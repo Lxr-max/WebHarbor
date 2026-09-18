@@ -473,8 +473,12 @@ def team_logo_url(sport_slug, abbreviation) -> str:
 
 
 def team_icon_url(sport_slug, abbreviation) -> str:
-    """Team PNG if present, else the resolved league icon / placeholder."""
-    return team_logo_url(sport_slug, abbreviation) or league_icon_url(sport_slug)
+    """Team PNG if present, else the shared placeholder.
+
+    Do not alias a missing club mark to nba/nfl/mlb/nhl — that makes
+    every college or soccer side look like the same pro league.
+    """
+    return team_logo_url(sport_slug, abbreviation) or espn_asset_url(_SPORT_PLACEHOLDER)
 
 
 # ─── Context Processors ───────────────────────────────────────────────────────
