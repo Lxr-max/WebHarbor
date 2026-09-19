@@ -20,7 +20,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent
 SEED = SITE / "instance_seed" / "mega.db"
-BASE = "http://localhost:40028"
+BASE = "http://localhost:40045"
 TASKS = list(range(18))
 READ_ONLY = {0, 1, 9, 10, 11, 13, 15}
 
