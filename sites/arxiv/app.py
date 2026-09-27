@@ -27,7 +27,10 @@ from flask_login import (
 )
 from flask_bcrypt import Bcrypt
 from flask_wtf import CSRFProtect
-from sqlalchemy import or_, and_, func
+from sqlalchemy import event, or_, and_, func
+from sqlalchemy.orm.attributes import set_committed_value
+
+from metadata_cleaning import clean_arxiv_metadata_text, clean_paper_metadata_fields
 
 BASE_DIR = Path(__file__).parent
 DB_DIR = BASE_DIR / "instance"
@@ -521,7 +524,7 @@ def seed_database():
         if primary_category not in primary_cats and subject_code in primary_cats:
             primary_category = subject_code
         # Titles
-        title = rp.get("title", "").strip()
+        title = clean_arxiv_metadata_text(rp.get("title", "").strip())
         if not title:
             continue
         # Parse date, falling back to arxiv-id-encoded yymm (e.g. 2604.08525 -> 2026-04)
@@ -547,7 +550,7 @@ def seed_database():
         if not authors:
             authors = _synthesize_authors(arxiv_id)
         # Parse figures, tables, formulas counts from comments
-        cmt = rp.get("comments", "")
+        cmt = clean_arxiv_metadata_text(rp.get("comments", "") or "")
         figs = 0
         tbls = 0
         frms = 0
@@ -564,7 +567,7 @@ def seed_database():
         versions = rp.get("versions", [])
         # Loss function from abstract
         loss_fn = ""
-        abs_text = rp.get("abstract", "") or ""
+        abs_text = clean_arxiv_metadata_text(rp.get("abstract", "") or "")
         # Backfill empty abstracts for high-traffic categories so the /abs
         # and listing pages always surface something meaningful.
         if not abs_text:
@@ -590,7 +593,7 @@ def seed_database():
             submitted_day=sub_d,
             announce_date=(f"{sub_y:04d}-{sub_m:02d}-{sub_d:02d}" if sub_y else ""),
             comments=cmt,
-            journal_ref=rp.get("journal_ref", ""),
+            journal_ref=clean_arxiv_metadata_text(rp.get("journal_ref", "") or ""),
             doi=rp.get("doi", ""),
             pdf_url=f"https://arxiv.org/pdf/{arxiv_id}",
             html_url=f"https://arxiv.org/abs/{arxiv_id}",
@@ -2403,6 +2406,39 @@ def seed_benchmark_users():
 # =======================================================================
 # MAIN
 # =======================================================================
+
+def _present_clean_metadata(paper) -> None:
+    """Show cleaned metadata without scheduling a database write.
+
+    Packaged ``instance_seed`` rows still store adjacent duplicates. Persisting
+    the cleanup on startup would make ``/reset/arxiv`` fail the byte-identical
+    check until a cleaned seed bundle is published. ``set_committed_value``
+    updates the loaded object and its committed history, so a later
+    ``db.session.commit()`` does not write these fields back.
+    """
+    updates = clean_paper_metadata_fields(paper)
+    for field, value in updates.items():
+        set_committed_value(paper, field, value)
+
+
+def _clean_paper_metadata_on_load(paper, _context, attrs=None):
+    """Clean metadata after a load and after a post-commit refresh.
+
+    ``paper_detail`` increments ``view_count`` and commits, which expires
+    attributes. The following read refreshes raw seed values and would
+    otherwise show the duplicated fragments again. ``load`` does not fire
+    for that refresh.
+    """
+    if attrs is not None:
+        fields = ("title", "abstract", "comments", "journal_ref")
+        if not any(field in attrs for field in fields):
+            return
+    _present_clean_metadata(paper)
+
+
+event.listen(Paper, "load", _clean_paper_metadata_on_load)
+event.listen(Paper, "refresh", _clean_paper_metadata_on_load)
+
 
 def backfill_paper_gaps():
     """Patch pre-existing Paper rows with empty authors / abstract so the
