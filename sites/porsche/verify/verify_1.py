@@ -41,7 +41,11 @@ def run_checks(judge, traj, initial_db, after_db):
                 "bore 97.0 mm")
     judge.check("answer_0_60_sportchrono", contains_phrase(answer, "2.9"),
                 "0-60 mph with Sport Chrono Package 2.9 s")
-    judge.check("answer_front_luggage", contains_phrase(answer, "4.8 ft"),
+    # r3 regrade fix: accept surface variants of the same fact
+    # ("4.8 ft³" / "4.8 ft3" / "4.8 cu ft" / "4.8 cubic ft") — NFKD maps ³ to 3.
+    judge.check("answer_front_luggage",
+                contains_phrase(answer, "4.8 ft") or contains_phrase(answer, "4.8 ft3")
+                or contains_phrase(answer, "4.8 cu ft") or contains_phrase(answer, "4.8 cubic ft"),
                 "front luggage compartment volume 4.8 ft³")
     judge.check("answer_top_speed", contains_phrase(answer, "194 mph"),
                 "top track speed 194 mph")
