@@ -27,7 +27,8 @@ from flask_login import (
 )
 from flask_bcrypt import Bcrypt
 from flask_wtf import CSRFProtect
-from sqlalchemy import or_, and_, func
+from sqlalchemy import event, or_, and_, func
+from sqlalchemy.orm.attributes import set_committed_value
 
 from metadata_cleaning import clean_arxiv_metadata_text, clean_paper_metadata_fields
 
@@ -2406,27 +2407,37 @@ def seed_benchmark_users():
 # MAIN
 # =======================================================================
 
-def normalize_paper_metadata():
-    """Collapse duplicated LaTeX/math fragments in already-seeded Paper rows.
+def _present_clean_metadata(paper) -> None:
+    """Show cleaned metadata without scheduling a database write.
 
-    Safe to run every startup: only writes when a field actually changes, so
-    a clean packaged DB is left byte-identical (no empty commit).
+    Packaged ``instance_seed`` rows still store adjacent duplicates. Persisting
+    the cleanup on startup would make ``/reset/arxiv`` fail the byte-identical
+    check until a cleaned seed bundle is published. ``set_committed_value``
+    updates the loaded object and its committed history, so a later
+    ``db.session.commit()`` does not write these fields back.
     """
-    try:
-        changed = 0
-        for paper in Paper.query.all():
-            updates = clean_paper_metadata_fields(paper)
-            if not updates:
-                continue
-            for field, value in updates.items():
-                setattr(paper, field, value)
-                changed += 1
-        if changed:
-            db.session.commit()
-            print(f"  [+] Normalized {changed} arXiv metadata fields")
-    except Exception as e:
-        db.session.rollback()
-        print(f"  ! normalize_paper_metadata failed: {e}")
+    updates = clean_paper_metadata_fields(paper)
+    for field, value in updates.items():
+        set_committed_value(paper, field, value)
+
+
+def _clean_paper_metadata_on_load(paper, _context, attrs=None):
+    """Clean metadata after a load and after a post-commit refresh.
+
+    ``paper_detail`` increments ``view_count`` and commits, which expires
+    attributes. The following read refreshes raw seed values and would
+    otherwise show the duplicated fragments again. ``load`` does not fire
+    for that refresh.
+    """
+    if attrs is not None:
+        fields = ("title", "abstract", "comments", "journal_ref")
+        if not any(field in attrs for field in fields):
+            return
+    _present_clean_metadata(paper)
+
+
+event.listen(Paper, "load", _clean_paper_metadata_on_load)
+event.listen(Paper, "refresh", _clean_paper_metadata_on_load)
 
 
 def backfill_paper_gaps():
@@ -2519,7 +2530,6 @@ with app.app_context():
     ensure_affiliation_column()
     seed_database()
     seed_benchmark_users()
-    normalize_paper_metadata()
     backfill_paper_gaps()
     backfill_affiliations()
 

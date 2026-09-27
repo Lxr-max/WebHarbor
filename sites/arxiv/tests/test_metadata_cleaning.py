@@ -199,21 +199,24 @@ class PapersJsonRegressionTests(unittest.TestCase):
 
 
 class WiringTests(unittest.TestCase):
-    def test_app_wires_cleanup_into_seed_and_startup_backfill(self):
+    def test_app_wires_cleanup_into_seed_and_load(self):
         src = APP_PY.read_text()
         self.assertIn(
             "from metadata_cleaning import clean_arxiv_metadata_text", src
         )
         self.assertIn('clean_arxiv_metadata_text(rp.get("title"', src)
-        self.assertIn("def normalize_paper_metadata", src)
-        self.assertIn("normalize_paper_metadata()", src)
-        # Startup order: normalize packaged rows before synthesizing empty
-        # abstracts from titles, so backfilled abstracts do not inherit
-        # duplicated fragments.
-        norm_at = src.rfind("normalize_paper_metadata()")
-        gaps_at = src.rfind("backfill_paper_gaps()")
-        self.assertGreater(norm_at, 0)
-        self.assertGreater(gaps_at, norm_at)
+        self.assertIn("def _present_clean_metadata", src)
+        self.assertIn('event.listen(Paper, "load"', src)
+        self.assertIn('event.listen(Paper, "refresh"', src)
+        self.assertIn("set_committed_value", src)
+        # Do not rewrite packaged rows. A startup commit of cleaned titles
+        # breaks /reset byte-identity until the HF seed bundle is republished.
+        self.assertNotIn("def normalize_paper_metadata", src)
+        self.assertNotIn("normalize_paper_metadata()", src)
+        load_at = src.rfind("def _clean_paper_metadata_on_load")
+        gaps_at = src.rfind("def backfill_paper_gaps")
+        self.assertGreater(load_at, 0)
+        self.assertGreater(gaps_at, load_at)
 
 
 if __name__ == "__main__":

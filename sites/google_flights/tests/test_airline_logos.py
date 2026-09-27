@@ -90,11 +90,27 @@ class AirlineLogoResolverTest(unittest.TestCase):
             airline_code='ZZ',
             airline_logo='/static/images/airlines/delta.svg',
         )
-        # No ZZ.png; letter-tile SVG from the published bundle still exists.
-        self.assertEqual(
-            self.gf.airline_logo_relpath(flight),
-            'images/airlines/delta.svg',
-        )
+        # No ZZ.png. Use the published letter-tile when the asset bundle
+        # shipped it; otherwise plant a temporary file so the fallback is
+        # still checked without Hugging Face assets.
+        rel = 'images/airlines/delta.svg'
+        target = SITE / 'static' / rel
+        created = False
+        if not target.is_file():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg"/>', encoding='utf-8'
+            )
+            created = True
+        try:
+            self.assertEqual(self.gf.airline_logo_relpath(flight), rel)
+        finally:
+            if created:
+                target.unlink()
+                try:
+                    target.parent.rmdir()
+                except OSError:
+                    pass
 
 
 class AirlineLogoHttpTest(unittest.TestCase):
