@@ -47,7 +47,7 @@
           {% endif %}
         </div>
       </div>
-      <section class="section-title"><h2>{{ player.name }} Chess Games</h2></section>
+      <section class="section-title"><h2>{{ player.name if player.name.endswith('Chess Games') else player.name ~ ' Chess Games' }}</h2></section>
       <div class="card" style="padding:4px 8px;">
         <table class="data-table">
           <tr><th>Players</th><th>Opening</th><th>Result</th><th class="t-right">Moves</th><th class="t-right">Year</th></tr>

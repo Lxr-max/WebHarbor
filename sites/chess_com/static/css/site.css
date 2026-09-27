@@ -139,8 +139,8 @@ img { max-width: 100%; }
 /* nav dropdowns */
 .nav-dropdown {
   display: none;
-  position: absolute;
-  left: calc(var(--nav-width) - 6px);
+  position: fixed;
+  left: var(--nav-width);
   top: 0;
   min-width: 260px;
   background: var(--bg-alt);

@@ -7,7 +7,7 @@
 
 {% macro user_link(u, show_title=True, size=40) -%}
   <a class="user-tagline" href="{{ url_for('member_profile', username=u.username) }}">
-    <span class="avatar avatar-{{ size }}" style="background-image:url('{{ u.avatar_small or u.avatar or url_for('static', filename='icons/noavatar_l.gif') }}')"></span>
+    <span class="avatar avatar-{{ size }}" style="background-image:url('{{ url_for('static', filename='images/avatars/' + (u.avatar_small or u.avatar)) if (u.avatar_small or u.avatar) else url_for('static', filename='icons/noavatar_l.gif') }}')"></span>
     {% if show_title and u.title %}<span class="user-title">{{ u.title }}</span>{% endif %}
     <span class="username">{{ u.username }}</span>
     {{ flag(u.country_id, u.country_code) }}

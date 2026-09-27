@@ -171,8 +171,13 @@
     this.container.classList.add("board");
     this.squares = {};
     var order = [];
-    for (var r = 1; r <= 8; r++) { for (var f = 0; f < 8; f++) { order.push(FILES[f] + r); } }
-    if (this.flip) order.reverse();
+    if (this.flip) {
+      /* Black POV: rank 1 at the bottom edge, files h->a left to right. */
+      for (var r = 1; r <= 8; r++) { for (var f = 7; f >= 0; f--) { order.push(FILES[f] + r); } }
+    } else {
+      /* White POV (site default): rank 8 at the top, files a->h left to right. */
+      for (var r = 8; r >= 1; r--) { for (var f = 0; f < 8; f++) { order.push(FILES[f] + r); } }
+    }
     order.forEach(function (sq) {
       var el = document.createElement("div");
       var isLight = (FILES.indexOf(sq[0]) + parseInt(sq[1], 10)) % 2 === 0;

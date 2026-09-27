@@ -14,7 +14,7 @@
       <div class="muted">
         {% if member.name and member.name != member.username %}{{ member.name }} · {% endif %}
         {{ member.country_name or member.country_code or '' }}
-        {% if member.location %} · {{ member.location }}{% endif %}
+        {% if member.location and member.location != (member.country_name or member.country_code or '') %} · {{ member.location }}{% endif %}
       </div>
       <div class="profile-ratings">
         {% for cat, label in [('blitz', 'Blitz'), ('bullet', 'Bullet'), ('rapid', 'Rapid'), ('daily', 'Daily'), ('tactics', 'Tactics')] %}
