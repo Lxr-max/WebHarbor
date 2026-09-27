@@ -331,7 +331,10 @@ class FandomRepairTests(unittest.TestCase):
             self.assertEqual(revision.bytes_delta, len(content.encode("utf-8")))
 
     def test_tasks_have_basic_keys_and_live_targets(self):
-        required = {"web_name", "id", "ques", "web", "upstream_url"}
+        required = {
+            "web_name", "id", "ques", "web", "upstream_url",
+            "verifier_path", "judge_rubric",
+        }
         tasks = [
             json.loads(line) for line in (self.site / "tasks.jsonl").read_text().splitlines()
             if line.strip()
@@ -341,6 +344,10 @@ class FandomRepairTests(unittest.TestCase):
                          [f"Fandom--{i}" for i in range(18)])
         for task in tasks:
             self.assertEqual(set(task), required)
+            index = task["id"].rsplit("--", 1)[1]
+            self.assertEqual(task["verifier_path"], f"sites/fandom/verify/verify_{index}.py")
+            self.assertTrue(task["judge_rubric"])
+            self.assertNotIn("answer", task)
             self.assertEqual(task["web"], "http://localhost:40101/")
 
         targets = [

@@ -324,7 +324,16 @@ class EventbriteRegressionTests(unittest.TestCase):
         tasks = [json.loads(line) for line in (SITE / "tasks.jsonl").read_text().splitlines()]
         self.assertEqual(len(tasks), 18)
         self.assertEqual([task["id"] for task in tasks], [f"Eventbrite--{i}" for i in range(18)])
-        self.assertTrue(all(set(task) == {"web_name", "id", "ques", "web", "upstream_url"} for task in tasks))
+        expected = {
+            "web_name", "id", "ques", "web", "upstream_url",
+            "verifier_path", "judge_rubric",
+        }
+        self.assertTrue(all(set(task) == expected for task in tasks))
+        self.assertTrue(all(
+            task["verifier_path"] == f"sites/eventbrite/verify/verify_{task['id'].rsplit('--', 1)[1]}.py"
+            and task["judge_rubric"] and "answer" not in task
+            for task in tasks
+        ))
         self.assertTrue(all(task["web"] == "http://localhost:40100/" for task in tasks))
 
         with site.app.app_context():

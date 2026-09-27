@@ -223,7 +223,10 @@ class WebWorkflowTests(unittest.TestCase):
 
 class TaskContractTests(unittest.TestCase):
     def test_tasks_use_basic_schema_and_real_targets(self):
-        allowed = {"web_name", "id", "ques", "web", "upstream_url"}
+        allowed = {
+            "web_name", "id", "ques", "web", "upstream_url",
+            "verifier_path", "judge_rubric",
+        }
         tasks = [
             json.loads(line) for line in (SITE_DIR / "tasks.jsonl").read_text().splitlines()
             if line.strip()
@@ -234,6 +237,12 @@ class TaskContractTests(unittest.TestCase):
         for task in tasks:
             with self.subTest(task=task["id"]):
                 self.assertEqual(set(task), allowed)
+                index = task["id"].rsplit("--", 1)[1]
+                self.assertEqual(
+                    task["verifier_path"],
+                    f"sites/smartasset/verify/verify_{index}.py",
+                )
+                self.assertTrue(task["judge_rubric"])
                 self.assertEqual(task["web"], "http://localhost:40103/")
                 self.assertTrue(task["ques"].strip())
                 self.assertNotIn("answer", " ".join(task).lower())

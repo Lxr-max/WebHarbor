@@ -83,8 +83,18 @@ class MayoRepairTests(unittest.TestCase):
         for task in tasks:
             self.assertEqual(
                 set(task),
-                {"web_name", "id", "ques", "web", "upstream_url"},
+                {
+                    "web_name", "id", "ques", "web", "upstream_url",
+                    "verifier_path", "judge_rubric",
+                },
             )
+            index = task["id"].rsplit("--", 1)[1]
+            self.assertEqual(
+                task["verifier_path"],
+                f"sites/mayo_clinic/verify/verify_{index}.py",
+            )
+            self.assertTrue(task["judge_rubric"])
+            self.assertNotIn("answer", task)
             self.assertEqual(task["web"], "http://localhost:40102/")
 
         checks = [

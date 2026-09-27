@@ -19,6 +19,9 @@
             <div class="img-title">{{ cn }}, {{ st }}</div>
           </div>
         {% endif %}
+        <div style="padding:10px 12px;font-size:14px;">
+          {{ city_counts.get(cs, 0) }} upcoming events
+        </div>
       </a>
     {% endfor %}
   </div>

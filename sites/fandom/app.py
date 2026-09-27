@@ -812,8 +812,8 @@ def article_view(wiki_slug, title):
         return render_template("article_missing.html", wiki=w,
                                title=unslug(slug), slug=slug,
                                unavailable=bool(a)), 404
-    a.view_count = (a.view_count or 0) + 1
-    db.session.commit()
+    # Read-only article views must not write. Persisting view_count on GET
+    # changed the live DB during grading and broke reset-stable read tasks.
     body_html = render_wikitext(
         a.content, wiki_slug=w.slug,
         edit_url=url_for("article_edit", wiki_slug=w.slug, title=a.slug),
@@ -1292,8 +1292,7 @@ def forum_thread(wiki_slug, thread_id):
             db.session.commit()
             flash("Reply posted.", "success")
         return redirect(url_for("forum_thread", wiki_slug=w.slug, thread_id=t.id))
-    t.view_count = (t.view_count or 0) + 1
-    db.session.commit()
+    # Same as article views: do not commit a counter bump on GET.
     posts = ForumPost.query.filter_by(thread_id=t.id).order_by(ForumPost.timestamp).all()
     return render_template("forum_thread.html", wiki=w, thread=t, posts=posts)
 

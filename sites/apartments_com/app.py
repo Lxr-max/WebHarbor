@@ -1400,11 +1400,11 @@ def article_detail(slug):
 @app.route("/student-housing")
 def student_housing():
     rows = Building.query.filter_by(is_student_housing=True)\
-        .order_by(Building.rating_avg.desc()).limit(24).all()
+        .order_by(Building.rating_avg.desc(), Building.id.asc()).all()
     return render_template("specialty.html",
                            title="Student Housing",
                            subtitle="Apartments designed for college life: short leases, by-the-bed pricing, walk-to-campus.",
-                           buildings=rows, mode="student")
+                           buildings=rows, mode="student", list_capped=False)
 
 
 @app.route("/senior-housing")

@@ -601,12 +601,22 @@ def region_landing(region_slug):
         abort(404)
     rs, name, city_slugs = region
     today = benchmark_now()
+    cities = [c for c in CITIES if c[0] in city_slugs]
+    # Full upcoming counts, not the 60-card preview below. The West task
+    # asks for the displayed per-city counts, including ties.
+    city_counts = {
+        slug: Event.query.filter(
+            Event.city_slug == slug, Event.start_dt >= today
+        ).count()
+        for slug, *_rest in cities
+    }
     events = (Event.query.filter(Event.city_slug.in_(city_slugs),
                                    Event.start_dt >= today)
                         .order_by(Event.start_dt.asc()).limit(60).all())
     return render_template('region_landing.html',
         region_slug=rs, region_name=name,
-        cities=[c for c in CITIES if c[0] in city_slugs],
+        cities=cities,
+        city_counts=city_counts,
         events=events,
     )
 

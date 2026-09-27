@@ -467,12 +467,22 @@ class ApartmentsRegressionTests(unittest.TestCase):
         feasibility = json.loads(
             (self.site / "tests" / "task_feasibility.json").read_text()
         )
-        expected_keys = {"web_name", "id", "ques", "web", "upstream_url"}
+        expected_keys = {
+            "web_name", "id", "ques", "web", "upstream_url",
+            "verifier_path", "judge_rubric",
+        }
         self.assertGreaterEqual(len(tasks), 15)
         self.assertLessEqual(len(tasks), 20)
         self.assertEqual({task["id"] for task in tasks}, set(feasibility))
         for task in tasks:
             self.assertEqual(set(task), expected_keys)
+            index = task["id"].rsplit("--", 1)[1]
+            self.assertEqual(
+                task["verifier_path"],
+                f"sites/apartments_com/verify/verify_{index}.py",
+            )
+            self.assertTrue(task["judge_rubric"])
+            self.assertNotIn("answer", task)
             self.assertEqual(task["web"], "http://localhost:40099/")
             self.assertGreater(feasibility[task["id"]]["candidate_count"], 0)
 
