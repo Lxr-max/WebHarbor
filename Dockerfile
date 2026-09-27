@@ -307,6 +307,35 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/mta
 RUN cd /opt/WebSyn/mta && rm -rf instance instance_seed && \
     PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
 
+# public_storage: deterministic seed from the tracked upstream snapshots + asset gate.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/public_storage
+RUN cd /opt/WebSyn/public_storage && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# raising_canes: deterministic seed from tracked source snapshots + asset gate.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/raising_canes
+RUN cd /opt/WebSyn/raising_canes && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    mkdir -p instance_seed && cp instance/raising_canes.db instance_seed/raising_canes.db && \
+    rm -rf instance __pycache__
+
+# re_max: deterministic seed from the tracked upstream snapshots + asset gate.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/re_max
+RUN cd /opt/WebSyn/re_max && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    mkdir -p instance_seed && cp instance/re_max.db instance_seed/re_max.db && \
+    rm -rf instance __pycache__
+
+# Parkers ships its frozen seed and inventoried images via the pinned asset archive.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/parkers
+
+# ryanair: validate source assets and build the deterministic seed.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/ryanair
+RUN cd /opt/WebSyn/ryanair && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    mkdir -p instance_seed && cp instance/ryanair.db instance_seed/ryanair.db && \
+    rm -rf instance __pycache__
+
 # Porsche rebuilds its deterministic, version-marked SQLite seed from tracked source data.
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/porsche
 RUN cd /opt/WebSyn/porsche && rm -rf instance instance_seed && \
@@ -315,6 +344,6 @@ RUN cd /opt/WebSyn/porsche && rm -rf instance instance_seed && \
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40094
+EXPOSE 8101 40000-40099
 
 CMD ["/opt/websyn_start.sh"]

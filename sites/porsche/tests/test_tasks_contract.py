@@ -54,7 +54,7 @@ def test_grading_keys_are_all_or_nothing():
 
 def test_task_web_urls_point_at_the_declared_port():
     for row in _rows():
-        assert row["web"] == "http://localhost:40094/", row["web"]
+        assert row["web"] == "http://localhost:40099/", row["web"]
         assert row["upstream_url"] == "https://www.porsche.com/usa/", row["upstream_url"]
 
 

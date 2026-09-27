@@ -99,8 +99,9 @@ All registered websites and their default ports, in registration order from left
 | LandWatch | 40084 | Medicare.gov | 40085 | Marriott | 40086 |
 | Megabus | 40087 | Michaels | 40088 | Micro Center | 40089 |
 | OhioMeansJobs | 40090 | Ohio.gov | 40091 | NFL | 40092 |
-| MTA | 40093 | | | | |
-| Porsche | 40094 | | | | |
+| MTA | 40093 | Public Storage | 40094 | Raising Cane’s | 40095 |
+| RE/MAX | 40096 | Parkers | 40097 | Ryanair | 40098 |
+| Porsche | 40099 | | | | |
 
 ## 🤝 Contribute
 
