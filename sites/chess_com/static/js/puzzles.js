@@ -60,7 +60,14 @@
   function norm(sq) { return sq ? sq.toLowerCase().replace("square_", "") : sq; }
 
   function onUserMove(from, to) {
-    if (busy || !puzzle) return;
+    if (busy) {
+      /* after a failed puzzle the board stays locked; re-explain instead of silently ignoring */
+      if (els.status.className.indexOf("incorrect") >= 0) {
+        els.status.textContent = "Puzzle failed — the best line is shown below. Press Next for a new puzzle.";
+      }
+      return;
+    }
+    if (!puzzle) return;
     var expected = puzzle.moves[step];
     if (!expected) return;
     if (norm(from) === norm(expected.from) && norm(to) === norm(expected.to)) {
@@ -71,6 +78,7 @@
         els.status.textContent = "Correct! Well played.";
         els.status.className = "trainer-status correct";
         updateStreak();
+        bumpSolved();
         recordAttempt(true);
         busy = true;
         return;
@@ -88,6 +96,7 @@
           els.status.textContent = "Correct! Well played.";
           els.status.className = "trainer-status correct";
           updateStreak();
+          bumpSolved();
           recordAttempt(true);
         }
       }, 550);
@@ -111,30 +120,22 @@
   }
 
   function describeSolution() {
-    /* replay the solution on a scratch state to render SAN-ish text */
+    /* replay the solution on a scratch state and pair the plies like a game score */
     var parts = [];
     var state = window.parseFen(puzzle.fen);
-    var turnNo = 1;
-    var sanList = [];
-    puzzle.moves.forEach(function (mv) {
-      sanList.push(sanOf(state, mv));
-    });
-    /* pair the moves like a game score */
-    var idx = 0;
-    var startBlack = state.turn === "b";
-    if (startBlack) { parts.push("1… " + sanList[0]); idx = 1; }
-    else if (sanList.length) { parts.push("1. " + sanList[0]); idx = 1; }
-    var moveNo = startBlack ? 2 : 1;
-    while (idx < sanList.length) {
+    var moveNo = 1;
+    for (var i = 0; i < puzzle.moves.length; i++) {
+      var san = sanOf(state, puzzle.moves[i]);
       if (state.turn === "w") {
-        parts.push(moveNo + ". " + sanList[idx]);
-        idx++;
-        if (idx < sanList.length) { parts.push(" " + sanList[idx]); idx++; }
+        if (i + 1 < puzzle.moves.length) {
+          parts.push(moveNo + ". " + san + " " + sanOf(state, puzzle.moves[++i]));
+        } else {
+          parts.push(moveNo + ". " + san + " …");
+        }
+        moveNo++;
       } else {
-        parts.push(moveNo + "… " + sanList[idx]);
-        idx++;
+        parts.push(moveNo + "… " + san);
       }
-      moveNo++;
     }
     return parts.join(" ");
   }
@@ -158,6 +159,10 @@
     }
     window.applySan(state, san);
     return san;
+  }
+
+  function bumpSolved() {
+    if (els.solved) els.solved.textContent = String((parseInt(els.solved.textContent, 10) || 0) + 1);
   }
 
   function updateStreak() {

@@ -270,6 +270,9 @@
       }
     }
     delete this.state.squares[from];
+    if (!promo && piece.toUpperCase() === "P" && (to[1] === "8" || to[1] === "1")) {
+      promo = piece === "P" ? "Q" : "q";
+    }
     this.state.squares[to] = promo || piece;
     if (piece.toUpperCase() === "P" && Math.abs(parseInt(to[1], 10) - parseInt(from[1], 10)) === 2) {
       this.state.ep = from[0] + (parseInt(from[1], 10) + (colorOf(piece) === "w" ? 1 : -1));

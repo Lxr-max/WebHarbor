@@ -405,18 +405,24 @@ def load_user(user_id):
 
 # ------------------------------------------------------------------ helpers
 
-def scored_search(query, items, fields, limit=60):
-    """Token-overlap scored search (multi-word queries must work)."""
+def scored_search(query, items, fields, limit=60, require_all=False):
+    """Token-overlap scored search (multi-word queries must work).
+
+    require_all=True keeps only items matching EVERY token, so a broad token
+    like "chess" cannot flood multi-word results; the search route falls back
+    to plain OR scoring when AND matching is too restrictive.
+    """
     import re as _re
     tokens = [t for t in _re.split(r"\W+", query)
               if t and t.lower() not in STOP_WORDS and len(t) > 1]
     if not tokens:
         return items[:limit]
+    lowered = [t.lower() for t in tokens]
     results = []
     for item in items:
         text = " ".join(str(getattr(item, f, "") or "") for f in fields).lower()
-        score = sum(1 for t in tokens if t.lower() in text)
-        if score > 0:
+        score = sum(1 for t in lowered if t in text)
+        if score > 0 and (not require_all or score == len(lowered)):
             results.append((score, item))
     results.sort(key=lambda pair: (-pair[0], pair[1].id))
     return [item for _, item in results[:limit]]
@@ -617,7 +623,10 @@ def lessons():
     level = request.args.get("level", type=int)
     search = request.args.get("q", "").strip()
     if category:
-        q = q.filter(LessonCourse.categories.contains([category]))
+        # JSON contains() emits a bracket-inclusive LIKE that only matches single-
+        # category arrays on SQLite; match the quoted token instead so multi-
+        # category courses (e.g. ["endgames", "tactics"]) are found.
+        q = q.filter(db.cast(LessonCourse.categories, db.Text).like(f'%"{category}"%'))
     if level is not None:
         q = q.filter_by(level=level)
     courses = q.order_by(LessonCourse.id).all()
@@ -978,18 +987,28 @@ def search():
     q = request.args.get("q", "").strip()
     results = {}
     if q:
-        results["members"] = scored_search(q, User.query.filter_by(is_real_member=True).all(),
-                                          ["username", "name", "title"], limit=12)
-        results["articles"] = scored_search(q, NewsArticle.query.all(),
-                                            ["title", "excerpt"], limit=12)
-        results["openings"] = scored_search(q, Opening.query.all(),
-                                            ["name", "eco", "moves"], limit=12)
-        results["lessons"] = scored_search(q, LessonCourse.query.all(),
-                                           ["title", "description", "author"], limit=12)
-        results["clubs"] = scored_search(q, Club.query.all(), ["name", "description"], limit=12)
-        results["events"] = scored_search(q, ChessEvent.query.all(), ["name"], limit=12)
-        results["master_players"] = scored_search(q, MasterPlayer.query.all(),
-                                                  ["name", "slug"], limit=12)
+        import re as _re
+        tokens = [t for t in _re.split(r"\W+", q) if t and t.lower() not in STOP_WORDS and len(t) > 1]
+        strict = len(tokens) > 1  # AND-match multi-word queries; fall back to OR if too sparse
+
+        def run(require_all):
+            return {
+                "articles": scored_search(q, NewsArticle.query.all(),
+                                          ["title", "excerpt"], limit=12, require_all=require_all),
+                "members": scored_search(q, User.query.filter_by(is_real_member=True).all(),
+                                         ["username", "name", "title"], limit=12, require_all=require_all),
+                "openings": scored_search(q, Opening.query.all(),
+                                          ["name", "eco", "moves"], limit=12, require_all=require_all),
+                "lessons": scored_search(q, LessonCourse.query.all(),
+                                         ["title", "description", "author"], limit=12, require_all=require_all),
+                "clubs": scored_search(q, Club.query.all(), ["name", "description"], limit=12, require_all=require_all),
+                "events": scored_search(q, ChessEvent.query.all(), ["name"], limit=12, require_all=require_all),
+                "master_players": scored_search(q, MasterPlayer.query.all(),
+                                                ["name", "slug"], limit=12, require_all=require_all),
+            }
+        results = run(True)
+        if strict and sum(len(v) for v in results.values()) == 0:
+            results = run(False)
     return render_template("search.html", q=q, results=results)
 
 
