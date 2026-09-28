@@ -1,163 +1,170 @@
 # PR #45 task-validator review
 
-This reviewer-owned continuation preserves XuanRui LI's original contribution and commit
-from [PR #45](https://github.com/aiming-lab/WebHarbor/pull/45), then brings it onto the
-current WebHarbor task and grading contract.
+This reviewer-owned continuation of [PR #45](https://github.com/aiming-lab/WebHarbor/pull/45)
+preserves Xuanrui Li's original contribution and history. It adds a read-only task
+validator and repairs schema, registry, grading-metadata, and diagnostic handling.
 
-## Current main synchronization — 2026-09-25
+## Current repair — 2026-09-28
 
-Merged upstream `main` at `b3275d75fdfcfea6ca142ddd59e20b7e4cb3d454`, preserving contributor and reviewer history.
-The validator and its 31 tests are byte-identical to pre-sync head `fdc58de0f179eec31da85f6094d78f57b69b5ac1`.
-Usage documentation moved from the root README to [docs/task-validation.md](../docs/task-validation.md)
-to follow the current repository policy. No task, verifier, site runtime, or asset differs from upstream.
+The validator incorrectly required a display name to match its directory slug.
+For example, `UC Berkeley--1` / `UC Berkeley` is valid under CONTRIBUTING.md even
+though its directory is `berkeley`. Removing that undocumented restriction fixes
+88 false errors across Berkeley, CA.gov, IRS Refund Tracker, and PhET. ID prefixes
+must still exactly match `web_name`; numeric suffixes, consistent names, unique
+IDs, registered directories, and correct localhost ports are still checked.
 
-Fresh checks: **31/31 tests PASS** on Python 3.12; Pyright reports 0 errors; Ruff lint and
-format checks pass; upstream registry validation passes for 94 sites, ports 40000–40093.
-The full strict corpus scan covers **94 sites / 2,315 tasks and exits 1**, with
-**261 errors and 10 warnings**:
+Generic `credit card` wording also produced 10 false warnings for offline task
+topics and demo workflows. That generic pattern is removed. Explicit real-payment,
+secret-credential, answer-leak, and placeholder patterns still warn; normal and
+strict exit behavior is unchanged.
 
-| Finding | Count | Interpretation |
-|---|---:|---|
-| `bad-task-identity` | 156 | Existing naming/alias conventions differ from the validator contract; adjudication remains. |
-| `bad-judge-rubric` | 54 | Object-valued rubrics in Healthgrades, Kelley Blue Book, and Uniqlo; the current judge expects strings. |
-| `duplicate-verifier` | 51 | Shared dispatcher paths conflict with the one-verifier-per-task rule; adjudication remains. |
-| `suspicious-term` | 10 | Heuristic warnings, including ordinary payment vocabulary; not confirmed secret exposure. |
+- Upstream main: `1c1dc23f5fabdaaef67c6d3bbf87bcd6915b9518`.
+- Main merge: `1fffcc22a8b336853da04cb3e4eb17ad99541083`.
+- Frozen executable/test/usage-doc commit: `6fb08f64373314e0d31214f53f673276d16f0610`.
+- Subsequent delivery changes only this report and its JSON evidence attachments.
+- No task, verifier, site runtime, registry, root README, agent/judge, Dockerfile,
+  or asset differs from upstream. No Hugging Face action is required.
 
-An executable probe of the actual `trajectory_text` function in `agent_demo/eval_judge.py`
-confirms that passing an object as `judge_rubric` raises `TypeError` at string joining.
-The other findings are diagnostic results, not 207 independently established site defects.
-The synchronization does not weaken validation rules or rewrite unrelated task sets.
-Current-corpus compatibility needs follow-up before claiming a clean repository-wide result.
-The historical 18-scenario blind review below does **not** cover this enlarged corpus.
+## Current corpus: expected nonzero diagnostics
 
-Reproduce the current results:
+The full normal and strict scans both cover **99 sites / 2,417 tasks** and return
+**exit 1, 173 errors, 0 warnings**. Before this repair the same corpus returned
+261 errors and 10 warnings. A validator that correctly rejects existing invalid
+metadata can be ready for review while the corpus itself remains noncompliant.
+This report does not claim a clean repository-wide scan.
 
-```bash
-python3.12 -B -m unittest discover -s scripts -p 'test_validate_tasks.py' -v
-python3.12 -B scripts/validate_tasks.py --strict  # expected exit 1; findings above
-python3.12 -B scripts/check_site_registry.py
-pyright scripts/validate_tasks.py scripts/test_validate_tasks.py
-ruff check scripts/validate_tasks.py scripts/test_validate_tasks.py
-ruff format --check scripts/validate_tasks.py scripts/test_validate_tasks.py
-```
+The remaining findings match the documented contract; they are not unresolved
+alias heuristics:
 
-No Docker build/runtime smoke or new independent review was performed in this sync.
-This is a tooling-only delta against main; no HF action is needed.
+| Sites | Finding | Count | Why retained |
+|---|---|---:|---|
+| Adopt a Pet (20), Best Buy (12), Macy's Wine Shop (16), Recreation.gov (20) | `bad-task-identity` | 68 | IDs use compact names such as `AdoptAPet--0` instead of the exact `web_name` prefix required by CONTRIBUTING.md. This is a naming-contract violation, not proof of a runtime failure. |
+| Healthgrades, Kelley Blue Book, Uniqlo (18 each) | `bad-judge-rubric` | 54 | Rubrics are objects; CONTRIBUTING.md requires an English text block, and the actual current judge raises `TypeError` when joining them into its prompt. |
+| Healthgrades, Kelley Blue Book, Uniqlo (17 additional references each) | `duplicate-verifier` | 51 | All 18 tasks in each site reference the same dispatcher. This violates the documented one-script-per-task convention; reuse alone does not prove an incorrect grading result. |
 
-## Historical review versions
+The 173 findings affect 122 rows across seven sites. The other 92 sites have no
+findings. See [all current findings with paths and line numbers](PR-45-CORPUS-FINDINGS.json).
+The data follow-up is to reconcile ID/display-name metadata, render the rubric
+criteria as text, and provide the required per-task verifier entry points (or
+have maintainers explicitly revise that repository convention). Those site-data
+changes are outside this validator PR and have not been performed here.
 
-- Original contributor commit: `6b2a41a600bd0e1b260c3c80494f2d50f2b1d2fa`
-- Reviewed upstream base: `36004932bdf82afbe36dc14e00f66841eccf9946`
-- Current-main integration: `de3e45631db5f053b5157b9b16b57ace90875113`
-- Validator remediation: `142bae2c32c4f3fc8b1ceae51b1b63511b401f7d`
-- Blind-reviewed head: `1a87f18f16ff83b6549a6a4e75cdb8e8ffca2cfe`
+## Verification
 
-PR #45 is repository tooling, not a mirror contribution. It changes no site application,
-seed database, route, UI, asset archive, or Hugging Face revision. Docker health/reset,
-visual-fidelity, source-fidelity, browser-task, and HF checks are therefore not applicable;
-they were not executed or represented as passing.
+**36 unit tests pass** on Python 3.12. New regressions cover four unrelated
+slug/display-name pairs, wrong ports despite legal aliases, benign payment topics
+and demo credentials, real-payment/secret warnings, and non-text/empty rubrics.
+Existing negative tests retain malformed JSON/UTF-8, missing/empty files,
+registry drift, wrong ID prefixes/suffixes, duplicate IDs, forbidden answer
+fields, half grading pairs, missing/escaped/reused verifiers, and warning exits.
+The new alias/payment regressions failed before the implementation repair.
 
-## Review findings and repairs
+Fresh checks also pass: Pyright (0 errors), Ruff lint and format, scoped
+`git diff --check`, and upstream registry validation for ports **40000–40098**.
 
-| Area | Original behavior | Reviewed behavior |
-|---|---|---|
-| Invalid ports and files | malformed ports raised `ValueError`; invalid UTF-8 raised | structured nonzero findings, without a validator crash |
-| Empty or missing task sets | empty files and missing files for registered sites could pass a full scan | both are blocking errors |
-| Site registries | missing, duplicate, or mismatched `SITES` registries could be ignored or downgraded to a warning | all are blocking errors; shell/Python comments no longer create phantom entries |
-| Agent-facing schema | embedded answer/ground-truth keys were accepted | answer-like keys are blocking errors; unknown extension fields remain warnings and fail only in strict mode |
-| Reviewer grading fields | half a verifier/rubric pair, missing/cross-site/traversing verifier paths, and verifier reuse were accepted | grading fields must form a non-empty pair; verifier files must exist under the same site's `verify/` directory and be one-per-task |
-| Task identity | prefix matching accepted unrelated names and nonnumeric IDs | IDs must be exactly `<web_name>--<number>` and the site identity must match, including established acronyms such as Ohio State University / `osu` |
-| Duplicate diagnostics | a duplicate inside one file was also mislabeled as cross-site duplication | same-file and true cross-file duplicates are reported separately |
-| Heuristic false positives | substrings such as `todo` in “Mastodon” and the ordinary word “Secret” triggered warnings | markers use word boundaries; secret warnings require credential context such as “client secret” |
-| Human output | warning-only files were printed as `[OK]`, including strict-mode failures | output distinguishes `[WARN]` and `[FAIL]` |
+The real CLI was executed in 22 synthetic scenarios, capturing stdout, stderr,
+OS process exit codes, and file hashes before/after. All match their declared
+contracts and preserve input bytes. These are guided CLI fixtures, not web-agent
+benchmark trajectories. They exercise legal aliases/reviewer metadata, wrong
+IDs/ports/names, shared/missing/escaping verifier paths, malformed rubric types,
+answer fields, normal/strict warnings, cross-site duplicate IDs, and empty files.
+[Execution inputs and observations](PR-45-CLI-RESULTS.json) are public.
 
-## Historical validation — 2026-09-10
+A separate probe extracted and executed the **actual `trajectory_text` function**
+from `agent_demo/eval_judge.py` without importing external SDKs or calling an LLM.
+All 54 current object-valued rubrics raise `TypeError`. Full-corpus scans were
+also rerun in normal and strict modes with input hashes checked before/after;
+all 3,198 task, registry and verifier input files remained byte-identical. The public CLI attachment records the counts and results.
 
-The reviewed test suite contains 31 tests. It covers valid contributor rows, valid reviewer
-rows, current acronym naming, normal/strict warning behavior, invalid JSON and encoding,
-port failures, empty/missing files, site-registration drift, answer leakage, grading-pair
-integrity, verifier containment/existence/uniqueness, task identity, and duplicate IDs.
+## Independent review
 
-Results on both available runtimes:
+A fresh isolated Claude Code session (actual model `claude-opus-5-5`) returned
+**22 PASS / 0 FAIL**, with `packet_valid=true` and `contaminated=false`.
+Validator source, unit tests, expected-result oracles, prior reviews and project
+memory were excluded. The session executed the allowed hash helper, which
+verified 68 packet files and input/state correspondence for all 22 cases.
 
-```text
-Python 3.11.3: 31 tests passed
-Python 3.12:   31 tests passed
-```
+- Manifest SHA-256: `834d10f0552cc416e35c171ba42a2d0cfec315854a13e3df11fdc22ceb091837`.
+- Raw verdict transport SHA-256 (frozen before parsing/reconciliation):
+  `ed67057db79bc683dfac4bdff4fdb4c4e0c0b56bf1fcc5299f176426ea09bac7`.
+- [Per-case independent verdicts and observations](PR-45-CLI-RESULTS.json).
 
-The historical 24-site corpus was executed in strict mode:
+The reviewer relied on the helper's reported hash checks; it did not independently
+inspect that helper or rerun the validator. It reviewed only these frozen CLI
+executions, not the full corpus or production grading behavior. Reconciliation
+against the predeclared fixture contracts found no discrepancies. The minor
+`secret credential` diagnostic label denotes the matched `client secret` category.
 
-```text
-Checked 24 site(s), 24 task file(s), 805 task(s)
-Errors: 0  Warnings: 0
-```
-
-That corpus contains 643 legacy/basic five-field rows and 162 reviewed rows with the
-optional `verifier_path` + `judge_rubric` pair. Focused strict scans also passed for a
-legacy task file (`allrecipes`), an acronym site (`osu`), and a reviewed site (`compass`).
-
-An 18-scenario executable contract matrix was also recorded at the remediation commit:
-four legal inputs/alternate naming or wording paths, two warning-mode paths, eleven
-negative schema/registry/grading cases, and the full current-corpus scan. All 18 matched
-their predeclared outcomes and left their input trees byte-identical. These are guided
-regression executions, not web-agent trajectories or an independent blind-review result.
-
-Static checks:
-
-```text
-ruff check:        passed
-ruff format check: passed
-pyright:           0 errors, 0 warnings
-git diff --check:  passed
-```
-
-## Historical independent blind review
-
-A fresh Claude Code session reviewed a frozen, checksum-verified packet containing the
-18 scenario requirements, inputs, recorded invocations/results, and before/after state.
-Validator source, tests, expected-result oracles, prior conclusions, and PR discussion
-were excluded from its first pass.
-
-- Self-reported model: `claude-fable-5-1`
-- Packet manifest SHA-256: `bce1317c4b1985a248a0e0d3e1d9c55634cd19e8631d4f8014cd7cf2c173cae9`
-- Verdict artifact SHA-256: `f9a125c1f8b9e52eca09fb58ce6e406357dc50b96ca5eb437f0e6656ac22b239`
-- Coverage: 18/18 scenarios reviewed; 18 PASS / 0 FAIL
-- Public result: [PR #91 blind-review comment](https://github.com/aiming-lab/WebHarbor/pull/91#issuecomment-5614696822)
-
-The blind reviewer did not re-execute the validator or inspect its implementation and
-could not reconstruct the packet's aggregate tree-hash algorithm. Reconciliation
-independently reproduced all 36 before/after tree hashes, matched all 18 recorded-result
-hashes, and confirmed that every blind verdict agrees with the predeclared task contract.
-The omitted implementation and CLI coverage is supplied by the committed 31-test suite,
-fresh CLI runs, and static checks above rather than attributed to the blind review.
-
-Non-blocking output notes remain: registry-set drift uses the broad message “site order
-differs”; `task_count` counts nonblank JSONL entries even when one is malformed; and a
-full scan lists an expected but missing registered-site file among checked targets. These
-do not alter finding codes, severity, mutation guarantees, or process exit status.
+The first session's result was not accepted as final because its extra manifest-hash
+command was denied and manifest identity was unconfirmed. The helper was extended
+to check that identity and input/state correspondence; a new isolated session
+reviewed the same frozen executions. No validator change or rerun was required.
 
 ## Reproduce
 
 ```bash
-python3.12 -m py_compile scripts/validate_tasks.py scripts/test_validate_tasks.py
-python3.12 scripts/test_validate_tasks.py
-python3.12 scripts/validate_tasks.py --strict
-python3.12 scripts/validate_tasks.py --site osu --strict
-python3.12 scripts/validate_tasks.py --site compass --strict
-python3.12 scripts/validate_tasks.py --tasks sites/allrecipes/tasks.jsonl --strict
-python3.12 scripts/validate_tasks.py --json | python3.12 -m json.tool >/dev/null
+python3.12 -B -m unittest discover -s scripts -p 'test_validate_tasks.py' -v
+python3.12 -B scripts/check_site_registry.py
+pyright scripts/validate_tasks.py scripts/test_validate_tasks.py
 ruff check scripts/validate_tasks.py scripts/test_validate_tasks.py
 ruff format --check scripts/validate_tasks.py scripts/test_validate_tasks.py
-pyright scripts/validate_tasks.py scripts/test_validate_tasks.py
-git diff --check
+python3.12 -B scripts/validate_tasks.py --site berkeley --strict  # exit 0
+python3.12 -B scripts/validate_tasks.py --site phet_simulations --strict  # exit 0
+python3.12 -B scripts/validate_tasks.py --json  # exit 1: 173 errors, no warnings
+python3.12 -B scripts/validate_tasks.py --strict --json  # same findings and exit 1
 ```
 
-## Historical evidence scope
+To replay an individual published CLI fixture, create its `inputs.text_files`,
+create empty files at the paths listed in `inputs.verifier_inventory`, and copy
+`scripts/validate_tasks.py` from the frozen commit into that fixture root's
+`scripts/` directory. Run the recorded command with Python 3.12 from the fixture
+root. Verifier stubs are only existence fixtures and are never executed. Compare
+JSON findings and the OS exit code, allowing the absolute `root` field to differ.
 
-- Engineering evidence: unit/static checks and the 18 guided contract executions above.
-- Independent review: checksum-verified, oracle-free first pass, 18 PASS / 0 FAIL, followed
-  by result/state/hash reconciliation against the task contracts.
-- Public maintainer evidence: this report, the committed tests, and the reproduction commands.
+The consumer probe can be reproduced without installing or calling the judge SDK:
 
-These results describe the historical candidate only. The current corpus and its
-remaining findings are reported above. No new independent blind-review PASS is claimed.
+```python
+import ast, json
+from pathlib import Path
+
+source = Path('agent_demo/eval_judge.py')
+fn = next(n for n in ast.parse(source.read_text()).body
+          if isinstance(n, ast.FunctionDef) and n.name == 'trajectory_text')
+scope = {}
+exec(compile(ast.Module(body=[fn], type_ignores=[]), str(source), 'exec'), scope)
+for site in ('healthgrades', 'kelley_blue_book', 'uniqlo'):
+    rows = Path(f'sites/{site}/tasks.jsonl').read_text().splitlines()
+    for raw in rows:
+        task = json.loads(raw)
+        try:
+            scope['trajectory_text']({'judge_rubric': task['judge_rubric'], 'steps': []})
+        except TypeError as error:
+            print(site, task['id'], type(error).__name__, str(error))
+        else:
+            raise AssertionError('Expected an incompatible object rubric')
+```
+
+## Delivery limits and historical evidence
+
+This is repository tooling. No full Docker build, live site/UI task execution,
+asset validation, source-fidelity certification, or grading-accuracy claim is
+made. Static schema checks cannot prove task feasibility or verifier correctness.
+
+The historical 18-scenario review of executable `142bae2` covered 24 sites and
+805 tasks. Its [frozen report](https://github.com/jackjin1997/WebHarbor/blob/c4813222453acda5f0f80ab7397154f08c44faa2/review-reports/PR-45-TASK-VALIDATOR.md)
+and [independent result](https://github.com/aiming-lab/WebHarbor/pull/91#issuecomment-5614696822)
+remain historical evidence; their PASS does not certify today's enlarged corpus.
+
+Non-blocking diagnostic conventions remain: registry-set drift uses the broad
+message “site order differs”; task counts include nonblank malformed JSONL rows;
+and full scans list expected missing registered-site files among their targets.
+These do not alter severity or exit semantics.
+
+## Maintainer handoff
+
+The validator repair is ready for maintainer review. The branch contains the
+latest checked upstream main and preserves the original contributor ancestry.
+The current published head and GitHub mergeability are recorded in PR #91's
+description at delivery. Final approval and merge remain with the maintainer;
+no PR was merged by this review. The seven-site corpus findings above remain
+explicit data follow-up work and must not be mistaken for a green corpus.
