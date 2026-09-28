@@ -4,13 +4,13 @@ Original contribution: [aiming-lab/WebHarbor#46](https://github.com/aiming-lab/W
 
 ## Scope and fixed versions
 
-- Current upstream base: `b3275d75fdfcfea6ca142ddd59e20b7e4cb3d454`
-- Pre-sync candidate (audit source and tests unchanged): `609f4cbb833b524f786bd5b610eaee0720d65106`
+- Current upstream base: `1c1dc23f5fabdaaef67c6d3bbf87bcd6915b9518`
+- Pre-sync candidate (audit source and tests unchanged): `bd6a2cb699364b45bcdfd7a0f263aa60ff85baa0`
 - Original review base: `f20b5ee8377ba31bcb825b4dfe30ad96c416e477`
 - Original contribution: `6e5d77b0af6c2b7dfcd82039361df4228f2c3c65`
 - Isolated-review fixed point: `80bd5817109563313d1ae30fac684a8b918599f7`
 - Reconciled implementation commit: `839c74dc0dd1a2967552b9d6df991701c61aafe6`
-- Assets pin inherited from current upstream: `d7b4e614ba7d5dbf59c6326e96d10c6ef304fac1`
+- Assets pin inherited from current upstream: `5d2b17fa21067990370f8e7fc27123a1c24d7802`
 
 Relative to current upstream, this PR adds repository-level tooling, tests, the canonical pre-PR checklist entry, and this report. It also removes two empty tracked `.gitkeep` files from CarMax runtime-only directories so the strict repository audit starts clean. It does not modify mirror behavior, task sets, deterministic task verifiers, or Hugging Face assets. The asset pin is identical to upstream; the original review used `ad6f424f72cada9e6f5c09a58093d0ceeab9c52b`.
 
@@ -50,22 +50,22 @@ The frozen candidate was independently reviewed at `80bd581`. The reviewer repro
 
 Affected tests and the full validation set were rerun after reconciliation. A direct regression check also confirmed that restricting Python assignments to module scope does not reject valid indented shell declarations.
 
-## Upstream synchronization — 2026-09-25
+## Upstream synchronization — 2026-09-28
 
-Merged upstream `main` at `b3275d7`, preserving the original contribution and reviewer commits.
-There were no text conflicts. Audit source and tests are unchanged from `609f4cb`;
+Merged upstream `main` at `1c1dc23`, preserving the original contribution and reviewer commits.
+There were no text conflicts. Audit source and tests are unchanged from `bd6a2cb`;
 only the inherited main tree and documentation change. The documented registry now
-covers 94 sites, container ports `40000–40093` and host ports `41000–41093`.
+covers 99 sites, container ports `40000–40098` and host ports `41000–41098`.
 
 Upstream `scripts/check_site_registry.py` remains enabled and unchanged. The supplemental
 audit adds structured JSON diagnostics, per-site selection, asset-path coverage, and
-tracked runtime-artifact checks. Both checks pass on the current corpus.
+tracked runtime-artifact checks. Both checks pass on the current corpus, including the five added sites: Public Storage, Raising Cane's, RE/MAX, Parkers, and Ryanair.
 The historical isolated code review remains scoped to its original fixed point; no
 new independent review is claimed. No asset archives were downloaded or modified.
 
 ## Validation
 
-The following checks were rerun on 2026-09-25 after integration with `b3275d7`:
+The following checks were rerun on 2026-09-28 after integration with `1c1dc23`:
 
 ```bash
 python3.12 -m py_compile scripts/audit_site_registry.py scripts/test_audit_site_registry.py
@@ -78,9 +78,9 @@ pyright scripts/audit_site_registry.py scripts/test_audit_site_registry.py
 Results:
 
 - 23/23 unit and adversarial tests passed.
-- Current repository scan covered 94 site directories, 94 registered sites, 94 ports, 94 task files, and 2,315 tasks.
+- Current repository scan covered 99 site directories, 99 registered sites, 99 ports, 99 task files, and 2,417 tasks.
 - Strict scan: 0 errors, 0 warnings, exit 0.
-- Upstream registry check: all 94 sites, task URLs, and referenced verifier paths passed; Docker exposure is `8101 40000-40093`.
+- Upstream registry check: all 99 sites, task URLs, and referenced verifier paths passed; Docker exposure is `8101 40000-40098`.
 - Pyright: 0 errors, 0 warnings.
 - Python byte-compilation: passed.
 - Reviewer-delta whitespace/conflict checks: passed; only the audit, its tests, the pre-PR documentation, this report, and removal of two empty ignored runtime placeholders differ from current upstream.
