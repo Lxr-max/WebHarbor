@@ -359,11 +359,11 @@ class ValidateTasksTests(unittest.TestCase):
             any(f["code"] == "duplicate-verifier" for f in summary["findings"])
         )
 
-    def test_task_identity_matches_site_and_numeric_suffix(self) -> None:
+    def test_task_identity_matches_web_name_and_numeric_suffix(self) -> None:
         cases = (
             {"task_id": "DemoExtra--0"},
             {"task_id": "Demo--not-a-number"},
-            {"task_id": "Other--0", "web_name": "Other"},
+            {"task_id": "Demo--0extra"},
         )
         for overrides in cases:
             with self.subTest(overrides=overrides):
@@ -372,6 +372,87 @@ class ValidateTasksTests(unittest.TestCase):
                 self.assertEqual(summary["exit_code"], 1)
                 self.assertTrue(
                     any(f["code"] == "bad-task-identity" for f in summary["findings"])
+                )
+
+    def test_display_name_need_not_match_directory_slug(self) -> None:
+        for site, name in (
+            ("berkeley", "UC Berkeley"),
+            ("california_gov", "CA.gov"),
+            ("irs_refund", "IRS Refund Tracker"),
+            ("phet_simulations", "PhET Interactive Simulations"),
+        ):
+            with self.subTest(site=site):
+                root = self.make_root(
+                    task_line(task_id=f"{name}--0", web_name=name) + "\n",
+                    site=site,
+                    websyn_sites=(site,),
+                    control_sites=(site,),
+                )
+                summary = vt.run_validation(root=root, strict=True)
+                self.assertEqual(summary["findings"], [])
+                self.assertEqual(summary["exit_code"], 0)
+
+    def test_display_name_alias_does_not_allow_a_wrong_port(self) -> None:
+        root = self.make_root(
+            task_line(
+                task_id="UC Berkeley--0",
+                web_name="UC Berkeley",
+                web="http://localhost:40001/",
+            )
+            + "\n",
+            site="berkeley",
+            websyn_sites=("berkeley",),
+            control_sites=("berkeley",),
+        )
+        summary = vt.run_validation(root=root, strict=True)
+        self.assertEqual(summary["exit_code"], 1)
+        self.assertTrue(any(f["code"] == "port-mismatch" for f in summary["findings"]))
+        self.assertFalse(
+            any(f["code"] == "bad-task-identity" for f in summary["findings"])
+        )
+
+    def test_payment_topics_and_demo_credentials_pass_strict(self) -> None:
+        for question in (
+            "Compare the credit card annual fees shown on both detail pages.",
+            "Download the Credit Card Fraud Transactions dataset.",
+            "Log in with the demo account (email: alice.j@test.com, "
+            "password: TestPass123!) and pay the demo credit card bill.",
+        ):
+            with self.subTest(question=question):
+                root = self.make_root(task_line(ques=question) + "\n")
+                summary = vt.run_validation(root=root, strict=True)
+                self.assertEqual(summary["findings"], [])
+                self.assertEqual(summary["exit_code"], 0)
+
+    def test_real_payment_and_secret_credentials_still_fail_strict(self) -> None:
+        for question in (
+            "Complete a real payment using the credit card at checkout.",
+            "Read the client secret from the credit card provider settings.",
+        ):
+            with self.subTest(question=question):
+                root = self.make_root(task_line(ques=question) + "\n")
+                summary = vt.run_validation(root=root, strict=True)
+                self.assertEqual(summary["errors"], 0)
+                self.assertEqual(summary["exit_code"], 1)
+                self.assertTrue(
+                    any(f["code"] == "suspicious-term" for f in summary["findings"])
+                )
+
+    def test_non_text_or_empty_judge_rubric_fails(self) -> None:
+        for rubric in ({"success_criteria": ["Visit the page."]}, [], None, "", "  "):
+            with self.subTest(rubric=rubric):
+                root = self.make_root(
+                    task_line(
+                        verifier_path="sites/demo/verify/verify_0.py",
+                        judge_rubric=rubric,
+                    )
+                    + "\n"
+                )
+                self.add_verifier(root)
+                summary = vt.run_validation(root=root, strict=True)
+                self.assertEqual(summary["exit_code"], 1)
+                self.assertTrue(
+                    any(f["code"] == "bad-judge-rubric" for f in summary["findings"])
                 )
 
     def test_acronym_site_identity_passes(self) -> None:

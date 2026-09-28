@@ -36,7 +36,6 @@ SUSPICIOUS_PATTERNS = (
         "production environment",
     ),
     (re.compile(r"\bexternal runtime call\b", re.IGNORECASE), "external runtime call"),
-    (re.compile(r"\bcredit card\b", re.IGNORECASE), "credit card"),
     (re.compile(r"\bssn\b", re.IGNORECASE), "ssn"),
     (
         re.compile(r"\bsocial security number\b", re.IGNORECASE),
@@ -500,13 +499,9 @@ def scan_question_quality(
             )
 
 
-def task_identity_is_valid(task_id: str, site_slug: str, web_name: str) -> bool:
-    normalized_site = normalize_token(site_slug)
-    normalized_name = normalize_token(web_name)
-    words = re.findall(r"[A-Za-z0-9]+", web_name)
-    initialism = "".join(word[0] for word in words).lower()
-    if normalized_name != normalized_site and initialism != normalized_site:
-        return False
+def task_identity_is_valid(task_id: str, web_name: str) -> bool:
+    # CONTRIBUTING.md ties IDs to the display name, not the directory slug.
+    # Site membership is checked separately through the registry and local port.
     return re.fullmatch(rf"{re.escape(web_name)}--[0-9]+", task_id) is not None
 
 
@@ -817,11 +812,7 @@ def validate_file(
                 seen_ids[task_id] = line_no
             id_occurrences[task_id].append((path, line_no))
 
-        if (
-            task_id
-            and web_name
-            and not task_identity_is_valid(task_id, site_slug, web_name)
-        ):
+        if task_id and web_name and not task_identity_is_valid(task_id, web_name):
             add_finding(
                 findings,
                 file_summaries,
@@ -829,7 +820,7 @@ def validate_file(
                 root,
                 "error",
                 "bad-task-identity",
-                f"task id '{task_id}' must be '{web_name}--<number>' and web_name must match site '{site_slug}'",
+                f"task id '{task_id}' must be '{web_name}--<number>'",
                 line_no,
             )
 
