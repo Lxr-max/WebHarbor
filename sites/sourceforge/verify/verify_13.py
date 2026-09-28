@@ -6,7 +6,7 @@ Register a new SourceForge account with username fleet-admin and email fleet-adm
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--13"
 

@@ -235,9 +235,15 @@ def check_visited_path(judge, traj, name, pattern):
 
 
 def check_answer_phrase(judge, answer, name, phrase, case_sensitive=False):
-    hay = answer if case_sensitive else answer.casefold()
-    needle = phrase if case_sensitive else phrase.casefold()
-    judge.check(name, needle in hay, f"answer must mention {phrase!r}")
+    if _is_plain_number(phrase):
+        # A numeric phrase is a standalone token. "10" must not match inside
+        # "109,095" and "25" must not match inside "2025".
+        found = bool(number_spans(answer, phrase))
+    else:
+        hay = answer if case_sensitive else answer.casefold()
+        needle = phrase if case_sensitive else phrase.casefold()
+        found = needle in hay
+    judge.check(name, found, f"answer must mention {phrase!r}")
 
 
 def _norm_num(s):
@@ -245,21 +251,245 @@ def _norm_num(s):
     return s.lower()
 
 
-def check_answer_number(judge, answer, name, value, label=None):
-    """The answer must contain the number (comma-formatted or plain)."""
-    target = _norm_num(value)
-    tokens = re.findall(NUM_TOKEN_RX, answer)
-    found = any(_norm_num(tok) == target for tok in tokens)
-    label_suffix = f" ({label})" if label else ""
-    judge.check(name, found,
-                f"answer must contain the number {value}{label_suffix}; "
-                f"found tokens={tokens[:14]}")
+_PLAIN_NUMBER_RE = re.compile(r"\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?")
+_NUMBER_SPAN_RE = re.compile(
+    # Sentence punctuation may follow a number ("4.8." / "27."). A dot that
+    # continues a version ("4.8.1") does not end the token.
+    r"(?<![A-Za-z0-9.])(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?(?!(?:\.\d)|[A-Za-z0-9])"
+)
+# Following-subject window is short so the next sentence's subject does not
+# steal the previous sentence's number.
+_FOLLOWING_WINDOW = 48
 
 
-def check_answer_any(judge, answer, name, variants, label=""):
-    hay = answer.casefold()
-    hit = any(_norm_num(v) in hay or str(v).casefold() in hay for v in variants)
-    judge.check(name, hit, f"answer must mention one of {variants} {label}")
+def _is_plain_number(value):
+    return bool(re.fullmatch(_PLAIN_NUMBER_RE, str(value).strip()))
+
+
+def _number_matches(whole_raw, frac, wanted):
+    """Standalone numeric equality. Leading-zero tokens (date fragments like
+    ``04``) are not the integer 4. ``2.0`` is not the integer 2."""
+    whole = str(whole_raw).replace(",", "")
+    raw = _norm_num(wanted)
+    if not re.fullmatch(r"\d+(?:\.\d+)?", raw):
+        return False
+    if "." in raw:
+        w_whole, w_frac = raw.split(".", 1)
+    else:
+        w_whole, w_frac = raw, None
+    if len(whole) > 1 and whole[0] == "0":
+        return False
+    try:
+        if int(whole) != int(w_whole):
+            return False
+    except ValueError:
+        return False
+    if (w_frac is None) != (frac is None):
+        return False
+    if w_frac is None:
+        return True
+    return frac.rstrip("0") == w_frac.rstrip("0")
+
+
+def number_spans(answer, value):
+    """(start, end) of standalone occurrences of ``value`` (comma or plain)."""
+    spans = []
+    for match in _NUMBER_SPAN_RE.finditer(str(answer)):
+        if _number_matches(match.group(1), match.group(2), value):
+            spans.append((match.start(), match.end()))
+    return spans
+
+
+def _phrase_spans(text, phrase):
+    """Literal phrase hits that are not glued to a longer alphanumeric token.
+    ``3.3B`` does not match inside ``13.3B``; ``10`` does not match inside ``109``.
+    """
+    hay = str(text).casefold()
+    needle = str(phrase).casefold()
+    if not needle:
+        return []
+    spans = []
+    start = 0
+    while True:
+        index = hay.find(needle, start)
+        if index < 0:
+            break
+        before = hay[index - 1] if index else " "
+        after_at = index + len(needle)
+        after = hay[after_at] if after_at < len(hay) else " "
+        if before.isalnum() or after.isalnum():
+            start = index + 1
+            continue
+        spans.append((index, after_at))
+        start = after_at
+    return spans
+
+
+def _boundary_positions(text, needle):
+    if not needle:
+        return []
+    hay = str(text).casefold()
+    pattern = re.compile(
+        r"(?<![a-z0-9])" + re.escape(str(needle).casefold()) + r"(?![a-z0-9])"
+    )
+    return [match.start() for match in pattern.finditer(hay)]
+
+
+def _span_owner(text, start, end, candidates, window):
+    """The subject that owns a span.
+
+    Prefer the nearest preceding candidate. An immediately following label
+    wins only when it is closer and no sentence break (period or semicolon)
+    sits between the span and that label — so ``#2670 'CVE-...'`` binds to
+    the CVE, while ``171 reviews. AutoClicker`` stays with the previous project.
+    """
+    preceding = []
+    following = []
+    for name in candidates:
+        if not name:
+            continue
+        for pos in _boundary_positions(text, name):
+            if pos <= start:
+                dist = start - pos
+                if dist <= window:
+                    preceding.append((dist, name))
+            else:
+                dist = pos - end
+                if dist <= window:
+                    following.append((dist, name))
+    preceding.sort()
+    following.sort()
+    if preceding and following:
+        pdist, pname = preceding[0]
+        fdist, fname = following[0]
+        between = text[end:end + fdist]
+        # Only an immediately attached label ("#2670 'CVE-...'") may outrank
+        # a farther preceding subject. The next list item ("1,150), EspoCRM",
+        # "priority 7, #2670") must not.
+        attached_label = re.fullmatch(r"[\s'\"#(/)]*", between) is not None
+        if attached_label and fdist <= 24 and fdist + 8 < pdist:
+            return fname
+        return pname
+    if preceding:
+        return preceding[0][1]
+    if following and following[0][0] <= _FOLLOWING_WINDOW:
+        return following[0][1]
+    return None
+
+
+def _near_ok(text, start, end, near, near_window):
+    if not near:
+        return True
+    segment = text[max(0, start - near_window):min(len(text), end + near_window)]
+    return re.search(near, segment, re.IGNORECASE) is not None
+
+
+def _context_ok(text, start, end, context, context_window):
+    if not context:
+        return True
+    segment = text[max(0, start - context_window):min(len(text), end + context_window)]
+    return any(re.search(pattern, segment, re.IGNORECASE) for pattern in context)
+
+
+def bound_to_subject(answer, spans, subject, competitors=(), window=420,
+                     near=None, near_window=70, context=None, context_window=80):
+    """True when some span is owned by ``subject`` (not a competitor) and any
+    local ``near`` / ``context`` constraint holds for that same span."""
+    if not spans or not subject:
+        return False
+    candidates = [subject, *(competitors or ())]
+    for start, end in spans:
+        if _span_owner(answer, start, end, candidates, window) != subject:
+            continue
+        if not _near_ok(answer, start, end, near, near_window):
+            continue
+        if not _context_ok(answer, start, end, context, context_window):
+            continue
+        return True
+    return False
+
+
+def number_bound_to_subject(answer, value, subject, competitors=(), window=420,
+                            near=None, near_window=70, context=None,
+                            context_window=80):
+    return bound_to_subject(
+        answer, number_spans(answer, value), subject, competitors, window,
+        near, near_window, context, context_window,
+    )
+
+
+def phrase_bound_to_subject(answer, phrase, subject, competitors=(), window=420,
+                            near=None, near_window=70, context=None,
+                            context_window=80):
+    spans = number_spans(answer, phrase) if _is_plain_number(phrase) else _phrase_spans(answer, phrase)
+    return bound_to_subject(
+        answer, spans, subject, competitors, window, near, near_window,
+        context, context_window,
+    )
+
+
+def _binding_detail(value, label, subject, competitors, near):
+    bits = [f"value {value!r} bound to {subject!r}"]
+    if competitors:
+        bits.append(f"not {list(competitors)!r}")
+    if near:
+        bits.append(f"near /{near}/")
+    if label:
+        bits.append(str(label))
+    return "; ".join(bits)
+
+
+def check_answer_number(judge, answer, name, value, label=None, *,
+                        subject, competitors=(), window=420,
+                        near=None, near_window=70, context=None,
+                        context_window=80):
+    """The number must be a standalone token owned by ``subject``.
+
+    A correct integer elsewhere in the answer (another project's weekly
+    count, a date fragment, a digit inside a longer id) does not count.
+    """
+    found = number_bound_to_subject(
+        answer, value, subject, competitors, window, near, near_window,
+        context, context_window,
+    )
+    judge.check(name, found, _binding_detail(value, label, subject, competitors, near))
+
+
+def check_answer_phrase_near(judge, answer, name, phrase, *,
+                             subject, competitors=(), window=420,
+                             near=None, near_window=70, label=None):
+    """A phrase (date, license, abbreviated total) owned by ``subject``."""
+    found = phrase_bound_to_subject(
+        answer, phrase, subject, competitors, window, near, near_window,
+    )
+    judge.check(name, found, _binding_detail(phrase, label, subject, competitors, near))
+
+
+def check_answer_any(judge, answer, name, variants, label="", *,
+                     subject, competitors=(), window=420,
+                     near=None, near_window=70):
+    """One of ``variants`` must be standalone and owned by ``subject``.
+
+    Numeric variants use standalone number tokens. Abbreviated forms
+    (``430M``) use boundary-aware phrase spans. Neither is a raw substring.
+    """
+    hit = False
+    for variant in variants:
+        if _is_plain_number(variant):
+            if number_bound_to_subject(
+                answer, variant, subject, competitors, window, near, near_window,
+            ):
+                hit = True
+                break
+        elif phrase_bound_to_subject(
+            answer, variant, subject, competitors, window, near, near_window,
+        ):
+            hit = True
+            break
+    judge.check(
+        name, hit,
+        _binding_detail(list(variants), label, subject, competitors, near),
+    )
 
 
 # ---------------------------------------------------------------- navigation

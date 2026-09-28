@@ -6,7 +6,7 @@ What does SourceForge offer beyond project downloads? Report: the About page's f
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--19"
 
@@ -31,30 +31,30 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_create", r"/create")
     check_visited_path(judge, traj, "visited_support", r"/support")
     check_visited_path(judge, traj, "visited_file_compression_search", r"/directory/.*file.compression")
-    check_answer_phrase(judge, answer, "founded_1999", '1999')
-    check_answer_phrase(judge, answer, "software_titles", '123,200')
+    check_answer_number(judge, answer, "founded_1999", '1999', '1999', subject='founded', competitors=['NinjaOne', 'podcast', 'blog'])
+    check_answer_number(judge, answer, "software_titles", '123,200', '123,200', subject='lists', competitors=['NinjaOne', 'founded', 'titles'], near='123')
     check_answer_phrase(judge, answer, "leader_1", 'Logan Abbott')
     check_answer_phrase(judge, answer, "leader_1_title", 'President, SourceForge')
     check_answer_phrase(judge, answer, "leader_2", 'Roger Sheppard')
     check_answer_phrase(judge, answer, "leader_2_title", 'President of Slashdot Media')
     check_answer_phrase(judge, answer, "podcast_episode", 'FastField')
     check_answer_phrase(judge, answer, "podcast_episode_number", '#138')
-    check_answer_phrase(judge, answer, "podcast_date", '2026-09-03')
+    check_answer_phrase_near(judge, answer, "podcast_date", '2026-09-03', subject='#138', competitors=['article', 'blog'])
     check_answer_phrase(judge, answer, "newest_article", 'Trend Analysis and Capacity Planning')
-    check_answer_phrase(judge, answer, "article_date", '2026-09-03')
+    check_answer_phrase_near(judge, answer, "article_date", '2026-09-03', subject='article', competitors=['blog', '#138'])
     check_answer_phrase(judge, answer, "vendor_1", 'Gemini Enterprise Agent Platform')
     check_answer_phrase(judge, answer, "vendor_2", 'Google Cloud Platform')
     check_answer_phrase(judge, answer, "vendor_3", 'NinjaOne')
-    check_answer_number(judge, answer, "ninjaone_ratings", '6,035', 'NinjaOne ratings count')
-    check_answer_number(judge, answer, "gcp_ratings", '61,049', 'Google Cloud Platform ratings count')
+    check_answer_number(judge, answer, "ninjaone_ratings", '6,035', 'NinjaOne ratings count', subject='NinjaOne', competitors=['Google Cloud Platform', 'Gemini'], near='ratings?')
+    check_answer_number(judge, answer, "gcp_ratings", '61,049', 'Google Cloud Platform ratings count', subject='Google Cloud Platform', competitors=['NinjaOne', 'Gemini'], near='ratings?')
     check_answer_phrase(judge, answer, "newest_blog_post", 'Trend Analysis and Capacity Planning')
-    check_answer_phrase(judge, answer, "blog_date", '2026-09-03')
+    check_answer_phrase_near(judge, answer, "blog_date", '2026-09-03', subject='blog', competitors=['article', '#138'])
     check_answer_phrase(judge, answer, "vendors_offer", 'list your product in the Business Software directory')
     check_answer_phrase(judge, answer, "create_invite", 'Find, Create & Publish Open Source software for free')
     check_answer_phrase(judge, answer, "support_fastest", 'fastest way to get help')
     check_answer_phrase(judge, answer, "hq_address", '1320 Columbia Street Suite 310')
     check_answer_phrase(judge, answer, "hq_city", 'San Diego')
-    check_answer_number(judge, answer, "file_compression_count", 96, "projects returned by the 'file compression' directory search")
+    check_answer_number(judge, answer, "file_compression_count", 96, "projects returned by the 'file compression' directory search", subject='file compression', competitors=['NinjaOne', 'podcast'], near='projects?|return')
     check_read_only(judge, initial_db, after_db)
 
 

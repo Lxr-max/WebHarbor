@@ -6,7 +6,7 @@ Using the demo account (email: alice.j@test.com, password: TestPass123!), log in
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--7"
 
@@ -25,7 +25,7 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_review_form", r"/projects/passwordsafe/reviews/new")
     check_visited_path(judge, traj, "visited_account", r"/account/")
     check_answer_phrase(judge, answer, "top_result", 'Password Safe')
-    check_answer_number(judge, answer, "top_week", 1788, 'Password Safe weekly downloads')
+    check_answer_number(judge, answer, "top_week", 1788, 'Password Safe weekly downloads', subject='Password Safe', competitors=['KeePass'], near='weekly')
     check_answer_phrase(judge, answer, "review_text_daily", 'daily')
     # stateful: alice bookmarked Password Safe and posted it a 5-star review.
     check_only_tables_changed(judge, initial_db, after_db, {"bookmarks", "reviews", "projects"})

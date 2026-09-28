@@ -6,7 +6,7 @@ Where in the world does 7-Zip get downloaded? From its download statistics pages
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--8"
 
@@ -27,19 +27,19 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_autoclicker", r"/projects/orphamielautoclicker/")
     check_visited_path(judge, traj, "visited_winscp", r"/projects/winscp/")
     check_answer_phrase(judge, answer, "top_country", 'United States')
-    check_answer_number(judge, answer, "top_country_count", '40,718', 'US downloads')
+    check_answer_number(judge, answer, "top_country_count", '40,718', 'US downloads', subject='United States', competitors=['Windows', 'peak'], near='with|download')
     check_answer_phrase(judge, answer, "top_os", 'Windows')
-    check_answer_number(judge, answer, "top_os_count", '90,456', 'Windows downloads')
-    check_answer_phrase(judge, answer, "peak_day", '2026-09-19')
-    check_answer_number(judge, answer, "peak_day_count", '6,001', 'highest-day downloads')
-    check_answer_phrase(judge, answer, "mingw_reg", '2000-02-09')
-    check_answer_phrase(judge, answer, "mingw_license", 'GPLv3')
-    check_answer_phrase(judge, answer, "auto_reg", '2014-06-19')
-    check_answer_phrase(judge, answer, "auto_license", 'Creative Commons Attribution Non-Commercial')
-    check_answer_phrase(judge, answer, "winscp_reg", '2003-07-13')
-    check_answer_phrase(judge, answer, "winscp_license", 'GPLv2')
+    check_answer_number(judge, answer, "top_os_count", '90,456', 'Windows downloads', subject='Windows', competitors=['United States', 'peak'], near='with|download')
+    check_answer_phrase_near(judge, answer, "peak_day", '2026-09-19', subject='peak', competitors=['Windows', 'United States'])
+    check_answer_number(judge, answer, "peak_day_count", '6,001', 'highest-day downloads', subject='peak', competitors=['Windows', 'United States'], near='day|download')
+    check_answer_phrase_near(judge, answer, "mingw_reg", '2000-02-09', subject='MinGW', competitors=['AutoClicker', 'WinSCP'])
+    check_answer_phrase_near(judge, answer, "mingw_license", 'GPLv3', subject='MinGW', competitors=['AutoClicker', 'WinSCP'], near='licen')
+    check_answer_phrase_near(judge, answer, "auto_reg", '2014-06-19', subject='AutoClicker', competitors=['MinGW', 'WinSCP'])
+    check_answer_phrase_near(judge, answer, "auto_license", 'Creative Commons Attribution Non-Commercial', subject='AutoClicker', competitors=['MinGW', 'WinSCP'], near='licen')
+    check_answer_phrase_near(judge, answer, "winscp_reg", '2003-07-13', subject='WinSCP', competitors=['MinGW', 'AutoClicker'])
+    check_answer_phrase_near(judge, answer, "winscp_license", 'GPLv2', subject='WinSCP', competitors=['MinGW', 'AutoClicker'], near='licen')
     check_answer_phrase(judge, answer, "most_recent_updated", 'WinSCP')
-    check_answer_phrase(judge, answer, "most_recent_date", '2026-09-03')
+    check_answer_phrase_near(judge, answer, "most_recent_date", '2026-09-03', subject='WinSCP', competitors=['MinGW', 'AutoClicker'], near='updat|recent')
     check_read_only(judge, initial_db, after_db)
 
 

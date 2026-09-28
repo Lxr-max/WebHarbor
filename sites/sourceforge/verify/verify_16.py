@@ -6,7 +6,7 @@ I need the 7-Zip LZMA SDK and older builds for compatibility testing. In the fil
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--16"
 
@@ -28,17 +28,17 @@ def run_checks(judge, traj, initial_db, after_db):
     check_answer_phrase(judge, answer, "file_2600", 'lzma2600.7z')
     check_answer_phrase(judge, answer, "file_2409", 'lzma2409.7z')
     check_answer_phrase(judge, answer, "file_2408", 'lzma2408.7z')
-    check_answer_phrase(judge, answer, "size_2601", '1.8 MB')
-    check_answer_phrase(judge, answer, "modified_2601", '2026-04-29')
-    check_answer_number(judge, answer, "newest_week", 27, 'lzma2601.7z weekly downloads')
-    check_answer_number(judge, answer, "sdk_folder_week", 675, 'LZMA SDK folder weekly downloads')
+    check_answer_phrase_near(judge, answer, "size_2601", '1.8 MB', subject='lzma2601.7z', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', '7z2601-x64.exe', '7z2601-x64.msi', '7z2600-x64.exe'])
+    check_answer_phrase_near(judge, answer, "modified_2601", '2026-04-29', subject='lzma2601.7z', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', '7z2601-x64.exe', '7z2601-x64.msi', '7z2600-x64.exe'])
+    check_answer_number(judge, answer, "newest_week", 27, 'lzma2601.7z weekly downloads', subject='lzma2601.7z', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', '7z2601-x64.exe', '7z2601-x64.msi', '7z2600-x64.exe'])
+    check_answer_number(judge, answer, "sdk_folder_week", 675, 'LZMA SDK folder weekly downloads', subject='SDK', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', 'lzma2601.7z', '7z2601-x64.exe', '7z2601-x64.msi', '7z2600-x64.exe'], near='weekly')
     check_answer_phrase(judge, answer, "build_2601_x64", '7z2601-x64.exe')
-    check_answer_number(judge, answer, "build_2601_x64_week", '5,494', '7z2601-x64.exe weekly downloads')
+    check_answer_number(judge, answer, "build_2601_x64_week", '5,494', '7z2601-x64.exe weekly downloads', subject='7z2601-x64.exe', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', 'lzma2601.7z', '7z2601-x64.msi', '7z2600-x64.exe'])
     check_answer_phrase(judge, answer, "build_2601_msi", '7z2601-x64.msi')
-    check_answer_number(judge, answer, "build_2601_msi_week", '1,210', '7z2601-x64.msi weekly downloads')
+    check_answer_number(judge, answer, "build_2601_msi_week", '1,210', '7z2601-x64.msi weekly downloads', subject='7z2601-x64.msi', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', 'lzma2601.7z', '7z2601-x64.exe', '7z2600-x64.exe'])
     check_answer_phrase(judge, answer, "build_2600_x64", '7z2600-x64.exe')
-    check_answer_number(judge, answer, "build_2600_x64_week", '2,038', '7z2600-x64.exe weekly downloads')
-    check_answer_number(judge, answer, "root_folder_week", 23345, '7-Zip root folder weekly downloads')
+    check_answer_number(judge, answer, "build_2600_x64_week", '2,038', '7z2600-x64.exe weekly downloads', subject='7z2600-x64.exe', competitors=['lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', 'lzma2601.7z', '7z2601-x64.exe', '7z2601-x64.msi'])
+    check_answer_number(judge, answer, "root_folder_week", 23345, '7-Zip root folder weekly downloads', subject='root', competitors=['SDK', 'lzma2408.7z', 'lzma2409.7z', 'lzma2600.7z', 'lzma2601.7z', '7z2601-x64.exe', '7z2601-x64.msi', '7z2600-x64.exe'], near='weekly')
     check_read_only(judge, initial_db, after_db)
 
 

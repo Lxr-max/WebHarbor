@@ -6,7 +6,7 @@ Our procurement team wants a CRM shortlist with an open source candidate. Browse
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--6"
 
@@ -30,19 +30,19 @@ def run_checks(judge, traj, initial_db, after_db):
     check_answer_phrase(judge, answer, "product_pipedrive", 'Pipedrive')
     check_answer_phrase(judge, answer, "product_suitecrm", 'SuiteCRM')
     check_answer_phrase(judge, answer, "product_espocrm", 'EspoCRM')
-    check_answer_phrase(judge, answer, "pipedrive_ratings", '3,120')
-    check_answer_phrase(judge, answer, "pipedrive_rating_value", '4.4')
-    check_answer_phrase(judge, answer, "suitecrm_ratings", '1,150')
-    check_answer_phrase(judge, answer, "espocrm_ratings", '480')
+    check_answer_number(judge, answer, "pipedrive_ratings", '3,120', '3,120', subject='Pipedrive', competitors=['SuiteCRM', 'EspoCRM', 'Dolibarr'], near='ratings?')
+    check_answer_number(judge, answer, "pipedrive_rating_value", '4.4', '4.4', subject='Pipedrive', competitors=['SuiteCRM', 'EspoCRM', 'Dolibarr'], near='\\d')
+    check_answer_number(judge, answer, "suitecrm_ratings", '1,150', '1,150', subject='SuiteCRM', competitors=['Pipedrive', 'EspoCRM', 'Dolibarr'], near='ratings?')
+    check_answer_number(judge, answer, "espocrm_ratings", '480', '480', subject='EspoCRM', competitors=['Pipedrive', 'SuiteCRM', 'Dolibarr'], near='ratings?')
     check_answer_phrase(judge, answer, "pipedrive_description", 'easy-to-use CRM built for sales teams')
     check_answer_phrase(judge, answer, "category_label", 'CRM')
-    check_answer_number(judge, answer, "crm_results", 2, 'CRM search result count')
+    check_answer_number(judge, answer, "crm_results", 2, 'CRM search result count', subject='CRM', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM', 'Dolibarr'], near='results?')
     check_answer_phrase(judge, answer, "dolibarr_summary", 'Open source ERP and CRM web software for business')
-    check_answer_phrase(judge, answer, "dolibarr_license", 'GPLv3')
-    check_answer_number(judge, answer, "dolibarr_week", 2932, 'Dolibarr weekly downloads')
-    check_answer_phrase(judge, answer, "dolibarr_updated", '2026-05-26')
-    check_answer_number(judge, answer, "dolibarr_rating", '4.8', 'Dolibarr rating')
-    check_answer_number(judge, answer, "dolibarr_reviews", 52, 'Dolibarr review count')
+    check_answer_phrase_near(judge, answer, "dolibarr_license", 'GPLv3', subject='Dolibarr', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM'], near='licen')
+    check_answer_number(judge, answer, "dolibarr_week", 2932, 'Dolibarr weekly downloads', subject='Dolibarr', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM'], near='weekly')
+    check_answer_phrase_near(judge, answer, "dolibarr_updated", '2026-05-26', subject='Dolibarr', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM'], near='updat')
+    check_answer_number(judge, answer, "dolibarr_rating", '4.8', 'Dolibarr rating', subject='Dolibarr', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM'], near='rating')
+    check_answer_number(judge, answer, "dolibarr_reviews", 52, 'Dolibarr review count', subject='Dolibarr', competitors=['Pipedrive', 'SuiteCRM', 'EspoCRM'], near='reviews?')
     check_answer_phrase(judge, answer, "dolibarr_support_rec", 'discussion forums')
     check_read_only(judge, initial_db, after_db)
 

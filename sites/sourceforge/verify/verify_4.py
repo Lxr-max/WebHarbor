@@ -6,7 +6,7 @@ In 7-Zip's Open Discussion forum, find the thread asking for a dark mode. Report
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--4"
 
@@ -27,22 +27,22 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_help_hv_thread", r"/thread/be65c1f094/")
     check_answer_phrase(judge, answer, "thread_subject", 'Dark Mode')
     check_answer_phrase(judge, answer, "thread_creator", 'Carlos Nunes')
-    check_answer_phrase(judge, answer, "thread_created", 'Tue Jul 08, 2025')
-    check_answer_number(judge, answer, "thread_posts", 4, 'Dark Mode posts')
-    check_answer_number(judge, answer, "thread_views", '3,206', 'Dark Mode views')
+    check_answer_phrase_near(judge, answer, "thread_created", 'Tue Jul 08, 2025', subject='Dark Mode', competitors=['Dark Theme', 'Help'])
+    check_answer_number(judge, answer, "thread_posts", 4, 'Dark Mode posts', subject='Dark Mode', competitors=['Dark Theme', '7-Zip 26.02', 'Help', 'rtm'], near='posts?')
+    check_answer_number(judge, answer, "thread_views", '3,206', 'Dark Mode views', subject='Dark Mode', competitors=['Dark Theme', '7-Zip 26.02', 'Help', 'rtm'], near='views?')
     check_answer_phrase(judge, answer, "darkmode_health_reason", 'greatly facilitates eye comfort')
     check_answer_phrase(judge, answer, "darktheme_creator", 'kb0000001')
-    check_answer_number(judge, answer, "darktheme_posts", 18, 'Dark Theme posts')
-    check_answer_number(judge, answer, "darktheme_views", '9,620', 'Dark Theme views')
+    check_answer_number(judge, answer, "darktheme_posts", 18, 'Dark Theme posts', subject='Dark Theme', competitors=['Dark Mode', '7-Zip 26.02', 'Help', 'rtm'], near='posts?')
+    check_answer_number(judge, answer, "darktheme_views", '9,620', 'Dark Theme views', subject='Dark Theme', competitors=['Dark Mode', '7-Zip 26.02', 'Help', 'rtm'], near='views?')
     check_answer_phrase(judge, answer, "darktheme_opening_post", 'Dark Theme')
     check_answer_phrase(judge, answer, "max_views_thread", '7-Zip 26.02')
     check_answer_phrase(judge, answer, "max_views_creator", 'Igor Pavlov')
-    check_answer_number(judge, answer, "max_views", '297,148', 'highest-view thread view count')
+    check_answer_number(judge, answer, "max_views", '297,148', 'highest-view thread view count', subject='7-Zip 26.02', competitors=['Dark Mode', 'Dark Theme', 'Help', 'rtm'], near='views?')
     check_answer_phrase(judge, answer, "help_forum_name", 'Help')
-    check_answer_any(judge, answer, "help_topic_count", ['25', '8,276', '8276'], 'topics the Help forum lists')
+    check_answer_any(judge, answer, "help_topic_count", ['25', '8,276', '8276'], 'topics the Help forum lists', subject='Help', competitors=['Dark Mode', 'Dark Theme', '7-Zip 26.02', 'rtm'], near='topics?')
     check_answer_phrase(judge, answer, "help_hv_subject", 'Compress multiple files to individual ZIP archives with fixed size')
     check_answer_phrase(judge, answer, "help_hv_creator", 'rtm')
-    check_answer_number(judge, answer, "help_hv_views", '3,161', 'Help forum highest-viewed thread views')
+    check_answer_number(judge, answer, "help_hv_views", '3,161', 'Help forum highest-viewed thread views', subject='rtm', competitors=['Dark Mode', 'Dark Theme', '7-Zip 26.02', 'Help'], near='views?')
     check_read_only(judge, initial_db, after_db)
 
 

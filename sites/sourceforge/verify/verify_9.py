@@ -6,7 +6,7 @@ I only want open source games. Browse the Games category and report how many pro
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--9"
 
@@ -27,21 +27,21 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_neko", r"/projects/neko-void/")
     check_visited_path(judge, traj, "visited_neko_reviews", r"/projects/neko-void/reviews/")
     check_visited_path(judge, traj, "visited_top", r"/top")
-    check_answer_number(judge, answer, "games_count", 26, 'games project count')
+    check_answer_number(judge, answer, "games_count", 26, 'games project count', subject='Games', competitors=['DOSBox', 'Neko Void'], near='projects?|lists')
     check_answer_phrase(judge, answer, "first_project", 'DOSBox')
     check_answer_phrase(judge, answer, "second_project", 'Neko Void')
     check_answer_phrase(judge, answer, "page2_first", "ii's Stupid Menu")
     check_answer_phrase(judge, answer, "first_license", 'GNU General Public License version 2.0')
-    check_answer_phrase(judge, answer, "first_updated", '2025-08-25')
-    check_answer_number(judge, answer, "first_week", '14,848', 'DOSBox weekly downloads')
-    check_answer_number(judge, answer, "first_rating", '4.7', 'DOSBox rating')
-    check_answer_number(judge, answer, "first_reviews", 165, 'DOSBox review count')
+    check_answer_phrase_near(judge, answer, "first_updated", '2025-08-25', subject='DOSBox', competitors=['Neko Void', 'MinGW'], near='updat')
+    check_answer_number(judge, answer, "first_week", '14,848', 'DOSBox weekly downloads', subject='DOSBox', competitors=['Neko Void', 'MinGW'], near='weekly')
+    check_answer_number(judge, answer, "first_rating", '4.7', 'DOSBox rating', subject='DOSBox', competitors=['Neko Void', 'MinGW'], near='rating')
+    check_answer_number(judge, answer, "first_reviews", 165, 'DOSBox review count', subject='DOSBox', competitors=['Neko Void', 'MinGW'], near='reviews?')
     check_answer_phrase(judge, answer, "first_support_rec", 'discussion forums')
     check_answer_phrase(judge, answer, "second_license", 'GPLv3')
-    check_answer_phrase(judge, answer, "second_updated", '2026-08-31')
-    check_answer_number(judge, answer, "second_week", '9,044', 'Neko Void weekly downloads')
-    check_answer_number(judge, answer, "second_rating", '4.5', 'Neko Void rating')
-    check_answer_number(judge, answer, "second_reviews", 4, 'Neko Void review count')
+    check_answer_phrase_near(judge, answer, "second_updated", '2026-08-31', subject='Neko Void', competitors=['DOSBox', 'MinGW'], near='updat')
+    check_answer_number(judge, answer, "second_week", '9,044', 'Neko Void weekly downloads', subject='Neko Void', competitors=['DOSBox', 'MinGW'], near='weekly')
+    check_answer_number(judge, answer, "second_rating", '4.5', 'Neko Void rating', subject='Neko Void', competitors=['DOSBox', 'MinGW'], near='rating')
+    check_answer_number(judge, answer, "second_reviews", 4, 'Neko Void review count', subject='Neko Void', competitors=['DOSBox', 'MinGW'], near='reviews?')
     check_answer_phrase(judge, answer, "weekly_no1", 'MinGW')
     check_read_only(judge, initial_db, after_db)
 

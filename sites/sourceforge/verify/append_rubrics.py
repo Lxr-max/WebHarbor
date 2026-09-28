@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
-"""Append verifier_path + judge_rubric to sites/sourceforge/tasks.jsonl.
+"""Rewrite judge_rubric on sites/sourceforge/tasks.jsonl.
 
-Contract:
-  - the ORIGINAL five keys (id, ques, upstream_url, web, web_name) stay
-    BYTE-IDENTICAL on every line: the two new keys are appended textually
-    before the closing brace, so the original bytes are untouched;
-  - no `answer` key is ever written;
-  - judge_rubric is pure-rule English (no ground truth leaked);
-  - verifier_path points at this directory's per-task deterministic verifier.
+The contributor already appended verifier_path and judge_rubric. Those
+rubrics named the ground-truth projects, counts, dates, and ticket ids.
+The agent reads tasks.jsonl, so a rubric must state the checkpoints only.
 
-r3 sync: rubrics updated for the 5 deepened tasks (T3/T4/T5/T12/T19);
-expected values re-frozen from the fb4ff5bf seed (verified live in the
-r3 review container wh-sf-r3). The other 16 rubrics are byte-identical to r2.
+This script replaces judge_rubric in place. It does not add an answer key
+and it keeps web_name, id, ques, web, upstream_url, and verifier_path.
 """
 from __future__ import annotations
 
@@ -21,28 +16,328 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 TASKS = HERE.parent / "tasks.jsonl"
 
+KEY_ORDER = (
+    "web_name",
+    "id",
+    "ques",
+    "web",
+    "upstream_url",
+    "verifier_path",
+    "judge_rubric",
+)
+
 RUBRICS = {
-    0: "Verify the agent ran the directory search for 'file compression', selected Most Popular in the Sort By dropdown, and opened all three project pages plus their Reviews pages. The answer must name the top two results (MinGW - Minimalist GNU for Windows and AutoClicker) and 7-Zip, with each project's weekly download count (3,600,000 / 768,800 / 23,587), registered date (2000-02-09 / 2014-06-19 / 2000-11-10), license (GPLv3 / Creative Commons Attribution Non-Commercial / LGPLv2), average rating (4.6 / 4.9 / 4.8) and total review count (171 / 221 / 831), and state that 7-Zip was updated most recently (2026-09-04). Fail answers that swap the top two or invent numbers.",
-    1: "Verify the agent opened the 7-Zip file browser, both newest version folders (26.03 and 26.02) and the download/statistics chain. The answer must list every build in 26.03 (7z2603-arm64.exe, -extra.7z, -linux-x64.tar.xz, -src.7z, -x64.exe, -x64.msi, 7z2603.exe) and in 26.02 (7z2602-x64.exe, -x64.msi, 7z2602.exe) with file sizes, report each folder's own weekly count (26.03 = 29,589; 26.02 = 21,750), state that the big Download button starts 7z2603-x64.exe and the download page confirms that filename, and report the statistics peak day (2026-09-19 with 6,001) and the top operating system with its count (Windows, 90,456). Fail answers reporting 0 for a folder weekly.",
-    2: "Verify the agent opened both projects' reviews pages and applied the star-filter views via the dropdown. The answer must report 7-Zip's rating (4.8), 5-star (765) and 1-star (27) histogram counts, the featured Highest Rated review text with its author (itreet-raking5), and its 4-star filter view count (6); KeePass's rating (4.9), 5-star (567) and 1-star (11) histogram counts, its 5-star filter view count (22) and 4-star filter view count (3); and that 7-Zip shows more total reviews (831 vs 606). Fail answers that confuse histogram counts with filter-view counts.",
-    3: "Verify the agent searched the Bugs tracker, opened ticket #2701, ran the CVE search, opened the two newest CVE tickets for their priorities, and opened the lowest-numbered CVE ticket. The answer must report #2701's summary ('user interface misleading'), status (open), creator (Harry Stein), priority (5), a faithful summary of Igor Pavlov's reply (the USB drive may have been slow for data writing), the CVE search result count (3), the two newest CVE tickets (#2681 CVE-2026-58052 and #2670 CVE-2026-48102) with each one's priority (7 and 7), the lowest-numbered CVE ticket #2669's owner (Igor Pavlov) and creation date (2026-06-10), and the tracker's open ticket count (31). A near-miss ticket (#2680, text overlapping the progress bar) exists; answers must distinguish them.",
-    4: "Verify the agent opened the Open Discussion forum, the Dark Mode thread, the Dark Theme thread, the forum's highest-viewed thread, the Help forum, and the Help forum's highest-viewed thread. The answer must report the Dark Mode thread's subject (Dark Mode), creator (Carlos Nunes), creation date (Tue Jul 08, 2025), post count (4) and view count (3,206), and quote the health reason its opening post gives for dark mode (greatly facilitates eye comfort, especially for those with eye problems related to brightness); the older Dark Theme thread's creator (kb0000001), posts (18) and views (9,620) with its opening post quoted; the highest-viewed thread (7-Zip 26.02 by Igor Pavlov) with its exact view count (297,148); and the Help forum's name (Help), its topic count, and its highest-viewed thread's subject, creator (rtm) and view count (Compress multiple files to individual ZIP archives with fixed size, 3,161 views).",
-    5: "Verify the agent opened the Top Downloaded Projects page, all three top all-time project pages with their Reviews pages, and 7-Zip's page with its Reviews page. The answer must report the all-time #1 (Microsoft's TrueType core fonts, 3.3B), the last-week #1 (MinGW, 3.6M), 7-Zip's all-time rank and total (#10, 430M as the Top page displays it), each of the top three's registered date (corefonts 2001-08-22, MinGW 2000-02-09, Notepad++ Plugin Manager 2011-11-29) and weekly downloads (3,000,000 / 3,600,000 / 109,095), the two #1s' licenses (GPLv2 / GPLv3), all three top projects' average ratings and review counts from their Reviews pages (corefonts 4.1 with 46 reviews, MinGW 4.6 with 171, Notepad++ Plugin Manager 4.4 with 64), and from 7-Zip's own page its last update date (2026-09-04) and total review count (831), plus its Reviews page average rating (4.8).",
-    6: "Verify the agent browsed the Business Software CRM category, opened every product's business page, ran the open source 'CRM' search sorted by Rating, and opened the first result's project, Reviews and Support pages. The answer must list the CRM products with ratings and ratings counts (Pipedrive 4.4/3,120; SuiteCRM 4.2/1,150; EspoCRM 4.4/480), give each product's description and the CRM category label, report the CRM search result count (2), and the first result Dolibarr ERP - CRM's summary ('Open source ERP and CRM web software for business'), license (GPLv3), weekly downloads (2,932), last update (2026-05-26), average rating (4.8), review count (52), and its Support tab's help recommendation (the project's discussion forums).",
-    7: "Verify the agent logged in as the demo user, searched 'password manager', bookmarked the top result and posted it a 5-star review. The answer must name the top result (Password Safe) with its weekly downloads (1,788), and the DB must show exactly one new alice_j bookmark for Password Safe and one new 5-star alice_j review mentioning daily use, with the Password Safe counters bumped and every other table untouched.",
-    8: "Verify the agent opened 7-Zip's download statistics pages (timeline, OS breakdown, country map) and the 'file compression' search sorted by Most Popular with the top three project pages. The answer must report the top country (United States, 40,718), the top OS (Windows, 90,456), the peak day with its count (2026-09-19, 6,001), and for each of MinGW, AutoClicker and WinSCP the registered date (2000-02-09 / 2014-06-19 / 2003-07-13), license (GPLv3 / Creative Commons Attribution Non-Commercial / GPLv2), and which of the three was updated most recently (WinSCP, 2026-09-03).",
-    9: "Verify the agent browsed the Games category including page 2, opened both first projects' pages, Reviews and Support tabs, and the Top page. The answer must report the project count (26), the first two names (DOSBox, Neko Void), page 2's project count and first name (1 project, ii's Stupid Menu), DOSBox's license (GPLv2), last update (2025-08-25), weekly downloads (14,848), rating (4.7), review count (165) and Support recommendation, Neko Void's license (GPLv3), last update (2026-08-31), weekly downloads (9,044), rating (4.5) and review count (4), and the Top page's weekly #1 (MinGW).",
-    10: "Verify the agent read the homepage picks and opened PortableApps.com, 7-Zip and KeePass with their Reviews pages, plus the Top page. The answer must name the Staff Choice (7-Zip, 831 reviews) and Community Choice (KeePass, 606 reviews), PortableApps.com's weekly downloads (422,400), registered date (2005-10-21), license (MPL 1.1), rating (4.9) and review count (266), both choices' weekly downloads and last update dates, their average ratings (4.8 / 4.9), 7-Zip's 5-star and 1-star histogram counts (765 / 27), and the Top page's weekly #1 (MinGW).",
-    11: "Verify the agent ran the 'video player' search, opened both the Android native and HTML5 players' pages, applied the Windows facet, opened the first Windows result with its Reviews page, and re-sorted by Rating. The answer must report the total result count (53), the Android native player (Next Player, 37 weekly, updated 2026-08-09), the HTML5 player (Video.js, updated 2026-08-10), the Windows-only count (13), the first Windows result (mpv player (Windows), 9,572 weekly, registered 2015-12-31, rating 4.3), and the new first result after sorting by Rating (Shotcut).",
-    12: "Verify the agent opened 7-Zip's project page, the developer's user profile, all three of the developer's other project pages, and 7-Zip's Reviews page with both star-filter views applied via the Filter Reviews dropdown. The answer must report the username (ipavlov), display name (Igor Pavlov), join date (2000-08-17), every project the profile associates with them (7-Zip, p7zip, 7-Far, 7-max), each of the three other projects' summary (p7zip: command-line port of the 7-Zip file archiver; 7-max: speeds up Windows applications by optimising memory allocation; 7-Far: 7-Zip archiver plugin for the FAR Manager file manager), license (LGPLv2 each) and registered date (p7zip 2004-06-12, 7-max 2004-08-12, 7-Far 2009-12-28), 7-Zip's average rating (4.8), how many reviews its 1-star and 4-star filter views list (3 and 6), and the total review count shown on its project page (831).",
-    13: "Verify the agent registered fleet-admin, edited the profile (country Germany + a display name), verified both on the account page, bookmarked CrystalDiskInfo from its project page, and confirmed the bookmark. The answer must mention the fleet-admin registration, the Germany country setting, the display name, the CrystalDiskInfo bookmark, the account pages' heading wording, and that My Reviews shows no reviews for a brand-new user. The DB must show exactly one new user row (fleet-admin, fleet-admin@example.com, country DE, display name set) plus exactly one new bookmark for CrystalDiskInfo, and no other table touched.",
-    14: "Verify the agent opened 7-Zip's Wiki, News, and Support tabs, the Open Discussion forum with its highest-viewed thread, and the Help forum. The answer must report the archive formats the wiki Home page lists (7z, XZ, BZIP2, GZIP, TAR, ZIP, WIM, ARJ, CAB, ...), the credited author (Igor Pavlov), the page's last modification date (2026-09-04), the two most recent news posts with titles, dates and authors (7-Zip 9.21 beta, 2011-04-15, Igor Pavlov; 7-Zip 9.20 was released, 2010-11-25, Igor Pavlov), the forum the Support tab names as the best way to get help (Open Discussion, forum 45797), the Open Discussion highest-viewed thread (7-Zip 26.02 by Igor Pavlov, 297,148 views), and the Help forum's name, topic count and highest-viewed thread's subject and creator.",
-    15: "Verify the agent searched the Bugs tracker for CVE, opened the two newest CVE tickets and the lowest-numbered one, found the vulnerability-scanner thread in the Open Discussion forum, and read the tracker sidebar. The answer must report the CVE search count (3), the two newest tickets (#2681 CVE-2026-58052 and #2670 CVE-2026-48102) with status (open) and priority each, the lowest-numbered CVE ticket #2669's owner (Igor Pavlov) and creation date (2026-06-10), the Open Discussion thread's subject ('vulnerability scanner flagged version 26.02 as unsafe'), creator (Robert Barcikowski) and post count (7), and the tracker's open ticket count (31).",
-    16: "Verify the agent opened the LZMA SDK folder, started the newest SDK file's download, opened the 26.01 and 26.00 folders, started the 26.00 x64 download, and read the file-browser root. The answer must list every SDK file with size, modification date and weekly downloads (lzma2408.7z 1.7 MB 2024-08-13 16; lzma2409.7z 1.7 MB 2024-11-30 35; lzma2600.7z 1.8 MB 2026-02-19 15; lzma2601.7z 1.8 MB 2026-04-29 27), identify lzma2601.7z as the newest with the download page confirming that filename, report the SDK folder's weekly count (675), the 26.01 builds (7z2601-x64.exe 1.6 MB 5,494; 7z2601-x64.msi 1.7 MB 1,210), the 26.00 build (7z2600-x64.exe 1.6 MB 2,038) with the download page confirming 7z2600-x64.exe, and the 7-Zip root folder weekly count (23,345).",
-    17: "Verify the agent opened both project pages, both Reviews pages, both Support tabs, the linked discussion forum, and the all-time Top list. The answer must report KeePass's weekly downloads (205,800), review count (606), registered date (2003-11-15), average rating (4.9) and 5-star/1-star histogram counts (567 / 11), its Support tab's recommendation (the project's discussion forums); 7-Zip's weekly downloads (23,587), review count (831), registered date (2000-11-10), average rating (4.8) and histogram counts (765 / 27), its Support tab's recommendation (forum 45797 / Open Discussion) and the linked forum's name and topic count; and that 7-Zip has the larger all-time total (430M vs 191M).",
-    18: "Verify the agent logged in as bob, reviewed the existing bookmarks (WinSCP, CrystalDiskInfo), removed the disk-health tool, added the bootable USB tool, posted the 4-star review, and confirmed the final list. The answer must name all of these; the DB must show bob's bookmark swapped from CrystalDiskInfo to Ventoy, one new 4-star bob_c review mentioning USB, the Ventoy counters bumped, and every other table untouched.",
-    19: "Verify the agent opened the About, Team, Podcast, Articles, Case Studies, NinjaOne and Google Cloud Platform product pages, Blog, For Vendors, Create and Support pages, and ran the directory search for 'file compression'. The answer must report the About page's founding year (1999) and software title count (123,200); the first two Team members' names and titles (Logan Abbott, President, SourceForge & COO, Slashdot Media; Roger Sheppard, President of Slashdot Media); the newest podcast episode's title and date (Mobile Data Collection and Analytics: FastField | SourceForge Podcast, episode #138, 2026-09-03); the newest article's title and date (Trend Analysis and Capacity Planning..., 2026-09-03); the Case Studies featured vendors (Gemini Enterprise Agent Platform, Google Cloud Platform, NinjaOne) plus the ratings counts on the NinjaOne (6,035) and Google Cloud Platform (61,049) product pages; the newest Blog post's title and date (Trend Analysis and Capacity Planning, 2026-09-03); what the For Vendors page offers (list your product in the Business Software directory); the Create page's invitation (Find, Create & Publish Open Source software for free); the Support page's fastest way to get help (post in the project's own support forum); the footer's headquarters street address (1320 Columbia Street Suite 310, San Diego); and how many projects the 'file compression' directory search returns (96).",
-    20: "Verify the agent browsed the ERP category, opened both products' business pages, ran the open source 'erp' search sorted by Rating, opened the first and second results, and the first result's Reviews and Support pages. The answer must list every ERP product with rating and ratings count (Odoo 4.3 / 4,100; Dolibarr ERP - CRM 4.2 / 940), give both business-page descriptions, report the erp search result count (8), the first result Dolibarr ERP - CRM's summary ('Open source ERP and CRM web software for business'), license (GPLv3), weekly downloads (2,932), last update (2026-05-26), registered date (2005-11-28), average rating (4.8), review count (52) and Support recommendation, and the second result PSeInt's registered date (2004-11-28).",
+    0: (
+        "FACT CHECKPOINTS: (1) The agent MUST search the open source directory "
+        "for file compression, sort by Most Popular, and open the top two "
+        "result project pages plus 7-Zip, including each project's Reviews "
+        "page. (2) The answer MUST name those three projects and, for each, "
+        "the weekly download count, registered date, and license from the "
+        "project page, plus the average rating and total review count from "
+        "the Reviews page, and MUST say which project was updated most "
+        "recently. (3) Each number and date MUST be attributed to the correct "
+        "project. An empty answer is a FAIL. FAIL if a count, date, rating, "
+        "or license is swapped across projects."
+    ),
+    1: (
+        "FACT CHECKPOINTS: (1) The agent MUST open the 7-Zip file browser, "
+        "both newest version folders, the project-page download action, the "
+        "download confirmation page, and the download statistics for the "
+        "daily table and the operating-system breakdown. (2) The answer MUST "
+        "list every build in each of those two folders with its file size, "
+        "each folder's own weekly download count, the filename the big "
+        "Download button starts, the filename the download page confirms, "
+        "the peak day in the daily table with that day's count, and the top "
+        "operating system with its count. (3) Each size and count MUST be "
+        "attributed to the correct folder, file, day, or operating system. "
+        "An empty answer is a FAIL. FAIL if a folder weekly is reported as "
+        "zero, or if a count is swapped between the two version folders or "
+        "between the peak day and the operating system."
+    ),
+    2: (
+        "FACT CHECKPOINTS: (1) The agent MUST open both 7-Zip's and KeePass's "
+        "project pages and Reviews pages, and MUST apply the star-filter "
+        "views named in the task. (2) The answer MUST give each project's "
+        "overall rating, the 5-star and 1-star histogram counts, the featured "
+        "Highest Rated review text and author for 7-Zip, the 4-star "
+        "filter-view count for 7-Zip, the 5-star and 4-star filter-view "
+        "counts for KeePass, and which project shows more total reviews on "
+        "its project page. (3) Histogram counts and filter-view counts MUST "
+        "stay distinct and attached to the correct project and star level. "
+        "An empty answer is a FAIL. FAIL if a histogram count is used as a "
+        "filter-view count, or if a rating or count is swapped between 7-Zip "
+        "and KeePass."
+    ),
+    3: (
+        "FACT CHECKPOINTS: (1) The agent MUST find the progress-bar ticket in "
+        "the 7-Zip Bugs tracker, search that tracker for CVE, open the two "
+        "newest CVE tickets and the lowest-numbered CVE ticket, and read the "
+        "open-ticket count from the sidebar. (2) The answer MUST report that "
+        "ticket's number, summary, status, creator, and priority, summarize "
+        "the project owner's reply, the CVE search result count, the two "
+        "newest CVE tickets' numbers, summaries, and priorities, the "
+        "lowest-numbered CVE ticket's owner and creation date, and the "
+        "sidebar open count. (3) Each priority, owner, date, and count MUST "
+        "be bound to the ticket or sidebar it came from. An empty answer is "
+        "a FAIL. FAIL if a near-miss ticket is substituted for the "
+        "progress-bar ticket, or if one ticket's priority is reused for "
+        "another."
+    ),
+    4: (
+        "FACT CHECKPOINTS: (1) The agent MUST open 7-Zip's Open Discussion "
+        "forum, the dark-mode thread, the older Dark Theme thread, that "
+        "forum's highest-viewed thread, the Help forum, and the Help forum's "
+        "highest-viewed thread. (2) The answer MUST report the dark-mode "
+        "thread's subject, creator, creation date, post count, and view "
+        "count, and quote the health reason in its opening post; the Dark "
+        "Theme thread's creator, post count, view count, and a quote of its "
+        "opening post; the highest-viewed thread's subject, creator, and "
+        "exact view count; and the Help forum's name, topic count, and its "
+        "highest-viewed thread's subject, creator, and view count. (3) Post "
+        "counts and view counts MUST stay attached to the thread they belong "
+        "to. An empty answer is a FAIL. FAIL if a count from one thread is "
+        "reported for another."
+    ),
+    5: (
+        "FACT CHECKPOINTS: (1) The agent MUST open the Top Downloaded "
+        "Projects page, the top three all-time project pages and their "
+        "Reviews pages, and 7-Zip's project page and Reviews page. (2) The "
+        "answer MUST name the all-time #1 with its displayed figure, the "
+        "last-week #1 with its displayed figure, and 7-Zip's all-time rank "
+        "with its displayed total; each of the top three's registered date "
+        "and weekly downloads; the two #1s' licenses; all three top "
+        "projects' average ratings and review counts; and 7-Zip's last "
+        "update date, total review count, and Reviews-page average rating. "
+        "(3) Ranks, figures, dates, licenses, ratings, and review counts "
+        "MUST be attributed to the correct project. An empty answer is a "
+        "FAIL. FAIL if an all-time rank is taken from digits inside another "
+        "project's download total, or if stats are swapped across the top "
+        "three."
+    ),
+    6: (
+        "FACT CHECKPOINTS: (1) The agent MUST browse the Business Software "
+        "CRM category, open every listed product's business page, search the "
+        "open source directory for CRM sorted by Rating, and open the first "
+        "result's project, Reviews, and Support pages. (2) The answer MUST "
+        "list every CRM product with its rating and ratings count, each "
+        "product's full description and the category label on its business "
+        "page, the CRM search result count, and the first result's summary, "
+        "license, weekly downloads, last update date, average rating, review "
+        "count, and Support-tab help recommendation. (3) Ratings and ratings "
+        "counts MUST stay paired with the correct product, and a "
+        "business-directory rating MUST not be substituted for the "
+        "open-source project's review rating. An empty answer is a FAIL. "
+        "FAIL if a product's rating or count is swapped with another's."
+    ),
+    7: (
+        "FACT CHECKPOINTS: (1) The agent MUST log in as the demo account "
+        "named in the task, search the directory for password manager, open "
+        "the top result, bookmark it, and post a 5-star review that says "
+        "the user uses it daily, then confirm both on the account page. (2) "
+        "The answer MUST name that top result and its weekly downloads. (3) "
+        "The after-state MUST contain exactly one new bookmark by that user "
+        "for that project and exactly one new 5-star review by that user "
+        "mentioning daily use, with that project's counters updated and "
+        "every other table unchanged. An empty answer is a FAIL. FAIL if "
+        "the bookmark or review is missing, is for a different project, or "
+        "if the weekly count is credited to another project."
+    ),
+    8: (
+        "FACT CHECKPOINTS: (1) The agent MUST open 7-Zip's download "
+        "statistics for country, operating system, and the daily table, and "
+        "the file-compression directory search sorted by Most Popular, then "
+        "open the top three result project pages. (2) The answer MUST report "
+        "the top country with its count, the top operating system with its "
+        "count, the peak day with that day's count, and for each of the top "
+        "three projects the registered date and license, plus which of the "
+        "three was updated most recently. (3) Each count, date, and license "
+        "MUST be attributed to the correct place or project. An empty answer "
+        "is a FAIL. FAIL if the country, operating-system, and peak-day "
+        "counts are swapped, or if dates or licenses are swapped across the "
+        "three projects."
+    ),
+    9: (
+        "FACT CHECKPOINTS: (1) The agent MUST browse the Games category "
+        "including its second page, open the first two projects' pages, "
+        "Reviews pages, and Support tabs, and open the Top Downloaded "
+        "Projects page. (2) The answer MUST report how many projects the "
+        "category lists, the first two names, the second page's project "
+        "count and first name, the first project's license, last update, "
+        "weekly downloads, average rating, review count, and Support "
+        "recommendation, the second project's license, operating systems, "
+        "last update, weekly downloads, average rating, and review count, "
+        "and the #1 weekly project. (3) Each field MUST stay attached to the "
+        "project it came from. An empty answer is a FAIL. FAIL if the two "
+        "projects' stats are swapped or if page 1's count is reported as "
+        "page 2's."
+    ),
+    10: (
+        "FACT CHECKPOINTS: (1) The agent MUST read the homepage picks, open "
+        "the portable software platform from Popular Projects plus both "
+        "choice projects, including each Reviews page, and open the Top "
+        "Downloaded Projects page. (2) The answer MUST name the Staff Choice "
+        "and Community Choice with the review count shown for each, the "
+        "portable platform's weekly downloads, registered date, license, "
+        "rating, and review count, both choice projects' weekly downloads "
+        "and last update dates, each choice's average rating, the Staff "
+        "Choice's 5-star and 1-star counts, and the last-week #1. (3) The "
+        "5-star count and the 1-star count MUST stay bound to those labels, "
+        "and each project's numbers MUST not be credited to another project. "
+        "An empty answer is a FAIL. FAIL if the two histogram counts are "
+        "swapped or if a choice project's stats are assigned to the other "
+        "choice."
+    ),
+    11: (
+        "FACT CHECKPOINTS: (1) The agent MUST search the directory for video "
+        "player, open the Android native player and the HTML5 player, apply "
+        "the Windows facet, open the first Windows result and its Reviews "
+        "page, and re-sort the Windows results by Rating. (2) The answer "
+        "MUST report the total result count, which result is the Android "
+        "native player and which is the HTML5 player, the Android player's "
+        "weekly downloads and update date, the HTML5 player's summary and "
+        "update date, the Windows-only result count, the first Windows "
+        "result's name, weekly downloads, registered date, and average "
+        "rating, and the new first result after sorting by Rating. (3) "
+        "Counts and dates MUST stay attached to the result or filter they "
+        "came from. An empty answer is a FAIL. FAIL if the unfiltered total "
+        "is reported as the Windows count, or if the two players' dates are "
+        "swapped."
+    ),
+    12: (
+        "FACT CHECKPOINTS: (1) The agent MUST open the 7-Zip project page, "
+        "the developer's user profile, each of the three other projects the "
+        "profile associates with that developer, and 7-Zip's Reviews page "
+        "with the 1-star and 4-star filter views applied. (2) The answer "
+        "MUST report the username, join date, and every associated project, "
+        "each of the three other projects' summary, license, and registered "
+        "date, 7-Zip's average rating, how many reviews the 1-star and "
+        "4-star filter views list, and the total review count on the project "
+        "page. (3) Each registered date and filter count MUST be bound to "
+        "the correct project or star filter. An empty answer is a FAIL. "
+        "FAIL if a date from one side project is reported for another, or if "
+        "the 1-star and 4-star list counts are swapped."
+    ),
+    13: (
+        "FACT CHECKPOINTS: (1) The agent MUST register the account named in "
+        "the task, set the country to Germany and a display name, confirm "
+        "both on the account page, bookmark CrystalDiskInfo from its project "
+        "page, and confirm that bookmark. (2) The answer MUST mention the "
+        "registration, the Germany country setting, the display name, the "
+        "CrystalDiskInfo bookmark, the exact heading text of the two account "
+        "pages used, and what My Reviews shows for a brand-new user. (3) The "
+        "after-state MUST contain exactly one new user row for that username "
+        "and email with country DE and a display name, plus exactly one new "
+        "bookmark for CrystalDiskInfo, and no other table changed. An empty "
+        "answer is a FAIL. FAIL if the country, display name, or bookmark is "
+        "missing, or if a review row was created."
+    ),
+    14: (
+        "FACT CHECKPOINTS: (1) The agent MUST open 7-Zip's Wiki, News, and "
+        "Support tabs, the Open Discussion forum and its highest-viewed "
+        "thread, and the Help forum. (2) The answer MUST report the archive "
+        "formats the wiki Home page lists, its credited author, and the "
+        "page's last modification date; the two most recent news posts' "
+        "titles, dates, and authors; the forum the Support tab names as the "
+        "best way to get help; the Open Discussion highest-viewed thread's "
+        "subject, creator, and view count; and the Help forum's name, topic "
+        "count, and its highest-viewed thread's subject and creator. (3) "
+        "Dates and counts MUST be bound to the page, post, or forum they "
+        "came from. An empty answer is a FAIL. FAIL if a calendar day inside "
+        "a news date is reported as the Help forum's topic count, or if the "
+        "two news posts' dates are swapped."
+    ),
+    15: (
+        "FACT CHECKPOINTS: (1) The agent MUST search the 7-Zip Bugs tracker "
+        "for CVE, open the two newest CVE tickets and the lowest-numbered "
+        "CVE ticket, open the Open Discussion thread about a vulnerability "
+        "scanner flagging version 26.02, and read the tracker sidebar. (2) "
+        "The answer MUST report the CVE search count, the two newest "
+        "tickets' numbers, summaries, statuses, and priorities, the "
+        "lowest-numbered CVE ticket's owner and creation date, that thread's "
+        "subject, creator, and post count, and the sidebar open-ticket "
+        "count. (3) Each priority and status MUST be bound to its own "
+        "ticket. An empty answer is a FAIL. FAIL if one ticket's priority is "
+        "reused for the other, or if the sidebar open count is taken from "
+        "the search count."
+    ),
+    16: (
+        "FACT CHECKPOINTS: (1) The agent MUST open the LZMA SDK folder, start "
+        "a download of the newest SDK file, open the 26.01 and 26.00 "
+        "folders, start a download of the 26.00 x64 build, and read the "
+        "7-Zip root folder's weekly count. (2) The answer MUST list every "
+        "SDK file with size, modification date, and weekly downloads, "
+        "identify the newest file, and report the filename the download page "
+        "confirms; the SDK folder's own weekly count; each build in 26.01 "
+        "and 26.00 with size and weekly downloads; the filename confirmed "
+        "for the 26.00 x64 download; and the root folder weekly count. (3) "
+        "Each size, date, and weekly count MUST stay attached to the correct "
+        "file or folder. An empty answer is a FAIL. FAIL if weekly counts "
+        "are swapped between SDK files or between the version-folder builds."
+    ),
+    17: (
+        "FACT CHECKPOINTS: (1) The agent MUST open both KeePass and 7-Zip "
+        "project pages, both Reviews pages, both Support tabs, any "
+        "discussion forum linked from Support, and the all-time Top list. "
+        "(2) The answer MUST report each project's weekly downloads, review "
+        "count, registered date, and supported operating systems; each "
+        "Reviews page's average rating and 5-star and 1-star histogram "
+        "counts; each Support tab's help recommendation; the linked forum's "
+        "name and thread count; and which project has the larger all-time "
+        "total, with both figures. (3) Every figure MUST be attributed to "
+        "the correct project. An empty answer is a FAIL. FAIL if weekly "
+        "downloads, ratings, or histogram counts are swapped between KeePass "
+        "and 7-Zip."
+    ),
+    18: (
+        "FACT CHECKPOINTS: (1) The agent MUST log in as the demo account "
+        "named in the task, review the existing bookmarks, remove the "
+        "disk-health tool, add the bootable USB drive tool, post that new "
+        "project a 4-star review mentioning USB sticks, and confirm the "
+        "final list on the account page. (2) The answer MUST name every "
+        "project that was bookmarked at the start and the final bookmark "
+        "list. (3) The after-state MUST show that user's bookmark swapped "
+        "from the disk-health tool to the bootable USB tool, exactly one "
+        "new 4-star review by that user mentioning USB, that project's "
+        "counters updated, and every other table unchanged. An empty answer "
+        "is a FAIL. FAIL if the removed project is still bookmarked, the "
+        "new project is missing, or the review is for the wrong project or "
+        "the wrong star count."
+    ),
+    19: (
+        "FACT CHECKPOINTS: (1) The agent MUST open the About, Team, Podcast, "
+        "Articles, Case Studies, NinjaOne, and Google Cloud Platform pages, "
+        "plus Blog, For Vendors, Create, and Support, and MUST run a "
+        "directory search for file compression. (2) The answer MUST report "
+        "the About page's founding year and software title count; the first "
+        "two Team members' names and titles; the newest podcast episode's "
+        "title and date and the newest article's title and date; the Case "
+        "Studies featured vendors and the ratings counts on the NinjaOne and "
+        "Google Cloud Platform product pages; the newest Blog post's title "
+        "and date; what For Vendors offers; the Create page's invitation; "
+        "the Support page's fastest way to get help; the footer's "
+        "headquarters street address; and how many projects the "
+        "file-compression search returns. (3) Dates MUST stay attached to "
+        "the podcast, article, or blog item they came from, and the two "
+        "product ratings counts MUST stay attached to the named product. An "
+        "empty answer is a FAIL. FAIL if one shared date is reused for a "
+        "different item, or if the two ratings counts are swapped."
+    ),
+    20: (
+        "FACT CHECKPOINTS: (1) The agent MUST browse the Business Software "
+        "ERP category, open both products' business pages, search the open "
+        "source directory for erp sorted by Rating, and open the first "
+        "result's project, Reviews, and Support pages plus the second "
+        "result's project page. (2) The answer MUST list every ERP product "
+        "with its rating and ratings count, both business-page descriptions, "
+        "the search result count, the first result's summary, license, "
+        "weekly downloads, last update, registered date, average rating, "
+        "review count, and Support recommendation, and the second result's "
+        "registered date. (3) Business-directory ratings MUST stay paired "
+        "with the correct product, and the first result's project rating "
+        "MUST not be substituted for its business-directory rating. An empty "
+        "answer is a FAIL. FAIL if the two products' ratings or counts are "
+        "swapped, or if the two registered dates are swapped."
+    ),
 }
 
 
@@ -52,15 +347,13 @@ def main() -> None:
     for line in lines:
         row = json.loads(line)
         n = int(row["id"].split("--")[1])
-        assert set(row) == {"id", "ques", "upstream_url", "web", "web_name"}, \
-            f"unexpected pre-existing keys in {row['id']}"
-        assert line.endswith("}"), line[-40:]
-        addition = (f', "verifier_path": "sites/sourceforge/verify/verify_{n}.py", '
-                    f'"judge_rubric": {json.dumps(RUBRICS[n], ensure_ascii=False)}')
-        out_lines.append(line[:-1] + addition + "}")
+        assert set(row) == set(KEY_ORDER), sorted(row)
+        row["judge_rubric"] = RUBRICS[n]
+        row["verifier_path"] = f"sites/sourceforge/verify/verify_{n}.py"
+        ordered = {key: row[key] for key in KEY_ORDER}
+        out_lines.append(json.dumps(ordered, ensure_ascii=False, separators=(", ", ": ")))
     TASKS.write_text("\n".join(out_lines) + "\n", encoding="utf-8")
-    print(f"appended verifier_path + judge_rubric to {len(out_lines)} tasks "
-          "(original 5 keys byte-untouched)")
+    print(f"rewrote judge_rubric on {len(out_lines)} tasks")
 
 
 if __name__ == "__main__":

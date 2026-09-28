@@ -6,7 +6,7 @@ I need an open source video player. Search the directory for "video player" and 
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--11"
 
@@ -26,17 +26,17 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_mpv", r"/projects/mpv-player-windows/")
     check_visited_path(judge, traj, "visited_mpv_reviews", r"/projects/mpv-player-windows/reviews/")
     check_visited_path(judge, traj, "windows_sorted_rating", r"/directory/windows/.*sort=rating")
-    check_answer_number(judge, answer, "total_results", 53, 'video player results')
+    check_answer_number(judge, answer, "total_results", 53, 'video player results', subject='video player', competitors=['Next Player', 'Video.js', 'mpv', 'Shotcut', 'Windows-only'], near='results?')
     check_answer_phrase(judge, answer, "android_native", 'Next Player')
-    check_answer_number(judge, answer, "android_week", 37, 'Next Player weekly downloads')
-    check_answer_phrase(judge, answer, "android_updated", '2026-08-09')
+    check_answer_number(judge, answer, "android_week", 37, 'Next Player weekly downloads', subject='Next Player', competitors=['Video.js', 'mpv', 'Shotcut', 'Windows-only'], near='weekly')
+    check_answer_phrase_near(judge, answer, "android_updated", '2026-08-09', subject='Next Player', competitors=['Video.js', 'mpv', 'Shotcut', 'Windows-only'], near='updat')
     check_answer_phrase(judge, answer, "html5_player", 'Video.js')
-    check_answer_phrase(judge, answer, "videojs_updated", '2026-08-10')
-    check_answer_number(judge, answer, "windows_count", 13, 'windows-only result count')
+    check_answer_phrase_near(judge, answer, "videojs_updated", '2026-08-10', subject='Video.js', competitors=['Next Player', 'mpv', 'Shotcut', 'Windows-only'], near='updat')
+    check_answer_number(judge, answer, "windows_count", 13, 'windows-only result count', subject='Windows-only', competitors=['Next Player', 'Video.js', 'mpv', 'Shotcut'], near='results?')
     check_answer_phrase(judge, answer, "windows_first", 'mpv player (Windows)')
-    check_answer_number(judge, answer, "windows_first_week", '9,572', 'mpv player (Windows) weekly downloads')
-    check_answer_phrase(judge, answer, "windows_first_reg", '2015-12-31')
-    check_answer_number(judge, answer, "windows_first_rating", '4.3', 'mpv player (Windows) rating')
+    check_answer_number(judge, answer, "windows_first_week", '9,572', 'mpv player (Windows) weekly downloads', subject='mpv', competitors=['Next Player', 'Video.js', 'Shotcut', 'Windows-only'], near='weekly')
+    check_answer_phrase_near(judge, answer, "windows_first_reg", '2015-12-31', subject='mpv', competitors=['Next Player', 'Video.js', 'Shotcut', 'Windows-only'])
+    check_answer_number(judge, answer, "windows_first_rating", '4.3', 'mpv player (Windows) rating', subject='mpv', competitors=['Next Player', 'Video.js', 'Shotcut', 'Windows-only'], near='rating')
     check_answer_phrase(judge, answer, "rating_sort_first", 'Shotcut')
     check_read_only(judge, initial_db, after_db)
 

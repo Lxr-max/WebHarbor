@@ -9,6 +9,7 @@ r3 sync (fb4ff5bf): TASKS check specs updated for the 5 deepened tasks
 (T3/T4/T5/T12/T19); the other 16 specs unchanged. Expected values re-frozen
 from the r3 review container (wh-sf-r3) honest walks + seed DB.
 """
+import re
 from pathlib import Path
 
 HEADER = '''#!/usr/bin/env python3
@@ -19,7 +20,7 @@ HEADER = '''#!/usr/bin/env python3
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--{n}"
 
@@ -48,17 +49,50 @@ for _line in (Path(__file__).resolve().parent.parent / "tasks.jsonl").read_text(
     Q[int(_row["id"].split("--")[1])] = _row["ques"]
 
 # per-task: list of (kind, args) emitted as checks
-def num(name, value, label=None):
-    return f'    check_answer_number(judge, answer, "{name}", {value!r}{", " + repr(label) if label else ""})'
+def B(subject, *competitors, near=None, window=420, near_window=80,
+      context=None, context_window=80):
+    """Binding spec: (subject, competitors, near, window, near_window, context, context_window)."""
+    return (subject, competitors, near, window, near_window, context, context_window)
+
+
+def _kw(subject, competitors, near, window, near_window, context=None, context_window=80):
+    parts = [f"subject={subject!r}"]
+    if competitors:
+        parts.append(f"competitors={list(competitors)!r}")
+    if window != 420:
+        parts.append(f"window={window}")
+    if near:
+        parts.append(f"near={near!r}")
+    if near_window != 80:
+        parts.append(f"near_window={near_window}")
+    if context:
+        parts.append(f"context={list(context)!r}")
+    if context and context_window != 80:
+        parts.append(f"context_window={context_window}")
+    return ", ".join(parts)
+
+
+def num(name, value, label, spec):
+    return (f'    check_answer_number(judge, answer, "{name}", {value!r}, {label!r}, '
+            f'{_kw(*spec)})')
+
 
 def phrase(name, text):
     return f'    check_answer_phrase(judge, answer, "{name}", {text!r})'
 
+
+def phrase_near(name, text, spec):
+    return (f'    check_answer_phrase_near(judge, answer, "{name}", {text!r}, '
+            f'{_kw(*spec)})')
+
+
 def path(name, pattern):
     return f'    check_visited_path(judge, traj, "{name}", r"{pattern}")'
 
-def anyof(name, variants, label=""):
-    return f'    check_answer_any(judge, answer, "{name}", {variants!r}{", " + repr(label) if label else ""})'
+
+def anyof(name, variants, label, spec):
+    return (f'    check_answer_any(judge, answer, "{name}", {variants!r}, {label!r}, '
+            f'{_kw(*spec)})')
 
 TASKS = {}
 
@@ -684,21 +718,313 @@ def _pid(db, shortname):
     return db.execute("SELECT id FROM projects WHERE shortname = ?", (shortname,)).fetchone()[0]
 '''
 
+# Subject binding for every numeric fact. A number counts only when the nearest
+# preceding subject (else a short following subject) is the expected one, so a
+# swapped attribution fails even though every integer still appears somewhere.
+# `near` / `context` disambiguate two facts about the same subject (histogram
+# vs filter count, priority vs post count, the same date on three pages).
+_PROJ = ("MinGW", "AutoClicker", "7-Zip")
+_TOP3 = ("corefonts", "MinGW", "Notepad++ Plugin Manager", "7-Zip")
+_FILES = ("lzma2408.7z", "lzma2409.7z", "lzma2600.7z", "lzma2601.7z",
+          "7z2601-x64.exe", "7z2601-x64.msi", "7z2600-x64.exe")
+# First histogram bucket: "5-star 765", "stars ['765'", or "histogram ['567'".
+_HIST5 = (r"5[\-\s]?stars?", r"stars\s*\[\s*'?", r"histogram\s*\[\s*'?")
+_HIST1 = (r"1[\-\s]?stars?", r"'\s*\]")
+
+def _others(name, group):
+    return tuple(item for item in group if item != name)
+
+
+BIND = {}
+PHRASE_BIND = {}
+
+def _n(task, name, spec):
+    BIND[(task, name)] = spec
+
+def _p(task, name, spec):
+    PHRASE_BIND[(task, name)] = spec
+
+# --- task 0 ---
+for _name, _subj, _near in (
+    ("mingw_week", "MinGW", r"weekly"),
+    ("mingw_rating", "MinGW", r"rating"),
+    ("mingw_reviews", "MinGW", r"reviews?"),
+    ("auto_week", "AutoClicker", r"weekly"),
+    ("auto_rating", "AutoClicker", r"rating"),
+    ("auto_reviews", "AutoClicker", r"reviews?"),
+    ("sz_week", "7-Zip", r"weekly"),
+    ("sz_rating", "7-Zip", r"rating"),
+    ("sz_reviews", "7-Zip", r"reviews?"),
+):
+    _n(0, _name, B(_subj, *_others(_subj, _PROJ), near=_near))
+_p(0, "mingw_reg", B("MinGW", "AutoClicker", "7-Zip"))
+_p(0, "auto_reg", B("AutoClicker", "MinGW", "7-Zip"))
+_p(0, "sz_reg", B("7-Zip", "MinGW", "AutoClicker"))
+_p(0, "mingw_license", B("MinGW", "AutoClicker", "7-Zip", near=r"licen"))
+_p(0, "auto_license", B("AutoClicker", "MinGW", "7-Zip", near=r"licen"))
+_p(0, "sz_license", B("7-Zip", "MinGW", "AutoClicker", near=r"licen"))
+_p(0, "sz_updated_more_recent", B("7-Zip", "MinGW", "AutoClicker", near=r"updat|recent"))
+
+# --- task 1 ---
+_n(1, "folder_week_2603", B("26.03", "26.02", near=r"weekly|="))
+_n(1, "folder_week_2602", B("26.02", "26.03", near=r"weekly|="))
+_n(1, "peak_day_count", B("peak", "Windows", "26.03", "26.02", near=r"day|download"))
+_n(1, "top_os_count", B("Windows", "peak", "26.03", "26.02", near=r"download"))
+_p(1, "peak_day", B("peak", "Windows", near=r"day"))
+
+# --- task 2 ---
+_n(2, "sz_avg", B("7-Zip", "KeePass", near=r"rating"))
+_n(2, "sz_five_star", B("7-Zip", "KeePass", context=_HIST5, context_window=24))
+_n(2, "sz_one_star", B("7-Zip", "KeePass", context=_HIST1, context_window=16))
+_n(2, "sz_four_star_view", B("7-Zip", "KeePass", near=r"4[\-\s]?stars?"))
+_n(2, "kp_avg", B("KeePass", "7-Zip", near=r"rating"))
+_n(2, "kp_five_star", B("KeePass", "7-Zip", context=_HIST5, context_window=24))
+_n(2, "kp_one_star", B("KeePass", "7-Zip", context=_HIST1, context_window=16))
+_n(2, "kp_five_star_view", B("KeePass", "7-Zip", near=r"5[\-\s]?stars?"))
+_n(2, "kp_four_star_view", B("KeePass", "7-Zip", near=r"4[\-\s]?stars?"))
+_n(2, "sz_total_reviews", B("7-Zip", "KeePass", context=(r"831\s*vs",), context_window=12))
+_n(2, "kp_total_reviews", B("7-Zip", "KeePass", context=(r"vs\s*606",), context_window=12))
+
+# --- task 3 ---
+_CVE = ("2701", "2681", "2670", "2669")
+_n(3, "ticket_priority", B("2701", *_others("2701", _CVE), near=r"priorit"))
+_n(3, "cve_ticket_count", B("CVE", *_CVE, near=r"return|ticket"))
+_n(3, "cve_newest_1_priority", B("2681", *_others("2681", _CVE), near=r"priorit"))
+_n(3, "cve_newest_2_priority", B("2670", *_others("2670", _CVE), near=r"priorit"))
+_n(3, "open_tickets", B("sidebar", *_CVE, near=r"open"))
+_p(3, "ticket_status_open", B("2701", *_others("2701", _CVE), near=r"status"))
+_p(3, "cve_newest_1", B("CVE-2026-58052", "CVE-2026-48102", "2669"))
+_p(3, "cve_newest_2", B("CVE-2026-48102", "CVE-2026-58052", "2669"))
+_p(3, "cve_lowest", B("2669", "2681", "2670", near=r"own|creat|Igor"))
+_p(3, "cve_lowest_created", B("2669", "2681", "2670"))
+
+# --- task 4 ---
+_THREADS = ("Dark Mode", "Dark Theme", "7-Zip 26.02", "Help", "rtm")
+_n(4, "thread_posts", B("Dark Mode", *_others("Dark Mode", _THREADS), near=r"posts?"))
+_n(4, "thread_views", B("Dark Mode", *_others("Dark Mode", _THREADS), near=r"views?"))
+_n(4, "darktheme_posts", B("Dark Theme", *_others("Dark Theme", _THREADS), near=r"posts?"))
+_n(4, "darktheme_views", B("Dark Theme", *_others("Dark Theme", _THREADS), near=r"views?"))
+_n(4, "max_views", B("7-Zip 26.02", *_others("7-Zip 26.02", _THREADS), near=r"views?"))
+_n(4, "help_topic_count", B("Help", *_others("Help", _THREADS), near=r"topics?"))
+_n(4, "help_hv_views", B("rtm", *_others("rtm", _THREADS), near=r"views?"))
+_p(4, "thread_created", B("Dark Mode", "Dark Theme", "Help"))
+
+# --- task 5 ---
+for _name, _subj, _near in (
+    ("corefonts_week", "corefonts", r"weekly"),
+    ("mingw_week", "MinGW", r"weekly"),
+    ("npp_week", "Notepad++ Plugin Manager", r"weekly"),
+    ("corefonts_rating", "corefonts", r"rating"),
+    ("corefonts_reviews", "corefonts", r"reviews?"),
+    ("mingw_rating", "MinGW", r"rating"),
+    ("mingw_reviews", "MinGW", r"reviews?"),
+    ("npp_rating", "Notepad++ Plugin Manager", r"rating"),
+    ("npp_reviews", "Notepad++ Plugin Manager", r"reviews?"),
+    ("sz_total_reviews", "7-Zip", r"total|reviews"),
+    ("sz_rating", "7-Zip", r"rating"),
+):
+    _n(5, _name, B(_subj, *_others(_subj, _TOP3), near=_near))
+_n(5, "sz_alltime_rank", B("7-Zip", *_others("7-Zip", _TOP3), near=r"all-time|rank|#"))
+_n(5, "sz_alltime_total", B("7-Zip", *_others("7-Zip", _TOP3), near=r"430|all-time|total"))
+_p(5, "alltime_no1_downloads", B("TrueType", "MinGW", "7-Zip"))
+_p(5, "weekly_no1_downloads", B("MinGW", "TrueType", "7-Zip"))
+_p(5, "corefonts_reg", B("corefonts", *_others("corefonts", _TOP3)))
+_p(5, "mingw_reg", B("MinGW", *_others("MinGW", _TOP3)))
+_p(5, "npp_reg", B("Notepad++ Plugin Manager", *_others("Notepad++ Plugin Manager", _TOP3)))
+_p(5, "corefonts_license", B("corefonts", *_others("corefonts", _TOP3), near=r"licen"))
+_p(5, "mingw_license", B("MinGW", *_others("MinGW", _TOP3), near=r"licen"))
+_p(5, "sz_updated", B("7-Zip", *_others("7-Zip", _TOP3), near=r"updat"))
+
+# --- task 6 ---
+_CRM = ("Pipedrive", "SuiteCRM", "EspoCRM", "Dolibarr")
+_n(6, "pipedrive_ratings", B("Pipedrive", *_others("Pipedrive", _CRM), near=r"ratings?"))
+_n(6, "pipedrive_rating_value", B("Pipedrive", *_others("Pipedrive", _CRM), near=r"\d"))
+_n(6, "suitecrm_ratings", B("SuiteCRM", *_others("SuiteCRM", _CRM), near=r"ratings?"))
+_n(6, "espocrm_ratings", B("EspoCRM", *_others("EspoCRM", _CRM), near=r"ratings?"))
+_n(6, "crm_results", B("CRM", *_CRM, near=r"results?"))
+_n(6, "dolibarr_week", B("Dolibarr", *_others("Dolibarr", _CRM), near=r"weekly"))
+_n(6, "dolibarr_rating", B("Dolibarr", *_others("Dolibarr", _CRM), near=r"rating"))
+_n(6, "dolibarr_reviews", B("Dolibarr", *_others("Dolibarr", _CRM), near=r"reviews?"))
+_p(6, "dolibarr_updated", B("Dolibarr", *_others("Dolibarr", _CRM), near=r"updat"))
+_p(6, "dolibarr_license", B("Dolibarr", *_others("Dolibarr", _CRM), near=r"licen"))
+
+# --- task 7 ---
+_n(7, "top_week", B("Password Safe", "KeePass", near=r"weekly"))
+
+# --- task 8 ---
+_FC = ("MinGW", "AutoClicker", "WinSCP")
+_n(8, "top_country_count", B("United States", "Windows", "peak", near=r"with|download"))
+_n(8, "top_os_count", B("Windows", "United States", "peak", near=r"with|download"))
+_n(8, "peak_day_count", B("peak", "Windows", "United States", near=r"day|download"))
+_p(8, "peak_day", B("peak", "Windows", "United States"))
+_p(8, "mingw_reg", B("MinGW", *_others("MinGW", _FC)))
+_p(8, "auto_reg", B("AutoClicker", *_others("AutoClicker", _FC)))
+_p(8, "winscp_reg", B("WinSCP", *_others("WinSCP", _FC)))
+_p(8, "mingw_license", B("MinGW", *_others("MinGW", _FC), near=r"licen"))
+_p(8, "auto_license", B("AutoClicker", *_others("AutoClicker", _FC), near=r"licen"))
+_p(8, "winscp_license", B("WinSCP", *_others("WinSCP", _FC), near=r"licen"))
+_p(8, "most_recent_date", B("WinSCP", *_others("WinSCP", _FC), near=r"updat|recent"))
+
+# --- task 9 ---
+_GAMES = ("DOSBox", "Neko Void", "MinGW")
+_n(9, "games_count", B("Games", "DOSBox", "Neko Void", near=r"projects?|lists"))
+_n(9, "first_week", B("DOSBox", *_others("DOSBox", _GAMES), near=r"weekly"))
+_n(9, "first_rating", B("DOSBox", *_others("DOSBox", _GAMES), near=r"rating"))
+_n(9, "first_reviews", B("DOSBox", *_others("DOSBox", _GAMES), near=r"reviews?"))
+_n(9, "second_week", B("Neko Void", *_others("Neko Void", _GAMES), near=r"weekly"))
+_n(9, "second_rating", B("Neko Void", *_others("Neko Void", _GAMES), near=r"rating"))
+_n(9, "second_reviews", B("Neko Void", *_others("Neko Void", _GAMES), near=r"reviews?"))
+_p(9, "first_updated", B("DOSBox", *_others("DOSBox", _GAMES), near=r"updat"))
+_p(9, "second_updated", B("Neko Void", *_others("Neko Void", _GAMES), near=r"updat"))
+
+# --- task 10 ---
+_PICKS = ("7-Zip", "KeePass", "PortableApps.com")
+_n(10, "staff_reviews", B("7-Zip", *_others("7-Zip", _PICKS), near=r"reviews?"))
+_n(10, "community_reviews", B("KeePass", *_others("KeePass", _PICKS), near=r"reviews?"))
+_n(10, "portable_week", B("PortableApps.com", *_others("PortableApps.com", _PICKS), near=r"weekly"))
+_n(10, "portable_rating", B("PortableApps.com", *_others("PortableApps.com", _PICKS), near=r"rating"))
+_n(10, "portable_reviews", B("PortableApps.com", *_others("PortableApps.com", _PICKS), near=r"reviews?"))
+_n(10, "sz_week", B("7-Zip", *_others("7-Zip", _PICKS), near=r"weekly"))
+_n(10, "sz_rating", B("7-Zip", *_others("7-Zip", _PICKS), near=r"rating"))
+_n(10, "sz_five_star", B("7-Zip", *_others("7-Zip", _PICKS), near=r"5[\-\s]?stars?", near_window=12))
+_n(10, "sz_one_star", B("7-Zip", *_others("7-Zip", _PICKS), near=r"1[\-\s]?stars?", near_window=12))
+_n(10, "kp_week", B("KeePass", *_others("KeePass", _PICKS), near=r"weekly"))
+_n(10, "kp_rating", B("KeePass", *_others("KeePass", _PICKS), near=r"rating"))
+_p(10, "portable_registered", B("PortableApps.com", *_others("PortableApps.com", _PICKS)))
+_p(10, "sz_updated", B("7-Zip", *_others("7-Zip", _PICKS), near=r"updat"))
+_p(10, "kp_updated", B("KeePass", *_others("KeePass", _PICKS), near=r"updat"))
+_p(10, "portable_license", B("PortableApps.com", *_others("PortableApps.com", _PICKS), near=r"licen|MPL"))
+
+# --- task 11 ---
+_VID = ("Next Player", "Video.js", "mpv", "Shotcut", "Windows-only")
+_n(11, "total_results", B("video player", *_VID, near=r"results?"))
+_n(11, "android_week", B("Next Player", *_others("Next Player", _VID), near=r"weekly"))
+_n(11, "windows_count", B("Windows-only", *_others("Windows-only", _VID), near=r"results?"))
+_n(11, "windows_first_week", B("mpv", *_others("mpv", _VID), near=r"weekly"))
+_n(11, "windows_first_rating", B("mpv", *_others("mpv", _VID), near=r"rating"))
+_p(11, "android_updated", B("Next Player", *_others("Next Player", _VID), near=r"updat"))
+_p(11, "videojs_updated", B("Video.js", *_others("Video.js", _VID), near=r"updat"))
+_p(11, "windows_first_reg", B("mpv", *_others("mpv", _VID)))
+
+# --- task 12 ---
+_FAM = ("7-Zip", "p7zip", "7-max", "7-Far")
+_n(12, "sz_rating", B("7-Zip", *_others("7-Zip", _FAM), near=r"rating"))
+_n(12, "one_star_view", B("7-Zip", *_others("7-Zip", _FAM), near=r"1[\-\s]?stars?", near_window=36))
+_n(12, "four_star_view", B("7-Zip", *_others("7-Zip", _FAM), near=r"4[\-\s]?stars?", near_window=36))
+_n(12, "sz_total_reviews", B("7-Zip", *_others("7-Zip", _FAM), near=r"total|reviews"))
+_p(12, "join_date", B("joined", "p7zip", "7-max", "7-Far"))
+_p(12, "p7zip_reg", B("p7zip", "7-max", "7-Far", near=r"regist"))
+_p(12, "max_reg", B("7-max", "p7zip", "7-Far", near=r"regist"))
+_p(12, "far_reg", B("7-Far", "p7zip", "7-max", near=r"regist"))
+
+# --- task 14 ---
+_n(14, "max_views", B("7-Zip 26.02", "Help", "rtm", near=r"views?"))
+_n(14, "help_topic_count", B("Help", "7-Zip 26.02", "Dark Mode", near=r"topics?"))
+_p(14, "wiki_last_modified", B("Modified", "News", "9.21", near=r"2026-09-04|Modified"))
+_p(14, "news_date_1", B("9.21", "9.20"))
+_p(14, "news_date_2", B("9.20", "9.21"))
+_p(14, "support_forum_rec", B("forum", "Wiki", "News", near=r"45797"))
+
+# --- task 15 ---
+_n(15, "cve_ticket_count", B("CVE", "2681", "2670", "2669", near=r"return|ticket"))
+_n(15, "cve_newest_1_priority", B("2681", "2670", "2669", "Barcikowski", near=r"priorit"))
+_n(15, "cve_newest_2_priority", B("2670", "2681", "2669", "Barcikowski", near=r"priorit"))
+_n(15, "vuln_thread_posts", B("Barcikowski", "2681", "2670", "2669", near=r"posts?"))
+_n(15, "open_tickets", B("sidebar", "2681", "2670", "2669", "Barcikowski", near=r"open"))
+_p(15, "cve_lowest_created", B("2669", "2681", "2670"))
+_p(15, "ticket_status_open", B("2681", "2670", "2669", near=r"open"))
+_p(15, "cve_newest_1", B("CVE-2026-58052", "CVE-2026-48102", "2669"))
+_p(15, "cve_newest_2", B("CVE-2026-48102", "CVE-2026-58052", "2669"))
+_p(15, "cve_lowest", B("2669", "2681", "2670", near=r"own|creat|Igor"))
+
+# --- task 16 ---
+_n(16, "newest_week", B("lzma2601.7z", *_others("lzma2601.7z", _FILES)))
+_n(16, "sdk_folder_week", B("SDK", *_FILES, near=r"weekly"))
+_n(16, "build_2601_x64_week", B("7z2601-x64.exe", *_others("7z2601-x64.exe", _FILES)))
+_n(16, "build_2601_msi_week", B("7z2601-x64.msi", *_others("7z2601-x64.msi", _FILES)))
+_n(16, "build_2600_x64_week", B("7z2600-x64.exe", *_others("7z2600-x64.exe", _FILES)))
+_n(16, "root_folder_week", B("root", "SDK", *_FILES, near=r"weekly"))
+_p(16, "size_2601", B("lzma2601.7z", *_others("lzma2601.7z", _FILES)))
+_p(16, "modified_2601", B("lzma2601.7z", *_others("lzma2601.7z", _FILES)))
+
+# --- task 17 ---
+_KP = ("KeePass", "7-Zip")
+_n(17, "kp_week", B("KeePass", "7-Zip", near=r"weekly"))
+_n(17, "kp_reviews", B("KeePass", "7-Zip", near=r"reviews?"))
+_n(17, "kp_rating", B("KeePass", "7-Zip", near=r"rating"))
+_n(17, "kp_five_star", B("KeePass", "7-Zip", context=_HIST5, context_window=24))
+_n(17, "kp_one_star", B("KeePass", "7-Zip", context=_HIST1, context_window=16))
+_n(17, "sz_week", B("7-Zip", "KeePass", near=r"weekly"))
+_n(17, "sz_reviews", B("7-Zip", "KeePass", near=r"reviews?"))
+_n(17, "sz_rating", B("7-Zip", "KeePass", near=r"rating"))
+_n(17, "sz_five_star", B("7-Zip", "KeePass", context=_HIST5, context_window=24))
+_n(17, "sz_one_star", B("7-Zip", "KeePass", context=_HIST1, context_window=16))
+_n(17, "forum_topics", B("Open Discussion", "KeePass", "7-Zip", near=r"topics?"))
+_p(17, "kp_registered", B("KeePass", "7-Zip"))
+_p(17, "sz_registered", B("7-Zip", "KeePass"))
+_p(17, "sz_support_rec", B("forum", "KeePass", "Help", near=r"45797"))
+_p(17, "sz_total_larger", B("7-Zip", "KeePass"))
+_p(17, "kp_total", B("KeePass", "7-Zip"))
+
+# --- task 19 ---
+_n(19, "ninjaone_ratings", B("NinjaOne", "Google Cloud Platform", "Gemini", near=r"ratings?"))
+_n(19, "gcp_ratings", B("Google Cloud Platform", "NinjaOne", "Gemini", near=r"ratings?"))
+_n(19, "file_compression_count", B("file compression", "NinjaOne", "podcast", near=r"projects?|return"))
+_n(19, "founded_1999", B("founded", "NinjaOne", "podcast", "blog"))
+_n(19, "software_titles", B("lists", "NinjaOne", "founded", "titles", near=r"123"))
+_p(19, "podcast_date", B("#138", "article", "blog"))
+_p(19, "article_date", B("article", "blog", "#138"))
+_p(19, "blog_date", B("blog", "article", "#138"))
+
+# --- task 20 ---
+_ERP = ("Odoo", "Dolibarr", "PSeInt")
+_n(20, "odoo_rating", B("Odoo", *_others("Odoo", _ERP), near=r"ratings?"))
+_n(20, "odoo_ratings_count", B("Odoo", *_others("Odoo", _ERP), near=r"ratings?"))
+_n(20, "dolibarr_rating", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"\bratings\b"))
+_n(20, "dolibarr_ratings_count", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"\bratings\b"))
+_n(20, "erp_results", B("erp", "Odoo", "Dolibarr", "PSeInt", near=r"results?"))
+_n(20, "dolibarr_week", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"weekly"))
+_n(20, "dolibarr_rating_avg", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"\breviews\b"))
+_n(20, "dolibarr_reviews", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"\breviews\b"))
+_p(20, "dolibarr_updated", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"updat"))
+_p(20, "dolibarr_reg", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"regist"))
+_p(20, "pseint_reg", B("PSeInt", *_others("PSeInt", _ERP)))
+_p(20, "dolibarr_license", B("Dolibarr", *_others("Dolibarr", _ERP), near=r"licen"))
+
+
+_PLAIN_NUMBER = re.compile(r"\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?")
+_ABBREV_NUMBER = re.compile(r"\d+(?:\.\d+)?[KMB]", re.IGNORECASE)
+_ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
 def build(n):
     checks = []
     for item in TASKS[n]:
         kind = item[0]
         if kind == "p":
             name, text = item[1], item[2]
-            checks.append(phrase(name, text))
+            if (n, name) in PHRASE_BIND:
+                checks.append(phrase_near(name, text, PHRASE_BIND[(n, name)]))
+            elif (n, name) in BIND:
+                checks.append(num(name, text, text, BIND[(n, name)]))
+            elif (_PLAIN_NUMBER.fullmatch(str(text).strip())
+                  or _ABBREV_NUMBER.fullmatch(str(text).strip())
+                  or _ISO_DATE.fullmatch(str(text).strip())):
+                raise SystemExit(f"unbound numeric phrase SourceForge--{n} {name}={text!r}")
+            else:
+                checks.append(phrase(name, text))
         elif kind == "n":
             name, value = item[1], item[2]
             label = item[3] if len(item) > 3 else None
-            checks.append(num(name, value, label))
+            if (n, name) not in BIND:
+                raise SystemExit(f"unbound number SourceForge--{n} {name}={value!r}")
+            checks.append(num(name, value, label, BIND[(n, name)]))
         elif kind == "any":
             name, variants = item[1], item[2]
             label = item[3] if len(item) > 3 else ""
-            checks.append(anyof(name, variants, label))
+            if (n, name) not in BIND:
+                raise SystemExit(f"unbound any-of SourceForge--{n} {name}")
+            checks.append(anyof(name, variants, label, BIND[(n, name)]))
         elif kind == "path":
             name, pattern = item[1], item[2]
             checks.append(path(name, pattern))

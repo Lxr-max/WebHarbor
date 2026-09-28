@@ -6,7 +6,7 @@ I manage 7-Zip rollouts on a Windows fleet. From the project's file browser, ope
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--1"
 
@@ -36,13 +36,13 @@ def run_checks(judge, traj, initial_db, after_db):
     check_answer_phrase(judge, answer, "build_2602_x64", '7z2602-x64.exe')
     check_answer_phrase(judge, answer, "build_2602_msi", '7z2602-x64.msi')
     check_answer_phrase(judge, answer, "build_2602_x86", '7z2602.exe')
-    check_answer_number(judge, answer, "folder_week_2603", 29589, '26.03 folder weekly count')
-    check_answer_number(judge, answer, "folder_week_2602", 21750, '26.02 folder weekly count')
+    check_answer_number(judge, answer, "folder_week_2603", 29589, '26.03 folder weekly count', subject='26.03', competitors=['26.02'], near='weekly|=')
+    check_answer_number(judge, answer, "folder_week_2602", 21750, '26.02 folder weekly count', subject='26.02', competitors=['26.03'], near='weekly|=')
     check_answer_phrase(judge, answer, "download_button_target", '7z2603-x64.exe')
-    check_answer_phrase(judge, answer, "peak_day", '2026-09-19')
-    check_answer_number(judge, answer, "peak_day_count", '6,001', 'peak day downloads')
+    check_answer_phrase_near(judge, answer, "peak_day", '2026-09-19', subject='peak', competitors=['Windows'], near='day')
+    check_answer_number(judge, answer, "peak_day_count", '6,001', 'peak day downloads', subject='peak', competitors=['Windows', '26.03', '26.02'], near='day|download')
     check_answer_phrase(judge, answer, "top_os", 'Windows')
-    check_answer_number(judge, answer, "top_os_count", '90,456', 'Windows downloads')
+    check_answer_number(judge, answer, "top_os_count", '90,456', 'Windows downloads', subject='Windows', competitors=['peak', '26.03', '26.02'], near='download')
     check_read_only(judge, initial_db, after_db)
 
 

@@ -6,7 +6,7 @@ I'm choosing a free file archiver for Windows. Search the open source directory 
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--0"
 
@@ -25,23 +25,23 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_7zip", r"/projects/sevenzip/")
     check_visited_path(judge, traj, "visited_reviews_for_ratings", r"/projects/(mingw|orphamielautoclicker|sevenzip)/reviews/")
     check_answer_phrase(judge, answer, "mingw_name", 'MinGW')
-    check_answer_number(judge, answer, "mingw_week", '3,600,000', 'MinGW weekly downloads')
-    check_answer_phrase(judge, answer, "mingw_reg", '2000-02-09')
-    check_answer_phrase(judge, answer, "mingw_license", 'GPLv3')
-    check_answer_number(judge, answer, "mingw_rating", '4.6', 'MinGW rating')
-    check_answer_number(judge, answer, "mingw_reviews", 171, 'MinGW review count')
+    check_answer_number(judge, answer, "mingw_week", '3,600,000', 'MinGW weekly downloads', subject='MinGW', competitors=['AutoClicker', '7-Zip'], near='weekly')
+    check_answer_phrase_near(judge, answer, "mingw_reg", '2000-02-09', subject='MinGW', competitors=['AutoClicker', '7-Zip'])
+    check_answer_phrase_near(judge, answer, "mingw_license", 'GPLv3', subject='MinGW', competitors=['AutoClicker', '7-Zip'], near='licen')
+    check_answer_number(judge, answer, "mingw_rating", '4.6', 'MinGW rating', subject='MinGW', competitors=['AutoClicker', '7-Zip'], near='rating')
+    check_answer_number(judge, answer, "mingw_reviews", 171, 'MinGW review count', subject='MinGW', competitors=['AutoClicker', '7-Zip'], near='reviews?')
     check_answer_phrase(judge, answer, "auto_name", 'AutoClicker')
-    check_answer_number(judge, answer, "auto_week", '768,800', 'AutoClicker weekly downloads')
-    check_answer_phrase(judge, answer, "auto_reg", '2014-06-19')
-    check_answer_phrase(judge, answer, "auto_license", 'Creative Commons Attribution Non-Commercial')
-    check_answer_number(judge, answer, "auto_rating", '4.9', 'AutoClicker rating')
-    check_answer_number(judge, answer, "auto_reviews", 221, 'AutoClicker review count')
-    check_answer_number(judge, answer, "sz_week", 23587, '7-Zip weekly downloads')
-    check_answer_phrase(judge, answer, "sz_reg", '2000-11-10')
-    check_answer_phrase(judge, answer, "sz_license", 'GNU Library or Lesser General Public License version 2.0')
-    check_answer_number(judge, answer, "sz_rating", '4.8', '7-Zip rating')
-    check_answer_number(judge, answer, "sz_reviews", 831, '7-Zip review count')
-    check_answer_phrase(judge, answer, "sz_updated_more_recent", '2026-09-04')
+    check_answer_number(judge, answer, "auto_week", '768,800', 'AutoClicker weekly downloads', subject='AutoClicker', competitors=['MinGW', '7-Zip'], near='weekly')
+    check_answer_phrase_near(judge, answer, "auto_reg", '2014-06-19', subject='AutoClicker', competitors=['MinGW', '7-Zip'])
+    check_answer_phrase_near(judge, answer, "auto_license", 'Creative Commons Attribution Non-Commercial', subject='AutoClicker', competitors=['MinGW', '7-Zip'], near='licen')
+    check_answer_number(judge, answer, "auto_rating", '4.9', 'AutoClicker rating', subject='AutoClicker', competitors=['MinGW', '7-Zip'], near='rating')
+    check_answer_number(judge, answer, "auto_reviews", 221, 'AutoClicker review count', subject='AutoClicker', competitors=['MinGW', '7-Zip'], near='reviews?')
+    check_answer_number(judge, answer, "sz_week", 23587, '7-Zip weekly downloads', subject='7-Zip', competitors=['MinGW', 'AutoClicker'], near='weekly')
+    check_answer_phrase_near(judge, answer, "sz_reg", '2000-11-10', subject='7-Zip', competitors=['MinGW', 'AutoClicker'])
+    check_answer_phrase_near(judge, answer, "sz_license", 'GNU Library or Lesser General Public License version 2.0', subject='7-Zip', competitors=['MinGW', 'AutoClicker'], near='licen')
+    check_answer_number(judge, answer, "sz_rating", '4.8', '7-Zip rating', subject='7-Zip', competitors=['MinGW', 'AutoClicker'], near='rating')
+    check_answer_number(judge, answer, "sz_reviews", 831, '7-Zip review count', subject='7-Zip', competitors=['MinGW', 'AutoClicker'], near='reviews?')
+    check_answer_phrase_near(judge, answer, "sz_updated_more_recent", '2026-09-04', subject='7-Zip', competitors=['MinGW', 'AutoClicker'], near='updat|recent')
     check_read_only(judge, initial_db, after_db)
 
 

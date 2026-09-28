@@ -6,7 +6,7 @@ Before I recommend 7-Zip to my team I need its review record checked against Kee
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--2"
 
@@ -24,19 +24,19 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_kp_reviews", r"/projects/keepass/reviews/")
     check_visited_path(judge, traj, "visited_kp_5star_filter", r"/projects/keepass/reviews/\?filter-stars=5")
     check_visited_path(judge, traj, "visited_kp_4star_filter", r"/projects/keepass/reviews/\?filter-stars=4")
-    check_answer_number(judge, answer, "sz_avg", '4.8', '7-Zip overall rating')
-    check_answer_number(judge, answer, "sz_five_star", 765, '7-Zip 5-star count')
-    check_answer_number(judge, answer, "sz_one_star", 27, '7-Zip 1-star count')
+    check_answer_number(judge, answer, "sz_avg", '4.8', '7-Zip overall rating', subject='7-Zip', competitors=['KeePass'], near='rating')
+    check_answer_number(judge, answer, "sz_five_star", 765, '7-Zip 5-star count', subject='7-Zip', competitors=['KeePass'], context=['5[\\-\\s]?stars?', "stars\\s*\\[\\s*'?", "histogram\\s*\\[\\s*'?"], context_window=24)
+    check_answer_number(judge, answer, "sz_one_star", 27, '7-Zip 1-star count', subject='7-Zip', competitors=['KeePass'], context=['1[\\-\\s]?stars?', "'\\s*\\]"], context_window=16)
     check_answer_phrase(judge, answer, "featured_author", 'itreet-raking5')
     check_answer_phrase(judge, answer, "featured_text", 'This is my tribute to your great 7-zip')
-    check_answer_number(judge, answer, "sz_four_star_view", 6, '7-Zip 4-star filter view count')
-    check_answer_number(judge, answer, "kp_avg", '4.9', 'KeePass overall rating')
-    check_answer_number(judge, answer, "kp_five_star", 567, 'KeePass 5-star count')
-    check_answer_number(judge, answer, "kp_one_star", 11, 'KeePass 1-star count')
-    check_answer_number(judge, answer, "kp_five_star_view", 22, 'KeePass 5-star filter view count')
-    check_answer_number(judge, answer, "kp_four_star_view", 3, 'KeePass 4-star filter view count')
-    check_answer_number(judge, answer, "sz_total_reviews", 831, '7-Zip total reviews')
-    check_answer_number(judge, answer, "kp_total_reviews", 606, 'KeePass total reviews')
+    check_answer_number(judge, answer, "sz_four_star_view", 6, '7-Zip 4-star filter view count', subject='7-Zip', competitors=['KeePass'], near='4[\\-\\s]?stars?')
+    check_answer_number(judge, answer, "kp_avg", '4.9', 'KeePass overall rating', subject='KeePass', competitors=['7-Zip'], near='rating')
+    check_answer_number(judge, answer, "kp_five_star", 567, 'KeePass 5-star count', subject='KeePass', competitors=['7-Zip'], context=['5[\\-\\s]?stars?', "stars\\s*\\[\\s*'?", "histogram\\s*\\[\\s*'?"], context_window=24)
+    check_answer_number(judge, answer, "kp_one_star", 11, 'KeePass 1-star count', subject='KeePass', competitors=['7-Zip'], context=['1[\\-\\s]?stars?', "'\\s*\\]"], context_window=16)
+    check_answer_number(judge, answer, "kp_five_star_view", 22, 'KeePass 5-star filter view count', subject='KeePass', competitors=['7-Zip'], near='5[\\-\\s]?stars?')
+    check_answer_number(judge, answer, "kp_four_star_view", 3, 'KeePass 4-star filter view count', subject='KeePass', competitors=['7-Zip'], near='4[\\-\\s]?stars?')
+    check_answer_number(judge, answer, "sz_total_reviews", 831, '7-Zip total reviews', subject='7-Zip', competitors=['KeePass'], context=['831\\s*vs'], context_window=12)
+    check_answer_number(judge, answer, "kp_total_reviews", 606, 'KeePass total reviews', subject='7-Zip', competitors=['KeePass'], context=['vs\\s*606'], context_window=12)
     check_read_only(judge, initial_db, after_db)
 
 

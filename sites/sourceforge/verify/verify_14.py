@@ -6,7 +6,7 @@ From 7-Zip's Wiki tab, report which archive formats the Home page lists, its cre
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--14"
 
@@ -29,16 +29,16 @@ def run_checks(judge, traj, initial_db, after_db):
     check_answer_phrase(judge, answer, "wiki_format_zip", 'ZIP')
     check_answer_phrase(judge, answer, "wiki_format_gzip", 'GZIP')
     check_answer_phrase(judge, answer, "wiki_author", 'Igor Pavlov')
-    check_answer_phrase(judge, answer, "wiki_last_modified", '2026-09-04')
+    check_answer_phrase_near(judge, answer, "wiki_last_modified", '2026-09-04', subject='Modified', competitors=['News', '9.21'], near='2026-09-04|Modified')
     check_answer_phrase(judge, answer, "news_title_1", '7-Zip 9.21 beta')
-    check_answer_phrase(judge, answer, "news_date_1", '2011-04-15')
+    check_answer_phrase_near(judge, answer, "news_date_1", '2011-04-15', subject='9.21', competitors=['9.20'])
     check_answer_phrase(judge, answer, "news_title_2", '7-Zip 9.20 was released')
-    check_answer_phrase(judge, answer, "news_date_2", '2010-11-25')
-    check_answer_phrase(judge, answer, "support_forum_rec", '45797')
+    check_answer_phrase_near(judge, answer, "news_date_2", '2010-11-25', subject='9.20', competitors=['9.21'])
+    check_answer_phrase_near(judge, answer, "support_forum_rec", '45797', subject='forum', competitors=['Wiki', 'News'], near='45797')
     check_answer_phrase(judge, answer, "max_views_thread", '7-Zip 26.02')
-    check_answer_number(judge, answer, "max_views", '297,148', 'highest-view thread view count')
+    check_answer_number(judge, answer, "max_views", '297,148', 'highest-view thread view count', subject='7-Zip 26.02', competitors=['Help', 'rtm'], near='views?')
     check_answer_phrase(judge, answer, "help_forum_name", 'Help')
-    check_answer_any(judge, answer, "help_topic_count", ['25', '8,276', '8276'], 'topics the Help forum lists')
+    check_answer_any(judge, answer, "help_topic_count", ['25', '8,276', '8276'], 'topics the Help forum lists', subject='Help', competitors=['7-Zip 26.02', 'Dark Mode'], near='topics?')
     check_answer_phrase(judge, answer, "help_hv_subject", 'Compress multiple files to individual ZIP archives with fixed size')
     check_answer_phrase(judge, answer, "help_hv_creator", 'rtm')
     check_read_only(judge, initial_db, after_db)

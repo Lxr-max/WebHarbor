@@ -6,7 +6,7 @@ Compare this month's homepage picks. Report the Staff Choice and Community Choic
 from verify_lib import (check_answer_number, check_answer_phrase, check_read_only,
                         check_only_tables_changed, check_trajectory_identity,
                         check_visited_path, final_answer, run_verifier,
-                        table_diff, check_answer_any)
+                        table_diff, check_answer_any, check_answer_phrase_near)
 
 TASK_ID = "SourceForge--10"
 
@@ -29,22 +29,22 @@ def run_checks(judge, traj, initial_db, after_db):
     check_visited_path(judge, traj, "visited_top", r"/top")
     check_answer_phrase(judge, answer, "staff_choice", '7-Zip')
     check_answer_phrase(judge, answer, "community_choice", 'KeePass')
-    check_answer_number(judge, answer, "staff_reviews", 831, '7-Zip review count')
-    check_answer_number(judge, answer, "community_reviews", 606, 'KeePass review count')
+    check_answer_number(judge, answer, "staff_reviews", 831, '7-Zip review count', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='reviews?')
+    check_answer_number(judge, answer, "community_reviews", 606, 'KeePass review count', subject='KeePass', competitors=['7-Zip', 'PortableApps.com'], near='reviews?')
     check_answer_phrase(judge, answer, "portable_platform", 'PortableApps.com')
-    check_answer_number(judge, answer, "portable_week", '422,400', 'PortableApps.com weekly downloads')
-    check_answer_phrase(judge, answer, "portable_registered", '2005-10-21')
-    check_answer_phrase(judge, answer, "portable_license", 'MPL 1.1')
-    check_answer_number(judge, answer, "portable_rating", '4.9', 'PortableApps.com rating')
-    check_answer_number(judge, answer, "portable_reviews", 266, 'PortableApps.com review count')
-    check_answer_number(judge, answer, "sz_week", 23587, '7-Zip weekly downloads')
-    check_answer_phrase(judge, answer, "sz_updated", '2026-09-04')
-    check_answer_number(judge, answer, "sz_rating", '4.8', '7-Zip rating')
-    check_answer_number(judge, answer, "sz_five_star", 765, '7-Zip 5-star count')
-    check_answer_number(judge, answer, "sz_one_star", 27, '7-Zip 1-star count')
-    check_answer_number(judge, answer, "kp_week", '205,800', 'KeePass weekly downloads')
-    check_answer_phrase(judge, answer, "kp_updated", '2026-07-25')
-    check_answer_number(judge, answer, "kp_rating", '4.9', 'KeePass rating')
+    check_answer_number(judge, answer, "portable_week", '422,400', 'PortableApps.com weekly downloads', subject='PortableApps.com', competitors=['7-Zip', 'KeePass'], near='weekly')
+    check_answer_phrase_near(judge, answer, "portable_registered", '2005-10-21', subject='PortableApps.com', competitors=['7-Zip', 'KeePass'])
+    check_answer_phrase_near(judge, answer, "portable_license", 'MPL 1.1', subject='PortableApps.com', competitors=['7-Zip', 'KeePass'], near='licen|MPL')
+    check_answer_number(judge, answer, "portable_rating", '4.9', 'PortableApps.com rating', subject='PortableApps.com', competitors=['7-Zip', 'KeePass'], near='rating')
+    check_answer_number(judge, answer, "portable_reviews", 266, 'PortableApps.com review count', subject='PortableApps.com', competitors=['7-Zip', 'KeePass'], near='reviews?')
+    check_answer_number(judge, answer, "sz_week", 23587, '7-Zip weekly downloads', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='weekly')
+    check_answer_phrase_near(judge, answer, "sz_updated", '2026-09-04', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='updat')
+    check_answer_number(judge, answer, "sz_rating", '4.8', '7-Zip rating', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='rating')
+    check_answer_number(judge, answer, "sz_five_star", 765, '7-Zip 5-star count', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='5[\\-\\s]?stars?', near_window=12)
+    check_answer_number(judge, answer, "sz_one_star", 27, '7-Zip 1-star count', subject='7-Zip', competitors=['KeePass', 'PortableApps.com'], near='1[\\-\\s]?stars?', near_window=12)
+    check_answer_number(judge, answer, "kp_week", '205,800', 'KeePass weekly downloads', subject='KeePass', competitors=['7-Zip', 'PortableApps.com'], near='weekly')
+    check_answer_phrase_near(judge, answer, "kp_updated", '2026-07-25', subject='KeePass', competitors=['7-Zip', 'PortableApps.com'], near='updat')
+    check_answer_number(judge, answer, "kp_rating", '4.9', 'KeePass rating', subject='KeePass', competitors=['7-Zip', 'PortableApps.com'], near='rating')
     check_answer_phrase(judge, answer, "weekly_no1", 'MinGW')
     check_read_only(judge, initial_db, after_db)
 
