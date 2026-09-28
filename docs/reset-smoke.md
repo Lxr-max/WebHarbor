@@ -30,4 +30,3 @@ python scripts/check_reset_smoke.py --db-root /opt/WebSyn
 Without one of those flags the DB check reports `SKIP` with source `none` rather than
 comparing this checkout's files, and every result names the source it hashed
 (`md5_source`), so a `PASS` always says which DBs it read.
-
