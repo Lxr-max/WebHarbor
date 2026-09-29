@@ -234,7 +234,7 @@ class TaskContractTests(unittest.TestCase):
         for task in tasks:
             with self.subTest(task=task["id"]):
                 self.assertEqual(set(task), allowed)
-                self.assertEqual(task["web"], "http://localhost:40103/")
+                self.assertEqual(task["web"], "http://localhost:40116/")
                 self.assertTrue(task["ques"].strip())
                 self.assertNotIn("answer", " ".join(task).lower())
 

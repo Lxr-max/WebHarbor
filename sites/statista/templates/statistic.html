@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block title %}{{ stat.title|truncate(70) }} | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a>
+  {% if stat.breadcrumb %}
+    {% for crumb in stat.breadcrumb %}
+    <span class="sep"></span>
+    {% if loop.last %}<span>{{ crumb }}</span>
+    {% elif industry and crumb == industry.name %}<a href="/markets/{{ industry.id }}/{{ industry.slug }}/">{{ crumb }}</a>
+    {% else %}<a href="/markets/">{{ crumb }}</a>{% endif %}
+    {% endfor %}
+  {% else %}
+    <span class="sep"></span><a href="/markets/">Industries</a>
+  {% endif %}
+</nav>
+
+<div class="statLayout">
+  <div class="statMain">
+    <div class="statTitleBlock">
+      <h1>{{ stat.title }}</h1>
+      {% if stat.value_label %}<p class="subtitle">{{ stat.value_label }}</p>{% endif %}
+      <div class="statMeta">
+        <span><b>Last update:</b> {{ stat.last_update or '—' }}</span>
+        <span><b>Region:</b> {{ stat.region }}</span>
+        <span>{{ stat.publisher }}</span>
+        {% if stat.survey_period %}<span><b>Survey time period:</b> {{ stat.survey_period }}</span>{% endif %}
+        {% if stat.release_date %}<span><b>Release date:</b> {{ stat.release_date }}</span>{% endif %}
+      </div>
+    </div>
+
+    <div class="statToolbar">
+      <span class="switcher" role="group" aria-label="Switch chart type">
+        {% if stat.chart_type == 'bar' %}
+          <a class="{% if chart_mode == 'bar' %}on{% endif %}" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?chart=bar">Bar</a>
+        {% else %}
+          <a class="{% if chart_mode == 'line' %}on{% endif %}" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?chart=line">Line</a>
+          <a class="{% if chart_mode == 'bar' %}on{% endif %}" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?chart=bar">Column</a>
+        {% endif %}
+        <a class="{% if chart_mode == 'table' %}on{% endif %}" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?chart=table">Table</a>
+      </span>
+      <form method="post" action="/download/stat/{{ stat.id }}" class="dlForm">
+        <input type="hidden" name="format" value="png">
+        <button type="submit" class="btn btn--primary">Download</button>
+      </form>
+      <form method="post" action="/favorite/stat/{{ stat.id }}">
+        <input type="hidden" name="back" value="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?chart={{ chart_mode }}">
+        <button type="submit" class="favBtn {% if is_fav %}on{% endif %}" aria-pressed="{{ 'true' if is_fav else 'false' }}">
+          {% if is_fav %}★ Saved to favorites{% else %}☆ Save to favorites{% endif %}
+        </button>
+      </form>
+    </div>
+
+    <div class="statChartBox">
+      {% if visible and chart_mode == 'table' and stat.table %}
+        <table class="chartTable">
+          {% for row in stat.table %}
+          <tr>
+            {% for cell in row %}
+              {% if loop.index0 == 0 %}<th>{{ cell }}</th>
+              {% else %}<td class="num">{{ cell }}</td>{% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      {% elif visible and chart_mode == 'table' and stat.points %}
+        <table class="chartTable">
+          <tr><th>Characteristic</th><th>{{ stat.value_label or 'Value' }}</th></tr>
+          {% for pt in stat.points|reverse %}
+          <tr><th>{{ pt[0] }}</th><td class="num">{{ pt[1] }}</td></tr>
+          {% endfor %}
+        </table>
+      {% elif visible and stat.points %}
+        {% set svg = render_chart_svg(stat.points, stat.value_label, 'bar' if chart_mode == 'bar' else 'line') %}
+        {% if svg %}{{ svg|safe }}{% endif %}
+        <p class="chartAria">{{ 'Bar' if chart_mode == 'bar' else 'Line' }} chart with {{ stat.points|length }} data points.
+        The chart has 1 X axis displaying categories. The chart has 1 Y axis displaying
+        {{ stat.value_label or 'values' }}.</p>
+      {% elif visible and stat.table %}
+        <table class="chartTable">
+          {% for row in stat.table %}
+          <tr>
+            {% for cell in row %}
+              {% if loop.index0 == 0 %}<th>{{ cell }}</th>
+              {% else %}<td class="num">{{ cell }}</td>{% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      {% elif stat.premium %}
+        <div class="paywallBox">
+          {% if stat.has_thumb %}
+          <img src="/static/images/stat_{{ stat.id }}_thumb.png" alt="Statistic preview: {{ stat.title }}">
+          {% elif stat.has_hero %}
+          <img src="/static/images/stat_{{ stat.id }}_hero.png" alt="Statistic preview: {{ stat.title }}">
+          {% endif %}
+          <h3>You need a paid <b>Statista Account</b> to see the exact figures</h3>
+          <p>A Starter Account or higher is required to see the exact figures for this premium statistic.</p>
+          {% if current_user.is_authenticated and current_user.can_view_premium %}
+          <p>This offline mirror does not include the premium data table for this statistic.</p>
+          {% elif current_user.is_authenticated %}
+          <p><b>Your {{ current_user.account_type }} Account does not include premium statistics.</b>
+          Upgrade to a Starter Account or higher to see the exact figures.</p>
+          <a class="btn btn--primary" href="/pricing/">Upgrade your plan</a>
+          {% else %}
+          <a class="btn btn--primary" href="/login">Log in</a>
+          <a class="btn btn--ghost" href="/register">Register now</a>
+          {% endif %}
+        </div>
+      {% elif visible %}
+        <div class="noDataBox">
+          {% if stat.has_thumb %}
+          <img src="/static/images/stat_{{ stat.id }}_thumb.png" alt="Statistic preview: {{ stat.title }}">
+          {% elif stat.has_hero %}
+          <img src="/static/images/stat_{{ stat.id }}_hero.png" alt="Statistic preview: {{ stat.title }}">
+          {% endif %}
+          <h3>The data table for this statistic is not available in this view</h3>
+          <p>This is a free statistic — no Statista Account is required. The chart
+          data table has not been published for this page; the key figures are
+          given in the summary and description below.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if stat.summary %}
+    <p class="statSummary">{{ stat.summary|striptags }}</p>
+    {% endif %}
+    {% if stat.description %}
+    <div class="statDesc">{{ stat.description|striptags }}</div>
+    {% endif %}
+
+    <div class="statSources">
+      <p><span class="lbl">Sources:</span> <span class="val">{% if stat.source %}{{ stat.source }}{% else %}Statista Research Department; aggregated from official sources{% endif %}</span></p>
+      {% if stat.details %}<p><span class="lbl">Details:</span> <span class="val">{{ stat.details }}</span></p>{% endif %}
+    </div>
+
+    <div class="statActions">
+      <a class="btn btn--ghost" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?citation=APA">Citations</a>
+      <a class="btn btn--ghost" href="/contact/">Report a problem</a>
+      <a class="btn btn--ghost" href="/serp?q={{ stat.breadcrumb[0]|urlencode if stat.breadcrumb else 'statistics' }}">More on this industry</a>
+    </div>
+
+    {% if citation_text %}
+    <div class="citationBox">
+      <div class="fmts">
+        {% for fmt in ['APA', 'Chicago', 'Harvard', 'MLA', 'Bluebook'] %}
+        <a class="{% if fmt == citation_fmt %}on{% endif %}" href="/{{ stat.url_kind }}/{{ stat.id }}/{{ stat.slug }}/?citation={{ fmt }}&amp;chart={{ chart_mode }}">{{ fmt }}</a>
+        {% endfor %}
+      </div>
+      <p class="citationText">{{ citation_text }}</p>
+    </div>
+    {% endif %}
+
+    {% if related %}
+    <section class="section">
+      <h2>Other statistics that may interest you</h2>
+      <div class="cardGrid">
+        {% for r in related %}
+        <a class="card" href="/{{ r.url_kind }}/{{ r.id }}/{{ r.slug }}/">
+          {% if r.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ r.id }}_thumb.png" alt="{{ r.title }}" loading="lazy"></span>{% endif %}
+          <div class="card__body">
+            <span class="card__meta">{{ r.last_update }} | {{ r.region }}</span>
+            <span class="card__title">{{ r.title|truncate(80) }}</span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+
+  <aside class="statSide">
+    {% if topic %}
+    <div class="sideBox">
+      <h3>Topic</h3>
+      <ul><li><a href="/topics/{{ topic.id }}/{{ topic.slug }}/">{{ topic.name }}</a></li></ul>
+    </div>
+    {% endif %}
+    {% if industry %}
+    <div class="sideBox">
+      <h3>Industry</h3>
+      <ul><li><a href="/markets/{{ industry.id }}/{{ industry.slug }}/">{{ industry.name }}</a></li></ul>
+    </div>
+    {% endif %}
+    <div class="sideBox">
+      <h3>Further content</h3>
+      <ul>
+        <li><a href="/recent/statistics/">Recent statistics</a></li>
+        <li><a href="/recent/reports/">Recent reports</a></li>
+        <li><a href="/outlook/">Market Insights</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="/account/favorites">My favorites</a></li>
+        <li><a href="/account/downloads">My downloads</a></li>
+        {% else %}
+        <li><a href="/login">Log in for favorites</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="sideBox">
+      <h3>Statista accounts</h3>
+      <p style="font-size:13px;color:var(--muted);">Access all statistics starting from $2,388 USD yearly.</p>
+      <a class="btn btn--primary" href="/pricing/" style="width:100%;text-align:center;">Compare plans</a>
+    </div>
+  </aside>
+</div>
+{% endblock %}

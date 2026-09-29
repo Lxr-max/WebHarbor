@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}{{ city.name }} Hotels - Where to stay in {{ city.name }} | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; Hotels &gt; Hotels in {{ city.state or 'United States' }} &gt; <b>Hotels in {{ city.name }}</b></div>
+
+<div class="widget">
+  <form class="widget-row" action="{{ url_for('hotel_list') }}" method="get">
+    <input type="hidden" name="city" value="{{ city.name }}">
+    <div class="wfield wfield-grow">
+      <label>Destination or property name</label>
+      <input name="city" value="{{ city.name }}">
+    </div>
+    <div class="wfield">
+      <label>Check-in</label>
+      <input name="checkin" type="date" value="{{ checkin.isoformat() }}">
+    </div>
+    <div class="wfield">
+      <label>Check-out</label>
+      <input name="checkout" type="date" value="{{ checkout.isoformat() }}">
+    </div>
+    <div class="wfield">
+      <label>Rooms and guests</label>
+      <select name="adults">
+        {% for n in [1,2,3,4] %}
+        <option value="{{ n }}" {% if n == adults %}selected{% endif %}>{{ n }} adult{{ 's' if n > 1 }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="list-layout" style="margin-top:14px">
+  <form class="filters" id="filters" method="get" action="{{ url_for('hotel_list') }}">
+    <input type="hidden" name="city" value="{{ city.name }}">
+    <input type="hidden" name="checkin" value="{{ checkin.isoformat() }}">
+    <input type="hidden" name="checkout" value="{{ checkout.isoformat() }}">
+    <input type="hidden" name="adults" value="{{ adults }}">
+    <input type="hidden" name="sort" value="{{ sort }}">
+    <h3>Popular filters for {{ city.name }}</h3>
+    <label class="frow"><input type="checkbox" name="freecancel" value="1" {% if filters.freecancel %}checked{% endif %}> Free cancellation</label>
+    <label class="frow"><input type="checkbox" name="breakfast" value="1" {% if filters.breakfast %}checked{% endif %}> Breakfast included</label>
+    <label class="frow"><input type="checkbox" name="pool" value="1" {% if filters.pool %}checked{% endif %}> Swimming pool</label>
+    <label class="frow"><input type="checkbox" name="parking" value="1" {% if filters.parking %}checked{% endif %}> Free parking</label>
+    <h3>Price per night</h3>
+    <div class="frow">
+      <input type="number" name="minprice" placeholder="Min $" min="0" value="{{ filters.minprice or '' }}">
+      <span>–</span>
+      <input type="number" name="maxprice" placeholder="Max $" min="0" value="{{ filters.maxprice or '' }}">
+    </div>
+    <h3>Star rating</h3>
+    {% for s in all_stars %}
+    <label class="frow"><input type="checkbox" name="star" value="{{ s }}"> {{ s }}-star</label>
+    {% endfor %}
+    <h3>Guest rating</h3>
+    <label class="frow"><input type="radio" name="rating" value="" {% if not filters.rating %}checked{% endif %}> Any</label>
+    <label class="frow"><input type="radio" name="rating" value="9" {% if filters.rating == '9' %}checked{% endif %}> Great 9+</label>
+    <label class="frow"><input type="radio" name="rating" value="8" {% if filters.rating == '8' %}checked{% endif %}> Very good 8+</label>
+    <label class="frow"><input type="radio" name="rating" value="7" {% if filters.rating == '7' %}checked{% endif %}> Good 7+</label>
+    <h3>Area</h3>
+    <select name="district">
+      <option value="">All areas</option>
+      {% for d in districts %}
+      <option value="{{ d }}" {% if filters.district == d %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn filter-btn" type="submit">Apply filters</button>
+  </form>
+
+  <div>
+    <div class="results-head">
+      <div class="results-count">{{ hotels|length }} propert{{ 'y' if hotels|length == 1 else 'ies' }} found in {{ city.name }}</div>
+      <div class="sort-links">
+        <a href="{{ url_for('hotel_list') }}?{{ keep_args(sort='recommended') }}" class="{{ 'active' if sort == 'recommended' }}">Recommended</a>
+        <a href="{{ url_for('hotel_list') }}?{{ keep_args(sort='price') }}" class="{{ 'active' if sort == 'price' }}">Lowest price</a>
+        <a href="{{ url_for('hotel_list') }}?{{ keep_args(sort='rating') }}" class="{{ 'active' if sort == 'rating' }}">Top reviewed</a>
+        <a href="{{ url_for('hotel_list') }}?{{ keep_args(sort='stars') }}" class="{{ 'active' if sort == 'stars' }}">Star rating (high to low)</a>
+      </div>
+    </div>
+
+    {% for h in hotels %}
+    <div class="hotel-row">
+      <a href="{{ url_for('hotel_detail', hotel_id=h.id, checkin=checkin.isoformat(), checkout=checkout.isoformat(), adults=adults) }}">
+        {% if h.img %}<img src="{{ url_for('static', filename='images/' + h.img) }}" alt="{{ h.name }}">{% endif %}
+      </a>
+      <div>
+        <a class="hr-name" href="{{ url_for('hotel_detail', hotel_id=h.id, checkin=checkin.isoformat(), checkout=checkout.isoformat(), adults=adults) }}">{{ h.name }}</a>
+        <span class="hr-stars">{% if h.stars %}{{ '★' * h.stars }}{% endif %}</span>
+        <div class="hr-rating">
+          <span class="hr-score">{{ '%.1f'|format(h.rating) }}</span>
+          <span><span class="hr-label">{{ h.rating_label }}</span><br><span class="hr-reviews">{{ h.reviews_count }} reviews</span></span>
+        </div>
+        <div class="hr-tags">
+          {% for t in h.tag_list[:2] %}<span class="hr-tag">{{ t }}</span>{% endfor %}
+        </div>
+        <div class="hr-area">{{ h.district }}{% if h.near %} &middot; <span class="near">Near {{ h.near }}</span>{% endif %}</div>
+        {% if h.bookable %}
+        <div class="hr-room">{{ h.address }}</div>
+        {% else %}
+        <div class="sold-out-flag">Sold out for your dates</div>
+        {% endif %}
+      </div>
+      <div class="hr-right">
+        {% if h.bookable %}
+        <span class="hr-badge">Member deal available</span>
+        <div class="hr-price">${{ '%d'|format(h.price) }}</div>
+        <div class="hr-total">${{ '%d'|format(h.total) }}/night incl. taxes &amp; fees</div>
+        <div class="hr-coins">Earn ${{ '%.2f'|format(h.total * nights * 0.01) }} in Trip Coins</div>
+        <a class="btn" href="{{ url_for('hotel_detail', hotel_id=h.id, checkin=checkin.isoformat(), checkout=checkout.isoformat(), adults=adults) }}">Check Availability</a>
+        {% else %}
+        <div class="hr-total">No availability</div>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-note">We couldn't find properties that match your preferences. Try removing some filters.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

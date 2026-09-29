@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block title %}My Wishlist | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <h1 class="cart-page-title">My Wishlist</h1>
+  {% if cards %}
+  <div class="wishlist-grid">
+    {% for c in cards %}
+    <div>
+      {{ card(c) }}
+      <form method="post" action="/wishlist/remove" style="margin-top:8px;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="slug" value="{{ c.product.slug }}">
+        <input type="hidden" name="next" value="/wishlist">
+        <button type="submit" class="link-btn">Remove from wishlist</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h2>Your wishlist is empty</h2>
+    <p>Save items you love while you browse.</p>
+    <a class="btn btn-primary" href="/">Continue Shopping</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

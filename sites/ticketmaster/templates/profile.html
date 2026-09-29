@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a href="/member">Your Account</a>
+      <a class="active" href="/member/profile">Edit Profile</a>
+      <a href="/member/payment">Payment Options</a>
+      <a href="/member">Orders</a>
+      <a href="/member/favorites">My Favorites</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <h1>Edit Profile</h1>
+      <form class="form-card" style="max-width:520px" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field">
+          <label for="first_name">First name</label>
+          <input id="first_name" type="text" name="first_name" value="{{ current_user.first_name }}" required>
+        </div>
+        <div class="field">
+          <label for="last_name">Last name</label>
+          <input id="last_name" type="text" name="last_name" value="{{ current_user.last_name }}" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" type="text" name="phone" value="{{ current_user.phone }}">
+        </div>
+        <div class="field">
+          <label for="zip">ZIP / Postal code</label>
+          <input id="zip" type="text" name="zip" value="{{ current_user.zip }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

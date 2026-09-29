@@ -1,5 +1,5 @@
 # WebHarbor — slim, self-contained image.
-# 104 Flask mirror sites + control plane on :8101.
+# 85 Flask mirror sites + control plane on :8101.
 
 FROM python:3.12-slim-bookworm@sha256:782412e85d0f0984994c290652577d4018aff08145c85b262bb63dc0c7522254
 
@@ -336,8 +336,65 @@ RUN cd /opt/WebSyn/ryanair && rm -rf instance instance_seed && \
     mkdir -p instance_seed && cp instance/ryanair.db instance_seed/ryanair.db && \
     rm -rf instance __pycache__
 
+# Chess.com's seed is rebuilt deterministically from the tracked source snapshot
+# (see .build-generated-seed); its real upstream imagery ships via the asset bundle.
+RUN cd /opt/WebSyn/chess_com && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# Porsche rebuilds its deterministic, version-marked SQLite seed from tracked source data.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/porsche
+RUN cd /opt/WebSyn/porsche && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    rm -rf instance __pycache__
+
+# qatar_airways: deterministic seed from tracked source snapshots + asset gate.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/qatar_airways
+RUN cd /opt/WebSyn/qatar_airways && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    mkdir -p instance_seed && cp instance/qatar_airways.db instance_seed/qatar_airways.db && \
+    rm -rf instance __pycache__
+
+# soundcloud: validate source assets and build the deterministic seed.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/soundcloud
+RUN cd /opt/WebSyn/soundcloud && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# speedo: deterministic seed from the tracked upstream snapshots + asset gate.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/speedo
+RUN cd /opt/WebSyn/speedo && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && \
+    mkdir -p instance_seed && cp instance/speedo.db instance_seed/speedo.db && \
+    rm -rf instance __pycache__
+
+# sourceforge: validate source assets and build the deterministic seed.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/sourceforge
+RUN cd /opt/WebSyn/sourceforge && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# stubhub: validate source assets and build the deterministic seed.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/stubhub
+RUN cd /opt/WebSyn/stubhub && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# spothero: validate source assets and build the deterministic seed.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/spothero
+RUN cd /opt/WebSyn/spothero && rm -rf instance instance_seed && \
+    PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__
+
+# Validate and seed the latest sites in one layer to stay below overlay limits.
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/student_com && \
+    (cd /opt/WebSyn/student_com && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__) && \
+    python3 /opt/check_asset_inventory.py /opt/WebSyn/statista && \
+    (cd /opt/WebSyn/statista && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && rm -rf instance __pycache__) && \
+    python3 /opt/check_asset_inventory.py /opt/WebSyn/thumbtack && \
+    (cd /opt/WebSyn/thumbtack && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/thumbtack.db instance_seed/thumbtack.db && rm -rf instance __pycache__) && \
+    python3 /opt/check_asset_inventory.py /opt/WebSyn/ticketmaster && \
+    (cd /opt/WebSyn/ticketmaster && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/ticketmaster.db instance_seed/ticketmaster.db && rm -rf instance __pycache__) && \
+    python3 /opt/check_asset_inventory.py /opt/WebSyn/trip_com && \
+    (cd /opt/WebSyn/trip_com && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/trip_com.db instance_seed/trip_com.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40103
+EXPOSE 8101 40000-40116
 
 CMD ["/opt/websyn_start.sh"]

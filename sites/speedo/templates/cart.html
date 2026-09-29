@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Your Basket | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <h1 class="cart-page-title">Your Basket</h1>
+  <div class="cart-layout">
+    <section>
+      {% if summary.rows %}
+      {% for row in summary.rows %}
+      <article class="cart-row">
+        {% set imgs = row.product.image_list() %}
+        <a href="/products/{{ row.product.slug }}">
+          {% if imgs %}<img src="{{ url_for('static', filename='images/' + imgs[0]) }}" alt="{{ row.product.name }}">{% endif %}
+        </a>
+        <div>
+          <a class="cart-name" href="/products/{{ row.product.slug }}">{{ row.product.name }}</a>
+          {% if row.size %}<div class="cart-variant">Size: {{ row.size }}</div>{% endif %}
+          <div class="cart-variant">£{{ '%.2f' % row.product.price }}</div>
+          <form action="/cart/remove" method="post" style="margin-top:8px;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="key" value="{{ row.key }}">
+            <input type="hidden" name="quantity" value="0">
+            <button type="submit" class="link-btn">Remove</button>
+          </form>
+        </div>
+        <div class="qty-input">
+          <form action="/cart/update" method="post" style="display:contents;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="key" value="{{ row.key }}">
+            <input type="hidden" name="quantity" value="{{ row.qty - 1 if row.qty > 1 else 0 }}">
+            <button type="submit" aria-label="Decrease quantity">&minus;</button>
+          </form>
+          <span>{{ row.qty }}</span>
+          <form action="/cart/update" method="post" style="display:contents;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="key" value="{{ row.key }}">
+            <input type="hidden" name="quantity" value="{{ row.qty + 1 if row.qty < 50 else 50 }}">
+            <button type="submit" aria-label="Increase quantity">+</button>
+          </form>
+        </div>
+        <div class="cart-price">£{{ '%.2f' % (row.product.price * row.qty) }}</div>
+      </article>
+      {% endfor %}
+      <p style="margin-top:18px;"><a href="/" class="link-btn">Continue shopping</a></p>
+      {% else %}
+      <div class="empty-state">
+        <h2>Your basket is empty</h2>
+        <p>Have an account? <a href="/login">Log in</a> to check out faster.</p>
+        <a class="btn btn-primary" href="/">Continue Shopping</a>
+      </div>
+      {% endif %}
+    </section>
+    <aside>
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="free-ship-meter">
+          {% if summary.remaining > 0 %}
+            Spend £{{ '%.2f' % summary.remaining }} more to receive FREE shipping
+          {% else %}
+            You've unlocked FREE shipping
+          {% endif %}
+          <div class="bar"><span style="width: {{ [100, (100 - summary.remaining / 50 * 100)|round(0)]|min if summary.remaining > 0 else 100 }}%;"></span></div>
+        </div>
+        <div class="sum-row"><span>Subtotal</span><span>£{{ '%.2f' % summary.subtotal }}</span></div>
+        {% if summary.discount %}
+        <div class="sum-row discount"><span>Discount {{ summary.code }}</span><span>&minus;£{{ '%.2f' % summary.discount }}</span></div>
+        {% endif %}
+        <div class="sum-row total"><span>Estimated total</span><span>£{{ '%.2f' % summary.total }}</span></div>
+        <form action="/cart/discount" method="post" class="discount-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          {% if summary.code %}
+          <input type="hidden" name="code" value="">
+          <button type="submit" class="link-btn">Remove discount {{ summary.code }}</button>
+          {% else %}
+          <input type="text" name="code" placeholder="Discount code" aria-label="Discount code">
+          <button type="submit" class="btn btn-secondary" style="padding:9px 18px;">Apply</button>
+          {% endif %}
+        </form>
+        {% if summary.rows %}
+        <a class="btn btn-primary" href="/checkout" style="width:100%;margin-top:10px;">Checkout</a>
+        {% endif %}
+        <p class="cart-note">Taxes included. Discounts and shipping calculated at checkout.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

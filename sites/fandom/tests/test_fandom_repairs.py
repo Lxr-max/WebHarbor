@@ -341,7 +341,7 @@ class FandomRepairTests(unittest.TestCase):
                          [f"Fandom--{i}" for i in range(18)])
         for task in tasks:
             self.assertEqual(set(task), required)
-            self.assertEqual(task["web"], "http://localhost:40101/")
+            self.assertEqual(task["web"], "http://localhost:40114/")
 
         targets = [
             "/wiki/mcu/Tony_Stark",

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}VIP | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">VIP Packages</h1>
+  <p class="page-sub">Elevate your live experience. VIP Packages include a ticket plus exclusive perks such as premium seating, dedicated entrances, merchandise, and presale access.</p>
+  <div class="topic-list">
+    <div class="topic-card">
+      <h3>Premium Seats</h3>
+      <p>Some of the best locations in the venue, hand-picked for VIP Package buyers.</p>
+    </div>
+    <div class="topic-card">
+      <h3>Exclusive Perks</h3>
+      <p>Commemorative merchandise, limited-edition items and drink vouchers, depending on the show.</p>
+    </div>
+    <div class="topic-card">
+      <h3>Fast Entry</h3>
+      <p>Dedicated VIP entrances and early entry windows where available.</p>
+    </div>
+  </div>
+  <p style="padding-bottom:50px"><a class="btn btn-primary" href="/search?q=VIP">Browse Events with VIP Packages</a></p>
+</div>
+{% endblock %}

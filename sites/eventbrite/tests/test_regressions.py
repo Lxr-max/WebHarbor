@@ -325,7 +325,7 @@ class EventbriteRegressionTests(unittest.TestCase):
         self.assertEqual(len(tasks), 18)
         self.assertEqual([task["id"] for task in tasks], [f"Eventbrite--{i}" for i in range(18)])
         self.assertTrue(all(set(task) == {"web_name", "id", "ques", "web", "upstream_url"} for task in tasks))
-        self.assertTrue(all(task["web"] == "http://localhost:40100/" for task in tasks))
+        self.assertTrue(all(task["web"] == "http://localhost:40113/" for task in tasks))
 
         with site.app.app_context():
             titles = {event.title for event in site.Event.query.all()}

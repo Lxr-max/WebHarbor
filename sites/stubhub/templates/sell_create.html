@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}List tickets for {{ evt.name }} | StubHub{% endblock %}
+{% block content %}
+<div class="sell-page">
+  <h1>List your tickets</h1>
+  <section class="checkout-event">
+    <h2>{{ evt.name }}</h2>
+    <p>{{ evt.date_full }} • {{ 'TBA' if evt.is_time_tbd else evt.local_starts_at.strftime('%-I:%M %p') }}</p>
+    <p>{{ evt.venue.name }}, {{ evt.venue.city }}, {{ evt.venue.state or evt.venue.country }}</p>
+  </section>
+  <form method="post" class="sell-form">
+    <label>Section
+      {% if sections %}
+      <input type="text" name="section" list="section-list" placeholder="e.g. 108" required>
+      <datalist id="section-list">
+        {% for s in sections %}<option value="{{ s }}"></option>{% endfor %}
+      </datalist>
+      {% else %}
+      <input type="text" name="section" placeholder="e.g. 108" required>
+      {% endif %}
+    </label>
+    <label>Row
+      <input type="text" name="row" placeholder="e.g. 12">
+    </label>
+    <label>Seats <span class="muted">(optional)</span>
+      <input type="text" name="seats" placeholder="e.g. 7-8">
+    </label>
+    <label>Number of tickets
+      <input type="number" name="quantity" min="1" max="20" value="2" required>
+    </label>
+    <label>Price per ticket
+      <input type="text" name="price" placeholder="$ e.g. 85" required>
+    </label>
+    <p class="filter-note">You set the price. StubHub adds its fee on top for buyers; your payout is your listed price.</p>
+    <button type="submit" class="btn btn-primary btn-wide">Create listing</button>
+  </form>
+</div>
+{% endblock %}

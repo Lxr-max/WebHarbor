@@ -473,7 +473,7 @@ class ApartmentsRegressionTests(unittest.TestCase):
         self.assertEqual({task["id"] for task in tasks}, set(feasibility))
         for task in tasks:
             self.assertEqual(set(task), expected_keys)
-            self.assertEqual(task["web"], "http://localhost:40099/")
+            self.assertEqual(task["web"], "http://localhost:40112/")
             self.assertGreater(feasibility[task["id"]]["candidate_count"], 0)
 
         m = self.module

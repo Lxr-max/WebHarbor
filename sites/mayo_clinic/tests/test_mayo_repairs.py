@@ -85,7 +85,7 @@ class MayoRepairTests(unittest.TestCase):
                 set(task),
                 {"web_name", "id", "ques", "web", "upstream_url"},
             )
-            self.assertEqual(task["web"], "http://localhost:40102/")
+            self.assertEqual(task["web"], "http://localhost:40115/")
 
         checks = [
             "/search?q=type+2+diabetes",

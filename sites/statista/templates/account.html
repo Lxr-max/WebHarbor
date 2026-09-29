@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}My Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>My Statista</span>
+</nav>
+<h1>My Statista</h1>
+<div class="acctNav">
+  <a class="on" href="/account">Overview</a>
+  <a href="/account/favorites">Favorites</a>
+  <a href="/account/downloads">Download history</a>
+  <a href="/pricing/">Plan &amp; billing</a>
+</div>
+
+<div class="acctGrid">
+  <div class="acctCard">
+    <h3>Account <span style="color:var(--muted);font-weight:400;font-size:13px;">{{ current_user.account_type }} Account</span></h3>
+    <dl class="kv">
+      <dt>Display name</dt><dd>{{ current_user.display_name }}</dd>
+      <dt>Username</dt><dd>{{ current_user.username }}</dd>
+      <dt>Email</dt><dd>{{ current_user.email }}</dd>
+      <dt>Company</dt><dd>{{ current_user.company or '—' }}</dd>
+      <dt>Member since</dt><dd>{{ current_user.created_at.strftime('%B %d, %Y') }}</dd>
+    </dl>
+  </div>
+  <div class="acctCard">
+    <h3>Favorites</h3>
+    <p class="big">{{ fav_stats|length }}</p>
+    <p style="color:var(--muted);font-size:13px;">statistics and reports saved to your favorites</p>
+    <a class="btn btn--ghost" href="/account/favorites">View favorites</a>
+  </div>
+  <div class="acctCard">
+    <h3>Downloads</h3>
+    <p class="big">{{ downloads|length }}</p>
+    <p style="color:var(--muted);font-size:13px;">files prepared for your account</p>
+    <a class="btn btn--ghost" href="/account/downloads">View download history</a>
+  </div>
+  <div class="acctCard">
+    <h3>Your plan</h3>
+    <p style="color:var(--muted);font-size:13px;">
+      {% if current_user.account_type == 'Basic' %}
+      Your Basic Account includes all free statistics. Premium statistics and report downloads require a paid plan.
+      {% elif current_user.account_type == 'Starter' %}
+      Your Starter Account includes free and premium statistics. Report downloads require a Professional Account.
+      {% elif current_user.account_type == 'Personal' %}
+      Your Personal Account includes free and premium statistics. Report downloads require a Professional Account.
+      {% else %}
+      Your Professional Account includes free and premium statistics plus report downloads.
+      {% endif %}
+    </p>
+    <a class="btn btn--primary" href="/pricing/">Compare plans</a>
+  </div>
+</div>
+{% endblock %}

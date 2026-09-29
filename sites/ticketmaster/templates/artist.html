@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ artist.name }} Tickets, Tour Dates | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs">
+    <a href="/">Home</a> ›
+    {% if artist.events %}<a href="/event/{{ artist.events[0].id }}">{{ artist.events[0].category }}</a> ›{% endif %}
+    {{ artist.name }} Tickets
+  </div>
+  <div class="avp-hero">
+    {% if artist.image %}<img src="{{ url_for('static', filename=artist.image.replace('static/','')) }}" alt="{{ artist.name }}">{% endif %}
+    <div>
+      <h1 class="avp-title">{{ artist.name }} Tickets</h1>
+      {% if artist.rating %}
+      <div class="rating-line">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span><b>{{ '%.1f'|format(artist.rating) }}</b> Rating: {{ '%.1f'|format(artist.rating) }} out of 5 based on {{ artist.rating_count }} reviews</span>
+      </div>
+      {% endif %}
+      <form method="post" action="/favorites/toggle" style="margin-top:14px">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="kind" value="artist">
+        <input type="hidden" name="ref" value="{{ artist.id }}">
+        <input type="hidden" name="next" value="/artist/{{ artist.id }}">
+        <button class="save-btn {{ 'saved' if artist.id in fav_artists }}" type="submit">
+          {{ 'Saved to favorites' if artist.id in fav_artists else 'Save ' + artist.name + ' to favorites' }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="avp-tabs">
+    <span class="active">Concerts</span>
+  </div>
+
+  <p class="results-note">{{ events|length }} Results</p>
+  {% if events %}
+  <ul>
+    {% for e in events %}
+    <li class="event-row">
+      <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+      <div class="er-main">
+        <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+        <div class="er-sub">{{ e.city_state }} — <a href="/venue/{{ e.venue.id }}">{{ e.venue.name }}</a></div>
+        <div class="er-time">{{ e.time_line }}</div>
+        <div class="price-tag">{{ price_band(e) }}</div>
+      </div>
+      <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty-state">
+    <h3>No upcoming events listed</h3>
+    <p>New dates are added as they are announced — check back soon.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

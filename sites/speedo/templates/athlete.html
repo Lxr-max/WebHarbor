@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ a.name }} | Team Speedo{% endblock %}
+{% block content %}
+<section class="athlete-hero">
+  <img src="{{ url_for('static', filename='images/' + a.hero_image) if a.hero_image else '' }}" alt="{{ a.name }}">
+  <div class="athlete-hero-overlay">
+    <span class="team">TEAM {{ a.team|upper }}</span>
+    <h1>{{ a.name|upper }}</h1>
+    {% if a.quote %}<blockquote>&ldquo;{{ a.quote }}&rdquo;</blockquote>{% endif %}
+  </div>
+</section>
+<div class="athlete-bio">
+  <p>{{ a.bio }}</p>
+</div>
+{% if a.portrait_image %}
+<div class="athlete-portraits">
+  <img src="{{ url_for('static', filename='images/' + a.portrait_image) }}" alt="{{ a.name }} portrait">
+</div>
+{% endif %}
+<section class="related-section page-width">
+  <h2>Blog Posts</h2>
+  <div class="blog-grid">
+    {% for art in articles %}
+    <a class="blog-card" href="/blogs/news/{{ art.slug }}">
+      {% if art.image %}<img src="{{ url_for('static', filename='images/' + art.image) }}" alt="{{ art.title }}" loading="lazy">{% endif %}
+      <h3>{{ art.title }}</h3>
+      <div class="date">{{ art.published }}</div>
+      <div class="summary">{{ art.summary }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
