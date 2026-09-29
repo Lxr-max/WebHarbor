@@ -78,16 +78,14 @@ def absent_sertraline(answer):
     return True
 
 
-def no_byline(answer):
+def affirmed_byline(answer):
     text = fold(answer)
-    if "nutrition" not in text:
-        return False
-    return any(
-        cue in text
-        for cue in (
-            "no author", "no byline", "not shown", "not listed",
-            "does not list", "doesn't list", "without an author", "author is not",
-        )
+    return not re.search(
+        r"\b(?:no|without an?) (?:author|byline)\b|"
+        r"\b(?:author(?: byline)?|byline) (?:is |was )?(?:not|absent|missing)\b|"
+        r"\b(?:does not|doesn't) (?:show|list|provide) (?:an? )?(?:author|byline)\b|"
+        r"\bnot (?:by )?mayo clinic staff\b",
+        text,
     )
 
 
@@ -160,9 +158,10 @@ TASKS = {
     },
     10: {
         "task_id": "Mayo Clinic--10",
-        "nav": [r"/healthy-lifestyle/.*/mediterranean-diet-overview|/patient-stories/|mediterranean-diet-overview"],
-        "pred": no_byline,
-        "rubric": "FACT CHECKPOINTS: Open Mediterranean Diet: A Heart-Healthy Eating Plan. Report the displayed category and whether the page provides an author byline; if present, report it exactly. Inventing a byline or contradicting the page fails.",
+        "nav": [r"/healthy-lifestyle/mediterranean-diet-overview(?:[?#]|$)"],
+        "phrases": ["Nutrition", "Mayo Clinic Staff"],
+        "pred": affirmed_byline,
+        "rubric": "FACT CHECKPOINTS: Open Mediterranean Diet: A Heart-Healthy Eating Plan and report its displayed category and author credit, including the credit in the article body. Omitting either field, inventing a credit, or denying the displayed credit fails.",
     },
     11: {
         "task_id": "Mayo Clinic--11",

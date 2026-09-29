@@ -48,7 +48,7 @@ PASS_ANSWERS = {
     7: "Metformin treats Type 2 diabetes and polycystic ovary syndrome. Side effects include GI upset, vitamin B12 deficiency, and rare lactic acidosis.",
     8: "CABG is performed by Cardiovascular Medicine.",
     9: "Confirmation code MAYO-277547AF.",
-    10: "Category Nutrition. No author byline is shown.",
+    10: "Category Nutrition. By Mayo Clinic Staff.",
     11: "4 physicians match in Jacksonville neurology.",
     12: "Doctors include Adam Clark, Chelsea Turner, and Hadley Ramirez. The department is Neurology.",
     13: "14 Phase 2 recruiting studies in Rochester.",
@@ -173,6 +173,25 @@ class MayoVerifierTests(unittest.TestCase):
                 with self.subTest(task=index, case="pass"):
                     verdict = evaluate(index, traj(PASS_ANSWERS[index], PASS_URLS[index]), seed_copy, after)
                     self.assertTrue(verdict["pass"], verdict)
+
+    def test_article_category_and_byline(self):
+        cases = [
+            ("body-credit", "Category Nutrition. The article body credits Mayo Clinic Staff.", PASS_URLS[10], True),
+            ("no-byline", "Category Nutrition. No byline shown.", PASS_URLS[10], False),
+            ("no-author", "Category Nutrition. No author byline is shown.", PASS_URLS[10], False),
+            ("missing-byline", "Category Nutrition.", PASS_URLS[10], False),
+            ("missing-category", "By Mayo Clinic Staff.", PASS_URLS[10], False),
+            ("wrong-category", "Category Fitness. By Mayo Clinic Staff.", PASS_URLS[10], False),
+            ("wrong-author", "Category Nutrition. By Jane Doe.", PASS_URLS[10], False),
+            ("contradictory-byline", "Category Nutrition. No byline shown, but likely Mayo Clinic Staff.", PASS_URLS[10], False),
+            ("denied-credit", "Category Nutrition. The byline is not Mayo Clinic Staff.", PASS_URLS[10], False),
+            ("unrelated-story", PASS_ANSWERS[10], ["/patient-stories/david-parkinsons"], False),
+            ("search-only", PASS_ANSWERS[10], ["/search?q=mediterranean-diet-overview"], False),
+        ]
+        for name, answer, paths, expected in cases:
+            with self.subTest(case=name):
+                verdict = evaluate(10, traj(answer, paths))
+                self.assertEqual(verdict["pass"], expected, verdict)
 
     def test_present_drug_is_not_the_missing_one(self):
         verdict = evaluate(

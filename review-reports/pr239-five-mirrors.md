@@ -1,6 +1,6 @@
 # Review: PR #239 — five reserved mirrors
 
-Review of [#239](https://github.com/aiming-lab/WebHarbor/pull/239), hqhq1025's five mirrors and 90 tasks at contributor commit `7920869974bd82573713d9faefefb733546233d5`. [#251](https://github.com/aiming-lab/WebHarbor/pull/251), `Lxr-max/WebHarbor:review/pr239`, preserves that commit and adds the reviewer continuation. This report combines the earlier Chromium, scoped-Docker, and Hugging Face evidence with the 2026-09-30 Linux checks and the post-edit verifier tests recorded below. Docker and Chromium were not re-run on 2026-09-30.
+Review of [#239](https://github.com/aiming-lab/WebHarbor/pull/239), hqhq1025's five mirrors and 90 tasks at contributor commit `7920869974bd82573713d9faefefb733546233d5`. [#251](https://github.com/aiming-lab/WebHarbor/pull/251), `Lxr-max/WebHarbor:review/pr239`, preserves that commit and adds the reviewer continuation. This report combines the earlier Chromium, scoped-Docker, and Hugging Face evidence with the 2026-09-30 post-edit Linux checks, Eventbrite Chromium re-check, and Mayo byline correction recorded below. Docker was not re-run on 2026-09-30.
 
 **Verdict: do not merge #239 yet. Functional depth passes; upstream ports, merged assets, nine returned tasks, and Eventbrite's 768px layout remain blockers. #251 does not re-slot ports or change `.assets-revision`.**
 
@@ -8,20 +8,22 @@ Review of [#239](https://github.com/aiming-lab/WebHarbor/pull/239), hqhq1025's f
 
 Local checks pass on this branch's `1c1dc23f` base; the asset pin and upstream port conflicts do not.
 
-- [x] 2026-09-30 Linux pass, Python 3.12, with the `refs/pr/144` archives extracted: `py_compile` of all five `app.py` files passed.
+- [x] 2026-09-30 post-edit Linux pass after `a8f77102`, Python 3.12, with the `refs/pr/144` archives extracted: `py_compile` of all five `app.py` files passed.
 - [x] That pass: `python scripts/check_site_registry.py` reported **104 sites consistent**, `EXPOSE (8101 40000-40103)`. This establishes branch-local consistency, not compatibility with current upstream main.
 - [x] That pass: `pytest sites/<site>/verify` and `pytest sites/<site>/tests` passed as listed below.
-- [x] Post-edit Windows pass, Python 3.12.13, `PYTHONUTF8=1`: `python -m pytest -q -p no:cacheprovider sites/<site>/verify` passed separately for all five sites, including the new schema/no-leak test.
+- [x] Those Linux verifier suites include the schema/no-leak tests: **18 tests and 467 subtests passed** across all five sites, before the Mayo byline correction below.
 - [ ] Full-image build and all-site HTTP sweep. The official `./scripts/build.sh` was not run in the earlier pass: only these five seeds were present, and the branch pin `5d2b17fa21067990370f8e7fc27123a1c24d7802` did not contain their bundles. No full-image result is claimed here.
 - [ ] Adopt upstream-compatible ports and a merged asset revision containing all five archives.
 
-| Site | Linux verifier tests / subtests (before edits) | Linux site tests | Windows verifier tests / subtests (after edits) |
-| --- | --- | --- | --- |
-| apartments_com | 2 / 67 passed | 13 passed | 3 / 83 passed |
-| eventbrite | 2 / 78 passed | 16 passed | 3 / 96 passed |
-| fandom | 2 / 76 passed | 13 passed | 3 / 94 passed |
-| mayo_clinic | 2 / 81 passed | 11 passed | 3 / 101 passed |
-| smartasset | 5 / 75 passed | 21 passed | 6 / 93 passed |
+| Site | Post-edit Linux verifier tests / subtests | Linux site tests |
+| --- | --- | --- |
+| apartments_com | 3 / 83 passed | 13 passed |
+| eventbrite | 3 / 96 passed | 16 passed |
+| fandom | 3 / 94 passed | 13 passed |
+| mayo_clinic | 3 / 101 passed | 11 passed |
+| smartasset | 6 / 93 passed | 21 passed |
+
+After the 2026-09-30 Mayo byline correction, the local Windows / Python 3.12.13 run (`PYTHONUTF8=1`) of `python -m pytest -q -p no:cacheprovider sites/mayo_clinic/verify` passed **4 tests and 112 subtests**. A Linux rerun of that correction is pending; the table records the supplied Linux results before it.
 
 ### Registry against upstream main
 
@@ -72,7 +74,7 @@ In the earlier pass, local `seed_data` generation does not reproduce those files
 
 ## Visual fidelity: FAIL
 
-Earlier pass: Playwright Chromium at desktop 1280 and 768 against the scoped container. Screenshots were saved locally under `/tmp/pr239-review/`; they were not published or committed. Chromium was not re-run on 2026-09-30.
+Earlier pass: Playwright Chromium at desktop 1280 and 768 against the scoped container. Screenshots were saved locally under `/tmp/pr239-review/`; they were not published or committed. A targeted 2026-09-30 Linux headless Chromium re-check of Eventbrite is recorded below; the other browser findings remain from the earlier pass.
 
 ### Apartments.com — PASS
 
@@ -87,6 +89,7 @@ Earlier pass: Playwright Chromium at desktop 1280 and 768 against the scoped con
 - [x] Desktop home is recognizable: orange wordmark, location menu, “Popular in New York”, category row, newsletter.
 - [x] Cards are CSS backgrounds, not `<img>`. Playwright counted 53 `.eb-card-img` nodes, all with a real `url(...)`. A cropped card for “The Great Gatsby Jazz Night” shows a photograph, a Music badge, and “From $27.00”. `GET /static/images/evt_music_011.jpg` returned `image/jpeg`, 83968 bytes.
 - [ ] **768px homepage overflows horizontally** (`scrollWidth` greater than the viewport). The location list and header wrap into a broken multi-column strip. That fails the responsive check.
+- [ ] **2026-09-30 re-check (Playwright, Linux headless Chromium):** the homepage, `/search?q=music`, and an event page on this branch all reproduce the 768px overflow: document `scrollWidth=831` versus `clientWidth=768`, with `.eb-nav-links` extending to `x=831`. At 390px and 1280px, none of those pages overflowed.
 
 ### Fandom — PASS
 
@@ -98,7 +101,7 @@ Earlier pass: Playwright Chromium at desktop 1280 and 768 against the scoped con
 ### Mayo Clinic — PASS
 
 - [x] Homepage: blue header, “Request appointment”, “Patient Care” menu, search, condition cards. 11 images, 0 broken. Sample anatomy/wellness photos are real Wikimedia-style images, not flat placeholders (sample color counts 256–2942).
-- [x] Mediterranean diet article shows category “Nutrition”, date “May 27, 2026”, and a 960×720 photo. The word “author” is absent.
+- [x] Mediterranean diet article shows category “Nutrition”, date “May 27, 2026”, and a 960×720 photo. **2026-09-30 correction:** the header shows category/date, while the body carries “By Mayo Clinic Staff” followed by “May 27, 2026”. The earlier pass overlooked this displayed credit: `templates/article_detail.html` renders `article.body`, whose seed row (`article`, slug `mediterranean-diet-overview`) contains it.
 - [x] Header targets exercised (`/`, `/appointments`) returned 200. 768px: no page-level overflow.
 - [ ] Provenance is incomplete (illustrative Commons files, synthetic `SIM-MAYO-*` trials). Disclosure is in `NOTICE.md`.
 
@@ -131,7 +134,7 @@ Search spot checks: Apartments “The Boulevard Austin” (page contains “Walk
 
 PASS means the fixture can answer the question through the UI and the question is not a famous-knowledge shortcut or a listing-card leak. FAIL means send the row back. Graders exist for every row either way; a navigation gate does not repair a shortcut or a leak.
 
-The earlier Chromium pass confirmed the listing leaks (Walk 36 and a 4.8 rating are on Apartments search results), the student-housing heading “42 Student Housing properties” with no “42+”, Eventbrite West counts (32 three times, 31 three times, 30 once, 27 once), Fandom recent-changes text “200 revisions shown (page limit 200)”, the Tony Stark page containing the birthday while search results do not, the Mediterranean article with Nutrition and no byline, and the SmartAsset credit-card chips. The other rows were checked against the Hugging Face seed and the routes in the earlier pass on this branch; they were not each clicked again in Chromium.
+The earlier Chromium pass confirmed the listing leaks (Walk 36 and a 4.8 rating are on Apartments search results), the student-housing heading “42 Student Housing properties” with no “42+”, Eventbrite West counts (32 three times, 31 three times, 30 once, 27 once), Fandom recent-changes text “200 revisions shown (page limit 200)”, the Tony Stark page containing the birthday while search results do not, the Mediterranean article's Nutrition category, and the SmartAsset credit-card chips. The earlier reading of the Mayo byline was corrected on 2026-09-30: the rendered body credits Mayo Clinic Staff. The other rows were checked against the Hugging Face seed and the routes in the earlier pass on this branch; they were not each clicked again in Chromium.
 
 - [x] **81 tasks PASS** on the reviewed fixture.
 - [ ] **Nine tasks FAIL** and remain returned to the contributor; the offered follow-up is not incorporated here. No task question was changed in this pass.
@@ -203,7 +206,7 @@ The earlier Chromium pass confirmed the listing leaks (Walk 36 and a 4.8 rating 
 | --16 | PASS | One active poll question per wiki. |
 | --17 | PASS | Cathedral uploader is distinct from the concept-painting uploader. `test_asset_manifest_and_references` passes once `mcu_avengers__endgame.jpg` is extracted from the archive. |
 
-### Mayo Clinic — section FAIL (shortcut + missing byline)
+### Mayo Clinic — section FAIL (knowledge shortcuts)
 
 | Task | Result | Evidence |
 | --- | --- | --- |
@@ -217,7 +220,7 @@ The earlier Chromium pass confirmed the listing leaks (Walk 36 and a 4.8 rating 
 | --7 | PASS | Indication, side effects, and warning are on the drug page. |
 | --8 | PASS | CABG is tied to coronary artery disease and to the department display name. |
 | --9 | PASS | Stateful. Code is computable from email and date, so the grader requires the appointment row. Chromium opened the stepped request form; a full submit was not finished in that earlier pass. |
-| --10 | FAIL | Not answerable as an author. Chromium article: “Nutrition · May 27, 2026” and no byline. `Article` has no author column. The verifier accepts only an explicit no-byline answer plus Nutrition. |
+| --10 | FAIL | Knowledge shortcut: the displayed credit is the generic, guessable “Mayo Clinic Staff”, not an unanswerable byline. Corrected on 2026-09-30: `article.body` ends with “By Mayo Clinic Staff” and “May 27, 2026”, and the template renders it. The corrected verifier requires article navigation, Nutrition, and Mayo Clinic Staff; a no-author/byline answer fails. |
 | --11 | PASS | Count is the full Jacksonville neurology list. The location filter adds nothing. |
 | --12 | PASS | Loose: doctors are the neurology department, not an MS-only panel. |
 | --13 | PASS | Phase 2 + Recruiting + Rochester is a stable count. |
@@ -255,7 +258,8 @@ The earlier Chromium pass confirmed the listing leaks (Walk 36 and a 4.8 rating 
 
 - [x] All 90 rows have exactly `web_name`, `id`, `ques`, `web`, `upstream_url`, `verifier_path`, and `judge_rubric`. Each indexed path exists; there is no answer key.
 - [x] `sites/<site>/verify/verify_N.py` calls `verify_lib.main(index)`. Frozen expected values and state callbacks live in `contracts.py`; shared text matchers live in `checks.py`. Each package now has a `verify/README.md` describing its actual run signature and limits.
-- [x] Rubrics were checked against expected numbers, names, codes, dates, and outcome predicates. Six were made rules-only, synchronized in `tasks.jsonl` and `contracts.py`: Eventbrite--6 and --13, Fandom--10, Mayo Clinic--5 and --10, SmartAsset--9. Questions and verifier logic are unchanged.
+- [x] Rubrics were checked against expected numbers, names, codes, dates, and outcome predicates. Six were made rules-only, synchronized in `tasks.jsonl` and `contracts.py`: Eventbrite--6 and --13, Fandom--10, Mayo Clinic--5 and --10, SmartAsset--9. Questions are unchanged; Mayo Clinic--10 additionally corrects the verifier's byline facts and article-navigation requirement.
+- [x] The 2026-09-30 Mayo Clinic--10 correction requires Nutrition and Mayo Clinic Staff after opening the article. It rejects an explicit no-byline answer, contradictory credits, missing/wrong fields, and unrelated story/search-only navigation. The rubric states rules only, with no answer literal.
 - [x] Each `test_verifiers.py` covers no-op, correct-answer/no-navigation shortcut, wrong-answer, unchanged-state self-report for stateful tasks, and passing fixtures. New tests enforce schema, indexed paths, rubric synchronization, and practical numeric/literal no-leak checks, allowing inputs already stated in the question and guarding the audited outcome leaks. These are synthetic fixtures, not browser trajectories.
 
 ```bash
@@ -274,8 +278,9 @@ The current harness does not authenticate screenshots, task identity, completion
 - [x] Fandom recent-changes heading states the 200-row page limit.
 - [x] Apartments.com `/student-housing` renders all 42 buildings and hides the “+”.
 - [x] Eventbrite `/region/<slug>` prints each city's full upcoming count.
+- [x] Mayo Clinic--10 now grades the displayed body credit rather than the earlier incorrect absence claim, with synchronized rules-only rubrics and regression cases. The task remains returned for its generic-credit knowledge shortcut.
 
-No port re-slot or `.assets-revision` change is included. The following rubric edits remove answer-bearing wording without changing task questions or grading logic:
+No port re-slot or `.assets-revision` change is included. The following rubric edits remove answer-bearing wording without changing task questions; Mayo Clinic--10 also corrects grading logic to match the displayed body credit:
 
 | Task | Old wording | Replacement rule |
 | --- | --- | --- |
@@ -283,14 +288,14 @@ No port re-slot or `.assets-revision` change is included. The following rubric e
 | Eventbrite--13 | “Report the $0.00 total” | Report the persisted receipt total and order code; require a matching stored order. |
 | Fandom--10 | “edit count of 0” / “claim of 0 edits” | Report the displayed edit count and require the new account. |
 | Mayo Clinic--5 | “Another Jacksonville cardiologist” | “A Jacksonville doctor”; do not supply the requested specialty. |
-| Mayo Clinic--10 | “The page does not show an author byline” / “no author is displayed” | Report whether a byline is present and reproduce it if present. |
+| Mayo Clinic--10 | Incorrect absence claim, later weakened to conditional byline reporting | Open the article and report its displayed category and author credit, including the body credit; reject omitted fields, invented credits, or denial of the displayed credit. Corrected on 2026-09-30. |
 | SmartAsset--9 | “An on-track claim fails.” | Reject a conclusion that contradicts the displayed result. |
 
 ## Required before upstream merge
 
 - [ ] Merge HF discussion #144 (or a reviewed replacement) while preserving unrelated assets, confirm its actual merged status, pin an immutable merged revision containing all five archives, and fetch clean. Do not use open-PR commit `46cb97f` as a merged pin. Resolve the recorded media-license/provenance gaps before publishing the archive.
 - [ ] Have #239 adopt the offered `Lxr-max:fix/pr239-returned-tasks` follow-up, or equivalent contributor fixes: merge current main, re-slot the five sites to **40112–40116** in the stated order, and align both registries, `EXPOSE`, task URLs, and only the README Websites table.
-- [ ] Re-anchor **Apartments.com--2, --3, --7, --9; Fandom--0, --3, --9; Mayo Clinic--0, --10**. Remove listing-card answers or require page-specific details; replace knowledge shortcuts and the missing-byline question.
-- [ ] Fix Eventbrite's 768px homepage overflow and recheck it in Chromium.
+- [ ] Re-anchor **Apartments.com--2, --3, --7, --9; Fandom--0, --3, --9; Mayo Clinic--0, --10**. Remove listing-card answers or require page-specific details; replace knowledge shortcuts, including Mayo's generic “Mayo Clinic Staff” credit in --10.
+- [ ] Fix Eventbrite's 768px navigation overflow on the homepage, search, and event pages, reproduced on 2026-09-30, and recheck those pages in Chromium.
 - [ ] After contributor adoption, refresh #251's ports and the nine tasks' verifiers/rubrics; repeat task review and the grading suites. Integrate the original contribution before the reviewer continuation, preserving ancestry.
 - [ ] Keep the reviewed archives rather than rebuilding them from the non-reproducing seed scripts. Validate the combined code and freshly fetched merged assets with the full-image build, all-site HTTP/health checks, and byte-identical reset checks before upstream merge.
