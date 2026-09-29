@@ -101,6 +101,8 @@ All registered websites and their default ports, in registration order from left
 | OhioMeansJobs | 40090 | Ohio.gov | 40091 | NFL | 40092 |
 | MTA | 40093 | Public Storage | 40094 | Raising Cane’s | 40095 |
 | RE/MAX | 40096 | Parkers | 40097 | Ryanair | 40098 |
+| Apartments.com | 40099 | Eventbrite | 40100 | Fandom | 40101 |
+| Mayo Clinic | 40102 | SmartAsset | 40103 | | |
 
 ## 🤝 Contribute
 
