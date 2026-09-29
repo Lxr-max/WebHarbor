@@ -88,8 +88,8 @@ class MayoRepairTests(unittest.TestCase):
             self.assertEqual(task["web"], "http://localhost:40115/")
 
         checks = [
-            "/search?q=type+2+diabetes",
-            "/diseases-conditions/diabetes-type-2",
+            "/clinical-trials?q=diabetes&status=Recruiting",
+            "/clinical-trials?q=spinal+cord+stimulation&status=Recruiting",
             "/diseases-conditions/atrial-fibrillation",
             "/symptom-checker?region=chest&symptom=chest-pain&age_group=adult&duration=acute",
             "/symptom-checker?region=general&symptom=fatigue&age_group=adult&duration=chronic",
@@ -99,7 +99,9 @@ class MayoRepairTests(unittest.TestCase):
             "/clinical-trials?q=lung+cancer&phase=Phase+3&status=Recruiting",
             "/drugs-supplements/metformin",
             "/tests-procedures/cabg",
-            "/healthy-lifestyle/mediterranean-diet-overview",
+            "/find-a-doctor?specialty=family-medicine&location=Jacksonville",
+            "/biographies/megan-hayes-family-medicine-106",
+            "/biographies/aubrey-yamamoto-family-medicine-16",
             "/find-a-doctor?specialty=neurology&location=Jacksonville",
             "/diseases-conditions/multiple-sclerosis",
             "/clinical-trials?phase=Phase+2&status=Recruiting&location=Rochester",
@@ -142,6 +144,64 @@ class MayoRepairTests(unittest.TestCase):
                 "alice_saved": 5,
             },
         )
+
+    def test_preventive_care_task_requires_record_specific_doctor_details(self):
+        target_slug = "megan-hayes-family-medicine-106"
+        distractor_slug = "aubrey-yamamoto-family-medicine-16"
+        with sqlite3.connect(self.database.as_uri() + "?mode=ro", uri=True) as connection:
+            records = {
+                slug: (name, education)
+                for slug, name, education in connection.execute(
+                    "SELECT slug, name, education FROM doctor "
+                    "WHERE dept_slug='family-medicine' AND locations='Jacksonville' "
+                    "AND focus_areas LIKE '%Preventive medicine%' AND slug IN (?, ?)",
+                    (target_slug, distractor_slug),
+                )
+            }
+        self.assertEqual(set(records), {target_slug, distractor_slug})
+        training = {
+            slug: [
+                line for line in education.splitlines()
+                if line.startswith(("Residency - ", "Fellowship - "))
+            ]
+            for slug, (_, education) in records.items()
+        }
+        for slug in records:
+            self.assertEqual(len(training[slug]), 2)
+        for target_line, distractor_line in zip(
+            training[target_slug], training[distractor_slug]
+        ):
+            self.assertNotEqual(target_line, distractor_line)
+
+        home = self.client.get("/")
+        self.assertEqual(home.status_code, 200)
+        self.assertIn(b'href="/find-a-doctor"', home.data)
+        directory = self.client.get("/find-a-doctor")
+        self.assertEqual(directory.status_code, 200)
+        self.assertIn(b'action="/find-a-doctor"', directory.data)
+        self.assertIn(b'value="family-medicine"', directory.data)
+        self.assertIn(b'value="Jacksonville"', directory.data)
+        listing = self.client.get(
+            "/find-a-doctor?specialty=family-medicine&location=Jacksonville"
+        )
+        self.assertEqual(listing.status_code, 200)
+        self.assertIn(b"Preventive medicine", listing.data)
+        for slug, (name, _) in records.items():
+            detail_path = f"/biographies/{slug}"
+            self.assertIn(f'href="{detail_path}"'.encode(), listing.data)
+            self.assertIn(name.encode(), listing.data)
+            search = self.client.get("/search", query_string={"q": name.split(",")[0]})
+            self.assertEqual(search.status_code, 200)
+            self.assertIn(f'href="{detail_path}"'.encode(), search.data)
+            detail = self.client.get(detail_path)
+            self.assertEqual(detail.status_code, 200)
+            self.assertIn(b"Education and training", detail.data)
+            for line in training[slug]:
+                self.assertIn(f"<li>{line}</li>".encode(), detail.data)
+                value = line.split(" - ", 1)[1].encode()
+                self.assertNotIn(value, directory.data)
+                self.assertNotIn(value, listing.data)
+                self.assertNotIn(value, search.data)
 
     def test_guest_auth_logout_and_protected_write(self):
         response = self.client.get("/")

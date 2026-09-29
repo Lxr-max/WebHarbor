@@ -491,8 +491,14 @@ class ApartmentsRegressionTests(unittest.TestCase):
                     m.Unit.rent <= 3500,
                     m.Unit.is_available.is_(True),
                 ).distinct().count(),
-                "Apartments.com--2": m.Building.query.filter_by(
-                    name="The Boulevard", address="6081 S 1st St", city="Austin"
+                "Apartments.com--2": m.db.session.query(m.Unit.id).join(
+                    m.Building, m.Building.id == m.Unit.building_id
+                ).filter(
+                    m.Building.name == "The Boulevard",
+                    m.Building.address == "6081 S 1st St",
+                    m.Building.city == "Austin",
+                    m.Unit.beds == 1,
+                    m.Unit.is_available.is_(True),
                 ).count(),
                 "Apartments.com--3": m.Building.query.filter(
                     m.or_(

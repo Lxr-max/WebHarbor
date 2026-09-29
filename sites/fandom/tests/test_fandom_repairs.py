@@ -345,14 +345,17 @@ class FandomRepairTests(unittest.TestCase):
 
         targets = [
             "/wiki/mcu/Tony_Stark",
+            "/wiki/mcu/Tony_Stark/history",
             "/wiki/mcu/Thanos",
             "/wiki/genshin/Zhongli",
             "/wiki/starwars/Mace_Windu",
+            "/wiki/starwars/Mace_Windu/history",
             "/wiki/mcu/Category:Guardians_of_the_Galaxy",
             "/wiki/genshin/Category:Five-Star_Characters",
             "/wiki/starwars/Special:RecentChanges?hide_bot=1",
             "/wiki/genshin/Hu_Tao/history",
             "/wiki/starwars/Tatooine",
+            "/wiki/starwars/Tatooine/talk",
             "/wiki/mcu/Special:WhatLinksHere/Tony_Stark",
             "/wiki/mcu/Forum",
             "/wiki/genshin/Special:ListFiles?q=Mondstadt",
@@ -360,6 +363,32 @@ class FandomRepairTests(unittest.TestCase):
         for target in targets:
             with self.subTest(target=target):
                 self.assertEqual(self.client.get(target).status_code, 200)
+
+        for wiki_slug, article_slug in (
+            ("mcu", "Tony_Stark"),
+            ("starwars", "Mace_Windu"),
+        ):
+            with self.subTest(wiki=wiki_slug, article=article_slug):
+                with self.app.app_context():
+                    wiki = self.module.Wiki.query.filter_by(slug=wiki_slug).one()
+                    article = self.module.Article.query.filter_by(
+                        wiki_id=wiki.id, slug=article_slug
+                    ).one()
+                    revisions = [
+                        self.module.Revision.query.filter_by(
+                            article_id=article.id, summary=summary
+                        ).one()
+                        for summary in (
+                            "Expanded biography section",
+                            "Added infobox details",
+                        )
+                    ]
+                    old_id, new_id = [revision.id for revision in revisions]
+                response = self.client.get(
+                    f"/wiki/{wiki_slug}/{article_slug}/diff/{old_id}/{new_id}"
+                )
+                self.assertEqual(response.status_code, 200)
+                self.assertIn('class="diff-insert"', response.get_data(as_text=True))
 
     def test_asset_manifest_and_references(self):
         manifest = json.loads((self.site / "asset_manifest.json").read_text())
