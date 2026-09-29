@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}{{ co.name }} Jobs (Now Hiring) - ZipRecruiter{% endblock %}
+{% block body %}
+<div class="co-layout">
+  <section class="co-main">
+    <header class="co-header">
+      {% if co.logo_url() %}<img class="co-logo-lg" src="{{ co.logo_url() }}" alt="{{ co.name }} logo">{% endif %}
+      <h1>{{ co.name|upper }} Jobs</h1>
+      <p class="co-sub">Now hiring — open roles from {{ co.name }}</p>
+    </header>
+    <section class="detail-section about-co">
+      <h2>About {{ co.name }}</h2>
+      {% if co.about %}<div class="about-own">{{ co.about|safe }}</div>{% endif %}
+      {% if co.sourced_about %}
+      <div class="about-sourced">
+        <p class="sourcing">Sourced by ZipRecruiter</p>
+        {{ co.sourced_about|safe }}
+      </div>
+      {% endif %}
+      <dl class="co-facts">
+        {% if co.industry %}<dt>Industry</dt><dd>{{ co.industry }}</dd>{% endif %}
+        {% if co.size %}<dt>Company size</dt><dd>{{ co.size|replace(' Employees', ' employees') }}</dd>{% endif %}
+        {% if co.hq_city %}<dt>Headquarters location</dt><dd>{{ co.hq_city }}{% if co.hq_state %}, {{ co.hq_state }}{% endif %}</dd>{% endif %}
+        {% if co.founded %}<dt>Year founded</dt><dd>{{ co.founded }}</dd>{% endif %}
+        {% if co.website %}<dt>Website</dt><dd>{{ co.website }}</dd>{% endif %}
+      </dl>
+      {% if co.rating_value %}
+      <div class="breakroom">
+        <p class="score">{{ co.rating_value }}</p>
+        <p class="basis">Based on {{ co.rating_count }} frontline employees who took The Breakroom Quiz</p>
+        <ul class="highlights">{% for h in co.rating_highlights_list() %}<li>{{ h }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      {% if co.findings_list() %}
+      <div class="perks">
+        <h3>What {{ co.name }} employees say</h3>
+        <ul>{% for f in co.findings_list() %}<li><strong>{{ f.short }}</strong> — {{ f.detail }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+    </section>
+
+    <section class="detail-section">
+      <h2>Jobs at {{ co.name }}</h2>
+      <p class="snapshot">{{ jobs|length }} open roles from {{ co.name }} in this snapshot</p>
+      {% if locations %}
+      <p class="snapshot">Jobs by location:
+        {% for (city, state), n in locations %}
+        <a href="{{ url_for('company_jobs', company=co.slug, location='-in-' + city.replace(' ', '-') + ',' + state) }}">{{ city }}, {{ state }} ({{ n }})</a>{% if not loop.last %} · {% endif %}
+        {% endfor %}
+      </p>
+      {% endif %}
+      <ol class="job-list">
+        {% for job in jobs %}
+        <li class="job-card">
+          <article>
+            <h3 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h3>
+            <p class="job-location">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+            {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+            <p class="card-actions">
+              <span>{{ job.employment_display() }}</span>
+              <span class="posted">{{ job.posted_display() }}</span>
+            </p>
+          </article>
+        </li>
+        {% endfor %}
+        {% if not jobs %}<li>No open {{ co.name }} jobs in this snapshot.</li>{% endif %}
+      </ol>
+    </section>
+  </section>
+</div>
+{% endblock %}

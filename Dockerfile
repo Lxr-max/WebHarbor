@@ -393,8 +393,16 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/student_com && \
     python3 /opt/check_asset_inventory.py /opt/WebSyn/trip_com && \
     (cd /opt/WebSyn/trip_com && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/trip_com.db instance_seed/trip_com.db && rm -rf instance __pycache__)
 
+
+# ZipRecruiter validates its downloaded company logos, blog media and brand
+# assets against the tracked inventory and rebuilds its deterministic SQLite
+# seed from tracked upstream snapshot data (captured 2026-09-29; see
+# sites/ziprecruiter/provenance.json).
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/ziprecruiter && \
+    (cd /opt/WebSyn/ziprecruiter && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/ziprecruiter.db instance_seed/ziprecruiter.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40111
+EXPOSE 8101 40000-40173
 
 CMD ["/opt/websyn_start.sh"]

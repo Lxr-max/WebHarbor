@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}{{ job.title }} Job in {{ job.city }}, {{ job.state }} - ZipRecruiter{% endblock %}
+{% block body %}
+<div class="detail-layout">
+  <section class="detail-main">
+    <header class="detail-header">
+      <h1>{{ job.title }}</h1>
+      <p class="detail-location">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+      <p class="detail-co">
+        <a href="{{ url_for('company_profile', company=job.company.slug) }}">{{ job.company.name }}</a>
+        {% if job.company.industry %}<span> • {{ job.company.industry }}</span>{% endif %}
+        {% if job.company.size %}<span> • {{ job.company.size|replace(' Employees', ' employees') }}</span>{% endif %}
+      </p>
+      {% if job.company.logo_url() %}<img class="co-logo-lg" src="{{ job.company.logo_url() }}" alt="{{ job.company.name }} logo">{% endif %}
+      <p class="detail-meta">
+        {% if job.salary_text %}<span class="salary">{{ job.salary_text }}</span>{% endif %}
+        <span>{{ job.employment_display() }}</span>
+        <span>{{ job.posted_display() }}</span>
+      </p>
+      <p class="detail-badges">{% for b in job.badge_list() %}<span class="badge">{{ b }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+      <div class="detail-actions">
+        {% if current_user.is_authenticated %}
+          {% if applied %}
+            <a class="btn-ghost" href="/jobseeker/applications">Applied ✓ — view my applications</a>
+          {% else %}
+          <form method="post" action="/apply/{{ job.jid }}" class="inline-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="next" value="{{ job.url() }}">
+            <button type="submit" class="btn-green big">1-Click Apply</button>
+          </form>
+          {% endif %}
+          <form method="post" action="/save/{{ job.jid }}" class="inline-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="next" value="{{ job.url() }}">
+            <button type="submit" class="btn-ghost">{{ 'Saved ✓ — unsave' if saved else 'Save job for later' }}</button>
+          </form>
+        {% else %}
+          <a class="btn-green big" href="/authn/login?realm=candidates&next_url={{ job.url()|urlencode }}">1-Click Apply</a>
+          <span class="login-hint">Log in or create a free account to apply.</span>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="detail-section">
+      <h2>Job description</h2>
+      <div class="job-description">{{ job.description_html|rich_text }}</div>
+    </section>
+
+    {% if faqs %}
+    <section class="detail-section faq">
+      <h2>Career questions &amp; answers for {{ job.title }}</h2>
+      {% for faq in faqs %}
+      <details>
+        <summary>{{ faq.question }}</summary>
+        <div class="faq-answer">{{ faq.answer_html|safe }}</div>
+      </details>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="detail-section about-co">
+      <h2>About {{ job.company.name }}</h2>
+      {% if job.company.about %}
+      <div class="about-own">{{ job.company.about|safe }}</div>
+      {% endif %}
+      {% if job.company.sourced_about %}
+      <div class="about-sourced">
+        <p class="sourcing">Sourced by ZipRecruiter</p>
+        {{ job.company.sourced_about|safe }}
+      </div>
+      {% endif %}
+      <dl class="co-facts">
+        {% if job.company.industry %}<dt>Industry</dt><dd>{{ job.company.industry }}</dd>{% endif %}
+        {% if job.company.size %}<dt>Company size</dt><dd>{{ job.company.size|replace(' Employees', ' employees') }}</dd>{% endif %}
+        {% if job.company.hq_city %}<dt>Headquarters location</dt><dd>{{ job.company.hq_city }}{% if job.company.hq_state %}, {{ job.company.hq_state }}{% endif %}</dd>{% endif %}
+        {% if job.company.founded %}<dt>Year founded</dt><dd>{{ job.company.founded }}</dd>{% endif %}
+        {% if job.company.website %}<dt>Website</dt><dd>{{ job.company.website }}</dd>{% endif %}
+      </dl>
+      {% if job.company.rating_value %}
+      <div class="breakroom">
+        <p class="rating">{{ job.company.name }} rating — Powered by real frontline workers</p>
+        <p class="score">{{ job.company.rating_value }}</p>
+        <p class="basis">Based on {{ job.company.rating_count }} frontline employees who took The Breakroom Quiz</p>
+        <ul class="highlights">
+          {% for h in job.company.rating_highlights_list() %}<li>{{ h }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% if job.company.findings_list() %}
+      <div class="perks">
+        <h3>What {{ job.company.name }} employees say</h3>
+        <ul>{% for f in job.company.findings_list()[:5] %}<li><strong>{{ f.short }}</strong> — {{ f.detail }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      <a class="btn-outline" href="{{ url_for('company_profile', company=job.company.slug) }}">View All {{ job.company.name }} Jobs</a>
+    </section>
+  </section>
+
+  <aside class="related">
+    <h2>Related jobs</h2>
+    {% for r in related %}
+    <div class="related-card">
+      <h3><a href="{{ r.url() }}">{{ r.title }}</a></h3>
+      <p class="rel-co">{{ r.company.name }}</p>
+      <p class="rel-loc">{{ r.city }}, {{ r.state }}{% if r.remote_display() %} • {{ r.remote_display() }}{% endif %}</p>
+      {% if r.salary_text %}<p class="rel-sal">{{ r.salary_text }}</p>{% endif %}
+    </div>
+    {% endfor %}
+    {% if not related %}<p>No other {{ job.title }} jobs in this snapshot.</p>{% endif %}
+  </aside>
+</div>
+{% endblock %}
