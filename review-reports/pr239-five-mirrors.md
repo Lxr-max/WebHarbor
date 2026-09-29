@@ -2,7 +2,7 @@
 
 Review of [#239](https://github.com/aiming-lab/WebHarbor/pull/239), hqhq1025's five mirrors and 90 tasks at contributor commit `7920869974bd82573713d9faefefb733546233d5`. [#251](https://github.com/aiming-lab/WebHarbor/pull/251), `Lxr-max/WebHarbor:review/pr239`, preserves that commit and adds the reviewer continuation. This report combines the earlier Chromium, scoped-Docker, and Hugging Face evidence with the 2026-09-30 post-edit Linux checks, Eventbrite Chromium re-check, and Mayo byline correction recorded below. Docker was not re-run on 2026-09-30.
 
-**Verdict: do not merge #239 yet. Functional depth passes; upstream ports, merged assets, nine returned tasks, and Eventbrite's 768px layout remain blockers. #251 does not re-slot ports or change `.assets-revision`.**
+**Verdict: do not merge #239 yet. Functional depth passes; merged assets and adoption of the pushed port/task/Eventbrite fixes remain blockers. Those fixes are measured on the separate contributor follow-up, not incorporated in #251. #251 does not re-slot ports or change `.assets-revision`.**
 
 ## Mechanical checks: FAIL
 
@@ -10,8 +10,8 @@ Local checks pass on this branch's `1c1dc23f` base; the asset pin and upstream p
 
 - [x] 2026-09-30 post-edit Linux pass after `a8f77102`, Python 3.12, with the `refs/pr/144` archives extracted: `py_compile` of all five `app.py` files passed.
 - [x] That pass: `python scripts/check_site_registry.py` reported **104 sites consistent**, `EXPOSE (8101 40000-40103)`. This establishes branch-local consistency, not compatibility with current upstream main.
-- [x] That pass: `pytest sites/<site>/verify` and `pytest sites/<site>/tests` passed as listed below.
-- [x] Those Linux verifier suites include the schema/no-leak tests: **18 tests and 467 subtests passed** across all five sites, before the Mayo byline correction below.
+- [x] The Linux rerun after `a561164e` on 2026-09-30 passed as listed below; the other four verifier suites and all five site-test suites were unchanged.
+- [x] Those Linux verifier suites include the schema/no-leak tests: **19 tests and 478 subtests passed** across all five sites, including the Mayo byline correction.
 - [ ] Full-image build and all-site HTTP sweep. The official `./scripts/build.sh` was not run in the earlier pass: only these five seeds were present, and the branch pin `5d2b17fa21067990370f8e7fc27123a1c24d7802` did not contain their bundles. No full-image result is claimed here.
 - [ ] Adopt upstream-compatible ports and a merged asset revision containing all five archives.
 
@@ -20,10 +20,10 @@ Local checks pass on this branch's `1c1dc23f` base; the asset pin and upstream p
 | apartments_com | 3 / 83 passed | 13 passed |
 | eventbrite | 3 / 96 passed | 16 passed |
 | fandom | 3 / 94 passed | 13 passed |
-| mayo_clinic | 3 / 101 passed | 11 passed |
+| mayo_clinic | 4 / 112 passed | 11 passed |
 | smartasset | 6 / 93 passed | 21 passed |
 
-After the 2026-09-30 Mayo byline correction, the local Windows / Python 3.12.13 run (`PYTHONUTF8=1`) of `python -m pytest -q -p no:cacheprovider sites/mayo_clinic/verify` passed **4 tests and 112 subtests**. A Linux rerun of that correction is pending; the table records the supplied Linux results before it.
+The table records the completed Linux rerun after `a561164e`, including Mayo's **4 tests / 112 subtests**. Its 11 site tests are distinct from the follow-up branch's 12 below.
 
 ### Registry against upstream main
 
@@ -37,7 +37,17 @@ As of 2026-09-30, upstream main is `90c91a69`: **112 registered sites**, ending 
 | Mayo Clinic | `mayo_clinic` | 102 / 40102 | SoundCloud | 115 / 40115 |
 | SmartAsset | `smartasset` | 103 / 40103 | Speedo | 116 / 40116 |
 
-The offered contributor follow-up branch `Lxr-max/WebHarbor:fix/pr239-returned-tasks` merges main, re-slots these sites to 40112–40116, re-anchors the nine returned tasks, and fixes Eventbrite's 768px overflow. It is **not part of #251**. Once #239 adopts it, this review branch will be refreshed for the ports and the nine tasks' verifiers/rubrics.
+### Pushed contributor follow-up (2026-09-30)
+
+[`Lxr-max/WebHarbor:fix/pr239-returned-tasks`](https://github.com/Lxr-max/WebHarbor/tree/fix/pr239-returned-tasks) is pushed at `9bdba5bf41c569a3d11ec7df5a47fd134f72bc24`. It descends from #239's head `79208699` and can be fast-forwarded onto hqhq1025's `feat/reserved-five-mirrors-20260927`. It is **not part of #251**.
+
+- `c1e78b09`: merge main `90c91a69` and re-slot to **40112–40116**, updating both registries, `EXPOSE 8101 40000-40116`, only the README Websites table, task URLs, and site-test port assertions.
+- `84c9907e`: move Eventbrite's compact-header breakpoint from **760px to 900px** and let the add-to-cart form wrap.
+- `9bdba5bf`: re-anchor the nine tasks on detail pages: Fandom revision diffs (--0/--3) and Tatooine Talk (--9); Mayo simulated-trial eligibility (--0) and a Family Medicine profile's education (--10); Apartments unit (--2), parking/lease (--3), Sound Score/pet rent (--7), and pet-policy details (--9).
+
+Linux checks on `9bdba5bf`: `py_compile` passed; `check_site_registry` reported **117 sites consistent**, `EXPOSE (8101 40000-40116)`; site tests passed **13 / 16 / 13 / 12 / 21** in Apartments.com/Eventbrite/Fandom/Mayo Clinic/SmartAsset order. The Eventbrite fix was **measured on this follow-up branch** in headless Chromium: homepage, `/search?q=music`, and an event page had **no page-level overflow at 390, 768, 800, 834, 900, 901, 960, 1024, and 1280px**.
+
+`.assets-revision` and `assets-manifest.json` are byte-identical to main `90c91a69`; this branch does not complete asset integration. Once #239 adopts it, the reviewer will refresh #251 for the ports and the nine tasks' verifiers/rubrics.
 
 ### Earlier scoped-Docker evidence
 
@@ -90,6 +100,7 @@ Earlier pass: Playwright Chromium at desktop 1280 and 768 against the scoped con
 - [x] Cards are CSS backgrounds, not `<img>`. Playwright counted 53 `.eb-card-img` nodes, all with a real `url(...)`. A cropped card for “The Great Gatsby Jazz Night” shows a photograph, a Music badge, and “From $27.00”. `GET /static/images/evt_music_011.jpg` returned `image/jpeg`, 83968 bytes.
 - [ ] **768px homepage overflows horizontally** (`scrollWidth` greater than the viewport). The location list and header wrap into a broken multi-column strip. That fails the responsive check.
 - [ ] **2026-09-30 re-check (Playwright, Linux headless Chromium):** the homepage, `/search?q=music`, and an event page on this branch all reproduce the 768px overflow: document `scrollWidth=831` versus `clientWidth=768`, with `.eb-nav-links` extending to `x=831`. At 390px and 1280px, none of those pages overflowed.
+- [x] **Follow-up fix measured on `fix/pr239-returned-tasks` at `9bdba5bf`:** all three pages have no page-level overflow at the nine widths listed above. Adoption into #239 remains required; the failure above describes the review branch, not the follow-up.
 
 ### Fandom — PASS
 
@@ -128,6 +139,7 @@ Search spot checks: Apartments “The Boulevard Austin” (page contains “Walk
 
 
 - [x] Auth, registration, search, and the stateful actions in the table were exercised in the earlier pass.
+- [ ] Mayo functional/content nit (2026-09-30): all **61 Healthy Lifestyle article bodies** use the same boilerplate apart from title/summary. This is a content-depth limitation, not a reversal of the functional verdict.
 - [ ] Recorded limits: no full Mayo appointment booking in Chromium; Eventbrite and Mayo lack CSRF on state-changing POSTs. The earlier code review found no user-controlled SQL string building; Apartments, Eventbrite, and Mayo rejected off-site `next` redirects. Development secrets are hardcoded. Apartments, Fandom, and SmartAsset use `CSRFProtect`. These security limits were accepted for the offline benchmark, not as production guarantees.
 
 ## Task quality: FAIL
@@ -293,9 +305,7 @@ No port re-slot or `.assets-revision` change is included. The following rubric e
 
 ## Required before upstream merge
 
-- [ ] Merge HF discussion #144 (or a reviewed replacement) while preserving unrelated assets, confirm its actual merged status, pin an immutable merged revision containing all five archives, and fetch clean. Do not use open-PR commit `46cb97f` as a merged pin. Resolve the recorded media-license/provenance gaps before publishing the archive.
-- [ ] Have #239 adopt the offered `Lxr-max:fix/pr239-returned-tasks` follow-up, or equivalent contributor fixes: merge current main, re-slot the five sites to **40112–40116** in the stated order, and align both registries, `EXPOSE`, task URLs, and only the README Websites table.
-- [ ] Re-anchor **Apartments.com--2, --3, --7, --9; Fandom--0, --3, --9; Mayo Clinic--0, --10**. Remove listing-card answers or require page-specific details; replace knowledge shortcuts, including Mayo's generic “Mayo Clinic Staff” credit in --10.
-- [ ] Fix Eventbrite's 768px navigation overflow on the homepage, search, and event pages, reproduced on 2026-09-30, and recheck those pages in Chromium.
+- [ ] Merge HF discussion #144 (or a reviewed replacement) while preserving unrelated assets, confirm its actual merged status, set `.assets-revision` to the immutable merged commit, and add the five archives to `assets-manifest.json` with per-archive `bytes` and `sha256`; regenerate `managed_tree_sha256` and the shared `revision` as in main, then fetch clean. Do not use open-PR commit `46cb97f` as a merged pin. Resolve the recorded media-license/provenance gaps before publishing the archive.
+- [ ] Have #239 adopt the pushed `Lxr-max:fix/pr239-returned-tasks` follow-up at `9bdba5bf41c569a3d11ec7df5a47fd134f72bc24`, or equivalent contributor fixes, for the **40112–40116** ports, nine re-anchored questions, and measured Eventbrite responsive fix.
 - [ ] After contributor adoption, refresh #251's ports and the nine tasks' verifiers/rubrics; repeat task review and the grading suites. Integrate the original contribution before the reviewer continuation, preserving ancestry.
 - [ ] Keep the reviewed archives rather than rebuilding them from the non-reproducing seed scripts. Validate the combined code and freshly fetched merged assets with the full-image build, all-site HTTP/health checks, and byte-identical reset checks before upstream merge.
