@@ -389,7 +389,7 @@ button { font-family: inherit; cursor: pointer; }
 .eb-promo-form label { grid-column: 1 / -1; font-size: 14px; font-weight: 600; }
 .eb-promo-form input { min-width: 0; padding: 10px 12px; border: 1px solid var(--eb-border); }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .eb-nav { position: static; padding: 10px 14px; flex-wrap: wrap; }
   .eb-nav-search {
     order: 3;
@@ -414,6 +414,7 @@ button { font-family: inherit; cursor: pointer; }
   .eb-search-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .eb-facets { overflow: hidden; }
   .eb-tier-card > div { align-items: flex-start !important; flex-direction: column; gap: 10px; }
+  .eb-cart-form { flex-wrap: wrap; }
   .eb-steps { overflow-x: auto; }
   .eb-step { flex: 0 0 auto; }
   .eb-table { display: block; overflow-x: auto; }
