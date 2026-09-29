@@ -203,7 +203,7 @@ TASKS = {
         "nav": [r"/user/TestEditor99"],
         "phrases": ["TestEditor99"],
         "state": state_register,
-        "rubric": "FACT CHECKPOINTS: Register TestEditor99 with testeditor99@example.com, confirm the account page shows an edit count of 0, and sign out. A claim of 0 edits without that account fails.",
+        "rubric": "FACT CHECKPOINTS: Register TestEditor99 with testeditor99@example.com, report the edit count displayed on the account page, and sign out. A count that differs from the account page or a claim without the new account fails.",
     },
     11: {
         "task_id": "Fandom--11",

@@ -400,7 +400,7 @@ TASKS = {
         "task_id": "SmartAsset--9",
         "nav": [r"/calculators/retirement"],
         "pred": retirement,
-        "rubric": "FACT CHECKPOINTS: Run the retirement calculator with the stated ages, income, savings, contribution, return, inflation, and replacement rate, leaving other form fields at their displayed defaults. Report the projected nest egg and whether the result says the plan is on track. An on-track claim fails.",
+        "rubric": "FACT CHECKPOINTS: Run the retirement calculator with the stated ages, income, savings, contribution, return, inflation, and replacement rate, leaving other form fields at their displayed defaults. Report the projected nest egg and whether the result says the plan is on track. A conclusion that contradicts the displayed result fails.",
     },
     10: {
         "task_id": "SmartAsset--10",

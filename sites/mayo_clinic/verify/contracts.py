@@ -132,7 +132,7 @@ TASKS = {
         "task_id": "Mayo Clinic--5",
         "nav": [r"/find-a-doctor\?(?=[^#\s]*specialty=cardiology)(?=[^#\s]*location=Jacksonville)(?=[^#\s]*language=Spanish)"],
         "phrases": ["Aaron Bell", "Cardiologist"],
-        "rubric": "FACT CHECKPOINTS: Find the Cardiovascular Medicine doctor in Jacksonville who speaks Spanish and report that doctor's full name and listed specialty. Another Jacksonville cardiologist who does not speak Spanish fails.",
+        "rubric": "FACT CHECKPOINTS: Find the Cardiovascular Medicine doctor in Jacksonville who speaks Spanish and report that doctor's full name and listed specialty. A Jacksonville doctor who does not speak Spanish fails.",
     },
     6: {
         "task_id": "Mayo Clinic--6",
@@ -162,7 +162,7 @@ TASKS = {
         "task_id": "Mayo Clinic--10",
         "nav": [r"/healthy-lifestyle/.*/mediterranean-diet-overview|/patient-stories/|mediterranean-diet-overview"],
         "pred": no_byline,
-        "rubric": "FACT CHECKPOINTS: Open Mediterranean Diet: A Heart-Healthy Eating Plan. Report its category. The page does not show an author byline; say that no author is displayed rather than inventing one.",
+        "rubric": "FACT CHECKPOINTS: Open Mediterranean Diet: A Heart-Healthy Eating Plan. Report the displayed category and whether the page provides an author byline; if present, report it exactly. Inventing a byline or contradicting the page fails.",
     },
     11: {
         "task_id": "Mayo Clinic--11",

@@ -273,7 +273,7 @@ TASKS = {
         "task_id": "Eventbrite--6",
         "nav": [r"fillmore-sold-out-night-sf-2026"],
         "phrases": ["The Fillmore", "General Admission (SOLD OUT)", "VIP Balcony (SOLD OUT)"],
-        "rubric": "FACT CHECKPOINTS: Identify the sold-out Music event in San Francisco and report its venue and every ticket tier shown as sold out. A different venue, or only one tier when both are sold out, fails.",
+        "rubric": "FACT CHECKPOINTS: Identify the sold-out Music event in San Francisco and report its venue and every ticket tier shown as sold out. A different venue or an incomplete list of sold-out tiers fails.",
     },
     7: {
         "task_id": "Eventbrite--7",
@@ -323,7 +323,7 @@ TASKS = {
         "nav": [r"rnb-rooftop-free-rsvp-brooklyn-2026", r"/checkout/"],
         "phrases": ["Maya Lee", "No nuts"],
         "state": state_free_order,
-        "rubric": "FACT CHECKPOINTS: As alice.j@test.com, buy 1 Free RSVP for R&B vs Slow Jams Rooftop for Maya Lee with dietary note No nuts. Report the $0.00 total and the stored order code. A paid tier or a missing order row fails.",
+        "rubric": "FACT CHECKPOINTS: As alice.j@test.com, buy the requested Free RSVP ticket for R&B vs Slow Jams Rooftop for Maya Lee with dietary note No nuts. Report the persisted receipt total and order code. A paid tier, a missing order row, or a total that differs from the receipt fails.",
     },
     14: {
         "task_id": "Eventbrite--14",

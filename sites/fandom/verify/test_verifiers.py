@@ -1,9 +1,12 @@
 """No-op, shortcut, wrong-answer, state-mismatch, and pass cases."""
 
+import json
+import re
 import shutil
 import sqlite3
 import tempfile
 import unittest
+from decimal import Decimal
 from pathlib import Path
 
 from verify_lib import TASKS, evaluate
@@ -95,7 +98,68 @@ def mutate(index, path):
     conn.close()
 
 
+def contract_literals(value):
+    if isinstance(value, (str, int, float)) and not isinstance(value, bool):
+        yield str(value)
+    elif isinstance(value, (tuple, list, set, frozenset)):
+        for item in value:
+            yield from contract_literals(item)
+    elif callable(value):
+        yield from contract_literals(value.__code__.co_consts)
+
+
+def literal_words(text):
+    return " " + " ".join(re.findall(r"\w+", text.casefold().replace("_", " "))) + " "
+
+
+def numeric_tokens(text):
+    return {
+        Decimal(token.replace(",", ""))
+        for token in re.findall(r"(?<!\w)\d+(?:,\d{3})*(?:\.\d+)?(?!\w)", text)
+    }
+
+
 class FandomVerifierTests(unittest.TestCase):
+    def test_task_schema_and_rules_only_rubrics(self):
+        site_dir = SEED.parents[1]
+        repo_root = site_dir.parents[1]
+        rows = [
+            json.loads(line)
+            for line in (site_dir / "tasks.jsonl").read_text(encoding="utf-8").splitlines()
+        ]
+        self.assertEqual([row["id"] for row in rows], [spec["task_id"] for spec in TASKS.values()])
+        for index, row in enumerate(rows):
+            with self.subTest(task=index, case="schema-no-leak"):
+                spec = TASKS[index]
+                self.assertEqual(set(row), {
+                    "web_name", "id", "ques", "web", "upstream_url",
+                    "verifier_path", "judge_rubric",
+                })
+                self.assertEqual(row["web_name"], row["id"].rsplit("--", 1)[0])
+                self.assertEqual(row["verifier_path"], f"sites/{site_dir.name}/verify/verify_{index}.py")
+                self.assertTrue((repo_root / row["verifier_path"]).is_file())
+                rubric = row["judge_rubric"]
+                self.assertTrue(rubric.startswith("FACT CHECKPOINTS:"))
+                self.assertEqual(rubric, spec["rubric"])
+                expected = list(contract_literals([
+                    spec.get("phrases", []), spec.get("numbers", []),
+                    [value for _, value in spec.get("bind", [])],
+                    spec.get("at_least", (0, []))[1],
+                ]))
+                callback_values = list(contract_literals([spec.get("pred"), spec.get("state")]))
+                answer_numbers = numeric_tokens(" ".join(expected + callback_values + [PASS_ANSWERS[index]]))
+                input_numbers = numeric_tokens(row["ques"])
+                self.assertFalse(numeric_tokens(rubric) & (answer_numbers - input_numbers))
+                for literal in expected:
+                    if literal_words(literal) not in literal_words(row["ques"]):
+                        self.assertNotIn(literal_words(literal), literal_words(rubric))
+                for literal in callback_values:
+                    if literal and literal.casefold() not in row["ques"].casefold():
+                        for quote, closing in (("\"", "\""), ("'", "'"), ("`", "`"), ("\u201c", "\u201d")):
+                            self.assertNotIn(f"{quote}{literal}{closing}".casefold(), rubric.casefold())
+                if index == 10:
+                    self.assertNotIn(Decimal(0), numeric_tokens(rubric))
+
     def test_matrix(self):
         for index in range(18):
             with self.subTest(task=index, case="noop"):
