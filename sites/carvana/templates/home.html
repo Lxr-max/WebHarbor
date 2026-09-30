@@ -58,7 +58,7 @@
       <div class="car-card-body">
         <h3>{{ v.title() }}</h3>
         <p class="car-trim">{{ v.subtitle() }}</p>
-        <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ v.city }}, {{ v.state }}</p>
+        <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ (v.city ~ ", " ~ v.state) if v.city and v.state else "Location not provided" }}</p>
         <p class="car-price">{{ v.price|money }} <span class="was">{{ v.previous_price|money if v.previous_price and v.previous_price > v.price else '' }}</span></p>
       </div>
     </a>

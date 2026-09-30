@@ -24,6 +24,7 @@ import json
 import math
 import os
 import re
+from urllib.parse import urlsplit
 
 from flask import (Flask, abort, jsonify, redirect, render_template, request,
                    session, url_for)
@@ -284,6 +285,12 @@ class Vehicle(db.Model):
         return principal * r / (1 - math.pow(1 + r, -term))
 
 
+class ContentPage(db.Model):
+    __tablename__ = 'content_pages'
+    name = db.Column(db.String(100), primary_key=True)
+    payload = db.Column(db.Text, nullable=False)
+
+
 class Favorite(db.Model):
     __tablename__ = 'favorites'
     id = db.Column(db.Integer, primary_key=True)
@@ -472,7 +479,8 @@ def _apply_filters(query, args):
     if mileage_max is not None:
         q = q.filter(Vehicle.mileage <= mileage_max)
     if payment_max is not None:
-        q = q.filter(Vehicle.price <= payment_max * 12)  # coarse prefilter
+        ids = [v.id for v in q.all() if int(round(v.monthly_payment())) <= payment_max]
+        q = q.filter(Vehicle.id.in_(ids))
     if single_owner:
         q = q.filter(Vehicle.single_owner.is_(True))
     if accident_free:
@@ -592,8 +600,6 @@ def cars_landing(slug):
             db.func.lower(Vehicle.make) == db.func.lower(make)).first()
         if not target:
             abort(404)
-        results = _search(request.args.clone() if hasattr(request.args, 'clone')
-                          else request.args) if False else None
         args = dict(request.args)
         args['make'] = target.make
         return redirect(url_for('cars_search', **args))
@@ -649,23 +655,33 @@ def vehicle_detail(vehicle_id):
                            credit_tiers=CREDIT_TIERS, terms=TERMS)
 
 
+def nonnegative_dollars(value):
+    value = str(value or '0')
+    if not value.isdigit() or len(value) > 10:
+        abort(400, 'Amounts must be nonnegative whole dollars.')
+    return int(value)
+
+
+def financing_inputs(form, vehicle):
+    down = nonnegative_dollars(form.get('down_payment'))
+    try:
+        term = int(form.get('term', vehicle.default_term or 72))
+    except (TypeError, ValueError):
+        abort(400, 'Choose a supported loan term.')
+    rates = {key: rate for key, label, rate in CREDIT_TIERS}
+    tier = form.get('credit_tier', 'good')
+    if term not in TERMS or tier not in rates:
+        abort(400, 'Choose a supported term and credit profile.')
+    if down > vehicle.financed_principal():
+        abort(400, 'Cash down cannot exceed the purchase total.')
+    return down, term, tier, rates[tier]
+
+
 @app.route('/vehicle/<int:vehicle_id>/payment-estimate', methods=['POST'])
 def payment_estimate(vehicle_id):
     """The VDP payment estimator: real amortization over the captured APR."""
     vehicle = Vehicle.query.filter_by(vehicle_id=vehicle_id).first_or_404()
-    try:
-        down = max(0, int(request.form.get('down_payment', '0') or 0))
-    except ValueError:
-        down = 0
-    try:
-        term = int(request.form.get('term', str(vehicle.default_term or 72)))
-    except ValueError:
-        term = vehicle.default_term or 72
-    if term not in TERMS:
-        term = vehicle.default_term or 72
-    tier = request.form.get('credit_tier', 'good')
-    apr = next((a for key, _label, a in CREDIT_TIERS if key == tier),
-               DEFAULT_APR)
+    down, term, tier, apr = financing_inputs(request.form, vehicle)
     monthly = int(round(vehicle.monthly_payment(down_payment=down,
                                                 term=term,
                                                 apr_percent=apr * 100)))
@@ -689,10 +705,6 @@ def favorite_toggle(vehicle_id):
     existing = Favorite.query.filter_by(user_id=current_user.id,
                                         vehicle_id=vehicle.id).first()
     if request.method == 'GET':
-        if not existing:
-            db.session.add(Favorite(user_id=current_user.id,
-                                   vehicle_id=vehicle.id))
-            db.session.commit()
         return redirect(url_for('vehicle_detail', vehicle_id=vehicle_id))
     if existing:
         db.session.delete(existing)
@@ -742,28 +754,17 @@ def checkout(vehicle_id):
     apr = None
     monthly = None
     if payment_type == 'finance':
-        try:
-            down = max(0, int(f.get('down_payment', '0') or 0))
-        except ValueError:
-            down = 0
-        try:
-            term = int(f.get('term', '72'))
-        except ValueError:
-            term = 72
-        if term not in TERMS:
-            term = 72
-        tier = f.get('credit_tier', 'good')
-        apr = next((a for key, _label, a in CREDIT_TIERS if key == tier),
-                   DEFAULT_APR)
-        monthly = int(round(vehicle.monthly_payment(down_payment=down, term=term,
-                                                    apr_percent=apr * 100)))
+        down, term, tier, apr = financing_inputs(f, vehicle)
+    if f.get('trade_in', 'no') not in ('no', 'yes'):
+        abort(400, 'Choose whether you are trading in a vehicle.')
     trade = f.get('trade_in', 'no') == 'yes'
-    trade_credit = 0
-    if trade:
-        try:
-            trade_credit = max(0, int(f.get('trade_credit', '0') or 0))
-        except ValueError:
-            trade_credit = 0
+    trade_credit = nonnegative_dollars(f.get('trade_credit')) if trade else 0
+    if down + trade_credit > vehicle.financed_principal():
+        abort(400, 'Cash down and trade credit exceed the purchase total.')
+    if payment_type == 'finance':
+        monthly = int(round(vehicle.monthly_payment(
+            down_payment=down, term=term, apr_percent=apr * 100,
+            trade_credit=trade_credit)))
     delivery_date = f.get('delivery_date', '')
     delivery_slot = f.get('delivery_slot', '')
     street = f.get('street', '').strip()
@@ -779,10 +780,11 @@ def checkout(vehicle_id):
                                delivery_slots=DELIVERY_SLOTS,
                                error='Complete the delivery details to '
                                      'schedule your delivery.')
-    existing = Order.query.filter_by(user_id=current_user.id,
-                                     vehicle_id=vehicle.id).first()
+    existing = Order.query.filter_by(vehicle_id=vehicle.id).filter(Order.status != 'Cancelled').first()
     if existing:
-        return redirect(url_for('account_orders'))
+        if existing.user_id == current_user.id:
+            return redirect(url_for('account_orders'))
+        abort(409, 'This vehicle already has an active order.')
     order = Order(
         order_number=f"CV-{200000 + 13 * (Order.query.with_entities(db.func.max(Order.id)).scalar() or 0) + current_user.id}",
         user_id=current_user.id, vehicle_id=vehicle.id,
@@ -902,7 +904,7 @@ def sell_offer():
     f = request.form
     vin = f.get('vin', '').strip().upper()
     mileage = f.get('mileage', '').strip()
-    if len(vin) < 11 or not re.match(r'^[A-HJ-NPR-Z0-9]+$', vin):
+    if len(vin) != 17 or not re.match(r'^[A-HJ-NPR-Z0-9]+$', vin):
         return render_template('sell_form.html',
                                error='Enter the full VIN (17 characters, '
                                      'no I/O/Q).')
@@ -914,10 +916,15 @@ def sell_offer():
     if not (0 <= mileage <= 300000):
         return render_template('sell_form.html',
                                error='Mileage must be between 0 and 300,000.')
-    # deterministic valuation from the captured KBB baseline table
+    # Synthetic benchmark valuation, not a live appraisal or purchase offer.
     from seed_lib import vehicle_baseline, condition_multiplier
     base = vehicle_baseline(vin)
     condition = f.get('condition', 'good')
+    if condition not in ('excellent', 'good', 'fair', 'rough'):
+        abort(400, 'Choose a supported condition.')
+    year_text = f.get('year', '').strip()
+    if year_text and (not year_text.isdigit() or not 1900 <= int(year_text) <= 2027):
+        abort(400, 'Enter a valid vehicle year.')
     offer = int(round(base * condition_multiplier(condition) * (1 - min(mileage, 250000) / 500000.0)))
     session['sell_offer'] = {'vin': vin, 'mileage': mileage,
                              'condition': condition, 'offer': offer,
@@ -951,6 +958,14 @@ def sell_claim():
 
 # --------------------------------------------------------------- auth pages --
 
+def safe_next(value):
+    value = value or '/account'
+    parsed = urlsplit(value)
+    if not value.startswith('/') or value.startswith('//') or parsed.netloc or parsed.scheme or '\\' in value or any(ord(c) < 32 for c in value):
+        return '/account'
+    return value
+
+
 @app.route('/authn/login', methods=['GET', 'POST'])
 def authn_login():
     if request.method == 'POST':
@@ -959,8 +974,7 @@ def authn_login():
         if user and bcrypt.check_password_hash(
                 user.password_hash, request.form.get('password', '')):
             login_user(user)
-            return redirect(request.args.get('next')
-                            or url_for('account_home'))
+            return redirect(safe_next(request.args.get('next')))
         return render_template('authn_login.html',
                                error='Invalid email or password.')
     return render_template('authn_login.html')
@@ -996,6 +1010,7 @@ def authn_register():
 @app.route('/authn/logout')
 @login_required
 def authn_logout():
+    session.pop('sell_offer', None)
     logout_user()
     return redirect(url_for('home'))
 
@@ -1003,10 +1018,8 @@ def authn_logout():
 # ---------------------------------------------------------- content pages ----
 
 def _content_page(name, title):
-    pages = _load('content_pages.json')
-    page = pages.get(name)
-    if not page:
-        abort(404)
+    row = ContentPage.query.filter_by(name=name).first_or_404()
+    page = json.loads(row.payload)
     return render_template('content_page.html', page=page,
                            title=title or page.get('title', name))
 
@@ -1125,6 +1138,14 @@ def seed_database():
     seed_all(db, app)
 
 
+def seed_content_pages():
+    if ContentPage.query.first() is not None:
+        return
+    for name, page in sorted(_load('content_pages.json').items()):
+        db.session.add(ContentPage(name=name, payload=json.dumps(page, sort_keys=True)))
+    db.session.commit()
+
+
 def seed_benchmark_users():
     if User.query.filter_by(is_benchmark=True).count() >= 4:
         return
@@ -1136,6 +1157,7 @@ def main():
     with app.app_context():
         db.create_all()
         seed_database()
+        seed_content_pages()
         seed_benchmark_users()
 
 
@@ -1143,9 +1165,10 @@ with app.app_context():
     db.create_all()
     if os.environ.get('CARVANA_AUTO_SEED', '1') == '1':
         seed_database()
+        seed_content_pages()
         seed_benchmark_users()
 
 
 if __name__ == '__main__':
     main()
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 40193)))
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 40134)))

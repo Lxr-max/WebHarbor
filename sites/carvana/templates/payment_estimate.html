@@ -6,7 +6,7 @@
   <p class="est-config">{{ v.trim or v.body_style }} · {{ v.mileage|mileage }} · {{ v.price|money }}</p>
 
   <div class="est-result">
-    <p class="est-monthly">${{ monthly|money }}/mo</p>
+    <p class="est-monthly">{{ monthly|money }}/mo</p>
     <dl class="est-terms">
       <div><dt>Cash down</dt><dd>{{ down|money }}</dd></div>
       <div><dt>Term</dt><dd>{{ term }} months</dd></div>
@@ -42,7 +42,7 @@
   </form>
 
   <div class="est-actions">
-    <a class="btn-blue big" href="{{ url_for('checkout', vehicle_id=v.vehicle_id) }}">Start purchase with this estimate</a>
+    <a class="btn-blue big" href="{{ url_for('checkout', vehicle_id=v.vehicle_id, payment_type='finance', down_payment=down, term=term, credit_tier=tier) }}">Start purchase with this estimate</a>
     <a class="btn-outline" href="{{ v.url() }}">Back to the car</a>
   </div>
 </div>

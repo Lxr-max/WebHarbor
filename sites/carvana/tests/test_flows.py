@@ -243,7 +243,8 @@ def test_anonymous_save_login_next_completes(client):
         follow = client.get(follow.headers['Location'])
     assert follow.status_code == 200, follow.status_code
     body = follow.get_data(as_text=True)
-    assert 'Saved ♥' in body
+    assert 'Saved ♥' not in body
+    client.post('/vehicle/4466702/favorite', data=with_csrf(client, '/vehicle/4466702', {}))
     favs = client.get('/account/favorites').get_data(as_text=True)
     assert 'Nissan Altima' in favs
     # GET is idempotent: hitting the favorite URL again never unsaves

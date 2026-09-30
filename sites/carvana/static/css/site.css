@@ -358,3 +358,13 @@ main { min-height: 60vh; }
 
 .mt { margin-top: 26px; }
 .crumb { color: var(--muted); font-size: 13.5px; }
+
+/* Keep mobile search controls usable instead of shrinking the whole header. */
+@media (max-width: 900px) {
+  .header-bar { flex-wrap: wrap; gap: 14px; }
+  .logo { flex-shrink: 0; }
+  .header-links { margin-left: auto; flex-wrap: wrap; gap: 10px; }
+  .header-search { order: 3; flex: 1 0 100%; width: 100%; }
+  .header-search .field { flex: 1 1 110px; min-width: 0; }
+  .header-search button { flex: 0 0 auto; }
+}

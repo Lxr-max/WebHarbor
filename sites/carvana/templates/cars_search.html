@@ -125,9 +125,9 @@
           <div class="car-card-body">
             <h3>{{ v.title() }}</h3>
             <p class="car-trim">{{ v.subtitle() }}</p>
-            <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ v.city }}, {{ v.state }}</p>
+            <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ (v.city ~ ", " ~ v.state) if v.city and v.state else "Location not provided" }}</p>
             <p class="car-price">{{ v.price|money }} {% if v.previous_price and v.previous_price > v.price %}<span class="was">{{ v.previous_price|money }}</span>{% endif %}</p>
-            <p class="car-est">${{ (v.price // 100) }} est. /mo</p>
+            <p class="car-est">{{ v.monthly_payment()|round|int|money }} est. /mo</p>
             <div class="car-badges">
               {% for b in v.badge_list()[:3] %}<span class="badge">{{ b }}</span>{% endfor %}
             </div>
