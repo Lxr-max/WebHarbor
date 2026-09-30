@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}{{ v.year }} {{ v.make | title }} {{ v.model | title }} {{ v.trim }} — Instant Offer | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('offer_start') }}">Instant Offer</a> &rsaquo; <span>Your car</span></nav>
+{% endblock %}
+{% block content %}
+<div class="offer-wizard">
+  <h1>{{ v.year }} {{ v.make | title }} {{ v.model | title }} {{ v.trim }}</h1>
+  <p><a href="{{ url_for('offer_start') }}">Edit vehicle</a></p>
+  <div class="estimated-value">
+    <h2>Estimated car value</h2>
+    <p class="value-range">${{ '{:,}'.format(v.initial_low) }} - ${{ '{:,}'.format(v.initial_high) }}</p>
+  </div>
+  <p>Enter a few more details about your car. All fields marked with * are required.</p>
+  {% if v.options_list() %}
+  <section class="offer-options">
+    <h3>Captured vehicle options</h3>
+    {% for opt in v.options_list() %}
+    <label class="option-check">
+      {{ opt }}
+    </label>
+    {% endfor %}
+    {% if v.standard_features_list() %}
+    <p class="muted">Standard features: {{ v.standard_features_list() | join(', ') }}</p>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="offer-form" method="post" action="{{ url_for('offer_details') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="offer-field">
+      <label for="od-mileage">How many miles are displayed on your odometer? *</label>
+      <input id="od-mileage" type="number" name="mileage" min="0" required>
+    </div>
+    <div class="offer-field">
+      <label for="od-zip">What is your ZIP code? *</label>
+      <input id="od-zip" type="text" name="zip" value="{{ DEFAULT_ZIP }}" required>
+    </div>
+    <div class="offer-field">
+      <label for="od-color">What color is your car? *</label>
+      <select id="od-color" name="exterior_color" required>
+        <option value="">Select exterior color</option>
+        {% for c in colors %}
+        <option value="{{ c }}">{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="offer-field">
+      <label>How many keys do you have? *</label>
+      <div class="radio-row">
+        {% for k in ['0', '1', '2', '3+'] %}
+        <label class="radio"><input type="radio" name="keys" value="{{ k }}" required> {{ k }}</label>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="offer-field">
+      <label>Are you the original owner? *</label>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="original_owner" value="Yes" required> Yes</label>
+        <label class="radio"><input type="radio" name="original_owner" value="No" required> No</label>
+      </div>
+    </div>
+    <div class="offer-field">
+      <label>Are you still making payments on your car?</label>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="payments" value="Yes"> Yes</label>
+        <label class="radio"><input type="radio" name="payments" value="No"> No</label>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Next</button>
+  </form>
+</div>
+{% endblock %}

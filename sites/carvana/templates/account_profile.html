@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}My profile | Carvana{% endblock %}
+{% block body %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/account/favorites">Saved cars</a>
+    <a href="/account/orders">Orders</a>
+    <a href="/account/profile" class="active">Profile</a>
+  </nav>
+  <h1>My profile</h1>
+  <div class="content-section">
+    <h2>Current details</h2>
+    <p>Name: {{ current_user.display_name }} · Email: {{ current_user.email }}
+    {% if profile and profile.phone %} · Phone: {{ profile.phone }}{% endif %}</p>
+    {% if profile and profile.street %}
+    <p>Delivery address: {{ profile.street }}, {{ profile.city }}, {{ profile.state }} {{ profile.zip5 }}</p>
+    {% endif %}
+  </div>
+  <form class="profile-form" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="est-row"><label for="p-name">Name</label><input id="p-name" type="text" value="{{ current_user.display_name }}" disabled></div>
+    <div class="est-row"><label for="p-email">Email</label><input id="p-email" type="email" value="{{ current_user.email }}" disabled></div>
+    <div class="est-row"><label for="p-phone">Phone</label><input id="p-phone" type="text" name="phone" value="{{ profile.phone if profile else '' }}"></div>
+    <div class="est-row"><label for="p-street">Delivery street address</label><input id="p-street" type="text" name="street" value="{{ profile.street if profile else '' }}"></div>
+    <div class="est-row three">
+      <div><label for="p-city">City</label><input id="p-city" type="text" name="city" value="{{ profile.city if profile else '' }}"></div>
+      <div><label for="p-state">State</label><input id="p-state" type="text" name="state" maxlength="2" value="{{ profile.state if profile else '' }}"></div>
+      <div><label for="p-zip">ZIP</label><input id="p-zip" type="text" name="zip" pattern="\d{5}" value="{{ profile.zip5 if profile else '' }}"></div>
+    </div>
+    <div class="est-row"><label for="p-about">About me</label><textarea id="p-about" name="about" rows="3">{{ profile.about if profile else '' }}</textarea></div>
+    <button type="submit" class="btn-blue">Save profile</button>
+  </form>
+</div>
+{% endblock %}

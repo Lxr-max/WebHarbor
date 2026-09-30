@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Find a UPS Location | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Find a UPS Location</div>
+  <h1>Find a UPS Location</h1>
+  <div class="ups-card ups-locatorbar">
+    <form method="get" action="{{ url_for('locations') }}" class="ups-locatorform">
+      <label for="loczip" class="ups-sr-only">Enter Address or ZIP Code</label>
+      <input id="loczip" name="zip" value="{{ zip }}" placeholder="Enter Address or ZIP Code">
+      <input type="hidden" name="type" value="{{ ftype }}">
+      <button class="ups-btn ups-btn-primary" type="submit">Look Up</button>
+    </form>
+    <div class="ups-filters">
+      <span class="ups-filterlbl">Filter By Location Type</span>
+      {% for t in types %}
+        <a class="ups-chip {{ 'is-active' if ftype == t }}" href="{{ url_for('locations', zip=zip, type=t) }}">
+          {{ 'All Locations' if t == 'all' else t }}</a>
+      {% endfor %}
+    </div>
+    {% if not points and zip %}
+      <p class="ups-locator-empty">No locations were found for that search. This locator covers the captured markets:
+        {{ known|join(', ') }}.</p>
+    {% endif %}
+  </div>
+
+  {% if points %}
+  <p class="ups-lede">{{ points|length }} location{{ 's' if points|length != 1 }} within 15 miles of {{ zip }}</p>
+  <section class="ups-locgrid">
+    {% for p in points %}
+    <div class="ups-card ups-loccard">
+      <div class="ups-loc-icon ups-icon-{{ p.loc.type|replace(' ', '-')|lower }}"></div>
+      <div class="ups-loc-body">
+        <p class="ups-loctype">{{ p.loc.type }}</p>
+        <p class="ups-locname"><a href="{{ url_for('location_detail', location_id=p.loc.location_id) }}">{{ p.loc.name.title() }}</a></p>
+        <p>{{ p.loc.addr1.title() }}<br>{{ p.loc.city }}, {{ p.loc.state }} {{ p.loc.zip }}</p>
+        <p class="ups-hint">{{ p.miles }} miles away</p>
+      </div>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('location_detail', location_id=p.loc.location_id) }}">Details</a>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+</section>
+{% endblock %}

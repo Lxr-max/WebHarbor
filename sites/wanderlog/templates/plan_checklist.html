@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Checklist — {{ trip.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">{{ trip.title }} — checklist</h1>
+      <p class="small muted" style="margin:4px 0 0">Pack and plan together — every member sees the same list.</p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a class="on" href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+    </nav>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <form method="post" action="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}" style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div style="flex:1;min-width:200px">
+        <label for="text">Add an item</label>
+        <input type="text" id="text" name="text" required placeholder="e.g. Passport, sunscreen, book museum…">
+      </div>
+      <div>
+        <label for="list_type">List</label>
+        <select id="list_type" name="list_type">
+          <option value="packing">Packing</option>
+          <option value="todo">To-dos</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit">Add item</button>
+    </form>
+  </div>
+
+  <div class="trip-grid">
+    <div class="card">
+      <h2>Packing list</h2>
+      {% set packing = items | select_list('packing') %}
+      {% for item in packing %}
+        <div class="checklist-item {{ 'done' if item.checked }}">
+          <form class="inline" method="post" action="{{ url_for('checklist_toggle', iid=item.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn {{ 'btn-primary' if not item.checked else 'btn-ghost' }} btn-sm" type="submit">
+              {{ '✓ Done' if item.checked else 'Mark done' }}</button>
+          </form>
+          <span class="txt">{{ item.text }}</span>
+          <form class="inline" method="post" action="{{ url_for('checklist_delete', iid=item.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-ghost btn-sm" type="submit">Delete</button>
+          </form>
+        </div>
+      {% else %}
+        <p class="small muted">Nothing on the packing list yet.</p>
+      {% endfor %}
+      <p class="small muted" style="margin-top:10px">{{ packing | done_count }} of {{ packing|length }} packed</p>
+    </div>
+    <div class="card">
+      <h2>To-dos before the trip</h2>
+      {% set todos = items | select_list('todo') %}
+      {% for item in todos %}
+        <div class="checklist-item {{ 'done' if item.checked }}">
+          <form class="inline" method="post" action="{{ url_for('checklist_toggle', iid=item.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn {{ 'btn-primary' if not item.checked else 'btn-ghost' }} btn-sm" type="submit">
+              {{ '✓ Done' if item.checked else 'Mark done' }}</button>
+          </form>
+          <span class="txt">{{ item.text }}</span>
+          <form class="inline" method="post" action="{{ url_for('checklist_delete', iid=item.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-ghost btn-sm" type="submit">Delete</button>
+          </form>
+        </div>
+      {% else %}
+        <p class="small muted">No to-dos yet.</p>
+      {% endfor %}
+      <p class="small muted" style="margin-top:10px">{{ todos | done_count }} of {{ todos|length }} done</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

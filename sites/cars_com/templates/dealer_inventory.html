@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}{{ d.name }} — Inventory | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('dealers_index') }}">Find a dealer</a> &rsaquo;
+  <a href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">{{ d.name }}</a> &rsaquo; <span>Inventory</span></nav>
+{% endblock %}
+{% block content %}
+<div class="dealer-inventory-page">
+  <h1>Cars at {{ d.name }}</h1>
+  <form class="dealer-filters" method="get" action="{{ url_for('dealer_inventory', dealer_id=d.id, slug=d.slug) }}">
+    <div class="filter-item">
+      <label for="i-stock">Stock type</label>
+      <select id="i-stock" name="stock_type">
+        <option value="">All</option>
+        <option value="new" {{ 'selected' if args.get('stock_type') == 'new' }}>New</option>
+        <option value="used" {{ 'selected' if args.get('stock_type') == 'used' }}>Used</option>
+        <option value="cpo" {{ 'selected' if args.get('stock_type') == 'cpo' }}>Certified Pre-Owned</option>
+      </select>
+    </div>
+    <div class="filter-item">
+      <label for="i-make">Make</label>
+      <select id="i-make" name="make">
+        <option value="">All makes</option>
+        {% set inv_makes = listings | map(attribute='make_slug') | unique | sort %}
+        {% for m in inv_makes %}
+        <option value="{{ m }}" {{ 'selected' if args.get('make') == m }}>{{ m | replace('_',' ') | title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Apply</button>
+  </form>
+  <p class="muted">{{ listings | length }} cars listed at this dealership</p>
+  <ol class="srp-list">
+    {% for l in listings %}
+    <li class="vehicle-card" id="vehicle-card-{{ l.id }}">
+      <a class="card-media" href="{{ url_for('vehicle_detail', listing_id=l.id) }}">
+        {% if l.photo_list() %}
+        <img src="{{ url_for('static', filename=l.photo_list()[0]) }}" alt="{{ l.title }}">
+        {% else %}
+        <div class="no-photo">No photos</div>
+        {% endif %}
+      </a>
+      <div class="card-body">
+        <div class="card-price-row">
+          <span class="price">{{ l.price | money }}</span>
+          <span class="mileage">{{ l.mileage | mileagefmt }} mi.</span>
+        </div>
+        <h2 class="card-title"><a href="{{ url_for('vehicle_detail', listing_id=l.id) }}">{{ l.title }}</a></h2>
+        {% if l.deal_badge %}<span class="badge badge-{{ l.deal_badge | lower | replace(' ', '-') }}">{{ l.deal_badge }}</span>{% endif %}
+        <div class="card-seller"><span class="muted">{{ l.stock_type }}</span></div>
+      </div>
+    </li>
+    {% else %}
+    <li class="empty">No cars match those filters at this dealership.</li>
+    {% endfor %}
+  </ol>
+  <a class="btn btn-outline" href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">Back to dealership page</a>
+</div>
+{% endblock %}

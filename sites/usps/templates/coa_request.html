@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Change of Address Request | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('coa_page') }}">Change My Address</a> &rsaquo; Request</p>
+<h1>Change of Address Request</h1>
+{% if result %}
+  {% if result.errors %}
+    <div class="error-box">{% for e in result.errors %}<p>{{ e }}</p>{% endfor %}</div>
+  {% else %}
+    <div class="panel">
+      <h3>Change of Address Confirmed</h3>
+      <p><strong>Confirmation number:</strong> {{ result.confirmation }}</p>
+      <p><strong>Move type:</strong> {{ result.move_type }} &middot; <strong>Forwarding:</strong> {{ result.forward_type }}</p>
+      <p><strong>Forwarding begins:</strong> {{ result.start | longdate }}</p>
+      <p><strong>Identity validation fee:</strong> ${{ '%.2f' | format(result.fee) }}</p>
+      <p>Keep your confirmation number — you can use it to view or cancel your request later.</p>
+    </div>
+  {% endif %}
+{% endif %}
+<div class="panel">
+  <form class="flow" action="{{ url_for('coa_request') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Who is moving?
+      <select name="move_type">
+        <option>Individual</option>
+        <option>Family (everyone with the same last name)</option>
+        <option>Business</option>
+      </select>
+    </label>
+    <label>Forwarding type
+      <select name="forward_type">
+        <option>Regular</option>
+
+      </select>
+    </label>
+    <label>Forwarding start date <input type="date" name="start_date" min="{{ today }}" required></label>
+    <h3>Old address</h3>
+    <label>Street address <input type="text" name="old_street" required></label>
+    <label>City <input type="text" name="old_city"></label>
+    <label>State <input type="text" name="old_state" maxlength="2"></label>
+    <label>ZIP Code <input type="text" name="old_zip" maxlength="5" required></label>
+    <h3>New address</h3>
+    <label>Street address <input type="text" name="new_street" required></label>
+    <label>City <input type="text" name="new_city"></label>
+    <label>State <input type="text" name="new_state" maxlength="2"></label>
+    <label>ZIP Code <input type="text" name="new_zip" maxlength="5" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <p class="note">An identity validation fee of ${{ '%.2f' | format(fee) }} applies to online Change of Address requests.</p>
+    <button class="btn" type="submit">Pay &amp; Submit Request</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}404 — Page not found{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Sorry. We can't find that page.</h1>
+  <p>Popular pages:</p>
+  <ul>
+    <li><a href="{{ url_for('smartphones') }}">Shop smartphones</a></li>
+    <li><a href="{{ url_for('plans_simplicity') }}">Simplicity Plan</a></li>
+    <li><a href="{{ url_for('plans_prepaid') }}">Verizon Prepaid</a></li>
+    <li><a href="{{ url_for('stores_home') }}">Find a store</a></li>
+    <li><a href="{{ url_for('support_home') }}">Support</a></li>
+  </ul>
+</section>
+{% endblock %}

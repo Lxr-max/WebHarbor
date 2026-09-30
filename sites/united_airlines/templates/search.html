@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Search — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Search united.com</h1>
+  <form method="get" action="{{ url_for('site_search') }}" class="ua-form ua-form-inline">
+    <label class="ua-field ua-grow">Search
+      <input type="text" name="q" value="{{ query }}">
+    </label>
+    <button class="ua-btn ua-btn-primary" type="submit">Search</button>
+  </form>
+
+  {% if query %}
+    <h2>Results for “{{ query }}”</h2>
+    {% for label, rows in [('Help articles', help_hits), ('Cabins', cabin_hits), ('Policies', policy_hits), ('Airports', airport_hits)] %}
+      {% if rows %}
+      <h3>{{ label }}</h3>
+        {% for row in rows %}
+        <div class="ua-help-row">
+          {% if label == 'Help articles' %}
+            <a href="{{ url_for('help_article', slug=row.slug) }}">{{ row.question }}</a>
+          {% elif label == 'Cabins' %}
+            <a href="{{ url_for('cabin_detail', slug=row.slug) }}">{{ row.name }} — {{ row.tagline }}</a>
+          {% elif label == 'Policies' %}
+            <a href="{{ url_for('policy_detail', slug=row.slug) }}">{{ row.title }}</a>
+          {% else %}
+            <a href="{{ url_for('airport_detail', code=row.code) }}">{{ row.city }} ({{ row.code }})</a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% if not (help_hits or cabin_hits or policy_hits or airport_hits) %}
+      <p class="ua-quiet">Nothing matched “{{ query }}”.</p>
+    {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

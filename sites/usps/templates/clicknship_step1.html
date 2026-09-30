@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Click-N-Ship — Addresses | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('clicknship_home') }}">Click-N-Ship</a> &rsaquo; Create a Label</p>
+<h1>Create a Shipping Label</h1>
+<div class="steps">
+  {% for s in steps %}<span class="step-pill {{ 'active' if loop.index == step }}">{{ s }}</span>{% endfor %}
+</div>
+<div class="panel">
+  <form class="flow" action="{{ url_for('clicknship_create', step=1) }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next_step" value="2">
+    <h3>From (sender)</h3>
+    <label>Full name <input type="text" name="sender_name" value="{{ data.get('sender_name', current_user.display_name or '') }}"></label>
+    <label>Street address <input type="text" name="sender_street" value="{{ data.get('sender_street', current_user.street or '') }}"></label>
+    <label>City <input type="text" name="sender_city" value="{{ data.get('sender_city', current_user.city or '') }}"></label>
+    <label>State <input type="text" name="sender_state" maxlength="2" value="{{ data.get('sender_state', current_user.state or '') }}"></label>
+    <label>ZIP Code <input type="text" name="sender_zip" maxlength="5" value="{{ data.get('sender_zip', current_user.zip5 or '') }}"></label>
+    <h3>To (recipient)</h3>
+    <label>Full name <input type="text" name="recipient_name" value="{{ data.get('recipient_name', '') }}"></label>
+    <label>Street address <input type="text" name="recipient_street" value="{{ data.get('recipient_street', '') }}"></label>
+    <label>City <input type="text" name="recipient_city" value="{{ data.get('recipient_city', '') }}"></label>
+    <label>State <input type="text" name="recipient_state" maxlength="2" value="{{ data.get('recipient_state', '') }}"></label>
+    <label>ZIP Code <input type="text" name="recipient_zip" maxlength="5" value="{{ data.get('recipient_zip', '') }}"></label>
+    <button class="btn" type="submit">Continue to Package</button>
+  </form>
+</div>
+{% endblock %}

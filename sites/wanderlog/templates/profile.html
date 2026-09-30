@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.display_name }} (@{{ user.username }}) — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card" style="margin-bottom:20px">
+    <div class="author-row">
+      {% if user.avatar %}<img class="avatar-lg" src="{{ user.avatar }}" alt="{{ user.display_name }}">{% endif %}
+      <div>
+        <h1 style="margin:0">{{ user.display_name }}
+          {% if user.is_pro %}<span class="badge pro">Pro</span>{% endif %}
+        </h1>
+        <p class="muted" style="margin:2px 0">@{{ user.username }}
+          {% if user.home_country %} · {{ user.home_country }}{% endif %}</p>
+        <p class="small muted" style="margin:2px 0">
+          {{ user.visit_geos_count }} geos visited · {{ user.countries_count }} countries
+          {% if extra %} · {{ extra.numFollowedUsers }} followers · {{ extra.numFollowingUsers }} following{% endif %}
+        </p>
+      </div>
+    </div>
+    {% if user.bio %}<p class="small" style="margin:0">{{ user.bio }}</p>{% endif %}
+  </div>
+
+  <h2>{{ user.display_name }}'s guides</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for g in guides %}
+      <a class="tile" href="{{ url_for('guide_view', key=g.key) }}">
+        {% if g.header_image %}<img class="cover" src="{{ g.header_image }}" alt="{{ g.title }}">{% endif %}
+        <div class="pad">
+          <h3>{{ g.title }}</h3>
+          <span class="small muted">{{ g.place_count }} places · {{ '{:,}'.format(g.view_count) }} views</span>
+        </div>
+      </a>
+    {% else %}
+      <p class="muted">No shared guides yet.</p>
+    {% endfor %}
+  </div>
+
+  {% if public_trips %}
+    <h2>Public trips</h2>
+    <div class="grid cols-3">
+      {% for t in public_trips %}
+        <a class="tile" href="{{ url_for('trip_view', view_key=t.view_key) }}">
+          <div class="pad">
+            <h3>{{ t.title }}</h3>
+            <span class="small muted">{{ t.start_date or 'No dates' }} ·
+              {{ t.travelers }} traveler{{ 's' if t.travelers != 1 }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

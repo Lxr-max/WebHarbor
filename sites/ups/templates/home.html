@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}UPS Global Shipping and Logistics Solutions | Ship and Track Online | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-hero">
+  <div class="ups-wrap ups-hero-grid">
+    <div class="ups-hero-copy">
+      <h1>Global Shipping &amp; Logistics Solutions</h1>
+      <p>Ship and track online with the world&rsquo;s largest package delivery company.</p>
+      <div class="ups-quicktools">
+        <form class="ups-card ups-trackwidget" action="{{ url_for('track') }}" method="get">
+          <label class="ups-h2" for="trackInput">Track</label>
+          <textarea id="trackInput" name="tracknum" rows="1"
+            placeholder="Enter up to 25 tracking numbers, one per line."></textarea>
+          <button class="ups-btn ups-btn-primary" type="submit">Track <i class="ups-chev">&#8250;</i></button>
+        </form>
+        <div class="ups-quickgrid">
+          <a class="ups-tool" href="{{ url_for('ship') }}">
+            <img src="/static/images/box.svg" alt=""><span>Create a Shipment</span></a>
+          <a class="ups-tool" href="{{ url_for('ctc') }}">
+            <img src="/static/images/savings.svg" alt=""><span>Calculate Shipping Cost</span></a>
+          <a class="ups-tool" href="{{ url_for('pickup') }}">
+            <img src="/static/images/calendar_clock.svg" alt=""><span>Schedule a Pickup</span></a>
+          <a class="ups-tool" href="{{ url_for('locations') }}">
+            <img src="/static/images/pin.svg" alt=""><span>Find UPS Locations</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="ups-hero-art">
+      <img src="/static/images/pickup-dropoff-packages-b-1166486-q421.jpg" alt="UPS package pickup and drop-off">
+    </div>
+  </div>
+</section>
+
+{% if alerts %}
+<section class="ups-wrap">
+  <div class="ups-alertbar">
+    <img src="/static/images/alert.svg" alt="" width="16">
+    <span>{{ alerts|length }} Service Alert{{ 's' if alerts|length > 1 }}</span>
+    <a href="{{ url_for('alerts') }}">{{ alerts[0].title }} &mdash; View All Alerts</a>
+  </div>
+</section>
+{% endif %}
+
+<section class="ups-wrap ups-section">
+  <div class="ups-sec-head">
+    <h2>What would you like to do?</h2>
+    <span class="ups-rule"></span>
+  </div>
+  <div class="ups-cardgrid">
+    <a class="ups-card" href="{{ url_for('track') }}">
+      <img src="/static/images/ups-package-logo.png" alt="">
+      <h3>Track a Package</h3>
+      <p>See your package&rsquo;s journey with milestone updates, activity feed and delivery details.</p>
+      <span class="ups-cardlink">Track <i class="ups-chev">&#8250;</i></span>
+    </a>
+    <a class="ups-card" href="{{ url_for('ctc') }}">
+      <img src="/static/images/ups-money-manage.png" alt="">
+      <h3>Calculate Time and Cost</h3>
+      <p>Compare estimated shipping quotes across our delivery services and sort by time or cost.</p>
+      <span class="ups-cardlink">Get a Quote <i class="ups-chev">&#8250;</i></span>
+    </a>
+    <a class="ups-card" href="{{ url_for('ship') }}">
+      <img src="/static/images/ups-boxes-packaging.png" alt="">
+      <h3>Create a Shipment</h3>
+      <p>Ship a package as a guest or log in for saved addresses and shipping history.</p>
+      <span class="ups-cardlink">Ship Now <i class="ups-chev">&#8250;</i></span>
+    </a>
+    <a class="ups-card" href="{{ url_for('pickup') }}">
+      <img src="/static/images/ups-pickups-dropoffs-dolly-boxes.png" alt="">
+      <h3>Schedule a Pickup</h3>
+      <p>Request an on-demand pickup for your UPS ground, air and international shipments.</p>
+      <span class="ups-cardlink">Schedule a Pickup <i class="ups-chev">&#8250;</i></span>
+    </a>
+  </div>
+</section>
+
+<section class="ups-wrap ups-section">
+  <div class="ups-sec-head">
+    <h2>Services built around your shipment</h2>
+    <span class="ups-rule"></span>
+  </div>
+  <div class="ups-cardgrid">
+    <a class="ups-card" href="{{ url_for('services') }}">
+      <img src="/static/images/fastest-ground-g-1395474771-q323.png" alt="">
+      <h3>UPS Ground</h3>
+      <p>Cost-effective ground shipping within one to five business days &mdash; 85% of UPS Ground packages arrive in three days or less.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('service_detail', code='1DA') }}">
+      <img src="/static/images/ups-package-ontime-box-fast.png" alt="">
+      <h3>UPS Next Day Air&reg;</h3>
+      <p>Guaranteed next-business-day delivery by 10:30 a.m., 12:00 p.m. or 3:00 p.m.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('business') }}">
+      <img src="/static/images/warehouse-shipping-right-1232020-2600.jpg" alt="">
+      <h3>Business Solutions</h3>
+      <p>Pickup options, billing tools, returns and logistics services for businesses of every size.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('locations') }}">
+      <img src="/static/images/ups-location-map.png" alt="">
+      <h3>UPS Access Point&reg;</h3>
+      <p>Redirect packages to nearby Access Point locations and pick them up when it suits you.</p>
+    </a>
+  </div>
+</section>
+
+<section class="ups-wrap ups-section">
+  <div class="ups-sec-head">
+    <h2>Help when you need it</h2>
+    <span class="ups-rule"></span>
+  </div>
+  <div class="ups-cardgrid">
+    <a class="ups-card" href="{{ url_for('claims') }}">
+      <img src="/static/images/ups-file-folder.png" alt="">
+      <h3>File a Claim</h3>
+      <p>Report a lost or damaged package and follow the claim through review to resolution.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('support') }}">
+      <img src="/static/images/ups-questions-support.png" alt="">
+      <h3>Help and Support Center</h3>
+      <p>Search support articles on tracking, shipping, delivery changes and your account.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('support_article', key='understanding-tracking-status') }}">
+      <img src="/static/images/ups-articles-note.png" alt="">
+      <h3>Understanding Tracking Status</h3>
+      <p>What Label Created, On the Way, Out for Delivery and other statuses mean.</p>
+    </a>
+    <a class="ups-card" href="{{ url_for('store') }}">
+      <img src="/static/images/ups-store-pack-and-ship.png" alt="">
+      <h3>The UPS Store</h3>
+      <p>Pack and ship, printing, mailboxes and in-store services at a location near you.</p>
+    </a>
+  </div>
+</section>
+{% endblock %}

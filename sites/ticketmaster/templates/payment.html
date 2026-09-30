@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Payment Options | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a href="/member">Your Account</a>
+      <a href="/member/profile">Edit Profile</a>
+      <a class="active" href="/member/payment">Payment Options</a>
+      <a href="/member">Orders</a>
+      <a href="/member/favorites">My Favorites</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <h1>Payment Options</h1>
+      {% if methods %}
+      <table class="table">
+        <tr><th>Card</th><th>Name on card</th><th>Expires</th><th></th></tr>
+        {% for m in methods %}
+        <tr>
+          <td>{{ m.brand }} •••• {{ m.last4 }}</td>
+          <td>{{ m.holder }}</td>
+          <td>{{ '%02d'|format(m.exp_month) }}/{{ '%02d'|format(m.exp_year % 100) }}</td>
+          <td>
+            <form method="post" style="display:inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="{{ m.id }}">
+              <button class="btn btn-light" type="submit" style="padding:6px 12px">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p style="color:var(--tm-gray); margin-bottom:14px">You have no saved cards.</p>
+      {% endif %}
+
+      <h3 style="margin:24px 0 10px">Add a new card</h3>
+      <form class="form-card" style="max-width:520px" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field">
+          <label for="brand">Card type</label>
+          <select id="brand" name="brand">
+            <option>Visa</option><option>Mastercard</option><option>Amex</option><option>Discover</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="number">Card number</label>
+          <input id="number" type="text" name="number" inputmode="numeric" required>
+        </div>
+        <div class="field">
+          <label for="holder">Name on card</label>
+          <input id="holder" type="text" name="holder" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="exp_month">Expiry month</label>
+            <input id="exp_month" type="number" name="exp_month" min="1" max="12" required>
+          </div>
+          <div class="field">
+            <label for="exp_year">Expiry year</label>
+            <input id="exp_year" type="number" name="exp_year" min="2026" max="2040" required>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Card</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

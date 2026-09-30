@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% block title %}{{ tour.name }} by {{ tour.operator_name }} with {{ tour.review_count }} Tour Reviews - TourRadar{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs">
+    <a href="/">Home</a> &nbsp;&#8805;&nbsp;
+    {% for c in tour.countries_list[:1] %}
+    <a href="/srp/d-{{ c|lower|replace(' ', '-') }}">{{ c }} Tours</a>
+    {% endfor %}
+    {% if tour.cities_list %}
+    &nbsp;&#8805;&nbsp; {{ tour.cities_list[0] }}
+    {% endif %}
+  </div>
+
+  <div class="td-layout">
+    <div class="td-main">
+      {% set gallery = tour.days_list[:3] %}
+      <div class="gallery">
+        <img src="/static/images/{{ tour.gallery_main or tour.hero }}" alt="{{ tour.name }}">
+        <img src="/static/images/{{ tour.gallery_2 or tour.hero }}" alt="{{ tour.name }}">
+        <img src="/static/images/{{ tour.gallery_3 or tour.hero }}" alt="{{ tour.name }}">
+      </div>
+
+      <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+        <span class="style-tag">{{ tour.style }}</span>
+        {% if tour.instant_confirm %}<span class="flag instant">Instant Confirmation</span>{% endif %}
+      </div>
+      <h1 style="margin-top:8px;">{{ tour.name }}</h1>
+      <div class="rating-line" style="font-size:14px;">
+        <span class="rating-badge" style="font-size:14px;">{{ '%.1f'|format(tour.rating) }}</span>
+        <span>({{ tour.review_count }} reviews)</span>
+        {% if tour.code %}<span>&bull; Tour code: {{ tour.code }}</span>{% endif %}
+      </div>
+
+      <div class="attr-grid">
+        {% for a in tour.attributes_list %}
+        <div class="attr">
+          <div class="ico">{% if 'Culture' in a.name %}C{% elif 'Hiking' in a.name %}H{% elif 'River' in a.name %}R{% elif 'Safari' in a.name %}S{% elif 'Group' in a.name or 'Tour' in a.name %}G{% elif 'Guided' in a.name %}G{% elif 'Intensity' in a.name %}I{% else %}&#10003;{% endif %}</div>
+          <div><b>{{ a.name }}</b><span>{{ a.tip }}</span></div>
+        </div>
+        {% endfor %}
+        {% if tour.group_max %}
+        <div class="attr"><div class="ico">&#128101;</div><div><b>Group Size {{ tour.group_min or 1 }} - {{ tour.group_max }}</b></div></div>
+        {% endif %}
+        {% if tour.min_age %}
+        <div class="attr"><div class="ico">&#127879;</div><div><b>Ages {{ tour.min_age }}+</b></div></div>
+        {% endif %}
+      </div>
+
+      <div class="panel">
+        <h2>Itinerary</h2>
+        <button class="btn btn-outline btn-sm" type="button" data-expand-all>Expand all</button>
+        {% if tour.intro %}
+        <p style="margin-top:12px; color:var(--text-2);">{{ tour.intro[:600] }}</p>
+        {% endif %}
+        {% for d in tour.days_list %}
+        <div class="day-item">
+          <div class="day-head">
+            <div class="n">{{ d.day }}</div>
+            <h3>{{ d.title }}</h3>
+            <span aria-hidden="true">&#9662;</span>
+          </div>
+          <div class="day-body">
+            {% if d.description %}<p>{{ d.description }}</p>{% endif %}
+            {% if d.meals %}<h4>Meals</h4><p>{{ d.meals }}</p>{% endif %}
+            {% if d.included %}<h4>Included Activities</h4><ul>{% for x in d.included %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+            {% if d.optional %}<h4>Optional Activities</h4><ul>{% for x in d.optional %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+            {% if d.landmarks %}<h4>Landmarks</h4><ul>{% for x in d.landmarks %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>What's Included</h2>
+          {% for cat, items in tour.included_dict.items() %}
+          <h4 style="margin-top:8px;">{{ cat }}</h4>
+          {% if items %}
+          <ul>{% for x in items %}<li>{{ x }}</li>{% endfor %}</ul>
+          {% endif %}
+          {% else %}
+          <p style="color:var(--text-3);">Expand All for details on every inclusion.</p>
+          {% endfor %}
+        </div>
+        <div class="panel">
+          <h2>What's Not Included</h2>
+          {% for cat, items in tour.not_included_dict.items() %}
+          <h4 style="margin-top:8px;">{{ cat }}</h4>
+          {% if items %}
+          <ul>{% for x in items %}<li>{{ x }}</li>{% endfor %}</ul>
+          {% endif %}
+          {% else %}
+          <p style="color:var(--text-3);">Flights, insurance and optional activities are not included.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Good to Know</h2>
+        <p><b>Tour ID:</b> {{ tour.id }}</p>
+        {% set gtk = tour.gtk_dict %}
+        {% if gtk.currencies %}
+        <h4>Currencies</h4>
+        <p>{{ gtk.currencies }}</p>
+        {% endif %}
+        {% if gtk.plugs %}
+        <h4>Plugs &amp; Adapters</h4>
+        <p>{{ gtk.plugs }}</p>
+        {% endif %}
+        {% if gtk.vaccines %}
+        <h4>Vaccines</h4>
+        <p>{{ gtk.vaccines }}</p>
+        {% endif %}
+        {% if gtk.visa %}
+        <h4>Visa</h4>
+        <p>{{ gtk.visa }}</p>
+        {% endif %}
+      </div>
+
+      {% if moments %}
+      <div class="panel">
+        <h2>Traveler Moments</h2>
+        <div class="grid-cards">
+          {% for m in moments %}
+          <div class="moment-card">
+            <img src="/static/images/{{ m.image }}" alt="{{ m.tour_name }}">
+            <div class="who"><b>{{ m.author }}</b> &bull; {{ m.tour_name }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="panel">
+        <div class="section-head">
+          <h2>Traveler Reviews</h2>
+          <a class="more" href="/t/{{ tour.id }}/reviews">View all {{ all_reviews }} reviews</a>
+        </div>
+        <div class="rating-line" style="font-size:15px;">
+          <span class="rating-badge" style="font-size:16px;">{{ '%.1f'|format(tour.rating) }}</span>
+          <span>Overall rating based on {{ tour.review_count }} Reviews</span>
+        </div>
+        <div class="subratings">
+          {% for k, v in tour.subratings_dict.items() %}
+          <div class="subrating"><b>{{ v }}</b>{{ k }}</div>
+          {% endfor %}
+        </div>
+        {% for r in reviews %}
+        <div class="review">
+          <div class="head">
+            {% if r.avatar %}
+            <img class="avatar" src="/static/images/{{ r.avatar }}" alt="{{ r.author }}">
+            {% else %}
+            <div class="avatar" style="background:var(--bg-blue); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-weight:700;">{{ r.initials or r.author[:1] }}</div>
+            {% endif %}
+            <div>
+              <div class="name">{{ r.author }}</div>
+              <div class="when">{{ r.month }}{% if r.traveled_month %} &bull; Traveled in {{ r.traveled_month }}{% endif %}{% if r.guide_name %} &bull; Led by {{ r.guide_name }}{% endif %}</div>
+            </div>
+            <span class="score">{{ '%.1f'|format(r.rating) }}</span>
+          </div>
+          {% if r.title %}<b>{{ r.title }}</b>{% endif %}
+          <div class="body">{{ r.body }}</div>
+          {% if r.photos_list %}
+          <div class="photos">
+            {% for p in r.photos_list[:3] %}
+            <img src="/static/images/{{ p }}" alt="Traveler photo">
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if r.reply %}
+          <div class="reply"><b>Reply from: {{ r.reply_by or tour.operator_name }}</b><br>{{ r.reply }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="panel" id="ask">
+        <h2>What our customers ask about this tour</h2>
+        <form method="post" action="/t/{{ tour.id }}/ask" class="form-grid" style="grid-template-columns:1fr; margin-bottom:14px;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="field">
+            <label>Ask the operator a question</label>
+            <textarea name="question" rows="2" placeholder="Type your question about this tour..." required style="width:100%; border:1px solid var(--border); border-radius:6px; padding:9px 10px; font:inherit;"></textarea>
+          </div>
+          <div class="field" style="max-width:320px;">
+            <label>Your name</label>
+            <input name="asker" placeholder="Name" value="{{ current_user.display_name if current_user.is_authenticated else '' }}">
+          </div>
+          <div><button class="btn btn-sm" type="submit">Submit question</button></div>
+        </form>
+        <p style="font-size:12px; color:var(--text-3);">The content in our FAQ section is subject to change.</p>
+      {% if qa %}
+        {% for q in qa %}
+        <div class="review">
+          <div class="head">
+            <div class="avatar" style="background:var(--bg-blue); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-weight:700;">{{ q.asker[:1] if q.asker else 'Q' }}</div>
+            <div>
+              <div class="name">{{ q.asker }}</div>
+              <div class="when">Asked on {{ q.asked_date }}{% if q.tags %} &bull; {{ q.tag_list|join(', ') }}{% endif %}</div>
+            </div>
+          </div>
+          <div class="body">{{ q.question }}</div>
+          {% if q.answer %}
+          <div class="reply"><b>{{ q.answer_by }}</b> &bull; {{ q.answer_date }}<br>{{ q.answer }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if similar %}
+      <div class="panel">
+        <h2>Keep Exploring {{ tour.countries_list[0] if tour.countries_list else 'the World' }}</h2>
+        <div class="grid-cards">
+          {% for t in similar %}
+          <div class="mini-card">
+            <a href="/t/{{ t.id }}"><img src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+            <div class="inner">
+              <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+              <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span> ({{ t.review_count }})</div>
+              <div class="price">{{ t.duration_days }} days from {{ money(t.current_price) }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <aside>
+      <div class="price-box">
+        <div class="from">From</div>
+        {% if tour.price_from and tour.price_from != tour.current_price %}
+        <div class="was">{{ money(tour.price_from) }}</div>
+        {% endif %}
+        <div class="big">{{ money(tour.current_price) }} <span class="per">per person</span></div>
+        {% if tour.discount_pct %}<span class="flag discount">-{{ tour.discount_pct }}%</span>{% endif %}
+        <a class="btn btn-lg" href="#dates" data-dates-toggle>See dates &amp; prices</a>
+        <button class="btn btn-outline" type="button" onclick="window.location='/contact'">Contact Operator</button>
+        <div class="note">Price based on {{ tour.price_basis or 'Shared Room' }}</div>
+        <div class="note">You will be charged {{ money2(tour.current_price * 0.1) }} today with deposit.</div>
+        <form method="post" action="/wishlist/toggle/{{ tour.id }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="/t/{{ tour.id }}">
+          <button class="btn btn-ghost" type="submit">{{ '♥ Saved' if in_wishlist else '♡ Save to wishlist' }}</button>
+        </form>
+      </div>
+
+      <div class="price-box" id="dates" data-dates-panel style="margin-top:16px;">
+        <h2>Dates &amp; Prices</h2>
+        {% for d in deps %}
+        <div class="dep-row{{ ' dep-extra' if loop.index > 10 }}">
+          <div class="dates">
+            <b>From {{ d.start_weekday }}, {{ d.start_label }}</b>
+            <span>To {{ d.end_weekday }}, {{ d.end_label }}</span>
+          </div>
+          <div class="flags">
+            {% if d.instant %}<span class="flag instant">Instant Confirmation</span>{% endif %}
+            {% if d.discount_pct %}<span class="flag discount">-{{ d.discount_pct }}%</span>{% endif %}
+            {% if d.guaranteed %}<span class="flag guaranteed">Guaranteed departure</span>{% endif %}
+            {% if d.status == 'sold_out' %}<span class="flag soldout">Sold out</span>{% endif %}
+          </div>
+          <div class="price">
+            {% if d.was_price and d.was_price != d.price %}<s>{{ money(d.was_price) }}</s>{% endif %}
+            <b>{{ money(d.price) }}</b>
+            <span style="color:var(--text-3); font-size:11px;">per person</span>
+          </div>
+          {% if d.status == 'available' %}
+          <a class="btn btn-sm" href="/book-now/{{ tour.id }}?date={{ d.start_date }}&type=book&travellers[1]=2">Confirm Dates</a>
+          {% else %}
+          <span class="btn btn-outline btn-sm" style="opacity:.6;">See Similar Tours</span>
+          {% endif %}
+        </div>
+        {% else %}
+        <p style="color:var(--text-3);">No upcoming departures are currently listed for this tour.</p>
+        {% endfor %}
+        {% if deps|length > 10 %}
+        <button class="btn btn-outline btn-sm" type="button" data-dates-more style="margin-top:8px;">Show more dates</button>
+        {% endif %}
+      </div>
+
+      <div class="price-box" style="margin-top:16px;">
+        <h2>Operated by</h2>
+        <div class="op-chip">
+          {% if tour.operator.logo %}
+          <img src="/static/images/{{ tour.operator.logo }}" alt="{{ tour.operator_name }}">
+          {% endif %}
+          <div>
+            <b><a href="/o/{{ tour.operator.slug }}">{{ tour.operator_name }}</a></b>
+            {% if tour.operator.badge %}
+            <div><span class="badge {{ tour.operator.badge }}">{{ tour.operator.badge|title }} Operator</span></div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="summary-line"><span>Rating</span><span>{{ '%.1f'|format(tour.operator.rating) }} ({{ '{:,}'.format(tour.operator.reviews_count) }} reviews)</span></div>
+        <div class="summary-line"><span>Response time</span><span>{{ tour.operator.response_time or 'within 1 day' }}</span></div>
+        <div class="summary-line"><span>Response rate</span><span>{{ tour.operator.response_rate or '80%' }}</span></div>
+        <div class="summary-line"><span>Cancellation policy</span><span><a href="/cancellation-policy">Learn more</a></span></div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

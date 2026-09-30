@@ -1,0 +1,1210 @@
+{
+  "Zara--0": {
+    "task": "I want an inexpensive dress in XS, and I am choosing between the Z1975 Denim Midi Halter Dress and the Animal Print Draped Tulle Dress. Compare their prices, colors and XS availability, then leave one of the brown denim dress in my guest bag. Tell me the total including delivery.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 565059480,
+            "color_id": 9,
+            "size_id": 35,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p07957576\\.html",
+      "-p07846403\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "z1975.{0,65}69\\.90"
+      ],
+      [
+        "fact 2",
+        "z1975.{0,100}brown.{0,40}xs.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 3",
+        "animal print.{0,65}69\\.90"
+      ],
+      [
+        "fact 4",
+        "animal print.{0,100}leopard.{0,40}xs.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 5",
+        "(?:total|delivery).{0,35}74\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--1": {
+    "task": "Sign in as alice.j@test.com (password TestPass123!). I am choosing an evening dress between the Midi Scarf Dress and the Chiffon Halter Midi Dress with Tie. Compare their prices and colors, save the less expensive one to my wishlist, and tell me which you saved and how much cheaper it is. Leave my bag as it is.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_id": 545406123,
+            "color_id": 7,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p08100038\\.html",
+      "-p07521308\\.html",
+      "/us/en/wishlist"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "midi scarf.{0,50}229(?:\\.00)?.{0,25}ecru"
+      ],
+      [
+        "fact 2",
+        "chiffon.{0,65}79\\.90.{0,25}black"
+      ],
+      [
+        "fact 3",
+        "(?:149\\.10.{0,30}(?:cheaper|less|sav)|sav.{0,30}149\\.10)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--2": {
+    "task": "I need two matching red shoulder bags as gifts, each under $60. Compare the Elongated Shoulder Bag and the Oval Shoulder Bag for price and color options, then put two of the eligible red bag in my guest bag. Tell me the chosen color and the total including delivery.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 545399254,
+            "color_id": 49,
+            "size_id": 225,
+            "quantity": 2,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p16214810\\.html",
+      "-p16821710\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "oval.{0,35}59\\.90.{0,25}(?:dark )?tan"
+      ],
+      [
+        "fact 2",
+        "elongated.{0,40}49\\.90"
+      ],
+      [
+        "fact 3",
+        "(?:two-tone.{0,20}red.{0,20}black|red.{0,20}black.{0,20}two-tone)"
+      ],
+      [
+        "fact 4",
+        "(?:total|delivery).{0,35}104\\.75"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--3": {
+    "task": "My daughter needs a dress for a party next week in size 6\u20137 years. Compare the Ruffled Romantic Dress and the Plaid A-Line Dress for price and availability in that size, and put one of the option available now in my guest bag. Tell me why you chose it and the delivered total.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 549296705,
+            "color_id": 133,
+            "size_id": 672,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p05598702\\.html",
+      "-p06096811\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "ruffled romantic.{0,35}49\\.90.{0,70}(?:coming soon|unavailable|not.{0,8}stock)"
+      ],
+      [
+        "fact 2",
+        "plaid a.line.{0,35}45\\.90.{0,70}(?:in stock|available)"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}50\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--4": {
+    "task": "I need charcoal jeans in US size 32 and want to keep the item price below $60. Compare Basic Slim Fit Jeans with Waxed-Effect Straight-Fit Jeans for price and availability in that color and size. Put one of the qualifying pair in my guest bag and tell me the delivered total.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 545418796,
+            "color_id": 84,
+            "size_id": 349,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p06688333\\.html",
+      "-p00774333\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "waxed.effect.{0,55}99\\.90.{0,45}charcoal.{0,35}32.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 2",
+        "basic slim.{0,45}49\\.90.{0,45}charcoal.{0,35}32.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}54\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--5": {
+    "task": "Sign in as carol.d@test.com (password TestPass123!). I want the Plaid Belted Trench Coat in S along with the Plaid A-Line Dress already in my bag. Order them for delivery to my saved HOME address using card 4111111111111111 expiring 09/27. Tell me the order number, total and the two items confirmed.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[3]"
+        ],
+        "added": [],
+        "updated": {}
+      },
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 549296705,
+            "color_name": "Ecru / Blue",
+            "size_name": "8-9 years (51,6 INCHES)",
+            "product_name": "PLAID A-LINE DRESS",
+            "unit_price": 4590,
+            "quantity": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 559622788,
+            "color_name": "Brown-Blue",
+            "size_name": "S",
+            "product_name": "PLAID BELTED TRENCH COAT",
+            "unit_price": 12900,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 3,
+            "number": "80030000005",
+            "status": "placed",
+            "placed_at": "2026-09-29",
+            "shipping_cents": 495,
+            "subtotal_cents": 17490,
+            "total_cents": 17985,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Carol Davis",
+                "line1": "1104 Wilshire Blvd",
+                "city": "Santa Monica",
+                "state": "CA",
+                "zip": "90401",
+                "phone": "310-555-0166"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p08073247\\.html",
+      "/shop/confirm/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "plaid belted trench coat.{0,20}\\bs\\b"
+      ],
+      [
+        "fact 2",
+        "plaid a.line dress"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}179\\.85"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "Zara--6": {
+    "task": "I can shop on Saturday evening at either Century City Mall or South Coast Plaza Mall. Compare their Saturday closing times and tell me which leaves more time if I arrive at 20:30, how much time I would have there, and its address.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {},
+    "paths": [
+      "-s3612",
+      "-s3265"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "century city.{0,55}(?:22:00|10\\s*p\\.?m)"
+      ],
+      [
+        "fact 2",
+        "south coast.{0,55}(?:21:00|9\\s*p\\.?m)"
+      ],
+      [
+        "fact 3",
+        "(?:90 minutes|1\\.5 hours|hour and a half)"
+      ],
+      [
+        "fact 4",
+        "10250.{0,5}santa monica.{0,20}(?:boulevard|blvd)"
+      ],
+      [
+        "fact 5",
+        "los angeles.{0,20}90067"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--7": {
+    "task": "I am planning a Monday shopping stop in Santa Monica or San Francisco. Find the stores in ZIPs 90401 and 94108, compare their Monday opening times, and recommend the one that opens earlier. Give its street address and phone number so I can plan the visit.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {},
+    "paths": [
+      "-s3322",
+      "-s3441"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "santa monica.{0,50}(?:11:00|11\\s*a\\.?m)"
+      ],
+      [
+        "fact 2",
+        "(?:san francisco.{0,40}(?:10:00|10\\s*a\\.?m))"
+      ],
+      [
+        "fact 3",
+        "250.{0,5}post (?:street|st)"
+      ],
+      [
+        "fact 4",
+        "94108"
+      ],
+      [
+        "fact 5",
+        "833[ -]?247[ -]?2473"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--8": {
+    "task": "For a Sunday visit in New York, I am considering 5th Av Flatiron and Garden Roosevelt Field Mall. Compare their Sunday hours and tell me which stays open later, with its address and how much later it closes.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {},
+    "paths": [
+      "-s3037",
+      "-s351"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "flatiron.{0,40}(?:11:00|11\\s*a\\.?m).{0,8}(?:20:00|8\\s*p\\.?m)"
+      ],
+      [
+        "fact 2",
+        "roosevelt.{0,55}(?:11:00|11\\s*a\\.?m).{0,8}(?:19:00|7\\s*p\\.?m)"
+      ],
+      [
+        "fact 3",
+        "flatiron.{0,35}(?:1 hour|an hour).{0,10}later"
+      ],
+      [
+        "fact 4",
+        "101.{0,5}(?:fifth|5th) avenue"
+      ],
+      [
+        "fact 5",
+        "10003"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--9": {
+    "task": "Sign in as alice.j@test.com (password TestPass123!). Please revise my bag for a boots-and-bag outfit: keep one pair of the boots already there, remove the scarf dress, and add one red Elongated Shoulder Bag. Tell me the final items, quantities and total including delivery; leave the order unplaced.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[1]"
+        ],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "guest_token": null,
+            "product_id": 545399254,
+            "color_id": 49,
+            "size_id": 225,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {
+          "[2]": {
+            "quantity": 1
+          }
+        }
+      }
+    },
+    "paths": [
+      "/us/en/shop$",
+      "-p16821710\\.html"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "leather wide heel boots"
+      ],
+      [
+        "fact 2",
+        "elongated shoulder bag.{0,20}red"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}233\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--10": {
+    "task": "Sign in as alice.j@test.com (password TestPass123!). Add one red Elongated Shoulder Bag to my existing bag and order everything to my saved WORK address, using card 4242424242424242 expiring 11/27. Confirm the order number, total, delivery ZIP and the items with their quantities.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[1]",
+          "[2]"
+        ],
+        "added": [],
+        "updated": {}
+      },
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 578162617,
+            "color_name": "Ecru",
+            "size_name": "XS",
+            "product_name": "MIDI SCARF DRESS",
+            "unit_price": 22900,
+            "quantity": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 545480431,
+            "color_name": "Black",
+            "size_name": "7\u00bd",
+            "product_name": "LEATHER WIDE HEEL BOOTS",
+            "unit_price": 17900,
+            "quantity": 2
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 545399254,
+            "color_name": "Red",
+            "size_name": "ONE SIZE ONLY",
+            "product_name": "ELONGATED SHOULDER BAG",
+            "unit_price": 4990,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 1,
+            "number": "80010000005",
+            "status": "placed",
+            "placed_at": "2026-09-29",
+            "shipping_cents": 495,
+            "subtotal_cents": 63690,
+            "total_cents": 64185,
+            "payment_last4": "4242",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Alice Johnson",
+                "line1": "425 W 14th St",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10014",
+                "phone": "212-555-0184"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p16821710\\.html",
+      "/shop/confirm/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bwork\\b.{0,20}10014"
+      ],
+      [
+        "fact 2",
+        "midi scarf dress.{0,20}xs"
+      ],
+      [
+        "fact 3",
+        "2.{0,30}leather wide heel boots"
+      ],
+      [
+        "fact 4",
+        "red elongated shoulder bag"
+      ],
+      [
+        "fact 5",
+        "(?:total|delivery).{0,35}641\\.85"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "Zara--11": {
+    "task": "Sign in as alice.j@test.com (password TestPass123!). I am reconciling my two September orders. For each, give the order number, status, items, subtotal, delivery charge and total, and tell me the combined amount charged. Leave my account unchanged.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {},
+    "paths": [
+      "/orders/8004193147",
+      "/orders/8004128041"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "8004193147.{0,25}shipped.{0,65}printed sequin dress.{0,30}219(?:\\.00)?.{0,25}4\\.95.{0,25}223\\.95"
+      ],
+      [
+        "fact 2",
+        "8004128041.{0,25}delivered.{0,60}shoulder pad zip jacket.{0,40}leather puffed.body dress.{0,35}538\\.90.{0,30}0\\.00.{0,30}538\\.90"
+      ],
+      [
+        "fact 3",
+        "(?:combined|both|altogether).{0,30}762\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--12": {
+    "task": "Sign in as alice.j@test.com (password TestPass123!). I want to narrow my wishlist to dresses for an evening event. Remove the cashmere cardigan and shoulder bag already saved, keep the sequin dress, and add the black Chiffon Halter Midi Dress with Tie. Confirm the two remaining dresses and their prices.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "wishlist_items": {
+        "removed": [
+          "[3]",
+          "[2]"
+        ],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_id": 545406123,
+            "color_id": 7,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/us/en/wishlist",
+      "-p07521308\\.html"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "draped sequin midi dress.{0,30}219(?:\\.00)?"
+      ],
+      [
+        "fact 2",
+        "chiffon halter midi dress.{0,45}79\\.90"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--13": {
+    "task": "Create an account for Morgan Reed using morgan.reed@zara.example and password TravelDress2026!. Order one Midi Scarf Dress in XS to Morgan Reed, 25 Lake St, Chicago, IL 60601, phone 312-555-0162, using card 5555777788889999 expiring 08/28. Confirm the order number, delivered total and item.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 578162617,
+            "color_name": "Ecru",
+            "size_name": "XS",
+            "product_name": "MIDI SCARF DRESS",
+            "unit_price": 22900,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 5,
+            "number": "80050000005",
+            "status": "placed",
+            "placed_at": "2026-09-29",
+            "shipping_cents": 495,
+            "subtotal_cents": 22900,
+            "total_cents": 23395,
+            "payment_last4": "9999",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Morgan Reed",
+                "line1": "25 Lake St",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60601",
+                "phone": "312-555-0162"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "morgan.reed@zara.example",
+            "display_name": "Morgan Reed",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$.{53}"
+            },
+            "is_benchmark": 0,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/logon.*register",
+      "-p08100038\\.html",
+      "/shop/confirm/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "midi scarf dress.{0,35}xs"
+      ],
+      [
+        "fact 2",
+        "(?:total|delivery).{0,35}233\\.95"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "Zara--14": {
+    "task": "Sign in as bob.c@test.com (password TestPass123!). I have moved to 25 Lake St, Chicago, IL 60601. Replace my old HOME address with a new HOME address for Bob Chen at that location, phone 773-555-0137, and make it the default. Confirm that future orders will use the new address and the old one is gone.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "addresses": {
+        "removed": [
+          "[3]"
+        ],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "label": "HOME",
+            "full_name": "Bob Chen",
+            "line1": "25 Lake St",
+            "line2": null,
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601",
+            "phone": "773-555-0137",
+            "is_default": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account/addresses"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "home.{0,20}bob chen"
+      ],
+      [
+        "fact 2",
+        "25 lake (?:st|street)"
+      ],
+      [
+        "fact 3",
+        "chicago.{0,15}60601"
+      ],
+      [
+        "fact 4",
+        "773[ -]?555[ -]?0137"
+      ],
+      [
+        "fact 5",
+        "default"
+      ],
+      [
+        "fact 6",
+        "old.{0,30}(?:removed|deleted|gone)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--15": {
+    "task": "I want one red Elongated Shoulder Bag delivered with the Plaid A-Line Dress already saved in my account. Start by adding the bag as a guest, then sign in as carol.d@test.com (password TestPass123!) and order both to my HOME address with card 4111111111111111 expiring 09/27. Confirm that the guest item was retained, the order number and the delivered total.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[3]"
+        ],
+        "added": [],
+        "updated": {}
+      },
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 549296705,
+            "color_name": "Ecru / Blue",
+            "size_name": "8-9 years (51,6 INCHES)",
+            "product_name": "PLAID A-LINE DRESS",
+            "unit_price": 4590,
+            "quantity": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 545399254,
+            "color_name": "Red",
+            "size_name": "ONE SIZE ONLY",
+            "product_name": "ELONGATED SHOULDER BAG",
+            "unit_price": 4990,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 3,
+            "number": "80030000005",
+            "status": "placed",
+            "placed_at": "2026-09-29",
+            "shipping_cents": 495,
+            "subtotal_cents": 9580,
+            "total_cents": 10075,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Carol Davis",
+                "line1": "1104 Wilshire Blvd",
+                "city": "Santa Monica",
+                "state": "CA",
+                "zip": "90401",
+                "phone": "310-555-0166"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p16821710\\.html",
+      "/us/en/logon",
+      "/shop/confirm/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "(?:guest.{0,80}(?:retained|kept|merged)|retained.{0,40}guest)"
+      ],
+      [
+        "fact 2",
+        "plaid a.line dress"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}100\\.75"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "Zara--16": {
+    "task": "I am scheduling a Sunday video shopping call with family at Ala Moana Center in Honolulu and Fashion Square Mall in Scottsdale. Check both stores' Sunday hours and time zones and give a time window in UTC when both are open. Use the fixed offsets UTC\u221210 for Honolulu and UTC\u22127 for Scottsdale.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {},
+    "paths": [
+      "-s10285",
+      "-s6422"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "ala moana.{0,30}10:00.{0,5}20:00.{0,45}(?:hawaii|honolulu).{0,20}(?:utc.?10)"
+      ],
+      [
+        "fact 2",
+        "scottsdale.{0,30}10:00.{0,5}18:00.{0,45}phoenix.{0,20}utc.?7"
+      ],
+      [
+        "fact 3",
+        "20:00.{0,20}(?:sunday|sun).{0,20}01:00.{0,20}(?:monday|mon)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--17": {
+    "task": "I need a white shirt in S for work and am choosing between the Slim Fit Shirt and the Relaxed Fit Pocket Shirt. Compare their prices and S availability, put one of the cheaper white shirt in my guest bag, and tell me the total including delivery.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 545399609,
+            "color_id": 76,
+            "size_id": 307,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p04391804\\.html",
+      "-p04408147\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "relaxed fit pocket shirt.{0,20}79\\.90.{0,30}white s.{0,20}(?:in stock|available)"
+      ],
+      [
+        "fact 2",
+        "(?<!relaxed )slim fit shirt.{0,20}59\\.90.{0,30}white s.{0,20}(?:in stock|available)"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}64\\.85"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--18": {
+    "task": "I want two different 80 ml fragrances as a gift set: Zara Illusion Radiance and Zaraillusion Serenity. Check that both are available, add one of each to my guest bag, and tell me their individual prices and the combined total with delivery.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 556189100,
+            "color_id": 166,
+            "size_id": 845,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 545449879,
+            "color_id": 165,
+            "size_id": 844,
+            "quantity": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p20110961\\.html",
+      "-p20110955\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "radiance.{0,30}39\\.90.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 2",
+        "serenity.{0,30}39\\.90.{0,30}(?:in stock|available)"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}84\\.75"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--19": {
+    "task": "Sign in as bob.c@test.com (password TestPass123!). I am choosing between the burgundy 100% Leather Puffed-Body Dress in S and the black Chiffon Halter Midi Dress with Tie in S for an event next week. Check their availability and prices, save the available option to my wishlist, and explain the choice. Leave my bag unchanged.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "product_id": 545406123,
+            "color_id": 7,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p05479900\\.html",
+      "-p07521308\\.html",
+      "/us/en/wishlist"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "leather puffed.body dress.{0,20}459(?:\\.00)?.{0,35}burgundy s.{0,25}(?:coming soon|unavailable)"
+      ],
+      [
+        "fact 2",
+        "chiffon halter midi dress.{0,40}79\\.90.{0,30}black s.{0,20}(?:in stock|available)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--20": {
+    "task": "I need two pairs of inexpensive jeans in Ecru, US size 30. Compare Lightweight Regular Fit Jeans and Loose Fit Jeans for price and available colors, then put two of the Ecru option under $40 per pair in my guest bag. Confirm the color, size and delivered total.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "product_id": 555487955,
+            "color_id": 104,
+            "size_id": 481,
+            "quantity": 2,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "-p00774307\\.html",
+      "-p09306301\\.html",
+      "/us/en/shop$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "lightweight regular fit jeans.{0,20}35\\.94.{0,35}light blue.{0,15}ecru.{0,20}charcoal gray"
+      ],
+      [
+        "fact 2",
+        "loose fit jeans.{0,20}69\\.90"
+      ],
+      [
+        "fact 3",
+        "oyster.white.{0,25}dark indigo.{0,30}navy blue.{0,30}faded black"
+      ],
+      [
+        "fact 4",
+        "(?:total|delivery).{0,35}76\\.83"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Zara--21": {
+    "task": "Sign in as dana.k@test.com (password TestPass123!). Please turn my existing bag into a fragrance-and-bag gift order: two of the perfume, three of the shoulder bag and no polo shirt. Order those items to my HOME address using card 4242424242424242 expiring 11/27. Confirm the quantities, order number and total including delivery.",
+    "initial_digest": "d2e9a5b7d70da3dc4daa46ce42c38a6c69e9acc1e26fb2a694e2f67777ab9f4e",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[4]",
+          "[5]",
+          "[6]"
+        ],
+        "added": [],
+        "updated": {}
+      },
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 556189100,
+            "color_name": "",
+            "size_name": "ONE SIZE ONLY",
+            "product_name": "ZARA ILLUSION RADIANCE EAU DE PARFUM 80 ML (2.71 FL OZ)",
+            "unit_price": 3990,
+            "quantity": 2
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 5,
+            "product_id": 545399254,
+            "color_name": "Two-tone",
+            "size_name": "ONE SIZE ONLY",
+            "product_name": "ELONGATED SHOULDER BAG",
+            "unit_price": 4990,
+            "quantity": 3
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 4,
+            "number": "80040000005",
+            "status": "placed",
+            "placed_at": "2026-09-29",
+            "shipping_cents": 495,
+            "subtotal_cents": 22950,
+            "total_cents": 23445,
+            "payment_last4": "4242",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Dana Kim",
+                "line1": "2320 Kapiolani Blvd",
+                "city": "Honolulu",
+                "state": "HI",
+                "zip": "96815",
+                "phone": "808-555-0148"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shop/confirm/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2.{0,30}radiance"
+      ],
+      [
+        "fact 2",
+        "3.{0,25}two.tone elongated shoulder bag"
+      ],
+      [
+        "fact 3",
+        "(?:total|delivery).{0,35}234\\.45"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  }
+}

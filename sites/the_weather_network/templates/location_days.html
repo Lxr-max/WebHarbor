@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ loc.name }}, {{ loc.prov_code }} {{ "7 Day" if tab == "7-days" else "14 Day" }} Forecast - The Weather Network{% endblock %}
+{% from '_fx_header.html' import fx_header %}
+{% block content %}
+{% call fx_header(loc, obs, tab, updated) %}
+  <h2 style="font-size:16px;font-weight:600">Temperature Chart</h2>
+  <div class="day-strip">
+    {% for d in days %}
+    <div class="day-cell">
+      <div class="dc-day">{{ d.day_name }}</div>
+      <div class="dc-date">{{ d.date_label }}</div>
+      <img src="{{ d.day_icon|wxicon }}" alt="{{ d.day_text }}">
+      <div class="dc-high">{{ d.day_temp|temp(unit) }}</div>
+      <div class="dc-night">Night {{ d.night_temp|temp(unit) }}</div>
+      <div class="dc-pop">{{ d.pop }}%{% if d.rain_range %} {{ d.rain_range }}mm{% endif %}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% for d in days %}
+  <h3 style="font-size:17px;font-weight:600;margin:18px 0 2px;color:#fff">{{ d.full_date_label }}</h3>
+  <div class="period-rows">
+    {% set p = periods[loop.index0] %}
+    {% for label, per in [('Morning', p.morning), ('Afternoon', p.afternoon), ('Evening', p.evening), ('Overnight', p.overnight)] %}
+      {% if per.temp is not none %}
+      <div class="period-row">
+        <div class="pr-label">{{ label }}</div>
+        <div class="pr-main">
+          <img src="{{ per.icon|wxicon }}" alt="{{ per.text }}">
+          <span class="pr-temp">{{ per.temp|temp(unit) }}</span>
+          <span class="small" style="opacity:.85">{{ per.text }} · Feels {{ per.feels|temp(unit) }}</span>
+        </div>
+        <div class="pr-meta">
+          Wind {{ per.wind_speed|speed(unit) }} {{ per.wind_dir }} · Gust {{ per.wind_gust|speed(unit) }}<br>
+          Humidity {{ per.rh }}% · P.O.P. {{ per['pop'] }}%
+          {% if per.rain or per.snow %} · {{ precip_label(per.rain, per.rain_range, per.snow, per.snow_range, unit) }}{% endif %}
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+{% endcall %}
+{% endblock %}

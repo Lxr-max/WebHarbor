@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}My Profile | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>My Profile</h1>
+  <nav class="account-nav">
+    <a href="/jobseeker/profile" class="active">Profile</a>
+    <a href="/jobseeker/resume">Resume</a>
+    <a href="/jobseeker/saved-jobs">Saved Jobs</a>
+    <a href="/jobseeker/applications">Applications</a>
+    <a href="/jobseeker/alerts">Job Alerts</a>
+    <form method="post" action="/authn/logout" class="inline-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="linklike">Log Out</button>
+    </form>
+  </nav>
+</section>
+<section class="account-layout">
+  <form method="post" action="/jobseeker/profile" class="account-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h2>Contact &amp; headline</h2>
+    <label for="p-name">Full name</label>
+    <input id="p-name" type="text" name="name" value="{{ current_user.display_name }}">
+    <label for="p-email">Email (read-only)</label>
+    <input id="p-email" type="email" value="{{ current_user.email }}" disabled>
+    <label for="p-phone">Phone</label>
+    <input id="p-phone" type="text" name="phone" value="{{ prof.phone if prof else '' }}">
+    <label for="p-loc">Location</label>
+    <input id="p-loc" type="text" name="location" value="{{ prof.location if prof else '' }}" placeholder="City, state or ZIP">
+    <label for="p-head">Headline</label>
+    <input id="p-head" type="text" name="headline" value="{{ prof.headline if prof else '' }}" placeholder="e.g. Registered Nurse, BSN — 6 years ICU experience">
+    <label for="p-years">Years of experience</label>
+    <input id="p-years" type="number" name="years" min="0" max="60" value="{{ prof.years_experience if prof else 0 }}">
+    <label class="inline"><input type="checkbox" name="remote" {% if prof and prof.willing_remote %}checked{% endif %}> Open to remote work</label>
+    <label for="p-about">About me</label>
+    <textarea id="p-about" name="about" rows="4">{{ prof.about if prof else '' }}</textarea>
+    <button type="submit" class="btn-green">Save Profile</button>
+  </form>
+  <aside class="account-side">
+    <h2>Phil says</h2>
+    <p>{% if res %}Your resume is {{ ['started','partial','nearly complete','complete'][res.completeness()-1] }} — keep it fresh so employers see your best self.
+       {% else %}You haven’t created a resume yet. <a href="/jobseeker/resume">Build one now</a> so Phil can match you.{% endif %}</p>
+    <p><a href="/jobseeker/alerts">Manage your job alerts</a> · <a href="/jobseeker/applications">{{ app_count }} applications in progress</a></p>
+  </aside>
+</section>
+{% endblock %}

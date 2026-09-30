@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My orders | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>MY ORDERS</h1></div>
+{% if orders %}
+<table class="orders-table" style="padding: 0">
+  <tr><th>ORDER</th><th>DATE</th><th>STATUS</th><th>TOTAL</th><th>ITEMS</th></tr>
+  {% for o in orders %}
+    <tr>
+      <td><a href="/us/en/account/orders/{{ o.number }}">{{ o.number }}</a></td>
+      <td>{{ o.placed_at }}</td>
+      <td class="status-tag">{{ o.status_label }}</td>
+      <td>{{ money(o.total_cents) }}</td>
+      <td>{{ o.items|map(attribute='quantity')|sum }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="center-note">You have no orders yet</p>
+{% endif %}
+{% endblock %}

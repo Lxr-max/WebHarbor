@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Trip.com Guides{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; <b>Guides</b></div>
+<div class="section">
+  <div class="section-head"><h2>Trip.com Guides</h2></div>
+  <div class="card-grid">
+    {% for g in guides %}
+    <a class="guide-card" href="{{ url_for('guide_article', slug=g.slug) }}">
+      {% if g.img %}<img src="{{ url_for('static', filename='images/' + g.img) }}" alt="{{ g.title }}">{% endif %}
+      <div class="gc-body"><div class="hc-name">{{ g.title }}</div><div class="cc-sub">{{ g.city }}</div></div>
+    </a>
+    {% else %}
+    <div class="empty-note">No guides yet.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrap">
+  {% for h in heroes %}
+  <section class="hero">
+    {% if h.image %}<img class="hero-img" src="{{ h.image }}" alt="{{ h.title }}">{% endif %}
+    <div class="hero-body">
+      {% if h.eyebrow %}<p class="hero-eyebrow">{{ h.eyebrow }}</p>{% endif %}
+      <h1 class="hero-title">{{ h.title }}</h1>
+      {% if h.description %}<p class="hero-desc">{{ h.description }}</p>{% endif %}
+      {% if h.cta_label and h.cta_url %}<a class="btn" href="{{ h.cta_url }}">{{ h.cta_label }}</a>{% endif %}
+    </div>
+  </section>
+  {% endfor %}
+
+  <div class="section-head">
+    <h2>Movies</h2>
+    <a class="btn ghost" style="color:var(--disney-dark)" href="{{ url_for('movies') }}">All Movies</a>
+  </div>
+  <div class="grid cols-6">
+    {% for m in movies %}
+    <a class="card" href="{{ url_for('movie_detail', slug=m.slug) }}">
+      <div class="card-img card-poster">
+        {% if img(m.poster) %}<img src="{{ img(m.poster) }}" alt="{{ m.title }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ m.title }}</p>
+        <p class="card-meta">{{ m.release_date or '' }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="section-head">
+    <h2>Shows</h2>
+    <a class="btn ghost" style="color:var(--disney-dark)" href="{{ url_for('shows') }}">All Shows</a>
+  </div>
+  <div class="grid cols-6">
+    {% for s in shows %}
+    <a class="card" href="{{ url_for('show_detail', slug=s.slug) }}">
+      <div class="card-img">
+        {% if img(s.thumb) %}<img src="{{ img(s.thumb) }}" alt="{{ s.title }}">{% endif %}
+      </div>
+      <div class="card-body"><p class="card-title">{{ s.title }}</p></div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="section-head">
+    <h2>Parks &amp; Travel</h2>
+    <a class="btn ghost" style="color:var(--disney-dark)" href="{{ url_for('parks') }}">Explore Parks</a>
+  </div>
+  <div class="grid cols-4">
+    <a class="card" href="{{ url_for('parks') }}">
+      <div class="card-img">{% if parks_teaser %}<img src="{{ parks_teaser }}" alt="Cinderella Castle at Magic Kingdom Park">{% endif %}</div>
+      <div class="card-body"><p class="card-title">Walt Disney World Resort</p>
+      <p class="card-meta">Attractions, entertainment and character experiences</p></div>
+    </a>
+    <a class="card" href="{{ url_for('games') }}">
+      <div class="card-body"><p class="card-title">Games</p>
+      <p class="card-meta">Play the latest Disney games</p></div>
+    </a>
+    <a class="card" href="{{ url_for('live_shows') }}">
+      <div class="card-body"><p class="card-title">Live Shows</p>
+      <p class="card-meta">Broadway musicals and Disney On Ice</p></div>
+    </a>
+    <a class="card" href="{{ url_for('shop') }}">
+      <div class="card-body"><p class="card-title">Shop</p>
+      <p class="card-meta">Clothes, toys, accessories and sale</p></div>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <h2>Shop Disney</h2>
+    <a class="btn ghost" style="color:var(--disney-dark)" href="{{ url_for('shop') }}">Shop All</a>
+  </div>
+  <div class="grid cols-6">
+    {% for p in products %}
+    <a class="card" href="{{ url_for('product_detail', pid=p.pid) }}">
+      <div class="card-img">
+        {% if p.image_list() %}<img src="{{ img(p.image_list()[0]) }}" alt="{{ p.name }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ p.name }}</p>
+        <p class="card-meta">${{ '%.2f'|format(p.price or 0) }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Replace Driver's License{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('account_dashboard') }}">My Account</a> › Replace License</nav>
+  <div class="page-title"><h1>Driver's License Replacement</h1></div>
+  <div class="card">
+    <p>Credential on file: {{ lic.credential_type }} — Class {{ lic.class_type }} ({{ lic.number }}).</p>
+    <p class="hint">A replacement driver's license costs $20.00. Your replacement card arrives by
+    U.S. mail within 5 business days.</p>
+  </div>
+  <form class="flow" method="post" action="{{ url_for('license_replace') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="choice">
+      <legend>Reason for replacement</legend>
+      <label class="radio-row"><input type="radio" name="reason" value="Lost or stolen" checked> Lost or stolen</label>
+      <label class="radio-row"><input type="radio" name="reason" value="Damaged"> Damaged</label>
+      <label class="radio-row"><input type="radio" name="reason" value="Never received"> Never received in the mail</label>
+    </fieldset>
+    <button class="btn" type="submit">Pay $20.00 and order replacement</button>
+  </form>
+</div>
+{% endblock %}

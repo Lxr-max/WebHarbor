@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Baggage — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Baggage information</h1>
+  <p>Everything you need to know about checked bags, carry-ons and the fees
+    for your trip. Use the fee calculator to see exactly what your bags will
+    cost.</p>
+  <div class="ua-img-row">
+    <img src="{{ url_for('static', filename='images/baggage/carry-on-bag-286x340.png') }}" alt="Carry-on bag sizer">
+    <img src="{{ url_for('static', filename='images/baggage/g-oversized-bag-3x.png') }}" alt="Oversized bag">
+  </div>
+  <div class="ua-card-grid">
+    <a class="ua-card" href="{{ url_for('baggage_calculator') }}">
+      <span class="ua-card-title">Checked bag fee calculator</span>
+      <span class="ua-card-cat">See your exact fees before you fly</span>
+    </a>
+    <a class="ua-card" href="{{ url_for('baggage_checked') }}">
+      <span class="ua-card-title">Checked bags</span>
+      <span class="ua-card-cat">Size, weight and fee rules</span>
+    </a>
+    <a class="ua-card" href="{{ url_for('baggage_carryon') }}">
+      <span class="ua-card-title">Carry-on bags</span>
+      <span class="ua-card-cat">What you can bring on board</span>
+    </a>
+    <a class="ua-card" href="{{ url_for('help_center') }}?q=bag">
+      <span class="ua-card-title">Bag FAQs</span>
+      <span class="ua-card-cat">Common baggage questions</span>
+    </a>
+  </div>
+</section>
+{% endblock %}

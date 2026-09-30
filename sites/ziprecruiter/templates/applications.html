@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}My Applications | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>My Applications</h1>
+  <nav class="account-nav">
+    <a href="/jobseeker/profile">Profile</a>
+    <a href="/jobseeker/resume">Resume</a>
+    <a href="/jobseeker/saved-jobs">Saved Jobs</a>
+    <a href="/jobseeker/applications" class="active">Applications</a>
+    <a href="/jobseeker/alerts">Job Alerts</a>
+  </nav>
+  <p class="snapshot">{{ rows|length }} applications</p>
+</section>
+<ol class="app-list">
+  {% for row in rows %}
+  <li class="app-card">
+    <h2><a href="{{ row.job.url() }}">{{ row.job.title }}</a></h2>
+    <p class="rel-co">{{ row.job.company.name }} · {{ row.job.city }}, {{ row.job.state }}</p>
+    <p class="status">Status: <strong>{{ row.status }}</strong> · applied {{ row.applied_at[:10] }}</p>
+    <ol class="timeline">
+      {% for ev in row.timeline() %}
+      <li><span class="when">{{ ev.occurred_at[:10] }}</span> <strong>{{ ev.status }}</strong>
+        {% if ev.note %} — {{ ev.note }}{% endif %}</li>
+      {% endfor %}
+    </ol>
+  </li>
+  {% endfor %}
+  {% if not rows %}<li class="empty-state">No applications yet — find a job and hit 1-Click Apply.</li>{% endif %}
+</ol>
+{% endblock %}

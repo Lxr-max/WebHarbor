@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Disney.com | The official home for all things Disney{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Disney.com">
+      <img src="{{ url_for('static', filename='icons/disney_logo_dark.png') }}" alt="Disney" class="brand-logo">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="{{ url_for('movies') }}" class="nav-link">Movies</a>
+      <a href="{{ url_for('shows') }}" class="nav-link">Shows</a>
+      <a href="{{ url_for('parks') }}" class="nav-link">Parks &amp; Travel</a>
+      <a href="{{ url_for('games') }}" class="nav-link">Games</a>
+      <a href="{{ url_for('shop') }}" class="nav-link">Shop</a>
+      <a href="{{ url_for('live_shows') }}" class="nav-link">Live Shows</a>
+    </nav>
+    <form class="header-search" action="{{ url_for('search') }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Search Disney" value="{{ request.args.get('q','') }}" aria-label="Search Disney">
+      <button type="submit" aria-label="Search"><span class="search-glyph">&#9906;</span></button>
+    </form>
+    <div class="header-account">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('favorites') }}" class="nav-link">My Favorites</a>
+        <a href="{{ url_for('logout') }}" class="nav-link">Log Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="nav-link">Log In</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Movies</h4>
+        <a href="{{ url_for('movies') }}">All Movies</a>
+        <a href="{{ url_for('movies', status='coming_soon') }}">Coming Soon</a>
+        <a href="{{ url_for('movies', status='now_playing') }}">In Theaters</a>
+      </div>
+      <div class="footer-col">
+        <h4>Parks &amp; Travel</h4>
+        <a href="{{ url_for('parks') }}">Walt Disney World</a>
+        <a href="{{ url_for('attractions') }}">Attractions &amp; Entertainment</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="{{ url_for('shop_collection', collection='toys') }}">Toys</a>
+        <a href="{{ url_for('shop_collection', collection='clothing') }}">Clothes</a>
+        <a href="{{ url_for('shop_collection', collection='accessories') }}">Accessories</a>
+        <a href="{{ url_for('shop_collection', collection='sale') }}">Sale</a>
+      </div>
+      <div class="footer-col">
+        <h4>Live Shows</h4>
+        <a href="{{ url_for('live_shows') }}">Broadway Musicals</a>
+        <a href="{{ url_for('doi_schedule') }}">Disney On Ice Schedule</a>
+      </div>
+    </div>
+    <p class="footer-note">Disney.com mirror for offline agent evaluation &mdash; not affiliated with, endorsed by, or connected to The Walt Disney Company.</p>
+  </div>
+</footer>
+</body>
+</html>

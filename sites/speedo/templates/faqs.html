@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}FAQs | Frequently Asked Questions | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <div class="content-page">
+    <h1>FAQS</h1>
+    <p style="color:#555;margin-bottom:24px;">Answers to the questions our customer care team hears most.</p>
+    <div class="faq-list">
+      {% for f in entries %}
+      <details class="faq-item">
+        <summary>{{ f.question }}</summary>
+        <div class="faq-answer">{{ f.answer }}</div>
+      </details>
+      {% endfor %}
+    </div>
+    <p style="margin-top:26px;">Didn&rsquo;t find the answer you were looking for? <a href="/pages/contact" style="text-decoration:underline;">Contact us</a> — we aim to respond within 24 hours.</p>
+  </div>
+</div>
+{% endblock %}

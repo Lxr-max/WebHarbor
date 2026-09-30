@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Shopping Cart | The Postal Store | USPS{% endblock %}
+{% block content %}
+<h1>Shopping Cart</h1>
+{% if items %}
+<table class="data">
+  <tr><th>Product</th><th>SKU</th><th>Qty</th><th>Price</th><th>Line Total</th><th></th></tr>
+  {% for item in items %}
+    <tr>
+      <td><a href="{{ url_for('store_product', slug=item.product.slug) }}">{{ item.product.name }}</a></td>
+      <td>{{ item.product.sku }}</td>
+      <td>{{ item.row.qty }}</td>
+      <td>{{ item.product.price | usd }}</td>
+      <td>{{ item.line | usd }}</td>
+      <td>
+        <form action="{{ url_for('store_cart_remove') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="row" value="{{ item.row.id }}">
+          <button class="btn secondary" type="submit">Remove</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+<p class="totals">Order total: {{ total | usd }}</p>
+<a class="btn" href="{{ url_for('store_checkout') }}">Proceed to Checkout</a>
+{% else %}
+<p>Your cart is empty. <a href="{{ url_for('store_home') }}">Browse The Postal Store</a>.</p>
+{% endif %}
+{% endblock %}

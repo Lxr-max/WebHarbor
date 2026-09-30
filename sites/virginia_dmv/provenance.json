@@ -1,0 +1,52 @@
+{
+  "site": "virginia_dmv",
+  "upstream": "https://www.dmv.virginia.gov/",
+  "captured_at": "2026-09-29",
+  "capture_method": "polite HTTP fetches with a browser User-Agent against the live pages (www.dmv.virginia.gov serves plain HTML to unauthenticated clients — no WAF or bot challenge was encountered for any captured surface); the dmv-manuals study-guide JSON was fetched from the upstream API host transactions.dmv.virginia.gov/dmvapimanuals the live SPA itself calls; the fee chart PDF was fetched at its resolved /sites/default/files/forms/dmv201.pdf URL",
+  "sources": {
+    "www.dmv.virginia.gov": {
+      "role": "primary site: 87 content pages (homepage; Licenses & IDs section: driver's license, applying, replace, learner's permits, REAL ID, CDL + HAZMAT, ID cards, motorcycle, exams/knowledge exam/road skills test/manual pages, driver improvement, disability, training, military, organ donation, payment plan, mobile ID, Apple Wallet; Vehicles section: registration + emissions, title + mail/etitle/replacement, license plates, taxes & fees + highway use, buy-sell, insurance requirements, general; Moving: new to Virginia, leaving Virginia; Records: driver/vehicle record request, personal information updates, voluntary, PPI, vital, emergency contact; Online Services: catalog + all-services + address change + record request + reinstatement; About, Contact Us, How Do I, Safety pages), the all-locations directory (134 offices: 76 Customer Service Centers + 58 DMV Selects with hours/phones/faxes/services/nearby alternatives), the specialized license plate catalog (342 designs across Special Interest/College/Military/Other categories with per-plate fees, personalization rules, requirements and revenue-sharing details), the forms catalog (419 forms with number/language/category/PDF links, 43 listing pages), the newsroom (70 releases with dates and images), and the site chrome/scam alert",
+      "pages_captured": 87,
+      "offices": 134,
+      "plates": 342,
+      "forms_rows": 419,
+      "news_items": 70,
+      "images": 398,
+      "form_pdfs": 322,
+      "fee_chart_pdf": "https://www.dmv.virginia.gov/sites/default/files/forms/dmv201.pdf (DMV 201, 08/10/2026 edition — the structured fee schedule in source_data/fees.json is transcribed 1:1 from this chart and programmatically verified against its pdftotext extraction)"
+    },
+    "transactions.dmv.virginia.gov": {
+      "role": "the dmv-manuals study-guide SPA backend: the table of contents (7 manual sections), the full manual subsection copy (21 subsections), and the complete sample knowledge-exam question bank (266 questions with answers and per-question feedback), fetched from the same /dmvapimanuals/api endpoints the live SPA calls",
+      "manual_sections": 7,
+      "manual_subsections": 21,
+      "quiz_questions": 266,
+      "access_note": "public API, no auth; the account/transaction pages (CustomerProfile, registration renewal, records) sit behind an Okta-fed login and are NOT mirrored from live sessions — see benchmark fixtures below"
+    },
+    "appointments.dmv.virginia.gov": {
+      "role": "the Reserve Your Spot / OABS appointment wizard (referenced from every office page)",
+      "access_note": "JavaScript wizard behind a recaptcha-gated flow; the booking flow in the mirror is a mirror-native reconstruction seeded with the real office list and the real service types, with the chrome (appointment vs e-ticket vs walk-in guidance, cancel/lookup wording) captured from the www.dmv.virginia.gov/appointments page"
+    }
+  },
+  "benchmark_fixtures": {
+    "note": "The DMV online-account surface (login, dashboard, address change, registration renewal, driver's license renewal/replacement, plate purchase, record requests, receipts) is a mirror-native reconstruction: the real transactions.dmv.virginia.gov account app is behind an Okta-fed login and cannot hold benchmark accounts. The four seeded accounts (alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com — password TestPass123!) and their vehicles/licenses/appointments are fixtures declared in source_data/benchmark_users.json. Every fee, rule and receipt wording inside those flows is the real upstream data: the DMV 201 fee chart math (registration $30.75/$35.75/$44.75 by weight class, emissions $2/yr, EV highway use fee $135.63, late fee $10, internet discount $1/yr, 2-year $3 / 3-year $4 online discounts, license $4/yr with $32 8-year term, replacement $20, REAL ID $10 one-time, records $8 online + $5 certified), the renewal guidance from the upstream registration-renewal intro (Official Internet Receipt wording, 15-day extension, 5-day mail delivery), and the multi-year / Mileage Choice / highway-use-fee disclosures as captured.",
+    "users": 4,
+    "vehicles": 5
+  },
+  "images": {
+    "count": 398,
+    "note": "every non-manual image is the real file served by www.dmv.virginia.gov at the exact style URL the live pages render: the 342 plate designs at the max_650x650 style URL (the style both the live search grid and the plate detail pages render), 43 homepage/section/card art files at their upstream style URLs, 10 news images and 3 theme pin assets — 398 files, per-file sha256 + resolved source URL recorded in asset_inventory.json. The upstream additionally serves a small-detail plate style that the mirrored surfaces do not render; it is intentionally not shipped. One upstream quirk preserved honestly: news-scam-text-image.jpg is served by the upstream as GIF bytes at a .jpg URL; the mirror stores it with its true .gif extension and the inventory keeps the original source URL. The 121 manual/exam images are declared separately under manual_images; total shipped images 519 = 398 + 121, matching asset_inventory.json."
+  },
+  "determinism": {
+    "seed": "the SQLite seed is generated at image build time from the tracked source_data/*.json snapshots (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash; .build-generated-seed documents that instance_seed/ is a build output and never ships in the asset archive",
+    "timezone": "all seeded dates are stored as ISO-8601 date strings (UTC-neutral); the mirror freezes the upstream capture date 2026-09-29 as MIRROR_TODAY"
+  },
+  "manual_images": {
+    "count": 121,
+    "note": "121 unique real image files served by the upstream dmv-manuals backend (transactions.dmv.virginia.gov/dmv-manuals/manuals/images/1/), captured 2026-09-29: the 21 manual subsections' inline figures (121 unique names referenced 126 times) and the knowledge-exam bank's picture questions' illustrations (54 unique names, incl. the 38 road-sign questions). Two upstream filename case variants (SchoolZoneSpeed.jpg/schoolzonespeed.jpg, WorkZoneSpeed.png/workzonespeed.png) serve byte-identical art; the mirror keeps one real file per unique sha256 and maps both spellings through source_data/manual_image_map.json. Upstream file 3parkHill2.jpg is served truncated (complete JPEG scan data, missing the final 2-byte EOI marker); the mirror stores the upstream bytes completed with the standard EOI marker so the repo's strict JPEG framing gate passes — pixel content identical. Per-file sha256 + source URL recorded in asset_inventory.json."
+  },
+  "upstream_drift": {
+    "recorded": "2026-09-29 (fix pass)",
+    "forms_catalog": "frozen at 419 captured rows; the live catalog now lists 422 (snapshot semantics, no action)",
+    "id_cards_link_label": "the live home now labels the ID card link 'Get an ID Card'; the frozen capture reads 'Get an Identification Card' (snapshot semantics, no action)"
+  }
+}

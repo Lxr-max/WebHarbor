@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}Shop By Brand - US Appliance{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Shop By Brand</span></li>
+{% endblock %}
+{% block content %}
+<section class="container brands-page">
+  <h1 class="page-heading">Shop By Brand</h1>
+  <p class="category-blurb">At US Appliance we carry a huge selection of Major Appliances from dozens of appliance manufacturers. We know it's difficult to select the right appliance for your needs given such a vast selection of choices. Our experts are on hand to answer your questions or give you recommendations for your specific needs.</p>
+  <ul class="brand-grid">
+    {% for b in brands %}
+    <li class="brand-cell">
+      <a href="{{ url_for('brand_page', slug=b.slug) }}">
+        <span class="brand-name">{{ b.name }}</span>
+        <span class="brand-count">{{ b.product_count }} products</span>
+        {% if b.name in rebate_brands %}<span class="brand-rebate">Rebate Offers</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

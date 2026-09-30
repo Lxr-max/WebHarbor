@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Guarantee – Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>The Thumbtack Guarantee</h1>
+  <p class="muted">If you hire a pro through Thumbtack and the job isn't done as agreed, you could get up to $2,500 back.</p>
+  {% for b in blocks %}
+  <div class="faq"><b>{{ b[0] }}</b><span class="muted">{{ b[1] }}</span></div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Device trade-in program{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Trade in your device</h1>
+  <div class="grid grid-4">
+    <div class="tile"><h3>1. Tell us about the device</h3><p>Tell us the device you would like to trade in.</p></div>
+    <div class="tile"><h3>2. Back up and clear your data</h3><p>Be sure to back up your content and clear your data.</p></div>
+    <div class="tile"><h3>3. Mail your device</h3><p>Mail your old device to us within 30 days.</p></div>
+    <div class="tile"><h3>4. Get your credit</h3><p>We'll apply your credit once we receive your device.</p></div>
+  </div>
+  <p>Trading in your phone, tablet, smartwatch or other device is easy with our Device Trade-in Program. Just tell us the device and its condition and you'll get a new one, instant credit, account credit, or gift card.</p>
+  <a class="btn btn-primary" href="{{ url_for('trade_in_estimate') }}">Get a trade-in estimate</a>
+
+  <section class="section">
+    <h2>Have questions? We've got answers.</h2>
+    {% for q, a in faqs %}
+    <details class="faq">
+      <summary>{{ q }}</summary>
+      <p>{{ a }}</p>
+    </details>
+    {% endfor %}
+  </section>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Compare Services | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('services') }}">Shipping Services</a> &rsaquo; Compare Services</div>
+  <h1>Compare UPS Domestic Services</h1>
+  <div class="ups-card ups-comparewrap">
+    <table class="ups-comparetable">
+      <thead>
+        <tr>
+          <th></th>
+          {% for s in services %}<th>{{ s.name }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Priority</th>{% for s in services %}<td>{{ s.bucket }}</td>{% endfor %}</tr>
+        <tr><th>Transit Time</th>{% for s in services %}<td>{{ s.days if s.days else '1-5 business days' }}</td>{% endfor %}</tr>
+        <tr><th>Delivery Commitment</th>{% for s in services %}<td>{{ s.delivered_by_default }}</td>{% endfor %}</tr>
+        <tr><th>Guaranteed</th>{% for s in services %}<td>{{ 'Yes' if s.guaranteed else 'No' }}</td>{% endfor %}</tr>
+        <tr><th>Latest Pickup</th>{% for s in services %}<td>{{ s.latest_pickup }}</td>{% endfor %}</tr>
+        <tr><th>Schedule By</th>{% for s in services %}<td>{{ s.schedule_by }}</td>{% endfor %}</tr>
+        <tr><th>Saturday Delivery</th>{% for s in services %}<td>{{ 'Available' if s.saturday_delivery else 'Not available' }}</td>{% endfor %}</tr>
+        <tr><th>Max Weight</th>{% for s in services %}<td>{{ s.max_weight_lb }} lbs / {{ s.max_length_in }}&quot;</td>{% endfor %}</tr>
+        <tr><th></th>{% for s in services %}<td><a class="ups-btn ups-btn-secondary" href="{{ url_for('service_detail', code=s.code) }}">Details</a></td>{% endfor %}</tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="ups-lede">Quotes for your exact shipment are available from the <a href="{{ url_for('ctc') }}">Calculate Time and Cost</a> tool.</p>
+</section>
+{% endblock %}

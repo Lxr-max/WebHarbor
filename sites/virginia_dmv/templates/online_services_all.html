@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}All Online Services{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › All Online Services</nav>
+  <div class="page-title"><h1>DMV Online Services</h1></div>
+  <p>Over 50 DMV transactions are available online. Conduct your business with DMV from anywhere
+  with an internet connection: renewals, replacements, address changes, records and more.</p>
+  {% for cat, services in cats.items() %}
+  <h2>{{ cat }}</h2>
+  <div class="card-grid">
+    {% for s in services %}
+    <div class="card">
+      {% set target = mirror_href(s.url) if s.url.startswith('/') else url_for('account_login') %}
+      {% if s.url.startswith('/') and not target %}
+      <h3>{{ s.label }}</h3>
+      {% elif target %}
+      <a href="{{ target }}"{% if not s.url.startswith('/') %} title="Sign in to your DMV online account to use this service"{% endif %}>
+        <h3>{{ s.label }}</h3></a>
+      {% else %}
+      <h3>{{ s.label }}</h3>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

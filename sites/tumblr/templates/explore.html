@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Explore — Tumblr{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Explore Tumblr</h1>
+  <p class="page-sub">What the internet is talking about right now.</p>
+</div>
+
+<div class="hub-grid">
+  {% for hub in hubs %}
+    <a class="hub-card" href="{{ url_for('tagged', tag=hub.tag) }}"
+       style="background-color: {{ hub.background_color }}">
+      {% if hub.header_image %}<img class="hub-img" src="{{ hub.header_image }}" alt="{{ hub.tag }}">{% endif %}
+      <div class="hub-overlay">
+        <span class="hub-tag">#{{ hub.tag }}</span>
+        <span class="hub-meta">{{ hub.followers_count }} followers · {{ hub.new_posts_count }} new posts</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    <div class="feed-header">
+      <h2>Trending posts</h2>
+    </div>
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>How Explore works</h3>
+      <p class="side-copy">Trending pulls the posts people are liking and reblogging most across Tumblr, refreshed against the snapshot from 2026-09-28.</p>
+    </div>
+    <div class="side-card">
+      <h3>Jump into a tag</h3>
+      <div class="tag-cloud">
+        {% for hub in hubs %}
+          <a class="tag" href="{{ url_for('tagged', tag=hub.tag) }}">#{{ hub.tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+</div>
+{% endblock %}

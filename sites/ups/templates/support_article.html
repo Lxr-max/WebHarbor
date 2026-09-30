@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ a.title }} | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('support') }}">Help and Support Center</a> &rsaquo; {{ a.category }}</div>
+  <div class="ups-card ups-contentpage">
+    <p class="ups-svcbucket">{{ a.category }}</p>
+    {% if hero %}<img class="ups-heroimg" src="/static/images/{{ hero }}" alt="">{% endif %}
+    <h1>{{ a.title }}</h1>
+    <div class="ups-contentbody">{{ a.body }}</div>
+    {% if related %}
+    <h2>Related Articles</h2>
+    <ul class="ups-svc-list">
+      {% for r in related %}
+      <li><a href="{{ url_for('support_article', key=r.key) }}">{{ r.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('track') }}">Track a Package</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('support') }}">More Support Topics</a>
+    </div>
+    <p class="ups-hint">Source: {{ a.upstream_url }}</p>
+  </div>
+</section>
+{% endblock %}

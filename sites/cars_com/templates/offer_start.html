@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Instant Cash Offer for Car - Trade in My Car | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <span>Instant Offer</span></nav>
+{% endblock %}
+{% block content %}
+<div class="offer-wizard">
+  <h1>Get your Instant Offer</h1>
+  <p>Enter your car's details and receive an Instant Offer. All fields marked with * are required.</p>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+
+  <div class="offer-tabs">
+    <span class="offer-tab">Plate</span>
+    <span class="offer-tab">VIN</span>
+    <span class="offer-tab active">Make</span>
+  </div>
+
+  <form class="offer-form" method="post" action="{{ url_for('offer_vehicle') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="offer-field">
+      <label for="of-year">Year *</label>
+      <select id="of-year" name="year" required>
+        <option value="">Select year</option>
+        {% for y in years %}
+        <option value="{{ y }}">{{ y }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="offer-field">
+      <label for="of-make">Make *</label>
+      <select id="of-make" name="make" required>
+        <option value="">Select make</option>
+        {% for m in makes %}
+        <option value="{{ m }}">{{ m | title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="offer-field">
+      <label for="of-model">Model *</label>
+      <select id="of-model" name="model" required>
+        <option value="">Select model</option>
+        <optgroup id="of-model-group" label="Pick a make first"></optgroup>
+      </select>
+      <p class="muted" id="of-model-hint">Pick a make first.</p>
+    </div>
+    <div class="offer-field">
+      <label for="of-trim">Trim *</label>
+      <select id="of-trim" name="trim" required>
+        <option value="">Select trim</option>
+        <optgroup id="of-trim-group" label="Pick a year, make and model first"></optgroup>
+      </select>
+      <p class="muted" id="of-trim-hint">Pick a year, make and model first.</p>
+    </div>
+    <button class="btn btn-primary" type="submit">Look up your car</button>
+  </form>
+
+  <section class="how-it-works">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Get an Instant Offer.</strong> Enter your car's details to see in real time how things like your mileage and condition affect your car's value.</li>
+      <li><strong>Confirm your car's condition.</strong> Bring your car into the dealership for a quick side-by-side check to confirm the final value.</li>
+      <li><strong>Cash out or trade-in.</strong> Receive your check or use your Instant Offer to trade in your car for a new or used one.</li>
+    </ol>
+  </section>
+</div>
+<script>
+  (function () {
+    var yearSel = document.getElementById('of-year');
+    var makeSel = document.getElementById('of-make');
+    var modelSel = document.getElementById('of-model');
+    var trimSel = document.getElementById('of-trim');
+    var modelGroup = document.getElementById('of-model-group');
+    var trimGroup = document.getElementById('of-trim-group');
+    var modelHint = document.getElementById('of-model-hint');
+    var trimHint = document.getElementById('of-trim-hint');
+    function fill(select, group, values, hintEl, hint) {
+      while (select.options.length > 1) { select.remove(1); }
+      group.innerHTML = '';
+      values.forEach(function (v) {
+        var o = document.createElement('option');
+        o.value = v; o.textContent = v;
+        group.appendChild(o); select.appendChild(o);
+      });
+      if (hintEl) { hintEl.textContent = hint; }
+    }
+    function loadTrims() {
+      fill(trimSel, trimGroup, [], trimHint, 'Pick a year, make and model first.');
+      if (!yearSel.value || !makeSel.value || !modelSel.value) return;
+      fetch('/sell/instant-offer/api/trims?year=' + encodeURIComponent(yearSel.value) +
+            '&make=' + encodeURIComponent(makeSel.value) +
+            '&model=' + encodeURIComponent(modelSel.value))
+        .then(function (r) { return r.json(); })
+        .then(function (trims) {
+          fill(trimSel, trimGroup, trims, trimHint,
+               trims.length + ' trims available for the ' + yearSel.value + ' ' + makeSel.value + ' ' + modelSel.value + '.');
+        });
+    }
+    makeSel.addEventListener('change', function () {
+      fill(modelSel, modelGroup, [], modelHint, 'Pick a make first.');
+      fill(trimSel, trimGroup, [], trimHint, 'Pick a year, make and model first.');
+      if (!makeSel.value) return;
+      fetch('/sell/instant-offer/api/models?make=' + encodeURIComponent(makeSel.value))
+        .then(function (r) { return r.json(); })
+        .then(function (models) {
+          fill(modelSel, modelGroup, models, modelHint,
+               models.length + ' models available for ' + makeSel.value + '.');
+        });
+    });
+    modelSel.addEventListener('change', loadTrims);
+    yearSel.addEventListener('change', loadTrims);
+  })();
+</script>
+{% endblock %}

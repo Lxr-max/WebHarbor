@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}United Airlines — Airline Tickets, Travel Deals and Flights{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<header class="ua-header">
+  <div class="ua-header-inner">
+    <a class="ua-logo" href="{{ url_for('home') }}" aria-label="United home">
+      <span class="ua-globe" aria-hidden="true"></span>
+      <span class="ua-logo-text">UNITED</span>
+    </a>
+    <nav class="ua-nav">
+      <a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Book</a>
+      <a href="{{ url_for('flight_status') }}" {% if request.endpoint in ('flight_status','flight_status_results') %}class="active"{% endif %}>Flight status</a>
+      <a href="{{ url_for('checkin') }}" {% if request.endpoint and request.endpoint.startswith('checkin') %}class="active"{% endif %}>Check-in</a>
+      <a href="{{ url_for('mytrips') }}" {% if request.endpoint and (request.endpoint.startswith('mytrips') or request.endpoint in ('trip_detail','change_flight','cancel_booking','seat_selection')) %}class="active"{% endif %}>My trips</a>
+      <a href="{{ url_for('mileageplus') }}" {% if request.endpoint and (request.endpoint.startswith('mp_') or request.endpoint in ('mileageplus','account')) %}class="active"{% endif %}>MileagePlus</a>
+      <a href="{{ url_for('deals') }}" {% if request.endpoint and request.endpoint.startswith('deal') %}class="active"{% endif %}>Deals</a>
+      <a href="{{ url_for('help_center') }}" {% if request.endpoint and request.endpoint.startswith('help') %}class="active"{% endif %}>Help</a>
+    </nav>
+    <div class="ua-header-right">
+      {% if current_user.is_authenticated %}
+        <a class="ua-user" href="{{ url_for('account') }}">
+          <span class="ua-user-name">{{ current_user.first_name }}</span>
+          <span class="ua-user-miles">{{ '{:,}'.format(current_user.award_miles) }} miles</span>
+        </a>
+        <a class="ua-signout" href="{{ url_for('mp_signout') }}">Sign out</a>
+      {% else %}
+        <a class="ua-signin" href="{{ url_for('mp_signin') }}">Sign in</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="ua-flashes" role="status">
+      {% for message in messages %}<div class="ua-flash">{{ message }}</div>{% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main class="ua-main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="ua-footer">
+  <div class="ua-footer-inner">
+    <div class="ua-footer-cols">
+      <div>
+        <h4>Travel info</h4>
+        <a href="{{ url_for('baggage') }}">Baggage</a>
+        <a href="{{ url_for('cabins') }}">Cabin experience</a>
+        <a href="{{ url_for('fleet') }}">Our fleet</a>
+        <a href="{{ url_for('airports_page') }}">Airport guides</a>
+        <a href="{{ url_for('policies') }}">Change &amp; cancellation policies</a>
+      </div>
+      <div>
+        <h4>MileagePlus</h4>
+        <a href="{{ url_for('mileageplus') }}">Program benefits</a>
+        <a href="{{ url_for('mp_join') }}">Join MileagePlus</a>
+        <a href="{{ url_for('mp_signin') }}">Sign in</a>
+        <a href="{{ url_for('account') }}">My account</a>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <a href="{{ url_for('help_center') }}">Help Center</a>
+        <a href="{{ url_for('site_search') }}">Search united.com</a>
+        <a href="{{ url_for('flight_status') }}">Flight status</a>
+        <a href="{{ url_for('checkin') }}">Check-in</a>
+      </div>
+    </div>
+    <p class="ua-footer-note">This is a WebHarbor offline mirror of united.com for benchmark
+      evaluation, not an official United Airlines website.</p>
+  </div>
+</footer>
+</body>
+</html>

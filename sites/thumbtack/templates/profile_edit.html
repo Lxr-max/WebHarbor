@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Edit profile - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>Edit your profile</h1>
+  <div class="auth-card">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-row">
+        <label>Full name</label>
+        <input type="text" name="name" value="{{ current_user.display_name }}" required>
+      </div>
+      <div class="form-row">
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{ current_user.phone or '' }}">
+      </div>
+      <div class="form-row">
+        <label>Zip code</label>
+        <input type="text" name="zip" value="{{ current_user.zip or '' }}">
+      </div>
+      <div class="form-row">
+        <label>Address</label>
+        <input type="text" name="address" value="{{ current_user.address or '' }}">
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Save changes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

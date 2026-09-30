@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Calculate Domestic Package Prices | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('postcalc_home') }}">Calculate a Price</a> &rsaquo; Domestic Packages</p>
+<h1>Domestic Package Prices</h1>
+
+<p class="note">Also see: <a href="{{ url_for('postcalc_letters') }}">Letters</a> &middot;
+  <a href="{{ url_for('postcalc_packages') }}">Packages</a> &middot;
+  <a href="{{ url_for('postcalc_intl') }}">International</a> &middot;
+  <a href="{{ url_for('postcalc_extras') }}">Extra Services</a></p>
+<p>Compare retail services by weight and zone (Notice 123 retail price list). Zone 1 is closest; Zone 9 covers APO/FPO/DPO and remote destinations.</p>
+<div class="panel">
+  <form class="flow" action="{{ url_for('postcalc_packages') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Weight (lbs) <input type="number" step="0.1" min="0.5" max="70" name="weight" value="{{ form.get('weight', '1') }}"></label>
+    <label>Zone
+      <select name="zone">
+        {% for z in range(1, 10) %}
+          <option value="{{ z }}" {{ 'selected' if form.get('zone')|string == z|string }}>Zone {{ z }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button class="btn" type="submit">Compare Services</button>
+  </form>
+</div>
+{% if result %}
+  {% if result.error %}
+    <div class="error-box">{{ result.error }}</div>
+  {% else %}
+    <h2>Prices for {{ result.weight }} lb, Zone {{ result.zone }}</h2>
+    <table class="data">
+      <tr><th>Service</th><th>Retail Price</th></tr>
+      {% for label, price in result.rows %}
+        <tr><td>{{ label }}</td><td class="totals">{{ price | usd }}</td></tr>
+      {% endfor %}
+    </table>
+    <h3>Priority Mail Flat Rate options</h3>
+    <table class="data">
+      <tr><th>Flat Rate packaging</th><th>Price (any zone, up to 70 lbs)</th></tr>
+      {% for fr in result.flat_rate %}
+        <tr><td>{{ fr.label }} <span class="note">{{ fr.size }}</span></td><td>{{ fr.price | usd }}</td></tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endif %}
+{% endblock %}

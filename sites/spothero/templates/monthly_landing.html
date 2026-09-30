@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Find Monthly Parking Near You | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>Find Monthly Parking Near You</h1>
+    <p>Long-term parking near work or home, billed on a simple monthly cycle.</p>
+    <form method="get" action="{{ url_for('search') }}" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <input type="hidden" name="kind" value="monthly">
+      <input name="search_string" placeholder="Type an address, place, or city" data-autocomplete style="flex:1;min-width:240px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <input type="date" name="monthly_start" value="2026-09-26" style="border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <button class="btn btn-primary" type="submit">Find Parking Spots</button>
+    </form>
+  </div>
+  <section class="section-tight">
+    <h2>Monthly parking by city</h2>
+    <div class="link-columns">
+      {% for c in cities %}
+      <a href="{{ url_for('city_monthly', slug=c.slug) }}">{{ c.display_name }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  <section class="section-tight">
+    <h2>FAQs</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">How does the monthly billing cycle work?</button>
+        <div class="accordion-panel" style="display:none"><p>Most locations are set up with the billing cycle to be on the 1st and the 15th of every month. Some facilities do offer a flexible start date: you can start parking any day of the month you like and are billed 5 days prior to the start of the following month.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">Are there any additional fees for monthly reservations?</button>
+        <div class="accordion-panel" style="display:none"><p>That depends! Some locations may require a fee for your access card or transponder, however, that will all be detailed in the description of the location before you purchase. All extra fees will be paid to the garage or lot office after purchase.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">Will you prorate my monthly parking spot?</button>
+        <div class="accordion-panel" style="display:none"><p>No, monthly parking is not prorated. If you have an extenuating circumstance, please call our Customer Heroes at (844) 324-7768.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

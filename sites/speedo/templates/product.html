@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.name }} | Speedo{% endblock %}
+{% block content %}
+<nav class="breadcrumbs page-width" aria-label="Breadcrumb">
+  <a href="/">Home</a> &rsaquo; <span>{{ p.name }}</span>
+</nav>
+<div class="page-width product-layout">
+  <section class="product-gallery">
+    {% set imgs = p.image_list() %}
+    <div class="main-image">
+      <img id="pdp-main" src="{{ url_for('static', filename='images/' + imgs[0]) if imgs else '' }}" alt="{{ p.name }}">
+    </div>
+    {% if imgs|length > 1 %}
+    <div class="product-thumbs">
+      {% for img in imgs %}
+      <img src="{{ url_for('static', filename='images/' + img) }}" alt="{{ p.name }} view {{ loop.index }}"
+           onclick="document.getElementById('pdp-main').src=this.src;">
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  <section class="product-info">
+    <h1>{{ p.name }}</h1>
+    <div class="product-price">
+      {% if p.is_sale and p.compare_at_price %}
+        <span class="regular">£{{ '%.2f' % p.compare_at_price }}</span>
+        <span class="sale-price">£{{ '%.2f' % p.price }}</span>
+      {% else %}
+        £{{ '%.2f' % p.price }}
+      {% endif %}
+    </div>
+    <div class="product-tax-note">Taxes included. Shipping calculated at checkout.</div>
+    {% if p.sizes %}
+    <div>
+      <a class="size-guide-link" href="#" id="open-size-guide">To find your Speedo size, check our size guide.</a>
+    </div>
+    <form action="/cart/add" method="post" id="add-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="slug" value="{{ p.slug }}">
+      <div class="variant-block">
+        <div class="variant-legend">Size: <span id="size-label">{{ p.available_sizes()[0] if p.available_sizes() else 'Size' }}</span></div>
+        <div class="variant-pills">
+          {% for s in p.sizes %}
+          <button type="button" class="variant-pill {% if s.sold_out %}disabled{% endif %} {% if s.size == p.available_sizes()[0] %}active{% endif %}"
+                  data-size="{{ s.size }}" data-sold-out="{{ 1 if s.sold_out else 0 }}"
+                  {% if s.sold_out %}title="Variant sold out or unavailable"{% endif %}>{{ s.size }}</button>
+          {% endfor %}
+        </div>
+        <input type="hidden" name="size" id="size-input" value="{{ p.available_sizes()[0] if p.available_sizes() else '' }}">
+      </div>
+      {% if siblings %}
+      <div class="variant-block">
+        <div class="variant-legend">Colour: {{ p.colour }}</div>
+        <div class="colour-row">
+          <span class="swatch active" style="background: {{ p.colour_swatch or '#666' }};" title="{{ p.colour }}"></span>
+          {% for sib in siblings %}
+          <a class="colour-swatch-link" href="/products/{{ sib.slug }}" title="{{ sib.colour }}">
+            <span class="swatch" style="background: {{ sib.colour_swatch or '#666' }};"></span>
+          </a>
+          {% endfor %}
+          <span class="choose-colour">Choose colour</span>
+        </div>
+      </div>
+      {% endif %}
+      <div class="qty-row">
+        <label for="quantity">Quantity</label>
+        <div class="qty-input">
+          <button type="button" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" max="50" aria-label="Quantity">
+          <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button type="submit" class="btn btn-primary" id="add-to-bag" {% if p.sold_out or not p.available_sizes() %}disabled{% endif %}>
+          {% if p.sold_out %}Out of stock{% else %}Add to bag{% endif %}
+        </button>
+        <button type="submit" formaction="/wishlist/add" form="wishlist-form" class="wishlist-btn" hidden>Wishlist</button>
+      </div>
+    </form>
+    <form action="/wishlist/add" method="post" id="wishlist-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="slug" value="{{ p.slug }}">
+      <input type="hidden" name="next" value="/products/{{ p.slug }}">
+      <button type="submit" class="wishlist-btn">Add to Wishlist</button>
+    </form>
+    {% else %}
+    <form action="/cart/add" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="slug" value="{{ p.slug }}">
+      <input type="hidden" name="size" value="">
+      <div class="qty-row">
+        <label for="quantity">Quantity</label>
+        <div class="qty-input">
+          <button type="button" onclick="var q=document.getElementById('quantity');q.value=Math.max(1,+q.value-1);">&minus;</button>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" max="50" aria-label="Quantity">
+          <button type="button" onclick="var q=document.getElementById('quantity');q.value=Math.min(50,+q.value+1);">+</button>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button type="submit" class="btn btn-primary" {% if p.sold_out %}disabled{% endif %}>
+          {% if p.sold_out %}Out of stock{% else %}Add to bag{% endif %}
+        </button>
+      </div>
+    </form>
+    <form action="/wishlist/add" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="slug" value="{{ p.slug }}">
+      <input type="hidden" name="next" value="/products/{{ p.slug }}">
+      <button type="submit" class="wishlist-btn">Add to Wishlist</button>
+    </form>
+    {% endif %}
+
+    <div class="product-accordion">
+      {% if p.description %}
+      <details open>
+        <summary>Description</summary>
+        <div class="accordion-content">{{ p.description }}</div>
+      </details>
+      {% endif %}
+      <details>
+        <summary>Delivery &amp; Returns</summary>
+        <div class="accordion-content">{{ p.delivery or 'Standard UK: 3–5 working days - £5.99 (free over £50)
+Express UK: Next working day - £8.99
+Standard International: 5–12 working days - £12.99 (free over £75)
+Express International: 4–7 working days - £24.99
+
+We ship to 40+ countries worldwide.' }}</div>
+      </details>
+    </div>
+
+    {% if p.spec_items() %}
+    <table class="spec-table" aria-label="Specifications">
+      {% for k, v in p.spec_items() %}
+      <tr><td>{{ k }}</td><td>{{ v }}</td></tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    {% if p.sku %}<div class="sku-line">SKU: {{ p.sku }}</div>{% endif %}
+  </section>
+</div>
+
+{% if related %}
+<section class="related-section page-width">
+  <h2>You may also like</h2>
+  <div class="product-grid">
+    {% from '_product_card.html' import card %}
+    {% for c in related[:4] %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if size_guide %}
+<div class="modal-backdrop" id="size-guide-modal">
+  <div class="modal" role="dialog" aria-label="Size guide">
+    <button class="modal-close" type="button" id="close-size-guide" aria-label="Close">&times;</button>
+    <h3>Size Guide</h3>
+    {% for table in size_guide.tables %}
+    <h4 style="font-size:13px;text-transform:uppercase;margin-top:10px;">{{ table.title }}</h4>
+    <table>
+      <tr>{% for h in table.headers %}<th>{{ h }}</th>{% endfor %}</tr>
+      {% for row in table.rows %}
+      <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+      {% endfor %}
+    </table>
+    {% endfor %}
+    {% for note in size_guide.notes %}
+    <p class="measure-note">{{ note }}</p>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  (function () {
+    var open = document.getElementById('open-size-guide');
+    var modal = document.getElementById('size-guide-modal');
+    var close = document.getElementById('close-size-guide');
+    if (open) open.addEventListener('click', function (e) { e.preventDefault(); modal.classList.add('open'); });
+    if (close) close.addEventListener('click', function () { modal.classList.remove('open'); });
+    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) modal.classList.remove('open'); });
+    var pills = document.querySelectorAll('.variant-pill');
+    var sizeInput = document.getElementById('size-input');
+    var sizeLabel = document.getElementById('size-label');
+    var addBtn = document.getElementById('add-to-bag');
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        if (pill.classList.contains('disabled')) return;
+        pills.forEach(function (x) { x.classList.remove('active'); });
+        pill.classList.add('active');
+        sizeInput.value = pill.dataset.size;
+        sizeLabel.textContent = pill.dataset.size;
+        addBtn.disabled = pill.dataset.soldOut === '1';
+      });
+    });
+    var minus = document.getElementById('qty-minus');
+    var plus = document.getElementById('qty-plus');
+    var qty = document.getElementById('quantity');
+    if (minus) minus.addEventListener('click', function () { qty.value = Math.max(1, +qty.value - 1); });
+    if (plus) plus.addEventListener('click', function () { qty.value = Math.min(50, +qty.value + 1); });
+  })();
+</script>
+{% endif %}
+{% endblock %}
