@@ -1,5 +1,9 @@
 # PR #45 task-validator review
 
+Historical review snapshot. For the subsequent 140-site assessment and validator
+revisions, see [the PR #91 report](PR-91-TASK-VALIDATOR.md). The JSON attachments
+below describe the earlier frozen executions, not the current corpus.
+
 This reviewer-owned continuation of [PR #45](https://github.com/aiming-lab/WebHarbor/pull/45)
 preserves Xuanrui Li's original contribution and history. It adds a read-only task
 validator and repairs schema, registry, grading-metadata, and diagnostic handling.

@@ -6,6 +6,7 @@ from __future__ import annotations
 import io
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -558,6 +559,78 @@ class ValidateTasksTests(unittest.TestCase):
                 self.assertTrue(
                     any(f["code"] == "bad-upstream-host" for f in summary["findings"])
                 )
+
+    def test_confirmation_requests_and_lookup_inputs_are_not_answer_leaks(self) -> None:
+        for question in (
+            "Buy the gift and ship it to 25 Maple Lane, Orlando FL 32801. "
+            "Report the order total and confirmation code.",
+            "Check booking code ABC123 and report the departure time and baggage allowance.",
+            "Buy the gift with SKU DISNEY123 and report its confirmation code.",
+        ):
+            with self.subTest(question=question):
+                root = self.make_root(task_line(ques=question) + "\n")
+                self.assertEqual(vt.run_validation(root=root, strict=True)["findings"], [])
+
+    def test_explicit_answer_revelation_still_warns(self) -> None:
+        root = self.make_root(
+            task_line(ques="Find the confirmation code. The answer is ABC123.") + "\n"
+        )
+        result = vt.run_validation(root=root, strict=True)
+        self.assertEqual(result["errors"], 0)
+        self.assertEqual(result["exit_code"], 1)
+        self.assertIn("answer-leak", [f["code"] for f in result["findings"]])
+
+    def test_padded_verifier_paths_fail_instead_of_being_silently_trimmed(self) -> None:
+        for value in (
+            " sites/demo/verify/verify_0.py",
+            "sites/demo/verify/verify_0.py ",
+            "\tsites/demo/verify/verify_0.py\n",
+        ):
+            with self.subTest(value=value):
+                root = self.make_root(task_line(
+                    verifier_path=value, judge_rubric="Require the item price."
+                ) + "\n")
+                self.add_verifier(root)
+                self.assertFalse((root / value).is_file())
+                result = vt.run_validation(root=root)
+                self.assertEqual(result["exit_code"], 1)
+                self.assertIn("bad-verifier-path", [f["code"] for f in result["findings"]])
+
+    def test_local_runtime_requires_http_but_upstream_accepts_https(self) -> None:
+        for host in ("localhost", "127.0.0.1"):
+            for scheme in ("http", "https"):
+                with self.subTest(host=host, scheme=scheme):
+                    root = self.make_root(task_line(web=f"{scheme}://{host}:40000/") + "\n")
+                    result = vt.run_validation(root=root)
+                    self.assertEqual(result["exit_code"], int(scheme == "https"))
+                    self.assertEqual(
+                        [f["code"] for f in result["findings"]],
+                        ["bad-web-url"] if scheme == "https" else [],
+                    )
+
+    def test_actual_cli_exit_codes_and_json_without_input_mutation(self) -> None:
+        for question, web, strict, expected_code in (
+            ("Ship to Orlando FL 32801 and report the confirmation code.",
+             "http://localhost:40000/", True, 0),
+            ("Find the code. The answer is ABC123.", "http://localhost:40000/", False, 0),
+            ("Find the code. The answer is ABC123.", "http://localhost:40000/", True, 1),
+            ("Open the item details and report its price.", "https://localhost:40000/", False, 1),
+        ):
+            with self.subTest(question=question, web=web, strict=strict):
+                root = self.make_root(task_line(ques=question, web=web) + "\n")
+                scripts = root / "scripts"
+                scripts.mkdir()
+                shutil.copyfile(vt.__file__, scripts / "validate_tasks.py")
+                before = {p.relative_to(root): p.read_bytes() for p in root.rglob("*") if p.is_file()}
+                command = [sys.executable, "-B", str(scripts / "validate_tasks.py"), "--json"]
+                if strict:
+                    command.append("--strict")
+                result = subprocess.run(command, cwd=root, text=True, capture_output=True, check=False)
+                self.assertEqual(result.stderr, "")
+                self.assertEqual(result.returncode, expected_code)
+                self.assertEqual(json.loads(result.stdout)["exit_code"], expected_code)
+                after = {p.relative_to(root): p.read_bytes() for p in root.rglob("*") if p.is_file()}
+                self.assertEqual(before, after)
 
 
 if __name__ == "__main__":

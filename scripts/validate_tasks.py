@@ -53,7 +53,6 @@ ANSWER_LEAK_PATTERNS = (
         "question may leak the exact UI text of the answer",
     ),
 )
-CONFIRMATION_CODE_PATTERN = re.compile(r"\b[A-Z0-9]{5,}\b")
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -292,7 +291,7 @@ def validate_local_web(
             line_no,
         )
         return
-    if parsed.scheme not in {"http", "https"}:
+    if parsed.scheme != "http":
         add_finding(
             findings,
             file_summaries,
@@ -300,7 +299,7 @@ def validate_local_web(
             root,
             "error",
             "bad-web-url",
-            "web must use http or https",
+            "web must use http; the mirror runtime does not serve HTTPS",
             line_no,
         )
         return
@@ -458,20 +457,6 @@ def scan_question_quality(
         )
 
     lower = question.lower()
-    if (
-        "confirmation code" in lower or "booking code" in lower
-    ) and CONFIRMATION_CODE_PATTERN.search(question):
-        add_finding(
-            findings,
-            file_summaries,
-            path,
-            root,
-            "warning",
-            "answer-leak",
-            "question includes a code-like token that may leak the lookup target directly",
-            line_no,
-        )
-
     for pattern, label in SUSPICIOUS_PATTERNS:
         if pattern.search(question):
             add_finding(
@@ -527,7 +512,21 @@ def validate_verifier_path(
         )
         return
 
-    verifier_path = Path(value.strip())
+    # eval_judge resolves this exact string, without trimming it.
+    if value != value.strip():
+        add_finding(
+            findings,
+            file_summaries,
+            path,
+            root,
+            "error",
+            "bad-verifier-path",
+            "verifier_path must not contain leading or trailing whitespace",
+            line_no,
+        )
+        return
+
+    verifier_path = Path(value)
     expected_prefix = ("sites", site_slug, "verify")
     if (
         verifier_path.is_absolute()
