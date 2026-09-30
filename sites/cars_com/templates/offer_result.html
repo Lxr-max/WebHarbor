@@ -6,15 +6,15 @@
 {% block content %}
 <div class="offer-result">
   <h1>{{ r.vehicle }}</h1>
-  <p class="muted">{{ r.mileage | mileagefmt }} miles &middot; ZIP {{ r.zip }} &middot; {{ r.color }} &middot; {{ r.keys }} keys &middot; original owner: {{ r.original_owner }}</p>
+  <p class="muted">{{ r.mileage | mileagefmt }} miles &middot; ZIP {{ r.zip }} &middot; {{ r.color }} &middot; {{ r['keys'] }} keys &middot; original owner: {{ r.original_owner }}</p>
   <section class="estimated-value">
     <h2>Your Instant Offer estimate</h2>
     <p class="value-range">${{ '{:,}'.format(r.offer_low) }} - ${{ '{:,}'.format(r.offer_high) }}</p>
     <p class="muted">Estimated when you entered the vehicle: ${{ '{:,}'.format(r.initial_low) }} - ${{ '{:,}'.format(r.initial_high) }}.
-    The offer reflects your mileage ({{ r.mileage | mileagefmt }} miles) and the details you provided.</p>
+    This mirror estimate adjusts the captured vehicle value for mileage ({{ r.mileage | mileagefmt }} miles); color, keys and ownership details are recorded but do not change the estimate.</p>
   </section>
   <ol class="how-it-works-steps">
-    <li><strong>Get an Instant Offer.</strong> This estimate reflects your car's year, make, model, trim, mileage and condition details.</li>
+    <li><strong>Get an Instant Offer.</strong> This estimate uses the captured vehicle value and your mileage.</li>
     <li><strong>Confirm your car's condition.</strong> Bring your car into the dealership for a quick side-by-side check to confirm the final value.</li>
     <li><strong>Cash out or trade-in.</strong> Receive your check or use your Instant Offer to trade in your car for a new or used one.</li>
   </ol>

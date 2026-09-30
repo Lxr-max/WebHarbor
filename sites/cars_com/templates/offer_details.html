@@ -14,10 +14,10 @@
   <p>Enter a few more details about your car. All fields marked with * are required.</p>
   {% if v.options_list() %}
   <section class="offer-options">
-    <h3>Select your value impacting options</h3>
+    <h3>Captured vehicle options</h3>
     {% for opt in v.options_list() %}
     <label class="option-check">
-      <input type="checkbox" name="option_{{ loop.index0 }}" value="{{ opt }}"> {{ opt }}
+      {{ opt }}
     </label>
     {% endfor %}
     {% if v.standard_features_list() %}

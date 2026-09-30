@@ -68,7 +68,8 @@ def parse_model_page(path):
                    "Drivetrain": "drivetrain"}.get(label)
             if key:
                 row[key] = value
-        trims.append(row)
+        if not name.isdigit():
+            trims.append(row)
     out["trims"] = trims
     # expert's take (short summary only — the upstream byline + lead)
     mm = re.search(r"Our Expert's Take By ([A-Z][A-Za-z.]+(?: [A-Z][A-Za-z.]+){0,2}) (.+?)(?:Read full review|Shop the|$)", t)

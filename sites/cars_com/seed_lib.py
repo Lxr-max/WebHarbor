@@ -140,7 +140,10 @@ def seed_all(db, bcrypt, app):
             safety_rating=row.get('safety_rating'),
             safety_review_count=row.get('safety_review_count'),
             starting_price=row.get('starting_price'),
-            trims=json.dumps(row.get('trims', [])),
+            # Year-only comparison cards were captured beside the trim table.
+            # They are related vehicles, not trims of this model.
+            trims=json.dumps([t for t in row.get('trims', [])
+                              if not str(t.get('name', '')).strip().isdigit()]),
             notable_features=json.dumps(row.get('notable_features', [])),
             good_points=json.dumps(row.get('good_points', [])),
             bad_points=json.dumps(row.get('bad_points', [])),

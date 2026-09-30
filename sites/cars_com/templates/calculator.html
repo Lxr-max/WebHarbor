@@ -7,6 +7,7 @@
 <div class="calculator-page">
   <h1>Estimate your monthly car loan payment</h1>
   <p>Use our auto loan calculator to estimate your monthly car loan payments. Enter a car price and adjust other factors as needed to see how changes affect your estimated payment.</p>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
   <form class="calculator-form" method="post" action="{{ url_for('loan_calculator') }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="offer-field">

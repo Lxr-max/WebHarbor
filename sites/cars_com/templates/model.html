@@ -10,7 +10,7 @@
     <h1>{{ p.year }} {{ p.make }} {{ p.model }}</h1>
     <p class="muted">
       {% if p.starting_price %}Shop options from ${{ '{:,}'.format(p.starting_price) }}{% endif %}
-      {% if p.safety_rating %} &middot; Safety rating {{ p.safety_rating }}/5 ({{ p.safety_review_count }} reviews){% endif %}
+      {% if p.safety_rating %} &middot; Safety rating {{ p.safety_rating }}/5 {% if p.safety_review_count is not none %}({{ p.safety_review_count }} reviews){% endif %}{% endif %}
     </p>
     {% if p.photo_list() %}
     <div class="model-gallery">

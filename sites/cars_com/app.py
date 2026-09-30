@@ -23,6 +23,8 @@ upstream Cloudflare interstitial (see provenance.json); the SQLite seed
 is materialized deterministically at image build time (PYTHONHASHSEED=0).
 """
 import json
+import math
+from urllib.parse import urlsplit
 import os
 import re
 from datetime import date
@@ -167,6 +169,13 @@ CREDIT_RATINGS = {
 }
 CREDIT_APRS = {'excellent': 5.5, 'good': 7.0, 'average': 9.5, 'fair': 12.5}
 LOAN_TERMS = [36, 48, 60, 72, 84]
+
+
+def safe_next(target, fallback):
+    if not target or not target.startswith('/') or target.startswith('//') or '\\' in target or any(ord(c) < 32 for c in target):
+        return fallback
+    parsed = urlsplit(target)
+    return fallback if parsed.netloc or parsed.scheme else target
 
 
 # --------------------------------------------------------------------- models --
@@ -407,7 +416,8 @@ class ValuationVehicle(db.Model):
         return json.loads(self.options or '[]')
 
     def standard_features_list(self):
-        return json.loads(self.standard_features or '[]')
+        value = json.loads(self.standard_features or '[]')
+        return [value] if isinstance(value, str) else value
 
 
 class SavedCar(db.Model):
@@ -507,21 +517,18 @@ def _listing_filters(args):
     for trims in args.getlist('trims[]') or args.getlist('trims'):
         if trims:
             q.append(Listing.trim == trims)
-    try:
-        if args.get('list_price_min'):
-            q.append(Listing.price >= int(args['list_price_min']))
-        if args.get('list_price_max'):
-            q.append(Listing.price <= int(args['list_price_max']))
-        if args.get('mileage_max'):
-            q.append(Listing.mileage <= int(args['mileage_max']))
-        if args.get('year_min'):
-            q.append(Listing.year >= int(args['year_min']))
-        if args.get('year_max'):
-            q.append(Listing.year <= int(args['year_max']))
-        if args.get('maximum_distance'):
-            q.append(Listing.distance_miles <= int(args['maximum_distance']))
-    except ValueError:
-        pass
+    for key, column, operator in [
+        ('list_price_min', Listing.price, 'min'), ('list_price_max', Listing.price, 'max'),
+        ('mileage_max', Listing.mileage, 'max'), ('year_min', Listing.year, 'min'),
+        ('year_max', Listing.year, 'max'), ('maximum_distance', Listing.distance_miles, 'max')]:
+        if args.get(key):
+            try:
+                value = int(args[key])
+                if not 0 <= value <= 100000000:
+                    raise ValueError()
+            except ValueError:
+                abort(400, description='Invalid numeric search filter.')
+            q.append(column >= value if operator == 'min' else column <= value)
     for bs in args.getlist('body_style_slugs[]') or args.getlist('body_style_slugs'):
         if bs:
             q.append(Listing.body_style_slug == bs)
@@ -629,9 +636,9 @@ def shopping_results():
     query = Listing.query.filter(*filters)
     total = query.count()
     sort = args.get('sort', 'best_match_desc')
-    order = listing_sort_key(sort)
+    order = (*listing_sort_key(sort), Listing.id.asc())
     try:
-        page = max(1, int(args.get('page', 1)))
+        page = min(100000, max(1, int(args.get('page', 1))))
     except ValueError:
         page = 1
     pagination = query.order_by(*order).paginate(page=page, per_page=PER_PAGE,
@@ -722,9 +729,9 @@ def dealers_index():
     sort = args.get('sort', 'rating')
     order = {'rating': (Dealer.rating.desc(), Dealer.review_count.desc()),
              'name': (Dealer.name.asc(),),
-             'distance': (Dealer.distance_miles.asc(), Dealer.name.asc())}.get(sort)
+             'distance': (Dealer.distance_miles.asc(), Dealer.name.asc())}.get(sort, (Dealer.rating.desc(), Dealer.review_count.desc()))
     try:
-        page = max(1, int(args.get('page', 1)))
+        page = min(100000, max(1, int(args.get('page', 1))))
     except ValueError:
         page = 1
     pagination = query.order_by(*order).paginate(page=page, per_page=20, error_out=False)
@@ -831,7 +838,7 @@ def offer_vehicle():
     make = request.form.get('make', '')
     model = request.form.get('model', '')
     trim = request.form.get('trim', '')
-    row = ValuationVehicle.query.filter_by(year=int(year or 0), make=make,
+    row = ValuationVehicle.query.filter_by(year=int(year) if year.isdigit() and len(year) == 4 else 0, make=make,
                                            model=model, trim=trim).first()
     if not row:
         years = sorted({v.year for v in ValuationVehicle.query.all()}, reverse=True)
@@ -839,6 +846,8 @@ def offer_vehicle():
         return render_template('offer_start.html', years=years, makes=makes,
                                error="Pick a year, make, model and trim from the lists.",
                                zip=DEFAULT_ZIP), 400
+    session.pop('offer_result', None)
+    session.pop('offer_request_id', None)
     session['offer_vehicle'] = row.key
     session['offer_initial'] = [row.initial_low, row.initial_high]
     return redirect(url_for('offer_details'))
@@ -857,9 +866,10 @@ def offer_details():
         keys_count = request.form.get('keys', '')
         original = request.form.get('original_owner', '')
         payments = request.form.get('payments', '') or 'No'
-        if not (mileage and zipc and color and keys_count and original):
+        valid_colors = {v.exterior_color for v in ValuationVehicle.query.all()}
+        if not (mileage.isdigit() and len(mileage) <= 7 and int(mileage) <= 1000000 and re.fullmatch(r'\d{5}', zipc) and color in valid_colors and keys_count in ['0', '1', '2', '3+'] and original in ['Yes', 'No'] and payments in ['Yes', 'No']):
             return render_template('offer_details.html', v=row,
-                                   error="All fields marked with * are required.",
+                                   error="Enter a valid mileage, five-digit ZIP, color, key count and ownership details.",
                                    colors=sorted({c for c in
                                                   [r.exterior_color for r in
                                                    ValuationVehicle.query.all()] if c})), 400
@@ -870,8 +880,8 @@ def offer_details():
         except ValueError:
             mileage = row.est_mileage
         delta_low = row.est_low - row.initial_low
-        adj = max(500, (row.est_mileage - mileage) // 25)
-        offer_low = row.initial_low + delta_low + adj
+        adj = (row.est_mileage - mileage) // 25
+        offer_low = max(0, row.initial_low + delta_low + adj)
         offer_high = offer_low + (row.initial_high - row.initial_low)
         session['offer_result'] = {
             'vehicle': f"{row.year} {row.make} {row.model} {row.trim}".strip(),
@@ -881,6 +891,21 @@ def offer_details():
             'initial_low': row.initial_low, 'initial_high': row.initial_high,
             'offer_low': offer_low, 'offer_high': offer_high,
         }
+        if current_user.is_authenticated:
+            saved_request = OfferRequest(user_id=current_user.id,
+                                         vehicle_key=row.key, year=row.year,
+                                         make=row.make, model=row.model, trim=row.trim,
+                                         mileage=session['offer_result']['mileage'], zip=session['offer_result']['zip'],
+                                         exterior_color=session['offer_result']['color'],
+                                         keys_count=session['offer_result']['keys'],
+                                         original_owner=session['offer_result']['original_owner'],
+                                         payments_remaining=session['offer_result']['payments'],
+                                         offer_low=session['offer_result']['offer_low'],
+                                         offer_high=session['offer_result']['offer_high'],
+                                         created_at=MIRROR_TS)
+            db.session.add(saved_request)
+            db.session.commit()
+            session['offer_request_id'] = saved_request.id
         return redirect(url_for('offer_result'))
     colors = sorted({c for c in [r.exterior_color for r in ValuationVehicle.query.all()] if c})
     return render_template('offer_details.html', v=row, colors=colors)
@@ -892,21 +917,9 @@ def offer_result():
     if not result:
         return redirect(url_for('offer_start'))
     row = ValuationVehicle.query.filter_by(key=result['vehicle_key']).first_or_404()
-    saved_request = None
-    if current_user.is_authenticated:
-        saved_request = OfferRequest(user_id=current_user.id,
-                                     vehicle_key=row.key, year=row.year,
-                                     make=row.make, model=row.model, trim=row.trim,
-                                     mileage=result['mileage'], zip=result['zip'],
-                                     exterior_color=result['color'],
-                                     keys_count=result['keys'],
-                                     original_owner=result['original_owner'],
-                                     payments_remaining=result.get('payments', 'No'),
-                                     offer_low=result['offer_low'],
-                                     offer_high=result['offer_high'],
-                                     created_at=MIRROR_TS)
-        db.session.add(saved_request)
-        db.session.commit()
+    saved_request = db.session.get(OfferRequest, session.get('offer_request_id')) if current_user.is_authenticated and session.get('offer_request_id') else None
+    if saved_request and saved_request.user_id != current_user.id:
+        saved_request = None
     return render_template('offer_result.html', r=result, v=row, saved=saved_request)
 
 
@@ -916,6 +929,7 @@ def offer_result():
 def loan_calculator():
     result = None
     form = {}
+    error = None
     if request.method == 'POST':
         form = {k: request.form.get(k, '').strip() for k in
                 ('vehicle_price', 'credit_rating', 'custom_apr', 'zip',
@@ -927,7 +941,9 @@ def loan_calculator():
             incentives = float(form['cash_incentives'] or 0)
             fees = float(form['fees'] or 0)
             term = int(form['term'] or 72)
-            apr = float(form['custom_apr'] or 0) or CREDIT_APRS.get(form['credit_rating'] or 'good', 7.0)
+            apr = float(form['custom_apr']) if form['custom_apr'] else CREDIT_APRS.get(form['credit_rating'] or 'good', 7.0)
+            if not all(math.isfinite(v) and 0 <= v <= 100000000 for v in [price, down, trade, incentives, fees]) or not math.isfinite(apr) or not 0 <= apr <= 20 or term not in LOAN_TERMS:
+                raise ValueError('Invalid loan inputs')
             tax_rate = 10.25
             taxable = max(0.0, price - trade)
             sales_tax = taxable * tax_rate / 100.0
@@ -944,11 +960,11 @@ def loan_calculator():
                 'principal': round(principal), 'total_interest': round(total_paid - principal),
                 'total_paid': round(total_paid), 'apr': apr, 'term': term,
             }
-        except ValueError:
-            result = None
+        except (ValueError, OverflowError):
+            error = 'Enter nonnegative finite amounts, an APR from 0 to 20, and an available loan term.'
     return render_template('calculator.html', form=form, result=result,
                            credit_ratings=CREDIT_RATINGS, terms=LOAN_TERMS,
-                           zip=DEFAULT_ZIP)
+                           zip=DEFAULT_ZIP, error=error), (400 if error else 200)
 
 
 # ------------------------------------------------------------------- accounts --
@@ -962,7 +978,7 @@ def authn_login():
         if user and bcrypt.check_password_hash(user.password_hash, password):
             login_user(user)
             target = request.args.get('next_url') or url_for('garage')
-            return redirect(target)
+            return redirect(safe_next(target, url_for('garage')))
         return render_template('login.html', error="Invalid email or password.",
                                email=email), 401
     return render_template('login.html')
@@ -994,6 +1010,8 @@ def authn_register():
 @login_required
 def authn_logout():
     logout_user()
+    for key in ['offer_vehicle', 'offer_initial', 'offer_result', 'offer_request_id']:
+        session.pop(key, None)
     return redirect(url_for('home'))
 
 
@@ -1021,7 +1039,7 @@ def save_car(listing_id):
         db.session.add(SavedCar(user_id=current_user.id, listing_id=listing_id,
                                 saved_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('next') or url_for('vehicle_detail', listing_id=listing_id))
+    return redirect(safe_next(request.form.get('next'), url_for('vehicle_detail', listing_id=listing_id)))
 
 
 @app.route('/searches/save/', methods=['POST'])
@@ -1030,6 +1048,8 @@ def save_search():
     query_string = request.form.get('query_string', '')
     name = request.form.get('name', '').strip() or "Search"
     freq = request.form.get('alert_frequency', 'daily')
+    if freq not in ['daily', 'weekly', 'monthly', 'off']:
+        abort(400)
     if not query_string.startswith('/shopping/results/'):
         query_string = '/shopping/results/' + query_string
     db.session.add(SavedSearch(user_id=current_user.id, name=name,

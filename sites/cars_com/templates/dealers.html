@@ -20,9 +20,9 @@
       <label for="d-rating">Dealer rating</label>
       <select id="d-rating" name="rating">
         <option value="">Any rating</option>
-        <option value="4.5" {{ 'selected' if args.get('rating') == '4.5' }}>&amp; up</option>
-        <option value="4" {{ 'selected' if args.get('rating') == '4' }}>&amp; up</option>
-        <option value="3" {{ 'selected' if args.get('rating') == '3' }}>&amp; up</option>
+        <option value="4.5" {{ 'selected' if args.get('rating') == '4.5' }}>4.5 &amp; up</option>
+        <option value="4" {{ 'selected' if args.get('rating') == '4' }}>4 &amp; up</option>
+        <option value="3" {{ 'selected' if args.get('rating') == '3' }}>3 &amp; up</option>
       </select>
     </div>
     <div class="filter-item">
