@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Checkout — {{ v.title() }} | Carvana{% endblock %}
+{% block body %}
+<div class="checkout">
+  <h1>Complete your purchase</h1>
+  <div class="checkout-car">
+    {% if v.card_image_url() %}<img src="{{ v.card_image_url() }}" alt="{{ v.title() }}">{% endif %}
+    <div>
+      <h2>{{ v.title() }}</h2>
+      <p>{{ v.trim or v.body_style }} · {{ v.mileage|mileage }}</p>
+      <p class="car-price">{{ v.price|money }}</p>
+    </div>
+  </div>
+
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+
+  <form class="checkout-form" method="post" action="{{ url_for('checkout', vehicle_id=v.vehicle_id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <section class="co-section">
+      <h3>1. How do you want to pay?</h3>
+      <label class="check"><input type="radio" name="payment_type" value="cash" {% if step != 'delivery' %}checked{% endif %}> Pay cash — {{ v.price|money }}</label>
+      <label class="check"><input type="radio" name="payment_type" value="finance" {% if step == 'delivery' %}checked{% endif %}> Finance with Carvana</label>
+      <div class="finance-fields">
+        <div class="est-row">
+          <label for="co-down">Cash down ($)</label>
+          <input id="co-down" type="number" name="down_payment" min="0" step="250" value="0">
+        </div>
+        <div class="est-row">
+          <label for="co-term">Term (months)</label>
+          <select id="co-term" name="term">
+            {% for t in terms %}<option value="{{ t }}"{% if t == 72 %} selected{% endif %}>{{ t }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="est-row">
+          <label for="co-tier">Credit profile</label>
+          <select id="co-tier" name="credit_tier">
+            {% for key, label, apr in credit_tiers %}<option value="{{ key }}"{% if key == 'good' %} selected{% endif %}>{{ label }} — {{ '%.2f'|format(apr*100) }}% APR</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="co-section">
+      <h3>2. Trading in a car?</h3>
+      <label class="check"><input type="radio" name="trade_in" value="no" checked> No trade-in</label>
+      <label class="check"><input type="radio" name="trade_in" value="yes"> Yes — apply my trade-in credit</label>
+      <div class="est-row">
+        <label for="co-trade">Trade-in credit ($)</label>
+        <input id="co-trade" type="number" name="trade_credit" min="0" step="250" value="0">
+      </div>
+    </section>
+
+    <section class="co-section">
+      <h3>3. Schedule your delivery</h3>
+      <div class="est-row">
+        <label for="co-date">Delivery date</label>
+        <select id="co-date" name="delivery_date">
+          {% for d in delivery_dates %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="est-row">
+        <label for="co-slot">Time window</label>
+        <select id="co-slot" name="delivery_slot">
+          {% for s in delivery_slots %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="est-row">
+        <label for="co-street">Street address</label>
+        <input id="co-street" type="text" name="street" placeholder="123 Main Street" required>
+      </div>
+      <div class="est-row three">
+        <div><label for="co-city">City</label><input id="co-city" type="text" name="city" placeholder="Seattle" required></div>
+        <div><label for="co-state">State</label><input id="co-state" type="text" name="state" placeholder="WA" maxlength="2" required></div>
+        <div><label for="co-zip">ZIP</label><input id="co-zip" type="text" name="zip" placeholder="98101" pattern="\d{5}" required></div>
+      </div>
+      <p class="co-note">Delivery is free. The 7-Day Money-Back Guarantee starts the day your car is delivered.</p>
+    </section>
+
+    <button type="submit" class="btn-blue big">Place order &amp; schedule delivery</button>
+  </form>
+</div>
+{% endblock %}
