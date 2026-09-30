@@ -461,6 +461,9 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/airbnb && \
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40137
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/iclr && \
+    (cd /opt/WebSyn/iclr && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/iclr.db instance_seed/iclr.db && rm -rf instance __pycache__)
+
+EXPOSE 8101 40000-40206
 
 CMD ["/opt/websyn_start.sh"]

@@ -1,0 +1,1431 @@
+{
+  "iclr--0": {
+    "task": "From the conference home open the papers browser and search titles for diffusion; report how many match. Narrow to topic Reinforcement Learning -> Deep RL and report how many remain. Open the alphabetically first result and report its poster position and session. Return to the diffusion search, keep only Accept (Oral) decisions, and open the first match: report its session and whether a poster position shows. Open the schedule on that session's day and report the session's time window and paper count. Log in as alice.j@test.com with password TestPass123!, bookmark the first result you opened, and report Alice's bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/$",
+      "^/papers\\b",
+      "q=diffusion",
+      "topic=Reinforcement",
+      "decision=Accept",
+      "^/papers/10008059$",
+      "^/papers/10008638$",
+      "^/schedule\\b",
+      "date=2026-04-24",
+      "session=Poster[\\s+]*Session[\\s+]*3[\\s+]*Pavilion[\\s+]*3",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "diffusion match count",
+        "diffusion[^.;]{0,60}\\b406\\b"
+      ],
+      [
+        "RL->Deep RL subset count",
+        "narrowed[^.;]{0,30}\\b4\\b"
+      ],
+      [
+        "first result poster position",
+        "p4\\-\\#4618"
+      ],
+      [
+        "first result session",
+        "poster\\s*session\\s*2\\s*pavilion\\s*4"
+      ],
+      [
+        "oral-only match count",
+        "oral-only[^.;]{0,40}\\b34\\b"
+      ],
+      [
+        "first oral match session",
+        "poster\\s*session\\s*3\\s*pavilion\\s*3"
+      ],
+      [
+        "first oral match position",
+        "p3\\-\\#1309"
+      ],
+      [
+        "poster position shows",
+        "(yes|shows?|position\\s*p3-#1309)"
+      ],
+      [
+        "session time window",
+        "10:30\\s*am\\-1:00\\s*pm"
+      ],
+      [
+        "session paper count",
+        "holding[^.;]{0,40}\\b503\\s*papers\\b"
+      ],
+      [
+        "alice bookmark total",
+        "alice[^.;]{0,80}\\b4\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 1,
+            "paper_id": 10008059,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--1": {
+    "task": "Search the papers browser for titles containing language model and report the match count. Keep only Accept (Oral) decisions and report how many remain. Open the alphabetically first result and report its session and whether the page shows a talk slot or a poster position. Find that session on the schedule and report its day and time window. Log in as bob.c@test.com with password TestPass123!, bookmark that first paper, and report how many bookmarks Bob has in total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/papers\\b",
+      "q=language\\+model",
+      "decision=Accept",
+      "^/papers/10007869$",
+      "^/schedule\\b",
+      "date=2026-04-23",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "language model match count",
+        "language\\s*model[^.;]{0,60}\\b495\\b"
+      ],
+      [
+        "oral-only count",
+        "oral-only[^.;]{0,40}\\b38\\b"
+      ],
+      [
+        "first result session",
+        "poster\\s*session\\s*2\\s*pavilion\\s*4"
+      ],
+      [
+        "page shows poster position",
+        "(poster\\s*position|no\\s*talk\\s*slot)"
+      ],
+      [
+        "session day",
+        "(thu|thursday|apr\\s*23|2026-04-23)"
+      ],
+      [
+        "session window",
+        "3:15\\s*pm\\-5:45\\s*pm"
+      ],
+      [
+        "bob bookmark total",
+        "bob[^.;]{0,80}\\b2\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "paper_id": 10007869,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--2": {
+    "task": "In the papers browser filter to the session Poster Session 4 Pavilion 4 and report how many papers it holds. Sort by title and open the first result: report its poster position and the institution of its first author. Open the schedule on that session's day and report the session's time window. Now filter the papers browser to Poster Session 1 Pavilion 4, sort by title, and report the first paper's poster position. Log in as carol.d@test.com with password TestPass123!, bookmark that paper, and report Carol's total bookmark count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/papers\\b",
+      "session=Poster[\\s+]*Session[\\s+]*4[\\s+]*Pavilion[\\s+]*4",
+      "session=Poster[\\s+]*Session[\\s+]*1[\\s+]*Pavilion[\\s+]*4",
+      "^/papers/10010518$",
+      "^/schedule\\b",
+      "date=2026-04-24",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "PS4P4 count",
+        "ps4p4[^.;]{0,40}\\b432\\b"
+      ],
+      [
+        "first result poster position",
+        "p4\\-\\#4712"
+      ],
+      [
+        "first author institution",
+        "seoul\\s*national\\s*university"
+      ],
+      [
+        "PS4P4 window",
+        "3:15\\s*pm\\-5:45\\s*pm"
+      ],
+      [
+        "PS1P4 first paper position",
+        "p4\\-\\#3316"
+      ],
+      [
+        "carol bookmark total",
+        "carol[^.;]{0,80}\\b2\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "paper_id": 10010780,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--3": {
+    "task": "Open the schedule on Thursday April 23. In Oral Session 1A LLMs and Reasoning report how many talks are listed and the titles of the first and last. Open the first talk's paper and report its decision and room; open the last talk's paper and report its talk slot. Report Thursday's Poster Session 1 Pavilion 4 window and its alphabetically first paper's poster position. Log in as bob.c@test.com with password TestPass123!, bookmark the last talk's paper, and report Bob's bookmark total and saved-event title. Switch to Friday and report the social count and earliest start time.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/schedule\\b",
+      "date=2026-04-23",
+      "date=2026-04-24",
+      "^/papers/10007766$",
+      "^/papers/10009682$",
+      "session=Poster[\\s+]*Session[\\s+]*1[\\s+]*Pavilion[\\s+]*4",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "OS1A talk count",
+        "oral\\s*session\\s*1a[^.;]{0,40}\\b6\\s*talks\\b"
+      ],
+      [
+        "first talk title",
+        "overthinking\\s*reduction\\s*with\\s*decoupled\\s*rewards\\s*and\\s*curriculum\\s*data\\s*scheduling"
+      ],
+      [
+        "last talk title",
+        "rain\\-merging:\\s*a\\s*gradient\\-free\\s*method\\s*to\\s*enhance\\s*instruction\\s*following\\s*in\\s*large\\s*reasoning\\s*models\\s*with\\s*preserved\\s*thinking\\s*format"
+      ],
+      [
+        "first talk decision",
+        "accept\\s*\\(oral\\)"
+      ],
+      [
+        "first talk room",
+        "amphitheater"
+      ],
+      [
+        "last talk slot",
+        "11:30\\s*am\\-11:40\\s*am"
+      ],
+      [
+        "PS1P4 window",
+        "10:30\\s*am\\-1:00\\s*pm"
+      ],
+      [
+        "PS1P4 first paper position",
+        "p4\\-\\#3316"
+      ],
+      [
+        "bob bookmark total",
+        "bob[^.;]{0,80}\\b2\\s*bookmarks?\\b"
+      ],
+      [
+        "bob saved event title",
+        "i\\s*can't\\s*believe\\s*it's\\s*not\\s*better:\\s*where\\s*large\\s*language\\s*models\\s*need\\s*to\\s*improve"
+      ],
+      [
+        "friday social count",
+        "friday[^.;]{0,40}\\b12\\s*socials\\b"
+      ],
+      [
+        "earliest social start",
+        "12:00\\s*pm"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "paper_id": 10009682,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--4": {
+    "task": "From the workshops hub report how many workshops run on Sunday April 26. Open the workshop whose title starts with VerifAI-2 and report its organizers and how many schedule items its program lists. Open the AI for Peace workshop and report the time and title of its first schedule item. Log in as dana.k@test.com with password TestPass123!, add the workshop AI for Mechanism Design and Strategic Decision Making (AIMS) to your schedule, and report Dana's saved-event total.  Open the Monday schedule and report the workshop count that day. Finally report the project-page domain of I Can't Believe It's Not Better.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/workshops\\b",
+      "^/events/10000774$",
+      "^/events/10000804$",
+      "^/events/10000779$",
+      "^/login$",
+      "^/mystuff$",
+      "date=2026-04-27",
+      "^/events/10000772$"
+    ],
+    "claims": [
+      [
+        "sunday workshop count",
+        "(20\\s*workshops[^.;]{0,40}sunday|sunday[^.;]{0,40}\\b20\\s*workshops\\b)"
+      ],
+      [
+        "verifai-2 organizers",
+        "celine\\s*lee"
+      ],
+      [
+        "verifai-2 organizers 2",
+        "armando\\s*solar\\-lezama"
+      ],
+      [
+        "verifai-2 schedule items",
+        "\\b18\\s*schedule\\s*items\\b"
+      ],
+      [
+        "ai for peace first item time",
+        "9:00\\s*am"
+      ],
+      [
+        "ai for peace first item title",
+        "welcome"
+      ],
+      [
+        "dana saved event total",
+        "dana[^.;]{0,60}\\b2\\s*saved\\s*events?\\b"
+      ],
+      [
+        "monday workshop count",
+        "monday[^.;]{0,40}\\b20\\s*workshops\\b"
+      ],
+      [
+        "icbinb domain",
+        "sites\\.google\\.com/view/icbinb\\-2026"
+      ]
+    ],
+    "state": {
+      "schedule_saves": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 4,
+            "event_id": 10000779,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--5": {
+    "task": "Open the invited talks hub and report how many talks are listed. Open Images of the Hidden Universe and report the speaker and the first university mentioned in her bio. Open Marin: Open Development of Frontier AI and report the speaker, the day, and the start time. Open the Thursday 9:00 AM talk and report its overflow room. Open Learning while developing and report its speaker. Log in as alice.j@test.com with password TestPass123!, add the Marin talk to your schedule, and report how many events My Schedule shows for Alice.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/invited-talks$",
+      "^/events/10020867$",
+      "^/events/10020868$",
+      "^/events/10020869$",
+      "^/events/10020588$",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "talk count",
+        "\\b7\\s*invited\\s*talks\\b"
+      ],
+      [
+        "bouman speaker",
+        "katherine\\s*bouman"
+      ],
+      [
+        "bouman bio university",
+        "california\\s*institute\\s*of\\s*technology"
+      ],
+      [
+        "marin speaker",
+        "percy\\s*liang"
+      ],
+      [
+        "marin day",
+        "sat,\\s*apr\\s*25,\\s*2026"
+      ],
+      [
+        "marin start time",
+        "5:45\\s*pm"
+      ],
+      [
+        "thursday 9am talk title",
+        "the\\s*challenges\\s*of\\s*human\\-centered\\s*ai\\s*and\\s*robotics:\\s*what\\s*we\\s*want,\\s*need,\\s*and\\s*are\\s*getting\\s*from\\s*human\\-machine\\s*interaction"
+      ],
+      [
+        "thursday 9am overflow room",
+        "201\\s*a/b"
+      ],
+      [
+        "karen speaker",
+        "karen\\s*e\\.\\s*adolph"
+      ],
+      [
+        "alice saved event total",
+        "schedule[^.;]{0,60}\\b1\\s*event"
+      ]
+    ],
+    "state": {
+      "schedule_saves": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 1,
+            "event_id": 10020867,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--6": {
+    "task": "From the site search look up Susquehanna and report its tier. Look up Marin, open the matching schedule event, and report its speaker and start time. Open the schedule on that day and report the Poster Session 6 Pavilion 3 window. Open the sponsors page and report the Double Diamond names and Diamond count. Look up Amazon's tier. Open the blog; report the newest announcement's title and date, open it, and report its author line. Return to the blog and open the Test of Time announcement; report its date. Open the awards page and report both Test of Time titles.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/search\\b",
+      "q=Susquehanna",
+      "q=Marin",
+      "q=Amazon",
+      "^/events/10020867$",
+      "^/schedule\\b",
+      "date=2026-04-25",
+      "^/sponsors$",
+      "^/news\\b",
+      "^/news/[a-z0-9-]+$",
+      "^/awards$"
+    ],
+    "claims": [
+      [
+        "susquehanna tier",
+        "susquehanna[^.;]{0,40}diamond\\b"
+      ],
+      [
+        "marin speaker",
+        "percy\\s*liang"
+      ],
+      [
+        "marin start time",
+        "starting[^.;]{0,20}5:45\\s*pm"
+      ],
+      [
+        "PS6P3 window",
+        "3:15\\s*pm\\-5:45\\s*pm"
+      ],
+      [
+        "double diamond names",
+        "double\\s*diamond\\s*sponsors[^.;]{0,60}amazon"
+      ],
+      [
+        "double diamond names 2",
+        "tencent"
+      ],
+      [
+        "diamond tier count",
+        "diamond\\s*tier\\s*count[^.;]{0,10}\\b13\\b"
+      ],
+      [
+        "amazon tier",
+        "amazon\\s*tier\\s*double\\s*diamond"
+      ],
+      [
+        "newest announcement title",
+        "submission\\s*policies\\s*for\\s*iclr\\s*2027"
+      ],
+      [
+        "newest announcement date",
+        "2026\\-09\\-02"
+      ],
+      [
+        "newest announcement author",
+        "iclr\\s*2027\\s*program\\s*chairs"
+      ],
+      [
+        "test of time title 1",
+        "unsupervised\\s*representation\\s*learning\\s*with\\s*deep\\s*convolutional\\s*generative\\s*adversarial\\s*networks"
+      ],
+      [
+        "test of time title 2",
+        "continuous\\s*control\\s*with\\s*deep\\s*reinforcement\\s*learning"
+      ],
+      [
+        "test of time post title",
+        "announcing\\s*the\\s*test\\s*of\\s*time\\s*awards\\s*from\\s*iclr\\s*2016"
+      ],
+      [
+        "test of time post date",
+        "wed,\\s*apr\\s*22,\\s*2026"
+      ]
+    ],
+    "state": {}
+  },
+  "iclr--7": {
+    "task": "On the organizers page report the General Chair's name and institution and the Program Chair and Ethics Review Chair counts. Report the Cornell Senior Program Chair's first research area. Open the awards page and report the two Outstanding Paper titles and the Honorable Mention's title and first author. Open the blog post announcing the Outstanding Papers and report its author. Search the papers for Polar Express, open the first match, and report its session, decision, and poster position. Log in as carol.d@test.com with password TestPass123!, search for Transformers are Inherently Succinct, bookmark the first match, and report Carol's bookmark count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/organizers$",
+      "^/awards$",
+      "^/news\\b",
+      "q=Polar\\+Express",
+      "^/papers/10006553$",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "general chair name",
+        "carl\\s*vondrick"
+      ],
+      [
+        "general chair institution",
+        "columbia\\s*university\\s*\\&\\s*apple"
+      ],
+      [
+        "program chair count",
+        "\\b4\\s*program\\s*chairs\\b"
+      ],
+      [
+        "ethics review chair count",
+        "\\b5\\s*ethics\\s*review\\s*chairs\\b"
+      ],
+      [
+        "cornell spc name",
+        "bharath\\s*hariharan"
+      ],
+      [
+        "spc first research area",
+        "computer\\s*vision"
+      ],
+      [
+        "outstanding title 1",
+        "transformers\\s*are\\s*inherently\\s*succinct"
+      ],
+      [
+        "outstanding title 2",
+        "llms\\s*get\\s*lost\\s*in\\s*multi\\-turn\\s*conversation"
+      ],
+      [
+        "honorable mention title",
+        "the\\s*polar\\s*express:\\s*optimal\\s*matrix\\s*sign\\s*methods\\s*and\\s*their\\s*application\\s*to\\s*the\\s*muon\\s*algorithm"
+      ],
+      [
+        "honorable mention first author",
+        "noah\\s*amsel"
+      ],
+      [
+        "awards post author",
+        "iclr\\s*2026\\s*program\\s*chairs"
+      ],
+      [
+        "polar express session",
+        "poster\\s*session\\s*4\\s*pavilion\\s*3"
+      ],
+      [
+        "polar express decision",
+        "accept\\s*\\(oral\\)"
+      ],
+      [
+        "polar express position",
+        "p3\\-\\#407"
+      ],
+      [
+        "carol bookmark count",
+        "carol[^.;]{0,80}\\b2\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "paper_id": 10008853,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--8": {
+    "task": "On the awards page report the two Outstanding Paper titles with first authors and the two Test of Time titles and first authors. Open the Outstanding Papers post and report the committee chair. Open the keynotes announcement and report how many keynote talks it presents and the first's day and time. Open the newest post and report its title and submission limit. Log in as alice.j@test.com with password TestPass123!, search the papers browser for Transformers are Inherently Succinct, open the first match, and report its session, poster position, and bookmark state, plus the session's time window and paper count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/awards$",
+      "^/news/awards$",
+      "^/news/keynotes$",
+      "^/news/[a-z0-9-]+$",
+      "^/login$",
+      "^/papers\\b",
+      "q=Transformers",
+      "^/papers/10008853$",
+      "session=Poster[\\s+]*Session[\\s+]*2[\\s+]*Pavilion[\\s+]*3"
+    ],
+    "claims": [
+      [
+        "outstanding title 1",
+        "transformers\\s*are\\s*inherently\\s*succinct"
+      ],
+      [
+        "outstanding first author 1",
+        "pascal\\s*bergsträsser"
+      ],
+      [
+        "outstanding title 2",
+        "llms\\s*get\\s*lost\\s*in\\s*multi\\-turn\\s*conversation"
+      ],
+      [
+        "outstanding first author 2",
+        "philippe\\s*laban"
+      ],
+      [
+        "test of time title 1",
+        "unsupervised\\s*representation\\s*learning\\s*with\\s*deep\\s*convolutional\\s*generative\\s*adversarial\\s*networks"
+      ],
+      [
+        "test of time first author 1",
+        "alec\\s*radford"
+      ],
+      [
+        "test of time title 2",
+        "continuous\\s*control\\s*with\\s*deep\\s*reinforcement\\s*learning"
+      ],
+      [
+        "test of time first author 2",
+        "timothy\\s*p\\.\\s*lillicrap"
+      ],
+      [
+        "committee chair",
+        "gautam\\s*kamath"
+      ],
+      [
+        "keynote talk count",
+        "\\b6\\s*keynote\\s*talks\\b"
+      ],
+      [
+        "first keynote slot",
+        "9:00\\s*am\\s*thursday"
+      ],
+      [
+        "newest post title",
+        "submission\\s*policies\\s*for\\s*iclr\\s*2027"
+      ],
+      [
+        "submission limit",
+        "\\b20-paper\\s*limit\\b"
+      ],
+      [
+        "transformers session",
+        "poster\\s*session\\s*2\\s*pavilion\\s*3"
+      ],
+      [
+        "transformers position",
+        "p3\\-\\#619"
+      ],
+      [
+        "bookmark state",
+        "(already\\s*bookmark|remove\\s*button|remove\\s*from\\s*my\\s*bookmarks)"
+      ],
+      [
+        "session window",
+        "3:15\\s*pm\\-5:45\\s*pm"
+      ],
+      [
+        "session paper count",
+        "session[^.;]{0,40}\\b497\\s*papers\\b"
+      ]
+    ],
+    "state": {}
+  },
+  "iclr--9": {
+    "task": "Open the registration page and report the price of one guest banquet ticket and the three affiliation types offered. Try submitting with Conference Sessions and Workshops plus a second item checked and report the error message you get. Then submit a valid registration as Full time student with Conference Sessions and Workshops, two banquet tickets, and no dietary preference; report your registration code and the total in USD. Log in as alice.j@test.com with password TestPass123! and report the code and total of her existing registration under My Stuff.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/register$",
+      "^/register/confirmation/ICLR26-[0-9A-F]{8}$",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "banquet ticket price",
+        "banquet\\s*ticket[^.;]{0,30}\\$50\\b"
+      ],
+      [
+        "affiliation 1",
+        "full\\s*time\\s*student"
+      ],
+      [
+        "affiliation 2",
+        "academic"
+      ],
+      [
+        "affiliation 3",
+        "industrial"
+      ],
+      [
+        "exclusivity error",
+        "if\\s*you\\s*choose\\s*conference\\s*sessions\\s*and\\s*workshops,\\s*do\\s*not\\s*check\\s*any\\s*other\\s*items"
+      ],
+      [
+        "registration total",
+        "total\\s*\\$100\\b"
+      ],
+      [
+        "registration code format",
+        "ICLR26-[0-9A-F]{8}"
+      ],
+      [
+        "alice registration code",
+        "iclr26\\-a1b2c3d4"
+      ],
+      [
+        "alice registration total",
+        "existing\\s*registration[^.;]{0,60}\\$50\\b"
+      ]
+    ],
+    "state": {
+      "registrations": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": null,
+            "name": "Reg Tester",
+            "email": "reg@test.com",
+            "affiliation": "Full time student",
+            "items": {
+              "contains": "Conference Sessions and Workshops"
+            },
+            "banquet_tickets": 2,
+            "dietary": null,
+            "total_usd": 100,
+            "reg_code": {
+              "regex": "ICLR26-[0-9A-F]{8}"
+            },
+            "created": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "answer_state": [
+      {
+        "table": "registrations",
+        "column": "reg_code"
+      }
+    ]
+  },
+  "iclr--10": {
+    "task": "Create a new profile (name Rosa Parks, email rosa.p@test.com, a password of at least 8 characters). Search the papers browser for Escaping Policy Contraction and open the match; report its session and poster position. Bookmark it, open My Stuff, and report your bookmark count. Log out and log back in with the same account; report how many bookmarked papers and saved events the account has. Finally report the decision type shown for the bookmarked paper.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/signup$",
+      "^/papers\\b",
+      "q=Escaping\\+Policy",
+      "^/papers/10006831$",
+      "^/mystuff$",
+      "^/login$"
+    ],
+    "claims": [
+      [
+        "cappo session",
+        "poster\\s*session\\s*4\\s*pavilion\\s*4"
+      ],
+      [
+        "cappo position",
+        "p4\\-\\#4602"
+      ],
+      [
+        "rosa bookmark count",
+        "bookmark\\s*count[^.;]{0,10}\\b1\\b"
+      ],
+      [
+        "bookmarked papers after relogin",
+        "logout\\+login[^.;]{0,20}\\b1\\s*bookmarked\\b"
+      ],
+      [
+        "saved events after relogin",
+        "\\b1\\s*bookmarked\\s*papers,\\s*0\\s*saved\\s*events\\b"
+      ],
+      [
+        "bookmarked decision type",
+        "poster"
+      ]
+    ],
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "email": "rosa.p@test.com",
+            "name": "Rosa Parks",
+            "password_hash": {
+              "regex": "\\$2b\\$\\d+\\$[./A-Za-z0-9]+"
+            },
+            "joined": "2026-09-30"
+          }
+        ]
+      },
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 5,
+            "paper_id": 10006831,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--11": {
+    "task": "Open the FAQ and report the Badge Replacement Policy's first-replacement fee. Search the site for luggage, open the conference site result, and report the lost badge fee and the April 24-27 luggage hours. Open the dates page and report the 2026 dietary preference and registration cancellation deadlines. Search the site for policies, open the oldest matching announcement, and report its title. Open the HelpDesk and send a message to the Workshops topic (name Help Tester, email help@test.com, subject Workshop question, body asking about Sunday passes); report the confirmation shown. Then report which HelpDesk topics handle Visa Support and Press.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/faq$",
+      "^/search\\b",
+      "q=luggage",
+      "q=policies",
+      "^/venue$",
+      "^/dates$",
+      "^/news/[a-z0-9-]+$",
+      "^/helpdesk$"
+    ],
+    "claims": [
+      [
+        "badge replacement fee",
+        "badge\\s*replacement\\s*fee[^.;]{0,30}\\$100\\b"
+      ],
+      [
+        "lost badge fee",
+        "lost\\s*badge\\s*fee[^.;]{0,20}\\$100\\b"
+      ],
+      [
+        "luggage hours",
+        "7am\\-5:30pm"
+      ],
+      [
+        "dietary preference deadline",
+        "mar\\s*31\\s*'26\\s*\\(anywhere\\s*on\\s*earth\\)"
+      ],
+      [
+        "registration cancellation deadline",
+        "apr\\s*02\\s*'26\\s*10:00\\s*pm\\s*utc"
+      ],
+      [
+        "oldest policies announcement title",
+        "policies\\s*on\\s*large\\s*language\\s*model\\s*usage\\s*at\\s*iclr\\s*2026"
+      ],
+      [
+        "oldest policies announcement date",
+        "tue,\\s*aug\\s*26,\\s*2025"
+      ],
+      [
+        "helpdesk confirmation",
+        "your\\s*message\\s*has\\s*been\\s*sent\\s*to\\s*the\\s*iclr\\s*helpdesk"
+      ],
+      [
+        "visa support topic",
+        "visa\\s*support"
+      ],
+      [
+        "press topic",
+        "\\bpress\\b"
+      ]
+    ],
+    "state": {
+      "contact_messages": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "name": "Help Tester",
+            "email": "help@test.com",
+            "topic": "workshop-chairs@iclr.cc",
+            "subject": "Workshop question",
+            "body": {
+              "contains": "Sunday"
+            },
+            "created": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--12": {
+    "task": "Open the dates page and report the ICLR 2027 abstract and paper deadlines and final decision date, plus the 2026 registration deadlines. Search the site for Riocentro and report the result types. Search for Amazon, open the sponsors page, and report its tier. Open the conference site page and report the lost badge fee and luggage hours. Open the FAQ and report the first-time badge replacement fee. Search the papers browser for Polar Express and report the first match's decision. Log in as alice.j@test.com with password TestPass123!, open My Stuff, and report her registration code, total, and bookmark count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/dates$",
+      "^/search\\b",
+      "q=Riocentro",
+      "q=Amazon",
+      "^/sponsors$",
+      "^/venue$",
+      "^/faq$",
+      "^/papers\\b",
+      "q=Polar\\+Express",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "2027 abstract deadline",
+        "sep\\s*18\\s*'26"
+      ],
+      [
+        "2027 paper deadline",
+        "sep\\s*25\\s*'26"
+      ],
+      [
+        "2027 final decisions",
+        "dec\\s*16\\s*'26"
+      ],
+      [
+        "2026 registration open",
+        "dec\\s*29\\s*'25"
+      ],
+      [
+        "2026 early registration deadline",
+        "mar\\s*14\\s*'26"
+      ],
+      [
+        "riocentro result types",
+        "conference\\s*site"
+      ],
+      [
+        "amazon tier",
+        "double\\s*diamond"
+      ],
+      [
+        "lost badge fee",
+        "lost\\s*badge\\s*fee[^.;]{0,20}\\$100\\b"
+      ],
+      [
+        "luggage hours",
+        "7am\\-5:30pm"
+      ],
+      [
+        "badge replacement fee",
+        "badge\\s*replacement\\s*fee[^.;]{0,20}\\$100\\b"
+      ],
+      [
+        "polar express decision",
+        "accept\\s*\\(\\s*oral\\s*\\)"
+      ],
+      [
+        "alice registration code",
+        "iclr26\\-a1b2c3d4"
+      ],
+      [
+        "alice registration total",
+        "registration[^.;]{0,60}total\\s*\\$50\\b"
+      ],
+      [
+        "alice bookmark count",
+        "\\b3\\s*bookmarks\\b"
+      ]
+    ],
+    "state": {}
+  },
+  "iclr--13": {
+    "task": "Use the site search for the query Riocentro, open the conference site page result, and report the 2027 conference location and dates. Search for Outstanding and open the newest matching announcement; report its date and author. Search for Amazon and report its sponsor tier. Search for Jane Street and report its tier. Search for VerifAI and open the matching workshop; report its day and start time and how many schedule items it lists. Search for Polar Express, open the first match, and report the paper's decision.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/search\\b",
+      "q=Riocentro",
+      "^/venue$",
+      "q=Outstanding",
+      "q=Amazon",
+      "q=Jane\\+Street",
+      "q=VerifAI",
+      "q=Polar\\+Express",
+      "^/news/awards$",
+      "^/events/10000774$",
+      "^/papers/10006553$"
+    ],
+    "claims": [
+      [
+        "riocentro result types",
+        "conference\\s*site"
+      ],
+      [
+        "2027 conference location",
+        "california"
+      ],
+      [
+        "2027 conference dates",
+        "april\\s*26\\-30,\\s*2027"
+      ],
+      [
+        "outstanding announcement date",
+        "thu,\\s*apr\\s*23,\\s*2026"
+      ],
+      [
+        "outstanding announcement author",
+        "iclr\\s*2026\\s*program\\s*chairs"
+      ],
+      [
+        "amazon tier",
+        "double\\s*diamond"
+      ],
+      [
+        "jane street tier",
+        "(?<!double\\s)diamond\\b"
+      ],
+      [
+        "verifai workshop day",
+        "sun,\\s*apr\\s*26,\\s*2026"
+      ],
+      [
+        "verifai start time",
+        "9:00\\s*am"
+      ],
+      [
+        "verifai schedule items",
+        "\\b18\\s*schedule\\s*items\\b"
+      ],
+      [
+        "polar express decision",
+        "accept\\s*\\(\\s*oral\\s*\\)"
+      ]
+    ],
+    "state": {}
+  },
+  "iclr--14": {
+    "task": "Open the schedule on Wednesday April 22 and report what kind of event is listed that day. Switch to Sunday April 26 and report how many workshops are listed; open the first one and report its organizers. Switch to Monday April 27, report how many workshops run, and open I Can't Believe It's Not Better: report its start time and first schedule item. Open Saturday's Town Hall event and report its start time and abstract. Log in as bob.c@test.com with password TestPass123!, add the Town Hall to your schedule, and report Bob's saved-event total and titles.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/schedule\\b",
+      "date=2026-04-26",
+      "date=2026-04-27",
+      "date=2026-04-25",
+      "^/events/10020467$",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "april 22 event kind",
+        "registration\\-desk"
+      ],
+      [
+        "sunday workshop count",
+        "sunday[^.;]{0,40}\\b20\\s*workshops\\b"
+      ],
+      [
+        "first sunday workshop organizers",
+        "celine\\s*lee"
+      ],
+      [
+        "monday workshop count",
+        "monday[^.;]{0,40}\\b20\\s*workshops\\b"
+      ],
+      [
+        "icbinb start time",
+        "9:00\\s*am"
+      ],
+      [
+        "icbinb first schedule item",
+        "opening\\s*remarks"
+      ],
+      [
+        "town hall start time",
+        "1:00\\s*pm"
+      ],
+      [
+        "town hall abstract",
+        "an\\s*open\\s*discussion\\s*led\\s*by\\s*the\\s*organizing\\s*committee\\s*on\\s*topics"
+      ],
+      [
+        "bob saved event total",
+        "bob[^.;]{0,60}\\b2\\s*saved\\s*events?\\b"
+      ],
+      [
+        "bob saved event title",
+        "town\\s*hall"
+      ]
+    ],
+    "state": {
+      "schedule_saves": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "event_id": 10020467,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--15": {
+    "task": "In the papers browser report the total number of accepted papers and how many carry the Accept (Oral) decision. Filter to Poster Session 3 Pavilion 3 and report how many papers it holds; sort by title and open the first result, reporting its poster position and first author's institution. Log in as dana.k@test.com with password TestPass123! and report how many bookmarks and saved events Dana has under My Stuff. Add the first result to her bookmarks and report the new total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/papers\\b",
+      "decision=Accept",
+      "session=Poster[\\s+]*Session[\\s+]*3[\\s+]*Pavilion[\\s+]*3",
+      "^/papers/10007326$",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "accepted paper total",
+        "\\b5691\\s*accepted\\s*papers\\b"
+      ],
+      [
+        "oral decision total",
+        "\\b447\\s*accept\\s*\\(oral\\)"
+      ],
+      [
+        "PS3P3 count",
+        "ps3p3[^.;]{0,40}\\b503\\b"
+      ],
+      [
+        "first result poster position",
+        "p3\\-\\#117"
+      ],
+      [
+        "first author institution",
+        "jinan\\s*university"
+      ],
+      [
+        "dana bookmark count",
+        "dana\\s*had[^.;]{0,20}\\b2\\s*bookmarks\\b"
+      ],
+      [
+        "dana saved events",
+        "dana\\s*had[^.;]{0,40}\\b1\\s*saved\\s*event"
+      ],
+      [
+        "dana new bookmark total",
+        "now[^.;]{0,20}\\b3\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 4,
+            "paper_id": 10007326,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--16": {
+    "task": "From the awards page open the Outstanding Paper LLMs Get Lost In Multi-Turn Conversation; then find it in the papers browser by searching its title, open the first match, and report its session, decision, and poster position. Report that session's day and time window from the schedule, and from its paper list report the alphabetically first paper's poster position. Return to the awards page and report the first author of the other Outstanding Paper and both Test of Time paper titles. Log in as alice.j@test.com with password TestPass123! and report how many events her My Schedule area lists.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/awards$",
+      "^/papers\\b",
+      "q=LLMs\\+Get\\+Lost",
+      "^/papers/10009146$",
+      "^/schedule\\b",
+      "date=2026-04-23",
+      "session=Poster[\\s+]*Session[\\s+]*1[\\s+]*Pavilion[\\s+]*3",
+      "^/login$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "llm session",
+        "poster\\s*session\\s*1\\s*pavilion\\s*3"
+      ],
+      [
+        "llm decision",
+        "accept\\s*\\(oral\\)"
+      ],
+      [
+        "llm poster position",
+        "p3\\-\\#1505"
+      ],
+      [
+        "session window",
+        "10:30\\s*am\\-1:00\\s*pm"
+      ],
+      [
+        "session first paper title",
+        "odnet"
+      ],
+      [
+        "session first paper position",
+        "p3\\-\\#905"
+      ],
+      [
+        "other outstanding title",
+        "transformers\\s*are\\s*inherently\\s*succinct"
+      ],
+      [
+        "other outstanding first author",
+        "pascal\\s*bergsträsser"
+      ],
+      [
+        "test of time titles",
+        "unsupervised\\s*representation\\s*learning\\s*with\\s*deep\\s*convolutional\\s*generative\\s*adversarial\\s*networks"
+      ],
+      [
+        "test of time titles 2",
+        "continuous\\s*control\\s*with\\s*deep\\s*reinforcement\\s*learning"
+      ],
+      [
+        "alice saved events",
+        "schedule[^.;]{0,40}\\b0\\s*events?\\b"
+      ]
+    ],
+    "state": {}
+  },
+  "iclr--17": {
+    "task": "Log in as carol.d@test.com with password TestPass123! and report how many bookmarked papers and saved events Carol has under My Stuff, including the saved-event titles. Add the workshop AI for Peace to her schedule and report the new saved-event total. Remove the Marin talk from her schedule and report the final saved-event count. Search the papers browser for LLMs Get Lost In Multi-Turn Conversation, open the first match, bookmark it, and report her final bookmark count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/login$",
+      "^/mystuff$",
+      "^/workshops\\b",
+      "^/events/10000804$",
+      "^/events/10020867$",
+      "^/papers\\b",
+      "q=LLMs\\+Get\\+Lost",
+      "^/papers/10009146$"
+    ],
+    "claims": [
+      [
+        "carol bookmark count",
+        "carol\\s*had[^.;]{0,30}\\b1\\s*bookmarked\\b"
+      ],
+      [
+        "carol saved event count",
+        "carol\\s*had[^.;]{0,60}\\b2\\s*saved\\s*events\\b"
+      ],
+      [
+        "carol saved event title 1",
+        "marin:\\s*open\\s*development\\s*of\\s*frontier\\s*ai"
+      ],
+      [
+        "carol saved event title 2",
+        "verifai\\-2"
+      ],
+      [
+        "saved events after add",
+        "after\\s*adding[^.;]{0,40}\\b3\\b"
+      ],
+      [
+        "saved events after remove",
+        "after\\s*removing[^.;]{0,40}\\b2\\b"
+      ],
+      [
+        "carol final bookmark count",
+        "after\\s*bookmarking[^.;]{0,60}\\b2\\s*bookmarks?\\b"
+      ]
+    ],
+    "state": {
+      "schedule_saves": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "event_id": 10000804,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "removed": [
+          "[2]"
+        ]
+      },
+      "bookmarks": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "paper_id": 10009146,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "iclr--18": {
+    "task": "Log in as bob.c@test.com with password TestPass123! and submit a new registration as Academic with the Sunday Workshop 1 Day Pass, one banquet ticket, and dietary preference Halal; report the registration code and total. Open My Stuff and report how many registrations Bob now has and the items on the new one. Report the exclusivity rule printed on the registration page about Conference Sessions and Workshops. Finally report which other registrant name and affiliation appear in Alice's registration under her My Stuff.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/login$",
+      "^/register$",
+      "^/register/confirmation/ICLR26-[0-9A-F]{8}$",
+      "^/mystuff$"
+    ],
+    "claims": [
+      [
+        "bob registration code format",
+        "ICLR26-[0-9A-F]{8}"
+      ],
+      [
+        "bob registration total",
+        "new\\s*registration[^.;]{0,60}total\\s*\\$50\\b"
+      ],
+      [
+        "bob registration count",
+        "bob\\s*now\\s*has[^.;]{0,20}\\b1\\s*registration"
+      ],
+      [
+        "bob registration item",
+        "sunday\\s*workshop\\s*1\\s*day\\s*pass"
+      ],
+      [
+        "exclusivity rule",
+        "if\\s*you\\s*choose\\s*conference\\s*sessions\\s*and\\s*workshops,\\s*do\\s*not\\s*check\\s*any\\s*other\\s*items"
+      ],
+      [
+        "alice registration code",
+        "iclr26\\-a1b2c3d4"
+      ],
+      [
+        "alice registrant name",
+        "alice\\s*johnson"
+      ],
+      [
+        "alice registrant affiliation",
+        "full\\s*time\\s*student"
+      ]
+    ],
+    "state": {
+      "registrations": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "name": "Bob Chen",
+            "email": "bob.c@test.com",
+            "affiliation": "Academic",
+            "items": {
+              "contains": "Sunday Workshop 1 Day Pass"
+            },
+            "banquet_tickets": 1,
+            "dietary": "Halal",
+            "total_usd": 50,
+            "reg_code": {
+              "regex": "ICLR26-[0-9A-F]{8}"
+            },
+            "created": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "answer_state": [
+      {
+        "table": "registrations",
+        "column": "reg_code"
+      }
+    ]
+  },
+  "iclr--19": {
+    "task": "Open the conference home and report the conference city and the workshop days in the banner. Open the papers browser and search for Personality Subnetworks; open the match and report its session and poster position. Log in as dana.k@test.com with password TestPass123!, report whether the paper already appears among her bookmarks, remove it, and report her new bookmark total. Open the schedule on that paper's session day and report the session's time window and how many papers it holds. Report the first talk in the day's first oral session, open that paper, and report its decision.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "paths": [
+      "^/papers\\b",
+      "q=Personality",
+      "^/papers/10006395$",
+      "^/login$",
+      "^/mystuff$",
+      "^/schedule\\b",
+      "date=2026-04-25",
+      "session=Poster[\\s+]*Session[\\s+]*5[\\s+]*Pavilion[\\s+]*4"
+    ],
+    "claims": [
+      [
+        "conference city",
+        "rio\\s*de\\s*janeiro"
+      ],
+      [
+        "workshop days",
+        "sunday\\s*april\\s*26"
+      ],
+      [
+        "workshop days 2",
+        "monday\\s*april\\s*27"
+      ],
+      [
+        "personality subnetworks session",
+        "poster\\s*session\\s*5\\s*pavilion\\s*4"
+      ],
+      [
+        "personality subnetworks position",
+        "p4\\-\\#4003"
+      ],
+      [
+        "paper among bookmarks",
+        "(yes|already|was\\s*among|appears?\\s*among|bookmarked|present)"
+      ],
+      [
+        "dana bookmark total after removal",
+        "after\\s*removal[^.;]{0,40}\\b1\\s*bookmark"
+      ],
+      [
+        "session window",
+        "10:30\\s*am\\-1:00\\s*pm"
+      ],
+      [
+        "session paper count",
+        "holding[^.;]{0,40}\\b428\\s*papers\\b"
+      ],
+      [
+        "first oral talk title",
+        "diffusion\\s*language\\s*model\\s*knows\\s*the\\s*answer\\s*before\\s*it\\s*decodes"
+      ],
+      [
+        "first oral talk decision",
+        "accept\\s*\\(oral\\)"
+      ]
+    ],
+    "state": {
+      "bookmarks": {
+        "removed": [
+          "[6]"
+        ]
+      }
+    }
+  }
+}
