@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Seat selection — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Choose your seats</h1>
+  <p class="ua-quiet">UA {{ flight.flight_number }} {{ flight.origin_code }} → {{ flight.dest_code }}
+    on {{ leg.travel_date }} · {{ aircraft.name }} ·
+    {% if booking.cabin == 'EPU' %}Economy Plus included in your fare{% elif booking.cabin == 'BE' %}Basic Economy seats are assigned at check-in — advance assignment is not offered{% else %}Economy Plus seats cost ${{ '%d'|format(eplus_fee) }} on this flight{% endif %}.</p>
+
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% for pax in booking.passengers %}
+    <fieldset class="ua-fieldset">
+      <legend>{{ pax.first_name }} {{ pax.last_name }} — current seat: {{ pax.seat or 'none' }}</legend>
+      <label class="ua-field">Seat (row + letter)
+        <input type="text" name="seat_{{ pax.id }}" maxlength="4" placeholder="e.g. 21C">
+      </label>
+    </fieldset>
+    {% endfor %}
+    <button class="ua-btn ua-btn-primary" type="submit">Save seats</button>
+  </form>
+
+  <div class="ua-seatmap" aria-label="Seat map">
+    {% for band in bands %}
+    <div class="ua-seat-cabin">
+      <div class="ua-seat-cabin-name">{{ band.name }}
+        {% if band.eplus %}(Economy Plus — ${{ '%d'|format(eplus_fee) }} unless included in your fare){% endif %}
+        — rows {{ band.start }}–{{ band.end }}</div>
+    </div>
+    {% endfor %}
+    <div class="ua-seat-grid">
+      {% for row in range(1, aircraft.seat_rows + 1) %}
+        <div class="ua-seat-row">
+          <span class="ua-row-num">{{ row }}</span>
+          {% for letter in aircraft.seat_letters %}
+            {% set seat = row ~ letter %}
+            {% if seat in occupied %}
+              <span class="ua-seat ua-seat-taken" title="Occupied">{{ seat }}</span>
+            {% elif seat == (booking.passengers[0].seat if booking.passengers else '') %}
+              <span class="ua-seat ua-seat-mine" title="Your seat">{{ seat }}</span>
+            {% else %}
+              <span class="ua-seat">{{ seat }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    <p class="ua-quiet">Occupied seats are marked — the map is frozen from the
+      upstream flight-status snapshot. Enter the seat you want in the form
+      above (an occupied seat will be rejected).</p>
+  </div>
+</section>
+{% endblock %}

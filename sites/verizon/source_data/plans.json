@@ -1,0 +1,106 @@
+{
+ "simplicity": {
+  "name": "Simplicity Plan",
+  "per_line": 30,
+  "line_prices": {
+   "1": 30,
+   "2": 60,
+   "3": 90,
+   "4": 120
+  },
+  "note": "After AutoPay and $15/mo switch discount. Plus taxes and fees.",
+  "switch_discount": 15,
+  "max_lines": 12,
+  "features": [
+   "5G Ultra Wideband",
+   "Verizon Dollars",
+   "Mexico & Canada talk, text & data",
+   "Satellite texting",
+   "10 GB mobile hotspot data",
+   "Call filter & Verizon Family"
+  ],
+  "phone_options": [
+   {
+    "name": "Bring your own phone",
+    "blurb": "Connect it to our best 5G network."
+   },
+   {
+    "name": "Buy a new phone right now",
+    "blurb": "We've got flexible financing options to meet your needs."
+   },
+   {
+    "name": "Upgrade to the latest phone every year",
+    "blurb": "Get the newest every year for a monthly charge."
+   }
+  ],
+  "hero": {
+   "headline": "Get iPhone 18 Pro. No trade-in needed",
+   "price": "$80/mo when you switch to Verizon with Simplicity Plan",
+   "details": "After Auto Pay and switch discount. Plus taxes and fees. No activation/upgrade fees when you enroll in Verizon Loyalty."
+  }
+ },
+ "prepaid": {
+  "name": "Verizon Prepaid",
+  "plans": [
+   {
+    "name": "Talk & Text",
+    "base": 35,
+    "autopay": 30,
+    "autopay_discount": 5,
+    "first_month": 35,
+    "blurb": "Unlimited calling and texting.",
+    "features": [
+     "Unlimited calling",
+     "Unlimited texting"
+    ]
+   },
+   {
+    "name": "15 GB",
+    "base": 45,
+    "autopay": 35,
+    "autopay_discount": 10,
+    "first_month": 45,
+    "blurb": "Get more data and discounts.",
+    "features": [
+     "15 GB of 5G / 4G LTE data",
+     "Mobile Hotspot from plan allowance",
+     "3-year price lock guarantee"
+    ]
+   },
+   {
+    "name": "Unlimited",
+    "base": 60,
+    "autopay": 50,
+    "autopay_discount": 10,
+    "first_month": 60,
+    "blurb": "Get the freedom of unlimited talk, text, and data.",
+    "features": [
+     "Unlimited talk, text and data",
+     "5 GB Mobile Hotspot",
+     "Includes 5G Ultra Wideband",
+     "3-year price lock guarantee"
+    ]
+   },
+   {
+    "name": "Unlimited Plus",
+    "base": 70,
+    "autopay": 60,
+    "autopay_discount": 10,
+    "first_month": 70,
+    "blurb": "Experience unprecedented speed and savings.",
+    "features": [
+     "5G Ultra Wideband",
+     "50 GB premium network access",
+     "25 GB premium Mobile Hotspot",
+     "Global Choice at no additional cost for 1 country/mo",
+     "3-year price lock guarantee"
+    ]
+   }
+  ],
+  "autopay_rule": "Auto Pay discount of $10/mo on plans $45 & higher after the 1st month. $5/mo discount on the $35 Talk & Text plan after the 1st month. Credit or Debit card required. Additional loyalty discounts do not apply.",
+  "loyalty_rule": "Loyalty discount of $5/mo applies after 3 months of service; additional $5/mo applies after 9 months of service, for a total of $10/mo on plans $45 or higher. Discount applies as long as your line is not disconnected. Additional Auto Pay discounts do not apply.",
+  "multiline_rule": "Save $20/mo when you add any Verizon Prepaid Unlimited phone plan to your Multiline account. Each additional Unlimited phone line receives a $20/mo discount. Auto Pay and loyalty discounts cannot be combined.",
+  "price_lock": "Applies to the then-current base monthly rate charged by Verizon for your talk, text and data; excludes taxes, fees, surcharges, one-time charges, additional plan discounts or promotions and third-party services. Price guarantee is void if lines are canceled or moved to an ineligible plan."
+ },
+ "captured_from": "https://www.verizon.com/plans/unlimited/"
+}

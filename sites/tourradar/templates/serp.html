@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} - TourRadar{% endblock %}
+{% block content %}
+<div class="container">
+
+<div class="hero" style="background-image: url('/static/images/site/serp_hero.webp'); min-height:260px; margin:0 -16px;">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner container" style="padding: 24px 16px;">
+    <h1 style="font-size:28px; text-align:left; margin-bottom:6px;">{{ title }}</h1>
+    {% if dest and dest.description %}
+    <p class="sub" style="text-align:left; margin-bottom:16px; max-width:760px;">{{ dest.description[:220] }}</p>
+    {% endif %}
+    <form class="search-widget" data-search-form method="get" action="/search" style="margin:0;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field">
+        <label for="where">Where to?</label>
+        <input class="value" id="where" name="q" data-suggest type="text" value="{{ dest.name if dest else '' }}" autocomplete="off">
+        <div class="suggest-box"></div>
+      </div>
+      <div class="field">
+        <label>When?</label>
+        <input class="value" name="when" type="text" value="{{ args.get('when', 'Anytime') }}" readonly>
+      </div>
+      <div class="field">
+        <label>Travelers</label>
+        <input class="value" name="travellers" type="text" value="{{ args.get('travellers', '2') }} Adults" readonly>
+      </div>
+      <button class="btn btn-lg" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="chip-row" style="margin-top:14px;">
+  <span class="chip">7 to 10 days</span>
+  <span class="chip">Group size 20</span>
+  <span class="chip">Departs in November 2026</span>
+  <span class="chip">Under $2,000</span>
+  <span class="chip">Hotel 4*</span>
+  <span class="chip">Private Room</span>
+  <a class="chip" href="{{ qs(style='City & Culture') }}">City &amp; Culture</a>
+  <a class="chip" href="{{ qs(instant='1') }}">Instant Confirmation</a>
+</div>
+
+<div class="serp-layout">
+  <aside class="filters">
+    <h3>Sort</h3>
+    <form method="get" id="filter-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <select class="sort-select" name="sort" onchange="this.form.submit()">
+        <option value="recommended" {% if sort == 'recommended' %}selected{% endif %}>Recommended</option>
+        <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+        <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+        <option value="duration_asc" {% if sort == 'duration_asc' %}selected{% endif %}>Duration (short to long)</option>
+        <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Rating</option>
+        <option value="reviews" {% if sort == 'reviews' %}selected{% endif %}>Most reviewed</option>
+      </select>
+
+      <h3>Duration</h3>
+      {% for key, lo, hi in duration_bands %}
+      <label><input type="radio" name="duration" value="{{ key }}" {% if args.get('duration') == key %}checked{% endif %}
+        onchange="this.form.submit()"> {{ lo }}{% if hi < 900 %}&ndash;{{ hi }} days{% else %}+ days{% endif %}</label>
+      {% endfor %}
+
+      <h3>Price</h3>
+      <div class="price-inputs">
+        <input type="number" name="price_min" placeholder="Min." value="{{ args.get('price_min', '') }}">
+        <span>&ndash;</span>
+        <input type="number" name="price_max" placeholder="Max." value="{{ args.get('price_max', '') }}">
+      </div>
+
+      <h3>Adventure styles</h3>
+      {% for s, n in styles %}
+      <label><input type="radio" name="style" value="{{ s }}" {% if args.get('style') == s %}checked{% endif %}
+        onchange="this.form.submit()"> {{ s }} <span class="count">{{ n }}</span></label>
+      {% endfor %}
+
+      <h3>Must-see cities</h3>
+      {% for c, n in cities[:8] %}
+      <label><input type="radio" name="city" value="{{ c }}" {% if args.get('city') == c %}checked{% endif %}
+        onchange="this.form.submit()"> {{ c }} <span class="count">{{ n }}</span></label>
+      {% endfor %}
+
+      <h3>Start city</h3>
+      {% for c, n in start_cities[:6] %}
+      <label><input type="radio" name="start_city" value="{{ c }}" {% if args.get('start_city') == c %}checked{% endif %}
+        onchange="this.form.submit()"> {{ c }} <span class="count">{{ n }}</span></label>
+      {% endfor %}
+
+      <h3>End city</h3>
+      {% for c, n in end_cities[:6] %}
+      <label><input type="radio" name="end_city" value="{{ c }}" {% if args.get('end_city') == c %}checked{% endif %}
+        onchange="this.form.submit()"> {{ c }} <span class="count">{{ n }}</span></label>
+      {% endfor %}
+
+      <h3>Guide Type</h3>
+      <label><input type="radio" name="guide_type" value="Fully Guided" {% if args.get('guide_type') == 'Fully Guided' %}checked{% endif %} onchange="this.form.submit()"> Fully Guided</label>
+      <label><input type="radio" name="guide_type" value="Partially Guided" {% if args.get('guide_type') == 'Partially Guided' %}checked{% endif %} onchange="this.form.submit()"> Partially Guided</label>
+      <label><input type="radio" name="guide_type" value="Self-Guided" {% if args.get('guide_type') == 'Self-Guided' %}checked{% endif %} onchange="this.form.submit()"> Self-Guided</label>
+
+      <h3>Tour Type</h3>
+      <label><input type="radio" name="group_type" value="Group Tour" {% if args.get('group_type') == 'Group Tour' %}checked{% endif %} onchange="this.form.submit()"> Group</label>
+      <label><input type="radio" name="group_type" value="Private Tour" {% if args.get('group_type') == 'Private Tour' %}checked{% endif %} onchange="this.form.submit()"> Private</label>
+
+      <h3>Physical rating</h3>
+      {% for p in ['Easy Intensity', 'Light Intensity', 'Medium Intensity', 'Challenging Intensity'] %}
+      <label><input type="radio" name="physical" value="{{ p }}" {% if args.get('physical') == p %}checked{% endif %} onchange="this.form.submit()"> {{ p.split(' ')[0] }}</label>
+      {% endfor %}
+
+      <h3>Operators</h3>
+      {% for o, n in operators[:8] %}
+      <label><input type="radio" name="operator" value="{{ o|slugify }}" {% if args.get('operator') == o|slugify %}checked{% endif %}
+        onchange="this.form.submit()"> {{ o }} <span class="count">{{ n }}</span></label>
+      {% endfor %}
+
+      <h3>Instant Confirmation</h3>
+      <label><input type="checkbox" name="instant" value="1" {% if args.get('instant') == '1' %}checked{% endif %} onchange="this.form.submit()"> Instant bookable only</label>
+
+      <h3>Age range</h3>
+      <label><input type="radio" name="age" value="18-35" {% if args.get('age') == '18-35' %}checked{% endif %} onchange="this.form.submit()"> Young Adults (18-35)</label>
+      <label><input type="radio" name="age" value="36-59" {% if args.get('age') == '36-59' %}checked{% endif %} onchange="this.form.submit()"> Adults (36-59)</label>
+      <label><input type="radio" name="age" value="60+" {% if args.get('age') == '60+' %}checked{% endif %} onchange="this.form.submit()"> Seniors (60+)</label>
+      <label><input type="radio" name="age" value="family" {% if args.get('age') == 'family' %}checked{% endif %} onchange="this.form.submit()"> Family</label>
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-sm" type="submit">Apply</button>
+        <a class="btn btn-outline btn-sm" href="{{ request.path }}">Clear</a>
+      </div>
+    </form>
+  </aside>
+
+  <div class="results">
+    <div class="results-head">
+      <div><b>{{ total }}</b> tours found{% if dest %} in {{ dest.name }}{% endif %}</div>
+      <div class="chip-row" style="margin:0;">
+        {% if args.get('duration') %}<span class="chip active">{{ args.get('duration') }} days</span>{% endif %}
+        {% if args.get('style') %}<span class="chip active">{{ args.get('style') }}</span>{% endif %}
+        {% if args.get('price_max') %}<span class="chip active">Under ${{ args.get('price_max') }}</span>{% endif %}
+        {% if args.get('city') %}<span class="chip active">Goes through {{ args.get('city') }}</span>{% endif %}
+        {% if args.get('start_city') %}<span class="chip active">Starts in {{ args.get('start_city') }}</span>{% endif %}
+      </div>
+    </div>
+
+    {% for t in tours %}
+    <div class="tour-card">
+      {% if t.discount_pct %}<span class="discount-chip">-{{ t.discount_pct }}% Off</span>{% endif %}
+      <a href="/t/{{ t.id }}"><img class="thumb" src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+      <div class="body">
+        <div class="style-tag">{{ t.style }}</div>
+        <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+        <div class="rating-line">
+          <span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span>
+          <span>({{ t.review_count }} reviews)</span>
+        </div>
+        {% if t.summary %}
+        <div class="quote">&ldquo;{{ t.summary[:140] }}{% if t.summary|length > 140 %}...{% endif %}&rdquo;
+          {% if t.summary_author %}&mdash; {{ t.summary_author }}{% endif %}</div>
+        {% endif %}
+        <div class="meta-rows">
+          <div><b>Duration</b>{{ t.duration_label }}</div>
+          <div><b>Destinations</b>{{ t.cities_list[:4]|join(', ') }}{% if t.cities_list|length > 4 %} +{{ t.cities_list|length - 4 }} more{% endif %}</div>
+          <div><b>Age Range</b>{{ t.age_label }}</div>
+          <div><b>Operated in</b>{{ t.guided_language or 'English' }}</div>
+          <div><b>Operator</b>{{ t.operator_name }}</div>
+          <div><b>Tour Type</b>{{ t.group_type or 'Group Tour' }}</div>
+        </div>
+        <a class="btn btn-outline btn-sm" href="/t/{{ t.id }}">View tour</a>
+      </div>
+      <div class="price-block">
+        <span class="price-was">{{ money(t.price_from) }}</span>
+        <span class="price-now">{{ money(t.current_price) }}</span>
+        <span class="price-note">per person</span>
+        <span class="price-note">Price based on {{ t.price_basis or 'Shared Room' }}</span>
+      </div>
+    </div>
+    {% else %}
+    <div class="panel" style="text-align:center;">
+      <h2>No tours match your filters</h2>
+      <p>Try removing some filters or search another destination.</p>
+      <a class="btn" href="{{ request.path }}">Clear filters</a>
+    </div>
+    {% endfor %}
+
+    {% if pages > 1 %}
+    <div class="pagination">
+      {% if page > 1 %}<a href="{{ qs(page=page-1) }}">&laquo; Prev</a>{% endif %}
+      {% for p in range(1, pages + 1) %}
+        {% if p == page %}
+        <span class="current">{{ p }}</span>
+        {% elif p <= 2 or p > pages - 2 or (p - page)|abs <= 2 %}
+        <a href="{{ qs(page=p) }}">{{ p }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page < pages %}<a href="{{ qs(page=page+1) }}">Next &raquo;</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}

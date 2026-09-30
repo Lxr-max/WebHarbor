@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% from 'macros.html' import icon with context %}
+{% block title %}{{ title }} — CVS{% endblock %}
+{% block content %}<div class="container page-space narrow"><div class="empty-state error-state"><p class="error-code">{{ status }}</p><h1>{{ title }}</h1><p>{{ message }}</p><div class="button-row centered"><a class="button button-primary" href="{{ url_for('index') }}">Back to home</a><a class="button button-outline" href="{{ url_for('shop') }}">Shop products</a></div></div></div>{% endblock %}

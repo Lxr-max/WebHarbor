@@ -1,0 +1,64 @@
+{% macro csrf() -%}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{%- endmacro %}
+
+{% macro icon(name, extra='') -%}
+<svg class="icon {{ extra }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+{% if name == 'search' %}<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>
+{% elif name == 'cart' %}<path d="M2 3h3l2.2 12h12l2-9H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/>
+{% elif name == 'heart' %}<path d="M20.7 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.7-8.5a5.5 5.5 0 0 0 0-7.8Z"/>
+{% elif name == 'pin' %}<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.4"/>
+{% elif name == 'user' %}<circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
+{% elif name == 'arrow' %}<path d="M4 12h16m-6-6 6 6-6 6"/>
+{% elif name == 'check' %}<path d="m5 12 4 4L20 5"/>
+{% elif name == 'bag' %}<path d="M4 7h16l1 15H3L4 7Z"/><path d="M8 9V5a4 4 0 1 1 8 0v4"/>
+{% elif name == 'menu' %}<path d="M4 6h16M4 12h16M4 18h16"/>
+{% elif name == 'truck' %}<path d="M1 4h13v13H1V4Zm13 5h5l4 5v3h-9"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/>
+{% elif name == 'close' %}<path d="m5 5 14 14M19 5 5 19"/>
+{% endif %}</svg>
+{%- endmacro %}
+
+{% macro product_card(product, favorite_action=false) %}
+<article class="product-card">
+  <a class="product-card-image" href="{{ product.path }}">{% if product.primary_image %}<img src="{{ product.primary_image }}" alt="{{ product.name }}" loading="lazy">{% else %}<span class="muted">Product image unavailable</span>{% endif %}</a>
+  <div class="product-card-body">
+    <p class="product-brand">{{ product.brand }}</p>
+    <h3><a href="{{ product.path }}">{{ product.name }}</a></h3>
+    {% if product.rating is not none or product.review_count is not none %}<p class="rating">{% if product.rating is not none %}<span class="stars" aria-hidden="true">★</span><span>{{ product.rating }} out of 5</span>{% endif %}{% if product.review_count is not none %}<span>{{ product.review_count }} reviews</span>{% endif %}</p>{% endif %}
+    <p class="price">{% if product.price_cents is not none %}{{ product.price_cents|money }}{% elif product.price_min_cents is not none and product.price_max_cents is not none %}{{ product.price_min_cents|money }}–{{ product.price_max_cents|money }}{% else %}{{ product.price_text or 'Price not captured' }}{% endif %}</p>
+    {% if favorite_action %}<form action="{{ url_for('favorite_toggle', product_id=product.id) }}" method="post">{{ csrf() }}<input type="hidden" name="next" value="{{ url_for('favorites') }}"><button class="text-button" type="submit">Remove from favorites</button></form>{% else %}<a class="button button-outline compact" href="{{ product.path }}">View product</a>{% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro account_nav(active) %}
+<nav class="account-nav" aria-label="Account navigation">
+{% for endpoint,label in [('account','Account overview'),('profile','Personal information'),('addresses','Address book'),('orders','Order history'),('favorites','Favorites')] %}
+  <a href="{{ url_for(endpoint) }}" {% if endpoint == active %}aria-current="page"{% endif %}>{{ label }}{{ icon('arrow') }}</a>
+{% endfor %}
+<form action="{{ url_for('logout') }}" method="post">{{ csrf() }}<button class="text-button" type="submit">Sign out</button></form>
+</nav>
+{% endmacro %}
+
+{% macro address_fields(values={}, prefix='', required=true) %}
+<div class="form-grid">
+  <label class="full-width" for="{{ prefix }}recipient">Full name<input id="{{ prefix }}recipient" name="recipient" autocomplete="name" value="{{ values.get('recipient','') }}" maxlength="120" {% if required %}required{% endif %}></label>
+  <label class="full-width" for="{{ prefix }}line1">Street address<input id="{{ prefix }}line1" name="line1" autocomplete="address-line1" value="{{ values.get('line1','') }}" maxlength="200" {% if required %}required{% endif %}></label>
+  <label class="full-width" for="{{ prefix }}line2">Apartment, suite, etc. <span class="optional">(optional)</span><input id="{{ prefix }}line2" name="line2" autocomplete="address-line2" value="{{ values.get('line2','') }}" maxlength="200"></label>
+  <label class="full-width" for="{{ prefix }}city">City<input id="{{ prefix }}city" name="city" autocomplete="address-level2" value="{{ values.get('city','') }}" maxlength="100" {% if required %}required{% endif %}></label>
+  <label for="{{ prefix }}state">State<input id="{{ prefix }}state" name="state" autocomplete="address-level1" value="{{ values.get('state','') }}" maxlength="2" minlength="2" placeholder="IL" {% if required %}required{% endif %}></label>
+  <label for="{{ prefix }}postal_code">ZIP code<input id="{{ prefix }}postal_code" name="postal_code" autocomplete="postal-code" value="{{ values.get('postal_code','') }}" maxlength="10" pattern="[0-9]{5}(-[0-9]{4})?" {% if required %}required{% endif %}></label>
+</div>
+{% endmacro %}
+
+{% macro order_totals(subtotal,shipping,total) %}
+<dl class="totals"><div><dt>Subtotal</dt><dd>{{ subtotal|money }}</dd></div><div><dt>Shipping</dt><dd>{% if shipping == 0 %}FREE{% else %}{{ shipping|money }}{% endif %}</dd></div><div><dt>Tax</dt><dd>Not calculated</dd></div><div class="total"><dt>Total</dt><dd>{{ total|money }}</dd></div></dl>
+{% endmacro %}
+
+{% macro order_lines(order) %}
+<div class="order-lines">{% for line in order.items %}<article class="order-line"><div><a href="{{ url_for('product_detail', product_id=line.product_id) }}">{{ line.name }}</a>{% if line.variant_label %}<p class="muted">{{ line.variant_label }}</p>{% endif %}<p class="small">Quantity: {{ line.quantity }} · {{ line.price_cents|money }} each</p></div><strong>{{ line.line_cents|money }}</strong></article>{% endfor %}</div>
+{% endmacro %}
+
+{% macro store_heading(store) -%}{% if store.store_type in ['Schnucks','CVS Pharmacy at Target'] %}{{ store.name }}{% else %}CVS Pharmacy — {{ store.address }}{% endif %}{%- endmacro %}
+
+{% macro store_card(store, selectable=true) %}
+<article class="store-card"><div class="store-card-title">{{ icon('pin') }}<div><p class="eyebrow">{{ store.store_type or 'CVS Pharmacy' }}</p><h2><a href="{{ store.path }}">{{ store_heading(store) }}</a></h2></div></div><p>{{ store.address }}<br>{{ store.city }}, {{ store.state }} {{ store.postal_code }}</p><p class="small">Phone: {{ store.phone }}</p><div class="tags">{% for service in store.services[:4] %}<span>{{ service }}</span>{% endfor %}</div><div class="store-card-actions"><a class="button button-outline compact" href="{{ store.path }}">Store details</a>{% if selectable %}<form action="{{ url_for('store_select', store_id=store.id) }}" method="post">{{ csrf() }}<input type="hidden" name="next" value="{{ request.full_path.rstrip('?') }}"><button class="text-button" type="submit">{% if selected_store and selected_store.id == store.id %}Your selected store{% else %}Set as my store{% endif %}</button></form>{% endif %}</div></article>
+{% endmacro %}

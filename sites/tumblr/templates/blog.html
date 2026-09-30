@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ blog.display_title() }} — Tumblr{% endblock %}
+{% block content %}
+<div class="blog-hero" style="background-color: {{ blog.background_color }}">
+  {% if blog.header_image %}
+    <img class="blog-hero-img" src="{{ blog.header_image }}" alt="{{ blog.name }} header">
+  {% else %}
+    <div class="blog-hero-pattern"></div>
+  {% endif %}
+</div>
+
+<div class="blog-head">
+  <div class="blog-avatar-wrap">
+    {% if blog.avatar %}
+      <img class="avatar a96 {{ blog.avatar_shape }}" src="{{ blog.avatar }}" alt="{{ blog.name }}">
+    {% else %}
+      <span class="avatar a96 avatar-fallback {{ blog.avatar_shape }}">{{ blog.display_title()[:1] }}</span>
+    {% endif %}
+  </div>
+  <div class="blog-meta">
+    <h1 class="blog-title" style="color: {{ blog.title_color|readable_title_color }}">{{ blog.display_title() }}</h1>
+    <div class="blog-name-line">
+      <span class="blog-handle">{{ blog.name }}</span>
+      {% if blog.primary %}<span class="verified" title="Verified blog">✓</span>{% endif %}
+      {% if user and user.blog_id == blog.id %}<span class="you-badge">You</span>{% endif %}
+    </div>
+    <div class="blog-desc">{{ render_inline(blog.description) }}</div>
+    <div class="blog-stats">
+      <span class="blog-stat">{{ blog.post_count_label() }}</span>
+      {% if blog.updated %}
+        <span class="blog-stat">Updated {{ time_ago(blog.updated) }}</span>
+      {% endif %}
+      {% if blog.share_likes and user and user.blog_id == blog.id %}
+        <span class="blog-stat"><a href="{{ url_for('likes') }}">See likes</a></span>
+      {% endif %}
+      {% if blog.share_following and user and user.blog_id == blog.id %}
+        <span class="blog-stat"><a href="{{ url_for('following') }}">See following</a></span>
+      {% endif %}
+    </div>
+    <div class="blog-actions">
+      {% if user and user.blog_id != blog.id %}
+        <button class="action-btn follow-btn big {{ 'active' if following }}" data-blog-name="{{ blog.name }}"
+                data-follow-url="{{ url_for('toggle_follow', name=blog.name) }}">
+          <span class="follow-label">{{ 'Following' if following else 'Follow' }}</span>
+        </button>
+        {% if blog.can_message %}
+          <a class="btn btn-ghost" href="{{ url_for('conversation', blog_name=blog.name) }}">Message</a>
+        {% endif %}
+      {% elif not user %}
+        <a class="btn btn-primary" href="{{ url_for('login') }}">Follow</a>
+      {% endif %}
+      {% if blog.ask %}
+        <a class="btn btn-ghost" href="{{ url_for('ask', name=blog.name) }}">{{ blog.ask_page_title or 'Ask me anything' }}</a>
+      {% endif %}
+      <a class="btn btn-ghost" href="{{ url_for('blog_archive', name=blog.name) }}">Archive</a>
+    </div>
+  </div>
+</div>
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    <div class="feed-header">
+      <h2>Posts</h2>
+      <span class="feed-count">{{ '{:,}'.format(pagination.total) }} posts</span>
+    </div>
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% else %}
+      <div class="empty-state">This blog hasn't posted yet.</div>
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>About this blog</h3>
+      <dl class="blog-facts">
+        <dt>Blog</dt><dd>{{ blog.name }}</dd>
+        <dt>Posts</dt><dd>{{ '{:,}'.format(blog.posts_count or 0) }}</dd>
+        {% if blog.url %}<dt>Homepage</dt><dd>{{ blog.url }}</dd>{% endif %}
+      </dl>
+    </div>
+    <div class="side-card">
+      <h3>Browse</h3>
+      <a class="side-link" href="{{ url_for('blog_archive', name=blog.name) }}">Archive — posts by month</a>
+      {% if blog.ask %}<a class="side-link" href="{{ url_for('ask', name=blog.name) }}">Send an ask</a>{% endif %}
+      {% if blog.can_message and user %}<a class="side-link" href="{{ url_for('conversation', blog_name=blog.name) }}">Send a message</a>{% endif %}
+    </div>
+  </aside>
+</div>
+{% endblock %}

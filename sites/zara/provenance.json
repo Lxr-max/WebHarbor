@@ -1,0 +1,59 @@
+{
+  "site": "zara",
+  "upstream": "https://www.zara.com/us/",
+  "captured_at": "2026-09-29",
+  "capture_method": "zara.com is an Akamai-protected React storefront: plain HTTP clients receive an interstitial bot challenge (bm-verify) and headless browsers are refused (403). All captures were therefore made with a real headful Chromium (Playwright, xvfb) that passed the upstream Akamai interstitial, driving the exact public storefront: SSR pages were captured as-rendered (window.zara.viewPayload JSON embedded in each page), and the storefront JSON APIs the SPA itself calls (categories, category products/filters, search, chat config, stores) were captured from the live responses the browser received. Managed images were fetched from static.zara.net (the xmedia CDN) at the render widths the mirror uses. No WAF-protected page is reproduced from anything other than a real upstream response.",
+  "sources": {
+    "www.zara.com/us/": {
+      "role": "primary storefront: home slider campaigns (8 section blocks), the full US category tree (categories?ajax=true, 1.6MB), 13 category product grids (woman dresses/jackets/knitwear/shoes/bags, man shirts/jeans/jackets/shoes, kids girl dresses + boy coats-jackets, beauty perfumes + makeup) with their filter panels, product detail SSR payloads for 127 unique products (colors, sizes, availability, prices, SKUs, descriptions, tags, galleries), the stores locator with the US store list (102 stores across 26 state groups) and 25 store detail pages (address, phone, opening hours, upcoming 7-day schedule)",
+      "ssr_pages_captured": 96,
+      "api_endpoints": [
+        "https://www.zara.com/us/en/categories?ajax=true",
+        "https://www.zara.com/us/en/category/<id>/products?ajax=true",
+        "https://www.zara.com/us/en/category/<id>/filters?ajax=true",
+        "https://www.zara.com/itxrest/1/search/store/11719/query?query=<term>",
+        "https://www.zara.com/us/en/z-stores-st1404.html",
+        "https://www.zara.com/us/en/stores-locator/<store-slug>"
+      ]
+    },
+    "static.zara.net": {
+      "role": "Zara's xmedia image CDN: every managed image fetched from its exact upstream delivery URL at the render width used by the mirror (w=1024 gallery, w=400 color thumbs, w=1400 campaign posters)",
+      "images_fetched": 769
+    }
+  },
+  "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/ captures. The tracked source_data/ snapshots trim as follows: each of the 13 mirrored categories keeps the upstream grid order but only the products whose SSR product payload was captured (10 per category, 127 unique products; three products appear in two categories upstream and are shared); product galleries keep the captured images for each color and one selector thumbnail per additional color; upstream grid counts, facet counts, search totalResults and result ordering remain the upstream values \u2014 the visible grids show the catalog subset, exactly as the wanderlog lists trim to the upstream top 10 while keeping upstream place counts. Search is served from the nine captured API snapshots for those terms; other terms are computed over the captured catalog (declared on the search page: 'computed over this snapshot').",
+  "fixtures": {
+    "benchmark_users": [
+      {
+        "email": "alice.j@test.com",
+        "display": "Alice Johnson",
+        "fixture": "bag with 2 items (Midi Scarf Dress XS + Leather Wide Heel Boots 7\u00bd \u00d72), wishlist with 3 items, 2 addresses (default NYC), 2 orders (delivered 8004128041, shipped 8004193147)"
+      },
+      {
+        "email": "bob.c@test.com",
+        "display": "Bob Chen",
+        "fixture": "empty bag, wishlist with Contrast Reversible Jacket, 1 Chicago address, 1 in-progress order 8004277560"
+      },
+      {
+        "email": "carol.d@test.com",
+        "display": "Carol Davis",
+        "fixture": "bag with the Plaid A-line kids dress, wishlist with 2 kids items, 1 Santa Monica address, no orders"
+      },
+      {
+        "email": "dana.k@test.com",
+        "display": "Dana Kim",
+        "fixture": "bag with 3 items (perfume, bag, polo), Honolulu address, 1 returned order 8004384012"
+      }
+    ],
+    "fixture_note": "The upstream account area (bag, wishlist, orders, checkout) requires live accounts, so authenticated state is fixture-built following the u_s_customs precedent: every product referenced carries its real captured upstream name, price, color, size and SKU; order numbers, statuses, addresses and cards are authored fixture data modeling the upstream flows. Guest bag behavior (cookie-scoped rows merged per session) mirrors the upstream guest bag.",
+    "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash; two consecutive builds produce byte-identical databases and /reset/zara restores instance == instance_seed byte-for-byte.",
+    "timezone": "UTC"
+  },
+  "waf_note": "zara.com is behind Akamai bot protection. The capture used a real headful Chromium passing the interstitial challenge; where a deterministic direct fetch was impossible (any page or API behind the challenge), the mirror uses only what the real browser captured \u2014 nothing is synthesized and nothing pretends to be live.",
+  "reviewed_variant_recovery": {
+    "date": "2026-09-29",
+    "additional_images": 216,
+    "source": "Exact color gallery/thumbnail URLs in source_data/products.json",
+    "reason": "Replace reuse of main-color photography for every selected variant."
+  }
+}

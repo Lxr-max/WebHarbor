@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}My trips — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>My trips</h1>
+  <p>Look up a trip with your six-character confirmation number and the last
+    name of the lead traveler, or sign in to see every trip on your account.</p>
+  <form method="get" action="{{ url_for('mytrips') }}" class="ua-form ua-form-inline">
+    <label class="ua-field">Confirmation number
+      <input type="text" name="confirmation" maxlength="6" placeholder="e.g. KX42LM" value="{{ request.args.get('confirmation', '') }}">
+    </label>
+    <label class="ua-field">Last name
+      <input type="text" name="lastname" placeholder="e.g. Johnson" value="{{ request.args.get('lastname', '') }}">
+    </label>
+    <button class="ua-btn ua-btn-primary" type="submit">Find my trip</button>
+  </form>
+
+  {% if not_found %}
+    <div class="ua-flash ua-flash-error">We couldn't find a reservation with
+      that confirmation number and last name. Check the details and try again.</div>
+  {% endif %}
+
+  {% if not current_user.is_authenticated %}
+    <p class="ua-quiet">Signed in on MileagePlus? <a href="{{ url_for('mp_signin') }}">Sign in</a>
+      to see all your upcoming trips.</p>
+  {% else %}
+    <h2>Trips on your account</h2>
+    {% if bookings %}
+      <div class="ua-trip-list">
+      {% for booking in bookings %}
+        <a class="ua-trip-row" href="{{ url_for('trip_detail', conf=booking.confirmation) }}">
+          <span class="ua-pnr">{{ booking.confirmation }}</span>
+          <span>{{ booking.route_label }}</span>
+          <span>{{ booking.legs[0].travel_date if booking.legs else '' }}</span>
+          <span class="ua-status-{{ booking.status }}">{{ booking.status|capitalize }}</span>
+        </a>
+      {% endfor %}
+      </div>
+    {% else %}
+      <p class="ua-quiet">No trips on this account yet.</p>
+    {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

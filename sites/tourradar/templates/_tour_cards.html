@@ -1,0 +1,24 @@
+{% for t in tours %}
+<div class="tour-card">
+  {% if t.discount_pct %}<span class="discount-chip">-{{ t.discount_pct }}% Off</span>{% endif %}
+  <a href="/t/{{ t.id }}"><img class="thumb" src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+  <div class="body">
+    <div class="style-tag">{{ t.style }}</div>
+    <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+    <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span> <span>({{ t.review_count }} reviews)</span></div>
+    {% if t.summary %}<div class="quote">&ldquo;{{ t.summary[:130] }}&rdquo;</div>{% endif %}
+    <div class="meta-rows">
+      <div><b>Duration</b>{{ t.duration_label }}</div>
+      <div><b>Destinations</b>{{ t.cities_list[:4]|join(', ') }}</div>
+      <div><b>Age Range</b>{{ t.age_label }}</div>
+      <div><b>Operator</b>{{ t.operator_name }}</div>
+    </div>
+    <a class="btn btn-outline btn-sm" href="/t/{{ t.id }}">View tour</a>
+  </div>
+  <div class="price-block">
+    {% if t.price_from != t.current_price %}<span class="price-was">{{ money(t.price_from) }}</span>{% endif %}
+    <span class="price-now">{{ money(t.current_price) }}</span>
+    <span class="price-note">per person</span>
+  </div>
+</div>
+{% endfor %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Forms{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Forms</nav>
+  <div class="page-title"><h1>Forms</h1></div>
+
+  <div class="card">
+    <form method="get" action="{{ url_for('forms') }}">
+      <div class="field"><label for="q">Search forms by title, number or description</label>
+        <input id="q" type="text" name="q" value="{{ q }}" placeholder="e.g. VSA 14"></div>
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+
+  <h2>Filter Your Results</h2>
+  <p>
+    <a class="pill" href="{{ url_for('forms', language=lang) }}">All categories</a>
+    {% for c, n in cats %}<a class="pill" href="{{ url_for('forms', category=c, language=lang, q=q) }}">{{ c }} ({{ n }})</a>{% endfor %}
+  </p>
+  <p>
+    {% for l, n in langs %}<a class="pill" href="{{ url_for('forms', language=l, category=cat, q=q) }}">{{ l }} ({{ n }})</a>{% endfor %}
+  </p>
+
+  <p>Displaying {{ (page-1)*per + 1 }} - {{ [page*per, total]|min }} of {{ total }}</p>
+  {% for form in rows %}
+  <div class="card">
+    <h3><a href="{{ url_for('download_form', name=form.pdf_name()) }}">{{ form.title }}</a></h3>
+    <p>{{ form.description }}</p>
+    <p>
+      <span class="pill">{{ form.number }}</span>
+      <span class="pill">{{ form.language }}</span>
+      <span class="pill">{{ form.category }}</span>
+    </p>
+  </div>
+  {% endfor %}
+
+  <nav class="pager" aria-label="Pagination">
+    {% set pages = ((total + per - 1)//per) if total else 1 %}
+    {% if page > 1 %}<a href="{{ url_for('forms', pg=page-1, q=q, category=cat, language=lang) }}">‹ Prev</a>{% endif %}
+    {% for p in range(1, pages+1) %}
+      {% if p == page %}<span class="current">{{ p }}</span>
+      {% elif p <= 6 or p > pages-2 or (p - page)|abs <= 2 %}<a href="{{ url_for('forms', pg=p, q=q, category=cat, language=lang) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+    {% if page < pages %}<a href="{{ url_for('forms', pg=page+1, q=q, category=cat, language=lang) }}">Next ›</a>{% endif %}
+  </nav>
+</div>
+{% endblock %}

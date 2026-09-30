@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Saved attorneys | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('account') }}">Manage my account</a> ›
+    <span>Saved attorneys</span>
+  </nav>
+  <h1>Saved attorneys</h1>
+  <p class="lead">{{ rows|length }} attorney{{ 's' if rows|length != 1 }} on your shortlist.</p>
+
+  <div class="serp-list">
+    {% for row in rows %}
+    <article class="serp-card">
+      <div class="serp-photo">
+        <a href="/profiles/{{ row.lawyer.state_slug }}/{{ row.lawyer.city_slug }}/lawyer/{{ row.lawyer.slug }}/{{ row.lawyer.uuid }}.html" aria-label="View profile of {{ row.lawyer.name }}">
+          <img src="{{ url_for('static', filename=row.lawyer.photo('card')) }}" alt="{{ row.lawyer.name }}" width="175" height="219" loading="lazy">
+        </a>
+      </div>
+      <div class="serp-body">
+        <h2 class="serp-name">
+          <a href="/profiles/{{ row.lawyer.state_slug }}/{{ row.lawyer.city_slug }}/lawyer/{{ row.lawyer.slug }}/{{ row.lawyer.uuid }}.html">{{ row.lawyer.name }}</a>
+        </h2>
+        {% if row.lawyer.firm %}<span class="serp-firm">{{ row.lawyer.firm.name }}</span>{% endif %}
+        <span class="serp-city">{{ row.lawyer.city_slug|replace('-', ' ')|title }}, {{ row.lawyer.state_slug|replace('-', ' ')|title }}</span>
+        {% if row.lawyer.side_practice_areas %}<p class="serp-tagline">{{ row.lawyer.side_practice_areas }}</p>{% endif %}
+        <p class="muted">Saved on {{ row.fav.created_at.strftime('%B %d, %Y') }}</p>
+        <div class="serp-actions">
+          <a class="btn btn-outline" href="/profiles/{{ row.lawyer.state_slug }}/{{ row.lawyer.city_slug }}/lawyer/{{ row.lawyer.slug }}/{{ row.lawyer.uuid }}.html">View profile</a>
+          <form method="post" action="{{ url_for('toggle_favorite', uuid=row.lawyer.uuid) }}" class="inline-form">
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button class="btn btn-danger-outline" type="submit">Remove</button>
+          </form>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% if not rows %}
+  <p>No saved attorneys yet. Browse the directory and save attorneys from their profiles.</p>
+  {% endif %}
+</div>
+{% endblock %}

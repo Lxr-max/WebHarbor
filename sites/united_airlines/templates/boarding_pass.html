@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Boarding pass — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Boarding pass</h1>
+  {% for pax in booking.passengers %}
+  <div class="ua-bp">
+    <div class="ua-bp-head">
+      <span class="ua-logo-text">UNITED</span>
+      <span class="ua-bp-group">Boarding group <strong>{{ pax.boarding_group }}</strong></span>
+    </div>
+    <div class="ua-bp-body">
+      <div class="ua-bp-pax">{{ pax.first_name }} {{ pax.last_name }}</div>
+      <div class="ua-bp-route">
+        <div><strong>{{ leg.flight.origin_code }}</strong> {{ leg.flight.departure }}</div>
+        <div class="ua-bp-arrow">→</div>
+        <div><strong>{{ leg.flight.dest_code }}</strong> {{ leg.flight.arrival }}</div>
+      </div>
+      <div class="ua-bp-grid">
+        <div><span>Flight</span><strong>UA {{ leg.flight.flight_number }}</strong></div>
+        <div><span>Date</span><strong>{{ leg.travel_date }}</strong></div>
+        <div><span>Seat</span><strong>{{ pax.seat or '—' }}</strong></div>
+        <div><span>Gate</span><strong>{{ gate }}</strong></div>
+        <div><span>Boarding</span><strong>{{ board_time }}</strong></div>
+        <div><span>Cabin</span><strong>{{ leg.cabin }}</strong></div>
+      </div>
+      <div class="ua-bp-conf">Confirmation {{ booking.confirmation }}</div>
+    </div>
+  </div>
+  {% endfor %}
+  <p class="ua-quiet">Have your boarding pass ready at the gate. Basic Economy
+    boards in Group 6; Premier members board with their tier group.</p>
+</section>
+{% endblock %}

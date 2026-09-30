@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">My Account — {{ user.display_name }}</h1>
+<p class="note">{{ user.email }} · Country: {{ user.country or '—' }} · Passport: {{ user.passport_number or '—' }}</p>
+
+<div class="two-col">
+  <div>
+    <section>
+      <h2>ESTA Applications</h2>
+      {% if esta_apps %}
+      <table class="data">
+        <tr><th>Application Number</th><th>Name</th><th>Status</th><th>Created</th><th>Expires</th></tr>
+        {% for a in esta_apps %}
+        <tr>
+          <td><a href="{{ url_for('esta_confirmation', application_number=a.application_number) }}">{{ a.application_number }}</a></td>
+          <td>{{ a.first_name }} {{ a.family_name }}</td>
+          <td><span class="chip {{ ('approved' if a.status == 'Authorization Approved' else ('pending' if 'Pending' in a.status else 'denied')) }}">{{ a.status }}</span></td>
+          <td>{{ a.created_at }}</td>
+          <td>{{ a.expires_on or '—' }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}<p>No ESTA applications yet. <a href="{{ url_for('esta_apply') }}">Apply for an ESTA</a>.</p>{% endif %}
+    </section>
+
+    <section>
+      <h2>Trusted Traveler Program Applications</h2>
+      {% if ttp_apps %}
+      <table class="data">
+        <tr><th>Application Number</th><th>Program</th><th>Status</th><th>Interview</th></tr>
+        {% for a in ttp_apps %}
+        <tr>
+          <td><a href="{{ url_for('ttp_status', application_number=a.application_number) }}">{{ a.application_number }}</a></td>
+          <td>{{ a.program.replace('-', ' ').title() }}</td>
+          <td>{{ a.status }}</td>
+          <td>{% if a.interview_center %}{{ a.interview_center.name }} — {{ a.interview_date }} {{ a.interview_slot }}{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}<p>No Trusted Traveler Program applications. <a href="{{ url_for('ttp_overview') }}">Compare programs</a>.</p>{% endif %}
+    </section>
+
+    <section>
+      <h2>Saved Border Crossings</h2>
+      {% if saved %}
+      <table class="data">
+        <tr><th>Crossing</th><th>Border</th><th>Hours</th><th>Max delay now</th></tr>
+        {% for s in saved %}
+        <tr>
+          <td><a href="{{ url_for('bwt_crossing', port_number=s.crossing.port_number) }}">{{ s.crossing.full_name }}</a></td>
+          <td>{{ s.crossing.border|title }}</td>
+          <td>{{ s.crossing.hours }}</td>
+          <td>{% set md = max_delays.get(s.id) %}{% if md %}{{ md[0] }} min{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}<p>No saved crossings. <a href="{{ url_for('bwt') }}">Browse border wait times</a>.</p>{% endif %}
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <h3>Saved Ports of Entry</h3>
+    <ul>
+      {% for s in saved_ports %}
+      <li><a href="{{ url_for('port_detail', slug=s.port.slug) }}">{{ s.port.name }}</a></li>
+      {% else %}<li class="note">None saved yet.</li>
+      {% endfor %}
+    </ul>
+    <h3>Saved Jobs</h3>
+    <ul>
+      {% for s in saved_jobs %}
+      <li><a href="{{ url_for('job_detail', control=s.job.control) }}">{{ s.job.title }}</a></li>
+      {% else %}<li class="note">None saved yet.</li>
+      {% endfor %}
+    </ul>
+    <h3>Saved Forms</h3>
+    <ul>
+      {% for s in saved_forms %}
+      <li><a href="{{ url_for('form_detail', catalog_key=s.form.catalog_key) }}">CBP Form {{ s.form.form_number }} — {{ s.form.name }}</a></li>
+      {% else %}<li class="note">None saved yet.</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+{% endblock %}

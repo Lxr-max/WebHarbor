@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Appointment Confirmed{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Your Appointment Is Scheduled</h1>
+  <div class="alert-box alert-box--success">
+    <p><strong>Your appointment has been scheduled.</strong> Please print or save your confirmation number.</p>
+  </div>
+  <section class="office-result">
+    <h2>Confirmation: {{ appt.confirmation }}</h2>
+    <dl class="office-meta">
+      <dt>Service:</dt><dd>{{ appt.reason }}</dd>
+      {% if appt.reason_detail %}<dt>Your note:</dt><dd>{{ appt.reason_detail }}</dd>{% endif %}
+      <dt>Office:</dt><dd>{{ appt.office_name }} ({{ appt.office_designation }})</dd>
+      <dt>Date:</dt><dd>{{ appt.appt_date }}</dd>
+      <dt>Time:</dt><dd>{{ appt.appt_time }}</dd>
+      <dt>Status:</dt><dd>{{ appt.status }}</dd>
+    </dl>
+    <p><a href="{{ url_for('appointment_view') }}">View your appointment</a> to cancel or reprint your confirmation letter at any time.</p>
+  </section>
+</div>
+{% endblock %}

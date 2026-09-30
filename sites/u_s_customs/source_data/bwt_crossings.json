@@ -1,0 +1,5952 @@
+[
+ {
+  "port_number": "070801",
+  "port_name": "Alexandria Bay",
+  "crossing_name": "Thousand Islands Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 2,
+    "updated": "At 11:00 am EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 3,
+    "updated": "At 11:00 am EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "delay",
+    "delay": 10,
+    "open": 1,
+    "updated": "At 11:00 am EDT"
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "300401",
+  "port_name": "Blaine",
+  "crossing_name": "Pacific Highway",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 7,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "300402",
+  "port_name": "Blaine",
+  "crossing_name": "Peace Arch",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "300403",
+  "port_name": "Blaine",
+  "crossing_name": "Point Roberts",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "090104",
+  "port_name": "Buffalo/Niagara Falls",
+  "crossing_name": "Lewiston Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 4,
+   "automation_type": "Bluetooth",
+   "Standard": {
+    "status": "no delay",
+    "delay": 6,
+    "open": 2,
+    "updated": "At 2:37 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 8,
+   "automation_type": "Bluetooth",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 4,
+    "updated": "At 2:37 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "090101",
+  "port_name": "Buffalo/Niagara Falls",
+  "crossing_name": "Peace Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "A Ready Lane is available from 2-6pm Monday through Thursday. ",
+  "commercial": {
+   "maximum_lanes": 8,
+   "automation_type": "Bluetooth",
+   "Standard": {
+    "status": "no delay",
+    "delay": 7,
+    "open": 4,
+    "updated": "At 2:37 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 17,
+   "automation_type": "Bluetooth",
+   "Standard": {
+    "status": "no delay",
+    "delay": 2,
+    "open": 9,
+    "updated": "At 2:37 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 2:37 pm EDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "090102",
+  "port_name": "Buffalo/Niagara Falls",
+  "crossing_name": "Rainbow Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "A Ready Lane is available from 3-7pm Monday through Thursday.  ",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 16,
+   "automation_type": "Bluetooth",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 5,
+    "updated": "At 2:37 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "090103",
+  "port_name": "Buffalo/Niagara Falls",
+  "crossing_name": "Whirlpool Bridge",
+  "border": "canada",
+  "hours": "7 am-11 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "011501",
+  "port_name": "Calais",
+  "crossing_name": "Ferry Point",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "011503",
+  "port_name": "Calais",
+  "crossing_name": "International Avenue",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "011502",
+  "port_name": "Calais",
+  "crossing_name": "Milltown",
+  "border": "canada",
+  "hours": "8 am-4 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "071201",
+  "port_name": "Champlain",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 3,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 4,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "020901",
+  "port_name": "Derby Line",
+  "crossing_name": "Derby Line I-91",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "380001",
+  "port_name": "Detroit",
+  "crossing_name": "Ambassador Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "A Ready Lane is available from 11am-2pm Monday through Friday.  More at: https://www.cbp.gov/travel",
+  "commercial": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 7,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 2:00 pm EDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 18,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "380102",
+  "port_name": "Detroit",
+  "crossing_name": "Gordie Howe International Bridge ",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 15,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 21,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "380002",
+  "port_name": "Detroit",
+  "crossing_name": "Windsor Tunnel",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "A Ready Lane is available from 11am-2pm Monday through Friday.  More at: https://www.cbp.gov/travel",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "021201",
+  "port_name": "Highgate Springs",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 3,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "010601",
+  "port_name": "Houlton",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "360401",
+  "port_name": "International Falls",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "010401",
+  "port_name": "Jackman",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 3:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "302301",
+  "port_name": "Lynden",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "8 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "L01901",
+  "port_name": "Madawaska",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "070401",
+  "port_name": "Massena",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 4,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "021101",
+  "port_name": "Norton",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "070101",
+  "port_name": "Ogdensburg",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:12",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "340101",
+  "port_name": "Pembina",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 12,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 2,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "380201",
+  "port_name": "Port Huron",
+  "crossing_name": "Bluewater Bridge",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 9,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 5,
+    "updated": "At 2:00 pm EST"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EST"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 2:00 pm EST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 2:00 pm EST"
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "380301",
+  "port_name": "Sault Ste. Marie",
+  "crossing_name": "International Bridge - SSM",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "14:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 4:00 pm EDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "300901",
+  "port_name": "Sumas",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 7:00 am PDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 7:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "331001",
+  "port_name": "Sweetgrass",
+  "crossing_name": "",
+  "border": "canada",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 8:00 am MDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 8:00 am MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250201",
+  "port_name": "Andrade",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 45,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230106",
+  "port_name": "B&M Bridge",
+  "crossing_name": "B&M Bridge",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240215",
+  "port_name": "BOTA CARGO FACILITY",
+  "crossing_name": "BRIDGE OF AMERICAS CARGO FACILITY ",
+  "border": "mexico",
+  "hours": "6 am-2 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240207",
+  "port_name": "Bridge of the Americas Port of Entry",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "535501",
+  "port_name": "Brownsville",
+  "crossing_name": "B&M",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "Pedestrian access closes at 10:00 PM and reopens at 6:00 AM, seven days a week.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 2,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "535504",
+  "port_name": "Brownsville",
+  "crossing_name": "Gateway",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "The Pedestrian Dedicated Ready Lane is now operational at Gateway Bridge and may be used with a valid U.S. passport or SENTRI card.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "delay",
+    "delay": 10,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   }
+  }
+ },
+ {
+  "port_number": "535503",
+  "port_name": "Brownsville",
+  "crossing_name": "Los Indios",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "535502",
+  "port_name": "Brownsville",
+  "crossing_name": "Veterans International",
+  "border": "mexico",
+  "hours": "6 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 4,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "READY": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250301",
+  "port_name": "Calexico",
+  "crossing_name": "East",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 11:00 am PDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 15,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250302",
+  "port_name": "Calexico",
+  "crossing_name": "West",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 16,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 11:00 am PDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 15,
+    "open": 4,
+    "updated": "At 11:00 am PDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "delay",
+    "delay": 60,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   }
+  }
+ },
+ {
+  "port_number": "240601",
+  "port_name": "Columbus",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230201",
+  "port_name": "Del Rio",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "Ready Lane is open from 6AM until MIDNIGHT seven days a week.  Ready Lane is on the far left as you approach.\r\n\r\nGo to www.GetYouHome.gov for more information.",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At Noon CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At Noon CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At Noon CDT"
+   },
+   "READY": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 2,
+    "updated": "At Noon CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260101",
+  "port_name": "Douglas (Raul Hector Castro)",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 11:00 am PST"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 7,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 120,
+    "open": 2,
+    "updated": "At 11:00 am PST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "delay",
+    "delay": 10,
+    "open": 1,
+    "updated": "At 11:00 am PST"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 11:00 am PST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230301",
+  "port_name": "Eagle Pass",
+  "crossing_name": "Bridge I",
+  "border": "mexico",
+  "hours": "7 am-11 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 30,
+    "open": 3,
+    "updated": "At 2:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230302",
+  "port_name": "Eagle Pass",
+  "crossing_name": "Bridge II",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "File FinCEN105 - Currency and Monetary Instrument Report (CMIR)online at https://fincen105.cbp.dhs.gov/ Provide confirmation number to CBP Officer upon making entry or departing the U.S.",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   },
+   "FAST": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 7,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 4,
+    "updated": "At 2:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240221",
+  "port_name": "El Paso",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 12,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240201",
+  "port_name": "El Paso",
+  "crossing_name": "Bridge of the Americas (BOTA)",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "BOTA Passenger/Ready Lanes is open west side of port; Passenger Hrs 24 hours/7days, BOTA CARGO Mon-FRI 6 am to 4 pm. SAT/SUN CLOSED. Tune into AM 1610 for info.",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 20,
+    "open": 1,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 20,
+    "open": 2,
+    "updated": "At 1:00 pm MDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 14,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 50,
+    "open": 2,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 45,
+    "open": 6,
+    "updated": "At 1:00 pm MDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 1:00 pm MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240202",
+  "port_name": "El Paso",
+  "crossing_name": "Paso Del Norte (PDN)",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "Ready Lanes are open at PDN.  See www.getyouhome.gov for more information. Tune in to AM 1620 for border crossing information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 12,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 60,
+    "open": 4,
+    "updated": "At Noon MDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 14,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 4,
+    "open": 3,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "no delay",
+    "delay": 4,
+    "open": 3,
+    "updated": "At Noon MDT"
+   }
+  }
+ },
+ {
+  "port_number": "240204",
+  "port_name": "El Paso",
+  "crossing_name": "Stanton DCL",
+  "border": "mexico",
+  "hours": "6 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "Be prepared for construction that may cause some delays in the southbound lanes of the Stanton bridge; early January - February.  Tune in to AM 1620 for border crossing information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 3,
+    "updated": "At Noon MDT"
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240203",
+  "port_name": "El Paso",
+  "crossing_name": "Ysleta",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "YSL Passenger/Ready Lanes is open west side of port; Passenger Hrs. 24 hours / 7 days, YSL CARGO Mon-FRI 6 am to Midnight. SAT 6 am to 2 pm. Tune into AM 1610 for info.\r\n\r\n\r\n",
+  "commercial": {
+   "maximum_lanes": 8,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 45,
+    "open": 5,
+    "updated": "At Noon MDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 25,
+    "open": 3,
+    "updated": "At Noon MDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 4,
+    "updated": "At Noon MDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 60,
+    "open": 3,
+    "updated": "At Noon MDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 2,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "l24501",
+  "port_name": "Fort Hancock",
+  "crossing_name": "Fort Hancock",
+  "border": "mexico",
+  "hours": "6 am-6 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230103",
+  "port_name": "Gateway",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230503",
+  "port_name": "Hidalgo/Pharr",
+  "crossing_name": "Anzalduas International Bridge",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 10,
+    "open": 4,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230501",
+  "port_name": "Hidalgo/Pharr",
+  "crossing_name": "Hidalgo",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 12,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 2,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 55,
+    "open": 3,
+    "updated": "At 1:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 5,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230502",
+  "port_name": "Hidalgo/Pharr",
+  "crossing_name": "Pharr",
+  "border": "mexico",
+  "hours": "6 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 7,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 35,
+    "open": 5,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 30,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 10,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230401",
+  "port_name": "Laredo",
+  "crossing_name": "Bridge I",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At Noon CDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 12,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 3,
+    "updated": "At Noon CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 3,
+    "updated": "At Noon CDT"
+   }
+  }
+ },
+ {
+  "port_number": "230402",
+  "port_name": "Laredo",
+  "crossing_name": "Bridge II",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "Ready Lanes are open from 8AM - Midnight seven days a week.\r\n\r\nGo to www.GetYouHome.gov for more information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 15,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 7,
+    "updated": "At Noon CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 25,
+    "open": 7,
+    "updated": "At Noon CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230403",
+  "port_name": "Laredo",
+  "crossing_name": "Colombia Solidarity",
+  "border": "mexico",
+  "hours": "8 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 8,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 3,
+    "updated": "At Noon CDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 25,
+    "open": 2,
+    "updated": "At Noon CDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 2,
+    "updated": "At Noon CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At Noon CDT"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230404",
+  "port_name": "Laredo",
+  "crossing_name": "World Trade Bridge",
+  "border": "mexico",
+  "hours": "7 am-Midnight",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 19,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 12,
+    "updated": "At Noon CDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 15,
+    "open": 4,
+    "updated": "At Noon CDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260201",
+  "port_name": "Lukeville",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "6 am-8 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 4,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 11:00 am MST"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240401",
+  "port_name": "Marcelino Serna",
+  "crossing_name": "Tornillo",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "CARGO Monday-Friday 8 am to 4 pm. Saturday/Sunday Closed.",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 20,
+    "open": 2,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 2,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260305",
+  "port_name": "Naco",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260301",
+  "port_name": "Naco",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 3,
+    "open": 1,
+    "updated": "At 11:00 am PST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 11:00 am PST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260401",
+  "port_name": "Nogales",
+  "crossing_name": "Deconcini",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "Ready Lane is open from 6AM - 10PM seven days a week.  Ready Lane is on the left side as you approach the port.\r\nGo to www.GetYouHome.gov for more information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "delay",
+    "delay": 10,
+    "open": 2,
+    "updated": "At 11:00 am MST"
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260402",
+  "port_name": "Nogales",
+  "crossing_name": "Mariposa",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 8,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 10:00 am MST"
+   },
+   "FAST": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 10:00 am MST"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 7,
+    "updated": "At 10:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 10:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260403",
+  "port_name": "Nogales",
+  "crossing_name": "Morley Gate",
+  "border": "mexico",
+  "hours": "10 am-6 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 2,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250609",
+  "port_name": "Otay Mesa",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250602",
+  "port_name": "Otay Mesa",
+  "crossing_name": "Commercial",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 10,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 40,
+    "open": 5,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 20,
+    "open": 3,
+    "updated": "At 11:00 am PDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250601",
+  "port_name": "Otay Mesa",
+  "crossing_name": "Passenger",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "Entrance to Ready Lanes is on the far left as you approach the border.  Go to www.getyouhome.gov for more information\r\n\r\nGo to www.GetYouHome.gov for more information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 185,
+    "open": 3,
+    "updated": "At 10:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "delay",
+    "delay": 15,
+    "open": 3,
+    "updated": "At 10:00 am PDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 120,
+    "open": 3,
+    "updated": "At 10:00 am PDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 90,
+    "open": 6,
+    "updated": "At 10:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250608",
+  "port_name": "Otay Mesa Port of Entry",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 13,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "202401",
+  "port_name": "Paso Del Norte",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 14,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240301",
+  "port_name": "Presidio",
+  "crossing_name": "PRESIDIO PORT OF ENTRY",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230902",
+  "port_name": "Progreso",
+  "crossing_name": "Donna International Bridge",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "Ready Lane is open from 9am until 2pm. Go to www.getyouhome.gov for more information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 60,
+    "open": 1,
+    "updated": "At 2:00 pm CDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230901",
+  "port_name": "Progreso",
+  "crossing_name": "Progreso International Bridge",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "The Pedestrian Ready lanes will be open daily from 12noon to 5pm.",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 5,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 20,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 6,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "231002",
+  "port_name": "ROMA TEXAS",
+  "crossing_name": "ROMA TEXAS ",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "230701",
+  "port_name": "Rio Grande City",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "7 am-11 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 3,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 2,
+    "updated": "At 1:00 pm CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "231001",
+  "port_name": "Roma",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "13:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 1,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 1,
+    "updated": "At Noon CDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 3,
+    "updated": "At Noon CDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260801",
+  "port_name": "San Luis",
+  "crossing_name": "San Luis I",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "A Ready Lane is now open at the San Luis Port of Entry from 6:00 until midnight.  Go to www.getyouhome.gov for more information on Ready Lanes.  Tune in to AM 530 for border crossing information.",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 16,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 5,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 3,
+    "updated": "At 11:00 am MST"
+   },
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 9,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Lanes Closed",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "260802",
+  "port_name": "San Luis",
+  "crossing_name": "San Luis II",
+  "border": "mexico",
+  "hours": "9 am-5 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 2,
+    "updated": "At 11:00 am MST"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250401",
+  "port_name": "San Ysidro",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 34,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 150,
+    "open": 6,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "delay",
+    "delay": 30,
+    "open": 11,
+    "updated": "At 11:00 am PDT"
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 120,
+    "open": 11,
+    "updated": "At 11:00 am PDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 22,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 60,
+    "open": 16,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At 11:00 am PDT"
+   }
+  }
+ },
+ {
+  "port_number": "250409",
+  "port_name": "San Ysidro",
+  "crossing_name": "Cross Border Express",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 8,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 0,
+    "open": 6,
+    "updated": "At 1:00 pm PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At 1:00 pm PDT"
+   }
+  }
+ },
+ {
+  "port_number": "250407",
+  "port_name": "San Ysidro",
+  "crossing_name": "PedWest",
+  "border": "mexico",
+  "hours": "6 am-2 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 14,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 15,
+    "open": 4,
+    "updated": "At Noon PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 1,
+    "updated": "At Noon PDT"
+   }
+  }
+ },
+ {
+  "port_number": "240801",
+  "port_name": "Santa Teresa",
+  "crossing_name": "Santa Teresa Port of Entry",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 3,
+   "automation_type": "RFID",
+   "Standard": {
+    "status": "delay",
+    "delay": 35,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": {
+    "status": "delay",
+    "delay": 30,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 45,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "delay",
+    "delay": 40,
+    "open": 1,
+    "updated": "At Noon MDT"
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 1,
+    "open": 1,
+    "updated": "At Noon MDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "250501",
+  "port_name": "Tecate",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "6 am-10 pm",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "11:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 2,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 10,
+    "open": 2,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "delay",
+    "delay": 30,
+    "open": 2,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 4,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "no delay",
+    "delay": 5,
+    "open": 4,
+    "updated": "At 11:00 am PDT"
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "N/A",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ },
+ {
+  "port_number": "240104",
+  "port_name": "YSLETA",
+  "crossing_name": "",
+  "border": "mexico",
+  "hours": "24 hrs/day",
+  "port_status": "Open",
+  "date": "9/28/2026",
+  "time": "12:49:13",
+  "construction_notice": "",
+  "commercial": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "NEXUS_SENTRI": null,
+   "READY": null
+  },
+  "passenger": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  },
+  "pedestrian": {
+   "maximum_lanes": 0,
+   "automation_type": "Manual",
+   "Standard": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   },
+   "FAST": null,
+   "NEXUS_SENTRI": null,
+   "READY": {
+    "status": "Update Pending",
+    "delay": 0,
+    "open": null,
+    "updated": ""
+   }
+  }
+ }
+]

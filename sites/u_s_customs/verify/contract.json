@@ -1,0 +1,905 @@
+{
+  "CBP.gov--0": {
+    "task": "We are driving from Tijuana into San Diego without a trusted-traveler membership. Compare Otay Mesa Passenger with the main San Ysidro crossing using the captured border-wait snapshot: standard and Ready Lane passenger waits, open lanes, update times, and operating hours. Recommend the faster standard-lane option and explain how much time it saves; distinguish the Ready Lane alternative so we do not confuse it with the standard queue.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "otay mesa.{0,40}standard.{0,15}185.{0,20}3 lanes"
+      ],
+      [
+        "fact 2",
+        "otay mesa.{0,110}ready.{0,20}120.{0,20}3 lanes"
+      ],
+      [
+        "fact 3",
+        "10:00 am pdt"
+      ],
+      [
+        "fact 4",
+        "san ysidro.{0,40}standard.{0,15}150.{0,20}6 lanes"
+      ],
+      [
+        "fact 5",
+        "san ysidro.{0,110}ready.{0,20}120.{0,20}11 lanes"
+      ],
+      [
+        "fact 6",
+        "11:00 am pdt"
+      ],
+      [
+        "fact 7",
+        "24 (?:hours|hrs)"
+      ],
+      [
+        "fact 8",
+        "(?:saves|faster|difference).{0,15}35 minutes"
+      ]
+    ],
+    "paths": [
+      "^/bwt/crossing/250601$",
+      "^/bwt/crossing/250401$"
+    ]
+  },
+  "CBP.gov--1": {
+    "task": "I am a NEXUS member driving from Vancouver, British Columbia into Washington State this weekend and can cross at any of the Blaine ports. Report how many Blaine crossings the Border Wait Times tool lists. For each crossing, report its name, hours, standard passenger-vehicle delay, and NEXUS/SENTRI lane delay with the number of NEXUS lanes open, quoting the status text of any crossing whose lanes are not currently reported. Finish with a one-sentence recommendation of which crossing a NEXUS member should choose and why.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "3 blaine crossings"
+      ],
+      [
+        "fact 2",
+        "pacific highway.{0,45}standard.{0,20}5 minutes.{0,30}nexus.{0,25}5 minutes.{0,15}1 lane"
+      ],
+      [
+        "fact 3",
+        "peace arch.{0,45}standard.{0,20}5 minutes.{0,30}nexus.{0,25}5 minutes.{0,15}1 lane"
+      ],
+      [
+        "fact 4",
+        "point roberts.{0,60}update pending"
+      ],
+      [
+        "fact 5",
+        "(?:choose|recommend).{0,45}(?:pacific highway|peace arch)"
+      ]
+    ],
+    "paths": [
+      "^/bwt/crossing/300401$",
+      "^/bwt/crossing/300402$",
+      "^/bwt/crossing/300403$"
+    ]
+  },
+  "CBP.gov--2": {
+    "task": "I am choosing where to walk into San Diego at San Ysidro. Compare the main crossing and PedWest using their pedestrian waits, open lanes, update times, and operating hours in the captured snapshot. Recommend an option based on those readings, and find the San Ysidro port code and directory phone number so I can check arrangements before leaving.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "(?:main san ysidro|san ysidro main).{0,35}60 minutes.{0,15}16 lanes"
+      ],
+      [
+        "fact 2",
+        "11:00 am pdt"
+      ],
+      [
+        "fact 3",
+        "pedwest.{0,35}15 minutes.{0,15}4 lanes"
+      ],
+      [
+        "fact 4",
+        "noon pdt"
+      ],
+      [
+        "fact 5",
+        "6 am.{0,5}2 pm"
+      ],
+      [
+        "fact 6",
+        "2504"
+      ],
+      [
+        "fact 7",
+        "619[- )]*428[- ]*2188"
+      ],
+      [
+        "fact 8",
+        "45 minutes"
+      ]
+    ],
+    "paths": [
+      "^/bwt/crossing/250401$",
+      "^/bwt/crossing/250407$",
+      "^/about/contact/ports/port/san\\-ysidro\\-class\\-california\\-2504$"
+    ]
+  },
+  "CBP.gov--3": {
+    "task": "Sofia Andersen, a Danish citizen born March 14, 1995, is visiting the U.S. next month and needs travel authorization. Confirm the ESTA application fee, then complete the full ESTA application for her: passport DK4455667 issued by Denmark, expiring 2029-05-20, email sofia.andersen@example.com, phone +45 33 555 0188, home city Copenhagen, Denmark, travel purpose Tourism, destination 300 Almaden Blvd, San Jose, CA, and No to every eligibility question. Pay with card 4242 4242 4242 4242 (exp 09/29, CVV 123). Report the application number, authorization status, valid-until date, and total fee charged.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {
+      "esta_applications": {
+        "added": [
+          {
+            "id": 3,
+            "application_number": "ESTA-86C8DC4",
+            "user_id": null,
+            "family_name": "Andersen",
+            "first_name": "Sofia",
+            "birth_date": "1995-03-14",
+            "gender": "Female",
+            "citizenship": "Denmark",
+            "passport_number": "DK4455667",
+            "passport_issue_country": "Denmark",
+            "passport_expiry": "2029-05-20",
+            "email": "sofia.andersen@example.com",
+            "phone": "+45 33 555 0188",
+            "address_city": "Copenhagen",
+            "address_country": "Denmark",
+            "travel_purpose": "Tourism",
+            "destination_address": "300 Almaden Blvd, San Jose, CA",
+            "status": "Authorization Approved",
+            "fee_usd": 40.27,
+            "created_at": "2026-09-28",
+            "expires_on": "2028-09-28"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "authorization approved"
+      ],
+      [
+        "fact 2",
+        "(?:valid|expires).{0,20}2028-09-28"
+      ],
+      [
+        "fact 3",
+        "(?:fee|paid|charged).{0,20}40\\.27"
+      ]
+    ],
+    "paths": [
+      "^/travel/international\\-visitors/esta$",
+      "^/esta/confirmation/ESTA\\-[A-Z0-9]+$"
+    ],
+    "answer_state": [
+      [
+        "esta_applications",
+        "application_number"
+      ]
+    ]
+  },
+  "CBP.gov--4": {
+    "task": "My colleague Lena, a German citizen, plans a two-week tourist trip to New York. Report how many countries participate in the Visa Waiver Program, the maximum stay it permits, and whether Germany is on the list. Report the ESTA application fee and the e-Passport requirement in one sentence. Check the ESTA status of passport DE29384756 and report the application number, its status, and the date it expires. Then report what the ESTA page says about whether an ESTA authorization determines admissibility, who does, and when to apply.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "42 countries"
+      ],
+      [
+        "fact 2",
+        "including germany|germany.{0,30}(?:list|participat)"
+      ],
+      [
+        "fact 3",
+        "90 days"
+      ],
+      [
+        "fact 4",
+        "(?:cost|fee).{0,15}40\\.27"
+      ],
+      [
+        "fact 5",
+        "e-passport.{0,30}electronic chip"
+      ],
+      [
+        "fact 6",
+        "esta-88291045.{0,20}authorization approved"
+      ],
+      [
+        "fact 7",
+        "2028-08-20"
+      ],
+      [
+        "fact 8",
+        "does not determine admissibility"
+      ],
+      [
+        "fact 9",
+        "cbp officers.{0,35}arrival"
+      ],
+      [
+        "fact 10",
+        "(?:plans begin|before buying|before purchasing)"
+      ]
+    ],
+    "paths": [
+      "^/travel/international\\-visitors/visa\\-waiver\\-program$",
+      "^/travel/international\\-visitors/esta$",
+      "^/esta/check$"
+    ]
+  },
+  "CBP.gov--5": {
+    "task": "I am preparing visa-application records for Alice Johnson (1990-04-12, passport DE29384756), Bob Chen (1988-07-19, passport US556677889), and Carol Davis (1985-11-02, passport GB778812345). Retrieve each person's electronic I-94 and prepare a short entry-record summary identifying their admission number, admission class, entry date, admitted-until date, and port of entry. Flag any record that does not give a fixed admitted-until date.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "alice johnson.{0,25}269745632011.{0,20}vwp b-1.{0,20}2026-06-14.{0,25}2026-09-12.{0,25}washington dulles"
+      ],
+      [
+        "fact 2",
+        "bob chen.{0,25}269745641088.{0,20}us citizen.{0,20}2026-09-03"
+      ],
+      [
+        "fact 3",
+        "bob chen.{0,160}san ysidro"
+      ],
+      [
+        "fact 4",
+        "carol davis.{0,25}269745650222.{0,20}vwp b-2.{0,20}2026-03-22.{0,25}2026-06-20.{0,25}john f. kennedy"
+      ],
+      [
+        "fact 5",
+        "bob.{0,40}no fixed admitted"
+      ]
+    ],
+    "paths": [
+      "^/i94/request$"
+    ]
+  },
+  "CBP.gov--6": {
+    "task": "Bob Chen needs to arrange his Global Entry interview. Sign in as bob.c@test.com with password TestPass123!, confirm his application number, status, and fee, and schedule the Austin-Bergstrom International Airport enrollment center for October 15, 2026 at 9:00 a.m. Give him the confirmed appointment details, the resulting application status, and the center's phone number so he can plan his visit.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {
+      "ttp_applications": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "status": "Interview Scheduled",
+            "interview_center_id": 24,
+            "interview_date": "2026-10-15",
+            "interview_slot": "9:00 a.m."
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "ge-77031188"
+      ],
+      [
+        "fact 2",
+        "conditionally approved"
+      ],
+      [
+        "fact 3",
+        "fee.{0,10}120|120 fee"
+      ],
+      [
+        "fact 4",
+        "austin-bergstrom"
+      ],
+      [
+        "fact 5",
+        "2026-10-15.{0,15}9:00 a\\.m"
+      ],
+      [
+        "fact 6",
+        "interview scheduled"
+      ],
+      [
+        "fact 7",
+        "512\\)?[ -]*530-3056"
+      ]
+    ],
+    "paths": [
+      "^/ttp/status/GE\\-77031188$",
+      "^/ttp/schedule/GE\\-77031188$"
+    ]
+  },
+  "CBP.gov--7": {
+    "task": "I am writing a report about khat seizures at U.S. airports. Find the September 25, 2026 media release about a khat seizure at Dulles Airport and report the arrested man's name, his age and hometown, the total weight of khat seized, the airport, and which police agency arrested him. Then find the earlier Atlanta release and report the total pounds of khat seized there since the beginning of the year and the airport named in it. Finish by reporting the category of each of the two releases.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "bakari wally.{0,15}24.{0,25}bronx"
+      ],
+      [
+        "fact 2",
+        "65 pounds.{0,55}washington dulles"
+      ],
+      [
+        "fact 3",
+        "metropolitan washington airports authority police"
+      ],
+      [
+        "fact 4",
+        "(?:more than|over) 4000 pounds.{0,90}hartsfield-jackson atlanta"
+      ],
+      [
+        "fact 5",
+        "both.{0,50}local media release"
+      ]
+    ],
+    "paths": [
+      "^/newsroom/local\\-media\\-release/new\\-york\\-man\\-arrested\\-after\\-cbp\\-officers\\-seize\\-65\\-pounds\\-khat$",
+      "^/newsroom/local\\-media\\-release/atlanta\\-cbp\\-officers\\-stop\\-more\\-4000\\-pounds\\-illegal\\-khat\\-entering\\-us$"
+    ]
+  },
+  "CBP.gov--8": {
+    "task": "I am comparing CBP's September Boston cruise-ship crew enforcement reports. Find the releases mentioning Tidal Wave and explain what happened in each operation: the release title and date, the port involved, and how many crew members were removed. Distinguish the two operations so the figures cannot be mistaken for a single combined total.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "operation tidal wave in boston leads to 87 cruise ship crew removals"
+      ],
+      [
+        "fact 2",
+        "september 25,? 2026.{0,45}cumulative 87"
+      ],
+      [
+        "fact 3",
+        "port of boston"
+      ],
+      [
+        "fact 4",
+        "6 breakaway.{0,40}september 20"
+      ],
+      [
+        "fact 5",
+        "cbp officers remove another 10 cruise ship crewmembers in boston"
+      ],
+      [
+        "fact 6",
+        "september 3,? 2026.{0,30}10 removals.{0,30}norwegian escape"
+      ],
+      [
+        "fact 7",
+        "(?:not a separate|do not add|cannot add|not.*add)"
+      ]
+    ],
+    "paths": [
+      "^/newsroom/national\\-media\\-release/operation\\-tidal\\-wave\\-boston\\-leads\\-87\\-cruise\\-ship\\-crew\\-removals\\-cbp$",
+      "^/newsroom/local\\-media\\-release/cbp\\-officers\\-remove\\-another\\-10\\-cruise\\-ship\\-crewmembers\\-boston$"
+    ]
+  },
+  "CBP.gov--9": {
+    "task": "I am preparing an import-entry document checklist for a broker and need to distinguish filing an entry summary from protesting a decision. Find CBP forms 7501 and 19 in the catalog, open their detail pages, and report each form's full title and listed date. Explain which belongs to each stage and identify the PDF offered on each page so the broker can download the right document.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "7501.{0,15}entry summary with continuation sheets.{0,25}february 11,? 2026"
+      ],
+      [
+        "fact 2",
+        "cbp_form_7501\\.pdf"
+      ],
+      [
+        "fact 3",
+        "form 19.{0,15}protest.{0,25}may 1,? 2024"
+      ],
+      [
+        "fact 4",
+        "cbp_form_19\\.pdf"
+      ]
+    ],
+    "paths": [
+      "^/newsroom/publications/forms/7501\\-entry\\-summary\\-with\\-continuation\\-sheets$",
+      "^/newsroom/publications/forms/19$"
+    ]
+  },
+  "CBP.gov--10": {
+    "task": "Carol Davis needs an English fillable customs declaration for a trip. Sign in as carol.d@test.com with password TestPass123!, locate form 6059B, and distinguish its English fillable version from the language variants. Save the English fillable form to her account without removing her existing saved form. Report its listed date and the form number and title as they appear in Saved Forms, and confirm that her earlier saved form remains available.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {
+      "saved_forms": {
+        "added": [
+          {
+            "id": 2,
+            "user_id": 3,
+            "form_id": 63,
+            "created_at": "2026-09-28"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:saved|selected).{0,60}english fillable"
+      ],
+      [
+        "fact 2",
+        "july 25,? 2024"
+      ],
+      [
+        "fact 3",
+        "6059b.{0,20}customs declaration.{0,10}english"
+      ],
+      [
+        "fact 4",
+        "7501.{0,65}remains saved"
+      ]
+    ],
+    "paths": [
+      "^/newsroom/publications/forms/6059b\\-4$"
+    ]
+  },
+  "CBP.gov--11": {
+    "task": "I am a nonresident planning to bring my car from Germany for a temporary U.S. stay. Use the vehicle-import guidance to explain the duty-free time limit, what must happen to the car afterward, the DOT age exemption, and the EPA and DOT clearance forms. Cross-check the importer guidance for the entry paperwork and responsibilities I should prepare before shipping, and identify any requirements that the car's age alone does not settle.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "(?:up to|for) 1 year"
+      ],
+      [
+        "fact 2",
+        "(?:must be exported|export.{0,20}end)"
+      ],
+      [
+        "fact 3",
+        "cannot be sold|may not be sold"
+      ],
+      [
+        "fact 4",
+        "(?:at least 25|25 years old).{0,30}exempt"
+      ],
+      [
+        "fact 5",
+        "epa.{0,15}3520-1"
+      ],
+      [
+        "fact 6",
+        "dot.{0,15}hs-7"
+      ],
+      [
+        "fact 7",
+        "5106"
+      ],
+      [
+        "fact 8",
+        "(?:responsib|accurate entry documentation)"
+      ],
+      [
+        "fact 9",
+        "importer security filing"
+      ],
+      [
+        "fact 10",
+        "(?:does not.{0,30}epa|epa.{0,20}separate)"
+      ]
+    ],
+    "paths": [
+      "^/trade/basic\\-import\\-export/importing\\-car$",
+      "^/trade/basic\\-import\\-export/importer\\-exporter\\-tips$"
+    ]
+  },
+  "CBP.gov--12": {
+    "task": "I am preparing a compliance briefing for a clothing importer that is setting up ACE. Explain how CBP's textile/apparel and quota priorities apply to this business, what AD/CVD means, and where intellectual-property compliance fits. Identify the informed-compliance publication series and explain what ACE is used for so the team understands how the filing system relates to these obligations.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "textiles.{0,10}wearing apparel"
+      ],
+      [
+        "fact 2",
+        "agriculture and quota"
+      ],
+      [
+        "fact 3",
+        "ad/cvd.{0,15}antidumping and countervailing duty"
+      ],
+      [
+        "fact 4",
+        "intellectual property rights"
+      ],
+      [
+        "fact 5",
+        "what every member of the trade community should know"
+      ],
+      [
+        "fact 6",
+        "ace.{0,15}automated commercial environment"
+      ],
+      [
+        "fact 7",
+        "(?:processing|process).{0,15}imports and exports"
+      ]
+    ],
+    "paths": [
+      "^/trade/priority\\-issues/adcvd$",
+      "^/trade/priority\\-issues/ipr$",
+      "^/trade/priority\\-issues/textiles$",
+      "^/trade/priority\\-issues/quotas$",
+      "^/trade/rulings/informed\\-compliance\\-publications$",
+      "^/trade/automated$"
+    ]
+  },
+  "CBP.gov--13": {
+    "task": "I am deciding between two CBP law-enforcement careers. Find the Border Patrol Agent (GL 5-7) posting that offers a recruitment incentive and report its salary range, closing date, announcement number, and the total incentive in dollars including how it is split. Then find the CBP Officer posting (GS 5-7, control number ending 800) and report its salary range, closing date, and whether a drug test is required. Finish by reporting which job has the higher starting salary and by how much, and which organization each belongs to.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "border patrol agent.{0,30}51632.{0,8}92912"
+      ],
+      [
+        "fact 2",
+        "bpa dh 26-12"
+      ],
+      [
+        "fact 3",
+        "incentive.{0,15}20000.{0,20}10000.{0,30}academy.{0,25}10000.{0,30}prioritized"
+      ],
+      [
+        "fact 4",
+        "cbp officer.{0,60}41863.{0,8}112415"
+      ],
+      [
+        "fact 5",
+        "drug test.{0,15}yes"
+      ],
+      [
+        "fact 6",
+        "higher.{0,30}9769"
+      ],
+      [
+        "fact 7",
+        "09/30/2026"
+      ],
+      [
+        "fact 8",
+        "u\\.s\\. border patrol"
+      ],
+      [
+        "fact 9",
+        "office of field operations"
+      ]
+    ],
+    "paths": [
+      "^/careers/job/882257900$",
+      "^/careers/job/882166800$"
+    ]
+  },
+  "CBP.gov--14": {
+    "task": "I want an in-person CBP recruiting opportunity in Texas and am considering an officer career. Compare the Texas hiring-fair and Dallas event by name, date, location, and type, and recommend one with a clear reason. Check the Office of Field Operations career page for the officer roles I could ask about and its advertised recruiting event; distinguish any online event from the in-person options. For the featured GS 5-7 officer opening, check the salary range, closing date and drug-test requirement so I can prepare relevant questions for the recruiter.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "waco.{0,30}hiring fair.{0,30}waco.{0,15}september 28,? 2026.{0,25}in person"
+      ],
+      [
+        "fact 2",
+        "dallas job fair.{0,20}addison.{0,15}september 29,? 2026.{0,25}in person"
+      ],
+      [
+        "fact 3",
+        "webinar.{0,15}online"
+      ],
+      [
+        "fact 4",
+        "gs 5-7.{0,10}gs 9"
+      ],
+      [
+        "fact 5",
+        "41863.{0,8}112415"
+      ],
+      [
+        "fact 6",
+        "09/30/2026"
+      ],
+      [
+        "fact 7",
+        "requires a drug test"
+      ],
+      [
+        "fact 8",
+        "(?:choose|recommend).{0,30}(?:dallas|waco)"
+      ]
+    ],
+    "paths": [
+      "^/careers/events$",
+      "^/careers/career\\-paths/ofo$",
+      "^/careers/job/882166800$"
+    ]
+  },
+  "CBP.gov--15": {
+    "task": "Dana Kim needs to prepare for her scheduled trusted-traveler interview. Sign in as dana.k@test.com with password TestPass123!, find her application's number, program and status, and confirm the interview date, time, and center. Open the center information to report its hours and phone number, and tell her whether the appointment falls within those hours. Preserve the appointment as booked.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "ge-77554402.{0,30}global entry.{0,20}interview scheduled"
+      ],
+      [
+        "fact 2",
+        "2026-10-14.{0,15}10:00 a\\.m"
+      ],
+      [
+        "fact 3",
+        "los angeles international airport"
+      ],
+      [
+        "fact 4",
+        "7:30 a\\.m.{0,5}9:30 p\\.m"
+      ],
+      [
+        "fact 5",
+        "310\\)?[ -]*642-1425"
+      ],
+      [
+        "fact 6",
+        "within.{0,15}hours"
+      ]
+    ],
+    "paths": [
+      "^/ttp/status/GE\\-77554402$",
+      "^/ttp/schedule/GE\\-77554402$"
+    ]
+  },
+  "CBP.gov--16": {
+    "task": "My family makes frequent trips between Canada, Mexico and the U.S. and is deciding between Global Entry, NEXUS, SENTRI and TSA PreCheck. Compare their fees, membership lengths and included benefits, explaining which options include Global Entry benefits and which members can use TSA PreCheck. Recommend how a family should narrow the options by travel pattern and explain the screening Global Entry applicants must complete.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "global entry.{0,10}120.{0,10}5 years"
+      ],
+      [
+        "fact 2",
+        "nexus.{0,10}50.{0,10}5 years"
+      ],
+      [
+        "fact 3",
+        "sentri.{0,10}122\\.25.{0,10}5 years"
+      ],
+      [
+        "fact 4",
+        "tsa precheck.{0,10}78.{0,10}5 years"
+      ],
+      [
+        "fact 5",
+        "nexus and sentri.{0,20}global entry benefits"
+      ],
+      [
+        "fact 6",
+        "global entry.{0,45}background check"
+      ],
+      [
+        "fact 7",
+        "(?:lawful permanent residents|permanent residents)"
+      ],
+      [
+        "fact 8",
+        "canadian nexus"
+      ],
+      [
+        "fact 9",
+        "(?:compare|recommend|choose)"
+      ]
+    ],
+    "paths": [
+      "^/travel/trusted\\-traveler\\-programs/global\\-entry$",
+      "^/travel/trusted\\-traveler\\-programs/nexus$",
+      "^/travel/trusted\\-traveler\\-programs/sentri$",
+      "^/travel/trusted\\-traveler\\-programs/tsa\\-precheck$"
+    ]
+  },
+  "CBP.gov--17": {
+    "task": "Marco Ricci, an Italian citizen born June 2, 1988, is flying to Seattle and driving to Vancouver and back. Confirm Italy is on the Visa Waiver Program list and report how many countries participate. Complete his full ESTA application: passport IT778899001 issued by Italy, expiring 2031-02-15, email marco.ricci@example.com, phone +39 02 555 0123, home city Milan, Italy, purpose Tourism, destination 1201 2nd Ave, Seattle, WA, No to all eligibility questions, card 4242 4242 4242 4242 (exp 09/29, CVV 123). Report his application number, authorization status, expiration date, and total fee paid.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {
+      "esta_applications": {
+        "added": [
+          {
+            "id": 3,
+            "application_number": "ESTA-A505B32",
+            "user_id": null,
+            "family_name": "Ricci",
+            "first_name": "Marco",
+            "birth_date": "1988-06-02",
+            "gender": "Male",
+            "citizenship": "Italy",
+            "passport_number": "IT778899001",
+            "passport_issue_country": "Italy",
+            "passport_expiry": "2031-02-15",
+            "email": "marco.ricci@example.com",
+            "phone": "+39 02 555 0123",
+            "address_city": "Milan",
+            "address_country": "Italy",
+            "travel_purpose": "Tourism",
+            "destination_address": "1201 2nd Ave, Seattle, WA",
+            "status": "Authorization Approved",
+            "fee_usd": 40.27,
+            "created_at": "2026-09-28",
+            "expires_on": "2028-09-28"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "italy.{0,70}42 countries"
+      ],
+      [
+        "fact 2",
+        "authorization approved"
+      ],
+      [
+        "fact 3",
+        "(?:valid|expires).{0,20}2028-09-28"
+      ],
+      [
+        "fact 4",
+        "(?:fee|paid).{0,20}40\\.27"
+      ]
+    ],
+    "paths": [
+      "^/travel/international\\-visitors/visa\\-waiver\\-program$",
+      "^/travel/international\\-visitors/esta$",
+      "^/esta/confirmation/ESTA\\-[A-Z0-9]+$"
+    ],
+    "answer_state": [
+      [
+        "esta_applications",
+        "application_number"
+      ]
+    ]
+  },
+  "CBP.gov--18": {
+    "task": "Carol Davis applied for ESTA recently and cannot remember where it stands. Log in as carol.d@test.com with password TestPass123! and report her ESTA application number, its current status, and the creation date. Confirm the status through the ESTA status checker using that application number. Then report what type of passport, with what feature, the ESTA page says travelers must have to use the Visa Waiver Program, what it recommends about when to apply relative to travel plans, the ESTA application fee, and whether her application shows an expiration date yet.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "esta-88452017.{0,20}authorization pending"
+      ],
+      [
+        "fact 2",
+        "created.{0,15}2026-09-26"
+      ],
+      [
+        "fact 3",
+        "e-passport.{0,35}electronic chip"
+      ],
+      [
+        "fact 4",
+        "(?:plans begin|before buying|before purchasing)"
+      ],
+      [
+        "fact 5",
+        "fee.{0,10}40\\.27"
+      ],
+      [
+        "fact 6",
+        "no expiration date"
+      ]
+    ],
+    "paths": [
+      "^/travel/international\\-visitors/esta$",
+      "^/esta/check$"
+    ]
+  },
+  "CBP.gov--19": {
+    "task": "Carol Davis operates charter flights and wants the CBP general declaration ready for her next filing. Sign in as carol.d@test.com with password TestPass123!. Read the aviation advisory to establish who may submit the declaration by email and what information CBP recommends protecting. Find the corresponding form in the catalog, save it to her account, and report its number, full title, listed date, and the submission guidance. Keep her existing saved form.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {
+      "saved_forms": {
+        "added": [
+          {
+            "id": 2,
+            "user_id": 3,
+            "form_id": 72,
+            "created_at": "2026-09-28"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "7507.{0,10}general declaration agriculture,? customs,? immigration and public health"
+      ],
+      [
+        "fact 2",
+        "june 11,? 2025"
+      ],
+      [
+        "fact 3",
+        "owners and operators of commercial aircraft"
+      ],
+      [
+        "fact 4",
+        "email|e-mail"
+      ],
+      [
+        "fact 5",
+        "protect.{0,10}personally identifiable information"
+      ],
+      [
+        "fact 6",
+        "(?:preserv|remain).{0,30}7501"
+      ],
+      [
+        "fact 7",
+        "contact.{0,30}port"
+      ]
+    ],
+    "paths": [
+      "^/travel/advisories\\-wait\\-times$",
+      "^/newsroom/publications/forms/7507$"
+    ]
+  },
+  "CBP.gov--20": {
+    "task": "I am preparing contact and crossing information for a San Diego border trip. Use site search to locate the Otay Mesa Passenger crossing and San Ysidro's port-of-entry directory entry. Report Otay Mesa's standard and Ready Lane passenger waits and operating hours, then give San Ysidro's port code, phone number and address. Explain which source answers the queue question and which should be used for port contact details.",
+    "initial_digest": "868c6fd79fce4423d61a34617f2d4eeb498b1206c8314f80ce5daf54a8f8bd69",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "otay mesa.{0,35}standard wait.{0,10}185.{0,40}ready lane wait.{0,10}120"
+      ],
+      [
+        "fact 2",
+        "24 hrs/day|24 hours"
+      ],
+      [
+        "fact 3",
+        "san ysidro port code.{0,10}2504"
+      ],
+      [
+        "fact 4",
+        "619-428-2188"
+      ],
+      [
+        "fact 5",
+        "720 east san ysidro blvd"
+      ],
+      [
+        "fact 6",
+        "border wait times.{0,50}queue"
+      ],
+      [
+        "fact 7",
+        "directory.{0,40}contact"
+      ]
+    ],
+    "paths": [
+      "^/search$",
+      "^/bwt/crossing/250601$",
+      "^/about/contact/ports/port/san\\-ysidro\\-class\\-california\\-2504$"
+    ]
+  }
+}

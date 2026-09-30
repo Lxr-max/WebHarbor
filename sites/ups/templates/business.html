@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Business Solutions | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Business Solutions</div>
+  <h1>Business Solutions</h1>
+  <p class="ups-lede">UPS has flexible pickup solutions designed to match the pace of your business — plus billing, returns and logistics services.</p>
+
+  <div class="ups-card">
+    <h2>Pickup and Drop-Off Options</h2>
+    <p>One UPS driver will pick up all your packages — air, international and domestic services. Scheduled Pickup options run Monday through Friday; Saturday pickup options are also available.</p>
+    <table class="ups-feetable">
+      <thead><tr><th>Available Option</th><th>Description</th><th>Fee</th></tr></thead>
+      <tbody>
+      {% for f in pickup_fees %}
+        <tr>
+          <td><strong>{{ f.name }}</strong></td>
+          <td>{{ f.description }}</td>
+          <td>{{ f.fee }}{% if f.per %} {{ f.per }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <ul class="ups-svc-list">
+      <li><a href="{{ url_for('business_page', page_key='pickup-dropoff-options') }}">Pickup and Drop-Off Options</a></li>
+      <li><a href="{{ url_for('business_page', page_key='daily-pickup') }}">UPS Daily Pickup</a> — {{ '$39.00' }} weekly</li>
+      <li><a href="{{ url_for('business_page', page_key='smart-pickup') }}">UPS Smart Pickup&reg;</a> — {{ '$18.50' }} weekly</li>
+      <li><a href="{{ url_for('business_page', page_key='day-specific-pickup') }}">Day-Specific Pickup</a> — from {{ '$8.00' }} weekly</li>
+      <li><a href="{{ url_for('business_page', page_key='weekend-pickup') }}">Saturday Delivery and Pickup Options</a></li>
+      <li><a href="{{ url_for('pickup') }}">Schedule a One-Time Pickup</a></li>
+    </ul>
+  </div>
+
+  <div class="ups-cardgrid">
+    <a class="ups-card" href="{{ url_for('business_page', page_key='business-shipping-tools') }}">
+      <h3>Business Shipping Tools</h3><p>Find the right tool for your needs: shipping systems, batch file shipping, and APIs.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='simplify-returns') }}">
+      <h3>Customer Return Services</h3><p>Make returns easy for your customers with return labels and Happy Returns.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='ups-billing') }}">
+      <h3>Manage UPS Billing</h3><p>View invoices, manage payment methods and analyze shipping spend.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='quantum-view') }}">
+      <h3>Quantum View&reg;</h3><p>Manage shipments for large enterprises from a single dashboard.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='my-choice-business') }}">
+      <h3>UPS My Choice&reg; for Business</h3><p>View and control inbound business shipments.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='ups-access-point') }}">
+      <h3>UPS Access Point&reg; Locations</h3><p>Offer your customers pickup and drop-off at nearby locations.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='expand-internationally') }}">
+      <h3>Expand Internationally</h3><p>Resources to help you ship globally.</p></a>
+    <a class="ups-card" href="{{ url_for('business_page', page_key='customized-logistics') }}">
+      <h3>Customized Logistics</h3><p>Industry-based shipping and logistics services.</p></a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ {'alerts': 'Alerts', 'news-releases': 'News Releases', 'all-news': 'All News'}[kind] }}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">{{ {'alerts': 'Alerts', 'news-releases': 'News Releases', 'all-news': 'All News'}[kind] }}</h1>
+  {% for alert in data.alerts %}
+  <div class="alert-box alert-box--{{ alert.type or 'info' }}">
+    <p><strong>{{ alert.type|capitalize if alert.type else 'Alert' }}:</strong> {{ alert.text }}</p>
+  </div>
+  {% endfor %}
+  <p class="result-count">{{ total }} item{{ 's' if total != 1 else '' }}</p>
+
+  <div class="news-list">
+    {% for item in rows %}
+    <article class="news-row">
+      <span class="news-teaser__kind {{ 'news-teaser__kind--alert' if item.kind == 'alert' else '' }}">{{ 'Alert' if item.kind == 'alert' else 'News Release' }}</span>
+      <h2><a href="{{ url_for('news_detail', kind=kind, slug=item.slug) }}">{{ item.title }}</a></h2>
+      <p class="news-teaser__date">{{ item.release_date }}</p>
+      {% if item.teaser %}<p>{{ item.teaser }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if pages > 1 %}
+  <nav class="pagination">
+    {% if page_no > 1 %}<a href="{{ url_for('news_list', kind=kind, page=page_no-1) }}">&laquo; Previous</a>{% endif %}
+    <span>Page {{ page_no }} of {{ pages }}</span>
+    {% if page_no < pages %}<a href="{{ url_for('news_list', kind=kind, page=page_no+1) }}">Next &raquo;</a>{% endif %}
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

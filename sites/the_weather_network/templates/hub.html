@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ meta.title }} - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / Discover &amp; Learn</div>
+<h1 class="page-title">{{ meta.title }}</h1>
+<img src="/static/images/brand/{{ meta.image }}" alt="{{ meta.title }}" style="max-width:min(640px,100%);border-radius:8px;margin:14px 0">
+
+<section class="section">
+  <div class="section-head"><h2>Stories</h2></div>
+  <div class="news-list">
+    {% for art in arts %}
+    <a class="news-card" href="{{ art.path }}">
+      <div class="nc-thumb">{% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}</div>
+      <div class="nc-title">{{ art.headline }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

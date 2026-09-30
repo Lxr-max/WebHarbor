@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Careers</div>
+<div class="hero">
+  <h1>Careers at CBP</h1>
+  <p>CBP operates in all 50 states, its territories, in over 50 countries, and at 328 ports of entry to protect the American people, safeguard our borders, and enhance the nation's economic prosperity. Your journey begins here.</p>
+  <p><a class="btn" href="{{ url_for('careers_search') }}">Search Jobs</a></p>
+</div>
+<div class="home-cards">
+  <div class="card"><div class="card-body">
+    <h3>Career Paths</h3>
+    <ul>
+      {% for p in paths %}<li><a href="{{ url_for('career_path', slug=p.slug) }}">{{ p.title }}</a></li>{% endfor %}
+    </ul>
+  </div></div>
+  <div class="card"><div class="card-body">
+    <h3>Upcoming Events</h3>
+    <ul>
+      {% for e in events %}
+      <li>{{ e.date }} — {{ e.event }}{% if e.location %} ({{ e.location }}){% endif %} <span class="tag">{{ e.kind }}</span></li>
+      {% endfor %}
+    </ul>
+    <a class="more" href="{{ url_for('careers_events') }}">All events →</a>
+  </div></div>
+  <div class="card"><div class="card-body">
+    <h3>Featured Jobs</h3>
+    <ul>
+      {% for j in jobs %}
+      <li><a href="{{ url_for('job_detail', control=j.control) }}">{{ j.title }}</a> <span class="note">{{ j.org }}</span></li>
+      {% endfor %}
+    </ul>
+    <a class="more" href="{{ url_for('careers_search') }}">All jobs →</a>
+  </div></div>
+</div>
+{% endblock %}

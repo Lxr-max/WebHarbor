@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Change a Delivery | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('track') }}">Tracking</a> &rsaquo; Change a Delivery</div>
+  <h1>Change a Delivery</h1>
+  <div class="ups-card">
+    <p class="ups-h2">Shipment {{ s.tracking_number }}</p>
+    <p>Status: {{ s.status }} &middot; Scheduled Delivery: {{ s.scheduled_delivery }}</p>
+    <p class="ups-hint">Choose how you&rsquo;d like UPS to handle this delivery. Delivery changes requested by the shipper may trigger a UPS Delivery Intercept&reg; fee of $18.00 (Web/Electronic).</p>
+    <div class="ups-cd-options">
+      <form method="post" action="{{ url_for('change_delivery', tracking_number=s.tracking_number) }}" class="ups-cd-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="change_type" value="hold">
+        <h2>Hold for Pickup at a UPS Location</h2>
+        <p>Have your package held at a UPS Access Point&trade; or The UPS Store&reg; near you. Bring a government-issued photo ID when you pick it up.</p>
+        <label for="cd-zip">ZIP Code for the pickup location</label>
+        <input id="cd-zip" name="zip" value="{{ selected_zip }}" placeholder="ZIP Code">
+        <button class="ups-btn ups-btn-secondary" type="submit">Find UPS Locations</button>
+        {% if access_points %}
+          <fieldset class="ups-cd-aps">
+            <legend>Select a location</legend>
+            {% for p in access_points[:8] %}
+              <label class="ups-cd-ap">
+                <input type="radio" name="location_id" value="{{ p.loc.location_id }}" required>
+                <span>
+                  <strong>{{ p.loc.name.title() }}</strong> &mdash; {{ p.miles }} mi<br>
+                  {{ p.loc.addr1.title() }}, {{ p.loc.city }}, {{ p.loc.state }} {{ p.loc.zip }}<br>
+                  <span class="ups-hint">Ground drop-off: {{ p.loc.latest_ground_dropoff or 'see location details' }}</span>
+                </span>
+              </label>
+            {% endfor %}
+          </fieldset>
+          <button class="ups-btn ups-btn-primary" type="submit">Confirm Hold for Pickup</button>
+        {% endif %}
+      </form>
+      <form method="post" action="{{ url_for('change_delivery', tracking_number=s.tracking_number) }}" class="ups-cd-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="change_type" value="address">
+        <h2>Deliver to Another Address</h2>
+        <p>Reroute the package to a new address. A UPS Delivery Intercept&reg; fee of $18.00 applies for web requests.</p>
+        <label for="cd-addr">New delivery address</label>
+        <input id="cd-addr" name="new_address" placeholder="Street address, City, State ZIP">
+        <button class="ups-btn ups-btn-primary" type="submit">Request Reroute</button>
+      </form>
+      <form method="post" action="{{ url_for('change_delivery', tracking_number=s.tracking_number) }}" class="ups-cd-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="change_type" value="reschedule">
+        <h2>Reschedule Delivery</h2>
+        <p>Ask UPS to deliver on a different date.</p>
+        <label for="cd-date">New delivery date</label>
+        <input id="cd-date" name="new_date" type="date" value="2026-09-30">
+        <button class="ups-btn ups-btn-primary" type="submit">Request New Date</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

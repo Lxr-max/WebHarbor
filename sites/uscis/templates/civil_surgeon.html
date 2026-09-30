@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Find a Civil Surgeon{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Find a Civil Surgeon</h1>
+  <p>Enter your address, city, state, or ZIP code to find a designated civil surgeon near you.</p>
+
+  <form class="locator-form" method="get" action="{{ url_for('civil_surgeon') }}">
+    <div class="input-group input-group--text">
+      <input aria-label="Search by zip code or address" id="search-entry" maxlength="100" name="zip"
+             placeholder="Search by zip code or address" type="text" value="{{ zip_q }}">
+      <button aria-label="Submit search by zip code or address" class="btn" type="submit" value="Search">Search</button>
+    </div>
+    <div class="locator-filters">
+      <div class="form-group">
+        <label class="form-label" for="language"><span class="form-label__title">Languages Spoken</span></label>
+        <div class="select-wrapper">
+          <select id="language" name="language">
+            <option value="">Any</option>
+            {% for lang in languages %}<option value="{{ lang }}" {% if lang == language %}selected{% endif %}>{{ lang }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="gender"><span class="form-label__title">Doctor Sex</span></label>
+        <div class="select-wrapper">
+          <select id="gender" name="gender">
+            <option value="">Any</option>
+            {% for g in genders %}<option value="{{ g }}" {% if g == gender %}selected{% endif %}>{{ g }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  {% if zip_q and not search %}
+  <div class="alert-box alert-box--error">
+    <p>No results were found for that search. Please check the ZIP code and try again.</p>
+  </div>
+  {% endif %}
+
+  {% if search %}
+  <section class="locator-results">
+    <p class="result-count">{{ total }} result{{ 's' if total != 1 else '' }} {% if total %}&middot; showing {{ (page_no-1)*10 + 1 }} - {{ (page_no-1)*10 + (rows|length) }} of {{ total }}{% endif %}{% if language %} &middot; language: {{ language }}{% endif %}{% if gender %} &middot; doctor sex: {{ gender }}{% endif %}</p>
+    <ol class="surgeon-list">
+      {% for r in rows %}
+      <li class="surgeon">
+        <h3 class="surgeon__name">{{ r.name }}</h3>
+        <p class="surgeon__address">
+          {{ r.address1 }}{% if r.address2 %}, {{ r.address2 }}{% endif %}<br>{{ r.city }}
+        </p>
+        {% if r.distance %}
+        <p class="surgeon__distance">{{ '%0.1f'|format(r.distance|float) }} miles away</p>
+        {% endif %}
+        {% for c in r.contacts_list %}
+        <p class="surgeon__contact">
+          {{ c.name }} &middot; {{ c.phone }}<br>
+          Gender: {{ c.gender }}<br>
+          {% if c.languages %}Additional Language{{ 's' if ',' in c.languages else '' }} Spoken: {{ c.languages }}<br>{% endif %}
+        </p>
+        {% endfor %}
+        <p class="surgeon__links">
+          {% if r.website %}<a href="{{ r.website }}">Visit website</a>{% endif %}
+          {% if r.email %} &middot; <a href="mailto:{{ r.email }}">Email</a>{% endif %}
+        </p>
+      </li>
+      {% else %}
+      <li><p>No civil surgeons matched these filters. Adjust the filters and search again.</p></li>
+      {% endfor %}
+    </ol>
+    {% if pages > 1 %}
+    <nav class="pagination">
+      {% if page_no > 1 %}<a href="{{ url_for('civil_surgeon', zip=zip_q, language=language, gender=gender, page=page_no-1) }}">Previous</a>{% endif %}
+      <span>Page {{ page_no }} of {{ pages }}</span>
+      {% if page_no < pages %}<a href="{{ url_for('civil_surgeon', zip=zip_q, language=language, gender=gender, page=page_no+1) }}">Next</a>{% endif %}
+    </nav>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section class="content-section">
+    <h2>Finding a USCIS-designated Civil Surgeon</h2>
+    <p>In general, when you file Form I-485 seeking to adjust your status to that of a lawful permanent resident (get a Green Card), you must complete an immigration medical examination. However, some aliens applying for a Green Card only need the vaccination portion of the immigration medical examination.</p>
+    <p>The immigration medical examination must be performed by certain doctors designated by USCIS (known as civil surgeons) to perform the immigration medical examination most Green Card applicants need.</p>
+    <h2>What To Bring to Your Immigration Medical Examination</h2>
+    <ul>
+      <li>Form I-693, Report of Immigration Medical Examination and Vaccination Record;</li>
+      <li>Government-issued photo identification, such as a valid passport or driver’s license;</li>
+      <li>A record of your vaccinations or immunizations;</li>
+      <li>Your health insurance card; and</li>
+      <li>Payment. Check with the civil surgeon’s office about acceptable forms of payment.</li>
+    </ul>
+    <p><a href="/tools/designated-civil-surgeons">Learn about designated civil surgeons</a>, <a href="/tools/designated-civil-surgeons/vaccination-requirements">read the vaccination requirements</a>, or <a href="/i-693">visit the Form I-693 page</a>.</p>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ tour.name }} - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:760px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; <a href="/t/{{ tour.id }}">{{ tour.name }}</a></div>
+  <div class="panel" style="text-align:center;">
+    <h1 style="font-size:24px;">No dates available</h1>
+    <p style="color:var(--text-2);">This tour currently has no upcoming departures listed. Contact the operator or check back later, or explore similar adventures below.</p>
+    <a class="btn btn-lg" href="/contact">Contact Operator</a>
+    <a class="btn btn-outline btn-lg" href="{{ '/srp/d-' ~ tour.dest_slugs_list[0] if tour.dest_slugs_list else ('/search?q=' ~ tour.countries_list[0]|urlencode if tour.countries_list else '/') }}">Explore similar tours</a>
+  </div>
+  {% set similar = tour.similar[:6] %}
+  {% if similar %}
+  <h2 style="margin-top:20px;">You may also like</h2>
+  {% include '_tour_cards.html' %}
+  {% endif %}
+</div>
+{% endblock %}
