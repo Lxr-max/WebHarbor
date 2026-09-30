@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ art.title }} | ZipRecruiter{% endblock %}
+{% block body %}
+<article class="blog-article">
+  <header class="article-header">
+    <p class="crumb"><a href="/blog/">Career Advice</a> / <a href="/blog/category/{{ art.category.slug }}/">{{ art.category.name }}</a></p>
+    <h1>{{ art.title }}</h1>
+    <p class="byline">By {{ art.author }} · published {{ art.published[:10] }}
+      {% if art.modified %} · updated {{ art.modified[:10] }}{% endif %}</p>
+    {% if art.hero_url() %}<img src="{{ art.hero_url() }}" alt="{{ art.title }}" class="blog-hero big">{% endif %}
+  </header>
+  <div class="article-body">{{ art.body_html|safe }}</div>
+  <footer class="article-footer">
+    <h2>More Career Advice</h2>
+    <ul>
+      {% for m in more %}
+      <li><a href="/blog/{{ m.slug }}/">{{ m.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </footer>
+</article>
+{% endblock %}
