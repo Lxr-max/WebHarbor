@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% block title %}{{ lst.name }} - {{ lst.title }} | Airbnb{% endblock %}
+{% block content %}
+<div style="margin-top:20px;">
+  <div class="pdp-title-row">
+    <div>
+      <h1>{{ lst.name }}</h1>
+      <p>
+        {% if lst.rating %}<span class="rating-star">&#9733; {{ lst.rating }}</span>
+          <a href="{{ url_for('listing_reviews', lid=lst.id) }}">{{ lst.reviews_count }} reviews</a>
+        {% else %}<span class="badge badge-muted">New</span>{% endif %}
+        <span class="muted">&middot; {{ lst.title }}</span>
+        {% if lst.is_superhost %}<span class="badge badge-muted">Superhost</span>{% endif %}
+      </p>
+    </div>
+    <div>
+      <form method="post" action="{{ url_for('wishlist_add') }}" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="listing_id" value="{{ lst.id }}">
+        <input type="hidden" name="back" value="{{ url_for('listing_detail', lid=lst.id) }}">
+        {% if current_user.is_authenticated %}
+        <label class="small" for="wishlist_id">Save to</label>
+        <select name="wishlist_id" id="wishlist_id">
+          <option value="">Default wishlist</option>
+          {% for wl in user_wishlists %}
+          <option value="{{ wl.id }}">{{ wl.name }}</option>
+          {% endfor %}
+        </select>
+        <label class="small" for="new_name">or new wishlist name</label>
+        <input type="text" name="new_name" id="new_name" placeholder="New wishlist name">
+        {% endif %}
+        {% if saved_ids %}
+        <button class="btn btn-ghost btn-sm" type="submit" aria-label="Save to wishlist">&#9829; Saved</button>
+        <p class="small muted" style="margin:4px 0 0;">Already saved to
+          {%- for wl in user_wishlists if wl.id in saved_ids %} {{ wl.name }}{% if not loop.last %},{% endif %}{% endfor -%}
+        </p>
+        {% else %}
+        <button class="btn btn-ghost btn-sm" type="submit" aria-label="Save to wishlist">&#9825; Save</button>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+
+  {% set photos = lst.photo_list() %}
+  {% if photos %}
+  <div class="photo-grid">
+    <img src="{{ photos[0].uri }}" alt="{{ photos[0].alt or lst.name }}">
+    <div class="side">
+      {% for p in photos[1:5] %}
+      <img src="{{ p.uri }}" alt="{{ p.alt or 'Photo ' + (loop.index + 1)|string }}">
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<div class="pdp" style="margin-top:24px;">
+  <div>
+    {% if quality.is_guest_favorite %}
+    <div class="note"><strong>&#9733; Guest favorite</strong> — {{ quality.guest_favorite_description }}
+      {% if quality.percentile == 'TOP_5' %}This home is in the top 5% of homes by guest rating.{% endif %}
+    </div>
+    {% endif %}
+
+    <h2>{{ lst.title }} in {{ lst.city }}</h2>
+    <p class="muted">{{ lst.person_capacity or 2 }} guests &middot; {{ lst.bedrooms or 1 }} bedroom(s) &middot; {{ lst.beds or 1 }} bed(s) &middot; {{ lst.baths or 1 }} bath(s)</p>
+    <p class="muted small">{{ lst.bed_line_list()|join(' · ') if lst.bed_lines else '' }}</p>
+    {% if lst.subtitle %}<p><em>{{ lst.subtitle }}</em></p>{% endif %}
+
+    {% if highlights %}
+    <section class="section">
+      <h2>Listing highlights</h2>
+      {% for h in highlights %}
+      <p>{% if h.title %}<strong>{{ h.title }}</strong>{% if h.body %} &mdash; {% endif %}{% endif %}{{ h.body or '' }}</p>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="section">
+      <h2>About this space</h2>
+      {% if lst.description_html %}{{ lst.description_html|safe }}{% else %}<p class="muted">The full description wasn't captured for this listing.</p>{% endif %}
+    </section>
+
+    <section class="section">
+      <h2>Where you'll sleep</h2>
+      {% for s in sleeping %}
+      <p><strong>{{ s['name'] }}</strong>{% if s['items'] %} — {{ s['items']|join(', ') }}{% endif %}</p>
+      {% endfor %}
+    </section>
+
+    <section class="section">
+      <h2>What this place offers</h2>
+      {% if lst.amenity_count %}<p class="muted small">{{ lst.amenity_count }} amenities captured</p>{% endif %}
+      <div class="amen-groups">
+        {% for g in lst.amenity_groups() %}
+        <div>
+          <h3>{{ g.title }}</h3>
+          <ul>
+            {% for item in g["items"] %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+      {% if lst.amenity_count and not lst.amenity_groups() %}
+      <p class="muted small">The amenity group details weren't captured for this listing.</p>
+      {% endif %}
+    </section>
+
+    <section class="section">
+      <h2>Reviews</h2>
+      {% if quality.category_ratings %}
+      <div class="tagpills">
+        {% for c in quality.category_ratings %}
+        <span class="pill">{{ c.category|title }}: {{ c.average }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if tags %}
+      <div class="tagpills">
+        {% for t in tags[:8] %}
+        <span class="pill">{{ t.name }} ({{ t.count }})</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% for r in reviews[:6] %}
+      <div class="rev">
+        <div class="head">
+          <div class="avatar">{{ (r.reviewer or '?')[:1] }}</div>
+          <div><strong>{{ r.reviewer }}</strong><br>
+            <span class="muted small">{{ r.localized_date }}{% if r.reviewer_location %} &middot; {{ r.reviewer_location }}{% endif %}</span>
+          </div>
+        </div>
+        <p>{{ r.text }}</p>
+        {% if r.host_response %}
+        <div class="host-reply"><strong>Response from {{ lst.host_name or 'the host' }}:</strong> {{ r.host_response }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% if lst.reviews_count > 6 %}
+      <p><a class="btn btn-ghost" href="{{ url_for('listing_reviews', lid=lst.id) }}">Show all {{ lst.reviews_count }} reviews</a></p>
+      {% endif %}
+    </section>
+
+    <section class="section">
+      <h2>Where you'll be</h2>
+      <p>{{ lst.city }}{% if lst.address_locality and lst.address_locality not in lst.city %} &middot; {{ lst.address_locality }}{% endif %}</p>
+      <p class="muted small">Exact location is shared after booking. Approximate coordinates: {{ '%.3f'|format(lst.lat) if lst.lat }}, {{ '%.3f'|format(lst.lng) if lst.lng }}</p>
+    </section>
+
+    <section class="section">
+      <h2>Meet your host</h2>
+      <div class="head" style="display:flex;gap:14px;align-items:center;">
+        {% if lst.host_avatar %}<img src="{{ lst.host_avatar }}" alt="{{ lst.host_name }}" style="width:56px;height:56px;border-radius:50%;object-fit:cover;">
+        {% else %}<div class="avatar" style="width:56px;height:56px;">{{ (lst.host_name or 'H')[:1] }}</div>{% endif %}
+        <div>
+          <strong>{{ lst.host_name or 'Host' }}</strong>
+          {% if lst.host_superhost %}<span class="badge badge-muted">Superhost</span>{% endif %}
+          <p class="muted small">{{ lst.host_years or '' }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Things to know</h2>
+      {% for t in ttk %}
+      <h3>{{ t.title }}</h3>
+      <ul>{% for p in t.preview %}<li>{{ p }}</li>{% endfor %}</ul>
+      {% endfor %}
+      {% if rules.groups %}
+      <div class="rules-grid">
+        {% for g in rules.groups %}
+        <div>
+          <h3>{{ g.title or rules.title }}</h3>
+          <ul>{% for i in g["items"] %}<li><strong>{{ i.title }}</strong>{% if i.description %} — {{ i.description }}{% endif %}</li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if safety.groups %}
+      <div class="rules-grid">
+        {% for g in safety.groups %}
+        <div>
+          <h3>{{ g.title or 'Safety & property' }}</h3>
+          <ul>{% for i in g["items"] %}<li><strong>{{ i.title }}</strong>{% if i.description %} — {{ i.description }}{% endif %}</li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </section>
+
+    {% if explore %}
+    <section class="section">
+      <h2>Explore other options in and around {{ lst.city }}</h2>
+      <div class="dest-grid">
+        {% for link in explore %}
+        {% set target = None %}
+        {% for d in dests_all %}
+        {% if d.city == link.title %}{% set target = d.slug %}{% endif %}
+        {% endfor %}
+        <a class="dest-card" href="{{ url_for('stays_search', slug=target or 'asheville') if target else url_for('home') }}">
+          <span>
+            <span class="t">{{ link.title }}</span><br>
+            <span class="muted small">{{ link.subtitle }}</span>
+          </span>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    {% if similar %}
+    <section class="section">
+      <h2>Similar stays</h2>
+      <div class="cards">
+        {% for s in similar[:4] %}
+        <a class="card" href="{{ url_for('listing_detail', lid=s.id) }}">
+          <div class="ph">{% if s.photo_list() %}<img src="{{ s.photo_list()[0].uri }}" alt="{{ s.name }}">{% endif %}</div>
+          <div class="body">
+            <div class="row1"><span>{{ s.title }}</span>{% if s.rating %}<span class="rating-star">&#9733; {{ s.rating }} ({{ s.reviews_count }})</span>{% endif %}</div>
+            <div class="row2"><span class="muted">{{ s.name }}</span></div>
+            <div class="row2"><span><strong>{{ '$%d'|format(s.nightly_price) if s.nightly_price }}</strong> night</span></div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+
+  <div>
+    <div class="bookit">
+      <p class="price">{{ '$%d'|format(lst.nightly_price) if lst.nightly_price }} <span class="muted" style="font-size:14px;">night</span></p>
+      <form id="bookit" method="get" action="{{ url_for('listing_detail', lid=lst.id) }}">
+        <div class="dates">
+          <div>
+            <label for="checkin" class="small"><strong>CHECK-IN</strong></label>
+            <input type="date" id="checkin" name="checkin" value="{{ checkin or '' }}">
+          </div>
+          <div>
+            <label for="checkout" class="small"><strong>CHECK-OUT</strong></label>
+            <input type="date" id="checkout" name="checkout" value="{{ checkout or '' }}">
+          </div>
+        </div>
+        <label for="adults" class="small"><strong>GUESTS</strong></label>
+        <select id="adults" name="adults">
+          {% for n in range(1, (lst.max_guest_capacity or lst.person_capacity or 16) + 1) %}
+          <option value="{{ n }}" {{ 'selected' if adults|string == n|string }}>{{ n }} guest{{ 's' if n > 1 }}</option>
+          {% endfor %}
+        </select>
+        <div style="margin-top:14px;">
+          <button class="btn btn-rausch btn-lg" type="submit">Check availability</button>
+        </div>
+      </form>
+      {% if nights and nights > 0 %}
+      <div class="breakdown">
+        <div class="row"><span>{{ money0(lst.nightly_price) }} x {{ nights }} night{{ 's' if nights > 1 }}</span><span>{{ money(price_total) }}</span></div>
+        <div class="row total"><span>Total (includes all fees)</span><span>{{ money(price_total) }}</span></div>
+      </div>
+      <!-- One shared form (review H3): the Request-to-book button submits the
+           same form data — the CURRENT dates and GUESTS select values — via
+           formaction, so a guest count changed in the widget can never be
+           silently dropped the way the old server-rendered hidden input
+           dropped it. -->
+      <button class="btn btn-lg" type="submit" form="bookit" formaction="{{ url_for('book_stay', lid=lst.id) }}">Request to book</button>
+      <p class="muted small" style="margin-top:10px;">{{ lst.quote_nights }}-night upstream quote for this window: {{ money0(lst.quote_total) if lst.quote_total else '—' }}</p>
+      {% else %}
+      <p class="muted small">Pick check-in and check-out dates to see the trip price.</p>
+      {% endif %}
+      {% if lst.free_cancellation %}<p class="small muted">Free cancellation on this stay</p>{% endif %}
+    </div>
+
+    <section class="section">
+      <h3>Availability calendar (captured)</h3>
+      <p class="muted small">Open days are available in the captured upstream calendar.</p>
+      {% for month in cal_months %}
+      <h4>{{ month.name }} {{ month.year }}</h4>
+      <div class="calendar">
+        <span class="day head">Su</span><span class="day head">Mo</span><span class="day head">Tu</span><span class="day head">We</span>
+        <span class="day head">Th</span><span class="day head">Fr</span><span class="day head">Sa</span>
+        {% for _ in range(month.lead) %}<span class="day"></span>{% endfor %}
+        {% for d in month.days %}
+        <span class="day {{ 'on' if d.available else 'off' }}">{{ d.label }}</span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </section>
+  </div>
+</div>
+{% endblock %}
