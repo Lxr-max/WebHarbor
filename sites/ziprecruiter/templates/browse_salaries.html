@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Browse Salaries - ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Browse Salaries</h1>
+  <p class="snapshot">Every title below has a captured salary page — national averages plus the city pages in this snapshot.</p>
+</section>
+<section class="browse-cols">
+  <div>
+    <h2>Salaries by job title</h2>
+    <ul class="browse-list big">
+      {% for stat in national %}
+      <li><a href="/Salaries/{{ stat.title_slug }}-Salary">{{ stat.title_slug|replace('-',' ')|title }} Salary</a> — average ${{ '{:,.0f}'.format(stat.avg_year) }}/year</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+    <h2>Salaries in cities</h2>
+    <ul class="browse-list">
+      {% for stat in cities %}
+      <li><a href="/Salaries/{{ stat.title_slug }}-Salary-in-{{ stat.city|replace(' ','-') }},{{ stat.state }}">{{ stat.city }}, {{ stat.state }}</a> — {{ stat.title_slug|replace('-',' ')|title }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Snapshot - {{ date }} | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Snapshot - {{ date }}</h1>
+<p class="muted">The top cryptocurrencies by market capitalization on {{ date }}.
+  Captured from coinmarketcap.com.</p>
+<p><a href="/historical/">← All snapshots</a></p>
+
+<table>
+  <thead><tr>
+    <th>Rank</th><th>Name</th><th>Symbol</th><th class="num">Market Cap</th><th class="num">Price</th>
+    <th class="num">Circulating Supply</th><th class="num">Volume (24h)</th>
+    <th class="num">% 1h</th><th class="num">% 24h</th><th class="num">% 7d</th>
+  </tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.rank }}</td>
+      <td>{% if r.symbol in coin_slugs %}<a href="/currencies/{{ coin_slugs[r.symbol] }}/">{{ r.name }}</a>{% else %}{{ r.name }}{% endif %}</td>
+      <td>{{ r.symbol }}</td>
+      <td class="num">{{ r.market_cap_text }}</td>
+      <td class="num">{{ r.price_text }}</td>
+      <td class="num">{{ r.supply_text }}</td>
+      <td class="num">{{ r.volume_text }}</td>
+      <td class="num">{{ r.pct_1h_text }}</td>
+      <td class="num">{{ r.pct_24h_text }}</td>
+      <td class="num">{{ r.pct_7d_text }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

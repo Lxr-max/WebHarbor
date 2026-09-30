@@ -1,0 +1,8 @@
+{
+ "url": "https://api.coinmarketcap.com/aggr/v3/web/homepage",
+ "status": 200,
+ "timestamp": "2026-09-30T04:06:32Z",
+ "bytes": 311419,
+ "sha256": "c7e384a462221073c1d965d79b1887d7f45018a0cfdda86d6d41c41c276f04b4",
+ "note": "Verbatim capture of the homepage data-plane response the live coinmarketcap.com table is rendered from. Every row's socialMetrics (the sentiment values behind the homepage 'Sentiment' column, table-sort-sentimentValue) is null and no row carries any sentiment/vote field (101/101 rows null) \u2014 the on-site column renders its default neutral state. Archived as the evidence for the declared omission of the mirror's Sentiment column; re-captured 2026-09-30 UTC within the declared capture window after the original raw captures were not retained."
+}
