@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Top Cryptocurrency Gainers and Losers | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Top Cryptocurrency Gainers And Losers</h1>
+<p class="muted">Which crypto had the best price movement in the last 24 hours? Timeframe: 24h.
+  Cohort: Top 100 by market cap (upstream shows the top-100 cohort on this page).
+  Snapshot of {{ mirror_date }} (UTC).</p>
+
+<div class="grid" style="grid-template-columns: 1fr 1fr;">
+  <div>
+    <h2>Top Gainers</h2>
+    <table>
+      <thead><tr><th>#</th><th>Name</th><th class="num">Price</th><th class="num">24h</th><th class="num">Volume(24h)</th></tr></thead>
+      <tbody>
+        {% for c in gainers %}
+        <tr>
+          <td>{{ c.rank }}</td>
+          <td><a class="coin-cell" href="/currencies/{{ c.slug }}/">
+            {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="{{ c.name }} logo">{% endif %}
+            <span class="coin-name">{{ c.name }}</span> <span class="coin-symbol">{{ c.symbol }}</span></a></td>
+          <td class="num">{{ c.price | price }}</td>
+          <td class="num up">{{ c.pct_24h | pct }}</td>
+          <td class="num">{{ c.volume_24h | usd }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h2>Top Losers</h2>
+    <table>
+      <thead><tr><th>#</th><th>Name</th><th class="num">Price</th><th class="num">24h</th><th class="num">Volume(24h)</th></tr></thead>
+      <tbody>
+        {% for c in losers %}
+        <tr>
+          <td>{{ c.rank }}</td>
+          <td><a class="coin-cell" href="/currencies/{{ c.slug }}/">
+            {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="{{ c.name }} logo">{% endif %}
+            <span class="coin-name">{{ c.name }}</span> <span class="coin-symbol">{{ c.symbol }}</span></a></td>
+          <td class="num">{{ c.price | price }}</td>
+          <td class="num down">{{ c.pct_24h | pct }}</td>
+          <td class="num">{{ c.volume_24h | usd }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

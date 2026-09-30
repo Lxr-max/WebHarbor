@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ sector.name }} Prices | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>{{ sector.name }}</h1>
+{% if sector.description %}<p class="muted">{{ sector.description }}</p>{% endif %}
+
+{% for s in sector.stats_list() %}
+<div class="card" style="display:inline-block; min-width:280px; margin-right:14px;">
+  <div class="label muted">{{ s.title }}</div>
+  <div class="value" style="font-size:22px; font-weight:700;">{{ s.value | usd }}</div>
+  <div class="{{ s.percentChange | pct_class }}">{{ s.percentChange | pct }}</div>
+</div>
+{% endfor %}
+
+<p class="muted">{{ sector.tokens_num | int if sector.tokens_num else '--' }} tokens in this category upstream
+  (upstream total: {{ '{:,}'.format(sector.upstream_total or 0) }}); {{ rows | length }} captured in this mirror snapshot.</p>
+
+<table>
+  <thead><tr>
+    <th>#</th><th>Name</th><th class="num">Price</th><th class="num">1h %</th>
+    <th class="num">24h %</th><th class="num">7d %</th><th class="num">Market Cap</th>
+    <th class="num">Volume(24h)</th><th class="num">Circulating Supply</th><th>Last 7 Days</th>
+  </tr></thead>
+  <tbody>
+    {% for c in rows %}
+    <tr>
+      <td>{{ c.rank }}</td>
+      <td><a class="coin-cell" href="/currencies/{{ c.slug }}/">
+        {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="{{ c.name }} logo" loading="lazy">{% endif %}
+        <span class="coin-name">{{ c.name }}</span> <span class="coin-symbol">{{ c.symbol }}</span></a></td>
+      <td class="num">{{ c.price | price }}</td>
+      <td class="num {{ c.pct_1h | pct_class }}">{{ c.pct_1h | pct }}</td>
+      <td class="num {{ c.pct_24h | pct_class }}">{{ c.pct_24h | pct }}</td>
+      <td class="num {{ c.pct_7d | pct_class }}">{{ c.pct_7d | pct }}</td>
+      <td class="num">{{ c.market_cap | usd }}</td>
+      <td class="num">{{ c.volume_24h | usd }}</td>
+      <td class="num">{{ c.circulating_supply | supply(c.symbol) }}</td>
+      <td>{% if coin_sparkline(c) %}<img class="sparkline" src="{{ coin_sparkline(c) }}" loading="lazy"
+            alt="{{ c.name }} 7d price graph">{% else %}--{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

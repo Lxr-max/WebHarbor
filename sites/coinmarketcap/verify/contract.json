@@ -1,0 +1,2043 @@
+{
+  "CoinMarketCap--0": {
+    "task": "Compare the leading 24-hour and one-hour price movers in the rankings. Report each coin's name, symbol, price, one-hour and 24-hour changes, market cap and circulating supply. Check each coin's Markets page for the leading pair, exchange and 24-hour volume so I can compare momentum with trading activity.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/grass/",
+      "/currencies/grass/markets/",
+      "/currencies/quant/",
+      "/currencies/quant/markets/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "grass"
+      ],
+      [
+        "fact 2",
+        "grass.{0,8}\\bgrass\\b"
+      ],
+      [
+        "fact 3",
+        "\\bgrass\\b(?:(?!quant).){0,520}?price.{0,14}?\\$0\\.766591(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bgrass\\b(?:(?!quant).){0,520}?(?:1.hour|1h) change.{0,14}?\\+1\\.62%"
+      ],
+      [
+        "fact 5",
+        "\\bgrass\\b(?:(?!quant).){0,520}?(?:24.hour|24h) change.{0,14}?\\+29\\.12%"
+      ],
+      [
+        "fact 6",
+        "\\bgrass\\b(?:(?!quant).){0,520}?market cap.{0,14}?\\$186\\.98m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "\\bgrass\\b(?:(?!quant).){0,520}?circulating supply.{0,14}?243905091\\ grass"
+      ],
+      [
+        "fact 8",
+        "\\bgrass\\b(?:(?!quant).){0,520}?leading pair.{0,14}?grass/\\$"
+      ],
+      [
+        "fact 9",
+        "\\bgrass\\b(?:(?!quant).){0,520}?on.{0,14}?coinbase\\ exchange"
+      ],
+      [
+        "fact 10",
+        "\\bgrass\\b(?:(?!quant).){0,520}?pair 24.hour volume.{0,14}?\\$4\\.18m"
+      ],
+      [
+        "fact 11",
+        "quant"
+      ],
+      [
+        "fact 12",
+        "quant.{0,8}\\bqnt\\b"
+      ],
+      [
+        "fact 13",
+        "\\bquant\\b(?:(?!grass).){0,520}?price.{0,14}?\\$266\\.71(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 14",
+        "\\bquant\\b(?:(?!grass).){0,520}?(?:1.hour|1h) change.{0,14}?\\+2\\.33%"
+      ],
+      [
+        "fact 15",
+        "\\bquant\\b(?:(?!grass).){0,520}?(?:24.hour|24h) change.{0,14}?\\+15\\.61%"
+      ],
+      [
+        "fact 16",
+        "\\bquant\\b(?:(?!grass).){0,520}?market cap.{0,14}?\\$3\\.22b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 17",
+        "\\bquant\\b(?:(?!grass).){0,520}?circulating supply.{0,14}?12072738\\ qnt"
+      ],
+      [
+        "fact 18",
+        "\\bquant\\b(?:(?!grass).){0,520}?leading pair.{0,14}?qnt/usdt"
+      ],
+      [
+        "fact 19",
+        "\\bquant\\b(?:(?!grass).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 20",
+        "\\bquant\\b(?:(?!grass).){0,520}?pair 24.hour volume.{0,14}?\\$164\\.78m"
+      ],
+      [
+        "fact 21",
+        "grass leads the 24.hour"
+      ],
+      [
+        "fact 22",
+        "quant leads the 1.hour"
+      ]
+    ]
+  },
+  "CoinMarketCap--1": {
+    "task": "I'm screening assets with a market cap between $10 billion and $100 billion. Find the strongest 24-hour performer within that range and report the matching count, its name, symbol, price, change, rank and market cap. Examine its circulating and maximum supply and the leading market pair's exchange, volume and liquidity depth within 2% on both sides. Compare its current price with the most recent historical close to assess the candidate beyond the headline price move.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/solana/",
+      "/currencies/solana/markets/",
+      "/currencies/solana/historical-data/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "solana"
+      ],
+      [
+        "fact 2",
+        "solana.{0,8}\\bsol\\b"
+      ],
+      [
+        "fact 3",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$119\\.03(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.20%"
+      ],
+      [
+        "fact 5",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?rank.{0,14}?7"
+      ],
+      [
+        "fact 6",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$69\\.97b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?circulating supply.{0,14}?587851303\\ sol"
+      ],
+      [
+        "fact 8",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?max(?:imum)? supply.{0,14}?(?:not submitted|unavailable|not provided)"
+      ],
+      [
+        "fact 9",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?leading pair.{0,14}?sol/usdt"
+      ],
+      [
+        "fact 10",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 11",
+        "\\bsolana\\b(?:(?!(?!)).){0,520}?pair 24.hour volume.{0,14}?\\$288\\.19m"
+      ],
+      [
+        "fact 12",
+        "9 matching coins"
+      ],
+      [
+        "fact 13",
+        "liquidity depth at -2%.{0,12}\\$5\\.31m"
+      ],
+      [
+        "fact 14",
+        "at \\+2%.{0,12}\\$9\\.32m"
+      ],
+      [
+        "fact 15",
+        "historical close.{0,12}\\$119\\.06.{0,10}september 29,? 2026"
+      ],
+      [
+        "fact 16",
+        "\\$0\\.03 lower"
+      ]
+    ]
+  },
+  "CoinMarketCap--2": {
+    "task": "I want to understand the largest stablecoins in this snapshot. Compare the top two coins in the Stablecoin category by name, price, market cap, 24-hour change, circulating supply and leading market pair. Use the Stablecoin glossary article to explain the four backing mechanisms it describes, without assuming a coin's backing solely from its price.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/tether/",
+      "/currencies/tether/markets/",
+      "/currencies/usd-coin/",
+      "/currencies/usd-coin/markets/",
+      "/academy/glossary/stablecoin"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "tether\\ usdt"
+      ],
+      [
+        "fact 2",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?price.{0,14}?\\$0\\.999608(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?market cap.{0,14}?\\$183\\.80b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.01%"
+      ],
+      [
+        "fact 5",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?circulating supply.{0,14}?183870584013\\ usdt"
+      ],
+      [
+        "fact 6",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 7",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 8",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?pair 24.hour volume.{0,14}?\\$1\\.11b"
+      ],
+      [
+        "fact 9",
+        "usdc"
+      ],
+      [
+        "fact 10",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?price.{0,14}?\\$0\\.999999(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?market cap.{0,14}?\\$74\\.42b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.00%"
+      ],
+      [
+        "fact 13",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?circulating supply.{0,14}?74423375568\\ usdc"
+      ],
+      [
+        "fact 14",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?leading pair.{0,14}?usdc/usdt"
+      ],
+      [
+        "fact 15",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 16",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?pair 24.hour volume.{0,14}?\\$3\\.02b"
+      ],
+      [
+        "fact 17",
+        "fiat.backed reserves"
+      ],
+      [
+        "fact 18",
+        "crypto.backed collateral"
+      ],
+      [
+        "fact 19",
+        "commodity.backed reserves"
+      ],
+      [
+        "fact 20",
+        "algorithmic supply adjustment"
+      ],
+      [
+        "fact 21",
+        "(?:does not|cannot).{0,25}establish.{0,25}backing"
+      ]
+    ]
+  },
+  "CoinMarketCap--3": {
+    "task": "Prepare a Bitcoin market brief using its detail, historical and Markets pages. Include current price, 24-hour change, market cap, fully diluted market cap, circulating and maximum supply, the highest point and date on the All chart, the most recent historical date and close, and the leading market pair with exchange, price, 24-hour volume and liquidity depth within 2% on both sides. Compare the most recent close with the oldest close in the 30-day historical view.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/bitcoin/",
+      "/currencies/bitcoin/markets/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "bitcoin"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$83622\\.87(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.12%"
+      ],
+      [
+        "fact 4",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$1\\.68t(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?fully diluted market cap.{0,14}?\\$1\\.76t(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?circulating supply.{0,14}?20090909\\ btc"
+      ],
+      [
+        "fact 7",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?max(?:imum)? supply.{0,14}?21000000\\ btc"
+      ],
+      [
+        "fact 8",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 9",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 10",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?pair 24.hour volume.{0,14}?\\$1\\.11b"
+      ],
+      [
+        "fact 11",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,520}?pair price.{0,14}?\\$83540\\.61(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "-2% liquidity depth.{0,10}\\$19\\.65m"
+      ],
+      [
+        "fact 13",
+        "\\+2% depth.{0,10}\\$33\\.47m"
+      ],
+      [
+        "fact 14",
+        "oldest row.{0,30}august 31,? 2026.{0,20}\\$78548\\.63"
+      ],
+      [
+        "fact 15",
+        "newest close.{0,10}\\$5073\\.80 higher"
+      ],
+      [
+        "fact 16",
+        "highest plotted sample.{0,12}\\$115399\\.63.{0,10}september 15,? 2025"
+      ],
+      [
+        "fact 17",
+        "historical row.{0,10}september 29,? 2026.{0,15}closing.{0,10}\\$83622\\.43"
+      ]
+    ]
+  },
+  "CoinMarketCap--4": {
+    "task": "Compare a hypothetical $1,000 allocation to Ethereum with the same dollar allocation to Solana using the site's converter. Report how many units each allocation buys at the snapshot prices, alongside each coin's price, 24-hour change and market cap. Explain that these are snapshot conversions rather than executable trade quotes.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/ethereum/",
+      "/currencies/solana/",
+      "/converter/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "ethereum"
+      ],
+      [
+        "fact 2",
+        "\\bethereum\\b(?:(?!solana).){0,520}?price.{0,14}?\\$2677\\.00(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\bethereum\\b(?:(?!solana).){0,520}?(?:24.hour|24h) change.{0,14}?\\-0\\.47%"
+      ],
+      [
+        "fact 4",
+        "\\bethereum\\b(?:(?!solana).){0,520}?market cap.{0,14}?\\$326\\.83b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "solana"
+      ],
+      [
+        "fact 6",
+        "\\bsolana\\b(?:(?!ethereum).){0,520}?price.{0,14}?\\$119\\.03(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "\\bsolana\\b(?:(?!ethereum).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.20%"
+      ],
+      [
+        "fact 8",
+        "\\bsolana\\b(?:(?!ethereum).){0,520}?market cap.{0,14}?\\$69\\.97b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "\\$1000.{0,40}0\\.373553 eth.{0,10}8\\.40 sol"
+      ],
+      [
+        "fact 10",
+        "snapshot conversions"
+      ],
+      [
+        "fact 11",
+        "not executable trade quotes"
+      ]
+    ]
+  },
+  "CoinMarketCap--5": {
+    "task": "Prepare a comparison of the two biggest gainers and two biggest losers on the Gainers & Losers page. For each, report name, symbol, price, 24-hour change, market cap, rank and 24-hour volume, checking its detail page. Identify which of those four has the largest trading volume so I can distinguish a large price move from market activity.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/pump-fun/",
+      "/currencies/quant/",
+      "/currencies/hedera/",
+      "/currencies/lighter/",
+      "/gainers-losers/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "pump\\.fun"
+      ],
+      [
+        "fact 2",
+        "pump\\.fun.{0,8}\\bpump\\b"
+      ],
+      [
+        "fact 3",
+        "\\bpump\\.fun\\b(?:(?!quant|hedera|lighter).){0,520}?price.{0,14}?\\$0\\.00587102(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bpump\\.fun\\b(?:(?!quant|hedera|lighter).){0,520}?(?:24.hour|24h) change.{0,14}?\\+19\\.45%"
+      ],
+      [
+        "fact 5",
+        "\\bpump\\.fun\\b(?:(?!quant|hedera|lighter).){0,520}?market cap.{0,14}?\\$2\\.73b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\bpump\\.fun\\b(?:(?!quant|hedera|lighter).){0,520}?rank.{0,14}?35"
+      ],
+      [
+        "fact 7",
+        "\\bpump\\.fun\\b(?:(?!quant|hedera|lighter).){0,520}?volume (?:24h|24.hour).{0,14}?\\$508\\.38m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "quant"
+      ],
+      [
+        "fact 9",
+        "quant.{0,8}\\bqnt\\b"
+      ],
+      [
+        "fact 10",
+        "\\bquant\\b(?:(?!pump\\.fun|hedera|lighter).){0,520}?price.{0,14}?\\$266\\.71(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "\\bquant\\b(?:(?!pump\\.fun|hedera|lighter).){0,520}?(?:24.hour|24h) change.{0,14}?\\+15\\.61%"
+      ],
+      [
+        "fact 12",
+        "\\bquant\\b(?:(?!pump\\.fun|hedera|lighter).){0,520}?market cap.{0,14}?\\$3\\.22b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 13",
+        "\\bquant\\b(?:(?!pump\\.fun|hedera|lighter).){0,520}?rank.{0,14}?32"
+      ],
+      [
+        "fact 14",
+        "\\bquant\\b(?:(?!pump\\.fun|hedera|lighter).){0,520}?volume (?:24h|24.hour).{0,14}?\\$763\\.15m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 15",
+        "hedera"
+      ],
+      [
+        "fact 16",
+        "hedera.{0,8}\\bhbar\\b"
+      ],
+      [
+        "fact 17",
+        "\\bhedera\\b(?:(?!pump\\.fun|quant|lighter).){0,520}?price.{0,14}?\\$0\\.102329(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 18",
+        "\\bhedera\\b(?:(?!pump\\.fun|quant|lighter).){0,520}?(?:24.hour|24h) change.{0,14}?\\-15\\.97%"
+      ],
+      [
+        "fact 19",
+        "\\bhedera\\b(?:(?!pump\\.fun|quant|lighter).){0,520}?market cap.{0,14}?\\$4\\.49b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 20",
+        "\\bhedera\\b(?:(?!pump\\.fun|quant|lighter).){0,520}?rank.{0,14}?26"
+      ],
+      [
+        "fact 21",
+        "\\bhedera\\b(?:(?!pump\\.fun|quant|lighter).){0,520}?volume (?:24h|24.hour).{0,14}?\\$539\\.12m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 22",
+        "lighter"
+      ],
+      [
+        "fact 23",
+        "lighter.{0,8}\\blit\\b"
+      ],
+      [
+        "fact 24",
+        "\\blighter\\b(?:(?!pump\\.fun|quant|hedera).){0,520}?price.{0,14}?\\$3\\.89(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 25",
+        "\\blighter\\b(?:(?!pump\\.fun|quant|hedera).){0,520}?(?:24.hour|24h) change.{0,14}?\\-12\\.58%"
+      ],
+      [
+        "fact 26",
+        "\\blighter\\b(?:(?!pump\\.fun|quant|hedera).){0,520}?market cap.{0,14}?\\$972\\.48m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 27",
+        "\\blighter\\b(?:(?!pump\\.fun|quant|hedera).){0,520}?rank.{0,14}?68"
+      ],
+      [
+        "fact 28",
+        "\\blighter\\b(?:(?!pump\\.fun|quant|hedera).){0,520}?volume (?:24h|24.hour).{0,14}?\\$120\\.79m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 29",
+        "quant.{0,40}largest.{0,40}volume.{0,40}\\$763\\.15m"
+      ]
+    ]
+  },
+  "CoinMarketCap--6": {
+    "task": "Build a watchlist containing Bitcoin and the most-viewed coin while browsing as a guest, checking both detail pages for their prices. Create a new account with a fresh email and a password of at least eight characters, opting into the newsletter, so the shortlist is saved. Confirm both coins survive signup and report the saved watchlist with prices and the account greeting.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "display_name": {
+              "regex": "\\S[\\s\\S]*"
+            },
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "is_benchmark": 0,
+            "newsletter": 1,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "watchlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 14,
+            "user_id": 5,
+            "coin_id": 39920,
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": 15,
+            "user_id": 5,
+            "coin_id": 1,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/currencies/bitcoin/",
+      "/currencies/asentum/",
+      "/most-viewed-pages/",
+      "/watchlist/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "bitcoin"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin\\b(?:(?!asentum).){0,520}?price.{0,14}?\\$83622\\.87(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "asentum"
+      ],
+      [
+        "fact 4",
+        "\\basentum\\b(?:(?!bitcoin).){0,520}?price.{0,14}?\\$0\\.00181026(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "newsletter.{0,20}enabled"
+      ],
+      [
+        "fact 6",
+        "bitcoin at \\$83622\\.87"
+      ],
+      [
+        "fact 7",
+        "asentum at \\$0\\.00181026"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "watchlist_items",
+        "foreign_key": "user_id"
+      }
+    ],
+    "answer_state": [
+      [
+        "users",
+        "display_name"
+      ]
+    ]
+  },
+  "CoinMarketCap--7": {
+    "task": "Update my watchlist to replace Ethereum with Dogecoin while keeping my other coins. Log in as alice.j@test.com with password TestPass123!, check Dogecoin's detail page and make the replacement. Sign out and back in to confirm persistence, then report each coin on my final watchlist with its price and 24-hour change.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {
+      "watchlist_items": {
+        "removed": [
+          "[2]"
+        ],
+        "added": [
+          {
+            "id": 14,
+            "user_id": 1,
+            "coin_id": 74,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/currencies/dogecoin/",
+      "/watchlist/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "dogecoin"
+      ],
+      [
+        "fact 2",
+        "\\bdogecoin\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$0\\.0938504(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "bitcoin.{0,15}price(?: is)? \\$83622\\.87.{0,25}\\+0\\.12%"
+      ],
+      [
+        "fact 4",
+        "solana.{0,15}price(?: is)? \\$119\\.03.{0,25}\\+0\\.20%"
+      ],
+      [
+        "fact 5",
+        "dogecoin.{0,15}price(?: is)? \\$0\\.0938504.{0,25}\\+0\\.01%"
+      ],
+      [
+        "fact 6",
+        "ethereum was removed"
+      ]
+    ]
+  },
+  "CoinMarketCap--8": {
+    "task": "Create an account with a fresh email and a password of at least eight characters, opting into the newsletter. Build a research watchlist of the top two tokens in the rankings, checking each token's detail page before saving it. Report the saved coins with their ranks, prices and market caps, and the account greeting so I can confirm the shortlist belongs to the new account.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "display_name": {
+              "regex": "\\S[\\s\\S]*"
+            },
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "is_benchmark": 0,
+            "newsletter": 1,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "watchlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 14,
+            "user_id": 5,
+            "coin_id": 825,
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": 15,
+            "user_id": 5,
+            "coin_id": 3408,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/currencies/tether/",
+      "/currencies/usd-coin/",
+      "/watchlist/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "tether\\ usdt"
+      ],
+      [
+        "fact 2",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?rank.{0,14}?3"
+      ],
+      [
+        "fact 3",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?price.{0,14}?\\$0\\.999608(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\btether\\ usdt\\b(?:(?!usdc).){0,520}?market cap.{0,14}?\\$183\\.80b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "usdc"
+      ],
+      [
+        "fact 6",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?rank.{0,14}?6"
+      ],
+      [
+        "fact 7",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?price.{0,14}?\\$0\\.999999(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "\\busdc\\b(?:(?!tether\\ usdt).){0,520}?market cap.{0,14}?\\$74\\.42b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "newsletter.{0,20}enabled"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "watchlist_items",
+        "foreign_key": "user_id"
+      }
+    ],
+    "answer_state": [
+      [
+        "users",
+        "display_name"
+      ]
+    ]
+  },
+  "CoinMarketCap--9": {
+    "task": "Value a hypothetical portfolio of 0.1 Bitcoin, 3 Ethereum and 10,000 Dogecoin in USD using the site's converter. Report each holding's dollar value and the combined total, and identify the largest contribution. Check Dogecoin's detail price to explain how it relates to the 10,000-unit conversion. Treat all values as the captured snapshot, not a live quote.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/dogecoin/",
+      "/converter/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "dogecoin"
+      ],
+      [
+        "fact 2",
+        "\\bdogecoin\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$0\\.0938504(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "0\\.1 bitcoin.{0,10}\\$8362\\.29"
+      ],
+      [
+        "fact 4",
+        "3 ethereum.{0,10}\\$8030\\.99"
+      ],
+      [
+        "fact 5",
+        "10000 dogecoin.{0,10}\\$938\\.50"
+      ],
+      [
+        "fact 6",
+        "combined total.{0,10}\\$17331\\.78"
+      ],
+      [
+        "fact 7",
+        "bitcoin.{0,15}largest contribution"
+      ],
+      [
+        "fact 8",
+        "snapshot values"
+      ]
+    ]
+  },
+  "CoinMarketCap--10": {
+    "task": "Compare the three highest-ranked spot exchanges. Report each exchange's volume, market share, maker and taker fees, and the leading market pair with its price and 24-hour volume from the detail page. Identify the lowest displayed taker fee among the three, allowing ties.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/exchanges/binance/",
+      "/exchanges/coinbase-exchange/",
+      "/exchanges/upbit/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?spot volume \\(24h\\).{0,14}?\\$11\\.14b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 2",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?market share.{0,14}?6\\.46%"
+      ],
+      [
+        "fact 3",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 4",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?taker fee.{0,14}?0\\.04%"
+      ],
+      [
+        "fact 5",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?leading pair.{0,14}?usdc/usdt"
+      ],
+      [
+        "fact 6",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?pair price.{0,14}?\\$0\\.999987"
+      ],
+      [
+        "fact 7",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|upbit).){0,520}?pair 24.hour volume.{0,14}?\\$3\\.02b"
+      ],
+      [
+        "fact 8",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?spot volume \\(24h\\).{0,14}?\\$2\\.26b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?market share.{0,14}?1\\.31%"
+      ],
+      [
+        "fact 10",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?maker fee.{0,14}?0\\.00%"
+      ],
+      [
+        "fact 11",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?taker fee.{0,14}?0\\.00%"
+      ],
+      [
+        "fact 12",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?leading pair.{0,14}?btc/\\$"
+      ],
+      [
+        "fact 13",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?pair price.{0,14}?\\$83464\\.75"
+      ],
+      [
+        "fact 14",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|upbit).){0,520}?pair 24.hour volume.{0,14}?\\$411\\.17m"
+      ],
+      [
+        "fact 15",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?spot volume \\(24h\\).{0,14}?\\$1\\.27b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 16",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?market share.{0,14}?0\\.74%"
+      ],
+      [
+        "fact 17",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?maker fee.{0,14}?0\\.00%"
+      ],
+      [
+        "fact 18",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?taker fee.{0,14}?0\\.10%"
+      ],
+      [
+        "fact 19",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?leading pair.{0,14}?xrp/krw"
+      ],
+      [
+        "fact 20",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?pair price.{0,14}?\\$1\\.49"
+      ],
+      [
+        "fact 21",
+        "\\bupbit\\b(?:(?!binance|coinbase\\ exchange).){0,520}?pair 24.hour volume.{0,14}?\\$212\\.04m"
+      ],
+      [
+        "fact 22",
+        "coinbase exchange.{0,40}lowest.{0,20}taker fee.{0,10}0\\.00%"
+      ]
+    ]
+  },
+  "CoinMarketCap--11": {
+    "task": "Compare the top three decentralized exchanges in the DEX rankings. For each, report its volume, market share and launch date, plus the leading market pair's name, price and 24-hour volume. Determine whether the available launch dates establish which is oldest, explicitly noting missing dates or market data.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/exchanges/gaiaex/",
+      "/exchanges/hyperliquid/",
+      "/exchanges/pumpswap/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bgaiaex\\b(?:(?!hyperliquid|pumpswap).){0,520}?total volume \\(24h\\).{0,14}?\\$30\\.63b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 2",
+        "\\bgaiaex\\b(?:(?!hyperliquid|pumpswap).){0,520}?market share.{0,14}?49\\.55%"
+      ],
+      [
+        "fact 3",
+        "\\bgaiaex\\b(?:(?!hyperliquid|pumpswap).){0,520}?launched.{0,14}?feb\\ 21,\\ 2025"
+      ],
+      [
+        "fact 4",
+        "\\bgaiaex\\b(?:(?!hyperliquid|pumpswap).){0,520}?leading market pair, price and volume.{0,14}?(?:not provided|unavailable)"
+      ],
+      [
+        "fact 5",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?total volume \\(24h\\).{0,14}?\\$9\\.09b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?market share.{0,14}?14\\.73%"
+      ],
+      [
+        "fact 7",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?launched.{0,14}?(?:not provided|unavailable|not (?:shown|listed))"
+      ],
+      [
+        "fact 8",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?leading pair.{0,14}?hype/usdc"
+      ],
+      [
+        "fact 9",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?pair price.{0,14}?\\$86\\.30"
+      ],
+      [
+        "fact 10",
+        "\\bhyperliquid\\b(?:(?!gaiaex|pumpswap).){0,520}?pair 24.hour volume.{0,14}?\\$85\\.11m"
+      ],
+      [
+        "fact 11",
+        "\\bpumpswap\\b(?:(?!gaiaex|hyperliquid).){0,520}?total volume \\(24h\\).{0,14}?\\$2\\.17b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "\\bpumpswap\\b(?:(?!gaiaex|hyperliquid).){0,520}?market share.{0,14}?3\\.50%"
+      ],
+      [
+        "fact 13",
+        "\\bpumpswap\\b(?:(?!gaiaex|hyperliquid).){0,520}?launched.{0,14}?(?:not provided|unavailable|not (?:shown|listed))"
+      ],
+      [
+        "fact 14",
+        "\\bpumpswap\\b(?:(?!gaiaex|hyperliquid).){0,520}?leading market pair, price and volume.{0,14}?(?:not provided|unavailable)"
+      ],
+      [
+        "fact 15",
+        "oldest.{0,30}(?:cannot be established|not established|unknown)"
+      ],
+      [
+        "fact 16",
+        "hyperliquid and pumpswap.{0,20}no launch date"
+      ]
+    ]
+  },
+  "CoinMarketCap--12": {
+    "task": "I'm comparing spot exchange costs and activity. Check Binance, Coinbase Exchange, Kraken, KuCoin, Bitget, Bybit and Gate for maker and taker fees, 24-hour volume and weekly visits, plus each exchange's leading market pair, price and volume from its detail page. Identify the lowest displayed taker fee, allowing ties, and the exchange with the most weekly visits. Keep these snapshot figures distinct from a personalized fee quote.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/exchanges/binance/",
+      "/exchanges/coinbase-exchange/",
+      "/exchanges/kraken/",
+      "/exchanges/kucoin/",
+      "/exchanges/bitget/",
+      "/exchanges/bybit/",
+      "/exchanges/gate/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$11\\.14b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 2",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 3",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?taker fee.{0,14}?0\\.04%"
+      ],
+      [
+        "fact 4",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?weekly visits.{0,14}?7369881"
+      ],
+      [
+        "fact 5",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?leading pair.{0,14}?usdc/usdt"
+      ],
+      [
+        "fact 6",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?pair price.{0,14}?\\$0\\.999987"
+      ],
+      [
+        "fact 7",
+        "\\bbinance\\b(?:(?!coinbase\\ exchange|kraken|kucoin|bitget|bybit|gate).){0,520}?pair 24.hour volume.{0,14}?\\$3\\.02b"
+      ],
+      [
+        "fact 8",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$2\\.26b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?maker fee.{0,14}?0\\.00%"
+      ],
+      [
+        "fact 10",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?taker fee.{0,14}?0\\.00%"
+      ],
+      [
+        "fact 11",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?weekly visits.{0,14}?4189694"
+      ],
+      [
+        "fact 12",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?leading pair.{0,14}?btc/\\$"
+      ],
+      [
+        "fact 13",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?pair price.{0,14}?\\$83464\\.75"
+      ],
+      [
+        "fact 14",
+        "\\bcoinbase\\ exchange\\b(?:(?!binance|kraken|kucoin|bitget|bybit|gate).){0,520}?pair 24.hour volume.{0,14}?\\$411\\.17m"
+      ],
+      [
+        "fact 15",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$2\\.03b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 16",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 17",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?taker fee.{0,14}?0\\.05%"
+      ],
+      [
+        "fact 18",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?weekly visits.{0,14}?1086112"
+      ],
+      [
+        "fact 19",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?leading pair.{0,14}?usdt/\\$"
+      ],
+      [
+        "fact 20",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?pair price.{0,14}?\\$0\\.999550"
+      ],
+      [
+        "fact 21",
+        "\\bkraken\\b(?:(?!binance|coinbase\\ exchange|kucoin|bitget|bybit|gate).){0,520}?pair 24.hour volume.{0,14}?\\$321\\.08m"
+      ],
+      [
+        "fact 22",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$1\\.78b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 23",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 24",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?taker fee.{0,14}?0\\.06%"
+      ],
+      [
+        "fact 25",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?weekly visits.{0,14}?3993806"
+      ],
+      [
+        "fact 26",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 27",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?pair price.{0,14}?\\$83476\\.76"
+      ],
+      [
+        "fact 28",
+        "\\bkucoin\\b(?:(?!binance|coinbase\\ exchange|kraken|bitget|bybit|gate).){0,520}?pair 24.hour volume.{0,14}?\\$390\\.73m"
+      ],
+      [
+        "fact 29",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$829\\.34m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 30",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 31",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?taker fee.{0,14}?0\\.06%"
+      ],
+      [
+        "fact 32",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?weekly visits.{0,14}?2053729"
+      ],
+      [
+        "fact 33",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 34",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?pair price.{0,14}?\\$83550\\.73"
+      ],
+      [
+        "fact 35",
+        "\\bbitget\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bybit|gate).){0,520}?pair 24.hour volume.{0,14}?\\$173\\.09m"
+      ],
+      [
+        "fact 36",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?spot volume \\(24h\\).{0,14}?\\$1\\.98b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 37",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 38",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?taker fee.{0,14}?0\\.06%"
+      ],
+      [
+        "fact 39",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?weekly visits.{0,14}?2464711"
+      ],
+      [
+        "fact 40",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 41",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?pair price.{0,14}?\\$83542\\.97"
+      ],
+      [
+        "fact 42",
+        "\\bbybit\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|gate).){0,520}?pair 24.hour volume.{0,14}?\\$426\\.28m"
+      ],
+      [
+        "fact 43",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?spot volume \\(24h\\).{0,14}?\\$1\\.33b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 44",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?maker fee.{0,14}?0\\.01%"
+      ],
+      [
+        "fact 45",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?taker fee.{0,14}?0\\.05%"
+      ],
+      [
+        "fact 46",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?weekly visits.{0,14}?2565584"
+      ],
+      [
+        "fact 47",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 48",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?pair price.{0,14}?\\$83474\\.46"
+      ],
+      [
+        "fact 49",
+        "\\bgate\\b(?:(?!binance|coinbase\\ exchange|kraken|kucoin|bitget|bybit).){0,520}?pair 24.hour volume.{0,14}?\\$334\\.88m"
+      ],
+      [
+        "fact 50",
+        "coinbase exchange.{0,25}lowest.{0,20}taker fee.{0,10}0\\.00%"
+      ],
+      [
+        "fact 51",
+        "binance.{0,20}most weekly visits.{0,10}7369881"
+      ],
+      [
+        "fact 52",
+        "not personalized fee quotes"
+      ]
+    ]
+  },
+  "CoinMarketCap--13": {
+    "task": "Compare the Memes, Oracles and Lending & Borrowing sectors. Report each sector's market cap, displayed market-cap percentage change, number of coins shown and upstream total. Examine its leading coin for name, symbol, price, rank and 24-hour volume, so the brief distinguishes overall sector figures from the representative asset.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/dogecoin/",
+      "/currencies/chainlink/",
+      "/currencies/aave/",
+      "/view/memes/",
+      "/view/oracles/",
+      "/view/lending-borowing/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "dogecoin"
+      ],
+      [
+        "fact 2",
+        "dogecoin.{0,8}\\bdoge\\b"
+      ],
+      [
+        "fact 3",
+        "\\bdogecoin\\b(?:(?!chainlink|aave).){0,520}?price.{0,14}?\\$0\\.0938504(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bdogecoin\\b(?:(?!chainlink|aave).){0,520}?rank.{0,14}?11"
+      ],
+      [
+        "fact 5",
+        "\\bdogecoin\\b(?:(?!chainlink|aave).){0,520}?volume (?:24h|24.hour).{0,14}?\\$974\\.27m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "chainlink"
+      ],
+      [
+        "fact 7",
+        "chainlink.{0,8}\\blink\\b"
+      ],
+      [
+        "fact 8",
+        "\\bchainlink\\b(?:(?!dogecoin|aave).){0,520}?price.{0,14}?\\$14\\.60(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "\\bchainlink\\b(?:(?!dogecoin|aave).){0,520}?rank.{0,14}?12"
+      ],
+      [
+        "fact 10",
+        "\\bchainlink\\b(?:(?!dogecoin|aave).){0,520}?volume (?:24h|24.hour).{0,14}?\\$815\\.64m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "aave"
+      ],
+      [
+        "fact 12",
+        "aave.{0,8}\\baave\\b"
+      ],
+      [
+        "fact 13",
+        "\\baave\\b(?:(?!dogecoin|chainlink).){0,520}?price.{0,14}?\\$165\\.26(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 14",
+        "\\baave\\b(?:(?!dogecoin|chainlink).){0,520}?rank.{0,14}?37"
+      ],
+      [
+        "fact 15",
+        "\\baave\\b(?:(?!dogecoin|chainlink).){0,520}?volume (?:24h|24.hour).{0,14}?\\$833\\.76m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 16",
+        "\\bmemes\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$30\\.58b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 17",
+        "\\bmemes\\b(?:(?!(?!)).){0,520}?displayed market.cap change.{0,14}?\\-0\\.93%"
+      ],
+      [
+        "fact 18",
+        "\\bmemes\\b(?:(?!(?!)).){0,520}?9 coins captured.{0,14}?.*?upstream total 5363"
+      ],
+      [
+        "fact 19",
+        "\\boracles\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$15\\.36b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 20",
+        "\\boracles\\b(?:(?!(?!)).){0,520}?displayed market.cap change.{0,14}?\\-5\\.44%"
+      ],
+      [
+        "fact 21",
+        "\\boracles\\b(?:(?!(?!)).){0,520}?4 coins captured.{0,14}?.*?upstream total 62"
+      ],
+      [
+        "fact 22",
+        "\\blending\\ \\&\\ borrowing\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$6\\.96b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 23",
+        "\\blending\\ \\&\\ borrowing\\b(?:(?!(?!)).){0,520}?displayed market.cap change.{0,14}?\\+5\\.78%"
+      ],
+      [
+        "fact 24",
+        "\\blending\\ \\&\\ borrowing\\b(?:(?!(?!)).){0,520}?5 coins captured.{0,14}?.*?upstream total 89"
+      ]
+    ]
+  },
+  "CoinMarketCap--14": {
+    "task": "Compare the leading markets for Bitcoin, Ethereum and Solana. For each asset, report the top pair, exchange, price, 24-hour volume and market score from its Markets page. Check the exchange hosting Bitcoin's leading pair for its maker and taker fees, and identify which of the three leading pairs has the largest displayed volume.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/bitcoin/",
+      "/currencies/bitcoin/markets/",
+      "/currencies/ethereum/",
+      "/currencies/ethereum/markets/",
+      "/currencies/solana/",
+      "/currencies/solana/markets/",
+      "/exchanges/binance/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "bitcoin"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin\\b(?:(?!ethereum|solana).){0,520}?leading pair.{0,14}?btc/usdt"
+      ],
+      [
+        "fact 3",
+        "\\bbitcoin\\b(?:(?!ethereum|solana).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 4",
+        "\\bbitcoin\\b(?:(?!ethereum|solana).){0,520}?pair 24.hour volume.{0,14}?\\$1\\.11b"
+      ],
+      [
+        "fact 5",
+        "\\bbitcoin\\b(?:(?!ethereum|solana).){0,520}?pair price.{0,14}?\\$83540\\.61(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\bbitcoin\\b(?:(?!ethereum|solana).){0,520}?market score.{0,14}?9\\.9783"
+      ],
+      [
+        "fact 7",
+        "ethereum"
+      ],
+      [
+        "fact 8",
+        "\\bethereum\\b(?:(?!bitcoin|solana).){0,520}?leading pair.{0,14}?eth/usdt"
+      ],
+      [
+        "fact 9",
+        "\\bethereum\\b(?:(?!bitcoin|solana).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 10",
+        "\\bethereum\\b(?:(?!bitcoin|solana).){0,520}?pair 24.hour volume.{0,14}?\\$855\\.90m"
+      ],
+      [
+        "fact 11",
+        "\\bethereum\\b(?:(?!bitcoin|solana).){0,520}?pair price.{0,14}?\\$2673\\.18(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "\\bethereum\\b(?:(?!bitcoin|solana).){0,520}?market score.{0,14}?9\\.9836"
+      ],
+      [
+        "fact 13",
+        "solana"
+      ],
+      [
+        "fact 14",
+        "\\bsolana\\b(?:(?!bitcoin|ethereum).){0,520}?leading pair.{0,14}?sol/usdt"
+      ],
+      [
+        "fact 15",
+        "\\bsolana\\b(?:(?!bitcoin|ethereum).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 16",
+        "\\bsolana\\b(?:(?!bitcoin|ethereum).){0,520}?pair 24.hour volume.{0,14}?\\$288\\.19m"
+      ],
+      [
+        "fact 17",
+        "\\bsolana\\b(?:(?!bitcoin|ethereum).){0,520}?pair price.{0,14}?\\$119\\.02(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 18",
+        "\\bsolana\\b(?:(?!bitcoin|ethereum).){0,520}?market score.{0,14}?9\\.9775"
+      ],
+      [
+        "fact 19",
+        "\\bbinance\\b(?:(?!(?!)).){0,520}?maker fee.{0,14}?0\\.02%"
+      ],
+      [
+        "fact 20",
+        "\\bbinance\\b(?:(?!(?!)).){0,520}?taker fee.{0,14}?0\\.04%"
+      ],
+      [
+        "fact 21",
+        "bitcoin.{0,30}largest volume.{0,25}\\$1\\.11b"
+      ]
+    ]
+  },
+  "CoinMarketCap--15": {
+    "task": "Compare the top three coins in the September 27, 2026 historical snapshot with their current detail pages. Report each coin's snapshot price and market cap, its current price and market cap, and the price difference. Keep the snapshot date separate from the current mirror date so I can see what period the comparison covers.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/historical/2026-09-27/",
+      "/currencies/bitcoin/",
+      "/currencies/ethereum/",
+      "/currencies/tether/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,300}?snapshot price.{0,14}?\\$84458\\.08"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$1696789523295\\.26"
+      ],
+      [
+        "fact 3",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,300}?current price.{0,14}?\\$83622\\.87"
+      ],
+      [
+        "fact 4",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$1\\.68t"
+      ],
+      [
+        "fact 5",
+        "\\bbitcoin\\b(?:(?!(?!)).){0,300}?price difference.{0,14}?\\-\\$835\\.21"
+      ],
+      [
+        "fact 6",
+        "\\bethereum\\b(?:(?!(?!)).){0,300}?snapshot price.{0,14}?\\$2686\\.93"
+      ],
+      [
+        "fact 7",
+        "\\bethereum\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$328032190023\\.17"
+      ],
+      [
+        "fact 8",
+        "\\bethereum\\b(?:(?!(?!)).){0,300}?current price.{0,14}?\\$2677\\.00"
+      ],
+      [
+        "fact 9",
+        "\\bethereum\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$326\\.83b"
+      ],
+      [
+        "fact 10",
+        "\\bethereum\\b(?:(?!(?!)).){0,300}?price difference.{0,14}?\\-\\$9\\.93"
+      ],
+      [
+        "fact 11",
+        "\\btether\\ usdt\\b(?:(?!(?!)).){0,300}?snapshot price.{0,14}?\\$0\\.9998"
+      ],
+      [
+        "fact 12",
+        "\\btether\\ usdt\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$183778778565\\.74"
+      ],
+      [
+        "fact 13",
+        "\\btether\\ usdt\\b(?:(?!(?!)).){0,300}?current price.{0,14}?\\$0\\.999608"
+      ],
+      [
+        "fact 14",
+        "\\btether\\ usdt\\b(?:(?!(?!)).){0,300}?and market cap.{0,14}?\\$183\\.80b"
+      ],
+      [
+        "fact 15",
+        "\\btether\\ usdt\\b(?:(?!(?!)).){0,300}?price difference.{0,14}?\\-\\$0\\.000192"
+      ],
+      [
+        "fact 16",
+        "september 27,? 2026"
+      ],
+      [
+        "fact 17",
+        "september 29,? 2026 utc"
+      ]
+    ]
+  },
+  "CoinMarketCap--16": {
+    "task": "I'm learning how an on-chain transaction works. Use the Blockchain, Smart Contract, Gas and DeFi glossary articles to explain what a block contains, what a smart contract does, what gas measures and how DeFi uses these ideas. Include each article's difficulty label and make the explanations fit together as a brief introduction.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/academy/glossary/blockchain",
+      "/academy/glossary/smart-contract",
+      "/academy/glossary/gas",
+      "/academy/glossary/defi"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "blockchain \\(easy\\)"
+      ],
+      [
+        "fact 2",
+        "transaction information"
+      ],
+      [
+        "fact 3",
+        "unique identifier or hash"
+      ],
+      [
+        "fact 4",
+        "smart contract \\(moderate\\)"
+      ],
+      [
+        "fact 5",
+        "self.executing code"
+      ],
+      [
+        "fact 6",
+        "conditions are met"
+      ],
+      [
+        "fact 7",
+        "gas \\(easy\\)"
+      ],
+      [
+        "fact 8",
+        "fee for computational resources"
+      ],
+      [
+        "fact 9",
+        "paid in eth"
+      ],
+      [
+        "fact 10",
+        "1 gwei.{0,10}0\\.000000001 eth"
+      ],
+      [
+        "fact 11",
+        "defi \\(moderate\\)"
+      ],
+      [
+        "fact 12",
+        "smart contracts on blockchains.{0,25}reduce gatekeepers"
+      ],
+      [
+        "fact 13",
+        "peer.to.peer lending"
+      ]
+    ]
+  },
+  "CoinMarketCap--17": {
+    "task": "Help me interpret crypto market metrics and their limits. Use the FAQ to explain the market-cap formula, circulating versus total versus maximum supply, why circulating supply is used, the reporting time zone and the 24-hour comparison basis. Relate that to the Blockchain and 51% Attack glossary articles by explaining how majority mining control can disrupt transaction confirmation. Include both articles' difficulty labels.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/academy/glossary/blockchain",
+      "/academy/glossary/51-attack",
+      "/faq/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "market cap as price multiplied by circulating supply"
+      ],
+      [
+        "fact 2",
+        "circulating supply.{0,25}coins in public hands"
+      ],
+      [
+        "fact 3",
+        "total supply.{0,35}minus verifiably burned"
+      ],
+      [
+        "fact 4",
+        "maximum supply.{0,20}all coins.{0,15}ever exist"
+      ],
+      [
+        "fact 5",
+        "excludes locked or reserved"
+      ],
+      [
+        "fact 6",
+        "public float"
+      ],
+      [
+        "fact 7",
+        "utc"
+      ],
+      [
+        "fact 8",
+        "rolling 24.hour"
+      ],
+      [
+        "fact 9",
+        "blockchain \\(easy\\)"
+      ],
+      [
+        "fact 10",
+        "51% attack article \\(easy\\)"
+      ],
+      [
+        "fact 11",
+        "over 50% of mining or hashing power"
+      ],
+      [
+        "fact 12",
+        "reorder transactions or prevent confirmation"
+      ]
+    ]
+  },
+  "CoinMarketCap--18": {
+    "task": "Compare the leading trending coin with the leading most-viewed coin. Report their prices, ranks, market caps and 24-hour changes from their detail pages. For the trending leader, include the platform, DEX liquidity and 24-hour DEX transactions shown on Trending, and explain why viewing popularity and trading activity measure different things.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/doppler-finance/",
+      "/currencies/asentum/",
+      "/most-viewed-pages/",
+      "/trending-cryptocurrencies/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "doppler\\ finance"
+      ],
+      [
+        "fact 2",
+        "\\bdoppler\\ finance\\b(?:(?!asentum).){0,520}?price.{0,14}?\\$0\\.0233562(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\bdoppler\\ finance\\b(?:(?!asentum).){0,520}?rank.{0,14}?655"
+      ],
+      [
+        "fact 4",
+        "\\bdoppler\\ finance\\b(?:(?!asentum).){0,520}?market cap.{0,14}?\\$23\\.36m(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "\\bdoppler\\ finance\\b(?:(?!asentum).){0,520}?(?:24.hour|24h) change.{0,14}?\\+7\\.96%"
+      ],
+      [
+        "fact 6",
+        "asentum"
+      ],
+      [
+        "fact 7",
+        "\\basentum\\b(?:(?!doppler\\ finance).){0,520}?price.{0,14}?\\$0\\.00181026(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "\\basentum\\b(?:(?!doppler\\ finance).){0,520}?rank.{0,14}?2098"
+      ],
+      [
+        "fact 9",
+        "\\basentum\\b(?:(?!doppler\\ finance).){0,520}?market cap.{0,14}?\\$761\\.34k(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "\\basentum\\b(?:(?!doppler\\ finance).){0,520}?(?:24.hour|24h) change.{0,14}?\\+0\\.38%"
+      ],
+      [
+        "fact 11",
+        "doppler.{0,10}base"
+      ],
+      [
+        "fact 12",
+        "dex liquidity.{0,10}\\$2\\.39m"
+      ],
+      [
+        "fact 13",
+        "689350 dex transactions"
+      ],
+      [
+        "fact 14",
+        "viewing popularity.{0,20}site attention"
+      ],
+      [
+        "fact 15",
+        "liquidity and transaction counts.{0,20}trading"
+      ]
+    ]
+  },
+  "CoinMarketCap--19": {
+    "task": "Compare the historical data coverage for Bitcoin and Ethereum over the 365-day view. For each, report the row count and the newest and oldest available row's date, open, high, low, close and volume. Calculate the difference between the newest and oldest close for each coin, noting any gap between available coverage and a full year.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/bitcoin/historical-data/\\?days=365",
+      "/currencies/bitcoin/historical-data/\\?days=365&page=8",
+      "/currencies/ethereum/historical-data/\\?days=365",
+      "/currencies/ethereum/historical-data/\\?days=365&page=8"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,10}?.{0,14}?september\\ 29,\\ 2026"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,250}?open.{0,14}?\\$83500\\.32(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,250}?high.{0,14}?\\$84511\\.28(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,250}?low.{0,14}?\\$82739\\.10(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,250}?close.{0,14}?\\$83622\\.43(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\bbitcoin\\ newest\\b(?:(?!(?!)).){0,250}?volume.{0,14}?\\$28\\.03b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,10}?.{0,14}?september\\ 30,\\ 2025"
+      ],
+      [
+        "fact 8",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,250}?open.{0,14}?\\$114396\\.52(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,250}?high.{0,14}?\\$114836\\.62(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,250}?low.{0,14}?\\$112740\\.56(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,250}?close.{0,14}?\\$114056\\.08(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "\\bbitcoin\\ oldest\\b(?:(?!(?!)).){0,250}?volume.{0,14}?\\$58\\.99b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 13",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,10}?.{0,14}?september\\ 29,\\ 2026"
+      ],
+      [
+        "fact 14",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,250}?open.{0,14}?\\$2688\\.63(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 15",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,250}?high.{0,14}?\\$2746\\.01(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 16",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,250}?low.{0,14}?\\$2651\\.47(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 17",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,250}?close.{0,14}?\\$2676\\.72(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 18",
+        "\\bethereum\\ newest\\b(?:(?!(?!)).){0,250}?volume.{0,14}?\\$15\\.31b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 19",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,10}?.{0,14}?september\\ 30,\\ 2025"
+      ],
+      [
+        "fact 20",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,250}?open.{0,14}?\\$4217\\.06(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 21",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,250}?high.{0,14}?\\$4238\\.67(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 22",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,250}?low.{0,14}?\\$4095\\.44(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 23",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,250}?close.{0,14}?\\$4145\\.96(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 24",
+        "\\bethereum\\ oldest\\b(?:(?!(?!)).){0,250}?volume.{0,14}?\\$37\\.68b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 25",
+        "365 daily rows"
+      ],
+      [
+        "fact 26",
+        "no day.count gap"
+      ],
+      [
+        "fact 27",
+        "bitcoin newest.minus.oldest close.{0,10}-\\$30433\\.65"
+      ],
+      [
+        "fact 28",
+        "ethereum newest.minus.oldest close.{0,10}-\\$1469\\.24"
+      ]
+    ]
+  },
+  "CoinMarketCap--20": {
+    "task": "Compare Bitcoin's and Ethereum's longer-term price ranges. For each, report the highest plotted sample on the 1Y and All charts with its date, plus the displayed 52-week high and low. Explain which maximum belongs to the year view and which belongs to the full captured history.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/bitcoin/\\?range=1Y",
+      "/currencies/bitcoin/\\?range=All",
+      "/currencies/ethereum/\\?range=1Y",
+      "/currencies/ethereum/\\?range=All"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "\\bbitcoin,\\ 1y\\ chart\\b(?:(?!(?!)).){0,10}?highest plotted sample.{0,14}?\\$123510\\.45(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 2",
+        "\\bbitcoin,\\ 1y\\ chart\\b(?:(?!(?!)).){0,90}?on.{0,14}?oct\\ 06,\\ 2025"
+      ],
+      [
+        "fact 3",
+        "\\bbitcoin,\\ 1y\\ chart\\b(?:(?!(?!)).){0,120}?52.week range.{0,14}?\\$57747\\.76(?!\\d|\\.\\d).{0,5}\\$126198\\.07(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\bbitcoin,\\ all\\ chart\\b(?:(?!(?!)).){0,10}?highest plotted sample.{0,14}?\\$115399\\.63(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "\\bbitcoin,\\ all\\ chart\\b(?:(?!(?!)).){0,90}?on.{0,14}?sep\\ 15,\\ 2025"
+      ],
+      [
+        "fact 6",
+        "\\bbitcoin,\\ all\\ chart\\b(?:(?!(?!)).){0,120}?52.week range.{0,14}?\\$57747\\.76(?!\\d|\\.\\d).{0,5}\\$126198\\.07(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "\\bethereum,\\ 1y\\ chart\\b(?:(?!(?!)).){0,10}?highest plotted sample.{0,14}?\\$4515\\.30(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "\\bethereum,\\ 1y\\ chart\\b(?:(?!(?!)).){0,90}?on.{0,14}?oct\\ 06,\\ 2025"
+      ],
+      [
+        "fact 9",
+        "\\bethereum,\\ 1y\\ chart\\b(?:(?!(?!)).){0,120}?52.week range.{0,14}?\\$1506\\.51(?!\\d|\\.\\d).{0,5}\\$4755\\.22(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "\\bethereum,\\ all\\ chart\\b(?:(?!(?!)).){0,10}?highest plotted sample.{0,14}?\\$4503\\.64(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "\\bethereum,\\ all\\ chart\\b(?:(?!(?!)).){0,90}?on.{0,14}?sep\\ 17,\\ 2025"
+      ],
+      [
+        "fact 12",
+        "\\bethereum,\\ all\\ chart\\b(?:(?!(?!)).){0,120}?52.week range.{0,14}?\\$1506\\.51(?!\\d|\\.\\d).{0,5}\\$4755\\.22(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 13",
+        "1y maxima.{0,40}1.year"
+      ],
+      [
+        "fact 14",
+        "all maxima.{0,30}full history"
+      ]
+    ]
+  },
+  "CoinMarketCap--21": {
+    "task": "Log in as bob.c@test.com with password TestPass123! and add Chainlink to my watchlist after checking its price, rank and market cap. Preserve the existing coins. Sign out and back in, then report the saved watchlist with prices and 24-hour changes to confirm the addition persisted.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {
+      "watchlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 14,
+            "user_id": 2,
+            "coin_id": 1975,
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/currencies/chainlink/",
+      "/watchlist/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "chainlink"
+      ],
+      [
+        "fact 2",
+        "\\bchainlink\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$14\\.60(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "\\bchainlink\\b(?:(?!(?!)).){0,520}?rank.{0,14}?12"
+      ],
+      [
+        "fact 4",
+        "\\bchainlink\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$10\\.92b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 5",
+        "xrp.{0,15}price(?: is)? \\$1\\.49.{0,25}-0\\.41%"
+      ],
+      [
+        "fact 6",
+        "dogecoin.{0,15}price(?: is)? \\$0\\.0938504.{0,25}\\+0\\.01%"
+      ],
+      [
+        "fact 7",
+        "chainlink.{0,15}price(?: is)? \\$14\\.60.{0,25}-5\\.52%"
+      ],
+      [
+        "fact 8",
+        "cardano.{0,15}price(?: is)? \\$0\\.244297.{0,25}-1\\.15%"
+      ]
+    ]
+  },
+  "CoinMarketCap--22": {
+    "task": "Research the leading coin in the Lending & Borrowing category. Report the category's market cap and displayed market-cap percentage change, then the coin's name, symbol, price, rank, market cap and circulating supply. Check its leading market pair, exchange and volume, and use the DeFi glossary article to explain the category's connection to decentralized finance.",
+    "initial_digest": "cf56c5a14afb5b96bf8ac5d74cd501b9dd08ea9928e8093e8a388a8ed638e807",
+    "state": {},
+    "paths": [
+      "/currencies/aave/",
+      "/currencies/aave/markets/",
+      "/view/lending-borowing/",
+      "/academy/glossary/defi"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "aave"
+      ],
+      [
+        "fact 2",
+        "aave.{0,8}\\baave\\b"
+      ],
+      [
+        "fact 3",
+        "\\baave\\b(?:(?!(?!)).){0,520}?price.{0,14}?\\$165\\.26(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 4",
+        "\\baave\\b(?:(?!(?!)).){0,520}?rank.{0,14}?37"
+      ],
+      [
+        "fact 5",
+        "\\baave\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$2\\.55b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "\\baave\\b(?:(?!(?!)).){0,520}?circulating supply.{0,14}?15433980\\ aave"
+      ],
+      [
+        "fact 7",
+        "\\baave\\b(?:(?!(?!)).){0,520}?leading pair.{0,14}?aave/usdt"
+      ],
+      [
+        "fact 8",
+        "\\baave\\b(?:(?!(?!)).){0,520}?on.{0,14}?binance"
+      ],
+      [
+        "fact 9",
+        "\\baave\\b(?:(?!(?!)).){0,520}?pair 24.hour volume.{0,14}?\\$76\\.55m"
+      ],
+      [
+        "fact 10",
+        "\\blending\\ \\&\\ borrowing\\b(?:(?!(?!)).){0,520}?market cap.{0,14}?\\$6\\.96b(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "\\blending\\ \\&\\ borrowing\\b(?:(?!(?!)).){0,520}?displayed market.cap change.{0,14}?\\+5\\.78%"
+      ],
+      [
+        "fact 12",
+        "smart contracts reduce dependence.{0,20}centralized gatekeepers"
+      ],
+      [
+        "fact 13",
+        "peer.to.peer lending"
+      ],
+      [
+        "fact 14",
+        "lending assets for yield"
+      ],
+      [
+        "fact 15",
+        "borrowing against collateral"
+      ]
+    ]
+  }
+}

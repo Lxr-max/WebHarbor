@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Most Viewed Cryptocurrencies | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Most Viewed Cryptocurrencies</h1>
+<p class="muted">The cryptocurrencies with the most page views on CoinMarketCap in the last 24 hours.
+  Snapshot of {{ mirror_date }} (UTC).</p>
+
+<table>
+  <thead><tr>
+    <th>#</th><th>Name</th><th class="num">Price</th><th class="num">24h</th>
+    <th class="num">7d</th><th class="num">30d</th><th class="num">Market Cap</th><th class="num">Volume(24h)</th>
+  </tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.rank }}</td>
+      <td>
+        {% if r.slug in known %}
+          <a class="coin-cell" href="/currencies/{{ r.slug }}/">
+            <span class="coin-name">{{ r.name }}</span> <span class="coin-symbol">{{ known[r.slug].symbol }}</span></a>
+        {% else %}
+          <span class="coin-cell"><span class="coin-name">{{ r.name }}</span></span>
+        {% endif %}
+      </td>
+      <td class="num">{{ r.price_text }}</td>
+      <td class="num">{{ r.pct_24h_text }}</td>
+      <td class="num">{{ r.pct_7d_text }}</td>
+      <td class="num">{{ r.pct_30d_text }}</td>
+      <td class="num">{{ r.market_cap_text }}</td>
+      <td class="num">{{ r.volume_text }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

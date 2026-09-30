@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Saved Jobs | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Saved Jobs</h1>
+  <nav class="account-nav">
+    <a href="/jobseeker/profile">Profile</a>
+    <a href="/jobseeker/resume">Resume</a>
+    <a href="/jobseeker/saved-jobs" class="active">Saved Jobs</a>
+    <a href="/jobseeker/applications">Applications</a>
+    <a href="/jobseeker/alerts">Job Alerts</a>
+  </nav>
+  <p class="snapshot">{{ rows|length }} saved jobs</p>
+</section>
+<ol class="job-list">
+  {% for row in rows %}
+  <li class="job-card">
+    <article>
+      <h2 class="job-title"><a href="{{ row.job.url() }}">{{ row.job.title }}</a></h2>
+      <p class="rel-co">{{ row.job.company.name }} · {{ row.job.city }}, {{ row.job.state }}</p>
+      {% if row.job.salary_text %}<p class="job-salary">{{ row.job.salary_text }}</p>{% endif %}
+      <p class="card-actions">
+        <span class="posted">saved {{ row.saved_at[:10] }}</span>
+        <form method="post" action="/save/{{ row.job.jid }}" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="/jobseeker/saved-jobs">
+          <button type="submit" class="linklike">Unsave</button>
+        </form>
+      </p>
+    </article>
+  </li>
+  {% endfor %}
+  {% if not rows %}<li class="empty-state">Nothing saved yet — tap “Save job for later” on any job page.</li>{% endif %}
+</ol>
+{% endblock %}
