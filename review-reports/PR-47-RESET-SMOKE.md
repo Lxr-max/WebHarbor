@@ -1,5 +1,9 @@
 # Review of PR #47: reset and smoke verification
 
+Historical snapshot: see [the PR #108 revision report](PR-108-RESET-SMOKE.md)
+for subsequent fixes and current validation. The attached JSON records the earlier
+frozen executions.
+
 Reviewer-owned continuation of [PR #47](https://github.com/aiming-lab/WebHarbor/pull/47)
 by @Lxr-max / XuanRui LI. Contributor and reviewer history is preserved.
 

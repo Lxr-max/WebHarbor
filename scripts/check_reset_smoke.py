@@ -14,12 +14,14 @@ import argparse
 import ast
 import hashlib
 import json
+import math
 import os
 import re
 import shlex
 import subprocess
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
+from http.client import HTTPException
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -62,6 +64,7 @@ class SiteCheck:
     md5_runtime_hash: str | None
     md5_seed_hash: str | None
     md5_detail: str
+    md5_files: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -157,25 +160,54 @@ class RegistryError(Exception):
 
 
 def parse_site_array(text: str, file_label: str) -> tuple[list[str], int]:
-    match = re.search(r"\bSITES\s*=\s*(\(.+?\)|\[.+?\])", text, re.DOTALL)
-    if not match:
-        raise RegistryError(f"Could not parse SITES from {file_label}")
-    block = match.group(1)
-    if block.startswith("("):
-        sites = re.findall(r"[A-Za-z0-9_]+", block)
-    else:
-        try:
-            sites = ast.literal_eval(block)
-        except (SyntaxError, ValueError) as exc:
-            raise RegistryError(f"Could not parse SITES from {file_label}: {exc}") from None
-        if not isinstance(sites, list):
-            raise RegistryError(f"SITES is not a list in {file_label}")
-    if not all(isinstance(site, str) for site in sites):
-        raise RegistryError(f"SITES contains a non-string entry in {file_label}")
-    base_match = re.search(r"\bBASE_PORT\s*=\s*(\d+)", text)
-    if not base_match:
-        raise RegistryError(f"Could not parse BASE_PORT from {file_label}")
-    return sites, int(base_match.group(1))
+    try:
+        if file_label.endswith(".sh"):
+            # Strip comments lexically; do not execute the startup script.
+            lexer = shlex.shlex(text, posix=True, punctuation_chars="()=")
+            lexer.whitespace_split = True
+            tokens = list(lexer)
+            # shlex groups adjacent punctuation; normalize literal assignments.
+            expanded = []
+            for token in tokens:
+                if token and set(token) <= set("()="):
+                    expanded.extend(token)
+                else:
+                    expanded.append(token)
+            tokens = expanded
+            start = tokens.index("SITES")
+            if tokens[start + 1:start + 3] != ["=", "("]:
+                raise ValueError("SITES must be a literal array")
+            end = tokens.index(")", start + 3)
+            sites = tokens[start + 3:end]
+            base = tokens.index("BASE_PORT")
+            if tokens[base + 1] != "=":
+                raise ValueError("BASE_PORT must be literal")
+            base_port = int(tokens[base + 2])
+        else:
+            values = {}
+            for node in ast.parse(text).body:
+                if isinstance(node, ast.Assign):
+                    names = [target.id for target in node.targets if isinstance(target, ast.Name)]
+                elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+                    names = [node.target.id]
+                else:
+                    continue
+                for name in names:
+                    if name in {"SITES", "BASE_PORT"}:
+                        values[name] = ast.literal_eval(node.value)
+            sites, base_port = values["SITES"], values["BASE_PORT"]
+        if not isinstance(sites, list) or not sites or any(
+            not isinstance(site, str) or not re.fullmatch(r"[A-Za-z0-9_]+", site)
+            for site in sites
+        ):
+            raise ValueError("SITES must be a nonempty list of valid site names")
+        if len(sites) != len(set(sites)):
+            raise ValueError("SITES contains duplicate entries")
+        if type(base_port) is not int or not 1 <= base_port <= 65536 - len(sites):
+            raise ValueError("BASE_PORT or resulting port range is invalid")
+        return sites, base_port
+    except (ValueError, KeyError, IndexError, TypeError, SyntaxError) as exc:
+        raise RegistryError(f"Could not parse SITES / BASE_PORT from {file_label}: {exc}") from None
 
 
 def build_port_map(sites: list[str], base_port: int) -> dict[str, int]:
@@ -231,49 +263,6 @@ def md5_file(path: Path) -> str:
     return hasher.hexdigest()
 
 
-def select_db_pair_names(
-    runtime_names: list[str],
-    seed_names: list[str],
-    site: str,
-) -> tuple[str | None, str | None, str | None]:
-    """Select one runtime/seed pair using the same rule for every DB source."""
-    if not runtime_names or not seed_names:
-        return None, None, "runtime or seed DB files are missing"
-    if len(runtime_names) == 1 and len(seed_names) == 1:
-        return runtime_names[0], seed_names[0], None
-
-    runtime_set = set(runtime_names)
-    seed_set = set(seed_names)
-    preferred_name = f"{site}.db"
-    if preferred_name in runtime_set and preferred_name in seed_set:
-        return preferred_name, preferred_name, None
-
-    shared_names = sorted(runtime_set & seed_set)
-    if len(shared_names) == 1:
-        return shared_names[0], shared_names[0], None
-    return None, None, "could not infer a unique runtime/seed DB pair"
-
-
-def resolve_db_pair(site_root: Path, site: str) -> tuple[Path | None, Path | None, str | None]:
-    runtime_dir = site_root / "instance"
-    seed_dir = site_root / "instance_seed"
-    if not runtime_dir.exists() or not seed_dir.exists():
-        return None, None, "runtime or seed DB directory is missing locally"
-
-    runtime_files = sorted(runtime_dir.glob("*.db"))
-    seed_files = sorted(seed_dir.glob("*.db"))
-    runtime_by_name = {path.name: path for path in runtime_files}
-    seed_by_name = {path.name: path for path in seed_files}
-    runtime_name, seed_name, problem = select_db_pair_names(
-        sorted(runtime_by_name), sorted(seed_by_name), site
-    )
-    if problem or runtime_name is None or seed_name is None:
-        if problem and "missing" in problem:
-            problem += " locally"
-        return None, None, problem
-    return runtime_by_name[runtime_name], seed_by_name[seed_name], None
-
-
 DOCKER_SITE_ROOT = "/opt/WebSyn"
 
 
@@ -286,43 +275,43 @@ class DbCheck:
     runtime_hash: str | None
     seed_hash: str | None
     detail: str
+    files: list[dict[str, Any]] = field(default_factory=list)
 
 
-def docker_md5(container: str, dirs: list[str]) -> dict[str, str]:
-    """Hash the selected runtime/seed DB pair inside a running container."""
-    if len(dirs) != 2:
-        raise RuntimeError("docker DB hashing requires runtime and seed directories")
+def db_inventory(directory: Path) -> dict[str, str]:
+    """Hash every DB; refuse active SQLite sidecars instead of ignoring writes."""
+    if not directory.is_dir():
+        raise OSError(f"missing DB directory: {directory}")
+    for pattern in ("*.db-wal", "*.db-journal"):
+        for sidecar in directory.glob(pattern):
+            if sidecar.stat().st_size:
+                raise OSError(f"nonempty SQLite sidecar prevents byte-parity verification: {sidecar}")
+    paths = sorted(directory.glob("*.db"))
+    if not paths:
+        raise OSError(f"no DB files in {directory}")
+    return {path.name: md5_file(path) for path in paths}
 
-    entries_by_dir: dict[str, dict[str, str]] = {}
-    for directory in dirs:
-        cmd = ["docker", "exec", container, "sh", "-c",
-               f"md5sum {shlex.quote(directory)}/*.db"]
-        try:
-            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        except (OSError, subprocess.SubprocessError) as exc:
-            raise RuntimeError(f"docker exec failed: {exc}") from None
-        if proc.returncode != 0:
-            raise RuntimeError(
-                f"docker exec failed for {directory}: "
-                f"{proc.stderr.strip() or f'exit {proc.returncode}'}"
-            )
-        entries: dict[str, str] = {}
-        for line in proc.stdout.splitlines():
-            parts = line.split(None, 1)
-            if len(parts) == 2:
-                entries[Path(parts[1].strip()).name] = parts[0]
-        entries_by_dir[directory] = entries
 
-    site = Path(dirs[0]).parent.name
-    runtime_name, seed_name, problem = select_db_pair_names(
-        sorted(entries_by_dir[dirs[0]]), sorted(entries_by_dir[dirs[1]]), site
-    )
-    if problem or runtime_name is None or seed_name is None:
-        raise RuntimeError(problem or "no *.db found")
-    return {
-        dirs[0]: entries_by_dir[dirs[0]][runtime_name],
-        dirs[1]: entries_by_dir[dirs[1]][seed_name],
-    }
+def docker_md5(container: str, dirs: list[str]) -> dict[str, dict[str, str]]:
+    """Run the same inventory implementation inside the selected container."""
+    import inspect
+
+    script = ("import hashlib, json, sys\nfrom pathlib import Path\n"
+              + inspect.getsource(md5_file) + "\n" + inspect.getsource(db_inventory)
+              + "\nprint(json.dumps({d: db_inventory(Path(d)) for d in sys.argv[1:]}))\n")
+    try:
+        proc = subprocess.run(
+            ["docker", "exec", container, "python3", "-c", script, *dirs],
+            capture_output=True, text=True, timeout=60,
+        )
+        if proc.returncode:
+            raise RuntimeError(proc.stderr.strip() or f"exit {proc.returncode}")
+        inventories = json.loads(proc.stdout)
+        if not isinstance(inventories, dict) or set(inventories) != set(dirs):
+            raise ValueError("unexpected DB inventory directories")
+        return inventories
+    except (OSError, subprocess.SubprocessError, ValueError) as exc:
+        raise RuntimeError(f"docker DB inventory failed: {exc}") from None
 
 
 def check_db_parity(
@@ -334,91 +323,60 @@ def check_db_parity(
     collector: Collector,
     reset_succeeded: bool,
 ) -> DbCheck:
-    """Compare a site's runtime DB against its seed in the configured source.
-
-    The control plane resets DOCKER_SITE_ROOT/<site>/instance inside the deployment.
-    Only a source the caller pointed at is hashed, and the source is always reported,
-    so a PASS can never be read as a statement about an environment that was not read.
-    """
     if docker_container:
         base = f"{DOCKER_SITE_ROOT}/{site}"
         source = f"docker:{docker_container}:{base}"
-        runtime_dir, seed_dir = f"{base}/instance", f"{base}/instance_seed"
-        if not reset_succeeded:
-            return DbCheck(
-                "SKIP", source, runtime_dir, seed_dir, None, None,
-                "no successful reset to verify; DB parity not evaluated",
-            )
-        hasher = container_hasher or docker_md5
-        try:
-            container_hashes = hasher(docker_container, [runtime_dir, seed_dir])
-        except Exception as exc:  # noqa: BLE001 - reported, never raised to the user
-            collector.error(f"could not hash DBs in container: {exc}", site=site)
-            return DbCheck("FAIL", source, runtime_dir, seed_dir, None, None, str(exc))
-        runtime_hash, seed_hash = container_hashes.get(runtime_dir), container_hashes.get(seed_dir)
-        if runtime_hash and runtime_hash == seed_hash:
-            return DbCheck("PASS", source, runtime_dir, seed_dir, runtime_hash,
-                           seed_hash, "runtime DB matches seed DB")
-        detail = (
-            "runtime DB MD5 differs from seed DB after reset" if reset_succeeded
-            else "runtime DB MD5 differs from seed DB (no successful reset this run)"
-        )
-        collector.error(detail, site=site, file=runtime_dir)
-        return DbCheck("FAIL", source, runtime_dir, seed_dir, runtime_hash, seed_hash,
-                       detail)
-
-    if db_root is None:
-        # The DB source has to be asked for. Falling back to this checkout whenever it
-        # happens to carry an instance/ directory would produce a parity verdict --
-        # green or red -- without ever reading the DBs the control plane resets.
+    elif db_root is not None:
+        base = str(Path(db_root) / site)
+        source = f"local:{base}"
+    else:
         return DbCheck(
             "SKIP", "none", None, None, None, None,
             "no DB source configured; the control plane resets "
             f"{DOCKER_SITE_ROOT}/{site}/instance inside the deployment. "
             "Pass --docker-container or --db-root to check DB parity.",
         )
-
-    base_dir = Path(db_root)
-    site_root = base_dir / site
-    source = f"local:{site_root}"
-    runtime_db, seed_db, problem = resolve_db_pair(site_root, site)
-    if problem:
-        detail = f"{problem} under --db-root {base_dir}"
-        if "missing" in problem:
-            # The caller pointed at a root that does not hold this site's DBs, so the
-            # check they asked for cannot run at all.
-            collector.error(detail, site=site, file=str(site_root))
-            return DbCheck("FAIL", source, None, None, None, None, detail)
-        # The root is plausible but this site's DB pair is undecidable; report it
-        # rather than guessing which file to compare.
-        collector.warn(detail, site=site, file=str(site_root))
-        return DbCheck("SKIP", source, None, None, None, None, detail)
-
-    assert runtime_db is not None and seed_db is not None
+    runtime_dir, seed_dir = f"{base}/instance", f"{base}/instance_seed"
     if not reset_succeeded:
-        # Nothing to attribute a parity verdict to.
-        return DbCheck(
-            "SKIP", source, str(runtime_db), str(seed_db), None, None,
-            "no successful reset to verify; DB parity not evaluated",
-        )
-    hashes: list[str] = []
-    for db_path in (runtime_db, seed_db):
-        try:
-            hashes.append(md5_file(db_path))
-        except OSError as exc:
-            detail = f"could not read local DB: {exc}"
-            collector.error(detail, site=site, file=str(db_path))
-            return DbCheck(
-                "FAIL", source, str(runtime_db), str(seed_db), None, None, detail
-            )
-    runtime_hash, seed_hash = hashes
-    if runtime_hash == seed_hash:
-        return DbCheck("PASS", source, str(runtime_db), str(seed_db), runtime_hash,
-                       seed_hash, "runtime DB matches seed DB")
-    detail = "local runtime DB differs from local seed DB"
-    collector.error(detail, site=site, file=str(runtime_db))
-    return DbCheck("FAIL", source, str(runtime_db), str(seed_db), runtime_hash,
-                   seed_hash, detail)
+        return DbCheck("SKIP", source, runtime_dir, seed_dir, None, None,
+                       "no successful reset to verify; DB parity not evaluated")
+    try:
+        if docker_container:
+            inventories = (container_hasher or docker_md5)(docker_container, [runtime_dir, seed_dir])
+        else:
+            inventories = {d: db_inventory(Path(d)) for d in (runtime_dir, seed_dir)}
+        for directory in (runtime_dir, seed_dir):
+            entries = inventories[directory]
+            if not isinstance(entries, dict) or not entries or any(
+                not isinstance(name, str) or Path(name).name != name or not name.endswith(".db")
+                or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{32}", digest)
+                for name, digest in entries.items()
+            ):
+                raise ValueError(f"invalid DB inventory: {directory}")
+    except Exception as exc:  # noqa: BLE001 - failures remain structured
+        detail = f"could not read {'container' if docker_container else 'local'} DB inventory: {exc}"
+        collector.error(detail, site=site, file=getattr(exc, "filename", None) or base)
+        return DbCheck("FAIL", source, runtime_dir, seed_dir, None, None, detail)
+    runtime, seed = inventories[runtime_dir], inventories[seed_dir]
+    files = [
+        {"name": name, "runtime_hash": runtime.get(name), "seed_hash": seed.get(name),
+         "status": "PASS" if name in runtime and name in seed and runtime[name] == seed[name] else "FAIL"}
+        for name in sorted(runtime.keys() | seed.keys())
+    ]
+    failed = [entry["name"] for entry in files if entry["status"] == "FAIL"]
+    detail = (f"DB inventory/hash mismatch: {', '.join(failed)}" if failed else
+              f"all {len(files)} runtime DBs match the seed inventory and bytes")
+    if failed:
+        collector.error(detail, site=site, file=runtime_dir)
+    # Preserve the old single-DB fields; multi-DB results use md5_files.
+    single = files[0] if len(files) == 1 else None
+    return DbCheck(
+        "FAIL" if failed else "PASS", source,
+        f"{runtime_dir}/{single['name']}" if single else runtime_dir,
+        f"{seed_dir}/{single['name']}" if single else seed_dir,
+        single["runtime_hash"] if single else None,
+        single["seed_hash"] if single else None, detail, files,
+    )
 
 
 class RejectControlRedirects(HTTPRedirectHandler):
@@ -434,15 +392,25 @@ def http_request(
     method: str = "GET",
     timeout: float = 10.0,
     bearer_token: str | None = None,
+    control_kind: str | None = None,
+    expected_sites: dict[str, int] | None = None,
 ) -> tuple[bool, int | None, str]:
     request = Request(url, method=method)
     open_request = urlopen
     if bearer_token:
         request.add_unredirected_header("Authorization", f"Bearer {bearer_token}")
+    if bearer_token or control_kind:
         open_request = build_opener(RejectControlRedirects()).open
     try:
         with open_request(request, timeout=timeout) as response:
-            body = response.read(512)
+            body = response.read(1024 * 1024 + 1 if control_kind else 512)
+            if control_kind:
+                try:
+                    if response.status != 200 or len(body) > 1024 * 1024:
+                        raise ValueError("expected HTTP 200 with a bounded JSON body")
+                    validate_control_response(json.loads(body), control_kind, expected_sites or {})
+                except (ValueError, TypeError, KeyError) as exc:
+                    return False, response.status, f"invalid {control_kind} response: {exc}"
             detail = f"HTTP {response.status}"
             if body:
                 detail += f" ({len(body)} byte(s) read)"
@@ -455,11 +423,37 @@ def http_request(
         if "Connection refused" in detail or "[WinError 10061]" in detail:
             detail += " (server may not be running)"
         return False, None, detail
-    except OSError as exc:
+    except (OSError, ValueError, HTTPException) as exc:
         detail = str(exc)
         if "Connection refused" in detail or "[WinError 10061]" in detail:
             detail += " (server may not be running)"
         return False, None, detail
+
+
+def validate_control_response(payload: Any, kind: str, expected: dict[str, int]) -> None:
+    if not isinstance(payload, dict):
+        raise ValueError("expected an object")
+    def reset_entry(entry: Any, site: str) -> bool:
+        return (isinstance(entry, dict) and entry.get("site") == site
+                and entry.get("ready") is True and not entry.get("error")
+                and type(entry.get("pid")) is int and entry["pid"] > 0)
+    if kind == "reset":
+        if len(expected) != 1 or not reset_entry(payload, next(iter(expected))):
+            raise ValueError("reset must identify the requested site and a ready process")
+        return
+    entries = payload.get("sites")
+    if payload.get("ok") is not True or not isinstance(entries, dict) or set(entries) != set(expected):
+        raise ValueError("expected ok=true and exactly the registered sites")
+    if kind == "reset-all":
+        if payload.get("partial") is not False or not all(reset_entry(entries[s], s) for s in expected):
+            raise ValueError("every reset result must be ready; partial resets fail")
+    elif kind == "health":
+        if not all(isinstance(entries[s], dict) and entries[s].get("alive") is True
+                   and entries[s].get("ready") is True and entries[s].get("port") == port
+                   for s, port in expected.items()):
+            raise ValueError("site readiness or registry ports do not match")
+    else:
+        raise ValueError("unknown control response kind")
 
 
 def normalize_control_url(url: str) -> str:
@@ -482,14 +476,15 @@ def build_homepage_url(base_host: str, port: int) -> str:
 def check_control_health(
     control_url: str, timeout: float, collector: Collector,
     control_token: str | None = None,
+    expected_sites: dict[str, int] | None = None,
 ) -> ControlCheck:
     url = f"{control_url}/health"
-    ok, status_code, detail = http_request(url, timeout=timeout, bearer_token=control_token)
+    ok, status_code, detail = http_request(
+        url, timeout=timeout, bearer_token=control_token,
+        control_kind="health", expected_sites=expected_sites,
+    )
     if ok:
         return ControlCheck(url=url, status="PASS", http_status=status_code, detail=detail)
-    if status_code == 404:
-        collector.warn("control server health endpoint is missing; skipping health validation", url=url)
-        return ControlCheck(url=url, status="SKIP", http_status=status_code, detail=detail)
     collector.error("control server health check failed", url=url)
     return ControlCheck(url=url, status="FAIL", http_status=status_code, detail=detail)
 
@@ -508,8 +503,9 @@ def check_site(
     db_root: str | None = None,
     docker_container: str | None = None,
     container_hasher: Any = None,
+    host_port: int | None = None,
 ) -> SiteCheck:
-    homepage_url = build_homepage_url(base_host, port)
+    homepage_url = build_homepage_url(base_host, host_port if host_port is not None else port)
 
     if use_reset_all:
         if reset_all_ok:
@@ -526,6 +522,7 @@ def check_site(
         reset_url = f"{control_url}/reset/{site}"
         ok, status_code, detail = http_request(
             reset_url, method="POST", timeout=timeout, bearer_token=control_token,
+            control_kind="reset", expected_sites={site: port},
         )
         if ok:
             reset_status = "PASS"
@@ -570,6 +567,7 @@ def check_site(
         md5_runtime_hash=db.runtime_hash,
         md5_seed_hash=db.seed_hash,
         md5_detail=db.detail,
+        md5_files=db.files,
     )
 
 
@@ -580,12 +578,13 @@ def run_checks(
     control_url: str = "http://localhost:8101",
     control_token: str | None = None,
     base_host: str = "localhost",
-    timeout: float = 10.0,
+    timeout: float = 120.0,
     strict: bool = False,
     reset_all: bool = False,
     db_root: str | None = None,
     docker_container: str | None = None,
     container_hasher: Any = None,
+    site_ports: dict[str, int] | None = None,
 ) -> SmokeResult:
     collector = Collector()
     control_url = normalize_control_url(control_url)
@@ -611,6 +610,16 @@ def run_checks(
             warnings=collector.warnings,
         )
 
+    if site is not None and reset_all:
+        collector.error("--site and --reset-all are mutually exclusive; reset-all affects every site")
+        return empty("conflicting reset scope; no requests sent")
+    if db_root is not None and docker_container is not None:
+        collector.error("--db-root and --docker-container are mutually exclusive")
+        return empty("conflicting DB sources; no requests sent")
+    if not math.isfinite(timeout) or timeout <= 0:
+        collector.error("--timeout must be finite and positive")
+        return empty("invalid timeout; no requests sent")
+
     if control_token is not None and (
         len(control_token) < 32 or any(not 33 <= ord(c) <= 126 for c in control_token)
     ):
@@ -623,6 +632,11 @@ def run_checks(
         # Registry drift and unreadable registries are findings, not crashes.
         collector.error(str(exc), file=str(root))
         return empty("site registry could not be resolved")
+    site_ports = site_ports or {}
+    if any(name not in site_map or type(port) is not int or not 1 <= port <= 65535
+           for name, port in site_ports.items()):
+        collector.error("--site-port requires a registered site and a host port in 1..65535")
+        return empty("invalid host port mapping; no requests sent")
     if site is not None:
         if site not in site_map:
             collector.error(f"unknown site '{site}'")
@@ -649,12 +663,17 @@ def run_checks(
     else:
         filtered_sites = site_map
 
-    control = check_control_health(control_url, timeout, collector, control_token)
+    host_ports = [site_ports.get(name, port) for name, port in filtered_sites.items()]
+    if len(host_ports) != len(set(host_ports)):
+        collector.error("homepage host port mappings overlap")
+        return empty("overlapping host ports; no requests sent")
+    control = check_control_health(control_url, timeout, collector, control_token, site_map)
     reset_all_ok = False
     if reset_all:
         reset_all_url = f"{control_url}/reset-all"
         ok, status_code, detail = http_request(
             reset_all_url, method="POST", timeout=timeout, bearer_token=control_token,
+            control_kind="reset-all", expected_sites=site_map,
         )
         if ok:
             reset_all_ok = True
@@ -677,6 +696,7 @@ def run_checks(
             db_root=db_root,
             docker_container=docker_container,
             container_hasher=container_hasher,
+            host_port=site_ports.get(site_slug),
         )
         for site_slug, port in filtered_sites.items()
     ]
@@ -771,8 +791,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--timeout",
         type=float,
-        default=10.0,
-        help="HTTP timeout in seconds for control and homepage checks",
+        default=120.0,
+        help="HTTP timeout in seconds (default: 120; resets can take over 60 seconds)",
     )
     parser.add_argument(
         "--db-root",
@@ -789,6 +809,10 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "Hash each site's DBs inside this running container under "
             f"{DOCKER_SITE_ROOT}/<site>, i.e. where the control plane actually resets them."
         ),
+    )
+    parser.add_argument(
+        "--site-port", action="append", default=[], metavar="SITE=PORT",
+        help="Override a homepage host port; repeat for non-default published ports",
     )
     parser.add_argument("--strict", action="store_true", help="Treat warnings as failures")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON only")
@@ -808,6 +832,12 @@ def main(
 ) -> int:
     args = build_arg_parser().parse_args(argv)
     target_root = root or Path(__file__).resolve().parents[1]
+    site_ports = {}
+    for mapping in args.site_port:
+        name, separator, value = mapping.partition("=")
+        if not separator or not value.isdecimal() or name in site_ports:
+            build_arg_parser().error("--site-port must be SITE=PORT with no repeated site")
+        site_ports[name] = int(value)
     result = run_checks(
         target_root,
         site=args.site,
@@ -819,6 +849,7 @@ def main(
         reset_all=args.reset_all,
         db_root=args.db_root,
         docker_container=args.docker_container,
+        site_ports=site_ports,
     )
     stream = stdout if stdout is not None else sys.stdout
     if args.json:
