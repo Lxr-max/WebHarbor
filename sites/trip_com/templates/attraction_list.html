@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Top Activities and Things to Do in {{ city.name }} | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; Attractions &amp; Tours &gt; <b>Things to do in {{ city.name }}</b></div>
+
+<div class="results-head">
+  <div class="results-count">Top activities and things to do in {{ city.name }}</div>
+  <div class="sort-links">
+    <a href="{{ url_for('attraction_list', city_slug=city.slug) }}?{{ keep_args(sort='recommended') }}" class="{{ 'active' if sort == 'recommended' }}">Recommended</a>
+    <a href="{{ url_for('attraction_list', city_slug=city.slug) }}?{{ keep_args(sort='price') }}" class="{{ 'active' if sort == 'price' }}">Lowest price</a>
+    <a href="{{ url_for('attraction_list', city_slug=city.slug) }}?{{ keep_args(sort='rating') }}" class="{{ 'active' if sort == 'rating' }}">Top rated</a>
+  </div>
+</div>
+
+<div class="list-layout">
+  <form class="filters" method="get" action="{{ url_for('attraction_list', city_slug=city.slug) }}">
+    <h3>Categories</h3>
+    <label class="frow"><input type="radio" name="category" value="" {% if not category %}checked{% endif %}> All categories</label>
+    {% for cat in categories %}
+    <label class="frow"><input type="radio" name="category" value="{{ cat }}" {% if category == cat %}checked{% endif %}> {{ cat }}</label>
+    {% endfor %}
+    <button class="btn filter-btn" type="submit">Apply</button>
+  </form>
+
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fill, minmax(240px, 1fr))">
+    {% for a in attractions %}
+    <a class="attr-card" href="{{ url_for('attraction_detail', attraction_id=a.id) }}">
+      {% if a.img %}<img src="{{ url_for('static', filename='images/' + a.img) }}" alt="{{ a.name }}">{% endif %}
+      <div class="ac-body">
+        <div class="ac-name">{{ a.name }}</div>
+        <div class="ac-meta">{{ '%.1f'|format(a.rating) }}/5 &middot; {{ a.reviews_count }} reviews &middot; {{ a.category }}</div>
+        <div class="ac-price">From ${{ '%.2f'|format(a.price_from) }}</div>
+        <div class="ac-meta">{{ a.booked_count }} booked</div>
+      </div>
+    </a>
+    {% else %}
+    <div class="empty-note">No activities in this category yet.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}My profile — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card" style="margin-bottom:20px">
+    <div class="author-row">
+      {% if current_user.avatar %}<img class="avatar-lg" src="{{ current_user.avatar }}" alt="{{ current_user.display_name }}">{% endif %}
+      <div>
+        <h1 style="margin:0">{{ current_user.display_name }}</h1>
+        <p class="muted" style="margin:2px 0">@{{ current_user.username }}
+          {% if current_user.home_country %} · {{ current_user.home_country }}{% endif %}</p>
+        {% if current_user.bio %}<p class="small" style="margin:2px 0">{{ current_user.bio }}</p>{% endif %}
+      </div>
+    </div>
+    <form method="post" style="margin-top:14px" class="card-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label class="small muted">Display name</label>
+      <input type="text" name="display_name" value="{{ current_user.display_name }}" maxlength="80">
+      <label class="small muted">Home country</label>
+      <input type="text" name="home_country" value="{{ current_user.home_country or '' }}" maxlength="60">
+      <label class="small muted">Bio</label>
+      <textarea name="bio" rows="2" maxlength="280">{{ current_user.bio or '' }}</textarea>
+      <button type="submit">Save profile</button>
+    </form>
+  </div>
+
+  <h2>My trips</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for t in my_trips %}
+      <a class="tile" href="{{ url_for('plan', edit_key=t.edit_key) }}">
+        <div class="pad">
+          <h3>{{ t.title }}</h3>
+          <span class="small muted">{{ t.start_date }} · {{ t.privacy }}
+            {% if t.collaborators_count %} · {{ t.collaborators_count }} collaborator{{ 's' if t.collaborators_count != 1 else '' }}{% endif %}</span>
+        </div>
+      </a>
+    {% else %}
+      <p class="muted">No trips yet — <a href="{{ url_for('plan_new') }}">create one</a>.</p>
+    {% endfor %}
+  </div>
+
+  <h2>Shared with me</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for t in shared %}
+      <a class="tile" href="{{ url_for('plan', edit_key=t.edit_key) }}">
+        <div class="pad">
+          <h3>{{ t.title }}</h3>
+          <span class="small muted">by {{ t.owner.display_name }}</span>
+        </div>
+      </a>
+    {% else %}
+      <p class="muted">No trips have been shared with you yet.</p>
+    {% endfor %}
+  </div>
+
+  <h2>Guides I like</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for g in liked_guides %}
+      <a class="tile" href="{{ url_for('guide_view', key=g.key) }}">
+        {% if g.header_image %}<img class="cover" src="{{ g.header_image }}" alt="{{ g.title }}">{% endif %}
+        <div class="pad">
+          <h3>{{ g.title }}</h3>
+          <span class="small muted">{{ g.place_count }} places · {{ '{:,}'.format(g.view_count) }} views</span>
+        </div>
+      </a>
+    {% else %}
+      <p class="muted">You haven't liked any guides yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}My Account | Backcountry.com{% endblock %}
+{% block body %}
+<div class="account-page">
+  <h1>Hi, {{ current_user.display_name }}</h1>
+  <p class="account-email">{{ current_user.email }}</p>
+  <nav class="account-nav">
+    <a href="/account">Orders</a>
+    <a href="/account/addresses">Addresses</a>
+    <a href="/wish-list">Wish List</a>
+    <a href="/logout">Sign Out</a>
+  </nav>
+
+  <section class="account-orders">
+    <h2>Your Orders</h2>
+    {% if orders %}
+    <div role="region" aria-label="Order history" tabindex="0" style="max-width:100%;overflow-x:auto"><table class="orders-table">
+      <thead><tr><th>Order #</th><th>Placed</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        {% for o in orders %}
+        <tr>
+          <td><a href="/account/orders/{{ o.number }}">{{ o.number }}</a></td>
+          <td>{{ o.placed_at }}</td>
+          <td>{{ o.items|map(attribute='quantity')|sum }}</td>
+          <td>{{ money(o.total_cents) }}</td>
+          <td>{{ o.status_label }}</td>
+          <td><a href="/account/orders/{{ o.number }}">View</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table></div>
+    {% else %}
+    <p>No orders yet — <a href="/">start shopping</a>.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

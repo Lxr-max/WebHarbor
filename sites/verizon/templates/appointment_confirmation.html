@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Appointment confirmed{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Your appointment is confirmed</h1>
+  <div class="card">
+    <h2>Confirmation {{ appt.confirmation }}</h2>
+    <p>Store: {{ appt.store.display_type() }} — {{ appt.store.name }}</p>
+    <p>{{ appt.store.street }}, {{ appt.store.city }}, {{ appt.store.state }} {{ appt.store.zip }}</p>
+    <p>Topic: {{ appt.topic }}</p>
+    <p>When: {{ appt.appt_date }} at {{ appt.appt_time }}</p>
+    <p>Contact: {{ appt.name }} — {{ appt.email }} — {{ appt.phone }}</p>
+    <p>Status: {{ appt.status }}</p>
+  </div>
+</section>
+{% endblock %}

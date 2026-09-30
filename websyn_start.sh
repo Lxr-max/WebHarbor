@@ -1,11 +1,14 @@
 #!/bin/bash
-# WebSyn startup: launch all 12 mirror sites, then exec the original CMD.
-# This preserves the base image's browser env server (port 8100) as PID 1.
+# WebSyn startup: launch all mirror sites, then exec the control plane.
+# The control server becomes PID 1 after all per-site supervisors are launched.
 set -e
 
-SITES=(allrecipes amazon apple arxiv bbc_news booking github
-       google_flights google_map google_search huggingface wolfram_alpha
-       cambridge_dictionary coursera espn)
+if [[ ${#WEBSYN_CONTROL_TOKEN} -lt 32 ]]; then
+    echo "[WebSyn] WEBSYN_CONTROL_TOKEN is required and must contain at least 32 characters" >&2
+    exit 1
+fi
+
+SITES=( allrecipes amazon apple arxiv bbc_news booking github google_flights google_map google_search huggingface wolfram_alpha cambridge_dictionary coursera espn merriam_webster ikea phys_org target ted osu rotten_tomatoes compass walmart_careers fedex webmd_doctor healthline kaggle nvidia berkeley bh_photo accuweather gov_uk imdb nba recreation_gov boardgamegeek carmax babycenter amtrak cookpad craigslist drugs_com versus y_combinator phet_simulations discogs google_finance bandcamp adopt_a_pet ign irs_refund wineaccess webmd petfinder mega 4shared 9gag akc bestbuy youtube weather amazon_jobs cboe better_business_bureau birkenstock americas_health_rankings american_express carnival_cruise california_gov coolmath4kids chase flightaware chronicle_jobs dillards google_shopping imgur instructure league_of_legends healthgrades kelley_blue_book uniqlo macys_wine_shop jcpenney landwatch medicare_gov marriott megabus michaels micro_center ohiomeansjobs ohio_gov nfl mta public_storage  raising_canes re_max parkers ryanair chess_com porsche qatar_airways soundcloud speedo sourceforge stubhub spothero student_com statista thumbtack ticketmaster trip_com the_weather_network super_lawyers tourradar apartments_com eventbrite fandom mayo_clinic smartasset us_doj cvs u_s_customs ups united_airlines us_appliance uscis tumblr zara usps wanderlog virginia_dmv verizon ziprecruiter carvana coinmarketcap cars_com airbnb backcountry disney)
 BASE_PORT=40000
 PID_DIR=/tmp/websyn_pids
 mkdir -p "$PID_DIR"
@@ -17,16 +20,17 @@ for d in "${SITES[@]}"; do
     cp -a "/opt/WebSyn/$d/instance_seed" "/opt/WebSyn/$d/instance"
 done
 
-echo "[WebSyn] Starting 15 sites on ports ${BASE_PORT}-$((BASE_PORT + 14))..."
+SITE_COUNT=${#SITES[@]}
+END_PORT=$((BASE_PORT + SITE_COUNT - 1))
+echo "[WebSyn] Starting ${SITE_COUNT} sites on ports ${BASE_PORT}-${END_PORT}..."
 for i in "${!SITES[@]}"; do
     site="${SITES[$i]}"
     port=$((BASE_PORT + i))
     # Spawn via /opt/site_runner.py supervisor so SIGTERM works.
     # See site_runner.py for the rationale (Werkzeug ignores SIGTERM).
-    exec python3 /opt/site_runner.py "$site" "$port" \
+    exec env -u WEBSYN_CONTROL_TOKEN python3 /opt/site_runner.py "$site" "$port" \
         > "/tmp/websyn_${site}.log" 2>&1 &
-    echo "$!" > "$PID_DIR/${site}.pid"
-    echo "  $site -> port $port (PID $!)"
+    echo "  $site -> port $port (PID $!; identity record written by supervisor)"
 done
 
 
@@ -51,14 +55,15 @@ except Exception: exit(1)
             ready=$((ready + 1))
         fi
     done
-    echo "  [${elapsed}/${max_wait}s] ${ready}/15 sites ready"
-    if [ $ready -eq 15 ]; then
+    echo "  [${elapsed}/${max_wait}s] ${ready}/${SITE_COUNT} sites ready"
+    if [ $ready -eq $SITE_COUNT ]; then
         break
     fi
 done
 
 # Final status report
 echo "[WebSyn] Site status:"
+failed=0
 for i in "${!SITES[@]}"; do
     site="${SITES[$i]}"
     port=$((BASE_PORT + i))
@@ -72,12 +77,19 @@ except Exception: exit(1)
         echo "  [OK] $site :$port"
     else
         echo "  [!!] $site :$port FAILED -- check /tmp/websyn_${site}.log"
+        failed=1
     fi
 done
+
+if [ "$failed" -ne 0 ]; then
+    echo "[WebSyn] Startup failed; stopping site supervisors." >&2
+    python3 /opt/control_server.py --stop-sites || true
+    exit 1
+fi
 
 echo "[WebSyn] Starting control server on :8101 (PID 1)..."
 
 # Control server becomes PID 1 — receives SIGTERM on `docker stop`,
-# keeps the container alive as long as it's running. The 15 site
+# keeps the container alive as long as it is running. Site
 # subprocesses are managed via /tmp/websyn_pids/<site>.pid.
 exec python3 /opt/control_server.py --port 8101

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Thumbtack | Care for Your Home | Find Local Pros & Reviews{% endblock %}</title>
+  <meta name="description" content="{% block description %}Find local pros for repairs, upgrades, and projects big or small — all in one place.{% endblock %}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="tt-header">
+  <div class="tt-header-inner">
+    <a class="tt-logo-link" href="/" aria-label="Thumbtack Home">{% include '_logo_black.html' %}</a>
+    <nav class="tt-nav">
+      <a href="/near-me" class="tt-nav-link">Explore Services</a>
+      <a href="/pro" class="tt-nav-link">Join as a pro</a>
+      {% if current_user.is_authenticated %}
+        <a href="/account" class="tt-nav-link">{{ current_user.display_name.split(' ')[0] }}</a>
+        <a href="/logout" class="tt-nav-link">Log out</a>
+      {% else %}
+        <a href="/login" class="tt-nav-link">Log in</a>
+        <a href="/register" class="tt-nav-link tt-nav-cta">Sign up</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="tt-flashes">
+      {% for m in messages %}<div class="tt-flash">{{ m }}</div>{% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main class="tt-main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-brand">
+      <a href="/" class="tt-logo-link">{% include '_logo_white.html' %}</a>
+      <p class="tt-footer-tag">Consider it done.</p>
+    </div>
+    <div class="tt-footer-cols">
+      <div class="tt-footer-col">
+        <h4>About</h4>
+        <a href="/guarantee">Thumbtack Guarantee</a>
+        <a href="/how-it-works">How Thumbtack works</a>
+        <a href="/near-me">Services near me</a>
+        <a href="/prices">Cost estimates</a>
+      </div>
+      <div class="tt-footer-col">
+        <h4>For customers</h4>
+        <a href="/how-it-works">How to use Thumbtack</a>
+        <a href="/register">Sign up</a>
+        <a href="/login">Log in</a>
+      </div>
+      <div class="tt-footer-col">
+        <h4>For pros</h4>
+        <a href="/pro">Join as a pro</a>
+        <a href="/pro">Thumbtack for pros</a>
+      </div>
+      <div class="tt-footer-col">
+        <h4>Popular near you</h4>
+        <a href="/k/house-cleaning/near-me">House cleaners near me</a>
+        <a href="/k/affordable-plumbing-services/near-me">Plumbers near me</a>
+        <a href="/k/interior-painting/near-me">Interior painters near me</a>
+        <a href="/k/handyman/near-me">Handymen near me</a>
+      </div>
+    </div>
+    <div class="tt-footer-bottom">
+      <span>© 2026 Thumbtack Mirror — for benchmark use</span>
+      <span class="tt-footer-cities">
+        <a href="/wa/seattle">Seattle</a> · <a href="/wa/kirkland">Kirkland</a> ·
+        <a href="/wa/bellevue">Bellevue</a> · <a href="/wa/everett">Everett</a> ·
+        <a href="/wa/lynnwood">Lynnwood</a> · <a href="/wa/redmond">Redmond</a> ·
+        <a href="/wa/bothell">Bothell</a> · <a href="/wa/tacoma">Tacoma</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

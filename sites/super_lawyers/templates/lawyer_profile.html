@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block title %}{{ lawyer.tagline or lawyer.name }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="/attorneys/{{ lawyer.state_slug }}/{{ lawyer.city_slug }}/">{{ city.name if city else lawyer.city_slug }}, {{ state.name if state else lawyer.state_slug }}</a> ›
+    <span>{{ lawyer.name }}</span>
+  </nav>
+
+  <div class="profile-hero">
+    <div class="profile-head">
+      <h1 id="attorney_name">{{ lawyer.name }}</h1>
+      <h2 id="attorney_profile_tagline">{{ lawyer.tagline }}</h2>
+      {% if lawyer.firm %}
+        <a class="profile-firm-link" href="/profiles/{{ lawyer.firm.state_slug }}/{{ lawyer.firm.city_slug }}/lawfirm/{{ lawyer.firm.slug }}/{{ lawyer.firm.uuid }}.html">{{ lawyer.firm.name }}</a>
+      {% endif %}
+    </div>
+    <div class="profile-photo">
+      <img src="{{ url_for('static', filename=lawyer.photo()) }}" alt="{{ lawyer.name }}" width="200" height="250">
+    </div>
+    <div class="profile-side">
+      {% if lawyer.phone %}
+      <p class="profile-phone-row">
+        <h2 class="call-label">Call today:</h2>
+        <a class="profile-phone" href="tel:{{ lawyer.phone|replace('-', '') }}">{{ lawyer.phone }}</a>
+      </p>
+      {% endif %}
+      <p><a class="btn btn-primary" href="/profiles/contact/lawyer/{{ lawyer.uuid }}.html">Contact me today</a></p>
+      {% if lawyer.side_practice_areas %}
+      <p id="pa_areas"><span class="fw-bold">Practice areas:</span> {{ lawyer.side_practice_areas }}</p>
+      {% endif %}
+      {% if lawyer.licensed_since %}
+      <p id="licensed_since"><span class="fw-bold">Licensed in {{ state.name if state else lawyer.state_slug }} since:</span> {{ lawyer.licensed_since }}</p>
+      {% endif %}
+      {% if lawyer.education %}
+      <p id="law_school"><span class="fw-bold">Education:</span> {{ lawyer.education }}</p>
+      {% endif %}
+      {% if lawyer.sl_years %}
+      <p class="selection-row"><img src="{{ url_for('static', filename='images/icon_sl_selection.png') }}" alt="" width="24" height="24"> Selected to Super Lawyers: {{ lawyer.sl_years }}</p>
+      {% endif %}
+      {% if lawyer.rs_years %}
+      <p class="selection-row"><img src="{{ url_for('static', filename='images/icon_rs_selection.png') }}" alt="" width="24" height="24"> Selected to Rising Stars: {{ lawyer.rs_years }}</p>
+      {% endif %}
+      {% if lawyer.languages %}
+      <p id="languages"><span class="fw-bold">Languages spoken:</span> {{ lawyer.languages|join(', ') }}</p>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('toggle_favorite', uuid=lawyer.uuid) }}" class="inline-form">
+        <button class="btn btn-outline" type="submit">Save attorney</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="profile-callout">
+    {% if lawyer.firm %}
+      <h2>{{ lawyer.firm.name }}</h2>
+      <p>{% for line in lawyer.office %}{{ line }}<br>{% endfor %}</p>
+      <p><a class="btn btn-outline" href="/profiles/{{ lawyer.firm.state_slug }}/{{ lawyer.firm.city_slug }}/lawfirm/{{ lawyer.firm.slug }}/{{ lawyer.firm.uuid }}.html">Visit firm profile</a></p>
+    {% elif lawyer.office %}
+      <h2>Office location</h2>
+      <p>{% for line in lawyer.office %}{{ line }}<br>{% endfor %}</p>
+    {% endif %}
+  </div>
+
+  <nav class="profile-tabs" aria-label="Profile sections">
+    <a href="#about">About</a>
+    {% if lawyer.practice_areas %}<a href="#practice-areas">Practice areas</a>{% endif %}
+    <a href="#achievements">Achievements</a>
+    <a href="#map">Map</a>
+    <a href="#contact">Contact me</a>
+  </nav>
+
+  <section id="about" class="profile-section">
+    <h2>About</h2>
+    {% for para in lawyer.about %}<p>{{ para }}</p>{% endfor %}
+  </section>
+
+  {% if lawyer.practice_areas %}
+  <section id="practice-areas" class="profile-section">
+    <h2>Practice areas</h2>
+    <h3>Practice areas</h3>
+    <p>{{ lawyer.practice_areas|join(', ') }}</p>
+    {% if lawyer.focus_areas %}
+    <h3>Focus areas</h3>
+    <p>{{ lawyer.focus_areas|join(', ') }}</p>
+    {% endif %}
+    {% if lawyer.pa_breakdown %}
+    {% set total = lawyer.pa_breakdown|map(attribute='pct')|sum %}
+    {% set colors = ['#D9B0ED', '#8C5BC1', '#FFD690', '#B7E3F5', '#C9E4B4'] %}
+    {% set stops = [] %}
+    {% set acc = 0 %}
+    {% for row in lawyer.pa_breakdown %}
+      {% set _ = stops.append(colors[loop.index0 % 5] ~ ' ' ~ acc ~ '% ' ~ (acc + 100 * row.pct / total)|round(1) ~ '%') %}
+      {% set acc = acc + 100 * row.pct / total %}
+    {% endfor %}
+    <div class="pa-breakdown">
+      <div class="pa-pie" role="img" aria-label="Practice area percentages"
+           style="background: conic-gradient({{ stops|join(', ') }});"></div>
+      <ul class="pa-legend" aria-label="Practice areas">
+        {% for row in lawyer.pa_breakdown %}
+        <li><span class="pa-dot" style="background: {{ colors[loop.index0 % 5] }}"></span>{{ row.pct }}% {{ row.area }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section id="achievements" class="profile-section">
+    <h2>Achievements</h2>
+    {% if lawyer.first_admitted %}
+    <p><span class="fw-bold">First Admitted:</span> {{ lawyer.first_admitted }}</p>
+    {% endif %}
+    {% if lawyer.professional_webpage %}
+    <p><span class="fw-bold">Professional Webpage:</span> <a href="{{ lawyer.professional_webpage }}" rel="nofollow">{{ lawyer.professional_webpage }}</a></p>
+    {% endif %}
+    {% if lawyer.honors %}
+    <h3>Honors</h3>
+    <ul class="honor-list">
+      {% for honor in lawyer.honors %}<li>{{ honor }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section id="map" class="profile-section">
+    <h2>Map</h2>
+    <h3>Office location for {{ lawyer.name }}</h3>
+    <p>{% for line in lawyer.office %}{{ line }}<br>{% endfor %}</p>
+  </section>
+
+  <section class="profile-section">
+    <h2>Selections</h2>
+    {% if lawyer.sl_years_count %}
+    <p><strong>{{ lawyer.sl_years_count }} Years</strong> — Super Lawyers</p>
+    {% endif %}
+    {% if lawyer.rs_years_count %}
+    <p><strong>{{ lawyer.rs_years_count }} Years</strong> — Rising Stars</p>
+    {% endif %}
+    {% if lawyer.sl_years %}<p>Selected to Super Lawyers: {{ lawyer.sl_years }}</p>{% endif %}
+    {% if lawyer.rs_years %}<p>Selected to Rising Stars: {{ lawyer.rs_years }}</p>{% endif %}
+  </section>
+
+  {% if lawyer.online_links or lawyer.findlaw or lawyer.lawinfo %}
+  <section class="profile-section">
+    <h2>Additional sources of information about {{ lawyer.name }}</h2>
+    <h3>Find me online</h3>
+    {% for link in lawyer.online_links %}
+      <p>Website — <a href="{{ link.url }}" rel="nofollow">{{ link.url }}</a></p>
+    {% endfor %}
+    {% if lawyer.findlaw %}<p>Visit my <a href="#" onclick="return false">FindLaw</a> profile</p>{% endif %}
+    {% if lawyer.lawinfo %}<p>Visit my firm's <a href="#" onclick="return false">LawInfo</a> profile</p>{% endif %}
+  </section>
+  {% endif %}
+
+  <section class="profile-section">
+    <h2>Attorney resources for {{ lawyer.name }}</h2>
+    <ul class="muted-list">
+      <li><a href="{{ url_for('attorneys_home') }}">Browse attorney directory for referrals</a></li>
+      <li><a href="/for-lawyers/">Attorney resources hub</a></li>
+      <li><a href="/about/attorney-faq/">Get involved with Super Lawyers</a></li>
+    </ul>
+  </section>
+
+  <section id="contact" class="profile-section">
+    <h2>Contact me</h2>
+    <p class="muted">Required fields are marked with an asterisk (<span class="req">*</span>).</p>
+    <form class="contact-form" method="post" action="/profiles/contact/lawyer/{{ lawyer.uuid }}.html">
+      <p><label for="first_name">* First name</label>
+         <input id="first_name" name="first_name" maxlength="100" required></p>
+      <p><label for="last_name">* Last name</label>
+         <input id="last_name" name="last_name" maxlength="100" required></p>
+      <p><label for="email">* Email</label>
+         <input id="email" name="email" type="email" maxlength="100" required></p>
+      <p><label for="phone">* Phone (e.g. xxx-xxx-xxxx)</label>
+         <input id="phone" name="phone" maxlength="100" required></p>
+      <p><label for="city">* City</label>
+         <input id="city" name="city" maxlength="100" required></p>
+      <p><label for="state">* State</label>
+         <select id="state" name="state" required>
+           <option value="">Select a state</option>
+           {% for abbr in ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"] %}
+           <option value="{{ abbr }}">{{ abbr }}</option>
+           {% endfor %}
+         </select></p>
+      <p><label for="message">* Briefly describe your case</label>
+         <textarea id="message" name="message" rows="8" maxlength="999" required></textarea></p>
+      <button class="btn btn-primary" type="submit">Contact me today</button>
+    </form>
+    <h3>Disclaimer</h3>
+    <p class="muted">Submitting this form does not create an attorney-client
+    relationship. Any information sent is not confidential.</p>
+  </section>
+
+  <section class="profile-section profile-promo">
+    <h2>Find top lawyers with confidence</h2>
+    <p>The Super Lawyers patented selection process is peer influenced and research
+    driven, selecting the top 5% of attorneys to the Super Lawyers lists each year.
+    We know lawyers and make it easy to connect with them.</p>
+  </section>
+</div>
+{% endblock %}

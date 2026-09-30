@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Simplicity Plan: Unlimited data plan for one price per line{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Simplicity Plan</h1>
+  <p>Start by choosing the number of lines you want.</p>
+
+  <div class="plan-widget card">
+    <div class="line-picker">
+      <form method="get" action="{{ url_for('plans_simplicity') }}" class="inline-form">
+        <label for="lines">How many lines?</label>
+        <select id="lines" name="lines">
+          <option value="1" {{ 'selected' if lines == 1 }}>1 line</option>
+          <option value="2" {{ 'selected' if lines == 2 }}>2 lines</option>
+          <option value="3" {{ 'selected' if lines == 3 }}>3 lines</option>
+          <option value="4" {{ 'selected' if lines == 4 }}>4 lines</option>
+        </select>
+        <button type="submit" class="btn btn-secondary">Update</button>
+      </form>
+    </div>
+    <div class="plan-price">
+      <p class="big-price">$30<span>/month per line</span></p>
+      <p class="plan-total">${{ monthly }}/month for {{ lines }} line{{ 's' if lines > 1 }}</p>
+      <p class="muted">After AutoPay and $15/mo switch discount. Plus taxes and fees.</p>
+    </div>
+    <ul class="feature-list">
+      {% for f in sim.features %}
+      <li>{{ f }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <section class="section">
+    <h2>Your phone, your way</h2>
+    <p>With {{ ['a single line', 'two lines', 'three lines', 'four lines'][lines - 1] }} for ${{ monthly }}/mo, you have three easy ways to get the phone you want.</p>
+    <div class="grid grid-3">
+      {% for opt in sim.phone_options %}
+      <div class="tile">
+        <h3>{{ opt.name }}</h3>
+        <p>{{ opt.blurb }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>{{ sim.hero.headline }}</h2>
+    <p>{{ sim.hero.price }}</p>
+    <p class="muted">{{ sim.hero.details }}</p>
+    <a class="btn btn-primary" href="{{ url_for('device_detail', slug='apple-iphone-18-pro') }}">Shop iPhone 18 Pro</a>
+  </section>
+
+  <section class="section">
+    <h2>Good to know</h2>
+    <ul>
+      <li>Up to {{ sim.max_lines }} lines per account.</li>
+      <li>$10/mo Auto Pay discount applies when paying by ACH bank draft or the Verizon Visa Card.</li>
+      <li>New customers pay no activation or upgrade fees when they enroll in Verizon Loyalty.</li>
+      <li>Looking for prepaid instead? <a href="{{ url_for('plans_prepaid') }}">Compare Verizon Prepaid plans</a>.</li>
+    </ul>
+  </section>
+</section>
+{% endblock %}

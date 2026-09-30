@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Usage — My Verizon{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Data usage — current cycle ({{ usages.values()|first|attr('cycle') if usages else 'Sep 2026' }})</h1>
+  <table class="data-table">
+    <thead><tr><th>Line</th><th>Number</th><th>Plan</th><th>Plan monthly</th><th>Data used</th><th>Data cap</th><th>Hotspot used</th><th>Hotspot cap</th><th>Talk (min)</th><th>Texts</th></tr></thead>
+    <tbody>
+      {% for l in lines %}
+      {% set u = usages.get(l.id) %}
+      <tr>
+        <td>{{ l.nickname }}</td>
+        <td>{{ l.phone_number }}</td>
+        <td>{{ l.plan.name }}</td>
+        <td>${{ l.plan.monthly }}/mo</td>
+        <td>{{ u.data_gb }} GB</td>
+        <td>{{ u.data_cap_gb + ' GB' if u.data_cap_gb else 'Unlimited' }}</td>
+        <td>{{ u.hotspot_gb }} GB</td>
+        <td>{{ u.hotspot_cap_gb }} GB</td>
+        <td>{{ u.talk_min }}</td>
+        <td>{{ u.texts }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="muted">Simplicity Plan lines have unlimited data with a 10 GB mobile hotspot allowance. Prepaid Unlimited includes 5 GB of hotspot data; Unlimited Plus 25 GB.</p>
+</section>
+{% endblock %}

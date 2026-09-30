@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Car Comparison Tool - Compare Cars Side by Side | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('research_home') }}">Research</a> &rsaquo; <span>Compare cars</span></nav>
+{% endblock %}
+{% block content %}
+<div class="compare-home">
+  <h1>Compare cars side by side</h1>
+  <p class="muted">Pick a pairing to see starting MSRP, consumer ratings, engines, MPG, horsepower, seating and warranties side by side.</p>
+  <h2>Available comparisons</h2>
+  <ul class="link-list compare-list">
+    {% for pair in pairs %}
+    <li><a href="{{ url_for('compare_page', slug=pair.slug) }}">{% set c = pair.columns_list() %}{% if c %}{{ c[0].name }} vs. {{ c[1].name }}{% else %}{{ pair.slug_a | replace('-',' ') | title }} vs. {{ pair.slug_b | replace('-',' ') | title }}{% endif %}</a></li>
+    {% else %}
+    <li>No comparisons captured.</li>
+    {% endfor %}
+  </ul>
+  <h2>All model pages</h2>
+  <ul class="link-list">
+    {% for p in pages %}
+    <li><a href="{{ url_for('research_page', slug=p.slug) }}">{{ p.year }} {{ p.make }} {{ p.model }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

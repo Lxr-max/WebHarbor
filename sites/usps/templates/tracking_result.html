@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Tracking Results | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('tracking_home') }}">Tracking</a> &rsaquo; {{ number }}</p>
+<h1>Tracking Results</h1>
+{% if shipment %}
+  <div class="panel">
+    <p><strong>Tracking Number:</strong> {{ shipment.tracking_number }}</p>
+    <p><strong>Status:</strong> <span class="badge">{{ shipment.status }}</span>
+      {% if shipment.status == 'Delivered' %} on {{ shipment.delivered_at }}
+      {% elif shipment.expected_date %} — expected delivery by {{ shipment.expected_date | longdate }}{% endif %}</p>
+    <p><strong>Service:</strong>
+      {% if shipment.is_international and shipment.dest_country %}International shipment to {{ shipment.dest_country }} &mdash; {% endif %}
+      {{ {'pm': 'Priority Mail', 'pme': 'Priority Mail Express', 'ga': 'USPS Ground Advantage', 'mm': 'Media Mail', 'fcpis': 'First-Class Package International Service'}.get(shipment.service_code, shipment.service_code) }}</p>
+    {% if shipment.signature_required %}<p><strong>Signature required</strong> at delivery.</p>{% endif %}
+    {% if shipment.insured_value %}<p><strong>Insured value:</strong> {{ shipment.insured_value | usd }}</p>{% endif %}
+  </div>
+  <h2>Tracking History</h2>
+  <div class="timeline">
+    {% for e in events %}
+      <div class="event {{ 'latest' if loop.first }}">
+        <p><strong>{{ e.status }}</strong></p>
+        <p class="when">{{ e.ts }} — {{ e.facility }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  {% if current_user.is_authenticated %}
+    <form action="{{ url_for('save_tracking') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="tracking" value="{{ shipment.tracking_number }}">
+      <label>Save to my account as: <input type="text" name="label" placeholder="Nickname (optional)"></label>
+      <button class="btn secondary" type="submit">Save Tracking Number</button>
+    </form>
+  {% endif %}
+{% else %}
+  <div class="error-box">
+    <p><strong>Tracking information is currently unavailable for {{ number }}.</strong></p>
+    <p>Please verify your tracking number and try again. Labels take up to 24 hours to appear in Tracking after they are created.</p>
+  </div>
+{% endif %}
+<p><a href="{{ url_for('tracking_home') }}">&larr; Track another package</a></p>
+{% endblock %}

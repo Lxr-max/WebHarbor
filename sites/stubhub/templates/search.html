@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Search results for {{ q }} | StubHub{% endblock %}
+{% block content %}
+<div class="search-results">
+  <h1 class="visually-hidden">Search</h1>
+  {% if not q %}
+  <div class="empty-state"><p>Search for events, artists, teams and more</p></div>
+  {% else %}
+    {% if performers %}
+    <section class="search-performers">
+      {% for p in performers %}
+      <a class="search-perf" href="/{{ p.slug }}-tickets/performer/{{ p.upstream_id }}">
+        {% if p.image_file %}<img src="{{ p.image_file }}" alt="{{ p.name }}">{% endif %}
+        <div>
+          <strong>{{ p.name }}</strong>
+          <p>{{ p.next_label }}</p>
+          <p class="muted">{{ p.event_count }} events</p>
+        </div>
+      </a>
+      {% endfor %}
+    </section>
+    {% endif %}
+    <div class="grid-toolbar sticky">
+      <span class="location-chip">{{ default_metro.name if default_metro else 'Redmond' }}</span>
+      <span class="toolbar-chip">All dates</span>
+      <span class="grid-count">{{ events|length }} events</span>
+    </div>
+    <div class="event-grid list">
+      {% for evt in events %}
+      {% set card = event_card(evt) %}
+      <a class="event-card row" href="{{ card.url }}" title="{{ evt.name }}">
+        <time class="event-date-box" datetime="{{ evt.local_starts_at.isoformat() }}">
+          <span class="month">{{ evt.local_starts_at.strftime('%b') }}</span>
+          <span class="day">{{ evt.local_starts_at.day }}</span>
+          <span class="dow">{{ evt.local_starts_at.strftime('%a') }}</span>
+        </time>
+        <div class="event-card-body">
+          <h3>{{ evt.name }}</h3>
+          <p class="event-card-when">{{ card.time }}</p>
+          <p class="event-card-venue">{{ card.venue }}</p>
+          <p class="event-card-city">{{ card.city }}</p>
+          {% if card.badge %}<span class="event-badge">{{ card.badge }}</span>{% endif %}
+        </div>
+        <span class="see-tickets">See tickets</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% if not performers and not events %}
+    <div class="empty-state"><p>No results found for "{{ q }}". Try a different search.</p></div>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

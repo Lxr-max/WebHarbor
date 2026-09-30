@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-26",
+  "upstream": "https://www.statista.com/",
+  "records": [
+    {
+      "path": "app.py",
+      "classification": "mirror-code",
+      "scope": "Flask application implementing the statista.com mirror: homepage (hero search, trending statistics, topic directory, industry directory, Market Insights strip, account pricing), scored search with content-type filters and pagination, statistics/forecast detail pages (breadcrumb, meta bar, switchable line/bar/table chart rendered server-side as SVG, summary, description, sources, citations in five formats, favorites, downloads, premium paywall matching the upstream account tiers), topic pages (editor's picks, recommended statistics, key insights, key figures, related topics), report/study pages (report details, table of contents, recommended statistics, cover images), the industry overview and industry pages, Market Insights segment and market forecast pages (highlights, key regions, in-scope/out-of-scope, analyst opinion), recent content lists, the pricing page, the contact form, and the account domain (register/login, favorites, download history)."
+    },
+    {
+      "path": "seed_data.py",
+      "classification": "mirror-code",
+      "scope": "Deterministic build-time/boot-time seeder. All rows load from the tracked source_data/ snapshots; the benchmark password digest is frozen so the SQLite seed is byte-reproducible (PYTHONHASHSEED=0). Every seed function early-returns on a populated database, keeping /reset/statista byte-identical."
+    },
+    {
+      "path": "source_data/*_statistics.json, *_forecasts.json (220 files)",
+      "classification": "captured-upstream-content",
+      "scope": "Per-statistic captures from the public statistics/forecasts pages: title, breadcrumb, last-update/release date, region, survey period, source line, details, summary/description text, and chart data harvested either from the rendered Highcharts SVG coordinates (validated cell-by-cell against the on-page data tables), the on-page data-table view, or the chart text block. Premium statistics carry their real metadata but masked values, mirroring the upstream anonymous view."
+    },
+    {
+      "path": "source_data/topic_*.json (10 files)",
+      "classification": "captured-upstream-content",
+      "scope": "Topic pages (AI worldwide, TikTok, Nvidia, E-commerce, Global GDP, Instagram, Apparel market, Video gaming, Renewable energy, Influencer marketing): description, editor's picks, recommended statistics, key insights, key figures, and related topics as shown on 2026-09-26."
+    },
+    {
+      "path": "source_data/report_*.json (11 files)",
+      "classification": "captured-upstream-content",
+      "scope": "Report/study pages (Consumer Trends 2026, Artificial Intelligence in-depth, E-commerce challenges, Global economy, TikTok, Luxury goods, Electric vehicles x2, Video gaming, Travel and tourism trends, Battery recycling): report details (pages, format, language, released, price), descriptions, and full tables of contents."
+    },
+    {
+      "path": "source_data/mob_*.json, seg_*.json (155 files)",
+      "classification": "captured-upstream-content",
+      "scope": "Market Insights (outlook) market pages across all nine segments (Mobility, Technology, eCommerce, Consumer, Finance, Health, Industrial, Advertising & Media, Global Indicators): revenue boxes, highlight bullets, key regions, market definitions, in-scope/out-of-scope lists, and analyst opinions."
+    },
+    {
+      "path": "source_data/outlook_market_content.json",
+      "classification": "captured-upstream-content",
+      "scope": "Market Insights (outlook) market pages, second capture pass: the real 'Market definition' accordion HTML and the 'Analyst Opinion' section HTML (with its stated date) for all 155 markets, read from the same public outlook URLs on 2026-09-26 via the embedded page payload. Loaded into the seed database at build time; runtime pages read the persisted market definition and analyst opinion."
+    },
+    {
+      "path": "source_data/industries.json",
+      "classification": "captured-upstream-content",
+      "scope": "The industry overview taxonomy (22 industries with 128 sub-industries) from the /markets/ directory page."
+    },
+    {
+      "path": "static/images/ (471 files, asset_inventory.json)",
+      "classification": "captured-upstream-media",
+      "scope": "Real statista.com CDN media: 411 statistic chart thumbnails (-blank-100), 39 hero-size previews (-blank-355), 11 report covers, 9 Market Insights segment illustrations (SVG), and the favicon, each with its source URL, byte size, and SHA-256 recorded in asset_inventory.json."
+    },
+    {
+      "path": "static/fonts/open-sans-*.woff2 (6 files)",
+      "classification": "redistributed-third-party-font",
+      "scope": "Open Sans (Apache License 2.0) as served by cdn.statcdn.com for the site typography."
+    },
+    {
+      "path": "static/icons/logo.svg, logo_plus.svg",
+      "classification": "upstream-brand-mark",
+      "scope": "The Statista wordmark and Statista+ mark extracted from the upstream pages, used only to keep the mirror visually faithful."
+    },
+    {
+      "path": "templates/_logo.svg",
+      "classification": "captured-upstream-media",
+      "scope": "Official inline Statista wordmark captured from https://www.statista.com/ on 2026-09-28. Original path geometry preserved; accessibility and currentColor attributes adapted for header/footer. Replaces malformed hand-copied lettering."
+    }
+  ]
+}

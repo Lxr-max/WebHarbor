@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Check-in — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Check in</h1>
+  <p>Online check-in opens 24 hours before departure and closes 60 minutes
+    before. Enter your confirmation number and last name, or sign in.</p>
+
+  <form method="get" action="{{ url_for('checkin') }}" class="ua-form ua-form-inline">
+    <label class="ua-field">Confirmation number
+      <input type="text" name="confirmation" maxlength="6" placeholder="e.g. QT83NB">
+    </label>
+    <label class="ua-field">Last name
+      <input type="text" name="lastname" placeholder="e.g. Miller">
+    </label>
+    <button class="ua-btn ua-btn-primary" type="submit">Check in</button>
+  </form>
+
+  {% if not_found %}
+    <div class="ua-flash ua-flash-error">We couldn't find a reservation with
+      that confirmation number and last name, or the trip is no longer active.</div>
+  {% endif %}
+  {% if not_open %}
+    <div class="ua-flash">Check-in isn't open yet — it opens 24 hours before
+      departure (that's {{ checkin_minutes // 60 }} hours before your flight).</div>
+  {% endif %}
+  {% if booking %}
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('checkin_flow', conf=booking.confirmation) }}">
+      Continue to seat selection for {{ booking.confirmation }}</a>
+  {% endif %}
+
+  {% if current_user.is_authenticated and eligible %}
+    <h2>Trips ready for check-in</h2>
+    {% for trip in eligible %}
+      <a class="ua-trip-row" href="{{ url_for('checkin_flow', conf=trip.confirmation) }}">
+        <span class="ua-pnr">{{ trip.confirmation }}</span>
+        <span>{{ trip.route_label }} on {{ trip.legs[0].travel_date }}</span>
+        <span>Check in now</span>
+      </a>
+    {% endfor %}
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% macro money(v) -%}
+£{{ '%.2f' % v }}
+{%- endmacro %}
+
+{% macro card(c, show_swatches=True) -%}
+<article class="product-card">
+  <a class="card-media" href="/products/{{ c.product.slug }}">
+    {% set imgs = c.product.image_list() %}
+    {% if imgs %}<img src="{{ url_for('static', filename='images/' + imgs[0]) }}" alt="{{ c.product.name }}" loading="lazy">{% endif %}
+    <div class="card-badges">
+      {% if c.product.is_sale %}<span class="badge sale">On Sale</span>{% endif %}
+      {% if c.product.is_new %}<span class="badge new">New</span>{% endif %}
+      {% if c.product.is_exclusive %}<span class="badge">Exclusive</span>{% endif %}
+      {% if c.product.sold_out %}<span class="badge sold-out">Sold out</span>{% endif %}
+    </div>
+  </a>
+  <div class="card-body">
+    <a class="card-name" href="/products/{{ c.product.slug }}">{{ c.product.name }}</a>
+    <div class="card-price">
+      {% if c.product.is_sale and c.product.compare_at_price %}
+        <span class="regular">{{ money(c.product.compare_at_price) }}</span>
+        <span class="sale-price">{{ money(c.product.price) }}</span>
+      {% else %}
+        <span class="current">{% if c.price_from %}From {% endif %}{{ money(c.product.price) }}</span>
+      {% endif %}
+    </div>
+    {% if show_swatches and c.swatches %}
+    <div class="card-swatches">
+      {% for s in c.swatches[:5] %}
+      <a href="/products/{{ s.slug }}" title="{{ s.name }}" aria-label="{{ s.colour }}">
+        <span class="swatch {% if s.slug == c.product.slug %}active{% endif %}" style="background: {{ s.swatch or '#666' }};"></span>
+      </a>
+      {% endfor %}
+      {% if c.swatches|length > 1 %}<span class="choose-colour">Choose colour</span>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</article>
+{%- endmacro %}

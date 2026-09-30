@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Pricing | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Pricing</span>
+</nav>
+<h1>Statista accounts</h1>
+<p class="section__sub">Access all statistics starting from $2,388 USD yearly *</p>
+<p class="formNote" style="max-width:640px;">* For commercial use only. All prices do not include sales tax. The account requires an annual contract and will renew after one year to the regular list price.</p>
+<section class="planGrid" style="margin-top:26px;">
+  {% for p in plans %}
+  <div class="plan {% if p.name == 'Professional Account' %}plan--hot{% endif %}">
+    <h3>{{ p.name }}</h3>
+    <p class="who">{{ p.who }}</p>
+    <p class="price">{{ p.price }}</p>
+    <p class="per">{{ p.per }}</p>
+    <ul>{% for f in p.features %}<li>{{ f }}</li>{% endfor %}</ul>
+    {% if p.name == 'Basic Account' %}
+    <a class="btn btn--primary" href="/register">{{ p.cta }}</a>
+    {% else %}
+    <a class="btn btn--ghost" href="/contact/">{{ p.cta }}</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</section>
+<section class="section">
+  <h2>What each account includes</h2>
+  <div class="tableScroll">
+  <table class="dataTable">
+    <tr><th>Feature</th><th>Basic</th><th>Starter</th><th>Personal</th><th>Professional</th></tr>
+    <tr><td>Free statistics</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Premium statistics</td><td>—</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Favorites &amp; download history</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Report downloads</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
+    <tr><td>API access</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
+  </table>
+  </div>
+</section>
+{% endblock %}

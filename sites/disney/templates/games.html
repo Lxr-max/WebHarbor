@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Games | Disney{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Disney Games</h1>
+  <p class="page-sub">Console and mobile games featuring Disney stories and characters.</p>
+
+  <form class="filters" method="get" action="{{ url_for('games') }}">
+    <label for="q">Search</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="Search games">
+    <button class="btn" type="submit">Apply</button>
+    <span class="count">{{ total }} game{{ 's' if total != 1 }}</span>
+  </form>
+
+  <div class="grid cols-4">
+    {% for g in rows %}
+    <a class="card" href="{{ url_for('game_detail', slug=g.slug) }}">
+      <div class="card-img">
+        {% if img(g.image) %}<img src="{{ img(g.image) }}" alt="{{ g.title }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ g.title }}</p>
+        <p class="card-meta">Official Disney game</p>
+      </div>
+    </a>
+    {% else %}
+    <p class="empty">No games match that search.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

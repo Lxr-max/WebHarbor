@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Job Alerts | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Job Alerts</h1>
+  <nav class="account-nav">
+    <a href="/jobseeker/profile">Profile</a>
+    <a href="/jobseeker/resume">Resume</a>
+    <a href="/jobseeker/saved-jobs">Saved Jobs</a>
+    <a href="/jobseeker/applications">Applications</a>
+    <a href="/jobseeker/alerts" class="active">Job Alerts</a>
+  </nav>
+</section>
+<section class="account-layout">
+  <form method="post" action="/jobseeker/alerts" class="account-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h2>Create an alert</h2>
+    <label for="a-term">What kind of job?</label>
+    <input id="a-term" type="text" name="term" placeholder="e.g. registered nurse" required>
+    <label for="a-loc">Where?</label>
+    <input id="a-loc" type="text" name="location" placeholder="City, state or ZIP (leave blank for Anywhere)">
+    <label for="a-freq">How often?</label>
+    <select id="a-freq" name="frequency">
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+    </select>
+    <button type="submit" class="btn-green">Create Alert</button>
+  </form>
+  <aside class="account-side">
+    <h2>Your alerts</h2>
+    <table class="alert-table">
+      <thead><tr><th>Search</th><th>Location</th><th>Frequency</th><th></th></tr></thead>
+      <tbody>
+        {% for a in alerts %}
+        <tr>
+          <td><a href="/jobs-search?search={{ a.term|replace(' ','+') }}&location={{ a.location|replace(' ','+') if a.location != 'Anywhere' else '' }}">{{ a.term }}</a></td>
+          <td>{{ a.location }}</td>
+          <td>{{ a.frequency|capitalize }}</td>
+          <td>
+            <form method="post" action="/jobseeker/alerts" class="inline-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="alert_id" value="{{ a.id }}">
+              <button type="submit" class="linklike">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if not alerts %}<p>No alerts yet.</p>{% endif %}
+  </aside>
+</section>
+{% endblock %}

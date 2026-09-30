@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ quiz.title }} | Speedo{% endblock %}
+{% block content %}
+<section class="quiz-hero">
+  <h1>{{ quiz.title }}</h1>
+  <p>{{ quiz.intro }}</p>
+</section>
+<div class="quiz-container">
+  <div class="quiz-progress">{{ step + 1 }} / {{ total_steps }}</div>
+  <div class="quiz-progress-dots">
+    {% for i in range(total_steps) %}
+    <span class="{% if i <= step %}active{% endif %}"></span>
+    {% endfor %}
+  </div>
+  <h2 class="quiz-question">{{ step_data.question }}</h2>
+  <div class="quiz-options">
+    {% for opt in step_data.options %}
+    <form method="post" action="{{ url_for(quiz_key + '_quiz', step=step) }}" style="display:contents;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="step" value="{{ step }}">
+      <input type="hidden" name="value" value="{{ opt.label }}">
+      <button type="submit" class="quiz-option">{{ opt.label }}</button>
+    </form>
+    {% endfor %}
+  </div>
+  <div class="quiz-nav">
+    {% if step > 0 %}
+    <a class="btn btn-secondary" href="{{ url_for(quiz_key + '_quiz', step=step - 1) }}">Back</a>
+    {% endif %}
+    <form method="post" action="{{ url_for(quiz_key + '_quiz') }}" style="display:contents;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="restart">
+      <button type="submit" class="btn btn-secondary">Retake Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

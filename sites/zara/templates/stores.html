@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Find your Zara Store | ZARA United States{% endblock %}
+{% block body %}
+<div class="page-head">
+  <h1>STORE LOCATOR</h1>
+  <p class="cat-count">{{ all_count }} stores in this United States snapshot across {{ states|length }} states — search by city, state or ZIP</p>
+</div>
+<div style="padding: 14px 28px 6px">
+  <form method="get" action="/us/en/z-stores-st1404.html" class="filters">
+    <div class="price-form">
+      <input type="text" name="q" value="{{ q }}" placeholder="CITY, STATE OR ZIP"
+             style="width: 260px; border: 1px solid #d5d5da; padding: 8px;">
+      <select name="state" style="border: 1px solid #d5d5da; padding: 8px;">
+        <option value="">ALL STATES</option>
+        {% for s in states %}
+          <option value="{{ s }}" {{ 'selected' if s == state else '' }}>{{ s }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="fbtn">SEARCH</button>
+      {% if q or state %}<a class="clear" href="/us/en/z-stores-st1404.html" style="font-size:10px; text-decoration:underline; text-transform:uppercase; letter-spacing:.08em">CLEAR</a>{% endif %}
+    </div>
+  </form>
+</div>
+{% if stores %}
+<div class="store-list">
+  {% for s in stores %}
+    <div class="store-card">
+      <h3><a href="{{ s.path }}">{{ s.name }}</a></h3>
+      <p class="meta">
+        {{ s.address }}<br>
+        {{ s.city }}, {{ s.province }} {{ s.zip }}<br>
+        TEL. {{ s.phone }} · {{ s.type }} · {{ s.status }}
+      </p>
+      <p class="hours">TODAY ({{ MIRROR_TS.split(' ')[0] }}): {{ fmt_hours(s.hours_today()) }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="center-note">No stores match your search</p>
+{% endif %}
+{% endblock %}

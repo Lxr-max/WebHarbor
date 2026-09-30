@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Favorites | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <h1>Favorites</h1>
+  {% for fav in favorites %}
+  {% if fav.performer %}
+  <a class="order-row" href="/{{ fav.performer.slug }}-tickets/performer/{{ fav.performer.upstream_id }}">
+    <div class="fav-media">{% if fav.performer.image_file %}<img src="{{ fav.performer.image_file }}" alt="{{ fav.performer.name }}">{% endif %}</div>
+    <div>
+      <strong>{{ fav.performer.name }}</strong>
+      <p>{{ fav.performer.next_label }}</p>
+      <p class="muted">{{ fav.performer.event_count }} events</p>
+    </div>
+    <span class="see-tickets">See tickets</span>
+  </a>
+  {% elif fav.event %}
+  <a class="order-row" href="{{ fav.event.url_path }}">
+    <div>
+      <strong>{{ fav.event.name }}</strong>
+      <p>{{ fav.event.date_full }} • {{ fav.event.venue.name }}</p>
+    </div>
+    <span class="see-tickets">See tickets</span>
+  </a>
+  {% endif %}
+  {% else %}
+  <p class="muted">No favorites yet. Follow artists and teams to see them here.</p>
+  {% endfor %}
+</div>
+{% endblock %}

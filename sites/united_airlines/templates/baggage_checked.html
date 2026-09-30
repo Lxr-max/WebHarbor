@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Checked bags — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Checked bags</h1>
+
+  <h2>Checked bag fees</h2>
+  <p>Fees below apply to most domestic routes and short-haul international
+    flights. Pay online (prepay, up to 24 hours before departure) and save $5
+    per bag versus the airport price.</p>
+  <p class="ua-quiet">Starting February 24, 2024, fees for your first and
+    second checked bag went up by $5 in most markets — the rates shown are
+    the current levels. Use the baggage fee calculator to see the cost for
+    your trip.</p>
+  <table class="ua-table">
+    <thead><tr><th>Bag</th><th>Online price</th><th>Airport price</th></tr></thead>
+    <tbody>
+      <tr><td>First checked bag</td><td>${{ '%d'|format(bag_table['first_online']) }}</td><td>${{ '%d'|format(bag_table['first_airport']) }}</td></tr>
+      <tr><td>Second checked bag</td><td>${{ '%d'|format(bag_table['second_online']) }}</td><td>${{ '%d'|format(bag_table['second_airport']) }}</td></tr>
+      <tr><td>Additional bags</td><td colspan="2">${{ '%d'|format(bag_table['extra']) }} each</td></tr>
+      <tr><td>Overweight (51–70 lb)</td><td colspan="2">${{ '%d'|format(bag_table['overweight_51_70']) }}</td></tr>
+      <tr><td>Overweight (71–100 lb)</td><td colspan="2">${{ '%d'|format(bag_table['overweight_71_100']) }}</td></tr>
+      <tr><td>Oversized (63–115 linear in)</td><td colspan="2">${{ '%d'|format(bag_table['oversized_63_115']) }}</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Size and weight</h2>
+  <p>The maximum size of a checked bag is 30 in x 20 in x 12 in (76 cm x 52 cm
+    x 30 cm) or 62 total linear inches, including handles and wheels.</p>
+  <p><strong>Weight limits</strong> depend on your cabin and MileagePlus status:</p>
+  <table class="ua-table">
+    <thead><tr><th>Ticket / status</th><th>Maximum weight per bag</th></tr></thead>
+    <tbody>
+      <tr><td>United Economy® / Premium Economy®</td><td>{{ weight_economy }} lb (23 kg)</td></tr>
+      <tr><td>United Business® / United First® / United Polaris®</td><td>{{ weight_premier }} lb (32 kg)</td></tr>
+      <tr><td>Any Premier member (Silver, Gold, Platinum, 1K®)</td><td>{{ weight_premier }} lb (32 kg)</td></tr>
+    </tbody>
+  </table>
+  <p>Bags over 100 lb are not accepted. The overweight and oversized fees are
+    in addition to any checked bag fee.</p>
+  <p>We can't accept bags that measure (length + width + height) more than
+    115 inches (292 centimeters), or bags weighing more than 100 pounds
+    (45 kilograms). Musical instruments and assistive devices are exceptions:
+    we accept musical instruments up to 165 pounds (75 kilograms), and all
+    assistive devices travel for free. Extra bags are only accepted if space
+    is available, and if your bag is both oversized and overweight, each
+    charge applies.</p>
+
+  <h2>Exceptions to checked bag fees</h2>
+  <p>For travel between the U.S. and the destinations below, every customer
+    — in any cabin and regardless of MileagePlus status — receives two free
+    checked bags at 70 lb (32 kg) each, all year:</p>
+  <table class="ua-table">
+    <thead><tr><th>Destination</th><th>Bags without service charges</th><th>Maximum weight per bag</th><th>Travel period (departures)</th></tr></thead>
+    <tbody>
+      <tr><td>San Salvador (SAL)</td><td>2 bags</td><td>70 lb (32 kg)</td><td>January 1 – December 31</td></tr>
+      <tr><td>Havana (HAV)</td><td>2 bags</td><td>70 lb (32 kg)</td><td>January 1 – December 31</td></tr>
+      <tr><td>Santo Domingo (SDQ), Managua (MGA), San Pedro Sula (SAP), Tegucigalpa (XPL)</td><td>2 bags</td><td>70 lb (32 kg)</td><td>January 1 – December 31</td></tr>
+      <tr><td>Guatemala City (GUA)</td><td>2 bags</td><td>70 lb (32 kg)</td><td>January 1 – December 31</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Military checked bag policy</h3>
+  <p>Benefits apply to active U.S. military personnel and their dependents on
+    United- and United Express-operated flights. Dependents share the
+    benefits when traveling on the same reservation; when travel is due to
+    military orders, dependents can travel alone with proof of orders.</p>
+  <table class="ua-table">
+    <thead><tr><th>Type of trip</th><th>Class of service</th><th>Bags without service charges</th><th>Medium size</th><th>Maximum weight per bag</th></tr></thead>
+    <tbody>
+      <tr><td>Personal travel</td><td>All classes of service</td><td>3 bags</td><td>62 in (158 cm)</td><td>70 lb (32 kg)</td></tr>
+      <tr><td>Military dependent with travel orders</td><td>All classes of service</td><td>2 bags</td><td>62 in (158 cm)</td><td>70 lb (32 kg)</td></tr>
+      <tr><td>Travel due to military orders</td><td>All classes of service</td><td>5 bags</td><td>115 in (292 cm)</td><td>100 lb (45 kg)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Free checked bags with Premier status</h2>
+  <table class="ua-table">
+    <thead><tr><th>Cabin and route</th><th>Silver</th><th>Gold</th><th>Platinum</th><th>1K®</th></tr></thead>
+    <tbody>
+      <tr><td>Economy between the U.S. and continental U.S., Alaska, Hawaii, Canada, Mexico, the Caribbean or Central America</td><td>1 bag, 70 lb</td><td>2 bags, 70 lb each</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td></tr>
+      <tr><td>Economy between the U.S. and South America, Asia, Australia, New Zealand, Europe, the Middle East or Africa</td><td>2 bags, 70 lb each</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td></tr>
+      <tr><td>All premium cabin travel</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td><td>3 bags, 70 lb each</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Bag check process</h2>
+  <ul>
+    <li><strong>Check your bag on time</strong> — every airport has a cutoff
+      for checking bags; you can't check a bag after it.</li>
+    <li><strong>Keep your claim check</strong> — the tag receipt you get at
+      the kiosk; keep it until you have all your bags.</li>
+    <li><strong>Connecting flights</strong> — bags usually transfer
+      automatically; re-checking is only needed for some international
+      connections.</li>
+    <li><strong>Bag drop shortcut</strong> — prepay online, then drop your
+      bag in the shortcut area at the airport.</li>
+    <li><strong>Pack liquids carefully</strong> — pack all liquids in a
+      resealable bag. Liquids more than 3.4 oz (100 ml) should be packed in
+      your checked bag.</li>
+  </ul>
+  <p><a class="ua-link" href="{{ url_for('baggage_calculator') }}">Calculate your exact bag fees</a></p>
+</section>
+{% endblock %}

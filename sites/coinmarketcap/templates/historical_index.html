@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Historical Snapshots | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Cryptocurrency Historical Snapshots</h1>
+<p class="muted">Weekly snapshots of the top cryptocurrencies by market capitalization.</p>
+
+<h2>Available Snapshots</h2>
+<div>
+  {% for d in dates %}
+    <a class="tag-chip" href="/historical/{{ d }}/">Snapshot - {{ d }}</a>
+  {% endfor %}
+</div>
+{% endblock %}

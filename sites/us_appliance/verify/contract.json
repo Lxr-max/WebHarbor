@@ -1,0 +1,1683 @@
+{
+  "USAppliance--0": {
+    "task": "I am considering the GE JGBS66REKSS gas range for a kitchen in Troy, ZIP 48083. Check its price and two useful cooking features, compare its price with the cheapest model in the Gas Ranges category, and tell me whether the GE can be delivered to my ZIP and what its shipping offer includes. Do not buy anything.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss.html",
+      "/gas-ranges.html",
+      "/fcrg3051bs"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "jgb[s]?66rekss.{0,35}\\$?823"
+      ],
+      [
+        "claim 2",
+        "5(?:\\.0)?[ -]?(?:cu|cubic)"
+      ],
+      [
+        "claim 3",
+        "15000[ -]?btu"
+      ],
+      [
+        "claim 4",
+        "48083.{0,35}(?:available|eligible)|(?:available|eligible).{0,35}48083"
+      ],
+      [
+        "claim 5",
+        "fcrg3051bs.{0,30}\\$?703"
+      ],
+      [
+        "claim 6",
+        "\\$?120.{0,15}(?:more|difference)"
+      ],
+      [
+        "claim 7",
+        "(?:standard|delivery).{0,25}\\$?99"
+      ],
+      [
+        "claim 8",
+        "in.home.{0,30}\\$?199"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--1": {
+    "task": "Find the least expensive actual Bosch dishwasher between $500 and $1,500. Use the dishwasher search and its brand and price filters, taking care not to choose an accessory. Tell me the model, price, one useful feature, and whether delivery to ZIP 48083 is available.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/search.php.*brand=Bosch",
+      "/she41cm[256]n"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "she41cm[256]n"
+      ],
+      [
+        "claim 2",
+        "\\$?729"
+      ],
+      [
+        "claim 3",
+        "precisionwash|sensors.{0,65}(?:water|cycle)"
+      ],
+      [
+        "claim 4",
+        "(?:delivery.{0,25}48083.{0,25}available|48083.{0,25}available|available.{0,30}48083)"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--2": {
+    "task": "Put together a kitchen order with two GE JGBS66REKSS gas ranges and one Bosch SHS53CD5N dishwasher. Before I decide, tell me the subtotal and shipping charge. I have decided to replace only one range for now: leave the cart with just one GE range and report the revised subtotal and shipping charge.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/shs53cd5n",
+      "/cart.php"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "(?:initial|original).{0,55}\\$?2795"
+      ],
+      [
+        "claim 2",
+        "(?:initial|original).{0,85}free"
+      ],
+      [
+        "claim 3",
+        "(?:final|revised).{0,90}(?:1|one) ge"
+      ],
+      [
+        "claim 4",
+        "(?:final|revised).{0,140}\\$?823"
+      ],
+      [
+        "claim 5",
+        "(?:standard|shipping).{0,20}\\$?99"
+      ]
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9]\\d*"
+            },
+            "cart_token": {
+              "regex": "[a-f0-9]{16,64}"
+            },
+            "user_id": null,
+            "product_id": 21476,
+            "qty": 1,
+            "added": 0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "USAppliance--3": {
+    "task": "Buy one GE JGBS66REKSS gas range as a guest: ship to Guest Buyer, 42 Maple Street, Troy MI 48083, email guest@example.com, phone 248-555-0100, pay with card 4111111111111111 expiring 12/28 with CVV 123, standard delivery, pay in full. Report your order number and the order total including tax. Then look the order up on the tracking page using that email and report its status and the first timeline event.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/checkout",
+      "/order-confirmation/",
+      "/ordertracking.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "971\\.38"
+      ],
+      [
+        "claim 2",
+        "processing"
+      ],
+      [
+        "claim 3",
+        "order placed"
+      ],
+      [
+        "claim 4",
+        "september 29.{0,10}2026|2026-09-29"
+      ],
+      [
+        "claim 5",
+        "823"
+      ],
+      [
+        "claim 6",
+        "49\\.38"
+      ],
+      [
+        "claim 7",
+        "\\$?99.{0,20}(?:standard|delivery)"
+      ]
+    ],
+    "state": {
+      "order_events": {
+        "added": [
+          {
+            "id": 28,
+            "order_id": 9,
+            "step": "Order Placed",
+            "happened_on": "2026-09-29",
+            "note": "We received your order."
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 9,
+            "product_id": 21476,
+            "name": "GE JGBS66REKSS 30\" Free-Standing Gas Range with Edge to Edge Cooktop - Stainless Steel",
+            "qty": 1,
+            "price": 823.0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "orders": {
+        "added": [
+          {
+            "id": 9,
+            "number": "10009",
+            "user_id": null,
+            "email": "guest@example.com",
+            "ship_name": "Guest Buyer",
+            "ship_address": "42 Maple Street",
+            "ship_city": "Troy",
+            "ship_state": "MI",
+            "ship_zip": "48083",
+            "phone": "248-555-0100",
+            "status": "Processing",
+            "shipping_method": "Standard Delivery",
+            "shipping_cost": 99.0,
+            "subtotal": 823.0,
+            "tax": 49.38,
+            "total": 971.38,
+            "carrier": "",
+            "tracking": "",
+            "placed_on": "2026-09-29",
+            "eta": null,
+            "financing": ""
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "USAppliance--4": {
+    "task": "I am Alice (alice.j@test.com, password TestPass123!) and need to reconcile my appliance deliveries. Compare the delivered and shipped orders in my account: give each order number, total, carrier, tracking number, and latest timeline event. Check the shipped order through public order tracking too and tell me its estimated delivery date and whether that status agrees with my account.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/account.php/orders/1",
+      "/account.php/orders/2",
+      "/ordertracking.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "10001.{0,30}delivered"
+      ],
+      [
+        "claim 2",
+        "10001.{0,70}2289\\.32"
+      ],
+      [
+        "claim 3",
+        "r\\+l.{0,50}rl774912"
+      ],
+      [
+        "claim 4",
+        "delivered.{0,30}september 24"
+      ],
+      [
+        "claim 5",
+        "10002.{0,30}shipped"
+      ],
+      [
+        "claim 6",
+        "10002.{0,70}2011\\.88"
+      ],
+      [
+        "claim 7",
+        "maersk.{0,30}mn-88231340"
+      ],
+      [
+        "claim 8",
+        "shipped.{0,30}september 28"
+      ],
+      [
+        "claim 9",
+        "(?:estimated|delivery).{0,30}october 6"
+      ],
+      [
+        "claim 10",
+        "(?:public|tracking).{0,60}agree"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--5": {
+    "task": "I am helping Bob check his appliance deliveries without signing in. Track orders 10003 and 10004 using bob.c@test.com. For each, tell me its status, carrier, tracking number, estimated delivery date if supplied, and latest timeline event. Explain the site's warning about when carrier tracking information becomes available.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/ordertracking.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "10003.{0,35}in transit"
+      ],
+      [
+        "claim 2",
+        "valley.{0,40}vc559201"
+      ],
+      [
+        "claim 3",
+        "10003.{0,125}october 2"
+      ],
+      [
+        "claim 4",
+        "10004.{0,35}processing"
+      ],
+      [
+        "claim 5",
+        "10004.{0,80}october 8"
+      ],
+      [
+        "claim 6",
+        "no carrier|carrier.{0,20}(?:none|not)"
+      ],
+      [
+        "claim 7",
+        "order placed.{0,30}september 27"
+      ],
+      [
+        "claim 8",
+        "24.{0,5}48 hours"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--6": {
+    "task": "Find the product with the largest advertised dollar saving on the Top Deals page. Check that product's detail page and delivery availability for ZIP 48083, then tell me its model, current price, previous price, saving, and delivery message so I can judge the offer.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/hugepricecuts.html",
+      "/hbc163ess.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "hbc163ess"
+      ],
+      [
+        "claim 2",
+        "(?:price|costs?|now).{0,15}\\$?2095"
+      ],
+      [
+        "claim 3",
+        "(?:previous|was|regular).{0,20}\\$?3299"
+      ],
+      [
+        "claim 4",
+        "(?:saving|save).{0,10}\\$?1204"
+      ],
+      [
+        "claim 5",
+        "48083.{0,30}(?:eligible|available)"
+      ],
+      [
+        "claim 6",
+        "1.{0,5}2 business days"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--7": {
+    "task": "I am comparing appliance rebate packages from Asko, KitchenAid, and Viking. Check each brand's rebate offers and product selection. Summarize the rebate titles and displayed expiration date for each brand, and its catalog product count, so I can decide which package to investigate with sales.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/rebates.html",
+      "/brand/asko",
+      "/brand/kitchenaid",
+      "/brand/viking"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "asko.{0,20}47.{0,25}products"
+      ],
+      [
+        "claim 2",
+        "(?:save|saving).{0,8}\\$?300.{0,50}washer.{0,20}dryer"
+      ],
+      [
+        "claim 3",
+        "5.year warranty"
+      ],
+      [
+        "claim 4",
+        "(?:save|saving).{0,8}\\$?150.{0,35}dishwasher"
+      ],
+      [
+        "claim 5",
+        "kitchenaid.{0,20}408.{0,25}products"
+      ],
+      [
+        "claim 6",
+        "(?:save|saving).{0,12}\\$?3000"
+      ],
+      [
+        "claim 7",
+        "september 30"
+      ],
+      [
+        "claim 8",
+        "viking.{0,20}347.{0,25}products"
+      ],
+      [
+        "claim 9",
+        "buy 1 get 1"
+      ],
+      [
+        "claim 10",
+        "1000 allowance"
+      ],
+      [
+        "claim 11",
+        "700.{0,25}installation"
+      ],
+      [
+        "claim 12",
+        "december 31"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--8": {
+    "task": "I am considering financing a GE JGBS66REKSS range. Check its advertised finance offer and the financing pages, then explain the two available promotional offers, their qualifying-purchase rules, and the consequence of leaving the 15-month balance unpaid. Tell me how to arrange the purchase and whether the range is deliverable to ZIP 48083.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/financeoffers.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "jgb[s]?66rekss.{0,35}15 months"
+      ],
+      [
+        "claim 2",
+        "15.month.{0,40}0%"
+      ],
+      [
+        "claim 3",
+        "paid in full"
+      ],
+      [
+        "claim 4",
+        "(?:interest.{0,30}purchase date|purchase date.{0,30}interest)"
+      ],
+      [
+        "claim 5",
+        "6 months.{0,25}\\$?200"
+      ],
+      [
+        "claim 6",
+        "credit card"
+      ],
+      [
+        "claim 7",
+        "minimum monthly payments"
+      ],
+      [
+        "claim 8",
+        "1 receipt|single receipt"
+      ],
+      [
+        "claim 9",
+        "877.?628.?9913"
+      ],
+      [
+        "claim 10",
+        "48083"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--9": {
+    "task": "Help me plan delivery of a GE JGBS66REKSS range to ZIP 48083. Check its availability and product shipping offer against the main delivery policy and FAQ. Explain the standard and In-Home delivery costs, what the upgrade includes, the expected major-appliance delivery time, and whether installation is included.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/freedelivery.html",
+      "/faq.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "48083.{0,20}available|available.{0,35}48083"
+      ],
+      [
+        "claim 2",
+        "99.{0,15}standard|standard.{0,20}99"
+      ],
+      [
+        "claim 3",
+        "999.{0,65}free|free.{0,65}999"
+      ],
+      [
+        "claim 4",
+        "in.home.{0,25}199"
+      ],
+      [
+        "claim 5",
+        "1 flight"
+      ],
+      [
+        "claim 6",
+        "unbox"
+      ],
+      [
+        "claim 7",
+        "packaging removal"
+      ],
+      [
+        "claim 8",
+        "1.{0,5}3 weeks"
+      ],
+      [
+        "claim 9",
+        "installation is not included|does not include installation"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--10": {
+    "task": "Help me assess US Appliance's customer service from its merchant reviews. Compare John's page-one review with the first reviews on pages two and three: give each reviewer, date, rating, and a short summary. Report the overall rating and review count and explain whether John's review is more recent than the other two.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/testimonials.html",
+      "/testimonials.html\\?page=2",
+      "/testimonials.html\\?page=3"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "4\\.9.{0,15}5.{0,15}20841"
+      ],
+      [
+        "claim 2",
+        "john.{0,20}5.{0,25}september 20.{0,10}2026"
+      ],
+      [
+        "claim 3",
+        "calvin d.{0,40}5.{0,20}august 3.{0,10}2026"
+      ],
+      [
+        "claim 4",
+        "a reviewer.{0,40}5.{0,20}june 22.{0,10}2026"
+      ],
+      [
+        "claim 5",
+        "john.{0,30}more recent"
+      ],
+      [
+        "claim 6",
+        "uncluttered|available information"
+      ],
+      [
+        "claim 7",
+        "checkout.{0,12}breeze|easy.{0,25}checkout"
+      ],
+      [
+        "claim 8",
+        "fast and easy"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--11": {
+    "task": "Before ordering a major appliance, help me understand how US Appliance handles delivery problems and warranty service. Use its FAQ, detailed delivery policy, and warranty details to explain whether installation is included, who handles covered repairs or replacement, what In-Home delivery includes and costs, and what optional warranty coverage is offered.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/faq.html",
+      "/us-appliance-warranties.html",
+      "/freedelivery.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "installation is not|installation.{0,20}not included"
+      ],
+      [
+        "claim 2",
+        "manufacturer.{0,35}(?:repair|replacement)"
+      ],
+      [
+        "claim 3",
+        "in.home.{0,25}199"
+      ],
+      [
+        "claim 4",
+        "1 flight"
+      ],
+      [
+        "claim 5",
+        "unbox"
+      ],
+      [
+        "claim 6",
+        "packaging removal"
+      ],
+      [
+        "claim 7",
+        "extended service protection"
+      ],
+      [
+        "claim 8",
+        "(?:begin|start).{0,40}manufacturer warranty ends"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--12": {
+    "task": "I found a competitor price of $799 for the GE JGBS66REKSS 30-inch gas range. Check US Appliance's current price and price-match policy, then submit a price-match request as Alex Rivera, alex.r@example.com, naming Big Box Store as the competitor. Report the confirmation and requested product. Do not place an order.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/price-match-request.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "jgb[s]?66rekss.{0,35}\\$?823"
+      ],
+      [
+        "claim 2",
+        "110%"
+      ],
+      [
+        "claim 3",
+        "authorized retailer"
+      ],
+      [
+        "claim 4",
+        "request received"
+      ],
+      [
+        "claim 5",
+        "alex rivera"
+      ],
+      [
+        "claim 6",
+        "big box store.{0,15}\\$?799"
+      ]
+    ],
+    "state": {
+      "price_match_requests": {
+        "added": [
+          {
+            "id": 1,
+            "name": "Alex Rivera",
+            "email": "alex.r@example.com",
+            "phone": {
+              "regex": "[\\s\\S]*"
+            },
+            "product": {
+              "regex": "(?s)(?=.*JGBS66REKSS)(?=.*(?:range|GE)).+"
+            },
+            "competitor": "Big Box Store",
+            "competitor_price": 799.0,
+            "url": {
+              "regex": "[\\s\\S]*"
+            },
+            "created_on": "2026-09-29"
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "USAppliance--13": {
+    "task": "I am considering a Whirlpool WRF560SEHZ refrigerator for ZIP 48083. Use the Refrigerator Buying Guide to understand French-door layouts and installation considerations, then find that model in French Door Refrigerators and check its details and delivery availability. Tell me its price, dimensions, one useful feature, and what I should check in my kitchen before buying.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/guides/refrigerator.html",
+      "/frdore.html",
+      "/wrf560sehz"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "wrf560sehz.{0,20}\\$?1898"
+      ],
+      [
+        "claim 2",
+        "68\\.38.{0,20}high|height.{0,10}68\\.38"
+      ],
+      [
+        "claim 3",
+        "30.{0,15}wide|width.{0,10}30"
+      ],
+      [
+        "claim 4",
+        "34\\.38.{0,15}deep|depth.{0,10}34\\.38"
+      ],
+      [
+        "claim 5",
+        "humidity.controlled crispers"
+      ],
+      [
+        "claim 6",
+        "2 refrigerator doors.{0,30}bottom freezer"
+      ],
+      [
+        "claim 7",
+        "ventilation"
+      ],
+      [
+        "claim 8",
+        "(?:doorways|hallways)"
+      ],
+      [
+        "claim 9",
+        "water.line"
+      ],
+      [
+        "claim 10",
+        "48083"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--14": {
+    "task": "Find the cheapest available Cafe item in the brand's full product listing. Check what the item actually is, one feature from its description, and delivery availability to ZIP 48083. Report its model and price, the brand's product count, and whether the item would serve as a complete appliance or an accessory.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/brand/cafe"
+    ],
+    "claims": [
+      [
+        "accessory",
+        "accessory|kit|knobs"
+      ],
+      [
+        "catalog size",
+        "337.{0,25}products"
+      ],
+      [
+        "delivery ZIP",
+        "48083"
+      ]
+    ],
+    "state": {},
+    "alternatives": [
+      {
+        "paths": [
+          "/cxadth1pmbt\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmbt.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pmbz\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmbz.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ bronze"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pmcu\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmcu.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ copper"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxce1hkpmbt\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxce1hkpmbt.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxce1hkpmss\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxce1hkpmss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "stainless\\ steel"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmbt\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmbt.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmbz\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmbz.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ bronze"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmcu\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmcu.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ copper"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmss\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "stainless\\ steel"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmbt\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmbt.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "brushed\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmbz\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmbz.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "brushed\\ bronze"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmcu\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmcu.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "brushed\\ copper"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmss\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "stainless\\ steel"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx152p3mds\\-27\\-optional\\-built\\-in\\-trim\\-kit\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx152p3mds.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx153p3mds\\-30\\-optional\\-built\\-in\\-trim\\-kit\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx153p3mds.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx152p2mss\\-27\\-optional\\-built\\-in\\-trim\\-kit\\-stainless\\-steel\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx152p2mss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "stainless\\ steel"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx153p2mss\\-30\\-optional\\-built\\-in\\-trim\\-kit\\-stainless\\-steel\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx153p2mss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "stainless\\ steel"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx152p4mwm\\-cafe\\-27\\-optional\\-built\\-in\\-trim\\-kit\\-matte\\-white\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx152p4mwm.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "matte\\ white"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cx153p4mwm\\-cafe\\-27\\-optional\\-built\\-in\\-trim\\-kit\\-matte\\-white\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cx153p4mwm.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "trim kit"
+          ],
+          [
+            "finish feature",
+            "matte\\ white"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmcg\\-cafe\\-5\\-gas\\-cooktop\\-knobs\\-brushed\\-brass\\-brushed\\-brass\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmcg.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ brass"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxcg1k0pmfb\\-cafe\\-5\\-gas\\-cooktop\\-knobs\\-flat\\-black\\-flat\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxcg1k0pmfb.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:cooktop.{0,20}knobs|knobs.{0,20}cooktop)"
+          ],
+          [
+            "finish feature",
+            "flat\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pmcg\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-brass\\-brushed\\-brass\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmcg.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ brass"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pmfb\\-cafe\\-dishwasher\\-handle\\-kit\\-flat\\-black\\-flat\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmfb.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "flat\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pmss\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-stainless\\-brushed\\-stainless\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pmss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ stainless"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvbt\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-black\\-brushed\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvbt.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvbz\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-bronze\\-brushed\\-bronze\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvbz.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ bronze"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvcg\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-brass\\-brushed\\-brass\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvcg.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ brass"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvcu\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-copper\\-brushed\\-copper\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvcu.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ copper"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvfb\\-cafe\\-dishwasher\\-handle\\-kit\\-flat\\-black\\-flat\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvfb.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "flat\\ black"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxadth1pvss\\-cafe\\-dishwasher\\-handle\\-kit\\-brushed\\-stainless\\-brushed\\-stainless\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxadth1pvss.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "(?:dishwasher.{0,20}handle|handle.{0,20}dishwasher)"
+          ],
+          [
+            "finish feature",
+            "brushed\\ stainless"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmcg\\-cafe\\-accessory\\-kit\\-brushed\\-brass\\-brushed\\-brass\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmcg.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "brushed\\ brass"
+          ]
+        ]
+      },
+      {
+        "paths": [
+          "/cxotrhkpmfb\\-cafe\\-accessory\\-kit\\-flat\\-black\\-flat\\-black\\.html"
+        ],
+        "claims": [
+          [
+            "tied minimum price",
+            "cxotrhkpmfb.{0,35}\\$?219"
+          ],
+          [
+            "item function",
+            "accessory kit"
+          ],
+          [
+            "finish feature",
+            "flat\\ black"
+          ]
+        ]
+      }
+    ]
+  },
+  "USAppliance--15": {
+    "task": "I need two matching GE JGBS66 gas ranges and am choosing between Stainless Steel, Black, and Slate. Compare their model codes and prices, then leave two units of the Black variant in my cart. Report the three prices and the final cart subtotal and shipping charge.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/jgbs66rekss",
+      "/jgbs66dekbb",
+      "/jgbs66eekes",
+      "/cart.php"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "jgb[s]?66rekss.{0,20}\\$?823"
+      ],
+      [
+        "claim 2",
+        "jgb[s]?66dekbb.{0,25}\\$?823"
+      ],
+      [
+        "claim 3",
+        "jgb[s]?66eekes.{0,20}\\$?923"
+      ],
+      [
+        "claim 4",
+        "2 black|two black"
+      ],
+      [
+        "claim 5",
+        "(?:subtotal|total).{0,15}\\$?1646"
+      ],
+      [
+        "claim 6",
+        "(?:shipping.{0,10}free|free.{0,15}shipping)"
+      ]
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9]\\d*"
+            },
+            "cart_token": {
+              "regex": "[a-f0-9]{16,64}"
+            },
+            "user_id": null,
+            "product_id": 21473,
+            "qty": 2,
+            "added": 0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "USAppliance--16": {
+    "task": "Create a new account with email morgan.t@example.com, name Morgan Torres, password Passw0rd123, then add the GE JGBS66REKSS range to your cart. Sign out and sign back in, and confirm the cart still holds the range. Check out with In-Home Delivery to 9 Elm St, Columbus OH 43215, email morgan.t@example.com, card 5555444433332222 exp 01/29 CVV 456. Report the order number and the total including the delivery upgrade.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/account.php",
+      "/cart.php",
+      "/checkout",
+      "/order-confirmation/"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "morgan torres"
+      ],
+      [
+        "claim 2",
+        "(?:cart.{0,50}(?:sign|log)|(?:sign|log).{0,50}cart)"
+      ],
+      [
+        "claim 3",
+        "in.home"
+      ],
+      [
+        "claim 4",
+        "1022"
+      ]
+    ],
+    "state": {
+      "order_events": {
+        "added": [
+          {
+            "id": 28,
+            "order_id": 9,
+            "step": "Order Placed",
+            "happened_on": "2026-09-29",
+            "note": "We received your order."
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 9,
+            "product_id": 21476,
+            "name": "GE JGBS66REKSS 30\" Free-Standing Gas Range with Edge to Edge Cooktop - Stainless Steel",
+            "qty": 1,
+            "price": 823.0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "orders": {
+        "added": [
+          {
+            "id": 9,
+            "number": "10009",
+            "user_id": 5,
+            "email": "morgan.t@example.com",
+            "ship_name": "Morgan Torres",
+            "ship_address": "9 Elm St",
+            "ship_city": "Columbus",
+            "ship_state": "OH",
+            "ship_zip": "43215",
+            "phone": {
+              "regex": "[\\s\\S]*"
+            },
+            "status": "Processing",
+            "shipping_method": "In-Home Delivery",
+            "shipping_cost": 199.0,
+            "subtotal": 823.0,
+            "tax": 0.0,
+            "total": 1022.0,
+            "carrier": "",
+            "tracking": "",
+            "placed_on": "2026-09-29",
+            "eta": null,
+            "financing": ""
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "email": "morgan.t@example.com",
+            "password_hash": "93491728c944dd69c1a7aac0b86785f8433e27b8648f9d821daea163f03d9a81",
+            "name": "Morgan Torres",
+            "phone": "",
+            "created_on": "2026-09-29"
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ]
+  },
+  "USAppliance--17": {
+    "task": "I need two units of the first QuickShip item on the home page and one unit of the second. Check delivery availability for the first item to ZIP 48083, add the quantities to the cart, and compare the standard and In-Home delivery charges shown at checkout. Tell me both product names and prices and the subtotal. Stop before placing an order.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/tc5001wn",
+      "/frss2623as",
+      "/cart.php",
+      "/checkout"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "tc5003wn.{0,65}\\$?1499"
+      ],
+      [
+        "claim 2",
+        "frss2623as.{0,65}\\$?1208"
+      ],
+      [
+        "claim 3",
+        "2 washers"
+      ],
+      [
+        "claim 4",
+        "1 refrigerator"
+      ],
+      [
+        "claim 5",
+        "(?:subtotal|total).{0,10}\\$?4206"
+      ],
+      [
+        "claim 6",
+        "free standard"
+      ],
+      [
+        "claim 7",
+        "199.{0,10}in.home|in.home.{0,10}199"
+      ],
+      [
+        "claim 8",
+        "48083"
+      ]
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9]\\d*"
+            },
+            "cart_token": {
+              "regex": "[a-f0-9]{16,64}"
+            },
+            "user_id": null,
+            "product_id": 26475,
+            "qty": 2,
+            "added": 0
+          },
+          {
+            "id": {
+              "regex": "[1-9]\\d*"
+            },
+            "cart_token": {
+              "regex": "[a-f0-9]{16,64}"
+            },
+            "user_id": null,
+            "product_id": 20337,
+            "qty": 1,
+            "added": 0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "USAppliance--18": {
+    "task": "I am new to shopping for a gas range. Read the Range Buying Guide for gas-fuel advantages and limitations, then search the catalog for range products and investigate the lowest-priced result. Explain whether that result is a complete range or an accessory, give its model and price, and explain how its fuel compatibility relates to the guide.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/guides/range.html",
+      "/cert77301"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "instant heat"
+      ],
+      [
+        "claim 2",
+        "temperature control"
+      ],
+      [
+        "claim 3",
+        "gas line"
+      ],
+      [
+        "claim 4",
+        "less.even"
+      ],
+      [
+        "claim 5",
+        "cert77301.{0,70}\\$?29\\.95"
+      ],
+      [
+        "claim 6",
+        "installation kit"
+      ],
+      [
+        "claim 7",
+        "accessory"
+      ],
+      [
+        "claim 8",
+        "natural.{0,25}manufactured.{0,35}(?:petroleum|propane)"
+      ]
+    ],
+    "state": {}
+  },
+  "USAppliance--19": {
+    "task": "Help me prepare a support request about returning a major appliance. Check the Return Policy, the FAQ return and warranty answers, and Contact Us. Summarize the return window, restocking fee, damage-report deadline, and final-sale exclusions, then identify the department, phone number, and hours I should use. Do not send a message.",
+    "initial_digest": "ae07c284f9712ffa8b0b0f395e136387d386b7b79e43caf074477ff68bf1f29b",
+    "paths": [
+      "/returninformation.html",
+      "/faq.html",
+      "/contactus2.html"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "30 days"
+      ],
+      [
+        "claim 2",
+        "10%.{0,20}restock"
+      ],
+      [
+        "claim 3",
+        "24 hours"
+      ],
+      [
+        "claim 4",
+        "overstock"
+      ],
+      [
+        "claim 5",
+        "closeout"
+      ],
+      [
+        "claim 6",
+        "installation parts"
+      ],
+      [
+        "claim 7",
+        "clearance"
+      ],
+      [
+        "claim 8",
+        "customer service"
+      ],
+      [
+        "claim 9",
+        "877.?628.?9913"
+      ],
+      [
+        "claim 10",
+        "monday.{0,8}friday.{0,15}9.{0,10}6.{0,5}(?:est|eastern)"
+      ]
+    ],
+    "state": {}
+  }
+}

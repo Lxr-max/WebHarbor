@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}News{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › News</nav>
+  <div class="page-title"><h1>DMV News</h1></div>
+  <p>Displaying {{ (page-1)*per + 1 }} - {{ [page*per, total]|min }}</p>
+  {% for article in articles %}
+  <div class="card">
+    <div class="eyebrow">{{ article.published[:10] if article.published else 'DMV News' }}</div>
+    <h3><a href="{{ url_for('news_article', slug=article.slug) }}">{{ article.title }}</a></h3>
+    {% if article.paras() %}<p>{{ article.paras()[0][:240] }}…</p>{% endif %}
+  </div>
+  {% endfor %}
+  <nav class="pager" aria-label="Pagination">
+    {% set pages = ((total + per - 1)//per) if total else 1 %}
+    {% if page > 1 %}<a href="{{ url_for('news_list', pg=page-1) }}">‹ Prev</a>{% endif %}
+    {% for p in range(1, pages+1) %}
+      {% if p == page %}<span class="current">{{ p }}</span>
+      {% elif p <= 6 or p > pages-2 or (p - page)|abs <= 2 %}<a href="{{ url_for('news_list', pg=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+    {% if page < pages %}<a href="{{ url_for('news_list', pg=page+1) }}">Next ›</a>{% endif %}
+  </nav>
+</div>
+{% endblock %}

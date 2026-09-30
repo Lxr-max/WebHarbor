@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ cabin.name }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>{{ cabin.name }}</h1>
+  {% if cabin.image %}<img class="ua-deal-hero" src="{{ url_for('static', filename=cabin.image.replace('static/', '')) }}" alt="{{ cabin.name }}">{% endif %}
+  <p class="ua-lead">{{ cabin.tagline }}</p>
+  <ul class="ua-highlights">
+    {% for highlight in cabin.highlights %}<li>{{ highlight }}</li>{% endfor %}
+  </ul>
+  {% if cabin.body and cabin.body != '[]' %}
+  {% set blocks = cabin.body|from_json %}
+  {% for block in blocks %}
+    {% if block.kind == 'heading' %}<h2>{{ block.text }}</h2>
+    {% elif block.kind == 'para' %}<p>{{ block.text }}</p>
+    {% elif block.kind == 'list' %}<ul>{% for item in block['items'] %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% elif block.kind == 'table' %}
+    <table class="ua-table">
+      <thead><tr>{% for h in block.head %}<th>{{ h|nl2br }}</th>{% endfor %}</tr></thead>
+      <tbody>{% for row in block.rows %}<tr>{% for cell in row %}<td>{{ cell|nl2br }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+    </table>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('home') }}">Book {{ cabin.name }}</a>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('cabins') }}">All cabins</a>
+  </div>
+</section>
+{% endblock %}

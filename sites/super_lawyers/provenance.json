@@ -1,0 +1,96 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the superlawyers.com mirror: consumer homepage (hero lawyer search, Why Super Lawyers, legal-issue cards, resource topic cards, Ask a Lawyer spotlight, for-lawyers band), attorney directory (national hub with the 19-category practice taxonomy, state and city pages, practice x city SERPs with lawyer cards, related practice areas, nearby cities, intro copy, FAQ accordions, court locations), lawyer and firm profile pages (sidebar summary, practice-area percentage pie chart, achievements, office, contact form), Top Lists (hub with the 40 upstream regions, state pages, list detail pages), legal article resources (hub, topic overviews, articles, scored search), Ask a Lawyer (hub with spotlight answers and topic/state taxonomy, Q&A detail pages, scored search), attorney feature articles, static pages (about, selection process, attorney FAQ, for-lawyers, digital magazines, marketing solutions, contact), and the account area (register, login, profile edit, favorites, saved searches, inquiries)."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. All content rows come from the tracked source_data/ snapshots captured from the live site; lawyer photo variants are resolved from the on-disk asset bundle; benchmark users use a frozen bcrypt digest so the SQLite seed is byte-reproducible on every build (PYTHONHASHSEED=0)."
+  },
+  {
+   "path": "source_data/directory.json",
+   "classification": "captured-upstream-content",
+   "scope": "Directory taxonomy captured from attorneys.superlawyers.com on 2026-09-26: 51 states, 62 top cities, 140 practice areas."
+  },
+  {
+   "path": "source_data/listings/",
+   "classification": "captured-upstream-content",
+   "scope": "28 (practice, state, city) lawyer listing pages captured from attorneys.superlawyers.com on 2026-09-26: 894 lawyer cards (display names, photo URLs, taglines, phones, serving lines, firm names, sponsored flags), the H1 and intro copy, FAQ accordions, nearby-cities and related-practice-area rails, and the court-location blocks."
+  },
+  {
+   "path": "source_data/lawyers/",
+   "classification": "captured-upstream-content",
+   "scope": "Full lawyer profile pages captured from profiles.superlawyers.com on 2026-09-26: names, taglines, photos, firms, phones, practice areas with percentage breakdowns, focus areas, licensed-since, education, Super Lawyers / Rising Stars selection years and counts, About biographies, first-admitted, professional webpages, honors, languages, office locations, static map URLs, and find-me-online links."
+  },
+  {
+   "path": "source_data/firms/",
+   "classification": "captured-upstream-content",
+   "scope": "401 firm profile pages captured from profiles.superlawyers.com on 2026-09-26: firm names, office addresses, phones, static map URLs, and attorney lists."
+  },
+  {
+   "path": "source_data/toplists.json",
+   "classification": "captured-upstream-content",
+   "scope": "54 top lists across 9 states captured from superlawyers.com/top-lists/ on 2026-09-26 (Top 10 / 50 / 100 / 25 and Top 5 practice-area lists, Women lists, 2024-2027 editions) with 1,551 ranked entries (positions, lawyer uuids, firms, photo URLs)."
+  },
+  {
+   "path": "source_data/resources/topics/",
+   "classification": "captured-upstream-content",
+   "scope": "12 legal-resources topic overview pages captured from superlawyers.com/resources/ on 2026-09-26 (intro blocks, article link rails)."
+  },
+  {
+   "path": "source_data/resources/articles/",
+   "classification": "captured-upstream-content",
+   "scope": "36 resource articles captured from superlawyers.com/resources/ on 2026-09-26 with their full body block structure (headings and paragraphs)."
+  },
+  {
+   "path": "source_data/answers/",
+   "classification": "captured-upstream-content",
+   "scope": "32 Ask-a-Lawyer Q&A pages captured from answers.superlawyers.com on 2026-09-26: questions, asker location and dates, answer counts, the answering attorneys (names, cities, firms, phones, profile uuids, headshot URLs) and the full answer bodies."
+  },
+  {
+   "path": "source_data/answerer_photos.json",
+   "classification": "derived-asset-mapping",
+   "scope": "Mapping of each captured Q&A answer to the local path of its answering attorney's downloaded headshot (see asset_inventory.json for the byte-level provenance of every image)."
+  },
+  {
+   "path": "source_data/articles/",
+   "classification": "captured-upstream-content",
+   "scope": "Attorney feature articles captured from superlawyers.com/articles/ on 2026-09-26: 10 state magazine articles and the online-exclusive pieces referenced by their related rails, with titles, subtitles, full body blocks, featured lawyers (with headshot URLs) and related-article links."
+  },
+  {
+   "path": "source_data/static_pages.json",
+   "classification": "captured-upstream-content",
+   "scope": "8 static pages captured from superlawyers.com on 2026-09-26: about, selection process, attorney FAQ, for-lawyers, digital magazines, marketing solutions, contact, and the top-lists hub copy."
+  },
+  {
+   "path": "source_data/practice_categories.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 19-category / 140-practice browse taxonomy extracted from the attorneys.superlawyers.com home capture (2026-09-26)."
+  },
+  {
+   "path": "source_data/toplist_regions.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 40 Top Lists regions (display names and slugs) extracted from the superlawyers.com/top-lists/ capture (2026-09-26)."
+  },
+  {
+   "path": "source_data/resource_categories.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 37 legal-article resource topic links extracted from the superlawyers.com/resources/ capture (2026-09-26)."
+  },
+  {
+   "path": "asset_inventory.json",
+   "classification": "asset-manifest",
+   "scope": "Manifest of the 3,992 real upstream images shipped with the mirror: per-file byte size, SHA-256 and https source URL (lawyer photo variants including feature-article featured-lawyer photos, firm static maps, answering-attorney headshots, site art, the upstream circled-headshot placeholder icon, logo, favicon). scripts/check_asset_inventory.py verifies exact coverage, hashes, formats and source URLs."
+  },
+  {
+   "path": "scripts_dev/",
+   "classification": "mirror-code",
+   "scope": "The Playwright capture pipeline (Cloudflare-challenge-aware browser launcher, directory / listings / profiles / firms / toplists / resources / answers / articles / static-page scrapers, asset downloader with inventory emission, taxonomy extractors, answerer-photo backfill, task writer)."
+  }
+ ]
+}

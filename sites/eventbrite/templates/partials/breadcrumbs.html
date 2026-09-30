@@ -1,0 +1,20 @@
+{# Breadcrumbs partial. Looks at request.path to render context-aware crumbs. #}
+<div class="eb-breadcrumbs" style="font-size:13px;color:var(--eb-text-muted);margin-bottom:14px;">
+  <a href="{{ url_for('index') }}">Home</a>
+  {% set parts = request.path.strip('/').split('/') %}
+  {% set cum = [] %}
+  {% for p in parts %}
+    {% if p %}
+      <span style="margin:0 6px;">›</span>
+      {% if loop.first and p == 'd' %}
+        <a href="{{ url_for('country_us') }}">Cities</a>
+      {% elif loop.first and p == 'events' %}
+        <a href="{{ url_for('search') }}">Events</a>
+      {% elif loop.first and p == 'c' %}
+        <a href="{{ url_for('sitemap_page') }}">Categories</a>
+      {% else %}
+        <a href="/{{ '/'.join(parts[:loop.index]) }}">{{ p|replace('-', ' ')|replace('_', ' ')|title|truncate(40) }}</a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>

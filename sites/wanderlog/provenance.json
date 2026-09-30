@@ -1,0 +1,63 @@
+{
+ "site": "wanderlog",
+ "upstream": "https://wanderlog.com/",
+ "captured_at": "2026-09-29",
+ "capture_method": "server-rendered pages fetched directly (wanderlog.com serves full SSR HTML with a window.__MOBX_STATE__ JSON snapshot per page); public JSON APIs fetched directly; every managed image fetched from the exact upstream CDN URL it renders at",
+ "sources": {
+  "wanderlog.com": {
+   "role": "primary site: landing page, destination explore pages (11 cities: Tokyo, London, Paris, Rome, Barcelona, New York City, San Francisco, Las Vegas, Singapore, Bangkok, Amsterdam), shared-guide view pages (14 real user guides), place detail pages (39), the hotels landing copy, user profiles (16), the traveler leaderboard and the marketing-page media",
+   "ssr_pages_captured": 89,
+   "api_endpoints": [
+    "https://wanderlog.com/api/tripPlans/browse/guides",
+    "https://wanderlog.com/api/tripPlans/profile/byUsername/<username>",
+    "https://wanderlog.com/api/user/leaderboard",
+    "https://wanderlog.com/api/geo/autocomplete/<query>",
+    "https://wanderlog.com/api/geo/countries"
+   ]
+  },
+  "itin-dev.wanderlogstatic.com": {
+   "role": "Wanderlog's image CDN: freeImage / freeImageSmall / profilePicture variants keyed by upstream image key, plus the /emoji category icons",
+   "images_fetched": 623
+  }
+ },
+ "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/ captures. The tracked source_data/ snapshots trim as follows: geo-category ranked lists are included for all 11 mirrored destinations' attractions/restaurants/hotels rankings plus Tokyo cafes and Paris free attractions (35 lists), each trimmed to the upstream top 10 entries; destination explore sections are trimmed to the top 5 places per section; shared guides keep every section heading and notes but trim place blocks to the first 3 per section and at most 8 per guide. Upstream place counts, view counts and list titles remain the upstream values.",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "Paris in the Spring (link-shared, 4 days, Bob as accepted collaborator) and a public Tokyo Weekend trip"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "Iceland Ring Road (link-shared, 5 days, Dana as accepted collaborator), collaborator on Alice's Paris trip"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "private New York City Food Crawl (3 days)"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "public Rome Essentials (3 days, Alice as accepted collaborator), collaborator on Bob's Iceland trip"
+   }
+  ],
+  "fixture_note": "The four benchmark accounts, their trips, itineraries, checklists, budgets, collaborator states, likes and comments are authored fixtures modeling Wanderlog's trip-planner product (the upstream planner requires live accounts). Every place referenced by a fixture is a real captured upstream place with its upstream description, coordinates, rating, phone, website, opening hours and image. Benchmark likes and comments are seeded on top of the captured upstream like counts (e.g. uzyvvtuwtc renders 769 upstream likes + 2 seeded benchmark likes = 771); view counts stay frozen at the captured upstream values.",
+  "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash; two consecutive builds produce byte-identical databases (md5 73cc99c32f3915a25554204fb1881929) and /reset/wanderlog restores instance == instance_seed byte-for-byte.",
+  "timezone": "UTC"
+ },
+ "media": {
+  "images": {
+   "count": 623,
+   "inventory": "asset_inventory.json",
+   "policy": "every file is fetched from the live upstream URL it renders at (freeImage for heroes and guide headers, freeImageSmall for place cards, profilePicture for avatars, wanderlog.com/p/ for landing-page media); no placeholders, no duplicates (content sha256 deduped), no stretching — files keep their upstream bytes"
+  }
+ },
+ "dynamic_features": {
+  "view_counts": "frozen at the captured upstream values (no per-request increment) so walkthroughs observe deterministic numbers",
+  "like_counts": "captured upstream value plus seeded benchmark likes; the like/unlike actions then move the count deterministically",
+  "comments": "upstream loads guide comments client-side behind authenticated APIs; the mirror seeds benchmark comments on the real guides and lets logged-in users post new ones"
+ }
+}

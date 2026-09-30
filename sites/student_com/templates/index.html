@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="bg"><img src="/static/images/home/hero-banner-new.png" alt="Student.com is having a glow-up"></div>
+  <div class="container inner">
+    <h1>Student living, made simple</h1>
+    <p>Compare verified student housing near your campus in seconds. Refresh? Nah — it's a full reboot. Student life hits different now. Your platform should too.</p>
+    <div class="searchbox">
+      <input type="search" id="hero-search" name="searchBar-hero"
+             placeholder="Search by city, college or property"
+             data-testid="inputField-searchBar-hero" autocomplete="off" aria-label="Search by city, college or property">
+      <div class="search-drop" id="hero-drop"></div>
+    </div>
+    <div class="chips">
+      <a href="/us/tx/u">Texas</a>
+      <a href="/us/fl/u">Florida</a>
+      <a href="/us/ga/u">Georgia</a>
+      <a href="/us/oh/u">Ohio</a>
+    </div>
+    <p class="small" style="color:rgba(255,255,255,.75);margin-top:18px">
+      We're currently taking inquiries for US &amp; Canada only. More destinations coming soon.</p>
+  </div>
+</section>
+
+<div class="scroll-banner">
+  <div class="track">
+    <span>NEXT LEVEL STUDENT LIFE 🏡</span><span>FIND THE PERFECT VIBE 🔥</span>
+    <span>NEXT LEVEL STUDENT LIFE 🏡</span><span>FIND THE PERFECT VIBE 🔥</span>
+  </div>
+</div>
+
+<section class="section container">
+  <div class="section-head">
+    <h2>JUST DROPPED: Texas, Florida, Georgia &amp; Ohio</h2>
+  </div>
+  <p class="muted" style="max-width:640px;margin-top:-10px">Thousands of 3+ star homes across 4 states, zero stress. Your next place is already waiting.</p>
+  <div class="state-ctas" style="margin-top:22px">
+    {% for st in [('tx','Texas','texas'), ('fl','Florida','florida'), ('ga','Georgia','georgia'), ('oh','Ohio','ohio')] %}
+    <a class="state-cta" href="/us/{{ st[0] }}/u">
+      {% if loop.index == 1 %}<span class="drop">JUST DROPPED 🚨</span>{% endif %}
+      <img class="state-img" src="/static/images/home/state-{{ st[2] }}.png" alt="Illustration of {{ st[1] }}">
+      <span class="txt">
+        <h3>{{ st[1] }},</h3>
+        <h3>your student era just started.</h3>
+        <span class="cta">Search {{ st[1] }} Now</span>
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head">
+    <h2>Why Student.com</h2>
+  </div>
+  <div class="grid cols-3">
+    <div class="card" style="padding:26px">
+      <div style="font-size:28px">🏠</div>
+      <h3 style="margin-top:10px">Curated listings</h3>
+      <p class="muted" style="font-size:14px">We only show 3+ star rated listings so you can find your student home without the guesswork.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <div style="font-size:28px">📍</div>
+      <h3 style="margin-top:10px">Find the area for you</h3>
+      <p class="muted" style="font-size:14px">Commute times, neighbourhood vibes and hot spots — see what living somewhere is really like.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <div style="font-size:28px">💬</div>
+      <h3 style="margin-top:10px">Talk to properties directly</h3>
+      <p class="muted" style="font-size:14px">Inquiry to move-in, one thread. Keep every conversation in My Inquiries.</p>
+    </div>
+  </div>
+</section>
+
+{% for group in carousel_cities %}
+<section class="section container" style="padding-top:0">
+  <div class="section-head">
+    <h2>Popular properties in {{ group.city.name }}</h2>
+    <a class="see-all" href="/us/{{ group.city.state }}/{{ group.city.slug }}">View All</a>
+  </div>
+  <div class="rail">
+    {% set heart_id = 'heart-' + group.city.slug + loop.index|string %}
+    {% for prop in group.properties %}
+      {% with distance = None %}{% include "_property_card.html" %}{% endwith %}
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head">
+    <h2>Popular Cities</h2>
+  </div>
+  <div class="grid cols-4">
+    {% for city in popular_cities %}
+    <a class="prop-card" href="/us/{{ city.state }}/{{ city.slug }}">
+      <div class="img">
+        {% if city.hero %}<img src="{{ city.hero }}" alt="Photo of student housing in {{ city.name }}" loading="lazy">{% endif %}
+        <span class="badge">{{ STATE_NAMES[city.state] }}</span>
+      </div>
+      <div class="body">
+        <div class="name">{{ city.name }}</div>
+        <div class="dist">Student housing in {{ city.name }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head">
+    <h2>Popular Colleges</h2>
+  </div>
+  <div class="grid cols-4">
+    {% for uni in top_unis %}
+    <a class="card" style="padding:20px;display:block" href="/us/{{ uni.state }}/{{ uni.city_slug }}/u/{{ uni.slug }}">
+      <h3 style="font-size:16px">{{ uni.name }}</h3>
+      <div class="muted small" style="margin-top:6px">{{ uni.city_slug.replace('-', ' ').title() }}, {{ STATE_NAMES[uni.state] }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head"><h2>As featured in</h2></div>
+  <div class="press">
+    <img src="/static/images/brand/bloomberg.png" alt="Bloomberg logo">
+    <img src="/static/images/brand/financial-times.png" alt="Financial Times logo">
+    <img src="/static/images/brand/forbes.png" alt="Forbes logo">
+    <img src="/static/images/brand/techcrunch.png" alt="TechCrunch logo">
+    <img src="/static/images/brand/venturebeat.png" alt="VentureBeat logo">
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="card" style="padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
+    <div>
+      <h2>Have your say &amp; get early access.</h2>
+      <p class="muted" style="margin-top:10px;font-size:14px">You can help shape Student.com — next level. We've been a global force in student housing since 2011 — and we're just getting started.</p>
+      <p class="small muted" style="margin-top:8px">Sign up now to be part of the movement and have the chance to shape what's next for Student.com</p>
+      <form id="newsletter-form" style="display:flex;gap:10px;margin-top:16px;max-width:420px;flex-wrap:wrap">
+        <input type="email" id="newsletter-email" placeholder="Enter your email" required
+               style="flex:1 1 180px;border:1px solid rgba(38,38,38,.2);border-radius:8px;padding:12px 14px;font-family:inherit;min-width:0">
+        <button class="btn primary" type="submit" id="newsletter-submit">Sign up now</button>
+      </form>
+      <div class="small muted" id="newsletter-msg" style="margin-top:8px"></div>
+    </div>
+    <img src="/static/images/home/woman-with-computer.webp" alt="Photo of 2 students laughing together" style="border-radius:16px;max-width:100%;height:auto">
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("newsletter-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = document.getElementById("newsletter-submit");
+    btn.disabled = true;
+    fetch("/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", "X-CSRFToken": window.CSRF_TOKEN },
+      body: "email=" + encodeURIComponent(document.getElementById("newsletter-email").value),
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      btn.disabled = false;
+      document.getElementById("newsletter-msg").textContent =
+        res.ok ? "Thanks for signing up! We'll be in touch." : (res.error || "Something went wrong.");
+    });
+  });
+</script>
+{% endblock %}

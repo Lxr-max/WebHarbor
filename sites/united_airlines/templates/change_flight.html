@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Change flight — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Change your flight</h1>
+  <div class="ua-booking-summary">
+    <div class="ua-leg"><strong>{{ leg.flight.origin_code }} → {{ leg.flight.dest_code }}</strong>
+      UA {{ leg.flight.flight_number }} on {{ leg.travel_date }} · {{ leg.flight.departure }}–{{ leg.flight.arrival }}</div>
+    <p class="ua-quiet">Change fee: $0 (waived on {{ dict(fare_cabins)[leg.cabin] }}).
+      You pay only the fare difference, if any.</p>
+  </div>
+  {% if results %}
+  <div class="ua-fare-table">
+    {% for flight in results %}
+    <div class="ua-fare-row">
+      <div class="ua-flight-cell">
+        <div class="ua-flight-time"><strong>{{ flight.departure }}</strong> → <strong>{{ flight.arrival }}</strong></div>
+        <div class="ua-flight-meta">UA {{ flight.flight_number }} · {{ flight.aircraft.name }} · {{ flight.duration_label }}</div>
+      </div>
+      {% set fare = flight.fares().get(leg.cabin) %}
+      {% if fare %}
+      <form method="post" action="" class="ua-fare-cell">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="flight_id" value="{{ flight.id }}">
+        <button class="ua-fare-btn" type="submit">
+          <span class="ua-fare-amount">${{ '%.2f'|format(fare.amount) }}</span>
+          {% if fare.amount > leg.amount %}
+            <span class="ua-diff">+ ${{ '%.2f'|format(fare.amount - leg.amount) }} difference</span>
+          {% else %}
+            <span class="ua-diff ua-diff-none">No fare difference</span>
+          {% endif %}
+        </button>
+      </form>
+      {% else %}<div class="ua-fare-cell ua-fare-unavailable">Not available</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="ua-flash">No other flights operate {{ leg.flight.origin_code }}–{{ leg.flight.dest_code }} on {{ leg.travel_date }}.</div>
+  {% endif %}
+</section>
+{% endblock %}

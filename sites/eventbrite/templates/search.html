@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}{% if q %}{{ q }} | {% endif %}Search events | Eventbrite{% endblock %}
+{% block content %}
+<div class="eb-container eb-page eb-search-layout">
+
+  <aside class="eb-facets">
+    <form method="GET" action="{{ url_for('search') }}">
+      <input type="hidden" name="q" value="{{ q }}">
+      <input type="hidden" name="city" value="{{ city }}">
+      <input type="hidden" name="category" value="{{ cat }}">
+      <input type="hidden" name="format" value="{{ fmt }}">
+      <input type="hidden" name="price" value="{{ price }}">
+      <input type="hidden" name="venue" value="{{ venue }}">
+      <input type="hidden" name="language" value="{{ lang }}">
+      <input type="hidden" name="when" value="{{ when }}">
+      <input type="hidden" name="sort" value="{{ sort }}">
+
+      <h3>Date</h3>
+      <ul>
+        {% for v, l in [('','Anytime'),('today','Today'),('tomorrow','Tomorrow'),('this-weekend','This weekend'),('this-week','This week'),('this-month','This month')] %}
+          <li><a class="{% if when==v %}active{% endif %}"
+                 href="{{ search_url(when=v, from='', to='') }}">{{ l }}</a></li>
+        {% endfor %}
+      </ul>
+      <div class="eb-form-grid" style="margin-top:8px;">
+        <input type="date" name="from" value="{{ date_from.isoformat() if date_from else '' }}">
+        <input type="date" name="to"   value="{{ date_to.isoformat() if date_to else '' }}">
+      </div>
+
+      <h3>Price</h3>
+      <ul>
+        <li><a class="{% if not price %}active{% endif %}" href="{{ search_url(price='') }}">Any price</a></li>
+        <li><a class="{% if price=='free' %}active{% endif %}" href="{{ search_url(price='free') }}">Free</a></li>
+        <li><a class="{% if price=='paid' %}active{% endif %}" href="{{ search_url(price='paid') }}">Paid</a></li>
+      </ul>
+      <label style="font-size:13px;color:var(--eb-text-muted)">Max price ($)
+        <input type="number" name="max_price" value="{{ max_price or '' }}" min="0" step="5">
+      </label>
+
+      <h3>Format</h3>
+      <ul>
+        {% for v in ['Class','Conference','Festival','Networking','Party','Performance','Seminar','Tour'] %}
+          <li><a class="{% if fmt==v %}active{% endif %}"
+                 href="{{ search_url(format=v) }}">{{ v }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3>Venue</h3>
+      <ul>
+        <li><a class="{% if not venue %}active{% endif %}" href="{{ search_url(venue='') }}">Any</a></li>
+        <li><a class="{% if venue=='online' %}active{% endif %}" href="{{ search_url(venue='online') }}">Online</a></li>
+        <li><a class="{% if venue=='in-person' %}active{% endif %}" href="{{ search_url(venue='in-person') }}">In-person</a></li>
+      </ul>
+
+      <h3>Category</h3>
+      <ul>
+        <li><a class="{% if not cat %}active{% endif %}" href="{{ search_url(category='') }}">All categories</a></li>
+        {% for cslug, cname, color in categories %}
+          <li><a class="{% if cat==cslug %}active{% endif %}"
+                 href="{{ search_url(category=cslug) }}">{{ cname }}
+              {% if cat_counts.get(cslug) %}<span style="color:var(--eb-text-muted);">({{ cat_counts[cslug] }})</span>{% endif %}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3>Language</h3>
+      <ul>
+        {% for v, l in [('','Any'),('English','English'),('Spanish','Spanish'),('French','French')] %}
+          <li><a class="{% if lang==v %}active{% endif %}"
+                 href="{{ search_url(language=v) }}">{{ l }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <button class="btn btn-outline btn-block" type="submit" style="margin-top:14px;">Apply filters</button>
+    </form>
+  </aside>
+
+  <section>
+    <h1 class="eb-h1">
+      {% if q %}"{{ q }}"{% else %}All events{% endif %}
+      <span class="eb-muted" style="font-size:16px;font-weight:500;">— {{ total }} result{% if total != 1 %}s{% endif %}</span>
+    </h1>
+
+    {% if when or cat or price or fmt or venue or max_price or lang or city %}
+      <div style="margin:10px 0 18px;">
+        {% set base_args = {'q': q} %}
+        {% if when %}<span class="applied-filter">{{ when }} <a href="{{ search_url(when='') }}">×</a></span>{% endif %}
+        {% if cat %}<span class="applied-filter">{{ cat_map[cat][0] }} <a href="{{ search_url(category='') }}">×</a></span>{% endif %}
+        {% if price %}<span class="applied-filter">{{ price|capitalize }} <a href="{{ search_url(price='') }}">×</a></span>{% endif %}
+        {% if max_price %}<span class="applied-filter">≤ ${{ max_price }} <a href="{{ search_url(max_price='') }}">×</a></span>{% endif %}
+        {% if fmt %}<span class="applied-filter">{{ fmt }} <a href="{{ search_url(format='') }}">×</a></span>{% endif %}
+        {% if venue %}<span class="applied-filter">{{ venue }} <a href="{{ search_url(venue='') }}">×</a></span>{% endif %}
+        {% if lang %}<span class="applied-filter">{{ lang }} <a href="{{ search_url(language='') }}">×</a></span>{% endif %}
+        {% if city %}<span class="applied-filter">{{ city_map[city][0] if city in city_map else city }} <a href="{{ search_url(city='') }}">×</a></span>{% endif %}
+      </div>
+    {% endif %}
+
+    <div style="margin-bottom:14px;">
+      <label class="eb-muted">Sort by:
+        <select onchange="window.location='{{ search_url(sort='SORT_VALUE') }}'.replace('SORT_VALUE', encodeURIComponent(this.value))">
+          <option value="date"        {% if sort=='date' %}selected{% endif %}>Date (soonest)</option>
+          <option value="price"       {% if sort=='price' %}selected{% endif %}>Price (low to high)</option>
+          <option value="price-desc"  {% if sort=='price-desc' %}selected{% endif %}>Price (high to low)</option>
+        </select>
+      </label>
+    </div>
+
+    {% if events %}
+      <div class="eb-grid-3">
+        {% for ev in events %}
+          {% include 'partials/event_card.html' %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="eb-muted">No results match your filters. Try removing some filters above.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

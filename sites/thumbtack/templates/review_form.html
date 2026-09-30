@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Review {{ match.pro.name }} - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>Review {{ match.pro.name }}</h1>
+  <p class="muted">Tell other customers how your {{ project.category.name|lower }} project went.</p>
+  {% if existing %}
+  <p class="muted">You already reviewed this project. Thanks!</p>
+  {% else %}
+  <div class="auth-card">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-row">
+        <label>Rating</label>
+        <div class="radio-list">
+          {% for opt in [5, 4, 3, 2, 1] %}
+          <label><input type="radio" name="rating" value="{{ opt }}" {% if opt == 5 %}checked{% endif %}> {{ opt }} star{{ 's' if opt != 1 }}</label>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Your review</label>
+        <textarea name="body" rows="5" required placeholder="What went well? What could have gone better?"></textarea>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Submit review</button>
+    </form>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

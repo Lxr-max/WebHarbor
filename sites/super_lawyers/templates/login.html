@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Lawyer Login | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <h1>Manage my account</h1>
+  <div class="auth-layout">
+  <div class="auth-card">
+    <form method="post" action="{{ url_for('login') }}">
+      <p><label for="email">Email</label>
+         <input id="email" name="email" type="email" required autocomplete="email"></p>
+      <p><label for="password">Password</label>
+         <input id="password" name="password" type="password" required autocomplete="current-password"></p>
+      <button class="btn btn-primary btn-lg" type="submit">Log in</button>
+    </form>
+  </div>
+  <div class="auth-side">
+    <h2>Helpful links</h2>
+    <ul class="muted-list">
+      <li><a href="{{ url_for('register') }}">First time user - create account</a></li>
+      <li><a href="/about/selection-process/">Learn about the selection process</a></li>
+      <li><a href="{{ url_for('attorneys_home') }}">Browse attorney profiles</a></li>
+      <li><a href="{{ url_for('answers_home') }}">Ask a Lawyer</a></li>
+    </ul>
+  </div>
+  </div>
+</div>
+{% endblock %}

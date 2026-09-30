@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Log in | ZARA{% endblock %}
+{% block body %}
+<div class="form-page">
+  <div class="mode-tabs">
+    <a href="/us/en/logon?mode=login" class="{{ 'on' if mode == 'login' else '' }}">LOG IN</a>
+    <a href="/us/en/logon?mode=register" class="{{ 'on' if mode == 'register' else '' }}">CREATE ACCOUNT</a>
+  </div>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  {% if mode == 'register' %}
+  <form method="post" action="/us/en/logon?mode=register">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="mode" value="register">
+    <div class="field">
+      <label for="name">NAME</label>
+      <input id="name" type="text" name="name" required>
+    </div>
+    <div class="field">
+      <label for="email">EMAIL</label>
+      <input id="email" type="email" name="email" required>
+    </div>
+    <div class="field">
+      <label for="password">PASSWORD (MIN 8 CHARACTERS)</label>
+      <input id="password" type="password" name="password" minlength="8" required>
+    </div>
+    <button type="submit" class="btn dark wide">CREATE ACCOUNT</button>
+  </form>
+  {% else %}
+  <form method="post" action="/us/en/logon?mode=login">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="mode" value="login">
+    <div class="field">
+      <label for="email">EMAIL</label>
+      <input id="email" type="email" name="email" required>
+    </div>
+    <div class="field">
+      <label for="password">PASSWORD</label>
+      <input id="password" type="password" name="password" required>
+    </div>
+    <button type="submit" class="btn dark wide">LOG IN</button>
+    <p class="form-note">New customer? <a href="/us/en/logon?mode=register">Create an account</a></p>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

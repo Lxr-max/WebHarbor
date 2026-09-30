@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Carry-on bags — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Carry-on bags</h1>
+  <p>You can bring one carry-on bag and one personal item for free on most
+    domestic and international flights. But there are a few rules.</p>
+
+  <h2>Size limits</h2>
+  <table class="ua-table">
+    <thead><tr><th>Item</th><th>Size limit</th><th>Where it fits</th></tr></thead>
+    <tbody>
+      <tr><td>Carry-on bag</td><td>{{ carry[0] }} in x {{ carry[1] }} in x {{ carry[2] }} in (23 x 35 x 56 cm)</td><td>Overhead bin (include handle and wheels when measuring)</td></tr>
+      <tr><td>Personal item</td><td>{{ personal[0] }} in x {{ personal[1] }} in x {{ personal[2] }} in (22 x 25 x 43 cm)</td><td>Under the seat in front of you</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Basic Economy</h2>
+  <p>Basic Economy includes a personal item on all flights. A full-size
+    carry-on is also included when flying to Canada, South America, across the
+    Atlantic, or on international flights across the Pacific. MileagePlus
+    members with Premier status and primary United cardmembers always get
+    the free carry-on.</p>
+
+  <h2>Traveler pro tips</h2>
+  <p>In addition to your carry-on bag and personal item you can bring for
+    free: a jacket or coat, an umbrella, things to read, food or items bought
+    at the airport, mobility devices (including wheelchairs, canes and
+    crutches), a car seat, child safety harness or stroller, a diaper bag and
+    breast pump, and a camera.</p>
+
+  <h2>Special items</h2>
+  <ul>
+    <li>Smart bags with lithium batteries must have the battery removed
+      before boarding.</li>
+    <li>TSA liquids rule: containers no larger than 3.4 oz (100 mL) inside a
+      quart-size clear sealable bag.</li>
+    <li>Powders: TSA recommends checked bags; up to 12 oz (350 mL) is allowed
+      in carry-on on domestic flights.</li>
+  </ul>
+</section>
+{% endblock %}

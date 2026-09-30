@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Legal article resources{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Legal article resources</h1>
+
+  <h2>Search our legal article resources</h2>
+  <form class="ask-form" method="get" action="/resources/search/">
+    <label for="res-q">Enter your legal issue</label>
+    <input id="res-q" type="search" name="q" placeholder="e.g. divorce, personal injury, DUI" autocomplete="off">
+    <button class="btn btn-primary btn-lg" type="submit">Search resources</button>
+  </form>
+
+  <h2>Know you need a lawyer, but confused where to start?</h2>
+  <p>Super Lawyers conducts interviews with the experienced top attorneys that make our
+  lists to get their insights on the best approaches to finding and selecting the right
+  attorney for you.</p>
+
+  <h2>Explore our legal article resources</h2>
+  <p>Learn more about your issue by reading helpful articles on a variety of legal issues.</p>
+  <div class="topic-cards">
+    <a class="topic-card" href="/resources/family-law/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_family_law.png') }}" alt="" width="55" height="55">
+      <span class="h3">Family Law</span>
+    </a>
+    <a class="topic-card" href="/resources/personal-injury-plaintiff/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_personal_injury.png') }}" alt="" width="55" height="55">
+      <span class="h3">Personal Injury</span>
+    </a>
+    <a class="topic-card" href="/resources/criminal-defense/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_criminal_defense.png') }}" alt="" width="55" height="55">
+      <span class="h3">Criminal Defense</span>
+    </a>
+    <a class="topic-card" href="/resources/estate-planning-and-probate/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_estate_planning.png') }}" alt="" width="55" height="55">
+      <span class="h3">Estate Planning &amp; Probate</span>
+    </a>
+    <a class="topic-card" href="/resources/employment-and-labor/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_employment.png') }}" alt="" width="55" height="55">
+      <span class="h3">Employment &amp; Labor</span>
+    </a>
+    <a class="topic-card" href="/resources/business-and-corporate/">
+      <img src="{{ url_for('static', filename='images/icon_legal_issue_business.png') }}" alt="" width="55" height="55">
+      <span class="h3">Key legal needs</span>
+    </a>
+  </div>
+
+  <h2>Browse all legal article resources</h2>
+  <div class="resource-topics">
+    {% for topic in resource_categories() %}
+      {% if topic.slug in topic_slugs %}
+      <h3><a href="/resources/{{ topic.slug }}/">{{ topic.name }}</a></h3>
+      {% else %}
+      <h3 class="muted">{{ topic.name }}</h3>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2>Browse common resource topics</h2>
+  <div class="issue-cards">
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_family_law.jpg') }}" alt="" width="408" height="130">
+      <h3>Family Law</h3>
+      <ul>
+        <li><a href="/resources/family-law/">Family Law</a></li>
+        <li><a href="/resources/divorce/">Divorce</a></li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_motor_vehicle_accidents.jpg') }}" alt="" width="408" height="130">
+      <h3>Personal Injury</h3>
+      <ul>
+        <li><a href="/resources/personal-injury-plaintiff/">Personal Injury</a></li>
+        <li><a href="/resources/motor-vehicle-accidents/">Car Accidents</a></li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_criminal_defense.jpg') }}" alt="" width="408" height="130">
+      <h3>Criminal Law</h3>
+      <ul>
+        <li><a href="/resources/criminal-defense/">Criminal Defense</a></li>
+        <li><a href="/resources/dui-dwi/">DUI/DWI</a></li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_estate_planning_and_probate.jpg') }}" alt="" width="408" height="130">
+      <h3>Estate Planning &amp; Probate</h3>
+      <ul>
+        <li><a href="/resources/estate-planning-and-probate/">Estate Planning and Probate</a></li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_employment_and_labor.jpg') }}" alt="" width="408" height="130">
+      <h3>Employment Law</h3>
+      <ul>
+        <li><a href="/resources/employment-and-labor/">Employment Law</a></li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <img src="{{ url_for('static', filename='images/card_key_legal_needs.jpg') }}" alt="" width="408" height="130">
+      <h3>Key legal needs</h3>
+      <ul>
+        <li><a href="/resources/business-and-corporate/">Business and Corporate</a></li>
+        <li><a href="/resources/real-estate/">Real Estate</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block title %}{{ uni.name }} Off-Campus Student Housing | Student.com{% endblock %}
+{% block meta_description %}Discover student housing options near {{ uni.name }}. Explore properties, check prices, and find your perfect home with Student.com.{% endblock %}
+
+{% block content %}
+<div class="srp-banner">
+  <div class="container">
+    <nav class="breadcrumb" data-testid="university-breadcrumbs" style="padding:0 0 10px;color:rgba(38,38,38,.75)">
+      <a href="/us/{{ uni.state }}/u">{{ STATE_NAMES[uni.state] }} College Finder</a> ›
+      <span>Homes near {{ uni.name }}</span>
+    </nav>
+    <h1 data-testid="university-banner">Homes near {{ uni.name }}</h1>
+    <p style="font-size:14px;color:rgba(38,38,38,.8);margin-top:6px">Find your ideal student home near {{ uni.name }}. Compare prices, ratings and commute times.</p>
+  </div>
+</div>
+
+<div class="srp-bar">
+  <div class="container" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <select class="select" id="sort-select" data-testid="map-sort-trigger" aria-label="Sort properties">
+      <option value="distance" {% if sort == 'distance' %}selected{% endif %}>Sort by Distance</option>
+      <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Sort by Rating (high to low)</option>
+      <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Sort by Price (low to high)</option>
+      <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Sort by Price (high to low)</option>
+    </select>
+    <button class="btn" id="filters-trigger" data-testid="filters-modal-trigger">Filters</button>
+    <button class="btn" id="ai-search-trigger" data-testid="ai-filters-trigger">✨ AI Search</button>
+    <div style="position:relative">
+      <button class="btn" id="view-toggle" data-testid="floating-map-view-toggle">List view</button>
+    </div>
+    <span class="count" id="results-count" data-testid="viewed-results">Showing {{ props|length }} out of {{ total_upstream }} results</span>
+  </div>
+</div>
+
+<div class="container srp-layout">
+  <div id="list-view" data-testid="property-list">
+    <div class="grid cols-3" id="prop-grid">
+      {% for prop, distance in props %}
+        {% with heart_id = 'srp-heart-' + loop.index|string %}
+          {% include "_property_card.html" %}
+        {% endwith %}
+      {% endfor %}
+    </div>
+    {% if total_matching > props|length %}
+    <div style="text-align:center;padding:26px">
+      <button class="btn primary" id="load-more">Load more homes</button>
+      <p class="small muted" id="no-more" style="display:none">You've seen all the homes near {{ uni.name }}</p>
+    </div>
+    {% else %}
+    <p class="small muted" style="text-align:center;padding:26px">You've seen all the homes near {{ uni.name }}</p>
+    {% endif %}
+    {% if not props %}
+    <div class="empty-state">
+      <p><strong>No homes match your filters.</strong></p>
+      <p class="muted small">Try widening the price range or clearing the property type filter.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="map-panel" id="map-panel">
+    <div class="map-canvas" id="map-canvas">
+      {% set lats = (props|map(attribute=0)|map(attribute='latitude')|select|list|sort) %}
+      {% set lngs = (props|map(attribute=0)|map(attribute='longitude')|select|list|sort) %}
+      {% set uni_lats = [uni.latitude] if uni.latitude else [] %}
+      {% set uni_lngs = [uni.longitude] if uni.longitude else [] %}
+      {% set all_lats = (lats + uni_lats)|sort %}
+      {% set all_lngs = (lngs + uni_lngs)|sort %}
+      {% if all_lats %}
+        {% set lat0 = all_lats[0] %}{% set lat1 = all_lats[-1] %}
+        {% set lng0 = all_lngs[0] %}{% set lng1 = all_lngs[-1] %}
+        {% set pad_lat = ((lat1 - lat0) * 0.18) if lat1 > lat0 else 0.02 %}
+        {% set pad_lng = ((lng1 - lng0) * 0.18) if lng1 > lng0 else 0.02 %}
+        {% set span_lat = (lat1 - lat0) + 2 * pad_lat %}
+        {% set span_lng = (lng1 - lng0) + 2 * pad_lng %}
+        {% if uni.latitude and uni.longitude %}
+        {% set ux = ((uni.longitude - lng0 + pad_lng) / span_lng * 100) %}
+        {% set uy = (100 - (uni.latitude - lat0 + pad_lat) / span_lat * 100) %}
+        <span class="map-uni" style="left:{{ ux }}%;top:{{ uy }}%" title="University: {{ uni.name }}">
+          <span class="marker">🎓</span>
+        </span>
+        {% endif %}
+        {% for prop, distance in props %}
+          {% if prop.latitude and prop.longitude %}
+          {% set x = ((prop.longitude - lng0 + pad_lng) / span_lng * 100) %}
+          {% set y = (100 - (prop.latitude - lat0 + pad_lat) / span_lat * 100) %}
+          {# Pin price labels use the compact $/k form for four-figure prices
+             ($1,115 -> "$1.1k") instead of truncating to "$1". #}
+          {% set pin_price = '$' ~ ('{:g}'.format((prop.min_price / 1000)|round(1)) ~ 'k')
+                             if prop.min_price and prop.min_price >= 1000
+                             else ('$' ~ prop.min_price if prop.min_price else 'N/A') %}
+          <a class="map-pin" href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}/p/{{ prop.slug }}"
+             style="left:{{ x }}%;top:{{ y }}%" title="Property: {{ prop.name }}, Price: {% if prop.min_price %}${{ '{:,}'.format(prop.min_price) }}{% else %}N/A{% endif %}"
+             aria-label="Property: {{ prop.name }}, Price: {% if prop.min_price %}${{ '{:,}'.format(prop.min_price) }}{% else %}N/A{% endif %}">
+            <span class="dot"><span>{{ pin_price }}</span></span>
+          </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="map-attrib">
+        <span>© Student.com mirror</span>
+        <span>© OpenStreetMap</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- filters modal -->
+<div class="modal-overlay" id="filters-modal">
+  <div class="modal">
+    <button class="close" data-close="filters-modal" aria-label="Close">✕</button>
+    <h3>Filters</h3>
+    <div class="field">
+      <label>Price range</label>
+      <div style="display:flex;gap:10px">
+        <input type="number" id="f-min-price" placeholder="Min" min="0" value="{{ min_price or '' }}">
+        <input type="number" id="f-max-price" placeholder="Max" min="0" value="{{ max_price or '' }}">
+      </div>
+    </div>
+    <div class="field">
+      <label>Property type</label>
+      {% for t in property_types %}
+      <label class="check" style="color:var(--ink);margin-bottom:8px">
+        <input type="checkbox" class="f-type" value="{{ t }}"
+               {% if t in (type_filter or '').split(',') %}checked{% endif %}> {{ t }}
+      </label>
+      {% endfor %}
+    </div>
+    <button class="btn primary full" id="apply-filters">Show properties</button>
+    <button class="btn ghost full" id="clear-filters" style="margin-top:8px">Clear filters</button>
+  </div>
+</div>
+
+<!-- AI search modal -->
+<div class="modal-overlay" id="ai-modal">
+  <div class="modal">
+    <button class="close" data-close="ai-modal" aria-label="Close">✕</button>
+    <h3>Find your college home with AI</h3>
+    <p class="muted small">Tell us what you are looking for - budget, lifestyle, location. Our AI-powered search will handle the rest.</p>
+    <div class="field">
+      <label for="ai-prompt">Describe your ideal college home</label>
+      <textarea id="ai-prompt" rows="4" placeholder="I want to live with other people. My grant is $15000 every 9 months, and I need to leave $100 per week for food and living costs, so I'm not sure what that works out to each month for rent. I want to see cheapest properties first."></textarea>
+    </div>
+    <button class="btn primary full" id="ai-go">Search with AI</button>
+    <p class="small muted" id="ai-result" style="margin-top:10px"></p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function () {
+    var params = {
+      sort: {{ sort | tojson }}, min_price: {{ (min_price or 0) | tojson }},
+      max_price: {{ (max_price or 0) | tojson }}, type: {{ type_filter | tojson }},
+    };
+    var grid = document.getElementById("prop-grid");
+    var shown = grid.children.length;
+    var totalMatching = {{ total_matching }};
+
+    function qs(overrides) {
+      var sp = new URLSearchParams();
+      var o = Object.assign({}, params, overrides || {});
+      if (o.sort && o.sort !== "distance") sp.set("sort", o.sort);
+      if (o.min_price) sp.set("min_price", o.min_price);
+      if (o.max_price) sp.set("max_price", o.max_price);
+      if (o.type) sp.set("type", o.type);
+      return sp;
+    }
+
+    document.getElementById("sort-select").addEventListener("change", function () {
+      var sp = qs({ sort: this.value });
+      window.location.search = sp.toString();
+    });
+
+    var filtersTrigger = document.getElementById("filters-trigger");
+    if (filtersTrigger) filtersTrigger.addEventListener("click", function () {
+      document.getElementById("filters-modal").classList.add("open");
+    });
+    document.getElementById("apply-filters").addEventListener("click", function () {
+      var types = [];
+      document.querySelectorAll(".f-type:checked").forEach(function (c) { types.push(c.value); });
+      var sp = qs({
+        min_price: document.getElementById("f-min-price").value,
+        max_price: document.getElementById("f-max-price").value,
+        type: types.join(","),
+      });
+      window.location.search = sp.toString();
+    });
+    document.getElementById("clear-filters").addEventListener("click", function () {
+      window.location.href = window.location.pathname;
+    });
+
+    var aiTrigger = document.getElementById("ai-search-trigger");
+    if (aiTrigger) aiTrigger.addEventListener("click", function () {
+      document.getElementById("ai-modal").classList.add("open");
+    });
+    document.getElementById("ai-go").addEventListener("click", function () {
+      var text = document.getElementById("ai-prompt").value.toLowerCase();
+      var out = document.getElementById("ai-result");
+      var max = 0;
+      var m = text.match(/\$?(\d{3,5})\s*(?:per|\/)?\s*(month|mo|week)?/);
+      if (m) max = parseInt(m[1], 10);
+      var types = [];
+      if (/apartment/.test(text)) types.push("Apartment");
+      if (/dorm|shared/.test(text)) types.push("Dorm");
+      if (/community|pbsa/.test(text)) types.push("Student Community");
+      var sp = qs({ max_price: max ? String(max) : "", type: types.join(",") });
+      out.textContent = "Great — showing homes" + (max ? " up to $" + max + "/mo" : "") +
+        (types.length ? " matching " + types.join("/") : "") + ".";
+      setTimeout(function () { window.location.search = sp.toString(); }, 900);
+    });
+
+    /* map/list toggle */
+    var mapPanel = document.getElementById("map-panel");
+    var toggle = document.getElementById("view-toggle");
+    if (toggle) toggle.addEventListener("click", function () {
+      var mapHidden = mapPanel.classList.toggle("hidden");
+      toggle.textContent = mapHidden ? "Map" : "List view";
+    });
+
+    /* infinite scroll */
+    var loadMore = document.getElementById("load-more");
+    var fetching = false;   /* in-flight guard: a click also fires the scroll
+                               listener; without this both run and the same page
+                               of results is appended twice */
+    function fetchMore() {
+      if (!loadMore || fetching) return;
+      if (shown >= totalMatching) {
+        loadMore.style.display = "none";
+        document.getElementById("no-more").style.display = "block";
+        return;
+      }
+      var sp = qs();
+      sp.set("offset", shown); sp.set("format", "json");
+      fetching = true;
+      fetch(window.location.pathname + "?" + sp.toString())
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          data.properties.forEach(function (p) {
+            var div = document.createElement("div");
+            div.innerHTML =
+              '<a class="prop-card" href="' + p.url + '">' +
+              '<div class="img">' + (p.image ? '<img src="' + p.image + '" loading="lazy">' : "") + '</div>' +
+              '<div class="body"><div style="display:flex;gap:10px;justify-content:space-between">' +
+              '<span class="price">' + (p.min_price ? "From $" + p.min_price.toLocaleString() + "/mo" : "Price Unavailable") + '</span>' +
+              '<span class="rating">' + (p.rating ? "★ " + p.rating : "") + '</span></div>' +
+              '<div class="name">' + p.name + '</div><div class="type">' + p.type + '</div>' +
+              '<div class="dist"><strong>' + (p.distance != null ? p.distance + " miles" : "") + '</strong> to campus</div></div></a>';
+            grid.appendChild(div.firstChild);
+          });
+          shown += data.properties.length;
+          document.getElementById("results-count").textContent =
+            "Showing " + shown + " out of " + data.total + " results";
+          if (shown >= totalMatching) {
+            loadMore.style.display = "none";
+            document.getElementById("no-more").style.display = "block";
+          }
+        })
+        .catch(function () {})
+        .then(function () { fetching = false; });
+    }
+    if (loadMore) {
+      loadMore.addEventListener("click", fetchMore);
+      window.addEventListener("scroll", function () {
+        if (window.innerHeight + window.scrollY > document.body.offsetHeight - 700) fetchMore();
+      }, { passive: true });
+    }
+  })();
+</script>
+{% endblock %}

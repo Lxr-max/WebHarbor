@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Tracking | USPS{% endblock %}
+{% block meta %}Track and manage your USPS packages online.{% endblock %}
+{% block content %}
+<h1>Tracking</h1>
+<div class="panel">
+  <form class="tracking-box" action="{{ url_for('tracking_home') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="text" name="tracking" placeholder="Enter up to 10 tracking / receipt numbers (one per line)"
+           aria-label="Tracking number" value="{{ number or '' }}">
+    <button class="btn" type="submit">Track</button>
+  </form>
+</div>
+{% if number %}
+  <p>Looking up <strong>{{ number }}</strong>… <a href="{{ url_for('tracking_result', number=number) }}">View results</a></p>
+{% endif %}
+
+<h2>What do the tracking statuses mean?</h2>
+<table class="data">
+  <tr><th>Status</th><th>Meaning</th></tr>
+  {% for status, meaning in glossary %}
+  <tr><td><strong>{{ status }}</strong></td><td>{{ meaning }}</td></tr>
+  {% endfor %}
+</table>
+<p class="note">Status vocabulary from the USPS Track and Confirm API documentation.</p>
+{% endblock %}

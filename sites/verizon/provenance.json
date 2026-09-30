@@ -1,0 +1,70 @@
+{
+ "site": "verizon",
+ "upstream": "https://www.verizon.com/",
+ "captured_at": "2026-09-29",
+ "capture_method": "headless Chromium (Playwright) against the live pages for the client-rendered surfaces (plan widgets, gridwall, PDPs, contact page) and direct HTTP fetches for the server-rendered AEM/Next.js pages; store data decoded from the store-locator pages' Next.js flight payloads",
+ "sources": {
+  "www.verizon.com": {
+   "role": "primary site: Simplicity Plan page, Verizon Prepaid plans page, smartphones gridwall, 24 device PDPs, trade-in program page, support pages (return policy, contact us, network), store locator",
+   "pages_captured": 45,
+   "devices": 24,
+   "stores": 885,
+   "note": "r1 N-1 fix: the Samsung Galaxy A17 5G PDP record was completed with its real upstream single-capacity config block (Storage: 128 GB; Free shipping by Thursday with new line), present in the frozen 2026-09-29 capture (scraped_data/pages/pdp/samsung-galaxy-a17-5g.html) and re-verified against the live PDP on the fix date; no synthesized values"
+  },
+  "ss7.vzw.com": {
+   "role": "Verizon image CDN: device gallery shots at the URLs the live PDPs render",
+   "images": 198
+  },
+  "assets.verizon.com": {
+   "role": "store interior/exterior photos embedded in the store-locator payload",
+   "images": 85,
+   "note": "authorized-retailer photos the CDN serves with 403 were not fetchable; only the 42 stores with publicly served photos ship images and the rest render no photo block"
+  },
+  "www.verizon.com/etc/designs/vzwcom/gnav20/core.css": {
+   "role": "Verizon wordmark (SVG data URI inside the upstream global-nav stylesheet; no standalone logo file is published)",
+   "images": 1
+  }
+ },
+ "media": {
+  "images": {
+   "count": 281,
+   "inventory": "asset_inventory.json",
+   "policy": "every file fetched from the upstream URL it renders at; no placeholders, no duplicates (three byte-identical Pro/Pro Max gallery shots are shared, like upstream), no stretching; the 281 files are byte-identical to the r1-verified baseline (sha256 per file in asset_inventory.json)",
+   "note": "count corrected 284->281 per the r1 review (ss7 195 device shots + 85 store photos + 1 wordmark); no file changed"
+  }
+ },
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "postpaid Seattle account: 2 Simplicity lines (iPhone 18 Pro / Galaxy S26), protection on line 1, Auto Pay + paper-free enrolled, 3 bills, hotspot near cap"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "postpaid Bellevue account: 2 Simplicity lines (Pixel 11 Pro / moto g), protection on line 1, Auto Pay off, unpaid Sep bill, A17 5G order in transit"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "postpaid Tacoma account: 3 Simplicity lines (iPhone 17e / razr 2026 / Pixel 10a), Auto Pay and paper-free both off (enrollment flow)"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "prepaid Redmond account: 1 Unlimited Plus line (Galaxy S26 Ultra), Auto Pay on (plan change flow)"
+   }
+  ],
+  "account_records": "accounts, lines, bills (charge breakdowns with 18.7% taxes/fees), usage, orders, payments and appointments are deterministic benchmark fixtures keyed to the benchmark users; all catalog/directory/content data is upstream-sourced",
+  "protection_plans": "three deterministic protection-plan rows priced as fixtures",
+  "trade_in_values": "the estimator matrix (12 devices x 3 conditions) is a deterministic fixture; the estimator flow mirrors the live wizard's device -> condition -> value structure",
+  "troubleshoot_flows": "10 deterministic wizard flows (family x issue) mirroring the live troubleshooter's device -> issue -> steps -> resolution structure",
+  "note": "per the u_s_customs precedent: deterministic fixtures + honest declaration; nothing fixture-sourced is presented as scraped"
+ },
+ "determinism": {
+  "seed": "PYTHONHASHSEED=0 python3 seed_data.py at image build time",
+  "password": "frozen bcrypt hash (TestPass123!)",
+  "verified": "byte-identical instance/ vs instance_seed/ after in-image rebuild (sha256 pinned in the build log); local-workspace rebuilds may differ from the in-image artifact - the determinism contract is the in-image rebuild"
+ }
+}

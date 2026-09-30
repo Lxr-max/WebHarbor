@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Order {{ order.order_number }} | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <div class="order-confirm-hero">
+    <h1>Thank you for your order</h1>
+    <p>Order <strong>{{ order.order_number }}</strong> &middot; A confirmation has been sent to {{ order.email }}</p>
+  </div>
+  <div class="checkout-layout">
+    <section>
+      <div class="order-box">
+        <h2>Items</h2>
+        {% for item in order.items %}
+        <div class="review-item">
+          {% set imgs = item.product.image_list() if item.product else [] %}
+          {% if imgs %}<img src="{{ url_for('static', filename='images/' + imgs[0]) }}" alt="{{ item.product_name }}">{% endif %}
+          <div class="ri-body">
+            <a href="/products/{{ item.product_slug }}"><strong>{{ item.product_name }}</strong></a>
+            <div class="ship-note">{% if item.size %}Size: {{ item.size }} &middot; {% endif %}Qty: {{ item.qty }}</div>
+          </div>
+          <span>£{{ '%.2f' % (item.unit_price * item.qty) }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="order-box">
+        <h2>Summary</h2>
+        <div class="sum-row"><span>Subtotal</span><span>£{{ '%.2f' % order.subtotal }}</span></div>
+        {% if order.discount %}<div class="sum-row discount"><span>Discount {{ order.discount_code }}</span><span>&minus;£{{ '%.2f' % order.discount }}</span></div>{% endif %}
+        <div class="sum-row"><span>{{ order.shipping_method }}</span><span>£{{ '%.2f' % order.shipping }}</span></div>
+        <div class="sum-row total"><span>Total</span><span>£{{ '%.2f' % order.total }}</span></div>
+      </div>
+    </section>
+    <aside>
+      <div class="order-box">
+        <h2>Shipping to</h2>
+        <p>{{ order.ship_name }}<br>
+        {{ order.ship_line1 }}{% if order.ship_line2 %}<br>{{ order.ship_line2 }}{% endif %}<br>
+        {{ order.ship_city }}, {{ order.ship_postcode }}<br>
+        {{ order.ship_country }}</p>
+        <h2>Payment</h2>
+        <p>{{ order.card_brand }} ending in {{ order.card_last4 }}</p>
+      </div>
+    </aside>
+  </div>
+  <p style="text-align:center;margin:26px 0;"><a class="btn btn-secondary" href="/">Continue Shopping</a></p>
+</div>
+{% endblock %}

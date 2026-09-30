@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Trips | Airbnb{% endblock %}
+{% block content %}
+<div style="margin-top:24px;">
+  <h1>Trips</h1>
+  <p class="muted">Bookings made on this mirror with {{ current_user.name }} ({{ current_user.email }}).</p>
+  {% if not items %}
+  <div class="note">No trips yet. Search stays or experiences and book one.</div>
+  {% endif %}
+  {% for bk, lst, exp in items %}
+  <div class="trip-card">
+    {% if lst and lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}">
+    {% elif exp and exp.photo_list() %}<img src="{{ exp.photo_list()[0] }}" alt="{{ exp.name }}">{% endif %}
+    <div>
+      {% if lst %}
+      <p class="muted small">Stay &middot; {{ lst.title }}</p>
+      <p><strong>{{ lst.name }}</strong></p>
+      <p class="muted small">{{ bk.checkin }} &rarr; {{ bk.checkout }} &middot; {{ bk.nights }} night{{ 's' if bk.nights and bk.nights > 1 }} &middot; {{ bk.guests }} guest{{ 's' if bk.guests > 1 }}</p>
+      {% elif exp %}
+      <p class="muted small">Experience &middot; {{ exp.theme or '' }}</p>
+      <p><strong>{{ exp.name }}</strong></p>
+      <p class="muted small">{{ bk.experience_date }} &middot; {{ bk.guests }} guest{{ 's' if bk.guests > 1 }}</p>
+      {% endif %}
+      <p>
+        <span class="status {{ bk.status }}">{{ bk.status|title }}</span>
+        <span class="small">Confirmation code <strong>{{ bk.code }}</strong> &middot; Total {{ money(bk.total) }}</span>
+      </p>
+      <p>
+        <a class="btn btn-ghost btn-sm" href="{{ url_for('booking_detail', code=bk.code) }}">View trip</a>
+        {% if bk.status == 'confirmed' %}
+        <form method="post" action="{{ url_for('cancel_trip', code=bk.code) }}" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-ghost btn-sm" type="submit">Cancel trip</button>
+        </form>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

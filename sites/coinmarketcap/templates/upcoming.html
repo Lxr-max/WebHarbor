@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Upcoming Cryptocurrencies | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Upcoming Cryptocurrencies</h1>
+<p class="muted">Coins and tokens that are expected to list on exchanges soon. Snapshot of
+  {{ mirror_date }} (UTC) — {{ rows | length }} upcoming listings captured.</p>
+
+<table>
+  <thead><tr><th>#</th><th>Name</th><th>Symbol</th><th>Expected Launch</th></tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.rank }}</td>
+      <td>{{ r.coin_name }}</td>
+      <td>{{ r.coin_symbol }}</td>
+      <td class="muted">{{ r.launch_time_ms | ms_date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
