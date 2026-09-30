@@ -90,9 +90,9 @@
       {% endif %}
       {% set reqs = exp.requirements() %}
       <p class="small muted">
-        Minimum age: {{ reqs.min_age if reqs.min_age is not none else 'any' }} &middot;
-        Children allowed: {{ 'yes' if reqs.children_allowed else 'no' }} &middot;
-        Infants allowed: {{ 'yes' if reqs.infants_allowed else 'no' }}
+        Minimum age: {{ reqs.min_age if reqs.min_age is not none else 'not captured' }} &middot;
+        Children allowed: {{ 'not captured' if reqs.children_allowed is none else ('yes' if reqs.children_allowed else 'no') }} &middot;
+        Infants allowed: {{ 'not captured' if reqs.infants_allowed is none else ('yes' if reqs.infants_allowed else 'no') }}
       </p>
     </section>
 
@@ -121,7 +121,7 @@
 
   <div>
     <div class="bookit">
-      <p class="price">{{ '$%d'|format(exp.price_per_guest) if exp.price_per_guest else '—' }} <span class="muted" style="font-size:14px;">/ guest</span></p>
+      <p class="price">{{ '$%.2f'|format(exp.price_per_guest) if exp.price_per_guest else '—' }} <span class="muted" style="font-size:14px;">/ guest</span></p>
       <p class="muted small">Hosted by {{ exp.host_name or 'the host' }}</p>
       <form method="get" action="{{ url_for('book_experience', eid=exp.id) }}">
         <label for="date"><strong>Choose a date</strong></label>

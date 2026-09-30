@@ -1,0 +1,1483 @@
+{
+  "Airbnb--0": {
+    "task": "I'm pricing five nights in Lake Tahoe from October 25\u201330, 2026. Among Guest favorites with a captured trip price under $1,600 and a hot tub, choose the cheapest listing. Report how many match, its name, rating and nightly rate, then use its date widget to quote my five-night stay and report the total. Do not book yet.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {},
+    "paths": [
+      "^/s/lake\\-tahoe/homes(?=.*(?:[?&])price_max=1599(?:&|$))(?=.*(?:[?&])guest_favorite=1(?:&|$))(?=.*(?:[?&])amenities=hot(?: |\\+)tub(?:&|$))",
+      "/rooms/46330668(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Lake Tahoe Lovely STUDIO Marriott Timber Lodge nightly",
+        "lake\\ tahoe\\ lovely\\ studio\\ marriott\\ timber\\ lodge(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$123(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Lake Tahoe Lovely STUDIO Marriott Timber Lodge rating",
+        "lake\\ tahoe\\ lovely\\ studio\\ marriott\\ timber\\ lodge(?:(?!(?!)).){0,900}?(?:rating|rated).{0,18}?4\\.98/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "matching stays.{0,10}3"
+      ],
+      [
+        "requested fact 1",
+        "(?:total|quote).{0,20}\\$615(?:\\.00)?"
+      ]
+    ]
+  },
+  "Airbnb--1": {
+    "task": "Book a Scottsdale stay for two adults using dana.k@test.com / TestPass123!. I need a pool and Instant Book; choose the first recommended match and use the five-night date window displayed on its listing. Check the dates and total before confirming, then report the property's name, booked dates, guest count, total and confirmation code from Trips.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 4,
+            "kind": "stay",
+            "listing_id": "1561618833129263447",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-10-25",
+            "checkout": "2026-10-30",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 208.74,
+            "subtotal": 1043.7,
+            "total": 1043.7,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/scottsdale/homes(?=.*(?:[?&])instant_book=1(?:&|$))(?=.*(?:[?&])amenities=pool(?:&|$))",
+      "/rooms/1561618833129263447(?:$|\\?)",
+      "/trips(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Minutes to OdySea Aquarium + Pool & Fitness Center nightly",
+        "minutes\\ to\\ odysea\\ aquarium\\ \\+\\ pool\\ \\&\\ fitness\\ center(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$208\\.74(?!\\w|\\.\\d)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$1043\\.70"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--2": {
+    "task": "Create an account for Sam Rivera (runner2@test.com, LongPass123!) and a wishlist named 'Beach trip' for a Miami getaway. Compare the two Miami stays with the most reviews, inspect their nightly rates and ratings, and save both to that wishlist. Report their names, review counts, ratings and nightly rates, then confirm the wishlist contains both.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "runner2@test.com",
+            "name": "Sam Rivera",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 7,
+            "listing_id": "1439891422884830295",
+            "experience_id": null,
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": 12,
+            "wishlist_id": 7,
+            "listing_id": "864046281151277736",
+            "experience_id": null,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlists": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 5,
+            "name": "Saved",
+            "is_default": 1,
+            "created_at": "2026-09-30"
+          },
+          {
+            "id": 7,
+            "user_id": 5,
+            "name": "Beach trip",
+            "is_default": 0,
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/miami/homes",
+      "/rooms/1439891422884830295(?:$|\\?)",
+      "/wishlist(?:$|\\?)",
+      "/rooms/864046281151277736(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Prime Spot Queen bed, Collins Av reviews",
+        "prime\\ spot\\ queen\\ bed,\\ collins\\ av(?:(?!south\\ beach\\ double\\ room\\ boutique\\ hotel).){0,900}?(?:reviews|review count).{0,18}?890(?!\\w|\\.\\d)"
+      ],
+      [
+        "Prime Spot Queen bed, Collins Av rating",
+        "prime\\ spot\\ queen\\ bed,\\ collins\\ av(?:(?!south\\ beach\\ double\\ room\\ boutique\\ hotel).){0,900}?(?:rating|rated).{0,18}?4\\.52/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Prime Spot Queen bed, Collins Av nightly",
+        "prime\\ spot\\ queen\\ bed,\\ collins\\ av(?:(?!south\\ beach\\ double\\ room\\ boutique\\ hotel).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$79(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "South Beach Double Room | Boutique Hotel reviews",
+        "south\\ beach\\ double\\ room\\ boutique\\ hotel(?:(?!prime\\ spot\\ queen\\ bed,\\ collins\\ av).){0,900}?(?:reviews|review count).{0,18}?470(?!\\w|\\.\\d)"
+      ],
+      [
+        "South Beach Double Room | Boutique Hotel rating",
+        "south\\ beach\\ double\\ room\\ boutique\\ hotel(?:(?!prime\\ spot\\ queen\\ bed,\\ collins\\ av).){0,900}?(?:rating|rated).{0,18}?4\\.59/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "South Beach Double Room | Boutique Hotel nightly",
+        "south\\ beach\\ double\\ room\\ boutique\\ hotel(?:(?!prime\\ spot\\ queen\\ bed,\\ collins\\ av).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$98\\.60(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "beach trip"
+      ],
+      [
+        "requested fact 1",
+        "2 saved items"
+      ]
+    ]
+  },
+  "Airbnb--3": {
+    "task": "Help me assess the most-reviewed Asheville stay for a relaxing getaway. Inspect its all-reviews page and report the property's name and review count, the first reviewer's name and displayed date, and the top and third review themes with their counts. Compare its nightly rate and hot-tub availability with the first recommended Asheville hot-tub listing so I can decide whether to prioritize reviews or amenities.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {},
+    "paths": [
+      "^/s/asheville/homes(?=.*(?:[?&])amenities=hot(?: |\\+)tub(?:&|$))",
+      "/rooms/27156940(?:$|\\?)",
+      "/rooms/27156940/reviews(?:$|\\?)",
+      "/rooms/39290956(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cottage in the Trees- Walk Downtown AVL- Hot Tub nightly",
+        "cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub(?:(?!cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$251\\.20(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cottage in the Trees- Walk Downtown AVL- Hot Tub reviews",
+        "cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub(?:(?!cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g).){0,900}?(?:reviews|review count).{0,18}?904(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cottage in the Trees- Walk Downtown AVL- Hot Tub hot tub",
+        "cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub(?:(?!cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g).){0,900}?hot\\ tub.{0,18}?listed(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cabin/Sunrise View/Hot Tub/King Bed/No Pet Fee/5G nightly",
+        "cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g(?:(?!cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$262\\.20(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cabin/Sunrise View/Hot Tub/King Bed/No Pet Fee/5G reviews",
+        "cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g(?:(?!cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub).){0,900}?(?:reviews|review count).{0,18}?483(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cabin/Sunrise View/Hot Tub/King Bed/No Pet Fee/5G hot tub",
+        "cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g(?:(?!cottage\\ in\\ the\\ trees\\-\\ walk\\ downtown\\ avl\\-\\ hot\\ tub).){0,900}?hot\\ tub.{0,18}?listed(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "first reviewer.{0,10}dylan"
+      ],
+      [
+        "requested fact 1",
+        "displayed date.{0,10}1 week ago"
+      ],
+      [
+        "requested fact 2",
+        "leading review theme.{0,10}location.{0,5}476"
+      ],
+      [
+        "requested fact 3",
+        "third review theme.{0,10}walkability.{0,5}334"
+      ]
+    ]
+  },
+  "Airbnb--4": {
+    "task": "Book an Austin cooking experience for two using bob.c@test.com / TestPass123!. Compare the available Cooking experiences by price and select the cheapest. Before booking its first available date, check the minimum guest age and what the activity involves. Report its name, price per guest, minimum age, a brief agenda summary, booked date, total and confirmation code.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 2,
+            "kind": "experience",
+            "listing_id": null,
+            "experience_id": "6190940",
+            "experience_date": "2026-10-04T17:30:00-05:00",
+            "checkin": null,
+            "checkout": null,
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": null,
+            "nightly_price": null,
+            "subtotal": 198.0,
+            "total": 198.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/experiences(?=.*(?:[?&])city=austin(?:&|$))(?=.*(?:[?&])category=Cooking(?:&|$))",
+      "/experiences/6190940(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Craft cocktails with an award-winning mixologist price",
+        "craft\\ cocktails\\ with\\ an\\ award\\-winning\\ mixologist(?:(?!(?!)).){0,900}?(?:price|cost|asking price).{0,18}?\\$99(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Craft cocktails with an award-winning mixologist minimum_age",
+        "craft\\ cocktails\\ with\\ an\\ award\\-winning\\ mixologist(?:(?!(?!)).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?21(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "(?:shake|create|make|prepare).{0,35}2 cocktails"
+      ],
+      [
+        "requested fact 1",
+        "(?:learn|practice|secrets).{0,40}(?:skills|cocktail|mix|secrets)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$198(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "experience_date"
+      ]
+    ]
+  },
+  "Airbnb--5": {
+    "task": "Help me compare the budget and premium ends of a Nashville pool getaway. Among Guest favorites with a pool, inspect the cheapest and most expensive stays. Report each property's name, nightly rate, captured trip price, host and review count, then explain the price difference. Do not book or save anything.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {},
+    "paths": [
+      "^/s/nashville/homes(?=.*(?:[?&])guest_favorite=1(?:&|$))(?=.*(?:[?&])amenities=pool(?:&|$))",
+      "/rooms/27611691(?:$|\\?)",
+      "/rooms/32724463(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "River & Blues-Downtown, Parking, Pool, River Front nightly",
+        "river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front(?:(?!oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$186(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "River & Blues-Downtown, Parking, Pool, River Front trip price",
+        "river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front(?:(?!oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points).){0,900}?(?:trip price|captured (?:trip )?price).{0,18}?\\$930(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "River & Blues-Downtown, Parking, Pool, River Front host",
+        "river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front(?:(?!oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points).){0,900}?host.{0,18}?debbie(?!\\w|\\.\\d)"
+      ],
+      [
+        "River & Blues-Downtown, Parking, Pool, River Front reviews",
+        "river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front(?:(?!oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points).){0,900}?(?:reviews|review count).{0,18}?507(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oasis in the East a Block From Five Points nightly",
+        "oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points(?:(?!river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$208\\.60(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oasis in the East a Block From Five Points trip price",
+        "oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points(?:(?!river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front).){0,900}?(?:trip price|captured (?:trip )?price).{0,18}?\\$1043(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oasis in the East a Block From Five Points host",
+        "oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points(?:(?!river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front).){0,900}?host.{0,18}?lew(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oasis in the East a Block From Five Points reviews",
+        "oasis\\ in\\ the\\ east\\ a\\ block\\ from\\ 5\\ points(?:(?!river\\ \\&\\ blues\\-downtown,\\ parking,\\ pool,\\ river\\ front).){0,900}?(?:reviews|review count).{0,18}?372(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "(?:price|more expensive|exceeds).{0,50}\\$113(?:\\.00)?"
+      ]
+    ]
+  },
+  "Airbnb--6": {
+    "task": "Use dana.k@test.com / TestPass123! to help me choose from my 'Winter cabins' wishlist. Inspect both saved cabins, comparing their nightly rates, ratings and hot-tub amenities; check the second cabin's top review theme and count as well. Book the first saved cabin for two guests using its displayed dates, and report the selected name, booked dates, total and confirmation code alongside the comparison.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 4,
+            "kind": "stay",
+            "listing_id": "13434357",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-10-04",
+            "checkout": "2026-10-09",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 230.8,
+            "subtotal": 1154.0,
+            "total": 1154.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/rooms/13434357(?:$|\\?)",
+      "/rooms/1755384460282754920(?:$|\\?)",
+      "/rooms/1755384460282754920/reviews(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "South Tahoe Bungalow Close Walk to Everything nightly",
+        "south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything(?:(?!queen\\ double).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$230\\.80(?!\\w|\\.\\d)"
+      ],
+      [
+        "South Tahoe Bungalow Close Walk to Everything rating",
+        "south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything(?:(?!queen\\ double).){0,900}?(?:rating|rated).{0,18}?4\\.96/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "South Tahoe Bungalow Close Walk to Everything hot tub",
+        "south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything(?:(?!queen\\ double).){0,900}?hot\\ tub.{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Queen double nightly",
+        "queen\\ double(?:(?!south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$232\\.70(?!\\w|\\.\\d)"
+      ],
+      [
+        "Queen double rating",
+        "queen\\ double(?:(?!south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything).){0,900}?(?:rating|rated).{0,18}?4\\.86/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Queen double hot tub",
+        "queen\\ double(?:(?!south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything).){0,900}?hot\\ tub.{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "queen double.{0,40}leading review theme.{0,12}cleanliness.{0,5}13"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$1154(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--7": {
+    "task": "Book an affordable New York week for two adults, January 19\u201326, 2027, using carol.d@test.com / TestPass123!. Choose the cheapest Guest favorite, check the updated seven-night price in its date widget, and confirm the booking. Report the property's name, nightly rate, dates, total and confirmation code.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 3,
+            "kind": "stay",
+            "listing_id": "759618126064467893",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2027-01-19",
+            "checkout": "2027-01-26",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 7,
+            "nightly_price": 110.0,
+            "subtotal": 770.0,
+            "total": 770.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/new\\-york/homes(?=.*(?:[?&])guest_favorite=1(?:&|$))",
+      "/rooms/759618126064467893(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Cozy bedroom with city views nightly",
+        "cozy\\ bedroom\\ with\\ city\\ views(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$110(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$770(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--8": {
+    "task": "I'm weighing two premium Los Angeles experiences. Compare the two most expensive by name, category, price per guest and rating; inspect each one's first agenda stop and minimum age to explain who it suits. Save the more expensive option to my wishlist using bob.c@test.com / TestPass123! and confirm the wishlist name.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 2,
+            "listing_id": null,
+            "experience_id": "109978",
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/experiences(?=.*(?:[?&])city=los\\-angeles(?:&|$))",
+      "/experiences/109978(?:$|\\?)",
+      "/experiences/7287785(?:$|\\?)",
+      "/wishlist(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Fly an airplane over LA\u2019s epic landmarks price",
+        "fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks(?:(?!eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen).){0,900}?(?:price|cost|asking price).{0,18}?\\$290(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Fly an airplane over LA\u2019s epic landmarks minimum_age",
+        "fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks(?:(?!eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?15(?!\\w|\\.\\d)"
+      ],
+      [
+        "Fly an airplane over LA\u2019s epic landmarks category",
+        "fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks(?:(?!eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen).){0,900}?category.{0,18}?flying(?!\\w|\\.\\d)"
+      ],
+      [
+        "Fly an airplane over LA\u2019s epic landmarks rating",
+        "fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks(?:(?!eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen).){0,900}?(?:rating|rated).{0,18}?4\\.97/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Fly an airplane over LA\u2019s epic landmarks first stop",
+        "fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks(?:(?!eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen).){0,900}?(?:first (?:stop|agenda stop)|agenda).{0,18}?step\\ into\\ the\\ cockpit(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eat a 5-course Haitian meal with @haitiankokitchen price",
+        "eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen(?:(?!fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks).){0,900}?(?:price|cost|asking price).{0,18}?\\$165(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eat a 5-course Haitian meal with @haitiankokitchen minimum_age",
+        "eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen(?:(?!fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eat a 5-course Haitian meal with @haitiankokitchen category",
+        "eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen(?:(?!fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks).){0,900}?category.{0,18}?dining(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eat a 5-course Haitian meal with @haitiankokitchen rating",
+        "eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen(?:(?!fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks).){0,900}?(?:rating|rated).{0,18}?5(?:\\.00)?/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eat a 5-course Haitian meal with @haitiankokitchen first stop",
+        "eat\\ a\\ 5\\-course\\ haitian\\ meal\\ with\\ @haitiankokitchen(?:(?!fly\\ an\\ airplane\\ over\\ la's\\ epic\\ landmarks).){0,900}?(?:first (?:stop|agenda stop)|agenda).{0,18}?meet\\ at\\ grand\\ central\\ market(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "saved.{0,30}saved wishlist"
+      ]
+    ]
+  },
+  "Airbnb--9": {
+    "task": "Reserve the first recommended Lake Tahoe Guest favorite for two adults, October 5\u201310, 2026, using carol.d@test.com / TestPass123!. Check the listing's nightly rate and the date widget's total before confirming. Report the property name, nightly rate, booked dates, total and confirmation code from the trip page.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 3,
+            "kind": "stay",
+            "listing_id": "13434357",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-10-05",
+            "checkout": "2026-10-10",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 230.8,
+            "subtotal": 1154.0,
+            "total": 1154.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/lake\\-tahoe/homes(?=.*(?:[?&])guest_favorite=1(?:&|$))",
+      "/rooms/13434357(?:$|\\?)",
+      "/trips(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "South Tahoe Bungalow Close Walk to Everything nightly",
+        "south\\ tahoe\\ bungalow\\ close\\ walk\\ to\\ everything(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$230\\.80(?!\\w|\\.\\d)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$1154(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--10": {
+    "task": "I'm cancelling my Scottsdale plans. Using alice.j@test.com / TestPass123!, locate my confirmed Scottsdale stay in Trips, check its dates and total, and cancel that reservation. Report the property, confirmation code, dates, total and final status, and verify that my other existing trip retains its original status.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[1]": {
+            "status": "cancelled"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/trips(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "requested fact 0",
+        "hmseed001"
+      ],
+      [
+        "requested fact 1",
+        "2026-10-25"
+      ],
+      [
+        "requested fact 2",
+        "2026-10-30"
+      ],
+      [
+        "requested fact 3",
+        "\\$1043\\.70"
+      ],
+      [
+        "requested fact 4",
+        "final status.{0,10}cancelled"
+      ],
+      [
+        "requested fact 5",
+        "hmseed002.{0,15}(?:remains|still).{0,5}cancelled"
+      ]
+    ]
+  },
+  "Airbnb--11": {
+    "task": "Set up my first Miami trip with a new account (Sam Rivera, sam.r@test.com, SunnyDay88!). Choose the cheapest Guest favorite, book its displayed date window for two guests, and save the property for reference in my default wishlist. Report its name, booked dates, total, confirmation code and the wishlist containing it.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 5,
+            "kind": "stay",
+            "listing_id": "1538398334303390660",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-10-18",
+            "checkout": "2026-10-23",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 77.0,
+            "subtotal": 385.0,
+            "total": 385.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "sam.r@test.com",
+            "name": "Sam Rivera",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 6,
+            "listing_id": "1538398334303390660",
+            "experience_id": null,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlists": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 5,
+            "name": "Saved",
+            "is_default": 1,
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/miami/homes(?=.*(?:[?&])guest_favorite=1(?:&|$))",
+      "/rooms/1538398334303390660(?:$|\\?)",
+      "/wishlist(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Miami Room Near Airport, Cruise Port nightly",
+        "miami\\ room\\ near\\ airport,\\ cruise\\ port(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$77(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "saved to saved"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$385(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--12": {
+    "task": "I'm comparing Nashville Superhost stays for a smooth arrival. Inspect the two cheapest Superhost listings, including their host names, years hosting, nightly rates and check-in windows. Check each one's top review theme and count, then summarize the differences that matter for arrival and host experience. Do not book.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {},
+    "paths": [
+      "^/s/nashville/homes(?=.*(?:[?&])superhost=1(?:&|$))",
+      "/rooms/1766059769369426427(?:$|\\?)",
+      "/rooms/1766059769369426427/reviews(?:$|\\?)",
+      "/rooms/1774886317241867303(?:$|\\?)",
+      "/rooms/1774886317241867303/reviews(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Riverview Condo - Walk to Downtown + Free Parking nightly",
+        "riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking(?:(?!11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$178\\.70(?!\\w|\\.\\d)"
+      ],
+      [
+        "Riverview Condo - Walk to Downtown + Free Parking host",
+        "riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking(?:(?!11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill).){0,900}?host.{0,18}?amy(?!\\w|\\.\\d)"
+      ],
+      [
+        "Riverview Condo - Walk to Downtown + Free Parking hosting",
+        "riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking(?:(?!11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill).){0,900}?hosting.{0,18}?5\\ years\\ hosting(?!\\w|\\.\\d)"
+      ],
+      [
+        "Riverview Condo - Walk to Downtown + Free Parking check-in",
+        "riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking(?:(?!11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 4:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "11 Beds Hot Tub Game Room Rooftop Grill nightly",
+        "11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill(?:(?!riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$228\\.60(?!\\w|\\.\\d)"
+      ],
+      [
+        "11 Beds Hot Tub Game Room Rooftop Grill host",
+        "11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill(?:(?!riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking).){0,900}?host.{0,18}?chris(?!\\w|\\.\\d)"
+      ],
+      [
+        "11 Beds Hot Tub Game Room Rooftop Grill hosting",
+        "11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill(?:(?!riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking).){0,900}?hosting.{0,18}?10\\ years\\ hosting(?!\\w|\\.\\d)"
+      ],
+      [
+        "11 Beds Hot Tub Game Room Rooftop Grill check-in",
+        "11\\ beds\\ hot\\ tub\\ g\\s*ame\\ room\\ rooftop\\ grill(?:(?!riverview\\ condo\\ \\-\\ walk\\ to\\ downtown\\ \\+\\ free\\ parking).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 3:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "riverview condo.{0,100}leading review theme.{0,12}walkability.{0,5}2"
+      ],
+      [
+        "requested fact 1",
+        "11 beds.{0,100}leading review theme.{0,20}not listed"
+      ]
+    ]
+  },
+  "Airbnb--13": {
+    "task": "Book an Asheville hot-tub getaway for two adults using bob.c@test.com / TestPass123!. Choose the first recommended hot-tub listing and inspect its top review theme and count before booking its displayed date window. Report the property's name, nightly rate, review finding, dates, total and confirmation code.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 2,
+            "kind": "stay",
+            "listing_id": "39290956",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-12-06",
+            "checkout": "2026-12-11",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 262.2,
+            "subtotal": 1311.0,
+            "total": 1311.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/asheville/homes(?=.*(?:[?&])amenities=hot(?: |\\+)tub(?:&|$))",
+      "/rooms/39290956(?:$|\\?)",
+      "/rooms/39290956/reviews(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Cabin/Sunrise View/Hot Tub/King Bed/No Pet Fee/5G nightly",
+        "cabin/sunrise\\ view/hot\\ tub/king\\ bed/no\\ pet\\ fee/5g(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$262\\.20(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "leading review theme.{0,10}view.{0,5}295"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$1311(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--14": {
+    "task": "Help me book a New York cultural tour for three guests using bob.c@test.com / TestPass123!. Compare the two cheapest Cultural tours by name, price per guest, minimum age and activity level. Choose the cheaper tour and book its first available date, then report the comparison, booked date, total and confirmation code.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 2,
+            "kind": "experience",
+            "listing_id": null,
+            "experience_id": "6778828",
+            "experience_date": "2026-09-29T19:15:00-04:00",
+            "checkin": null,
+            "checkout": null,
+            "adults": 3,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 3,
+            "nights": null,
+            "nightly_price": null,
+            "subtotal": 138.0,
+            "total": 138.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/experiences(?=.*(?:[?&])city=new\\-york(?:&|$))(?=.*(?:[?&])category=Cultural(?: |\\+)tours(?:&|$))",
+      "/experiences/6778828(?:$|\\?)",
+      "/experiences/3483920(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "Empire State Building 86th Main Deck Ticket price",
+        "empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket(?:(?!bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc).){0,900}?(?:price|cost|asking price).{0,18}?\\$46(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Empire State Building 86th Main Deck Ticket minimum_age",
+        "empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket(?:(?!bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?6(?!\\w|\\.\\d)"
+      ],
+      [
+        "Empire State Building 86th Main Deck Ticket activity",
+        "empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket(?:(?!bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc).){0,900}?activity.{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Bike Tour: Radical & Weird History of NYC price",
+        "bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc(?:(?!empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket).){0,900}?(?:price|cost|asking price).{0,18}?\\$48(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Bike Tour: Radical & Weird History of NYC minimum_age",
+        "bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc(?:(?!empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?12(?!\\w|\\.\\d)"
+      ],
+      [
+        "Bike Tour: Radical & Weird History of NYC activity",
+        "bike\\ tour[:\\s]+radical\\ \\&\\ weird\\ history\\ of\\ nyc(?:(?!empire\\ state\\ building\\ 86th\\ main\\ deck\\ ticket).){0,900}?activity.{0,18}?the\\ activity\\ level\\ for\\ this\\ experience\\ is\\ light\\ and\\ the\\ skill\\ level\\ is\\ beginner\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$138(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}3\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "experience_date"
+      ]
+    ]
+  },
+  "Airbnb--15": {
+    "task": "I'm comparing premium Scottsdale pool stays for a group. Among Guest favorites with a pool, inspect the two most expensive listings for maximum guest capacity, nightly and captured trip prices, and check-in windows. Check each one's leading review theme and count, then report the comparison so I can choose based on group size and arrival time.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {},
+    "paths": [
+      "^/s/scottsdale/homes(?=.*(?:[?&])guest_favorite=1(?:&|$))(?=.*(?:[?&])amenities=pool(?:&|$))",
+      "/rooms/688342926601653244(?:$|\\?)",
+      "/rooms/688342926601653244/reviews(?:$|\\?)",
+      "/rooms/807595555558637566(?:$|\\?)",
+      "/rooms/807595555558637566/reviews(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Scottsdale Home OldTown w 3bth & 3bdrm heated pool nightly",
+        "scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool(?:(?!scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$255\\.60(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Home OldTown w 3bth & 3bdrm heated pool capacity",
+        "scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool(?:(?!scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!).){0,900}?capacity.{0,18}?7(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Home OldTown w 3bth & 3bdrm heated pool trip price",
+        "scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool(?:(?!scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!).){0,900}?(?:trip price|captured (?:trip )?price).{0,18}?\\$1278(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Home OldTown w 3bth & 3bdrm heated pool check-in",
+        "scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool(?:(?!scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 3:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Classic - Luxury Home w/ 5 Beds & Pool! nightly",
+        "scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!(?:(?!scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$241\\.84(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Classic - Luxury Home w/ 5 Beds & Pool! capacity",
+        "scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!(?:(?!scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool).){0,900}?capacity.{0,18}?10(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Classic - Luxury Home w/ 5 Beds & Pool! trip price",
+        "scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!(?:(?!scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool).){0,900}?(?:trip price|captured (?:trip )?price).{0,18}?\\$1210(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Scottsdale Classic - Luxury Home w/ 5 Beds & Pool! check-in",
+        "scottsdale\\ classic\\ \\-\\ luxury\\ home\\ w/\\ 5\\ beds\\ \\&\\ pool!(?:(?!scottsdale\\ home\\ oldtown\\ w\\ 3bth\\ \\&\\ 3bdrm\\ heated\\ pool).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 4:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "scottsdale home oldtown.{0,100}leading review theme.{0,15}hospitality.{0,5}110"
+      ],
+      [
+        "requested fact 1",
+        "scottsdale classic.{0,100}leading review theme.{0,15}hospitality.{0,5}168"
+      ]
+    ]
+  },
+  "Airbnb--16": {
+    "task": "Book a Los Angeles hot-tub stay for two with a new account (Casey Taylor, casey.t@test.com, CaseyPass77!). Find the cheapest listing with a hot tub, inspect its house rules, and book its displayed date window. Report the property's name, nightly rate, check-in window, booked dates, total and confirmation code.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "bookings": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "code": {
+              "regex": "HM[A-Z0-9]{8}"
+            },
+            "user_id": 5,
+            "kind": "stay",
+            "listing_id": "1692465124519066586",
+            "experience_id": null,
+            "experience_date": null,
+            "checkin": "2026-12-26",
+            "checkout": "2026-12-31",
+            "adults": 2,
+            "children": 0,
+            "infants": 0,
+            "pets": 0,
+            "guests": 2,
+            "nights": 5,
+            "nightly_price": 280.2,
+            "subtotal": 1401.0,
+            "total": 1401.0,
+            "status": "confirmed",
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "casey.t@test.com",
+            "name": "Casey Taylor",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlists": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 5,
+            "name": "Saved",
+            "is_default": 1,
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/los\\-angeles/homes(?=.*(?:[?&])amenities=hot(?: |\\+)tub(?:&|$))",
+      "/rooms/1692465124519066586(?:$|\\?)",
+      "/bookings/HM"
+    ],
+    "claims": [
+      [
+        "DTLA Highrise Retreat w/ Private Balcony nightly",
+        "dtla\\ highrise\\ retreat\\ w/\\ private\\ balcony(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$280\\.20(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTLA Highrise Retreat w/ Private Balcony check-in",
+        "dtla\\ highrise\\ retreat\\ w/\\ private\\ balcony(?:(?!(?!)).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 4:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "confirmed booking",
+        "confirmed booking hm[a-z0-9]{8}"
+      ],
+      [
+        "booking total",
+        "total.{0,12}\\$1401(?:\\.00)?"
+      ],
+      [
+        "booked guest count",
+        "guests.{0,10}2\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "code"
+      ],
+      [
+        "bookings",
+        "total"
+      ],
+      [
+        "bookings",
+        "guests"
+      ],
+      [
+        "bookings",
+        "checkin"
+      ],
+      [
+        "bookings",
+        "checkout"
+      ]
+    ]
+  },
+  "Airbnb--17": {
+    "task": "Help me assess the third recommended Lake Tahoe listing for my winter shortlist. Check its nightly rate, rating, nearby destinations and all-reviews page, including the leading review theme with its count and the first reviewer's location. Save it to my 'Winter cabins' wishlist using dana.k@test.com / TestPass123!, then report those findings and confirm the saved property and wishlist.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 4,
+            "listing_id": "46330668",
+            "experience_id": null,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/lake\\-tahoe/homes",
+      "/rooms/46330668(?:$|\\?)",
+      "/rooms/46330668/reviews(?:$|\\?)",
+      "/wishlist(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Lake Tahoe Lovely STUDIO Marriott Timber Lodge nightly",
+        "lake\\ tahoe\\ lovely\\ studio\\ marriott\\ timber\\ lodge(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$123(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Lake Tahoe Lovely STUDIO Marriott Timber Lodge rating",
+        "lake\\ tahoe\\ lovely\\ studio\\ marriott\\ timber\\ lodge(?:(?!(?!)).){0,900}?(?:rating|rated).{0,18}?4\\.98/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "nearby destinations.{0,20}san francisco.{0,10}san jose"
+      ],
+      [
+        "requested fact 1",
+        "leading review theme.{0,12}hospitality.{0,5}22"
+      ],
+      [
+        "requested fact 2",
+        "first reviewer.{0,10}aziz"
+      ],
+      [
+        "requested fact 3",
+        "location.{0,10}hayward, california"
+      ],
+      [
+        "requested fact 4",
+        "saved to winter cabins"
+      ]
+    ]
+  },
+  "Airbnb--18": {
+    "task": "Help me shortlist a Miami experience for a small group. Compare the two cheapest experiences by name, price per guest, minimum age and the first agenda stop. Save the cheaper one using alice.j@test.com / TestPass123! and report the comparison and the wishlist containing it.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 1,
+            "listing_id": null,
+            "experience_id": "6976498",
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/experiences(?=.*(?:[?&])city=miami(?:&|$))",
+      "/experiences/6976498(?:$|\\?)",
+      "/experiences/6952023(?:$|\\?)",
+      "/wishlist(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Twilight cruise of Miami's Skyline tickets price",
+        "twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets(?:(?!biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views).){0,900}?(?:price|cost|asking price).{0,18}?\\$25(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Twilight cruise of Miami's Skyline tickets minimum_age",
+        "twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets(?:(?!biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Twilight cruise of Miami's Skyline tickets first stop",
+        "twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets(?:(?!biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views).){0,900}?(?:first (?:stop|agenda stop)|agenda).{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Biscayne Bay cruise with Miami skyline views price",
+        "biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views(?:(?!twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets).){0,900}?(?:price|cost|asking price).{0,18}?\\$30(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Biscayne Bay cruise with Miami skyline views minimum_age",
+        "biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views(?:(?!twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets).){0,900}?(?:minimum[_ ]age|minimum guest age).{0,18}?18(?!\\w|\\.\\d)"
+      ],
+      [
+        "Biscayne Bay cruise with Miami skyline views first stop",
+        "biscayne\\ bay\\ cruise\\ with\\ miami\\ skyline\\ views(?:(?!twilight\\ cruise\\ of\\ miami's\\ skyline\\ tickets).){0,900}?(?:first (?:stop|agenda stop)|agenda).{0,18}?(?:not (?:listed|provided|shown|available|captured)(?: in the captured amenities)?|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "saved.{0,30}saved wishlist"
+      ]
+    ]
+  },
+  "Airbnb--19": {
+    "task": "Plan an Asheville stay with a hot tub using alice.j@test.com / TestPass123!. Among Superhost listings with a hot tub, choose the cheapest, inspect its nightly rate, host name and check-in window, and save it to a new wishlist named 'Mountain escape'. Report those details and confirm the wishlist contains the chosen stay.",
+    "initial_digest": "6a904c99d17979f23ae88523580a1b6431937773926a12f86a6b8f9a46973972",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "wishlist_id": 6,
+            "listing_id": "1753759205310098066",
+            "experience_id": null,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "wishlists": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "name": "Mountain escape",
+            "is_default": 0,
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/s/asheville/homes(?=.*(?:[?&])superhost=1(?:&|$))(?=.*(?:[?&])amenities=hot(?: |\\+)tub(?:&|$))",
+      "/rooms/1753759205310098066(?:$|\\?)",
+      "/wishlist(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Brand New Creek Front Tiny Home Hot Tub & King Bed nightly",
+        "brand\\ new\\ creek\\ front\\ tiny\\ home\\ hot\\ tub\\ \\&\\ king\\ bed(?:(?!(?!)).){0,900}?(?:nightly(?: rate)?|per night|nightly price).{0,18}?\\$212(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brand New Creek Front Tiny Home Hot Tub & King Bed check-in",
+        "brand\\ new\\ creek\\ front\\ tiny\\ home\\ hot\\ tub\\ \\&\\ king\\ bed(?:(?!(?!)).){0,900}?check\\-in.{0,18}?check\\-in\\ after\\ 3:00\\ pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brand New Creek Front Tiny Home Hot Tub & King Bed host",
+        "brand\\ new\\ creek\\ front\\ tiny\\ home\\ hot\\ tub\\ \\&\\ king\\ bed(?:(?!(?!)).){0,900}?host.{0,18}?charmain(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "saved to mountain escape"
+      ]
+    ]
+  }
+}

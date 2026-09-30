@@ -254,7 +254,7 @@ def test_search_filter_amenities(client):
 def test_search_sort_price(client):
     body = client.get('/s/asheville/homes?sort=price_asc').get_data(as_text=True)
     prices = [float(p.replace(',', '')) for p in
-              re.findall(r'\$([0-9][0-9,]*) for \d+ nights', body)]
+              re.findall(r'\$([0-9][0-9,]*(?:\.[0-9]+)?) for \d+ nights', body)]
     assert prices, "no trip prices rendered"
     assert prices == sorted(prices)
 
@@ -400,7 +400,7 @@ def test_bookit_widget_is_one_shared_form(client):
         f'/rooms/{lst.id}?checkin={lst.quote_checkin}'
         f'&checkout={lst.quote_checkout}&adults=2').get_data(as_text=True)
     assert '<form id="bookit"' in body
-    assert f'form="bookit" formaction="/rooms/{lst.id}/book"' in body
+    assert re.search(r'form="bookit"[^>]*formaction="/rooms/' + re.escape(lst.id) + r'/book"', body)
     assert '<input type="hidden" name="adults"' not in body
 
 

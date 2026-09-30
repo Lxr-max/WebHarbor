@@ -35,7 +35,7 @@
       </div>
       <div class="row2"><span class="muted">{{ e.name }}</span></div>
       {% for b in e.badge_list() %}<div class="row2"><span class="badge badge-gold">{{ b }}</span></div>{% endfor %}
-      <div class="row2"><span><strong>{{ '$%d'|format(e.price_per_guest) if e.price_per_guest else '—' }}</strong> / guest</span></div>
+      <div class="row2"><span><strong>{{ '$%.2f'|format(e.price_per_guest) if e.price_per_guest else '—' }}</strong> / guest</span></div>
     </div>
   </a>
   {% endfor %}
