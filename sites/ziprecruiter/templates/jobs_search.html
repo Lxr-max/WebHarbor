@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}{{ total }} {{ term|title if term else 'Job' }} Jobs (NOW HIRING){% if location %} in {{ location }}{% endif %}{% endblock %}
+{% block body %}
+<div class="serp-layout">
+  <aside class="filters" aria-label="Filters">
+    <h2>Filters</h2>
+    <form method="get" action="/jobs-search">
+      <input type="hidden" name="search" value="{{ term }}">
+      <input type="hidden" name="location" value="{{ location }}">
+      <div class="filter-group">
+        <h3>Apply type</h3>
+        <label><input type="radio" name="apply" value="" {% if not f.apply %}checked{% endif %}> All apply types</label>
+        <label><input type="radio" name="apply" value="quick" {% if f.apply == 'quick' %}checked{% endif %}> Quick apply only</label>
+      </div>
+      <div class="filter-group">
+        <h3>Remote</h3>
+        <label><input type="radio" name="remote" value="" {% if not f.remote %}checked{% endif %}> All remote/on-site</label>
+        {% for mode, label in remote_labels.items() %}
+        <label><input type="radio" name="remote" value="{{ mode }}" {% if f.remote == mode %}checked{% endif %}> {{ label }}</label>
+        {% endfor %}
+      </div>
+      <div class="filter-group">
+        <h3>Date posted</h3>
+        <label><input type="radio" name="days" value="" {% if not f.days %}checked{% endif %}> Posted anytime</label>
+        {% for d in [30,10,5,1] %}
+        <label><input type="radio" name="days" value="{{ d }}" {% if f.days == d|string %}checked{% endif %}> Within {{ d }} days</label>
+        {% endfor %}
+      </div>
+      <div class="filter-group">
+        <h3>Salary range</h3>
+        <div class="salary-inputs">
+          <label>Minimum $<input type="number" name="smin" min="0" step="1000" value="{{ f.smin }}"></label>
+          <label>Maximum $<input type="number" name="smax" min="0" step="1000" value="{{ f.smax }}"></label>
+        </div>
+      </div>
+      <div class="filter-group">
+        <h3>Employment types</h3>
+        {% for et, label in employment_labels.items() %}
+        <label class="inline"><input type="checkbox" name="et" value="{{ et }}"
+          {% if et in (f.et or '').split(',') %}checked{% endif %}> {{ label }}</label>
+        {% endfor %}
+      </div>
+      <div class="filter-group">
+        <h3>Experience level</h3>
+        <label><input type="radio" name="exp" value="" {% if not f.exp %}checked{% endif %}> Any experience</label>
+        {% for ex, label in experience_labels.items() %}
+        <label><input type="radio" name="exp" value="{{ ex }}" {% if f.exp == ex %}checked{% endif %}> {{ label }}</label>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn-green">Apply Filters</button>
+      <a class="reset" href="/jobs-search?search={{ term }}&location={{ location }}">Reset Filters</a>
+    </form>
+  </aside>
+
+  <section class="results" aria-label="Job results">
+    <div class="serp-head">
+      <h1>{{ total }} {{ term|capitalize if term else 'Job' }} Jobs{% if location %} in {{ location }}{% endif %}</h1>
+      <p class="snapshot">Showing results {{ first_index if jobs else 0 }}–{{ first_index + jobs|length - 1 if jobs else 0 }}{% if snapshot %} · upstream reported {{ snapshot.upstream_total }} matching jobs on the 2026-09-29 capture date{% endif %}</p>
+      <div class="filter-chips">
+        {% if f.apply == 'quick' %}<span class="chip">Quick apply only</span>{% endif %}
+        {% if f.remote %}<span class="chip">{{ remote_labels[f.remote] }}</span>{% endif %}
+        {% if f.days %}<span class="chip">Within {{ f.days }} days</span>{% endif %}
+        {% if f.exp %}<span class="chip">{{ experience_labels[f.exp] }}</span>{% endif %}
+        {% if f.et %}<span class="chip">{{ et_labels }}</span>{% endif %}
+        {% if f.smin %}<span class="chip">Min ${{ f.smin }}</span>{% endif %}
+        {% if f.smax %}<span class="chip">Max ${{ f.smax }}</span>{% endif %}
+      </div>
+    </div>
+
+    {% if not jobs %}
+    <div class="empty-state">
+      <h2>No jobs match this search</h2>
+      <p>Try removing some filters, or search a different title or location.</p>
+    </div>
+    {% endif %}
+
+    <ol class="job-list">
+      {% for job in jobs %}
+      <li class="job-card" id="job-card-{{ job.jid }}">
+        <article>
+          <div class="card-top">
+            {% if job.company.logo_url() %}
+            <img class="co-logo" src="{{ job.company.logo_url() }}" alt="{{ job.company.name }} logo" width="64" height="32">
+            {% endif %}
+            <p class="co-name">
+              <a href="{{ url_for('company_jobs', company=job.company.slug) }}">{{ job.company.name }}</a>
+            </p>
+          </div>
+          <h2 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h2>
+          <p class="job-location">
+            <a href="/jobs-search?location={{ job.city|replace(' ','+') }}%2C{{ job.state }}">{{ job.city }}, {{ job.state }}</a>
+            {% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}
+          </p>
+          {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+          <p class="job-badges">
+            {% for b in job.badge_list() %}<span class="badge">{{ b }}</span>{% if not loop.last %} · {% endif %}{% endfor %}
+          </p>
+          <div class="card-actions">
+            {% if job.quick_apply %}<span class="badge brand">Quick apply</span>{% endif %}
+            <span class="posted">{{ job.posted_display() }}</span>
+          </div>
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+
+    <nav class="pagination" aria-label="Pagination">
+      {% if page > 1 %}<a href="{{ serp_url(page-1) }}">&laquo; Previous</a>{% endif %}
+      {% for p in range(1, pages + 1) %}
+        {% if p == page %}<span class="current">{{ p }}</span>
+        {% else %}<a href="{{ serp_url(p) }}">{{ p }}</a>{% endif %}
+      {% endfor %}
+      {% if page < pages %}<a href="{{ serp_url(page+1) }}">Next &raquo;</a>{% endif %}
+    </nav>
+  </section>
+</div>
+{% endblock %}

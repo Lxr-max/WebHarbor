@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}{{ trip.title }} — trip planner — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">{{ trip.title }}</h1>
+      <p class="small muted" style="margin:4px 0 0">
+        {% if geo %}<a href="{{ url_for('explore', gid=geo.id) }}">{{ geo.name }}</a> · {% endif %}
+        {{ trip.start_date or 'No dates' }}{% if trip.end_date %} → {{ trip.end_date }}{% endif %}
+        · {{ trip.travelers }} traveler{{ 's' if trip.travelers != 1 }}
+        · <span class="badge priv-{{ trip.privacy }}">{{ trip.privacy|capitalize }}</span>
+      </p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a class="on" href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+      {% if trip.owner_id == current_user.id %}
+      <a href="{{ url_for('plan_settings', edit_key=trip.edit_key) }}">Settings</a>
+      {% endif %}
+    </nav>
+  </div>
+
+  <div class="trip-grid">
+    <div>
+      {% for s in sections %}
+        <div class="day-card">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <h2 style="margin:0">{{ s.heading }}</h2>
+            <form class="inline" method="post" action="{{ url_for('plan_section_rename', sid=s.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="text" name="heading" value="{{ s.heading }}" class="tiny" style="max-width:180px" aria-label="Rename {{ s.heading }}">
+              <button class="btn btn-ghost btn-sm" type="submit">Rename</button>
+            </form>
+            <a class="btn btn-outline btn-sm" href="{{ url_for('plan_add_place', edit_key=trip.edit_key) }}">Add a place</a>
+          </div>
+          {% for entry, place in entries_by_section[s.id] %}
+            <div class="stop">
+              <div class="dot">{{ loop.index }}</div>
+              <div>
+                <div class="stat">
+                  {% if place.wl_id %}<a href="{{ url_for('place_details', pid=place.wl_id) }}">{{ place.name }}</a>
+                  {% else %}{{ place.name }}{% endif %}
+                  {% if place.rating %}<span class="small muted">★ {{ place.rating }}</span>{% endif %}
+                </div>
+                <div class="meta">
+                  {% if entry.start_time %}⏰ {{ entry.start_time }}{% if entry.duration_minutes %} · {{ entry.duration_minutes }} min{% endif %}{% endif %}
+                  {% if entry.note %} · {{ entry.note }}{% endif %}
+                </div>
+                <details>
+                  <summary class="small muted" style="cursor:pointer">Edit stop</summary>
+                  <form method="post" action="{{ url_for('plan_entry_update', eid=entry.id) }}" style="margin-top:6px">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <label class="small">Time</label>
+                    <input type="time" class="tiny" name="start_time" value="{{ entry.start_time or '' }}">
+                    <label class="small">Duration (minutes)</label>
+                    <input type="number" class="tiny" name="duration" min="0" max="600" value="{{ entry.duration_minutes or '' }}">
+                    <label class="small">Note</label>
+                    <input type="text" name="note" value="{{ entry.note or '' }}" style="max-width:340px">
+                    <p><button class="btn btn-primary btn-sm" type="submit">Save stop</button></p>
+                  </form>
+                </details>
+              </div>
+              <div class="tools">
+                <form class="inline" method="post" action="{{ url_for('plan_entry_move', eid=entry.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="delta" value="1">
+                  <button class="btn btn-ghost btn-sm" type="submit" aria-label="Move down">↓</button>
+                </form>
+                <form class="inline" method="post" action="{{ url_for('plan_entry_move', eid=entry.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="delta" value="-1">
+                  <button class="btn btn-ghost btn-sm" type="submit" aria-label="Move up">↑</button>
+                </form>
+                <form class="inline" method="post" action="{{ url_for('plan_entry_remove', eid=entry.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="btn btn-danger btn-sm" type="submit">Remove</button>
+                </form>
+              </div>
+            </div>
+          {% else %}
+            <p class="small muted" style="margin:8px 0">Nothing planned yet — add the first place for this day.</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <div class="card">
+        <form method="post" action="{{ url_for('plan_section_add', edit_key=trip.edit_key) }}" style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div style="flex:1;min-width:180px">
+            <label for="heading">Add a section</label>
+            <input type="text" id="heading" name="heading" placeholder="Day off the beaten path…">
+          </div>
+          <button class="btn btn-outline" type="submit">Add section</button>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>Share this trip</h3>
+        <p class="small muted" style="margin:4px 0">
+          Anyone with the link can view the trip when it is shared by link or public.</p>
+        <p class="small" style="margin:6px 0">
+          <a href="{{ url_for('trip_view', view_key=trip.view_key) }}">Shared view link</a>
+        </p>
+        <p class="small muted" style="margin:2px 0">
+          Current privacy: <span class="badge priv-{{ trip.privacy }}">{{ trip.privacy|capitalize }}</span>
+          {% if trip.owner_id == current_user.id %}
+          — change it in <a href="{{ url_for('plan_settings', edit_key=trip.edit_key) }}">Settings</a>.{% endif %}</p>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>Collaborators</h3>
+        <p class="small muted" style="margin:4px 0">Owner: {{ trip.owner.display_name }}</p>
+        {% for c in collaborators %}
+          {% if c.user_id %}
+            {% set cu = c | collab_user %}
+            <p class="small" style="margin:4px 0">
+              {{ cu.display_name if cu else c.invite_email }} (@{{ cu.username if cu else '?' }})
+              · <span class="badge priv-private">{{ c.status|capitalize }}</span>
+              {% if trip.owner_id == current_user.id and c.status != 'declined' %}
+              <form class="inline" method="post" action="{{ url_for('collaborator_remove', cid=c.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-ghost btn-sm" type="submit">Remove</button>
+              </form>
+              {% endif %}
+            </p>
+          {% endif %}
+        {% endfor %}
+        {% if trip.owner_id == current_user.id %}
+          <form method="post" action="{{ url_for('plan_collaborators', edit_key=trip.edit_key) }}" style="margin-top:8px">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label for="email">Invite by email</label>
+            <input type="email" id="email" name="email" placeholder="friend@example.com">
+            <p style="margin-top:8px"><button class="btn btn-primary btn-sm" type="submit">Send invitation</button></p>
+          </form>
+        {% else %}
+          <p class="small muted">Only the trip owner can invite collaborators.</p>
+        {% endif %}
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>Budget snapshot</h3>
+        <table class="money-table">
+          <tr><th>Total spent</th><td class="num">{{ fmt_money(bal.total) }}</td></tr>
+          {% for m in bal.members %}
+            <tr>
+              <th>{{ m.display_name }}</th>
+              <td class="num">{{ fmt_money(bal.paid[m.id]) }} paid</td>
+            </tr>
+          {% endfor %}
+        </table>
+        <p class="small" style="margin-top:8px">
+          <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Open full budget →</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Checklist snapshot</h3>
+        {% set packing = checklist | select_list('packing') %}
+        {% set todos = checklist | select_list('todo') %}
+        <p class="small muted" style="margin:4px 0">Packing: {{ packing | done_count }} / {{ packing|length }} done</p>
+        <p class="small muted" style="margin:4px 0">To-dos: {{ todos | done_count }} / {{ todos|length }} done</p>
+        <p class="small" style="margin-top:8px">
+          <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Open checklist →</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

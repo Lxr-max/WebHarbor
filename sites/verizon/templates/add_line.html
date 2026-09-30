@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Add a new line{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Add a new line to your account</h1>
+  <form method="post" action="{{ url_for('add_line') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Nickname for the new line <input type="text" name="nickname" placeholder="e.g. Mom" required></label>
+    <label>Device
+      <select name="device" required>
+        {% for d in devices %}
+        <option value="{{ d.id }}">{{ d.name }} ({{ '$' ~ d.full_price ~ ' retail' if d.full_price else 'Price unavailable' }})</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Plan
+      <select name="plan" required>
+        {% for p in plans %}
+        <option value="{{ p.id }}">{{ p.name }} — ${{ p.monthly }}/mo</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button type="submit" class="btn btn-primary">Add line</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Practice Exam Result — Section {{ section.number }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('practice_exam_landing') }}">Online Practice Exams</a> › Result</nav>
+  <div class="page-title"><h1>Practice Exam Result — Section {{ section.number }}: {{ section.title }}</h1></div>
+  <div class="card">
+    <h2>Your score: {{ correct }}/{{ total }} ({{ pct }}%)</h2>
+    <p>{% if passed %}<span class="result-ok">You passed this practice section.</span>
+    You answered at least 80 percent of the questions correctly — the same standard the real
+    knowledge exam applies to part two.{% else %}<span class="result-bad">Below the 80 percent passing standard.</span>
+    Study the section material and try again. If you fail the real exam, you must wait 15 days
+    before retaking it if you are under age 18, and the exam may be taken only once per business day.{% endif %}</p>
+  </div>
+  {% for r in results %}
+  <div class="question">
+    <p class="qtext">{{ loop.index }}. {{ r.q.question }}</p>
+    {% if q_images.get(r.q.qid) %}
+    <div class="question-images">
+      {% for im in q_images[r.q.qid] %}<img src="{{ im }}" alt="Exam question illustration">{% endfor %}
+    </div>
+    {% endif %}
+    <p>{% if r.ok %}<span class="result-ok">Correct.</span>{% else %}
+       <span class="result-bad">Not correct.</span> Your answer: {{ r.pick }}.{% endif %}</p>
+    {% if r.q.feedback %}<p class="feedback">{{ r.q.feedback }}</p>{% endif %}
+  </div>
+  {% endfor %}
+  <p><a class="btn" href="{{ url_for('practice_exam_section', section=section.number) }}">Retake this practice exam</a>
+  <a class="btn btn--secondary" href="{{ url_for('practice_exam_landing') }}">Back to all sections</a></p>
+</div>
+{% endblock %}

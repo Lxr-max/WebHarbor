@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Register — My Verizon{% endblock %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Register for My Verizon</h1>
+  <form method="post" action="{{ url_for('account_register') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Full name <input type="text" name="name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Street address <input type="text" name="street"></label>
+    <label>City <input type="text" name="city"></label>
+    <label>State <input type="text" name="state" maxlength="4"></label>
+    <label>ZIP code <input type="text" name="zip" maxlength="10"></label>
+    <label>Password <input type="password" name="password" minlength="8" required autocomplete="new-password"></label>
+    <button type="submit" class="btn btn-primary">Create account</button>
+  </form>
+</section>
+{% endblock %}

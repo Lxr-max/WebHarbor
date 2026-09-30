@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ co.name }} Jobs{% if where %} in {{ where }}{% endif %} (Now Hiring) - ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>{{ co.name|upper }} Jobs{% if where %} in {{ where }}{% endif %} (Now Hiring)</h1>
+  <p class="snapshot">{{ jobs|length }} open roles from {{ co.name }} in this snapshot</p>
+  <p><a href="{{ url_for('company_profile', company=co.slug) }}">About {{ co.name }}</a></p>
+</section>
+<ol class="job-list">
+  {% for job in jobs %}
+  <li class="job-card">
+    <article>
+      <h2 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h2>
+      <p class="job-location">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+      {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+      <p class="card-actions">
+        {% if job.quick_apply %}<span class="badge brand">Quick apply</span>{% endif %}
+        <span>{{ job.employment_display() }}</span>
+        <span class="posted">{{ job.posted_display() }}</span>
+      </p>
+    </article>
+  </li>
+  {% endfor %}
+  {% if not jobs %}<li>No open roles found.</li>{% endif %}
+</ol>
+{% endblock %}
