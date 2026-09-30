@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Virginia Department of Motor Vehicles{% endblock %} | Virginia DMV</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-upper">
+    <div class="container">
+      <span>Virginia Department of Motor Vehicles</span>
+      <nav aria-label="Utility menu">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('account_dashboard') }}">My Account</a>
+          <a href="{{ url_for('account_logout') }}">Sign Out</a>
+        {% else %}
+          <a href="{{ url_for('account_login') }}">My Account</a>
+        {% endif %}
+      </nav>
+    </div>
+  </div>
+  <div class="container header-main">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Virginia DMV home">
+      <span class="brand__seal">
+        <span class="brand__mark">VA</span>
+        <span class="brand__name">
+          <strong>Virginia DMV</strong>
+          <span>Department of Motor Vehicles</span>
+        </span>
+      </span>
+    </a>
+    <form class="header-search" action="{{ url_for('online_services_all') }}" method="get" role="search">
+      <label class="sr-only" for="site-search">Search DMV</label>
+      <input id="site-search" type="search" name="q" placeholder="Search online services">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <ul>
+        <li><a href="{{ url_for('online_services') }}">Online Services</a></li>
+        <li><a href="{{ url_for('all_locations') }}">Locations</a></li>
+        <li><a href="{{ url_for('moving') }}">Moving</a></li>
+        <li><a href="{{ url_for('forms') }}">Forms</a></li>
+        <li><a href="{{ url_for('licenses_ids') }}">Licenses &amp; IDs</a></li>
+        <li><a href="{{ url_for('vehicles') }}">Vehicles</a></li>
+        <li><a href="{{ url_for('records') }}">Records</a></li>
+        <li><a href="{{ url_for('appointments') }}">Appointments</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="container flashes">
+    {% for message in messages %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<main id="main-content">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <h4>Popular</h4>
+      <ul>
+        <li><a href="{{ url_for('appointments') }}">Reserve Your Spot</a></li>
+        <li><a href="{{ url_for('plates_search') }}">Browse License Plates</a></li>
+        <li><a href="{{ url_for('practice_exam_landing') }}">Practice Exams</a></li>
+        <li><a href="{{ url_for('drivers_manual') }}">Driver's Manual</a></li>
+        <li><a href="{{ url_for('vehicles_taxes_fees') }}">Fee Chart</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Online Services</h4>
+      <ul>
+        <li><a href="{{ url_for('online_services_all') }}">All Online Services</a></li>
+        <li><a href="{{ url_for('online_services_address_change') }}">Change Address</a></li>
+        <li><a href="{{ url_for('account_login') }}">DMV Online Account</a></li>
+        <li><a href="{{ url_for('records_request') }}">Request a Record</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About DMV</h4>
+      <ul>
+        <li><a href="{{ url_for('about') }}">About DMV</a></li>
+        <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('news_list') }}">News</a></li>
+        <li><a href="{{ url_for('how_do_i') }}">How Do I?</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Locations</h4>
+      <ul>
+        <li><a href="{{ url_for('all_locations', type='csc') }}">Customer Service Centers</a></li>
+        <li><a href="{{ url_for('all_locations', type='dmv_select') }}">DMV Select</a></li>
+        <li><a href="{{ url_for('appointment_new') }}">Make an Appointment</a></li>
+        <li><a href="{{ url_for('appointment_lookup') }}">View/Cancel Appointments</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <span>Commonwealth of Virginia — Department of Motor Vehicles</span>
+      <span>Call DMV: (804) 497-7100 · TDD: (800) 828-1120</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

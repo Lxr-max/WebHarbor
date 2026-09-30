@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Renew Driver's License{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('account_dashboard') }}">My Account</a> › Renew License</nav>
+  <div class="page-title"><h1>Driver's License Renewal</h1></div>
+  <div class="card">
+    <dl class="kv">
+      <dt>Credential</dt><dd>{{ lic.credential_type }} — Class {{ lic.class_type }}</dd>
+      <dt>Number</dt><dd>{{ lic.number }}</dd>
+      <dt>Status</dt><dd>{{ lic.status }}</dd>
+      <dt>Expires</dt><dd>{{ lic.expires }}</dd>
+      <dt>REAL ID</dt><dd>{% if lic.real_id %}REAL ID compliant{% else %}Not REAL ID compliant — add REAL ID for a one-time $10 fee{% endif %}</dd>
+    </dl>
+    <p class="hint">A Virginia driver's license is valid for eight years and costs $4.00 per year
+    ($32.00 for a full eight-year term).</p>
+  </div>
+  {% if preview %}
+  <div class="card">
+    <h2>Fee preview</h2>
+    <table class="data">
+      {% for line, amount in preview.lines %}<tr><td>{{ line }}</td><td>{{ amount }}</td></tr>{% endfor %}
+      <tr><th>Total due</th><th>{{ preview.total }}</th></tr>
+    </table>
+  </div>
+  {% endif %}
+  <form class="flow" method="post" action="{{ url_for('license_renew') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="choice">
+      <legend>Renewal term</legend>
+      <label class="radio-row"><input type="radio" name="years" value="8" {% if not years or years == 8 %}checked{% endif %}> Eight years ($32.00) — standard term</label>
+    </fieldset>
+    {% if not lic.real_id %}
+    <p>For a first REAL ID, <a href="{{ url_for('licenses_ids_real_id') }}">review the documents and visit a customer service center</a>. This online renewal keeps your current credential type.</p>
+    {% endif %}
+    <p><a class="btn btn--secondary" href="{{ url_for('license_renew', years=8) }}">Preview 8-year total</a></p>
+    <button class="btn" type="submit">Pay and renew license</button>
+  </form>
+</div>
+{% endblock %}

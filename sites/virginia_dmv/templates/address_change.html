@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Change Address{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('online_services_address_change') }}">Change Address</a></nav>
+  <div class="page-title"><h1>Change Address, Name or Sex Designation</h1></div>
+  <p>Changing your address with DMV updates the mailing address on your driver's license, ID card,
+  vehicle registration and title records. You must notify DMV within 30 days of moving.</p>
+  <div class="card">
+    <h2>Current address on file</h2>
+    <p>{{ user.street }}, {{ user.city }}, {{ user.state }} {{ user.zip }}</p>
+  </div>
+  <form class="flow" method="post" action="{{ url_for('account_address_change') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label for="street">New street address</label>
+      <input id="street" type="text" name="street" required placeholder="123 Main Street"></div>
+    <div class="field"><label for="city">City</label>
+      <input id="city" type="text" name="city" required></div>
+    <div class="field"><label for="state">State</label>
+      <input id="state" type="text" name="state" value="VA" readonly>
+      <p class="hint">Address changes must be within Virginia.</p></div>
+    <div class="field"><label for="zip">ZIP code (5 digits)</label>
+      <input id="zip" type="text" name="zip" required pattern="\d{5}"></div>
+    <button class="btn" type="submit">Submit address change</button>
+  </form>
+</div>
+{% endblock %}

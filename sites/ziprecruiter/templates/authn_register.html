@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Create a Free Job Seeker Account | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="authn-layout">
+  <div class="authn-card">
+    <h1>Create a Free Account</h1>
+    <p class="authn-sub">Join millions of job seekers who apply with one click.</p>
+    {% for err in errors %}<p class="form-error">{{ err }}</p>{% endfor %}
+    <form method="post" action="/authn/register?realm=candidates">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="r-name">Full name</label>
+      <input id="r-name" type="text" name="name" value="{{ form.get('name','') }}" required>
+      <label for="r-email">Email</label>
+      <input id="r-email" type="email" name="email" value="{{ form.get('email','') }}" required autocomplete="username">
+      <label for="r-pass">Password (8+ characters)</label>
+      <input id="r-pass" type="password" name="password" required autocomplete="new-password">
+      <label for="r-loc">Where are you looking for work?</label>
+      <input id="r-loc" type="text" name="location" value="{{ form.get('location','') }}" placeholder="City, state or ZIP">
+      <button type="submit" class="btn-green big">Sign Up</button>
+    </form>
+    <p class="authn-alt">Already have an account? <a href="/authn/login?realm=candidates">Log in</a></p>
+  </div>
+  <div class="authn-side">
+    <h2>What you get</h2>
+    <ul>
+      <li>1-Click Apply to millions of jobs</li>
+      <li>Job alerts for the searches you care about</li>
+      <li>A resume Phil can share with matching employers</li>
+      <li>Application tracking from “Applied” to offer</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Get Hired. <span class="green">Still Hiring?</span></h1>
+    <p class="hero-sub">Zip your resume to employers everywhere — from the web or your phone.</p>
+    <form class="hero-search" action="/jobs-search" method="get">
+      <div class="field what">
+        <label for="h-what">Search for job title or keyword</label>
+        <input id="h-what" type="search" name="search" placeholder="Job title or keyword">
+      </div>
+      <div class="field where">
+        <label for="h-where">Where?</label>
+        <input id="h-where" type="search" name="location" placeholder="Enter city, state or ZIP">
+      </div>
+      <button type="submit">Search Jobs</button>
+    </form>
+    <p class="hero-fine">1-Click Apply makes applying to jobs fast. Use it from your phone or the web.</p>
+  </div>
+</section>
+
+<section class="home-columns">
+  <div class="home-phil">
+    {% if phil_url %}<img src="{{ phil_url }}" alt="Phil, the ZipRecruiter capybara mascot">{% endif %}
+    <div>
+      <h2>Meet Phil — your personal recruiter</h2>
+      <p>Phil screens jobs for you daily and pings you when your background matches a role.
+         Create a free account and let Phil do the work.</p>
+      <a class="btn-green" href="/authn/register?realm=candidates">Create Free Account</a>
+    </div>
+  </div>
+  <div class="home-stats">
+    <h2>Search jobs the smart way</h2>
+    <ul>
+      <li><strong>1-Click Apply</strong> — apply to millions of jobs in one tap.</li>
+      <li><strong>Job Alerts</strong> — get new matches in your inbox daily.</li>
+      <li><strong>Salary pages</strong> — see what any job pays before you apply.</li>
+      <li><strong>Career advice</strong> — guides for every step of your search.</li>
+    </ul>
+    <a class="btn-outline" href="/browse">Browse jobs by title</a>
+  </div>
+</section>
+
+<section class="home-categories">
+  <h2>Browse jobs by category</h2>
+  <div class="cat-grid">
+    {% for cat in categories %}
+    <a class="cat-tile" href="/jobs-search?search={{ cat.name|lower|replace(' ','+') }}">
+      <h3>{{ cat.name }}</h3>
+      <span>{{ job_count_for(cat.id) }} open jobs</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-popular">
+  <h2>Popular searches right now</h2>
+  <ul class="popular-list">
+    {% for s in searches %}
+    <li><a href="/jobs-search?search={{ s.term|replace(' ','+') }}&location={{ s.location|replace(' ','+') }}">{{ s.term|capitalize }} Jobs in {{ s.location }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<div class="snapshot-note">
+  <p>Mirror snapshot of <a href="https://www.ziprecruiter.com/" rel="noopener">ziprecruiter.com</a> captured 2026-09-29 —
+     every job row, salary figure and article comes from the captured upstream pages.</p>
+</div>
+{% endblock %}

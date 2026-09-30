@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Checkout</h1>
+  <p>{{ cart|length }} item(s) in your order.</p>
+  <form method="post" action="{{ url_for('checkout') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h2>Tell us about yourself</h2>
+    <label>Full name <input type="text" name="name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <h2>Shipping address</h2>
+    <label>Street address <input type="text" name="street" required></label>
+    <label>City <input type="text" name="city" required></label>
+    <label>State <input type="text" name="state" required maxlength="4"></label>
+    <label>ZIP code <input type="text" name="zip" required maxlength="10"></label>
+    <h2>Payment</h2>
+    <p class="muted">Device financing and first-month service charges are billed to your Verizon account. No card is charged in this mirror.</p>
+    <button type="submit" class="btn btn-primary">Place order</button>
+  </form>
+</section>
+{% endblock %}

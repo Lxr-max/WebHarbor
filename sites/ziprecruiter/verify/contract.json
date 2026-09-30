@@ -1,0 +1,1369 @@
+{
+  "ZipRecruiter--0": {
+    "task": "I'm considering remote software engineering work in the San Francisco search area. Assess the first remote listing: summarize its role, employer, employment type, pay and posting age, and the employer's industry, size and headquarters. Compare its hourly pay range with the national Software Engineer average to tell me whether that benchmark falls within the advertised range.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/YO-AI-Labs",
+      "/co/YO-AI-Labs",
+      "/Salaries/Software-Engineer-Salary"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "(?:yo ai labs).{0,70}?(?:software\\ engineer\\ \\-\\ open\\ source\\ contributions\\ \\-\\ remote)"
+      ],
+      [
+        "fact 2",
+        "(?:yo ai labs).{0,170}?(?:san\\ francisco,\\ ca)"
+      ],
+      [
+        "fact 3",
+        "(?:yo ai labs).{0,260}?(?:(?:pay).{0,24}?(?:\\$50.{0,5}\\$100 per hour))"
+      ],
+      [
+        "fact 4",
+        "(?:yo ai labs).{0,350}?(?:(?:employment).{0,24}?(?:full time))"
+      ],
+      [
+        "fact 5",
+        "(?:yo ai labs).{0,420}?(?:(?:posted).{0,24}?(?:3 days))"
+      ],
+      [
+        "fact 6",
+        "(?:industry).{0,40}?(?:computing infrastructure providers)"
+      ],
+      [
+        "fact 7",
+        "(?:size).{0,25}?(?:201.{0,5}500 employees)"
+      ],
+      [
+        "fact 8",
+        "(?:headquarters).{0,30}?(?:abu dhabi)"
+      ],
+      [
+        "fact 9",
+        "(?:national).{0,60}?(?:\\$70\\.92)"
+      ],
+      [
+        "fact 10",
+        "(?:falls|lies|is) within"
+      ]
+    ]
+  },
+  "ZipRecruiter--1": {
+    "task": "I want a recently posted nursing job I can apply to quickly around New York, NY. Among registered nurse listings with quick apply posted within five days, compare the first two openings by role, employer, location, hourly pay, employment type and posting age. Include each employer's industry and size so I can assess the workplaces. Tell me how many listings meet the search constraints.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/Park-Ave",
+      "/c/BAYADA",
+      "/co/Park-Ave",
+      "/co/BAYADA"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "5 matching"
+      ],
+      [
+        "fact 2",
+        "(?:park ave gastroenterology).{0,70}?(?:registered\\ nurse\\ \\-\\ gastroenterology)"
+      ],
+      [
+        "fact 3",
+        "(?:park ave gastroenterology).{0,170}?(?:huntington,\\ ny)"
+      ],
+      [
+        "fact 4",
+        "(?:park ave gastroenterology).{0,260}?(?:(?:pay).{0,24}?(?:\\$40.{0,5}\\$50 per hour))"
+      ],
+      [
+        "fact 5",
+        "(?:park ave gastroenterology).{0,350}?(?:(?:employment).{0,24}?(?:part time))"
+      ],
+      [
+        "fact 6",
+        "(?:park ave gastroenterology).{0,420}?(?:(?:posted).{0,24}?(?:23 hours))"
+      ],
+      [
+        "fact 7",
+        "(?:industry and company size).{0,20}?(?:(?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 8",
+        "(?:bayada home health care).{0,70}?(?:private\\ duty\\ registered\\ nurse)"
+      ],
+      [
+        "fact 9",
+        "(?:bayada home health care).{0,170}?(?:hoboken,\\ nj)"
+      ],
+      [
+        "fact 10",
+        "(?:bayada home health care).{0,260}?(?:(?:pay).{0,24}?(?:\\$35.{0,5}\\$45 per hour))"
+      ],
+      [
+        "fact 11",
+        "(?:bayada home health care).{0,350}?(?:(?:employment).{0,24}?(?:part time.{0,25}full time.{0,25}per diem))"
+      ],
+      [
+        "fact 12",
+        "(?:bayada home health care).{0,420}?(?:(?:posted).{0,24}?(?:2 days))"
+      ],
+      [
+        "fact 13",
+        "(?:industry).{0,30}?(?:health care and social assistance)"
+      ],
+      [
+        "fact 14",
+        "(?:size).{0,25}?(?:10000\\+ employees)"
+      ]
+    ]
+  },
+  "ZipRecruiter--2": {
+    "task": "Help me evaluate accountant opportunities around Denver with advertised pay reaching at least $70,000. Compare the first two matching listings by role, employer, pay range, employment type and posting age, and use Denver's average and 25th-percentile accountant salary to put those ranges in context. Tell me how many openings match.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/Matter",
+      "/c/ELECTRO",
+      "/Salaries/Accountant-Salary-in-Denver"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "4 matching"
+      ],
+      [
+        "fact 2",
+        "(?:matter family office).{0,50}?(?:senior accountant.{0,25}pay \\$80000.{0,5}\\$100000 per year)"
+      ],
+      [
+        "fact 3",
+        "(?:matter family office).{0,170}?(?:posted yesterday)"
+      ],
+      [
+        "fact 4",
+        "(?:electro magnetic applications inc).{0,50}?(?:staff accountant.{0,25}pay \\$70000.{0,5}\\$90000 per year)"
+      ],
+      [
+        "fact 5",
+        "(?:electro magnetic applications inc).{0,180}?(?:posted 4 days)"
+      ],
+      [
+        "fact 6",
+        "(?:annual average).{0,24}?(?:\\$70327(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "(?:25th percentile).{0,24}?(?:\\$55100(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "full time"
+      ],
+      [
+        "fact 9",
+        "senior.{0,40}above"
+      ],
+      [
+        "fact 10",
+        "staff.{0,40}straddles"
+      ]
+    ]
+  },
+  "ZipRecruiter--3": {
+    "task": "I'm looking for flexible nursing work anywhere in the country. Compare the first part-time opening with the first per-diem opening by role, employer, city, employment type, posting age and advertised pay, explicitly noting missing pay. Include how many openings each employment filter returns so I can compare the two searches.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/GameDay",
+      "/c/Greenlife"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "part.time search.{0,10}27 openings"
+      ],
+      [
+        "fact 2",
+        "per.diem search.{0,10}20 openings"
+      ],
+      [
+        "fact 3",
+        "(?:gameday men.s health).{0,60}?(?:part-time licensed practical nurse)"
+      ],
+      [
+        "fact 4",
+        "(?:gameday).{0,200}?(?:west hartford, ct.{0,50}part time.{0,30}posted today.{0,30}pay (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 5",
+        "(?:greenlife healthcare staffing).{0,60}?(?:licensed practical nurse.{0,15}queens, ny.{0,30}per diem.{0,30}posted today.{0,65}\\$47\\.00 per hour)"
+      ]
+    ]
+  },
+  "ZipRecruiter--4": {
+    "task": "I'm weighing junior versus senior software engineering opportunities nationwide. Compare the first listing at each experience level by title, employer, pay, location, work arrangement and posting age. Include each employer's industry and size and the number of matching roles at each level.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/Burnt",
+      "/c/Tek-Fusion",
+      "/co/Burnt",
+      "/co/Tek-Fusion"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "senior search.{0,10}12 openings"
+      ],
+      [
+        "fact 2",
+        "junior search.{0,10}1 opening"
+      ],
+      [
+        "fact 3",
+        "(?:burnt).{0,40}?(?:senior software engineer.{0,30}san francisco, ca)"
+      ],
+      [
+        "fact 4",
+        "(?:burnt).{0,110}?(?:\\$144000.{0,5}\\$190000 per year)"
+      ],
+      [
+        "fact 5",
+        "(?:burnt).{0,200}?(?:on.site.{0,20}posted 2 days)"
+      ],
+      [
+        "fact 6",
+        "(?:burnt).{0,230}?(?:industry and size (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 7",
+        "(?:tek fusion global).{0,45}?(?:software engineer i & ii.{0,20}williamsburg, va)"
+      ],
+      [
+        "fact 8",
+        "(?:tek fusion global).{0,110}?(?:\\$55000.{0,5}\\$95000 per year)"
+      ],
+      [
+        "fact 9",
+        "(?:tek fusion global).{0,190}?(?:on.site.{0,20}posted 11 days)"
+      ],
+      [
+        "fact 10",
+        "(?:tek fusion global).{0,230}?(?:industry and size (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ]
+    ]
+  },
+  "ZipRecruiter--5": {
+    "task": "I'm assessing the Atlanta truck-driving market before applying. Compare the first listing on each of the two result pages by title, employer and pay, checking each job's employment type, location and posting age. Put their pay in context with the Atlanta truck-driver average and median, keeping the advertised pay periods clear.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/Dollar-General",
+      "/c/C.R.-England",
+      "/Salaries/Truck-Driver-Salary-in-Atlanta"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "(?:dollar general fleet).{0,45}?(?:cdl a truck driver.{0,20}mcdonough, ga)"
+      ],
+      [
+        "fact 2",
+        "(?:dollar general fleet).{0,100}?(?:\\$100000 per year)"
+      ],
+      [
+        "fact 3",
+        "(?:dollar general fleet).{0,130}?(?:full time.{0,25}posted 18 days)"
+      ],
+      [
+        "fact 4",
+        "(?:c\\.r\\. england).{0,30}?(?:cdl.a condo fleet truck driver.{0,80}atlanta, ga)"
+      ],
+      [
+        "fact 5",
+        "(?:c\\.r\\. england).{0,150}?(?:\\$1500.{0,5}\\$1800 per week)"
+      ],
+      [
+        "fact 6",
+        "(?:c\\.r\\. england).{0,200}?(?:full time.{0,25}posted 4 days)"
+      ],
+      [
+        "fact 7",
+        "(?:atlanta truck.driver).{0,40}?(?:average and median.{0,20}\\$54188)"
+      ]
+    ]
+  },
+  "ZipRecruiter--6": {
+    "task": "Help me choose between the first two quick-apply warehouse openings around Dallas. Compare their roles, employers, cities, hourly pay ranges, employment types and posting ages, and check each employer's industry and size. Tell me how many quick-apply openings are available in this search.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobs-search",
+      "/c/Proman",
+      "/c/REX",
+      "/co/Proman",
+      "/co/REX"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "8 quick.apply"
+      ],
+      [
+        "fact 2",
+        "(?:proman staffing).{0,70}?(?:forklift\\ operator)"
+      ],
+      [
+        "fact 3",
+        "(?:proman staffing).{0,170}?(?:fort\\ worth,\\ tx)"
+      ],
+      [
+        "fact 4",
+        "(?:proman staffing).{0,260}?(?:(?:pay).{0,24}?(?:\\$16\\.25.{0,5}\\$19\\.25 per hour))"
+      ],
+      [
+        "fact 5",
+        "(?:proman staffing).{0,350}?(?:(?:employment).{0,24}?(?:full time))"
+      ],
+      [
+        "fact 6",
+        "(?:proman staffing).{0,420}?(?:(?:posted).{0,24}?(?:8 hours))"
+      ],
+      [
+        "fact 7",
+        "(?:industry and size).{0,20}?(?:(?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 8",
+        "(?:rex staffing).{0,70}?(?:cold\\ environment\\ warehouse\\ packers)"
+      ],
+      [
+        "fact 9",
+        "(?:rex staffing).{0,170}?(?:grand\\ prairie,\\ tx)"
+      ],
+      [
+        "fact 10",
+        "(?:rex staffing).{0,260}?(?:(?:pay).{0,24}?(?:\\$13\\.50.{0,5}\\$14\\.50 per hour))"
+      ],
+      [
+        "fact 11",
+        "(?:rex staffing).{0,350}?(?:(?:employment).{0,24}?(?:full time))"
+      ],
+      [
+        "fact 12",
+        "(?:rex staffing).{0,420}?(?:(?:posted).{0,24}?(?:12 hours))"
+      ],
+      [
+        "fact 13",
+        "(?:industry).{0,20}?(?:recruiting and staffing services)"
+      ],
+      [
+        "fact 14",
+        "(?:size).{0,15}?(?:11.{0,5}50 employees)"
+      ]
+    ]
+  },
+  "ZipRecruiter--7": {
+    "task": "I'm researching the employer behind the first software engineer result in San Francisco. Summarize what the role works on, its work arrangement and employment type, and report whether reliable employer profile details are available. Compare its San Francisco and Alameda openings by role, location and pay, and tell me how many openings its company jobs pages show in each city.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/c/Veritus",
+      "/co/Veritus/Jobs/-in-San-Francisco",
+      "/co/Veritus/Jobs/-in-Alameda"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "veritus"
+      ],
+      [
+        "fact 2",
+        "forward deployed software engineer"
+      ],
+      [
+        "fact 3",
+        "voice ai"
+      ],
+      [
+        "fact 4",
+        "consumer lending"
+      ],
+      [
+        "fact 5",
+        "collections"
+      ],
+      [
+        "fact 6",
+        "backend integrations"
+      ],
+      [
+        "fact 7",
+        "latency"
+      ],
+      [
+        "fact 8",
+        "voice quality"
+      ],
+      [
+        "fact 9",
+        "a/b tests"
+      ],
+      [
+        "fact 10",
+        "on.site"
+      ],
+      [
+        "fact 11",
+        "full time"
+      ],
+      [
+        "fact 12",
+        "(?:reliable employer profile).{0,25}?(?:(?:unavailable|not available))"
+      ],
+      [
+        "fact 13",
+        "(?:san francisco, ca company jobs).{0,25}?(?:1 opening.{0,90}pay (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 14",
+        "(?:alameda, ca company jobs).{0,25}?(?:1 opening.{0,90}pay (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ]
+    ]
+  },
+  "ZipRecruiter--8": {
+    "task": "I'm comparing workplaces for registered nursing in the New York area. For the first two search results, report the role, employer, city, hourly pay and employment type. Check each employer profile for a Breakroom rating and response count, explicitly saying when a rating is unavailable, so I can judge the strength of the workplace feedback.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/c/CareOne",
+      "/c/BAYADA",
+      "/co/CareOne",
+      "/co/BAYADA"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "(?:careone).{0,40}?(?:registered nurse.{0,15}east brunswick, nj)"
+      ],
+      [
+        "fact 2",
+        "(?:careone).{0,100}?(?:\\$39.{0,5}\\$57 per hour)"
+      ],
+      [
+        "fact 3",
+        "(?:careone).{0,160}?(?:part time.{0,20}full time.{0,20}per diem)"
+      ],
+      [
+        "fact 4",
+        "(?:careone).{0,230}?(?:breakroom rating and response count (?:not provided|unavailable|not available|not (?:shown|listed)))"
+      ],
+      [
+        "fact 5",
+        "(?:bayada home health care).{0,40}?(?:private duty registered nurse.{0,20}hoboken, nj)"
+      ],
+      [
+        "fact 6",
+        "(?:bayada home health care).{0,140}?(?:\\$35.{0,5}\\$45 per hour)"
+      ],
+      [
+        "fact 7",
+        "(?:bayada home health care).{0,160}?(?:part time.{0,20}full time.{0,20}per diem)"
+      ],
+      [
+        "fact 8",
+        "(?:breakroom rating).{0,20}?(?:6\\.87.{0,20}257 frontline employees)"
+      ]
+    ]
+  },
+  "ZipRecruiter--9": {
+    "task": "I'm considering a move from software engineering into data analysis. Compare the national salary pages for both careers: average annual and hourly pay, median, and the 25th and 75th percentiles. Identify the highest-paying related role listed for each and its annual salary, and tell me which career has the higher median.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/Salaries/Software-Engineer-Salary",
+      "/Salaries/Data-Analyst-Salary"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "software engineer nationally(?:(?!data analyst nationally).){0,260}(?:annual average).{0,24}?(?:\\$147524(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 2",
+        "software engineer nationally(?:(?!data analyst nationally).){0,260}(?:hourly average).{0,24}?(?:\\$70\\.92(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 3",
+        "software engineer nationally(?:(?!data analyst nationally).){0,260}(?:median).{0,24}?(?:\\$147524(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 4",
+        "software engineer nationally(?:(?!data analyst nationally).){0,260}(?:25th percentile).{0,24}?(?:\\$120000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 5",
+        "software engineer nationally(?:(?!data analyst nationally).){0,260}(?:75th percentile).{0,24}?(?:\\$173000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 6",
+        "data analyst nationally(?:(?!software engineer nationally).){0,260}(?:annual average).{0,24}?(?:\\$82640(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "data analyst nationally(?:(?!software engineer nationally).){0,260}(?:hourly average).{0,24}?(?:\\$39\\.73(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "data analyst nationally(?:(?!software engineer nationally).){0,260}(?:median).{0,24}?(?:\\$82640(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 9",
+        "data analyst nationally(?:(?!software engineer nationally).){0,260}(?:25th percentile).{0,24}?(?:\\$62500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 10",
+        "data analyst nationally(?:(?!software engineer nationally).){0,260}(?:75th percentile).{0,24}?(?:\\$97000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 11",
+        "senior embedded systems engineer.{0,10}\\$137274 per year"
+      ],
+      [
+        "fact 12",
+        "lead business intelligence analyst.{0,10}\\$111209 per year"
+      ],
+      [
+        "fact 13",
+        "software engineer.{0,20}higher national median"
+      ]
+    ]
+  },
+  "ZipRecruiter--10": {
+    "task": "I'm deciding between registered nursing and licensed practical nursing. Compare their national average annual and hourly salaries, medians and 25th-to-75th-percentile ranges. Include the top-paying city listed for each career with its annual salary, and tell me which national median is higher.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/Salaries/Registered-Nurse-Salary",
+      "/Salaries/Licensed-Practical-Nurse-Salary"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "registered nurse nationally(?:(?!licensed practical nurse nationally).){0,260}(?:annual average).{0,24}?(?:\\$92525(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 2",
+        "registered nurse nationally(?:(?!licensed practical nurse nationally).){0,260}(?:hourly average).{0,24}?(?:\\$44\\.48(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 3",
+        "registered nurse nationally(?:(?!licensed practical nurse nationally).){0,260}(?:median).{0,24}?(?:\\$92525(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 4",
+        "registered nurse nationally(?:(?!licensed practical nurse nationally).){0,260}(?:25th percentile).{0,24}?(?:\\$70000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 5",
+        "registered nurse nationally(?:(?!licensed practical nurse nationally).){0,260}(?:75th percentile).{0,24}?(?:\\$108000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 6",
+        "licensed practical nurse nationally(?:(?!registered nurse nationally).){0,260}(?:annual average).{0,24}?(?:\\$62140(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "licensed practical nurse nationally(?:(?!registered nurse nationally).){0,260}(?:hourly average).{0,24}?(?:\\$29\\.88(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "licensed practical nurse nationally(?:(?!registered nurse nationally).){0,260}(?:median).{0,24}?(?:\\$62140(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 9",
+        "licensed practical nurse nationally(?:(?!registered nurse nationally).){0,260}(?:25th percentile).{0,24}?(?:\\$51500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 10",
+        "licensed practical nurse nationally(?:(?!registered nurse nationally).){0,260}(?:75th percentile).{0,24}?(?:\\$70000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 11",
+        "registered nurse nationally.{0,260}san mateo county, ca at \\$129338 per year"
+      ],
+      [
+        "fact 12",
+        "licensed practical nurse nationally.{0,260}san mateo county, ca at \\$91468 per year"
+      ],
+      [
+        "fact 13",
+        "registered nurse.{0,20}higher national median"
+      ]
+    ]
+  },
+  "ZipRecruiter--11": {
+    "task": "I'm negotiating a software engineer offer in San Francisco. Compare the national and San Francisco salary distributions using average annual and hourly pay, median, and 25th and 75th percentiles. Calculate the city's annual-average premium and inspect the first nearby San Francisco job for its role, employer, pay and employment type as a concrete market example.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/Salaries/Software-Engineer-Salary",
+      "/Salaries/Software-Engineer-Salary-in-San-Francisco",
+      "/c/Eitacies"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "national software engineer(?:(?!san francisco software engineer).){0,260}(?:annual average).{0,24}?(?:\\$147524(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 2",
+        "national software engineer(?:(?!san francisco software engineer).){0,260}(?:hourly average).{0,24}?(?:\\$70\\.92(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 3",
+        "national software engineer(?:(?!san francisco software engineer).){0,260}(?:median).{0,24}?(?:\\$147524(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 4",
+        "national software engineer(?:(?!san francisco software engineer).){0,260}(?:25th percentile).{0,24}?(?:\\$120000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 5",
+        "national software engineer(?:(?!san francisco software engineer).){0,260}(?:75th percentile).{0,24}?(?:\\$173000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 6",
+        "san francisco software engineer(?:(?!national software engineer).){0,260}(?:annual average).{0,24}?(?:\\$173808(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "san francisco software engineer(?:(?!national software engineer).){0,260}(?:hourly average).{0,24}?(?:\\$83\\.56(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "san francisco software engineer(?:(?!national software engineer).){0,260}(?:median).{0,24}?(?:\\$173808(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 9",
+        "san francisco software engineer(?:(?!national software engineer).){0,260}(?:25th percentile).{0,24}?(?:\\$141400(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 10",
+        "san francisco software engineer(?:(?!national software engineer).){0,260}(?:75th percentile).{0,24}?(?:\\$203800(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 11",
+        "(?:premium).{0,24}?(?:\\$26284(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 12",
+        "software developer and sre at eitacies inc"
+      ],
+      [
+        "fact 13",
+        "\\$50.{0,5}\\$55 per hour"
+      ],
+      [
+        "fact 14",
+        "full time"
+      ]
+    ]
+  },
+  "ZipRecruiter--12": {
+    "task": "I'm setting a salary target for accounting work in Denver. Compare national and Denver average annual and hourly pay, medians and 25th and 75th percentiles. Tell me the Denver annual-average difference, and examine the first nearby Denver job for its role, employer, advertised pay and employment type to ground the target in a listing.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/Salaries/Accountant-Salary",
+      "/Salaries/Accountant-Salary-in-Denver",
+      "/c/Lotus"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "national accountant(?:(?!denver accountant).){0,260}(?:annual average).{0,24}?(?:\\$68326(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 2",
+        "national accountant(?:(?!denver accountant).){0,260}(?:hourly average).{0,24}?(?:\\$32\\.85(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 3",
+        "national accountant(?:(?!denver accountant).){0,260}(?:median).{0,24}?(?:\\$68326(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 4",
+        "national accountant(?:(?!denver accountant).){0,260}(?:25th percentile).{0,24}?(?:\\$53500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 5",
+        "national accountant(?:(?!denver accountant).){0,260}(?:75th percentile).{0,24}?(?:\\$78500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 6",
+        "denver accountant(?:(?!national accountant).){0,260}(?:annual average).{0,24}?(?:\\$70327(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "denver accountant(?:(?!national accountant).){0,260}(?:hourly average).{0,24}?(?:\\$33\\.81(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "denver accountant(?:(?!national accountant).){0,260}(?:median).{0,24}?(?:\\$70327(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 9",
+        "denver accountant(?:(?!national accountant).){0,260}(?:25th percentile).{0,24}?(?:\\$55100(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 10",
+        "denver accountant(?:(?!national accountant).){0,260}(?:75th percentile).{0,24}?(?:\\$80800(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 11",
+        "(?:premium).{0,24}?(?:\\$2001(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 12",
+        "accountant at lotus concepts management corp"
+      ],
+      [
+        "fact 13",
+        "full time"
+      ],
+      [
+        "fact 14",
+        "\\$60000.{0,5}\\$72000 annually"
+      ]
+    ]
+  },
+  "ZipRecruiter--13": {
+    "task": "I'm preparing a job-search strategy after graduation. Use the blog's industry-insights article and its 2022 college-graduate job-market report to summarize the opportunities they describe. Include the four numbered industry-insight headings and the report's main findings, identify the authors and publication dates, and distinguish the dated market evidence from advice I could still use.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/blog/salary_exp/",
+      "/blog/ziprecruiter-2022-grad-report-red-hot-job-mar/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "4 top industry insights to fuel your job search"
+      ],
+      [
+        "fact 2",
+        "ziprecruiter editors"
+      ],
+      [
+        "fact 3",
+        "march 7,? 2023"
+      ],
+      [
+        "fact 4",
+        "there are more jobs"
+      ],
+      [
+        "fact 5",
+        "jobs offer more flexibility"
+      ],
+      [
+        "fact 6",
+        "workplaces want to be more diverse"
+      ],
+      [
+        "fact 7",
+        "perks and benefits are a priority"
+      ],
+      [
+        "fact 8",
+        "ziprecruiter report finds red hot job market for 2022 college grads"
+      ],
+      [
+        "fact 9",
+        "may 25,? 2022"
+      ],
+      [
+        "fact 10",
+        "lower.{0,30}experience.{0,20}degree"
+      ],
+      [
+        "fact 11",
+        "student.loan repayment"
+      ],
+      [
+        "fact 12",
+        "remote internships"
+      ],
+      [
+        "fact 13",
+        "college wage premium"
+      ],
+      [
+        "fact 14",
+        "underestimating.{0,20}earning"
+      ],
+      [
+        "fact 15",
+        "learning.{0,20}inclusion"
+      ],
+      [
+        "fact 16",
+        "savings.{0,15}remote"
+      ],
+      [
+        "fact 17",
+        "2 openings per unemployed"
+      ],
+      [
+        "fact 18",
+        "9%.{0,60}13%"
+      ],
+      [
+        "fact 19",
+        "90000 postings"
+      ],
+      [
+        "fact 20",
+        "1% of internships remote"
+      ],
+      [
+        "fact 21",
+        "59% college wage premium"
+      ],
+      [
+        "fact 22",
+        "dated"
+      ],
+      [
+        "fact 23",
+        "compare flexibility and benefits"
+      ]
+    ]
+  },
+  "ZipRecruiter--14": {
+    "task": "I'm planning a transition from military service to civilian work. Use the two articles in the blog's Veterans category to make a concise research brief: list the veteran job-search tips and the recommended industries, with each article's title, author and publication date. Explain how the tips can guide exploring those industries without treating these dated articles as current vacancy counts.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/blog/job-search-tips-for-veterans/",
+      "/blog/the-12-best-job-industries-for-veterans/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "job search tips every military veteran should know"
+      ],
+      [
+        "fact 2",
+        "julia pollak"
+      ],
+      [
+        "fact 3",
+        "november 10,? 2020"
+      ],
+      [
+        "fact 4",
+        "the 12 best job industries for veterans"
+      ],
+      [
+        "fact 5",
+        "kat boogaard"
+      ],
+      [
+        "fact 6",
+        "october 20,? 2017"
+      ],
+      [
+        "fact 7",
+        "major job sites"
+      ],
+      [
+        "fact 8",
+        "translat.{0,35}military experience.{0,30}civilian"
+      ],
+      [
+        "fact 9",
+        "explor.{0,20}broad"
+      ],
+      [
+        "fact 10",
+        "research.{0,25}civilian salary"
+      ],
+      [
+        "fact 11",
+        "not establish current vacancies"
+      ],
+      [
+        "fact 12",
+        "business"
+      ],
+      [
+        "fact 13",
+        "technology"
+      ],
+      [
+        "fact 14",
+        "transportation\\ and\\ storage"
+      ],
+      [
+        "fact 15",
+        "retail"
+      ],
+      [
+        "fact 16",
+        "construction"
+      ],
+      [
+        "fact 17",
+        "arts\\ and\\ entertainment"
+      ],
+      [
+        "fact 18",
+        "industrial\\ goods\\ and\\ services"
+      ],
+      [
+        "fact 19",
+        "healthcare"
+      ],
+      [
+        "fact 20",
+        "food\\ and\\ beverage"
+      ],
+      [
+        "fact 21",
+        "science\\ and\\ engineering"
+      ],
+      [
+        "fact 22",
+        "energy\\ and\\ environment"
+      ],
+      [
+        "fact 23",
+        "automotive"
+      ]
+    ]
+  },
+  "ZipRecruiter--15": {
+    "task": "Create a free job-seeker account using a fresh email, a name, a password of at least eight characters and Dallas, TX as the location. Apply to the first quick-apply warehouse listing in the Dallas search. Confirm the submitted role and employer, and check My Applications for its saved status and timeline note.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {
+      "application_events": {
+        "removed": [],
+        "added": [
+          {
+            "id": 10,
+            "application_id": 5,
+            "status": "Applied",
+            "note": "1-Click Application submitted",
+            "occurred_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "applications": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 5,
+            "job_id": 11,
+            "applied_at": "2026-09-29",
+            "status": "Applied",
+            "cover_note": null
+          }
+        ],
+        "updated": {}
+      },
+      "profiles": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 5,
+            "phone": null,
+            "location": "Dallas, TX",
+            "headline": null,
+            "about": null,
+            "years_experience": null,
+            "willing_remote": 0
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "display_name": {
+              "regex": "\\S[\\s\\S]*"
+            },
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "is_benchmark": 0,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/c/Proman",
+      "/jobseeker/applications"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "(?:application).{0,45}?(?:forklift operator at proman staffing)"
+      ],
+      [
+        "fact 2",
+        "application sent"
+      ],
+      [
+        "fact 3",
+        "status.{0,8}applied"
+      ],
+      [
+        "fact 4",
+        "september 29,? 2026"
+      ],
+      [
+        "fact 5",
+        "1.click application submitted"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "profiles",
+        "foreign_key": "user_id"
+      },
+      {
+        "left": "users",
+        "right": "applications",
+        "foreign_key": "user_id"
+      },
+      {
+        "left": "applications",
+        "right": "application_events",
+        "foreign_key": "application_id"
+      }
+    ]
+  },
+  "ZipRecruiter--16": {
+    "task": "My nursing search is now focused on Brooklyn. Log in as alice.j@test.com with password TestPass123!, review my saved openings, and remove the Manhattan urology-employer listing. Report the remaining roles, employers and cities, and set up a weekly licensed practical nurse alert for Brooklyn, NY so I can keep following local opportunities. Preserve my other alerts.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {
+      "job_alerts": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "term": "licensed practical nurse",
+            "location": "Brooklyn, NY",
+            "frequency": "weekly",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "saved_jobs": {
+        "removed": [
+          "[1]"
+        ],
+        "added": [],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/jobseeker/saved-jobs",
+      "/jobseeker/alerts"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "removed.{0,30}new york health.{0,20}urology"
+      ],
+      [
+        "fact 2",
+        "registered nurse iv drip.{0,5}park slope"
+      ],
+      [
+        "fact 3",
+        "restore hyper wellness.{0,5}rhws037.{0,15}brooklyn, ny"
+      ],
+      [
+        "fact 4",
+        "registered nurse \\(rn\\).{0,10}new york cancer & blood specialists.{0,15}manhattan, ny"
+      ],
+      [
+        "fact 5",
+        "licensed practical nurse alert.{0,20}brooklyn, ny.{0,25}weekly"
+      ],
+      [
+        "fact 6",
+        "existing registered nurse alert.{0,20}new york, ny.{0,20}daily"
+      ]
+    ]
+  },
+  "ZipRecruiter--17": {
+    "task": "Help me prepare for my pending software engineering interview. Log in as bob.c@test.com with password TestPass123! and use My Applications to identify the role, employer, city and current status, including the timeline notes and dates. Review that job's pay and work arrangement alongside my resume's summary, experience and skills so I have the relevant application and background in one brief.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/jobseeker/applications",
+      "/c/JOLT",
+      "/jobseeker/resume"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "software engineer at jolt.{0,15}san francisco, ca"
+      ],
+      [
+        "fact 2",
+        "current status interviewing"
+      ],
+      [
+        "fact 3",
+        "september 21,? 2026.{0,10}applied.{0,12}1.click application submitted"
+      ],
+      [
+        "fact 4",
+        "september 23.{0,10}viewed.{0,20}employer viewed"
+      ],
+      [
+        "fact 5",
+        "september 27.{0,10}interviewing.{0,45}phone screen"
+      ],
+      [
+        "fact 6",
+        "\\$125000.{0,5}\\$135000 per year"
+      ],
+      [
+        "fact 7",
+        "on.site"
+      ],
+      [
+        "fact 8",
+        "backend.leaning full.stack"
+      ],
+      [
+        "fact 9",
+        "python, go and postgres"
+      ],
+      [
+        "fact 10",
+        "software engineer at jolt.{0,10}january 2023 to present"
+      ],
+      [
+        "fact 11",
+        "payments api.{0,10}go"
+      ],
+      [
+        "fact 12",
+        "p99 latency 38%"
+      ],
+      [
+        "fact 13",
+        "python 5 years"
+      ],
+      [
+        "fact 14",
+        "go 4 years"
+      ],
+      [
+        "fact 15",
+        "postgresql 5 years"
+      ],
+      [
+        "fact 16",
+        "react 3 years"
+      ]
+    ]
+  },
+  "ZipRecruiter--18": {
+    "task": "Log in as dana.k@test.com with password TestPass123! and update my accounting resume to include QuickBooks with two years of experience. Keep all existing resume content intact. Confirm the saved skill count and update date, and summarize the experience and education retained in the revised resume so I can check it is ready to use.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {
+      "resumes": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[3]": {
+            "updated_at": "2026-09-29",
+            "skills": {
+              "json_value": [
+                [
+                  "NetSuite",
+                  "5"
+                ],
+                [
+                  "Month-end close",
+                  "8"
+                ],
+                [
+                  "GAAP",
+                  "8"
+                ],
+                [
+                  "Excel",
+                  "8"
+                ],
+                [
+                  "Audit prep",
+                  "6"
+                ],
+                [
+                  "SQL",
+                  "3"
+                ],
+                [
+                  "QuickBooks",
+                  "2"
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "paths": [
+      "/jobseeker/resume"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "quickbooks with 2 years"
+      ],
+      [
+        "fact 2",
+        "7 skills"
+      ],
+      [
+        "fact 3",
+        "september 29,? 2026"
+      ],
+      [
+        "fact 4",
+        "senior accountant at matter family office.{0,10}april 2022 to present"
+      ],
+      [
+        "fact 5",
+        "monthly close.{0,10}4 entities"
+      ],
+      [
+        "fact 6",
+        "netsuite migration"
+      ],
+      [
+        "fact 7",
+        "staff accountant ii at caribou financial.{0,10}june 2019 to march 2022"
+      ],
+      [
+        "fact 8",
+        "audit preparation"
+      ],
+      [
+        "fact 9",
+        "reconciliations"
+      ],
+      [
+        "fact 10",
+        "ap/ic review"
+      ],
+      [
+        "fact 11",
+        "bs, accounting.{0,10}metro state denver.{0,5}2018"
+      ],
+      [
+        "fact 12",
+        "cpa license.{0,10}colorado boa.{0,5}2020"
+      ]
+    ]
+  },
+  "ZipRecruiter--19": {
+    "task": "I'm comparing teacher pay in Chicago with the national market. Report the national and Chicago average annual and hourly salaries, medians, and 25th and 75th percentiles. Calculate the city's annual-average difference, then inspect the first nearby Chicago teaching job and report its title, employer, employment type and advertised pay, noting if pay is unavailable.",
+    "initial_digest": "7983031063766fc5efdebabb6321bdcf3968ef22e6ef755f2d67c8619c177274",
+    "state": {},
+    "paths": [
+      "/Salaries/Teacher-Salary",
+      "/Salaries/Teacher-Salary-in-Chicago",
+      "/c/ASO"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "national teacher(?:(?!chicago teacher).){0,260}(?:annual average).{0,24}?(?:\\$46590(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 2",
+        "national teacher(?:(?!chicago teacher).){0,260}(?:hourly average).{0,24}?(?:\\$22\\.40(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 3",
+        "national teacher(?:(?!chicago teacher).){0,260}(?:median).{0,24}?(?:\\$46590(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 4",
+        "national teacher(?:(?!chicago teacher).){0,260}(?:25th percentile).{0,24}?(?:\\$33500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 5",
+        "national teacher(?:(?!chicago teacher).){0,260}(?:75th percentile).{0,24}?(?:\\$57000(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 6",
+        "chicago teacher(?:(?!national teacher).){0,260}(?:annual average).{0,24}?(?:\\$47994(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 7",
+        "chicago teacher(?:(?!national teacher).){0,260}(?:hourly average).{0,24}?(?:\\$23\\.07(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 8",
+        "chicago teacher(?:(?!national teacher).){0,260}(?:median).{0,24}?(?:\\$47994(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 9",
+        "chicago teacher(?:(?!national teacher).){0,260}(?:25th percentile).{0,24}?(?:\\$34500(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 10",
+        "chicago teacher(?:(?!national teacher).){0,260}(?:75th percentile).{0,24}?(?:\\$58700(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 11",
+        "(?:premium).{0,24}?(?:\\$1404(?!\\d|\\.\\d))"
+      ],
+      [
+        "fact 12",
+        "teacher assistant at aso.{0,8}ada s. mckinley comm srvcs"
+      ],
+      [
+        "fact 13",
+        "full time"
+      ],
+      [
+        "fact 14",
+        "pay \\$40000 per year"
+      ]
+    ]
+  }
+}
