@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.year }} {{ p.make }} {{ p.model }} - Specs, Prices, MPG, Reviews & Photos | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('research_home') }}">Research</a> &rsaquo;
+  <span>{{ p.year }} {{ p.make }} {{ p.model }}</span></nav>
+{% endblock %}
+{% block content %}
+<article class="model-page">
+  <header class="model-head">
+    <h1>{{ p.year }} {{ p.make }} {{ p.model }}</h1>
+    <p class="muted">
+      {% if p.starting_price %}Shop options from ${{ '{:,}'.format(p.starting_price) }}{% endif %}
+      {% if p.safety_rating %} &middot; Safety rating {{ p.safety_rating }}/5 ({{ p.safety_review_count }} reviews){% endif %}
+    </p>
+    {% if p.photo_list() %}
+    <div class="model-gallery">
+      {% for photo in p.photo_list()[:4] %}
+      <img src="{{ url_for('static', filename=photo) }}" alt="{{ p.year }} {{ p.make }} {{ p.model }}">
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  {% if p.expert_take %}
+  <section class="vd-section">
+    <h2>Our expert's take</h2>
+    <p class="muted">By {{ p.expert_author }}</p>
+    <p>{{ p.expert_take }}</p>
+  </section>
+  {% endif %}
+
+  {% if listings %}
+  <section class="vd-section">
+    <h2>Listings near {{ DEFAULT_CITY }}</h2>
+    <ul class="similar-list">
+      {% for l in listings %}
+      <li><a href="{{ url_for('vehicle_detail', listing_id=l.id) }}">{{ l.title }}</a>
+        <span>{{ l.price | money }}{% if l.mileage %} &middot; {{ l.mileage | mileagefmt }} mi{% endif %}</span></li>
+      {% endfor %}
+    </ul>
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', stock_type='all', **{'models[]': p.model_slug}) }}">See all listings</a>
+  </section>
+  {% endif %}
+
+  {% if p.trim_list() %}
+  <section class="vd-section">
+    <h2>Available trims</h2>
+    <table class="trim-table">
+      <thead><tr><th>Trim</th><th>Starts at</th><th>MPG</th><th>Seats</th><th>Engine</th><th>Drivetrain</th></tr></thead>
+      <tbody>
+        {% for t in p.trim_list() %}
+        <tr>
+          <td>{{ t.name }}</td>
+          <td>{{ t.price }}</td>
+          <td>{{ t.mpg }}</td>
+          <td>{{ t.seats }}</td>
+          <td>{{ t.engine }}</td>
+          <td>{{ t.drivetrain }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  {% if p.notable_features_list() %}
+  <section class="vd-section">
+    <h2>Notable features</h2>
+    <ul>{% for f in p.notable_features_list() %}<li>{{ f }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+  {% if p.good_points_list() or p.bad_points_list() %}
+  <section class="vd-section">
+    <h2>The good &amp; the bad</h2>
+    <div class="good-bad">
+      {% if p.good_points_list() %}
+      <div><h3>The good</h3><ul>{% for g in p.good_points_list() %}<li>{{ g }}</li>{% endfor %}</ul></div>
+      {% endif %}
+      {% if p.bad_points_list() %}
+      <div><h3>The bad</h3><ul>{% for b in p.bad_points_list() %}<li>{{ b }}</li>{% endfor %}</ul></div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if p.consumer_rating %}
+  <section class="vd-section">
+    <h2>Consumer reviews</h2>
+    <p>{{ p.consumer_recommend_pct }}% of drivers recommend the {{ p.year }} {{ p.make }} {{ p.model }} &middot;
+       {{ p.consumer_rating }} / 5 Based on {{ p.consumer_review_count }} reviews</p>
+    {% if p.consumer_categories_json() %}
+    <ul class="rating-cats">
+      {% for cat, score in p.consumer_categories_json().items() %}
+      <li>{{ cat }} {{ score }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="review-list">
+      {% for r in p.review_list() %}
+      <div class="review">
+        <p class="review-head">By {{ r.author }}{% if r.from %} from {{ r.from }}{% endif %}
+          {% if r.ownership %} &middot; {{ r.ownership }}{% endif %} &middot; {{ r.date }}</p>
+        <p class="review-body">{{ r.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

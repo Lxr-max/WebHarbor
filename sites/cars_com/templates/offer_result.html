@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Instant Offer — {{ r.vehicle }} | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('offer_start') }}">Instant Offer</a> &rsaquo; <span>Your offer</span></nav>
+{% endblock %}
+{% block content %}
+<div class="offer-result">
+  <h1>{{ r.vehicle }}</h1>
+  <p class="muted">{{ r.mileage | mileagefmt }} miles &middot; ZIP {{ r.zip }} &middot; {{ r.color }} &middot; {{ r.keys }} keys &middot; original owner: {{ r.original_owner }}</p>
+  <section class="estimated-value">
+    <h2>Your Instant Offer estimate</h2>
+    <p class="value-range">${{ '{:,}'.format(r.offer_low) }} - ${{ '{:,}'.format(r.offer_high) }}</p>
+    <p class="muted">Estimated when you entered the vehicle: ${{ '{:,}'.format(r.initial_low) }} - ${{ '{:,}'.format(r.initial_high) }}.
+    The offer reflects your mileage ({{ r.mileage | mileagefmt }} miles) and the details you provided.</p>
+  </section>
+  <ol class="how-it-works-steps">
+    <li><strong>Get an Instant Offer.</strong> This estimate reflects your car's year, make, model, trim, mileage and condition details.</li>
+    <li><strong>Confirm your car's condition.</strong> Bring your car into the dealership for a quick side-by-side check to confirm the final value.</li>
+    <li><strong>Cash out or trade-in.</strong> Receive your check or use your Instant Offer to trade in your car for a new or used one.</li>
+  </ol>
+  {% if saved %}
+  <p class="offer-saved">Offer request saved. <a href="{{ url_for('garage') }}">See it in your garage</a>.</p>
+  {% else %}
+  <p><a href="{{ url_for('authn_login', next_url=url_for('offer_start')) }}">Log in</a> to save this offer to your garage.</p>
+  {% endif %}
+  <p><a class="btn btn-outline" href="{{ url_for('offer_start') }}">Value another car</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Car Dealerships Near {{ city }} | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <span>Find a dealer</span></nav>
+{% endblock %}
+{% block content %}
+<div class="dealers-page">
+  <h1>Car dealers near {{ city }}</h1>
+  <form class="dealer-filters" method="get" action="{{ url_for('dealers_index') }}">
+    <div class="filter-item">
+      <label for="d-make">Make</label>
+      <select id="d-make" name="make">
+        <option value="">All makes</option>
+        {% for slug, name in makes %}
+        <option value="{{ name }}" {{ 'selected' if args.get('make') == name }}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-item">
+      <label for="d-rating">Dealer rating</label>
+      <select id="d-rating" name="rating">
+        <option value="">Any rating</option>
+        <option value="4.5" {{ 'selected' if args.get('rating') == '4.5' }}>&amp; up</option>
+        <option value="4" {{ 'selected' if args.get('rating') == '4' }}>&amp; up</option>
+        <option value="3" {{ 'selected' if args.get('rating') == '3' }}>&amp; up</option>
+      </select>
+    </div>
+    <div class="filter-item">
+      <label for="d-distance">Within</label>
+      <select id="d-distance" name="maximum_distance">
+        <option value="">All miles</option>
+        {% for d in [10, 20, 30, 40, 50, 75, 100, 150, 200] %}
+        <option value="{{ d }}" {{ 'selected' if args.get('maximum_distance')|int == d }}>{{ d }} miles</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-item">
+      <label for="d-sort">Sort by</label>
+      <select id="d-sort" name="sort">
+        <option value="rating" {{ 'selected' if sort == 'rating' }}>Highest ratings</option>
+        <option value="name" {{ 'selected' if sort == 'name' }}>Dealer name</option>
+        <option value="distance" {{ 'selected' if sort == 'distance' }}>Nearest location</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Apply filters</button>
+  </form>
+  <p class="muted">{{ total }} matches</p>
+  <ol class="dealer-list">
+    {% for d in pagination.items %}
+    <li class="dealer-row">
+      <div class="dealer-row-main">
+        <h2><a href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">{{ d.name }}</a>
+          {% if d.rating %}<span class="muted">★ {{ d.rating }} ({{ d.review_count | mileagefmt }} reviews)</span>{% endif %}
+        </h2>
+        <p class="muted">{% if d.address %}{{ d.address }}{% if d.distance_miles is not none %} &middot; {{ d.distance_miles }} miles away{% endif %}{% endif %}</p>
+        <p class="dealer-phones">
+          {% if d.phone_new %}New {{ d.phone_new }}{% endif %}
+          {% if d.phone_used %}{% if d.phone_new %} &middot; {% endif %}Used {{ d.phone_used }}{% endif %}
+        </p>
+        {% if d.primary_make %}<p class="muted">Sells {{ d.primary_make }}</p>{% endif %}
+      </div>
+      <div class="dealer-row-actions">
+        <a class="btn btn-outline btn-small" href="{{ url_for('dealer_inventory', dealer_id=d.id, slug=d.slug) }}">View inventory</a>
+        <a class="btn btn-outline btn-small" href="{{ url_for('dealer_reviews', dealer_id=d.id, slug=d.slug) }}">Reviews</a>
+        <a class="btn btn-primary btn-small" href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">Dealer page</a>
+      </div>
+    </li>
+    {% else %}
+    <li class="empty">No dealers match those filters.</li>
+    {% endfor %}
+  </ol>
+  <div class="pagination">
+    {% if pagination.has_prev %}
+    <a class="btn btn-outline" href="{{ url_for('dealers_index', **dict(request.args, page=pagination.prev_num)) }}">&lsaquo; Prev</a>
+    {% endif %}
+    <span class="muted">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+    {% if pagination.has_next %}
+    <a class="btn btn-outline" href="{{ url_for('dealers_index', **dict(request.args, page=pagination.next_num)) }}">Next &rsaquo;</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -453,8 +453,11 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/carvana && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/coinmarketcap && \
     (cd /opt/WebSyn/coinmarketcap && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/coinmarketcap.db instance_seed/coinmarketcap.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/cars_com && \
+    (cd /opt/WebSyn/cars_com && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/cars_com.db instance_seed/cars_com.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40135
+EXPOSE 8101 40000-40136
 
 CMD ["/opt/websyn_start.sh"]

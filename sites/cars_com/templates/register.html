@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up | Cars.com{% endblock %}
+{% block content %}
+<div class="auth-page">
+  <h1>Create your Cars.com account</h1>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="auth-form" method="post" action="{{ url_for('authn_register') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="offer-field">
+      <label for="su-name">Your name *</label>
+      <input id="su-name" type="text" name="name" required>
+    </div>
+    <div class="offer-field">
+      <label for="su-email">Email *</label>
+      <input id="su-email" type="email" name="email" required value="{{ email or '' }}">
+    </div>
+    <div class="offer-field">
+      <label for="su-pass">Password * (at least 8 characters)</label>
+      <input id="su-pass" type="password" name="password" minlength="8" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('authn_login') }}">Log in</a>.</p>
+</div>
+{% endblock %}
