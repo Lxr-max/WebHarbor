@@ -125,8 +125,8 @@ def test_job_detail_page(client):
     assert 'Forward Deployed Software Engineer' in body
     assert 'Veritus' in body
     assert 'About Veritus' in body
-    assert 'Offices of Mental Health Practitioners' in body
-    assert '11 - 50 employees' in body
+    assert 'Offices of Mental Health Practitioners' not in body
+    assert '11 - 50 employees' not in body
 
 
 def test_job_detail_404_on_wrong_slug(client):

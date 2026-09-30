@@ -22,7 +22,7 @@
         {% if current_user.is_authenticated %}
           {% if applied %}
             <a class="btn-ghost" href="/jobseeker/applications">Applied ✓ — view my applications</a>
-          {% else %}
+          {% elif job.quick_apply %}
           <form method="post" action="/apply/{{ job.jid }}" class="inline-form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="next" value="{{ job.url() }}">
@@ -34,10 +34,11 @@
             <input type="hidden" name="next" value="{{ job.url() }}">
             <button type="submit" class="btn-ghost">{{ 'Saved ✓ — unsave' if saved else 'Save job for later' }}</button>
           </form>
-        {% else %}
+        {% elif job.quick_apply %}
           <a class="btn-green big" href="/authn/login?realm=candidates&next_url={{ job.url()|urlencode }}">1-Click Apply</a>
           <span class="login-hint">Log in or create a free account to apply.</span>
         {% endif %}
+        {% if not job.quick_apply and not applied %}<p>This employer uses an external application process. You can save this listing for later.</p>{% endif %}
       </div>
     </header>
 
@@ -89,7 +90,7 @@
       {% if job.company.findings_list() %}
       <div class="perks">
         <h3>What {{ job.company.name }} employees say</h3>
-        <ul>{% for f in job.company.findings_list()[:5] %}<li><strong>{{ f.short }}</strong> — {{ f.detail }}</li>{% endfor %}</ul>
+        <ul>{% for f in job.company.findings_list()[:5] %}<li><strong>{{ f.short }}</strong> — {{ f.detail|rich_text }}</li>{% endfor %}</ul>
       </div>
       {% endif %}
       <a class="btn-outline" href="{{ url_for('company_profile', company=job.company.slug) }}">View All {{ job.company.name }} Jobs</a>

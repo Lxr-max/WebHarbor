@@ -14,7 +14,7 @@
 {% if res %}
 <section class="resume-preview">
   <h2>{{ res.title or 'My Resume' }} <span class="muted">· updated {{ res.updated_at[:10] }} ·
-    {{ ['started','partial','nearly complete','complete'][res.completeness()-1] }}</span></h2>
+    {{ ['empty','started','partial','nearly complete','complete'][res.completeness()] }}</span></h2>
   {% if res.summary %}<h3>Summary</h3><p>{{ res.summary }}</p>{% endif %}
   {% if res.exp_rows() %}
   <h3>Experience</h3>

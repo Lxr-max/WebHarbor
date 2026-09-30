@@ -23,6 +23,7 @@ import json
 import os
 import re
 from datetime import date
+from urllib.parse import urlsplit
 
 from flask import (Flask, abort, jsonify, redirect, render_template, request,
                    session, url_for)
@@ -174,6 +175,15 @@ class Company(db.Model):
         return json.loads(self.findings or '[]')
 
 
+class MetroCity(db.Model):
+    __tablename__ = 'metro_cities'
+    id = db.Column(db.Integer, primary_key=True)
+    location = db.Column(db.String(120), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(8), nullable=False)
+    __table_args__ = (db.UniqueConstraint('location', 'city', 'state'),)
+
+
 class JobCategory(db.Model):
     __tablename__ = 'job_categories'
     id = db.Column(db.Integer, primary_key=True)
@@ -230,8 +240,6 @@ class Job(db.Model):
         return badges
 
     def remote_display(self):
-        if self.remote == 'remote':
-            return None
         return REMOTE_LABELS.get(self.remote)
 
     def posted_display(self):
@@ -544,27 +552,11 @@ def _job_count_for(cat_id):
 
 # ------------------------------------------------------------------- search --
 
-def _load_metros():
-    """Metro city sets derived from the captured upstream SERPs: for every
-    captured search location, the (city, state) pairs the upstream page-1
-    results actually covered (e.g. "New York, NY" spans Manhattan,
-    Brooklyn and the NJ suburbs exactly as the capture shows)."""
-    path = os.path.join(SOURCE, 'metros.json')
-    if not os.path.exists(path):
-        return {}
-    with open(path, encoding='utf-8') as f:
-        raw = json.load(f)
-    return {loc: {(c, s) for c, s in pairs} for loc, pairs in raw.items()}
-
-
-_METROS = None
-
-
 def metros():
-    global _METROS
-    if _METROS is None:
-        _METROS = _load_metros()
-    return _METROS
+    result = {}
+    for row in MetroCity.query.order_by(MetroCity.id):
+        result.setdefault(row.location, set()).add((row.city, row.state))
+    return result
 
 
 def _filtered_jobs(term, location, f):
@@ -641,6 +633,16 @@ def jobs_search():
          for k in ('apply', 'remote', 'distance', 'days', 'smin',
                    'smax', 'exp')}
     f['et'] = et_norm
+    if f['days'] and f['days'] not in {str(d) for d in DATE_FILTERS}:
+        abort(400, 'Choose a supported posting date filter.')
+    for key in ('smin', 'smax'):
+        if f[key] and (not f[key].isdigit() or len(f[key]) > 10):
+            abort(400, 'Salary bounds must be nonnegative whole dollars.')
+    if f['smin'] and f['smax'] and int(f['smin']) > int(f['smax']):
+        abort(400, 'Minimum salary cannot exceed maximum salary.')
+    for key, choices in [('remote', REMOTE_MODES), ('exp', EXPERIENCE_LEVELS), ('apply', ['quick'])]:
+        if f[key] and f[key] not in choices:
+            abort(400, 'Choose a supported filter.')
     if not term and not location and not any(f.values()):
         # An empty query degrades upstream to the near-me page; do the
         # same instead of rendering the whole corpus as "785 Job Jobs".
@@ -657,7 +659,7 @@ def jobs_search():
     snapshot = SearchSnapshot.query.filter_by(
         term=(term or '').lower(), location=location).first() if (term or location) else None
     ordered = list(q.order_by(Job.posted_days, Job.id).all())
-    if snapshot and page == 1 and not any(v for v in f.values()):
+    if snapshot and not any(v for v in f.values()):
         rank = {jid: i for i, jid in enumerate(snapshot.order_ids())}
         ordered.sort(key=lambda j: (rank.get(j.id, 10 ** 9),
                                     j.posted_days, j.id))
@@ -701,7 +703,7 @@ def search_near_me():
 def job_detail(company, title, location):
     jid = request.args.get('jid', '')
     job = Job.query.filter_by(jid=jid).first()
-    if not job or job.title_slug != title:
+    if not job or not job.active or job.title_slug != title or job.company.slug != company or _job_url_slug(job.city, job.state) != location:
         abort(404)
     related = (Job.query.filter_by(active=True, title_slug=job.title_slug)
                .filter(Job.id != job.id).limit(6).all())
@@ -734,7 +736,7 @@ def company_profile(company):
         loc_counts[(j.city, j.state)] = loc_counts.get((j.city, j.state), 0) + 1
     locations = sorted(loc_counts.items())
     return render_template('company.html', co=co, jobs=jobs,
-                           locations=locations)
+                           total=len(all_jobs), locations=locations)
 
 
 @app.route('/co/<company>/Jobs')
@@ -912,12 +914,19 @@ def blog_article(slug):
 
 # ---------------------------------------------------------------------- authn --
 
+def safe_next(value):
+    value = value or '/'
+    parsed = urlsplit(value)
+    if (not value.startswith('/') or value.startswith('//') or parsed.scheme
+            or parsed.netloc or '\\' in value or any(ord(c) < 32 for c in value)):
+        return '/'
+    return value
+
+
 @app.route('/authn/login', methods=['GET', 'POST'])
 def authn_login():
     realm = request.args.get('realm', 'candidates')
-    next_url = request.args.get('next_url', '/')
-    if not next_url.startswith('/'):
-        next_url = '/'
+    next_url = safe_next(request.args.get('next_url') or request.args.get('next'))
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password', '')
@@ -943,7 +952,7 @@ def authn_register():
         errors = []
         if len(name) < 2:
             errors.append('Please enter your full name.')
-        if not re.match(r'[^@\s]+@[^@\s]+\.[^@\s]+', email):
+        if not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', email):
             errors.append('Please enter a valid email address.')
         if len(password) < 8:
             errors.append('Password must be at least 8 characters.')
@@ -1074,6 +1083,8 @@ def jobseeker_alerts():
         term = request.form.get('term', '').strip()
         location = request.form.get('location', '').strip() or 'Anywhere'
         freq = request.form.get('frequency', 'daily')
+        if freq not in ('daily', 'weekly'):
+            abort(400, 'Choose daily or weekly alerts.')
         if term:
             db.session.add(JobAlert(user_id=current_user.id, term=term,
                                     location=location, frequency=freq,
@@ -1099,7 +1110,7 @@ def save_job(jid):
         db.session.add(SavedJob(user_id=current_user.id, job_id=job.id,
                                 saved_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('next') or
+    return redirect(safe_next(request.form.get('next')) if request.form.get('next') else
                     url_for('job_detail', company=job.company.slug,
                             title=job.title_slug,
                             location=_job_url_slug(job.city, job.state),
@@ -1109,7 +1120,9 @@ def save_job(jid):
 @app.route('/apply/<jid>', methods=['POST'])
 @login_required
 def apply_job(jid):
-    job = Job.query.filter_by(jid=jid).first_or_404()
+    job = Job.query.filter_by(jid=jid, active=True).first_or_404()
+    if not job.quick_apply:
+        abort(400, 'This listing does not support 1-Click Apply.')
     existing = Application.query.filter_by(user_id=current_user.id,
                                            job_id=job.id).first()
     if existing:
@@ -1133,6 +1146,8 @@ def apply_done(jid):
     job = Job.query.filter_by(jid=jid).first_or_404()
     application = Application.query.filter_by(user_id=current_user.id,
                                               job_id=job.id).first()
+    if not application:
+        abort(404)
     return render_template('apply_done.html', job=job,
                            application=application)
 
@@ -1146,6 +1161,31 @@ def seed_database():
     seed_all(db, bcrypt, app)
 
 
+def correct_company_collision():
+    company = Company.query.filter_by(slug='Veritus').first()
+    if company is None or company.website != 'veritussolutions.com':
+        return
+    # The captured profile describes a mental-health practice, whereas the
+    # job describes Veritus Agent's lending/collections Voice AI business.
+    # Do not attribute the unrelated company's metadata to this employer.
+    company.industry = None
+    company.size = None
+    company.hq_city = None
+    company.hq_state = None
+    company.website = None
+    company.about = 'Company profile details are unavailable: the captured profile could not be reliably matched to this job poster.'
+    db.session.commit()
+
+
+def seed_metros():
+    if MetroCity.query.first() is not None:
+        return
+    for location, pairs in sorted(_load('metros.json').items()):
+        for city, state in sorted({tuple(p) for p in pairs}):
+            db.session.add(MetroCity(location=location, city=city, state=state))
+    db.session.commit()
+
+
 def seed_benchmark_users():
     if User.query.filter_by(is_benchmark=True).count() >= 4:
         return
@@ -1157,6 +1197,8 @@ def main():
     with app.app_context():
         db.create_all()
         seed_database()
+        seed_metros()
+        correct_company_collision()
         seed_benchmark_users()
 
 
@@ -1164,6 +1206,8 @@ with app.app_context():
     db.create_all()
     if os.environ.get('ZIPRECRUITER_AUTO_SEED', '1') == '1':
         seed_database()
+        seed_metros()
+        correct_company_collision()
         seed_benchmark_users()
 
 
