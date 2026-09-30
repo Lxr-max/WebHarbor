@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Search — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <h1>Search Wanderlog</h1>
+  <form method="get" action="{{ url_for('search') }}" class="card" style="margin-bottom:18px">
+    <label for="q">Find destinations, places, guides and travelers</label>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <input type="text" id="q" name="q" value="{{ q }}" style="flex:1;min-width:220px" placeholder="e.g. Tokyo, ramen, Paris…">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </form>
+
+  {% if q %}
+    {% if geos %}
+      <h2>Destinations</h2>
+      <div class="grid cols-4" style="margin-bottom:20px">
+        {% for g in geos %}
+          <a class="tile" href="{{ url_for('explore', gid=g.id) }}">
+            {% if g.image %}<img class="cover" src="{{ g.image }}" alt="{{ g.name }}">{% endif %}
+            <div class="pad"><h3>{{ g.name }}</h3><span class="small muted">{{ g.country_name }}</span></div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if places %}
+      <h2>Places</h2>
+      <div class="card" style="padding:0">
+        {% for p in places %}
+          <div class="rank-row">
+            <div class="num">·</div>
+            {% if p.image %}<img class="cover" src="{{ p.image }}" alt="{{ p.name }}">{% else %}<div></div>{% endif %}
+            <div>
+              <h3>{% if p.wl_id %}<a href="{{ url_for('place_details', pid=p.wl_id) }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+              <p class="small muted" style="margin:0">{{ p.categories | from_json | join(', ') }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div style="height:18px"></div>
+    {% endif %}
+    {% if guides %}
+      <h2>Guides</h2>
+      <div class="grid cols-3" style="margin-bottom:20px">
+        {% for g in guides %}
+          <a class="tile" href="{{ url_for('guide_view', key=g.key) }}">
+            {% if g.header_image %}<img class="cover" src="{{ g.header_image }}" alt="{{ g.title }}">{% endif %}
+            <div class="pad"><h3>{{ g.title }}</h3>
+              <span class="small muted">{{ g.place_count }} places · {{ '{:,}'.format(g.view_count) }} views</span></div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if users %}
+      <h2>Travelers</h2>
+      <div class="card">
+        {% for u in users %}
+          <p style="margin:6px 0"><a href="{{ url_for('user_profile', username=u.username) }}">{{ u.display_name }}</a>
+            <span class="small muted">@{{ u.username }}</span></p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if not (geos or places or guides or users) %}
+      <p class="muted">Nothing on the mirror matches “{{ q }}”.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

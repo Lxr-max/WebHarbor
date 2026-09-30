@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Border Wait Times</h1>
+<p>Current estimated wait times for crossing the U.S.-Canada and U.S.-Mexico borders, by port and lane type. Snapshot captured {{ mirror_today.isoformat() }} — {{ total }} crossings.</p>
+
+<form class="filters" method="get" action="{{ url_for('bwt') }}">
+  <div class="field"><label for="border">Border</label>
+    <select id="border" name="border">
+      <option value="all" {% if border == 'all' %}selected{% endif %}>All borders</option>
+      <option value="canada" {% if border == 'canada' %}selected{% endif %}>Canadian Border</option>
+      <option value="mexico" {% if border == 'mexico' %}selected{% endif %}>Mexican Border</option>
+    </select></div>
+  <div class="field"><label for="q">Port or crossing name</label>
+    <input id="q" type="search" name="q" value="{{ q }}" placeholder="e.g. San Ysidro, Blaine"></div>
+  <div class="field"><label for="sort">Sort by</label>
+    <select id="sort" name="sort">
+      <option value="name" {% if sort == 'name' %}selected{% endif %}>Port name</option>
+      <option value="delay" {% if sort == 'delay' %}selected{% endif %}>Longest current delay</option>
+    </select></div>
+  <button class="btn" type="submit">Apply</button>
+  <a class="btn btn-ghost" href="{{ url_for('bwt') }}">Reset</a>
+</form>
+
+<table class="data">
+  <tr>
+    <th>Port / Crossing</th><th>Border</th><th>Hours</th><th>Status</th>
+    <th>Passenger Standard</th><th>Commercial Standard</th><th>Pedestrian Standard</th><th>Updated</th>
+  </tr>
+  {% for c in rows %}
+  <tr>
+    <td><a href="{{ url_for('bwt_crossing', port_number=c.port_number) }}">{{ c.full_name }}</a></td>
+    <td>{{ c.border|title }}</td>
+    <td>{{ c.hours }}</td>
+    <td><span class="chip {{ ('ok' if c.port_status == 'Open' else 'closed') }}">{{ c.port_status }}</span></td>
+    {% set pov = c.lanes.passenger.Standard %}
+    {% set cov = c.lanes.commercial.Standard %}
+    {% set ped = c.lanes.pedestrian.Standard %}
+    <td>{% if pov %}{{ pov.delay }} min · {{ pov.open if pov.open is not none else '—' }} open{% else %}N/A{% endif %}</td>
+    <td>{% if cov %}{{ cov.delay }} min · {{ cov.open if cov.open is not none else '—' }} open{% else %}N/A{% endif %}</td>
+    <td>{% if ped %}{{ ped.delay }} min · {{ ped.open if ped.open is not none else '—' }} open{% else %}N/A{% endif %}</td>
+    <td>{{ c.snapshot_time }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<ul class="pagination">
+  {% if page > 1 %}<li><a href="{{ url_for('bwt', border=border, q=q, sort=sort, page=page-1) }}">Previous</a></li>{% endif %}
+  {% for p in range(1, pages + 1) %}
+  <li class="{{ 'current' if p == page }}"><a href="{{ url_for('bwt', border=border, q=q, sort=sort, page=p) }}">{{ p }}</a></li>
+  {% endfor %}
+  {% if page < pages %}<li><a href="{{ url_for('bwt', border=border, q=q, sort=sort, page=page+1) }}">Next</a></li>{% endif %}
+</ul>
+{% endblock %}

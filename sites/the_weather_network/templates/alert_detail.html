@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}{{ alert.location_name }} - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / <a href="/en/alerts/ca">Canada Alerts</a> / {{ alert.location_name }}</div>
+<div class="alert-detail">
+  <h1>{{ alert.location_name }}</h1>
+  <div class="ad-meta">
+    <span class="sev-dot sev-{{ alert.treatment }}"></span><b style="color:#121212">{{ alert.name }}</b><br>
+    Issued at {{ alert.issued_label }}<br>
+    {% if alert.source_text %}Issued by: {{ alert.source_text }}<br>{% endif %}
+    Expires: {{ alert.expires_label }}
+  </div>
+
+  <div class="ad-section">
+    <h2>Description</h2>
+    <p>{{ alert.message }}</p>
+  </div>
+
+  {% if alert.recommended %}
+  <div class="ad-section">
+    <h2>Recommended Action</h2>
+    <p>{{ alert.recommended }}</p>
+  </div>
+  {% endif %}
+</div>
+
+{% if related %}
+<section class="section" style="max-width:960px">
+  <div class="section-head"><h2>Related</h2></div>
+  <div class="news-list">
+    {% for art in related %}
+    <a class="news-card" href="{{ art.path }}">
+      <div class="nc-thumb">{% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}</div>
+      <div class="nc-title">{{ art.headline }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if more %}
+<section class="section" style="max-width:960px">
+  <div class="section-head"><h2>More alerts in {{ alert.region }}</h2></div>
+  {% for a in more %}
+  <a class="alert-card" href="/en/alerts/ca/{{ a.placecode }}">
+    <div>
+      <div class="ac-loc">{{ a.location_name }}</div>
+      <div class="ac-type"><span class="sev-dot sev-{{ a.treatment }}"></span>{{ a.name }}</div>
+      <div class="ac-issued">Issued at {{ a.issued_label }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,1124 @@
+{
+  "Mayo Clinic--0": {
+    "task": "Sign in to the patient portal as alice.j@test.com with password TestPass123!. Use the saved Type 2 Diabetes page to prepare a prevention discussion with Allison Kennedy: send her a portal message titled Diabetes prevention plan mentioning four lifestyle changes from the Prevention section and asking which to prioritize. Confirm the message appears in Sent messages.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {
+      "portal_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "direction": "to_provider",
+            "provider_name": "Allison Kennedy, M.D.",
+            "subject": "Diabetes prevention plan",
+            "body": {
+              "contains": [
+                "healthy weight",
+                "balanced diet",
+                "active|activity",
+                "tobacco",
+                "prioriti"
+              ]
+            },
+            "is_read": 1,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "provider_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "doctor_slug": "allison-kennedy-endocrinology-6",
+            "subject": "Diabetes prevention plan",
+            "body": {
+              "contains": [
+                "healthy weight",
+                "balanced diet",
+                "active|activity",
+                "tobacco",
+                "prioriti"
+              ]
+            },
+            "confirmation_code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/diseases\\-conditions/diabetes\\-type\\-2(?:/|\\?|$)",
+      "^/patient\\-portal/messages(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "sent",
+          "diabetes prevention plan",
+          "allison kennedy",
+          "alice"
+        ],
+        "scope": "sent"
+      },
+      {
+        "label": "2",
+        "all": [
+          "healthy weight",
+          "balanced diet",
+          "physical activity",
+          "avoiding tobacco",
+          "prioritize"
+        ],
+        "scope": "healthy weight"
+      }
+    ],
+    "view_tables": [],
+    "portal_message": true
+  },
+  "Mayo Clinic--1": {
+    "task": "Prepare a medication discussion note using the Atrial Fibrillation page. Identify its four related drugs, then compare the listed side effects and warnings for apixaban and warfarin, including the monitoring advice. Report what the mirror says without recommending a medication change.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/atrial\\-fibrillation(?:/|\\?|$)",
+      "^/drugs\\-supplements/apixaban(?:/|\\?|$)",
+      "^/drugs\\-supplements/warfarin(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "atrial fibrillation",
+          "amiodarone",
+          "apixaban",
+          "metoprolol",
+          "warfarin"
+        ],
+        "scope": "atrial fibrillation"
+      },
+      {
+        "label": "2",
+        "all": [
+          "apixaban",
+          "bleeding",
+          "bruising",
+          "surgery",
+          "reversal"
+        ],
+        "scope": "apixaban"
+      },
+      {
+        "label": "3",
+        "all": [
+          "warfarin",
+          "bleeding",
+          "interactions",
+          "teratogenic",
+          "inr",
+          "vitamin k"
+        ],
+        "scope": "warfarin"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--2": {
+    "task": "Explore the symptom checker for an adult with acute chest pain. Report the urgency shown for Pulmonary Embolism, then follow its condition page and summarize the preparation advice for discussing symptoms with a clinician. Treat this as a review of the offline information, not a diagnosis.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/pulmonary\\-embolism(?:/|\\?|$)",
+      "^/symptom\\-checker(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "pulmonary embolism",
+          "urgent",
+          "emergency care"
+        ],
+        "scope": "pulmonary embolism"
+      },
+      {
+        "label": "2",
+        "all": [
+          "preparation",
+          "symptoms",
+          "medications",
+          "supplements",
+          "history",
+          "questions"
+        ],
+        "scope": "preparation"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--3": {
+    "task": "Use the symptom checker for an adult with chronic fatigue to prepare a question list for a clinician. Report three listed possible causes, then read the linked Anemia and Hypothyroidism pages and summarize the diagnostic approach described for each.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/anemia(?:/|\\?|$)",
+      "^/diseases\\-conditions/hypothyroidism(?:/|\\?|$)",
+      "^/symptom\\-checker(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "hypothyroidism",
+          "anemia",
+          "depression"
+        ],
+        "scope": "hypothyroidism"
+      },
+      {
+        "label": "2",
+        "all": [
+          "anemia",
+          "history",
+          "physical examination",
+          "blood work"
+        ],
+        "scope": "anemia"
+      },
+      {
+        "label": "3",
+        "all": [
+          "hypothyroidism",
+          "history.and.examination",
+          "tests"
+        ],
+        "scope": "hypothyroidism"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--4": {
+    "task": "I want to understand the joint-replacement information before discussing it with a specialist. Compare Knee Replacement and Hip Replacement: report the department responsible, how each page says to prepare, and the risks listed for each.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/tests\\-procedures/knee\\-replacement(?:/|\\?|$)",
+      "^/tests\\-procedures/hip\\-replacement(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "knee replacement",
+          "orthopedics"
+        ],
+        "scope": "knee replacement"
+      },
+      {
+        "label": "2",
+        "all": [
+          "hip replacement",
+          "orthopedics"
+        ],
+        "scope": "hip replacement"
+      },
+      {
+        "label": "3",
+        "all": [
+          "preparation",
+          "medications",
+          "fasting",
+          "driver"
+        ],
+        "scope": "preparation"
+      },
+      {
+        "label": "4",
+        "all": [
+          "risks",
+          "bleeding",
+          "infection",
+          "medication reactions",
+          "additional procedures"
+        ],
+        "scope": "risks"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--5": {
+    "task": "Find a doctor in Cardiovascular Medicine who is located in Jacksonville and speaks Spanish. Check the matching profile and report the doctor's full name, specialty, medical school, and fellowship institution so I can understand their background.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/biographies/aaron\\-bell\\-cardiology\\-0(?:/|\\?|$)",
+      "^/find\\-a\\-doctor(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "aaron bell",
+          "cardiologist",
+          "jacksonville",
+          "spanish"
+        ],
+        "scope": "aaron bell"
+      },
+      {
+        "label": "2",
+        "all": [
+          "medical school",
+          "johns hopkins"
+        ],
+        "scope": "medical school"
+      },
+      {
+        "label": "3",
+        "all": [
+          "fellowship",
+          "mayo clinic",
+          "rochester"
+        ],
+        "scope": "fellowship"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--6": {
+    "task": "In the offline simulated trial catalog, find the recruiting Phase 3 lung cancer study. Review its intervention and eligibility, then submit a pre-screen for Jordan Lee, jordan.lee@test.com, age 55, diagnosed in 2024, with no prior treatments. Report the local SIM-MAYO identifier and the logged pre-screening result and confirmation.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {
+      "trial_inquiry": {
+        "added": [
+          {
+            "id": 1,
+            "trial_nct_id": "SIM-MAYO-001",
+            "patient_name": "Jordan Lee",
+            "patient_email": "jordan.lee@test.com",
+            "patient_age": 55,
+            "diagnosis_year": 2024,
+            "prior_treatments": "None",
+            "eligible_screen": "needs-review",
+            "status": "received",
+            "confirmation_code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/clinical\\-trials/SIM\\-MAYO\\-001(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "sim-mayo-001",
+          "phase 3",
+          "lung.cancer"
+        ],
+        "scope": "sim-mayo-001"
+      },
+      {
+        "label": "2",
+        "all": [
+          "needs-review",
+          "eligibility",
+          "review"
+        ],
+        "scope": "needs-review"
+      },
+      {
+        "label": "3",
+        "all": [
+          "confirmation",
+          "trial-30ac3831"
+        ],
+        "scope": "confirmation"
+      }
+    ],
+    "view_tables": [],
+    "answer_state": [
+      [
+        "trial_inquiry",
+        "confirmation_code"
+      ]
+    ]
+  },
+  "Mayo Clinic--7": {
+    "task": "Help me prepare questions about the diabetes medicines Metformin and Empagliflozin. Compare the conditions each is listed as treating, its main side effects, and its warnings in this mirror. Keep the findings tied to each medicine.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/drugs\\-supplements/metformin(?:/|\\?|$)",
+      "^/drugs\\-supplements/empagliflozin(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "metformin",
+          "type 2 diabetes",
+          "polycystic ovary"
+        ],
+        "scope": "metformin",
+        "entity": "metformin"
+      },
+      {
+        "label": "2",
+        "all": [
+          "side effects",
+          "gi upset",
+          "b12",
+          "lactic acidosis"
+        ],
+        "scope": "side effects",
+        "entity": "metformin"
+      },
+      {
+        "label": "3",
+        "all": [
+          "warnings",
+          "contrast",
+          "renal"
+        ],
+        "scope": "warnings",
+        "entity": "metformin"
+      },
+      {
+        "label": "4",
+        "all": [
+          "empagliflozin",
+          "type 2 diabetes",
+          "heart failure",
+          "chronic kidney"
+        ],
+        "scope": "empagliflozin",
+        "entity": "empagliflozin"
+      },
+      {
+        "label": "5",
+        "all": [
+          "side effects",
+          "genital infections",
+          "hypovolemia",
+          "ketoacidosis"
+        ],
+        "scope": "side effects",
+        "entity": "empagliflozin"
+      },
+      {
+        "label": "6",
+        "all": [
+          "warnings",
+          "sglt2 inhibitor"
+        ],
+        "scope": "warnings",
+        "entity": "empagliflozin"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--8": {
+    "task": "From Coronary Artery Disease, compare the associated CABG and Cardiac Catheterization procedure pages. Explain what each is used for, which department is responsible, and the risks each page lists so I can discuss the options with my care team.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/coronary\\-artery\\-disease(?:/|\\?|$)",
+      "^/tests\\-procedures/cabg(?:/|\\?|$)",
+      "^/tests\\-procedures/cardiac\\-catheterization(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "cabg",
+          "route around",
+          "blocked",
+          "coronary artery",
+          "cardiovascular medicine"
+        ],
+        "scope": "cabg"
+      },
+      {
+        "label": "2",
+        "all": [
+          "cardiac catheterization",
+          "tube",
+          "blood vessels",
+          "heart",
+          "cardiovascular medicine"
+        ],
+        "scope": "cardiac catheterization"
+      },
+      {
+        "label": "3",
+        "all": [
+          "risks",
+          "bleeding",
+          "infection",
+          "medication reactions",
+          "additional procedures"
+        ],
+        "scope": "risks"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--9": {
+    "task": "Submit an appointment request for Endocrinology in Rochester with preferred date 2026-10-15, patient name Test Patient, email test@example.com, phone 555-1234, insurance Aetna, and reason Annual diabetes follow-up. Report the confirmation code.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {
+      "appointment_request": {
+        "added": [
+          {
+            "id": 4,
+            "user_id": null,
+            "dept_slug": "endocrinology",
+            "location": "Rochester",
+            "preferred_date": "2026-10-15",
+            "patient_name": "Test Patient",
+            "patient_email": "test@example.com",
+            "patient_phone": "555-1234",
+            "reason": "Annual diabetes follow-up",
+            "insurance": "Aetna",
+            "new_or_returning": "new",
+            "status": "submitted",
+            "confirmation_code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/appointments/request(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "confirmation",
+          "mayo-277547af"
+        ],
+        "scope": "confirmation"
+      }
+    ],
+    "view_tables": [],
+    "answer_state": [
+      [
+        "appointment_request",
+        "confirmation_code"
+      ]
+    ]
+  },
+  "Mayo Clinic--10": {
+    "task": "I am looking for a sustainable heart-health eating plan. Compare the Mediterranean Diet and DASH Diet articles, explaining the dietary emphasis of each and the advice both give for adapting changes to a health condition. Include the article titles and bylines.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/healthy\\-lifestyle/mediterranean\\-diet\\-overview(?:/|\\?|$)",
+      "^/healthy\\-lifestyle/dash\\-diet(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mediterranean diet",
+          "heart.healthy eating plan",
+          "mayo clinic staff",
+          "olive oil"
+        ],
+        "scope": "mediterranean diet"
+      },
+      {
+        "label": "2",
+        "all": [
+          "dash diet",
+          "healthy eating to lower blood pressure",
+          "mayo clinic staff",
+          "balanced eating"
+        ],
+        "scope": "dash diet"
+      },
+      {
+        "label": "3",
+        "all": [
+          "both",
+          "tailoring",
+          "care team",
+          "chronic conditions"
+        ],
+        "scope": "both"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--11": {
+    "task": "Find a Neurology doctor in Jacksonville who speaks English and accepts new appointments. Report the number of matches, then check each matching profile for the full name, specialty, and focus areas to help me choose whom to contact.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/biographies/adam\\-clark\\-neurology\\-1(?:/|\\?|$)",
+      "^/biographies/chelsea\\-turner\\-neurology\\-31(?:/|\\?|$)",
+      "^/biographies/hadley\\-ramirez\\-neurology\\-61(?:/|\\?|$)",
+      "^/biographies/laila\\-kennedy\\-neurology\\-91(?:/|\\?|$)",
+      "^/find\\-a\\-doctor(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "4 matching",
+          "neurology",
+          "jacksonville"
+        ],
+        "scope": "4 matching"
+      },
+      {
+        "label": "2",
+        "all": [
+          "adam clark",
+          "epileptologist",
+          "parkinson",
+          "epilepsy",
+          "stroke"
+        ],
+        "scope": "adam clark"
+      },
+      {
+        "label": "3",
+        "all": [
+          "chelsea turner",
+          "epileptologist",
+          "headache",
+          "alzheimer",
+          "sleep"
+        ],
+        "scope": "chelsea turner"
+      },
+      {
+        "label": "4",
+        "all": [
+          "hadley ramirez",
+          "epileptologist",
+          "neuromuscular",
+          "movement",
+          "multiple sclerosis"
+        ],
+        "scope": "hadley ramirez"
+      },
+      {
+        "label": "5",
+        "all": [
+          "laila kennedy",
+          "epileptologist",
+          "parkinson",
+          "epilepsy",
+          "stroke"
+        ],
+        "scope": "laila kennedy"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--12": {
+    "task": "Help me find a care team for Multiple Sclerosis. Starting from that condition, inspect the first three linked doctor profiles and compare their locations, languages, and specialties. Report their names and the department linked from the condition page.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/multiple\\-sclerosis(?:/|\\?|$)",
+      "^/biographies/adam\\-clark\\-neurology\\-1(?:/|\\?|$)",
+      "^/biographies/chelsea\\-turner\\-neurology\\-31(?:/|\\?|$)",
+      "^/biographies/hadley\\-ramirez\\-neurology\\-61(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "multiple sclerosis",
+          "neurology"
+        ],
+        "scope": "multiple sclerosis"
+      },
+      {
+        "label": "2",
+        "all": [
+          "adam clark",
+          "chelsea turner",
+          "hadley ramirez"
+        ],
+        "scope": "adam clark"
+      },
+      {
+        "label": "3",
+        "all": [
+          "each",
+          "epileptologist",
+          "jacksonville",
+          "english"
+        ],
+        "scope": "each"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--13": {
+    "task": "In the simulated clinical-trial catalog, filter to Phase 2, Recruiting, and Rochester. Report the number of matches and compare the first two studies in displayed order: include each local identifier, intervention, and eligibility criteria so I can see which research populations they address.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/clinical\\-trials/SIM\\-MAYO\\-002(?:/|\\?|$)",
+      "^/clinical\\-trials/SIM\\-MAYO\\-007(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "14 phase 2",
+          "recruiting",
+          "rochester"
+        ],
+        "scope": "14 phase 2"
+      },
+      {
+        "label": "2",
+        "all": [
+          "sim-mayo-002",
+          "axicabtagene ciloleucel"
+        ],
+        "scope": "sim-mayo-002"
+      },
+      {
+        "label": "3",
+        "all": [
+          "65\\+",
+          "b.cell lymphoma",
+          "two therapy lines",
+          "ecog 0-2",
+          "cardiopulmonary"
+        ],
+        "scope": "65\\+"
+      },
+      {
+        "label": "4",
+        "all": [
+          "sim-mayo-007",
+          "empagliflozin"
+        ],
+        "scope": "sim-mayo-007"
+      },
+      {
+        "label": "5",
+        "all": [
+          "18-65",
+          "type 1 diabetes",
+          "5 years",
+          "30-3000 mg/g",
+          "egfr 45",
+          "hba1c under 11"
+        ],
+        "scope": "18-65"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--14": {
+    "task": "Starting from the Breast Cancer condition page, compare the linked Tamoxifen and Anastrozole information. Report what each treats and its listed side effects and warnings, keeping each medicine distinct so I can prepare questions for my clinician.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/diseases\\-conditions/breast\\-cancer(?:/|\\?|$)",
+      "^/drugs\\-supplements/tamoxifen(?:/|\\?|$)",
+      "^/drugs\\-supplements/anastrozole(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "tamoxifen",
+          "breast cancer",
+          "risk reduction"
+        ],
+        "scope": "tamoxifen",
+        "entity": "tamoxifen"
+      },
+      {
+        "label": "2",
+        "all": [
+          "side effects",
+          "hot flashes",
+          "thromboembolism",
+          "endometrial cancer"
+        ],
+        "scope": "side effects",
+        "entity": "tamoxifen"
+      },
+      {
+        "label": "3",
+        "all": [
+          "warning",
+          "endometrial surveillance"
+        ],
+        "scope": "warning",
+        "entity": "tamoxifen"
+      },
+      {
+        "label": "4",
+        "all": [
+          "anastrozole",
+          "breast cancer"
+        ],
+        "scope": "anastrozole",
+        "entity": "anastrozole"
+      },
+      {
+        "label": "5",
+        "all": [
+          "side effects",
+          "hot flashes",
+          "joint pain",
+          "osteoporosis"
+        ],
+        "scope": "side effects",
+        "entity": "anastrozole"
+      },
+      {
+        "label": "6",
+        "all": [
+          "warnings",
+          "postmenopausal",
+          "bone density"
+        ],
+        "scope": "warnings",
+        "entity": "anastrozole"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--15": {
+    "task": "I want to understand the MRI options in this mirror. Browse Tests & Procedures with category Imaging and letter M, then compare MRI Brain, MRI Spine, and MRI Joint. Report what each is used for and its preparation instructions.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/tests\\-procedures/mri\\-brain(?:/|\\?|$)",
+      "^/tests\\-procedures/mri\\-spine(?:/|\\?|$)",
+      "^/tests\\-procedures/mri\\-joint(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mri brain",
+          "strokes",
+          "tumors",
+          "multiple sclerosis"
+        ],
+        "scope": "mri brain"
+      },
+      {
+        "label": "2",
+        "all": [
+          "mri spine",
+          "spinal cord"
+        ],
+        "scope": "mri spine"
+      },
+      {
+        "label": "3",
+        "all": [
+          "mri joint",
+          "ligaments",
+          "tendons",
+          "cartilage"
+        ],
+        "scope": "mri joint"
+      },
+      {
+        "label": "4",
+        "all": [
+          "all three",
+          "preparation",
+          "medication review",
+          "fasting",
+          "transport",
+          "sedation"
+        ],
+        "scope": "all three"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--16": {
+    "task": "Explore the Transplant Center research listing. Review its listed study and investigator profile, then report the study identifier, recruitment status, intervention, and eligibility, along with the investigator name and locations. Keep the simulated study distinct from a real recruitment opportunity.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/clinical\\-trials/SIM\\-MAYO\\-036(?:/|\\?|$)",
+      "^/biographies/brian\\-kennedy\\-transplant\\-23(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "sim-mayo-036",
+          "recruiting",
+          "intervention voxelotor"
+        ],
+        "scope": "sim-mayo-036"
+      },
+      {
+        "label": "2",
+        "all": [
+          "eligibility",
+          "4-11",
+          "hbss",
+          "hbs-beta0",
+          "5\\.5-10\\.5 g/dl"
+        ],
+        "scope": "eligibility"
+      },
+      {
+        "label": "3",
+        "all": [
+          "brian kennedy",
+          "phoenix"
+        ],
+        "scope": "brian kennedy"
+      },
+      {
+        "label": "4",
+        "all": [
+          "simulated study",
+          "not a real"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--17": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I am preparing to discuss St. John's Wort with Allison Kennedy. Read its supplement page and send her a portal message titled Supplement interaction question asking about the listed warning and side effects. Confirm that the sent message contains those concerns.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {
+      "portal_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "direction": "to_provider",
+            "provider_name": "Allison Kennedy, M.D.",
+            "subject": "Supplement interaction question",
+            "body": {
+              "contains": [
+                "st. john.s wort",
+                "interactions",
+                "photosensitivity"
+              ]
+            },
+            "is_read": 1,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "provider_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "doctor_slug": "allison-kennedy-endocrinology-6",
+            "subject": "Supplement interaction question",
+            "body": {
+              "contains": [
+                "st. john.s wort",
+                "interactions",
+                "photosensitivity"
+              ]
+            },
+            "confirmation_code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/drugs\\-supplements/st\\-johns\\-wort(?:/|\\?|$)",
+      "^/patient\\-portal/messages(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "sent",
+          "supplement interaction question",
+          "allison kennedy",
+          "alice"
+        ],
+        "scope": "sent"
+      },
+      {
+        "label": "2",
+        "all": [
+          "st. john.s wort",
+          "drug interactions",
+          "photosensitivity",
+          "saved"
+        ],
+        "scope": "st. john.s wort"
+      }
+    ],
+    "view_tables": [],
+    "portal_message": true
+  },
+  "Mayo Clinic--18": {
+    "task": "Read David's story about Deep Brain Stimulation for Parkinson's, then explore the Deep Brain Stimulation procedure and Parkinson\u2019s Disease condition pages. Explain what improvement the story reports, the hobby David returned to, and the procedure's listed risks and preparation advice.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {},
+    "paths": [
+      "^/patient\\-stories/david\\-parkinsons(?:/|\\?|$)",
+      "^/tests\\-procedures/deep\\-brain\\-stimulation(?:/|\\?|$)",
+      "^/diseases\\-conditions/parkinson\\-s\\-disease(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "david",
+          "tremor",
+          "mobility",
+          "woodworking"
+        ],
+        "scope": "david"
+      },
+      {
+        "label": "2",
+        "all": [
+          "risks",
+          "bleeding",
+          "infection",
+          "medication reactions",
+          "further procedures"
+        ],
+        "scope": "risks"
+      },
+      {
+        "label": "3",
+        "all": [
+          "preparation",
+          "medication review",
+          "fasting",
+          "driver",
+          "sedation"
+        ],
+        "scope": "preparation"
+      }
+    ],
+    "view_tables": []
+  },
+  "Mayo Clinic--19": {
+    "task": "Sign in to the patient portal as alice.j@test.com with password TestPass123!. Review the existing appointment request and send Allison Kennedy a message titled Preparing for my visit, citing its confirmation code and preferred date and asking what to bring. Confirm the sent message is saved under Alice's account.",
+    "initial_digest": "22b6bb3e2d442c0784b3773fe11ad0936c9bacd24f60240710d11fa9fa527064",
+    "state": {
+      "portal_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "direction": "to_provider",
+            "provider_name": "Allison Kennedy, M.D.",
+            "subject": "Preparing for my visit",
+            "body": {
+              "contains": [
+                "mayo-a1b2c3d4",
+                "2026-06-18|june 18",
+                "bring"
+              ]
+            },
+            "is_read": 1,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "provider_message": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "doctor_slug": "allison-kennedy-endocrinology-6",
+            "subject": "Preparing for my visit",
+            "body": {
+              "contains": [
+                "mayo-a1b2c3d4",
+                "2026-06-18|june 18",
+                "bring"
+              ]
+            },
+            "confirmation_code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/patient\\-portal/messages(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "preparing for my visit",
+          "allison kennedy",
+          "alice",
+          "mayo-a1b2c3d4",
+          "june 18.*2026",
+          "bring"
+        ],
+        "scope": "preparing for my visit"
+      },
+      {
+        "label": "2",
+        "all": [
+          "sent messages"
+        ],
+        "scope": "sent messages"
+      }
+    ],
+    "view_tables": [],
+    "portal_message": true
+  }
+}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Page not found — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page ua-oops">
+  <h1>Oops</h1>
+  <p>With the most destinations of any airline, we can get you pretty much
+    anywhere. But we can't get you here.</p>
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('home') }}">Go to the homepage</a>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('help_center') }}">Visit the Help Center</a>
+  </div>
+</section>
+{% endblock %}

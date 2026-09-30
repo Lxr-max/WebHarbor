@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">ESTA Application Confirmation</h1>
+<div class="callout">
+  <p><strong>Application Number: {{ record.application_number }}</strong></p>
+  <p>Status: <span class="chip {{ ('approved' if record.status == 'Authorization Approved' else 'denied') }}">{{ record.status }}</span></p>
+</div>
+<table class="data">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Family Name</td><td>{{ record.family_name }}</td></tr>
+  <tr><td>First Name</td><td>{{ record.first_name }}</td></tr>
+  <tr><td>Country of Citizenship</td><td>{{ record.citizenship }}</td></tr>
+  <tr><td>Passport Number</td><td>{{ record.passport_number }}</td></tr>
+  <tr><td>Application Date</td><td>{{ record.created_at }}</td></tr>
+  {% if record.expires_on %}
+  <tr><td>Authorization Valid Until</td><td>{{ record.expires_on }}</td></tr>
+  {% endif %}
+  <tr><td>Fee Paid</td><td>${{ '%.2f'|format(record.fee_usd) }} USD</td></tr>
+</table>
+<p class="note">Authorization via ESTA does not determine whether a traveler is admissible to the United States. U.S. Customs and Border Protection officers determine admissibility upon travelers' arrival.</p>
+<p><a class="btn" href="{{ url_for('esta_check') }}">Check application status</a></p>
+{% endblock %}

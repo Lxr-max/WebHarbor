@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Sign in — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-auth-page">
+  <h1>Sign in</h1>
+  <p>Sign in to your MileagePlus account to book with miles, see your trips
+    and manage your Premier status.</p>
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="ua-field">Email <input type="email" name="email" required></label>
+    <label class="ua-field">Password <input type="password" name="password" required></label>
+    <button class="ua-btn ua-btn-primary" type="submit">Sign in</button>
+  </form>
+  <p class="ua-quiet">Not a member? <a href="{{ url_for('mp_join') }}">Join MileagePlus</a>.</p>
+</section>
+{% endblock %}

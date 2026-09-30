@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}The UPS Store | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; The UPS Store</div>
+  <h1>The UPS Store</h1>
+  <p class="ups-lede">More than 5,000 locally owned locations across the U.S. and Canada. We provide expert packing, shipping, printing and in-store services.</p>
+  <div class="ups-card ups-contentpage">
+    <div class="ups-contentbody">{{ page.body }}</div>
+    <ul class="ups-svc-list">
+      <li><a href="{{ url_for('store_page', page_key='pack-and-ship') }}">Pack and Ship</a></li>
+      <li><a href="{{ url_for('store_page', page_key='services') }}">In-Store Services: Notary, Passport and Supplies</a></li>
+      <li><a href="{{ url_for('store_page', page_key='print') }}">Printing Solutions</a></li>
+      <li><a href="{{ url_for('store_page', page_key='mailboxes') }}">Open a Mailbox</a></li>
+    </ul>
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('locations', type='The UPS Store', zip='10001') }}">Find The UPS Store Locations</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

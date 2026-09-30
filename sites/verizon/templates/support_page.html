@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ titles.get(page.slug, page.title) }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('support_home') }}">Support</a> / <span>{{ page.slug }}</span></nav>
+  <h1>{{ titles.get(page.slug, page.title) }}</h1>
+  <div class="content-body">{{ page.body_text() }}</div>
+</section>
+{% endblock %}

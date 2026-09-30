@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Choose your return flight — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-search-page">
+  <div class="ua-search-head">
+    <h1>Choose your return: {{ origin }} → {{ destination }}</h1>
+    <p class="ua-results-note">Outbound selected. Now pick the return flight{% if day %} on {{ day.strftime('%A, %B %-d, %Y') }}{% endif %}.</p>
+  </div>
+  {% if results %}
+  <div class="ua-fare-table">
+    <div class="ua-fare-row ua-fare-head">
+      <span class="ua-fare-col-flight">Flight</span>
+      {% for key, label in fare_cabins %}<span class="ua-fare-col">{{ label }}</span>{% endfor %}
+    </div>
+    {% for flight in results %}
+    <div class="ua-fare-row">
+      <div class="ua-flight-cell">
+        <div class="ua-flight-time"><strong>{{ flight.departure }}</strong> ({{ flight.origin_code }})
+          → <strong>{{ flight.arrival }}</strong> ({{ flight.dest_code }})</div>
+        <div class="ua-flight-meta">UA {{ flight.flight_number }} · {{ flight.aircraft.name }} · {{ flight.duration_label }}</div>
+      </div>
+      {% for key, label in fare_cabins %}
+        {% set fare = flight.fares().get(key) %}
+        {% if fare %}
+        <form method="post" action="{{ url_for('confirm_return', flight_id=flight.id) }}" class="ua-fare-cell">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="cabin" value="{{ key }}">
+          <button class="ua-fare-btn" type="submit"><span class="ua-fare-amount">${{ '%.2f'|format(fare.amount * mult) }}</span></button>
+        </form>
+        {% else %}<div class="ua-fare-cell ua-fare-unavailable">Not available</div>{% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="ua-flash">No return flights were found for this date.</div>
+  {% endif %}
+</section>
+{% endblock %}

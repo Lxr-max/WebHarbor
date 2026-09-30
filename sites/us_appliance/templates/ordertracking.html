@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Order Tracking{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Order Tracking</span></li>
+{% endblock %}
+{% block content %}
+<section class="container tracking-page">
+  <h1 class="page-heading">Order Tracking</h1>
+  <p>{{ intro }}</p>
+
+  <div class="tracking-lookup">
+    <h2>Track Your US Appliance Order</h2>
+    <form class="lookup-form" method="post" action="{{ url_for('order_tracking') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="order_number">Order Number (e.g. 10001)</label>
+        <input class="form-input" type="text" id="order_number" name="order_number" value="{{ number }}" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email Address used on the order</label>
+        <input class="form-input" type="email" id="email" name="email" value="{{ email }}" required>
+      </div>
+      <button class="button button--primary" type="submit">Track</button>
+    </form>
+    {% if found == 'mismatch' %}
+    <p class="lookup-error">The order number and email do not match our records. Check the confirmation email and try again.</p>
+    {% elif found is not none %}
+    <div class="lookup-result">
+      <h3>Order #{{ found.number }} — {{ found.status }}</h3>
+      {% if found.eta %}<p>Estimated delivery: {{ found.eta | dmy }}</p>{% endif %}
+      {% if found.carrier %}
+      <p>Shipped via {{ found.carrier }} —
+        {% if found.carrier == 'R+L Carriers' %}Pro #{% else %}Tracking #{% endif %}{{ found.tracking }}</p>
+      {% endif %}
+      <p>Shipping to {{ found.ship_city }}, {{ found.ship_state }} &middot; {{ found.shipping_method }}</p>
+      <ol class="order-events">
+        {% for event in found.events %}
+        <li class="order-event">
+          <span class="event-date">{{ event.happened_on | dmy }}</span>
+          <span class="event-step">{{ event.step }}</span>
+          <span class="event-note">{{ event.note }}</span>
+        </li>
+        {% endfor %}
+      </ol>
+      <p>Total: {{ money(found.total) }} &middot; Placed {{ found.placed_on | dmy }}</p>
+      {% if current_user and current_user.email == found.email %}
+      <p><a class="button" href="{{ url_for('account_order', order_id=found.id) }}">View in My Account</a></p>
+      {% endif %}
+    </div>
+    {% elif request.method == 'POST' and found is none %}
+    <p class="lookup-error">We could not find an order with that number. Check the confirmation email and try again.</p>
+    {% endif %}
+  </div>
+
+  <h2>Carrier Tracking</h2>
+  <p>Below you will find links to our Shipping partners that will allow you to track your shipment.</p>
+  <div class="carrier-grid">
+    {% for c in carriers %}
+    <div class="carrier-card">
+      <h3>Track {{ c.name }} Shipment</h3>
+      <p>Enter your {{ c.field }} and click "Submit".</p>
+      <form class="carrier-form">
+        <input class="form-input" type="text" placeholder="{{ c.field }}" aria-label="{{ c.field }}">
+        <button class="button" type="button">Submit</button>
+      </form>
+      {% if c.phone %}<p>You may also track your package by calling {{ c.name }} at {{ c.phone }}.</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

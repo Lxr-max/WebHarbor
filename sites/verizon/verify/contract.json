@@ -1,0 +1,1505 @@
+{
+  "Verizon--0": {
+    "task": "My family of four is switching to Verizon and I need to budget for my new phone. Check the four-line Simplicity Plan price and its discount conditions, then configure an iPhone 18 Pro in Silver with 512 GB, 12-month payments and Verizon Mobile Protect. Leave it in the cart with Simplicity service. Report the phone, protection and service monthly costs, the cart total, and the family's combined monthly cost if the other three lines bring their own phones.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "apple-iphone-18-pro",
+                  "name": "Apple iPhone 18 Pro",
+                  "color": "Silver",
+                  "storage": "512 GB",
+                  "term": "12",
+                  "monthly": "99.99",
+                  "full": "1,199.99",
+                  "protection": "Verizon Mobile Protect",
+                  "plan_id": "1",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/plans/unlimited/",
+      "/smartphones/apple-iphone-18-pro/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:4 lines|four lines).{0,85}(?:\\$120)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:phone).{0,85}(?:\\$99\\.99)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:protect).{0,85}(?:\\$17)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:service).{0,85}(?:\\$30)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:total).{0,85}(?:\\$146\\.99)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:family).{0,85}(?:\\$236\\.99)"
+      ],
+      [
+        "checkpoint 7",
+        "auto.?pay"
+      ],
+      [
+        "checkpoint 8",
+        "(?:ach|bank draft)"
+      ],
+      [
+        "checkpoint 9",
+        "switch discount"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--1": {
+    "task": "I want a Samsung phone with Verizon Prepaid Unlimited and can afford at most $110 per month before taxes. Compare the two most expensive Samsung models, including retail prices, then configure the second-most expensive on 12-month payments without protection. Leave it in the cart and tell me whether it meets my budget, how much room is left, and how the plan's loyalty discounts would change my service cost after three and nine months without Auto Pay.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "samsung-galaxy-z-fold8",
+                  "name": "Samsung Galaxy Z Fold8",
+                  "color": {
+                    "one_of": [
+                      "Lavender",
+                      "Graphite",
+                      "Cream"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "256 GB",
+                      "512 GB"
+                    ]
+                  },
+                  "term": "12",
+                  "monthly": "158.33",
+                  "full": "1,899.99",
+                  "protection": "",
+                  "plan_id": "4",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/prepaid/plans/",
+      "/smartphones/samsung-galaxy-z-fold8-ultra/",
+      "/smartphones/samsung-galaxy-z-fold8/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:fold8 ultra).{0,85}(?:\\$2099\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:fold8 is second|fold8[^u]).{0,85}(?:\\$1899\\.99)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:total).{0,85}(?:\\$218\\.33)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:exceed|over).{0,85}(?:\\$108\\.33)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:unlimited service).{0,85}(?:\\$55)"
+      ],
+      [
+        "checkpoint 6",
+        "\\$50.{0,30}9 months|9 months.{0,30}\\$50"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--2": {
+    "task": "My nephew needs the cheapest Verizon Prepaid plan that includes 5G Ultra Wideband and a Google Pixel 11. Compare the eligible plans' base prices and hotspot allowances, then configure the Pixel on 24-month payments with the cheaper eligible plan and no protection. Leave it in the cart and report the monthly total. Estimate the trade-in value of his Pixel 10a with a cracked screen and explain how much value the damage costs compared with Good condition.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "google-pixel-11",
+                  "name": "Google Pixel 11",
+                  "color": {
+                    "one_of": [
+                      "Frost",
+                      "Pistachio",
+                      "Obsidian",
+                      "Hibiscus"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "256 GB",
+                      "512 GB"
+                    ]
+                  },
+                  "term": "24",
+                  "monthly": "37.49",
+                  "full": "899.99",
+                  "protection": "",
+                  "plan_id": "4",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/prepaid/plans/",
+      "/smartphones/google-pixel-11/",
+      "/cart/",
+      "/trade-in/estimate/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:unlimited is).{0,85}(?:\\$60)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:unlimited plus).{0,85}(?:\\$70)"
+      ],
+      [
+        "checkpoint 3",
+        "5 gb hotspot"
+      ],
+      [
+        "checkpoint 4",
+        "25 gb hotspot"
+      ],
+      [
+        "checkpoint 5",
+        "\\$97\\.49/(?:month|mo)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:cracked|trade.in).{0,85}(?:\\$45)"
+      ],
+      [
+        "checkpoint 7",
+        "\\$160.{0,15}good|good.{0,15}\\$160"
+      ],
+      [
+        "checkpoint 8",
+        "\\b(?:damage|loss).{0,85}(?:\\$115)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--3": {
+    "task": "I need a budget Samsung phone for a family member. Find the cheapest Samsung, check its storage options and shipping window, and compare its retail price with the most expensive Samsung. Configure the cheaper phone on 24-month payments with Wireless Phone Protection and Simplicity service. Leave it in the cart and report the device and protection charges, total monthly cost and retail saving against the expensive model.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "samsung-galaxy-a17-5g",
+                  "name": "Samsung Galaxy A17 5G",
+                  "color": {
+                    "one_of": [
+                      "Default"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "128 GB"
+                    ]
+                  },
+                  "term": "24",
+                  "monthly": "10.41",
+                  "full": "249.99",
+                  "protection": "Wireless Phone Protection",
+                  "plan_id": "1",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/smartphones/samsung-galaxy-a17-5g/",
+      "/smartphones/samsung-galaxy-z-fold8-ultra/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:a17).{0,85}(?:\\$249\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "128\\s*gb"
+      ],
+      [
+        "checkpoint 3",
+        "thursday"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:fold8 ultra).{0,85}(?:\\$2099\\.99)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:saving).{0,85}(?:\\$1850)"
+      ],
+      [
+        "checkpoint 6",
+        "\\$10\\.41"
+      ],
+      [
+        "checkpoint 7",
+        "\\b(?:protection).{0,85}(?:\\$9)"
+      ],
+      [
+        "checkpoint 8",
+        "\\b(?:total).{0,85}(?:\\$49\\.41)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--4": {
+    "task": "I am upgrading to an iPhone 18 Pro and want to compare it with the Pro Max before committing. Compare their retail prices, 36-month payments, shipping windows and typical-use battery life. Leave the Pro in Black with 1 TB, 48-month payments, Verizon Mobile Protect and Simplicity service in my cart. Report its monthly total and explain the battery-life tradeoff against the Pro Max.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "apple-iphone-18-pro",
+                  "name": "Apple iPhone 18 Pro",
+                  "color": "Black",
+                  "storage": "1 TB",
+                  "term": "48",
+                  "monthly": "24.99",
+                  "full": "1,199.99",
+                  "protection": "Verizon Mobile Protect",
+                  "plan_id": "1",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/smartphones/apple-iphone-18-pro/",
+      "/smartphones/apple-iphone-18-pro-max/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:18 pro).{0,85}(?:\\$1199\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "\\$33\\.33"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:pro max).{0,85}(?:\\$1299\\.99)"
+      ],
+      [
+        "checkpoint 4",
+        "\\$36\\.11"
+      ],
+      [
+        "checkpoint 5",
+        "september 29.{0,15}october 9"
+      ],
+      [
+        "checkpoint 6",
+        "october 12.{0,5}30"
+      ],
+      [
+        "checkpoint 7",
+        "24 hours.{0,35}pro.{0,20}30 hours.{0,25}max|pro.{0,40}24 hours.{0,50}max.{0,40}30 hours"
+      ],
+      [
+        "checkpoint 8",
+        "\\b(?:total).{0,85}(?:\\$71\\.99)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--5": {
+    "task": "Buy a Motorola moto g - 2026 for my kid. Find the cheapest Motorola with a listed price and check that it is the moto g, then choose 36-month payments, Verizon Mobile Protect and Simplicity service. Complete checkout for Jordan Pratt, jordan.pratt@example.com, 88 Pine Street, Seattle, WA 98101. Confirm the device, protection and service charges, monthly total, amount due today, order number and delivery window.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": []
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "status": "processing",
+            "placed_at": "2026-09-29",
+            "delivery_by": "Ships between Wed, Sep 30 - Fri, Oct 9",
+            "items": {
+              "json_rows": [
+                {
+                  "device": "Motorola moto g - 2026",
+                  "slug": "motorola-moto-g-2026",
+                  "color": {
+                    "one_of": [
+                      "Default"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "Single capacity"
+                    ]
+                  },
+                  "term": "36",
+                  "monthly": "54.77",
+                  "full": "279.99",
+                  "protection": "Verizon Mobile Protect",
+                  "protection_monthly": "17.00",
+                  "plan": "Simplicity Plan",
+                  "plan_monthly": "30.00"
+                }
+              ]
+            },
+            "total_today": "0.00",
+            "total_monthly": "54.77",
+            "name": "Jordan Pratt",
+            "email": "jordan.pratt@example.com",
+            "street": "88 Pine Street",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98101"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/smartphones/motorola-moto-g-2026/",
+      "/order/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:moto g).{0,85}(?:\\$279\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:device payments).{0,85}(?:\\$7\\.77)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:protect).{0,85}(?:\\$17)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:simplicity).{0,85}(?:\\$30)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:total).{0,85}(?:\\$54\\.77)"
+      ],
+      [
+        "checkpoint 6",
+        "\\$0.{0,15}due today|due today.{0,15}\\$0"
+      ],
+      [
+        "checkpoint 7",
+        "sep(?:tember)? 30.{0,15}oct(?:ober)? 9"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Verizon--6": {
+    "task": "I am replacing my Google Pixel 11 and my partner's Samsung Galaxy S26 Ultra with a Samsung Galaxy S26. Estimate trade-in credit for my phone in Good condition and my partner's with a cracked screen, and tell me the combined credit and mailing deadline. Configure the replacement on 48-month payments with Simplicity service and no protection, leave it in the cart, and report its retail price and monthly cost. Treat the trade-in quote separately from the cart total.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "samsung-galaxy-s26",
+                  "name": "Samsung Galaxy S26",
+                  "color": {
+                    "one_of": [
+                      "Cobalt Violet",
+                      "White",
+                      "Sky Blue",
+                      "Black"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "256 GB",
+                      "512 GB"
+                    ]
+                  },
+                  "term": "48",
+                  "monthly": "18.74",
+                  "full": "899.99",
+                  "protection": "",
+                  "plan_id": "1",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/trade-in/estimate/",
+      "/smartphones/samsung-galaxy-s26/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:pixel 11).{0,85}(?:good.{0,25}\\$300)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:s26 ultra).{0,85}(?:cracked.{0,30}\\$190)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:combined).{0,85}(?:\\$490)"
+      ],
+      [
+        "checkpoint 4",
+        "within 30 days"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:s26 retail).{0,20}(?:\\$899\\.99)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:device).{0,15}(?:\\$18\\.74)"
+      ],
+      [
+        "checkpoint 7",
+        "\\b(?:total).{0,85}(?:\\$48\\.74)"
+      ],
+      [
+        "checkpoint 8",
+        "separate"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--7": {
+    "task": "I need a Verizon company store for a Sunday visit around Puget Sound. Compare the company stores in Seattle and Tacoma for Sunday hours, address and appointment availability, then check the Bellevue store with an Express Pickup Locker. Recommend where I can collect an order and get in-person help on Sunday, distinguishing the locker's availability from staffed hours. Include the chosen store's phone number.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {},
+    "paths": [
+      "/stores/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:seattle).{0,85}(?:401 ne northgate)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:seattle).{0,180}(?:10 am.{0,4}6 pm)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:tacoma).{0,85}(?:4009 tacoma mall)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:tacoma).{0,180}(?:10 am.{0,4}6 pm)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:bellevue).{0,85}(?:2077 bellevue)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:bellevue).{0,190}(?:11 am.{0,4}7 pm)"
+      ],
+      [
+        "checkpoint 7",
+        "425.637.8369"
+      ],
+      [
+        "checkpoint 8",
+        "appointment"
+      ],
+      [
+        "checkpoint 9",
+        "locker.{0,110}(?:not specified|unknown|not established)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--8": {
+    "task": "Help my mom trade in her Motorola edge - 2026 at Seattle Northgate. Get its Good-condition estimate and check that store's address, phone and Sunday hours. Book a Device trade-in appointment for Sam Rivera, sam.rivera@example.com, 206-555-0139, on October 6, 2026 at 2 PM. Confirm the quoted value, appointment number, location, date and time.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "store_id": 1,
+            "user_id": null,
+            "name": "Sam Rivera",
+            "email": "sam.rivera@example.com",
+            "phone": "206-555-0139",
+            "topic": "Device trade-in",
+            "appt_date": "2026-10-06",
+            "appt_time": "02:00 PM",
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "status": "confirmed"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/trade-in/estimate/",
+      "/stores/",
+      "/appointment/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:edge).{0,85}(?:good.{0,25}\\$130)"
+      ],
+      [
+        "checkpoint 2",
+        "401 ne northgate"
+      ],
+      [
+        "checkpoint 3",
+        "206.367.0687"
+      ],
+      [
+        "checkpoint 4",
+        "sunday.{0,20}10 am.{0,4}6 pm"
+      ],
+      [
+        "checkpoint 5",
+        "device trade.in"
+      ],
+      [
+        "checkpoint 6",
+        "october 6.{0,10}2026.{0,15}2 pm"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ]
+    ]
+  },
+  "Verizon--9": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I can pay only $50 toward my September bill today. Review its charges and compare the protection charge with August to check for a change, then pay $50 using the bank account ending 8891. Confirm the payment number, amount, method, remaining balance and whether the bill is fully paid; check that the payment appears on the bill.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "bills": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[3]": {
+            "status": "partial"
+          }
+        }
+      },
+      "payments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "bill_id": 3,
+            "amount": "50.00",
+            "method": "Bank account (ACH ending 8891)",
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "paid_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account/bills/",
+      "/account/pay/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:september).{0,85}(?:\\$160\\.62)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:protect).{0,85}(?:\\$17.{0,35}august.{0,20}september)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:paid).{0,85}(?:\\$50)"
+      ],
+      [
+        "checkpoint 4",
+        "8891"
+      ],
+      [
+        "checkpoint 5",
+        "\\$110\\.62.{0,25}(?:outstanding|remaining)|(?:outstanding|remaining).{0,25}\\$110\\.62"
+      ],
+      [
+        "checkpoint 6",
+        "(?:status is partial|partially paid)"
+      ],
+      [
+        "checkpoint 7",
+        "(?:not fully paid|not paid in full)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "payments",
+        "confirmation"
+      ]
+    ]
+  },
+  "Verizon--10": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. Review my unpaid bill and check which line carries the protection charge, then pay the outstanding balance with the Verizon Visa Card. Reopen the bill to confirm the payment was applied. Report its period, original total, due date, protection charge, payment number and final balance and status.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "bills": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[6]": {
+            "status": "paid"
+          }
+        }
+      },
+      "payments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "bill_id": 6,
+            "amount": "118.17",
+            "method": "Verizon Visa Card ending 0057",
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "paid_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account/bills/",
+      "/account/pay/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "september 2026"
+      ],
+      [
+        "checkpoint 2",
+        "october 13.{0,8}2026"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:original).{0,85}(?:\\$118\\.17)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:bob.s line).{0,85}(?:\\$9)"
+      ],
+      [
+        "checkpoint 5",
+        "visa.{0,35}0057"
+      ],
+      [
+        "checkpoint 6",
+        "balance.{0,10}\\$0"
+      ],
+      [
+        "checkpoint 7",
+        "status.{0,10}paid"
+      ]
+    ],
+    "answer_state": [
+      [
+        "payments",
+        "confirmation"
+      ]
+    ]
+  },
+  "Verizon--11": {
+    "task": "Sign in as carol.d@test.com with password TestPass123!. I want to stop receiving paper bills and enroll in Auto Pay. Check the eligible payment methods and per-line discount, enable both preferences, and confirm they remain saved when you reopen settings. Use my current bill and number of lines to explain the potential monthly Auto Pay saving, without claiming that enrolling has changed an already-issued bill.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "users": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[3]": {
+            "autopay": 1,
+            "paper_free": 1
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/autopay/",
+      "/account/bills/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "auto.?pay.{0,30}paper.free.{0,30}(?:enabled|on|enrolled)"
+      ],
+      [
+        "checkpoint 2",
+        "bank draft"
+      ],
+      [
+        "checkpoint 3",
+        "verizon visa"
+      ],
+      [
+        "checkpoint 4",
+        "\\$10 per.{0,10}line"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:saving).{0,85}(?:\\$30)"
+      ],
+      [
+        "checkpoint 6",
+        "issued bill.{0,20}\\$176\\.46"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--12": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I am considering moving our two lines from Simplicity to Verizon Prepaid. Compare this cycle's data and hotspot use for each line with the 15 GB, Unlimited and Unlimited Plus allowances. Recommend the lowest-base-price plan that accommodates both lines' current use, quote the two-line base cost, and compare it with the two-line Simplicity quote. Leave the account unchanged.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {},
+    "paths": [
+      "/account/usage/",
+      "/prepaid/plans/",
+      "/plans/unlimited/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:alice used).{0,85}(?:31\\.4 gb.{0,20}9\\.6 gb hotspot)"
+      ],
+      [
+        "checkpoint 2",
+        "\\b(?:mike used).{0,85}(?:12\\.2 gb.{0,20}1\\.1 gb hotspot)"
+      ],
+      [
+        "checkpoint 3",
+        "\\b(?:15 gb plan).{0,85}(?:\\$45)"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:unlimited costs).{0,85}(?:\\$60.{0,50}5 gb hotspot)"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:unlimited plus).{0,85}(?:\\$70.{0,70}25 gb hotspot)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:2 lines).{0,85}(?:\\$140)"
+      ],
+      [
+        "checkpoint 7",
+        "\\b(?:simplicity).{0,85}(?:\\$60)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--13": {
+    "task": "Sign in as dana.k@test.com with password TestPass123!. I want to reduce Dana's line cost from Unlimited Plus to Unlimited. Check her current data and hotspot usage against the cheaper plan and explain any hotspot shortfall. Make the requested switch, verify the new allowances on the usage page, and report the base monthly saving and the monthly service cost after the loyalty discount for eleven months of service without Auto Pay.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "lines": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[8]": {
+            "plan_id": 4
+          }
+        }
+      },
+      "usage": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[8]": {
+            "hotspot_cap_gb": "5"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/usage/",
+      "/prepaid/plans/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:dana used).{0,85}(?:26\\.4 gb.{0,20}7\\.2 gb hotspot)"
+      ],
+      [
+        "checkpoint 2",
+        "5 gb hotspot"
+      ],
+      [
+        "checkpoint 3",
+        "2\\.2 gb short"
+      ],
+      [
+        "checkpoint 4",
+        "\\$70 to \\$60"
+      ],
+      [
+        "checkpoint 5",
+        "saving \\$10"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:loyalty).{0,85}(?:\\$50)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--14": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Add Mom to my account using the cheapest Samsung smartphone and Simplicity service. Verify the device's name and retail price before adding the line. Confirm Mom's assigned phone number, activation status and plan, then check the Simplicity quote for our new line count and report the account's quoted monthly service total.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "lines": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "nickname": "Mom",
+            "phone_number": {
+              "regex": "\\(206\\) 555-\\d{4}"
+            },
+            "device_id": 18,
+            "plan_id": 1,
+            "status": "activating",
+            "joined_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "usage": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "line_id": 9,
+            "cycle": "Sep 2026",
+            "data_gb": "0.0",
+            "data_cap_gb": null,
+            "hotspot_gb": "0.0",
+            "hotspot_cap_gb": "10",
+            "talk_min": 0,
+            "texts": 0
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account/add-line/",
+      "/smartphones/samsung-galaxy-a17-5g/",
+      "/plans/unlimited/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:a17).{0,85}(?:\\$249\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "activation status.{0,15}activating"
+      ],
+      [
+        "checkpoint 3",
+        "3 lines"
+      ],
+      [
+        "checkpoint 4",
+        "\\$90/(?:month|mo)"
+      ],
+      [
+        "checkpoint 5",
+        "simplicity"
+      ]
+    ],
+    "answer_state": [
+      [
+        "lines",
+        "phone_number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "lines",
+        "right": "usage",
+        "foreign_key": "line_id"
+      }
+    ]
+  },
+  "Verizon--15": {
+    "task": "My Samsung Galaxy S26 screen cracked and I need to decide whether returning it or trading it in is realistic. Check Verizon's return window, condition requirement and restocking fee, then compare its Good and Cracked trade-in estimates. Explain which route fits a damaged phone and the loss in trade-in value. Find the Tacoma company store's address and Sunday hours so I know where to seek in-person help.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {},
+    "paths": [
+      "/support/return_policy/",
+      "/trade-in/estimate/",
+      "/stores/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "returns? within 30 days"
+      ],
+      [
+        "checkpoint 2",
+        "like.new"
+      ],
+      [
+        "checkpoint 3",
+        "receipt"
+      ],
+      [
+        "checkpoint 4",
+        "original box"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:restocking).{0,85}(?:\\$50)"
+      ],
+      [
+        "checkpoint 6",
+        "\\b(?:good).{0,85}(?:\\$390)"
+      ],
+      [
+        "checkpoint 7",
+        "\\b(?:cracked).{0,85}(?:\\$120)"
+      ],
+      [
+        "checkpoint 8",
+        "\\$270 loss"
+      ],
+      [
+        "checkpoint 9",
+        "4009 tacoma mall"
+      ],
+      [
+        "checkpoint 10",
+        "sunday.{0,20}10 am.{0,4}6 pm"
+      ],
+      [
+        "checkpoint 11",
+        "cracked.{0,70}(?:does not meet|ineligible|not eligible)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--16": {
+    "task": "My Google Pixel keeps dropping service in Spokane. Work through the Google no-service troubleshooting guidance and summarize the recommended checks and escalation. If those checks do not restore service, I want in-person technical support: find Spokane's company store and book October 7, 2026 at 11 AM for Alex Morgan, alex.morgan@example.com, 509-555-0142. Confirm the store address, appointment number and topic, and give the technical support phone number as a fallback.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "store_id": 15,
+            "user_id": null,
+            "name": "Alex Morgan",
+            "email": "alex.morgan@example.com",
+            "phone": "509-555-0142",
+            "topic": "Technical support",
+            "appt_date": "2026-10-07",
+            "appt_time": "11:00 AM",
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "status": "confirmed"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/support/troubleshoot/",
+      "/stores/",
+      "/appointment/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "check coverage"
+      ],
+      [
+        "checkpoint 2",
+        "airplane mode.{0,25}restart"
+      ],
+      [
+        "checkpoint 3",
+        "reset network"
+      ],
+      [
+        "checkpoint 4",
+        "esim.{0,70}(?:refresh|delet)"
+      ],
+      [
+        "checkpoint 5",
+        "6227 n division"
+      ],
+      [
+        "checkpoint 6",
+        "october 7.{0,8}2026.{0,15}11 am"
+      ],
+      [
+        "checkpoint 7",
+        "technical support"
+      ],
+      [
+        "checkpoint 8",
+        "800.922.0204"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ]
+    ]
+  },
+  "Verizon--17": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. I need to know what to expect from my phone order that is in transit. Find its device, color, storage, order number, placement date, delivery estimate and monthly total. Check Verizon's return policy so I also know the return window, required condition and restocking fee if it does not suit me. Leave my order and account unchanged.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {},
+    "paths": [
+      "/account/orders/VZW200038/",
+      "/support/return_policy/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "vzw200038.{0,25}in transit"
+      ],
+      [
+        "checkpoint 2",
+        "september 25.{0,8}2026"
+      ],
+      [
+        "checkpoint 3",
+        "october 1"
+      ],
+      [
+        "checkpoint 4",
+        "a17.{0,30}navy blue.{0,15}128 gb"
+      ],
+      [
+        "checkpoint 5",
+        "\\$36\\.94/(?:month|mo)"
+      ],
+      [
+        "checkpoint 6",
+        "return window.{0,15}30 days"
+      ],
+      [
+        "checkpoint 7",
+        "like.new"
+      ],
+      [
+        "checkpoint 8",
+        "receipt"
+      ],
+      [
+        "checkpoint 9",
+        "\\b(?:restocking).{0,85}(?:\\$50)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--18": {
+    "task": "I am choosing between the iPhone 18 Pro and Samsung Galaxy S26 Ultra for a two-phone purchase. Compare their retail prices, battery life, screens and ratings with review counts. Configure an iPhone in Glacier with 2 TB and a Samsung in Cobalt Violet with 512 GB, both on 24-month payments with Simplicity service and no protection. Leave both in the cart and report each item's monthly cost and the combined total, distinguishing device payments from service charges.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": [
+                {
+                  "slug": "apple-iphone-18-pro",
+                  "name": "Apple iPhone 18 Pro",
+                  "color": "Glacier",
+                  "storage": "2 TB",
+                  "term": "24",
+                  "monthly": "49.99",
+                  "full": "1,199.99",
+                  "protection": "",
+                  "plan_id": "1",
+                  "qty": 1
+                },
+                {
+                  "slug": "samsung-galaxy-s26-ultra",
+                  "name": "Samsung Galaxy S26 Ultra",
+                  "color": "Cobalt Violet",
+                  "storage": "512 GB",
+                  "term": "24",
+                  "monthly": "54.16",
+                  "full": "1,299.99",
+                  "protection": "",
+                  "plan_id": "1",
+                  "qty": 1
+                }
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/smartphones/apple-iphone-18-pro/",
+      "/smartphones/samsung-galaxy-s26-ultra/",
+      "/cart/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:iphone 18 pro).{0,85}(?:\\$1199\\.99)"
+      ],
+      [
+        "checkpoint 2",
+        "24 hours"
+      ],
+      [
+        "checkpoint 3",
+        "6\\.3.inch"
+      ],
+      [
+        "checkpoint 4",
+        "4\\.2/5.{0,15}93 reviews"
+      ],
+      [
+        "checkpoint 5",
+        "\\b(?:s26 ultra).{0,85}(?:\\$1299\\.99)"
+      ],
+      [
+        "checkpoint 6",
+        "30\\.62 hours"
+      ],
+      [
+        "checkpoint 7",
+        "6\\.9.inch"
+      ],
+      [
+        "checkpoint 8",
+        "4\\.8/5.{0,15}18000 reviews"
+      ],
+      [
+        "checkpoint 9",
+        "\\b(?:iphone device).{0,85}(?:\\$49\\.99.{0,40}\\$79\\.99)"
+      ],
+      [
+        "checkpoint 10",
+        "\\b(?:samsung device).{0,85}(?:\\$54\\.16.{0,40}\\$84\\.16)"
+      ],
+      [
+        "checkpoint 11",
+        "\\b(?:combined total).{0,85}(?:\\$164\\.15)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Verizon--19": {
+    "task": "My cousin wants a Samsung Galaxy A17 5G with Verizon Prepaid Unlimited and no Auto Pay. Check the plan's base price and loyalty prices after three and nine months, then buy the phone on 24-month payments without protection for Rosa Diaz, rosa.diaz@example.com, 415 Pine St, Tacoma, WA 98409. Confirm the initial monthly total, order number and delivery window, and explain how the later loyalty discounts affect the service portion.",
+    "initial_digest": "6b97b0fc6e68d299de1ad96bfccd5793c4527b48dfd554d8848c1930dc902856",
+    "state": {
+      "carts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "user_id": null,
+            "items": {
+              "json_rows": []
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": null,
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "status": "processing",
+            "placed_at": "2026-09-29",
+            "delivery_by": "Ships between Wed, Sep 30 - Fri, Oct 9",
+            "items": {
+              "json_rows": [
+                {
+                  "device": "Samsung Galaxy A17 5G",
+                  "slug": "samsung-galaxy-a17-5g",
+                  "color": {
+                    "one_of": [
+                      "Default"
+                    ]
+                  },
+                  "storage": {
+                    "one_of": [
+                      "128 GB"
+                    ]
+                  },
+                  "term": "24",
+                  "monthly": "70.41",
+                  "full": "249.99",
+                  "protection": "",
+                  "protection_monthly": "0.00",
+                  "plan": "Unlimited",
+                  "plan_monthly": "60.00"
+                }
+              ]
+            },
+            "total_today": "0.00",
+            "total_monthly": "70.41",
+            "name": "Rosa Diaz",
+            "email": "rosa.diaz@example.com",
+            "street": "415 Pine St",
+            "city": "Tacoma",
+            "state": "WA",
+            "zip": "98409"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/prepaid/plans/",
+      "/smartphones/samsung-galaxy-a17-5g/",
+      "/order/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\b(?:unlimited base).{0,85}(?:\\$60)"
+      ],
+      [
+        "checkpoint 2",
+        "\\$55 after 3 months"
+      ],
+      [
+        "checkpoint 3",
+        "\\$50 after 9 months"
+      ],
+      [
+        "checkpoint 4",
+        "\\b(?:initial total).{0,85}(?:\\$70\\.41)"
+      ],
+      [
+        "checkpoint 5",
+        "\\$65\\.41"
+      ],
+      [
+        "checkpoint 6",
+        "\\$60\\.41"
+      ],
+      [
+        "checkpoint 7",
+        "sep(?:tember)? 30.{0,15}oct(?:ober)? 9"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "confirmation"
+      ]
+    ]
+  }
+}

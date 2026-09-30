@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}The Postal Store | USPS{% endblock %}
+{% block meta %}Buy stamps, shipping supplies, cards, envelopes and collectibles at The Postal Store.{% endblock %}
+{% block content %}
+<h1>The Postal Store</h1>
+<p><a class="btn secondary" href="{{ url_for('store_cart') }}">View Cart</a></p>
+<div class="grid">
+  {% for key, label in cats %}
+    <div class="card"><h3><a href="{{ url_for('store_category', category=key) }}">{{ label }}</a></h3></div>
+  {% endfor %}
+</div>
+<h2>Featured New Releases</h2>
+<div class="grid">
+  {% for p in featured %}
+    <div class="card store-tile">
+      {% if p.image %}<a href="{{ url_for('store_product', slug=p.slug) }}"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}"></a>{% endif %}
+      <h3><a href="{{ url_for('store_product', slug=p.slug) }}">{{ p.name }}</a></h3>
+      <p class="price">{{ p.price | usd }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Wanderlog: travel itineraries, maps, budgets & guides{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/upstream/logo.png') }}">
+</head>
+<body>
+<header class="site">
+  <div class="site-inner">
+    <a href="{{ url_for('home') }}" aria-label="Wanderlog home">
+      <img class="logo" src="{{ url_for('static', filename='images/upstream/logo.png') }}" alt="Wanderlog logo">
+    </a>
+    <nav class="main">
+      <a href="{{ url_for('guides') }}">Travel guides</a>
+      <a href="{{ url_for('hotels') }}">Hotels</a>
+      <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+    </nav>
+    <div class="spacer"></div>
+    {% if current_user.is_authenticated %}
+      <nav class="main">
+        <a href="{{ url_for('plans') }}">My trips</a>
+        <a href="{{ url_for('plan_new') }}">Plan a trip</a>
+        <span class="who">Hi, {{ current_user.display_name }}</span>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <form class="inline" method="post" action="{{ url_for('logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-ghost btn-sm" type="submit">Log out</button>
+        </form>
+      </nav>
+    {% else %}
+      <nav class="main">
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a class="btn btn-primary btn-sm" href="{{ url_for('register') }}">Sign up</a>
+      </nav>
+    {% endif %}
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="wrap" style="padding-bottom:0">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block body %}{% endblock %}
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <h4>Wanderlog</h4>
+      <p class="small muted">One app for all your travel planning needs — itineraries,
+        maps, checklists, budgets, sharing and collaboration.</p>
+      <p class="small muted">Mirror of wanderlog.com · content captured 2026-09-29.</p>
+    </div>
+    <div>
+      <h4>Plan</h4>
+      <a href="{{ url_for('plan_new') }}">Plan a trip</a>
+      <a href="{{ url_for('guides') }}">Travel guides</a>
+      <a href="{{ url_for('hotels') }}">Hotel search</a>
+      <a href="{{ url_for('search') }}">Search the site</a>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="{{ url_for('explore', gid=1) }}">Tokyo</a>
+      <a href="{{ url_for('explore', gid=9614) }}">Paris</a>
+      <a href="{{ url_for('explore', gid=9613) }}">London</a>
+      <a href="{{ url_for('explore', gid=58144) }}">New York City</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

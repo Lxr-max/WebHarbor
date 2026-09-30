@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Contact US Appliance - Phone, Chat or Email{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Contact us</span></li>
+{% endblock %}
+{% block content %}
+<section class="container contact-page">
+  <h1 class="page-heading">Contact us</h1>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h2>Sales - Order Processing</h2>
+      <p>Expert Advice from a real person!</p>
+      <p>{{ data.sales.hours }}</p>
+      <p>{{ data.sales.phone }}</p>
+    </div>
+    <div class="contact-card">
+      <h2>Customer Service</h2>
+      <p>{{ data.service.hours }}</p>
+      <p>{{ data.service.phone }}</p>
+    </div>
+    <div class="contact-card">
+      <h2>US Appliance Mailing Address</h2>
+      <p>
+        US Appliance<br>
+        111 Corporate Drive<br>
+        Auburn Hills, MI 48326
+      </p>
+      <p>{{ data.fax }}</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

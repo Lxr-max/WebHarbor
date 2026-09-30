@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Check ESTA Status</h1>
+<p>Check the status of your ESTA application by application number or passport number.</p>
+<form class="stack" method="post" style="max-width:520px">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="application_number">Application Number <span class="hint">(e.g. ESTA-12345678)</span></label>
+  <input id="application_number" name="application_number" value="{{ number }}">
+  <label for="passport_number">— or Passport Number —</label>
+  <input id="passport_number" name="passport_number" value="{{ passport }}">
+  <button class="btn" type="submit" style="margin-top:1rem;">Check Status</button>
+</form>
+{% if record %}
+<section>
+  <h2>Application {{ record.application_number }}</h2>
+  <p>Status: <span class="chip {{ ('approved' if record.status == 'Authorization Approved' else ('pending' if 'Pending' in record.status else 'denied')) }}">{{ record.status }}</span></p>
+  <table class="data">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Applicant</td><td>{{ record.first_name }} {{ record.family_name }}</td></tr>
+    <tr><td>Citizenship</td><td>{{ record.citizenship }}</td></tr>
+    <tr><td>Passport Number</td><td>{{ record.passport_number }}</td></tr>
+    <tr><td>Application Date</td><td>{{ record.created_at }}</td></tr>
+    <tr><td>Valid Until</td><td>{{ record.expires_on or '—' }}</td></tr>
+  </table>
+</section>
+{% elif not_found %}
+<div class="flash">No ESTA application found for the information provided. Please verify the application or passport number and try again.</div>
+{% endif %}
+{% endblock %}

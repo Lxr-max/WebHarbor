@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Attorney alerts | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('account') }}">Manage my account</a> ›
+    <span>Attorney alerts</span>
+  </nav>
+  <h1>Attorney alerts</h1>
+  <p class="lead">Get notified when new Super Lawyers rated attorneys are selected in
+  your practice area and city.</p>
+
+  <h2>Create a saved search</h2>
+  <form class="alert-form" method="post" action="{{ url_for('create_saved_search') }}">
+    <label for="practice_slug">Practice area</label>
+    <select id="practice_slug" name="practice_slug" required>
+      <option value="">Select a practice area</option>
+      {% set practices = ['personal-injury-plaintiff', 'family-law', 'criminal-defense', 'dui-dwi', 'employment-and-labor', 'estate-planning-and-probate', 'immigration', 'business-litigation', 'real-estate', 'bankruptcy', 'medical-malpractice', 'workers-compensation', 'elder-law', 'intellectual-property', 'civil-rights'] %}
+      {% for slug in practices %}
+      <option value="{{ slug }}">{{ slug|replace('-', ' ')|title }}</option>
+      {% endfor %}
+    </select>
+    <label for="state_slug">State</label>
+    <select id="state_slug" name="state_slug" required>
+      <option value="">Select a state</option>
+      {% for pair in [('washington', 'Washington'), ('illinois', 'Illinois'), ('new-york', 'New York'), ('california', 'California'), ('georgia', 'Georgia'), ('massachusetts', 'Massachusetts'), ('colorado', 'Colorado'), ('texas', 'Texas'), ('florida', 'Florida'), ('arizona', 'Arizona'), ('ohio', 'Ohio')] %}
+      <option value="{{ pair[0] }}">{{ pair[1] }}</option>
+      {% endfor %}
+    </select>
+    <label for="city_slug">City</label>
+    <select id="city_slug" name="city_slug" required>
+      <option value="">Select a city</option>
+      {% for triple in [('seattle', 'washington', 'Seattle'), ('chicago', 'illinois', 'Chicago'), ('new-york', 'new-york', 'New York'), ('los-angeles', 'california', 'Los Angeles'), ('atlanta', 'georgia', 'Atlanta'), ('boston', 'massachusetts', 'Boston'), ('denver', 'colorado', 'Denver'), ('houston', 'texas', 'Houston'), ('dallas', 'texas', 'Dallas'), ('miami', 'florida', 'Miami'), ('phoenix', 'arizona', 'Phoenix'), ('columbus', 'ohio', 'Columbus'), ('san-diego', 'california', 'San Diego'), ('san-francisco', 'california', 'San Francisco')] %}
+      <option value="{{ triple[0] }}" data-state="{{ triple[1] }}">{{ triple[2] }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-primary" type="submit">Create saved search</button>
+  </form>
+
+  <h2>My saved searches</h2>
+  <table class="alert-table">
+    <thead><tr><th scope="col">Search</th><th scope="col">Alerts</th><th scope="col">Created</th><th scope="col">Actions</th></tr></thead>
+    <tbody>
+      {% for search in searches %}
+      <tr>
+        <td><a href="/attorneys/{{ search.practice_slug }}/{{ search.state_slug }}/{{ search.city_slug }}/">{{ search.label }}</a></td>
+        <td>{{ 'On' if search.alerts else 'Off' }}</td>
+        <td>{{ search.created_at.strftime('%B %d, %Y') }}</td>
+        <td>
+          <form method="post" action="{{ url_for('delete_saved_search', sid=search.id) }}" class="inline-form">
+            <button class="btn btn-danger-outline" type="submit">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if not searches %}
+  <p>No saved searches yet. Create one above.</p>
+  {% endif %}
+</div>
+{% endblock %}

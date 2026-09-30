@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}All Forms{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">All Forms</h1>
+  <p>Search all USCIS forms. File your form online for a more convenient and secure experience. For forms available only in paper, select the Form Details button to download the form and instructions. USCIS forms and USCIS online accounts are always free.</p>
+
+  <form class="filter-bar" method="get" action="{{ url_for('forms_catalog') }}">
+    <div class="filter-bar__field">
+      <label for="q">Search by content</label>
+      <input id="q" type="text" name="q" value="{{ q }}" placeholder="Search by form number or title">
+    </div>
+    <div class="filter-bar__check">
+      <input type="checkbox" id="online" name="online" value="1" {% if online_only %}checked{% endif %}>
+      <label for="online">Show forms available to file online first.</label>
+    </div>
+    <button class="btn btn--primary" type="submit">Search</button>
+  </form>
+
+  <p class="result-count">{{ total }} form{{ 's' if total != 1 else '' }} found.</p>
+
+  <div class="form-list">
+    {% for form in rows %}
+    <article class="form-row">
+      <h2 class="form-row__title">
+        <a href="{{ form.detail_path if form.detail_path in mirrored else 'https://www.uscis.gov' + form.detail_path }}">{{ form.number }} | {{ form.title }}</a>
+      </h2>
+      <p class="form-row__desc">{{ form.description }}</p>
+      <div class="form-row__actions">
+        {% if form.file_online %}
+        <a class="btn btn--anchor" href="{{ url_for('account_login', next=url_for('forms_catalog')) }}">File Online</a>
+        {% endif %}
+        <a class="btn btn--anchor btn--secondary" href="{{ form.detail_path if form.detail_path in mirrored else 'https://www.uscis.gov' + form.detail_path }}">Form Details</a>
+      </div>
+    </article>
+    {% else %}
+    <p>No forms matched your search.</p>
+    {% endfor %}
+  </div>
+
+  {% if pages > 1 %}
+  <nav class="pagination" aria-label="Pagination">
+    {% if page_no > 1 %}
+      <a href="{{ url_for('forms_catalog', q=q, online='1' if online_only else '', page=page_no-1) }}">&laquo; Previous</a>
+    {% endif %}
+    <span>Page {{ page_no }} of {{ pages }}</span>
+    {% if page_no < pages %}
+      <a href="{{ url_for('forms_catalog', q=q, online='1' if online_only else '', page=page_no+1) }}">Next &raquo;</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

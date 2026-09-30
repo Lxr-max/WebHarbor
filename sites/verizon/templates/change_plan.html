@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Change plan — {{ line.nickname }}{% endblock %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Change the plan for {{ line.nickname }} ({{ line.phone_number }})</h1>
+  <p>Current plan: {{ line.plan.name }} — ${{ line.plan.monthly }}/mo.</p>
+  <form method="post" action="{{ url_for('change_plan', line_id=line.id) }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset>
+      <legend>Pick a new plan</legend>
+      {% for p in plans %}
+      <label class="choice">
+        <input type="radio" name="plan" value="{{ p.id }}" required> {{ p.name }} — ${{ p.monthly }}/mo
+        <span class="muted">{{ p.blurb or p.data_note }}</span>
+      </label>
+      {% endfor %}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Change plan</button>
+  </form>
+</section>
+{% endblock %}

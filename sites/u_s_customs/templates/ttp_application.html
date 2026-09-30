@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Application {{ record.application_number }}</h1>
+<table class="data">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Program</td><td>{{ program.name if program else record.program }}</td></tr>
+  <tr><td>Applicant</td><td>{{ record.first_name }} {{ record.family_name }}</td></tr>
+  <tr><td>Status</td><td><span class="chip {{ ('approved' if 'Approved' in record.status and 'Conditionally' not in record.status else ('pending' if 'Pending' in record.status or 'Conditionally' in record.status else 'ok')) }}">{{ record.status }}</span></td></tr>
+  <tr><td>Application Date</td><td>{{ record.created_at }}</td></tr>
+  <tr><td>Fee</td><td>${{ '%.2f'|format(record.fee_usd) }}</td></tr>
+  {% if record.interview_center %}
+  <tr><td>Interview</td><td>{{ record.interview_center.name }} ({{ record.interview_center.state }})<br>{{ record.interview_center.address }}<br>{{ record.interview_date }} at {{ record.interview_slot }}</td></tr>
+  {% endif %}
+</table>
+{% if 'Schedule' in record.status %}
+<div class="callout">
+  {% if record.status == "Interview Scheduled" %}
+  <p>Your interview is scheduled. Review the appointment details above. You can use the scheduling form to change the appointment if needed.</p>
+  {% else %}
+  <p>Your application is <strong>conditionally approved</strong>. The next step is to schedule an interview at an enrollment center.</p>
+  {% endif %}
+  <p><a class="btn" href="{{ url_for('ttp_schedule', application_number=record.application_number) }}">Schedule Interview</a></p>
+</div>
+{% elif record.status == 'Pending Review' %}
+<p class="note">Your application is under review. Check back for an update on conditional approval.</p>
+{% endif %}
+{% endblock %}

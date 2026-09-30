@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Get Most Recent I-94</h1>
+<p>Retrieve your most recent Form I-94 (arrival/departure record). You will need your family name, first name, date of birth and passport number exactly as they appear on your passport.</p>
+<form class="stack" method="post" style="max-width:520px">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="family_name">Family Name</label>
+  <input id="family_name" name="family_name" value="{{ form.get('family_name','') }}" required>
+  <label for="first_name">First (Given) Name</label>
+  <input id="first_name" name="first_name" value="{{ form.get('first_name','') }}" required>
+  <label for="birth_date">Date of Birth</label>
+  <input id="birth_date" name="birth_date" type="date" value="{{ form.get('birth_date','') }}" required>
+  <label for="passport_number">Passport Number</label>
+  <input id="passport_number" name="passport_number" value="{{ form.get('passport_number','') }}" required>
+  <button class="btn" type="submit" style="margin-top:1rem;">Get Most Recent I-94</button>
+</form>
+
+{% if record %}
+<section>
+  <h2>Most Recent I-94 — {{ record.first_name }} {{ record.family_name }}</h2>
+  <table class="data">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Admission (I-94) Number</td><td>{{ record.admission_number }}</td></tr>
+    <tr><td>Class of Admission</td><td>{{ record.class_of_admission }}</td></tr>
+    <tr><td>Most Recent Date of Entry</td><td>{{ record.most_recent_entry }}</td></tr>
+    <tr><td>Admitted Until</td><td>{{ record.admitted_until or '—' }}</td></tr>
+    <tr><td>Port of Entry</td><td>{{ record.port_of_entry }}</td></tr>
+    <tr><td>Citizenship</td><td>{{ record.citizenship }}</td></tr>
+    <tr><td>Passport Number</td><td>{{ record.passport_number }}</td></tr>
+  </table>
+  <p class="note">This is considered your lawful record of admission. If someone requests your admission information, this is the form you would provide.</p>
+</section>
+{% elif not_found %}
+<div class="flash">No I-94 record found. Verify that your name, date of birth and passport number match your passport exactly, then try again.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Schedule Interview — {{ record.application_number }}</h1>
+<p>Choose an enrollment center, a date and a time slot for your {{ record.program.replace('-', ' ').title() }} interview.</p>
+<form class="stack" method="post" style="max-width:640px">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="center">Enrollment Center</label>
+  <select id="center" name="center" required>
+    <option value="">- Select an enrollment center -</option>
+    {% for c in centers %}
+    <option value="{{ c.id }}">{{ c.name }} ({{ c.state }})</option>
+    {% endfor %}
+  </select>
+  <label for="date">Interview Date</label>
+  <input id="date" name="date" type="date" required>
+  <label for="slot">Time Slot</label>
+  <select id="slot" name="slot" required>
+    <option value="">- Select a time -</option>
+    {% for s in ['8:00 a.m.', '9:00 a.m.', '10:00 a.m.', '11:00 a.m.', '1:00 p.m.', '2:00 p.m.', '3:00 p.m.'] %}
+    <option value="{{ s }}">{{ s }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit" style="margin-top:1.2rem;">Schedule Interview</button>
+</form>
+<section>
+  <h2>Enrollment Centers</h2>
+  <table class="data">
+    <tr><th>Center</th><th>State</th><th>Address</th><th>Hours</th><th>Contact</th></tr>
+    {% for c in centers %}
+    <tr><td>{{ c.name }}</td><td>{{ c.state }}</td><td>{{ c.address }}</td><td>{{ c.hours }}</td><td>{{ c.contact }}</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

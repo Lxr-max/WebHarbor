@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Join MileagePlus — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-auth-page">
+  <h1>Join MileagePlus®</h1>
+  <p>Enrollment is free. You'll get your MileagePlus number immediately and
+    start earning miles on your next flight.</p>
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="ua-field">First name <input type="text" name="first_name" required></label>
+    <label class="ua-field">Last name <input type="text" name="last_name" required></label>
+    <label class="ua-field">Email <input type="email" name="email" required></label>
+    <label class="ua-field">Password <input type="password" name="password" required minlength="8"></label>
+    <button class="ua-btn ua-btn-primary" type="submit">Enroll now</button>
+  </form>
+  <p class="ua-quiet">Already a member? <a href="{{ url_for('mp_signin') }}">Sign in</a>.</p>
+</section>
+{% endblock %}

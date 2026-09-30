@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}My USPS | USPS{% endblock %}
+{% block content %}
+<h1>Welcome back, {{ current_user.display_name }}</h1>
+<div class="grid">
+  <div class="card">
+    <h3>Active Shipments</h3>
+    {% if active %}
+      <ul class="bullets">
+        {% for s in active %}
+          <li><a href="{{ url_for('tracking_result', number=s.tracking_number) }}">{{ s.tracking_number }}</a> — {{ s.status }}{% if s.expected_date %}, expected {{ s.expected_date | longdate }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% else %}<p>No shipments in transit.</p>{% endif %}
+    <h3>Recent Deliveries</h3>
+    {% if delivered %}
+      <ul class="bullets">
+        {% for s in delivered[:5] %}
+          <li><a href="{{ url_for('tracking_result', number=s.tracking_number) }}">{{ s.tracking_number }}</a> — delivered {{ s.delivered_at }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}<p>No deliveries yet.</p>{% endif %}
+    <p><a href="{{ url_for('clicknship_create') }}">Create a label with Click-N-Ship</a></p>
+  </div>
+  <div class="card">
+    <h3>Account Services</h3>
+    <ul class="bullets">
+      <li><a href="{{ url_for('informed_delivery') }}">Informed Delivery</a> — see your daily mail</li>
+      <li><a href="{{ url_for('hold_mail_request') }}">Hold Mail</a></li>
+      <li><a href="{{ url_for('coa_request') }}">Change of Address</a></li>
+      <li><a href="{{ url_for('pickup_home') }}">Schedule a Pickup</a></li>
+      <li><a href="{{ url_for('claim_file') }}">File a Claim</a></li>
+    </ul>
+    {% if holds %}
+      <h3>Hold Mail Requests</h3>
+      <ul class="bullets">
+        {% for h in holds %}<li>{{ h.confirmation }} — {{ h.start_date | longdate }} to {{ h.end_date | longdate }} ({{ h.status }}) — {{ h.option }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% if coas %}
+      <h3>Change of Address</h3>
+      <ul class="bullets">
+        {% for c in coas %}<li>{{ c.confirmation }} — {{ c.move_type }}, starting {{ c.start_date | longdate }} ({{ c.status }})</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% if rentals %}
+      <h3>PO Boxes</h3>
+      <ul class="bullets">
+        {% for r in rentals %}<li>Box {{ r.box_number }} (Size {{ r.size_label }}) — active until {{ r.expires_on | longdate }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  <div class="card">
+    <h3>Orders</h3>
+    {% if orders %}
+      <ul class="bullets">
+        {% for o in orders %}<li>{{ o.order_number }} — {{ o.placed_at | longdate }} — {{ o.total | usd }} ({{ o.status }})</li>{% endfor %}
+      </ul>
+    {% else %}<p>No store orders yet. <a href="{{ url_for('store_home') }}">Visit The Postal Store</a>.</p>{% endif %}
+    <h3>Claims</h3>
+    {% if claims %}
+      <ul class="bullets">
+        {% for c in claims %}<li><a href="{{ url_for('claim_detail', number=c.claim_number) }}">{{ c.claim_number }}</a> — {{ c.status }}</li>{% endfor %}
+      </ul>
+    {% else %}<p>No claims filed.</p>{% endif %}
+    <h3>Scheduled Pickups</h3>
+    {% if pickups %}
+      <ul class="bullets">
+        {% for p in pickups %}<li>{{ p.confirmation }} — {{ p.pickup_date | longdate }} ({{ p.status }})</li>{% endfor %}
+      </ul>
+    {% else %}<p>No pickups scheduled.</p>{% endif %}
+    <h3>Saved Tracking Numbers</h3>
+    {% if saved %}
+      <ul class="bullets">
+        {% for s in saved %}<li><a href="{{ url_for('tracking_result', number=s.tracking_number) }}">{{ s.tracking_number }}</a> — {{ s.label }}</li>{% endfor %}
+      </ul>
+    {% else %}<p>No saved tracking numbers.</p>{% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Change My Address | USPS{% endblock %}
+{% block meta %}File an official USPS Change of Address online — forward your mail when you move.{% endblock %}
+{% block content %}
+<h1>Change of Address</h1>
+{% if page and page.lead %}<p>{{ page.lead | safe }}</p>{% endif %}
+<div class="panel">
+  <h3>File an official Change of Address online</h3>
+  <p>The online service is the fastest way to forward your mail. A ${{ '%.2f' | format(fee) }} identity validation fee is charged to your card to prevent fraud.</p>
+  <a class="btn" href="{{ url_for('coa_request') }}">Start a Change of Address Request</a>
+</div>
+<h2>Forwarding options</h2>
+<ul class="bullets">
+  <li><strong>Regular Forward Mail:</strong> standard 12-month forwarding for First-Class Mail; periodicals forward for 60 days.</li>
+  <li><strong>Premium Forwarding Service:</strong> all mail is bundled weekly and reshipped via Priority Mail for a fee.</li>
+</ul>
+{% if premium and premium.lead %}<p>{{ premium.lead }}</p>{% endif %}
+{% if page %}
+  {% for sec in (page.body | from_json) %}
+    <h2>{{ sec.heading | safe }}</h2>
+    {% for p in sec.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  {% endfor %}
+{% endif %}
+{% endblock %}

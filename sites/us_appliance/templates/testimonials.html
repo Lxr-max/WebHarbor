@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}US Appliance Customer Reviews{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>US Appliance Customer Reviews</span></li>
+{% endblock %}
+{% block content %}
+<section class="container testimonials-page">
+  <h1 class="page-heading">US Appliance Customer Reviews</h1>
+  <p class="category-blurb">Welcome to US Appliance, the best way to shop online for major home appliances for the best prices. Founded in 1963 and online since 1999 we've helped hundreds of thousands of customers all across the country find the perfect appliances for their homes.</p>
+
+  <div class="reviews-summary">
+    <div class="reviews-score">
+      <span class="reviews-avg">{{ meta.get('site_rating', 4.9) }}</span>
+      <span>out of 5.0</span>
+      <p class="reviews-total">{{ '{:,}'.format(meta.get('total', 0)) }} merchant reviews</p>
+    </div>
+    <div class="reviews-pct">
+      <span class="reviews-pct-big">{{ meta.get('pct_4_or_5', '97%') }}</span>
+      <span>of customers rate this company 4- or 5-stars</span>
+    </div>
+    <div class="reviews-page-avg">
+      <span>Reviews on this page: {{ avg }} average ({{ reviews | length }} shown)</span>
+    </div>
+  </div>
+
+  <div class="review-list">
+    {% for r in reviews %}
+    <article class="review-card">
+      <header class="review-head">
+        <span class="review-name">{{ r.name }}</span>
+        {{ macros.stars(r.rating) }}
+        <span class="review-date">{{ r.review_date }}</span>
+        {% if r.verified %}<span class="review-verified">Verified Customer</span>{% endif %}
+      </header>
+      <p class="review-comments">{{ r.comments }}</p>
+      {% if r.service_rating or r.delivery_rating or r.price_rating or r.product_rating %}
+      <p class="review-subratings">
+        {% if r.service_rating %}Customer Service: {{ r.service_rating }}/5 &middot; {% endif %}
+        {% if r.delivery_rating %}Delivery: {{ r.delivery_rating }}/5 &middot; {% endif %}
+        {% if r.price_rating %}Price: {{ r.price_rating }}/5 &middot; {% endif %}
+        {% if r.product_rating %}Product: {{ r.product_rating }}/5{% endif %}
+      </p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if pages > 1 %}
+  <nav class="pagination" aria-label="pagination">
+    <ul class="pagination-list">
+      {% for n in range(1, pages + 1) %}
+      <li class="pagination-item {% if n == page %}pagination-item--current{% endif %}">
+        <a href="{{ url_for('testimonials', page=n) }}">{{ n }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+  <p class="reviews-more">See more reviews on Shopper Approved — {{ '{:,}'.format(meta.get('total', 0)) }} Reviews</p>
+</section>
+{% endblock %}

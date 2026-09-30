@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>{{ article.title }}</h1>
+  <p class="ua-lead">{{ article.body }}</p>
+  {% if article.facts %}
+  <table class="ua-table">
+    <thead><tr><th>Option</th><th>What you get</th></tr></thead>
+    <tbody>
+      {% for fact in article.facts %}
+      <tr><td>{{ fact[0] }}</td><td>{{ fact[1] }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('policies') }}">All policies</a>
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('mytrips') }}">Manage a trip</a>
+  </div>
+</section>
+{% endblock %}

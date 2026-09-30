@@ -1,0 +1,358 @@
+/* united_airlines mirror — United-style design system (navy #002244) */
+
+:root {
+  --ua-navy: #002244;
+  --ua-navy-2: #001c38;
+  --ua-blue: #005daa;
+  --ua-blue-hover: #004a86;
+  --ua-sky: #e8f1f9;
+  --ua-gold: #ffc72c;
+  --ua-text: #1a1a1a;
+  --ua-muted: #5a6570;
+  --ua-line: #d9e0e8;
+  --ua-danger: #b3261e;
+  --ua-ok: #0f7b3d;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "United Sans", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ua-text);
+  background: #fff;
+  line-height: 1.5;
+}
+a { color: var(--ua-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3 { color: var(--ua-navy); line-height: 1.2; }
+h1 { font-size: 2rem; margin: 0 0 .6rem; }
+h2 { font-size: 1.4rem; margin: 1.6rem 0 .5rem; }
+h3 { font-size: 1.1rem; margin: 1.2rem 0 .4rem; }
+
+/* ------------------------------------------------ header */
+.ua-header { background: var(--ua-navy); color: #fff; }
+.ua-header-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 20px;
+  display: flex; align-items: center; gap: 28px; height: 64px;
+}
+.ua-logo { display: flex; align-items: center; gap: 10px; color: #fff; }
+.ua-logo:hover { text-decoration: none; }
+.ua-globe {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 22%, transparent 24%),
+              conic-gradient(from 200deg, var(--ua-blue), #ffffff 40%, var(--ua-blue) 60%, #ffffff 90%);
+  border: 2px solid #fff;
+}
+.ua-logo-text {
+  font-weight: 800; letter-spacing: .16em; font-size: 1.15rem; color: #fff;
+}
+.ua-nav { display: flex; gap: 4px; flex: 1; }
+.ua-nav a {
+  color: #cfd8e3; padding: 8px 10px; border-radius: 4px; font-size: .92rem;
+}
+.ua-nav a:hover, .ua-nav a.active { color: #fff; background: rgba(255,255,255,.12); text-decoration: none; }
+.ua-header-right { display: flex; align-items: center; gap: 14px; }
+.ua-user { display: flex; flex-direction: column; color: #fff; line-height: 1.15; }
+.ua-user:hover { text-decoration: none; }
+.ua-user-name { font-weight: 700; }
+.ua-user-miles { font-size: .8rem; color: var(--ua-gold); }
+.ua-signin, .ua-signout { color: #fff; border: 1px solid rgba(255,255,255,.6); padding: 6px 14px; border-radius: 4px; }
+.ua-signin:hover, .ua-signout:hover { background: rgba(255,255,255,.12); text-decoration: none; }
+
+/* ------------------------------------------------ hero + widget */
+.ua-hero { background: linear-gradient(135deg, var(--ua-navy) 0%, #0a3d6b 100%); color: #fff; }
+.ua-hero-inner { max-width: 1160px; margin: 0 auto; padding: 46px 20px 30px; }
+.ua-hero h1 { color: #fff; font-size: 2.2rem; }
+.ua-hero-sub { color: #cfe0f0; max-width: 620px; }
+.ua-booking-widget {
+  max-width: 1160px; margin: -18px auto 0; padding: 0 20px; position: relative;
+}
+.ua-widget-tabs { display: flex; gap: 6px; }
+.ua-tab {
+  background: rgba(0,34,68,.85); color: #cfd8e3; padding: 10px 18px;
+  border-radius: 8px 8px 0 0; font-weight: 600;
+}
+.ua-tab.active, .ua-tab:hover { color: #fff; background: var(--ua-navy); text-decoration: none; }
+.ua-widget {
+  background: #fff; border-radius: 0 10px 10px 10px; padding: 18px;
+  box-shadow: 0 6px 24px rgba(0,34,68,.18);
+}
+.ua-widget-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.ua-widget-row + .ua-widget-row { margin-top: 10px; }
+.ua-field { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--ua-muted); min-width: 130px; }
+.ua-field span { font-weight: 600; }
+.ua-optional { font-style: normal; color: #98a2ad; font-weight: 400; }
+.ua-field input, .ua-field select, .ua-form input, .ua-form select {
+  padding: 9px 10px; border: 1px solid var(--ua-line); border-radius: 6px;
+  font-size: .95rem; background: #fff; color: var(--ua-text); min-width: 0;
+}
+.ua-field input:focus, .ua-field select:focus { outline: 2px solid var(--ua-blue); border-color: var(--ua-blue); }
+
+/* ------------------------------------------------ buttons */
+.ua-btn {
+  display: inline-block; padding: 11px 22px; border-radius: 6px; border: 0;
+  font-weight: 700; font-size: .95rem; cursor: pointer; text-align: center;
+}
+.ua-btn-primary { background: var(--ua-blue); color: #fff; }
+.ua-btn-primary:hover { background: var(--ua-blue-hover); text-decoration: none; }
+.ua-btn-ghost { background: #fff; color: var(--ua-blue); border: 1px solid var(--ua-blue); }
+.ua-btn-ghost:hover { background: var(--ua-sky); text-decoration: none; }
+.ua-btn-danger { background: #fff; color: var(--ua-danger); border: 1px solid var(--ua-danger); }
+.ua-btn-danger:hover { background: #fdecec; text-decoration: none; }
+
+/* ------------------------------------------------ layout */
+.ua-main { min-height: 62vh; }
+.ua-section { max-width: 1160px; margin: 0 auto; padding: 28px 20px; }
+.ua-section-head { display: flex; justify-content: space-between; align-items: baseline; }
+.ua-link { font-weight: 600; }
+.ua-card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px; margin-top: 14px;
+}
+.ua-card {
+  border: 1px solid var(--ua-line); border-radius: 10px; padding: 16px;
+  display: flex; flex-direction: column; gap: 6px; color: var(--ua-text);
+  background: #fff;
+}
+.ua-card:hover { border-color: var(--ua-blue); text-decoration: none; box-shadow: 0 2px 10px rgba(0,34,68,.08); }
+.ua-card-route { font-size: .8rem; color: var(--ua-muted); text-transform: uppercase; letter-spacing: .04em; }
+.ua-card-title { font-weight: 700; color: var(--ua-navy); }
+.ua-card-price { color: var(--ua-blue); font-weight: 700; }
+.ua-card-cat { font-size: .85rem; color: var(--ua-muted); }
+.ua-hubs { background: var(--ua-sky); }
+
+/* ------------------------------------------------ mileageplus promo */
+.ua-mp-promo { background: var(--ua-navy); color: #dbe7f3; }
+.ua-mp-promo h2 { color: #fff; }
+.ua-mp-promo-inner {
+  max-width: 1160px; margin: 0 auto; padding: 40px 20px;
+  display: grid; grid-template-columns: 1.6fr 1fr; gap: 30px; align-items: center;
+}
+.ua-mp-actions { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+.ua-mp-facts { display: grid; gap: 12px; }
+.ua-mp-facts div {
+  background: rgba(255,255,255,.08); padding: 14px; border-radius: 8px;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.ua-mp-facts strong { color: var(--ua-gold); font-size: 1.4rem; }
+.ua-mp-facts span { font-size: .85rem; }
+
+/* ------------------------------------------------ flights table */
+.ua-search-page, .ua-booking-page, .ua-auth-page, .ua-content-page, .ua-account-page {
+  max-width: 1160px; margin: 0 auto; padding: 26px 20px 40px;
+}
+.ua-search-head h1 { margin-bottom: 10px; }
+.ua-search-form {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end;
+  background: var(--ua-sky); padding: 14px; border-radius: 10px;
+}
+.ua-search-form label { display: flex; flex-direction: column; gap: 3px; font-size: .8rem; font-weight: 600; color: var(--ua-navy); }
+.ua-results-count { font-weight: 600; color: var(--ua-navy); }
+.ua-fare-table { border: 1px solid var(--ua-line); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+.ua-fare-row {
+  display: grid; grid-template-columns: 2.2fr repeat(5, 1fr);
+  border-bottom: 1px solid var(--ua-line);
+}
+.ua-fare-row:last-child { border-bottom: 0; }
+.ua-fare-row.ua-fare-head { background: var(--ua-navy); color: #fff; }
+.ua-fare-head span { padding: 10px; font-weight: 700; font-size: .85rem; }
+.ua-flight-cell { padding: 12px 14px; }
+.ua-flight-time { font-weight: 600; color: var(--ua-navy); }
+.ua-flight-meta { font-size: .83rem; color: var(--ua-muted); margin-top: 3px; }
+.ua-flight-status { font-size: .8rem; color: var(--ua-blue); margin-top: 2px; }
+.ua-fare-cell { display: flex; align-items: stretch; justify-content: center; padding: 0; margin: 0; }
+.ua-fare-btn {
+  width: 100%; border: 0; background: #fff; cursor: pointer; padding: 10px 4px;
+  display: flex; flex-direction: column; gap: 3px; align-items: center;
+  border-left: 1px solid var(--ua-line);
+}
+.ua-fare-btn:hover { background: var(--ua-sky); }
+.ua-fare-amount { font-weight: 800; color: var(--ua-navy); }
+.ua-seats-left { font-size: .72rem; color: var(--ua-danger); font-weight: 700; }
+.ua-fare-unavailable {
+  display: flex; align-items: center; justify-content: center;
+  color: #b9c2cb; font-size: .8rem; border-left: 1px solid var(--ua-line);
+}
+.ua-diff { font-size: .78rem; color: var(--ua-muted); }
+.ua-diff-none { color: var(--ua-ok); }
+
+/* ------------------------------------------------ booking */
+.ua-booking-summary {
+  background: var(--ua-sky); border-radius: 10px; padding: 16px; margin: 14px 0;
+}
+.ua-leg { padding: 6px 0; border-bottom: 1px solid #c7d5e4; }
+.ua-leg:last-of-type { border-bottom: 0; }
+.ua-price-line { padding: 4px 0; color: var(--ua-navy); }
+.ua-price-total { font-weight: 800; font-size: 1.15rem; }
+.ua-price-note { color: var(--ua-muted); font-size: .85rem; }
+.ua-form { margin: 18px 0; }
+.ua-fieldset { border: 1px solid var(--ua-line); border-radius: 10px; padding: 14px; margin: 12px 0; }
+.ua-fieldset legend { font-weight: 700; color: var(--ua-navy); padding: 0 6px; }
+.ua-fieldset .ua-field { margin: 6px 0; }
+.ua-inline { display: inline-flex; margin-right: 14px; }
+.ua-form-inline { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+.ua-form-inline .ua-field { min-width: 150px; }
+.ua-grow { flex: 1; }
+.ua-inline-form { display: inline-block; margin: 4px 6px 4px 0; }
+.ua-bag-row { color: var(--ua-navy); padding: 3px 0; }
+.ua-confirm-head { background: var(--ua-sky); border-radius: 10px; padding: 18px; }
+.ua-pnr {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 1.15rem;
+  background: #fff; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--ua-line);
+}
+.ua-next-steps { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ------------------------------------------------ my trips */
+.ua-trip-list .ua-trip-row, .ua-trip-row {
+  display: flex; gap: 16px; align-items: center; padding: 11px 12px;
+  border: 1px solid var(--ua-line); border-radius: 8px; margin-bottom: 8px;
+  color: var(--ua-text);
+}
+.ua-trip-row:hover { border-color: var(--ua-blue); text-decoration: none; }
+.ua-status-confirmed { color: var(--ua-ok); font-weight: 700; }
+.ua-status-canceled { color: var(--ua-danger); font-weight: 700; }
+.ua-action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 18px; }
+.ua-action { border: 1px solid var(--ua-line); border-radius: 10px; padding: 16px; }
+.ua-action h3 { margin-top: 0; }
+.ua-action .ua-btn { margin-top: 8px; }
+.ua-action p { color: var(--ua-muted); font-size: .9rem; }
+
+/* ------------------------------------------------ seat map */
+.ua-seatmap { margin-top: 20px; }
+.ua-seat-cabin-name { font-weight: 700; color: var(--ua-navy); padding: 8px 0 4px; border-top: 2px solid var(--ua-navy); margin-top: 10px; }
+.ua-seat-grid { display: inline-block; }
+.ua-seat-row { display: flex; gap: 5px; margin-bottom: 5px; align-items: center; }
+.ua-row-num { width: 26px; text-align: right; font-size: .78rem; color: var(--ua-muted); }
+.ua-seat {
+  width: 42px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--ua-line); border-radius: 5px; font-size: .75rem;
+  color: var(--ua-navy); background: #fff;
+}
+.ua-seat-taken { background: #e3e8ee; color: #98a2ad; border-style: dashed; }
+.ua-seat-mine { background: #d5ecdc; border-color: var(--ua-ok); font-weight: 700; }
+.ua-quiet { color: var(--ua-muted); font-size: .88rem; }
+
+/* ------------------------------------------------ check-in + boarding pass */
+.ua-status-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px; }
+.ua-status-forms h2 { margin-top: 0; }
+.ua-bp {
+  border: 2px solid var(--ua-navy); border-radius: 12px; max-width: 560px;
+  margin: 14px 0; overflow: hidden;
+}
+.ua-bp-head {
+  background: var(--ua-navy); color: #fff; padding: 10px 16px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ua-bp-head .ua-logo-text { font-size: .95rem; }
+.ua-bp-group strong { color: var(--ua-gold); margin-left: 4px; }
+.ua-bp-body { padding: 14px 16px; }
+.ua-bp-pax { font-weight: 800; font-size: 1.1rem; color: var(--ua-navy); }
+.ua-bp-route { display: flex; gap: 14px; align-items: center; margin: 8px 0; font-size: 1.05rem; color: var(--ua-navy); }
+.ua-bp-arrow { color: var(--ua-muted); }
+.ua-bp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.ua-bp-grid span { display: block; font-size: .72rem; color: var(--ua-muted); text-transform: uppercase; letter-spacing: .05em; }
+.ua-bp-conf { margin-top: 10px; font-size: .85rem; color: var(--ua-muted); }
+
+/* ------------------------------------------------ flight status */
+.ua-status-list .ua-status-row { border: 1px solid var(--ua-line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+.ua-status-main { font-size: 1.02rem; }
+.ua-status-badge {
+  margin-left: 10px; padding: 2px 10px; border-radius: 20px; font-size: .78rem;
+  background: var(--ua-sky); color: var(--ua-navy); font-weight: 700;
+}
+.ua-status-meta { color: var(--ua-muted); font-size: .85rem; margin-top: 4px; }
+.ua-status-actions { margin-top: 6px; display: flex; gap: 18px; }
+
+/* ------------------------------------------------ content pages */
+.ua-content-page table.ua-table, .ua-account-page table.ua-table, .ua-calc-result table.ua-table, .ua-table {
+  border-collapse: collapse; width: 100%; margin: 12px 0 20px; font-size: .92rem;
+}
+.ua-table th, .ua-table td {
+  border: 1px solid var(--ua-line); padding: 9px 12px; text-align: left; vertical-align: top;
+}
+.ua-table thead th { background: var(--ua-navy); color: #fff; }
+.ua-table .ua-total-row td { font-weight: 800; background: var(--ua-sky); }
+.ua-lead { font-size: 1.05rem; max-width: 760px; }
+.ua-highlights { columns: 2; max-width: 760px; }
+.ua-spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+.ua-spec-grid div { border: 1px solid var(--ua-line); border-radius: 8px; padding: 10px 12px; }
+.ua-spec-grid span { display: block; font-size: .78rem; color: var(--ua-muted); text-transform: uppercase; letter-spacing: .04em; }
+.ua-spec-grid strong { color: var(--ua-navy); }
+.ua-calc-result { background: var(--ua-sky); border-radius: 10px; padding: 18px; margin-top: 18px; }
+.ua-deals-filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+.ua-filter { padding: 7px 14px; border-radius: 20px; border: 1px solid var(--ua-line); color: var(--ua-navy); font-weight: 600; }
+.ua-filter:hover { border-color: var(--ua-blue); text-decoration: none; }
+.ua-filter.active { background: var(--ua-navy); color: #fff; border-color: var(--ua-navy); }
+
+/* ------------------------------------------------ help */
+.ua-help-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-top: 18px; }
+.ua-help-category { border: 1px solid var(--ua-line); border-radius: 10px; padding: 14px; }
+.ua-help-category h2 { margin-top: 0; font-size: 1.1rem; }
+.ua-help-row {
+  display: flex; gap: 12px; align-items: baseline; padding: 9px 10px;
+  border-bottom: 1px solid var(--ua-line);
+}
+.ua-help-row:last-child { border-bottom: 0; }
+.ua-help-row:hover { background: var(--ua-sky); text-decoration: none; }
+.ua-help-cat { font-size: .74rem; color: var(--ua-muted); text-transform: uppercase; letter-spacing: .05em; min-width: 150px; }
+.ua-help-q { font-weight: 600; color: var(--ua-navy); }
+
+/* ------------------------------------------------ account */
+.ua-account-head { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+.ua-account-balance { display: flex; gap: 14px; flex-wrap: wrap; }
+.ua-account-balance div { background: var(--ua-navy); color: #fff; border-radius: 10px; padding: 12px 18px; text-align: center; min-width: 110px; }
+.ua-account-balance span { display: block; font-size: .72rem; color: #b9c8d8; text-transform: uppercase; letter-spacing: .05em; }
+.ua-account-balance strong { font-size: 1.25rem; color: var(--ua-gold); }
+.ua-progress { background: var(--ua-sky); border-radius: 10px; padding: 16px; margin: 16px 0; }
+.ua-progress-bar { height: 10px; background: #fff; border-radius: 6px; overflow: hidden; margin-top: 8px; }
+.ua-progress-fill { height: 100%; background: var(--ua-blue); }
+.ua-account-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; margin-top: 16px; }
+.ua-account-card { min-width: 0; border: 1px solid var(--ua-line); border-radius: 10px; padding: 16px; }
+.ua-account-card h2 { margin-top: 0; font-size: 1.1rem; }
+
+/* ------------------------------------------------ flashes + footer */
+.ua-flashes { max-width: 1160px; margin: 12px auto 0; padding: 0 20px; }
+.ua-flash {
+  background: var(--ua-sky); color: var(--ua-navy); border-left: 4px solid var(--ua-blue);
+  padding: 11px 14px; border-radius: 6px; margin-bottom: 8px;
+}
+.ua-flash-error { border-left-color: var(--ua-danger); }
+.ua-footer { background: var(--ua-navy-2); color: #b9c8d8; margin-top: 40px; }
+.ua-footer-inner { max-width: 1160px; margin: 0 auto; padding: 30px 20px 24px; }
+.ua-footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.ua-footer h4 { color: #fff; margin: 0 0 8px; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em; }
+.ua-footer a { display: block; color: #b9c8d8; padding: 3px 0; font-size: .9rem; }
+.ua-footer a:hover { color: #fff; }
+.ua-footer-note { font-size: .8rem; color: #7f93a8; border-top: 1px solid #12365c; margin-top: 20px; padding-top: 14px; }
+
+.ua-oops { text-align: center; padding-top: 60px; }
+
+@media (max-width: 900px) {
+  .ua-fare-row { grid-template-columns: 1fr; }
+  .ua-fare-head { display: none; }
+  .ua-account-grid, .ua-status-forms, .ua-mp-promo-inner, .ua-footer-cols { grid-template-columns: 1fr; }
+  .ua-nav { display: none; }
+  .ua-highlights { columns: 1; }
+  /* narrow-viewport page-level overflow guards (audit fix): wide tables
+     scroll inside their own box instead of stretching the page */
+  .ua-table { display: block; overflow-x: auto; }
+  /* help rows stack the category tag instead of forcing a fixed column */
+  .ua-help-row { flex-wrap: wrap; }
+  .ua-help-cat { min-width: 0; }
+  /* content images never exceed the viewport width */
+  .ua-img-row img { max-width: 100%; height: auto; }
+}
+
+/* the seat map is intrinsically wider than a phone: pan it internally */
+.ua-seatmap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* booking-widget tabs wrap instead of overflowing the page */
+.ua-widget-tabs { flex-wrap: wrap; }
+/* card grids shrink to the viewport, never past it */
+.ua-action-grid { grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
+.ua-help-categories { grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
+
+.ua-deal-hero { width: 100%; max-width: 900px; border-radius: 10px; margin: 14px 0; display: block; }
+.ua-half-img { width: 48%; border-radius: 10px; margin: 14px 0; }
+.ua-card-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 6px; }
+.ua-img-row { display: flex; gap: 14px; margin: 16px 0; flex-wrap: wrap; }
+.ua-img-row img { height: 220px; border-radius: 10px; }

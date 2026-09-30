@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Delivery{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Delivery</span></li>
+{% endblock %}
+{% block content %}
+<section class="container delivery-page">
+  <div class="delivery-hero">
+    <h1 class="page-heading">{{ d.hero_title }}</h1>
+    <p class="delivery-hero-line">{{ d.hero_line }}</p>
+    <p>{{ d.hero_sub }}</p>
+    <p class="delivery-call">Call for Expert Help 877-628-9913</p>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="how-grid">
+    {% for title, text in d.how_it_works %}
+    <div class="how-step">
+      <h3>{{ title }}</h3>
+      <p>{{ text }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2>Major Appliance Delivery Options</h2>
+  <div class="ship-options">
+    {% for opt in d.options %}
+    <div class="ship-option {% if opt.tag == 'Most Popular' %}is-featured{% endif %}">
+      <p class="ship-tag">{{ opt.tag }}</p>
+      <h3>{{ opt.name }}</h3>
+      <p class="ship-price">{{ opt.price }}</p>
+      <p>{{ opt.blurb }}</p>
+      <ul>
+        {% for b in opt.bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="ship-extra">
+    <h3>Additional Charges May Apply</h3>
+    <ul class="extra-list">
+      {% for item in d.extra_charges %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+    <p>Most deliveries use 53-ft trailers. Need a smaller truck? Contact us — additional charges may apply.</p>
+  </div>
+
+  <h2>Small Appliances &amp; Accessories</h2>
+  <p>Smaller items ship via UPS, FedEx, or FedEx SmartPost. We do not deliver to P.O. Boxes.</p>
+  <table class="rate-table">
+    <thead><tr><th>Item Type</th><th>Shipping Rate</th></tr></thead>
+    <tbody>
+      {% for label, rate in d.small_rates %}
+      <tr><td>{{ label }}</td><td>{{ rate }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Estimated Delivery Times</h2>
+  <table class="rate-table">
+    <thead><tr><th>Order Type</th><th>Time</th><th>Notes</th></tr></thead>
+    <tbody>
+      {% for label, t, note in d.times %}
+      <tr><td>{{ label }}</td><td>{{ t }}</td><td>{{ note }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>Most orders are delivered within these timeframes. We will notify you should there be any delay. Once your order ships you will receive tracking information and our shipping partner will reach out to arrange a convenient delivery time. Remote locations may take longer.</p>
+</section>
+{% endblock %}

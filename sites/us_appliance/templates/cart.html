@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Cart</span></li>
+{% endblock %}
+{% block content %}
+<section class="container cart-page">
+  <h1 class="page-heading">Your Cart</h1>
+  {% if not summary['items'] %}
+  <div class="cart-empty">
+    <p>Your cart is empty.</p>
+    <p><a class="button button--primary" href="{{ url_for('home') }}">Continue Shopping</a></p>
+  </div>
+  {% else %}
+  <form method="post" action="{{ url_for('cart', action='update') }}" class="cart-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="cart-table-wrap" tabindex="0" role="region" aria-label="Cart items"><table class="cart-table">
+      <thead>
+        <tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for row in summary['items'] %}
+        <tr class="cart-item" data-item-id="{{ row.id }}">
+          <td class="cart-item-main">
+            {% if row.product.card_image %}
+            <a href="/{{ row.product.slug }}.html"><img class="cart-thumb" src="{{ url_for('static', filename='images/' ~ row.product.card_image) }}" alt="{{ row.product.name }}"></a>
+            {% endif %}
+            <a class="cart-item-name" href="/{{ row.product.slug }}.html">{{ row.product.name }}</a>
+            <p class="cart-item-brand">{{ row.product.brand }} &middot; model {{ row.product.mpn }}</p>
+          </td>
+          <td class="cart-price">{{ money(row.product.price) }}</td>
+          <td><input class="qty-input" type="number" min="0" name="qty_{{ row.id }}" value="{{ row.qty }}" aria-label="Quantity for {{ row.product.name }}"></td>
+          <td class="cart-line-total">{{ money((row.product.price or 0) * row.qty) }}</td>
+          <td>
+            <button class="cart-remove" type="submit" formaction="{{ url_for('cart', action='remove') }}" name="item" value="{{ row.id }}">Remove</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table></div>
+    <div class="cart-actions">
+      <button class="button" type="submit">Update Cart</button>
+      <a class="button button--primary" href="{{ url_for('checkout') }}">Check Out</a>
+    </div>
+  </form>
+
+  <aside class="cart-summary">
+    <h2>Order Summary</h2>
+    <dl>
+      <dt>Items</dt><dd>{{ summary['count'] }}</dd>
+      <dt>Subtotal</dt><dd>{{ money(summary['subtotal']) }}</dd>
+      <dt>Estimated Shipping</dt>
+      <dd>
+        {% if summary['shipping'] == 0 %}FREE{% else %}{{ money(summary['shipping']) }}{% endif %}
+      </dd>
+    </dl>
+    <p class="cart-note">
+      {% if summary['qualifies'] %}
+      Your order qualifies for FREE standard delivery — major appliance orders over ${{ free_threshold }} ship free.
+      {% else %}
+      Major appliance orders under ${{ free_threshold }} ship for $99. Add ${{ '%d' | format(free_threshold - summary['subtotal']) }} more to qualify for FREE delivery.
+      {% endif %}
+    </p>
+    <p class="cart-note">In-Home Delivery option upgrade — $199 per order (select at checkout).</p>
+    <a class="button button--primary" href="{{ url_for('checkout') }}">Check Out</a>
+  </aside>
+  {% endif %}
+</section>
+{% endblock %}

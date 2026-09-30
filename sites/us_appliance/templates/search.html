@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}US Appliance{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Search</span></li>
+{% endblock %}
+{% block content %}
+<section class="container">
+  <h1 class="page-heading">Search</h1>
+  <nav class="search-tabs" role="tablist">
+    <ul class="search-tab-list">
+      <li class="search-tab {% if section != 'content' %}is-active{% endif %}">
+        <a href="{{ url_for('search', search_query=query, section='product', brand=brand, price_from=price_from, price_to=price_to, sort=sort) }}">
+          Products ({{ total }})
+        </a>
+      </li>
+      <li class="search-tab {% if section == 'content' %}is-active{% endif %}">
+        <a href="{{ url_for('search', search_query=query, section='content') }}">
+          News &amp; Information ({{ content_total }})
+        </a>
+      </li>
+      <li class="search-tab-adv"><a class="toggleLink" href="#advanced-search" id="adv-toggle">Show Search Form</a></li>
+    </ul>
+  </nav>
+
+  {% if section != 'content' %}
+  <div class="advancedSearch-form" id="advanced-search">
+    <form method="get" action="{{ url_for('search') }}">
+      <input type="hidden" name="mode" value="1">
+      <input type="hidden" name="section" value="product">
+      <h5 class="advancedSearch-title">Advanced Search</h5>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="search_query_adv">Search Keyword</label>
+          <input class="form-input" type="text" name="search_query_adv" id="search_query_adv" value="{{ query }}">
+        </div>
+        <div class="form-field">
+          <label for="search-form-brand">Brands</label>
+          <select class="form-select" name="brand" id="search-form-brand">
+            <option value="">No Preference</option>
+            {% for b in brand_names %}
+            <option value="{{ b }}" {% if b == brand %}selected{% endif %}>{{ b }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-row search-price-range">
+        <h5 class="advancedSearch-title">Search By Price</h5>
+        <label><span>From</span><input class="form-input" type="number" step="any" name="price_from" value="{{ price_from }}"></label>
+        <label><span>to</span><input class="form-input" type="number" step="any" name="price_to" value="{{ price_to }}"></label>
+      </div>
+      <div class="form-actions">
+        <input class="button button--primary" type="submit" value="Search">
+      </div>
+    </form>
+  </div>
+
+  <div class="result-bar">
+    <p class="result-count">{{ total }} products {% if query %}for "{{ query }}"{% endif %}</p>
+    <form class="sort-form" method="get" action="{{ url_for('search') }}">
+      <input type="hidden" name="search_query" value="{{ query }}">
+      <input type="hidden" name="section" value="product">
+      {% if brand %}<input type="hidden" name="brand" value="{{ brand }}">{% endif %}
+      {% if price_from %}<input type="hidden" name="price_from" value="{{ price_from }}">{% endif %}
+      {% if price_to %}<input type="hidden" name="price_to" value="{{ price_to }}">{% endif %}
+      <label for="sort">Sort By:</label>
+      <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
+        <option value="featured" {% if sort == 'featured' %}selected{% endif %}>Featured Items</option>
+        <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Newest Items</option>
+        <option value="bestselling" {% if sort == 'bestselling' %}selected{% endif %}>Best Selling</option>
+        <option value="alphaasc" {% if sort == 'alphaasc' %}selected{% endif %}>A to Z</option>
+        <option value="alphadesc" {% if sort == 'alphadesc' %}selected{% endif %}>Z to A</option>
+        <option value="avgcustomerreview" {% if sort == 'avgcustomerreview' %}selected{% endif %}>By Review</option>
+        <option value="priceasc" {% if sort == 'priceasc' %}selected{% endif %}>Price: Ascending</option>
+        <option value="pricedesc" {% if sort == 'pricedesc' %}selected{% endif %}>Price: Descending</option>
+      </select>
+    </form>
+  </div>
+
+  {% if results %}
+  <div class="prod-grid">
+    {% for p in results %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-note">Your search returned no products. Try a different keyword or clear the filters.</p>
+  {% endif %}
+
+  {% if pages > 1 %}
+  <nav class="pagination" aria-label="pagination">
+    <ul class="pagination-list">
+      {% for n in range(1, pages + 1) %}
+      <li class="pagination-item {% if n == page %}pagination-item--current{% endif %}">
+        <a href="{{ url_for('search', search_query=query, section='product', brand=brand, price_from=price_from, price_to=price_to, sort=sort, page=n) }}">{{ n }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+  {% else %}
+  <div class="content-results">
+    <p class="result-count">{{ content_total }} News &amp; Information results {% if query %}for "{{ query }}"{% endif %}</p>
+    {% if content_hits %}
+    <ul class="content-result-list">
+      {% for hit in content_hits %}
+      <li class="content-result">
+        <a class="content-result-title" href="{{ hit.href }}">{{ hit.title }}</a>
+        <p class="content-result-text">{{ hit.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty-note">No articles matched your search.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

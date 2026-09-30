@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}View Your Appointment{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">View Your Appointment</h1>
+
+  {% if error %}
+  <div class="alert-box alert-box--error"><p>{{ error }}</p></div>
+  {% endif %}
+
+  {% if appt %}
+  <section class="office-result">
+    <h2>Appointment Confirmation: {{ appt.confirmation }}</h2>
+    <dl class="office-meta">
+      <dt>Status:</dt><dd>{{ appt.status }}</dd>
+      <dt>Service:</dt><dd>{{ appt.reason }}</dd>
+      {% if appt.reason_detail %}<dt>Your note:</dt><dd>{{ appt.reason_detail }}</dd>{% endif %}
+      <dt>Office:</dt><dd>{{ appt.office_name }} ({{ appt.office_designation }})</dd>
+      <dt>Date:</dt><dd>{{ appt.appt_date }}</dd>
+      <dt>Time:</dt><dd>{{ appt.appt_time }}</dd>
+    </dl>
+    {% if current_user.is_authenticated and appt.user_id == current_user.id and appt.status == 'Scheduled' %}
+    <form method="post" action="{{ url_for('appointment_cancel') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="confirmation" value="{{ appt.confirmation }}">
+      <button class="btn btn--danger" type="submit">Cancel this appointment</button>
+    </form>
+    {% endif %}
+  </section>
+  {% else %}
+  <section class="content-section">
+    <p>Enter your appointment confirmation number and the ZIP code you used when booking to view your appointment details.</p>
+    <form class="usa-form" method="post" action="{{ url_for('appointment_view') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label class="form-label" for="confirmation"><span class="form-label__title">Confirmation Number</span></label>
+      <input id="confirmation" name="confirmation" type="text" required placeholder="e.g., USCCHI26091501">
+      <label class="form-label" for="zip"><span class="form-label__title">ZIP Code</span></label>
+      <input id="zip" name="zip" type="text" maxlength="5" required placeholder="Your 5-digit ZIP code">
+      <button class="btn btn--primary" type="submit">View appointment</button>
+    </form>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
