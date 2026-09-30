@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Sign up | Carvana{% endblock %}
+{% block body %}
+<div class="authn-page">
+  <h1>Create your account</h1>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="authn-form" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="est-row"><label for="r-name">Full name</label><input id="r-name" type="text" name="display_name" required></div>
+    <div class="est-row"><label for="r-email">Email</label><input id="r-email" type="email" name="email" required></div>
+    <div class="est-row"><label for="r-pass">Password (8+ characters)</label><input id="r-pass" type="password" name="password" minlength="8" required></div>
+    <button type="submit" class="btn-blue big">Sign up</button>
+  </form>
+  <p class="form-note">Already have an account? <a href="/authn/login">Log in</a></p>
+</div>
+{% endblock %}

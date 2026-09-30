@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Carvana Help & Support | Carvana{% endblock %}
+{% block body %}
+<div class="content-page">
+  <h1>What do you need help with?</h1>
+  <p class="lead">Quick answers from the Carvana Help Center, captured from the upstream help pages on 2026-09-29.</p>
+  {% for category, arts in categories %}
+  <section class="content-section">
+    <h2>{{ category }}</h2>
+    <ul>
+      {% for a in arts %}
+      <li><a href="{{ a.url() }}">{{ a.question }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}
