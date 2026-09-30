@@ -217,7 +217,7 @@
           <div class="body">
             <div class="row1"><span>{{ s.title }}</span>{% if s.rating %}<span class="rating-star">&#9733; {{ s.rating }} ({{ s.reviews_count }})</span>{% endif %}</div>
             <div class="row2"><span class="muted">{{ s.name }}</span></div>
-            <div class="row2"><span><strong>{{ '$%d'|format(s.nightly_price) if s.nightly_price }}</strong> night</span></div>
+            <div class="row2"><span><strong>{{ '$%.2f'|format(s.nightly_price) if s.nightly_price }}</strong> night</span></div>
           </div>
         </a>
         {% endfor %}
@@ -228,7 +228,7 @@
 
   <div>
     <div class="bookit">
-      <p class="price">{{ '$%d'|format(lst.nightly_price) if lst.nightly_price }} <span class="muted" style="font-size:14px;">night</span></p>
+      <p class="price">{{ '$%.2f'|format(lst.nightly_price) if lst.nightly_price }} <span class="muted" style="font-size:14px;">night</span></p>
       <form id="bookit" method="get" action="{{ url_for('listing_detail', lid=lst.id) }}">
         <div class="dates">
           <div>
@@ -252,7 +252,7 @@
       </form>
       {% if nights and nights > 0 %}
       <div class="breakdown">
-        <div class="row"><span>{{ money0(lst.nightly_price) }} x {{ nights }} night{{ 's' if nights > 1 }}</span><span>{{ money(price_total) }}</span></div>
+        <div class="row"><span>{{ money(lst.nightly_price) }} x {{ nights }} night{{ 's' if nights > 1 }}</span><span>{{ money(price_total) }}</span></div>
         <div class="row total"><span>Total (includes all fees)</span><span>{{ money(price_total) }}</span></div>
       </div>
       <!-- One shared form (review H3): the Request-to-book button submits the
@@ -260,8 +260,9 @@
            formaction, so a guest count changed in the widget can never be
            silently dropped the way the old server-rendered hidden input
            dropped it. -->
-      <button class="btn btn-lg" type="submit" form="bookit" formaction="{{ url_for('book_stay', lid=lst.id) }}">Request to book</button>
-      <p class="muted small" style="margin-top:10px;">{{ lst.quote_nights }}-night upstream quote for this window: {{ money0(lst.quote_total) if lst.quote_total else '—' }}</p>
+      <button class="btn btn-lg" type="submit" form="bookit" {{ 'disabled' if not available }} formaction="{{ url_for('book_stay', lid=lst.id) }}">Request to book</button>
+      <p class="small">{{ 'Available in the captured calendar.' if available else 'These dates are unavailable in the captured calendar. Choose different dates before booking.' }}</p>
+      <p class="muted small" style="margin-top:10px;">Original captured quote ({{ lst.quote_checkin }} to {{ lst.quote_checkout }}, {{ lst.quote_nights }} nights): {{ money(lst.quote_total) if lst.quote_total else '—' }}</p>
       {% else %}
       <p class="muted small">Pick check-in and check-out dates to see the trip price.</p>
       {% endif %}

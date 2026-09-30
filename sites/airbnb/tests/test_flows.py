@@ -95,7 +95,7 @@ def test_booking_requires_login(client):
 
 def test_book_stay_full_flow(auth_client):
     with ab.app.app_context():
-        lst = ab.Listing.query.filter_by(destination_slug='scottsdale').first()
+        lst = ab.Listing.query.filter_by(destination_slug='asheville').first()
         n0 = ab.Booking.query.count()
     r = auth_client.get(f'/rooms/{lst.id}/book?checkin=2026-12-06'
                         f'&checkout=2026-12-11&adults=2')

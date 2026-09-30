@@ -18,6 +18,8 @@ from airbnb.com on 2026-09-30 (see provenance.json); the SQLite seed is
 materialized deterministically at image build time (PYTHONHASHSEED=0).
 """
 import json
+import math
+from urllib.parse import urlsplit
 import os
 import secrets
 from datetime import date, timedelta
@@ -537,7 +539,7 @@ def parse_stay_filters(args):
     def _float(name):
         v = args.get(name, '').strip()
         try:
-            return float(v) if v else None
+            return float(v) if v and math.isfinite(float(v)) and float(v) >= 0 else None
         except ValueError:
             return None
 
@@ -620,6 +622,8 @@ def dates_available_window(lst, checkin, checkout):
     cal = lst.calendar_map()
     if not cal or not checkin or not checkout:
         return False
+    if not nights_between(checkin, checkout) or not 0 < nights_between(checkin, checkout) <= 366:
+        return False
     d = date.fromisoformat(checkin)
     end = date.fromisoformat(checkout)
     while d < end:
@@ -673,9 +677,9 @@ def search_redirect():
     slug = request.args.get('query', '').strip()
     for d in all_destinations():
         if slug and (d.city.lower() in slug.lower() or d.label.lower() in slug.lower()):
-            return redirect(url_for('stays_search', slug=d.slug))
+            return redirect(url_for('stays_search', slug=d.slug, **{k: request.args[k] for k in ['checkin', 'checkout', 'adults'] if request.args.get(k)}))
     if slug:
-        return redirect(url_for('stays_search', slug='asheville'))
+        abort(404, description='No captured destination matches this search.')
     return redirect(url_for('home'))
 
 
@@ -774,7 +778,8 @@ def listing_detail(lid):
         dests_all=all_destinations(),
         saved_ids=saved_ids, checkin=checkin, checkout=checkout,
         adults=adults, nights=nights, price_total=price_total,
-        cal_months=calendar_months(lst), user_wishlists=user_wishlists,
+        cal_months=calendar_months(lst, limit=12), user_wishlists=user_wishlists,
+        available=dates_available_window(lst, checkin, checkout),
         money=money, money0=money0)
 
 
@@ -807,20 +812,25 @@ def book_stay(lid):
     if not current_user.is_authenticated:
         # relative next: the login guard only accepts paths starting with
         # '/', so an absolute request.url broke the round trip (review M1)
-        return redirect(url_for('login', next=request.full_path))
+        return redirect(url_for('login', next=url_for('book_stay', lid=lid, checkin=checkin, checkout=checkout, adults=adults)))
     nights = nights_between(checkin, checkout)
     if not nights or nights <= 0:
         abort(400)
+    if not dates_available_window(lst, checkin, checkout):
+        return render_template('book_stay.html', lst=lst, checkin=checkin, checkout=checkout, adults=adults, nights=nights, error='These dates are not available in the captured calendar.', money=money), 400
     capacity = lst.max_guest_capacity or lst.person_capacity or 16
     try:
         n_adults = int(adults)
     except ValueError:
-        n_adults = 1
+        n_adults = 0
     if n_adults < 1 or n_adults > capacity:
         return render_template('book_stay.html', lst=lst, checkin=checkin,
                                checkout=checkout, adults=adults, nights=nights,
                                error=f'This place allows up to {capacity} guests.',
                                money=money)
+    existing = Booking.query.filter_by(user_id=current_user.id, kind='stay', listing_id=lst.id, checkin=checkin, checkout=checkout, status='confirmed').first()
+    if existing:
+        return redirect(url_for('booking_detail', code=existing.code))
     subtotal, total = trip_price(lst.nightly_price or 0, nights)
     bk = Booking(code=booking_code(), user_id=current_user.id, kind='stay',
                  listing_id=lst.id, checkin=checkin, checkout=checkout,
@@ -1019,7 +1029,7 @@ def experience_detail(eid):
         user_wishlists = (Wishlist.query.filter_by(user_id=current_user.id)
                           .order_by(Wishlist.id).all())
     return render_template('experience_detail.html', exp=exp, saved_ids=saved_ids,
-                           user_wishlists=user_wishlists)
+                           user_wishlists=user_wishlists, offerings=exp.offering_list())
 
 
 @app.route('/experiences/<eid>/book', methods=['GET', 'POST'])
@@ -1037,7 +1047,7 @@ def book_experience(eid):
     if not current_user.is_authenticated:
         # relative next (review M1): request.url is absolute and the login
         # guard rejects it, stranding the user on the home page
-        return redirect(url_for('login', next=request.full_path))
+        return redirect(url_for('login', next=url_for('book_experience', eid=eid, date=request.form.get('date', ''), guests=request.form.get('guests', '1'))))
     when = request.form.get('date', '').strip()
     guests = request.form.get('guests', '1').strip() or '1'
     if not when:
@@ -1054,7 +1064,9 @@ def book_experience(eid):
     try:
         n_guests = int(guests)
     except ValueError:
-        n_guests = 1
+        n_guests = 0
+    if not 1 <= n_guests <= 6:
+        return render_template('book_experience.html', exp=exp, offerings=offerings, when=when, guests=guests, error='Choose between 1 and 6 guests.', money=money), 400
     total = round((exp.price_per_guest or 0) * n_guests, 2)
     bk = Booking(code=booking_code(), user_id=current_user.id,
                  kind='experience', experience_id=exp.id, experience_date=when,
@@ -1077,7 +1089,7 @@ def login():
     if user and bcrypt.check_password_hash(user.password_hash, password):
         login_user(user)
         target = request.args.get('next') or request.form.get('next')
-        if target and target.startswith('/'):
+        if target and target.startswith('/') and not target.startswith('//') and '\\' not in target and not any(ord(c) < 32 for c in target) and not urlsplit(target).netloc:
             return redirect(target)
         return redirect(url_for('home'))
     return render_template('login.html', error='Invalid email or password.')

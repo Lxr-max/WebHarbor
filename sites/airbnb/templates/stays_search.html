@@ -115,7 +115,7 @@
     {% endif %}
     <div class="cards">
       {% for lst in listings %}
-      <a class="card" href="{{ url_for('listing_detail', lid=lst.id, checkin=lst.quote_checkin, checkout=lst.quote_checkout, adults=adults or 2) }}">
+      <a class="card" href="{{ url_for('listing_detail', lid=lst.id, checkin=checkin or lst.quote_checkin, checkout=checkout or lst.quote_checkout, adults=adults or 2) }}">
         <div class="ph">
           {% if lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}" loading="lazy">{% endif %}
         </div>
@@ -133,8 +133,8 @@
             </span>
           </div>
           <div class="row2">
-            <span><strong>{{ '$%d'|format(lst.nightly_price) if lst.nightly_price else 'Price unavailable' }}</strong> night
-              {% if lst.quote_total %}<span class="muted">&middot; {{ '$%d'|format(lst.quote_total) }} for {{ lst.quote_nights }} nights</span>{% endif %}
+            <span><strong>{{ '$%.2f'|format(lst.nightly_price) if lst.nightly_price else 'Price unavailable' }}</strong> night
+              {% if lst.quote_total %}<span class="muted">&middot; {{ '$%.2f'|format(lst.quote_total) }} for {{ lst.quote_nights }} nights</span>{% endif %}
             </span>
             <span class="muted small">{{ lst.bedrooms or 0 }} bd &middot; {{ lst.baths or 0 }} ba</span>
           </div>
