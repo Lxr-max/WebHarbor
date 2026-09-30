@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}My trips — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="plan-head card" style="margin-bottom:20px">
+    <h1 style="margin:0">My trips</h1>
+    <span class="spacer"></span>
+    <a class="btn btn-primary" href="{{ url_for('plan_new') }}">Plan a new trip</a>
+  </div>
+
+  <h2>Trips I own</h2>
+  <div class="grid cols-3" style="margin-bottom:24px">
+    {% for t in my_trips %}
+      <div class="tile">
+        <div class="pad">
+          <h3><a href="{{ url_for('plan', edit_key=t.edit_key) }}">{{ t.title }}</a></h3>
+          <p class="small muted" style="margin:2px 0">
+            {% if t.geo %}{{ t.geo.name }} · {% endif %}
+            {{ t.start_date or 'No dates' }}{% if t.end_date %} → {{ t.end_date }}{% endif %}
+          </p>
+          <p style="margin:4px 0">
+            <span class="badge priv-{{ t.privacy }}">{{ t.privacy|capitalize }} trip</span>
+            <span class="small muted">{{ t.travelers }} traveler{{ 's' if t.travelers != 1 }}</span>
+          </p>
+          <p class="small" style="margin:4px 0 0">
+            <a href="{{ url_for('plan', edit_key=t.edit_key) }}">Open planner</a> ·
+            <a href="{{ url_for('trip_view', view_key=t.view_key) }}">Shared view</a>
+          </p>
+        </div>
+      </div>
+    {% else %}
+      <p class="muted">No trips yet — <a href="{{ url_for('plan_new') }}">plan your first trip</a>.</p>
+    {% endfor %}
+  </div>
+
+  {% if pending %}
+    <h2>Trip invitations</h2>
+    <div class="grid cols-2" style="margin-bottom:24px">
+      {% for t, c in pending %}
+        <div class="card">
+          <h3>{{ t.title }}</h3>
+          <p class="small muted" style="margin:2px 0">Invited by {{ t.owner.display_name }} ·
+            {% if t.geo %}{{ t.geo.name }}{% endif %}</p>
+          <form method="post" action="{{ url_for('invite_respond', cid=c.id) }}" class="inline">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="accept">
+            <button class="btn btn-primary btn-sm" type="submit">Accept invitation</button>
+          </form>
+          <form method="post" action="{{ url_for('invite_respond', cid=c.id) }}" class="inline">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="decline">
+            <button class="btn btn-ghost btn-sm" type="submit">Decline</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if shared %}
+    <h2>Shared with me</h2>
+    <div class="grid cols-3">
+      {% for t, c in shared %}
+        <div class="tile">
+          <div class="pad">
+            <h3><a href="{{ url_for('plan', edit_key=t.edit_key) }}">{{ t.title }}</a></h3>
+            <p class="small muted" style="margin:2px 0">Owner: {{ t.owner.display_name }}
+              {% if t.geo %} · {{ t.geo.name }}{% endif %}</p>
+            <p class="small" style="margin:2px 0 0">
+              <a href="{{ url_for('plan', edit_key=t.edit_key) }}">Open planner</a> ·
+              <a href="{{ url_for('trip_view', view_key=t.view_key) }}">Shared view</a>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

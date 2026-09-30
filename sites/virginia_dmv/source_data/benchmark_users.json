@@ -1,0 +1,185 @@
+{
+  "note": "Mirror-native benchmark fixtures for the DMV online account surface. The real transactions.dmv.virginia.gov account app sits behind an Okta-fed login and cannot be mirrored with real accounts; these four seeded accounts reconstruct the account + vehicle + renewal flows with the real upstream service chrome (fee schedule, receipt wording, renewal rules) captured from www.dmv.virginia.gov and the DMV 201 fee chart. Password for every benchmark account: TestPass123!",
+  "password": "TestPass123!",
+  "users": [
+    {
+      "email": "alice.j@test.com",
+      "display_name": "Alice Johnson",
+      "first_name": "Alice",
+      "last_name": "Johnson",
+      "account_number": "DMV-4831-2276",
+      "street": "4200 Cary Street",
+      "city": "Richmond",
+      "state": "VA",
+      "zip": "23221",
+      "phone": "(804) 555-0148",
+      "license": {
+        "number": "D1234581",
+        "class": "D",
+        "type": "Driver's License",
+        "issued": "2018-10-12",
+        "expires": "2026-11-30",
+        "status": "Valid",
+        "real_id": true,
+        "organ_donor": true,
+        "restrictions": "",
+        "veteran": false
+      },
+      "vehicles": [
+        {
+          "vin": "1HGCF1A23XA448119",
+          "plate": "UPL-2214",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2019,
+          "type": "Passenger vehicle - 4,000 lbs or less",
+          "weight_class": "4000_or_less",
+          "registration_expires": "2026-10-15",
+          "registration_years": 1,
+          "emissions_locality": false,
+          "electric": false,
+          "title_number": "T8842-1195",
+          "insured": true
+        },
+        {
+          "vin": "2T3W1RFV0KW204361",
+          "plate": "JKN-8043",
+          "make": "Toyota",
+          "model": "RAV4",
+          "year": 2021,
+          "type": "Passenger vehicle - 4,001 to 6,500 lbs",
+          "weight_class": "4001_6500",
+          "registration_expires": "2026-11-02",
+          "registration_years": 1,
+          "emissions_locality": false,
+          "electric": false,
+          "title_number": "T9013-4427",
+          "insured": true
+        }
+      ]
+    },
+    {
+      "email": "bob.c@test.com",
+      "display_name": "Bob Chen",
+      "first_name": "Bob",
+      "last_name": "Chen",
+      "account_number": "DMV-5127-8490",
+      "street": "3912 Sunset Ridge Road",
+      "city": "Fairfax",
+      "state": "VA",
+      "zip": "22030",
+      "phone": "(703) 555-0239",
+      "license": {
+        "number": "D7654329",
+        "class": "D, M",
+        "type": "Driver's License",
+        "issued": "2020-03-18",
+        "expires": "2028-03-18",
+        "status": "Valid",
+        "real_id": true,
+        "organ_donor": false,
+        "restrictions": "",
+        "veteran": false
+      },
+      "vehicles": [
+        {
+          "vin": "1FTFW1E85JKE34017",
+          "plate": "FXR-6672",
+          "make": "Ford",
+          "model": "F-150",
+          "year": 2020,
+          "type": "Pickup truck - 6,501 to 10,000 lbs gross weight",
+          "weight_class": "6501_10000",
+          "registration_expires": "2026-09-30",
+          "registration_years": 1,
+          "emissions_locality": true,
+          "electric": false,
+          "title_number": "T7719-3302",
+          "insured": true
+        }
+      ]
+    },
+    {
+      "email": "carol.d@test.com",
+      "display_name": "Carol Diaz",
+      "first_name": "Carol",
+      "last_name": "Diaz",
+      "account_number": "DMV-6034-1158",
+      "street": "1125 N Nelson Street",
+      "city": "Arlington",
+      "state": "VA",
+      "zip": "22201",
+      "phone": "(571) 555-0176",
+      "license": {
+        "number": "D5540917",
+        "class": "D",
+        "type": "Driver's License",
+        "issued": "2017-08-02",
+        "expires": "2027-08-02",
+        "status": "Valid",
+        "real_id": false,
+        "organ_donor": true,
+        "restrictions": "",
+        "veteran": false
+      },
+      "vehicles": [
+        {
+          "vin": "5HD1FLK18KB681425",
+          "plate": "MCK-3317",
+          "make": "Harley-Davidson",
+          "model": "Street Glide",
+          "year": 2018,
+          "type": "Motorcycle",
+          "weight_class": "motorcycle",
+          "registration_expires": "2026-12-31",
+          "registration_years": 1,
+          "emissions_locality": true,
+          "electric": false,
+          "title_number": "T6644-8811",
+          "insured": true
+        }
+      ]
+    },
+    {
+      "email": "dana.k@test.com",
+      "display_name": "Dana King",
+      "first_name": "Dana",
+      "last_name": "King",
+      "account_number": "DMV-7721-9043",
+      "street": "2087 Ocean Front Avenue",
+      "city": "Virginia Beach",
+      "state": "VA",
+      "zip": "23451",
+      "phone": "(757) 555-0164",
+      "license": {
+        "number": "ID9912345",
+        "class": "ID",
+        "type": "Photo Identification Card",
+        "issued": "2022-05-09",
+        "expires": "2026-05-09",
+        "status": "Valid",
+        "real_id": true,
+        "organ_donor": false,
+        "restrictions": "",
+        "veteran": false
+      },
+      "vehicles": [
+        {
+          "vin": "1G1FY6S00L4180927",
+          "plate": "VBE-1198",
+          "make": "Chevrolet",
+          "model": "Bolt EV",
+          "year": 2017,
+          "type": "Passenger vehicle - 4,000 lbs or less",
+          "weight_class": "4000_or_less",
+          "registration_expires": "2026-10-31",
+          "registration_years": 1,
+          "emissions_locality": false,
+          "electric": true,
+          "title_number": "T5533-2248",
+          "insured": true
+        }
+      ]
+    }
+  ]
+}

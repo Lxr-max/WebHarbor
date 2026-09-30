@@ -1,0 +1,50 @@
+{
+ "site": "ziprecruiter",
+ "upstream": "https://www.ziprecruiter.com/",
+ "captured_at": "2026-09-29",
+ "capture_method": "ziprecruiter.com serves its functional pages (jobs-search, job details, salaries, blog) behind Cloudflare managed challenges: plain HTTP clients receive a 'Just a moment...' interstitial. All captures were made with a real headful Chromium (Playwright under Xvfb, persistent profiles, retry-until-rendered harness in scraped_data/capture.py) driving the exact public site; every page recorded is the fully-rendered DOM plus the JSON-LD and the Next.js RSC flight payloads the page itself embeds. Nothing is synthesized: each tracked field traces to a capture file in scraped_data/captures/ (page + .meta.json sidecar with URL/status/timestamp).",
+ "sources": {
+  "www.ziprecruiter.com/": {
+   "role": "primary site: home; 16 job SERPs across 14 title families and 11 metros (with their filter panels and result totals); 184 job detail pages with full descriptions, employment types, remote/location types, pay, posted ages, badges and the career Q&A blocks; 34 company profile pages; 19 salary pages (14 national + city variants) with percentiles, histograms, top-cities and related-titles tables; the browse/title index; 18 career-advice blog pages",
+   "serps_captured": 16,
+   "job_details_captured": 184,
+   "company_pages_captured": 34,
+   "salary_pages_captured": 19,
+   "blog_pages_captured": 18
+  },
+  "www.ziprecruiter.com/svc/fotomat/": {
+   "role": "company-logo CDN: every managed logo fetched from its exact upstream fotomat URL (public-nosensitive-ziprecruiter-logos/company/<hash>)",
+   "images_fetched": 296
+  }
+ },
+ "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/captures/. The tracked source_data/ snapshots trim as follows: the job corpus keeps every job row the captured pages carry (785 rows from SERP jobKeysMap payloads, job-detail canonical records and company-page job lists; SERP captures are authoritative for card-level fields, job details fill descriptions); title landing pages cover the 14 captured search families plus the salary-page titles; the blog mirrors the 15 captured articles with their exact bodies. Upstream SERP totals are preserved per captured query (search_snapshots) and shown as context; the visible result counts are computed over the captured corpus and the pages state this. Where the upstream posted the same job in several cities, every captured posting is kept (distinct upstream jids).",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "RN profile (headline/years/location), complete resume, 3 saved RN jobs around New York, 2 applications (one Viewed, one Applied) and a daily registered-nurse alert"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "SWE profile, resume with one experience entry, 2 saved SF software-engineer jobs, 1 application in Interviewing with a 3-entry timeline, weekly software-engineer alert"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "warehouse-operations profile, no resume, 1 saved Dallas warehouse job, no applications, daily warehouse alert"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "CPA profile, complete resume (2 experience, 2 education, 6 skills), 2 saved accountant jobs, 1 withdrawn application with timeline, 2 alerts"
+   }
+  ],
+  "fixture_note": "The upstream account area (profile, resume, saved jobs, applications, alerts) requires live accounts, so authenticated state is fixture-built following the u_s_customs/zara precedent: every job referenced is a real captured upstream row (real jid, company, city, pay); profile text, resumes, alert queries and application statuses/timelines are authored fixtures modeling the upstream flows. All timestamps are frozen constants relative to the 2026-09-29 snapshot date.",
+  "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash and every row comes from the tracked source_data/*.json snapshots in a fixed order; two consecutive builds produce byte-identical databases and /reset/ziprecruiter restores instance == instance_seed byte-for-byte.",
+  "timezone": "UTC"
+ },
+ "waf_note": "ziprecruiter.com is behind Cloudflare bot protection (managed challenges fire intermittently on functional pages; HEAD requests are refused with 405). The capture used real headful Chromium sessions that rendered the pages; nothing is reproduced from anything other than a real upstream response. One upstream asset (the Getty-sourced hero of the 2022 grad-report article) now 302-redirects to the site's own 404 upstream; the mirror renders that article without the hero and records the dead URL in asset_inventory.json's missing_upstream list rather than substituting anything.",
+ "derived_fields": "Experience level is not carried per-job in the captured payloads (upstream computes its filter server-side), so the mirror derives it deterministically from the captured title and description text (documented keyword rules in scripts_dev/build_source_data.py). The category taxonomy maps the captured title families and industry keywords to nine browse categories. The location model: for the captured search locations the metro city sets come from the upstream page-1 results themselves (metros.json); other locations match state plus city containment. These derivations are deterministic and declared here."
+}

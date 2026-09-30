@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="page-title"><h1>Page Not Found</h1></div>
+  <p>The page you requested could not be found. Try the <a href="{{ url_for('home') }}">DMV home page</a>,
+  <a href="{{ url_for('online_services_all') }}">all online services</a> or
+  <a href="{{ url_for('all_locations') }}">find a DMV location</a>.</p>
+</div>
+{% endblock %}

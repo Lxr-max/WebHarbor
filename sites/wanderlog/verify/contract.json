@@ -1,0 +1,1280 @@
+{
+  "Wanderlog--0": {
+    "task": "I want a detailed Tokyo guide with useful animal-cafe ideas. Find the guide with the most places in the travel-guides directory, check its animal-cafes section and identify the first three places. Assess the guide's context using its edited date, author profile, travel counts and distinction badge, then summarize why it is a useful starting point and any limits to treating those signals as proof of quality.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/guides",
+      "/view/nlc",
+      "/u/pham"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "japan:?\\s+video game guide"
+      ],
+      [
+        "checkpoint 2",
+        "114 places"
+      ],
+      [
+        "checkpoint 3",
+        "asakusa mameshiba"
+      ],
+      [
+        "checkpoint 4",
+        "harry harajuku"
+      ],
+      [
+        "checkpoint 5",
+        "mipig"
+      ],
+      [
+        "checkpoint 6",
+        "june 17.{0,8}2026"
+      ],
+      [
+        "checkpoint 7",
+        "verified badge"
+      ],
+      [
+        "checkpoint 8",
+        "pham2ez"
+      ],
+      [
+        "checkpoint 9",
+        "92 geos.{0,10}14 countries"
+      ],
+      [
+        "checkpoint 10",
+        "(?:do not prove|not proof)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--1": {
+    "task": "I am shortlisting Tokyo's top three ranked attractions for a first visit. Compare their place-page descriptions, categories and coordinates, and check which web sources support the top-ranked attraction. Recommend one for a visitor interested in the type of experience described, explaining the choice and preserving each attraction's rank and source attribution. Explicitly note any missing descriptions or categories instead of inferring them.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/list/",
+      "/place/details/19905",
+      "/place/details/5907072",
+      "/place/details/7668524"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "#1 tokyo skytree"
+      ],
+      [
+        "checkpoint 2",
+        "360.degree"
+      ],
+      [
+        "checkpoint 3",
+        "35\\.7101.{0,8}139\\.8107"
+      ],
+      [
+        "checkpoint 4",
+        "cond\u00e9 nast traveler #4"
+      ],
+      [
+        "checkpoint 5",
+        "times of india #5"
+      ],
+      [
+        "checkpoint 6",
+        "lonely planet #17"
+      ],
+      [
+        "checkpoint 7",
+        "#2 shibuya crossing"
+      ],
+      [
+        "checkpoint 8",
+        "35\\.6595.{0,8}139\\.7006"
+      ],
+      [
+        "checkpoint 9",
+        "#3 akihabara"
+      ],
+      [
+        "checkpoint 10",
+        "35\\.6996.{0,8}139\\.7714"
+      ],
+      [
+        "checkpoint 11",
+        "categories.{0,25}missing"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--2": {
+    "task": "I am planning a Paris sightseeing day around the Louvre. Check its place-page description and categories, then compare it with the top two places in Paris's free-attractions ranking using their descriptions and coordinates. Recommend a paid-museum and free-sight combination, naming the rankings and explaining which information supports your choice rather than assuming every attraction is free. Explicitly note any missing descriptions or categories instead of inferring them.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/place/details/1529",
+      "/list/",
+      "/place/details/24882",
+      "/place/details/1534"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "louvre.{0,100}art museum"
+      ],
+      [
+        "checkpoint 2",
+        "mona lisa"
+      ],
+      [
+        "checkpoint 3",
+        "#1 cimeti\u00e8re du p\u00e8re.lachaise"
+      ],
+      [
+        "checkpoint 4",
+        "48\\.8615.{0,8}2\\.3935"
+      ],
+      [
+        "checkpoint 5",
+        "#2 basilique du sacr\u00e9.c\u0153ur"
+      ],
+      [
+        "checkpoint 6",
+        "48\\.8867.{0,8}2\\.3431"
+      ],
+      [
+        "checkpoint 7",
+        "(?:does not|doesn.t|cannot).{0,20}(?:establish|prove).{0,15}free"
+      ],
+      [
+        "checkpoint 8",
+        "(?:recommend|pair)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--3": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I want to understand the opening day of Paris in the Spring before changing anything. Review its stop order, times, durations and place details, then use the map to check the distance between the first two pins. Summarize Day 1's plan, the first stop's admission information and the first leg's distance in kilometers and miles. Leave the itinerary unchanged.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/plan/parisinspring",
+      "/place/details/1522",
+      "/place/details/1523",
+      "/place/details/1532",
+      "/map"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "orsay at 10:00.{0,10}120 minutes"
+      ],
+      [
+        "checkpoint 2",
+        "sainte.chapelle at 14:30.{0,10}60 minutes"
+      ],
+      [
+        "checkpoint 3",
+        "eiffel tower at 17:30.{0,10}90 minutes"
+      ],
+      [
+        "checkpoint 4",
+        "former station"
+      ],
+      [
+        "checkpoint 5",
+        "stained glass"
+      ],
+      [
+        "checkpoint 6",
+        "observation decks"
+      ],
+      [
+        "checkpoint 7",
+        "admission.{0,60}(?:tickets|entry)"
+      ],
+      [
+        "checkpoint 8",
+        "1\\.4 km.{0,8}0\\.9 mi"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--4": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Add Shinjuku Gyoen National Garden to Day 1 of Tokyo Weekend at 15:00 for 90 minutes, with the note Afternoon garden walk. Verify the saved stop, time and duration in the planner, and tell me how many stops Day 1 now contains.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_entries": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "section_id": 5,
+            "place_id": 126,
+            "note": "Afternoon garden walk",
+            "start_time": "15:00",
+            "duration_minutes": 90,
+            "position": 4,
+            "added_by": 17
+          }
+        ],
+        "updated": {}
+      },
+      "trips": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[2]": {
+            "updated_at": "2026-09-29"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/plan/tokyowkend"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "shinjuku gyoen"
+      ],
+      [
+        "checkpoint 2",
+        "day 1"
+      ],
+      [
+        "checkpoint 3",
+        "15:00.{0,10}90 minutes"
+      ],
+      [
+        "checkpoint 4",
+        "afternoon garden walk"
+      ],
+      [
+        "checkpoint 5",
+        "4 stops"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--5": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Revise Day 1 of Paris in the Spring: keep its current first stop, remove the current second stop, and add Arc de Triomphe at 19:30 for 60 minutes with the note Quick photo stop. Preserve the other stops and put the new stop last. Confirm the final order and scheduled times so I can check the revised day.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_entries": {
+        "removed": [
+          "[2]"
+        ],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "section_id": 1,
+            "place_id": 164,
+            "note": "Quick photo stop",
+            "start_time": "19:30",
+            "duration_minutes": 60,
+            "position": 3,
+            "added_by": 17
+          }
+        ],
+        "updated": {
+          "[3]": {
+            "position": 2
+          }
+        }
+      },
+      "trips": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[1]": {
+            "updated_at": "2026-09-29"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/plan/parisinspring"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "orsay at 10:00"
+      ],
+      [
+        "checkpoint 2",
+        "eiffel tower at 17:30"
+      ],
+      [
+        "checkpoint 3",
+        "arc de triomphe at 19:30.{0,10}60 minutes"
+      ],
+      [
+        "checkpoint 4",
+        "quick photo stop"
+      ],
+      [
+        "checkpoint 5",
+        "sainte.chapelle.{0,25}removed"
+      ],
+      [
+        "checkpoint 6",
+        "day 3.{0,15}unchanged"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--6": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. Get the Iceland Ring Road checklist ready for our northern-lights trip. Add Aurora forecast app to the to-do list and mark it done because I installed it. Add Thermal base layers to packing and mark the previously unfinished packing item done because it is now packed. Leave the new thermal layers unchecked, and report the remaining unfinished items and progress of both lists.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "checklist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 3,
+            "text": "Aurora forecast app",
+            "list_type": "todo",
+            "checked": 1,
+            "added_by": 18,
+            "position": 7
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 3,
+            "text": "Thermal base layers",
+            "list_type": "packing",
+            "checked": 0,
+            "added_by": 18,
+            "position": 8
+          }
+        ],
+        "updated": {
+          "[16]": {
+            "checked": 1
+          }
+        }
+      }
+    },
+    "paths": [
+      "/plan/icelandring/checklist"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "aurora forecast app.{0,50}done"
+      ],
+      [
+        "checkpoint 2",
+        "car insurance documents.{0,50}packed"
+      ],
+      [
+        "checkpoint 3",
+        "thermal base layers.{0,65}unchecked"
+      ],
+      [
+        "checkpoint 4",
+        "4/5"
+      ],
+      [
+        "checkpoint 5",
+        "2/3"
+      ],
+      [
+        "checkpoint 6",
+        "check gravel.road coverage"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--7": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. Reconcile our Iceland Ring Road transport spending. Record fuel of $87.30 paid by Dana and airport parking of $12.50 paid by me on November 7, 2026, splitting each expense between both members. Verify both saved expenses and report the new transport total, trip total, each member's paid amount and who owes whom how much.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "expenses": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 3,
+            "description": "Fuel",
+            "amount_cents": 8730,
+            "category": "Transport",
+            "paid_by": 20,
+            "date": "2026-11-07",
+            "split_among": {
+              "json_set": [
+                18,
+                20
+              ]
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 3,
+            "description": "Airport parking",
+            "amount_cents": 1250,
+            "category": "Transport",
+            "paid_by": 18,
+            "date": "2026-11-07",
+            "split_among": {
+              "json_set": [
+                18,
+                20
+              ]
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "trips": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[3]": {
+            "updated_at": "2026-09-29"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/plan/icelandring/budget"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "fuel \\$87\\.30.{0,15}dana"
+      ],
+      [
+        "checkpoint 2",
+        "airport parking \\$12\\.50.{0,15}bob"
+      ],
+      [
+        "checkpoint 3",
+        "transport total.{0,15}\\$989\\.80"
+      ],
+      [
+        "checkpoint 4",
+        "trip total.{0,15}\\$2304\\.30"
+      ],
+      [
+        "checkpoint 5",
+        "bob.{0,20}\\$1118\\.00"
+      ],
+      [
+        "checkpoint 6",
+        "dana.{0,20}\\$1186\\.30"
+      ],
+      [
+        "checkpoint 7",
+        "bob owes dana \\$34\\.15"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--8": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Give Carol access to Paris in the Spring by inviting carol.d@test.com. Then sign in as Carol using TestPass123!, accept the invitation and verify she can open the planner. Confirm the owner, Carol's accepted collaborator status and Day 2's first stop and start time as evidence that the shared itinerary is accessible.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_collaborators": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 1,
+            "user_id": 19,
+            "invite_email": "carol.d@test.com",
+            "role": "editor",
+            "status": "accepted",
+            "invited_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/plan/parisinspring"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "carol accepted"
+      ],
+      [
+        "checkpoint 2",
+        "alice johnson.{0,20}owner"
+      ],
+      [
+        "checkpoint 3",
+        "carol davis.{0,25}accepted collaborator"
+      ],
+      [
+        "checkpoint 4",
+        "day 2.{0,35}louvre museum.{0,10}09:30"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--9": {
+    "task": "Sign in as carol.d@test.com with password TestPass123!. I want to share New York City Food Crawl with friends after adding one more day. Extend the trip by one day and change privacy to anyone with the link. Check the new day heading, then sign out and open the share link to verify it works. Report the final dates, shared title and Day 2 stops with times, leaving existing itinerary entries intact.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_sections": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 4,
+            "heading": "Day 4 \u00b7 Dec 7",
+            "day_index": 4,
+            "position": 4
+          }
+        ],
+        "updated": {}
+      },
+      "trips": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[4]": {
+            "end_date": "2026-12-07",
+            "privacy": "link",
+            "updated_at": "2026-09-29"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/trip/nycfoodcrawlv"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "december 4.{0,3}7.{0,8}2026"
+      ],
+      [
+        "checkpoint 2",
+        "link privacy"
+      ],
+      [
+        "checkpoint 3",
+        "signed out"
+      ],
+      [
+        "checkpoint 4",
+        "grand central oyster bar at 12:00"
+      ],
+      [
+        "checkpoint 5",
+        "eleven madison park at 17:30"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--10": {
+    "task": "Sign in as dana.k@test.com with password TestPass123!. Create a Kyoto trip for two travelers named Kyoto Temple Weekend, November 21\u201322, 2026. Verify that the planner has a day for each date, and add a separate planning section named Fushimi Inari day trip for ideas beyond the scheduled weekend. Confirm the destination, dates, traveler count and section headings.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_sections": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 6,
+            "heading": "Day 1 \u00b7 Nov 21",
+            "day_index": 1,
+            "position": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 6,
+            "heading": "Day 2 \u00b7 Nov 22",
+            "day_index": 2,
+            "position": 2
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "trip_id": 6,
+            "heading": "Fushimi Inari day trip",
+            "day_index": 3,
+            "position": 3
+          }
+        ],
+        "updated": {}
+      },
+      "trips": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "edit_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "view_key": {
+              "regex": "[0-9a-f]{16,64}"
+            },
+            "title": "Kyoto Temple Weekend",
+            "owner_id": 20,
+            "geo_id": 2,
+            "start_date": "2026-11-21",
+            "end_date": "2026-11-22",
+            "travelers": 2,
+            "currency": "USD",
+            "privacy": "private",
+            "created_at": "2026-09-29",
+            "updated_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/plan/[a-f0-9]+"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "kyoto temple weekend"
+      ],
+      [
+        "checkpoint 2",
+        "2 travelers"
+      ],
+      [
+        "checkpoint 3",
+        "november 21.{0,3}22.{0,8}2026"
+      ],
+      [
+        "checkpoint 4",
+        "day 1.{0,8}nov 21"
+      ],
+      [
+        "checkpoint 5",
+        "day 2.{0,8}nov 22"
+      ],
+      [
+        "checkpoint 6",
+        "fushimi inari day trip"
+      ]
+    ],
+    "answer_state": [],
+    "state_checks": [
+      {
+        "left": "trips",
+        "right": "trip_sections",
+        "foreign_key": "trip_id"
+      }
+    ]
+  },
+  "Wanderlog--11": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Review the map for Paris in the Spring so I can check the route. Identify the first, fourth and last pins with their days, the distance between the first two pins and the first pin's coordinates. Check the first and last stops' place pages to describe what we will see at either end, and report the last stop's ranking and supporting source. Leave the trip unchanged.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/plan/parisinspring/map",
+      "/place/details/1522",
+      "/place/details/24178",
+      "/list/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "pin 1.{0,25}orsay.{0,15}day 1"
+      ],
+      [
+        "checkpoint 2",
+        "pin 4 louvre museum.{0,15}day 2"
+      ],
+      [
+        "checkpoint 3",
+        "pin 10 clamato.{0,15}day 4"
+      ],
+      [
+        "checkpoint 4",
+        "1\\.4 km.{0,8}0\\.9 mi"
+      ],
+      [
+        "checkpoint 5",
+        "48\\.8600.{0,8}2\\.3266"
+      ],
+      [
+        "checkpoint 6",
+        "former railway station"
+      ],
+      [
+        "checkpoint 7",
+        "clamato.{0,50}seafood"
+      ],
+      [
+        "checkpoint 8",
+        "ranks #4.{0,15}paris restaurants"
+      ],
+      [
+        "checkpoint 9",
+        "infatuation #12"
+      ],
+      [
+        "checkpoint 10",
+        "roadbook #4"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--12": {
+    "task": "I am choosing a hotel for Paris and want to compare the top three entries in Wanderlog's hotel ranking. Read each hotel's place description and categories, note its coordinates and ranking, and recommend one based on those descriptions. Include the ranking's stated coverage and distinguish sourced descriptions from your recommendation; do not invent prices or availability. Explicitly note any missing descriptions or categories instead of inferring them.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/list/",
+      "/place/details/24349",
+      "/place/details/384389",
+      "/place/details/531760"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "50 best hotels in paris"
+      ],
+      [
+        "checkpoint 2",
+        "#1 shangri.la"
+      ],
+      [
+        "checkpoint 3",
+        "eiffel tower views"
+      ],
+      [
+        "checkpoint 4",
+        "48\\.8639.{0,8}2\\.2934"
+      ],
+      [
+        "checkpoint 5",
+        "#2 4 seasons"
+      ],
+      [
+        "checkpoint 6",
+        "48\\.8688.{0,8}2\\.3008"
+      ],
+      [
+        "checkpoint 7",
+        "#3 ritz"
+      ],
+      [
+        "checkpoint 8",
+        "48\\.8681.{0,8}2\\.3289"
+      ],
+      [
+        "checkpoint 9",
+        "(?:recommend|preference)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--13": {
+    "task": "I am deciding whether to use the travel guide published by lilies. Find the traveler profile and its guide, check the guide's focus, edited date, views, likes and first section with places, and review both comments. Use the author's travel counts and the commenters' profiles to assess the guide's context, without treating popularity as a guarantee of accuracy. Report the guide title and the evidence behind your assessment.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/u/alilies",
+      "/view/uzy",
+      "/u/alice.j",
+      "/u/carol.d"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "elisa pro"
+      ],
+      [
+        "checkpoint 2",
+        "alilies"
+      ],
+      [
+        "checkpoint 3",
+        "214 geos.{0,10}38 countries"
+      ],
+      [
+        "checkpoint 4",
+        "paris 5 day tourist itinerary"
+      ],
+      [
+        "checkpoint 5",
+        "may 12.{0,8}2026"
+      ],
+      [
+        "checkpoint 6",
+        "177509 views.{0,10}771 likes"
+      ],
+      [
+        "checkpoint 7",
+        "notre dame and eiffel tower"
+      ],
+      [
+        "checkpoint 8",
+        "alice johnson.{0,60}navigo"
+      ],
+      [
+        "checkpoint 9",
+        "alice.{0,30}42 geos.{0,10}11 countries"
+      ],
+      [
+        "checkpoint 10",
+        "carol davis.{0,70}bakery tour"
+      ],
+      [
+        "checkpoint 11",
+        "23 geos.{0,10}8 countries"
+      ],
+      [
+        "checkpoint 12",
+        "old"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--14": {
+    "task": "I want a New York guide from an experienced traveler. Check the leaderboard and LizzyS's profile, then review their most-viewed guide and its Empire State Building entry. Report the author's travel counts, guide title and edited date, and the attraction's description, rank and supporting source. Explain how those details help me decide whether to use this guide.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/leaderboard",
+      "/u/LizzyS",
+      "/view/tbgo",
+      "/place/details/2352",
+      "/list/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "lizzy.{0,35}265 geos.{0,10}53 countries"
+      ],
+      [
+        "checkpoint 2",
+        "new york city guide"
+      ],
+      [
+        "checkpoint 3",
+        "93144 views"
+      ],
+      [
+        "checkpoint 4",
+        "january 7.{0,8}2024"
+      ],
+      [
+        "checkpoint 5",
+        "empire state building.{0,55}1931 art deco"
+      ],
+      [
+        "checkpoint 6",
+        "86.{0,10}102"
+      ],
+      [
+        "checkpoint 7",
+        "ranks #4.{0,25}new york"
+      ],
+      [
+        "checkpoint 8",
+        "culture trip #1"
+      ],
+      [
+        "checkpoint 9",
+        "time out #8"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--15": {
+    "task": "Sign in as carol.d@test.com with password TestPass123!. I am considering the History & Architecture in Rome guide for a future trip. Review its author, badge and Pantheon-related content, like it, and post the comment Adding the Pantheon stop from this list to my Rome trip. Verify the saved comment and new like count, and report the author's travel counts as context for the recommendation.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "comments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "guide_id": 38438,
+            "user_id": 19,
+            "body": "Adding the Pantheon stop from this list to my Rome trip.",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "guides": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[38438]": {
+            "like_count": 227
+          }
+        }
+      },
+      "likes": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "guide_id": 38438,
+            "user_id": 19
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/view/zlc",
+      "/u/delicious"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "brandon jackson"
+      ],
+      [
+        "checkpoint 2",
+        "verified badge"
+      ],
+      [
+        "checkpoint 3",
+        "4 geos.{0,15}3 countries"
+      ],
+      [
+        "checkpoint 4",
+        "pantheon"
+      ],
+      [
+        "checkpoint 5",
+        "227 likes"
+      ],
+      [
+        "checkpoint 6",
+        "adding the pantheon stop from this list to my rome trip"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--16": {
+    "task": "I am choosing dinner in Rome from Wanderlog's restaurant ranking. Compare the top two restaurants using their own place-page descriptions and categories, check their coordinates and the sources cited for each ranking, and recommend one based on the dining experience described. Report both names and ranks, explain your choice, and avoid inventing opening hours or reservation availability. Explicitly note any missing descriptions or categories instead of inferring them.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/list/",
+      "/place/details/370765",
+      "/place/details/370316"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "#1 armando al pantheon"
+      ],
+      [
+        "checkpoint 2",
+        "traditional roman"
+      ],
+      [
+        "checkpoint 3",
+        "41\\.8991.{0,8}12\\.4762"
+      ],
+      [
+        "checkpoint 4",
+        "eater #4"
+      ],
+      [
+        "checkpoint 5",
+        "infatuation #2"
+      ],
+      [
+        "checkpoint 6",
+        "#2 roscioli"
+      ],
+      [
+        "checkpoint 7",
+        "bakery.{0,15}deli.{0,15}wine shop"
+      ],
+      [
+        "checkpoint 8",
+        "41\\.8943.{0,8}12\\.4742"
+      ],
+      [
+        "checkpoint 9",
+        "culture trip #10"
+      ],
+      [
+        "checkpoint 10",
+        "eater #10"
+      ],
+      [
+        "checkpoint 11",
+        "(?:recommend|choose)"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--17": {
+    "task": "I would like to borrow ideas from Dana Kim's public Rome itinerary. Find her profile and open the shared trip, then examine Day 2's stops and notes. Check the first and third stops of Day 1 on their place pages to understand the trip's focus. Summarize the dates, Day 2 schedule, those two attractions and the trip's total budget, distinguishing the itinerary's benchmark budget from a current travel quote.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/u/dana.k",
+      "/trip/romeessentv",
+      "/place/details/1583",
+      "/place/details/1589"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "rome essentials.{0,35}october 16.{0,4}18.{0,8}2026"
+      ],
+      [
+        "checkpoint 2",
+        "saint peter.s basilica at 08:30.{0,10}120 minutes"
+      ],
+      [
+        "checkpoint 3",
+        "sistine chapel at 11:30.{0,10}90 minutes"
+      ],
+      [
+        "checkpoint 4",
+        "bonci pizzarium at 13:30.{0,10}45 minutes"
+      ],
+      [
+        "checkpoint 5",
+        "pizza al taglio"
+      ],
+      [
+        "checkpoint 6",
+        "pantheon.{0,65}118.{0,4}125"
+      ],
+      [
+        "checkpoint 7",
+        "trevi fountain.{0,55}nicola salvi.{0,25}1762"
+      ],
+      [
+        "checkpoint 8",
+        "budget.{0,15}\\$1556"
+      ],
+      [
+        "checkpoint 9",
+        "not a current travel quote"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--18": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. Add a breakfast stop to the Paris trip shared with me: Breizh Caf\u00e9 on Day 3 at 09:00 for 60 minutes, with the note Buckwheat cr\u00eapes for breakfast. Verify the addition in the shared planner and confirm its day, time, duration and the final number of stops that day, leaving the other entries intact.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {
+      "trip_entries": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "section_id": 3,
+            "place_id": 52,
+            "note": "Buckwheat cr\u00eapes for breakfast",
+            "start_time": "09:00",
+            "duration_minutes": 60,
+            "position": 4,
+            "added_by": 18
+          }
+        ],
+        "updated": {}
+      },
+      "trips": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[1]": {
+            "updated_at": "2026-09-29"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/plan/parisinspring"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "breizh caf\u00e9"
+      ],
+      [
+        "checkpoint 2",
+        "day 3.{0,15}09:00.{0,10}60 minutes"
+      ],
+      [
+        "checkpoint 3",
+        "buckwheat cr\u00eapes for breakfast"
+      ],
+      [
+        "checkpoint 4",
+        "4 stops"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--19": {
+    "task": "I am choosing between the two London guides in the directory. Compare their focus, author profiles, edited dates, views and first sections containing places. Check the Tate Modern entry in the more-viewed guide for its description and supporting ranking source. Recommend a guide for someone interested in contemporary art, using that evidence and acknowledging that popularity alone does not establish quality.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/view/dxpk",
+      "/view/wng",
+      "/u/tara",
+      "/u/LizzyS",
+      "/place/details/28109",
+      "/list/"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "slices of london by tara abraham"
+      ],
+      [
+        "checkpoint 2",
+        "april 2.{0,8}2022"
+      ],
+      [
+        "checkpoint 3",
+        "42922 views"
+      ],
+      [
+        "checkpoint 4",
+        "0 geos.{0,10}0 countries"
+      ],
+      [
+        "checkpoint 5",
+        "london guide by lizzy"
+      ],
+      [
+        "checkpoint 6",
+        "september 14.{0,8}2024"
+      ],
+      [
+        "checkpoint 7",
+        "33965 views"
+      ],
+      [
+        "checkpoint 8",
+        "265 geos.{0,10}53 countries"
+      ],
+      [
+        "checkpoint 9",
+        "neighborhoods"
+      ],
+      [
+        "checkpoint 10",
+        "tate modern.{0,60}modern.art"
+      ],
+      [
+        "checkpoint 11",
+        "#10 in london"
+      ],
+      [
+        "checkpoint 12",
+        "lonely planet #2"
+      ],
+      [
+        "checkpoint 13",
+        "views alone do not establish quality"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Wanderlog--20": {
+    "task": "I need a Tokyo cafe shortlist for a relaxed afternoon. Compare the top three cafes in the ranking using each place's description, categories and coordinates, and check the cited sources for the first-ranked cafe. Recommend one based on the experiences described, report all three names and ranks, and avoid assuming their hours or availability. Explicitly note any missing descriptions or categories instead of inferring them.",
+    "initial_digest": "0bb56595e0327315c59baf3ff0b8fc1509b64bb718bae5d4182ff45ac8e8cb20",
+    "state": {},
+    "paths": [
+      "/list/",
+      "/place/details/27207",
+      "/place/details/376399",
+      "/place/details/119197"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "#1 onibus coffee"
+      ],
+      [
+        "checkpoint 2",
+        "35\\.6432.{0,8}139\\.6980"
+      ],
+      [
+        "checkpoint 3",
+        "description is missing"
+      ],
+      [
+        "checkpoint 4",
+        "time out tokyo #16"
+      ],
+      [
+        "checkpoint 5",
+        "wandering scribbler #5"
+      ],
+      [
+        "checkpoint 6",
+        "#2 fuglen tokyo"
+      ],
+      [
+        "checkpoint 7",
+        "scandinavian baked goods"
+      ],
+      [
+        "checkpoint 8",
+        "35\\.6666.{0,8}139\\.6924"
+      ],
+      [
+        "checkpoint 9",
+        "#3 the roastery by nozy coffee"
+      ],
+      [
+        "checkpoint 10",
+        "champagne glasses"
+      ],
+      [
+        "checkpoint 11",
+        "35\\.6656.{0,8}139\\.7048"
+      ],
+      [
+        "checkpoint 12",
+        "(?:recommend|choose)"
+      ]
+    ],
+    "answer_state": []
+  }
+}

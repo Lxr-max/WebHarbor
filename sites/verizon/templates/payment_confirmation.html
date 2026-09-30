@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Payment confirmation{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Payment received — thank you</h1>
+  <div class="card">
+    <h2>Confirmation {{ payment.confirmation }}</h2>
+    <p>Amount: ${{ payment.amount }}</p>
+    <p>Method: {{ payment.method }}</p>
+    <p>Date: {{ payment.paid_at }}</p>
+    {% if payment.bill_id %}<p>Applied to your most recent bill.</p>{% endif %}
+  </div>
+  <a class="btn btn-secondary" href="{{ url_for('account_overview') }}">Back to account overview</a>
+</section>
+{% endblock %}

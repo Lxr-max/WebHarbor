@@ -435,11 +435,23 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/zara && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/usps && \
     (cd /opt/WebSyn/usps && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/usps.db instance_seed/usps.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/wanderlog && \
+    (cd /opt/WebSyn/wanderlog && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/wanderlog.db instance_seed/wanderlog.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/virginia_dmv && \
+    (cd /opt/WebSyn/virginia_dmv && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/virginia_dmv.db instance_seed/virginia_dmv.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/verizon && \
+    (cd /opt/WebSyn/verizon && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/verizon.db instance_seed/verizon.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/ziprecruiter && \
+    (cd /opt/WebSyn/ziprecruiter && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/ziprecruiter.db instance_seed/ziprecruiter.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/carvana && \
     (cd /opt/WebSyn/carvana && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/carvana.db instance_seed/carvana.db && rm -rf instance __pycache__)
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40193
+EXPOSE 8101 40000-40134
 
 CMD ["/opt/websyn_start.sh"]

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Travel guides — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <h1>Travel guides</h1>
+  <p class="muted">Shared itineraries and place lists from the Wanderlog community — every guide below is a real
+    Wanderlog guide, captured with its sections, places, views, likes and collaborators.</p>
+
+  <div class="card" style="margin-bottom:18px">
+    <form method="get" action="{{ url_for('guides') }}" class="checks" style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">
+      <div style="flex:1;min-width:220px">
+        <label for="q">Search guides</label>
+        <input type="text" id="q" name="q" value="{{ q }}" placeholder="Paris, Tokyo, food…">
+      </div>
+      <div>
+        <label for="sort">Sort by</label>
+        <select id="sort" name="sort">
+          <option value="views" {% if sort == 'views' %}selected{% endif %}>Most viewed</option>
+          <option value="likes" {% if sort == 'likes' %}selected{% endif %}>Most liked</option>
+          <option value="places" {% if sort == 'places' %}selected{% endif %}>Most places</option>
+          <option value="recent" {% if sort == 'recent' %}selected{% endif %}>Recently edited</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+  </div>
+
+  <div class="grid cols-3">
+    {% for g in guides %}
+      <a class="tile" href="{{ url_for('guide_view', key=g.key) }}">
+        {% if g.header_image %}<img class="cover" src="{{ g.header_image }}" alt="{{ g.title }}">{% endif %}
+        <div class="pad">
+          <h3>{{ g.title }}</h3>
+          <span class="small muted">{{ g.place_count }} places · {{ '{:,}'.format(g.view_count) }} views ·
+            {{ '{:,}'.format(g.like_count) }} likes</span>
+          {% if g.distinction %}<span class="badge {{ g.distinction }}">{{ g.distinction|capitalize }}</span>{% endif %}
+        </div>
+      </a>
+    {% else %}
+      <p>No guides match your search.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Find Jobs Hiring Now - Browse Millions of Jobs by Title - ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Browse Jobs by Title</h1>
+  <p class="snapshot">Every title below has a live jobs page and a salary page in this snapshot. <a href="/browse/salaries">Browse salaries instead</a></p>
+</section>
+<nav class="letter-index" aria-label="Title index">
+  {% for L in letters %}
+  <a href="/browse/titles/{{ L }}" {% if not counts.get(L) %}class="empty"{% endif %}>{{ L }}</a>
+  {% endfor %}
+</nav>
+<section class="browse-cols">
+  <div>
+    <h2>Browse by category</h2>
+    <ul class="browse-list">
+      {% for cat in categories %}<li><a href="/jobs-search?search={{ cat.name|lower|replace(' ','+') }}">{{ cat.name }}</a></li>{% endfor %}
+    </ul>
+  </div>
+  <div>
+    <h2>Popular titles</h2>
+    <ul class="browse-list">
+      {% for jt in popular %}
+      <li><a href="/Jobs/{{ jt.slug }}">{{ jt.name }}</a> — <a href="/Salaries/{{ jt.slug }}-Salary">salary</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}
