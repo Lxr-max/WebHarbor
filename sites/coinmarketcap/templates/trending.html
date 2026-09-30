@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Trending Cryptocurrencies | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Trending Cryptocurrencies On CoinMarketCap</h1>
+<p class="muted">Listed below are the hottest trending cryptocurrencies on CoinMarketCap. These are the
+  coins and tokens that have the most visibility in the last 24 hours across the site. Snapshot of
+  {{ mirror_date }} (UTC).</p>
+
+<table>
+  <thead><tr>
+    <th>#</th><th>Name</th><th class="num">Price</th><th class="num">1h %</th><th class="num">24h %</th>
+    <th class="num">7d %</th><th class="num">Market Cap</th><th class="num">Volume (24h)</th>
+    <th class="num">DEX Liquidity</th><th>Platform</th><th class="num">DEX Txns (24h)</th><th>Risk</th>
+  </tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.rank }}</td>
+      <td>
+        {% if r.slug in known %}
+          <a class="coin-cell" href="/currencies/{{ r.slug }}/">
+            <span class="coin-name">{{ r.name }}</span> <span class="coin-symbol">{{ r.symbol }}</span></a>
+        {% else %}
+          <span class="coin-cell"><span class="coin-name">{{ r.name }}</span>
+            <span class="coin-symbol">{{ r.symbol }}</span></span>
+        {% endif %}
+      </td>
+      <td class="num">{{ r.price | price }}</td>
+      <td class="num {{ r.pct_1h | pct_class }}">{{ r.pct_1h | pct }}</td>
+      <td class="num {{ r.pct_24h | pct_class }}">{{ r.pct_24h | pct }}</td>
+      <td class="num {{ r.pct_7d | pct_class }}">{{ r.pct_7d | pct }}</td>
+      <td class="num">{{ r.market_cap | usd }}</td>
+      <td class="num">{{ r.volume_24h | usd }}</td>
+      <td class="num">{{ r.liquidity | usd }}</td>
+      <td>{{ r.platform or '--' }}</td>
+      <td class="num">{{ r.txs_24h | int if r.txs_24h else '--' }}</td>
+      <td>{{ r.risk or '--' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

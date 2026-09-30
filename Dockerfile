@@ -450,8 +450,11 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/ziprecruiter && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/carvana && \
     (cd /opt/WebSyn/carvana && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/carvana.db instance_seed/carvana.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/coinmarketcap && \
+    (cd /opt/WebSyn/coinmarketcap && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/coinmarketcap.db instance_seed/coinmarketcap.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40134
+EXPOSE 8101 40000-40135
 
 CMD ["/opt/websyn_start.sh"]

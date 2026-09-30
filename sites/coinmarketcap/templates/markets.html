@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ coin.name }} Markets | CoinMarketCap{% endblock %}
+{% block body %}
+<div class="coin-head">
+  {% if coin_logo(coin) %}<img src="{{ coin_logo(coin) }}" alt="{{ coin.name }} logo">{% endif %}
+  <div class="names"><h1>{{ coin.name }} <span class="sym">{{ coin.symbol }}</span> Markets</h1></div>
+  <span class="rank-badge">Rank #{{ coin.rank }}</span>
+</div>
+<p class="muted">{{ '{:,}'.format(coin.market_pair_count or 0) }} market pairs tracked upstream;
+  {{ pairs | length }} captured in this mirror snapshot (spot).</p>
+<p><a href="/currencies/{{ coin.slug }}/">← Back to {{ coin.name }}</a></p>
+
+<table>
+  <thead><tr>
+    <th>#</th><th>Exchange</th><th>Pair</th><th class="num">Price</th>
+    <th class="num">Volume (24h)</th><th class="num">Volume %</th>
+    <th class="num">Liquidity ±2% Depth</th><th class="num">Effective Liquidity</th>
+    <th>Fee Type</th><th class="num">Market Score</th><th>Last Updated</th>
+  </tr></thead>
+  <tbody>
+    {% for p in pairs %}
+    <tr>
+      <td>{{ p.rank }}</td>
+      <td>{% if p.exchange_slug in existing_exchange_slugs %}
+        <a href="/exchanges/{{ p.exchange_slug }}/">{{ p.exchange_name }}</a>
+      {% else %}{{ p.exchange_name }}{% endif %}</td>
+      <td>{{ p.pair }}</td>
+      <td class="num">{{ p.price | usd_full }}</td>
+      <td class="num">{{ p.volume_usd | usd }}</td>
+      <td class="num">{{ '%.2f' % p.volume_pct if p.volume_pct is not none else '--' }}%</td>
+      <td class="num">{{ (p.depth_pos_2 or 0) | usd }} / {{ (p.depth_neg_2 or 0) | usd }}</td>
+      <td class="num">{{ p.effective_liquidity | int if p.effective_liquidity else '--' }}</td>
+      <td>{{ p.fee_type or '--' }}</td>
+      <td class="num">{{ p.market_score or '--' }}</td>
+      <td class="muted">{{ p.last_updated | date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
