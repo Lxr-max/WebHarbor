@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}{{ s.title }} | Disney Shows{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="breadcrumb"><a href="{{ url_for('shows') }}">Disney Shows</a> / {{ s.title }}</p>
+  <div class="detail">
+    <div class="detail-poster">
+      {% if img(s.thumb) %}<img src="{{ img(s.thumb) }}" alt="{{ s.title }}">{% endif %}
+    </div>
+    <div>
+      <h1>{{ s.title }}</h1>
+      <div class="chips" style="margin:10px 0 16px">
+        {% for g in s.genre_list() %}<span class="chip">{{ g }}</span>{% endfor %}
+      </div>
+      <div class="meta-rows">
+        {% if s.rating %}<div class="meta-item"><span class="k">Rating</span><span class="v">{{ s.rating }}</span></div>{% endif %}
+        {% if s.release_date %}<div class="meta-item"><span class="k">Release Date</span><span class="v">{{ s.release_date }}</span></div>{% endif %}
+        {% if s.genre_line %}<div class="meta-item"><span class="k">Genre</span><span class="v">{{ s.genre_line }}</span></div>{% endif %}
+      </div>
+      {% if s.description %}<p class="synopsis">{{ s.description }}</p>{% endif %}
+
+      {% if s.cast %}
+      <h2 class="h2">Cast</h2>
+      <p class="synopsis">{{ s.cast|replace('|', ', ') }}</p>
+      {% endif %}
+
+      {% if s.video_list() %}
+      <h2 class="h2">Videos</h2>
+      <ul>
+        {% for v in s.video_list() %}<li>{{ v }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin:18px 0">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="type" value="show">
+        <input type="hidden" name="key" value="{{ s.slug }}">
+        <input type="hidden" name="back" value="{{ url_for('show_detail', slug=s.slug) }}">
+        <button class="btn" type="submit">Add to Favorites</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

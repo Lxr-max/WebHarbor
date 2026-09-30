@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmed | Disney Store{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Thank you for your order!</h1>
+  <div class="confirm-box">
+    <p style="margin:0 0 6px">Your order is confirmed. Your confirmation code is
+    <span class="confirm-code">{{ order.confirmation }}</span></p>
+    <p class="card-meta" style="margin:0">A confirmation email was sent to {{ order.email }}.</p>
+  </div>
+  <table class="table">
+    <thead><tr><th>Product</th><th>Qty</th><th>Line total</th></tr></thead>
+    <tbody>
+      {% for it in items %}
+      <tr><td>{{ it.name }}</td><td>{{ it.qty }}</td><td>${{ '%.2f'|format(it.line) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p style="font-size:18px;font-weight:800">Order total: ${{ '%.2f'|format(order.total) }}</p>
+</div>
+{% endblock %}

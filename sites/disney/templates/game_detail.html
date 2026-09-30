@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ g.title }} | Disney Games{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="breadcrumb"><a href="{{ url_for('games') }}">Games</a> / {{ g.title }}</p>
+  <div class="detail">
+    <div class="detail-poster">
+      {% if img(g.image) %}<img src="{{ img(g.image) }}" alt="{{ g.title }}">{% endif %}
+    </div>
+    <div>
+      <h1>{{ g.title }}</h1>
+      {% if g.description %}<p class="badge blue">{{ g.description }}</p>{% endif %}
+      {% if g.section_list() %}
+      <h2 class="h2">Description</h2>
+      {% for sec in g.section_list() %}
+      {% if sec.heading and sec.heading != g.title %}<h3 class="h3">{{ sec.heading }}</h3>{% endif %}
+      {% for p in sec.paragraphs %}<p class="synopsis">{{ p }}</p>{% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin:18px 0">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="type" value="game">
+        <input type="hidden" name="key" value="{{ g.slug }}">
+        <input type="hidden" name="back" value="{{ url_for('game_detail', slug=g.slug) }}">
+        <button class="btn" type="submit">Add to Favorites</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
