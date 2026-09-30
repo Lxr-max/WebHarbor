@@ -45,7 +45,7 @@
         <input type="hidden" name="type" value="movie">
         <input type="hidden" name="key" value="{{ m.slug }}">
         <input type="hidden" name="back" value="{{ url_for('movie_detail', slug=m.slug) }}">
-        <button class="btn" type="submit">Add to Favorites</button>
+        <button class="btn" type="submit">{{ 'Remove from Favorites' if is_favorite('movie', m.slug) else 'Add to Favorites' }}</button>
       </form>
       {% endif %}
 

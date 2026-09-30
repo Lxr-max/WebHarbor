@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
-{% block title %}Buy Tickets &mdash; {{ e.show }} in {{ e.city }}{% endblock %}
+{% block title %}Buy Tickets &mdash; {{ e.show }} in {{ e.city }}<script>
+const dayInput = document.getElementById('day'), timeInput = document.getElementById('time');
+function updateTimes() {
+  for (const option of timeInput.options) {
+    const hidden = !!option.value && option.dataset.day !== dayInput.value;
+    option.hidden = hidden; option.disabled = hidden;
+    if (hidden && option.selected) timeInput.value = '';
+  }
+}
+dayInput.addEventListener('change', updateTimes); updateTimes();
+</script>
+{% endblock %}
 {% block content %}
 <div class="wrap">
   <h1 class="page-title">Buy Tickets</h1>
   <p class="page-sub">{{ e.show }} at {{ e.venue }}, {{ e.city }} &mdash; {{ e.date_range }}</p>
   <div class="confirm-box" style="background:var(--bg);border-left-color:var(--disney-blue)">
-    <p>Tickets are ${{ '%.2f'|format(unit) }} each, plus fees.</p>
+    <p>Simulated tickets are ${{ '%.2f'|format(unit) }} each. No fees or real payment; this is a benchmark booking price.</p>
   </div>
 
   {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
@@ -24,11 +35,11 @@
       <label for="time">Show time</label>
       <select id="time" name="time">
         <option value="">Choose a show time</option>
-        {% for p in performances %}{% if not day or p.day == day %}
+        {% for p in performances %}
           {% for t in p.times %}
           <option value="{{ t }}" data-day="{{ p.day }}" {% if time == t and p.day == day %}selected{% endif %}>{{ t }} ({{ p.day }})</option>
           {% endfor %}
-        {% endif %}{% endfor %}
+        {% endfor %}
       </select>
     </div>
     <div class="form-row">
@@ -46,4 +57,15 @@
     <button class="btn" type="submit">Buy Tickets</button>
   </form>
 </div>
+<script>
+const dayInput = document.getElementById('day'), timeInput = document.getElementById('time');
+function updateTimes() {
+  for (const option of timeInput.options) {
+    const hidden = !!option.value && option.dataset.day !== dayInput.value;
+    option.hidden = hidden; option.disabled = hidden;
+    if (hidden && option.selected) timeInput.value = '';
+  }
+}
+dayInput.addEventListener('change', updateTimes); updateTimes();
+</script>
 {% endblock %}
