@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}ZipRecruiter Job Seeker Login | Sign-In Today{% endblock %}
+{% block body %}
+<section class="authn-layout">
+  <div class="authn-card">
+    <h1>Job Seeker Login</h1>
+    <p class="authn-sub">Welcome back. Log in to apply with 1-Click.</p>
+    {% if error %}
+    <p class="form-error">That email and password combination doesn’t match an account. Try again.</p>
+    {% endif %}
+    <form method="post" action="/authn/login?realm=candidates&next_url={{ next_url|urlencode }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="l-email">Email</label>
+      <input id="l-email" type="email" name="email" value="{{ email or '' }}" required autocomplete="username">
+      <label for="l-pass">Password</label>
+      <input id="l-pass" type="password" name="password" required autocomplete="current-password">
+      <button type="submit" class="btn-green big">Log In</button>
+    </form>
+    <p class="authn-alt">New to ZipRecruiter? <a href="/authn/register?realm=candidates">Create a free account</a></p>
+  </div>
+  <div class="authn-side">
+    <h2>1-Click Apply</h2>
+    <p>Once you’re logged in, applying takes one click. Your resume goes straight to the employer.</p>
+    <ul>
+      <li>Save jobs you like and come back later</li>
+      <li>Track every application’s status</li>
+      <li>Let Phil, your personal recruiter, match you daily</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

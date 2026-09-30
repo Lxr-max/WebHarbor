@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Application sent — {{ job.title }} | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="apply-done">
+  <h1>Application sent ✓</h1>
+  <p class="big-check">You 1-Click Applied to:</p>
+  <div class="app-card">
+    <h2>{{ job.title }}</h2>
+    <p class="rel-co">{{ job.company.name }} · {{ job.city }}, {{ job.state }}</p>
+    {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+    <p class="status">Status: <strong>Applied</strong> · applied {{ application.applied_at[:10] }}</p>
+  </div>
+  <p>Phil will ping you the moment the employer responds. Track it any time on
+     <a href="/jobseeker/applications">My Applications</a>.</p>
+  <a class="btn-green big" href="/jobs-search?search={{ job.title_slug|replace('-','+') }}">See similar jobs</a>
+</section>
+{% endblock %}

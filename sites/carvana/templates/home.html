@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block body %}
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Buy a car online, get it as soon as tomorrow</h1>
+    <p class="hero-sub">Search {{ count }} used cars in the Carvana snapshot — every car is Carvana Certified, comes with a 7-Day Money-Back Guarantee, and can be delivered to your door.</p>
+    <form class="hero-search" action="/cars" method="get">
+      <div class="field">
+        <label for="h-make">Make</label>
+        <select id="h-make" name="make">
+          <option value="">Any make</option>
+          {% for mk in makes|sort %}<option value="{{ mk }}">{{ mk }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="h-model">Model</label>
+        <input id="h-model" type="search" name="model" placeholder="Any model">
+      </div>
+      <div class="field">
+        <label for="h-q">Keyword</label>
+        <input id="h-q" type="search" name="q" placeholder="e.g. Ram 2500, CX-5">
+      </div>
+      <button type="submit">Search cars</button>
+    </form>
+  </div>
+</section>
+
+<section class="strip">
+  <h2>Browse by body style</h2>
+  <div class="body-grid">
+    {% for b in body_styles %}
+    <a class="body-card" href="/cars?body={{ b|urlencode }}">
+      <span class="body-name">{{ b }}</span>
+      <span class="body-count">{{ body_counts[b] }} cars</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="strip">
+  <h2>Popular models</h2>
+  <div class="model-grid">
+    {% for mk, md in popular %}
+    <a class="model-card" href="/cars?make={{ mk|urlencode }}&model={{ md|urlencode }}">
+      {{ md }} <span class="model-make">{{ mk }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if featured %}
+<section class="strip">
+  <h2>Featured cars from the snapshot</h2>
+  <div class="car-grid">
+    {% for v in featured %}
+    <a class="car-card" href="{{ v.url() }}">
+      {% if v.card_image_url() %}<img src="{{ v.card_image_url() }}" alt="{{ v.title() }}" loading="lazy">{% endif %}
+      <div class="car-card-body">
+        <h3>{{ v.title() }}</h3>
+        <p class="car-trim">{{ v.subtitle() }}</p>
+        <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ (v.city ~ ", " ~ v.state) if v.city and v.state else "Location not provided" }}</p>
+        <p class="car-price">{{ v.price|money }} <span class="was">{{ v.previous_price|money if v.previous_price and v.previous_price > v.price else '' }}</span></p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="value-props">
+  <h2>Why buy from Carvana</h2>
+  <div class="vp-grid">
+    <div class="vp"><h3>Carvana Certified</h3><p>Every car passes a 360° camera inspection covering 150-point inspection before it earns the Carvana Certified badge.</p></div>
+    <div class="vp"><h3>7-Day Money-Back Guarantee</h3><p>Not in love with your car? Return it within 7 days for a full refund — the way online shopping should be.</p></div>
+    <div class="vp"><h3>Free delivery</h3><p>Get your car delivered to your door as soon as tomorrow, or pick it up from a Carvana Vending Machine.</p></div>
+    <div class="vp"><h3>Financing in minutes</h3><p>Get a real monthly payment with your down payment, term and credit profile — no impact to your credit score.</p></div>
+  </div>
+</section>
+{% endblock %}

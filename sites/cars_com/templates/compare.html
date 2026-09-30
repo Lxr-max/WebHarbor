@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ a.year }} {{ a.make }} {{ a.model }} vs. {{ b.year }} {{ b.make }} {{ b.model }} (Side by Side) | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('research_home') }}">Research</a> &rsaquo;
+  <a href="{{ url_for('compare_home') }}">Compare cars</a> &rsaquo; <span>{{ a.make }} {{ a.model }} vs. {{ b.make }} {{ b.model }}</span></nav>
+{% endblock %}
+{% block content %}
+<div class="compare-page">
+  <h1>{{ a.make }} {{ a.model }} vs. {{ b.make }} {{ b.model }}</h1>
+  <div class="compare-cols">
+    <div class="compare-col">
+      <h2>{% if cols %}{{ cols[0].year }} {{ cols[0].name }}{% else %}{{ a.year }} {{ a.make }} {{ a.model }}{% endif %}</h2>
+      {% if a.photo_list() %}<img src="{{ url_for('static', filename=a.photo_list()[0]) }}" alt="{{ a.make }} {{ a.model }}">{% endif %}
+      <p><a href="{{ url_for('research_page', slug=a.slug) }}">See the {{ a.make }} {{ a.model }} model page</a></p>
+      {% if a.trim_list() %}
+      <p class="muted">Trims: {% for t in a.trim_list() %}{{ t.name }}{{ ", " if not loop.last }}{% endfor %}</p>
+      <a class="btn btn-outline btn-small" href="{{ url_for('shopping_results', stock_type='new', **{'models[]': a.model_slug}) }}">See all results</a>
+      {% endif %}
+    </div>
+    <div class="compare-col">
+      <h2>{% if cols %}{{ cols[1].year }} {{ cols[1].name }}{% else %}{{ b.year }} {{ b.make }} {{ b.model }}{% endif %}</h2>
+      {% if b.photo_list() %}<img src="{{ url_for('static', filename=b.photo_list()[0]) }}" alt="{{ b.make }} {{ b.model }}">{% endif %}
+      <p><a href="{{ url_for('research_page', slug=b.slug) }}">See the {{ b.make }} {{ b.model }} model page</a></p>
+      {% if b.trim_list() %}
+      <p class="muted">Trims: {% for t in b.trim_list() %}{{ t.name }}{{ ", " if not loop.last }}{% endfor %}</p>
+      <a class="btn btn-outline btn-small" href="{{ url_for('shopping_results', stock_type='new', **{'models[]': b.model_slug}) }}">See all results</a>
+      {% endif %}
+    </div>
+  </div>
+  <h2>Highlights</h2>
+  <table class="compare-table">
+    <thead><tr><th></th><th>{% if cols %}{{ cols[0].year }} {{ cols[0].name }}{% else %}{{ a.year }} {{ a.make }} {{ a.model }}{% endif %}</th><th>{% if cols %}{{ cols[1].year }} {{ cols[1].name }}{% else %}{{ b.year }} {{ b.make }} {{ b.model }}{% endif %}</th></tr></thead>
+    <tbody>
+      {% for label, values in rows.items() %}
+      <tr>
+        <th>{{ label }}</th>
+        <td>{{ values[0] }}</td>
+        <td>{{ values[1] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
