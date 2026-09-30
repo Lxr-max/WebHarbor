@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}My orders | Carvana{% endblock %}
+{% block body %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/account/favorites">Saved cars</a>
+    <a href="/account/orders" class="active">Orders</a>
+    <a href="/account/profile">Profile</a>
+  </nav>
+  <h1>My orders</h1>
+  {% if offers %}
+  <h2 class="mt">Trade-in offers</h2>
+  {% for t in offers %}
+  <div class="order-card">
+    <div class="order-head">
+      <h2>{{ t.offer_code }} — {{ t.year }} {{ t.make }} {{ t.model }}</h2>
+      <span class="badge">{{ t.condition }}</span>
+    </div>
+    <div class="order-info">
+      <p>Offer: <strong>{{ t.offer_amount|money }}</strong> · {{ t.mileage|mileage }} · VIN {{ t.vin }}</p>
+      <p>Accepted {{ t.created_at }}</p>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% if orders %}
+  {% for o in orders %}
+  <div class="order-card">
+    <div class="order-head">
+      <h2>{{ o.order_number }} — <a href="{{ o.vehicle.url() }}">{{ o.vehicle.title() }}</a></h2>
+      <span class="badge">{{ o.status }}</span>
+    </div>
+    <div class="order-body">
+      {% if o.vehicle.card_image_url() %}<a href="{{ o.vehicle.url() }}"><img src="{{ o.vehicle.card_image_url() }}" alt="{{ o.vehicle.title() }}"></a>{% endif %}
+      <div class="order-info">
+        <p>{{ o.vehicle.trim or o.vehicle.body_style }} · {{ o.vehicle.mileage|mileage }}</p>
+        <p>Payment: {% if o.payment_type == 'cash' %}Cash — {{ o.vehicle.financed_principal(trade_credit=o.trade_credit)|money }} due after trade credit, including estimated taxes and fees{% else %}{{ o.monthly_payment|money }}/mo · {{ o.term_months }} months · {{ o.apr }}% APR · {{ o.down_payment|money }} down{% endif %}</p>
+        <p>Delivery: {{ o.delivery_date }} ({{ o.delivery_slot }}) to {{ o.delivery_city }}, {{ o.delivery_state }}</p>
+        <ol class="timeline">
+          {% for ev in o.events() %}
+          <li><strong>{{ ev.status }}</strong> — {{ ev.note }} <em>({{ ev.occurred_at }})</em></li>
+          {% endfor %}
+        </ol>
+        {% if o.status not in ('Cancelled', 'Delivered') %}
+        <form method="post" action="{{ url_for('order_cancel', order_number=o.order_number) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn-outline small">Cancel order</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p class="empty">No orders yet. <a href="/cars">Find your car</a> and start a purchase.</p>
+  {% endif %}
+</div>
+{% endblock %}

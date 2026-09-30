@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Plan a trip — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <h1>Plan a trip</h1>
+  <p class="muted">Pick a destination, name the trip, and Wanderlog sets up a day-by-day itinerary you can edit with friends.</p>
+
+  <div class="trip-grid">
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <form method="get" action="{{ url_for('plan_new') }}">
+          <label for="q">Find your destination</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="text" id="q" name="q" value="{{ q }}" style="flex:1;min-width:200px" placeholder="e.g. Tokyo, Paris, Iceland…">
+            <button class="btn btn-outline" type="submit">Search destinations</button>
+          </div>
+        </form>
+        {% if q %}
+          <h3 style="margin-top:14px">Results for “{{ q }}”</h3>
+          {% for g in matches %}
+            <p style="margin:6px 0;padding:8px 0;border-top:1px dashed var(--line)">
+              <a href="{{ url_for('plan_new', geo_id=g.id, q=q) }}">
+                {{ g.name }}{% if g.country_name %} <span class="small muted">· {{ g.country_name }}</span>{% endif %}
+              </a>
+            </p>
+          {% else %}
+            <p class="small muted" style="margin-top:10px">No destination on the mirror matches “{{ q }}”.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>New trip details</h3>
+      {% if chosen %}
+        <form method="post" action="{{ url_for('plan_new') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="geo_id" value="{{ chosen.id }}">
+          <label>Destination</label>
+          <p class="stat" style="margin:2px 0 8px">{{ chosen.name }}
+            <a class="small" href="{{ url_for('plan_new') }}">change</a></p>
+          <label for="title">Trip name</label>
+          <input type="text" id="title" name="title" value="{{ chosen.name }} trip" required>
+          <label for="start_date">Start date</label>
+          <input type="date" id="start_date" name="start_date">
+          <label for="end_date">End date</label>
+          <input type="date" id="end_date" name="end_date">
+          <label for="travelers">Travelers</label>
+          <input type="number" id="travelers" name="travelers" min="1" max="12" value="2" class="tiny" style="max-width:110px">
+          <p style="margin-top:14px"><button class="btn btn-primary" type="submit">Create trip</button></p>
+        </form>
+      {% else %}
+        <p class="muted small">Search for a destination on the left, then pick it to fill in trip details here.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

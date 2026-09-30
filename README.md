@@ -42,7 +42,7 @@ Build this checkout to run its registered web environments (published image tags
 
 ```bash
 ./scripts/build.sh webharbor:dev
-docker run -e WEBSYN_CONTROL_TOKEN -p 8101:8101 -p 40000-40129:40000-40129 webharbor:dev
+docker run -e WEBSYN_CONTROL_TOKEN -p 8101:8101 -p 40000-40132:40000-40132 webharbor:dev
 ```
 
 Then point your agent at `http://localhost:40000` through `http://localhost:40093` to explore 94 local mirrors. The table below lists every site in port order.
@@ -111,8 +111,9 @@ All registered websites and their default ports, in registration order from left
 | U.S. DOJ | 40120 | CVS | 40121 | CBP.gov | 40122 |
 | UPS | 40123 | United Airlines | 40124 | US Appliance | 40125 |
 | USCIS | 40126 | Tumblr | 40127 | Zara | 40128 |
-| USPS | 40129 |  |  |  |  |
-| CoinMarketCap | 40192 | | | | |
+| USPS | 40129 | Wanderlog | 40130 | Virginia DMV | 40131 |
+| Verizon | 40132 | ZipRecruiter | 40133 | Carvana | 40134 |
+| CoinMarketCap | 40135 |  |  |  |  |
 
 ## 🤝 Contribute
 

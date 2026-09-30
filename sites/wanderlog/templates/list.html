@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{{ cl.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="guide-hero">
+    {% if cl.header_image %}<img src="{{ cl.header_image }}" alt="{{ cl.title }}">{% endif %}
+    <div class="overlay">
+      <h1>{{ cl.title }}</h1>
+      <p>
+        {% if geo %}<a href="{{ url_for('explore', gid=geo.id) }}" style="color:#fff">{{ geo.name }}</a> · {% endif %}
+        <span class="stat">top {{ cl.upstream_count }} by Wanderlog ranking</span>
+        {% if cl.distinction %}<span class="badge {{ cl.distinction }}">{{ cl.distinction|capitalize }}</span>{% endif %}
+      </p>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    {% for entry, place in rows %}
+      <div class="rank-row">
+        <div class="num">#{{ entry.rank }}</div>
+        {% if place.image %}<img class="cover" src="{{ place.image }}" alt="{{ place.name }}">{% else %}<div></div>{% endif %}
+        <div>
+          <h3>
+            {% if place.wl_id %}<a href="{{ url_for('place_details', pid=place.wl_id) }}">{{ place.name }}</a>
+            {% else %}{{ place.name }}{% endif %}
+          </h3>
+          {% if place.rating %}<p class="small muted" style="margin:2px 0">★ {{ place.rating }}</p>{% endif %}
+          <p class="small" style="margin:2px 0">{% if place.description %}{{ place.description }}{% endif %}</p>
+          {% set cats = place.categories | from_json %}
+          {% if cats %}
+            <p style="margin:6px 0 0">
+              {% for c in cats[:4] %}<span class="chip static">{{ c }}</span>{% endfor %}
+            </p>
+          {% endif %}
+          {% set sources = entry.sources | from_json %}
+          {% if sources %}
+            <div class="sources">
+              {% for s in sources %}
+                <span class="src">{% if s.indexInSource is not none %}#{{ s.indexInSource + 1 }} on {% endif %}{{ s.siteName }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

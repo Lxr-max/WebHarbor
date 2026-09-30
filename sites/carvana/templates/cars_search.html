@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}{% if args.get('make') %}Used {{ args.get('make') }}{% if args.get('model') %} {{ args.get('model') }}{% endif %} For Sale{% else %}Used Cars For Sale{% endif %} | Carvana{% endblock %}
+{% block body %}
+<div class="serp-layout">
+  <aside class="filter-panel">
+    <h2>Filter cars</h2>
+    <form method="get" action="/cars">
+      <input type="hidden" name="q" value="{{ args.get('q','') }}">
+      <fieldset>
+        <legend>Make</legend>
+        <select name="make" onchange="this.form.submit()">
+          <option value="">Any make</option>
+          {% for mk in makes|sort %}
+          <option value="{{ mk }}"{% if args.get('make') == mk %} selected{% endif %}>{{ mk }}</option>
+          {% endfor %}
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Model</legend>
+        {% if args.get('make') and makes.get(args.get('make')) %}
+        <select name="model">
+          <option value="">Any {{ args.get('make') }} model</option>
+          {% for md in makes[args.get('make')] %}
+          <option value="{{ md }}"{% if args.get('model') == md %} selected{% endif %}>{{ md }}</option>
+          {% endfor %}
+        </select>
+        {% else %}
+        <input type="search" name="model" value="{{ args.get('model','') }}" placeholder="Any model">
+        {% endif %}
+      </fieldset>
+      <fieldset>
+        <legend>Body style</legend>
+        {% for b in body_styles %}
+        <label class="check"><input type="radio" name="body" value="{{ b }}"{% if args.get('body') == b %} checked{% endif %}> {{ b }}</label>
+        {% endfor %}
+        <label class="check"><input type="radio" name="body" value=""{% if not args.get('body') %} checked{% endif %}> Any</label>
+      </fieldset>
+      <fieldset>
+        <legend>Price</legend>
+        <div class="range-row">
+          <label for="f-price-min">Min $</label>
+          <input id="f-price-min" type="number" name="price_min" min="0" step="500" value="{{ args.get('price_min','') }}" placeholder="{{ ranges.price_min }}">
+          <label for="f-price-max">Max $</label>
+          <input id="f-price-max" type="number" name="price_max" min="0" step="500" value="{{ args.get('price_max','') }}" placeholder="{{ ranges.price_max }}">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Year</legend>
+        <div class="range-row">
+          <label for="f-year-min">From</label>
+          <input id="f-year-min" type="number" name="year_min" step="1" value="{{ args.get('year_min','') }}" placeholder="{{ ranges.year_min }}">
+          <label for="f-year-max">To</label>
+          <input id="f-year-max" type="number" name="year_max" step="1" value="{{ args.get('year_max','') }}" placeholder="{{ ranges.year_max }}">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Mileage</legend>
+        <div class="range-row">
+          <label for="f-mi-min">Min</label>
+          <input id="f-mi-min" type="number" name="mileage_min" min="0" step="1000" value="{{ args.get('mileage_min','') }}" placeholder="{{ ranges.mileage_min }}">
+          <label for="f-mi-max">Max</label>
+          <input id="f-mi-max" type="number" name="mileage_max" min="0" step="1000" value="{{ args.get('mileage_max','') }}" placeholder="{{ ranges.mileage_max }}">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Fuel</legend>
+        {% for f in fuel_types %}
+        <label class="check"><input type="radio" name="fuel" value="{{ f }}"{% if args.get('fuel') == f %} checked{% endif %}> {{ f }}</label>
+        {% endfor %}
+        <label class="check"><input type="radio" name="fuel" value=""{% if not args.get('fuel') %} checked{% endif %}> Any</label>
+      </fieldset>
+      <fieldset>
+        <legend>Transmission</legend>
+        <label class="check"><input type="radio" name="transmission" value="Automatic"{% if args.get('transmission') == 'Automatic' %} checked{% endif %}> Automatic</label>
+        <label class="check"><input type="radio" name="transmission" value="Manual"{% if args.get('transmission') == 'Manual' %} checked{% endif %}> Manual</label>
+        <label class="check"><input type="radio" name="transmission" value=""{% if not args.get('transmission') %} checked{% endif %}> Any</label>
+      </fieldset>
+      <fieldset>
+        <legend>Drivetrain</legend>
+        {% for d in ['FWD','RWD','AWD','4WD'] %}
+        <label class="check"><input type="radio" name="drivetrain" value="{{ d }}"{% if args.get('drivetrain') == d %} checked{% endif %}> {{ d }}</label>
+        {% endfor %}
+        <label class="check"><input type="radio" name="drivetrain" value=""{% if not args.get('drivetrain') %} checked{% endif %}> Any</label>
+      </fieldset>
+      <fieldset>
+        <legend>History</legend>
+        <label class="check"><input type="checkbox" name="single_owner" value="1"{% if args.get('single_owner') %} checked{% endif %}> Single owner</label>
+        <label class="check"><input type="checkbox" name="accident_free" value="1"{% if args.get('accident_free') %} checked{% endif %}> Accident-free</label>
+      </fieldset>
+      <button type="submit" class="btn-apply">Apply filters</button>
+    </form>
+  </aside>
+
+  <section class="results">
+    <div class="results-head">
+      <h1>{% if args.get('make') %}Used {{ args.get('make') }}{% if args.get('model') %} {{ args.get('model') }}{% endif %} for sale{% else %}Used cars for sale{% endif %}</h1>
+      <p class="result-count">{{ total }} cars match your search</p>
+      {% if snapshot %}
+      <p class="snapshot-note">Upstream carvana.com listed {{ "{:,}".format(snapshot.upstream_total) }} total cars for this search on 2026-09-29; this mirror serves the {{ total }} vehicles captured from those results.</p>
+      {% endif %}
+      <form method="get" action="/cars" class="sort-form">
+        {% for k, v in args.items() %}{% if k not in ('sort', 'page') %}<input type="hidden" name="{{ k }}" value="{{ v }}">{% endif %}{% endfor %}
+        <label for="sort">Sort</label>
+        <select id="sort" name="sort" onchange="this.form.submit()">
+          {% for key, label in sorts.items() %}
+          <option value="{{ key }}"{% if args.get('sort', 'relevance') == key %} selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+    {% if active %}
+    <div class="active-chips">
+      {% for key, label in active %}
+      <span class="chip">{{ label }}</span>
+      {% endfor %}
+      <a class="clear-all" href="/cars">Clear all</a>
+    </div>
+    {% endif %}
+    {% if vehicles %}
+    <div class="car-grid serp-grid">
+      {% for v in vehicles %}
+      <div class="car-card">
+        <a href="{{ v.url() }}">
+          {% if v.card_image_url() %}<img src="{{ v.card_image_url() }}" alt="{{ v.title() }}" loading="lazy">{% endif %}
+          <div class="car-card-body">
+            <h3>{{ v.title() }}</h3>
+            <p class="car-trim">{{ v.subtitle() }}</p>
+            <p class="car-meta">{{ v.mileage|mileage }} · {{ v.body_style }} · {{ (v.city ~ ", " ~ v.state) if v.city and v.state else "Location not provided" }}</p>
+            <p class="car-price">{{ v.price|money }} {% if v.previous_price and v.previous_price > v.price %}<span class="was">{{ v.previous_price|money }}</span>{% endif %}</p>
+            <p class="car-est">{{ v.monthly_payment()|round|int|money }} est. /mo</p>
+            <div class="car-badges">
+              {% for b in v.badge_list()[:3] %}<span class="badge">{{ b }}</span>{% endfor %}
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <nav class="pagination">
+      {% if pagination.has_prev %}
+      <a href="{{ url_for('cars_search', **dict(args, page=pagination.prev_num)) }}">&laquo; Previous</a>
+      {% endif %}
+      <span class="page-status">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+      {% if pagination.has_next %}
+      <a href="{{ url_for('cars_search', **dict(args, page=pagination.next_num)) }}">Next &raquo;</a>
+      {% endif %}
+    </nav>
+    {% else %}
+    <div class="no-results">
+      <h2>No cars match those filters</h2>
+      <p>Try widening the price range or clearing a filter.</p>
+      <a class="btn-blue" href="/cars">Clear all filters</a>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
