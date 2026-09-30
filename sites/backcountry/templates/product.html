@@ -37,12 +37,12 @@
     <h1 class="pdp-title">{{ p.title }}</h1>
 
     <p class="pdp-rating">
-      {% if p.review_count %}
+      {% if p.display_review_count %}
       <a href="#reviews">
-        <span class="stars" data-rating="{{ '%.1f'|format(p.review_avg or 0) }}"></span>
-        {{ '%.1f'|format(p.review_avg or 0) }} out of 5 stars
-        <strong>{{ '%.1f'|format(p.review_avg or 0) }}</strong> ({{ p.review_count }})
-        {{ p.review_count }} Reviews
+        <span class="stars" data-rating="{{ '%.1f'|format(p.display_review_avg or 0) }}"></span>
+        {{ '%.1f'|format(p.display_review_avg or 0) }} out of 5 stars
+        <strong>{{ '%.1f'|format(p.display_review_avg or 0) }}</strong> ({{ p.display_review_count }})
+        {{ p.display_review_count }} Reviews
       </a>
       {% else %}
       <span class="muted">No reviews yet</span>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="pdp-option">
-      <p class="option-label">Size: <a href="#size-chart" class="size-chart-link">Size Chart</a></p>
+      <p class="option-label">Size</p>
       <div class="size-buttons" id="size-buttons">
         {% for s in skus %}
         <a class="size-button{% if selected and selected.id == s.id %} selected{% endif %}{% if not s.in_stock %} disabled{% endif %}"
@@ -177,7 +177,7 @@
       <h3>What do you think about this product?</h3>
       {% if hist %}
       <p class="overall-rating"><strong>Overall Rating</strong>
-        {{ '%.1f'|format(p.review_avg or 0) }} based on {{ hist_total }} ratings</p>
+        {{ '%.1f'|format(p.display_review_avg or 0) }} based on {{ hist_total }} ratings</p>
       <ul class="rating-histogram">
         {% for h in hist|sort(attribute='rating', reverse=true) %}
         <li>

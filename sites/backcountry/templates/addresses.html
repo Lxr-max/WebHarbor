@@ -13,7 +13,7 @@
   <section class="address-list">
     {% for a in addresses %}
     <div class="address-card{% if a.is_default %} default{% endif %}">
-      <p><strong>{{ a.full_name }}</strong>
+      <p>{% if a.label %}<span>{{ a.label }}</span><br>{% endif %}<strong>{{ a.full_name }}</strong>
         {% if a.is_default %}<em class="default-tag">Default</em>{% endif %}<br>
         {{ a.line1 }}{% if a.line2 %}<br>{{ a.line2 }}{% endif %}<br>
         {{ a.city }}, {{ a.state }} {{ a.zip }}<br>

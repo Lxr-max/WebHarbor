@@ -9,14 +9,16 @@
   <div class="card-body">
     <p class="card-brand">{{ p.brand.name }}</p>
     <h3 class="card-title"><a href="/{{ p.slug }}">{{ p.title }}</a></h3>
-    {% if p.review_count %}
-    <p class="card-rating" aria-label="Rated {{ '%.1f'|format(p.review_avg or 0) }} out of 5 stars">
-      <span class="stars" data-rating="{{ '%.1f'|format(p.review_avg or 0) }}"></span>
-      ({{ p.review_count }})
+    {% if p.display_review_count %}
+    <p class="card-rating" aria-label="Rated {{ '%.1f'|format(p.display_review_avg or 0) }} out of 5 stars">
+      <span class="stars" data-rating="{{ '%.1f'|format(p.display_review_avg or 0) }}"></span>
+      ({{ p.display_review_count }})
     </p>
     {% endif %}
     <p class="card-price">
-      {% if p.on_sale %}
+      {% if p.filtered_min_sale is defined %}
+        <span class="sale">{{ money(p.filtered_min_sale) }}{% if p.filtered_max_sale != p.filtered_min_sale %} - {{ money(p.filtered_max_sale) }}{% endif %}</span>
+      {% elif p.on_sale %}
         <span class="sale">{{ money(p.min_sale) }}{% if p.max_sale and p.max_sale != p.min_sale %} - {{ money(p.max_sale) }}{% endif %}</span>
         <s class="list">{{ money(p.min_list) }}</s>
         <span class="pct">{{ p.max_discount }}% off</span>
