@@ -18,7 +18,7 @@
     <label for="sort">Sort</label>
     <select id="sort" name="sort">
       <option value="title" {% if sort == 'title' %}selected{% endif %}>Title A-Z</option>
-      <option value="recent" {% if sort == 'recent' %}selected{% endif %}>Recently added</option>
+      <option value="recent" {% if sort == 'recent' %}selected{% endif %}>Newest release</option>
     </select>
     <button class="btn" type="submit">Apply</button>
     <span class="count">{{ total }} show{{ 's' if total != 1 }}</span>

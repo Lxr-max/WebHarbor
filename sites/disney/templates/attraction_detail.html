@@ -29,6 +29,7 @@
       {% endfor %}
       {% endif %}
 
+      {% if not detail.get('sections') %}<p class="snapshot-note">No attraction-specific description was captured for this listing.</p>{% endif %}
       {% if related %}
       <h2 class="h2">Related Activities</h2>
       <div class="grid cols-4">
@@ -49,7 +50,7 @@
         <input type="hidden" name="type" value="attraction">
         <input type="hidden" name="key" value="{{ e.key }}">
         <input type="hidden" name="back" value="{{ url_for('attraction_detail', park=e.park_slug, slug=e.slug) }}">
-        <button class="btn" type="submit">Add to Favorites</button>
+        <button class="btn" type="submit">{{ 'Remove from Favorites' if is_favorite('attraction', e.key) else 'Add to Favorites' }}</button>
       </form>
       {% endif %}
     </div>

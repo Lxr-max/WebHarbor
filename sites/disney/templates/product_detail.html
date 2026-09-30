@@ -50,7 +50,7 @@
         <input type="hidden" name="type" value="product">
         <input type="hidden" name="key" value="{{ p.pid }}">
         <input type="hidden" name="back" value="{{ url_for('product_detail', pid=p.pid) }}">
-        <button class="btn" type="submit">Add to Favorites</button>
+        <button class="btn" type="submit">{{ 'Remove from Favorites' if is_favorite('product', p.pid) else 'Add to Favorites' }}</button>
       </form>
       {% endif %}
     </div>

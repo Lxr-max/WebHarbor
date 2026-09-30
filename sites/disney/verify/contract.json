@@ -1,0 +1,1085 @@
+{
+  "Disney--0": {
+    "task": "Help Alice plan a Disney movie night. Compare the ratings and runtimes of Moana 2 and Inside Out 2, save the shorter film to her favorites using alice.j@test.com / TestPass123!, and tell me which you saved and why it fits the shorter evening.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 1,
+            "item_type": "movie",
+            "item_key": "inside-out-2",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/movies/moana\\-2(?:$|\\?)",
+      "/movies/inside\\-out\\-2(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Moana 2 rating",
+        "moana\\s+2(?:(?!inside\\s+out\\s+2).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*pg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Moana 2 runtime",
+        "moana\\s+2(?:(?!inside\\s+out\\s+2).){0,1600}?(?:runtime|running time|duration)\\s*(?:is|was|:|=|of|at)?\\s*100\\s+minutes(?!\\w|\\.\\d)"
+      ],
+      [
+        "Inside Out 2 rating",
+        "inside\\s+out\\s+2(?:(?!moana\\s+2).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*pg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Inside Out 2 runtime",
+        "inside\\s+out\\s+2(?:(?!moana\\s+2).){0,1600}?(?:runtime|running time|duration)\\s*(?:is|was|:|=|of|at)?\\s*96\\s+minutes(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|chose|selected).{0,20}inside out 2"
+      ],
+      [
+        "outcome 1",
+        "(?:4\\s*minutes?\\s*shorter|shorter.{0,25}4\\s*minutes?)"
+      ]
+    ]
+  },
+  "Disney--1": {
+    "task": "Create a Disney account for Moana Fan, moana.fan@test.com, password Ocean2026!, to track upcoming animation. Find the alphabetically first Coming Soon movie in the Animation genre and save it to favorites. Report its title, release date and rating, then sign out and back in to confirm the saved movie remains.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 5,
+            "item_type": "movie",
+            "item_key": "frozen-3",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "moana.fan@test.com",
+            "name": "Moana Fan",
+            "password_hash": {
+              "bcrypt_password": "Ocean2026!"
+            },
+            "joined": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/movies/frozen\\-3(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Frozen 3 rating",
+        "frozen\\s+3(?:(?!(?!)).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*(?:not yet rated|unrated|rating (?:is )?(?:pending|unavailable))(?!\\w|\\.\\d)"
+      ],
+      [
+        "Frozen 3 release date",
+        "frozen\\s+3(?:(?!(?!)).){0,1600}?release\\s+date\\s*(?:is|was|:|=|of|at)?\\s*november\\s+24,\\s+2027(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|favorites).{0,100}(?:signing|logged|log|sign).{0,15}(?:back|in)"
+      ]
+    ]
+  },
+  "Disney--2": {
+    "task": "I'm planning a science-fiction double feature with Tron: Ares and The Marvels. Compare their ratings, runtimes and release dates, then tell me the combined running time so I can budget the evening. Use each film's detail page to check the information.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {},
+    "paths": [
+      "/movies/tron\\-ares(?:$|\\?)",
+      "/movies/the\\-marvels(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Tron: Ares rating",
+        "tron\\s+ares(?:(?!the\\s+marvels).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*pg\\-13(?!\\w|\\.\\d)"
+      ],
+      [
+        "Tron: Ares runtime",
+        "tron\\s+ares(?:(?!the\\s+marvels).){0,1600}?(?:runtime|running time|duration)\\s*(?:is|was|:|=|of|at)?\\s*119\\s+minutes(?!\\w|\\.\\d)"
+      ],
+      [
+        "Tron: Ares release date",
+        "tron\\s+ares(?:(?!the\\s+marvels).){0,1600}?release\\s+date\\s*(?:is|was|:|=|of|at)?\\s*october\\s+10,\\s+2025(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Marvels rating",
+        "the\\s+marvels(?:(?!tron\\s+ares).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*pg\\-13(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Marvels runtime",
+        "the\\s+marvels(?:(?!tron\\s+ares).){0,1600}?(?:runtime|running time|duration)\\s*(?:is|was|:|=|of|at)?\\s*105\\s+minutes(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Marvels release date",
+        "the\\s+marvels(?:(?!tron\\s+ares).){0,1600}?release\\s+date\\s*(?:is|was|:|=|of|at)?\\s*november\\s+10,\\s+2023(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:combined|total).{0,20}(?:224 minutes|3\\s*hours?\\s*44\\s*minutes?)"
+      ]
+    ]
+  },
+  "Disney--3": {
+    "task": "Help Bob choose between the original DuckTales and the newer series. Compare their release years and ratings, save the newer version using bob.c@test.com / TestPass123!, and confirm which version is in his favorites.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {},
+    "paths": [
+      "/shows/ducktales\\-products(?:$|\\?)",
+      "/shows/ducktales(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "DuckTales (1987) rating",
+        "ducktales\\s+\\(1987\\)(?:(?!ducktales\\s+\\(2017\\)).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-y7(?!\\w|\\.\\d)"
+      ],
+      [
+        "DuckTales (1987) year",
+        "ducktales\\s+\\(1987\\)(?:(?!ducktales\\s+\\(2017\\)).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*1987(?!\\w|\\.\\d)"
+      ],
+      [
+        "DuckTales (2017) rating",
+        "ducktales\\s+\\(2017\\)(?:(?!ducktales\\s+\\(1987\\)).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-y7(?!\\w|\\.\\d)"
+      ],
+      [
+        "DuckTales (2017) year",
+        "ducktales\\s+\\(2017\\)(?:(?!ducktales\\s+\\(1987\\)).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*2017(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "ducktales.{0,12}2017.{0,90}(?:saved|favorites)"
+      ]
+    ]
+  },
+  "Disney--4": {
+    "task": "Carol wants a Mickey-themed show suitable for a younger family audience. Compare Disney Mickey Mouse with The Mickey Mouse Club, including each rating and release year. Save the TV-G option using carol.d@test.com / TestPass123! and confirm the saved title.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 3,
+            "item_type": "show",
+            "item_key": "disney-mickey-mouse",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shows/the\\-mickey\\-mouse\\-club(?:$|\\?)",
+      "/shows/disney\\-mickey\\-mouse(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "The Mickey Mouse Club rating",
+        "the\\s+mickey\\s+mouse\\s+club(?:(?!disney\\s+mickey\\s+mouse).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-pg(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Mickey Mouse Club year",
+        "the\\s+mickey\\s+mouse\\s+club(?:(?!disney\\s+mickey\\s+mouse).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*1955(?!\\w|\\.\\d)"
+      ],
+      [
+        "Disney Mickey Mouse rating",
+        "disney\\s+mickey\\s+mouse(?:(?!the\\s+mickey\\s+mouse\\s+club).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-g(?!\\w|\\.\\d)"
+      ],
+      [
+        "Disney Mickey Mouse year",
+        "disney\\s+mickey\\s+mouse(?:(?!the\\s+mickey\\s+mouse\\s+club).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*2012(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|selected|chose).{0,20}disney mickey mouse"
+      ]
+    ]
+  },
+  "Disney--5": {
+    "task": "Compare Adventures of the Gummi Bears, Gargoyles and Goldie & Bear for a family fantasy-show shortlist. Report each show's rating and release year, noting which has the youngest audience rating. Check their individual detail pages; leave the account unchanged.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {},
+    "paths": [
+      "/shows/adventures\\-of\\-the\\-gummi\\-bears(?:$|\\?)",
+      "/shows/gargoyles(?:$|\\?)",
+      "/shows/goldie\\-and\\-bear(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Adventures of the Gummi Bears rating",
+        "adventures\\s+of\\s+the\\s+gummi\\s+bears(?:(?!gargoyles|goldie\\s+and\\s+bear).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-y7(?!\\w|\\.\\d)"
+      ],
+      [
+        "Adventures of the Gummi Bears year",
+        "adventures\\s+of\\s+the\\s+gummi\\s+bears(?:(?!gargoyles|goldie\\s+and\\s+bear).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*1985(?!\\w|\\.\\d)"
+      ],
+      [
+        "Gargoyles rating",
+        "gargoyles(?:(?!adventures\\s+of\\s+the\\s+gummi\\s+bears|goldie\\s+and\\s+bear).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-y7(?!\\w|\\.\\d)"
+      ],
+      [
+        "Gargoyles year",
+        "gargoyles(?:(?!adventures\\s+of\\s+the\\s+gummi\\s+bears|goldie\\s+and\\s+bear).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*1994(?!\\w|\\.\\d)"
+      ],
+      [
+        "Goldie & Bear rating",
+        "goldie\\s+and\\s+bear(?:(?!adventures\\s+of\\s+the\\s+gummi\\s+bears|gargoyles).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*tv\\-y(?!\\w|\\.\\d)"
+      ],
+      [
+        "Goldie & Bear year",
+        "goldie\\s+and\\s+bear(?:(?!adventures\\s+of\\s+the\\s+gummi\\s+bears|gargoyles).){0,1600}?(?:year|release(?: year| date)?)\\s*(?:is|was|:|=|of|at)?\\s*2015(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "goldie (?:&|and) bear.{0,70}youngest"
+      ]
+    ]
+  },
+  "Disney--6": {
+    "task": "Plan a Magic Kingdom thrill-ride shortlist for Alice's child, who is 40 inches tall. Compare Big Thunder Mountain Railroad, Seven Dwarfs Mine Train and Space Mountain by their minimum heights. Save the rides the child meets the height requirement for using alice.j@test.com / TestPass123!, and explain which is excluded.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 1,
+            "item_type": "attraction",
+            "item_key": "magic-kingdom/big-thunder-mountain-railroad",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/parks/attractions/magic\\-kingdom/big\\-thunder\\-mountain\\-railroad(?:$|\\?)",
+      "/parks/attractions/magic\\-kingdom/seven\\-dwarfs\\-mine\\-train(?:$|\\?)",
+      "/parks/attractions/magic\\-kingdom/space\\-mountain(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Big Thunder Mountain Railroad park",
+        "big\\s+thunder\\s+mountain\\s+railroad(?:(?!7\\s+dwarfs\\s+mine\\s+train|space\\s+mountain).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Big Thunder Mountain Railroad minimum height",
+        "big\\s+thunder\\s+mountain\\s+railroad(?:(?!7\\s+dwarfs\\s+mine\\s+train|space\\s+mountain).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*38\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "Seven Dwarfs Mine Train park",
+        "7\\s+dwarfs\\s+mine\\s+train(?:(?!big\\s+thunder\\s+mountain\\s+railroad|space\\s+mountain).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Seven Dwarfs Mine Train minimum height",
+        "7\\s+dwarfs\\s+mine\\s+train(?:(?!big\\s+thunder\\s+mountain\\s+railroad|space\\s+mountain).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*38\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "Space Mountain park",
+        "space\\s+mountain(?:(?!big\\s+thunder\\s+mountain\\s+railroad|7\\s+dwarfs\\s+mine\\s+train).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Space Mountain minimum height",
+        "space\\s+mountain(?:(?!big\\s+thunder\\s+mountain\\s+railroad|7\\s+dwarfs\\s+mine\\s+train).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*44\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "space mountain.{0,80}(?:excluded|ineligible|too tall|cannot|can.t)"
+      ]
+    ]
+  },
+  "Disney--7": {
+    "task": "Alice is deciding between EPCOT's Heartbeat of Freedom and Fantasmic! at Hollywood Studios for an evening show. Check each listing's park and available planning guidance. Report Fantasmic!'s early-arrival and wet-seat guidance, and say whether Heartbeat has a show-specific description available. Save Fantasmic! using alice.j@test.com / TestPass123!.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 1,
+            "item_type": "attraction",
+            "item_key": "hollywood-studios/fantasmic",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/parks/attractions/epcot/heartbeat\\-of\\-freedom(?:$|\\?)",
+      "/parks/attractions/hollywood\\-studios/fantasmic(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Heartbeat of Freedom park",
+        "heartbeat\\s+of\\s+freedom(?:(?!fantasmic!).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*epcot(?!\\w|\\.\\d)"
+      ],
+      [
+        "Fantasmic! park",
+        "fantasmic!(?:(?!heartbeat\\s+of\\s+freedom).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*disney's\\s+hollywood\\s+studios(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "fantasmic.{0,40}(?:up to\\s*)90\\s*minutes?"
+      ],
+      [
+        "outcome 1",
+        "(?:first (?:couple of|2)|front 2).{0,30}(?:get wet|wet)"
+      ],
+      [
+        "outcome 2",
+        "heartbeat.{0,60}(?:no|missing|not captured|unavailable).{0,40}(?:description|details)"
+      ],
+      [
+        "outcome 3",
+        "(?:saved|added).{0,30}fantasmic"
+      ]
+    ]
+  },
+  "Disney--8": {
+    "task": "Our group wants to compare Disney's biggest thrill rides across parks. Check Space Mountain, Rock \u2019n\u2019 Roller Coaster Starring The Muppets and Expedition Everest, and report each park and minimum height. Tell me which a 44-inch-tall guest can ride and which requires a taller guest.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {},
+    "paths": [
+      "/parks/attractions/magic\\-kingdom/space\\-mountain(?:$|\\?)",
+      "/parks/attractions/hollywood\\-studios/rock\\-and\\-roller\\-coaster\\-starring\\-muppets(?:$|\\?)",
+      "/parks/attractions/animal\\-kingdom/expedition\\-everest(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Space Mountain park",
+        "space\\s+mountain(?:(?!rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!|expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Space Mountain minimum height",
+        "space\\s+mountain(?:(?!rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!|expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*44\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rock \u2019n\u2019 Roller Coaster Starring The Muppets \u2014 New! park",
+        "rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!(?:(?!space\\s+mountain|expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*disney's\\s+hollywood\\s+studios(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rock \u2019n\u2019 Roller Coaster Starring The Muppets \u2014 New! minimum height",
+        "rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!(?:(?!space\\s+mountain|expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*48\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "Expedition Everest - Legend of the Forbidden Mountain park",
+        "expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain(?:(?!space\\s+mountain|rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*disney's\\s+animal\\s+kingdom\\s+theme\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Expedition Everest - Legend of the Forbidden Mountain minimum height",
+        "expedition\\s+everest\\s+\\-\\s+legend\\s+of\\s+the\\s+forbidden\\s+mountain(?:(?!space\\s+mountain|rock\\s+'n'\\s+roller\\s+coaster\\s+starring\\s+the\\s+muppets\\s+\\-\\s+new!).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*44\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "rock.{0,90}48 inches.{0,40}(?:excluded|ineligible|too tall|cannot)"
+      ]
+    ]
+  },
+  "Disney--9": {
+    "task": "Dana is choosing between Pirates of the Caribbean and Soarin' Around the World for a guest who is 38 inches tall. Check each ride's park, height requirement and interests. Save the eligible choice using dana.k@test.com / TestPass123!, and explain why the other ride is unsuitable.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 4,
+            "item_type": "attraction",
+            "item_key": "magic-kingdom/pirates-of-the-caribbean",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/parks/attractions/epcot/soarin\\-around\\-world(?:$|\\?)",
+      "/parks/attractions/magic\\-kingdom/pirates\\-of\\-the\\-caribbean(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Soarin' Around the World park",
+        "soarin'\\s+around\\s+the\\s+world(?:(?!pirates\\s+of\\s+the\\s+caribbean).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*epcot(?!\\w|\\.\\d)"
+      ],
+      [
+        "Soarin' Around the World minimum height",
+        "soarin'\\s+around\\s+the\\s+world(?:(?!pirates\\s+of\\s+the\\s+caribbean).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*40\\s+inches(?!\\w|\\.\\d)"
+      ],
+      [
+        "Pirates of the Caribbean park",
+        "pirates\\s+of\\s+the\\s+caribbean(?:(?!soarin'\\s+around\\s+the\\s+world).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Pirates of the Caribbean minimum height",
+        "pirates\\s+of\\s+the\\s+caribbean(?:(?!soarin'\\s+around\\s+the\\s+world).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*(?:any height|no (?:minimum )?height(?: requirement)?)(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "pirates of the caribbean.{0,40}dark.{0,30}slow rides.{0,30}small drops.{0,30}water rides"
+      ],
+      [
+        "outcome 1",
+        "soarin.{0,40}interests.{0,15}slow rides.{0,25}small drops"
+      ],
+      [
+        "outcome 2",
+        "(?:saved|chose|selected).{0,15}pirates"
+      ]
+    ]
+  },
+  "Disney--10": {
+    "task": "Buy one of the most expensive products in the Disney Store Toys collection for a gift. Check the detail-page price and rating before ordering. Use guest email toy.buyer@example.com, Toy Buyer, 25 Maple Lane, Orlando FL 32801. Report the product, price, rating, order total and confirmation code.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "shop_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "DS[A-F0-9]{7}"
+            },
+            "email": "toy.buyer@example.com",
+            "name": "Toy Buyer",
+            "shipping_address": "25 Maple Lane, Orlando FL 32801",
+            "items_json": {
+              "json_rows": [
+                {
+                  "pid": "416120689757",
+                  "name": "Disney Princess Classic Doll Collection Gift Set \u2013 10 1/2'' to 11 1/2''",
+                  "qty": 1,
+                  "line": 149.99
+                }
+              ]
+            },
+            "total": 149.99,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shop/products/416120689757(?:$|\\?)",
+      "/order/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Disney Princess Classic Doll Collection Gift Set \u2013 10 1/2'' to 11 1/2'' price",
+        "disney\\s+princess\\s+classic\\s+doll\\s+collection\\s+gift\\s+set\\s+\\-\\s+10\\s+1/2''\\s+to\\s+11\\s+1/2''(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*149\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Disney Princess Classic Doll Collection Gift Set \u2013 10 1/2'' to 11 1/2'' rating",
+        "disney\\s+princess\\s+classic\\s+doll\\s+collection\\s+gift\\s+set\\s+\\-\\s+10\\s+1/2''\\s+to\\s+11\\s+1/2''(?:(?!order).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*1(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!disney\\s+princess\\s+classic\\s+doll\\s+collection\\s+gift\\s+set\\s+\\-\\s+10\\s+1/2''\\s+to\\s+11\\s+1/2'').){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*149\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order confirmation",
+        "order(?:(?!disney\\s+princess\\s+classic\\s+doll\\s+collection\\s+gift\\s+set\\s+\\-\\s+10\\s+1/2''\\s+to\\s+11\\s+1/2'').){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "shop_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--11": {
+    "task": "Put together a Mickey-themed gift bag. Add one of the highest-rated Mickey Mouse items in the Sale collection and one of the first Bags & Wallets products in Accessories to the bag. Report the two product names and prices, the second item's review count, and the combined bag total. Leave it ready for checkout.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1,
+            "cart_key": {
+              "regex": "c[a-f0-9]{24}"
+            },
+            "product_pid": "415130694607",
+            "qty": 1
+          },
+          {
+            "id": 2,
+            "cart_key": {
+              "regex": "c[a-f0-9]{24}"
+            },
+            "product_pid": "442111075919",
+            "qty": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shop/products/415130694607(?:$|\\?)",
+      "/shop/products/442111075919(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Mickey Mouse Halloween 2026 Plush \u2013 Medium 14 1/4'' \u2013 Exclusive price",
+        "mickey\\s+mouse\\s+halloween\\s+2026\\s+plush\\s+\\-\\s+medium\\s+14\\s+1/4''\\s+\\-\\s+exclusive(?:(?!mickey\\s+mouse\\s+tote\\s+by\\s+harveys\\s+\\-\\s+the\\s+haunted\\s+house\\s+and\\s+the\\s+skeleton\\s+dance|bag).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*29\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Mickey Mouse Tote by Harveys \u2013 The Haunted House and The Skeleton Dance price",
+        "mickey\\s+mouse\\s+tote\\s+by\\s+harveys\\s+\\-\\s+the\\s+haunted\\s+house\\s+and\\s+the\\s+skeleton\\s+dance(?:(?!mickey\\s+mouse\\s+halloween\\s+2026\\s+plush\\s+\\-\\s+medium\\s+14\\s+1/4''\\s+\\-\\s+exclusive|bag).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*198(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Mickey Mouse Tote by Harveys \u2013 The Haunted House and The Skeleton Dance reviews",
+        "mickey\\s+mouse\\s+tote\\s+by\\s+harveys\\s+\\-\\s+the\\s+haunted\\s+house\\s+and\\s+the\\s+skeleton\\s+dance(?:(?!mickey\\s+mouse\\s+halloween\\s+2026\\s+plush\\s+\\-\\s+medium\\s+14\\s+1/4''\\s+\\-\\s+exclusive|bag).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*7(?!\\w|\\.\\d)"
+      ],
+      [
+        "Bag total",
+        "bag(?:(?!mickey\\s+mouse\\s+halloween\\s+2026\\s+plush\\s+\\-\\s+medium\\s+14\\s+1/4''\\s+\\-\\s+exclusive|mickey\\s+mouse\\s+tote\\s+by\\s+harveys\\s+\\-\\s+the\\s+haunted\\s+house\\s+and\\s+the\\s+skeleton\\s+dance).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*227\\.990*(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Disney--12": {
+    "task": "Buy three of the least expensive adult T-shirts featuring both Mickey and Minnie in the Clothes collection for our group. Check the selected shirt's rating and material before adding it to the bag. Check out with shirt.trip@example.com, Group Buyer, 25 Maple Lane, Orlando FL 32801. Report the product, unit price, rating, material, order total and confirmation code.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "shop_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "DS[A-F0-9]{7}"
+            },
+            "email": "shirt.trip@example.com",
+            "name": "Group Buyer",
+            "shipping_address": "25 Maple Lane, Orlando FL 32801",
+            "items_json": {
+              "json_rows": [
+                {
+                  "pid": "5106057431232m",
+                  "name": "Mickey and Minnie Mouse Cutie Ghost T-Shirt for Women",
+                  "qty": 3,
+                  "line": 110.97
+                }
+              ]
+            },
+            "total": 110.97,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shop/products/5106057431232m(?:$|\\?)",
+      "/order/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Mickey and Minnie Mouse Cutie Ghost T-Shirt for Women price",
+        "mickey\\s+and\\s+minnie\\s+mouse\\s+cutie\\s+ghost\\s+t\\-shirt\\s+for\\s+women(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*36\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Mickey and Minnie Mouse Cutie Ghost T-Shirt for Women rating",
+        "mickey\\s+and\\s+minnie\\s+mouse\\s+cutie\\s+ghost\\s+t\\-shirt\\s+for\\s+women(?:(?!order).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*3\\.50*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Mickey and Minnie Mouse Cutie Ghost T-Shirt for Women material",
+        "mickey\\s+and\\s+minnie\\s+mouse\\s+cutie\\s+ghost\\s+t\\-shirt\\s+for\\s+women(?:(?!order).){0,1600}?material\\s*(?:is|was|:|=|of|at)?\\s*60%\\s+cotton\\s+/\\s+40%\\s+polyester(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!mickey\\s+and\\s+minnie\\s+mouse\\s+cutie\\s+ghost\\s+t\\-shirt\\s+for\\s+women).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*110\\.970*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order confirmation",
+        "order(?:(?!mickey\\s+and\\s+minnie\\s+mouse\\s+cutie\\s+ghost\\s+t\\-shirt\\s+for\\s+women).){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "shop_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--13": {
+    "task": "I need two tote bags as gifts. Find the first product in the site's 'tote' search, check its detail-page price and description, and buy two using shop.compare@example.com, Gift Buyer, 25 Maple Lane, Orlando FL 32801. Report the product name, unit price, order total and confirmation code.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "shop_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "DS[A-F0-9]{7}"
+            },
+            "email": "shop.compare@example.com",
+            "name": "Gift Buyer",
+            "shipping_address": "25 Maple Lane, Orlando FL 32801",
+            "items_json": {
+              "json_rows": [
+                {
+                  "pid": "442030853759",
+                  "name": "Disneyland Canvas Tote",
+                  "qty": 2,
+                  "line": 89.98
+                }
+              ]
+            },
+            "total": 89.98,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/shop/products/442030853759(?:$|\\?)",
+      "/order/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Disneyland Canvas Tote price",
+        "disneyland\\s+canvas\\s+tote(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*44\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!disneyland\\s+canvas\\s+tote).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*89\\.980*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order confirmation",
+        "order(?:(?!disneyland\\s+canvas\\s+tote).){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "shop_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--14": {
+    "task": "Book two tickets to the first performance at the alphabetically first city hosting Magic in the Stars in the Disney On Ice schedule. Use ice.first@example.com and Alex Winter. Report the city, venue, performance date and time, confirmation code and total.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "ticket_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "TK[A-F0-9]{7}"
+            },
+            "email": "ice.first@example.com",
+            "name": "Alex Winter",
+            "event_id": "120992",
+            "show_title": "Magic in the Stars",
+            "city": "Allen, TX",
+            "venue": "Credit Union of Texas Event Center",
+            "day": "Nov 25, 2026",
+            "time": "7:00 pm",
+            "qty": 2,
+            "unit_price": 35.0,
+            "total": 70.0,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/live\\-shows/disney\\-on\\-ice/120992(?:$|\\?)",
+      "/tickets/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Booking show",
+        "booking(?:(?!(?!)).){0,1600}?show\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+in\\s+the\\s+stars(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking city",
+        "booking(?:(?!(?!)).){0,1600}?city\\s*(?:is|was|:|=|of|at)?\\s*allen,\\s+tx(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking venue",
+        "booking(?:(?!(?!)).){0,1600}?venue\\s*(?:is|was|:|=|of|at)?\\s*credit\\s+union\\s+of\\s+texas\\s+event\\s+center(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking date",
+        "booking(?:(?!(?!)).){0,1600}?(?:date|performance date)\\s*(?:is|was|:|=|of|at)?\\s*nov\\s+25,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking show time",
+        "booking(?:(?!(?!)).){0,1600}?(?:show time|time)\\s*(?:is|was|:|=|of|at)?\\s*7:00\\s+pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking tickets",
+        "booking(?:(?!(?!)).){0,1600}?tickets\\s*(?:is|was|:|=|of|at)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking total",
+        "booking(?:(?!(?!)).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*70(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking confirmation",
+        "booking(?:(?!(?!)).){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "ticket_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--15": {
+    "task": "Book three Disney On Ice tickets for Kent, WA's Saturday 11:00 am performance. Use skate.fan@example.com and Jamie Frost. Check the venue and event date range, then report those details with the booked performance, confirmation code and total.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "ticket_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "TK[A-F0-9]{7}"
+            },
+            "email": "skate.fan@example.com",
+            "name": "Jamie Frost",
+            "event_id": "120960",
+            "show_title": "Jump In!",
+            "city": "Kent, WA",
+            "venue": "accesso ShoWare Center",
+            "day": "Oct 24, 2026",
+            "time": "11:00 am",
+            "qty": 3,
+            "unit_price": 35.0,
+            "total": 105.0,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/live\\-shows/disney\\-on\\-ice/120960(?:$|\\?)",
+      "/tickets/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Booking show",
+        "booking(?:(?!(?!)).){0,1600}?show\\s*(?:is|was|:|=|of|at)?\\s*jump\\s+in!(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking city",
+        "booking(?:(?!(?!)).){0,1600}?city\\s*(?:is|was|:|=|of|at)?\\s*kent,\\s+wa(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking venue",
+        "booking(?:(?!(?!)).){0,1600}?venue\\s*(?:is|was|:|=|of|at)?\\s*accesso\\s+showare\\s+center(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking date",
+        "booking(?:(?!(?!)).){0,1600}?(?:date|performance date)\\s*(?:is|was|:|=|of|at)?\\s*oct\\s+24,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking show time",
+        "booking(?:(?!(?!)).){0,1600}?(?:show time|time)\\s*(?:is|was|:|=|of|at)?\\s*11:00\\s+am(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking tickets",
+        "booking(?:(?!(?!)).){0,1600}?tickets\\s*(?:is|was|:|=|of|at)?\\s*3(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking total",
+        "booking(?:(?!(?!)).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*105(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking confirmation",
+        "booking(?:(?!(?!)).){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking event dates",
+        "booking(?:(?!(?!)).){0,1600}?event\\s+dates\\s*(?:is|was|:|=|of|at)?\\s*oct\\s+22\\-25,\\s+2026(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "ticket_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--16": {
+    "task": "Book two tickets for the November 22, 2026 5:00 pm Disney On Ice performance in Laredo, Texas. Use laredo.ice@example.com and Taylor Snow. Confirm the show title and venue before booking, then report the date, time, confirmation code and total.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "ticket_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "confirmation": {
+              "regex": "TK[A-F0-9]{7}"
+            },
+            "email": "laredo.ice@example.com",
+            "name": "Taylor Snow",
+            "event_id": "120991",
+            "show_title": "Magic in the Stars",
+            "city": "Laredo, TX",
+            "venue": "Sames Auto Arena",
+            "day": "Nov 22, 2026",
+            "time": "5:00 pm",
+            "qty": 2,
+            "unit_price": 35.0,
+            "total": 70.0,
+            "placed_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/live\\-shows/disney\\-on\\-ice/120991(?:$|\\?)",
+      "/tickets/(?:DS|TK)[A-F0-9]{7}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Booking show",
+        "booking(?:(?!(?!)).){0,1600}?show\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+in\\s+the\\s+stars(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking city",
+        "booking(?:(?!(?!)).){0,1600}?city\\s*(?:is|was|:|=|of|at)?\\s*laredo,\\s+tx(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking venue",
+        "booking(?:(?!(?!)).){0,1600}?venue\\s*(?:is|was|:|=|of|at)?\\s*sames\\s+auto\\s+arena(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking date",
+        "booking(?:(?!(?!)).){0,1600}?(?:date|performance date)\\s*(?:is|was|:|=|of|at)?\\s*nov\\s+22,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking show time",
+        "booking(?:(?!(?!)).){0,1600}?(?:show time|time)\\s*(?:is|was|:|=|of|at)?\\s*5:00\\s+pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking tickets",
+        "booking(?:(?!(?!)).){0,1600}?tickets\\s*(?:is|was|:|=|of|at)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking total",
+        "booking(?:(?!(?!)).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*70(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Booking confirmation",
+        "booking(?:(?!(?!)).){0,1600}?(?:confirmation(?: code)?|code)\\s*(?:is|was|:|=|of|at)?\\s*(?:DS|TK)[a-f0-9]{7}(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "ticket_orders",
+        "confirmation"
+      ]
+    ]
+  },
+  "Disney--17": {
+    "task": "Create a Disney account for Game Player, game.player@test.com, password Play2026!, and build a game shortlist with Disney Illusion Island and Disney Villains Cursed Caf\u00e9. Read their descriptions and save both to favorites, then sign out and back in to confirm they remain. Briefly describe the gameplay of each saved game.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 5,
+            "item_type": "game",
+            "item_key": "disney-illusion-island",
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": 13,
+            "user_id": 5,
+            "item_type": "game",
+            "item_key": "disney-villains-cursed-cafe",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "game.player@test.com",
+            "name": "Game Player",
+            "password_hash": {
+              "bcrypt_password": "Play2026!"
+            },
+            "joined": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/games/disney\\-illusion\\-island(?:$|\\?)",
+      "/games/disney\\-villains\\-cursed\\-cafe(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "outcome 0",
+        "disney illusion island.{0,70}(?:platforming|platformer).{0,30}puzzles"
+      ],
+      [
+        "outcome 1",
+        "disney villains cursed caf[e\u00e9].{0,60}(?:create|craft|brew).{0,20}potions"
+      ],
+      [
+        "outcome 2",
+        "(?:both games|games|titles).{0,80}(?:saved|favorites).{0,80}(?:signing|logging|logged)"
+      ]
+    ]
+  },
+  "Disney--18": {
+    "task": "Help Dana plan a Frozen-themed outing: compare the Frozen Ever After attraction's park and height requirement with Frozen 3's announced release date and rating for a future movie outing. Save both to favorites using dana.k@test.com / TestPass123!, and report those details so she can check the plan suits her family.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 4,
+            "item_type": "attraction",
+            "item_key": "epcot/frozen-ever-after",
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": 13,
+            "user_id": 4,
+            "item_type": "movie",
+            "item_key": "frozen-3",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/parks/attractions/epcot/frozen\\-ever\\-after(?:$|\\?)",
+      "/movies/frozen\\-3(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Frozen Ever After park",
+        "frozen\\s+ever\\s+after(?:(?!frozen\\s+3).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*epcot(?!\\w|\\.\\d)"
+      ],
+      [
+        "Frozen Ever After minimum height",
+        "frozen\\s+ever\\s+after(?:(?!frozen\\s+3).){0,1600}?(?:minimum height|height(?: requirement)?)\\s*(?:is|was|:|=|of|at)?\\s*(?:any height|no (?:minimum )?height(?: requirement)?)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Frozen 3 rating",
+        "frozen\\s+3(?:(?!frozen\\s+ever\\s+after).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*(?:not yet rated|unrated|rating (?:is )?(?:pending|unavailable))(?!\\w|\\.\\d)"
+      ],
+      [
+        "Frozen 3 release date",
+        "frozen\\s+3(?:(?!frozen\\s+ever\\s+after).){0,1600}?release\\s+date\\s*(?:is|was|:|=|of|at)?\\s*november\\s+24,\\s+2027(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|added).{0,35}frozen ever after.{0,15}frozen 3"
+      ]
+    ]
+  },
+  "Disney--19": {
+    "task": "Carol wants two contrasting Magic Kingdom character experiences. Compare Meet Cinderella and a Visiting Princess at Princess Fairytale Hall with Meet Mickey Mouse at Town Square Theater, checking each location and description. Save both using carol.d@test.com / TestPass123!, and summarize whom she can meet at each.",
+    "initial_digest": "48a9246f98ebde000f12a88fbd3be9990dca89207f8b8c1702b8d6e51c820be3",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 12,
+            "user_id": 3,
+            "item_type": "attraction",
+            "item_key": "magic-kingdom/character-meet-princess-fantasyland",
+            "added_at": "2026-09-29"
+          },
+          {
+            "id": 13,
+            "user_id": 3,
+            "item_type": "attraction",
+            "item_key": "magic-kingdom/character-meet-mickey-town-square",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/parks/attractions/magic\\-kingdom/character\\-meet\\-princess\\-fantasyland(?:$|\\?)",
+      "/parks/attractions/magic\\-kingdom/character\\-meet\\-mickey\\-town\\-square(?:$|\\?)",
+      "/favorites(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Meet Cinderella and a Visiting Princess at Princess Fairytale Hall park",
+        "meet\\s+cinderella\\s+and\\s+a\\s+visiting\\s+princess\\s+at\\s+princess\\s+fairytale\\s+hall(?:(?!meet\\s+mickey\\s+at\\s+town\\s+square\\s+theater).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Meet Mickey at Town Square Theater park",
+        "meet\\s+mickey\\s+at\\s+town\\s+square\\s+theater(?:(?!meet\\s+cinderella\\s+and\\s+a\\s+visiting\\s+princess\\s+at\\s+princess\\s+fairytale\\s+hall).){0,1600}?park\\s*(?:is|was|:|=|of|at)?\\s*magic\\s+kingdom\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "princess fairytale hall.{0,40}cinderella.{0,15}visiting princess"
+      ],
+      [
+        "outcome 1",
+        "town square theater.{0,30}mickey.{0,30}rehearsal"
+      ],
+      [
+        "outcome 2",
+        "(?:both|2).{0,35}(?:saved|favorites)"
+      ]
+    ]
+  }
+}

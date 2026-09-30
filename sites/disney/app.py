@@ -22,6 +22,8 @@ image build time (PYTHONHASHSEED=0).
 import json
 import os
 import re
+import math
+from urllib.parse import urlsplit, urlencode
 import secrets
 from datetime import date
 
@@ -86,6 +88,22 @@ def _inventory():
 
 def asset_exists(path):
     return path in _inventory()
+
+
+def local_return(value, fallback='/'):
+    value = (value or '').strip()
+    parts = urlsplit(value)
+    return value if value.startswith('/') and not value.startswith('//') and not parts.netloc and not parts.scheme and not any(c in value for c in ('\\', '\r', '\n')) else fallback
+
+
+def integer(value, minimum=1, maximum=99):
+    try:
+        result = int(value)
+    except (ValueError, TypeError):
+        abort(400, 'Enter a valid whole number.')
+    if not minimum <= result <= maximum:
+        abort(400, 'Quantity or page is outside the allowed range.')
+    return result
 
 
 # ------------------------------------------------------------------- models --
@@ -321,6 +339,7 @@ class ShopOrder(db.Model):
     confirmation = db.Column(db.String(16), unique=True, nullable=False)
     email = db.Column(db.String(128), nullable=False)
     name = db.Column(db.String(128), nullable=False)
+    shipping_address = db.Column(db.Text)
     items_json = db.Column(db.Text, nullable=False)
     total = db.Column(db.Float, nullable=False)
     placed_at = db.Column(db.String(10), nullable=False)
@@ -458,7 +477,7 @@ def movies():
     status = request.args.get('status') or ''
     genre = request.args.get('genre') or ''
     sort = request.args.get('sort') or 'release'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = integer(request.args.get('page', 1) or 1, 1, 100000)
     query = Movie.query
     if q:
         query = query.filter(Movie.title.ilike(f'%{q}%'))
@@ -477,6 +496,7 @@ def movies():
         rows.sort(key=lambda m: m.rating or '')
     total = len(rows)
     per_page = 24
+    page = min(page, max(1, -(-total // per_page)))
     start = (page - 1) * per_page
     page_rows = rows[start:start + per_page]
     genres = sorted({g for m in Movie.query.all() for g in m.genre_list()})
@@ -508,7 +528,7 @@ def shows():
     q = (request.args.get('q') or '').strip()
     genre = request.args.get('genre') or ''
     sort = request.args.get('sort') or 'title'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = integer(request.args.get('page', 1) or 1, 1, 100000)
     query = Show.query
     if q:
         query = query.filter(Show.title.ilike(f'%{q}%'))
@@ -516,10 +536,11 @@ def shows():
         query = query.filter(Show.genres.ilike(f'%{genre}%'))
     rows = query.all()
     order = {'title': lambda s: s.title.lower(),
-             'recent': lambda s: s.slug}
-    rows.sort(key=order.get(sort, order['title']))
+             'recent': lambda s: (s.release_date or '', s.title.lower())}
+    rows.sort(key=order.get(sort, order['title']), reverse=sort == 'recent')
     total = len(rows)
     per_page = 30
+    page = min(page, max(1, -(-total // per_page)))
     start = (page - 1) * per_page
     page_rows = rows[start:start + per_page]
     genres = sorted({g for s in Show.query.all() for g in s.genre_list()})
@@ -575,7 +596,7 @@ def attractions():
     age = request.args.get('age') or ''
     height = request.args.get('height') or ''
     sort = request.args.get('sort') or 'name'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = integer(request.args.get('page', 1) or 1, 1, 100000)
     query = ParkEntity.query
     if park:
         query = query.filter_by(park_slug=park)
@@ -600,6 +621,7 @@ def attractions():
     rows.sort(key=order.get(sort, order['name']))
     total = len(rows)
     per_page = 30
+    page = min(page, max(1, -(-total // per_page)))
     start = (page - 1) * per_page
     page_rows = rows[start:start + per_page]
     interests = sorted({i for r in ParkEntity.query.all() for i in r.interest_list()})
@@ -618,6 +640,10 @@ def attraction_detail(park, slug):
     if not entity:
         abort(404)
     detail = entity.detail()
+    # A retired event may redirect to a generic upstream hub. Its sections
+    # describe other shows and must not appear as this event's description.
+    if detail.get('title') == 'Fireworks & Nighttime Entertainment':
+        detail = dict(detail, sections=[])
     related = [db.session.get(ParkEntity, k)
                for k in entity.related_list()]
     related = [r for r in related if r]
@@ -649,7 +675,7 @@ def shop_collection(collection):
     character = request.args.get('character') or ''
     target = request.args.get('target_age') or ''
     sort = request.args.get('sort') or 'featured'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = integer(request.args.get('page', 1) or 1, 1, 100000)
     query = Product.query.filter(Product.collections.ilike(f'%{collection}%'))
     if q:
         query = query.filter(Product.name.ilike(f'%{q}%'))
@@ -670,6 +696,7 @@ def shop_collection(collection):
         rows.sort(key=lambda p: (-(p.reviews or 0), -(p.rating or 0)))
     total = len(rows)
     per_page = 24
+    page = min(page, max(1, -(-total // per_page)))
     start = (page - 1) * per_page
     page_rows = rows[start:start + per_page]
     categories = sorted({p.category for p in
@@ -716,14 +743,14 @@ def bag():
 @app.route('/bag/add', methods=['POST'])
 def bag_add():
     pid = request.form.get('pid') or ''
-    qty = max(1, int(request.form.get('qty') or 1))
+    qty = integer(request.form.get('qty') or 1)
     product = db.session.get(Product, pid)
     if not product:
         abort(404)
     key = _cart_key()
     row = CartItem.query.filter_by(cart_key=key, product_pid=pid).first()
     if row:
-        row.qty += qty
+        row.qty = integer(row.qty + qty)
     else:
         db.session.add(CartItem(cart_key=key, product_pid=pid, qty=qty))
     db.session.commit()
@@ -732,8 +759,8 @@ def bag_add():
 
 @app.route('/bag/update', methods=['POST'])
 def bag_update():
-    row_id = int(request.form.get('row_id') or 0)
-    qty = int(request.form.get('qty') or 0)
+    row_id = integer(request.form.get('row_id'), 1, 2147483647)
+    qty = integer(request.form.get('qty'), 0, 99)
     key = _cart_key()
     row = db.session.get(CartItem, row_id)
     if row and row.cart_key == key:
@@ -764,6 +791,7 @@ def checkout():
                                error=error)
     confirmation = 'DS' + secrets.token_hex(4).upper()[:7]
     order = ShopOrder(confirmation=confirmation, email=email, name=name,
+                      shipping_address=address,
                       items_json=json.dumps([
                           {'pid': r['product'].pid, 'name': r['product'].name,
                            'qty': r['row'].qty, 'line': r['line']}
@@ -798,7 +826,7 @@ def doi_schedule():
     q = (request.args.get('q') or '').strip()
     show = request.args.get('show') or ''
     sort = request.args.get('sort') or 'date'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = integer(request.args.get('page', 1) or 1, 1, 100000)
     query = IceEvent.query
     if q:
         like = r'\b' + re.escape(q) + r'\b'
@@ -817,6 +845,7 @@ def doi_schedule():
         rows.sort(key=lambda e: (e.date_range or '', e.city))
     total = len(rows)
     per_page = 20
+    page = min(page, max(1, -(-total // per_page)))
     start = (page - 1) * per_page
     page_rows = rows[start:start + per_page]
     shows = sorted({e.show for e in IceEvent.query.all()})
@@ -860,7 +889,7 @@ def book_tickets(event_id):
         elif time not in valid_times.get(day, []):
             time = ''
         try:
-            qty = int(request.form.get('qty') or 0)
+            qty = integer(request.form.get('qty'), 0, 99)
         except ValueError:
             qty = 0
         email = (request.form.get('email') or '').strip().lower()
@@ -917,6 +946,27 @@ def search():
 
 # ------------------------------------------------------------------ account --
 
+def merge_guest_bag(user):
+    key = session.pop('cart_key', None)
+    if not key:
+        return
+    for row in CartItem.query.filter_by(cart_key=key).all():
+        existing = CartItem.query.filter_by(cart_key=f'u{user.id}', product_pid=row.product_pid).first()
+        if existing:
+            existing.qty += row.qty
+            db.session.delete(row)
+        else:
+            row.cart_key = f'u{user.id}'
+    db.session.commit()
+
+
+@app.context_processor
+def favorite_state():
+    def is_favorite(kind, key):
+        return current_user.is_authenticated and Favorite.query.filter_by(user_id=current_user.id, item_type=kind, item_key=key).first() is not None
+    return {'is_favorite': is_favorite}
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -925,10 +975,11 @@ def login():
     password = request.form.get('password') or ''
     user = User.query.filter_by(email=email).first()
     if user and bcrypt.check_password_hash(user.password_hash, password):
+        merge_guest_bag(user)
         login_user(user)
         target = request.args.get('next') or request.form.get('next')
-        if target and target.startswith('/'):
-            return redirect(target)
+        if target:
+            return redirect(local_return(target))
         return redirect(url_for('home'))
     return render_template('login.html', error='Invalid email or password.')
 
@@ -960,6 +1011,7 @@ def signup():
                 joined=MIRROR_TS)
     db.session.add(user)
     db.session.commit()
+    merge_guest_bag(user)
     login_user(user)
     return redirect(url_for('home'))
 
@@ -1004,11 +1056,11 @@ def favorites_toggle():
     if row:
         db.session.delete(row)
         db.session.commit()
-        return redirect(request.form.get('back') or url_for('favorites'))
+        return redirect(local_return(request.form.get('back'), url_for('favorites')))
     db.session.add(Favorite(user_id=current_user.id, item_type=item_type,
                            item_key=item_key, added_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('back') or url_for('favorites'))
+    return redirect(local_return(request.form.get('back'), url_for('favorites')))
 
 
 # -------------------------------------------------------------- error pages --
