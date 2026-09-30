@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Auto Loan Payment Calculator | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <span>Car payment calculator</span></nav>
+{% endblock %}
+{% block content %}
+<div class="calculator-page">
+  <h1>Estimate your monthly car loan payment</h1>
+  <p>Use our auto loan calculator to estimate your monthly car loan payments. Enter a car price and adjust other factors as needed to see how changes affect your estimated payment.</p>
+  <form class="calculator-form" method="post" action="{{ url_for('loan_calculator') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="offer-field">
+      <label for="calc-price">Price of the car you want *</label>
+      <input id="calc-price" type="number" name="vehicle_price" min="0" required
+             value="{{ form.get('vehicle_price', '') }}" placeholder="Vehicle price">
+    </div>
+    <div class="offer-field">
+      <label for="calc-credit">Your credit rating *</label>
+      <select id="calc-credit" name="credit_rating" required>
+        {% for slug, label in credit_ratings.items() %}
+        <option value="{{ slug }}" {{ 'selected' if form.get('credit_rating') == slug }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="offer-field">
+      <label for="calc-apr">Custom interest rate (leave blank to use credit rating)</label>
+      <input id="calc-apr" type="number" name="custom_apr" min="0" max="20" step="0.1"
+             value="{{ form.get('custom_apr', '') }}" placeholder="APR %">
+    </div>
+    <div class="offer-field">
+      <label for="calc-zip">ZIP (optional)</label>
+      <input id="calc-zip" type="text" name="zip" value="{{ form.get('zip', DEFAULT_ZIP) }}">
+    </div>
+    <div class="offer-field">
+      <label for="calc-term">Loan term *</label>
+      <select id="calc-term" name="term" required>
+        {% for t in terms %}
+        <option value="{{ t }}" {{ 'selected' if form.get('term')|int == t }}>{{ t }} months</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="offer-field">
+      <label for="calc-down">Down payment</label>
+      <input id="calc-down" type="number" name="down_payment" min="0" value="{{ form.get('down_payment', '') }}" placeholder="Down payment">
+    </div>
+    <div class="offer-field">
+      <label for="calc-trade">Trade-in value</label>
+      <input id="calc-trade" type="number" name="trade_in" min="0" value="{{ form.get('trade_in', '') }}" placeholder="Net trade-in value">
+    </div>
+    <div class="offer-field">
+      <label for="calc-incentives">Cash incentives</label>
+      <input id="calc-incentives" type="number" name="cash_incentives" min="0" value="{{ form.get('cash_incentives', '') }}" placeholder="Cash incentives">
+    </div>
+    <div class="offer-field">
+      <label for="calc-fees">Additional fees</label>
+      <input id="calc-fees" type="number" name="fees" min="0" value="{{ form.get('fees', '') }}" placeholder="Additional fees">
+    </div>
+    <button class="btn btn-primary" type="submit">Calculate payment</button>
+  </form>
+
+  {% if result %}
+  <section class="calc-result">
+    <h2>Estimated monthly payment: ${{ '{:,}'.format(result.monthly) }}/mo</h2>
+    <table class="price-breakdown">
+      <tr><th>APR used</th><td>{{ '%0.1f' % result.apr }}%</td></tr>
+      <tr><th>Loan term</th><td>{{ result.term }} months</td></tr>
+      <tr><th>Estimated sales tax (10.25%)</th><td>${{ '{:,}'.format(result.sales_tax) }}</td></tr>
+      <tr><th>Total loan amount</th><td>${{ '{:,}'.format(result.principal) }}</td></tr>
+      <tr><th>Total interest paid</th><td>${{ '{:,}'.format(result.total_interest) }}</td></tr>
+      <tr><th>Total loan &amp; interest paid</th><td>${{ '{:,}'.format(result.total_paid) }}</td></tr>
+    </table>
+    <p class="muted">Estimated payments are for informational purposes and do not represent a financing offer from the seller of this vehicle. Other taxes may apply.</p>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Research Car Models, Reviews, Specs & Comparisons | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <span>Research</span></nav>
+{% endblock %}
+{% block content %}
+<div class="research-home">
+  <h1>Research cars</h1>
+  <p class="muted">Models, trims, prices, MPG and consumer reviews — snapshot {{ MIRROR_TS }}.</p>
+  <div class="research-actions">
+    <a class="btn btn-outline" href="{{ url_for('compare_home') }}">Compare cars side by side</a>
+  </div>
+  <h2>Model pages</h2>
+  <ol class="model-list">
+    {% for p in pages %}
+    <li>
+      <h3><a href="{{ url_for('research_page', slug=p.slug) }}">{{ p.year }} {{ p.make }} {{ p.model }}</a></h3>
+      <p class="muted">
+        {% if p.starting_price %}Starting at ${{ '{:,}'.format(p.starting_price) }}{% endif %}
+        {% if p.body_style %} &middot; {{ p.body_style }}{% endif %}
+        {% if p.consumer_rating %} &middot; Consumer rating {{ p.consumer_rating }}/5 ({{ p.consumer_review_count }} reviews){% endif %}
+        {% if p.safety_rating %} &middot; Safety {{ p.safety_rating }}/5{% endif %}
+      </p>
+    </li>
+    {% endfor %}
+  </ol>
+  <h2>Popular comparisons</h2>
+  <ul class="link-list">
+    {% for pair in pairs %}
+    <li><a href="{{ url_for('compare_page', slug=pair.slug) }}">{% set c = pair.columns_list() %}{% if c %}{{ c[0].name }} vs. {{ c[1].name }}{% else %}{{ pair.slug_a | replace('-',' ') | title }} vs. {{ pair.slug_b | replace('-',' ') | title }}{% endif %}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
