@@ -435,8 +435,18 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/zara && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/usps && \
     (cd /opt/WebSyn/usps && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/usps.db instance_seed/usps.db && rm -rf instance __pycache__)
 
+# CoinMarketCap validates its downloaded coin/exchange logos, sparklines and
+# brand assets against the tracked inventory and rebuilds its deterministic
+# SQLite seed from tracked upstream snapshot data (captured 2026-09-29/30;
+# see sites/coinmarketcap/provenance.json).
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/coinmarketcap && \
+    (cd /opt/WebSyn/coinmarketcap && rm -rf instance instance_seed && \
+     PYTHONHASHSEED=0 python3 seed_data.py && \
+     mkdir -p instance_seed && cp instance/coinmarketcap.db instance_seed/coinmarketcap.db && \
+     rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40129
+EXPOSE 8101 40000-40192
 
 CMD ["/opt/websyn_start.sh"]

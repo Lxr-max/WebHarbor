@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Cryptocurrency Converter Calculator | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Cryptocurrency Converter Calculator</h1>
+<p class="muted">Conversion rates are computed from the captured {{ mirror_date }} (UTC) prices, exactly
+  as the upstream converter does.</p>
+
+<div class="card converter-card">
+  <form method="post" action="/converter/">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="converter-row">
+      <div class="field">
+        <label for="amount">Amount</label>
+        <input type="text" id="amount" name="amount" value="{{ amount }}" required>
+      </div>
+      <div class="field">
+        <label for="from">From</label>
+        <select id="from" name="from">
+          <option value="usd" {{ 'selected' if frm == 'usd' else '' }}>United States Dollar "$" (USD)</option>
+          {% for c in coins %}
+            <option value="{{ c.slug }}" {{ 'selected' if frm == c.slug else '' }}>
+              {{ c.name }} ({{ c.symbol }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="to">To</label>
+        <select id="to" name="to">
+          <option value="usd" {{ 'selected' if to == 'usd' else '' }}>United States Dollar "$" (USD)</option>
+          {% for c in coins %}
+            <option value="{{ c.slug }}" {{ 'selected' if to == c.slug else '' }}>
+              {{ c.name }} ({{ c.symbol }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Convert</button>
+    </div>
+  </form>
+
+  {% if result %}
+  <div class="result-box">
+    {{ result.amount | int if result.amount == (result.amount | int) else result.amount }}
+    {{ result.from_label }} = {{ result.value | price }} {{ result.to_label }}
+  </div>
+  {% endif %}
+</div>
+
+<h2>Popular Cryptocurrency Conversions</h2>
+<table>
+  <thead><tr><th>Conversion</th><th class="num">Rate</th></tr></thead>
+  <tbody>
+    {% for cv in popular %}
+    <tr>
+      <td>1 {{ cv.from_name }} ({{ cv.from_symbol }}) to {{ cv.to_symbol }}</td>
+      <td class="num">{{ cv.to_price | price }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

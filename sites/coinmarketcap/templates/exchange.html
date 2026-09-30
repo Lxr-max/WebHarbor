@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ exch.name }} Overview | CoinMarketCap{% endblock %}
+{% block body %}
+<div class="coin-head">
+  {% if exchange_logo(exch) %}<img src="{{ exchange_logo(exch) }}" alt="{{ exch.name }} logo">{% endif %}
+  <div class="names"><h1>{{ exch.name }}</h1></div>
+  {% if exch.spot_rank %}<span class="rank-badge">Spot Rank #{{ exch.spot_rank }}</span>{% endif %}
+  {% if exch.dex_rank %}<span class="rank-badge">DEX Rank #{{ exch.dex_rank }}</span>{% endif %}
+  {% if exch.derivatives_rank %}<span class="rank-badge">Derivatives Rank #{{ exch.derivatives_rank }}</span>{% endif %}
+  <span class="rank-badge">{{ 'DEX' if exch.dex_status else 'CEX' }}</span>
+</div>
+
+<div class="grid">
+  <div class="metric"><div class="label">Spot Volume (24h)</div>
+    <div class="value">{{ exch.spot_vol_24h | usd }}</div></div>
+  <div class="metric"><div class="label">Total Volume (24h)</div>
+    <div class="value">{{ exch.total_vol_24h | usd }}</div>
+    <div class="sub">{{ exch.vol_chg_24h | pct }} (24h)</div></div>
+  <div class="metric"><div class="label">Derivatives Volume (24h)</div>
+    <div class="value">{{ exch.derivatives_vol_24h | usd }}</div></div>
+  <div class="metric"><div class="label">Derivatives Open Interest</div>
+    <div class="value">{{ exch.derivatives_open_interest | usd }}</div></div>
+  <div class="metric"><div class="label">Market Share</div>
+    <div class="value">{{ '%.2f' % exch.market_share_pct if exch.market_share_pct is not none else '--' }}%</div></div>
+  <div class="metric"><div class="label">Avg. Liquidity</div>
+    <div class="value">{{ exch.liquidity | int if exch.liquidity else '--' }}</div></div>
+  <div class="metric"><div class="label">Weekly Visits</div>
+    <div class="value">{{ exch.visits | int if exch.visits else '--' }}</div></div>
+  <div class="metric"><div class="label">Coins / Markets</div>
+    <div class="value">{{ exch.num_coins | int if exch.num_coins else '--' }} / {{ exch.num_markets | int if exch.num_markets else '--' }}</div></div>
+  <div class="metric"><div class="label">Maker / Taker Fee</div>
+    <div class="value">{{ exch.maker_fee | fee }} / {{ exch.taker_fee | fee }}</div></div>
+  <div class="metric"><div class="label">Launched</div>
+    <div class="value">{{ exch.date_launched | date }}</div></div>
+</div>
+
+{% if exch.description %}
+<h2>About {{ exch.name }}</h2>
+<div class="prose">{{ exch.description | rich_text }}</div>
+{% endif %}
+
+{% if exch.fiats_list() %}
+<h2>Supported Fiat Currencies ({{ exch.fiats_list() | length }})</h2>
+<div>{% for f in exch.fiats_list() %}<span class="tag-chip">{{ f }}</span>{% endfor %}</div>
+{% endif %}
+
+{% if exch.tags_list() %}
+<h2>Tags</h2>
+<div>{% for t in exch.tags_list() %}<span class="tag-chip">{{ t }}</span>{% endfor %}</div>
+{% endif %}
+
+<h2>{{ exch.name }} Market Pairs (spot)</h2>
+<table>
+  <thead><tr>
+    <th>#</th><th>Pair</th><th class="num">Price</th><th class="num">Volume (24h)</th>
+    <th class="num">Volume %</th><th class="num">Liquidity Score</th><th>Last Updated</th>
+  </tr></thead>
+  <tbody>
+    {% for p in pairs %}
+    <tr>
+      <td>{{ p.rank }}</td>
+      <td>{{ p.pair }}</td>
+      <td class="num">{{ p.price | usd_full }}</td>
+      <td class="num">{{ p.volume_24h | usd }}</td>
+      <td class="num">{{ '%.2f' % p.volume_pct if p.volume_pct is not none else '--' }}%</td>
+      <td class="num">{{ p.liquidity_score | int if p.liquidity_score else '--' }}</td>
+      <td class="muted">{{ p.last_updated | date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% set urls = exch.urls_map() %}
+{% if urls %}
+<h2>Links</h2>
+{% for key, values in urls.items() %}
+  {% if values %}
+  <p><b>{{ key.replace('_', ' ') | title }}:</b>
+    {% for v in values %}<a href="{{ v }}" rel="nofollow">{{ v }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  {% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}
