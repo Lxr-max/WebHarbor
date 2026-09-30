@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Job Search - Jobs Hiring Near You - Sep 29, 2026{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Jobs Hiring Near You</h1>
+  <p class="snapshot">{{ total }} jobs across this snapshot — search a title or city to narrow it down.</p>
+</section>
+<ol class="job-list">
+  {% for job in jobs %}
+  <li class="job-card">
+    <article>
+      <div class="card-top">
+        {% if job.company.logo_url() %}<img class="co-logo" src="{{ job.company.logo_url() }}" alt="{{ job.company.name }} logo" width="64" height="32">{% endif %}
+        <p class="co-name"><a href="{{ url_for('company_jobs', company=job.company.slug) }}">{{ job.company.name }}</a></p>
+      </div>
+      <h2 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h2>
+      <p class="job-location">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+      {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+      <p class="card-actions"><span class="posted">{{ job.posted_display() }}</span></p>
+    </article>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}

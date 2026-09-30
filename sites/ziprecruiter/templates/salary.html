@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}{{ stat.page_title() }}{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>{{ jt.name }} Salary{% if stat.scope == 'city' %} in {{ stat.city }}, {{ stat.state }}{% endif %}</h1>
+  <p class="snapshot">How much does a {{ jt.name }} make{% if stat.scope == 'city' %} in {{ stat.city }}, {{ stat.state }}{% endif %}?</p>
+</section>
+
+<section class="salary-summary">
+  <div class="salary-figures">
+    <div class="figure">
+      <p class="label">Average {{ jt.name }} salary</p>
+      <p class="value">${{ '{:,.0f}'.format(stat.avg_year) }} <span class="per">/ year</span></p>
+      <p class="alt">${{ stat.avg_hour }} / hour</p>
+    </div>
+    <div class="figure">
+      <p class="label">Typical {{ jt.name }} pay ranges</p>
+      <p class="value">{{ stat.range_display() }}</p>
+    </div>
+  </div>
+
+  <div class="percentiles">
+    <table>
+      <thead><tr><th>Percentile</th><th>Annual pay</th></tr></thead>
+      <tbody>
+        {% for label, key in [('10th', 'p10'), ('25th', 'p25'), ('Median', 'median'), ('75th', 'p75'), ('90th', 'p90')] %}
+        <tr><td>{{ label }}</td><td>${{ '{:,.0f}'.format(stat[key] or 0) }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="histogram">
+    <h2>Salary distribution</h2>
+    {% for lo, hi, pct in stat.histogram_rows() %}
+    <div class="hist-row">
+      <span class="hist-label">${{ '{:,.0f}'.format(lo/1000) }}K – ${{ '{:,.0f}'.format(hi/1000) }}K</span>
+      <span class="hist-bar"><span style="width: {{ pct * 4 }}px"></span></span>
+      <span class="hist-pct">{{ pct }}% of jobs</span>
+    </div>
+    {% endfor %}
+    <p class="hist-note">{{ stat.p25_display() }} is the 25th percentile. Wages below this are outliers.
+       {{ stat.median_display() }} is the median wage. {{ stat.p75_display() }} is the 75th percentile.</p>
+  </div>
+</section>
+
+{% if stat.scope == 'national' and stat.city_rows() %}
+<section class="salary-section">
+  <h2>What are Top 10 Highest Paying Cities for {{ jt.name }} Jobs</h2>
+  <table class="salary-table">
+    <thead><tr><th>City</th><th>Annual salary</th></tr></thead>
+    <tbody>
+      {% for city, state, avg in stat.city_rows() %}
+      <tr><td>{{ city }}, {{ state }}</td><td>${{ '{:,.0f}'.format(avg) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if city_stats %}
+<section class="salary-section">
+  <h2>{{ jt.name }} Salaries in Cities</h2>
+  <p class="snapshot">City salary pages captured in this snapshot:</p>
+  <ul class="browse-list">
+    {% for cs in city_stats %}
+    <li><a href="/Salaries/{{ cs.title_slug }}-Salary-in-{{ cs.city|replace(' ','-') }},{{ cs.state }}">{{ jt.name }} Salary in {{ cs.city }}, {{ cs.state }}</a> — average ${{ '{:,.0f}'.format(cs.avg_year) }}/year</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if national and stat.scope == 'city' %}
+<p class="snapshot"><a href="/Salaries/{{ national.title_slug }}-Salary">See the United States average for {{ jt.name }}</a></p>
+{% endif %}
+
+{% if stat.related_rows() %}
+<section class="salary-section">
+  <h2>What are Top 5 Best Paying Related {{ jt.name }} Jobs in the U.S.</h2>
+  <table class="salary-table">
+    <thead><tr><th>Job title</th><th>Annual salary</th></tr></thead>
+    <tbody>
+      {% for name, slug, avg in stat.related_rows() %}
+      <tr><td>{{ name }}</td><td>${{ '{:,.0f}'.format(avg) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if stat.scope == 'national' and stat.state_rows() %}
+<section class="salary-section">
+  <h2>{{ jt.name }} Salaries by State</h2>
+  <table class="salary-table">
+    <thead><tr><th>State</th><th>Annual salary</th></tr></thead>
+    <tbody>
+      {% for state, avg in stat.state_rows() %}
+      <tr><td>{{ state }}</td><td>${{ '{:,.0f}'.format(avg) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if nearby %}
+<section class="salary-section">
+  <h2>Nearby {{ jt.name }} jobs</h2>
+  <ol class="job-list">
+    {% for job in nearby %}
+    <li class="job-card">
+      <article>
+        <h3 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h3>
+        <p class="rel-co">{{ job.company.name }}</p>
+        <p class="rel-loc">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+        {% if job.salary_text %}<p class="rel-sal">{{ job.salary_text }}</p>{% endif %}
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+<section class="salary-section">
+  <h2>About Our Data</h2>
+  <p>ZipRecruiter salary estimates are derived from both employer job postings and third party data sources.</p>
+</section>
+{% endblock %}
