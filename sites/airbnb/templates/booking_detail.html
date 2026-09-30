@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Your trip to {{ lst.city if lst else 'your booking' }} | Airbnb{% endblock %}
+{% block content %}
+<div class="form-card" style="max-width:760px;">
+  {% if bk.status == 'cancelled' %}
+  <h1>Trip cancelled</h1>
+  <p class="muted">Booking {{ bk.code }} is cancelled.</p>
+  {% else %}
+  <h1>Your trip is booked!</h1>
+  <p class="muted">Confirmation code <strong>{{ bk.code }}</strong></p>
+  {% endif %}
+  <div class="trip-card">
+    {% if lst and lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}">
+    {% elif exp and exp.photo_list() %}<img src="{{ exp.photo_list()[0] }}" alt="{{ exp.name }}">{% endif %}
+    <div>
+      {% if lst %}
+      <p class="muted small">{{ lst.title }}</p>
+      <p><strong>{{ lst.name }}</strong></p>
+      <p class="muted small">{{ lst.city }} &middot; hosted by {{ lst.host_name or 'the host' }}</p>
+      {% elif exp %}
+      <p class="muted small">Experience &middot; {{ exp.theme or '' }}</p>
+      <p><strong>{{ exp.name }}</strong></p>
+      <p class="muted small">{{ exp.location_city or '' }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <table class="table">
+    {% if lst %}
+    <tr><th>Confirmation code</th><td>{{ bk.code }}</td></tr>
+    <tr><th>Check-in</th><td>{{ bk.checkin }}</td></tr>
+    <tr><th>Check-out</th><td>{{ bk.checkout }}</td></tr>
+    <tr><th>Nights</th><td>{{ bk.nights }}</td></tr>
+    {% else %}
+    <tr><th>Confirmation code</th><td>{{ bk.code }}</td></tr>
+    <tr><th>Date</th><td>{{ bk.experience_date }}</td></tr>
+    {% endif %}
+    <tr><th>Guests</th><td>{{ bk.guests }}</td></tr>
+    <tr><th>Status</th><td><span class="status {{ bk.status }}">{{ bk.status|title }}</span></td></tr>
+    <tr><th>Total price</th><td>{{ money(bk.total) }}</td></tr>
+  </table>
+
+  {% if bk.kind == 'stay' and lst %}
+  <div class="breakdown">
+    <div class="row"><span>{{ money(bk.nightly_price) }} x {{ bk.nights }} night{{ 's' if bk.nights > 1 }}</span><span>{{ money(bk.subtotal) }}</span></div>
+    <div class="row total"><span>Total (includes all fees)</span><span>{{ money(bk.total) }}</span></div>
+  </div>
+  <p class="muted small">Cancellation: free cancellation windows depend on the listing's policy. Cancelling from Trips marks this booking cancelled.</p>
+  {% endif %}
+
+  <p>
+    <a class="btn btn-ghost" href="{{ url_for('trips') }}">Go to Trips</a>
+    {% if lst %}<a class="btn btn-ghost" href="{{ url_for('listing_detail', lid=lst.id) }}">Back to listing</a>{% endif %}
+    {% if exp %}<a class="btn btn-ghost" href="{{ url_for('experience_detail', eid=exp.id) }}">Back to experience</a>{% endif %}
+  </p>
+</div>
+{% endblock %}

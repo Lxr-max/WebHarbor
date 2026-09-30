@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Wish List | Backcountry.com{% endblock %}
+{% block body %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/account">Orders</a>
+    <a href="/account/addresses">Addresses</a>
+    <a href="/wish-list">Wish List</a>
+  </nav>
+  <h1>Your Wish List</h1>
+  {% if items %}
+  <div class="product-grid">
+    {% for row in items %}
+      {% set p = row.product %}
+      <article class="product-card">
+        <a class="card-media" href="/{{ p.slug }}">
+          {% set thumb = p.skus[0].image.replace('/medium/', '/large/') if p.skus else none %}
+          {% if thumb %}<img src="{{ img(thumb) }}" alt="{{ p.title }}">{% endif %}
+        </a>
+        <div class="card-body">
+          <p class="card-brand">{{ p.brand.name }}</p>
+          <h3 class="card-title"><a href="/{{ p.slug }}">{{ p.title }}</a></h3>
+          <p class="card-price"><span class="sale">{{ money(p.min_sale) }}</span></p>
+          <p class="wish-meta">Added {{ row.added_at }}</p>
+          <form method="post" action="/wish-list/toggle">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="product" value="{{ p.id }}">
+            <input type="hidden" name="next" value="/wish-list">
+            <button class="link-btn danger" type="submit">Remove from Wish List</button>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h2>There are no items in your wish list.</h2>
+    <p>Why create a wish list? Save items with your account and easily find
+       them later. <a href="/">Start browsing</a>.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
