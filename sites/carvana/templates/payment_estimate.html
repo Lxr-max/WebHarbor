@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Payment estimate — {{ v.title() }} | Carvana{% endblock %}
+{% block body %}
+<div class="est-page">
+  <h1>Your estimated payment for the {{ v.title() }}</h1>
+  <p class="est-config">{{ v.trim or v.body_style }} · {{ v.mileage|mileage }} · {{ v.price|money }}</p>
+
+  <div class="est-result">
+    <p class="est-monthly">${{ monthly|money }}/mo</p>
+    <dl class="est-terms">
+      <div><dt>Cash down</dt><dd>{{ down|money }}</dd></div>
+      <div><dt>Term</dt><dd>{{ term }} months</dd></div>
+      <div><dt>APR</dt><dd>{{ '%.2f'|format(apr*100) }}%</dd></div>
+      <div><dt>Credit profile</dt><dd>{{ tier_label }}</dd></div>
+      <div><dt>Amount financed</dt><dd>{{ v.financed_principal(down)|money }}</dd></div>
+      <div><dt>Estimated taxes &amp; fees</dt><dd>{{ v.estimated_taxes_fees|money if v.estimated_taxes_fees else '—' }}</dd></div>
+      <div><dt>Total of payments</dt><dd>{{ (monthly * term)|money }}</dd></div>
+    </dl>
+    <p class="est-note">Estimate uses the standard amortization formula over the captured APR for this vehicle. Taxes &amp; fees are the upstream-captured estimate for your location.</p>
+  </div>
+
+  <form class="estimator" method="post" action="{{ url_for('payment_estimate', vehicle_id=v.vehicle_id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>Adjust the estimate</h3>
+    <div class="est-row">
+      <label for="est-down">Cash down ($)</label>
+      <input id="est-down" type="number" name="down_payment" min="0" step="250" value="{{ down }}">
+    </div>
+    <div class="est-row">
+      <label for="est-term">Term (months)</label>
+      <select id="est-term" name="term">
+        {% for t in terms %}<option value="{{ t }}"{% if t == term %} selected{% endif %}>{{ t }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="est-row">
+      <label for="est-tier">Credit profile</label>
+      <select id="est-tier" name="credit_tier">
+        {% for key, label, apr in credit_tiers %}<option value="{{ key }}"{% if key == tier %} selected{% endif %}>{{ label }} — {{ '%.2f'|format(apr*100) }}% APR</option>{% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn-blue">Recalculate</button>
+  </form>
+
+  <div class="est-actions">
+    <a class="btn-blue big" href="{{ url_for('checkout', vehicle_id=v.vehicle_id) }}">Start purchase with this estimate</a>
+    <a class="btn-outline" href="{{ v.url() }}">Back to the car</a>
+  </div>
+</div>
+{% endblock %}

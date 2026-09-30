@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block title %}{{ v.title() }} | Carvana{% endblock %}
+{% block body %}
+<div class="vdp">
+  <div class="vdp-gallery">
+    {% if v.gallery_urls() %}
+    <div class="gallery-main">
+      <img id="gallery-main-img" src="{{ v.gallery_urls()[0] }}" alt="{{ v.title() }}">
+    </div>
+    <div class="gallery-thumbs">
+      {% for u in v.gallery_urls() %}
+      <button type="button" class="thumb" data-src="{{ u }}"><img src="{{ u }}" alt="photo {{ loop.index }}"></button>
+      {% endfor %}
+    </div>
+    <p class="gallery-note">{{ v.gallery_urls()|length }} photos captured from the upstream listing</p>
+    {% elif v.card_image_url() %}
+    <div class="gallery-main"><img src="{{ v.card_image_url() }}" alt="{{ v.title() }}"></div>
+    {% else %}
+    <div class="gallery-main placeholder">No photo captured for this vehicle</div>
+    {% endif %}
+  </div>
+
+  <div class="vdp-main">
+    <div class="vdp-head">
+      <p class="vdp-badges">{% for b in v.badge_list() %}<span class="badge">{{ b }}</span>{% endfor %}</p>
+      <h1>{{ v.title() }}</h1>
+      <p class="vdp-subtitle">{{ v.trim or v.body_style }}</p>
+      <p class="vdp-meta">{{ v.mileage|mileage }} · {{ v.exterior_color }} exterior · {{ v.interior_color }} interior</p>
+      <p class="vdp-location">Located at the Carvana hub in {{ v.city }}, {{ v.state }} — free delivery or pickup</p>
+    </div>
+
+    <div class="vdp-pricebox">
+      <div class="price-row">
+        <span class="price">{{ v.price|money }}</span>
+        {% if v.previous_price and v.previous_price > v.price %}<span class="was">was {{ v.previous_price|money }}</span>{% endif %}
+      </div>
+      <p class="est-line"><strong>${{ est }}/mo</strong> estimated · $0 cash down · {{ '%.2f'|format(v.default_apr()) }}% APR · {{ v.default_term or 72 }} months</p>
+      <p class="tax-note">Includes estimated taxes &amp; fees of {{ v.estimated_taxes_fees|money if v.estimated_taxes_fees else '—' }}</p>
+
+      <form class="estimator" method="post" action="{{ url_for('payment_estimate', vehicle_id=v.vehicle_id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h3>Estimate your monthly payment</h3>
+        <div class="est-row">
+          <label for="est-down">Cash down ($)</label>
+          <input id="est-down" type="number" name="down_payment" min="0" step="250" value="0">
+        </div>
+        <div class="est-row">
+          <label for="est-term">Term (months)</label>
+          <select id="est-term" name="term">
+            {% for t in terms %}<option value="{{ t }}"{% if t == (v.default_term or 72) %} selected{% endif %}>{{ t }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="est-row">
+          <label for="est-tier">Credit profile</label>
+          <select id="est-tier" name="credit_tier">
+            {% for key, label, apr in credit_tiers %}<option value="{{ key }}"{% if key == 'good' %} selected{% endif %}>{{ label }} — {{ '%.2f'|format(apr*100) }}% APR</option>{% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn-blue">Get payment estimate</button>
+      </form>
+
+      <div class="vdp-actions">
+        <a class="btn-blue big" href="{{ url_for('checkout', vehicle_id=v.vehicle_id) }}">Start purchase</a>
+        <form method="post" action="{{ url_for('favorite_toggle', vehicle_id=v.vehicle_id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn-outline">{{ 'Saved ♥' if saved else 'Save this car' }}</button>
+        </form>
+      </div>
+      <ul class="guarantees">
+        <li>7-Day Money-Back Guarantee</li>
+        <li>Free delivery as soon as tomorrow</li>
+        <li>Carvana Certified — 150-point inspection</li>
+      </ul>
+    </div>
+
+    <section class="vdp-section" id="overview">
+      <h2>Key specs</h2>
+      <div class="specs-grid">
+        <div><span>Mileage</span>{{ v.mileage|mileage }}</div>
+        <div><span>Body style</span>{{ v.body_style }}</div>
+        <div><span>Engine</span>{{ v.engine or '—' }}</div>
+        <div><span>Transmission</span>{{ v.transmission or '—' }}</div>
+        <div><span>Drivetrain</span>{{ v.drivetrain or '—' }}</div>
+        <div><span>Fuel</span>{{ v.fuel_type or '—' }}</div>
+        <div><span>MPG (combined)</span>{{ v.mpg_combined or '—' }}</div>
+        <div><span>Exterior color</span>{{ v.exterior_color or '—' }}</div>
+        <div><span>Interior color</span>{{ v.interior_color or '—' }}</div>
+        <div><span>Seating</span>{{ v.seating or '—' }} seats</div>
+        <div><span>VIN</span>{{ v.vin }}</div>
+        <div><span>Stock #</span>{{ v.stock_number }}</div>
+      </div>
+    </section>
+
+    {% if v.narrative_list() %}
+    <section class="vdp-section">
+      <h2>Why you&rsquo;ll love this {{ v.model }}</h2>
+      {% for n in v.narrative_list() %}
+      <div class="narrative">
+        <h3>{{ n.title }}</h3>
+        <p>{{ n.content }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if v.highlight_list() %}
+    <section class="vdp-section" id="details">
+      <h2>Vehicle history &amp; highlights</h2>
+      <ul class="highlights">
+        {% for h in v.highlight_list() %}
+        <li>{{ h }}</li>
+        {% endfor %}
+      </ul>
+      <div class="history-grid">
+        <div><span>Reported accidents</span>{{ 'None reported' if v.accident_free else 'At least one reported' }}</div>
+        <div><span>Owners</span>{{ 'Single owner' if v.single_owner else 'Multiple owners' }}</div>
+        <div><span>Prior use</span>{{ v.prior_use_display() }}</div>
+        <div><span>In service since</span>{{ v.in_service_date or '—' }}</div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if v.feature_list() %}
+    <section class="vdp-section" id="features">
+      <h2>Features</h2>
+      <ul class="feature-list">
+        {% for f in v.feature_list() %}
+        <li>{{ f }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if v.option_list() %}
+    <section class="vdp-section">
+      <h2>Installed options</h2>
+      <ul class="feature-list">
+        {% for o in v.option_list() %}
+        <li>{{ o }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if v.inspection_list() %}
+    <section class="vdp-section" id="inspection">
+      <h2>Inspection report</h2>
+      <ul class="inspection-list">
+        {% for i in v.inspection_list() %}
+        <li>{{ i }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if reviews %}
+    <section class="vdp-section" id="reviews">
+      <h2>Owner reviews for the {{ v.make }} {{ v.model }} ({{ review_total }})</h2>
+      {% for r in reviews %}
+      <div class="review">
+        <p class="review-stars">{% for _ in range(r.rating) %}★{% endfor %}{% for _ in range(5 - r.rating) %}☆{% endfor %} <span>{{ r.rating }}/5</span></p>
+        <p class="review-text">{{ r.text }}</p>
+        <p class="review-meta">{{ r.author }} · {{ r.review_date }} · {{ r.make_model }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if similar %}
+    <section class="vdp-section">
+      <h2>More {{ v.body_style }}s like this</h2>
+      <div class="car-grid">
+        {% for s in similar %}
+        <a class="car-card" href="{{ s.url() }}">
+          {% if s.card_image_url() %}<img src="{{ s.card_image_url() }}" alt="{{ s.title() }}" loading="lazy">{% endif %}
+          <div class="car-card-body">
+            <h3>{{ s.title() }}</h3>
+            <p class="car-meta">{{ s.mileage|mileage }} · {{ s.body_style }}</p>
+            <p class="car-price">{{ s.price|money }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.gallery-thumbs .thumb').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.getElementById('gallery-main-img').src = btn.getAttribute('data-src');
+    });
+  });
+</script>
+{% endblock %}

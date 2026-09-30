@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order.order_number }} confirmed | Carvana{% endblock %}
+{% block body %}
+<div class="confirm-page">
+  <h1>Your order is confirmed 🎉</h1>
+  <p class="order-number">Order <strong>{{ order.order_number }}</strong></p>
+  <div class="confirm-car">
+    {% if order.vehicle.card_image_url() %}<img src="{{ order.vehicle.card_image_url() }}" alt="{{ order.vehicle.title() }}">{% endif %}
+    <div>
+      <h2>{{ order.vehicle.title() }}</h2>
+      <p>{{ order.vehicle.trim or order.vehicle.body_style }} · {{ order.vehicle.mileage|mileage }}</p>
+      <p class="car-price">{{ order.vehicle.price|money }}</p>
+    </div>
+  </div>
+  <div class="confirm-details">
+    <div><span>Payment</span>{% if order.payment_type == 'cash' %}Cash — {{ order.vehicle.price|money }}{% else %}Financed — {{ order.monthly_payment|money }}/mo over {{ order.term_months }} months at {{ order.apr }}% APR with {{ order.down_payment|money }} down{% endif %}</div>
+    {% if order.payment_type == 'finance' %}<div><span>Amount financed</span>{{ order.vehicle.financed_principal(order.down_payment, order.trade_credit)|money }}</div>{% endif %}
+    {% if order.trade_credit %}<div><span>Trade-in credit</span>{{ order.trade_credit|money }}</div>{% endif %}
+    <div><span>Delivery date</span>{{ order.delivery_date }}</div>
+    <div><span>Time window</span>{{ order.delivery_slot }}</div>
+    <div><span>Delivery address</span>{{ order.delivery_street }}, {{ order.delivery_city }}, {{ order.delivery_state }} {{ order.delivery_zip }}</div>
+    <div><span>Status</span>{{ order.status }}</div>
+  </div>
+  <div class="est-actions">
+    <a class="btn-blue" href="/account/orders">View my orders</a>
+    <a class="btn-outline" href="/cars">Keep browsing cars</a>
+  </div>
+</div>
+{% endblock %}

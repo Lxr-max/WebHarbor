@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Your offer | Carvana{% endblock %}
+{% block body %}
+<div class="sell-page">
+  <h1>Your instant offer</h1>
+  <div class="offer-box">
+    <p class="offer-amount">{{ offer|money }}</p>
+    <p class="offer-terms">For VIN {{ vin }} · {{ mileage|mileage }} · condition: {{ condition }}</p>
+    <p class="offer-note">Offer valid for 7 days or 100 additional miles. Free pickup as soon as tomorrow.</p>
+  </div>
+  {% if current_user.is_authenticated %}
+  <form method="post" action="/sell-my-car/offer/claim">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn-blue big">Accept offer &amp; save to my account</button>
+  </form>
+  {% else %}
+  <p class="form-note"><a href="/authn/login">Log in</a> or <a href="/authn/register">create an account</a> to accept and save this offer.</p>
+  {% endif %}
+</div>
+{% endblock %}
