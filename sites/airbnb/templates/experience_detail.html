@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block title %}{{ exp.name }} | Airbnb Experiences{% endblock %}
+{% block content %}
+<div style="margin-top:20px;">
+  <div class="pdp-title-row">
+    <div>
+      <h1>{{ exp.name }}</h1>
+      <p>{% if exp.rating %}<span class="rating-star">&#9733; {{ '%.2f'|format(exp.rating) }}</span> ({{ exp.rating_count }} ratings) &middot; {% endif %}
+        <span class="muted">{{ exp.theme or 'Experience' }} &middot; {{ exp.location_city or dest_city or '' }}</span></p>
+      {% if exp.badge_list() %}<p>{% for b in exp.badge_list() %}<span class="badge badge-gold">{{ b }}</span>{% endfor %}</p>{% endif %}
+    </div>
+    <form method="post" action="{{ url_for('wishlist_add') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="experience_id" value="{{ exp.id }}">
+      <input type="hidden" name="back" value="{{ url_for('experience_detail', eid=exp.id) }}">
+      {% if current_user.is_authenticated %}
+      <label class="small" for="wishlist_id">Save to</label>
+      <select name="wishlist_id" id="wishlist_id">
+        <option value="">Default wishlist</option>
+        {% for wl in user_wishlists %}
+        <option value="{{ wl.id }}">{{ wl.name }}</option>
+        {% endfor %}
+      </select>
+      <label class="small" for="new_name">or new wishlist name</label>
+      <input type="text" name="new_name" id="new_name" placeholder="New wishlist name">
+      {% endif %}
+      {% if saved_ids %}
+      <button class="btn btn-ghost btn-sm" type="submit" aria-label="Save to wishlist">&#9829; Saved</button>
+      <p class="small muted" style="margin:4px 0 0;">Already saved to
+        {%- for wl in user_wishlists if wl.id in saved_ids %} {{ wl.name }}{% if not loop.last %},{% endif %}{% endfor -%}
+      </p>
+      {% else %}
+      <button class="btn btn-ghost btn-sm" type="submit" aria-label="Save to wishlist">&#9825; Save</button>
+      {% endif %}
+    </form>
+  </div>
+
+  {% set photos = exp.photo_list() %}
+  {% if photos %}
+  <div class="gallery-grid">
+    {% for p in photos %}
+    <img src="{{ p }}" alt="Experience photo {{ loop.index }}">
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="exp-detail" style="margin-top:24px;">
+  <div>
+    {% if exp.highlight_list() %}
+    <section class="section">
+      <h2>Listing highlights</h2>
+      {% for h in exp.highlight_list() %}
+      <p>{% if h.name %}<strong>{{ h.name }}</strong>{% if h.text %} &mdash; {% endif %}{% endif %}{{ h.text or '' }}</p>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if exp.doing_list() %}
+    <section class="section">
+      <h2>What you'll do</h2>
+      {% for p in exp.doing_list() %}<p>{{ p }}</p>{% endfor %}
+      {% if exp.agenda_list() %}
+      {% for a in exp.agenda_list() %}
+      <div class="agenda-item">
+        {% if a.image %}<img src="{{ a.image }}" alt="{{ a.title }}">{% endif %}
+        <div><h3>{{ a.title }}</h3>{% if a.body %}<p class="small muted">{{ a.body }}</p>{% endif %}</div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </section>
+    {% endif %}
+
+    {% if exp.meeting_list() %}
+    <section class="section">
+      <h2>Where we'll meet</h2>
+      {% for p in exp.meeting_list() %}<p>{{ p }}</p>{% endfor %}
+      <p class="muted small">{{ exp.location_city or '' }}</p>
+    </section>
+    {% endif %}
+
+    <section class="section">
+      <h2>Things to know</h2>
+      {% for t in exp.things_list() %}
+      <p><strong>{{ t.title }}</strong>{% if t.text %} — {{ t.text }}{% endif %}</p>
+      {% endfor %}
+      {% if exp.accessibility_list() %}
+      <p><strong>Accessibility features</strong></p>
+      <ul>{% for a in exp.accessibility_list() %}<li>{{ a }}</li>{% endfor %}</ul>
+      {% endif %}
+      {% set reqs = exp.requirements() %}
+      <p class="small muted">
+        Minimum age: {{ reqs.min_age if reqs.min_age is not none else 'any' }} &middot;
+        Children allowed: {{ 'yes' if reqs.children_allowed else 'no' }} &middot;
+        Infants allowed: {{ 'yes' if reqs.infants_allowed else 'no' }}
+      </p>
+    </section>
+
+    {% if exp.review_list() %}
+    <section class="section">
+      <h2>Reviews from guests</h2>
+      {% for r in exp.review_list() %}
+      <div class="rev">
+        <div class="head">
+          {% if r.reviewer %}
+          <div class="avatar">{{ (r.reviewer or '?')[:1] }}</div>
+          <div><strong>{{ r.reviewer }}</strong><br>
+            <span class="muted small">{{ r.localized_date }}</span></div>
+          {% else %}
+          <div class="avatar">?</div>
+          <div><strong>Guest review</strong><br>
+            <span class="muted small">Reviewer name not captured</span></div>
+          {% endif %}
+        </div>
+        <p>{% if r.rating %}<span class="rating-star">&#9733; {{ r.rating }}</span> &nbsp;{% endif %}{% if r.comments %}{{ r.comments }}{% else %}<span class="muted">Review text not captured</span>{% endif %}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+
+  <div>
+    <div class="bookit">
+      <p class="price">{{ '$%d'|format(exp.price_per_guest) if exp.price_per_guest else '—' }} <span class="muted" style="font-size:14px;">/ guest</span></p>
+      <p class="muted small">Hosted by {{ exp.host_name or 'the host' }}</p>
+      <form method="get" action="{{ url_for('book_experience', eid=exp.id) }}">
+        <label for="date"><strong>Choose a date</strong></label>
+        <select id="date" name="date">
+          {% for o in offerings %}
+          <option value="{{ o.iso }}">{{ o.day }} &middot; {{ o.start_time }}</option>
+          {% endfor %}
+        </select>
+        <label for="guests" style="margin-top:10px;"><strong>Guests</strong></label>
+        <select id="guests" name="guests">
+          {% for n in [1, 2, 3, 4, 5, 6] %}
+          <option value="{{ n }}">{{ n }} guest{{ 's' if n > 1 }}</option>
+          {% endfor %}
+        </select>
+        <div style="margin-top:14px;">
+          <button class="btn btn-rausch btn-lg" type="submit">Book this experience</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

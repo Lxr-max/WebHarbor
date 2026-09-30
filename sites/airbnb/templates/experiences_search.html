@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Experiences in {{ dest.city }} | Airbnb{% endblock %}
+{% block content %}
+<h1 style="font-size:26px;margin-top:24px;">Experiences in {{ dest.city }}</h1>
+<p class="muted small">{{ items|length }} captured experiences shown</p>
+
+<div class="filterbar">
+  {% for c in exp_cities %}
+  <a class="fchip" href="{{ url_for('experiences_search', city=c.slug, category=category, sort=sort) }}" style="{{ 'border-color:#222;font-weight:600;' if c.slug == dest.slug }}">{{ c.city }}</a>
+  {% endfor %}
+</div>
+
+<div class="filterbar">
+  <a class="fchip" href="{{ url_for('experiences_search', city=dest.slug) }}" style="{{ 'border-color:#222;' if not category }}">All categories</a>
+  {% for c in categories %}
+  <a class="fchip" href="{{ url_for('experiences_search', city=dest.slug, category=c) }}" style="{{ 'border-color:#222;' if category == c }}">{{ c }}</a>
+  {% endfor %}
+  <span style="flex:1"></span>
+  <a class="fchip" href="{{ url_for('experiences_search', city=dest.slug, category=category, sort='price_asc') }}">Price: low to high</a>
+  <a class="fchip" href="{{ url_for('experiences_search', city=dest.slug, category=category, sort='price_desc') }}">Price: high to low</a>
+  <a class="fchip" href="{{ url_for('experiences_search', city=dest.slug, category=category, sort='rating_desc') }}">Top rated</a>
+</div>
+
+{% if not items %}
+<div class="note">No captured experiences match this filter. Try another category.</div>
+{% endif %}
+
+<div class="exp-cards">
+  {% for e in items %}
+  <a class="exp-card" href="{{ url_for('experience_detail', eid=e.id) }}">
+    {% if e.photo_list() %}<img src="{{ e.photo_list()[0] }}" alt="{{ e.name }}" loading="lazy">{% endif %}
+    <div class="body">
+      <div class="row1"><span>{{ e.theme or 'Experience' }}</span>
+        {% if e.rating %}<span class="rating-star">&#9733; {{ '%.2f'|format(e.rating) }} ({{ e.rating_count }})</span>{% endif %}
+      </div>
+      <div class="row2"><span class="muted">{{ e.name }}</span></div>
+      {% for b in e.badge_list() %}<div class="row2"><span class="badge badge-gold">{{ b }}</span></div>{% endfor %}
+      <div class="row2"><span><strong>{{ '$%d'|format(e.price_per_guest) if e.price_per_guest else '—' }}</strong> / guest</span></div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

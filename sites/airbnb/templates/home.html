@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <h1>Find your next stay</h1>
+  <p class="muted">Search stays across the captured Airbnb destinations, or browse experiences.</p>
+  <div class="searchbar">
+    <form action="{{ url_for('search_redirect') }}" method="get">
+      <label for="dest">Destination</label>
+      <select name="query" id="dest">
+        {% for d in dests %}
+        <option value="{{ d.label }}">{{ d.label }}</option>
+        {% endfor %}
+      </select>
+      <label for="checkin">Check-in</label>
+      <input type="date" id="checkin" name="checkin" value="2026-12-06">
+      <label for="checkout">Check-out</label>
+      <input type="date" id="checkout" name="checkout" value="2026-12-11">
+      <label for="adults">Guests</label>
+      <input type="number" id="adults" name="adults" value="2" min="1" max="16" style="width:70px">
+      <button class="btn btn-rausch" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Destinations for you</h2>
+  <div class="dest-grid">
+    {% for d, item in carousels %}
+    <a class="dest-card" href="{{ url_for('stays_search', slug=d.slug) }}">
+      {% if item[0].photo_list() %}
+      <img src="{{ item[0].photo_list()[0].uri }}" alt="Stays in {{ d.city }}">
+      {% endif %}
+      <span>
+        <span class="t">{{ d.city }}</span><br>
+        <span class="muted small">{{ d.region }}</span>
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% for d, items in carousels %}
+<section class="section">
+  <h2>Popular homes in {{ d.city }}</h2>
+  <div class="cards">
+    {% for lst in items[:4] %}
+    <a class="card" href="{{ url_for('listing_detail', lid=lst.id) }}">
+      <div class="ph">
+        {% if lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}">{% endif %}
+      </div>
+      <div class="body">
+        <div class="row1"><span>{{ lst.title }}</span>
+          {% if lst.rating %}<span class="rating-star">&#9733; {{ '%.2f' % lst.rating if lst.rating < 10 else lst.rating }}</span>{% endif %}
+        </div>
+        <div class="row2"><span class="muted">{{ lst.name }}</span></div>
+        <div class="row2"><span><strong>{{ '$%d' % lst.nightly_price if lst.nightly_price else '—' }}</strong> night</span></div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<section class="section">
+  <h2>Experiences to try</h2>
+  <div class="exp-cards">
+    {% for e in exp_items[:4] %}
+    <a class="exp-card" href="{{ url_for('experience_detail', eid=e.id) }}">
+      {% if e.photo_list() %}<img src="{{ e.photo_list()[0] }}" alt="{{ e.name }}">{% endif %}
+      <div class="body">
+        <div class="row1"><span>{{ e.theme or 'Experience' }}</span>
+          {% if e.rating %}<span class="rating-star">&#9733; {{ '%.2f' % e.rating }}</span>{% endif %}
+        </div>
+        <div class="row2"><span class="muted">{{ e.name }}</span></div>
+        <div class="row2"><span><strong>{{ '$%d' % e.price_per_guest if e.price_per_guest else '—' }}</strong> / guest</span></div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
