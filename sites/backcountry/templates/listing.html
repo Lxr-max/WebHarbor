@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | Backcountry.com{% endblock %}
+{% block body %}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  {% for name, url in breadcrumbs %}
+    {% if url %}<a href="{{ url }}">{{ name }}</a>{% else %}<span aria-current="page">{{ name }}</span>{% endif %}
+    {% if not loop.last %}<span class="crumb-sep">/</span>{% endif %}
+  {% endfor %}
+</nav>
+
+<header class="listing-header">
+  <h1>{{ title }}</h1>
+  <p class="listing-counts">
+    <strong>{{ upstream_total }}</strong> products upstream
+    &middot; <strong>{{ shown_total }}</strong> of {{ snapshot_total }} in this snapshot{% if search_term is defined and search_term and snapshot_mode %} (upstream results for &ldquo;{{ search_term }}&rdquo;){% endif %}
+  </p>
+  <p class="snapshot-note">This mirror is a frozen snapshot of backcountry.com ({{ MIRROR_TS }});
+     upstream counts are the real values captured then; grids show the captured subset.</p>
+</header>
+
+<div class="listing-layout">
+  <aside class="filter-rail" aria-label="Filters">
+    <h2>Filter</h2>
+    {% if args|length %}
+      <div class="active-filters">
+        <h3>Active Filters</h3>
+        <ul>
+          {% for k in ['color','brand','gender','sale','use','size'] %}
+            {% if args.get(k) %}
+            <li><a class="clear-filter" href="{{ clear_url(k) }}">{{ k }}: {{ args.get(k) }} ✕</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if args.get('price-min') or args.get('price-max') %}
+            <li><a class="clear-filter" href="{{ clear_url('price') }}">price ✕</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+    {% for fname, fkey, values in facets %}
+    <details class="facet" open>
+      <summary>{{ fname }} <span class="facet-count"></span></summary>
+      <ul class="facet-values">
+        {% for label, val, count in values %}
+        <li>
+          {% if fkey == 'cats' %}
+            <a href="{{ val }}">{{ label }}{% if count %} <span class="facet-n">({{ count }})</span>{% endif %}</a>
+          {% elif fkey == 'price' %}
+            <a href="{{ price_url(val) }}">{{ label }}</a>
+          {% else %}
+            <a href="{{ facet_url(fkey, val) }}">{{ label }}{% if count %} <span class="facet-n">({{ count }})</span>{% endif %}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% endfor %}
+  </aside>
+
+  <section class="listing-main">
+    <div class="listing-toolbar">
+      <form method="get" action="{{ base_url }}" class="sort-form">
+        {% for k in ['color','brand','gender','sale','use','size','price-min','price-max'] %}
+          {% if args.get(k) %}<input type="hidden" name="{{ k }}" value="{{ args.get(k) }}">{% endif %}
+        {% endfor %}
+        <label for="sort">Sort by</label>
+        <select id="sort" name="sort" onchange="this.form.submit()">
+          {% for opt in sort_options or [] %}
+          <option value="{{ opt.value }}"{% if sort == opt.value %} selected{% endif %}>{{ opt.name }}</option>
+          {% endfor %}
+        </select>
+        <noscript><button type="submit">Apply</button></noscript>
+      </form>
+      <p class="shown-count">Showing {{ shown_total }} product{{ 's' if shown_total != 1 else '' }}</p>
+    </div>
+
+    {% if products %}
+    <div class="product-grid">
+      {% for p in products %}
+        {% include '_card.html' %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <h2>No products match these filters.</h2>
+      <p>Try clearing a filter or browsing the full
+        <a href="{{ base_url }}">listing</a>.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+
+{% endblock %}

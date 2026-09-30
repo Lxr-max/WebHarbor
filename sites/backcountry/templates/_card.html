@@ -1,0 +1,31 @@
+<article class="product-card">
+  <a class="card-media" href="/{{ p.slug }}">
+    {% set thumb = p.grid_image %}
+    {% if thumb %}<img src="{{ img(thumb) }}" alt="{{ p.title }}" loading="lazy">{% endif %}
+    {% if p.is_gearhead_pick %}<span class="badge badge-gh">Gearhead Pick</span>{% endif %}
+    {% if p.on_sale and p.max_discount %}<span class="badge badge-sale">Up to {{ p.max_discount }}% off</span>{% endif %}
+    {% if p.hsa_fsa %}<span class="badge badge-hsa">HSA/FSA</span>{% endif %}
+  </a>
+  <div class="card-body">
+    <p class="card-brand">{{ p.brand.name }}</p>
+    <h3 class="card-title"><a href="/{{ p.slug }}">{{ p.title }}</a></h3>
+    {% if p.review_count %}
+    <p class="card-rating" aria-label="Rated {{ '%.1f'|format(p.review_avg or 0) }} out of 5 stars">
+      <span class="stars" data-rating="{{ '%.1f'|format(p.review_avg or 0) }}"></span>
+      ({{ p.review_count }})
+    </p>
+    {% endif %}
+    <p class="card-price">
+      {% if p.on_sale %}
+        <span class="sale">{{ money(p.min_sale) }}{% if p.max_sale and p.max_sale != p.min_sale %} - {{ money(p.max_sale) }}{% endif %}</span>
+        <s class="list">{{ money(p.min_list) }}</s>
+        <span class="pct">{{ p.max_discount }}% off</span>
+      {% else %}
+        <span class="sale">{{ money(p.min_sale) }}</span>
+      {% endif %}
+    </p>
+    {% if p.total_variations and p.total_variations > 1 %}
+    <p class="card-colors">{{ (p.color_keys|length) }} color{{ 's' if p.color_keys|length != 1 else '' }}</p>
+    {% endif %}
+  </div>
+</article>

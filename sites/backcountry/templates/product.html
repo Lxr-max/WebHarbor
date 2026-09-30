@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.title }} - {{ p.brand.name }} | Backcountry.com{% endblock %}
+{% block body %}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  {% for name, url in breadcrumbs %}
+    {% if url %}<a href="{{ url }}">{{ name }}</a>{% else %}<span aria-current="page">{{ name }}</span>{% endif %}
+    {% if not loop.last %}<span class="crumb-sep">/</span>{% endif %}
+  {% endfor %}
+</nav>
+
+<div class="pdp-layout">
+  <section class="pdp-gallery" aria-label="Product images">
+    <div class="gallery-main">
+      {% if gallery %}
+      <img id="gallery-main-img" src="{{ img(gallery[0].full or gallery[0].large) }}"
+           alt="{{ p.title }} - {{ color_name }}">
+      {% endif %}
+    </div>
+    {% if gallery|length > 1 %}
+    <div class="gallery-thumbs" role="list">
+      {% for g in gallery %}
+      <button type="button" class="gallery-thumb{% if loop.first %} active{% endif %}"
+              data-full="{{ img(g.full or g.large) }}" role="listitem">
+        <img src="{{ img(g.large) }}" alt="{{ g.title or 'Product image' }} {{ loop.index }}">
+      </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="pdp-info">
+    <p class="pdp-brand">
+      <a href="/brand/{{ p.brand.slug }}">{{ p.brand.name }}</a>
+      {% if p.brand.logo %}<img class="brand-logo" src="{{ img(p.brand.logo) }}" alt="{{ p.brand.name }} logo">{% endif %}
+    </p>
+    <h1 class="pdp-title">{{ p.title }}</h1>
+
+    <p class="pdp-rating">
+      {% if p.review_count %}
+      <a href="#reviews">
+        <span class="stars" data-rating="{{ '%.1f'|format(p.review_avg or 0) }}"></span>
+        {{ '%.1f'|format(p.review_avg or 0) }} out of 5 stars
+        <strong>{{ '%.1f'|format(p.review_avg or 0) }}</strong> ({{ p.review_count }})
+        {{ p.review_count }} Reviews
+      </a>
+      {% else %}
+      <span class="muted">No reviews yet</span>
+      {% endif %}
+    </p>
+
+    <div class="pdp-price" id="price-box">
+      {% if selected %}
+        {% if selected.on_sale %}
+          <span class="sale-price" data-price="{{ selected.sale_price }}">{{ money(selected.sale_price) }}</span>
+          <s class="list-price">{{ money(selected.list_price) }}</s>
+          <span class="pct-off">{{ selected.discount }}% off</span>
+          <p class="savings-note">Save {{ money((selected.list_price or 0) - (selected.sale_price or 0)) }}</p>
+        {% else %}
+          <span class="sale-price" data-price="{{ selected.sale_price }}">{{ money(selected.sale_price) }}</span>
+        {% endif %}
+      {% else %}
+        {% if p.on_sale %}
+          <span class="sale-price" data-price="{{ p.min_sale }}">{{ money(p.min_sale) }}</span>
+          <s class="list-price">{{ money(p.min_list) }}</s>
+          <span class="pct-off">{{ p.max_discount }}% off</span>
+          <p class="savings-note">Save {{ money(p.savings_cents) }} — up to {{ p.max_discount }}% off select colors</p>
+        {% else %}
+          <span class="sale-price" data-price="{{ p.min_sale }}">{{ money(p.min_sale) }}</span>
+        {% endif %}
+        {% if p.max_sale and p.max_sale != p.min_sale %}
+        <p class="range-note">Prices from {{ money(p.min_sale) }} to {{ money(p.max_sale) }} by color &amp; size</p>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="pdp-option">
+      <p class="option-label">Color: <strong>{{ color_name }}</strong></p>
+      <div class="color-swatches">
+        {% for key in p.color_keys %}
+        <a class="color-swatch{% if key == color_key %} selected{% endif %}"
+           href="/{{ p.slug }}?color={{ key|urlencode }}"
+           title="{{ p.color_name(key) }}">
+          {% set t = p.skus_for_color(key)[0].image if p.skus_for_color(key) else none %}
+          {% if t %}<img src="{{ img(t.replace('/medium/', '/160/')) }}" alt="{{ p.color_name(key) }}">{% endif %}
+          <span class="swatch-name">{{ p.color_name(key) }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="pdp-option">
+      <p class="option-label">Size: <a href="#size-chart" class="size-chart-link">Size Chart</a></p>
+      <div class="size-buttons" id="size-buttons">
+        {% for s in skus %}
+        <a class="size-button{% if selected and selected.id == s.id %} selected{% endif %}{% if not s.in_stock %} disabled{% endif %}"
+           href="/{{ p.slug }}?color={{ color_key|urlencode }}&amp;sku={{ s.id|urlencode }}"
+           {% if not s.in_stock %}aria-disabled="true" title="Out of stock"{% endif %}>
+          {{ s.size }}
+        </a>
+        {% endfor %}
+      </div>
+      {% if selected %}
+      <p class="stock-note" id="stock-note">
+        {% if selected.in_stock %}In Stock{% if selected.stock and selected.stock <= 5 %} — only {{ selected.stock }} left{% endif %}
+        {% else %}Out of Stock{% endif %}
+        <span class="sku-id">SKU: {{ selected.id }}</span>
+      </p>
+      {% else %}
+      <p class="stock-note muted">Select a size to see stock and the exact price.</p>
+      {% endif %}
+    </div>
+
+    {% if selected %}
+    <form class="add-form" method="post" action="/cart/add">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="sku" value="{{ selected.id }}">
+      <label class="qty-label" for="qty">Quantity</label>
+      <input class="qty-input" id="qty" type="number" name="quantity" value="1" min="1" max="{{ selected.stock or 10 }}">
+      <button class="btn btn-primary" type="submit">Add to Cart</button>
+    </form>
+    {% else %}
+    <p class="add-note muted">Choose a color and size above to add this item to your cart.</p>
+    {% endif %}
+
+    <form class="wish-form" method="post" action="/wish-list/toggle">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="product" value="{{ p.id }}">
+      <input type="hidden" name="next" value="/{{ p.slug }}">
+      <button class="btn btn-secondary" type="submit">
+        {% if wished %}Remove from Wish List{% else %}Add to Wishlist{% endif %}
+      </button>
+    </form>
+
+    <ul class="pdp-perks">
+      <li>Free Shipping on orders over $69*</li>
+      <li>90 Day Risk-Free Returns</li>
+      <li>Lowest Price Guarantee</li>
+    </ul>
+    {% if p.hsa_fsa %}<p class="hsa-note">HSA/FSA eligible</p>{% endif %}
+    <p class="item-number">Item #{{ p.item_number }}</p>
+  </section>
+</div>
+
+<section class="pdp-details" id="details">
+  <h2>Details</h2>
+  {% if bullets %}
+  <ul class="bullet-points">
+    {% for b in bullets %}<li>{{ b }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  {% if p.description %}
+  <div class="pdp-description">
+    <h3>{{ p.title }} — from Backcountry</h3>
+    {{ p.description|safe }}
+  </div>
+  {% endif %}
+  {% if p.bottom_line %}<p class="bottom-line">{{ p.bottom_line }}</p>{% endif %}
+
+  {% if features %}
+  <h2 id="tech-specs">Tech Specs</h2>
+  <table class="specs-table">
+    <caption class="visually-hidden">Specifications for {{ p.title }}</caption>
+    <tbody>
+      {% for f in features %}
+      <tr><th scope="row">{{ f.name }}</th><td>{{ f.value }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</section>
+
+<section class="pdp-reviews" id="reviews">
+  <h2>Reviews &amp; Q&amp;A</h2>
+  <div class="reviews-header">
+    <div class="review-summary">
+      <h3>What do you think about this product?</h3>
+      {% if hist %}
+      <p class="overall-rating"><strong>Overall Rating</strong>
+        {{ '%.1f'|format(p.review_avg or 0) }} based on {{ hist_total }} ratings</p>
+      <ul class="rating-histogram">
+        {% for h in hist|sort(attribute='rating', reverse=true) %}
+        <li>
+          <span class="hist-label">{{ h.rating }} Stars - {{ h.count }} reviews</span>
+          <span class="hist-bar"><span class="hist-fill" style="width: {{ h.percentage or 0 }}%"></span></span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <a class="btn btn-secondary write-review-toggle" href="#write-review">Write a Review</a>
+    </div>
+
+    <div class="review-sort">
+      <form method="get" action="/{{ p.slug }}">
+        {% if color_key %}<input type="hidden" name="color" value="{{ color_key }}">{% endif %}
+        <label for="review-sort">Sort reviews</label>
+        <select id="review-sort" name="review-sort" onchange="this.form.submit()">
+          <option value="recent"{% if review_sort == 'recent' %} selected{% endif %}>Most Recent</option>
+          <option value="highest"{% if review_sort == 'highest' %} selected{% endif %}>Highest Rating to Lowest Rating</option>
+          <option value="lowest"{% if review_sort == 'lowest' %} selected{% endif %}>Lowest Rating to Highest Rating</option>
+        </select>
+        <noscript><button type="submit">Apply</button></noscript>
+      </form>
+    </div>
+  </div>
+
+  {% if request.args.get('review-posted') %}<p class="form-ok">Thanks! Your review has been posted.</p>{% endif %}
+  {% if request.args.get('review-error') == 'rating' %}<p class="form-err">Choose a star rating (1–5).</p>{% endif %}
+  {% if request.args.get('review-error') == 'text' %}<p class="form-err">Your review text needs at least 10 characters.</p>{% endif %}
+
+  {% if current_user.is_authenticated %}
+  <form class="write-review" id="write-review" method="post" action="/{{ p.slug }}/write-review">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>Write a Review</h3>
+    <fieldset class="rating-input">
+      <legend>Overall Rating <span class="req">*</span></legend>
+      {% for i in [5,4,3,2,1] %}
+      <label class="rating-choice"><input type="radio" name="rating" value="{{ i }}"> {{ i }} star{{ 's' if i > 1 }}</label>
+      {% endfor %}
+    </fieldset>
+    <label>Title <input type="text" name="title" maxlength="120" placeholder="Sum it up in a few words"></label>
+    <label>Review <span class="req">*</span>
+      <textarea name="text" rows="4" required minlength="10" placeholder="How did the gear work for you?"></textarea></label>
+    <label>Familiarity
+      <select name="familiarity">
+        <option value="">Choose…</option>
+        <option>I've used it several times</option>
+        <option>I've used it once or twice</option>
+        <option>I gave it as a gift but have feedback to share</option>
+        <option>I returned this product before using it</option>
+        <option>I'm familiar with the product category</option>
+      </select></label>
+    <label>Fit
+      <select name="fit">
+        <option value="">Choose…</option>
+        <option>Runs Small</option><option>True to Size</option><option>Runs Large</option>
+      </select></label>
+    <label>Size Purchased <input type="text" name="size_purchased" maxlength="20"></label>
+    <button class="btn btn-primary" type="submit">Post Review</button>
+  </form>
+  {% else %}
+  <p class="login-nudge"><a href="/login?next=/{{ p.slug }}">Sign in</a> to write a review or ask a question.</p>
+  {% endif %}
+
+  <ol class="review-list">
+    {% for r in reviews %}
+    <li class="review">
+      <p class="review-stars"><span class="stars" data-rating="{{ r.rating }}"></span>
+        {{ r.rating }} out of 5 stars</p>
+      <p class="review-meta">
+        <time datetime="{{ r.created }}">{{ r.created_pretty }}</time>
+        {% if r.familiarity %}<span class="familiarity">Familiarity: {{ r.familiarity }}</span>{% endif %}
+        {% if r.fit %}<span class="fit">Fit: {{ r.fit }}</span>{% endif %}
+        {% if r.size_purchased %}<span class="sizep">Size purchased: {{ r.size_purchased }}</span>{% endif %}
+        {% if r.author_gearhead %}<span class="gearhead-tag">Gearhead</span>{% endif %}
+      </p>
+      {% if r.title %}<h4 class="review-title">{{ r.title }}</h4>{% endif %}
+      <p class="review-text">{{ r.text }}</p>
+      <p class="review-author">{{ r.author }}{% if r.syndicated and r.syndication_source %} <span class="syndicated">Originally reviewed on {{ r.syndication_source }}</span>{% endif %}</p>
+    </li>
+    {% else %}
+    <li class="review"><p>No reviews yet — be the first!</p></li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section class="pdp-questions" id="questions">
+  <h3>Questions &amp; Answers</h3>
+  {% if request.args.get('question-posted') %}<p class="form-ok">Thanks! Your question has been posted.</p>{% endif %}
+  {% if request.args.get('question-error') %}<p class="form-err">Your question needs at least 10 characters.</p>{% endif %}
+  {% if current_user.is_authenticated %}
+  <form class="ask-form" method="post" action="/{{ p.slug }}/ask-question">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Ask a question about this product
+      <textarea name="text" rows="2" required minlength="10"></textarea></label>
+    <button class="btn btn-secondary" type="submit">Post Question</button>
+  </form>
+  {% endif %}
+  <ol class="question-list">
+    {% for q in questions %}
+    <li class="question">
+      <p class="q-text">Q: {{ q.text }}</p>
+      <p class="q-meta">Asked by {{ q.author }} on {{ q.created[:10] }}</p>
+      {% for a in q.answers %}
+      <div class="answer">
+        <p class="a-text">A: {{ a.text }}</p>
+        <p class="a-meta">By {{ a.author }}{% if a.author_gearhead %} (Gearhead){% endif %}</p>
+      </div>
+      {% endfor %}
+    </li>
+    {% else %}
+    <li class="question"><p>No questions yet.</p></li>
+    {% endfor %}
+  </ol>
+</section>
+
+{% if related %}
+<section class="pdp-related">
+  <h2>Recommended for you</h2>
+  <div class="product-rail">
+    {% for p in related %}
+      {% include '_card.html' %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
