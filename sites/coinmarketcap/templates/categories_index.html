@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Cryptocurrency Categories | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Cryptocurrency Categories</h1>
+<p class="muted">{{ all_cats | length }} categories tracked upstream; the {{ sectors | length }} captured
+  below have mirror pages with their coins.</p>
+
+<h2>Captured Categories</h2>
+<div class="glossary-grid">
+  {% for s in sectors %}
+  <a class="glossary-item" href="/view/{{ s.tag_slug }}/">
+    <b>{{ s.name }}</b>
+    <div class="muted">{{ s.tokens_num | int if s.tokens_num else '--' }} tokens ·
+      market cap {{ s.market_cap | usd }}</div>
+  </a>
+  {% endfor %}
+</div>
+
+<h2>All Upstream Categories</h2>
+<div>
+  {% for c in all_cats %}
+    <span class="tag-chip">{{ c.name }}</span>
+  {% endfor %}
+</div>
+{% endblock %}

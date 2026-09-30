@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Cryptocurrency Prices, Charts And Market Capitalizations | CoinMarketCap{% endblock %}</title>
+<link rel="icon" href="{{ menu_icon('brand/favicon') or '/static/images/upstream/brand/favicon.ico' }}">
+<link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-main">
+    <a class="logo" href="/" aria-label="Go to homepage">
+      <img src="{{ asset('brand', 'coinmarketcap_1') }}" alt="CoinMarketCap logo" width="200" height="34">
+    </a>
+    <nav class="main-nav" aria-label="Sections">
+      <div class="nav-item">
+        <a href="/">Cryptocurrencies</a>
+        <div class="nav-drop">
+          <a href="/?sort=rank">Ranking</a>
+          <a href="/cryptocurrency-category/">Categories</a>
+          <a href="/historical/">Historical Snapshots</a>
+          <a href="/gainers-losers/">Gainers &amp; Losers</a>
+          <a href="/trending-cryptocurrencies/">Trending</a>
+          <a href="/most-viewed-pages/">Most Visited</a>
+          <a href="/upcoming/">Upcoming</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="/rankings/exchanges/">Exchanges</a>
+        <div class="nav-drop">
+          <a href="/rankings/exchanges/?tab=spot">Spot</a>
+          <a href="/rankings/exchanges/?tab=derivatives">Derivatives</a>
+          <a href="/rankings/exchanges/?tab=dex">DEX</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="/converter/">Converter</a></div>
+      <div class="nav-item"><a href="/academy/glossary">Learn</a></div>
+      <div class="nav-item"><a href="/faq/">FAQ</a></div>
+    </nav>
+    <div class="header-actions">
+      <a class="nav-link" href="/watchlist/">Watchlist</a>
+      {% if current_user.is_authenticated %}
+        <span class="user-chip">Hi, {{ current_user.display_name.split(' ')[0] }}</span>
+        <form method="post" action="/logout" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-ghost">Log Out</button>
+        </form>
+      {% else %}
+        <a class="btn btn-ghost" href="/login">Log In</a>
+        <a class="btn btn-primary" href="/signup">Sign Up</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="stats-bar">
+    {% set gm = global_metrics %}
+    <span>Cryptos:&nbsp;<b>{{ '{:,.2f}'.format(gm.get('totalCryptos', 0) / 1e6) }}M</b></span>
+    <span>Exchanges:&nbsp;<b>{{ '{:,.0f}'.format(gm.get('activeExchanges', 0)) }}</b></span>
+    <span>Market Cap:&nbsp;<b>{{ gm.get('marketCap', 0) | usd }}</b>
+      <em class="{{ gm.get('marketCapChange', 0) | pct_class }}">{{ gm.get('marketCapChange', 0) | pct }}</em></span>
+    <span>24h Vol:&nbsp;<b>{{ gm.get('totalVol', 0) | usd }}</b>
+      <em class="{{ gm.get('totalVolChange', 0) | pct_class }}">{{ gm.get('totalVolChange', 0) | pct }}</em></span>
+    <span>Dominance:&nbsp;<b>BTC: {{ '%.1f' % gm.get('btcDominance', 0) }}%</b>
+      <b>ETH: {{ '%.1f' % gm.get('ethDominance', 0) }}%</b></span>
+    {% set gas = gm.get('etherscanGas') or {} %}
+    <span>ETH Gas:&nbsp;<b>{{ gas.get('standardPriceDecimal', 0) }} Gwei</b></span>
+    {% set fg = (page_shared.get('fearGreedIndexData') or {}).get('currentIndex') or {} %}
+    <span>Fear &amp; Greed:&nbsp;<b>{{ fg.get('score', 0) }}/100</b> ({{ fg.get('name') }})</span>
+  </div>
+</header>
+
+<main>
+{% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <h4>Products</h4>
+      <a href="/">Cryptocurrency Prices</a>
+      <a href="/converter/">Converter</a>
+      <a href="/watchlist/">Watchlist</a>
+      <a href="/academy/glossary">Glossary</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="/faq/">FAQ</a>
+      <a href="/methodology/">Methodology</a>
+      <a href="/historical/">Historical</a>
+      <a href="/cryptocurrency-category/">Categories</a>
+    </div>
+    <div>
+      <h4>Leaderboards</h4>
+      <a href="/gainers-losers/">Gainers &amp; Losers</a>
+      <a href="/trending-cryptocurrencies/">Trending</a>
+      <a href="/most-viewed-pages/">Most Visited</a>
+      <a href="/upcoming/">Upcoming</a>
+    </div>
+  </div>
+  <p class="copyright">© 2026 CoinMarketCap. All rights reserved — mirror snapshot of {{ mirror_date }} (UTC).
+    Data captured from coinmarketcap.com; see provenance.json.</p>
+</footer>
+</body>
+</html>

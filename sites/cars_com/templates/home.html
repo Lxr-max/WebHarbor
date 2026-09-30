@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Cars.com: Find New Cars, Used Cars, Dealerships, Prices & Reviews{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Find your next car</h1>
+    <form class="search-widget" method="get" action="{{ url_for('shopping_results') }}">
+      <div class="field">
+        <label for="sw-stock">New / Used</label>
+        <select id="sw-stock" name="stock_type">
+          <option value="all">New, used &amp; CPO</option>
+          <option value="new_cpo">New &amp; CPO</option>
+          <option value="new">New</option>
+          <option value="used">Used</option>
+          <option value="cpo">Certified Pre-Owned</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sw-make">Make</label>
+        <select id="sw-make" name="makes[]">
+          <option value="">All makes</option>
+          {% for slug, name in makes %}
+          <option value="{{ slug }}">{{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="sw-model">Model</label>
+        <select id="sw-model" name="models[]">
+          <option value="">All models</option>
+          {% for slug, name in models %}
+          <option value="{{ slug }}">{{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field field-zip">
+        <label for="sw-zip">ZIP</label>
+        <input id="sw-zip" type="text" name="zip" value="{{ zip }}">
+      </div>
+      <div class="field">
+        <label for="sw-distance">Distance</label>
+        <select id="sw-distance" name="maximum_distance">
+          {% for d in [10,20,30,40,50,75,100,150,200,500] %}
+          <option value="{{ d }}" {{ 'selected' if d == 200 }}>{{ d }} miles</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <p class="hero-note">Search results near {{ city }} &middot; snapshot {{ MIRROR_TS }}</p>
+  </div>
+</section>
+
+<section class="home-grid">
+  <div class="card">
+    <h2>Shop cars by type</h2>
+    <ul class="link-list">
+      <li><a href="{{ url_for('shopping_new') }}">Shop All New Cars</a> <span class="muted">({{ counts.new }})</span></li>
+      <li><a href="{{ url_for('shopping_used') }}">Used Cars</a> <span class="muted">({{ counts.used }})</span></li>
+      <li><a href="{{ url_for('shopping_cpo') }}">Certified Pre-Owned Cars</a> <span class="muted">({{ counts.cpo }})</span></li>
+      <li><a href="{{ url_for('shopping_fso') }}">Cars for Sale by Owner</a></li>
+      <li><a href="{{ url_for('shopping_style', style='suv') }}">SUVs</a> <span class="muted">({{ style_counts.suv }})</span></li>
+      <li><a href="{{ url_for('shopping_style', style='truck') }}">Trucks</a> <span class="muted">({{ style_counts.truck }})</span></li>
+      <li><a href="{{ url_for('shopping_style', style='sedan') }}">Sedans</a> <span class="muted">({{ style_counts.sedan }})</span></li>
+      <li><a href="{{ url_for('shopping_style', style='electric') }}">Electric Cars</a></li>
+      <li><a href="{{ url_for('shopping_style', style='hybrid') }}">Hybrid Cars</a></li>
+      <li><a href="{{ url_for('shopping_style', style='cheap') }}">Cheap Cars</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Research &amp; compare</h2>
+    <ul class="link-list">
+      <li><a href="{{ url_for('research_home') }}">Research Cars — models, trims &amp; reviews</a></li>
+      <li><a href="{{ url_for('compare_home') }}">Compare Cars side by side</a></li>
+      <li><a href="{{ url_for('dealers_index') }}">Find a Dealership</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Sell or value your car</h2>
+    <ul class="link-list">
+      <li><a href="{{ url_for('offer_start') }}">What's My Car Worth? — Instant Cash Offer</a></li>
+      <li><a href="{{ url_for('loan_calculator') }}">Car Payment Calculator</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Your garage</h2>
+    <ul class="link-list">
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('garage') }}">Saved cars, searches &amp; offers</a></li>
+      {% else %}
+      <li><a href="{{ url_for('authn_login') }}">Log in to see saved cars</a></li>
+      <li><a href="{{ url_for('authn_register') }}">Create an account</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

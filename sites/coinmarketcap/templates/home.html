@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="section-head">
+  <h1>Today's Cryptocurrency Prices</h1>
+  <span class="muted">Snapshot of {{ mirror_date }} (UTC) — captured from coinmarketcap.com.
+    Showing {{ total }} coins in this mirror snapshot.</span>
+</div>
+
+<div class="card">
+  <form class="filter-panel" method="get" action="/">
+    <div class="type-tabs">
+      <a class="{{ 'active' if crypto_type == 'all' else '' }}"
+         href="/?type=all&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}&sort={{ sort }}&dir={{ direction }}">All</a>
+      <a class="{{ 'active' if crypto_type == 'coins' else '' }}"
+         href="/?type=coins&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}&sort={{ sort }}&dir={{ direction }}">Coins</a>
+      <a class="{{ 'active' if crypto_type == 'tokens' else '' }}"
+         href="/?type=tokens&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}&sort={{ sort }}&dir={{ direction }}">Tokens</a>
+      <input type="hidden" name="type" id="type-input" value="{{ crypto_type }}">
+    </div>
+    <label>Market Cap
+      <select name="mcap">
+        {% for val, label in mcap_buckets %}
+          <option value="{{ val }}" {{ 'selected' if mcap == val else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Price
+      <select name="price">
+        {% for val, label in price_buckets %}
+          <option value="{{ val }}" {{ 'selected' if price_filter == val else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>24h %
+      <select name="pct24h">
+        {% for val, label in pct_buckets %}
+          <option value="{{ val }}" {{ 'selected' if pct24h == val else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Volume (24h)
+      <select name="vol">
+        {% for val, label in vol_buckets %}
+          <option value="{{ val }}" {{ 'selected' if vol == val else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Category
+      <select name="tag">
+        <option value="">All Categories</option>
+        {% for s in sectors %}
+          <option value="{{ s.tag_slug }}" {{ 'selected' if tag == s.tag_slug else '' }}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <input type="hidden" name="sort" value="{{ sort }}">
+    <input type="hidden" name="dir" value="{{ direction }}">
+    <button type="submit" class="btn btn-primary">Apply Filters</button>
+    <a class="btn btn-ghost" href="/">Clear</a>
+  </form>
+</div>
+
+<table class="coin-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th><a class="sort-link" href="/?sort=rank&dir={{ 'desc' if direction == 'asc' and sort == 'rank' else 'asc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">#</a></th>
+      <th>Name</th>
+      <th class="num"><a class="sort-link" href="/?sort=price&dir={{ 'asc' if direction == 'desc' and sort == 'price' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">Price</a></th>
+      <th class="num"><a class="sort-link" href="/?sort=pct_1h&dir={{ 'asc' if direction == 'desc' and sort == 'pct_1h' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">1h %</a></th>
+      <th class="num"><a class="sort-link" href="/?sort=pct_24h&dir={{ 'asc' if direction == 'desc' and sort == 'pct_24h' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">24h %</a></th>
+      <th class="num"><a class="sort-link" href="/?sort=pct_7d&dir={{ 'asc' if direction == 'desc' and sort == 'pct_7d' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">7d %</a></th>
+      <th class="num"><a class="sort-link" href="/?sort=market_cap&dir={{ 'asc' if direction == 'desc' and sort == 'market_cap' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">Market Cap</a></th>
+      <th class="num"><a class="sort-link" href="/?sort=volume_24h&dir={{ 'asc' if direction == 'desc' and sort == 'volume_24h' else 'desc' }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">Volume(24h)</a></th>
+      <th class="num">Circulating Supply</th>
+      <th>Last 7 Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in rows %}
+    <tr>
+      <td>
+        <form method="post" action="/watchlist/toggle/{{ c.slug }}" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ request.full_path }}">
+          <button type="submit" class="star-btn {{ 'on' if c.id in watched else '' }}"
+                  aria-label="Toggle {{ c.name }} in watchlist">{{ '★' if c.id in watched else '☆' }}</button>
+        </form>
+      </td>
+      <td>{{ c.rank }}</td>
+      <td>
+        <a class="coin-cell" href="/currencies/{{ c.slug }}/">
+          {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="{{ c.name }} logo" loading="lazy">{% endif %}
+          <span class="coin-name">{{ c.name }}</span>
+          <span class="coin-symbol">{{ c.symbol }}</span>
+        </a>
+      </td>
+      <td class="num">{{ c.price | price }}</td>
+      <td class="num {{ c.pct_1h | pct_class }}">{{ c.pct_1h | pct }}</td>
+      <td class="num {{ c.pct_24h | pct_class }}">{{ c.pct_24h | pct }}</td>
+      <td class="num {{ c.pct_7d | pct_class }}">{{ c.pct_7d | pct }}</td>
+      <td class="num">{{ c.market_cap | usd }}</td>
+      <td class="num">{{ c.volume_24h | usd }}</td>
+      <td class="num">{{ c.circulating_supply | supply(c.symbol) }}</td>
+      <td>{% if coin_sparkline(c) %}<img class="sparkline" src="{{ coin_sparkline(c) }}"
+            alt="{{ c.name }} 7d price graph" loading="lazy">{% else %}--{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="section-head"><h2>Trending Coins</h2><a href="/trending-cryptocurrencies/">View all trending →</a></div>
+<div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+  {% for t in trending_top5 %}
+  <div class="card">
+    <b>{{ t.tokenName }} <span class="coin-symbol">{{ t.tokenSymbol }}</span></b>
+    <div>{{ t.priceUsd | price }}</div>
+    <div class="{{ (t.pricePercentageChange24h or 0) | pct_class }}">{{ t.pricePercentageChange24h | pct }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+    <a href="/?page={{ page - 1 }}&sort={{ sort }}&dir={{ direction }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">← Previous</a>
+  {% endif %}
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="/?page={{ p }}&sort={{ sort }}&dir={{ direction }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page < pages %}
+    <a href="/?page={{ page + 1 }}&sort={{ sort }}&dir={{ direction }}&type={{ crypto_type }}&tag={{ tag }}&mcap={{ mcap }}&price={{ price_filter }}&pct24h={{ pct24h }}&vol={{ vol }}">Next →</a>
+  {% endif %}
+</div>
+{% endblock %}
