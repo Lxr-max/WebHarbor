@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ form_page.title }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('forms_catalog') }}">All Forms</a> &rsaquo; <span>{{ form_page.title }}</span></nav>
+  <h1 class="page-title">{{ form_page.title }}</h1>
+  {% if form_page.last_reviewed %}<p class="last-reviewed">Last Reviewed/Updated: {{ form_page.last_reviewed }}</p>{% endif %}
+
+  {% for alert in form_data.alerts %}
+  <div class="alert-box alert-box--{{ alert.type or 'info' }}">
+    <p><strong>{{ alert.type|capitalize if alert.type else 'Alert' }}:</strong> {{ alert.text }}</p>
+  </div>
+  {% endfor %}
+
+  <section class="content-section">
+    <h2>Form Details</h2>
+    {% if form_page.edition %}
+    <h3>Edition Date</h3>
+    <p>{{ form_page.edition }}. You can find the edition date at the bottom of the page on the form and instructions.</p>
+    {% endif %}
+
+    {% if form_data.pdfs %}
+    <h3>Forms and Document Downloads</h3>
+    <ul class="download-list">
+      {% for pdf in form_data.pdfs %}
+      <li>
+        <a class="download-link" href="{{ url_for('download_form', filename=pdf.file) }}">
+          {{ pdf.label }} <span class="download-size">({{ (pdf.size / 1024 / 1024) | round(1) }} MB)</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  {% for section in form_data.sections %}
+  <section class="content-section">
+    {% if section.heading %}<h2>{{ section.heading }}</h2>{% endif %}
+    {% for para in section.paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </section>
+  {% endfor %}
+
+  {% for table in form_data.tables %}
+  <div class="table-wrap">
+    <table class="data-table">
+      {% if table.headers %}<thead><tr>{% for h in table.headers %}<th>{{ h }}</th>{% endfor %}</tr></thead>{% endif %}
+      <tbody>
+      {% for row in table.rows %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+
+  <p><a href="{{ url_for('feecalculator') }}">Calculate your filing fees</a> or <a href="{{ url_for('processing_times') }}">check processing times</a>.</p>
+
+  {% if data.links %}
+  <section class="related-links">
+    <h2>Related Links</h2>
+    <ul>
+      {% for link in data.links %}
+        {% if link.href.startswith('https://www.uscis.gov/') %}
+        {% set local_path = link.href | replace('https://www.uscis.gov', '') %}
+        <li><a href="{{ local_path if local_path in mirrored else link.href }}">{{ link.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

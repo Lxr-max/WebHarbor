@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ dest.name }} - TourRadar{% endblock %}
+{% block content %}
+<div class="hero" style="background-image: url('/static/images/{{ dest.hero or "site/serp_hero.webp" }}'); min-height:300px;">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner container">
+    <h1>{{ dest.name }}</h1>
+    {% if dest.description %}<p class="sub" style="max-width:760px; margin:0 auto 12px;">{{ dest.description[:200] }}</p>{% endif %}
+  </div>
+</div>
+<div class="container" style="padding-bottom:50px;">
+  <div class="section-head" style="margin-top:26px;">
+    <h2>Save up to 70% on tours</h2>
+  </div>
+  {% include '_tour_cards.html' %}
+</div>
+{% endblock %}

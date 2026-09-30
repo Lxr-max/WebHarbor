@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}PO Boxes | USPS{% endblock %}
+{% block meta %}Reserve a PO Box online, compare PO Box sizes and fees.{% endblock %}
+{% block content %}
+<h1>PO Boxes</h1>
+<p>A PO Box gives you a secure, private address for your mail. Reserve online, pay by credit card, and your key is ready within 3 business days.</p>
+{% if page %}
+  {% if page.lead %}<p>{{ page.lead | safe }}</p>{% endif %}
+{% endif %}
+<h2>PO Box Fee Schedules</h2>
+<p class="note">Fee group 2 from the Notice 123 market-dominant price list (per box, per pay period). This is the fee group used by the mirrored offices.</p>
+{% for schedule, rows in fees.items() %}
+  <h3>{{ schedule.replace('_', ' ') | title }}</h3>
+  <table class="data">
+    <tr><th>Box size</th><th>Fee</th></tr>
+    {% for row in rows %}<tr><td>Size {{ row.size_label }}</td><td>{{ row.fee | usd }}</td></tr>{% endfor %}
+  </table>
+{% endfor %}
+<h2>Find a Post Office with PO Boxes</h2>
+<p>Search <a href="{{ url_for('locations_home') }}">Find USPS Locations</a>, open a Post Office, and choose "Reserve a PO Box here".</p>
+{% endblock %}

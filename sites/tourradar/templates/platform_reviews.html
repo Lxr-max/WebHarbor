@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}16,000+ Customer Reviews of TourRadar - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:900px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; <a href="/about">About Us</a> &nbsp;&#8805;&nbsp; Reviews of TourRadar</div>
+  <h1>16,000+ Customer Reviews of TourRadar</h1>
+  <div class="panel">
+    <p style="color:var(--text-2);">Welcome to a world where every trip is a chapter in a traveler&rsquo;s story, a world where dreams fly. At TourRadar, our core value is simple yet profound: &ldquo;Customer comes first.&rdquo; This is not just a motto, it&rsquo;s the essence of who we are and why we exist.</p>
+    <p style="color:var(--text-2);">But don&rsquo;t just take our word for it. Read thousands of authentic reviews on TourRadar, including reliable personal impressions about the services we offer. After each completed booking, we kindly ask our travelers to leave a review. This is done through Trustpilot.com, an external review platform that publishes unbiased opinions.</p>
+    <div class="rating-line" style="font-size:16px;">
+      <span class="rating-badge" style="font-size:18px;">4.6</span>
+      <span>Excellent &mdash; Based on 10,000+ reviews on Trustpilot</span>
+    </div>
+  </div>
+
+  {% if reviews %}
+  <h2>Recent reviews</h2>
+  {% for r in reviews %}
+  <div class="panel">
+    <div class="review" style="border-top:none; padding-top:0;">
+      <div class="head">
+        <div class="avatar" style="background:var(--bg-blue); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-weight:700;">{{ r.initials or r.author[:1] }}</div>
+        <div><div class="name">{{ r.author }}</div><div class="when">{{ r.date }} &bull; {{ r.source }}</div></div>
+        <span class="score">{{ '%.1f'|format(r.rating) }}</span>
+      </div>
+      {% if r.tour_name %}<div style="font-size:12.5px; color:var(--text-3);">Booked: {{ r.tour_name }}</div>{% endif %}
+      <div class="body">{{ r.body }}</div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

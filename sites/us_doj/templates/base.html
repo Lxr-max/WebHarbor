@@ -1,0 +1,86 @@
+{% from '_macros.html' import link with context %}
+{% set opa_brand = item is defined and item.path.startswith('/opa') %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>{% block title %}Homepage{% endblock %} | United States Department of Justice</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="government-banner">
+    <div class="container">
+      <span>Offline research mirror · U.S. Department of Justice</span>
+      <button class="banner-toggle" type="button" aria-expanded="false" aria-controls="government-info">About this mirror <span aria-hidden="true">⌄</span></button>
+    </div>
+    <div class="container government-info" id="government-info" hidden>
+      <div><strong>Public information from Justice.gov</strong><p>This research copy preserves a snapshot of public Department of Justice pages. It is not an official government website.</p></div>
+      <div><strong>Browse locally</strong><p>News, offices, and career information reflect the captured pages. Consult the official website for current information.</p></div>
+    </div>
+  </div>
+  <header class="site-header">
+    {% if opa_brand %}<div class="component-menu-bar"><div class="container"><button type="button" class="doj-menu-toggle" aria-expanded="false" aria-controls="doj-global-menu"><span aria-hidden="true">☰</span> DOJ Menu</button></div></div>{% endif %}
+    <div class="container brand-row">
+      {% if opa_brand %}
+      <a class="component-brand" href="{{ '/opa' if has_path is not defined or has_path('/opa') else '/' }}" aria-label="Office of Public Affairs home">
+        <span>Office of Public Affairs<small>U.S. Department of Justice</small></span>
+      </a>
+      {% else %}
+      <a href="/" class="brand" aria-label="U.S. Department of Justice home"><span>U.S. Department of</span><strong>JUSTICE</strong></a>
+      {% endif %}
+      <div class="header-tools">
+        <nav class="utility-nav" aria-label="Utilities">
+          {{ link('/agencies/chart/grid','Our Offices') }}
+          {{ link('/action-center/find-help-and-information-crime-victims','Find Help') }}
+          {{ link('/contact-us','Contact Us') }}
+        </nav>
+        <form class="header-search" role="search" action="/search" method="get">
+          <label class="visually-hidden" for="header-query">Search Justice.gov</label>
+          <input id="header-query" type="search" name="query" placeholder="Search" required>
+          <button type="submit" aria-label="Search"><span class="search-icon" aria-hidden="true"></span></button>
+        </form>
+      </div>
+      <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation">Menu <span aria-hidden="true">☰</span></button>
+    </div>
+    {% if opa_brand %}
+    <nav id="doj-global-menu" class="doj-global-menu" aria-label="Department of Justice" hidden>
+      <div class="container">{{ link('/','Justice.gov Home') }}{{ link('/about','About DOJ') }}{{ link('/our-work','Our Work') }}{{ link('/news','News') }}{{ link('/careers','Employment') }}</div>
+    </nav>
+    {% endif %}
+    <nav class="primary-nav" id="primary-navigation" aria-label="Main navigation">
+      <div class="container">
+      {% if opa_brand %}
+        {{ link('/opa/about-office','About') }}{{ link('/news','News') }}{{ link('/opa/documents','Documents') }}{{ link('/opa/internships','Internships') }}{{ link('/opa/opa-freedom-information-act','FOIA') }}{{ link('/opa/contact-office','Contact') }}{{ link('/opa/information-journalists','Information for Journalists') }}
+      {% else %}
+        <details class="nav-dropdown"><summary>About</summary><div>{{ link('/about','About DOJ') }}{{ link('/agencies/chart/grid','Our Offices') }}{{ link('/contact-us','Contact Us') }}</div></details>
+        {{ link('/our-work','Our Work') }}
+        <details class="nav-dropdown"><summary{% if request.path.startswith('/news') %} class="current-section"{% endif %}>News</summary><div>{{ link('/news','All News') }}{{ link('/news/press-releases','Press Releases') }}{{ link('/news/speeches','Speeches') }}{{ link('/news/blogs','Blogs') }}{{ link('/news/videos','Videos') }}</div></details>
+        <details class="nav-dropdown"><summary>Resources</summary><div>{{ link('/resources','Resources') }}{{ link('/action-center/report-crime-or-submit-complaint','Report a Crime') }}{{ link('/action-center/find-help-and-information-crime-victims','Help for Crime Victims') }}{{ link('/oip','Freedom of Information Act') }}</div></details>
+        {{ link('/grants','Grants') }}
+        <details class="nav-dropdown"><summary{% if request.path.startswith('/legal-careers') or request.path == '/careers' %} class="current-section"{% endif %}>Employment</summary><div>{{ link('/careers','Careers at DOJ') }}{{ link('/legal-careers','Legal Careers') }}{{ link('/legal-careers/vacancies','Attorney Vacancies & Legal Internships') }}</div></details>
+      {% endif %}
+        <form class="mobile-nav-search" role="search" action="/search" method="get"><label class="visually-hidden" for="mobile-query">Search Justice.gov</label><input id="mobile-query" type="search" name="query" placeholder="Search" required><button type="submit">Search</button></form>
+      </div>
+    </nav>
+  </header>
+  {% block breadcrumb %}{% endblock %}
+  <main id="main-content" tabindex="-1">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="container footer-contact">
+      <div><strong>U.S. Department of Justice</strong><p>950 Pennsylvania Avenue NW<br>Washington DC 20530</p></div>
+      <div><strong>{{ link('/contact-us','Contact the Department') }}</strong><p>Phone: 202-514-2000<br>TTY: 711</p></div>
+      <div><strong>Explore the Department</strong><p>{{ link('/agencies/chart/grid','Our Offices') }}<br>{{ link('/legal-careers','Legal Careers') }}</p></div>
+    </div>
+    <div class="footer-bottom"><div class="container">
+      <nav aria-label="Footer">{{ link('/about','About') }}{{ link('/our-work','Our Work') }}{{ link('/news','News') }}{{ link('/oip','FOIA') }}{{ link('/careers','Careers') }}{{ link('/contact-us','Contact Us') }}</nav>
+      <p class="mirror-note">Offline research mirror · Public content from the U.S. Department of Justice</p>
+      <a href="#top" class="back-top">Top <span aria-hidden="true">↑</span></a>
+    </div></div>
+  </footer>
+</body>
+</html>

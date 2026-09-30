@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Ask a legal question for free | Super Lawyers Answers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <h1>Ask a question</h1>
+  <p class="lead">Submit your question and a top-rated attorney may answer it for free.
+  Browse existing answers first - your question may already be answered.</p>
+
+  <form class="ask-form" method="get" action="/answers/search/">
+    <label for="ask-q3">Enter your legal issue</label>
+    <input id="ask-q3" type="search" name="q" placeholder="e.g. divorce, custody, personal injury">
+    <button class="btn btn-primary btn-lg" type="submit">Search answers</button>
+  </form>
+  <p class="muted">Super Lawyers Answers are for general informational purposes only and
+  do not create an attorney-client relationship.</p>
+</div>
+{% endblock %}

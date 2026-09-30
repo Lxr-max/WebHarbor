@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Deals — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>United deals</h1>
+  <div class="ua-deals-filters">
+    <a class="ua-filter {{ 'active' if not region }}" href="{{ url_for('deals') }}">All</a>
+    <a class="ua-filter {{ 'active' if region == 'Domestic' }}" href="{{ url_for('deals', region='Domestic') }}">Domestic</a>
+    <a class="ua-filter {{ 'active' if region == 'Europe' }}" href="{{ url_for('deals', region='Europe') }}">Europe</a>
+    <a class="ua-filter {{ 'active' if region == 'Asia Pacific & Middle East' }}" href="{{ url_for('deals', region='Asia Pacific & Middle East') }}">Asia Pacific &amp; Middle East</a>
+    <a class="ua-filter {{ 'active' if region == 'Latin America & Caribbean' }}" href="{{ url_for('deals', region='Latin America & Caribbean') }}">Latin America &amp; Caribbean</a>
+  </div>
+  <div class="ua-card-grid">
+    {% for deal in deals %}
+    <a class="ua-card" href="{{ url_for('deal_detail', slug=deal.slug) }}">
+      {% if deal.image %}<img class="ua-card-img" src="{{ url_for('static', filename=deal.image.replace('static/', '')) }}" alt="{{ deal.title }}">{% endif %}
+      <span class="ua-card-route">{{ deal.origin.city }} ({{ deal.origin_code }}) → {{ deal.dest.city }} ({{ deal.dest_code }})</span>
+      <span class="ua-card-title">{{ deal.title }}</span>
+      <span class="ua-card-price">from ${{ '%d'|format(deal.fare_from) }} one way</span>
+      <span class="ua-card-cat">{{ deal.category }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

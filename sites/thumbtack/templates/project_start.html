@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Find a pro - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>What can we help you with?</h1>
+  <p class="muted">Tell us what you need and we'll match you with the best local pros.</p>
+  <div class="chip-row" style="margin-top:18px;">
+    {% for c in cats %}
+    <a class="chip" href="/projects/new?category={{ c.slug }}">{{ c.name }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

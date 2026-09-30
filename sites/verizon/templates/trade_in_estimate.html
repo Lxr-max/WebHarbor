@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Trade-in estimate{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Let's get started — which device are you trading in?</h1>
+  <form method="post" action="{{ url_for('trade_in_estimate') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Device
+      <select name="device" required>
+        <option value="">Select your device</option>
+        {% for d in devices %}
+        <option value="{{ d }}" {{ 'selected' if device_name == d }}>{{ d }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Condition
+      <select name="condition" required>
+        <option value="">Select the condition</option>
+        {% for c in conditions %}
+        <option value="{{ c }}" {{ 'selected' if condition == c }}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <p class="muted">Mint: works perfectly, no scratches. Good: minor wear, fully functional. Cracked: cracked screen or body, still powers on.</p>
+    <button type="submit" class="btn btn-primary">Get my estimate</button>
+  </form>
+  {% if quote %}
+  <div class="card result">
+    <h2>Your estimate</h2>
+    <p>Device: <strong>{{ quote.device_name }}</strong></p>
+    <p>Condition: <strong>{{ quote.condition }}</strong></p>
+    <p class="big-price">${{ quote.value }}</p>
+    <p>Estimated trade-in value applied as instant credit toward your new device purchase, or as an account credit / gift card.</p>
+    <p class="muted">Back up your content, sign out of your accounts, then mail the device to us within 30 days. We'll apply the credit once we receive it.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

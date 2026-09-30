@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}My Inquiries | Student.com{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:44px 0 64px;max-width:1000px">
+  <nav class="breadcrumb" style="padding:0 0 10px"><a href="/">Home</a> › <span>My Inquiries</span></nav>
+  <h1>My Inquiries</h1>
+  <p class="muted" style="margin-top:6px">{{ rows|length }} {{ 'property' if rows|length == 1 else 'properties' }} — keep track of the properties you've contacted and their responses all in one place.</p>
+
+  {% if rows %}
+  <div class="card" style="margin-top:24px;padding:8px 16px;overflow-x:auto">
+    <table class="table" style="min-width:760px" data-testid="enquiries-table">
+      <thead>
+        <tr>
+          <th>Inquiry ID</th>
+          <th>Property</th>
+          <th>Message</th>
+          <th>Inquiry sent</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td><strong>{{ row.enquiry.reference }}</strong></td>
+          <td style="min-width:240px">
+            {% if row.prop %}
+            <a href="/us/{{ row.prop.state_slug }}/{{ row.prop.city_slug }}/p/{{ row.prop.slug }}" style="display:flex;gap:10px;align-items:center;overflow-wrap:anywhere">
+              {% if row.prop.primary_image %}<img src="{{ row.prop.primary_image }}" alt="Image of {{ row.prop.name }}">{% endif %}
+              <span>{{ row.prop.name }}</span>
+            </a>
+            {% else %}Unknown Property{% endif %}
+          </td>
+          <td class="small">{{ row.enquiry.message or '—' }}</td>
+          <td class="small">{{ row.enquiry.created_at.strftime('%B %d, %Y') if row.enquiry.created_at.strftime else '' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted" style="margin-top:12px">All {{ rows|length }} inquiries are shown newest first. Previous inquiries remain available here for reference.</p>
+  {% else %}
+  <div class="empty-state">
+    <p style="font-weight:600">Let's get your search started!</p>
+    <p class="muted small">You haven't reached out to any properties yet. Check out top-rated options near your campus and send your first inquiry today.</p>
+    <a class="btn primary" href="/" style="margin-top:16px">Find your student home</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}Home Appliances On Sale. Huge Discounts{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Deals</span></li>
+{% endblock %}
+{% block content %}
+<section class="container deals-page">
+  <h1 class="page-heading">Appliance Deals Today</h1>
+  <div class="deals-hero">
+    <h2>{{ d.heading }}</h2>
+    <p>{{ d.blurb }}</p>
+    <p class="deals-note">{{ d.note }}</p>
+  </div>
+  <h2 class="section-heading">Featured brands</h2>
+  <p class="inline-links">
+    {% for b in d.featured_brands %}{{ b }} Deals{% if not loop.last %} &middot; {% endif %}{% endfor %}
+  </p>
+  <h2 class="section-heading">On Sale Today</h2>
+  <div class="prod-grid">
+    {% for p in deals %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+  <h2 class="section-heading">Shop by category</h2>
+  <ul class="deals-cat-list">
+    {% for label, href in d.category_links %}
+    <li><a href="{{ href }}">{{ label }} on sale today</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

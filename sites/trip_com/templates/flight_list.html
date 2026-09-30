@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Flights from {{ route.origin_city }} to {{ route.dest_city }} | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; Flights &gt; <b>{{ route.origin_city }} to {{ route.dest_city }}</b></div>
+
+<div class="widget">
+  <form class="widget-row" action="{{ url_for('flight_list') }}" method="get">
+    <input type="hidden" name="triptype" value="{{ trip_type }}">
+    <div class="wfield">
+      <label>Leaving from</label>
+      <input name="dcity" value="{{ route.origin_code }}">
+    </div>
+    <div class="wfield">
+      <label>Going to</label>
+      <input name="acity" value="{{ route.dest_code }}">
+    </div>
+    <div class="wfield">
+      <label>Depart</label>
+      <input name="ddate" type="date" value="{{ ddate.isoformat() }}">
+    </div>
+    <div class="wfield">
+      <label>Return</label>
+      <input name="rdate" type="date" value="{{ rdate.isoformat() }}">
+    </div>
+    <div class="wfield">
+      <label>Cabin</label>
+      <select name="cabin"><option>{{ cabin }}</option><option>Economy</option><option>Business</option></select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="list-layout" style="margin-top:14px">
+  <form class="filters" method="get" action="{{ url_for('flight_list') }}">
+    <input type="hidden" name="dcity" value="{{ route.origin_code }}">
+    <input type="hidden" name="acity" value="{{ route.dest_code }}">
+    <input type="hidden" name="ddate" value="{{ ddate.isoformat() }}">
+    <input type="hidden" name="rdate" value="{{ rdate.isoformat() }}">
+    <input type="hidden" name="triptype" value="{{ trip_type }}">
+    <h3>Airlines</h3>
+    <label class="frow"><input type="radio" name="airline" value="" {% if not filters.airline %}checked{% endif %}> All airlines</label>
+    {% for a in airlines %}
+    <label class="frow"><input type="radio" name="airline" value="{{ a }}" {% if filters.airline == a %}checked{% endif %}> {{ a }}</label>
+    {% endfor %}
+    <h3>Stops</h3>
+    <label class="frow"><input type="radio" name="stops" value="" {% if not filters.stops %}checked{% endif %}> Any</label>
+    <label class="frow"><input type="radio" name="stops" value="nonstop" {% if filters.stops == 'nonstop' %}checked{% endif %}> Nonstop only</label>
+    <label class="frow"><input type="radio" name="stops" value="direct1" {% if filters.stops == 'direct1' %}checked{% endif %}> 1 stop or fewer</label>
+    <h3>Departure time</h3>
+    <label class="frow"><input type="radio" name="dep" value="" {% if not filters.dep %}checked{% endif %}> Any time</label>
+    <label class="frow"><input type="radio" name="dep" value="early" {% if filters.dep == 'early' %}checked{% endif %}> Before 6 AM</label>
+    <label class="frow"><input type="radio" name="dep" value="morning" {% if filters.dep == 'morning' %}checked{% endif %}> 6 AM – noon</label>
+    <label class="frow"><input type="radio" name="dep" value="afternoon" {% if filters.dep == 'afternoon' %}checked{% endif %}> Noon – 6 PM</label>
+    <label class="frow"><input type="radio" name="dep" value="evening" {% if filters.dep == 'evening' %}checked{% endif %}> After 6 PM</label>
+    <button class="btn filter-btn" type="submit">Apply filters</button>
+  </form>
+
+  <div>
+    <div class="results-head">
+      <div class="results-count">1. {{ route.origin_city }} ({{ route.origin_code }}) &#8594; {{ route.dest_city }} ({{ route.dest_code }}) &middot; {{ flights|length }} flights</div>
+      <div class="sort-links">
+        <a href="{{ url_for('flight_list') }}?{{ keep_args(sort='recommended') }}" class="{{ 'active' if sort == 'recommended' }}">Recommended</a>
+        <a href="{{ url_for('flight_list') }}?{{ keep_args(sort='price') }}" class="{{ 'active' if sort == 'price' }}">Cheapest</a>
+        <a href="{{ url_for('flight_list') }}?{{ keep_args(sort='duration') }}" class="{{ 'active' if sort == 'duration' }}">Fastest</a>
+        <a href="{{ url_for('flight_list') }}?{{ keep_args(sort='depart') }}" class="{{ 'active' if sort == 'depart' }}">Departure time</a>
+      </div>
+    </div>
+
+    {% for f in flights %}
+    <div class="flight-row">
+      <div class="flight-logo">{{ f.airline[:2] }}</div>
+      <div>
+        <div class="f-seg">
+          <div><div class="f-time">{{ f.dep_time }}</div><div class="f-ap">{{ f.route.origin_code }}{% if f.dep_terminal %} {{ f.dep_terminal }}{% endif %}</div></div>
+          <div class="f-mid">
+            <div class="f-duration">{{ f.duration_label }}</div>
+            <div class="f-stops">{% if f.stops == 0 %}<span class="f-nonstop">Nonstop</span>{% else %}{{ f.stops }} stop &middot; {{ f.stopover }}{% endif %}</div>
+          </div>
+          <div><div class="f-time">{{ f.arr_time }}{% if f.plus1 %} <span class="f-plus1">+1</span>{% endif %}</div><div class="f-ap">{{ f.route.dest_code }}{% if f.arr_terminal %} {{ f.arr_terminal }}{% endif %}</div></div>
+        </div>
+        <div class="f-airline">{{ f.airline }}{% if f.flight_no %} &middot; {{ f.flight_no }}{% endif %} &middot; {{ f.baggage }}</div>
+      </div>
+      <div class="f-price-cell">
+        <div class="f-price">${{ '%d'|format(f.price) }}</div>
+        <div class="f-price-sub">per adult, incl. taxes</div>
+      </div>
+      <div class="f-select-cell">
+        {% if trip_type == 'ow' %}
+        <a class="btn" href="{{ url_for('flight_book', out=f.id, cabin=cabin, ddate=ddate.isoformat()) }}">Select</a>
+        {% else %}
+        {# Carry the outbound airline/stops filters into the return-selection page
+           so a filtered outbound search cannot silently end in a non-matching
+           return flight (review finding: Delta+nonstop outbound used to book a
+           non-Delta return). #}
+        <a class="btn" href="{{ url_for('flight_select_return', out_id=f.id, ddate=ddate.isoformat(), rdate=rdate.isoformat(), cabin=cabin, adults=adults, airline=filters.airline or None, stops=filters.stops or None) }}">Select</a>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-note">No flights match your filters. Try clearing a filter.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

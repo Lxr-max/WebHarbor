@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ q }} | Search | Statista{% endblock %}
+{% block content %}
+<div class="serpHead">
+  <h1>{% if q %}{{ q }}{% else %}Search{% endif %}</h1>
+  <form class="heroSearch" style="max-width:640px;margin:14px 0 0;" action="/serp" method="get" role="search">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search statistics, reports…">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<div class="serpFilters">
+  <span class="lbl">Content type</span>
+  <a class="filterChip {% if not ctype %}on{% endif %}" href="/serp?q={{ q|urlencode }}">Summary</a>
+  <a class="filterChip {% if ctype == 'Statistics' %}on{% endif %}" href="/serp?q={{ q|urlencode }}&amp;content_type=Statistics">Statistics</a>
+  <a class="filterChip {% if ctype == 'Reports' %}on{% endif %}" href="/serp?q={{ q|urlencode }}&amp;content_type=Reports">Reports</a>
+  <a class="filterChip {% if ctype == 'Topics' %}on{% endif %}" href="/serp?q={{ q|urlencode }}&amp;content_type=Topics">Topics</a>
+  <a class="filterChip {% if ctype == 'Market Insights' %}on{% endif %}" href="/serp?q={{ q|urlencode }}&amp;content_type=Market+Insights">Market Insights</a>
+</div>
+
+<p class="resultCount">{{ total }} result{{ '' if total == 1 else 's' }}{% if q %} for “{{ q }}”{% endif %}</p>
+
+{% for kind, item in results %}
+<div class="serpResult">
+  <div class="serpResult__meta">
+    {% if kind == 'statistic' %}
+      {% if item.premium %}<span class="card__tag card__tag--premium">Premium Statistic</span>
+      {% elif item.content_type == 'forecast' %}<span class="card__tag card__tag--forecast">Market Insights</span>
+      {% else %}<span class="card__tag">Statistic</span>{% endif %}
+    {% elif kind == 'topic' %}
+      <span class="card__tag">Topic</span>
+      {% if item.published_date %}<span>{{ item.published_date }}</span>{% endif %}
+    {% elif kind == 'report' %}
+      <span class="card__tag card__tag--premium">Premium Report</span>
+    {% else %}
+      <span class="card__tag card__tag--forecast">Market Insights</span>
+      <span>{{ item.region }}</span>
+    {% endif %}
+  </div>
+  {% if kind == 'statistic' %}
+    <a class="serpResult__title" href="/{{ item.url_kind }}/{{ item.id }}/{{ item.slug }}/">{{ item.title }}</a>
+    <p class="serpResult__snippet">{{ (item.summary or item.description)|striptags|snippetize }}</p>
+  {% elif kind == 'topic' %}
+    <a class="serpResult__title" href="/topics/{{ item.id }}/{{ item.slug }}/">{% if item.name.lower().endswith('statistics & facts') %}{{ item.name }}{% else %}{{ item.name }} - statistics &amp; facts{% endif %}</a>
+    <p class="serpResult__snippet">{{ item.description|striptags|snippetize }}</p>
+  {% elif kind == 'report' %}
+    <a class="serpResult__title" href="/study/{{ item.id }}/{{ item.slug }}/">{{ item.title }}</a>
+    <p class="serpResult__snippet">{{ item.description|striptags|snippetize }}</p>
+  {% else %}
+    <a class="serpResult__title" href="{{ item.url }}">{{ item.name }} - {{ item.region }}</a>
+    {% if item.highlights %}<p class="serpResult__snippet">{{ item.highlights[0]|striptags|snippetize }}</p>{% endif %}
+  {% endif %}
+</div>
+{% else %}
+<div class="serpResult">
+  <p>No results found{% if q %} for “{{ q }}”{% endif %}. Try a broader query or remove the content-type filter.</p>
+</div>
+{% endfor %}
+
+{% if pages > 1 %}
+<div class="pager">
+  {% if page > 1 %}<a href="/serp?q={{ q|urlencode }}&amp;content_type={{ ctype|urlencode }}&amp;page={{ page - 1 }}">‹ Previous</a>{% endif %}
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}<span class="on">{{ p }}</span>
+    {% else %}<a href="/serp?q={{ q|urlencode }}&amp;content_type={{ ctype|urlencode }}&amp;page={{ p }}">{{ p }}</a>{% endif %}
+  {% endfor %}
+  {% if page < pages %}<a href="/serp?q={{ q|urlencode }}&amp;content_type={{ ctype|urlencode }}&amp;page={{ page + 1 }}">Next ›</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

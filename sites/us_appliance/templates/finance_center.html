@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Appliance Finance Options - US Appliance{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Financing</span></li>
+{% endblock %}
+{% block content %}
+<section class="container finance-page">
+  <h1 class="page-heading">Financing</h1>
+  <p class="category-blurb">{{ intro }}</p>
+  <div class="finance-cards">
+    <div class="finance-card">
+      <h3>Special Financing Offers</h3>
+      <p>Get the appliances you want with payments that work for you</p>
+      <p><a class="button button--primary" href="{{ url_for('finance_offers') }}">View Offers</a></p>
+    </div>
+    <div class="finance-card">
+      <h3>Progressive Leasing</h3>
+      <p>Flexible Lease To Own Options</p>
+      <p><a class="button" href="{{ url_for('contact') }}">Learn More</a></p>
+    </div>
+  </div>
+  <div class="finance-brands">
+    <h4>Special Finance Offers available on:</h4>
+    <ul class="inline-list">
+      <li>Storewide</li>
+      <li>Frigidaire 15 Months</li>
+      <li>GE 15 Months</li>
+      <li>KitchenAid 15 Months</li>
+      <li>Cafe 15 Months</li>
+      <li>Electrolux 15 Months</li>
+      <li>Whirlpool 15 Months</li>
+      <li>Bosch 15 Months</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.question }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <p class="ua-quiet"><a href="{{ url_for('help_center') }}">Help Center</a> / {{ article.category }}</p>
+  <h1>{{ article.question }}</h1>
+  <p class="ua-lead">{{ article.answer }}</p>
+  {% if related %}
+  <h2>Related articles</h2>
+  <ul>
+    {% for rel in related %}
+    <li><a class="ua-link" href="{{ url_for('help_article', slug=rel.slug) }}">{{ rel.question }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}Appliances On Sale Today US Appliance{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Deals</span></li>
+{% endblock %}
+{% block content %}
+<section class="container clearance-page">
+  <h1 class="page-heading">Deals</h1>
+  <div class="text-body">{{ text | replace('\n', '<br>') | safe }}</div>
+  <h2 class="section-heading">Clearance &amp; Price Cuts</h2>
+  <div class="prod-grid">
+    {% for p in deals %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+  <p class="center">
+    <a class="button" href="{{ url_for('deals_page') }}">Shop All Price Cuts</a>
+    <a class="button" href="{{ url_for('rebates_page') }}">Rebate Offers</a>
+    <a class="button" href="{{ url_for('finance_offers') }}">Finance Offers</a>
+  </p>
+</section>
+{% endblock %}

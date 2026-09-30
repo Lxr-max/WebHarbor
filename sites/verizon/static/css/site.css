@@ -1,0 +1,151 @@
+/* Verizon mirror — clean carrier-storefront styling. */
+:root {
+  --vz-red: #ed1c24;
+  --vz-dark: #000000;
+  --vz-gray: #f5f5f5;
+  --vz-line: #d9d9d9;
+  --vz-text: #1b1b1b;
+  --vz-muted: #6a6a6a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Verizon NH GeTX", "Helvetica Neue", Arial, sans-serif;
+  color: var(--vz-text);
+  background: #fff;
+  line-height: 1.5;
+}
+.container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+a { color: var(--vz-dark); text-decoration: underline; }
+a:hover { color: var(--vz-red); }
+h1 { font-size: 2rem; margin: 0.4em 0; }
+h2 { font-size: 1.4rem; margin: 1.2em 0 0.5em; }
+h3 { font-size: 1.1rem; margin: 0.8em 0 0.4em; }
+.muted { color: var(--vz-muted); }
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 10px; top: 10px; background: #fff; padding: 8px; z-index: 10; }
+
+.site-header { border-bottom: 3px solid var(--vz-red); }
+.header-inner { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
+.brand__logo { height: 26px; }
+.header-links a { margin-left: 18px; font-weight: 600; text-decoration: none; }
+.header-links a:hover { color: var(--vz-red); text-decoration: underline; }
+.site-nav { background: #fff; border-top: 1px solid var(--vz-line); }
+.nav-list { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 0; padding: 10px 0; }
+.nav-list a { text-decoration: none; font-weight: 700; }
+.nav-list a:hover { color: var(--vz-red); }
+
+.flashes { margin: 12px 0 0; }
+.flash { padding: 10px 14px; margin: 6px 0; background: #f0f7ff; border-left: 4px solid #3b82c4; }
+.flash--error { background: #fff0f0; border-color: var(--vz-red); }
+
+.hero { background: var(--vz-dark); color: #fff; padding: 48px 0; }
+.hero h1 { color: #fff; }
+.hero a { color: #fff; }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.hero-price { font-size: 2.6rem; font-weight: 800; margin: 8px 0; }
+.hero-price span, .big-price span { font-size: 1rem; font-weight: 400; }
+.hero-note { color: #ddd; }
+.hero-cards { display: grid; gap: 16px; }
+.hero-card { background: #fff; color: var(--vz-text); padding: 18px 20px; border-radius: 6px; }
+.hero-card .price { font-weight: 700; }
+
+.btn { display: inline-block; padding: 10px 22px; border-radius: 4px; border: 2px solid var(--vz-red);
+       font-weight: 700; text-decoration: none; cursor: pointer; background: #fff; color: var(--vz-dark); }
+.btn-primary { background: var(--vz-red); color: #fff; }
+.btn-primary:hover { background: #c8101a; color: #fff; }
+.btn-secondary { background: #fff; }
+.btn-ghost { border-color: var(--vz-line); font-weight: 500; }
+
+.section { padding: 28px 0; }
+.narrow { max-width: 720px; }
+.card { background: #fff; border: 1px solid var(--vz-line); border-radius: 8px; padding: 20px 24px; margin: 14px 0; }
+.grid { display: grid; gap: 18px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .grid-2, .grid-3, .grid-4, .hero-inner { grid-template-columns: 1fr; } }
+
+.tile { border: 1px solid var(--vz-line); border-radius: 8px; padding: 16px; text-decoration: none;
+        display: block; color: var(--vz-text); }
+.tile:hover { border-color: var(--vz-red); }
+.tile img { max-width: 130px; height: auto; }
+.tile-price { font-weight: 700; color: var(--vz-red); margin: 6px 0 0; }
+.tile-retail { margin: 2px 0; }
+.tile-promo { font-size: 0.85rem; color: var(--vz-muted); }
+
+.filter-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 0; }
+.filter-bar select, form select, form input[type=text], form input[type=email],
+form input[type=password], form input[type=tel], form input[type=date] {
+  padding: 8px 10px; border: 1px solid var(--vz-line); border-radius: 4px; font-size: 1rem; }
+form label { display: block; margin: 10px 0; font-weight: 600; }
+form label input, form label select { display: block; margin-top: 4px; width: 100%; max-width: 420px; font-weight: 400; }
+form label.choice { display: flex; gap: 10px; align-items: baseline; font-weight: 400; }
+form label.choice input { display: inline-block; width: auto; }
+fieldset { border: 1px solid var(--vz-line); border-radius: 6px; margin: 14px 0; }
+legend { font-weight: 700; padding: 0 6px; }
+
+.pdp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 18px; }
+@media (max-width: 900px) { .pdp-grid { grid-template-columns: 1fr; } }
+.pdp-gallery img { max-width: 260px; height: auto; margin: 0 10px 10px 0; border: 1px solid var(--vz-line); border-radius: 6px; }
+.configure-img { max-width: 220px; border: 1px solid var(--vz-line); border-radius: 6px; }
+.rating { color: var(--vz-muted); }
+.promo-banner { background: #fff4f4; border-left: 4px solid var(--vz-red); padding: 10px 14px; margin: 12px 0; }
+
+.plan-widget { display: grid; gap: 18px; }
+.line-picker { display: flex; gap: 12px; align-items: center; }
+.big-price { font-size: 2rem; font-weight: 800; margin: 4px 0; }
+.plan-total { font-size: 1.15rem; font-weight: 700; }
+.feature-list { columns: 2; padding-left: 18px; }
+.feature-list li { margin: 4px 0; }
+.plan-card { display: flex; flex-direction: column; }
+.plan-blurb { min-height: 44px; }
+
+.data-table { border-collapse: collapse; width: 100%; margin: 14px 0; }
+.data-table th, .data-table td { border-bottom: 1px solid var(--vz-line); padding: 9px 12px; text-align: left; }
+.data-table thead th { border-bottom: 2px solid var(--vz-dark); }
+.compare-table td { font-size: 0.9rem; }
+
+.state-list, .city-list { columns: 3; padding-left: 20px; }
+.state-list li, .city-list li { margin: 4px 0; }
+.store-list { list-style: none; padding: 0; }
+.store-item { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+.store-actions { display: flex; flex-direction: column; gap: 8px; white-space: nowrap; }
+.store-photo { max-width: 260px; width: 100%; height: auto; margin: 8px 12px 8px 0; border-radius: 6px; border: 1px solid var(--vz-line); }
+
+.breadcrumb { color: var(--vz-muted); margin-bottom: 10px; }
+.breadcrumb a { color: var(--vz-muted); }
+.cart-summary h2 { margin-top: 0; }
+.result h2 { margin-top: 0; }
+.faq summary { font-weight: 700; cursor: pointer; margin: 10px 0; }
+.content-body { white-space: pre-wrap; max-width: 900px; }
+
+.site-footer { background: #f2f2f2; margin-top: 40px; padding: 32px 0; }
+.footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.site-footer h4 { margin: 0 0 8px; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { margin: 4px 0; }
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-bottom { border-top: 1px solid var(--vz-line); margin-top: 22px; padding-top: 14px; color: var(--vz-muted); }
+
+/* ------------------------------------------------------------- mobile ----
+   Narrow-viewport hardening (2026-09-30 audit): wide data tables scroll
+   horizontally inside the page instead of forcing the whole page to pan
+   (the upstream mobile pattern); multi-column store/city lists and store
+   cards collapse to fewer columns / a single stacked column; action buttons
+   wrap instead of overflowing their card. */
+@media (max-width: 760px) {
+  .grid > *, .pdp-grid > * { min-width: 0; }
+  .data-table { display: block; overflow-x: auto; }
+  .data-table thead, .data-table tbody { display: table; width: max-content; }
+  .data-table th, .data-table td { display: table-cell; }
+  .state-list, .city-list { columns: 2; }
+  .store-item { flex-direction: column; gap: 12px; }
+  .store-actions { white-space: normal; }
+  .store-photo { max-width: 100%; margin-right: 0; }
+}
+
+/* Keep secondary actions readable inside the dark hero and its white cards. */
+.hero a.btn-secondary { color: #111; }

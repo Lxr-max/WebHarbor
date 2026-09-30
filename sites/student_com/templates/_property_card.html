@@ -1,0 +1,33 @@
+{# Shared property card. Expects `prop` (Property) and optional `distance`. #}
+<a class="prop-card" href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}/p/{{ prop.slug }}"
+   data-testid="property-card-{{ prop.slug }}"
+   aria-label="View details for {{ prop.name }} property">
+  <div class="img">
+    {% if prop.primary_image %}
+      <img src="{{ prop.primary_image }}" alt="Photo of {{ prop.name }} property" loading="lazy">
+    {% endif %}
+    {% if prop.is_featured %}<span class="badge">Featured</span>{% endif %}
+    {% if heart_id %}
+    <button class="heart" type="button" aria-label="{{ 'Remove ' + prop.name + ' from saved properties' if is_bookmarked(prop.slug) else 'Save ' + prop.name }}"
+            onclick="event.preventDefault(); event.stopPropagation(); toggleBookmark('{{ prop.slug }}', this, '{{ heart_id }}')">
+      <svg id="{{ heart_id }}" viewBox="0 0 24 24" stroke="#242529" stroke-width="1.8"
+           fill="{{ '#ff5a76' if is_bookmarked(prop.slug) else 'none' }}">
+        <path d="M12 21s-7.5-4.9-9.7-9.2C.6 8.4 2.6 5 6.1 5c2 0 3.4 1.1 4.2 2.3L12 9l1.7-1.7C14.5 6.1 15.9 5 17.9 5c3.5 0 5.5 3.4 3.8 6.8C19.5 16.1 12 21 12 21z"/>
+      </svg>
+    </button>
+    {% endif %}
+  </div>
+  <div class="body">
+    <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+      <span class="price">{% if prop.min_price %}From ${{ '{:,}'.format(prop.min_price) }}/mo{% else %}Price Unavailable{% endif %}</span>
+      {% if prop.rating %}<span class="rating">★ {{ '%.1f' % prop.rating }}</span>{% endif %}
+    </div>
+    <div class="name">{{ prop.name }}</div>
+    <div class="type">{{ prop.type_label }}</div>
+    {% if distance is defined and distance is not none %}
+      <div class="dist"><strong>{{ '%.1f' % distance if distance < 10 else distance|round|int }} miles</strong> to campus</div>
+    {% elif prop.address %}
+      <div class="dist">{{ prop.address.split(',')[0] }}</div>
+    {% endif %}
+  </div>
+</a>

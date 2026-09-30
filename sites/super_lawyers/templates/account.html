@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Manage my account | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <span>Manage my account</span>
+  </nav>
+  <h1>Manage my account</h1>
+  <p class="lead">Welcome back, {{ current_user.display_name }}. Manage your saved
+  attorneys, attorney alerts, and contact inquiries.</p>
+
+  <div class="account-grid">
+    <a class="account-tile" href="{{ url_for('account_favorites') }}">
+      <h2>Saved attorneys</h2>
+      <p>{{ favorites|length }} saved</p>
+    </a>
+    <a class="account-tile" href="{{ url_for('account_saved_searches') }}">
+      <h2>Attorney alerts</h2>
+      <p>{{ searches|length }} saved searches</p>
+    </a>
+    <a class="account-tile" href="{{ url_for('account_inquiries') }}">
+      <h2>My inquiries</h2>
+      <p>{{ inquiries|length }} sent</p>
+    </a>
+    <a class="account-tile" href="{{ url_for('account_profile') }}">
+      <h2>Profile settings</h2>
+      <p>{{ current_user.email }}</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

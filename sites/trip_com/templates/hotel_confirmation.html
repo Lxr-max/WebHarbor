@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Booking Confirmed | Trip.com{% endblock %}
+{% block content %}
+<div class="confirm-hero">
+  <div class="big">&#10003; Your booking is confirmed</div>
+  <p>Booking reference <b>{{ booking.ref }}</b> &middot; Confirmation sent to {{ booking.email }}</p>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h2>{{ hotel.name }}</h2>
+    <div class="hr-area">{{ hotel.address }} &middot; {{ city.name }}</div>
+    <div class="sum-row"><span>Room</span><span class="val">{{ room.name }}{% if room.bed %} ({{ room.bed }}){% endif %}</span></div>
+    <div class="sum-row"><span>Guest</span><span class="val">{{ booking.guest_first }} {{ booking.guest_last }}</span></div>
+    <div class="sum-row"><span>Check-in</span><span class="val">{{ booking.checkin|dmy }} (from {{ hotel.checkin_from }})</span></div>
+    <div class="sum-row"><span>Check-out</span><span class="val">{{ booking.checkout|dmy }} (before {{ hotel.checkout_by }})</span></div>
+    <div class="sum-row"><span>Guests</span><span class="val">{{ booking.adults }} adults{% if booking.children %} + {{ booking.children }} children{% endif %}</span></div>
+    {% if booking.promo_code %}<div class="sum-row"><span>Promo code</span><span class="val">{{ booking.promo_code }}</span></div>{% endif %}
+    <div class="sum-row total"><span>Total paid</span><span class="val">${{ '%.2f'|format(booking.total) }}</span></div>
+    <div class="sum-row"><span>Trip Coins earned</span><span class="val">{{ booking.coins }} coins (&#8776; ${{ '%.2f'|format(booking.coins * 0.01) }})</span></div>
+    <div class="rate-flags" style="margin-top:8px">
+      {% if room.free_cancel %}&#10003; Free cancellation before 11:59 PM, Oct 1, 2026{% endif %}
+      &#10003; Instant confirmation
+    </div>
+  </div>
+  <div class="panel">
+    <h3>What happens next?</h3>
+    <p style="color:var(--ink-2);font-size:13px;margin-top:8px">
+      Your voucher has been sent to {{ booking.email }}. Show your booking reference at the
+      front desk. Manage this booking any time from your account page.
+    </p>
+    {% if current_user.is_authenticated %}
+    <a class="btn" href="{{ url_for('account_bookings') }}">View my bookings</a>
+    {% else %}
+    <p style="color:var(--ink-3);font-size:12px">Booked as a guest — keep reference {{ booking.ref }} to look up this booking.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

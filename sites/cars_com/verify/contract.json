@@ -1,0 +1,1047 @@
+{
+  "Cars.com--0": {
+    "task": "I'm arranging a dealer visit for a used SUV. Find the cheapest Good Deal SUV priced from $25,000 to $35,000 with no more than 70,000 miles, within 50 miles of ZIP 98101. Tell me its price, mileage and estimated payment with APR, then use its dealership page to give me the dealer's name, rating, Monday sales hours and a sales phone number so I can arrange the visit.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=used(?:&|$))(?=.*(?:[?&])list_price_min=25000(?:&|$))(?=.*(?:[?&])list_price_max=35000(?:&|$))(?=.*(?:[?&])mileage_max=70000(?:&|$))(?=.*(?:[?&])body_style_slugs=suv(?:&|$))(?=.*(?:[?&])deal_ratings=good(?:&|$))(?=.*(?:[?&])maximum_distance=50(?:&|$))",
+      "/vehicledetail/353e2646\\-07ab\\-4cf3\\-9811\\-eb919af85867/(?:$|\\?)",
+      "/dealers/26520/rairdons\\-cdjr\\-kirkland/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2021 Toyota RAV4 LE price",
+        "used\\ 2021\\ toyota\\ rav4\\ le(?:(?!rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland).){0,900}?(?:price|cost|asking price).{0,18}?\\$25261(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Toyota RAV4 LE mileage",
+        "used\\ 2021\\ toyota\\ rav4\\ le(?:(?!rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland).){0,900}?(?:mileage|odometer).{0,18}?42801\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Toyota RAV4 LE payment",
+        "used\\ 2021\\ toyota\\ rav4\\ le(?:(?!rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$476/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Toyota RAV4 LE APR",
+        "used\\ 2021\\ toyota\\ rav4\\ le(?:(?!rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland).){0,900}?(?:apr|interest rate).{0,18}?7(?:\\.0)?%(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rairdon's Chrysler Dodge Jeep RAM of Kirkland rating",
+        "rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland(?:(?!used\\ 2021\\ toyota\\ rav4\\ le).){0,900}?(?:rating|rated).{0,18}?4\\.3/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rairdon's Chrysler Dodge Jeep RAM of Kirkland Monday",
+        "rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland(?:(?!used\\ 2021\\ toyota\\ rav4\\ le).){0,900}?monday.{0,18}?9(?::00)?\\s*am(?:-| to )8(?::00)?\\s*pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rairdon's Chrysler Dodge Jeep RAM of Kirkland phone",
+        "rairdon's\\ chrysler\\ dodge\\ jeep\\ ram\\ of\\ kirkland(?:(?!used\\ 2021\\ toyota\\ rav4\\ le).){0,900}?phone.{0,18}?\\(?888\\)?[ .-]*471[ .-]*5513(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Cars.com--1": {
+    "task": "Help me shortlist a used Honda Civic within 50 miles of ZIP 98101. Among the Good Deal listings, choose the one with the lowest mileage and save it to my garage using alice.j@test.com / TestPass123!. Tell me the car's title, price, mileage, exterior color and dealer, and confirm it is saved.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 1,
+            "listing_id": "e03ee3c5-5786-4477-8c8d-afeb8e16f93f",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=used(?:&|$))(?=.*(?:[?&])makes\\[\\]=honda(?:&|$))(?=.*(?:[?&])models\\[\\]=honda\\-civic(?:&|$))(?=.*(?:[?&])deal_ratings=good(?:&|$))(?=.*(?:[?&])maximum_distance=50(?:&|$))",
+      "/vehicledetail/e03ee3c5\\-5786\\-4477\\-8c8d\\-afeb8e16f93f/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2025 Honda Civic Sport price",
+        "used\\ 2025\\ honda\\ civic\\ sport(?:(?!(?!)).){0,900}?(?:price|cost|asking price).{0,18}?\\$27969(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2025 Honda Civic Sport mileage",
+        "used\\ 2025\\ honda\\ civic\\ sport(?:(?!(?!)).){0,900}?(?:mileage|odometer).{0,18}?10093\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2025 Honda Civic Sport color",
+        "used\\ 2025\\ honda\\ civic\\ sport(?:(?!(?!)).){0,900}?color.{0,18}?a\\ urban\\ gray\\ pearl(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2025 Honda Civic Sport dealer",
+        "used\\ 2025\\ honda\\ civic\\ sport(?:(?!(?!)).){0,900}?dealer.{0,18}?kia\\ of\\ everett(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Cars.com--2": {
+    "task": "I want to budget for the cheapest new Toyota RAV4 within 200 miles of ZIP 98101. Find the listing and use its price in the payment calculator with good credit, $4,000 down and a 60-month term. Tell me which car and dealer you used, its asking price, and the calculated monthly payment, APR and total interest, including the calculator's tax assumption.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=new(?:&|$))(?=.*(?:[?&])makes\\[\\]=toyota(?:&|$))(?=.*(?:[?&])models\\[\\]=toyota\\-rav4(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/6251e2c0\\-b153\\-444f\\-8d17\\-ebbec873f8c9/(?:$|\\?)",
+      "/car\\-loan\\-calculator/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "New 2026 Toyota RAV4 LE price",
+        "new\\ 2026\\ toyota\\ rav4\\ le(?:(?!60\\-month\\ loan).){0,900}?(?:price|cost|asking price).{0,18}?\\$35683(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "New 2026 Toyota RAV4 LE mileage",
+        "new\\ 2026\\ toyota\\ rav4\\ le(?:(?!60\\-month\\ loan).){0,900}?(?:mileage|odometer).{0,18}?2\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "New 2026 Toyota RAV4 LE dealer",
+        "new\\ 2026\\ toyota\\ rav4\\ le(?:(?!60\\-month\\ loan).){0,900}?dealer.{0,18}?marysville\\ toyota(?!\\w|\\.\\d)"
+      ],
+      [
+        "60-month loan payment",
+        "60\\-month\\ loan(?:(?!new\\ 2026\\ toyota\\ rav4\\ le).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$700/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "60-month loan APR",
+        "60\\-month\\ loan(?:(?!new\\ 2026\\ toyota\\ rav4\\ le).){0,900}?(?:apr|interest rate).{0,18}?7(?:\\.0)?%(?!\\w|\\.\\d)"
+      ],
+      [
+        "60-month loan interest",
+        "60\\-month\\ loan(?:(?!new\\ 2026\\ toyota\\ rav4\\ le).){0,900}?interest.{0,18}?\\$6647(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "60-month loan tax",
+        "60\\-month\\ loan(?:(?!new\\ 2026\\ toyota\\ rav4\\ le).){0,900}?tax.{0,18}?10\\.25%(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Cars.com--3": {
+    "task": "I'm considering a certified Toyota from 2020 or newer with at most 40,000 miles, within 200 miles of ZIP 98101. Find the least expensive match and assess its ownership risk from the listing: report its title, price, mileage, history summary and the certified program's basic warranty, maximum vehicle age and mileage. Include the dealership's Monday hours and sales phone so I can follow up.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=cpo(?:&|$))(?=.*(?:[?&])makes\\[\\]=toyota(?:&|$))(?=.*(?:[?&])mileage_max=40000(?:&|$))(?=.*(?:[?&])year_min=2020(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/ffb78a76\\-dcb7\\-4c49\\-9fed\\-ebf0a56f713a/(?:$|\\?)",
+      "/dealers/5382245/marysville\\-toyota/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Certified 2023 Toyota bZ4X Limited price",
+        "certified\\ 2023\\ toyota\\ bz4x\\ limited(?:(?!marysville\\ toyota).){0,900}?(?:price|cost|asking price).{0,18}?\\$26783(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2023 Toyota bZ4X Limited mileage",
+        "certified\\ 2023\\ toyota\\ bz4x\\ limited(?:(?!marysville\\ toyota).){0,900}?(?:mileage|odometer).{0,18}?21763\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota rating",
+        "marysville\\ toyota(?:(?!certified\\ 2023\\ toyota\\ bz4x\\ limited).){0,900}?(?:rating|rated).{0,18}?4\\.9/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota Monday",
+        "marysville\\ toyota(?:(?!certified\\ 2023\\ toyota\\ bz4x\\ limited).){0,900}?monday.{0,18}?9(?::00)?\\s*am(?:-| to )7(?::00)?\\s*pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota phone",
+        "marysville\\ toyota(?:(?!certified\\ 2023\\ toyota\\ bz4x\\ limited).){0,900}?phone.{0,18}?\\(?360\\)?[ .-]*474[ .-]*4089(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "1 owner"
+      ],
+      [
+        "requested fact 1",
+        "no accidents"
+      ],
+      [
+        "requested fact 2",
+        "clean title"
+      ],
+      [
+        "requested fact 3",
+        "basic warranty.{0,15}12 months.{0,12}12000 miles"
+      ],
+      [
+        "requested fact 4",
+        "eligibility.{0,10}7 years.{0,25}85000 miles"
+      ]
+    ]
+  },
+  "Cars.com--4": {
+    "task": "Help me choose a Toyota dealer within 100 miles of ZIP 98101. Among dealers rated at least four stars, investigate the highest-rated match. Tell me its name, rating, review count and distance, then summarize the three most recent displayed reviews with their authors, dates and ratings. Include its Monday sales hours and new-car phone number for a visit.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "^/dealers/(?=.*(?:[?&])make=Toyota(?:&|$))(?=.*(?:[?&])rating=4(?:&|$))(?=.*(?:[?&])maximum_distance=100(?:&|$))",
+      "/dealers/5382245/marysville\\-toyota/(?:$|\\?)",
+      "/dealers/5382245/marysville\\-toyota/reviews/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Marysville Toyota rating",
+        "marysville\\ toyota(?:(?!(?!)).){0,900}?(?:rating|rated).{0,18}?4\\.9/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota Monday",
+        "marysville\\ toyota(?:(?!(?!)).){0,900}?monday.{0,18}?9(?::00)?\\s*am(?:-| to )7(?::00)?\\s*pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota phone",
+        "marysville\\ toyota(?:(?!(?!)).){0,900}?phone.{0,18}?\\(?360\\)?[ .-]*474[ .-]*4089(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marysville Toyota reviews",
+        "marysville\\ toyota(?:(?!(?!)).){0,900}?(?:reviews|review count).{0,18}?1086(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "distance.{0,10}38 miles"
+      ],
+      [
+        "requested fact 1",
+        "michael nuno.{0,60}5(?:\\.0)?[ /\u2605\u00b7].{0,12}2026-05-19"
+      ],
+      [
+        "requested fact 2",
+        "robert moya.{0,60}5(?:\\.0)?[ /\u2605\u00b7].{0,12}2026-05-17"
+      ],
+      [
+        "requested fact 3",
+        "clyde libolt.{0,60}4(?:\\.0)?[ /\u2605\u00b7].{0,12}2026-05-16"
+      ],
+      [
+        "requested fact 4",
+        "collin|teresa|alondra"
+      ],
+      [
+        "requested fact 5",
+        "earlier|quick"
+      ],
+      [
+        "requested fact 6",
+        "clean|facilities"
+      ]
+    ]
+  },
+  "Cars.com--5": {
+    "task": "I'm putting together a high-end Porsche Bellevue shortlist. Find the dealer through the directory, check its inventory, and save its most expensive car to my garage using bob.c@test.com / TestPass123!. Tell me that car's title, price and mileage, the inventory count, and the dealer's rating and Monday sales hours so I can plan a viewing.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 2,
+            "listing_id": "9d7e7c43-041e-4054-90a1-a0d03563d841",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/dealers/(?=.*(?:[?&])make=Porsche(?:&|$))",
+      "/dealers/158590/porsche\\-bellevue/(?:$|\\?)",
+      "/dealers/158590/porsche\\-bellevue/inventory/(?:$|\\?)",
+      "/vehicledetail/9d7e7c43\\-041e\\-4054\\-90a1\\-a0d03563d841/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2021 Audi RS 6 Avant 4.0T price",
+        "used\\ 2021\\ audi\\ rs\\ 6\\ avant\\ 4\\.0t(?:(?!porsche\\ bellevue).){0,900}?(?:price|cost|asking price).{0,18}?\\$92990(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Audi RS 6 Avant 4.0T mileage",
+        "used\\ 2021\\ audi\\ rs\\ 6\\ avant\\ 4\\.0t(?:(?!porsche\\ bellevue).){0,900}?(?:mileage|odometer).{0,18}?41469\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Audi RS 6 Avant 4.0T dealer",
+        "used\\ 2021\\ audi\\ rs\\ 6\\ avant\\ 4\\.0t(?:(?!porsche\\ bellevue).){0,900}?dealer.{0,18}?porsche\\ bellevue(?!\\w|\\.\\d)"
+      ],
+      [
+        "Porsche Bellevue rating",
+        "porsche\\ bellevue(?:(?!used\\ 2021\\ audi\\ rs\\ 6\\ avant\\ 4\\.0t).){0,900}?(?:rating|rated).{0,18}?4\\.9/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Porsche Bellevue Monday",
+        "porsche\\ bellevue(?:(?!used\\ 2021\\ audi\\ rs\\ 6\\ avant\\ 4\\.0t).){0,900}?monday.{0,18}?9(?::00)?\\s*am(?:-| to )8(?::00)?\\s*pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "inventory.{0,15}8 cars"
+      ]
+    ]
+  },
+  "Cars.com--6": {
+    "task": "Help me choose between the Honda Civic and Toyota Corolla for commuting. Compare their starting prices, horsepower and city/highway MPG, then inspect both model pages for consumer ratings and the Civic's safety rating. Explain the price-versus-performance tradeoff using the displayed figures, distinguishing any missing rating from a zero score.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "/research/compare/honda\\-civic\\-vs\\-toyota\\-corolla/(?:$|\\?)",
+      "/research/honda\\-civic\\-2026/(?:$|\\?)",
+      "/research/toyota\\-corolla\\-2027/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "requested fact 0",
+        "2026 honda civic.{0,35}\\$24695"
+      ],
+      [
+        "requested fact 1",
+        "2026 honda civic.{0,80}150 hp"
+      ],
+      [
+        "requested fact 2",
+        "2026 honda civic.{0,130}32/41"
+      ],
+      [
+        "requested fact 3",
+        "consumer rating.{0,10}4\\.4/5"
+      ],
+      [
+        "requested fact 4",
+        "safety rating.{0,10}5/5"
+      ],
+      [
+        "requested fact 5",
+        "2027 toyota corolla.{0,35}\\$23325"
+      ],
+      [
+        "requested fact 6",
+        "2027 toyota corolla.{0,80}169 hp"
+      ],
+      [
+        "requested fact 7",
+        "2027 toyota corolla.{0,130}32/41"
+      ],
+      [
+        "requested fact 8",
+        "2027 toyota corolla.{0,180}(?:not provided|not listed|unavailable)"
+      ],
+      [
+        "requested fact 9",
+        "corolla.{0,30}(?:cheaper|less expensive)"
+      ],
+      [
+        "requested fact 10",
+        "(?:economy|mpg).{0,15}(?:tied|equal|same)"
+      ]
+    ]
+  },
+  "Cars.com--7": {
+    "task": "We're deciding which of our two cars to sell. Use Instant Cash Offer to estimate a 2018 Honda Civic EX 4-door hatchback with 60,000 miles and a 2019 Toyota RAV4 XLE with 55,000 miles. Both are blue, in ZIP 98101, have one key, an original owner and no payments remaining. Report each vehicle's initial and final estimated ranges, then say which has the higher final range.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "/sell/instant\\-offer/details/(?:$|\\?)",
+      "/sell/instant\\-offer/offer/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "2018 HONDA CIVIC EX 4 DOOR HATCHBACK 1.5L 4 CYL TURBO initial",
+        "2018\\ honda\\ civic\\ ex\\ 4\\ door\\ hatchback\\ 1\\.5l\\ 4\\ cyl\\ turbo(?:(?!2019\\ toyota\\ rav4\\ xle\\ 4\\ door\\ suv\\ 2\\.5l\\ 4\\ cyl).){0,900}?initial.{0,18}?\\$10650\\ \\-\\ \\$13050(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "2018 HONDA CIVIC EX 4 DOOR HATCHBACK 1.5L 4 CYL TURBO final",
+        "2018\\ honda\\ civic\\ ex\\ 4\\ door\\ hatchback\\ 1\\.5l\\ 4\\ cyl\\ turbo(?:(?!2019\\ toyota\\ rav4\\ xle\\ 4\\ door\\ suv\\ 2\\.5l\\ 4\\ cyl).){0,900}?final.{0,18}?\\$10025\\ \\-\\ \\$12425(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "2019 TOYOTA RAV4 XLE 4 DOOR SUV 2.5L 4 CYL initial",
+        "2019\\ toyota\\ rav4\\ xle\\ 4\\ door\\ suv\\ 2\\.5l\\ 4\\ cyl(?:(?!2018\\ honda\\ civic\\ ex\\ 4\\ door\\ hatchback\\ 1\\.5l\\ 4\\ cyl\\ turbo).){0,900}?initial.{0,18}?\\$15350\\ \\-\\ \\$17950(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "2019 TOYOTA RAV4 XLE 4 DOOR SUV 2.5L 4 CYL final",
+        "2019\\ toyota\\ rav4\\ xle\\ 4\\ door\\ suv\\ 2\\.5l\\ 4\\ cyl(?:(?!2018\\ honda\\ civic\\ ex\\ 4\\ door\\ hatchback\\ 1\\.5l\\ 4\\ cyl\\ turbo).){0,900}?final.{0,18}?\\$14775\\ \\-\\ \\$17375(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "(?:toyota )?rav4.{0,30}higher.{0,10}(?:final|estimate|range)"
+      ]
+    ]
+  },
+  "Cars.com--8": {
+    "task": "Help me choose a loan term for a $30,000 car with good credit and $3,000 down. Compare the calculator's 48- and 72-month monthly payments and total interest, using its default taxes and no other credits or fees. Explain the monthly-payment versus total-cost tradeoff. Also show how the 72-month payment changes at a custom 9% APR.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {},
+    "paths": [
+      "/car\\-loan\\-calculator/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "48-month loan at 7.0% APR payment",
+        "48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr(?:(?!72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$720/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "48-month loan at 7.0% APR interest",
+        "48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr(?:(?!72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr).){0,900}?interest.{0,18}?\\$4494(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "72-month loan at 7.0% APR payment",
+        "72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr(?:(?!48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$513/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "72-month loan at 7.0% APR interest",
+        "72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr(?:(?!48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr).){0,900}?interest.{0,18}?\\$6843(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "72-month loan at 9.0% APR payment",
+        "72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr(?:(?!48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$542/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "72-month loan at 9.0% APR interest",
+        "72\\-month\\ loan\\ at\\ 9(?:\\.0)?%\\ apr(?:(?!48\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr|72\\-month\\ loan\\ at\\ 7(?:\\.0)?%\\ apr).){0,900}?interest.{0,18}?\\$8957(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "72.month.{0,25}cheaper per month"
+      ],
+      [
+        "requested fact 1",
+        "48.month.{0,25}(?:less overall|lower total|less interest)"
+      ]
+    ]
+  },
+  "Cars.com--9": {
+    "task": "I want an affordable car from a private owner. Find the two cheapest owner listings under $20,000 within 200 miles of ZIP 98101, compare their prices and mileages, and inspect the cheaper one's exterior color and seller information. Save the cheaper car to my garage using dana.k@test.com / TestPass123! and tell me which car is saved, including any seller information the site does not provide.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 4,
+            "listing_id": "7d9719d7-be0f-4ff2-8f0f-70a280cd475b",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=used(?:&|$))(?=.*(?:[?&])list_price_max=19999(?:&|$))(?=.*(?:[?&])seller_type=private_seller(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/7d9719d7\\-be0f\\-4ff2\\-8f0f\\-70a280cd475b/(?:$|\\?)",
+      "/vehicledetail/f9d51079\\-7577\\-4908\\-8bf8\\-7b9029302bdf/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2013 Nissan Rogue S price",
+        "used\\ 2013\\ nissan\\ rogue\\ s(?:(?!used\\ 2009\\ ford\\ fusion\\ se).){0,900}?(?:price|cost|asking price).{0,18}?\\$2500(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2013 Nissan Rogue S mileage",
+        "used\\ 2013\\ nissan\\ rogue\\ s(?:(?!used\\ 2009\\ ford\\ fusion\\ se).){0,900}?(?:mileage|odometer).{0,18}?187000\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2013 Nissan Rogue S dealer",
+        "used\\ 2013\\ nissan\\ rogue\\ s(?:(?!used\\ 2009\\ ford\\ fusion\\ se).){0,900}?dealer.{0,18}?(?:not (?:listed|provided|shown|available)|unavailable)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2009 Ford Fusion SE price",
+        "used\\ 2009\\ ford\\ fusion\\ se(?:(?!used\\ 2013\\ nissan\\ rogue\\ s).){0,900}?(?:price|cost|asking price).{0,18}?\\$3199(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2009 Ford Fusion SE mileage",
+        "used\\ 2009\\ ford\\ fusion\\ se(?:(?!used\\ 2013\\ nissan\\ rogue\\ s).){0,900}?(?:mileage|odometer).{0,18}?198860\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "(?:exterior )?color.{0,10}gray"
+      ],
+      [
+        "requested fact 1",
+        "seller.{0,30}(?:not provided|not listed|unavailable)"
+      ]
+    ]
+  },
+  "Cars.com--10": {
+    "task": "Help me shortlist a budget electric car. Browse electric listings under $30,000 within 200 miles of ZIP 98101, ordered by price. Compare the cheapest and most expensive matches on that first page by title, price, mileage and dealer. Inspect the cheaper car's payment estimate with APR and two listed features, then save it using alice.j@test.com / TestPass123!.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 1,
+            "listing_id": "62d7f3ec-a98b-4cbe-9883-0bd314bd796b",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])list_price_max=29999(?:&|$))(?=.*(?:[?&])fuel_slugs=electric(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/62d7f3ec\\-a98b\\-4cbe\\-9883\\-0bd314bd796b/(?:$|\\?)",
+      "/vehicledetail/361af1d6\\-5669\\-4843\\-ad54\\-9f597ad57079/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2018 Tesla Model 3 Long Range price",
+        "used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range(?:(?!used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range).){0,900}?(?:price|cost|asking price).{0,18}?\\$19995(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2018 Tesla Model 3 Long Range mileage",
+        "used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range(?:(?!used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range).){0,900}?(?:mileage|odometer).{0,18}?59722\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2018 Tesla Model 3 Long Range dealer",
+        "used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range(?:(?!used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range).){0,900}?dealer.{0,18}?autonation\\ ford\\ bellevue(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2023 Tesla Model 3 Standard Range price",
+        "used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range(?:(?!used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range).){0,900}?(?:price|cost|asking price).{0,18}?\\$29964(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2023 Tesla Model 3 Standard Range mileage",
+        "used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range(?:(?!used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range).){0,900}?(?:mileage|odometer).{0,18}?22732\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2023 Tesla Model 3 Standard Range dealer",
+        "used\\ 2023\\ tesla\\ model\\ 3\\ standard\\ range(?:(?!used\\ 2018\\ tesla\\ model\\ 3\\ long\\ range).){0,900}?dealer.{0,18}?tonkin\\ gladstone\\ hyundai(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "(?:payment|monthly).{0,15}\\$377/(?:mo|month)"
+      ],
+      [
+        "requested fact 1",
+        "7(?:\\.0)?% apr"
+      ],
+      [
+        "requested fact 2",
+        "heated seats"
+      ],
+      [
+        "requested fact 3",
+        "bluetooth"
+      ]
+    ]
+  },
+  "Cars.com--11": {
+    "task": "Find me a used car under $15,000 with at most 80,000 miles within 20 miles of ZIP 98101. Choose the lowest-mileage match, inspect its seller's notes, and save it using carol.d@test.com / TestPass123!. Report its title, price, mileage, dealer, exterior color and payment estimate with APR, plus a short summary of the seller's notes that would help me decide whether to contact the dealer.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 3,
+            "listing_id": "e55c5fe0-ceff-406c-9ee7-4e2d2b263ba4",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=used(?:&|$))(?=.*(?:[?&])list_price_max=14999(?:&|$))(?=.*(?:[?&])mileage_max=80000(?:&|$))(?=.*(?:[?&])maximum_distance=20(?:&|$))",
+      "/vehicledetail/e55c5fe0\\-ceff\\-406c\\-9ee7\\-4e2d2b263ba4/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2017 Nissan Altima 2.5 S price",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?(?:price|cost|asking price).{0,18}?\\$14990(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Nissan Altima 2.5 S mileage",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?(?:mileage|odometer).{0,18}?55758\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Nissan Altima 2.5 S payment",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$283/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Nissan Altima 2.5 S APR",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?(?:apr|interest rate).{0,18}?7(?:\\.0)?%(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Nissan Altima 2.5 S color",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?color.{0,18}?brilliant\\ silver(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Nissan Altima 2.5 S dealer",
+        "used\\ 2017\\ nissan\\ altima\\ 2\\.5\\ s(?:(?!(?!)).){0,900}?dealer.{0,18}?lee\\ johnson\\ mazda\\ of\\ kirkland(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "0 gravity"
+      ],
+      [
+        "requested fact 1",
+        "bluetooth|backup camera"
+      ]
+    ]
+  },
+  "Cars.com--12": {
+    "task": "I'm looking for an inexpensive manual car within 50 miles of ZIP 98101. Find used manual-transmission listings under $25,000 and choose the cheapest. Check its mileage, exterior color, dealer rating and monthly payment with APR before saving it using bob.c@test.com / TestPass123!. Tell me the chosen car's title and price along with those details and confirm it is saved.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 2,
+            "listing_id": "cd095082-28dd-4fa9-9ffb-973809872ce6",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=used(?:&|$))(?=.*(?:[?&])list_price_max=24999(?:&|$))(?=.*(?:[?&])transmission_slugs=manual(?:&|$))(?=.*(?:[?&])maximum_distance=50(?:&|$))",
+      "/vehicledetail/cd095082\\-28dd\\-4fa9\\-9ffb\\-973809872ce6/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S price",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?(?:price|cost|asking price).{0,18}?\\$13748(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S mileage",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?(?:mileage|odometer).{0,18}?84388\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S payment",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$259/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S APR",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?(?:apr|interest rate).{0,18}?7(?:\\.0)?%(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S color",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?color.{0,18}?black(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S dealer",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?dealer.{0,18}?autonation\\ ford\\ bellevue(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2021 Volkswagen Jetta 1.4T S dealer rating",
+        "used\\ 2021\\ volkswagen\\ jetta\\ 1\\.4t\\ s(?:(?!(?!)).){0,900}?dealer\\ rating.{0,18}?4\\.8/5(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Cars.com--13": {
+    "task": "Set up a certified-SUV shortlist for me with a new account (Sam Rivera, sam.cars@test.com, SunnyDay88!). Search certified SUVs within 100 miles of ZIP 98101, sort by lowest price, and save the two cheapest. Save that search as 'Certified SUV shortlist' with daily alerts. Confirm the two cars' titles and prices and the alert settings in my garage.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 5,
+            "listing_id": "b780f009-3533-4c66-bad2-ba863a6d120c",
+            "saved_at": "2026-09-29"
+          },
+          {
+            "id": 12,
+            "user_id": 5,
+            "listing_id": "c7c1b0ee-be77-4834-ab80-df3cebc55ae5",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "saved_searches": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 5,
+            "name": "Certified SUV shortlist",
+            "query_string": {
+              "path": "/shopping/results/",
+              "query": {
+                "stock_type": [
+                  "cpo"
+                ],
+                "body_style_slugs": [
+                  "suv"
+                ],
+                "maximum_distance": [
+                  "100"
+                ],
+                "zip": [
+                  "98101"
+                ],
+                "sort": [
+                  "list_price_asc"
+                ]
+              }
+            },
+            "alert_frequency": "daily",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "sam.cars@test.com",
+            "display_name": "Sam Rivera",
+            "password_hash": {
+              "bcrypt_password": "SunnyDay88!"
+            },
+            "is_benchmark": 0
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=cpo(?:&|$))(?=.*(?:[?&])body_style_slugs=suv(?:&|$))(?=.*(?:[?&])maximum_distance=100(?:&|$))",
+      "/vehicledetail/b780f009\\-3533\\-4c66\\-bad2\\-ba863a6d120c/(?:$|\\?)",
+      "/vehicledetail/c7c1b0ee\\-be77\\-4834\\-ab80\\-df3cebc55ae5/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Certified 2020 Subaru Outback Premium price",
+        "certified\\ 2020\\ subaru\\ outback\\ premium(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select).){0,900}?(?:price|cost|asking price).{0,18}?\\$22364(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2025 Ford Escape ST-Line Select price",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select(?:(?!certified\\ 2020\\ subaru\\ outback\\ premium).){0,900}?(?:price|cost|asking price).{0,18}?\\$22666(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "certified suv shortlist.{0,30}daily"
+      ]
+    ]
+  },
+  "Cars.com--14": {
+    "task": "Help me prepare a trade-in estimate for my 2021 Tesla Model 3 Long Range AWD. Log in as bob.c@test.com / TestPass123! and use Instant Cash Offer with 38,000 miles, ZIP 98101, white exterior, one key, original owner and no payments remaining. Report the initial and final estimated ranges and verify that the completed request appears in my garage with the correct vehicle and mileage.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "offer_requests": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1,
+            "user_id": 2,
+            "vehicle_key": "2021|TESLA|MODEL 3|LONG RANGE AWD SEDAN ELECTRIC",
+            "year": 2021,
+            "make": "TESLA",
+            "model": "MODEL 3",
+            "trim": "LONG RANGE AWD SEDAN ELECTRIC",
+            "mileage": 38000,
+            "zip": "98101",
+            "exterior_color": "White",
+            "keys_count": "1",
+            "original_owner": "Yes",
+            "payments_remaining": "No",
+            "offer_low": 16950,
+            "offer_high": 19650,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/sell/instant\\-offer/details/(?:$|\\?)",
+      "/sell/instant\\-offer/offer/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "2021 TESLA MODEL 3 LONG RANGE AWD SEDAN ELECTRIC initial",
+        "2021\\ tesla\\ model\\ 3\\ long\\ range\\ awd\\ sedan\\ electric(?:(?!(?!)).){0,900}?initial.{0,18}?\\$17500\\ \\-\\ \\$20200(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "2021 TESLA MODEL 3 LONG RANGE AWD SEDAN ELECTRIC final",
+        "2021\\ tesla\\ model\\ 3\\ long\\ range\\ awd\\ sedan\\ electric(?:(?!(?!)).){0,900}?final.{0,18}?\\$16950\\ \\-\\ \\$19650(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "garage.{0,45}tesla.{0,35}38000 miles"
+      ],
+      [
+        "requested fact 1",
+        "98101"
+      ]
+    ]
+  },
+  "Cars.com--15": {
+    "task": "I'm evaluating the certified 2025 Ford Escape ST-Line Select offered in Shorewood, Illinois. Find it through a certified Ford Escape search, inspect its price history and deal analysis, and compare its asking price with the other certified Escape listing. Report both asking prices, the Shorewood car's mileage, badge, good-deal range and dated price changes; explain whether its current price is above or below that range. Save the Shorewood car using dana.k@test.com / TestPass123!.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 4,
+            "listing_id": "2d33ae91-4eaa-4e88-98aa-658bb3281fe5",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])stock_type=cpo(?:&|$))(?=.*(?:[?&])makes\\[\\]=ford(?:&|$))(?=.*(?:[?&])models\\[\\]=ford\\-escape(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/2d33ae91\\-4eaa\\-4e88\\-98aa\\-658bb3281fe5/(?:$|\\?)",
+      "/vehicledetail/c7c1b0ee\\-be77\\-4834\\-ab80\\-df3cebc55ae5/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Certified 2025 Ford Escape ST-Line Select from Ron Tirapelli Ford (Shorewood) price",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ ron\\ tirapelli\\ ford\\ \\(shorewood\\)(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ auburn\\ chevrolet).){0,900}?(?:price|cost|asking price).{0,18}?\\$24546(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2025 Ford Escape ST-Line Select from Ron Tirapelli Ford (Shorewood) mileage",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ ron\\ tirapelli\\ ford\\ \\(shorewood\\)(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ auburn\\ chevrolet).){0,900}?(?:mileage|odometer).{0,18}?50665\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2025 Ford Escape ST-Line Select from Ron Tirapelli Ford (Shorewood) badge",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ ron\\ tirapelli\\ ford\\ \\(shorewood\\)(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ auburn\\ chevrolet).){0,900}?badge.{0,18}?fair\\ deal(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2025 Ford Escape ST-Line Select from Auburn Chevrolet price",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ auburn\\ chevrolet(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ ron\\ tirapelli\\ ford\\ \\(shorewood\\)).){0,900}?(?:price|cost|asking price).{0,18}?\\$22666(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Certified 2025 Ford Escape ST-Line Select from Auburn Chevrolet mileage",
+        "certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ auburn\\ chevrolet(?:(?!certified\\ 2025\\ ford\\ escape\\ st\\-line\\ select\\ from\\ ron\\ tirapelli\\ ford\\ \\(shorewood\\)).){0,900}?(?:mileage|odometer).{0,18}?41242\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "09/18/26.{0,20}\\$200.{0,10}\\$24546"
+      ],
+      [
+        "requested fact 1",
+        "08/31/26.{0,20}listed.{0,10}\\$24746"
+      ],
+      [
+        "requested fact 2",
+        "(?:good.deal range|range).{0,15}\\$21672.{0,10}\\$24104"
+      ],
+      [
+        "requested fact 3",
+        "shorewood.{0,50}above"
+      ],
+      [
+        "requested fact 4",
+        "shorewood.{0,90}more expensive"
+      ]
+    ]
+  },
+  "Cars.com--16": {
+    "task": "I'm considering a used car from Auburn Chevrolet. Find its inventory through the dealer directory's make filter, narrow to used vehicles and compare the cheapest and most expensive by title and price. Inspect the cheaper one's mileage, exterior color and deal badge, then save it using carol.d@test.com / TestPass123!. Include the dealer's Monday hours to help me plan a visit.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 3,
+            "listing_id": "3c922896-8642-4c15-afbb-c5d204c5f66f",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/dealers/(?=.*(?:[?&])make=Chevrolet(?:&|$))",
+      "/dealers/158531/auburn\\-chevrolet/(?:$|\\?)",
+      "/dealers/158531/auburn\\-chevrolet/inventory/(?:$|\\?)",
+      "/vehicledetail/3c922896\\-8642\\-4c15\\-afbb\\-c5d204c5f66f/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2017 Chevrolet Express 2500 Work Van price",
+        "used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van(?:(?!auburn\\ chevrolet).){0,900}?(?:price|cost|asking price).{0,18}?\\$11911(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Chevrolet Express 2500 Work Van mileage",
+        "used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van(?:(?!auburn\\ chevrolet).){0,900}?(?:mileage|odometer).{0,18}?180510\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Chevrolet Express 2500 Work Van color",
+        "used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van(?:(?!auburn\\ chevrolet).){0,900}?color.{0,18}?a\\ summit\\ white(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2017 Chevrolet Express 2500 Work Van badge",
+        "used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van(?:(?!auburn\\ chevrolet).){0,900}?badge.{0,18}?good\\ deal(?!\\w|\\.\\d)"
+      ],
+      [
+        "Auburn Chevrolet rating",
+        "auburn\\ chevrolet(?:(?!used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van).){0,900}?(?:rating|rated).{0,18}?4\\.8/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Auburn Chevrolet Monday",
+        "auburn\\ chevrolet(?:(?!used\\ 2017\\ chevrolet\\ express\\ 2500\\ work\\ van).){0,900}?monday.{0,18}?9(?::00)?\\s*am(?:-| to )8(?::00)?\\s*pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "requested fact 0",
+        "most expensive.{0,100}2025 chevrolet silverado 1500 lt.{0,20}\\$37166"
+      ]
+    ]
+  },
+  "Cars.com--17": {
+    "task": "Help me research an affordable new Honda Civic and keep track of suitable listings. Inspect the 2025 Civic's model page for its starting price, cheapest trim's price, MPG and seats, consumer rating and recommendation percentage, and two good and two bad points. From its listings, set a $30,000 maximum and save the search as 'Civic research' with daily alerts using alice.j@test.com / TestPass123!. Report the research findings and confirm the saved search.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_searches": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "name": "Civic research",
+            "query_string": {
+              "path": "/shopping/results/",
+              "query": {
+                "stock_type": [
+                  "new"
+                ],
+                "list_price_max": [
+                  "30000"
+                ],
+                "models[]": [
+                  "honda-civic"
+                ],
+                "zip": [
+                  "98101"
+                ]
+              }
+            },
+            "alert_frequency": "daily",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/research/honda\\-civic\\-2025/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "requested fact 0",
+        "2025 honda civic.{0,35}\\$24250"
+      ],
+      [
+        "requested fact 1",
+        "lx cvt.{0,20}\\$24250"
+      ],
+      [
+        "requested fact 2",
+        "mpg.{0,10}32/41"
+      ],
+      [
+        "requested fact 3",
+        "seats.{0,10}5"
+      ],
+      [
+        "requested fact 4",
+        "consumer rating.{0,10}5(?:\\.0)?/5"
+      ],
+      [
+        "requested fact 5",
+        "recommendation.{0,10}100%"
+      ],
+      [
+        "requested fact 6",
+        "nimble handling"
+      ],
+      [
+        "requested fact 7",
+        "fuel economy"
+      ],
+      [
+        "requested fact 8",
+        "meager passing power"
+      ],
+      [
+        "requested fact 9",
+        "hybrid.{0,30}more expensive"
+      ],
+      [
+        "requested fact 10",
+        "civic research.{0,90}daily"
+      ]
+    ]
+  },
+  "Cars.com--18": {
+    "task": "Help me shortlist a hybrid under $30,000 within 200 miles of ZIP 98101. Find the cheapest match, inspect its title, price, mileage, payment estimate with APR and dealer, and check its dealership's Monday sales hours. Save the car using alice.j@test.com / TestPass123! and report those details with confirmation that it appears in my garage.",
+    "initial_digest": "760e1d67d74f764fb889b3c07336fa6cc5089d4f2085a28ab9c24d13e63a7040",
+    "state": {
+      "saved_cars": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "user_id": 1,
+            "listing_id": "178f342a-84e9-447d-9f10-8d9f446bdd88",
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/shopping/results/(?=.*(?:[?&])list_price_max=29999(?:&|$))(?=.*(?:[?&])fuel_slugs=hybrid(?:&|$))(?=.*(?:[?&])maximum_distance=200(?:&|$))",
+      "/vehicledetail/178f342a\\-84e9\\-447d\\-9f10\\-8d9f446bdd88/(?:$|\\?)",
+      "/dealers/975798188/kendall_ford_of_marysville/(?:$|\\?)",
+      "/profile/your\\-garage/(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Used 2016 Ford Fusion Hybrid SE price",
+        "used\\ 2016\\ ford\\ fusion\\ hybrid\\ se(?:(?!kendall\\ ford\\ of\\ marysville).){0,900}?(?:price|cost|asking price).{0,18}?\\$9171(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2016 Ford Fusion Hybrid SE mileage",
+        "used\\ 2016\\ ford\\ fusion\\ hybrid\\ se(?:(?!kendall\\ ford\\ of\\ marysville).){0,900}?(?:mileage|odometer).{0,18}?151095\\ miles(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2016 Ford Fusion Hybrid SE payment",
+        "used\\ 2016\\ ford\\ fusion\\ hybrid\\ se(?:(?!kendall\\ ford\\ of\\ marysville).){0,900}?(?:payment|monthly payment|monthly).{0,18}?\\$173/(?:mo|month)(?:\\.00)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2016 Ford Fusion Hybrid SE APR",
+        "used\\ 2016\\ ford\\ fusion\\ hybrid\\ se(?:(?!kendall\\ ford\\ of\\ marysville).){0,900}?(?:apr|interest rate).{0,18}?7(?:\\.0)?%(?!\\w|\\.\\d)"
+      ],
+      [
+        "Used 2016 Ford Fusion Hybrid SE dealer",
+        "used\\ 2016\\ ford\\ fusion\\ hybrid\\ se(?:(?!kendall\\ ford\\ of\\ marysville).){0,900}?dealer.{0,18}?kendall\\ ford\\ of\\ marysville(?!\\w|\\.\\d)"
+      ],
+      [
+        "Kendall Ford of Marysville rating",
+        "kendall\\ ford\\ of\\ marysville(?:(?!used\\ 2016\\ ford\\ fusion\\ hybrid\\ se).){0,900}?(?:rating|rated).{0,18}?4\\.5/5(?!\\w|\\.\\d)"
+      ],
+      [
+        "Kendall Ford of Marysville Monday",
+        "kendall\\ ford\\ of\\ marysville(?:(?!used\\ 2016\\ ford\\ fusion\\ hybrid\\ se).){0,900}?monday.{0,18}?9\\s*am\\ (?:-| to )\\ 8\\s*pm(?!\\w|\\.\\d)"
+      ]
+    ]
+  }
+}

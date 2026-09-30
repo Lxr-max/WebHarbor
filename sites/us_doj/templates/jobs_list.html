@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import date_label, pagination, share, career_sidebar, facet with context %}
+{% block title %}Attorney Vacancies and Volunteer Legal Internships{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li><li><a href="/legal-careers">Legal Careers</a></li><li>Attorney Vacancies and Volunteer Legal Internships</li></ol></nav>{% endblock %}
+{% block content %}
+<div class="container page-layout">
+  <aside class="sidebar">
+    {{ career_sidebar('/legal-careers/vacancies') }}
+    <section class="filters" aria-labelledby="filter-heading"><h2 id="filter-heading">Filters</h2>
+      {{ facet('Filter by Position','position',facets.positions|default(facets.position|default([])),position,'jobs-search') }}
+      {{ facet('Filter by Hiring Organization','organization',facets.organizations|default(facets.organization|default([])),organization,'jobs-search') }}
+      {{ facet('Filter by Practice Area','practice_area',facets.practice_areas|default(facets.practice_area|default([])),practice_area,'jobs-search') }}
+      {{ facet('Filter by State','state',facets.states|default(facets.state|default([])),state,'jobs-search') }}
+      <button class="button filter-apply" type="submit" form="jobs-search">Apply Filters</button>
+    </section>
+  </aside>
+  <div class="page-main">
+    <h1 class="page-title">Attorney Vacancies and Volunteer Legal Internships</h1>{{ share() }}
+    <form action="/legal-careers/vacancies" method="get" id="jobs-search" class="job-search-form" role="search"><div class="field"><label for="job-keyword">Search Vacancies</label><div class="inline-search"><input id="job-keyword" type="search" name="q" value="{{ q|default('') }}" placeholder="Job title or keyword"><button type="submit" class="button">Search</button></div></div></form>
+    <div class="results-toolbar"><p class="result-count" aria-live="polite">{{ total }} Results</p><div class="sort-field"><label for="job-sort">Sort by:</label><select id="job-sort" name="sort_by" form="jobs-search" data-submit-change><option value="changed"{% if sort_by != 'title' %} selected{% endif %}>Posted</option><option value="title"{% if sort_by == 'title' %} selected{% endif %}>Title</option></select><noscript><button form="jobs-search" type="submit">Sort</button></noscript></div></div>
+    {% if q or position or organization or practice_area or state %}<div class="active-filters" aria-label="Active filters">{% if q %}<span>Keyword: {{ q }}</span>{% endif %}{% if position %}<span>Position: {{ position }}</span>{% endif %}{% if organization %}<span>Organization: {{ organization }}</span>{% endif %}{% if practice_area %}<span>Practice Area: {{ practice_area }}</span>{% endif %}{% if state %}<span>State: {{ state }}</span>{% endif %}<a href="/legal-careers/vacancies">Clear all</a></div>{% endif %}
+    {% if items %}<div class="table-scroll"><table class="vacancy-table"><caption class="visually-hidden">Attorney vacancies and volunteer legal internships</caption><thead><tr><th scope="col">Hiring Organization</th><th scope="col">Job Title</th><th scope="col">State</th><th scope="col">Posted / Updated</th><th scope="col">Application Deadline</th></tr></thead><tbody>{% for job in items %}<tr><td>{{ job.organization }}</td><td><a href="{{ job.path }}">{{ job.title }}</a></td><td>{{ job.states|join(', ') if job.states is not string else job.states }}</td><td>{{ date_label(job.updated_date or job.date) }}</td><td>{{ date_label(job.deadline) if job.deadline else 'See Posting' }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><h2>No vacancies found</h2><p>Try another keyword or remove a filter to broaden your search.</p><a href="/legal-careers/vacancies">Reset filters</a></div>{% endif %}
+    {{ pagination(page,pages) }}
+  </div>
+</div>
+{% endblock %}

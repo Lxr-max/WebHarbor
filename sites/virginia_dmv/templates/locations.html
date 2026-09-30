@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}All Locations{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Locations</nav>
+  <div class="page-title"><h1>Find a Location</h1></div>
+  <div class="alert" role="alert">
+    <h2>Scam Alert!</h2>
+    <p>The Virginia DMV is aware of fraudulent text and email messages that are being sent regarding fines and suspensions. DMV will NEVER send text messages or emails about your fines or suspensions, or request you share financial details by text or email.</p>
+  </div>
+  <div class="card">
+    <form method="get" action="{{ url_for('all_locations') }}">
+      <div class="field"><label for="q">Search by office name or city</label>
+        <input id="q" type="text" name="q" value="{{ q }}" placeholder="e.g. Richmond"></div>
+      <label for="type">Office type</label>
+      <select id="type" name="type">
+        <option value="">Any</option>
+        <option value="csc" {% if typ=='csc' %}selected{% endif %}>Customer Service Center</option>
+        <option value="dmv_select" {% if typ=='dmv_select' %}selected{% endif %}>DMV Select</option>
+      </select>
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+  <p>{{ offices|length }} location{{ 's' if offices|length != 1 }} found.</p>
+  <div class="card-grid">
+    {% for office in offices %}
+    <div class="card">
+      <div class="eyebrow">{% if office.office_type == 'csc' %}Customer Service Center{% else %}DMV Select (vehicle only transactions){% endif %}</div>
+      <h3><a href="{{ url_for('office_detail', slug=office.slug) }}">{{ office.name }}</a></h3>
+      <address>{{ office.address }}</address>
+      {% if office.office_type == 'csc' and office.hours_list() %}
+        <h4>Hours</h4>
+        {% for day, time in office.hours_list() %}
+          <p>{{ day }}: {{ time }}</p>
+        {% endfor %}
+      {% endif %}
+      <p><a class="btn btn--secondary" href="{{ url_for('office_detail', slug=office.slug) }}">Location Information</a></p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

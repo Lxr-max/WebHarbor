@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Best Prepaid Phone Plans | Verizon Prepaid{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Verizon Prepaid plans</h1>
+  <p>No contract, no credit check. 3-year price lock guarantee on any phone plan.</p>
+  <p class="promo-banner">Get iPhone 16e for $349.99, plus an additional $100 in $10/mo service credits over 10 months on any Verizon Prepaid Unlimited plan. Offer ends 9/30/26 or while supplies last.</p>
+
+  <div class="grid grid-4 prepaid-grid">
+    {% for p in prepaid %}
+    <div class="plan-card card">
+      <h2>{{ p.name }}</h2>
+      <p class="plan-blurb">{{ p.blurb }}</p>
+      <p class="big-price">${{ p.autopay_monthly }}<span>/mo with Auto Pay</span></p>
+      {% if p.first_month %}<p class="muted">First month for ${{ p.first_month }}/mo</p>{% endif %}
+      <p class="muted">Starting at ${{ p.monthly }}/mo</p>
+      <ul class="feature-list">
+        {% for f in p.features_list() %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+      {% if p.hotspot_gb %}<p class="muted">Mobile Hotspot: {{ p.hotspot_gb }} GB</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <section class="section">
+    <h2>Ways to save</h2>
+    <div class="card">
+      <h3>Auto Pay discount</h3>
+      <p>{{ rules.autopay_rule }}</p>
+    </div>
+    <div class="card">
+      <h3>Loyalty discounts</h3>
+      <p>{{ rules.loyalty_rule }}</p>
+    </div>
+    <div class="card">
+      <h3>Multiline discount</h3>
+      <p>{{ rules.multiline_rule }}</p>
+    </div>
+    <div class="card">
+      <h3>3-year price lock guarantee</h3>
+      <p>{{ rules.price_lock }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Compare plans</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Plan</th><th>Base price</th><th>With Auto Pay</th><th>After 3 months (loyalty)</th><th>After 9 months (loyalty)</th></tr>
+      </thead>
+      <tbody>
+        {% for p in prepaid %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>${{ p.monthly }}/mo</td>
+          <td>${{ p.autopay_monthly }}/mo</td>
+          {% if p.name == 'Talk & Text' %}
+          <td>not eligible (under $45)</td><td>not eligible (under $45)</td>
+          {% else %}
+          <td>${{ '%.2f'|format(p.monthly|float - 5) }}/mo</td>
+          <td>${{ '%.2f'|format(p.monthly|float - 10) }}/mo</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="muted">Auto Pay and loyalty discounts cannot be combined. Plus taxes and fees.</p>
+  </section>
+</section>
+{% endblock %}

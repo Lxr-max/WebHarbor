@@ -1,0 +1,934 @@
+{
+  "USCIS.gov--0": {
+    "task": "I am Alice (alice.j@test.com, password TestPass123!). Help me understand my two pending USCIS cases: compare their My Progress entries with Case Status Online, giving each receipt number, form, current status, latest history date, and processing office. Tell me which case is further along and check the archived published processing range for the first case at its listed office.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/account",
+      "/casestatus",
+      "/processing-times.*form=I-485.*office=WAS"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "src2210123456.{0,25}i-485.{0,30}washington"
+      ],
+      [
+        "claim 2",
+        "actively reviewed.{0,40}august 30.{0,8}2026"
+      ],
+      [
+        "claim 3",
+        "src2210567890.{0,25}i-765.{0,30}washington"
+      ],
+      [
+        "claim 4",
+        "card.{0,15}produced.{0,40}september 18.{0,8}2026"
+      ],
+      [
+        "claim 5",
+        "i-765.{0,25}further"
+      ],
+      [
+        "claim 6",
+        "progress.{0,40}agree"
+      ],
+      [
+        "claim 7",
+        "washington.{0,20}i-485.{0,20}11.{0,5}20 months"
+      ],
+      [
+        "claim 8",
+        "august 29.{0,8}2018"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--1": {
+    "task": "Help me prepare for the interview associated with receipt LIN2210890123. Check Case Status Online for the form, current status, update date, interview date and location, and documents I should bring. Verify the interview office's street address and district using ZIP 60601 in the field-office locator.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/casestatus",
+      "field-offices/search.*zip=60601"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "lin2210890123.{0,20}n-400"
+      ],
+      [
+        "claim 2",
+        "interview was scheduled"
+      ],
+      [
+        "claim 3",
+        "september 20.{0,8}2026"
+      ],
+      [
+        "claim 4",
+        "october 21.{0,8}2026"
+      ],
+      [
+        "claim 5",
+        "101 west ida b\\.? wells"
+      ],
+      [
+        "claim 6",
+        "chicago.{0,8}il.{0,8}60605"
+      ],
+      [
+        "claim 7",
+        "green card"
+      ],
+      [
+        "claim 8",
+        "state id"
+      ],
+      [
+        "claim 9",
+        "re.entry permits"
+      ],
+      [
+        "claim 10",
+        "chi.{0,5}chicago district"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--2": {
+    "task": "Compare the archived published I-485 processing estimates for Chicago, Miami, Houston, and Milwaukee. Report each range, publication date, and service-request date, identify the fastest upper bound, and explain when the site says an applicant can inquire about a delayed case. Include Chicago's two case-category ranges so I know whether the comparison applies to my case.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/processing-times.*form=I-485.*office=CHI",
+      "/processing-times.*form=I-485.*office=MIA",
+      "/processing-times.*form=I-485.*office=HOU",
+      "/processing-times.*form=I-485.*office=MIL"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "chicago.{0,10}13\\.5.{0,5}35\\.5 months.{0,25}november 14.{0,8}2018.{0,30}january 10.{0,8}2017"
+      ],
+      [
+        "claim 2",
+        "miami.{0,10}11\\.5.{0,5}25\\.5 months.{0,25}november 14.{0,8}2018.{0,30}january 2.{0,8}2017"
+      ],
+      [
+        "claim 3",
+        "houston.{0,10}21.{0,5}26\\.5 months.{0,25}september 27.{0,8}2018.{0,30}october 10.{0,8}2016"
+      ],
+      [
+        "claim 4",
+        "milwaukee.{0,10}10\\.5.{0,5}23\\.5 months.{0,25}november 7.{0,8}2018.{0,30}december 8.{0,8}2016"
+      ],
+      [
+        "claim 5",
+        "milwaukee.{0,30}shortest"
+      ],
+      [
+        "claim 6",
+        "employment.{0,20}13\\.5.{0,5}23\\.5"
+      ],
+      [
+        "claim 7",
+        "family.{0,20}13\\.5.{0,5}35\\.5"
+      ],
+      [
+        "claim 8",
+        "before.{0,30}service.request date.{0,30}inquiry"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--3": {
+    "task": "Compare archived N-400 processing estimates for Seattle, Chicago, and Los Angeles. Give each range and publication date and identify the fastest upper bound. For Seattle, also report the case category, service-request date, and the tool's guidance on when an inquiry is appropriate. For a Seattle applicant preparing an inquiry, identify the field office serving ZIP 98101 and its street address.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/processing-times.*form=N-400.*office=SEA",
+      "/processing-times.*form=N-400.*office=CHI",
+      "/processing-times.*form=N-400.*office=LOS",
+      "field-offices/search.*98101"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "seattle.{0,10}15\\.5.{0,5}21 months.{0,25}april 5.{0,8}2019"
+      ],
+      [
+        "claim 2",
+        "chicago.{0,10}9.{0,5}18 months.{0,25}april 5.{0,8}2019"
+      ],
+      [
+        "claim 3",
+        "los angeles.{0,10}10\\.5.{0,5}17 months.{0,25}december 18.{0,8}2018"
+      ],
+      [
+        "claim 4",
+        "los angeles.{0,30}shortest"
+      ],
+      [
+        "claim 5",
+        "160a"
+      ],
+      [
+        "claim 6",
+        "august 3.{0,8}2017"
+      ],
+      [
+        "claim 7",
+        "before.{0,30}allows an inquiry"
+      ],
+      [
+        "claim 8",
+        "98101"
+      ],
+      [
+        "claim 9",
+        "12500 tukwila international boulevard"
+      ],
+      [
+        "claim 10",
+        "98168"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--4": {
+    "task": "I have a pending I-485 and need advance parole for travel. Find the applicable travel-document form in All Forms, check its edition and downloadable documents, and use its fee calculator to distinguish the pending-I-485 advance-parole paper and online fees from the reentry-permit fee. Explain which option matches my situation and whether the reentry-permit fee can be waived.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/i-131",
+      "/feecalculator.*form=99067",
+      "/feecalculator.*form=99064"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "i-131"
+      ],
+      [
+        "claim 2",
+        "january 20.{0,8}2025|01/20/25"
+      ],
+      [
+        "claim 3",
+        "form i-131.{0,10}(?:and )?instructions"
+      ],
+      [
+        "claim 4",
+        "advance parole.{0,45}\\$?630.{0,10}paper.{0,12}\\$?580.{0,10}online"
+      ],
+      [
+        "claim 5",
+        "reentry permit.{0,20}\\$?630"
+      ],
+      [
+        "claim 6",
+        "(?:not eligible|ineligible).{0,15}fee waiver"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--5": {
+    "task": "I am preparing an I-485 application with a child under 14 filing with a parent. Check the current I-485 edition and downloadable documents and compare the general and child filing fees. Follow the related immigration medical-examination form and report its edition, downloadable documents, and filing fee so I can prepare both parts of the packet.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/i-485",
+      "/i-693",
+      "/feecalculator.*form=97307",
+      "/feecalculator.*form=97286"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "i-485.{0,25}september 18.{0,8}2026|i-485.{0,25}09/18/26"
+      ],
+      [
+        "claim 2",
+        "form.{0,10}(?:and )?its instructions"
+      ],
+      [
+        "claim 3",
+        "general.{0,25}\\$?1440.{0,15}paper.{0,15}\\$?1390.{0,12}online"
+      ],
+      [
+        "claim 4",
+        "child.{0,65}\\$?950.{0,12}paper.{0,15}\\$?900.{0,12}online"
+      ],
+      [
+        "claim 5",
+        "i-693.{0,30}\\$?0 filing fee"
+      ],
+      [
+        "claim 6",
+        "january 20.{0,8}2025"
+      ],
+      [
+        "claim 7",
+        "form i-693.{0,10}(?:and )?instructions"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--6": {
+    "task": "Help me understand the cost of applying for naturalization on a low income. Use the N-400 fee calculator and related fee-waiver and poverty-guideline pages to distinguish the standard fee, reduced fee, and full waiver. Explain the income thresholds, two qualifying means-tested benefits, the form used to request a waiver, and the listed 150-percent poverty threshold for a household of four in the 48 contiguous states.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/feecalculator.*form=97352",
+      "/additional-information-on-filing-a-fee-waiver",
+      "/poverty-guidelines"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "n-400.{0,30}\\$?760.{0,12}paper.{0,15}\\$?710.{0,12}online"
+      ],
+      [
+        "claim 2",
+        "reduced fee.{0,15}\\$?380.{0,10}paper"
+      ],
+      [
+        "claim 3",
+        "400%"
+      ],
+      [
+        "claim 4",
+        "(?:waiver|income).{0,120}150%"
+      ],
+      [
+        "claim 5",
+        "i-912"
+      ],
+      [
+        "claim 6",
+        "medicaid"
+      ],
+      [
+        "claim 7",
+        "(?:supplemental nutrition assistance|snap)"
+      ],
+      [
+        "claim 8",
+        "household.of.4.{0,40}\\$?49500"
+      ],
+      [
+        "claim 9",
+        "(?:extreme financial hardship|means.tested benefit)"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--7": {
+    "task": "I need an immigration medical examination near ZIP 22202 with an Arabic-speaking civil surgeon. Use the locator to find the closest eligible practice and report its name, address, doctor, phone, languages, and distance, along with the number of Arabic-speaking results. Check the designated-civil-surgeon guidance and its vaccination requirements so I know which initial diseases the examination covers.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "find-a-civil-surgeon.*zip=22202.*language=Arabic",
+      "/vaccination-requirements"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "5 arabic.speaking"
+      ],
+      [
+        "claim 2",
+        "van dorn pediatrics"
+      ],
+      [
+        "claim 3",
+        "2500 n(?:orth)? van dorn.{0,30}102"
+      ],
+      [
+        "claim 4",
+        "alexandria.{0,8}va.{0,8}22302"
+      ],
+      [
+        "claim 5",
+        "2\\.8 miles"
+      ],
+      [
+        "claim 6",
+        "mona hanna"
+      ],
+      [
+        "claim 7",
+        "703.?933.?0555"
+      ],
+      [
+        "claim 8",
+        "mumps.{0,12}measles.{0,12}rubella.{0,12}polio"
+      ],
+      [
+        "claim 9",
+        "tetanus.{0,25}diphtheria"
+      ],
+      [
+        "claim 10",
+        "pertussis"
+      ],
+      [
+        "claim 11",
+        "haemophilus influenzae"
+      ],
+      [
+        "claim 12",
+        "hepatitis b"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--8": {
+    "task": "I need a female civil surgeon near ZIP 60601. Search the locator, note the total result count, and filter to female doctors. Compare the first two eligible practices, giving their names, doctors, addresses, phone numbers, and distances. Tell me how many eligible results remain and which practice is closer (or whether they tie).",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "find-a-civil-surgeon.*zip=60601.*gender=Female"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "60601.{0,20}10 results"
+      ],
+      [
+        "claim 2",
+        "female.{0,20}5"
+      ],
+      [
+        "claim 3",
+        "physicians immediate care.{0,30}600 w(?:est)? adams"
+      ],
+      [
+        "claim 4",
+        "arti chawla.{0,10}224.?220.?5940.{0,10}1\\.0 mile"
+      ],
+      [
+        "claim 5",
+        "concentra.{0,35}1030 west chicago"
+      ],
+      [
+        "claim 6",
+        "cynthia ross.{0,10}312.?243.?1574.{0,10}1\\.7 mile"
+      ],
+      [
+        "claim 7",
+        "physicians immediate care.{0,15}closer"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--9": {
+    "task": "I am comparing naturalization processing in Chicago and Milwaukee. Locate the offices serving ZIPs 60601 and 53201 and report their names, addresses, and service centers. Check each office's archived N-400 processing range and publication date, then explain whether they share a service center and which office has the shorter upper bound.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "field-offices/search.*zip=60601",
+      "field-offices/search.*zip=53201",
+      "/processing-times.*office=CHI",
+      "/processing-times.*office=MIL"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "60601.{0,20}chicago.{0,15}101 west ida b\\.? wells"
+      ],
+      [
+        "claim 2",
+        "53201.{0,20}milwaukee.{0,15}310 w(?:est)? wisconsin.{0,20}850w"
+      ],
+      [
+        "claim 3",
+        "both.{0,30}nsc"
+      ],
+      [
+        "claim 4",
+        "chicago.{0,30}9.{0,5}18 months.{0,25}april 5.{0,8}2019"
+      ],
+      [
+        "claim 5",
+        "milwaukee.{0,30}8.{0,5}19\\.5 months.{0,25}march 19.{0,8}2019"
+      ],
+      [
+        "claim 6",
+        "chicago.{0,25}shorter"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--10": {
+    "task": "I live in Houston, ZIP 77002, and need to understand the progress of cases MSC2210112233 and YSC2210667788. Check each case's form and status, identify my local field office and address, and use the fee calculator to explain the paper and online fees for replacing the permanent-resident card involved in the first case.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/casestatus",
+      "field-offices/search.*zip=77002",
+      "/feecalculator.*form=97259"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "msc2210112233.{0,15}i-90.{0,30}card is being produced"
+      ],
+      [
+        "claim 2",
+        "ysc2210667788.{0,15}i-131.{0,30}case was received"
+      ],
+      [
+        "claim 3",
+        "houston field office.{0,15}810 gears road.{0,15}100"
+      ],
+      [
+        "claim 4",
+        "77067"
+      ],
+      [
+        "claim 5",
+        "i-90.{0,50}\\$?465.{0,12}paper.{0,15}\\$?415.{0,12}online"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--11": {
+    "task": "Help me compare the latest H-2B cap notices for the first half of FY 2027 and second half of FY 2026. Find both alerts and report their publication dates, final receipt dates, requested employment-start cutoffs, and how later petitions are handled. Explain which filing period each alert covers.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/uscis-reaches-h-2b-cap-for-first-half-of-fy-2027",
+      "/uscis-reaches-h-2b-cap-for-second-half-of-fy-2026"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "first.half.{0,10}2027.{0,40}september 11.{0,8}2026"
+      ],
+      [
+        "claim 2",
+        "receipt date.{0,12}september 4.{0,8}2026"
+      ],
+      [
+        "claim 3",
+        "before april 1.{0,8}2027"
+      ],
+      [
+        "claim 4",
+        "second.half.{0,10}2026.{0,40}march 20.{0,8}2026"
+      ],
+      [
+        "claim 5",
+        "receipt date.{0,12}march 10.{0,8}2026"
+      ],
+      [
+        "claim 6",
+        "on or after april 1.{0,20}before october 1.{0,8}2026"
+      ],
+      [
+        "claim 7",
+        "(?:later|late).{0,65}reject"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--12": {
+    "task": "Prepare a brief comparison of the same-day USCIS releases about the Bosnian prisoner abuser and two Chinese aliens indicted on naturalization and firearms charges. Find each release in the newsroom and report the publication date and announcing city, the defendants and allegations, and the investigating agencies. Make clear that these are charges and identify any maximum potential prison terms stated.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/bosnian-prisoner-abuser",
+      "/chinese-aliens-indicted"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "september 22.{0,8}2026"
+      ],
+      [
+        "claim 2",
+        "charges.{0,8}not convictions|indictments"
+      ],
+      [
+        "claim 3",
+        "boise.{0,8}idaho"
+      ],
+      [
+        "claim 4",
+        "miran kostic"
+      ],
+      [
+        "claim 5",
+        "conceal.{0,20}prisoner abuse"
+      ],
+      [
+        "claim 6",
+        "naturalization fraud.{0,25}10 years"
+      ],
+      [
+        "claim 7",
+        "false statements.{0,35}5 years"
+      ],
+      [
+        "claim 8",
+        "ice.{0,10}homeland security investigations.{0,15}fbi"
+      ],
+      [
+        "claim 9",
+        "st\\.? louis"
+      ],
+      [
+        "claim 10",
+        "biqi.{0,15}huang"
+      ],
+      [
+        "claim 11",
+        "wentian du"
+      ],
+      [
+        "claim 12",
+        "huang.{0,50}false statement.{0,90}firearm"
+      ],
+      [
+        "claim 13",
+        "du.{0,40}alien in possession"
+      ],
+      [
+        "claim 14",
+        "firearm.{0,20}15 years"
+      ],
+      [
+        "claim 15",
+        "fbi.{0,110}air force office of special investigations.{0,15}uscis"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--13": {
+    "task": "Run the Naturalization Eligibility Tool for a person whose parents were both U.S. citizens when they were born. Answer the first question accordingly and report the outcome headline and the full explanation the tool gives, including the other form it says the person may need to file instead of the N-400. Then start over and answer for a 35-year-old with no U.S.-citizen parent, no armed forces service, no lawful permanent resident status, no U.S.-citizen spouse, and no U.S. national status. Report that outcome and the key difference between the two.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/naturalization-eligibility-tool"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "may already be a u\\.?s\\.? citizen"
+      ],
+      [
+        "claim 2",
+        "n-600"
+      ],
+      [
+        "claim 3",
+        "certificate of citizenship"
+      ],
+      [
+        "claim 4",
+        "born abroad.{0,30}parent"
+      ],
+      [
+        "claim 5",
+        "automatically after birth"
+      ],
+      [
+        "claim 6",
+        "may not be eligible.{0,30}naturalization"
+      ],
+      [
+        "claim 7",
+        "potential existing citizenship"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--14": {
+    "task": "Run the Naturalization Eligibility Tool for a 35-year-old lawful permanent resident: no U.S.-citizen parents, not a member of the armed forces, LPR status not obtained under VAWA, an LPR since before December 27, 2021, no trips outside the U.S. in the past 5 years, and no move in the past 3 months. Report how many questions the tool asks and the outcome's explanation sentence.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/naturalization-eligibility-tool"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "8 questions"
+      ],
+      [
+        "claim 2",
+        "may be eligible.{0,25}naturalization"
+      ],
+      [
+        "claim 3",
+        "lawful permanent resident.{0,25}5 years"
+      ],
+      [
+        "claim 4",
+        "good moral character"
+      ],
+      [
+        "claim 5",
+        "english and civics"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--15": {
+    "task": "Help me understand the immigration terminology involved in applying for adjustment of status and traveling while it is pending. Find the glossary entries for Adjustment of Status and Advance Parole and explain each in plain language. Use the related glossary results to distinguish adjustment from admission and explain why advance parole does not guarantee admission.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/tools/glossary"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "adjustment of status.{0,65}(?:permanent resident|green card).{0,60}united states"
+      ],
+      [
+        "claim 2",
+        "without returning home|without.{0,20}home country"
+      ],
+      [
+        "claim 3",
+        "advance parole.{0,60}united states.{0,35}visa"
+      ],
+      [
+        "claim 4",
+        "does not replace.{0,10}passport"
+      ],
+      [
+        "claim 5",
+        "before departure"
+      ],
+      [
+        "claim 6",
+        "admission.{0,20}lawful entry.{0,30}inspection"
+      ],
+      [
+        "claim 7",
+        "parole.{0,25}not.{0,25}admission"
+      ]
+    ],
+    "state": {}
+  },
+  "USCIS.gov--16": {
+    "task": "Log in as carol.d@test.com (password TestPass123!) and request an ADIT Stamp appointment using ZIP code 02108. Book any available slot, then report the office name, the appointment date and time you booked, and the confirmation number. Finish by looking the appointment up through the appointment tool with that confirmation number and ZIP code, and report the status shown.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/appointment/confirmed",
+      "/appointment/view"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "adit stamp"
+      ],
+      [
+        "claim 2",
+        "boston"
+      ],
+      [
+        "claim 3",
+        "scheduled"
+      ]
+    ],
+    "state": {
+      "appointments": {
+        "added": [
+          {
+            "id": 3,
+            "user_id": 3,
+            "reason": "ADIT Stamp",
+            "reason_detail": {
+              "regex": "[\\s\\S]*"
+            },
+            "office_designation": "BOS",
+            "office_name": "Boston",
+            "appt_date": {
+              "regex": "2026-10-\\d\\d"
+            },
+            "appt_time": {
+              "regex": "\\d\\d:\\d\\d [AP]M"
+            },
+            "confirmation": {
+              "regex": "USC(?:BOS|HOU)\\d{10}(?:-\\d+)?"
+            },
+            "status": "Scheduled",
+            "booking_zip": "02108"
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "appointment"
+      }
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_date"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "USCIS.gov--17": {
+    "task": "Log in as dana.k@test.com (password TestPass123!). From your account dashboard, report the service type, office, date, and time of your existing appointment. Cancel it from the dashboard, then request a replacement Emergency Advance Parole appointment using ZIP code 77002, booking any available slot. Report the new appointment's confirmation number, date, and time. Finally, look up both appointments through the appointment tool's view flow and report the status each one shows.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/account",
+      "/appointment/confirmed",
+      "/appointment/view"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "emergency advance parole"
+      ],
+      [
+        "claim 2",
+        "houston"
+      ],
+      [
+        "claim 3",
+        "old.{0,25}canceled"
+      ],
+      [
+        "claim 4",
+        "(?:new|replacement).{0,25}scheduled"
+      ]
+    ],
+    "state": {
+      "appointments": {
+        "added": [
+          {
+            "id": 3,
+            "user_id": 4,
+            "reason": "Emergency Advance Parole (EAP)",
+            "reason_detail": {
+              "regex": "[\\s\\S]*"
+            },
+            "office_designation": "HOU",
+            "office_name": "Houston",
+            "appt_date": {
+              "regex": "2026-10-\\d\\d"
+            },
+            "appt_time": {
+              "regex": "\\d\\d:\\d\\d [AP]M"
+            },
+            "confirmation": {
+              "regex": "USC(?:BOS|HOU)\\d{10}(?:-\\d+)?"
+            },
+            "status": "Scheduled",
+            "booking_zip": "77002"
+          }
+        ],
+        "removed": [],
+        "updated": {
+          "[2]": {
+            "status": "Canceled"
+          }
+        }
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "appointment"
+      }
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_date"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "USCIS.gov--18": {
+    "task": "Log in as bob.c@test.com (password TestPass123!) and update the account's mailing address to 500 W Madison St, Chicago, IL 60661. Confirm the new address appears in your profile. Then read the Form AR-11 description in the All Forms catalog and report how many days aliens must report a change of address to USCIS after moving, and which groups the description says are exempt.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/account/address",
+      "/account",
+      "/forms"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "500 w(?:est)? madison st"
+      ],
+      [
+        "claim 2",
+        "chicago.{0,8}il.{0,8}60661"
+      ],
+      [
+        "claim 3",
+        "10 days"
+      ],
+      [
+        "claim 4",
+        "a and g"
+      ],
+      [
+        "claim 5",
+        "visa.waiver"
+      ]
+    ],
+    "state": {
+      "users": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[2]": {
+            "street": "500 W Madison St",
+            "zip": "60661"
+          }
+        }
+      }
+    }
+  },
+  "USCIS.gov--19": {
+    "task": "I have an I-485 filed after April 1, 2024 and am preparing to apply for employment authorization. Check the I-765 edition and downloadable documents, compare the general paper and online fees with the pending-I-485 fee, and look up the National Benefits Center's 147-C9 processing range and publication date.",
+    "initial_digest": "2dfb4bdd99a1a46c0fc90630f42775079707dce6f4aa6e8813c6b614a64603b7",
+    "paths": [
+      "/i-765",
+      "/feecalculator.*form=97312",
+      "/processing-times.*form=I-765.*office=NBC"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "i-765.{0,25}august 21.{0,8}2025"
+      ],
+      [
+        "claim 2",
+        "form i-765"
+      ],
+      [
+        "claim 3",
+        "instructions"
+      ],
+      [
+        "claim 4",
+        "worksheet"
+      ],
+      [
+        "claim 5",
+        "general.{0,25}\\$?520.{0,12}paper.{0,15}\\$?470.{0,12}online"
+      ],
+      [
+        "claim 6",
+        "pending.{0,80}\\$?260.{0,25}(?:either|both)"
+      ],
+      [
+        "claim 7",
+        "national benefits center.{0,25}147-c9.{0,25}4.{0,5}6 months.{0,25}may 31.{0,8}2018"
+      ]
+    ],
+    "state": {}
+  }
+}

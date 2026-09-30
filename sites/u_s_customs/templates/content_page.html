@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › {{ page.nav }} › {{ page.title }}</div>
+<h1 class="page-title">{{ page.title }}</h1>
+{% if page.last_modified %}<p class="note">Last Modified: {{ page.last_modified }}</p>{% endif %}
+{% if page.lines %}
+<div class="content-lines">
+  {% if page.lines[0] == page.title %}{% set lines = page.lines[1:] %}{% else %}{% set lines = page.lines %}{% endif %}
+  {% for line in lines %}<p>{{ line }}</p>{% endfor %}
+</div>
+{% endif %}
+{% if child_nav %}
+<section aria-label="In this section">
+  <h2>In this section</h2>
+  <ul>
+    {% for route, label in child_nav %}<li><a href="{{ route }}">{{ label }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if countries %}
+<section aria-label="Visa Waiver Program countries">
+  <h2>Visa Waiver Program Countries ({{ countries|length }})</h2>
+  <p>Travelers from the following countries may apply for admission under the Visa Waiver Program:</p>
+  <ul>
+    {% for c in countries %}<li style="display:inline-block; min-width:180px;">{{ c.name }}</li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if children %}
+<section aria-label="Priority trade issues">
+  <h2>Priority Trade Issues</h2>
+  <ul>
+    {% for route, label in children %}<li><a href="{{ route }}">{{ label }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if related_links %}
+<section aria-label="Related links">
+  <h2>Related Links</h2>
+  <ul>
+    {% for l in related_links %}<li><a href="{{ l.url }}">{{ l.label }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if page.docs %}
+<section aria-label="Documents">
+  <h2>Documents</h2>
+  <ul>
+    {% for d in page.docs %}<li><a href="{{ d.url }}" rel="noopener">{{ d.label }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

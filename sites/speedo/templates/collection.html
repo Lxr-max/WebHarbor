@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block title %}{{ c.name }} | Speedo{% endblock %}
+{% block content %}
+<nav class="breadcrumbs page-width" aria-label="Breadcrumb">
+  <a href="/">Home</a> &rsaquo; <span>{{ c.name }}</span>
+</nav>
+<div class="page-width collection-layout">
+  <aside class="facets" aria-label="Filters">
+    <form method="get" action="/collections/{{ c.slug }}" id="facet-form">
+      {% if request.args.get('sort_by') %}<input type="hidden" name="sort_by" value="{{ request.args.get('sort_by') }}">{% endif %}
+      {% for f in facets %}
+      <details class="facet-group" {% if f.key == 'size' or f.key == 'price' %}open{% endif %}>
+        <summary class="facet-summary">{{ f.name }}</summary>
+        <div class="facet-options">
+          {% if f.type == 'range' %}
+          <div class="facet-price">
+            <input type="number" name="price_min" placeholder="From" min="0" step="0.01" value="{{ active.get('price_min','') }}" aria-label="Minimum price">
+            <input type="number" name="price_max" placeholder="To" min="0" step="0.01" value="{{ active.get('price_max','') }}" aria-label="Maximum price">
+            <button type="submit" class="link-btn">Apply</button>
+          </div>
+          {% elif f.type == 'swatch' %}
+          {% for value, count in f.options %}
+          <div class="facet-option {% if active.get('colour') == value %}active{% endif %}">
+            <a href="{{ url_for_page(1, colour=value if active.get('colour') != value else None) }}">
+              <span class="swatch" style="background: {{ value | colour_css }};"></span>
+              <span>{{ value }} <span class="count">({{ count }})</span></span>
+            </a>
+          </div>
+          {% endfor %}
+          {% else %}
+          {% for value, count in f.options %}
+          <div class="facet-option {% if active.get(f.key) == value %}active{% endif %}">
+            <a href="{{ url_for_page(1, **{f.key: value if active.get(f.key) != value else None}) }}">
+              <span>{{ value }} <span class="count">({{ count }})</span></span>
+            </a>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </form>
+  </aside>
+  <section>
+    <div class="collection-head">
+      <div>
+        <h1 class="collection-title">{{ c.name }}</h1>
+        <div class="product-count">{{ total }} products</div>
+      </div>
+      <form method="get" class="sort-form" action="/collections/{{ c.slug }}">
+        {% for k, v in request.args.items() %}
+          {% if k not in ('sort_by', 'page') and v %}<input type="hidden" name="{{ k }}" value="{{ v }}">{% endif %}
+        {% endfor %}
+        <label for="sort_by">Sort by</label>
+        <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+          {% for key, label in sort_options %}
+          <option value="{{ key }}" {% if sort == key %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+    {% if active %}
+    <div class="active-filters">
+      {% for k, v in active.items() %}
+      <span class="active-filter">{{ {'size':'Size','colour':'Colour','category':'Category','back_shape':'Back Shape','fabric':'Fabric','activity':'Activity','lens_type':'Lens Type','price_min':'Min price','price_max':'Max price'}.get(k,k) }}: {{ v }}
+        <a href="{{ url_for_page(1, **{k: None}) }}" aria-label="Remove filter">&times;</a>
+      </span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if cards %}
+    <div class="product-grid">
+      {% for c in cards %}{{ card(c) }}{% endfor %}
+    </div>
+    <div class="pagination">
+      {% if page > 1 %}<a href="{{ url_for_page(page - 1) }}" aria-label="Previous page">&lsaquo;</a>{% endif %}
+      {% for p in range(1, pages + 1) %}
+        {% if p == page %}<span class="current">{{ p }}</span>
+        {% elif p <= 2 or p > pages - 2 or (p - page)|abs <= 2 %}<a href="{{ url_for_page(p) }}">{{ p }}</a>
+        {% elif p == 3 or p == pages - 2 %}<span>&hellip;</span>{% endif %}
+      {% endfor %}
+      {% if page < pages %}<a href="{{ url_for_page(page + 1) }}" aria-label="Next page">&rsaquo;</a>{% endif %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <h2>No products found</h2>
+      <p>Try removing some filters.</p>
+      <a class="btn btn-secondary" href="/collections/{{ c.slug }}">Clear all filters</a>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

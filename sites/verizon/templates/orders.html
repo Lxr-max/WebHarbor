@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Orders — My Verizon{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Your orders</h1>
+  {% if orders %}
+  <table class="data-table">
+    <thead><tr><th>Order</th><th>Placed</th><th>Status</th><th>Delivery</th><th>Monthly total</th></tr></thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td><a href="{{ url_for('account_order_detail', confirmation=o.confirmation) }}">{{ o.confirmation }}</a></td>
+        <td>{{ o.placed_at }}</td>
+        <td>{{ o.status }}</td>
+        <td>{{ o.delivery_by }}</td>
+        <td>${{ o.total_monthly }}/mo</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No orders yet. <a href="{{ url_for('smartphones') }}">Shop smartphones</a>.</p>
+  {% endif %}
+</section>
+{% endblock %}

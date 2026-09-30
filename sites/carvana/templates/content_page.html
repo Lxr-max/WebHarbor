@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} | Carvana{% endblock %}
+{% block body %}
+<div class="content-page">
+  <h1>{{ page.title }}</h1>
+  {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+  {% for section in page.sections %}
+  <section class="content-section">
+    {% if section.heading %}<h2>{{ section.heading }}</h2>{% endif %}
+    {% if section.paragraphs %}
+      {% for p in section.paragraphs %}<p>{{ p }}</p>{% endfor %}
+    {% endif %}
+    {% if section.bullets %}
+    <ul>
+      {% for b in section.bullets %}<li>{{ b }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if section.faq %}
+    <dl class="faq-list">
+      {% for q, a in section.faq %}
+      <dt>{{ q }}</dt><dd>{{ a }}</dd>
+      {% endfor %}
+    </dl>
+    {% endif %}
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

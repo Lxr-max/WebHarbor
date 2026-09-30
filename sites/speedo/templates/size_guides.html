@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Size Guides | Find Your Perfect Fit with Speedo | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <div class="content-page">
+    <h1>Speedo Buyers Guide</h1>
+    <p style="color:#555;margin-bottom:20px;">Swimwear that fits correctly performs better and lasts longer. This guide explains how to measure yourself and find your size across our ranges.</p>
+
+    <div class="content-block">
+      <h2>Fit Isn't Just Comfort - It's Performance</h2>
+      <p>A swimsuit that's too loose creates drag in the water. One that's too tight restricts your stroke. Getting the right fit matters at every level of swimming.</p>
+    </div>
+
+    <div class="info-cols">
+      <div class="info-card">
+        <h3>Recreational Swim</h3>
+        <p>Fits closer than a regular garment but allows freedom of movement. Designed for comfort across a full range of motion.</p>
+      </div>
+      <div class="info-card">
+        <h3>Training &amp; Fitness</h3>
+        <p>A snug, supportive fit that stays in place during intense movement. Expect it to feel firm when dry &mdash; it eases in the water.</p>
+      </div>
+      <div class="info-card">
+        <h3>Racing &amp; Fastskin</h3>
+        <p>Engineered compression garments with their own dedicated sizing system. Deliberately tight &mdash; this is performance fit.</p>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>How to Measure Yourself</h2>
+      <p>Use a soft tape measure and take your measurements over bare skin or close-fitting underwear. Don't pull the tape tight &mdash; it should sit snug against the body without digging in.</p>
+    </div>
+
+    {% for key, guide in guides.items() %}
+    <div class="content-block">
+      <h2>{{ guide.title }}</h2>
+      {% for table in guide.tables %}
+      <h3>{{ table.title }}</h3>
+      <table class="fee-table">
+        <tr>{% for h in table.headers %}<th>{{ h }}</th>{% endfor %}</tr>
+        {% for row in table.rows %}
+        <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </table>
+      {% endfor %}
+      {% for note in guide.notes %}
+      <p style="font-size:13px;color:#666;">{{ note }}</p>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="content-block">
+      <h2>Does It Fit Correctly?</h2>
+      <p>New swimwear &mdash; especially training suits &mdash; can feel snug on first wear. Use these checks to tell the difference between performance fit and the wrong size.</p>
+      <div class="two-col">
+        <div class="info-card">
+          <h3>&#10003; Fits Well</h3>
+          <p>Sits flat against the body without gaps at the chest, back, or legs. Straps stay in place on your shoulders without slipping or digging in. Leg openings lie smoothly against the skin. You can complete a full arm rotation without the suit pulling. Feels firm when dry &mdash; this is normal and will ease slightly in water.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#10007; Wrong Size</h3>
+          <p>Fabric puckers or bunches anywhere across the chest, back, or seat. Straps fall off your shoulders or leave visible marks within minutes. Leg openings are so tight they restrict circulation or leave deep marks. You can't lift both arms above your head without the suit riding up. Significant gaps at the chest or back that let water in.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Care &amp; Longevity</h2>
+      <p>Chlorine and UV are hard on swimwear fabrics. The right care routine significantly extends the life of your suit.</p>
+      <ul style="margin:10px 0 12px 22px;color:#333;">
+        <li style="margin:6px 0;"><strong>Rinse Immediately</strong> &mdash; Rinse your suit in cold, clean water as soon as you leave the pool or sea.</li>
+        <li style="margin:6px 0;"><strong>Hand Wash Only</strong> &mdash; Machine washing breaks down Lycra fibres and shortens suit life.</li>
+        <li style="margin:6px 0;"><strong>Dry Flat in Shade</strong> &mdash; Never wring your suit; lay flat to dry away from direct sunlight.</li>
+        <li style="margin:6px 0;"><strong>Avoid Heat</strong> &mdash; Don't tumble dry, iron, or leave your suit on hot pool surfaces.</li>
+        <li style="margin:6px 0;"><strong>Rotate Suits</strong> &mdash; If you swim regularly, rotating between two suits gives each one time to recover its shape.</li>
+        <li style="margin:6px 0;"><strong>Store Dry</strong> &mdash; Never store your suit damp; this encourages mildew and accelerates fibre breakdown.</li>
+      </ul>
+    </div>
+    <p>Still unsure? Check out our <a href="/pages/faqs" style="text-decoration:underline;">Sizing FAQs</a> or <a href="/pages/contact" style="text-decoration:underline;">Contact Us</a> directly.</p>
+  </div>
+</div>
+{% endblock %}

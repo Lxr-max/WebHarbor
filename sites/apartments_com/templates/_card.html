@@ -1,0 +1,49 @@
+{# Reusable building card — expects `b` Building. #}
+<div class="listing-card">
+  <a href="{{ url_for('building_detail', state=b.state.lower(), city_slug=b.city|lower|replace(' ', '-'), building_slug=b.slug) }}" style="display:block;">
+    <div class="photo">
+      {% if b.hero_image %}<img loading="lazy" decoding="async" src="{{ b.hero_image }}" alt="{{ b.name }}">{% endif %}
+      {% if b.is_new %}<span class="badge">New</span>{% elif b.is_luxury %}<span class="badge" style="background:#1aa260;">Luxury</span>{% endif %}
+    </div>
+  </a>
+  <div class="body">
+    {% if matching_rents is defined and matching_rents.get(b.id) %}
+      {% set matched_min, matched_max = matching_rents.get(b.id) %}
+    {% endif %}
+    <div class="price">
+      {% if matched_min is defined and matched_min is not none %}
+        ${{ '{:,}'.format(matched_min) }}{% if matched_max != matched_min %} – ${{ '{:,}'.format(matched_max) }}{% endif %}
+      {% else %}
+        {{ b.rent_display }}
+      {% endif %}
+      <span style="font-size:13px;color:var(--muted);font-weight:400;">/mo</span>
+    </div>
+    {% if matched_min is defined and matched_min is not none %}
+      <div style="font-size:12px;color:var(--muted);">Matching available units</div>
+    {% endif %}
+    <div class="specs">{{ b.beds_display }} · {{ b.sqft_min }}–{{ b.sqft_max }} sqft</div>
+    <a href="{{ url_for('building_detail', state=b.state.lower(), city_slug=b.city|lower|replace(' ', '-'), building_slug=b.slug) }}"
+       style="color:var(--ink);text-decoration:none;">
+      <div class="name">{{ b.name }}</div>
+    </a>
+    <div class="addr">{{ b.address }}, {{ b.city }}, {{ b.state }} {{ b.zip }}</div>
+    <div class="meta">
+      {% if b.rating_avg %}<span class="rating">★ {{ '%.1f'|format(b.rating_avg) }}</span> ({{ b.review_count }} reviews) ·{% endif %}
+      Walk {{ b.walk_score }}
+    </div>
+    <div style="margin-top:10px;display:flex;gap:6px;">
+      {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('toggle_favorite', building_id=b.id) }}" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn sm ghost" type="submit">{% if b.id in favorite_building_ids %}♥ Saved{% else %}♡ Save{% endif %}</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login', next=request.full_path) }}" class="btn sm ghost">♡ Save</a>
+      {% endif %}
+      <form method="post" action="{{ url_for('compare_add', building_id=b.id) }}" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn sm ghost" type="submit">Compare</button>
+      </form>
+    </div>
+  </div>
+</div>

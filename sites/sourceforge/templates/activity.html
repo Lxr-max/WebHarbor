@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class sandiego_chrome legacy_chrome{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}{{ p.name }} Activity{% endblock %}
+{% block head_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">{% endblock %}
+{% block content %}
+<section id="page-body" class="neighborhood-Projects project-{{ p.shortname }} mountpoint-activity">
+<div class="l-two-column-page">
+  <div class="l-gutter"></div>
+  <div class="l-content-column">
+    <div class="grid-20 pad">
+      <h2 class="dark title"><span>Activity for {{ p.name }}</span></h2>
+      <div>
+        <div class="activity">
+          <ul class="timeline">
+            {% for ev in events %}
+            <li>
+              <time datetime="{{ ev.date }}" title="{{ ev.date }}">{{ relative_date(ev.date[:10]) }}</time>
+              <h1>
+                <img src="{{ url_for('static', filename='images/ui/default-avatar.png') }}" alt="{{ ev.actor }}" title="{{ ev.actor }}" class="emboss x32 avatar">
+                {% set _u = user_href(ev.actor) %}{% if _u %}<a href="/u/{{ _u }}/profile/">{{ ev.actor }}</a>{% else %}{{ ev.actor }}{% endif %} {{ ev.verb }} {% if ev.obj_url and file_download_exists(ev.obj_url) %}<a href="{{ ev.obj_url }}">{{ ev.obj }}</a>{% else %}{{ ev.obj }}{% endif %}{% if ev.target %} on <a href="{{ ev.target_url }}">{{ ev.target }}</a>{% endif %}
+              </h1>
+              {% if ev.summary %}<p>{{ ev.summary[:200] }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

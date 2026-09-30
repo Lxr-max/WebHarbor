@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Create your account | Trip.com{% endblock %}
+{% block content %}
+<div class="panel" style="max-width:480px;margin:20px auto">
+  <h1 style="margin-bottom:6px">Create an account</h1>
+  <p style="color:var(--ink-3);font-size:13px;margin-bottom:14px">New users get more discounts on travel — up to 20% off your first booking.</p>
+  <form method="post" autocomplete="off">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-grid" style="grid-template-columns:1fr">
+      <div class="form-field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" value="{{ form.get('name', '') }}" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" value="{{ form.get('email', '') }}" required>
+      </div>
+      <div class="form-field">
+        <label for="password">Password (min 8 characters)</label>
+        <input id="password" name="password" type="password" minlength="8" required>
+      </div>
+    </div>
+    <button class="btn btn-lg" style="margin-top:14px;width:100%" type="submit">Register</button>
+  </form>
+  <p style="margin-top:14px;font-size:13px;color:var(--ink-3)">
+    Already have an account? <a href="{{ url_for('sign_in') }}" style="color:var(--brand-blue);font-weight:700">Sign in</a>
+  </p>
+</div>
+{% endblock %}

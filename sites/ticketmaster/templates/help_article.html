@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ topic['title'] }} | Ticketmaster Help{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › <a href="/help">Help</a> › {{ topic['title'] }}</div>
+  <h1 class="page-title">{{ topic['title'] }}</h1>
+  <div class="article-body">
+    <p>{{ topic['body'] }}</p>
+    <h3 style="margin:20px 0 10px">Related topics</h3>
+    <ul>
+      {% for t in topics %}
+      {% if t['slug'] != topic['slug'] %}
+      <li class="event-row" style="padding:10px 0">
+        <div class="er-main"><a class="find-tickets" href="/help/{{ t['slug'] }}">{{ t['title'] }}</a></div>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

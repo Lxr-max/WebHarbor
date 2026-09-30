@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}My Watchlist | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>My Watchlist</h1>
+
+{% if not current_user.is_authenticated %}
+<div class="watchlist-prompt">
+  <p>Wanna keep this Watchlist? Just sign up in a few easy steps!</p>
+  <span>
+    <a class="btn btn-primary" href="/signup">Create an account</a>
+    <a class="btn btn-ghost" href="/login">Log In</a>
+  </span>
+</div>
+{% endif %}
+
+{% if rows %}
+<p class="muted">{{ rows | length }} coins on your watchlist
+  {% if current_user.is_authenticated %}— saved to your account{% else %}— saved in this browser session{% endif %}.</p>
+<table>
+  <thead><tr>
+    <th></th><th>#</th><th>Name</th><th class="num">Price</th><th class="num">1h %</th>
+    <th class="num">24h %</th><th class="num">7d %</th><th class="num">Market Cap</th>
+    <th class="num">Volume(24h)</th><th class="num">Circulating Supply</th><th>Last 7 Days</th>
+  </tr></thead>
+  <tbody>
+    {% for c in rows %}
+    <tr>
+      <td>
+        <form method="post" action="/watchlist/" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="remove" value="{{ c.slug }}">
+          <button type="submit" class="star-btn on" aria-label="Remove {{ c.name }} from watchlist">★</button>
+        </form>
+      </td>
+      <td>{{ c.rank }}</td>
+      <td><a class="coin-cell" href="/currencies/{{ c.slug }}/">
+        {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="{{ c.name }} logo">{% endif %}
+        <span class="coin-name">{{ c.name }}</span> <span class="coin-symbol">{{ c.symbol }}</span></a></td>
+      <td class="num">{{ c.price | price }}</td>
+      <td class="num {{ c.pct_1h | pct_class }}">{{ c.pct_1h | pct }}</td>
+      <td class="num {{ c.pct_24h | pct_class }}">{{ c.pct_24h | pct }}</td>
+      <td class="num {{ c.pct_7d | pct_class }}">{{ c.pct_7d | pct }}</td>
+      <td class="num">{{ c.market_cap | usd }}</td>
+      <td class="num">{{ c.volume_24h | usd }}</td>
+      <td class="num">{{ c.circulating_supply | supply(c.symbol) }}</td>
+      <td>{% if coin_sparkline(c) %}<img class="sparkline" src="{{ coin_sparkline(c) }}" loading="lazy"
+            alt="{{ c.name }} 7d price graph">{% else %}--{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Your watchlist is empty. Add coins with the ☆ button on the rankings table or a coin page.</p>
+{% endif %}
+{% endblock %}

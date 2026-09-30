@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Virginia Driver's Manual{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('licenses_ids_exams') }}">Exams &amp; Study Materials</a> › Virginia Driver's Manual</nav>
+  <div class="page-title"><h1>Virginia Driver's Manual — Study Guide</h1></div>
+  <p>Study the Virginia Driver's Manual section by section. When you finish a section, take its
+  practice questions to check your knowledge — the sample knowledge-exam questions come from
+  the same upstream DMV study guide.</p>
+  {% for s in sections %}
+    <h2>Section {{ s.number }}: {{ s.title }}</h2>
+    <ul class="flow">
+      {% for sub in by_section.get(s.number, []) %}
+      <li><a href="{{ url_for('manual_subsection', section=s.number, subsection=sub.subsection) }}">{{ sub.subsection }}.{{ sub.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <p><a class="btn btn--secondary" href="{{ url_for('practice_exam_section', section=s.number) }}">Practice exam for Section {{ s.number }}</a></p>
+  {% endfor %}
+</div>
+{% endblock %}

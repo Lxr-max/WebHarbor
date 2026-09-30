@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Request to book {{ lst.name }} | Airbnb{% endblock %}
+{% block content %}
+<div class="form-card" style="max-width:760px;">
+  <h1>Confirm and pay</h1>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <div class="trip-card">
+    {% if lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}">{% endif %}
+    <div>
+      <p class="muted small">{{ lst.title }}</p>
+      <p><strong>{{ lst.name }}</strong></p>
+      <p class="muted small">{{ lst.city }}</p>
+      {% if lst.rating %}<p class="small">&#9733; {{ lst.rating }} &middot; {{ lst.reviews_count }} reviews</p>{% endif %}
+    </div>
+  </div>
+
+  <h2 style="font-size:18px;">Your trip</h2>
+  <table class="table">
+    <tr><th>Dates</th><td>{{ checkin }} &rarr; {{ checkout }} ({{ nights }} night{{ 's' if nights > 1 }})</td></tr>
+    <tr><th>Guests</th><td>{{ adults }} guest{{ 's' if adults != '1' }}</td></tr>
+  </table>
+
+  <h2 style="font-size:18px;">Price details</h2>
+  <div class="breakdown">
+    <div class="row"><span>{{ money(lst.nightly_price) }} x {{ nights }} night{{ 's' if nights > 1 }}</span><span>{{ money(nights * lst.nightly_price) }}</span></div>
+    <div class="row total"><span>Total (trip price, includes all fees)</span><span>{{ money(nights * lst.nightly_price) }}</span></div>
+  </div>
+
+  <h2 style="font-size:18px;">Pay with</h2>
+  <p class="muted small">This is a benchmark mirror: no real payment is processed. Confirming creates a booking record in your Trips.</p>
+
+  <form method="post" action="{{ url_for('book_stay', lid=lst.id, checkin=checkin, checkout=checkout, adults=adults) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="checkin" value="{{ checkin }}">
+    <input type="hidden" name="checkout" value="{{ checkout }}">
+    <input type="hidden" name="adults" value="{{ adults }}">
+    <button class="btn btn-rausch btn-lg" type="submit">Confirm and book</button>
+  </form>
+  {% if not current_user.is_authenticated %}
+  <p class="muted small">You'll need to log in with a demo account to complete the booking.</p>
+  {% endif %}
+</div>
+{% endblock %}

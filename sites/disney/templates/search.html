@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}{% if q %}Search: {{ q }}{% else %}Search Disney{% endif %}{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Search</h1>
+  <form class="filters" method="get" action="{{ url_for('search') }}">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search movies, shows, parks, products">
+    <button class="btn" type="submit">Search</button>
+  </form>
+
+  {% if q %}
+    <div class="section-head"><h2>Movies ({{ movies|length }})</h2></div>
+    {% if movies %}
+    <div class="grid cols-6">
+      {% for m in movies %}
+      <a class="card" href="{{ url_for('movie_detail', slug=m.slug) }}">
+        <div class="card-img card-poster">{% if img(m.poster) %}<img src="{{ img(m.poster) }}" alt="{{ m.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ m.title }}</p></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}<p class="empty">No movies matched.</p>{% endif %}
+
+    <div class="section-head"><h2>Shows ({{ shows|length }})</h2></div>
+    {% if shows %}
+    <div class="grid cols-6">
+      {% for s in shows %}
+      <a class="card" href="{{ url_for('show_detail', slug=s.slug) }}">
+        <div class="card-img">{% if img(s.thumb) %}<img src="{{ img(s.thumb) }}" alt="{{ s.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ s.title }}</p></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}<p class="empty">No shows matched.</p>{% endif %}
+
+    <div class="section-head"><h2>Games ({{ games|length }})</h2></div>
+    {% if games %}
+    <div class="grid cols-6">
+      {% for g in games %}
+      <a class="card" href="{{ url_for('game_detail', slug=g.slug) }}">
+        <div class="card-img">{% if img(g.image) %}<img src="{{ img(g.image) }}" alt="{{ g.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ g.title }}</p></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}<p class="empty">No games matched.</p>{% endif %}
+
+    <div class="section-head"><h2>Parks &amp; Entertainment ({{ entities|length }})</h2></div>
+    {% if entities %}
+    <table class="table">
+      <thead><tr><th>Name</th><th>Park</th><th>Type</th><th>Height Requirement</th></tr></thead>
+      <tbody>
+        {% for e in entities %}
+        <tr><td><a href="{{ url_for('attraction_detail', park=e.park_slug, slug=e.slug) }}">{{ e.name }}</a></td><td>{{ e.park }}</td><td>{{ e.entity_type }}</td><td>{% if e.height %}{{ e.height }}" or taller{% else %}Any height{% endif %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="empty">No parks results matched.</p>{% endif %}
+
+    <div class="section-head"><h2>Shop ({{ products|length }})</h2></div>
+    {% if products %}
+    <div class="grid cols-6">
+      {% for p in products %}
+      <a class="card" href="{{ url_for('product_detail', pid=p.pid) }}">
+        <div class="card-img">{% if p.image_list() %}<img src="{{ img(p.image_list()[0]) }}" alt="{{ p.name }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ p.name }}</p><p class="card-meta">${{ '%.2f'|format(p.price or 0) }}</p></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}<p class="empty">No products matched.</p>{% endif %}
+  {% else %}
+  <p class="empty">Enter a search term to look across movies, shows, games, parks and products.</p>
+  {% endif %}
+</div>
+{% endblock %}

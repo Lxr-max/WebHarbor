@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import date_label, kind_label, link with context %}
+{% block title %}Homepage{% endblock %}
+{% block content %}
+<div class="container home-content">
+  <section class="home-hero" aria-label="Featured news">
+    <div class="hero-copy">
+      {% if news %}
+      <span class="eyebrow">{{ kind_label(news[0].kind) }}</span>
+      <h1><a href="{{ news[0].path }}">{{ news[0].title }}</a></h1>
+      <p class="hero-date">{{ date_label(news[0].date) }}</p>
+      <a class="hero-link" href="{{ news[0].path }}">Read more <span aria-hidden="true">→</span></a>
+      {% else %}
+      <span class="eyebrow">U.S. Department of Justice</span>
+      <h1>Upholding the rule of law. Protecting our country.</h1>
+      {{ link('/about','Learn about the Department','hero-link') }}
+      {% endif %}
+    </div>
+    <img class="hero-image" src="{{ url_for('static', filename='images/hero.jpg') }}" alt="United States Department of Justice building with an American flag">
+  </section>
+
+  <section class="action-center" aria-labelledby="action-center-heading">
+    <h2 class="section-heading" id="action-center-heading">Action Center</h2>
+    <div class="action-grid">
+      {% for path,label,icon in [('/action-center/report-crime-or-submit-complaint','Report a Crime or Submit a Complaint','report-crime'),('/action-center/report-and-identify-missing-persons','Report and Identify Missing Persons','missing-persons'),('/action-center/find-help-and-information-crime-victims','Find Help and Information for Crime Victims','find-help'),('/action-center/register-apply-permits-or-request-records','Register, Apply for Permits, or Request Records','register'),('/action-center/locate-prison-inmate-or-sex-offender','Locate a Prison, Inmate, or Sex Offender','locate-prison'),('/careers','Careers at DOJ','scales-justice'),('/action-center/identify-our-most-wanted-fugitives','Wanted Fugitives','most-wanted'),('/contact-us','Contact DOJ','phone')] %}
+      {% if has_path is not defined or has_path(path) %}
+      <a class="action-item" href="{{ path }}"><img src="{{ url_for('static', filename='images/icon-' ~ icon ~ '.svg') }}" alt=""><span>{{ label }}</span></a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+<section class="mission-section" aria-labelledby="mission-heading">
+  <div class="container mission-grid">
+    <div class="mission-statement"><h2 id="mission-heading">Our Mission</h2><p>The mission of the Department of Justice is to uphold the rule of law, to keep our country safe, and to protect civil rights.</p></div>
+    <div class="values"><h2>Our Values</h2><p><strong>Independence and Impartiality.</strong> We work each day to earn the public’s trust by following the facts and the law wherever they may lead, without prejudice or improper influence.</p><p><strong>Honesty and Integrity.</strong> Our employees adhere to the highest standards of ethical behavior, mindful that, as public servants, we must work to earn the trust of, and inspire confidence in, the public we serve.</p><p><strong>Respect.</strong> Our employees value differences in people and in ideas and treat everyone with fairness, dignity, and compassion.</p><p><strong>Excellence.</strong> We work every day to provide the highest levels of service to the American people and to be a responsible steward of the taxpayers’ dollars.</p></div>
+  </div>
+</section>
+<div class="container home-content">
+  <section aria-labelledby="home-news-heading"><h2 class="section-heading" id="home-news-heading">News</h2><div class="home-news-grid">
+    {% for article in news[:6] %}<article class="news-card"><span class="eyebrow">{{ kind_label(article.kind) }}</span><h3><a href="{{ article.path }}">{{ article.title }}</a></h3>{% if article.summary %}<p>{{ article.summary }}</p>{% endif %}<time datetime="{{ article.date }}">{{ date_label(article.date) }}</time></article>{% endfor %}
+  </div><a href="/news" class="button button-outline more-news">More News <span aria-hidden="true">→</span></a></section>
+  <section class="explore-grid" aria-label="Our Work"><div><h2>DOJ Components and Agencies</h2><p>The Department of Justice consists of multiple components and agencies dedicated to upholding our mission.</p>{{ link('/agencies/chart/grid','View Our Offices','button button-outline') }}</div><div><h2>Subject Matter Areas, Initiatives, and Programs</h2><p>Learn more about the work we do on a variety of focused topics.</p>{{ link('/our-work','More About Our Work','button button-outline') }}</div></section>
+</div>
+{% endblock %}

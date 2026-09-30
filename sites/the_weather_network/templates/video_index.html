@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Video - The Weather Network - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / Video</div>
+<h1 class="page-title">Video</h1>
+<p class="muted">Weather videos from The Weather Network — forecasts, storms, science and nature.</p>
+
+{% if top %}
+<section class="section">
+  <div class="top-video">
+    <a href="/en/video/{{ top.mediaid }}" style="display:block">
+      <img src="/static/images/videos/{{ top.mediaid }}.jpg" alt="{{ top.title }}" style="width:100%;max-width:900px;border-radius:8px">
+    </a>
+    {% set top_title = top.title[:46] + ("..." if top.title|length > 46 else "") %}
+    <h2 style="margin:12px 0 4px;font-size:22px;text-transform:uppercase">{{ top_title }}</h2>
+    <p class="muted">{{ top.duration_label }}</p>
+  </div>
+</section>
+{% endif %}
+
+{% if featured %}
+<section class="section">
+  <div class="section-head"><h2 style="text-transform:uppercase">Featured Videos</h2></div>
+  <div class="video-grid">
+    {% for v in featured %}
+    <a class="news-card" href="/en/video/{{ v.mediaid }}">
+      <div class="nc-thumb">
+        <img loading="lazy" src="/static/images/videos/{{ v.mediaid }}.jpg" alt="{{ v.title }}">
+        <span class="nc-dur">{{ v.duration_label }}</span>
+      </div>
+      <div class="nc-title">{{ v.title }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if feed %}
+<section class="section">
+  <div class="news-rail">
+    {% for item in feed %}
+      {% if item.kind == 'article' and item.article %}
+      <a class="news-card" href="{{ item.article.path }}">
+        <div class="nc-thumb">
+          {% if item.article.thumb %}<img loading="lazy" src="/static/images/{{ item.article.thumb }}" alt="{{ item.article.headline }}">{% endif %}
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% elif item.video %}
+      <a class="news-card" href="/en/video/{{ item.video.mediaid }}">
+        <div class="nc-thumb">
+          <img loading="lazy" src="/static/images/videos/{{ item.video.mediaid }}.jpg" alt="{{ item.video.title }}">
+          <span class="nc-dur">{{ item.video.duration_label }}</span>
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% for pid, pl in playlists.items() %}
+<section class="section">
+  <div class="section-head">
+    <h2>{{ pl.name }}</h2>
+  </div>
+  <div class="video-grid">
+    {% for v in pl.videos %}
+    <a class="news-card" href="/en/video/{{ v.mediaid }}">
+      <div class="nc-thumb">
+        <img loading="lazy" src="/static/images/videos/{{ v.mediaid }}.jpg" alt="{{ v.title }}">
+        <span class="nc-dur">{{ v.duration_label }}</span>
+      </div>
+      <div class="nc-title">{{ v.title }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

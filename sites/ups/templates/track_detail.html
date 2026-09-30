@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}Tracking Detail | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('track') }}">Tracking</a> &rsaquo; Tracking Detail</div>
+  <h1 class="ups-track-detail-h">Tracking Detail</h1>
+
+  <div class="ups-card ups-detail-head">
+    <div class="ups-detail-numbers">
+      <div>
+        <p class="ups-factlabel">Tracking Number</p>
+        <p class="ups-tracknum-big">{{ s.tracking_number }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Status</p>
+        <p class="ups-statuslabel-big {{ s.milestone }}">{{ s.status }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Scheduled Delivery</p>
+        <p>{{ s.scheduled_delivery if s.status != 'Delivered' else 'Delivered ' ~ s.delivered_on }}</p>
+      </div>
+    </div>
+    <div class="ups-progress">
+      <div class="ups-progress-track">
+        {% set stages = ['label', 'transit', 'out', 'delivered'] %}
+        {% set labels = ['Label Created', 'On the Way', 'Out for Delivery', 'Delivered'] %}
+        {% set ms = s.milestone %}
+        {% for st in stages %}
+          {% set i = loop.index0 %}
+          <div class="ups-progress-step {{ 'done' if (ms == 'delivered' and i <= 3) or (ms == 'ap' and i <= 2) or (ms == 'out' and i <= 2) or (ms == 'transit' and i <= 1) or (ms == 'exception' and i <= 1) or (ms == 'label' and i == 0) }}">
+            <span class="ups-progress-dot"></span>
+            <span class="ups-progress-label">{{ labels[i] }}</span>
+          </div>
+        {% endfor %}
+      </div>
+      {% if s.status == 'Exception' %}
+        <p class="ups-exception-note"><img src="/static/images/ups-warning.png" alt="" width="16"> {{ s.exception_note }}</p>
+      {% endif %}
+      {% if meaning %}
+        <p class="ups-meaning">{{ meaning }} <a href="{{ url_for('support_article', key='understanding-tracking-status') }}">What does my status mean?</a></p>
+      {% endif %}
+    </div>
+    <div class="ups-detail-actions">
+      {% if s.status not in ('Delivered', 'Awaiting Customer Pickup') %}
+        <a class="ups-btn ups-btn-secondary" href="{{ url_for('change_delivery', tracking_number=s.tracking_number) }}">Change Delivery</a>
+      {% endif %}
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('claims') }}">File a Claim</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('support_article', key='ups-delivery-notice') }}">Need a Delivery Notice?</a>
+    </div>
+  </div>
+
+  {% if s.status == 'Awaiting Customer Pickup' and hold_location %}
+    <div class="ups-card ups-holdcard">
+      <h2>Ready for Customer Pickup</h2>
+      <p>This shipment was delivered to a UPS Access Point&trade; location. Bring a government-issued photo ID.</p>
+      <div class="ups-holdinfo">
+        <div>
+          <p class="ups-factlabel">Pickup Location</p>
+          <p><a href="{{ url_for('location_detail', location_id=hold_location.location_id) }}">{{ hold_location.name.title() }}</a><br>
+          {{ hold_location.addr1.title() }}<br>{{ hold_location.city }}, {{ hold_location.state }} {{ hold_location.zip }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Pick Up By</p>
+          <p>{{ s.hold_by }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Phone</p>
+          <p>{{ hold_location.phone or '1-800-PICK-UPS' }}</p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="ups-detail-grid">
+    <div class="ups-card ups-activity">
+      <h2>Shipment Progress</h2>
+      {% if package_groups %}
+        {% for n, evs in package_groups.items()|sort %}
+          <h3 class="ups-pkg-h">Package {{ n }}</h3>
+          <ul class="ups-timeline">
+          {% for e in evs|reverse %}
+            <li class="{{ 'is-current' if loop.last }}">
+              <p class="ups-tl-status">{{ e.status }}</p>
+              <p class="ups-tl-when">{{ e.day }}{% if e.time and e.time != '—' %} at {{ e.time }}{% endif %}</p>
+              <p class="ups-tl-loc">{{ e.location }}</p>
+              {% if e.description %}<p class="ups-tl-desc">{{ e.description }}</p>{% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% endfor %}
+      {% else %}
+        <ul class="ups-timeline">
+        {% for e in s.events|reverse %}
+          <li class="{{ 'is-current' if loop.last }}">
+            <p class="ups-tl-status">{{ e.status }}</p>
+            <p class="ups-tl-when">{{ e.day }}{% if e.time and e.time != '—' %} at {{ e.time }}{% endif %}</p>
+            <p class="ups-tl-loc">{{ e.location }}</p>
+            {% if e.description %}<p class="ups-tl-desc">{{ e.description }}</p>{% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      {% if changes %}
+        <h3>Delivery Change Requests</h3>
+        <ul class="ups-changes">
+        {% for c in changes %}
+          <li>{{ c.change_type|title }} requested on {{ c.request_day }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="ups-card ups-facts">
+      <h2>Shipment Facts</h2>
+      <dl class="ups-facts-list">
+        <dt>Tracking Number</dt><dd>{{ s.tracking_number }}</dd>
+        <dt>Service</dt><dd>{{ s.service_name }}</dd>
+        <dt>Shipper</dt><dd>{{ s.shipper_name }} &mdash; {{ s.from_city }}, {{ s.from_state }}</dd>
+        <dt>Shipped To</dt><dd>{{ s.to_city }}, {{ s.to_state }}{% if s.to_zip %} {{ s.to_zip }}{% endif %}</dd>
+        <dt>Weight</dt><dd>{{ '%.1f'|format(s.weight_lb or 0) }} lbs{% if s.packages and s.packages > 1 %} &middot; {{ s.packages }} packages{% endif %}</dd>
+        {% if s.signature %}<dt>Signature</dt><dd>{{ s.signature }}</dd>{% endif %}
+        {% if s.declared_value %}<dt>Declared Value</dt><dd>${{ '%.2f'|format(s.declared_value) }}</dd>{% endif %}
+        {% if s.status == 'Delivered' %}
+          {% if s.signed_by %}<dt>Signed For By</dt><dd>{{ s.signed_by }}</dd>{% endif %}
+          {% if s.left_at %}<dt>Left At</dt><dd>{{ s.left_at }}</dd>{% endif %}
+          <dt>Delivered On</dt><dd>{{ s.delivered_on }} at {{ s.delivered_time }}</dd>
+        {% endif %}
+      </dl>
+      {% if s.status == 'Transferred to Post Office' %}
+        <p class="ups-meaning">{{ status_meanings.get('Transferred to Post Office for Delivery') }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

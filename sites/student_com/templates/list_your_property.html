@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}List Your Property • Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px"><a href="/">Home</a> › <span>List your property</span></nav>
+  <h1>List your property on Student.com</h1>
+  <p class="muted" style="margin-top:10px;max-width:760px">Your property listing will be visible to students worldwide. With high-quality photos, videos and VR tours, your property can showcase exactly what makes it the ideal student home.</p>
+  <p class="muted small" style="margin-top:8px">Registering your property can take as little as 10 minutes... so get started now!</p>
+  <a class="btn primary" href="/contact" style="margin-top:18px">List your property</a>
+</div>
+
+<section class="section container">
+  <div class="grid cols-2" style="grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <div>
+      <h2>Get in touch with Student.com</h2>
+      <p class="muted small" style="margin-top:10px">If you're looking to list your property on Student.com then get in touch to hear how we can help you get started today.</p>
+    </div>
+    <img src="/static/images/home/woman-with-tablet.webp" alt="Landlord listing a property" style="border-radius:16px">
+  </div>
+
+  <div class="section-head" style="margin-top:44px"><h2>Why Student.com?</h2></div>
+  <div class="grid cols-3">
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Best housing choices</h3>
+      <p class="small muted" style="margin-top:8px">Here at Student.com we want to provide our Students with the best available housing choices and prices at any time, anywhere in the world.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Easy for students</h3>
+      <p class="small muted" style="margin-top:8px">We want to make it easy for students to search, find, book and pay for their perfect home before and during their studies.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Market-leading tools</h3>
+      <p class="small muted" style="margin-top:8px">We provide our partners with market leading tools and insights to help you be successful.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

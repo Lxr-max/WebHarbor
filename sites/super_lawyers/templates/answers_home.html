@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Legal Answers from Top Rated Attorneys | Super Lawyers Answers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Ask a Lawyer</h1>
+
+  <p class="lead">Get answers to your real-life legal questions from top-rated attorneys.
+  Search by your state or legal issue to find answers to questions submitted by people
+  like you. Can't find what you are looking for? Submit a question to a lawyer yourself!</p>
+
+  <h2>Ask my question</h2>
+  <form class="ask-form" method="get" action="/answers/search/">
+    <label for="ask-q">Enter your legal issue</label>
+    <input id="ask-q" type="search" name="q" placeholder="e.g. divorce, custody, personal injury" autocomplete="off">
+    <button class="btn btn-primary btn-lg" type="submit">Search answers</button>
+  </form>
+  <p class="muted">Don't see what you are looking for? <a href="{{ url_for('ask_question') }}">Ask a Super Lawyers Selectee</a> - it's free!</p>
+
+  <h2>Spotlight attorney answers</h2>
+  <div class="answer-cards">
+    {% for answer in spotlight %}
+      <div class="answer-card">
+        <div class="answer-card-inner">
+          {% if answer.answerer_photo_path %}
+          <img src="{{ url_for('static', filename=answer.answerer_photo_path) }}" alt="{{ answer.answerer_name }}" width="135" height="170">
+          {% endif %}
+          <div class="answer-card-body">
+            <h3><a href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">{{ answer.question }}</a></h3>
+            {% if answer.body %}<p class="answer-snippet">{{ answer.body[0][:110] }} …</p>{% endif %}
+            <p class="answer-sponsored">Sponsored answer by: <a href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">{{ answer.answerer_name }}</a></p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Recently answered legal questions</h2>
+  <div class="answer-cards">
+    {% for answer in recent %}
+      <a class="answer-card" href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">
+        <h3>{{ answer.question }}</h3>
+        <p class="answer-meta">Asked in {{ answer.asked_in }} on {{ answer.asked_on }}
+          · {{ answer.answer_count }} answer{{ 's' if answer.answer_count != 1 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <h2>Find answers by legal issue or state</h2>
+  <p>Get answers to your real-life legal questions from top-rated attorneys. Search by
+  your state or legal issue to find answers to questions submitted by people like you.
+  Can't find what you are looking for? Submit a question to a lawyer yourself!</p>
+  <p>Browse answers by:</p>
+  <div class="answers-taxonomy">
+    <div>
+      <h3>Browse all answers by legal topic</h3>
+      <div class="practice-taxonomy compact">
+        {% for category in practice_categories() %}
+        <div class="practice-category">
+          <h3 class="category-name">{{ category.name }}</h3>
+          <ul>
+            {% for practice in category.practices if practice.slug in answered_topics %}
+            <li><a href="/answers/{{ practice.slug }}/">{{ practice.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <h3>Browse all answers by state</h3>
+      <div class="link-grid">
+        {% for state in all_states() if state.slug in answered_states %}
+          <a href="/answers/{{ state.slug }}/">{{ state.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

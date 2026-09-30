@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}{{ store.name }} — Verizon store in {{ store.city }},{{ store.state }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('stores_home') }}">Stores</a> / <a href="{{ url_for('stores_state', state=state_slug) }}">{{ store.state }}</a> / <a href="{{ url_for('stores_city', state=state_slug, city=city_slug) }}">{{ store.city }}</a> / <span>{{ store.name }}</span></nav>
+  <h1>{{ store.display_type() }} — {{ store.name }}</h1>
+  <div class="pdp-grid">
+    <div>
+      {% if store.image_outside %}<img class="store-photo" src="/{{ store.image_outside }}" alt="{{ store.name }} exterior">{% endif %}
+      {% if store.image_inside %}<img class="store-photo" src="/{{ store.image_inside }}" alt="{{ store.name }} interior">{% endif %}
+      {% if not store.image_outside and not store.image_inside %}<p class="muted">No store photos available for this location.</p>{% endif %}
+    </div>
+    <div class="card">
+      <h2>Store details</h2>
+      <p>{{ store.street }}, {{ store.city }}, {{ store.state }} {{ store.zip }}</p>
+      {% if store.phone %}<p>Phone: {{ store.phone[:3] }}-{{ store.phone[3:6] }}-{{ store.phone[6:] }}</p>{% endif %}
+      {% if store.cma %}<p class="muted">Market: {{ store.cma }}</p>{% endif %}
+      <h3>Hours</h3>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Monday</td><td>{{ store.hours_map().Mon or 'Closed' }}</td></tr>
+          <tr><td>Tuesday</td><td>{{ store.hours_map().Tue or 'Closed' }}</td></tr>
+          <tr><td>Wednesday</td><td>{{ store.hours_map().Wed or 'Closed' }}</td></tr>
+          <tr><td>Thursday</td><td>{{ store.hours_map().Thu or 'Closed' }}</td></tr>
+          <tr><td>Friday</td><td>{{ store.hours_map().Fri or 'Closed' }}</td></tr>
+          <tr><td>Saturday</td><td>{{ store.hours_map().Sat or 'Closed' }}</td></tr>
+          <tr><td>Sunday</td><td>{{ store.hours_map().Sun or 'Closed' }}</td></tr>
+        </tbody>
+      </table>
+      <h3>Store services</h3>
+      <ul>
+        {% if store.appointments %}<li>Appointments accepted — schedule online</li>{% endif %}
+        {% if store.pickup %}<li>Express Pickup In-store</li>{% endif %}
+        {% if store.locker %}<li>Express Pickup Locker</li>{% endif %}
+        {% if store.fios %}<li>Fios / Home Internet sales</li>{% else %}<li>No Fios equipment return</li>{% endif %}
+      </ul>
+      {% if store.appointments %}
+      <a class="btn btn-primary" href="{{ url_for('store_appointment', code=store.code) }}">Schedule an appointment</a>
+      {% else %}
+      <p class="muted">This location does not accept online appointments.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Passenger Details | Trip.com{% endblock %}
+{% block content %}
+<div class="steps">
+  <span>1. Select flights</span>
+  <span class="step-active">&#8594; 2. Passenger details</span>
+  <span>&#8594; 3. Confirmation</span>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h2>Passenger details</h2>
+    <p>Departure: {{ ddate|dmy }}{% if rdate %} · Return: {{ rdate|dmy }}{% endif %}</p>
+    <form method="post" autocomplete="off">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="first_name">First name (as on ID) *</label>
+          <input id="first_name" name="first_name" value="{{ form.get('first_name', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="last_name">Last name (as on ID) *</label>
+          <input id="last_name" name="last_name" value="{{ form.get('last_name', '') }}" required>
+        </div>
+        <div class="form-field form-wide">
+          <label for="email">Contact email *</label>
+          <input id="email" name="email" type="email" value="{{ form.get('email', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="phone">Contact phone *</label>
+          <input id="phone" name="phone" value="{{ form.get('phone', '') }}" placeholder="+1 555 000 1234" required>
+        </div>
+        <div class="form-field">
+          <label for="promo_code">Promo code</label>
+          <input id="promo_code" name="promo_code" value="{{ form.get('promo_code', '') }}">
+        </div>
+        <div class="form-field form-wide">
+          <label for="card_no">Bank card no. *</label>
+          <input id="card_no" name="card_no" value="{{ form.get('card_no', '') }}" placeholder="4242 4242 4242 4242" required>
+        </div>
+        <div class="form-field">
+          <label for="card_name">Cardholder name</label>
+          <input id="card_name" name="card_name" value="{{ form.get('card_name', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="card_exp">Expiration date</label>
+          <input id="card_exp" name="card_exp" value="{{ form.get('card_exp', '09/29') }}">
+        </div>
+        <div class="form-field">
+          <label for="card_cvv">CVV/CVC</label>
+          <input id="card_cvv" name="card_cvv" value="{{ form.get('card_cvv', '123') }}">
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--ink-3);margin-top:12px">
+        By completing this purchase I agree to Trip.com's Terms of Use, Privacy Statement
+        and the airline fare rules shown above.
+      </p>
+      <button class="btn btn-lg" type="submit">Pay ${{ '%d'|format(total) }} and finish</button>
+    </form>
+  </div>
+
+  <div class="summary-panel">
+    <div class="panel">
+      <h3>Your itinerary</h3>
+      <div class="sum-row"><span>Outbound</span><span class="val">{{ outbound.route.origin_code }} &#8594; {{ outbound.route.dest_code }}</span></div>
+      <div class="sum-row"><span>{{ outbound.dep_time }} – {{ outbound.arr_time }}</span><span class="val">{{ outbound.airline }}</span></div>
+      <div class="sum-row"><span>Outbound fare</span><span class="val">${{ '%d'|format(outbound.price) }}</span></div>
+      {% if inbound %}
+      <div class="sum-row" style="margin-top:8px"><span>Return</span><span class="val">{{ inbound.route.dest_code }} &#8594; {{ inbound.route.origin_code }}</span></div>
+      <div class="sum-row"><span>{{ inbound.dep_time }} – {{ inbound.arr_time }}</span><span class="val">{{ inbound.airline }}</span></div>
+      <div class="sum-row"><span>Return fare</span><span class="val">${{ '%d'|format(inbound.price) }}</span></div>
+      {% endif %}
+      <div class="sum-row total"><span>Total</span><span class="val">${{ '%d'|format(total) }}</span></div>
+      <div class="sum-row"><span>Cabin</span><span class="val">{{ cabin }}</span></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

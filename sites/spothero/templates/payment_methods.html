@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Payment Methods | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight" style="max-width:760px">
+  <nav class="search-toolbar" style="top:0;border-bottom:none;padding-left:0">
+    <a class="chip" href="{{ url_for('account') }}">Reservations</a>
+    <a class="chip active" href="{{ url_for('payment_methods') }}">Payment Methods</a>
+    <a class="chip" href="{{ url_for('favorites') }}">Saved Spots</a>
+    <a class="chip" href="{{ url_for('profile') }}">Profile</a>
+  </nav>
+  <h1 style="font-size:24px;margin-top:18px">Payment methods</h1>
+
+  {% if methods %}
+  <div class="table-wrap">
+  <table class="data-table" style="margin-bottom:24px">
+    <thead><tr><th>Card</th><th>Expires</th><th>Label</th><th></th></tr></thead>
+    <tbody>
+      {% for m in methods %}
+      <tr>
+        <td>{{ m.brand }} ending in {{ m.last4 }} {% if m.is_default %}<span class="spot-tag" style="background:rgba(18,113,235,.1);color:var(--primary)">Default</span>{% endif %}</td>
+        <td>{{ '%02d' % m.exp_month }}/{{ m.exp_year }}</td>
+        <td>{{ m.label or '—' }}</td>
+        <td style="white-space:nowrap">
+          {% if not m.is_default %}
+          <form method="post" style="display:inline" action="{{ url_for('payment_methods') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="default"><input type="hidden" name="id" value="{{ m.id }}">
+            <button class="btn btn-secondary btn-sm" type="submit" aria-label="Make {{ m.brand }} ending in {{ m.last4 }} the default payment method">Make default</button>
+          </form>
+          {% endif %}
+          <form method="post" style="display:inline" action="{{ url_for('payment_methods') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ m.id }}">
+            <button class="btn btn-tertiary btn-sm" type="submit" aria-label="Remove {{ m.brand }} ending in {{ m.last4 }} from your account">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="muted">You have no saved payment methods.</p>
+  {% endif %}
+
+  <div class="panel">
+    <h2>Add a card</h2>
+    <form method="post" action="{{ url_for('payment_methods') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="add">
+      <div class="datetime-row">
+        <div class="field">
+          <label for="brand">Brand</label>
+          <div class="control">
+            <select id="brand" name="brand" style="padding-left:12px">
+              <option>Visa</option><option>Mastercard</option><option>American Express</option><option>Discover</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="number">Card number</label>
+          <div class="control"><input id="number" name="number" inputmode="numeric" placeholder="4242 4242 4242 4242" required style="padding-left:12px"></div>
+        </div>
+      </div>
+      <div class="datetime-row">
+        <div class="field">
+          <label for="exp_month">Exp. month</label>
+          <div class="control"><input id="exp_month" name="exp_month" type="number" min="1" max="12" value="12" style="padding-left:12px"></div>
+        </div>
+        <div class="field">
+          <label for="exp_year">Exp. year</label>
+          <div class="control"><input id="exp_year" name="exp_year" type="number" min="2026" max="2040" value="2028" style="padding-left:12px"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="label">Label (e.g. Personal, Work)</label>
+        <div class="control"><input id="label" name="label" style="padding-left:12px"></div>
+      </div>
+      <button class="btn btn-primary" type="submit">Add card</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

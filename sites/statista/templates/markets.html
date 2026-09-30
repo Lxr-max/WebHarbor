@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Statista Industry Overview{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Industries</span>
+</nav>
+<h1>Industry Overview</h1>
+<p class="section__sub">All industries and related sub-industries</p>
+<section class="section">
+  <div class="cardGrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+    {% for ind in industries %}
+    <a class="card" href="/markets/{{ ind.id }}/{{ ind.slug }}/">
+      <div class="card__body">
+        <span class="card__title" style="font-size:16px;">{{ ind.name }}</span>
+        <span class="card__snippet">{{ ind.subs|map(attribute='name')|join(', ')|truncate(120) }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
