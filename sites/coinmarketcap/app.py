@@ -24,6 +24,8 @@ at image build time (PYTHONHASHSEED=0).
 import json
 import math
 import os
+import re
+from urllib.parse import urlsplit
 from datetime import datetime, timedelta, timezone
 
 from flask import (Flask, abort, jsonify, redirect, render_template, request,
@@ -332,6 +334,7 @@ class User(UserMixin, db.Model):
     display_name = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
     is_benchmark = db.Column(db.Boolean, default=False)
+    newsletter = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.String(10), nullable=False, default='2026-09-01')
 
 
@@ -712,15 +715,39 @@ def load_user(user_id):
 
 # ------------------------------------------------------------------ helpers --
 
+def page_number(value):
+    if not str(value).isdigit() or len(str(value)) > 6 or int(value) < 1:
+        abort(400, 'Page must be a positive whole number.')
+    return int(value)
+
+
 def _range_filter(query, column, spec):
     if not spec:
         return query
-    lo, _, hi = spec.partition('~')
-    if lo not in (None, '', '0'):
-        query = query.filter(column >= float(lo))
-    if hi not in (None, ''):
-        query = query.filter(column <= float(hi))
+    parts = spec.split('~')
+    if len(parts) != 2:
+        abort(400, 'Use a valid numeric range.')
+    try:
+        lo, hi = [float(v) if v else None for v in parts]
+    except (ValueError, OverflowError):
+        abort(400, 'Use finite numeric bounds.')
+    if any(v is not None and not math.isfinite(v) for v in (lo, hi)):
+        abort(400, 'Use finite numeric bounds.')
+    if lo is not None and hi is not None and lo > hi:
+        abort(400, 'Minimum cannot exceed maximum.')
+    if lo is not None:
+        query = query.filter(column >= lo)
+    if hi is not None:
+        query = query.filter(column <= hi)
     return query
+
+
+def safe_next(value):
+    value = value or '/'
+    parsed = urlsplit(value)
+    if not value.startswith('/') or value.startswith('//') or parsed.netloc or parsed.scheme or '\\' in value or any(ord(c) < 32 for c in value):
+        return '/'
+    return value
 
 
 def _global_metrics():
@@ -782,7 +809,7 @@ def home():
     direction = args.get('dir', default_dir)
     crypto_type = args.get('type', 'all')
     tag = args.get('tag', '')
-    page = max(1, int(args.get('page', 1) or 1))
+    page = page_number(args.get('page', '1'))
 
     query = Coin.query.filter(Coin.is_active == True)  # noqa: E712
     if crypto_type == 'coins':
@@ -863,7 +890,7 @@ def coin_historical(slug):
     days = request.args.get('days', '30')
     if days not in ('7', '30', '90', '365'):
         days = '30'
-    page = max(1, int(request.args.get('page', 1) or 1))
+    page = page_number(request.args.get('page', '1'))
     span = int(days)
     query = Ohlcv.query.filter_by(coin_id=coin.id)
     # Upstream semantics: the days tabs window the table to the most
@@ -1026,7 +1053,7 @@ def watchlist_toggle(slug):
         else:
             wl.append(coin.id)
         session['watchlist'] = wl
-    return redirect(request.form.get('next') or request.referrer or url_for('home'))
+    return redirect(safe_next(request.form.get('next')))
 
 
 @app.route('/converter/', methods=['GET', 'POST'])
@@ -1040,7 +1067,7 @@ def converter():
     if request.method == 'POST':
         try:
             amt = float(amount.replace(',', ''))
-        except ValueError:
+        except (ValueError, OverflowError):
             amt = None
         price_from = 1.0 if frm == 'usd' else None
         price_to = 1.0 if to == 'usd' else None
@@ -1050,6 +1077,8 @@ def converter():
             price_from = coin_from.price
         if coin_to and coin_to.price:
             price_to = coin_to.price
+        if amt is None or not math.isfinite(amt) or amt < 0 or amt > 1e15 or not price_from or not price_to:
+            abort(400, 'Enter a finite nonnegative amount and supported currencies.')
         if amt is not None and price_from and price_to:
             value = amt * price_from / price_to
             from_label = f"{coin_from.name} ({coin_from.symbol})" if coin_from else 'United States Dollar "$" (USD)'
@@ -1068,9 +1097,13 @@ def converter():
 
 @app.route('/academy/glossary')
 def glossary_index():
-    terms = GlossaryTerm.query.order_by(GlossaryTerm.title).all()
+    query = request.args.get('q', '').strip()
+    terms_query = GlossaryTerm.query
+    if query:
+        terms_query = terms_query.filter(GlossaryTerm.title.ilike('%'+query+'%'))
+    terms = terms_query.order_by(GlossaryTerm.title).all()
     ctx = _base_ctx()
-    ctx.update({'terms': terms})
+    ctx.update({'terms': terms, 'query': query})
     return render_template('glossary_index.html', **ctx)
 
 
@@ -1135,7 +1168,8 @@ def historical_snapshot(date):
     if not rows:
         abort(404)
     ctx = _base_ctx()
-    ctx.update({'rows': rows, 'date': date})
+    coins = {c.symbol: c.slug for c in Coin.query.order_by(Coin.rank.desc())}
+    ctx.update({'rows': rows, 'date': date, 'coin_slugs': coins})
     return render_template('snapshot.html', **ctx)
 
 
@@ -1164,7 +1198,7 @@ def signup():
         email = (request.form.get('email') or '').strip().lower()
         password = request.form.get('password') or ''
         newsletter = request.form.get('newsletter') == 'on'
-        if '@' not in email or '.' not in email.split('@')[-1] or len(email) < 6:
+        if not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', email):
             error = 'The email you entered is not in the correct format. Please check.'
         elif len(password) < 8:
             error = 'Your password must be at least 8 characters long.'
@@ -1173,11 +1207,11 @@ def signup():
         else:
             user = User(email=email, display_name=email.split('@')[0],
                         password_hash=bcrypt.generate_password_hash(password).decode(),
-                        is_benchmark=False, created_at=MIRROR_DATE)
+                        is_benchmark=False, newsletter=newsletter, created_at=MIRROR_DATE)
             db.session.add(user)
-            db.session.commit()
+            db.session.flush()
             # a guest watchlist carries over to the new account
-            for cid in session.get('watchlist', []):
+            for cid in set(session.get('watchlist', [])):
                 coin = db.session.get(Coin, cid)
                 if coin:
                     db.session.add(WatchlistItem(user_id=user.id, coin_id=cid,
@@ -1237,6 +1271,20 @@ def seed_database():
     seed_all(db, bcrypt, app)
 
 
+def seed_review_glossary():
+    term = db.session.get(GlossaryTerm, '51-attack')
+    if term is not None and term.content:
+        return
+    with open(os.path.join(BASE_DIR, 'source_data', 'review_glossary.json'), encoding='utf-8') as f:
+        record = json.load(f)
+    if term is None:
+        term = GlossaryTerm(slug=record['slug'], title=record['title'])
+        db.session.add(term)
+    term.content = record['content']
+    term.difficulty = record['difficulty']
+    db.session.commit()
+
+
 def seed_benchmark_users():
     if User.query.filter_by(is_benchmark=True).count() >= 4:
         return
@@ -1248,6 +1296,7 @@ def main():
     with app.app_context():
         db.create_all()
         seed_database()
+        seed_review_glossary()
         seed_benchmark_users()
 
 
@@ -1255,6 +1304,7 @@ with app.app_context():
     db.create_all()
     if os.environ.get('COINMARKETCAP_AUTO_SEED', '1') == '1':
         seed_database()
+        seed_review_glossary()
         seed_benchmark_users()
 
 

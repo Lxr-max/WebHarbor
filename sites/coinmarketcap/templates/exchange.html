@@ -7,7 +7,7 @@
   {% if exch.spot_rank %}<span class="rank-badge">Spot Rank #{{ exch.spot_rank }}</span>{% endif %}
   {% if exch.dex_rank %}<span class="rank-badge">DEX Rank #{{ exch.dex_rank }}</span>{% endif %}
   {% if exch.derivatives_rank %}<span class="rank-badge">Derivatives Rank #{{ exch.derivatives_rank }}</span>{% endif %}
-  <span class="rank-badge">{{ 'DEX' if exch.dex_status else 'CEX' }}</span>
+  <span class="rank-badge">{{ 'Listed in DEX rankings' if exch.dex_rank else ('DEX' if exch.dex_status else 'CEX') }}</span>
 </div>
 
 <div class="grid">
@@ -60,7 +60,7 @@
     <tr>
       <td>{{ p.rank }}</td>
       <td>{{ p.pair }}</td>
-      <td class="num">{{ p.price | usd_full }}</td>
+      <td class="num">{{ p.price | price }}</td>
       <td class="num">{{ p.volume_24h | usd }}</td>
       <td class="num">{{ '%.2f' % p.volume_pct if p.volume_pct is not none else '--' }}%</td>
       <td class="num">{{ p.liquidity_score | int if p.liquidity_score else '--' }}</td>

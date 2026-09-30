@@ -5,6 +5,7 @@
 <p class="muted">{{ terms | length }} terms captured from the upstream glossary. Terms with full
   articles are linked.</p>
 
+<form method="get" class="glossary-search"><label for="glossary-q">Find a glossary term</label><input id="glossary-q" name="q" value="{{ query }}"><button type="submit" class="btn btn-primary">Search terms</button></form>
 <div class="glossary-grid">
   {% for t in terms %}
     {% if t.content %}

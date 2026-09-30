@@ -16,7 +16,7 @@
     {% for r in rows %}
     <tr>
       <td>{{ r.rank }}</td>
-      <td>{{ r.name }}</td>
+      <td>{% if r.symbol in coin_slugs %}<a href="/currencies/{{ coin_slugs[r.symbol] }}/">{{ r.name }}</a>{% else %}{{ r.name }}{% endif %}</td>
       <td>{{ r.symbol }}</td>
       <td class="num">{{ r.market_cap_text }}</td>
       <td class="num">{{ r.price_text }}</td>

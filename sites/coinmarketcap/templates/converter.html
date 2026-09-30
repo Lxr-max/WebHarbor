@@ -40,7 +40,7 @@
   {% if result %}
   <div class="result-box">
     {{ result.amount | int if result.amount == (result.amount | int) else result.amount }}
-    {{ result.from_label }} = {{ result.value | price }} {{ result.to_label }}
+    {{ result.from_label }} = {{ result.value | price if to == 'usd' else (result.value | price).replace('$', '') }} {{ result.to_label }}
   </div>
   {% endif %}
 </div>
