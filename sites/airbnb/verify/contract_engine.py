@@ -3,6 +3,7 @@
 Language recognition is finite and deterministic; no LLM or live-state fallback.
 """
 import argparse
+import bcrypt
 import hashlib
 import json
 from pathlib import Path
@@ -47,6 +48,17 @@ def canonical_json(value):
 def matches(value,expected):
     if isinstance(value,bytes):value=value.decode("utf-8",errors="strict")
     if isinstance(expected,dict):
+        if 'bcrypt_password' in expected:
+            try:
+                return bcrypt.checkpw(expected['bcrypt_password'].encode(), str(value).encode())
+            except (ValueError, TypeError):
+                return False
+        if expected.get('iso_date'):
+            from datetime import date
+            try:
+                return date.fromisoformat(str(value)).isoformat() == value
+            except (ValueError, TypeError):
+                return False
         if 'json_rows' in expected:
             rows=json.loads(value); wants=list(expected['json_rows'])
             if not isinstance(rows,list) or len(rows)!=len(wants):return False

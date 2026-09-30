@@ -120,9 +120,11 @@
             "email": "runner2@test.com",
             "name": "Sam Rivera",
             "password_hash": {
-              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+              "bcrypt_password": "LongPass123!"
             },
-            "joined": "2026-09-30"
+            "joined": {
+              "iso_date": true
+            }
           }
         ],
         "updated": {}
@@ -825,9 +827,11 @@
             "email": "sam.r@test.com",
             "name": "Sam Rivera",
             "password_hash": {
-              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+              "bcrypt_password": "SunnyDay88!"
             },
-            "joined": "2026-09-30"
+            "joined": {
+              "iso_date": true
+            }
           }
         ],
         "updated": {}
@@ -1244,9 +1248,11 @@
             "email": "casey.t@test.com",
             "name": "Casey Taylor",
             "password_hash": {
-              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+              "bcrypt_password": "CaseyPass77!"
             },
-            "joined": "2026-09-30"
+            "joined": {
+              "iso_date": true
+            }
           }
         ],
         "updated": {}

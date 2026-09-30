@@ -701,7 +701,7 @@
             "email": "sam.cars@test.com",
             "display_name": "Sam Rivera",
             "password_hash": {
-              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+              "bcrypt_password": "SunnyDay88!"
             },
             "is_benchmark": 0
           }
