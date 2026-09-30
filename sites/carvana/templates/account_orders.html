@@ -34,7 +34,7 @@
       {% if o.vehicle.card_image_url() %}<a href="{{ o.vehicle.url() }}"><img src="{{ o.vehicle.card_image_url() }}" alt="{{ o.vehicle.title() }}"></a>{% endif %}
       <div class="order-info">
         <p>{{ o.vehicle.trim or o.vehicle.body_style }} · {{ o.vehicle.mileage|mileage }}</p>
-        <p>Payment: {% if o.payment_type == 'cash' %}Cash — {{ o.vehicle.price|money }}{% else %}{{ o.monthly_payment|money }}/mo · {{ o.term_months }} months · {{ o.apr }}% APR · {{ o.down_payment|money }} down{% endif %}</p>
+        <p>Payment: {% if o.payment_type == 'cash' %}Cash — {{ o.vehicle.financed_principal(trade_credit=o.trade_credit)|money }} due after trade credit, including estimated taxes and fees{% else %}{{ o.monthly_payment|money }}/mo · {{ o.term_months }} months · {{ o.apr }}% APR · {{ o.down_payment|money }} down{% endif %}</p>
         <p>Delivery: {{ o.delivery_date }} ({{ o.delivery_slot }}) to {{ o.delivery_city }}, {{ o.delivery_state }}</p>
         <ol class="timeline">
           {% for ev in o.events() %}

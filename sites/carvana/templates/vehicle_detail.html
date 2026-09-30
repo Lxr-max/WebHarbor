@@ -26,7 +26,7 @@
       <h1>{{ v.title() }}</h1>
       <p class="vdp-subtitle">{{ v.trim or v.body_style }}</p>
       <p class="vdp-meta">{{ v.mileage|mileage }} · {{ v.exterior_color }} exterior · {{ v.interior_color }} interior</p>
-      <p class="vdp-location">Located at the Carvana hub in {{ v.city }}, {{ v.state }} — free delivery or pickup</p>
+      <p class="vdp-location">{% if v.city and v.state %}Located at the Carvana hub in {{ v.city }}, {{ v.state }} — free delivery or pickup{% else %}Vehicle location not provided in the captured listing{% endif %}</p>
     </div>
 
     <div class="vdp-pricebox">
@@ -82,7 +82,7 @@
         <div><span>Transmission</span>{{ v.transmission or '—' }}</div>
         <div><span>Drivetrain</span>{{ v.drivetrain or '—' }}</div>
         <div><span>Fuel</span>{{ v.fuel_type or '—' }}</div>
-        <div><span>MPG (combined)</span>{{ v.mpg_combined or '—' }}</div>
+        <div><span>{{ "MPGe" if v.fuel_type == "Electric" else "MPG" }} (combined)</span>{{ v.mpg_combined or '—' }}</div>
         <div><span>Exterior color</span>{{ v.exterior_color or '—' }}</div>
         <div><span>Interior color</span>{{ v.interior_color or '—' }}</div>
         <div><span>Seating</span>{{ v.seating or '—' }} seats</div>
@@ -112,8 +112,8 @@
         {% endfor %}
       </ul>
       <div class="history-grid">
-        <div><span>Reported accidents</span>{{ 'None reported' if v.accident_free else 'At least one reported' }}</div>
-        <div><span>Owners</span>{{ 'Single owner' if v.single_owner else 'Multiple owners' }}</div>
+        <div><span>Reported accidents</span>{{ 'None reported' if v.accident_free else 'Accident-free history not confirmed' }}</div>
+        <div><span>Owners</span>{{ 'Single owner' if v.single_owner else 'Single ownership not confirmed' }}</div>
         <div><span>Prior use</span>{{ v.prior_use_display() }}</div>
         <div><span>In service since</span>{{ v.in_service_date or '—' }}</div>
       </div>

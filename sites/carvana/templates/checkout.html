@@ -19,23 +19,23 @@
 
     <section class="co-section">
       <h3>1. How do you want to pay?</h3>
-      <label class="check"><input type="radio" name="payment_type" value="cash" {% if step != 'delivery' %}checked{% endif %}> Pay cash — {{ v.price|money }}</label>
-      <label class="check"><input type="radio" name="payment_type" value="finance" {% if step == 'delivery' %}checked{% endif %}> Finance with Carvana</label>
+      <label class="check"><input type="radio" name="payment_type" value="cash" {% if request.args.get('payment_type') != 'finance' %}checked{% endif %}> Pay cash — {{ v.price|money }}</label>
+      <label class="check"><input type="radio" name="payment_type" value="finance" {% if request.args.get('payment_type') == 'finance' %}checked{% endif %}> Finance with Carvana</label>
       <div class="finance-fields">
         <div class="est-row">
           <label for="co-down">Cash down ($)</label>
-          <input id="co-down" type="number" name="down_payment" min="0" step="250" value="0">
+          <input id="co-down" type="number" name="down_payment" min="0" step="250" value="{{ request.args.get('down_payment', '0') }}">
         </div>
         <div class="est-row">
           <label for="co-term">Term (months)</label>
           <select id="co-term" name="term">
-            {% for t in terms %}<option value="{{ t }}"{% if t == 72 %} selected{% endif %}>{{ t }}</option>{% endfor %}
+            {% for t in terms %}<option value="{{ t }}"{% if t|string == request.args.get('term', '72') %} selected{% endif %}>{{ t }}</option>{% endfor %}
           </select>
         </div>
         <div class="est-row">
           <label for="co-tier">Credit profile</label>
           <select id="co-tier" name="credit_tier">
-            {% for key, label, apr in credit_tiers %}<option value="{{ key }}"{% if key == 'good' %} selected{% endif %}>{{ label }} — {{ '%.2f'|format(apr*100) }}% APR</option>{% endfor %}
+            {% for key, label, apr in credit_tiers %}<option value="{{ key }}"{% if key == request.args.get('credit_tier', 'good') %} selected{% endif %}>{{ label }} — {{ '%.2f'|format(apr*100) }}% APR</option>{% endfor %}
           </select>
         </div>
       </div>

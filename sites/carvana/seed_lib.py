@@ -183,7 +183,9 @@ def _vehicle_row(card, details, pricing):
         "exterior_color": card.get("color") or d.get("exteriorColor"),
         "interior_color": card.get("interiorColor") or d.get("interiorColor"),
         "fuel_type": fuel,
-        "mpg_combined": card.get("milesPerGallon") or d.get("mpgCombined"),
+        # The card's milesPerGallon is not a combined rating (and can be
+        # mislabeled EV data). Only expose the explicit source field.
+        "mpg_combined": d.get("mpgCombined"),
         "transmission": d.get("transmission") or (
             "Automatic" if d.get("automaticTransmission") else None),
         "drivetrain": d.get("drivetrainDescription"),
@@ -191,8 +193,8 @@ def _vehicle_row(card, details, pricing):
         "seating": card.get("seatingCapacity") or d.get("seating"),
         "doors": d.get("doors"),
         "vin": card.get("vin") or d.get("vin"),
-        "city": loc.get("city") or "Auburn",
-        "state": loc.get("stateAbbreviation") or "WA",
+        "city": loc.get("city"),
+        "state": loc.get("stateAbbreviation"),
         "offering": card.get("offering") or d.get("offering"),
         "single_owner": single_owner,
         "accident_free": accident_free,

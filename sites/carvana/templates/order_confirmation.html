@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="confirm-details">
-    <div><span>Payment</span>{% if order.payment_type == 'cash' %}Cash — {{ order.vehicle.price|money }}{% else %}Financed — {{ order.monthly_payment|money }}/mo over {{ order.term_months }} months at {{ order.apr }}% APR with {{ order.down_payment|money }} down{% endif %}</div>
+    <div><span>Payment</span>{% if order.payment_type == 'cash' %}Cash — {{ order.vehicle.financed_principal(trade_credit=order.trade_credit)|money }} due, including estimated taxes and fees after trade credit{% else %}Financed — {{ order.monthly_payment|money }}/mo over {{ order.term_months }} months at {{ order.apr }}% APR with {{ order.down_payment|money }} down{% endif %}</div>
     {% if order.payment_type == 'finance' %}<div><span>Amount financed</span>{{ order.vehicle.financed_principal(order.down_payment, order.trade_credit)|money }}</div>{% endif %}
     {% if order.trade_credit %}<div><span>Trade-in credit</span>{{ order.trade_credit|money }}</div>{% endif %}
     <div><span>Delivery date</span>{{ order.delivery_date }}</div>
