@@ -112,7 +112,7 @@ All registered websites and their default ports, in registration order from left
 | UPS | 40123 | United Airlines | 40124 | US Appliance | 40125 |
 | USCIS | 40126 | Tumblr | 40127 | Zara | 40128 |
 | USPS | 40129 | Wanderlog | 40130 | Virginia DMV | 40131 |
-| Verizon | 40132 |  |  |  |  |
+| Verizon | 40132 | Disney | 40200 |  |  |  |
 
 ## 🤝 Contribute
 

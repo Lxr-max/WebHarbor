@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}My Favorites | Disney{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">My Favorites</h1>
+  {% set total = grouped['movie']|length + grouped['show']|length + grouped['attraction']|length + grouped['product']|length + grouped['game']|length %}
+  <p class="page-sub">{{ total }} favorite{{ 's' if total != 1 }} saved to your Disney account.</p>
+
+  {% for kind, label in [('movie','Movies'), ('show','Shows'), ('attraction','Parks'), ('product','Shop'), ('game','Games')] %}
+    {% if grouped[kind] %}
+    <div class="section-head"><h2>{{ label }}</h2></div>
+    <div class="grid cols-5">
+      {% for entry in grouped[kind] %}
+      {% set item = entry.item %}
+      {% if item %}
+      {% if kind == 'movie' %}
+      <a class="card" href="{{ url_for('movie_detail', slug=item.slug) }}">
+        <div class="card-img card-poster">{% if img(item.poster) %}<img src="{{ img(item.poster) }}" alt="{{ item.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ item.title }}</p></div>
+      </a>
+      {% elif kind == 'show' %}
+      <a class="card" href="{{ url_for('show_detail', slug=item.slug) }}">
+        <div class="card-img">{% if img(item.thumb) %}<img src="{{ img(item.thumb) }}" alt="{{ item.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ item.title }}</p></div>
+      </a>
+      {% elif kind == 'attraction' %}
+      <a class="card" href="{{ url_for('attraction_detail', park=item.park_slug, slug=item.slug) }}">
+        <div class="card-img">{% if img(item.image) %}<img src="{{ img(item.image) }}" alt="{{ item.name }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ item.name }}</p><p class="card-meta">{{ item.park }}</p></div>
+      </a>
+      {% elif kind == 'product' %}
+      <a class="card" href="{{ url_for('product_detail', pid=item.pid) }}">
+        <div class="card-img">{% if item.image_list() %}<img src="{{ img(item.image_list()[0]) }}" alt="{{ item.name }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ item.name }}</p><p class="card-meta">${{ '%.2f'|format(item.price or 0) }}</p></div>
+      </a>
+      {% else %}
+      <a class="card" href="{{ url_for('game_detail', slug=item.slug) }}">
+        <div class="card-img">{% if img(item.image) %}<img src="{{ img(item.image) }}" alt="{{ item.title }}">{% endif %}</div>
+        <div class="card-body"><p class="card-title">{{ item.title }}</p></div>
+      </a>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% if total == 0 %}
+  <p class="empty">No favorites yet. Browse movies, shows, parks and products and add your favorites.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ m.title }} | Disney Movies{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="breadcrumb"><a href="{{ url_for('movies') }}">All Movies</a> / {{ m.title }}</p>
+  <div class="detail">
+    <div class="detail-poster">
+      {% if img(m.poster) %}<img src="{{ img(m.poster) }}" alt="{{ m.title }} poster">{% endif %}
+    </div>
+    <div>
+      <h1>{{ m.title }}</h1>
+      <div class="meta-rows">
+        <div class="meta-item"><span class="k">Rating</span><span class="v">{{ m.rating or 'Not rated' }}</span></div>
+        <div class="meta-item"><span class="k">Runtime</span><span class="v">{{ m.runtime or '—' }}</span></div>
+        <div class="meta-item"><span class="k">Release Date</span><span class="v">{{ m.release_date or '—' }}</span></div>
+        <div class="meta-item"><span class="k">Status</span><span class="v">{{ status_label }}</span></div>
+      </div>
+      <div class="chips" style="margin-bottom:16px">
+        {% for g in m.genre_list() %}<span class="chip">{{ g }}</span>{% endfor %}
+      </div>
+      <p class="synopsis">{{ m.synopsis }}</p>
+
+      {% if m.directed_by %}
+      <h2 class="h2">Directed By</h2>
+      <p class="synopsis">{{ m.directed_by|replace('|', ', ') }}</p>
+      {% endif %}
+      {% if m.produced_by %}
+      <h2 class="h2">Produced By</h2>
+      <p class="synopsis">{{ m.produced_by|replace('|', ', ') }}</p>
+      {% endif %}
+      {% if m.cast %}
+      <h2 class="h2">Cast</h2>
+      <p class="synopsis">{{ m.cast|replace('|', ', ') }}</p>
+      {% endif %}
+      {% if m.awards %}
+      <h2 class="h2">Awards</h2>
+      <ul>
+        {% for a in m.awards.split('|') %}{% if a %}<li>{{ a }}</li>{% endif %}{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin:18px 0">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="type" value="movie">
+        <input type="hidden" name="key" value="{{ m.slug }}">
+        <input type="hidden" name="back" value="{{ url_for('movie_detail', slug=m.slug) }}">
+        <button class="btn" type="submit">Add to Favorites</button>
+      </form>
+      {% endif %}
+
+      {% if videos %}
+      <h2 class="h2">Videos</h2>
+      <ul>
+        {% for v in videos %}<li>{{ v }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if gallery %}
+      <h2 class="h2">{{ m.title }} Image Gallery</h2>
+      <div class="gallery">
+        {% for g in gallery %}{% if img(g) %}<img src="{{ img(g) }}" alt="{{ m.title }} still">{% endif %}{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
