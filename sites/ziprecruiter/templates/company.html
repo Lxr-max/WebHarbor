@@ -34,14 +34,14 @@
       {% if co.findings_list() %}
       <div class="perks">
         <h3>What {{ co.name }} employees say</h3>
-        <ul>{% for f in co.findings_list() %}<li><strong>{{ f.short }}</strong> — {{ f.detail }}</li>{% endfor %}</ul>
+        <ul>{% for f in co.findings_list() %}<li><strong>{{ f.short }}</strong> — {{ f.detail|rich_text }}</li>{% endfor %}</ul>
       </div>
       {% endif %}
     </section>
 
     <section class="detail-section">
       <h2>Jobs at {{ co.name }}</h2>
-      <p class="snapshot">{{ jobs|length }} open roles from {{ co.name }} in this snapshot</p>
+      <p class="snapshot">{{ total }} open roles from {{ co.name }} in this snapshot</p>
       {% if locations %}
       <p class="snapshot">Jobs by location:
         {% for (city, state), n in locations %}

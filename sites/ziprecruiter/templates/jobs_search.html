@@ -55,7 +55,7 @@
   <section class="results" aria-label="Job results">
     <div class="serp-head">
       <h1>{{ total }} {{ term|capitalize if term else 'Job' }} Jobs{% if location %} in {{ location }}{% endif %}</h1>
-      <p class="snapshot">Showing results {{ first_index }}–{{ first_index + jobs|length - 1 }}{% if snapshot %} · upstream reported {{ snapshot.upstream_total }} matching jobs on the 2026-09-29 capture date{% endif %}</p>
+      <p class="snapshot">Showing results {{ first_index if jobs else 0 }}–{{ first_index + jobs|length - 1 if jobs else 0 }}{% if snapshot %} · upstream reported {{ snapshot.upstream_total }} matching jobs on the 2026-09-29 capture date{% endif %}</p>
       <div class="filter-chips">
         {% if f.apply == 'quick' %}<span class="chip">Quick apply only</span>{% endif %}
         {% if f.remote %}<span class="chip">{{ remote_labels[f.remote] }}</span>{% endif %}

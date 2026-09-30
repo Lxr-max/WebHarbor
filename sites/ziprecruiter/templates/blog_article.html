@@ -11,7 +11,7 @@
   </header>
   <div class="article-body">{{ art.body_html|safe }}</div>
   <footer class="article-footer">
-    <h2>More Articles by {{ art.author }}</h2>
+    <h2>More Career Advice</h2>
     <ul>
       {% for m in more %}
       <li><a href="/blog/{{ m.slug }}/">{{ m.title }}</a></li>
