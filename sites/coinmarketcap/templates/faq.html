@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Frequently Asked Questions (FAQ) | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Frequently Asked Questions (FAQ)</h1>
+<p class="muted">Captured from coinmarketcap.com's FAQ page (rendered {{ mirror_date }} UTC).</p>
+
+{% for b in blocks %}
+<div class="faq-block">
+  <p class="q">{{ b.q }}</p>
+  <p class="muted">{{ b.a }}</p>
+</div>
+{% endfor %}
+{% endblock %}

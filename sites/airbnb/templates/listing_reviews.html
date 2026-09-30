@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Reviews for {{ lst.name }} | Airbnb{% endblock %}
+{% block content %}
+<div style="margin-top:24px;">
+  <p><a href="{{ url_for('listing_detail', lid=lst.id) }}">&larr; Back to {{ lst.name }}</a></p>
+  <h1>{{ lst.name }}</h1>
+  <p class="muted">{{ lst.title }} &middot;
+    {% if lst.rating %}<span class="rating-star">&#9733; {{ lst.rating }}</span> &middot; {{ lst.reviews_count }} reviews{% else %}New listing{% endif %}</p>
+
+  {% if quality.is_guest_favorite %}
+  <div class="note"><strong>&#9733; Guest favorite</strong> — {{ quality.guest_favorite_description }}</div>
+  {% endif %}
+
+  <section class="section">
+    <h2>Rating breakdown</h2>
+    {% if quality.category_ratings %}
+    <table class="table">
+      <tr><th>Category</th><th>Average</th></tr>
+      {% for c in quality.category_ratings %}
+      <tr><td>{{ c.category|title }}</td><td>{{ c.average }}</td></tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p class="muted small">Category ratings weren't captured for this listing.</p>
+    {% endif %}
+    {% if tags %}
+    <h3>What guests mentioned</h3>
+    <div class="tagpills">
+      {% for t in tags %}
+      <span class="pill">{{ t.name }} ({{ t.count }})</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="section">
+    <h2>{{ reviews|length }} captured reviews</h2>
+    {% for r in reviews %}
+    <div class="rev">
+      <div class="head">
+        <div class="avatar">{{ (r.reviewer or '?')[:1] }}</div>
+        <div><strong>{{ r.reviewer }}</strong><br>
+          <span class="muted small">{{ r.localized_date }}{% if r.reviewer_location %} &middot; {{ r.reviewer_location }}{% endif %}</span>
+        </div>
+      </div>
+      <p>{% if r.rating %}<span class="rating-star">&#9733; {{ r.rating }}</span> &nbsp;{% endif %}{{ r.text }}</p>
+      {% if r.host_response %}
+      <div class="host-reply"><strong>Response from {{ lst.host_name or 'the host' }}:</strong> {{ r.host_response }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

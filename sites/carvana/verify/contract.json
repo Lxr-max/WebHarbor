@@ -1,0 +1,1471 @@
+{
+  "Carvana--0": {
+    "task": "I'm choosing a Honda under $25,000 and haven't decided between an SUV and a sedan. Compare the first matching vehicle of each body style by year, model, mileage, price, exterior color, fuel type and MPG. Tell me how many Hondas match each body-style search at that budget.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4599463(?:$|[/?])",
+      "/vehicle/4447089(?:$|[/?])"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2016\\ honda\\ pilot"
+      ],
+      [
+        "fact 2",
+        "2016\\ honda\\ pilot(?:(?!2023\\ honda\\ accord).){0,700}?price.{0,16}?\\$17990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2016\\ honda\\ pilot(?:(?!2023\\ honda\\ accord).){0,700}?mileage.{0,16}?100382 miles"
+      ],
+      [
+        "fact 4",
+        "2016\\ honda\\ pilot(?:(?!2023\\ honda\\ accord).){0,700}?(?:exterior )?color.{0,16}?gray"
+      ],
+      [
+        "fact 5",
+        "2016\\ honda\\ pilot(?:(?!2023\\ honda\\ accord).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 6",
+        "2016\\ honda\\ pilot(?:(?!2023\\ honda\\ accord).){0,700}?mpg(?:e)?(?: \\(combined\\))?.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 7",
+        "2023\\ honda\\ accord"
+      ],
+      [
+        "fact 8",
+        "2023\\ honda\\ accord(?:(?!2016\\ honda\\ pilot).){0,700}?price.{0,16}?\\$22990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "2023\\ honda\\ accord(?:(?!2016\\ honda\\ pilot).){0,700}?mileage.{0,16}?71112 miles"
+      ],
+      [
+        "fact 10",
+        "2023\\ honda\\ accord(?:(?!2016\\ honda\\ pilot).){0,700}?(?:exterior )?color.{0,16}?white"
+      ],
+      [
+        "fact 11",
+        "2023\\ honda\\ accord(?:(?!2016\\ honda\\ pilot).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 12",
+        "2023\\ honda\\ accord(?:(?!2016\\ honda\\ pilot).){0,700}?mpg(?:e)?(?: \\(combined\\))?.{0,16}?32"
+      ],
+      [
+        "fact 13",
+        "24 honda suvs"
+      ],
+      [
+        "fact 14",
+        "23 honda sedans"
+      ]
+    ]
+  },
+  "Carvana--1": {
+    "task": "Find the cheapest electric car from 2022 or later costing no more than $30,000. Report the matching count and the chosen car's year, make, model, mileage, price, drivetrain and city. Estimate its monthly payment with $2,500 down over 60 months using the Great credit profile so I can assess affordability.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4452259(?:$|[/?])",
+      "/vehicle/4452259/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2025\\ nissan\\ leaf"
+      ],
+      [
+        "fact 2",
+        "2025\\ nissan\\ leaf(?:(?!(?!)).){0,700}?price.{0,16}?\\$15990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2025\\ nissan\\ leaf(?:(?!(?!)).){0,700}?mileage.{0,16}?29197 miles"
+      ],
+      [
+        "fact 4",
+        "2025\\ nissan\\ leaf(?:(?!(?!)).){0,700}?drivetrain.{0,16}?fwd"
+      ],
+      [
+        "fact 5",
+        "2025\\ nissan\\ leaf(?:(?!(?!)).){0,700}?city.{0,16}?tooele,\\ ut"
+      ],
+      [
+        "fact 6",
+        "2025\\ nissan\\ leaf.{0,10}great credit.{0,8}\\$2500(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$300(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 7",
+        "42 matching"
+      ]
+    ]
+  },
+  "Carvana--2": {
+    "task": "I'm shopping for a sedan with no more than 40,000 miles and a price at or below $20,000. Compare the two cheapest matches by year, make, model, mileage, price, exterior color, fuel type and MPG. Include the matching count and explain which has the lower mileage.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4636804(?:$|[/?])",
+      "/vehicle/4675077(?:$|[/?])"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2020\\ hyundai\\ accent"
+      ],
+      [
+        "fact 2",
+        "2020\\ hyundai\\ accent(?:(?!2020\\ hyundai\\ elantra).){0,700}?price.{0,16}?\\$15990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2020\\ hyundai\\ accent(?:(?!2020\\ hyundai\\ elantra).){0,700}?mileage.{0,16}?34670 miles"
+      ],
+      [
+        "fact 4",
+        "2020\\ hyundai\\ accent(?:(?!2020\\ hyundai\\ elantra).){0,700}?(?:exterior )?color.{0,16}?black"
+      ],
+      [
+        "fact 5",
+        "2020\\ hyundai\\ accent(?:(?!2020\\ hyundai\\ elantra).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 6",
+        "2020\\ hyundai\\ accent(?:(?!2020\\ hyundai\\ elantra).){0,700}?mpg(?:e)?(?: \\(combined\\))?.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 7",
+        "2020\\ hyundai\\ elantra"
+      ],
+      [
+        "fact 8",
+        "2020\\ hyundai\\ elantra(?:(?!2020\\ hyundai\\ accent).){0,700}?price.{0,16}?\\$16990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "2020\\ hyundai\\ elantra(?:(?!2020\\ hyundai\\ accent).){0,700}?mileage.{0,16}?38398 miles"
+      ],
+      [
+        "fact 10",
+        "2020\\ hyundai\\ elantra(?:(?!2020\\ hyundai\\ accent).){0,700}?(?:exterior )?color.{0,16}?white"
+      ],
+      [
+        "fact 11",
+        "2020\\ hyundai\\ elantra(?:(?!2020\\ hyundai\\ accent).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 12",
+        "2020\\ hyundai\\ elantra(?:(?!2020\\ hyundai\\ accent).){0,700}?mpg(?:e)?(?: \\(combined\\))?.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 13",
+        "34 matches"
+      ],
+      [
+        "fact 14",
+        "accent.{0,35}lower mileage"
+      ]
+    ]
+  },
+  "Carvana--3": {
+    "task": "Help me budget for the newest Toyota Camry in the catalog. Report its year, mileage, price, exterior color and fuel type, and compare its monthly payments with $3,000 down for three scenarios: Good credit over 72 months, Good credit over 60 months, and Excellent credit over 60 months. Include estimated taxes and fees and explain which scenario has the lowest monthly payment.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4754196(?:$|[/?])",
+      "/vehicle/4754196/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2026\\ toyota\\ camry"
+      ],
+      [
+        "fact 2",
+        "2026\\ toyota\\ camry(?:(?!(?!)).){0,700}?price.{0,16}?\\$30990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2026\\ toyota\\ camry(?:(?!(?!)).){0,700}?mileage.{0,16}?15201 miles"
+      ],
+      [
+        "fact 4",
+        "2026\\ toyota\\ camry(?:(?!(?!)).){0,700}?(?:exterior )?color.{0,16}?blue"
+      ],
+      [
+        "fact 5",
+        "2026\\ toyota\\ camry(?:(?!(?!)).){0,700}?fuel(?: type)?.{0,16}?hybrid"
+      ],
+      [
+        "fact 6",
+        "2026\\ toyota\\ camry.{0,10}good credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$536(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 7",
+        "2026\\ toyota\\ camry.{0,10}good credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,170}taxes and fees.{0,10}\\$3470(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "2026\\ toyota\\ camry.{0,10}good credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$623(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 9",
+        "2026\\ toyota\\ camry.{0,10}good credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,170}taxes and fees.{0,10}\\$3470(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "2026\\ toyota\\ camry.{0,10}excellent credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$601(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 11",
+        "2026\\ toyota\\ camry.{0,10}excellent credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,170}taxes and fees.{0,10}\\$3470(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "72.month.{0,15}good.credit.{0,35}lowest monthly"
+      ]
+    ]
+  },
+  "Carvana--4": {
+    "task": "Create a new account with a fresh email and a password of at least eight characters, and buy the cheapest Jeep Wrangler found by keyword search, including Wrangler Unlimited models. Use financing with $2,500 down over 60 months and Great credit, with no trade-in. Schedule the earliest available delivery in the 8:00 AM - 10:00 AM window to 500 Sunset Blvd, Scottsdale, AZ 85254. Confirm the order number, car, mileage, monthly payment and delivery date.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "order_events": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "order_id": 4,
+            "status": "Order placed",
+            "note": "Order placed online",
+            "occurred_at": "2026-09-29"
+          },
+          {
+            "id": 12,
+            "order_id": 4,
+            "status": "Delivery scheduled",
+            "note": "Delivery scheduled for 2026-09-30 (8:00 AM - 10:00 AM) to Scottsdale, AZ",
+            "occurred_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 4,
+            "order_number": "CV-200044",
+            "user_id": 5,
+            "vehicle_id": 986,
+            "payment_type": "finance",
+            "down_payment": 2500,
+            "trade_credit": 0,
+            "term_months": 60,
+            "apr": "6.24",
+            "monthly_payment": 398,
+            "delivery_date": "2026-09-30",
+            "delivery_slot": "8:00 AM - 10:00 AM",
+            "delivery_city": "Scottsdale",
+            "delivery_state": "AZ",
+            "delivery_street": "500 Sunset Blvd",
+            "delivery_zip": "85254",
+            "status": "Delivery scheduled",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "display_name": {
+              "regex": "\\S[\\s\\S]*"
+            },
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "is_benchmark": 0,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4737374(?:$|[/?])",
+      "/order/CV-",
+      "/account/orders"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2019\\ jeep\\ wrangler\\ unlimited"
+      ],
+      [
+        "fact 2",
+        "2019\\ jeep\\ wrangler\\ unlimited(?:(?!(?!)).){0,700}?price.{0,16}?\\$20590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2019\\ jeep\\ wrangler\\ unlimited(?:(?!(?!)).){0,700}?mileage.{0,16}?91951 miles"
+      ],
+      [
+        "fact 4",
+        "cv\\-200044"
+      ],
+      [
+        "fact 5",
+        "8:00\\ am\\ \\-\\ 10:00\\ am"
+      ],
+      [
+        "fact 6",
+        "500\\ sunset\\ blvd"
+      ],
+      [
+        "fact 7",
+        "scottsdale"
+      ],
+      [
+        "fact 8",
+        "az\\ 85254"
+      ],
+      [
+        "fact 9",
+        "(?:\\$398 (?:per month|monthly)|monthly payment.{0,8}\\$398)"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_events",
+        "foreign_key": "order_id"
+      },
+      {
+        "left": "users",
+        "right": "orders",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "Carvana--5": {
+    "task": "I'm replacing my saved Toyota RAV4 with a Tesla Model Y. Log in as alice.j@test.com with password TestPass123!, find the first Model Y result, and estimate its payment with $2,000 down over 60 months using Great credit. Save that car and remove the RAV4. Report the estimate and the final saved vehicles with their prices, preserving my other saved cars.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "favorites": {
+        "removed": [
+          "[2]"
+        ],
+        "added": [
+          {
+            "id": 9,
+            "user_id": 1,
+            "vehicle_id": 355,
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4650840(?:$|[/?])",
+      "/vehicle/4650840/payment-estimate",
+      "/account/favorites"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2025\\ tesla\\ model\\ y"
+      ],
+      [
+        "fact 2",
+        "2025\\ tesla\\ model\\ y(?:(?!(?!)).){0,700}?price.{0,16}?\\$40590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2025\\ tesla\\ model\\ y(?:(?!(?!)).){0,700}?mileage.{0,16}?12133 miles"
+      ],
+      [
+        "fact 4",
+        "2025\\ tesla\\ model\\ y.{0,10}great credit.{0,8}\\$2000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$837(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 5",
+        "2025 tesla model y at \\$40590"
+      ],
+      [
+        "fact 6",
+        "2019 tesla model 3 at \\$17990"
+      ],
+      [
+        "fact 7",
+        "2022 honda civic at \\$28990"
+      ],
+      [
+        "fact 8",
+        "removed the rav4"
+      ]
+    ]
+  },
+  "Carvana--6": {
+    "task": "Find a single-owner, accident-free vehicle under $20,000. Compare the cheapest match with the lowest-mileage match by year, make, model, mileage, price, prior use, engine and city. Report how many vehicles meet all three constraints and explain the price-versus-mileage tradeoff.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4661379(?:$|[/?])",
+      "/vehicle/4452259(?:$|[/?])"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2018\\ smart\\ fortwo\\ electric\\ drive"
+      ],
+      [
+        "fact 2",
+        "2018\\ smart\\ fortwo\\ electric\\ drive(?:(?!2025\\ nissan\\ leaf).){0,700}?price.{0,16}?\\$11990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2018\\ smart\\ fortwo\\ electric\\ drive(?:(?!2025\\ nissan\\ leaf).){0,700}?mileage.{0,16}?32591 miles"
+      ],
+      [
+        "fact 4",
+        "2018\\ smart\\ fortwo\\ electric\\ drive(?:(?!2025\\ nissan\\ leaf).){0,700}?prior use.{0,16}?lease"
+      ],
+      [
+        "fact 5",
+        "2018\\ smart\\ fortwo\\ electric\\ drive(?:(?!2025\\ nissan\\ leaf).){0,700}?engine.{0,16}?electric"
+      ],
+      [
+        "fact 6",
+        "2018\\ smart\\ fortwo\\ electric\\ drive(?:(?!2025\\ nissan\\ leaf).){0,700}?city.{0,16}?wood\\ village,\\ or"
+      ],
+      [
+        "fact 7",
+        "2025\\ nissan\\ leaf"
+      ],
+      [
+        "fact 8",
+        "2025\\ nissan\\ leaf(?:(?!2018\\ smart\\ fortwo\\ electric\\ drive).){0,700}?price.{0,16}?\\$15990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "2025\\ nissan\\ leaf(?:(?!2018\\ smart\\ fortwo\\ electric\\ drive).){0,700}?mileage.{0,16}?29197 miles"
+      ],
+      [
+        "fact 10",
+        "2025\\ nissan\\ leaf(?:(?!2018\\ smart\\ fortwo\\ electric\\ drive).){0,700}?prior use.{0,16}?personal"
+      ],
+      [
+        "fact 11",
+        "2025\\ nissan\\ leaf(?:(?!2018\\ smart\\ fortwo\\ electric\\ drive).){0,700}?engine.{0,16}?electric"
+      ],
+      [
+        "fact 12",
+        "2025\\ nissan\\ leaf(?:(?!2018\\ smart\\ fortwo\\ electric\\ drive).){0,700}?city.{0,16}?tooele,\\ ut"
+      ],
+      [
+        "fact 13",
+        "7 matches"
+      ],
+      [
+        "fact 14",
+        "smart.{0,15}\\$4000 cheaper"
+      ],
+      [
+        "fact 15",
+        "leaf.{0,15}3394 fewer miles"
+      ]
+    ]
+  },
+  "Carvana--7": {
+    "task": "Help me understand the demo valuation for VIN 1HGCM82633A004352 before accepting an offer. Compare Good and Excellent condition at 45,000 miles, and Good condition at 60,000 miles, reporting each simulated offer and the differences. Log in as bob.c@test.com with password TestPass123! and accept the 45,000-mile Good-condition offer. Confirm its saved offer code and amount.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "trade_in_offers": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "user_id": 2,
+            "vin": "1HGCM82633A004352",
+            "year": 2020,
+            "make": "\u2014",
+            "model": "\u2014",
+            "trim": null,
+            "mileage": 45000,
+            "condition": "good",
+            "offer_amount": 18971,
+            "offer_code": "TI-91013",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/sell-my-car/offer",
+      "/account/orders"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "simulat"
+      ],
+      [
+        "fact 2",
+        "45000 miles.{0,20}good.{0,25}\\$18971"
+      ],
+      [
+        "fact 3",
+        "excellent.{0,15}\\$20621"
+      ],
+      [
+        "fact 4",
+        "increase.{0,10}\\$1650"
+      ],
+      [
+        "fact 5",
+        "60000 miles.{0,15}good.{0,15}\\$18346"
+      ],
+      [
+        "fact 6",
+        "decrease.{0,10}\\$625"
+      ],
+      [
+        "fact 7",
+        "ti-91013.{0,10}\\$18971"
+      ]
+    ]
+  },
+  "Carvana--8": {
+    "task": "I'm considering the first 2022 Kia Telluride in the search results. Review its price, mileage, engine, transmission, drivetrain, seating, VIN, city, accidents and prior use. Include the owner-review count and the first review's author and rating. Compare monthly payments with $5,000 down and Great credit over 60 and 72 months to help me choose a loan term.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4255570(?:$|[/?])",
+      "/vehicle/4255570/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2022\\ kia\\ telluride"
+      ],
+      [
+        "fact 2",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?price.{0,16}?\\$26990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?mileage.{0,16}?65981 miles"
+      ],
+      [
+        "fact 4",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?engine.{0,16}?lambda\\ ii\\ 3\\.8l\\ v\\-6\\ dohc"
+      ],
+      [
+        "fact 5",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?transmission.{0,16}?8\\-speed\\ automatic"
+      ],
+      [
+        "fact 6",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?drivetrain.{0,16}?awd"
+      ],
+      [
+        "fact 7",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?seating.{0,16}?7"
+      ],
+      [
+        "fact 8",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?vin.{0,16}?5xyp6dhc3ng255505"
+      ],
+      [
+        "fact 9",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?city.{0,16}?rocklin,\\ ca"
+      ],
+      [
+        "fact 10",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?(?:reported )?accidents.{0,16}?none reported"
+      ],
+      [
+        "fact 11",
+        "2022\\ kia\\ telluride(?:(?!(?!)).){0,700}?prior use.{0,16}?personal"
+      ],
+      [
+        "fact 12",
+        "2022\\ kia\\ telluride.{0,10}great credit.{0,8}\\$5000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$487(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 13",
+        "2022\\ kia\\ telluride.{0,10}great credit.{0,8}\\$5000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$418(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 14",
+        "20 owner reviews"
+      ],
+      [
+        "fact 15",
+        "brianne b\\..{0,20}5/5"
+      ]
+    ]
+  },
+  "Carvana--9": {
+    "task": "Help me reconcile my delivered car purchase. Log in as bob.c@test.com with password TestPass123! and summarize the delivered order's number, vehicle, mileage, monthly payment, loan term, APR, down payment, delivery date, time window and destination. Include the complete status timeline, the trade-in offer code and amount on the account, and the ordered vehicle's stock number and VIN.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4528064(?:$|[/?])",
+      "/account/orders"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2019\\ ford\\ f150\\ supercrew\\ cab"
+      ],
+      [
+        "fact 2",
+        "2019\\ ford\\ f150\\ supercrew\\ cab(?:(?!(?!)).){0,700}?price.{0,16}?\\$27990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2019\\ ford\\ f150\\ supercrew\\ cab(?:(?!(?!)).){0,700}?mileage.{0,16}?49425 miles"
+      ],
+      [
+        "fact 4",
+        "2019\\ ford\\ f150\\ supercrew\\ cab(?:(?!(?!)).){0,700}?stock (?:#|number).{0,16}?2005002901"
+      ],
+      [
+        "fact 5",
+        "2019\\ ford\\ f150\\ supercrew\\ cab(?:(?!(?!)).){0,700}?vin.{0,16}?1ftew1cpxkfd28108"
+      ],
+      [
+        "fact 6",
+        "cv-100019"
+      ],
+      [
+        "fact 7",
+        "\\$462 monthly.{0,20}72 months.{0,15}6\\.99% apr.{0,10}\\$4000 down"
+      ],
+      [
+        "fact 8",
+        "september 12,? 2026.{0,10}10:00 am.{0,5}12:00 pm.{0,10}scottsdale, az"
+      ],
+      [
+        "fact 9",
+        "september 2.{0,10}order placed.{0,10}order placed online"
+      ],
+      [
+        "fact 10",
+        "september 3.{0,10}financing approved"
+      ],
+      [
+        "fact 11",
+        "september 3.{0,10}delivery scheduled"
+      ],
+      [
+        "fact 12",
+        "september 12.{0,10}out for delivery.{0,20}loaded"
+      ],
+      [
+        "fact 13",
+        "september 12.{0,10}delivered.{0,70}7.day money.back"
+      ],
+      [
+        "fact 14",
+        "ti-90013.{0,10}\\$27518"
+      ]
+    ]
+  },
+  "Carvana--10": {
+    "task": "I'm budgeting for the 2025 Ram 2500. Report its price, mileage, engine, drivetrain and estimated taxes and fees. Compare financing with $10,000 down at Excellent credit over 84 and 72 months, then Poor credit over 72 months with $10,000 and $15,000 down. Give each monthly payment and amount financed so I can see the effects of term, credit and deposit.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4120245(?:$|[/?])",
+      "/vehicle/4120245/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2025\\ ram\\ 2500\\ crew\\ cab"
+      ],
+      [
+        "fact 2",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!(?!)).){0,700}?price.{0,16}?\\$61590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!(?!)).){0,700}?mileage.{0,16}?17 miles"
+      ],
+      [
+        "fact 4",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!(?!)).){0,700}?engine.{0,16}?cummins\\ high\\ output\\ 6\\.7l\\ i\\-6"
+      ],
+      [
+        "fact 5",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!(?!)).){0,700}?drivetrain.{0,16}?rwd"
+      ],
+      [
+        "fact 6",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}84 months.{0,30}(?:payment|monthly).{0,10}\\$837(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 7",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}84 months.{0,110}amount financed.{0,10}\\$58234(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}84 months.{0,170}taxes and fees.{0,10}\\$6644(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 9",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$951(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 10",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,110}amount financed.{0,10}\\$58234(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 11",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}excellent credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,170}taxes and fees.{0,10}\\$6644(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 12",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$1138(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 13",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,110}amount financed.{0,10}\\$58234(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 14",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$10000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,170}taxes and fees.{0,10}\\$6644(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 15",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$15000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$1040(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 16",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$15000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,110}amount financed.{0,10}\\$53234(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 17",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}poor credit.{0,8}\\$15000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,170}taxes and fees.{0,10}\\$6644(?:\\.00)?(?!\\d|\\.\\d)"
+      ]
+    ]
+  },
+  "Carvana--11": {
+    "task": "Log in as carol.d@test.com with password TestPass123! and buy the cheapest Mazda CX-5 for cash with a $5,000 trade-in credit. Schedule the last available delivery date in the 4:00 PM - 6:00 PM window to 1040 N State St, Chicago, IL 60610. Confirm the order number, vehicle year, mileage, price, color, fuel type, cash amount due, delivery date and the new order's status timeline.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "order_events": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "order_id": 4,
+            "status": "Order placed",
+            "note": "Order placed online",
+            "occurred_at": "2026-09-29"
+          },
+          {
+            "id": 12,
+            "order_id": 4,
+            "status": "Delivery scheduled",
+            "note": "Delivery scheduled for 2026-10-06 (4:00 PM - 6:00 PM) to Chicago, IL",
+            "occurred_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 4,
+            "order_number": "CV-200042",
+            "user_id": 3,
+            "vehicle_id": 1013,
+            "payment_type": "cash",
+            "down_payment": 0,
+            "trade_credit": 5000,
+            "term_months": null,
+            "apr": null,
+            "monthly_payment": null,
+            "delivery_date": "2026-10-06",
+            "delivery_slot": "4:00 PM - 6:00 PM",
+            "delivery_city": "Chicago",
+            "delivery_state": "IL",
+            "delivery_street": "1040 N State St",
+            "delivery_zip": "60610",
+            "status": "Delivery scheduled",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4739440(?:$|[/?])",
+      "/order/CV-",
+      "/account/orders"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2016\\ mazda\\ cx\\-5"
+      ],
+      [
+        "fact 2",
+        "2016\\ mazda\\ cx\\-5(?:(?!(?!)).){0,700}?price.{0,16}?\\$16990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2016\\ mazda\\ cx\\-5(?:(?!(?!)).){0,700}?mileage.{0,16}?84486 miles"
+      ],
+      [
+        "fact 4",
+        "2016\\ mazda\\ cx\\-5(?:(?!(?!)).){0,700}?(?:exterior )?color.{0,16}?white"
+      ],
+      [
+        "fact 5",
+        "2016\\ mazda\\ cx\\-5(?:(?!(?!)).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 6",
+        "cash due.{0,10}\\$14007"
+      ],
+      [
+        "fact 7",
+        "\\$5000 trade credit"
+      ],
+      [
+        "fact 8",
+        "order placed online"
+      ],
+      [
+        "fact 9",
+        "delivery scheduled"
+      ],
+      [
+        "fact 10",
+        "cv\\-200042"
+      ],
+      [
+        "fact 11",
+        "4:00\\ pm\\ \\-\\ 6:00\\ pm"
+      ],
+      [
+        "fact 12",
+        "1040\\ n\\ state\\ st"
+      ],
+      [
+        "fact 13",
+        "chicago"
+      ],
+      [
+        "fact 14",
+        "il\\ 60610"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_events",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Carvana--12": {
+    "task": "Log in as dana.k@test.com with password TestPass123! and correct my contact details: set my phone to (617) 555-0700 and ZIP code to 02110 while preserving the rest of my profile. Sign out and back in to confirm the changes persisted, then report the saved phone, street address, city, state and ZIP.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "profiles": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[4]": {
+            "phone": "(617) 555-0700",
+            "zip5": "02110"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/profile"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "phone.{0,10}\\(617\\) 555-0700"
+      ],
+      [
+        "fact 2",
+        "77 beacon st.{0,5}boston.{0,5}ma 02110"
+      ]
+    ]
+  },
+  "Carvana--13": {
+    "task": "Help me compare the newest Mustang with the lowest-mileage Mustang in the catalog. Report each one's year, price, mileage, engine, transmission, drivetrain and exterior color. For the 2025 Mustang GT Premium, compare monthly payments with $2,000 and $4,000 down over 66 months using Good credit.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4315759(?:$|[/?])",
+      "/vehicle/4715177(?:$|[/?])",
+      "/vehicle/4315759/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2025\\ ford\\ mustang"
+      ],
+      [
+        "fact 2",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?price.{0,16}?\\$39590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?mileage.{0,16}?15493 miles"
+      ],
+      [
+        "fact 4",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?engine.{0,16}?5l\\ v\\-8\\ dohc"
+      ],
+      [
+        "fact 5",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?transmission.{0,16}?10\\-speed\\ automatic"
+      ],
+      [
+        "fact 6",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?drivetrain.{0,16}?rwd"
+      ],
+      [
+        "fact 7",
+        "2025\\ ford\\ mustang(?:(?!2024\\ ford\\ mustang).){0,700}?(?:exterior )?color.{0,16}?silver"
+      ],
+      [
+        "fact 8",
+        "2024\\ ford\\ mustang"
+      ],
+      [
+        "fact 9",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?price.{0,16}?\\$31590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?mileage.{0,16}?4421 miles"
+      ],
+      [
+        "fact 11",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?engine.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 12",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?transmission.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 13",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?drivetrain.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 14",
+        "2024\\ ford\\ mustang(?:(?!2025\\ ford\\ mustang).){0,700}?(?:exterior )?color.{0,16}?blue"
+      ],
+      [
+        "fact 15",
+        "2025\\ ford\\ mustang.{0,10}good credit.{0,8}\\$2000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,30}(?:payment|monthly).{0,10}\\$767(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 16",
+        "2025\\ ford\\ mustang.{0,10}good credit.{0,8}\\$4000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,30}(?:payment|monthly).{0,10}\\$731(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 17",
+        "2025 mustang.{0,15}newest"
+      ],
+      [
+        "fact 18",
+        "2024 mustang.{0,20}lowest mileage"
+      ]
+    ]
+  },
+  "Carvana--14": {
+    "task": "I'm shopping for a diesel truck. Compare the first two diesel truck results by year, make, model, mileage, price and engine. Estimate each vehicle's monthly payment with $5,000 down over 72 months using Good credit, and tell me how many diesel trucks are listed.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4120245(?:$|[/?])",
+      "/vehicle/4668151(?:$|[/?])",
+      "/vehicle/4120245/payment-estimate",
+      "/vehicle/4668151/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2025\\ ram\\ 2500\\ crew\\ cab"
+      ],
+      [
+        "fact 2",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!2020\\ ram\\ 1500\\ crew\\ cab).){0,700}?price.{0,16}?\\$61590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!2020\\ ram\\ 1500\\ crew\\ cab).){0,700}?mileage.{0,16}?17 miles"
+      ],
+      [
+        "fact 4",
+        "2025\\ ram\\ 2500\\ crew\\ cab(?:(?!2020\\ ram\\ 1500\\ crew\\ cab).){0,700}?engine.{0,16}?cummins\\ high\\ output\\ 6\\.7l\\ i\\-6"
+      ],
+      [
+        "fact 5",
+        "2020\\ ram\\ 1500\\ crew\\ cab"
+      ],
+      [
+        "fact 6",
+        "2020\\ ram\\ 1500\\ crew\\ cab(?:(?!2025\\ ram\\ 2500\\ crew\\ cab).){0,700}?price.{0,16}?\\$27990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 7",
+        "2020\\ ram\\ 1500\\ crew\\ cab(?:(?!2025\\ ram\\ 2500\\ crew\\ cab).){0,700}?mileage.{0,16}?115835 miles"
+      ],
+      [
+        "fact 8",
+        "2020\\ ram\\ 1500\\ crew\\ cab(?:(?!2025\\ ram\\ 2500\\ crew\\ cab).){0,700}?engine.{0,16}?(?:not provided|unavailable|not (?:shown|listed|available))"
+      ],
+      [
+        "fact 9",
+        "2025\\ ram\\ 2500\\ crew\\ cab.{0,10}good credit.{0,8}\\$5000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$1078(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 10",
+        "2020\\ ram\\ 1500\\ crew\\ cab.{0,10}good credit.{0,8}\\$5000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}72 months.{0,30}(?:payment|monthly).{0,10}\\$446(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 11",
+        "5 diesel trucks"
+      ]
+    ]
+  },
+  "Carvana--15": {
+    "task": "I want to compare another Civic with the one I already ordered. Log in as alice.j@test.com with password TestPass123! and report my scheduled order's vehicle, monthly payment, term, APR and down payment. Find the first 2023 Civic in the Honda Civic results and estimate its payment with $1,500 down over 60 months using Great credit. Save that alternative without cancelling my order, and report its price, amount financed, payment and the final saved-car list.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 9,
+            "user_id": 1,
+            "vehicle_id": 959,
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4736046(?:$|[/?])",
+      "/vehicle/4736046/payment-estimate",
+      "/account/favorites"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2023\\ honda\\ civic"
+      ],
+      [
+        "fact 2",
+        "2023\\ honda\\ civic(?:(?!(?!)).){0,700}?price.{0,16}?\\$22990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2023\\ honda\\ civic(?:(?!(?!)).){0,700}?mileage.{0,16}?80147 miles"
+      ],
+      [
+        "fact 4",
+        "2023\\ honda\\ civic.{0,10}great credit.{0,8}\\$1500(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$469(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 5",
+        "2023\\ honda\\ civic.{0,10}great credit.{0,8}\\$1500(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,110}amount financed.{0,10}\\$24130(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "cv-100026.{0,30}delivery scheduled"
+      ],
+      [
+        "fact 7",
+        "\\$578 monthly.{0,10}60 months.{0,10}6\\.24% apr.{0,10}\\$2500 down"
+      ],
+      [
+        "fact 8",
+        "2023 honda civic at \\$22990"
+      ],
+      [
+        "fact 9",
+        "2019 tesla model 3 at \\$17990"
+      ],
+      [
+        "fact 10",
+        "2023 toyota rav4 at \\$31990"
+      ],
+      [
+        "fact 11",
+        "2022 honda civic at \\$28990"
+      ]
+    ]
+  },
+  "Carvana--16": {
+    "task": "I'm preparing to collect a Carvana purchase from a Vending Machine. Use Help to explain how rescheduling an appointment works, when I receive the pickup token and whether I can keep it, and whether I can buy a car inside the machine. Also check the vehicle-certification article so I know what inspection the vehicle has undergone. Ground the brief in those help articles.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/help/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "order placed dashboard.{0,30}reschedule"
+      ],
+      [
+        "fact 2",
+        "token.{0,40}(?:collect|pick up).{0,30}vending machine"
+      ],
+      [
+        "fact 3",
+        "(?:may|can|allowed to) keep"
+      ],
+      [
+        "fact 4",
+        "(?:usually|generally) already sold"
+      ],
+      [
+        "fact 5",
+        "similar vehicle.{0,15}website"
+      ],
+      [
+        "fact 6",
+        "not every vehicle is carvana certified"
+      ],
+      [
+        "fact 7",
+        "all inventory is inspected and reconditioned"
+      ],
+      [
+        "fact 8",
+        "no reported fire, flood or frame damage"
+      ]
+    ]
+  },
+  "Carvana--17": {
+    "task": "I'm considering my first online used-car purchase. Review How It Works and Carvana Certified for the inspection, return and Worry Free Guarantee terms, including days and miles. Then assess the cheapest vehicle in the catalog: report its year, make, model, price, mileage and city, and estimate the monthly payment with $3,000 down over 60 months using Good credit.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4612911(?:$|[/?])",
+      "/vehicle/4612911/payment-estimate",
+      "/how-it-works",
+      "/certified-program"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2016\\ fiat\\ 500x"
+      ],
+      [
+        "fact 2",
+        "2016\\ fiat\\ 500x(?:(?!(?!)).){0,700}?price.{0,16}?\\$10990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2016\\ fiat\\ 500x(?:(?!(?!)).){0,700}?mileage.{0,16}?85806 miles"
+      ],
+      [
+        "fact 4",
+        "2016\\ fiat\\ 500x.{0,10}good credit.{0,8}\\$3000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$186(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 5",
+        "150.point inspection"
+      ],
+      [
+        "fact 6",
+        "7.day return.{0,15}delivery"
+      ],
+      [
+        "fact 7",
+        "100 days or 4189 miles.{0,15}whichever expires first"
+      ],
+      [
+        "fact 8",
+        "refund excludes shipping fees"
+      ]
+    ]
+  },
+  "Carvana--18": {
+    "task": "I want an affordable hybrid and need to compare financing choices. Find the first hybrid costing at most $25,000 and report the matching count, its year, model, mileage, price, taxes and fees. Estimate monthly payments with Fair credit for $4,000 down over 66 months, $8,000 down over 66 months, and $8,000 down over 60 months, and identify the lowest monthly option.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {},
+    "paths": [
+      "/vehicle/4545578(?:$|[/?])",
+      "/vehicle/4545578/payment-estimate"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2018\\ toyota\\ rav4\\ hybrid"
+      ],
+      [
+        "fact 2",
+        "2018\\ toyota\\ rav4\\ hybrid(?:(?!(?!)).){0,700}?price.{0,16}?\\$21990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2018\\ toyota\\ rav4\\ hybrid(?:(?!(?!)).){0,700}?mileage.{0,16}?101467 miles"
+      ],
+      [
+        "fact 4",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$4000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,30}(?:payment|monthly).{0,10}\\$393(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 5",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$4000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,170}taxes and fees.{0,10}\\$2536(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 6",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$8000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,30}(?:payment|monthly).{0,10}\\$316(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 7",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$8000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}66 months.{0,170}taxes and fees.{0,10}\\$2536(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$8000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,30}(?:payment|monthly).{0,10}\\$341(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 9",
+        "2018\\ toyota\\ rav4\\ hybrid.{0,10}fair credit.{0,8}\\$8000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}60 months.{0,170}taxes and fees.{0,10}\\$2536(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 10",
+        "19 qualifying hybrids"
+      ],
+      [
+        "fact 11",
+        "lowest monthly option.{0,15}\\$8000 down.{0,10}66 months.{0,15}fair credit.{0,15}\\$316"
+      ]
+    ]
+  },
+  "Carvana--19": {
+    "task": "Create a new account with a fresh email and a password of at least eight characters, and buy the cheapest Nissan Frontier. Finance it with $1,500 down over 75 months using Good credit and no trade-in. Schedule the second available delivery date in the 12:00 PM - 2:00 PM window to 88 Oak Street, Denver, CO 80203. Confirm the order number, vehicle year, mileage, price, financed amount, monthly payment, delivery date and first order-timeline entry.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "order_events": {
+        "removed": [],
+        "added": [
+          {
+            "id": 11,
+            "order_id": 4,
+            "status": "Order placed",
+            "note": "Order placed online",
+            "occurred_at": "2026-09-29"
+          },
+          {
+            "id": 12,
+            "order_id": 4,
+            "status": "Delivery scheduled",
+            "note": "Delivery scheduled for 2026-10-01 (12:00 PM - 2:00 PM) to Denver, CO",
+            "occurred_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 4,
+            "order_number": "CV-200044",
+            "user_id": 5,
+            "vehicle_id": 112,
+            "payment_type": "finance",
+            "down_payment": 1500,
+            "trade_credit": 0,
+            "term_months": 75,
+            "apr": "6.99",
+            "monthly_payment": 464,
+            "delivery_date": "2026-10-01",
+            "delivery_slot": "12:00 PM - 2:00 PM",
+            "delivery_city": "Denver",
+            "delivery_state": "CO",
+            "delivery_street": "88 Oak Street",
+            "delivery_zip": "80203",
+            "status": "Delivery scheduled",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "display_name": {
+              "regex": "\\S[\\s\\S]*"
+            },
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "is_benchmark": 0,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4573288(?:$|[/?])",
+      "/order/CV-",
+      "/account/orders"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2022\\ nissan\\ frontier\\ crew\\ cab"
+      ],
+      [
+        "fact 2",
+        "2022\\ nissan\\ frontier\\ crew\\ cab(?:(?!(?!)).){0,700}?price.{0,16}?\\$26590(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2022\\ nissan\\ frontier\\ crew\\ cab(?:(?!(?!)).){0,700}?mileage.{0,16}?45523 miles"
+      ],
+      [
+        "fact 4",
+        "amount financed.{0,10}\\$28103"
+      ],
+      [
+        "fact 5",
+        "monthly payment.{0,10}\\$464"
+      ],
+      [
+        "fact 6",
+        "first timeline entry.{0,10}september 29,? 2026.{0,10}order placed.{0,10}order placed online"
+      ],
+      [
+        "fact 7",
+        "cv\\-200044"
+      ],
+      [
+        "fact 8",
+        "12:00\\ pm\\ \\-\\ 2:00\\ pm"
+      ],
+      [
+        "fact 9",
+        "88\\ oak\\ street"
+      ],
+      [
+        "fact 10",
+        "denver"
+      ],
+      [
+        "fact 11",
+        "co\\ 80203"
+      ],
+      [
+        "fact 12",
+        "(?:\\$464 (?:per month|monthly)|monthly payment.{0,8}\\$464)"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_events",
+        "foreign_key": "order_id"
+      },
+      {
+        "left": "users",
+        "right": "orders",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "Carvana--20": {
+    "task": "Log in as carol.d@test.com with password TestPass123! and shortlist the cheapest BMW 3 Series. Report its year, mileage, price, exterior color and fuel type, then estimate the monthly payment and amount financed with $2,000 down over 48 months using Great credit. Save it and sign out and back in to verify it persists; report the final saved vehicles and their prices.",
+    "initial_digest": "a59d0c5eee6ae5648cbed4579e9e9fb763c51941d05282fdaa0f43757d97930e",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": 9,
+            "user_id": 3,
+            "vehicle_id": 1467,
+            "saved_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicle/4777616(?:$|[/?])",
+      "/vehicle/4777616/payment-estimate",
+      "/account/favorites"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "2013\\ bmw\\ 3\\ series"
+      ],
+      [
+        "fact 2",
+        "2013\\ bmw\\ 3\\ series(?:(?!(?!)).){0,700}?price.{0,16}?\\$12990(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 3",
+        "2013\\ bmw\\ 3\\ series(?:(?!(?!)).){0,700}?mileage.{0,16}?77129 miles"
+      ],
+      [
+        "fact 4",
+        "2013\\ bmw\\ 3\\ series(?:(?!(?!)).){0,700}?(?:exterior )?color.{0,16}?silver"
+      ],
+      [
+        "fact 5",
+        "2013\\ bmw\\ 3\\ series(?:(?!(?!)).){0,700}?fuel(?: type)?.{0,16}?gas"
+      ],
+      [
+        "fact 6",
+        "2013\\ bmw\\ 3\\ series.{0,10}great credit.{0,8}\\$2000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}48 months.{0,30}(?:payment|monthly).{0,10}\\$297(?:\\.00)?(?!\\d|\\.\\d)/(?:mo|month)"
+      ],
+      [
+        "fact 7",
+        "2013\\ bmw\\ 3\\ series.{0,10}great credit.{0,8}\\$2000(?:\\.00)?(?!\\d|\\.\\d) down.{0,8}48 months.{0,110}amount financed.{0,10}\\$12592(?:\\.00)?(?!\\d|\\.\\d)"
+      ],
+      [
+        "fact 8",
+        "2013 bmw 3 series sedan.{0,10}77129 miles.{0,10}\\$12990"
+      ],
+      [
+        "fact 9",
+        "2013 bmw 3 series convertible.{0,10}44145 miles.{0,10}\\$16990"
+      ]
+    ]
+  }
+}

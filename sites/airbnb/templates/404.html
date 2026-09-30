@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Page not found | Airbnb{% endblock %}
+{% block content %}
+<div class="form-card" style="text-align:center;">
+  <h1>404</h1>
+  <p class="muted">We can't seem to find the page you're looking for.</p>
+  <p><a class="btn btn-rausch" href="{{ url_for('home') }}">Back to home</a></p>
+</div>
+{% endblock %}

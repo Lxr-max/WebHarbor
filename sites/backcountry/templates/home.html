@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Backcountry - Outdoor Gear &amp; Clothing for Ski, Snowboard, Camp, &amp; More{% endblock %}
+{% block body %}
+
+{% if hero %}
+<section class="hero-carousel" aria-label="Featured campaigns">
+  <div class="hero-track">
+    {% for c in hero %}
+      {% set src = cms_img(c.image) %}
+      {% if src %}
+      <a class="hero-slide" href="{{ mirror_link(c.link) or '#' }}">
+        <img src="{{ src }}" alt="{{ c.alt or c.text or 'Backcountry' }}">
+        {% if c.text %}<span class="hero-caption">{{ c.text }}</span>{% endif %}
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if tiles %}
+<section class="home-section">
+  <h2>Shop by Category</h2>
+  <div class="cat-tiles">
+    {% for c in tiles %}
+      {% set src = cms_img(c.image) %}
+      <a class="cat-tile" href="{{ mirror_link(c.link) or '#' }}">
+        {% if src %}<img src="{{ src }}" alt="{{ c.alt or c.text }}">{% endif %}
+        <span class="cat-name">{{ c.text or c.alt }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if grid_products %}
+<section class="home-section">
+  <h2>From the Hike &amp; Camp Grid</h2>
+  <div class="product-rail">
+    {% for p in grid_products %}
+      {% include '_card.html' %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if rails %}
+<section class="home-section">
+  <h2>Featured Gear</h2>
+  <div class="product-rail">
+    {% for c in rails %}
+      {% set src = cms_img(c.image) %}
+      <a class="featured-card" href="{{ mirror_link(c.link) or '#' }}">
+        {% if src %}<img src="{{ src }}" alt="{{ c.alt or c.text }}">{% endif %}
+        <span>{{ c.text or c.alt }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="home-section home-brands">
+  <h2>Top Brands</h2>
+  <div class="brand-chips">
+    {% for slug, name in [('patagonia','Patagonia'),('the-north-face','The North Face'),('outdoor-research','Outdoor Research'),('black-diamond','Black Diamond'),('salomon','Salomon'),('smartwool','Smartwool'),('fjallraven','Fjallraven')] %}
+      <a class="brand-chip" href="/brand/{{ slug }}">{{ name }}</a>
+    {% endfor %}
+    <a class="brand-chip more" href="/shop-all-brands">Shop All Brands</a>
+  </div>
+</section>
+
+{% endblock %}

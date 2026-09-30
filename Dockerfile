@@ -444,14 +444,29 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/virginia_dmv && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/verizon && \
     (cd /opt/WebSyn/verizon && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/verizon.db instance_seed/verizon.db && rm -rf instance __pycache__)
 
-# Disney validates its downloaded portal/parks/store media against the
-# tracked inventory and rebuilds its deterministic SQLite seed from tracked
-# upstream snapshot data (captured 2026-09-29; see sites/disney/provenance.json).
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/ziprecruiter && \
+    (cd /opt/WebSyn/ziprecruiter && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/ziprecruiter.db instance_seed/ziprecruiter.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/carvana && \
+    (cd /opt/WebSyn/carvana && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/carvana.db instance_seed/carvana.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/coinmarketcap && \
+    (cd /opt/WebSyn/coinmarketcap && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/coinmarketcap.db instance_seed/coinmarketcap.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/cars_com && \
+    (cd /opt/WebSyn/cars_com && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/cars_com.db instance_seed/cars_com.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/airbnb && \
+    (cd /opt/WebSyn/airbnb && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/airbnb.db instance_seed/airbnb.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/backcountry && \
+    (cd /opt/WebSyn/backcountry && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/backcountry.db instance_seed/backcountry.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/disney && \
     (cd /opt/WebSyn/disney && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/disney.db instance_seed/disney.db && rm -rf instance __pycache__)
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40200
+EXPOSE 8101 40000-40139
 
 CMD ["/opt/websyn_start.sh"]
