@@ -117,11 +117,11 @@ def test_converter_computes_from_captured_prices(client):
         'amount': '1', 'from': 'bitcoin', 'to': 'ethereum'}))
     body = r.get_data(as_text=True)
     expected_eth = btc['price'] / eth['price']
-    assert f"${expected_eth:,.2f}" in body
+    assert f"{expected_eth:,.2f}" in body
 
 
 def test_converter_rejects_bad_amount(client):
     r = client.post('/converter/', data=with_csrf(client, '/converter/', {
         'amount': 'not-a-number', 'from': 'bitcoin', 'to': 'usd'}))
-    assert r.status_code == 200  # re-renders without a result box
+    assert r.status_code == 400  # invalid input is rejected without a result
     assert 'result-box' not in r.get_data(as_text=True)

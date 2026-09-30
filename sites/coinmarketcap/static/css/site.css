@@ -179,8 +179,8 @@ tr:hover td { background: #fafbfc; }
    page-level horizontal overflow (header row + stats bar + wide tables).
    Mobile now wraps the header, scrolls the stats bar and wide tables
    inside their own boxes, and stacks the multi-column sections. Desktop
-   rendering (>=761px) is unchanged. */
-@media (max-width: 760px) {
+   rendering (>=1001px) is unchanged. */
+@media (max-width: 1000px) {
   main { padding: 0 10px 30px; }
   .header-main { flex-wrap: wrap; gap: 8px 10px; padding: 10px; }
   .main-nav { order: 3; flex: none; width: 100%; overflow-x: auto;
@@ -190,7 +190,9 @@ tr:hover td { background: #fafbfc; }
   .stats-bar { overflow-x: auto; white-space: nowrap; }
   .stats-bar span { padding: 6px 8px; }
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .coin-cell { min-width: 0; }
+  .coin-cell { min-width: 180px; }
+  table th, table td { white-space: nowrap; }
+  table a { overflow-wrap: normal; }
   .coin-head { flex-wrap: wrap; }
   .changes { flex-wrap: wrap; gap: 8px 14px; }
   .section-head { flex-wrap: wrap; }
