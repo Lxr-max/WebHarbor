@@ -28,7 +28,7 @@
         {% for a in addresses %}
         <label class="address-choice">
           <input type="radio" name="address_id" value="{{ a.id }}"
-                 {% if a.is_default %}checked{% endif %}>
+                 {% if (request.method == 'GET' and a.is_default) or request.form.get('address_id') == a.id|string %}checked{% endif %}>
           <span>
             <strong>{{ a.full_name }}</strong>
             {% if a.is_default %}<em class="default-tag">Default</em>{% endif %}<br>
@@ -38,7 +38,7 @@
         </label>
         {% endfor %}
         <label class="address-choice">
-          <input type="radio" name="address_id" value="">
+          <input type="radio" name="address_id" value="" {% if request.method == 'POST' and not request.form.get('address_id') %}checked{% endif %}>
           <span><strong>Ship to a new address</strong></span>
         </label>
       </div>
@@ -82,13 +82,13 @@
                {% if method != 'express' %}checked{% endif %}>
         <span><strong>Standard Shipping</strong> —
           {% if subtotal >= 6900 %}FREE!{% else %}{{ money(695) }}{% endif %}
-          <small>4–8 business days</small></span>
+          <small>3–5 business days after shipment</small></span>
       </label>
       <label class="method-choice">
         <input type="radio" name="shipping_method" value="express"
                {% if method == 'express' %}checked{% endif %}>
         <span><strong>Express Shipping</strong> — {{ money(2500) }}
-          <small>2–3 business days</small></span>
+          <small>Estimated delivery depends on destination</small></span>
       </label>
     </fieldset>
 

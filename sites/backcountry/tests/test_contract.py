@@ -29,7 +29,7 @@ def test_tasks_seven_keys_and_ports():
         assert set(r.keys()) >= {"web_name", "id", "ques", "web",
                                 "upstream_url", "verifier_path",
                                 "judge_rubric"}, r.get("id")
-        assert r["web"] == "http://localhost:40116/", r["id"]
+        assert r["web"] == "http://localhost:40138/", r["id"]
         assert r["upstream_url"] == "https://www.backcountry.com/"
         assert r["web_name"] == "Backcountry"
         assert r["verifier_path"].startswith("sites/backcountry/verify/")
@@ -41,7 +41,7 @@ def test_tasks_no_answer_leakage():
     rows = [json.loads(l) for l in TASKS.read_text().splitlines() if l.strip()]
     joined = "\n".join(r["ques"] for r in rows)
     # the questions must not leak answers with verbatim numbers/urls
-    assert "40116" not in joined
+    assert "40138" not in joined
     assert "http://localhost" not in joined
     assert "order number is" not in joined.lower()
     # no direct DB / source-code answers

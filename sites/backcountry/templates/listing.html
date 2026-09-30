@@ -60,7 +60,7 @@
   <section class="listing-main">
     <div class="listing-toolbar">
       <form method="get" action="{{ base_url }}" class="sort-form">
-        {% for k in ['color','brand','gender','sale','use','size','price-min','price-max'] %}
+        {% for k in ['q','color','brand','gender','sale','use','size','price-min','price-max'] %}
           {% if args.get(k) %}<input type="hidden" name="{{ k }}" value="{{ args.get(k) }}">{% endif %}
         {% endfor %}
         <label for="sort">Sort by</label>

@@ -14,7 +14,7 @@
   <section class="account-orders">
     <h2>Your Orders</h2>
     {% if orders %}
-    <table class="orders-table">
+    <div role="region" aria-label="Order history" tabindex="0" style="max-width:100%;overflow-x:auto"><table class="orders-table">
       <thead><tr><th>Order #</th><th>Placed</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead>
       <tbody>
         {% for o in orders %}
@@ -28,7 +28,7 @@
         </tr>
         {% endfor %}
       </tbody>
-    </table>
+    </table></div>
     {% else %}
     <p>No orders yet — <a href="/">start shopping</a>.</p>
     {% endif %}

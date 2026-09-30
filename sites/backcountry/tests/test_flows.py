@@ -158,7 +158,7 @@ def test_order_confirmation_guest_scoped(client):
     if not order:
         pytest.skip("no guest order in this run")
     r = client.get(f"/order-confirmation/{order.number}")
-    assert r.status_code == 200
+    assert r.status_code == 403
 
 
 # -------------------------------------------------------------- wishlist --

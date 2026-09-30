@@ -22,6 +22,8 @@ SQLite seed is materialized deterministically at image build time
 import json
 import os
 import re
+import math
+from urllib.parse import urlsplit, urlencode
 import uuid
 from datetime import date
 
@@ -71,6 +73,22 @@ def money(cents):
 def _load(name):
     with open(os.path.join(SOURCE, name), encoding='utf-8') as f:
         return json.load(f)
+
+
+def local_return(value, fallback='/'):
+    value = (value or '').strip()
+    parts = urlsplit(value)
+    return value if value.startswith('/') and not value.startswith('//') and not parts.netloc and not parts.scheme and not any(c in value for c in ('\\', '\r', '\n')) else fallback
+
+
+def integer(value, minimum=1, maximum=99):
+    try:
+        result = int(value)
+    except (ValueError, TypeError):
+        abort(400, 'Enter a valid whole number.')
+    if not minimum <= result <= maximum:
+        abort(400, 'Quantity or page is outside the allowed range.')
+    return result
 
 
 # ------------------------------------------------------------------- models --
@@ -152,6 +170,17 @@ class Product(db.Model):
         if not pick or not pick.image:
             return None
         return pick.image.replace('/medium/', '/large/')
+
+    @property
+    def display_review_count(self):
+        local = Review.query.filter_by(product_id=self.id, is_seed=False).count()
+        return (self.review_count or 0) + local
+
+    @property
+    def display_review_avg(self):
+        local = Review.query.filter_by(product_id=self.id, is_seed=False).all()
+        count = (self.review_count or 0) + len(local)
+        return (((self.review_avg or 0) * (self.review_count or 0) + sum(r.rating for r in local)) / count) if count else 0
 
     @property
     def price_from(self):
@@ -1002,9 +1031,9 @@ def sort_key(sort):
 def apply_grid_sort(products, sort, positions=None):
     """Sort a grid by the upstream sort token; default keeps upstream order."""
     if sort == 'price':
-        return sorted(products, key=lambda p: p.min_sale or 0)
+        return sorted(products, key=lambda p: getattr(p, "filtered_min_sale", p.min_sale) or 0)
     if sort == '-price':
-        return sorted(products, key=lambda p: -(p.min_sale or 0))
+        return sorted(products, key=lambda p: -(getattr(p, "filtered_min_sale", p.min_sale) or 0))
     if sort == '-rating':
         return sorted(
             products,
@@ -1070,17 +1099,17 @@ GENDER_MAP = {"men's": "male", "mens": "male", "women's": "female",
 
 def product_gender(p):
     t = (p.title or '').lower()
-    if "men's" in t:
-        return 'male'
     if "women's" in t:
         return 'female'
+    if "men's" in t:
+        return 'male'
     return 'unisex'
 
 
 def product_uses(p):
     uses = []
     for a in json.loads(p.features or '[]'):
-        if a.get('name') == 'Activity' and a.get('value'):
+        if a.get('name') in ('Activity', 'Recommended Use') and a.get('value'):
             uses.extend([v.strip() for v in a['value'].split(',')])
     return uses
 
@@ -1096,6 +1125,8 @@ def apply_grid_filters(products, args):
     use = (args.get('use') or '').strip()
     size = (args.get('size') or '').strip()
 
+    if any(v is not None and (not math.isfinite(v) or v < 0) for v in (pmin, pmax)):
+        abort(400, 'Enter a finite nonnegative price.')
     out = []
     for p in products:
         if color and not any(s.color_family == color for s in p.skus):
@@ -1222,13 +1253,16 @@ def _facet_json(cat):
 def _qs(base, drop=None, **updates):
     """Build a query string on a base URL, preserving existing args."""
     args = {}
+    color_match = re.search(r'/color/([^/]+)$', request.path)
+    if color_match:
+        args['color'] = color_match.group(1)
     for k in request.args:
         args[k] = request.args.get(k)
     if drop:
         for k in (drop if isinstance(drop, list) else [drop]):
             args.pop(k, None)
     args.update({k: v for k, v in updates.items() if v is not None})
-    qs = '&'.join(f'{k}={v}' for k, v in args.items() if v not in (None, ''))
+    qs = urlencode({k: v for k, v in args.items() if v not in (None, '')})
     return base + ('?' + qs if qs else '')
 
 
@@ -1236,30 +1270,14 @@ def facet_url(key, value):
     """URL for applying one facet value on the current listing."""
     base = request.path
     if key == 'color':
-        # upstream uses /cat/<slug>/color/<value> paths for colors — but
-        # only category listings have that route; brand (+cat) and search
-        # pages filter through the query string instead
-        m = re.match(r'^(/cat/[a-z0-9\-]+)$', base)
-        if m:
-            out = f"{base}/color/{value}"
-            keep = {k: request.args.get(k) for k in
-                    ('sort', 'brand', 'gender', 'sale', 'use')
-                    if request.args.get(k)}
-            qs = '&'.join(f'{k}={v}' for k, v in keep.items())
-            return out + ('?' + qs if qs else '')
+        base = re.sub(r'/color/[^/]+$', '', base)
     return _qs(base, **{key: value})
 
 
 def clear_url(key):
     base = request.path
-    # path-based filters (e.g. /cat/ski/color/black) clear by dropping the
-    # path segment, not just a query param
-    m = re.match(r'^(.*?/cat/[a-z0-9\-]+?)/color/[a-z]+$', base)
-    if m:
-        base = m.group(1)
-        if key == 'color':
-            return _qs(base, drop=['color'])
-        return _qs(base, drop=key)
+    if key == 'color':
+        base = re.sub(r'/color/[^/]+$', '', base)
     if key == 'price':
         return _qs(base, drop=['price-min', 'price-max'])
     return _qs(base, drop=key)
@@ -1278,12 +1296,25 @@ def _sort_options(entity):
     return json.loads((entity.sort_options or '[]') if hasattr(entity, 'sort_options') else '[]')
 
 
+def scope_listing_prices(products, args):
+    for p in products:
+        if not args.get('color') and not args.get('size'):
+            continue
+        variants = [s for s in p.skus if
+                    (not args.get('color') or s.color_family == args['color']) and
+                    (not args.get('size') or s.size == args['size'])]
+        if variants:
+            p.filtered_min_sale = min(s.sale_price for s in variants)
+            p.filtered_max_sale = max(s.sale_price for s in variants)
+
+
 def render_listing(products, positions, context, facets_data, sort,
                    upstream_total, title, breadcrumbs, args,
                    cat=None, base_url='/'):
     """Shared grid rendering for categories / brands / searches / subcats."""
     base_products = [p for p in products]
     filtered = apply_grid_filters(base_products, args)
+    scope_listing_prices(filtered, args)
     filtered = apply_grid_sort(filtered, sort, positions)
     facets = grid_facets(base_products, facets_data, cat=cat)
     raw_sort = getattr(context, 'sort_options', None)
@@ -1434,6 +1465,7 @@ def search():
             results = matched
     sort = (request.args.get('sort') or '-relevance').strip()
     results = apply_grid_filters(results, request.args)
+    scope_listing_prices(results, request.args)
     results = apply_grid_sort(results, sort, positions)
 
     class _Ctx:
@@ -1507,6 +1539,8 @@ def product_page(product_slug):
                 if h['rating'] == r.rating:
                     h['count'] = h.get('count', 0) + 1
     hist_total = sum(h.get('count') or 0 for h in hist)
+    for h in hist:
+        h['percentage'] = 100 * h['count'] / hist_total if hist_total else 0
     questions = (Question.query.filter_by(product_id=p.id)
                  .order_by(Question.created.desc()).all())
     in_cart = 0
@@ -1555,12 +1589,14 @@ def cart_add():
     sku = ProductSku.query.get(sku_id)
     if not sku or not sku.in_stock:
         abort(404)
-    quantity = max(1, int(request.form.get('quantity', 1) or 1))
+    quantity = integer(request.form.get('quantity', 1) or 1)
+    if quantity > (sku.stock or 99):
+        abort(400, 'Requested quantity exceeds available stock.')
     if current_user.is_authenticated:
         row = CartItem.query.filter_by(user_id=current_user.id,
                                        sku_id=sku.id).first()
         if row:
-            row.quantity += quantity
+            row.quantity = integer(row.quantity + quantity, 1, sku.stock or 99)
         else:
             row = CartItem(user_id=current_user.id, sku_id=sku.id,
                            quantity=quantity, added_at='2026-09-30')
@@ -1571,33 +1607,35 @@ def cart_add():
         row = CartItem.query.filter_by(guest_token=token,
                                        sku_id=sku.id).first()
         if row:
-            row.quantity += quantity
+            row.quantity = integer(row.quantity + quantity, 1, sku.stock or 99)
         else:
             row = CartItem(guest_token=token, sku_id=sku.id,
                            quantity=quantity, added_at='2026-09-30')
             db.session.add(row)
     db.session.commit()
     dest = request.form.get('next') or url_for('cart')
-    return redirect(dest)
+    return redirect(local_return(dest))
 
 
 @app.route('/cart/update', methods=['POST'])
 def cart_update():
-    item_id = int(request.form.get('item', 0) or 0)
+    item_id = integer(request.form.get('item'), 1, 2147483647)
     item = db.session.get(CartItem, item_id)
     if not item:
         abort(404)
     if current_user.is_authenticated and item.user_id != current_user.id:
         abort(403)
-    if not current_user.is_authenticated and \
-            item.guest_token != session.get('bc_guest'):
+    if not current_user.is_authenticated and (not session.get('bc_guest') or
+            item.guest_token != session.get('bc_guest')):
         abort(403)
     action = request.form.get('action', '')
     if action == 'remove':
         db.session.delete(item)
     else:
-        q = int(request.form.get('quantity', 1) or 1)
-        item.quantity = max(1, q)
+        q = integer(request.form.get('quantity', 1) or 1)
+        if not item.sku.in_stock or q > (item.sku.stock or 99):
+            abort(400, 'Requested quantity exceeds available stock.')
+        item.quantity = q
     db.session.commit()
     return redirect(url_for('cart'))
 
@@ -1641,6 +1679,8 @@ def checkout():
         method = request.form.get('shipping_method', 'standard')
         session['bc_shipping_method'] = method
 
+        if method not in ('standard', 'express'):
+            error = 'Choose Standard or Express shipping.'
         addr = None
         if not current_user.is_authenticated:
             if not email or not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
@@ -1658,7 +1698,7 @@ def checkout():
                 error = 'Choose a valid US state for shipping.'
             if error is None and not re.match(r"^\d{5}(-\d{4})?$", zipc):
                 error = 'Enter a valid ZIP code (e.g. 84101).'
-        if error is None and len(card) != 16 or not card.isdigit():
+        if error is None and (len(card) != 16 or not card.isdigit()):
             error = 'Enter a valid 16-digit card number.'
         if error is None and not re.match(r"^(0[1-9]|1[0-2])\/([0-9]{2})$",
                                           expiry.replace('-', '/')):
@@ -1703,6 +1743,7 @@ def checkout():
                     quantity=it.quantity))
                 db.session.delete(it)
             db.session.commit()
+            session['bc_orders'] = session.get('bc_orders', []) + [number]
             return redirect(url_for('order_confirmation', number=number))
 
     return render_template('checkout.html', items=items,
@@ -1720,6 +1761,8 @@ def order_confirmation(number):
         if not current_user.is_authenticated or \
                 current_user.id != order.user_id:
             abort(403)
+    if not order.user_id and number not in session.get('bc_orders', []):
+        abort(403)
     return render_template('order_confirmation.html', order=order)
 
 
@@ -1751,7 +1794,7 @@ def login():
                 session.pop('bc_guest', None)
             db.session.commit()
             dest = request.args.get('next') or url_for('account')
-            return redirect(dest)
+            return redirect(local_return(dest))
         error = 'Invalid email or password.'
     return render_template('login.html', error=error, mode=mode)
 
@@ -1896,7 +1939,7 @@ def wishlist_toggle():
         db.session.add(WishlistItem(user_id=current_user.id, product_id=p.id,
                                     added_at='2026-09-30'))
     db.session.commit()
-    return redirect(request.form.get('next') or '/wish-list')
+    return redirect(local_return(request.form.get('next'), '/wish-list'))
 
 
 # ---------------------------------------------------------------- reviews --
