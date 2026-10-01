@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Course Planner — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Course Planner</h2>
+  <span class="count">{{ items|length }} planned courses</span>
+</div>
+{% if items %}
+<table class="data">
+  <tr><th>Code</th><th>Title</th><th>Units</th><th>Terms</th><th></th></tr>
+  {% for row, course in items %}
+    <tr>
+      <td><a href="{{ url_for('course_detail', code=course.code) }}">{{ course.code }}</a></td>
+      <td>{{ course.title }}</td>
+      <td>{{ course.units_display }}</td>
+      <td>{{ course.terms|join(', ') }}</td>
+      <td>
+        <form class="inline-form" method="post" action="{{ url_for('planner_remove') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="code" value="{{ course.code }}">
+          <input type="hidden" name="next" value="{{ url_for('planner') }}">
+          <button class="btn small" type="submit">Remove</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+<p><strong>Total planned units:</strong>
+{% if total_min == total_max %}{{ total_min }}{% else %}{{ total_min }}–{{ total_max }}{% endif %}</p>
+{% else %}
+<div class="empty">Your course planner is empty. Browse the
+<a href="{{ url_for('courses') }}">course catalog</a> and add courses to plan your quarter.</div>
+{% endif %}
+<p><a class="btn" href="{{ url_for('courses') }}">Browse the course catalog</a></p>
+{% endblock %}
