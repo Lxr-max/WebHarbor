@@ -1,0 +1,1272 @@
+{
+ "Samsung--0": {
+  "claims": [
+   [
+    "catalog total",
+    "\\b42\\b"
+   ],
+   [
+    "galaxy z count",
+    "\\b11\\b"
+   ],
+   [
+    "cheapest name",
+    "galaxy\\ a17\\ 5g\\ 128gb\\ \\(unlocked\\)"
+   ],
+   [
+    "cheapest price",
+    "\\$249\\.99"
+   ],
+   [
+    "cheapest rating",
+    "4\\.3"
+   ],
+   [
+    "cheapest reviews",
+    "3481"
+   ],
+   [
+    "fold8u price",
+    "\\$1799\\.99"
+   ],
+   [
+    "wishlist count",
+    "\\b4\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/smartphones/\\?.*f_series=Galaxy",
+   "sort=price-low",
+   "/smartphones/galaxy-a17-5g/",
+   "/smartphones/galaxy-z-fold8-ultra/",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-a17-5g",
+      "user_id": 1
+     }
+    ]
+   }
+  },
+  "task": "Open the Smartphones catalog from the home page and report how many phones are listed. Apply the series filter for Galaxy Z and report how many phones remain. Clear the filter, sort by price from low to high, and report the name and price of the cheapest phone. Open its product page and report its rating and review count. Also open the Galaxy Z Fold8 Ultra page and report its price. Sign in as alice.j@test.com with password TestPass123!, add the cheapest phone to your wishlist, and report how many items Alice's wishlist shows."
+ },
+ "Samsung--1": {
+  "claims": [
+   [
+    "case search count",
+    "\\b181\\b"
+   ],
+   [
+    "cases and covers count",
+    "\\b85\\b"
+   ],
+   [
+    "top case name",
+    "galaxy\\ s26\\+\\ clear\\ magnet\\ case,\\ transparent"
+   ],
+   [
+    "top case price",
+    "\\$49\\.99"
+   ],
+   [
+    "wishlist count",
+    "\\b3\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "mobile-accessories/\\?.*q=case",
+   "f_type=Cases",
+   "sort=rating",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-s26-plus-clear-magnet-case-transparent-sku-ef-cs947ctegus",
+      "user_id": 2
+     }
+    ]
+   }
+  },
+  "task": "Open the Mobile Accessories catalog and search within it for case; report how many results appear. Keep only the Cases & Covers type and report how many products remain. Sort by customer rating and open the highest-rated product; report its name and price. Sign in as bob.c@test.com with password TestPass123!, add that product to your wishlist, and report how many wishlist items Bob has."
+ },
+ "Samsung--10": {
+  "answer_state": [
+   [
+    "support_tickets",
+    "ticket_no"
+   ]
+  ],
+  "claims": [
+   [
+    "category count",
+    "\\b5\\b"
+   ],
+   [
+    "s26 ultra coverage",
+    "active\\ \\(standard\\ limited\\ warranty\\)"
+   ],
+   [
+    "s26 ultra period",
+    "12\\ months"
+   ],
+   [
+    "fridge coverage",
+    "active\\ \\(standard\\ limited\\ warranty\\)"
+   ],
+   [
+    "ticket number",
+    "s[st]-[0-9]+"
+   ],
+   [
+    "ticket status",
+    "\\bopen\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/support/warranty/\\?category=phones-tablets-wearables",
+   "model=SM-S948UZVEXAA",
+   "/support/warranty/\\?category=home-appliances",
+   "/support/contact/done/\\?ticket_no=ST-",
+   "/account/login/"
+  ],
+  "state": {
+   "support_tickets": {
+    "added": [
+     {
+      "category": "Phones, Tablets & Wearables",
+      "created_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "email": "carol.d@test.com",
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "message": "My Galaxy S26 Ultra screen has a defect and I would like it checked under warranty.",
+      "status": "Open",
+      "subject": "S26 Ultra screen warranty question",
+      "ticket_no": {
+       "regex": "ST-[0-9]+"
+      },
+      "topic": "Warranty",
+      "user_id": 3
+     }
+    ]
+   }
+  },
+  "task": "Open the Warranty Center from the Support page and report how many product categories the coverage checker lists. Check coverage for Phones, Tablets & Wearables with the Galaxy S26 Ultra 512GB model and report the coverage status and warranty period. Check coverage again for Home Appliances with any Bespoke refrigerator and report its coverage status. Sign in as carol.d@test.com with password TestPass123! and file a ticket under Phones, Tablets & Wearables with topic Warranty about your S26 Ultra screen; report the ticket number and status."
+ },
+ "Samsung--11": {
+  "claims": [
+   [
+    "faq count",
+    "\\b7\\b"
+   ],
+   [
+    "validate answer",
+    "if\\ you\\ believe\\ there\\ is\\ an\\ error\\ in\\ your\\ warranty\\ expiration"
+   ],
+   [
+    "tv coverage",
+    "active\\ \\(standard\\ limited\\ warranty\\)"
+   ],
+   [
+    "tv period",
+    "12\\ months"
+   ],
+   [
+    "watch coverage",
+    "active\\ \\(standard\\ limited\\ warranty\\)"
+   ],
+   [
+    "model 512",
+    "sm\\-s948uzsexaa"
+   ],
+   [
+    "price 512",
+    "\\$1499\\.99"
+   ],
+   [
+    "watch price",
+    "\\$379\\.99"
+   ],
+   [
+    "watch model",
+    "sm\\-l340nzeaxaa"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/support/warranty/",
+   "category=tv-display-home-theater",
+   "category=phones-tablets-wearables",
+   "galaxy-s26-ultra/buy/\\?.*Storage=512GB",
+   "/watches/galaxy-watch9/",
+   "/watches/galaxy-watch9/buy/"
+  ],
+  "state": {},
+  "task": "From the Support home open the Warranty Center and report how many FAQ questions are listed. Open the FAQ about validating your warranty and report its answer. Check coverage for TV, Display & Home Theater with any TV model and report the status and warranty period. Check coverage for Phones, Tablets & Wearables with the Galaxy Watch9 as well. Then open the Galaxy S26 Ultra buy page, select the 512GB storage option and report the resolved model code and price, and open the Galaxy Watch9 product page and report its price and the default model code on its buy page."
+ },
+ "Samsung--12": {
+  "claims": [
+   [
+    "order count",
+    "\\b2\\b"
+   ],
+   [
+    "recent item",
+    "galaxy\\ watch9,\\ 40\\ mm,\\ bluetooth,\\ graphite"
+   ],
+   [
+    "recent quantity",
+    "2"
+   ],
+   [
+    "delivery city",
+    "ridgefield\\ park"
+   ],
+   [
+    "older item",
+    "galaxy\\ s26\\ ultra\\ 512gb\\ \\(unlocked\\)"
+   ],
+   [
+    "older total",
+    "\\$1599\\.36"
+   ],
+   [
+    "watch model",
+    "sm\\-l340nzeaxaa"
+   ],
+   [
+    "wishlist count",
+    "\\b3\\b"
+   ],
+   [
+    "ticket count",
+    "\\b1\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/orders/",
+   "/orders/SS-",
+   "/account/wishlist/",
+   "/watches/galaxy-watch9/buy/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-watch9",
+      "user_id": 1
+     }
+    ],
+    "removed": [
+     "[3]"
+    ]
+   }
+  },
+  "task": "Sign in as alice.j@test.com with password TestPass123!. Open your order history and report how many orders Alice has and the order numbers. Open the most recent order and report the item it contains, its quantity and the delivery city; open the older order and report its item and total. Then open your wishlist, remove the Galaxy Tab S11, add the Galaxy Watch9 from the Watches catalog and open its buy page for the default model code, open your account page, and report the final wishlist count and how many support tickets are listed."
+ },
+ "Samsung--13": {
+  "answer_state": [
+   [
+    "support_tickets",
+    "ticket_no"
+   ]
+  ],
+  "claims": [
+   [
+    "flip8 coverage",
+    "active\\ \\(standard\\ limited\\ warranty\\)"
+   ],
+   [
+    "flip8 period",
+    "12\\ months"
+   ],
+   [
+    "ticket number",
+    "s[st]-[0-9]+"
+   ],
+   [
+    "ticket status",
+    "\\bopen\\b"
+   ],
+   [
+    "ticket on account",
+    "\\byes\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/support/warranty/\\?category=phones-tablets-wearables",
+   "/support/contact/",
+   "/account/",
+   "/support/contact/done/\\?ticket_no=ST-"
+  ],
+  "state": {
+   "support_tickets": {
+    "added": [
+     {
+      "category": "Phones, Tablets & Wearables",
+      "created_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "email": "dana.k@test.com",
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "message": "The hinge on my Galaxy Z Flip8 is stiff and clicks; please advise on repair service.",
+      "status": "Open",
+      "subject": "Z Flip8 hinge repair needed",
+      "ticket_no": {
+       "regex": "ST-[0-9]+"
+      },
+      "topic": "Repair",
+      "user_id": 4
+     }
+    ]
+   }
+  },
+  "task": "Sign in as dana.k@test.com with password TestPass123!. From the Support home open the Warranty Center and check coverage for Phones, Tablets & Wearables with the Galaxy Z Flip8; report its coverage status and warranty period. Then open Contact Us and file a ticket under Phones, Tablets & Wearables with topic Repair about your Z Flip8 hinge; use a clear subject and message. Report the ticket number and the status shown, and confirm the ticket appears on your account page."
+ },
+ "Samsung--14": {
+  "claims": [
+   [
+    "family hub results",
+    "9"
+   ],
+   [
+    "family hub categories",
+    "26\\.7\\ cu\\.\\ ft\\.\\ large\\ capacity\\ side\\-by\\-side\\ refrigerator\\ with\\ t"
+   ],
+   [
+    "fridge price",
+    "\\$3799\\.00"
+   ],
+   [
+    "fridge model",
+    "rf29db9900qdaa"
+   ],
+   [
+    "buds name",
+    "clip\\ case\\ with\\ carabiner\\ for\\ galaxy\\ buds3\\ \\&\\ buds3\\ pro"
+   ],
+   [
+    "buds price",
+    "\\$15\\.00"
+   ],
+   [
+    "case results",
+    "219"
+   ],
+   [
+    "wishlist count",
+    "\\b3\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/search/\\?.*q=Family",
+   "/search/\\?.*q=Buds",
+   "/search/\\?.*q=case",
+   "/account/login/",
+   "/audio/galaxy-buds4-pro/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-buds4-pro",
+      "user_id": 2
+     }
+    ]
+   }
+  },
+  "task": "Use the header search to find Family Hub and report how many results appear and their categories. Open the first Bespoke Family Hub refrigerator result and report its price and model code. Search for Buds and report the name and price of the first result; also search for case and report how many results appear. Sign in as bob.c@test.com with password TestPass123!, add the Galaxy Buds4 Pro to your wishlist, and report how many items Bob's wishlist shows."
+ },
+ "Samsung--15": {
+  "claims": [
+   [
+    "account page",
+    "profile,\\ orders,\\ wishlist\\ and\\ support\\ tickets\\ cards"
+   ],
+   [
+    "profile name",
+    "frank\\ nova"
+   ],
+   [
+    "flip8 price",
+    "\\$1049\\.99"
+   ],
+   [
+    "wishlist count",
+    "\\b1\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/account/signup/",
+   "/account/login/",
+   "/watches/galaxy-watch9/",
+   "/smartphones/galaxy-z-flip8/",
+   "/account/"
+  ],
+  "state": {
+   "users": {
+    "added": [
+     {
+      "email": "frank.n@test.com",
+      "id": 5,
+      "name": "Frank Nova",
+      "pw_hash": {
+       "regex": "b'\\$2b\\$12\\$[./A-Za-z0-9]{53}'"
+      }
+     }
+    ]
+   },
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-watch9",
+      "user_id": 5
+     }
+    ]
+   }
+  },
+  "task": "Create a new Samsung account with the name Frank Nova, email frank.n@test.com and password TestPass123! from the sign-up page, and report what the account page shows. Sign out and sign back in with the same credentials to confirm the profile name shown. Then open the Galaxy Watch9 product page from the Watches catalog, add it to your wishlist, open the Galaxy Z Flip8 product page and report its price, and report how many wishlist items the account has."
+ },
+ "Samsung--16": {
+  "claims": [
+   [
+    "shop all total",
+    "\\b505\\b"
+   ],
+   [
+    "tablets count",
+    "\\b11\\b"
+   ],
+   [
+    "watches count",
+    "\\b14\\b"
+   ],
+   [
+    "audio count",
+    "\\b3\\b"
+   ],
+   [
+    "audio product name",
+    "galaxy\\ buds3\\ fe,\\ gray"
+   ],
+   [
+    "audio product price",
+    "\\$149\\.99"
+   ],
+   [
+    "tvs count",
+    "\\b42\\b"
+   ],
+   [
+    "order number",
+    "s[st]-[0-9]+"
+   ],
+   [
+    "order item",
+    "galaxy\\ z\\ fold8\\ ultra\\ 256gb\\ \\(unlocked\\)"
+   ],
+   [
+    "watch model",
+    "sm\\-l340nzeaxaa"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/shop/all/",
+   "/tablets/",
+   "/watches/",
+   "/audio/",
+   "/tvs/",
+   "/account/login/",
+   "/orders/SS-",
+   "galaxy-watch9/buy/"
+  ],
+  "state": {},
+  "task": "Open Shop All from the home page and report how many products it lists. Open the Tablets, Watches and Audio catalogs and report how many products each lists. Open the Audio catalog's first product and report its name and price. Then open the TVs catalog and report how many TVs are listed. Sign in as bob.c@test.com with password TestPass123!, open your order history, and report the order number and the item it contains. Then open the Galaxy Watch9 buy page from the Watches catalog and report its default model code."
+ },
+ "Samsung--17": {
+  "claims": [
+   [
+    "default model",
+    "sm\\-l340nzeaxaa"
+   ],
+   [
+    "default price",
+    "\\$379\\.99"
+   ],
+   [
+    "lte model",
+    "sm\\-l355uzsaxaa"
+   ],
+   [
+    "lte price",
+    "\\$459\\.99"
+   ],
+   [
+    "graphite model",
+    "sm\\-l355uzkaxaa"
+   ],
+   [
+    "cart subtotal",
+    "\\$919\\.98"
+   ],
+   [
+    "cart options",
+    "device:\\ galaxy\\ watch9;\\ size:\\ 44mm;\\ watch\\ connectivity:\\ lte;"
+   ],
+   [
+    "color option",
+    "color:\\ graphite"
+   ],
+   [
+    "estimated tax",
+    "\\$60\\.95"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "galaxy-watch9/buy/\\?.*Size=44mm",
+   "Connectivity=LTE",
+   "Color=Graphite",
+   "/account/login/",
+   "/cart/",
+   "/checkout/"
+  ],
+  "state": {
+   "cart_items": {
+    "added": [
+     {
+      "cart_key": "user:3",
+      "configurator": "watches_galaxy-watch9",
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "image": "us-galaxy-watch-sm-l350nzkaxaa-galaxy-watch-----mm--bluetooth--graphite-graphite-554056107.png",
+      "model_code": "SM-L355UZKAXAA",
+      "options": "{\"Device\": \"Galaxy Watch9\", \"Size\": \"44mm\", \"Watch Connectivity\": \"LTE\", \"Watch Carrier\": \"Wifi\", \"Color\": \"Graphite\", \"Band Type\": \"Sport\", \"Band Color\": \"Black\", \"Band Size\": \"Medium/Large\"}",
+      "qty": 2,
+      "title": "Galaxy Watch9, 44mm, LTE, Graphite",
+      "unit_price": 459.99
+     }
+    ]
+   }
+  },
+  "task": "From the Watches catalog open the Galaxy Watch9 buy page and report the default model code and price. Switch to the 44mm size and the LTE connectivity option and report the resolved model code and price. Change the color to Graphite and report the resolved model code. Sign in as carol.d@test.com with password TestPass123!, add the watch to the cart with quantity two, and report the cart subtotal and the options shown for the item. Open the checkout page and report the estimated tax shown."
+ },
+ "Samsung--18": {
+  "claims": [
+   [
+    "default model",
+    "sm\\-f776ulgaxaa"
+   ],
+   [
+    "default price",
+    "\\$1049\\.99"
+   ],
+   [
+    "model 512",
+    "sm\\-f776ulgexaa"
+   ],
+   [
+    "price 512",
+    "\\$1249\\.99"
+   ],
+   [
+    "cart subtotal",
+    "\\$2499\\.98"
+   ],
+   [
+    "cart items",
+    "2"
+   ],
+   [
+    "new subtotal",
+    "\\$1049\\.99"
+   ],
+   [
+    "new options",
+    "storage:\\ 256gb"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "galaxy-z-flip8/buy/\\?.*Storage=512GB",
+   "/account/login/",
+   "/cart/",
+   "galaxy-z-flip8/buy/"
+  ],
+  "state": {
+   "cart_items": {
+    "added": [
+     {
+      "cart_key": "user:2",
+      "configurator": "smartphones_galaxy-z-flip8",
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "image": "us-galaxy-zflip8-f776-sm-f776ulgaxaa-553842884.png",
+      "model_code": "SM-F776ULGAXAA",
+      "options": "{\"Storage\": \"256GB\", \"Color\": \"Mint\", \"Connectivity\": \"Unlocked\"}",
+      "qty": 1,
+      "title": "Galaxy Z Flip8 256GB (Unlocked)",
+      "unit_price": 1049.99
+     }
+    ]
+   }
+  },
+  "task": "Open the Galaxy Z Flip8 buy page from the Smartphones catalog and report the default model code and price. Select the 512GB storage option and report the new price and model code. Sign in as bob.c@test.com with password TestPass123!, add one unit to the cart, change the quantity to two, and report the subtotal and the item count shown in the cart. Remove the item, open the buy page again from the Smartphones catalog, keep the default storage, add one unit to the cart, and report the new subtotal and the options shown for the item."
+ },
+ "Samsung--19": {
+  "claims": [
+   [
+    "model code",
+    "sm\\-s938uzbavzw"
+   ],
+   [
+    "price",
+    "\\$1299\\.99"
+   ],
+   [
+    "rating",
+    "4\\.8"
+   ],
+   [
+    "display dimension",
+    "6\\.9\u201d"
+   ],
+   [
+    "peak brightness",
+    "2600nits"
+   ],
+   [
+    "s25 ultra weight",
+    "218"
+   ],
+   [
+    "s26 ultra weight",
+    "214"
+   ],
+   [
+    "heavier model",
+    "galaxy\\ s25\\ ultra"
+   ],
+   [
+    "flip8 price",
+    "\\$1049\\.99"
+   ],
+   [
+    "wishlist count",
+    "\\b4\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/smartphones/galaxy-s25-ultra/",
+   "/compare/\\?models=SM-S938&models=SM-S948",
+   "/account/login/",
+   "/smartphones/galaxy-z-flip8/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-s25-ultra",
+      "user_id": 1
+     }
+    ]
+   }
+  },
+  "task": "From the Smartphones catalog open the Galaxy S25 Ultra product page and report its model code, price and rating. From its specification table report the main display dimension and peak brightness. Use Galaxy Compare to compare it with the Galaxy S26 Ultra and report which model is heavier and both weights. Sign in as alice.j@test.com with password TestPass123!, add the Galaxy S25 Ultra to your wishlist, open the Galaxy Z Flip8 product page and report its price, and report the wishlist count."
+ },
+ "Samsung--2": {
+  "claims": [
+   [
+    "tv total",
+    "\\b42\\b"
+   ],
+   [
+    "size filter count",
+    "\\b17\\b"
+   ],
+   [
+    "both filter count",
+    "\\b2\\b"
+   ],
+   [
+    "first tv name",
+    "75\\ inch\\ class\\ micro\\ rgb\\ r85h\\ 4k\\ samsung\\ vision\\ ai\\ smart\\ tv\\ \\("
+   ],
+   [
+    "first tv price",
+    "\\$1899\\.99"
+   ],
+   [
+    "expensive tv name",
+    "89\"\\ class\\ micro\\ led\\ \\(ms1b\\)"
+   ],
+   [
+    "expensive tv price",
+    "\\$109999\\.00"
+   ],
+   [
+    "wishlist count",
+    "\\b2\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/tvs/\\?.*f_screen_size=",
+   "f_type=Micro",
+   "sort=price-high",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "89-class-micro-led-sku-mna89ms1bacxza",
+      "user_id": 3
+     }
+    ]
+   }
+  },
+  "task": "Open the TVs catalog and report how many TVs are listed. Apply the screen-size filter for 75\" - 84\" and report how many remain. Add the Micro RGB TVs type filter and report the count. Open the first remaining TV and report its name and price. Clear the filters, sort by price from high to low, and report the most expensive TV's name and price. Sign in as carol.d@test.com with password TestPass123!, add that TV to your wishlist, and report Carol's wishlist count."
+ },
+ "Samsung--3": {
+  "claims": [
+   [
+    "family hub count",
+    "\\b6\\b"
+   ],
+   [
+    "fridge name",
+    "bespoke\\ ai\\ 4\\-door\\ flex\\ family\\ hub\\ 32\"\\ ai\\ vision\\ \\&\\ auto\\ open"
+   ],
+   [
+    "fridge price",
+    "\\$3799\\.00"
+   ],
+   [
+    "fridge model",
+    "rf29db9900qdaa"
+   ],
+   [
+    "laundry name",
+    "top\\ load\\ electric\\ dryer\\ sensor\\ dry\\ reversible\\ dryer\\ door\\ 7\\.2"
+   ],
+   [
+    "laundry price",
+    "\\$599\\.00"
+   ],
+   [
+    "wishlist count",
+    "\\b2\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "refrigerators/\\?.*q=Family",
+   "laundry/\\?.*sort=price-low",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "bespoke-4-door-flex-refrigerator-29-cu-ft-with-family-hub-32-and-ai-vision-in-stainless-steel-sku-rf29db9900qdaa",
+      "user_id": 4
+     }
+    ]
+   }
+  },
+  "task": "Open the Refrigerators catalog and search within it for Family Hub; report how many refrigerators match. Open the first match and report its name, price and model code. Then open the Laundry catalog, sort by price from low to high, and report the name and price of the cheapest laundry product. Sign in as dana.k@test.com with password TestPass123!, add the Family Hub refrigerator you found to your wishlist, and report how many items Dana's wishlist shows."
+ },
+ "Samsung--4": {
+  "claims": [
+   [
+    "model code",
+    "sm\\-s948uzvexaa"
+   ],
+   [
+    "price",
+    "\\$1499\\.99"
+   ],
+   [
+    "rating",
+    "4\\.8"
+   ],
+   [
+    "display dimension",
+    "6\\.9\""
+   ],
+   [
+    "resolution",
+    "3120\\ x\\ 1440\\ qhd\\+\\ dynamic\\ amoled\\ 2x"
+   ],
+   [
+    "peak brightness",
+    "2600\\ nits"
+   ],
+   [
+    "battery",
+    "5000\\ mah"
+   ],
+   [
+    "s26 price",
+    "\\$899\\.99"
+   ],
+   [
+    "s26 spec table",
+    "\\byes\\b"
+   ],
+   [
+    "fe price",
+    "\\$699\\.99"
+   ],
+   [
+    "wishlist count",
+    "\\b3\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/smartphones/galaxy-s26-ultra/",
+   "/smartphones/galaxy-s26/",
+   "/smartphones/galaxy-s26-fe/",
+   "/account/login/",
+   "/account/wishlist/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-s26-ultra",
+      "user_id": 1
+     }
+    ],
+    "removed": [
+     "[3]"
+    ]
+   }
+  },
+  "task": "From the Smartphones catalog open the Galaxy S26 Ultra product page and report its model code, price and rating. From its specification table report the main display dimension, the main display resolution, the peak brightness and the battery capacity. Open the Galaxy S26 and Galaxy S26 FE product pages as well and report each price, and whether the Galaxy S26 shows a specification table. Sign in as alice.j@test.com with password TestPass123!, add the Galaxy S26 Ultra to your wishlist, remove the Galaxy Tab S11 from it, and report the final wishlist count."
+ },
+ "Samsung--5": {
+  "claims": [
+   [
+    "default model",
+    "sm\\-s948uzsaxaa"
+   ],
+   [
+    "default price",
+    "\\$1299\\.99"
+   ],
+   [
+    "terabyte price",
+    "\\$1799\\.99"
+   ],
+   [
+    "terabyte model",
+    "sm\\-s948uzsfxaa"
+   ],
+   [
+    "violet model",
+    "sm\\-s948uzvfxaa"
+   ],
+   [
+    "cart subtotal",
+    "\\$3599\\.98"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "galaxy-s26-ultra/buy/\\?.*Storage=1TB",
+   "Color=Cobalt",
+   "Carrier=Unlocked",
+   "/account/login/",
+   "/cart/"
+  ],
+  "state": {
+   "cart_items": {
+    "added": [
+     {
+      "cart_key": "user:1",
+      "configurator": "smartphones_galaxy-s26-ultra",
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "image": "us-galaxy-s26-ultra-s948-sm-s948uzvaatt-550993860.png",
+      "model_code": "SM-S948UZVFXAA",
+      "options": "{\"Storage\": \"1TB\", \"Color\": \"Cobalt Violet\", \"Carrier\": \"Unlocked\"}",
+      "qty": 2,
+      "title": "Galaxy S26 Ultra 1TB (Unlocked)",
+      "unit_price": 1799.99
+     }
+    ]
+   }
+  },
+  "task": "Open the Galaxy S26 Ultra buy page from its product page and report the default model code and price. Select the 1TB storage option and report the new price and model code. Change the color to Cobalt Violet and report the resolved model code. Select the Unlocked carrier option. Sign in as alice.j@test.com with password TestPass123!, set the quantity to two, add the phone to the cart, and report the cart subtotal."
+ },
+ "Samsung--6": {
+  "claims": [
+   [
+    "default model",
+    "sm\\-f976udgaxaa"
+   ],
+   [
+    "default price",
+    "\\$1799\\.99"
+   ],
+   [
+    "terabyte price",
+    "\\$2399\\.99"
+   ],
+   [
+    "terabyte model",
+    "sm\\-f976udgfxaa"
+   ],
+   [
+    "violet shadow model",
+    "sm\\-f976uzvfxaa"
+   ],
+   [
+    "line total",
+    "\\$7199\\.97"
+   ],
+   [
+    "cart after remove",
+    "\\bempty\\b"
+   ],
+   [
+    "wishlist count",
+    "\\b3\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "galaxy-z-fold8-ultra/buy/\\?.*Storage=1TB",
+   "Color=Violet",
+   "/account/login/",
+   "/cart/",
+   "/smartphones/galaxy-z-fold8-ultra/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-z-fold8-ultra",
+      "user_id": 2
+     }
+    ]
+   }
+  },
+  "task": "From the Smartphones catalog open the Galaxy Z Fold8 Ultra buy page and report the default model code and price. Switch to the 1TB storage option and report the new price and model code. Change the color to Violet Shadow and report the resolved model code. Sign in as bob.c@test.com with password TestPass123!, add one unit to the cart, then change the quantity to three and report the new line total. Remove the item and report what the cart shows afterwards. Open the Galaxy Z Fold8 Ultra product page again, add it to your wishlist, and report Bob's wishlist count."
+ },
+ "Samsung--7": {
+  "answer_state": [
+   [
+    "orders",
+    "order_no"
+   ]
+  ],
+  "claims": [
+   [
+    "default model",
+    "sm\\-x930nzaaxar"
+   ],
+   [
+    "default price",
+    "\\$1299\\.99"
+   ],
+   [
+    "order number",
+    "s[st]-[0-9]+"
+   ],
+   [
+    "order total",
+    "\\$1386\\.11"
+   ],
+   [
+    "order tax",
+    "\\$86\\.12"
+   ],
+   [
+    "order count",
+    "3"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/account/login/",
+   "galaxy-tab-s11/buy/",
+   "/cart/",
+   "/checkout/",
+   "/orders/SS-",
+   "/account/"
+  ],
+  "state": {
+   "order_items": {
+    "added": [
+     {
+      "id": 4,
+      "image": "us-galaxy-tab-s11-ultra-sm-x930-sm-x930nzaaxar-550969762.png",
+      "model_code": "SM-X930NZAAXAR",
+      "options": "{\"Device\": \"Galaxy Tab S11 Ultra\", \"Storage\": \"256 GB\", \"Screen Size\": \"14.6\\\"\", \"Color\": \"Gray\", \"Carrier\": \"Wi-fi\"}",
+      "order_id": 4,
+      "qty": 1,
+      "title": "Galaxy Tab S11 Ultra (14.6\")",
+      "unit_price": 1299.99
+     }
+    ]
+   },
+   "orders": {
+    "added": [
+     {
+      "address1": "1200 Test Address Ln",
+      "city": "Ridgefield Park",
+      "email": "alice.j@test.com",
+      "full_name": "Alice Johnson",
+      "id": 4,
+      "order_no": {
+       "regex": "SS-[0-9]+"
+      },
+      "payment_method": "Samsung Pay",
+      "placed_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "shipping": 0.0,
+      "state": "NJ",
+      "status": "Processing",
+      "subtotal": 1299.99,
+      "tax": 86.12,
+      "total": 1386.11,
+      "user_id": 1,
+      "zipcode": "07660"
+     }
+    ]
+   }
+  },
+  "task": "Sign in as alice.j@test.com with password TestPass123!. From the Tablets catalog open the Galaxy Tab S11 buy page, keep the default model, and report the default model code and price. Add the tablet to the cart, proceed to checkout, complete the delivery form with any valid US test address, select Samsung Pay, and place the order. Report the order number, the total and the tax. Then report how many orders Alice's order history shows."
+ },
+ "Samsung--8": {
+  "claims": [
+   [
+    "s26 dimension",
+    "6\\.3\""
+   ],
+   [
+    "s26 ultra dimension",
+    "6\\.9\""
+   ],
+   [
+    "s26 weight",
+    "167"
+   ],
+   [
+    "s26 ultra weight",
+    "214"
+   ],
+   [
+    "s26 wide camera",
+    "50\\.0\\ mp"
+   ],
+   [
+    "s26 ultra wide camera",
+    "200\\.0\\ mp"
+   ],
+   [
+    "larger battery",
+    "galaxy\\ s26\\ ultra"
+   ],
+   [
+    "flip8 dimension",
+    "6\\.9\u201d"
+   ],
+   [
+    "buy model",
+    "sm\\-s948uzsaxaa"
+   ],
+   [
+    "wishlist count",
+    "\\b2\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/compare/\\?models=SM-S942&models=SM-S948",
+   "/compare/\\?models=SM-F776&models=SM-S942&models=SM-S948",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-s26-ultra",
+      "user_id": 4
+     }
+    ]
+   }
+  },
+  "task": "Open Galaxy Compare and select Galaxy S26 Ultra and Galaxy S26; run the comparison. Report each model's main display dimension, weight and wide camera resolution, and report which model has the larger battery. Add Galaxy Z Flip8 to the comparison and report its main display dimension. Sign in as dana.k@test.com with password TestPass123!, add the Galaxy S26 Ultra to your wishlist from its product page, open its buy page and report the default model code, and report Dana's wishlist count."
+ },
+ "Samsung--9": {
+  "claims": [
+   [
+    "fold8 ultra dimension",
+    "158\\.4\\ x\\ 143\\.2\\ x\\ 4\\.1"
+   ],
+   [
+    "fold8 dimension",
+    "123\\.9\\ x\\ 161\\.4\\ x\\ 4\\.5"
+   ],
+   [
+    "fold8 ultra weight",
+    "215"
+   ],
+   [
+    "fold8 weight",
+    "201"
+   ],
+   [
+    "heavier model",
+    "galaxy\\ z\\ fold8\\ ultra"
+   ],
+   [
+    "s26 ultra brightness",
+    "2600\\ nits"
+   ],
+   [
+    "s25 ultra brightness",
+    "2600nits"
+   ],
+   [
+    "s26 ultra dimension two",
+    "6\\.9\""
+   ],
+   [
+    "s25 ultra dimension two",
+    "6\\.9\u201d"
+   ],
+   [
+    "wishlist count",
+    "\\b2\\b"
+   ]
+  ],
+  "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+  "paths": [
+   "/compare/\\?models=SM-F971&models=SM-F976",
+   "/compare/\\?models=SM-S938&models=SM-S948",
+   "/account/login/",
+   "/account/"
+  ],
+  "state": {
+   "wishlist_items": {
+    "added": [
+     {
+      "added_ts": {
+       "regex": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]+Z"
+      },
+      "id": {
+       "regex": "[1-9][0-9]*"
+      },
+      "product_slug": "galaxy-z-fold8-ultra",
+      "user_id": 4
+     }
+    ]
+   }
+  },
+  "task": "In Galaxy Compare select Galaxy Z Fold8 Ultra and Galaxy Z Fold8 and report both models' unfolded dimensions and weights, and which one is heavier. Then compare Galaxy S26 Ultra with Galaxy S25 Ultra instead and report both main display dimensions and each model's peak brightness. Sign in as dana.k@test.com with password TestPass123!, add the Galaxy Z Fold8 Ultra to your wishlist from its product page, and report Dana's wishlist count."
+ }
+}
