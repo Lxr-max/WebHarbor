@@ -10,12 +10,14 @@ from pathlib import Path
 import re
 import sqlite3
 import sys
+import unicodedata
 from urllib.parse import urlsplit, unquote
 from PIL import Image
 
 
 def norm(text):
-    text = str(text).replace('|', ' ').replace('**', '').casefold()
+    text = ''.join(c for c in unicodedata.normalize('NFKD', str(text)) if not unicodedata.combining(c))
+    text = text.replace('|', ' ').replace('**', '').casefold()
     text = text.replace('−', '-').replace('®', '').replace('™', '')
     text = text.replace('’', "'").replace('–', '-').replace('—', '-')
     text = re.sub(r'\b([0-9][0-9,.]*)\s*usd\b', r'$\1', text)
@@ -255,6 +257,12 @@ def check_contest_answer(answer, initial, after, rule):
     text=norm(answer);score=row['score']
     if not re.search(r'(?:my|your|entry|i|dana)[^.;]{0,35}(?:score[ds]?|scored)[^.;]{0,15}'+str(score)+r'(?![0-9])',text):
         raise ValueError('Reported score does not match owned entry')
+    if rule['strategy']=='any':
+        highest = max(r['score'] for r in after['super6_entries'].values() if r['contest_id'] == rule['contest_id'])
+        gap = highest - score
+        comparison = (r'\b(?:tied|equal|matches|joint)\b.{0,30}(?:top|lead|highest)|(?:top|lead|highest).{0,30}\b(?:tied|equal|matches|joint)\b' if gap == 0 else r'(?<![0-9])' + str(gap) + r'\s*(?:points?\s*)?(?:behind|below|back)|(?:behind|below|gap|trails?).{0,50}(?<![0-9])' + str(gap) + r'(?![0-9])')
+        if not re.search(comparison, text):
+            raise ValueError('Reported leaderboard comparison does not match entry')
     if rule['strategy']=='alternating':
         if not re.search(r'(?:missed|misses)[^.;]{0,15}'+str(6-score)+r'(?![0-9])',text):
             raise ValueError('Reported misses do not match entry')
@@ -264,6 +272,6 @@ def check_contest_answer(answer, initial, after, rule):
         winner=next(t['full_name'] for t in initial['teams'].values() if t['slug']==first['correct_pick'])
         if norm(winner) not in text or norm(game['venue']) not in text:
             raise ValueError('Missing first missed matchup winner or venue')
-        spread=str(game['spread'])
-        if spread not in text:
+        spread = re.escape(format(float(game['spread']), 'g')) + r'(?:\.0)?(?![0-9]|\.[0-9])'
+        if not re.search(spread, text):
             raise ValueError('Missing first missed matchup spread')
