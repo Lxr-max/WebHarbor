@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}IPO Data | Recent IPOs{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('ipo_recent') }}">IPO Center</a> / Recent IPOs</p>
+  <h1 class="page-title">IPO Data &mdash; Recent IPOs</h1>
+
+  <section class="section-head"><h2>Priced Deals</h2></section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Price Date</th><th>Issuer</th><th>Ticker</th><th>Industry</th>
+          <th>Bookrunner(s)</th><th>Exchange</th>
+          <th class="num">Amt+ Over. ($MM)</th><th class="num">Offer Price ($)</th><th>Price Vs. Last Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in deals %}
+          <tr>
+            <td>{{ d.price_date or d.expected_date or '--' }}</td>
+            <td>{{ d.issuer }}</td>
+            <td>{{ d.symbol or '--' }}</td>
+            <td>{{ d.industry or '--' }}</td>
+            <td class="muted">{{ d.bookrunners or '--' }}</td>
+            <td>{{ d.exchange or '--' }}</td>
+            <td class="num">{{ fmt_money(d.proceeds) if d.proceeds else '--' }}</td>
+            <td class="num">{{ fmt_price(d.offer_price) if d.offer_price else '--' }}</td>
+            <td>{{ d.range_vs_offer or '--' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">LAST UPDATED: {{ updated }} &middot; Source: {{ source }}</p>
+
+  <section class="section-head">
+    <h2>Largest 10 IPOs in the Last</h2>
+    <span class="opt-tabs">
+      <a class="{{ 'cur' if window == '30' }}" href="{{ url_for('ipo_recent', window='30') }}">30</a>
+      <a class="{{ 'cur' if window == '90' }}" href="{{ url_for('ipo_recent', window='90') }}">90</a>
+      <a class="{{ 'cur' if window == '180' }}" href="{{ url_for('ipo_recent', window='180') }}">180</a>
+      <span class="muted">Days</span>
+    </span>
+  </section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Price Date</th><th>Filing Date</th><th>Issuer</th><th>Industry</th>
+          <th>Bookrunner(s)</th><th class="num">Offer / 1-day</th><th class="num">Offer / Current [%]</th>
+          <th>Relative to Range</th><th class="num">Proceeds ($MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in largest %}
+          <tr>
+            <td>{{ d.price_date or '--' }}</td>
+            <td>{{ d.filed_date or '--' }}</td>
+            <td>{{ d.issuer }}</td>
+            <td>{{ d.industry or '--' }}</td>
+            <td class="muted">{{ d.bookrunners or '--' }}</td>
+            <td class="num">{{ fmt_pct(d.offer_1day) if d.offer_1day is not none else '--' }}</td>
+            <td class="num">{{ fmt_pct(d.offer_current) if d.offer_current is not none else '--' }}</td>
+            <td>{{ d.range_vs_offer or '--' }}</td>
+            <td class="num">{{ fmt_money(d.proceeds) if d.proceeds else '--' }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="9">No IPOs priced in this window.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">LAST UPDATED: {{ updated }} &middot; Source: {{ source }}</p>
+
+  <section class="section-head"><h2>US IPO Execution ($Bn)</h2></section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Month</th><th class="num">Deals</th><th class="num">Proceeds ($MM)</th></tr></thead>
+      <tbody>
+        {% for m in monthly %}
+          <tr>
+            <td>{{ m.month_label }}</td>
+            <td class="num">{{ m.deals }}</td>
+            <td class="num">{{ fmt_money(m.proceeds) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">LAST UPDATED: {{ updated }} &middot; Source: {{ source }}</p>
+</div>
+{% endblock %}

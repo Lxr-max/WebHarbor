@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %}The New York Stock Exchange | NYSE{% endblock %}
+{% block content %}
+
+{% if movers %}
+<section class="ticker" aria-label="Market movers ticker">
+  <div class="ticker-strip">
+    {% for m in movers %}
+      <a class="ticker-item" href="/quote/XNYS:{{ m.symbol }}">
+        <span class="sym">{{ m.symbol }}</span>
+        <b>{{ fmt_price(m.last_price) }}</b>
+      </a>
+    {% endfor %}
+    {% for m in movers %}
+      <a class="ticker-item" href="/quote/XNYS:{{ m.symbol }}">
+        <span class="sym">{{ m.symbol }}</span>
+        <b>{{ fmt_price(m.last_price) }}</b>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="ticker-note">{{ ticker_note }}</div>
+</section>
+{% endif %}
+
+<div class="wrap">
+
+  {% if hero %}
+  <section class="hero">
+    <h1>{{ hero.get('headline', 'The home of market-defining IPOs') }}</h1>
+    <p>{{ hero.get('subline', '') }}</p>
+    <a class="btn" href="{{ url_for('listings') }}">{{ hero.get('cta', 'Learn more') }}</a>
+  </section>
+  {% endif %}
+
+  <section class="section-head">
+    <h2>Today&rsquo;s Stock Market</h2>
+    <a href="{{ url_for('market_update') }}">Read the full article</a>
+  </section>
+  {% if article %}
+  <div class="grid cols-2">
+    <div class="card card-pad">
+      <p class="muted">
+        {{ article.get('author') }} &middot; {{ article.get('role') }}<br>
+        {{ article.get('date') }}
+      </p>
+      {% for para in article.get('paragraphs', [])[:2] %}
+        <p>{{ para }}</p>
+      {% endfor %}
+      <a class="btn ghost small" href="{{ url_for('market_update') }}">Expand article</a>
+    </div>
+    <div class="grid cols-2" style="align-content:start;">
+      {% for card in cards %}
+        <div class="card card-pad">
+          <h3>{{ card.get('title') }}</h3>
+          <p>{{ card.get('blurb') }}</p>
+          <span class="badge">{{ card.get('cta', 'READ NOW') }}</span>
+        </div>
+      {% endfor %}
+      {% for show in shows %}
+        <div class="card card-pad">
+          <h3>{{ show.get('name') }}</h3>
+          <p>{{ show.get('blurb') }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <section class="section-head">
+    <h2>Recent Bell Ceremonies</h2>
+    <a href="{{ url_for('bell_calendar') }}">Bell calendar</a>
+  </section>
+  <div class="grid cols-4">
+    {% for e in bells %}
+      <div class="card">
+        {% if e.image %}
+          <img src="{{ img('https://www.nyse.com' ~ e.image) }}" alt="Bell ceremony: {{ e.title }}">
+        {% endif %}
+        <div class="bell-body">
+          <span class="badge">{{ e.etype }}</span>
+          <h3>{{ e.title }}</h3>
+          <div class="bell-when">{{ e.date_label }} &middot; {{ e.time_label }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <section class="section-head">
+    <h2>Newly Priced IPOs</h2>
+    <a href="{{ url_for('ipo_recent') }}">IPO Center</a>
+  </section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Price Date</th><th>Issuer</th><th>Ticker</th><th>Industry</th><th>Exchange</th><th class="num">Offer Price ($)</th><th class="num">Amt+ Over. ($MM)</th></tr>
+      </thead>
+      <tbody>
+        {% for d in priced %}
+          <tr>
+            <td>{{ d.price_date or '--' }}</td>
+            <td>{{ d.issuer }}</td>
+            <td><a href="{{ d.href }}">{{ d.symbol }}</a></td>
+            <td>{{ d.industry or '--' }}</td>
+            <td>{{ d.exchange or '--' }}</td>
+            <td class="num">{{ fmt_price(d.offer_price) if d.offer_price else '--' }}</td>
+            <td class="num">{{ fmt_money(d.proceeds) if d.proceeds else '--' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">LAST UPDATED: September 30, 2026 5:49 AM EDT &middot; Source: S&amp;P Global</p>
+
+  {% if whats_next %}
+  <section class="section-head">
+    <h2>What&rsquo;s next?</h2>
+  </section>
+  <p class="page-sub">The NYSE looks forward to welcoming more leading companies from around the world in 2026, growing our one-of-a-kind community and setting the pace for innovation on a global scale.</p>
+  <div class="grid cols-3">
+    {% for item in whats_next %}
+      <div class="card">
+        {% if item.img %}<img src="{{ item.img }}" alt="{{ item.title }}">{% endif %}
+        <div class="card-pad">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if collage_images %}
+  <section class="section-head"><h2>The NYSE Community</h2></section>
+  <div class="collage">
+    {% for url in collage_images %}
+      <img src="{{ url_for('static', filename='images/upstream/' ~ url.split('/')[-1]) }}" alt="NYSE community">
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

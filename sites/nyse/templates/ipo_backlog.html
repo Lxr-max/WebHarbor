@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}IPO Data | The Backlog{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('ipo_recent') }}">IPO Center</a> / The Backlog</p>
+  <h1 class="page-title">The IPO Backlog by Industry</h1>
+  <p class="page-sub">Deals currently on file and their historical precedents, grouped by industry.</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Industry</th><th class="num">Current Deals</th><th class="num">Current Filed Proceeds ($MM)</th>
+          <th class="num">Historical Deals</th><th class="num">Historical Proceeds ($MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r.industry }}</td>
+            <td class="num">{{ r.current_deals }}</td>
+            <td class="num">{{ fmt_money(r.current_proceeds) }}</td>
+            <td class="num">{{ r.historical_deals }}</td>
+            <td class="num">{{ fmt_money(r.historical_proceeds) }}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td><strong>Total</strong></td>
+          <td class="num"><strong>{{ total_current }}</strong></td>
+          <td class="num"><strong>{{ fmt_money(total_proceeds) }}</strong></td>
+          <td class="num"></td><td class="num"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

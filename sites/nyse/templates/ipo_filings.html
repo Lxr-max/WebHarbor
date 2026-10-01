@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}IPO Data | Filings{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('ipo_recent') }}">IPO Center</a> / Filings</p>
+  <h1 class="page-title">IPO Filings</h1>
+
+  <form class="filters" method="get" action="{{ url_for('ipo_filings') }}">
+    <div class="field">
+      <label for="status">Deal status</label>
+      <select id="status" name="status">
+        <option value="">All statuses</option>
+        {% for s in statuses %}
+          <option value="{{ s }}" {{ 'selected' if s == status }}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="exchange">Exchange</label>
+      <select id="exchange" name="exchange">
+        <option value="">All exchanges</option>
+        {% for e in exchanges %}
+          <option value="{{ e }}" {{ 'selected' if e == exchange }}>{{ e }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn small" type="submit">Apply</button>
+    <a class="btn ghost small" href="{{ url_for('ipo_filings') }}">Clear</a>
+  </form>
+
+  <p class="count-line"><strong>{{ rows | length }}</strong> deals{% if status %} with status {{ status }}{% endif %}{% if exchange %} on {{ exchange }}{% endif %}</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Status</th><th>Price / Expected Date</th><th>Filed</th><th>Issuer</th><th>Ticker</th>
+          <th>Industry</th><th>Exchange</th><th class="num">Offer Price ($)</th><th class="num">Filed Proceeds ($MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in rows %}
+          <tr>
+            <td><span class="badge {{ 'solid' if d.status == 'Priced' }}">{{ d.status }}</span></td>
+            <td>{{ d.price_date or d.expected_date or '--' }}</td>
+            <td>{{ d.filed_date or '--' }}</td>
+            <td>{{ d.issuer }}</td>
+            <td>{{ d.symbol or '--' }}</td>
+            <td>{{ d.industry or '--' }}</td>
+            <td>{{ d.exchange or '--' }}</td>
+            <td class="num">{{ fmt_price(d.offer_price) if d.offer_price else '--' }}</td>
+            <td class="num">{{ fmt_money(d.filed_proceeds) if d.filed_proceeds else '--' }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="9">No filings match these filters.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
