@@ -492,6 +492,6 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/university_of_michigan && 
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40219
+EXPOSE 8101 40000-40147
 
 CMD ["/opt/websyn_start.sh"]

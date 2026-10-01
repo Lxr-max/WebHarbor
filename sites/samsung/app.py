@@ -34,6 +34,7 @@ orders/wishlist/tickets. The SQLite seed is materialized deterministically
 at image build time (PYTHONHASHSEED=0).
 """
 import json
+import html
 import os
 import re
 import time
@@ -155,6 +156,11 @@ def _money(value):
 @app.template_filter('money')
 def _money_filter(value):
     return _money(value)
+
+
+@app.template_filter('plain_entities')
+def _plain_entities(value):
+    return html.unescape(str(value))
 
 
 @app.template_filter('stars')
@@ -927,6 +933,9 @@ def buy(category_slug, product_slug):
     # current selections as hidden inputs — request.values covers both
     selected = {k: v for k, v in request.values.items()
                 if k not in ('csrf_token', 'model_code', 'qty')}
+    device = {'galaxy-tab-s11': 'Galaxy Tab S11', 'galaxy-s26': 'Galaxy S26'}.get(product_slug)
+    if device and 'Device' not in selected:
+        selected['Device'] = device
     levels, resolved = _resolve_option_tree(tree, selected)
     cp = ConfigProduct.query.filter_by(model_code=resolved).first() if resolved else None
     if not cp:
@@ -937,10 +946,13 @@ def buy(category_slug, product_slug):
             flash('Please sign in to add items to your cart.', 'error')
             return redirect(url_for('login', next=request.url))
         model_code = request.form.get('model_code', '')
-        qty = max(1, min(5, int(request.form.get('qty', '1') or 1)))
-        target = ConfigProduct.query.filter_by(model_code=model_code).first()
-        if not target:
-            abort(404)
+        try:
+            qty = int(request.form.get('qty', '1'))
+        except (TypeError, ValueError):
+            abort(400)
+        if not 1 <= qty <= 5 or not cp or model_code != cp.model_code:
+            abort(400)
+        target = cp
         opts = {name: pick for name, _items, pick in levels}
         existing = CartItem.query.filter_by(cart_key=_cart_key(),
                                             model_code=model_code).first()
@@ -970,7 +982,12 @@ def cart():
 @app.route('/cart/update', methods=['POST'])
 def cart_update():
     item_id = request.form.get('item_id', '')
-    qty = int(request.form.get('qty', '1') or 1)
+    try:
+        qty = int(request.form.get('qty', '1'))
+    except (TypeError, ValueError):
+        abort(400)
+    if not 0 <= qty <= 5:
+        abort(400)
     item = CartItem.query.filter_by(id=item_id,
                                     cart_key=_cart_key()).first()
     if not item:
@@ -1232,7 +1249,7 @@ def warranty():
                 Product.category_slug.in_(cat_slugs)) \
                 .order_by(Product.model_code).all()
     if model_code:
-        chosen_product = Product.query.filter_by(model_code=model_code).first()
+        chosen_product = next((p for p in models if p.model_code == model_code), None)
         if chosen_product and chosen_cat:
             coverage = chosen_cat.coverage
     return render_template('warranty.html', cats=cats, faqs=faqs,

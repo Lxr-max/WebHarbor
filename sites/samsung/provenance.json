@@ -39,7 +39,7 @@
   },
   "images.samsung.com / image-us.samsung.com": {
    "role": "all imagery: 505 catalog card images, 213 buy-page variant images, 4 home heroes, the warranty-checker category icons and the site logo",
-   "assets": 825,
+   "assets": 644,
    "bytes": 111734000,
    "note": "every file was fetched from the exact upstream URL it renders at; identical upstream artwork reused across variants is stored once and referenced by every page that uses it; seven upstream files are served with a .png URL but JPEG bytes and are stored under their true extension"
   }
@@ -55,7 +55,7 @@
   },
   "images": {
    "classification": "live-capture",
-   "note": "all 825 images under static/images/ were downloaded from the upstream CDNs; asset_inventory.json records per-file sha256, bytes and the exact source URL, and scripts/check_asset_inventory.py enforces exact coverage, hash integrity and real format headers at image build time"
+   "note": "644 captured images are inventoried individually in asset_inventory.json; checked by scripts/check_asset_inventory.py."
   }
  },
  "determinism": {
@@ -63,14 +63,14 @@
   "transforms": "scripts_dev/build_source_data.py converts the raw captures in scraped_data/ (gitignored) into the tracked source_data/*.json byte-reproducibly; scripts_dev/build_contract.py regenerates verify/contract.json from the seed digest and the honest-path audit answers"
  },
  "registration": {
-  "sites_index": 219,
-  "container_port": 40219,
-  "expose": "8101 40000-40219",
-  "declared_slot": "audit-wave slot: index 219 / port 40219 (origin/main site count 145 at PR time + audit position 75 - 1 per the standing parallel-wave merge order; the pre-freeze normalization 133/40133 was the 134-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
+  "sites_index": 145,
+  "container_port": 40145,
+  "expose": "8101 40000-40147"
  },
- "verification": {
-  "tasks": "20 seven-key rows (web_name / id / ques / web / upstream_url / verifier_path / judge_rubric) in sites/samsung/tasks.jsonl",
-  "honest_steps": "scripts_dev/validate_tasks.py drives every task's honest path twice on fresh databases: 330 atomic actions total, min 15 / max 20 per task, both rounds agreeing; reads are never counted and no task can be finished in fewer than 15 honest steps",
-  "contract": "verify/contract.json + verify/verify_N.py grade browser evidence (page paths, decoded screenshots), scoped factual claims and exact database deltas against the reviewed seed; scripts_dev/walk_tasks.py proves all 20 tasks pass the verifier in two independent rounds"
+ "review": {
+  "date": "2026-10-01",
+  "task_revision": "coherent-goals-v1",
+  "evidence": "/data/webharbor-prs/final/pr335: scripted browser regressions, independent source/state expectations and grading controls.",
+  "upstream_check": "Homepage, smartphones and warranty pages accessible and visually compared on 2026-10-01."
  }
 }

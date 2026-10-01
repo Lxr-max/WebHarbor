@@ -6,7 +6,7 @@
   <div class="hero-slide">
     <img src="{{ url_for('static', filename='images/' ~ hero.image) }}" alt="{{ hero.title }}">
     <div class="hero-copy">
-      <h1>{{ hero.title }}</h1>
+      {% if loop.index0 != 0 and hero.title %}<h1>{{ hero.title }}</h1>{% endif %}
       <p>{{ hero.subtitle }}</p>
       {% if hero.cta_url %}
       <a class="btn btn-outline" href="{{ hero.cta_url }}">{{ hero.cta_label }}</a>
