@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Search{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Search results{% if q %} for &ldquo;{{ q }}&rdquo;{% endif %}</h1></div>
+{% if q and not results %}
+<p class="empty">No products matched your search.</p>
+{% elif results %}
+<p class="muted">{{ results|length }} result{{ 's' if results|length != 1 }}.</p>
+<div class="product-grid">
+  {% for p in results %}
+  <a class="product-card" href="/{{ p.category_slug }}/{{ p.slug }}/">
+    <div class="product-img">{% if p.image %}<img src="{{ url_for('static', filename='images/' ~ p.image) }}" alt="{{ p.name }}" loading="lazy">{% else %}<div class="img-fallback" role="img" aria-label="{{ p.name }}"><span>Image not available</span></div>{% endif %}</div>
+    <div class="product-body">
+      <p class="product-series">{{ p.family or p.series }}</p>
+      <p class="product-name">{{ p.name }}</p>
+      <p class="product-price">{% if p.price is not none %}{{ p.price|money }}{% endif %}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="muted">Type a product name, series or feature in the search box above.</p>
+{% endif %}
+{% endblock %}

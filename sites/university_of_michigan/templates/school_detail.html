@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ school.full_name }} — University of Michigan{% endblock %}
+{% block content %}
+<h1>{{ school.full_name }}</h1>
+{% if school.image %}<img class="hero-photo" src="{{ school.image }}" alt="{{ school.full_name }}">{% endif %}
+<p class="page-sub">{{ school.short_name }} &middot; Campus: {{ school.campus }} &middot; <a href="{{ school.url }}">{{ school.url }}</a></p>
+{% if school.blurb %}
+<p>{{ school.blurb }}</p>
+{% endif %}
+
+<h2>Degree Programs <span class="count-pill">{{ programs|length }} programs</span></h2>
+{% if programs %}
+<table class="list">
+  <tr><th>Program</th><th>Type</th></tr>
+  {% for p in programs %}
+  <tr>
+    <td><a href="{{ url_for('program_detail', pid=p.id) }}">{{ p.name }}</a></td>
+    <td>{% if p.submajor %}Sub-major{% else %}Major / Degree{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No degree programs from this unit are listed in the undergraduate Majors &amp; Degrees directory.</p>
+{% endif %}
+
+{% if subjects %}
+<h2>Course Subjects <span class="count-pill">{{ subjects|length }} subjects in the Fall 2026 class search</span></h2>
+<p>
+  {% for s in subjects %}
+  <a class="badge type" style="margin:2px" href="{{ url_for('course_subject', code=s) }}">{{ s }}</a>
+  {% endfor %}
+</p>
+{% endif %}
+{% endblock %}

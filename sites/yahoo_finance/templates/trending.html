@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Trending Stocks - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Trending Stocks</h2>
+  <p class="muted">The tickers Yahoo Finance visitors looked up most, captured September 30, 2026.</p>
+  <div class="table-scroll">
+  <table class="yf">
+    <thead>
+      <tr><th>Rank</th><th>Symbol</th><th>Name</th><th class="num">Last</th><th class="num">Chg</th><th class="num">% Chg</th><th class="num">Market Cap</th><th class="num">Volume</th></tr>
+    </thead>
+    <tbody>
+    {% for rank, q in rows %}
+      <tr>
+        <td>{{ rank }}</td>
+        <td><a href="/quote/{{ q.symbol|urlencode }}"><strong>{{ q.symbol }}</strong></a></td>
+        <td>{{ q.short_name or q.long_name }}</td>
+        <td class="num">{{ fmt_price(q.price) }}</td>
+        <td class="num {{ 'up' if (q.change or 0) >= 0 else 'down' }}">{{ fmt_signed(q.change) }}</td>
+        <td class="num {{ 'up' if (q.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(q.change_pct, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_big(q.market_cap) }}</td>
+        <td class="num">{{ fmt_int(q.volume) }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

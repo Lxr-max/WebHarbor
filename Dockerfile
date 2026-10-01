@@ -478,11 +478,32 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/microsoft_azure && \
     (cd /opt/WebSyn/microsoft_azure && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/microsoft_azure.db instance_seed/microsoft_azure.db && rm -rf instance __pycache__)
 
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/fox_sports && \
-    (cd /opt/WebSyn/fox_sports && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/fox_sports.db instance_seed/fox_sports.db && rm -rf instance __pycache__) && \
-    python3 /opt/check_asset_inventory.py /opt/WebSyn/trader_joes && \
-    (cd /opt/WebSyn/trader_joes && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/trader_joes.db instance_seed/trader_joes.db && rm -rf instance __pycache__) && \
-    python3 /opt/check_seed_databases.py /opt/WebSyn
+    (cd /opt/WebSyn/fox_sports && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/fox_sports.db instance_seed/fox_sports.db && rm -rf instance __pycache__)
 
-EXPOSE 8101 40000-40222
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/samsung && \
+    (cd /opt/WebSyn/samsung && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/samsung.db instance_seed/samsung.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/nyse && \
+    (cd /opt/WebSyn/nyse && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/nyse.db instance_seed/nyse.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/university_of_michigan && \
+    (cd /opt/WebSyn/university_of_michigan && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/university_of_michigan.db instance_seed/university_of_michigan.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/stanford_university && \
+    (cd /opt/WebSyn/stanford_university && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/stanford_university.db instance_seed/stanford_university.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/yahoo_finance && \
+    (cd /opt/WebSyn/yahoo_finance && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/yahoo_finance.db instance_seed/yahoo_finance.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/steam && \
+    (cd /opt/WebSyn/steam && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/steam.db instance_seed/steam.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/trader_joes && \
+    (cd /opt/WebSyn/trader_joes && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/trader_joes.db instance_seed/trader_joes.db && rm -rf instance __pycache__)
+
+RUN python3 /opt/check_seed_databases.py /opt/WebSyn
+
+EXPOSE 8101 40000-40151
 
 CMD ["/opt/websyn_start.sh"]

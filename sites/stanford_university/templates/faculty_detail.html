@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}{{ person.name }} — Stanford Profiles{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('faculty') }}">Faculty Directory</a> › {{ person.name }}</div>
+<div class="detail-head">
+  <h1>{{ person.name }}</h1>
+  <div class="meta">{{ person.short_title }}</div>
+</div>
+<div class="profile">
+  {% if person.photo_url %}
+  <div class="photo"><img src="{{ person.photo_url }}" alt="{{ person.name }}"></div>
+  {% endif %}
+  <div class="info">
+    {% if person.bio %}
+    <h2 style="margin-top:0">Bio</h2>
+    <p>{{ person.bio }}</p>
+    {% endif %}
+    {% if person.research_interests %}
+    <h2>Current research interests</h2>
+    <p>{{ person.research_interests }}</p>
+    {% endif %}
+    {% if person.titles %}
+    <h2>Titles</h2>
+    <ul>
+      {% for t in person.titles %}
+        {% if t.label %}<li>{{ t.label }}</li>{% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if person.education %}
+    <h2>Education</h2>
+    <ul>
+      {% for e in person.education %}
+        {% if e.label %}<li>{{ e.label }}</li>{% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if person.email %}
+    <h2>Contact</h2>
+    <p>Email: {{ person.email }}</p>
+    {% endif %}
+    <p><span class="tag cardinal">{{ person.department }}</span>
+       <span class="tag">{{ person.publication_count }} publications</span></p>
+    {% if person.publications %}
+    <h2>Selected publications</h2>
+    <ul>
+      {% for p in person.publications %}
+        {% if p.label %}<li>{{ p.label }}</li>{% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>
+{% if dept_faculty %}
+<h2 style="margin-top:30px">More faculty in {{ person.department }}</h2>
+<div class="grid cols-3">
+  {% for f in dept_faculty %}
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('faculty_detail', profile_id=f.profile_id) }}">{{ f.name }}</a></h3>
+      <div class="meta">{{ f.short_title }}</div>
+    </div></div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
