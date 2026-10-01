@@ -35,7 +35,7 @@
       <input type="hidden" name="kind" value="athlete">
       <input type="hidden" name="slug" value="{{ athlete.slug }}">
       <input type="hidden" name="next" value="{{ request.path }}">
-      <button type="submit" class="btn btn-outline">Save to favorites</button>
+      <button type="submit" class="btn btn-outline">{{ 'Remove from favorites' if is_favorite('athlete', athlete.slug) else 'Save to favorites' }}</button>
     </form>
     {% endif %}
   </aside>

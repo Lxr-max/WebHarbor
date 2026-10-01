@@ -6,7 +6,7 @@
   <div class="fact-row"><span class="k">Order number</span><span class="v">{{ order.order_number }}</span></div>
   <div class="fact-row"><span class="k">Status</span><span class="v">{{ order.status | capitalize }}</span></div>
   <div class="fact-row"><span class="k">Placed</span><span class="v">{{ order.placed_at[:10] }}</span></div>
-  <div class="fact-row"><span class="k">Ship to</span><span class="v">{{ order.ship_name }}</span></div>
+  <div class="fact-row"><span class="k">Ship to</span><span class="v">{{ order.ship_name }}{% if order.ship_address %}<br>{{ order.ship_address }}<br>{{ order.ship_city }}, {{ order.ship_zip }}{% endif %}</span></div>
   <div class="fact-row"><span class="k">Total</span><span class="v">${{ '%.2f' | format(order.total) }}</span></div>
 
   <h3 style="margin-top:20px">Items</h3>
