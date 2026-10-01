@@ -1,1565 +1,1184 @@
 {
- "FOX Sports--0": {
-  "task": "From the NFL standings report which team leads the AFC West and its record. Open that team's page and report its next opponent and the point spread, then open its roster and report the college of its tallest player on offense. Log in as alice.j@test.com (password TestPass123!), follow that next opponent and that player, and report how many teams Alice follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/standings$",
-   "^/nfl/kansas-city-chiefs-team$",
-   "kansas-city-chiefs-team-roster$",
-   "^/login$",
-   "^/nfl/las-vegas-raiders-team$",
-   "ethan-driskell-player$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "afc west leader",
-    "\\bkansas\\s+city\\s+chiefs\\b"
-   ],
-   [
-    "leader record",
-    "\\b3-0\\b"
-   ],
-   [
-    "next opponent and spread",
-    "raiders[\\s\\S]{0,60}kc\\s*-4\\.5|-4\\.5[\\s\\S]{0,40}raiders"
-   ],
-   [
-    "tallest offensive player",
-    "\\bethan\\s+driskell\\b"
-   ],
-   [
-    "tallest player college",
-    "\\bmarshall\\b"
-   ],
-   [
-    "alice team count",
-    "\\b3\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 1,
-      "item_type": "team",
-      "item_key": "las-vegas-raiders",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 1,
-      "item_type": "player",
-      "item_key": "ethan-driskell",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--1": {
-  "task": "Open the NFL scores, find the week the Chiefs beat the Dolphins 24-10, and report the venue and the attendance from that boxscore. Open the Chiefs' schedule page and report the total line for their next game, then open that game and report the passing-yards leader for each side and which network broadcasts it. Open the home team's page and report its record, then from the betting hub's NFL page report the spread for that game. Log in as bob.c@test.com (password TestPass123!), follow the Dolphins, and report how many teams Bob follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/scores/nfl$",
-   "chiefs-vs-miami-dolphins-sep-27",
-   "kansas-city-chiefs-team-schedule$",
-   "chiefs-vs-las-vegas-raiders-oct-04",
-   "^/nfl/las-vegas-raiders-team$",
-   "^/betting/nfl$",
-   "^/login$",
-   "miami-dolphins-team$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "venue",
-    "\\bhard\\s+rock\\s+stadium\\b"
-   ],
-   [
-    "attendance",
-    "59[,.]?216|59216"
-   ],
-   [
-    "next game total",
-    "o/u\\s*48\\.5|48\\.5"
-   ],
-   [
-    "away passing-yards leader",
-    "mahomes[\\s\\S]{0,40}812|812[\\s\\S]{0,40}mahomes"
-   ],
-   [
-    "home passing-yards leader",
-    "cousins[\\s\\S]{0,40}661|661[\\s\\S]{0,40}cousins"
-   ],
-   [
-    "broadcast network",
-    "\\bcbs\\b"
-   ],
-   [
-    "home team record",
-    "raiders[\\s\\S]{0,40}3-0|3-0[\\s\\S]{0,40}raiders"
-   ],
-   [
-    "betting-hub spread for the game",
-    "kan\\s*-4\\.5|chiefs[\\s\\S]{0,40}-4\\.5|-4\\.5[\\s\\S]{0,40}chiefs|-4\\.5"
-   ],
-   [
-    "bob team count",
-    "\\b3\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "team",
-      "item_key": "miami-dolphins",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--2": {
-  "task": "The Steelers and Browns meet Thursday in Week 4. Open that game's page and report the spread, the total, and the away team's passing-yards team leader with his yardage. Then open the Steelers roster and report the college of the tallest tight end. Create a new account (name Jordan Hale, email jordan.hale@test.com, password at least 8 characters), follow the Steelers, that tight end, and the Browns, and report how many favorites the new account has and the Browns' record.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/schedule$",
-   "steelers-vs-cleveland-browns-oct-01",
-   "pittsburgh-steelers-team-roster$",
-   "^/signup$",
-   "^/nfl/pittsburgh-steelers-team$",
-   "darnell-washington-player$",
-   "^/nfl/cleveland-browns-team$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "spread",
-    "pit\\s*-2\\.5|-2\\.5"
-   ],
-   [
-    "total",
-    "38\\.5"
-   ],
-   [
-    "away passing leader",
-    "\\brodgers\\b[\\s\\S]{0,40}\\b700\\b|\\b700\\b[\\s\\S]{0,40}\\brodgers\\b"
-   ],
-   [
-    "tallest tight end",
-    "\\bdarnell\\s+washington\\b"
-   ],
-   [
-    "tight end college",
-    "\\bgeorgia\\b"
-   ],
-   [
-    "new account favorites",
-    "\\b3\\s+favorites?\\b"
-   ],
-   [
-    "browns record",
-    "browns[\\s\\S]{0,40}2-1|2-1[\\s\\S]{0,40}browns"
-   ]
-  ],
-  "state": {
-   "users": {
-    "added": [
-     {
-      "id": 5,
-      "name": "Jordan Hale",
-      "email": "jordan.hale@test.com",
-      "password_hash": {
-       "regex": ".+"
-      },
-      "joined": "2026-09-30"
-     }
-    ]
-   },
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 5,
-      "item_type": "team",
-      "item_key": "pittsburgh-steelers",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 5,
-      "item_type": "player",
-      "item_key": "darnell-washington",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 5,
-      "item_type": "team",
-      "item_key": "cleveland-browns",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--3": {
-  "task": "Open the NFL schedule and report how many Week 4 games are listed and how many air on CBS. Open the Cowboys-Texans game and report its venue, the over/under total, and which team the spread favors. Open the favored team's page and report its record and the headline of its most recent player-news item, then open the other team's page and report its record. Log in as alice.j@test.com (password TestPass123!), follow the favored team, then search for its quarterback C.J. Stroud and follow him, and report how many teams and players Alice follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/schedule$",
-   "cowboys-vs-houston-texans-oct-04",
-   "houston-texans-team$",
-   "^/nfl/dallas-cowboys-team$",
-   "^/login$",
-   "^/search",
-   "cj-stroud-player$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "week 4 game count",
-    "\\b16\\b"
-   ],
-   [
-    "cbs count",
-    "\\b7\\b[\\s\\S]{0,40}cbs|cbs[\\s\\S]{0,40}\\b7\\b"
-   ],
-   [
-    "venue",
-    "\\breliant\\s+stadium\\b"
-   ],
-   [
-    "over/under",
-    "48\\.5"
-   ],
-   [
-    "spread favors the texans",
-    "hou\\s*-2\\.5|texans[\\s\\S]{0,40}favor|favor[\\s\\S]{0,40}texans|favou?r"
-   ],
-   [
-    "texans record",
-    "\\b0-3\\b"
-   ],
-   [
-    "most recent news headline",
-    "signs\\s+off\\s+vegas('|\u2019)?\\s+practice\\s+squad"
-   ],
-   [
-    "cowboys record",
-    "cowboys[\\s\\S]{0,40}1-2|1-2[\\s\\S]{0,40}cowboys"
-   ],
-   [
-    "stroud search results",
-    "\\b2\\b[\\s\\S]{0,60}player|player[\\s\\S]{0,60}\\b2\\b|two\\s+players"
-   ],
-   [
-    "alice team count",
-    "\\b3\\s+teams?\\b"
-   ],
-   [
-    "alice player count",
-    "\\b3\\s+players?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 1,
-      "item_type": "team",
-      "item_key": "houston-texans",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 1,
-      "item_type": "player",
-      "item_key": "cj-stroud",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--4": {
-  "task": "Open the NFL player stats page and report who leads the league in passing yards and with how many, plus the sacks leader and his team. Open the passing-yards leader's player page and report his position and college, then his team's page and report its record and next opponent. Open the sacks leader's player page and report his jersey number, then his team's page and report its record. From the standings report each team's division and rank. Log in as bob.c@test.com (password TestPass123!), follow both leaders, and report Bob's total number of favorites.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/players$",
-   "bryce-young-player$",
-   "carolina-panthers-team$",
-   "gregory-rousseau-player$",
-   "buffalo-bills-team$",
-   "^/nfl/standings$",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "passing yards leader",
-    "\\bbryce\\s+young\\b"
-   ],
-   [
-    "passing yards",
-    "939"
-   ],
-   [
-    "sacks leader",
-    "\\bgreg\\s+rousseau\\b|\\brousseau\\b"
-   ],
-   [
-    "sacks leader team",
-    "\\bbuf\\b|bills"
-   ],
-   [
-    "sacks value",
-    "6\\.0"
-   ],
-   [
-    "young position",
-    "\\bqb\\b|quarterback"
-   ],
-   [
-    "young college",
-    "\\balabama\\b"
-   ],
-   [
-    "panthers record",
-    "1-2"
-   ],
-   [
-    "panthers next opponent",
-    "lions"
-   ],
-   [
-    "rousseau jersey number",
-    "#?15\\b"
-   ],
-   [
-    "bills record",
-    "3-0"
-   ],
-   [
-    "panthers division and rank",
-    "nfc\\s+south"
-   ],
-   [
-    "bills division and rank",
-    "afc\\s+east"
-   ],
-   [
-    "bob favorites total",
-    "\\b8\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "player",
-      "item_key": "bryce-young",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "player",
-      "item_key": "gregory-rousseau",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--5": {
-  "task": "Five NFL teams are still undefeated. From the standings list all five, then open the page of the NFC West one and report its next opponent and the point spread. Search for that opponent and report the headline of its most recent player-news item. Log in as dana.k@test.com (password TestPass123!), follow the undefeated team, and report Dana's total number of favorites. Then open the power rankings story from the NFL news hub and report where it ranks the Dolphins and their Super Bowl odds.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/standings$",
-   "san-francisco-49ers-team$",
-   "^/search",
-   "denver-broncos-team$",
-   "^/login$",
-   "^/favorites$",
-   "^/nfl/news$",
-   "2026-nfl-power-rankings-week-4"
-  ],
-  "claims": [
-   [
-    "undefeated bills",
-    "\\bbuffalo\\s+bills\\b"
-   ],
-   [
-    "undefeated chiefs",
-    "\\bkansas\\s+city\\s+chiefs\\b"
-   ],
-   [
-    "undefeated raiders",
-    "(las\\s+vegas\\s+)?raiders"
-   ],
-   [
-    "undefeated vikings",
-    "\\bminnesota\\s+vikings\\b"
-   ],
-   [
-    "undefeated 49ers",
-    "\\b49ers\\b"
-   ],
-   [
-    "49ers next opponent and spread",
-    "broncos[\\s\\S]{0,60}sf\\s*-2\\.5|-2\\.5[\\s\\S]{0,60}broncos|vs\\.?\\s+broncos"
-   ],
-   [
-    "broncos recent news",
-    "considered\\s+('|\u2019)?fine('|\u2019)?\\s+after\\s+sporting\\s+boot"
-   ],
-   [
-    "dana favorites total",
-    "\\b6\\b"
-   ],
-   [
-    "dolphins power rank",
-    "\\b32\\b|no\\.?\\s*32"
-   ],
-   [
-    "dolphins super bowl odds",
-    "\\+?100,?000"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "san-francisco-49ers",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--6": {
-  "task": "From the MLB standings report which AL East team clinched the division, its record and home record, and the second-place team's games-behind. Open that team's page and report its record and streak. Open the wild-card Game 1 between the Braves and Phillies and report the final score, the venue, and whether over bettors won or lost. Open the Braves' page and report their record. Open the series' Game 2 and 3 pages and report each start time and network. Log in as carol.d@test.com (password TestPass123!), follow the Phillies and that second-place team, and report how many teams Carol follows.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/mlb/standings$",
-   "tampa-bay-rays-team$",
-   "nl-wild-card-game-1-philadelphia-phillies",
-   "atlanta-braves-team$",
-   "nl-wild-card-game-2-philadelphia-phillies",
-   "nl-wild-card-game-3-philadelphia-phillies",
-   "^/login$",
-   "philadelphia-phillies-team$",
-   "new-york-yankees-team$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "al east champion",
-    "\\btampa\\s+bay\\s+rays\\b|\\brays\\b"
-   ],
-   [
-    "clinched record",
-    "98-64"
-   ],
-   [
-    "home record",
-    "55-26"
-   ],
-   [
-    "yankees games behind",
-    "\\b4\\.5\\b"
-   ],
-   [
-    "rays record",
-    "98-64"
-   ],
-   [
-    "rays streak",
-    "\\bl1\\b|lost\\s+1|1-game\\s+losing|losing\\s+streak"
-   ],
-   [
-    "game 1 final score",
-    "3-5|5-3|'3',\\s*'5'|3\\s*(,|to|-)\\s*5"
-   ],
-   [
-    "game 1 venue",
-    "\\btruist\\s+park\\b"
-   ],
-   [
-    "over bettors won",
-    "over\\b[\\s\\S]{0,60}\\bwon\\b|people\\s+who\\s+bet\\s+the\\s+over\\s+won"
-   ],
-   [
-    "braves record",
-    "94-68"
-   ],
-   [
-    "game 2 start",
-    "sep(tember)?\\s*30|2026-09-30"
-   ],
-   [
-    "game 2 network",
-    "\\bnbc\\b"
-   ],
-   [
-    "game 3 start",
-    "oct(ober)?\\s*1|2026-10-01"
-   ],
-   [
-    "game 3 network",
-    "\\bnbc\\b"
-   ],
-   [
-    "carol team count",
-    "\\b4\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "team",
-      "item_key": "philadelphia-phillies",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "team",
-      "item_key": "new-york-yankees",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--7": {
-  "task": "Open the AL wild-card game the White Sox won in Houston and report the final score, the winning pitcher, and the venue. Open both teams' pages from that boxscore and report each record. From the AL West standings report where the home team finished. Then open the series' Game 2 and 3 pages and report the day and time each starts, the network carrying Game 3, its headline preview, and the recap headline of Game 1. Log in as bob.c@test.com (password TestPass123!), follow the Astros and the White Sox, and report how many teams Bob follows after that.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/scores/mlb$",
-   "al-wild-card-game-1-chicago-white-sox",
-   "houston-astros-team$",
-   "chicago-white-sox-team$",
-   "^/mlb/standings$",
-   "al-wild-card-game-2-chicago-white-sox",
-   "al-wild-card-game-3-chicago-white-sox",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "final score",
-    "6-3|'6',\\s*'3'|6\\s*(,|to|-)\\s*3"
-   ],
-   [
-    "winning pitcher",
-    "\\bjordan\\s+hicks\\b"
-   ],
-   [
-    "venue",
-    "\\bdaikin\\s+park\\b"
-   ],
-   [
-    "game 1 recap",
-    "\\bwhite\\s+sox\\s+top\\s+astros\\b"
-   ],
-   [
-    "astros record",
-    "81-81"
-   ],
-   [
-    "white sox record",
-    "84-78"
-   ],
-   [
-    "astros al west finish",
-    "(1st|first|no\\.?\\s*1|1)[\\s\\S]{0,40}al\\s+west|al\\s+west[\\s\\S]{0,40}(1st|first|no\\.?\\s*1|\\b1\\b)"
-   ],
-   [
-    "game 2 day",
-    "sep(tember)?\\s*30|2026-09-30"
-   ],
-   [
-    "game 2 time",
-    "9:00\\s*pm|9:00pm"
-   ],
-   [
-    "game 3 day",
-    "oct(ober)?\\s*1|2026-10-01"
-   ],
-   [
-    "game 3 time",
-    "9:00\\s*pm|9:00pm"
-   ],
-   [
-    "game 3 network",
-    "\\bpc?ock\\b|\\bpeacock\\b"
-   ],
-   [
-    "game 3 preview",
-    "\\bwinner-take-all\\b"
-   ],
-   [
-    "bob team count",
-    "\\b4\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "team",
-      "item_key": "houston-astros",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "team",
-      "item_key": "chicago-white-sox",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--8": {
-  "task": "Open the College Football standings and report the top three teams with their records, how many first-place votes the No. 1 team received, and which ranked team moved up two spots to No. 4. Open the top four teams' pages and report each next opponent and the No. 4 team's point spread, then the No. 4 team's schedule and its next game's kickoff time. Log in as dana.k@test.com (password TestPass123!), follow the No. 2 and No. 4 teams, and report how many teams Dana follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/college-football/standings$",
-   "texas-longhorns-team$",
-   "georgia-bulldogs-team$",
-   "notre-dame-fighting-irish-team$",
-   "miami-\\(fl\\)-hurricanes-team$",
-   "miami-\\(fl\\)-hurricanes-team-schedule",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "no. 1 team",
-    "\\btexas\\s+longhorns\\b"
-   ],
-   [
-    "no. 2 team",
-    "\\bgeorgia\\s+bulldogs\\b"
-   ],
-   [
-    "no. 3 team",
-    "\\bnotre\\s+dame\\b"
-   ],
-   [
-    "no. 1 record",
-    "4-0"
-   ],
-   [
-    "first-place votes",
-    "\\b62\\b"
-   ],
-   [
-    "moved up two spots",
-    "\\bmiami(\\s+\\(fl\\))?\\s+hurricanes\\b"
-   ],
-   [
-    "no.1 next opponent",
-    "oklahoma"
-   ],
-   [
-    "no.2 next opponent",
-    "vanderbilt"
-   ],
-   [
-    "no.3 next opponent",
-    "north\\s+carolina|tar\\s+heels"
-   ],
-   [
-    "no.4 next opponent",
-    "clemson|tigers"
-   ],
-   [
-    "no.4 point spread",
-    "-16\\.5"
-   ],
-   [
-    "kickoff time",
-    "11:30\\s*pm|11:30pm"
-   ],
-   [
-    "kickoff network",
-    "\\babc\\b"
-   ],
-   [
-    "dana team count",
-    "\\b4\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "georgia-bulldogs",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "miami-(fl)-hurricanes",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--9": {
-  "task": "From College Football scores find where Notre Dame plays its next game, open that game's page, and report the spread and the venue, plus Notre Dame's record from the poll. Then find the most recent final involving USC, open that boxscore, and report the final score and the venue. Search for USC and report what kinds of results appear. Log in as dana.k@test.com (password TestPass123!), follow both USC and Notre Dame's next opponent, and report Dana's total number of favorites.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/scores/college-football$",
-   "notre-dame-fighting-irish-vs-north-carolina",
-   "^/college-football/standings$",
-   "oregon-ducks-vs-usc-trojans",
-   "^/search",
-   "^/login$",
-   "usc-trojans-team$",
-   "north-carolina-tar-heels-team$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "notre dame next venue",
-    "\\bkenan\\s+stadium\\b"
-   ],
-   [
-    "notre dame spread",
-    "-21\\.5"
-   ],
-   [
-    "notre dame poll record",
-    "4-0"
-   ],
-   [
-    "usc final score",
-    "41-27|'41',\\s*'27'|41\\s*(,|to|-)\\s*27"
-   ],
-   [
-    "usc venue",
-    "\\blos\\s+angeles\\s+memorial\\s+coliseum\\b"
-   ],
-   [
-    "usc search kinds",
-    "player|team|story|nascar"
-   ],
-   [
-    "dana total favorites",
-    "\\b7\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "usc-trojans",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "north-carolina-tar-heels",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--10": {
-  "task": "Open The Herd's show page and report the title of its most recent episode and how long ago it was posted. Report how many episodes are listed in total. Open First Things First and report its newest episode title, then open Colin Cowherd's personality page and report the title of his most recent video. Log in as carol.d@test.com (password TestPass123!), follow both shows, and report Carol's total favorites count.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/shows$",
-   "the-herd-with-colin-cowherd",
-   "first-things-first",
-   "^/personalities$",
-   "colin-cowherd$",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "herd most recent episode",
-    "\\bis\\s+arch\\s+manning\\s+underdelivering\\b"
-   ],
-   [
-    "herd episode recency",
-    "6\\s+days?\\s+ago"
-   ],
-   [
-    "herd episode count",
-    "\\b5\\s+episodes?\\b|\\b5\\b"
-   ],
-   [
-    "ftf newest episode",
-    "\\btrevor\\s+lawrence\\s+vs\\s+drake\\s+maye\\b"
-   ],
-   [
-    "cowherd most recent video",
-    "\\bis\\s+arch\\s+manning\\s+underdelivering\\b"
-   ],
-   [
-    "carol favorites total",
-    "\\b8\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "show",
-      "item_key": "first-things-first",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "show",
-      "item_key": "the-herd-with-colin-cowherd",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--11": {
-  "task": "Open Tom Brady's personality page and report his role and the title of his most recent video. Then open the FOX NFL Sunday show page and report how many episodes it lists and the title of its newest one. Search the site for 'brady' and report how many results appear and what kinds they are, then open the top result and report what page it lands on. Log in as bob.c@test.com (password TestPass123!), follow Tom Brady, and report how many personalities Bob follows.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/personalities$",
-   "tom-brady$",
-   "fox-nfl-sunday",
-   "^/search",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "brady role",
-    "\\bannouncer\\b"
-   ],
-   [
-    "brady most recent video",
-    "\\bfox\\s+nfl\\s+sunday\\b"
-   ],
-   [
-    "fox nfl sunday episode count",
-    "\\b16\\s+episodes?\\b|\\b16\\b"
-   ],
-   [
-    "fox nfl sunday newest",
-    "\\btom\\s+brady\\s+shares\\s+thoughts\\s+on\\s+why\\s+chargers\\b"
-   ],
-   [
-    "brady search result count",
-    "\\b13\\b"
-   ],
-   [
-    "seven players",
-    "player'?:?\\s*7\\b|7\\s+players?|7\\s+player\\b"
-   ],
-   [
-    "two personalities",
-    "personality'?:?\\s*2\\b|2\\s+personalit"
-   ],
-   [
-    "four stories",
-    "story'?:?\\s*4\\b|4\\s+stor"
-   ],
-   [
-    "top result page",
-    "\\bbrady[-\\s]basso\\b|player\\s+page"
-   ],
-   [
-    "bob personality count",
-    "\\b2\\s+personalit"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "personality",
-      "item_key": "tom-brady",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--12": {
-  "task": "From the betting hub open the Cardinals-Giants game with the 44.5 total and report its spread and kickoff time. Log in as dana.k@test.com (password TestPass123!), follow both the Cardinals and the Giants, and report how many teams Dana follows in total. Then open the NFL news hub's story about Week 4 offensive player of the year odds and report the favored player in its headline, then open the newest related story there and report its title. Finally open the MLB betting page and report how many games are listed and the Phillies-Braves Game 3 date.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/betting$",
-   "arizona-cardinals-vs-new-york-giants-oct-04",
-   "^/login$",
-   "arizona-cardinals-team$",
-   "new-york-giants-team$",
-   "^/favorites$",
-   "^/nfl/news$",
-   "2026-nfl-odds-offensive-player-of-the-year",
-   "^/stories/nfl/",
-   "^/betting/mlb$"
-  ],
-  "claims": [
-   [
-    "cardinals-giants spread",
-    "ari\\s*-1\\.5|-1\\.5"
-   ],
-   [
-    "44.5 total",
-    "44\\.5"
-   ],
-   [
-    "kickoff time",
-    "5:00\\s*pm|5:00pm"
-   ],
-   [
-    "dana team count",
-    "\\b4\\s+teams?\\b"
-   ],
-   [
-    "opoy favored player",
-    "\\bjahmyr\\s+gibbs\\b"
-   ],
-   [
-    "newest related story title",
-    "tom\\s+brady'?s?\\s+first\\s+start"
-   ],
-   [
-    "mlb betting game count",
-    "\\b8\\b"
-   ],
-   [
-    "phillies-braves game 3 date",
-    "oct(ober)?\\s*1|2026-10-01"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "arizona-cardinals",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 4,
-      "item_type": "team",
-      "item_key": "new-york-giants",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--13": {
-  "task": "Log in as alice.j@test.com (password TestPass123!) and enter the NFL Week 3 Pick 6 contest. Pick the winner you believe is correct for all six matchups, submit your entry, and report your graded score. Then open the leaderboard and report the highest score on the board, how many entries there are, and which matchup Question 3 covers.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/login$",
-   "^/fox-super-6$",
-   "/enter$",
-   "/entries/",
-   "leaderboard"
-  ],
-  "claims": [
-   [
-    "question 3 matchup",
-    "(\\bchicago\\s+bears\\b[\\s\\S]{0,60}\\btennessee\\s+titans\\b|\\btennessee\\s+titans\\b[\\s\\S]{0,60}\\bchicago\\s+bears\\b|\\bbears\\b[\\s\\S]{0,30}\\btitans\\b)"
-   ],
-   [
-    "leaderboard top score",
-    "\\b6\\b"
-   ],
-   [
-    "leaderboard entry count",
-    "\\b4\\s+entries?\\b|\\b4\\b"
-   ]
-  ],
-  "state": {
-   "super6_entries": {
-    "updated": {
-     "[1]": {
-      "picks": {
-       "regex": "[a-z0-9-]+(\\|[a-z0-9-]+){5}"
-      },
-      "score": {
-       "regex": "\\d"
+  "FOX Sports--0": {
+    "task": "Help Alice prepare a watchlist for the AFC West leader's next game. Identify the division leader and record, its next opponent and spread, and the tallest offensive player on its roster with his college. Follow the opponent and that player in Alice's account (alice.j@test.com, password TestPass123!), and confirm the additions on her favorites page.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/nfl/standings",
+      "kansas-city-chiefs-team-roster",
+      "^/favorites$",
+      "las\\-vegas\\-raiders\\-team$",
+      "ethan\\-driskell\\-player$"
+    ],
+    "claims": [
+      [
+        "afc west leader",
+        "\\bkansas\\s+city\\s+chiefs\\b"
+      ],
+      [
+        "leader record",
+        "\\b3-0\\b"
+      ],
+      [
+        "next opponent and spread",
+        "raiders[\\s\\S]{0,60}kc\\s*-4\\.5|-4\\.5[\\s\\S]{0,40}raiders"
+      ],
+      [
+        "tallest offensive player",
+        "\\bethan\\s+driskell\\b"
+      ],
+      [
+        "tallest player college",
+        "\\bmarshall\\b"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "item_type": "team",
+            "item_key": "las-vegas-raiders",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "item_type": "player",
+            "item_key": "ethan-driskell",
+            "added_at": "2026-09-30"
+          }
+        ]
       }
-     }
     }
-   }
   },
-  "answer_state": [
-   {
-    "table": "super6_entries",
-    "column": "score",
-    "user_id": 1,
-    "contest_id": 1
-   }
-  ],
-  "super6_consistency": {
-   "contest_id": 1
-  }
- },
- "FOX Sports--14": {
-  "task": "Log in as dana.k@test.com (password TestPass123!) and open the NFL Week 3 Pick 6 contest. Pick the home team for questions 1, 3 and 5 and the away team for questions 2, 4 and 6, submit, and report your score and how many questions you missed. Open your entry page and report the correct pick for the first question you missed, then open that matchup's page and report its venue and spread. Report the entry deadline shown on the contest page.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/login$",
-   "^/fox-super-6$",
-   "/enter$",
-   "/entries/",
-   "chicago-bears-vs-tennessee-titans-aug-29-2026-game-boxscore-11185"
-  ],
-  "claims": [
-   [
-    "graded score",
-    "\\b3\\b"
-   ],
-   [
-    "missed count",
-    "\\b3\\b"
-   ],
-   [
-    "first missed question",
-    "\\bquestion\\s*3\\b|\\bq3\\b|\\b3\\b[\\s\\S]{0,30}missed|missed[\\s\\S]{0,30}\\b3\\b"
-   ],
-   [
-    "first missed correct pick",
-    "\\bchicago\\s+bears\\b|\\bbears\\b"
-   ],
-   [
-    "matchup venue",
-    "\\bnissan\\s+stadium\\b"
-   ],
-   [
-    "matchup spread",
-    "-?1\\.5"
-   ],
-   [
-    "entry deadline",
-    "2026-09-27|september\\s+27[\\s\\S]{0,20}12:00"
-   ]
-  ],
-  "state": {
-   "super6_entries": {
-    "updated": {
-     "[4]": {
-      "picks": "green-bay-packers|atlanta-falcons|tennessee-titans|cincinnati-bengals|indianapolis-colts|houston-texans",
-      "score": 3
-     }
+  "FOX Sports--1": {
+    "task": "Put together a Chiefs form-and-fixture brief for Bob. Find their 24–10 win over Miami and report its venue and attendance, then compare it with their next scheduled game: opponent, total, network, each side's passing-yards leader and yardage, and the home team's record. Follow Miami in Bob's account (bob.c@test.com, password TestPass123!) so he can track the team from the result.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "chiefs-vs-miami-dolphins-sep-27",
+      "chiefs-vs-las-vegas-raiders-oct-04",
+      "^/favorites$",
+      "miami\\-dolphins\\-team$"
+    ],
+    "claims": [
+      [
+        "venue",
+        "\\bhard\\s+rock\\s+stadium\\b"
+      ],
+      [
+        "attendance",
+        "59[,.]?216|59216"
+      ],
+      [
+        "next game total",
+        "o/u\\s*48\\.5|48\\.5"
+      ],
+      [
+        "away passing-yards leader",
+        "mahomes[\\s\\S]{0,40}812|812[\\s\\S]{0,40}mahomes"
+      ],
+      [
+        "home passing-yards leader",
+        "cousins[\\s\\S]{0,40}661|661[\\s\\S]{0,40}cousins"
+      ],
+      [
+        "broadcast network",
+        "\\bcbs\\b"
+      ],
+      [
+        "home team record",
+        "raiders[\\s\\S]{0,40}3-0|3-0[\\s\\S]{0,40}raiders"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "team",
+            "item_key": "miami-dolphins",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
     }
-   }
   },
-  "answer_state": [
-   {
-    "table": "super6_entries",
-    "column": "score",
-    "user_id": 4,
-    "contest_id": 1
-   }
-  ],
-  "super6_consistency": {
-   "contest_id": 1
-  }
- },
- "FOX Sports--15": {
-  "task": "Create a new FOX Sports account (name Riley Quinn, email riley.quinn@test.com, password at least 8 characters). Follow the Tampa Bay Rays, the Texas Longhorns, and the show Big Noon Kickoff, then log out. Sign back in, open your favorites, and report the Rays' record, the Longhorns' record, and the number of favorites on the page. Then unfollow the Longhorns and report the new total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/signup$",
-   "tampa-bay-rays-team$",
-   "texas-longhorns-team$",
-   "big-noon-kickoff",
-   "^/logout$",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "rays record",
-    "98-64"
-   ],
-   [
-    "longhorns record",
-    "\\b4-0\\b"
-   ],
-   [
-    "favorites count",
-    "\\b3\\b"
-   ],
-   [
-    "total after unfollow",
-    "\\b2\\b"
-   ]
-  ],
-  "state": {
-   "users": {
-    "added": [
-     {
-      "id": 5,
-      "name": "Riley Quinn",
-      "email": "riley.quinn@test.com",
-      "password_hash": {
-       "regex": ".+"
+  "FOX Sports--2": {
+    "task": "Set up Jordan Hale's FOX Sports watchlist for the Steelers–Browns Week 4 matchup (jordan.hale@test.com, choose a password of at least 8 characters). Report the spread, total, Browns' record and Pittsburgh's passing-yards leader with yardage. Find Pittsburgh's tallest tight end and his college, and follow him and both teams in the new account.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "steelers-vs-cleveland-browns-oct-01",
+      "pittsburgh-steelers-team-roster",
+      "^/favorites$",
+      "pittsburgh\\-steelers\\-team$",
+      "cleveland\\-browns\\-team$",
+      "darnell\\-washington\\-player$",
+      "^/signup$"
+    ],
+    "claims": [
+      [
+        "spread",
+        "pit\\s*-2\\.5|-2\\.5"
+      ],
+      [
+        "total",
+        "38\\.5"
+      ],
+      [
+        "away passing leader",
+        "\\brodgers\\b[\\s\\S]{0,40}\\b700\\b|\\b700\\b[\\s\\S]{0,40}\\brodgers\\b"
+      ],
+      [
+        "tallest tight end",
+        "\\bdarnell\\s+washington\\b"
+      ],
+      [
+        "tight end college",
+        "\\bgeorgia\\b"
+      ],
+      [
+        "browns record",
+        "browns[\\s\\S]{0,40}2-1|2-1[\\s\\S]{0,40}browns"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "item_type": "team",
+            "item_key": "pittsburgh-steelers",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "item_type": "team",
+            "item_key": "cleveland-browns",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "item_type": "player",
+            "item_key": "darnell-washington",
+            "added_at": "2026-09-30"
+          }
+        ]
       },
-      "joined": "2026-09-30"
-     }
-    ]
-   },
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 5,
-      "item_type": "team",
-      "item_key": "tampa-bay-rays",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 5,
-      "item_type": "show",
-      "item_key": "big-noon-kickoff",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--16": {
-  "task": "Search the site for 'wild card' and report how many stories and how many games appear in the results. Open the story about wild-card power rankings and report how many teams it says kick off the playoffs and the date it was published. Search again for 'Larson' and report which kinds of results appear, then open the NASCAR page and report the points leader and his win total. Log in as alice.j@test.com (password TestPass123!), follow the AL East champion from the MLB standings, and report how many teams Alice follows.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/search",
-   "mlb-wild-card-playoffs-yankees-red-sox",
-   "^/nascar$",
-   "^/login$",
-   "^/mlb/standings$",
-   "tampa-bay-rays-team$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "wild card story count",
-    "\\b18\\b"
-   ],
-   [
-    "wild card game count",
-    "\\b22\\b"
-   ],
-   [
-    "wild card total results",
-    "\\b56\\b"
-   ],
-   [
-    "teams kicking off playoffs",
-    "\\b8\\b|eight"
-   ],
-   [
-    "story published date",
-    "2026-09-27|september\\s+27"
-   ],
-   [
-    "larson search kinds",
-    "nascar"
-   ],
-   [
-    "nascar points leader",
-    "\\bkyle\\s+larson\\b"
-   ],
-   [
-    "larson points",
-    "2282|2,282"
-   ],
-   [
-    "larson wins",
-    "\\b2\\s+wins?\\b"
-   ],
-   [
-    "alice team count",
-    "\\b3\\s+teams?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "name": "Jordan Hale",
+            "email": "jordan.hale@test.com",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d{2}\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "signup_password_column": "password_hash"
+  },
+  "FOX Sports--3": {
+    "task": "Alice wants to track the favored side in the Week 4 Cowboys–Texans game. Report the venue, total, favored team and both teams' records, and check the favored team's latest player-news headline. Follow that team and its quarterback C.J. Stroud in Alice's account (alice.j@test.com, password TestPass123!), and confirm both additions.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "cowboys-vs-houston-texans-oct-04",
+      "houston-texans-team",
+      "^/favorites$",
+      "houston\\-texans\\-team$",
+      "cj\\-stroud\\-player$"
+    ],
+    "claims": [
+      [
+        "venue",
+        "\\breliant\\s+stadium\\b"
+      ],
+      [
+        "over/under",
+        "48\\.5"
+      ],
+      [
+        "spread favors the texans",
+        "hou\\s*-2\\.5|texans[\\s\\S]{0,40}favor|favor[\\s\\S]{0,40}texans|favou?r"
+      ],
+      [
+        "texans record",
+        "\\b0-3\\b"
+      ],
+      [
+        "most recent news headline",
+        "signs\\s+off\\s+vegas('|’)?\\s+practice\\s+squad"
+      ],
+      [
+        "cowboys record",
+        "cowboys[\\s\\S]{0,40}1-2|1-2[\\s\\S]{0,40}cowboys"
+      ],
+      [
+        "spread direction",
+        "(texans|houston).{0,40}(favored|favoured|-2\\.5)"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "item_type": "team",
+            "item_key": "houston-texans",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "item_type": "player",
+            "item_key": "cj-stroud",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--4": {
+    "task": "Build Bob's watchlist around the current NFL passing-yards and sacks leaders. Identify each leader, his leading statistic and team, check the passing leader's position and college and the sacks leader's jersey number, and compare their teams' records and division positions. Follow both players using bob.c@test.com (password TestPass123!) and confirm they are saved.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/nfl/players",
+      "/nfl/standings",
+      "^/favorites$",
+      "bryce\\-young\\-player$",
+      "gregory\\-rousseau\\-player$"
+    ],
+    "claims": [
+      [
+        "passing yards leader",
+        "\\bbryce\\s+young\\b"
+      ],
+      [
+        "passing yards",
+        "939"
+      ],
+      [
+        "sacks leader",
+        "\\bgreg\\s+rousseau\\b|\\brousseau\\b"
+      ],
+      [
+        "sacks leader team",
+        "\\bbuf\\b|bills"
+      ],
+      [
+        "sacks value",
+        "6\\.0"
+      ],
+      [
+        "young position",
+        "\\bqb\\b|quarterback"
+      ],
+      [
+        "young college",
+        "\\balabama\\b"
+      ],
+      [
+        "panthers record",
+        "1-2"
+      ],
+      [
+        "rousseau jersey number",
+        "#?15\\b"
+      ],
+      [
+        "bills record",
+        "3-0"
+      ],
+      [
+        "panthers division and rank",
+        "nfc\\s+south"
+      ],
+      [
+        "bills division and rank",
+        "afc\\s+east"
+      ],
+      [
+        "Panthers placement",
+        "panthers.{0,60}(1st|first).{0,20}nfc south"
+      ],
+      [
+        "Bills placement",
+        "bills.{0,60}(1st|first).{0,20}afc east"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "player",
+            "item_key": "bryce-young",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "player",
+            "item_key": "gregory-rousseau",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--5": {
+    "task": "Dana wants to follow the unbeaten NFC West team into its next game. Identify it from the NFL standings, report its record, next opponent and spread, and check the opponent's latest player-news headline for matchup context. Follow the unbeaten team in dana.k@test.com's account (password TestPass123!) and confirm the saved team.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/nfl/standings",
+      "denver-broncos-team",
+      "^/favorites$",
+      "san\\-francisco\\-49ers\\-team$"
+    ],
+    "claims": [
+      [
+        "undefeated 49ers",
+        "\\b49ers\\b"
+      ],
+      [
+        "49ers next opponent and spread",
+        "broncos[\\s\\S]{0,60}sf\\s*-2\\.5|-2\\.5[\\s\\S]{0,60}broncos|vs\\.?\\s+broncos"
+      ],
+      [
+        "broncos recent news",
+        "considered\\s+('|’)?fine('|’)?\\s+after\\s+sporting\\s+boot"
+      ],
+      [
+        "unbeaten record",
+        "49ers.{0,40}3-0"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "san-francisco-49ers",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--6": {
+    "task": "Help Carol catch up with the Braves–Phillies wild-card series. Report Game 1's score, venue and over-bet outcome, compare both teams' season records, and find the start times and networks for Games 2 and 3. Follow both teams in Carol's account (carol.d@test.com, password TestPass123!) so she can keep up with the series.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "nl-wild-card-game-1-philadelphia",
+      "nl-wild-card-game-2-philadelphia",
+      "nl-wild-card-game-3-philadelphia",
+      "^/favorites$",
+      "atlanta\\-braves\\-team$",
+      "philadelphia\\-phillies\\-team$"
+    ],
+    "claims": [
+      [
+        "game 1 final score",
+        "3-5|5-3|'3',\\s*'5'|3\\s*(,|to|-)\\s*5"
+      ],
+      [
+        "game 1 venue",
+        "\\btruist\\s+park\\b"
+      ],
+      [
+        "over bettors won",
+        "over\\b[\\s\\S]{0,60}\\bwon\\b|people\\s+who\\s+bet\\s+the\\s+over\\s+won"
+      ],
+      [
+        "braves record",
+        "94-68"
+      ],
+      [
+        "game 2 start",
+        "sep(tember)?\\s*30|2026-09-30"
+      ],
+      [
+        "game 2 network",
+        "\\bnbc\\b"
+      ],
+      [
+        "game 3 start",
+        "oct(ober)?\\s*1|2026-10-01"
+      ],
+      [
+        "game 3 network",
+        "\\bnbc\\b"
+      ],
+      [
+        "Phillies record",
+        "phillies.{0,40}88-74"
+      ],
+      [
+        "Game2 time",
+        "game 2.{0,60}6(?::00)?\\s*pm"
+      ],
+      [
+        "Game3 time",
+        "game 3.{0,60}6(?::00)?\\s*pm"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "team",
+            "item_key": "philadelphia-phillies",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--7": {
+    "task": "Bob missed the White Sox wild-card win in Houston. Summarize Game 1's score, winning pitcher, venue and recap headline, and compare the teams' records and Houston's division finish. Find when Games 2 and 3 start and the Game 3 network and preview headline. Follow both teams in bob.c@test.com's account (password TestPass123!) to keep track of the series.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "al-wild-card-game-1-chicago",
+      "al-wild-card-game-2-chicago",
+      "al-wild-card-game-3-chicago",
+      "/mlb/standings",
+      "^/favorites$",
+      "chicago\\-white\\-sox\\-team$",
+      "houston\\-astros\\-team$"
+    ],
+    "claims": [
+      [
+        "final score",
+        "6-3|'6',\\s*'3'|6\\s*(,|to|-)\\s*3"
+      ],
+      [
+        "winning pitcher",
+        "\\bjordan\\s+hicks\\b"
+      ],
+      [
+        "venue",
+        "\\bdaikin\\s+park\\b"
+      ],
+      [
+        "game 1 recap",
+        "\\bwhite\\s+sox\\s+top\\s+astros\\b"
+      ],
+      [
+        "astros record",
+        "81-81"
+      ],
+      [
+        "white sox record",
+        "84-78"
+      ],
+      [
+        "astros al west finish",
+        "(1st|first|no\\.?\\s*1|1)[\\s\\S]{0,40}al\\s+west|al\\s+west[\\s\\S]{0,40}(1st|first|no\\.?\\s*1|\\b1\\b)"
+      ],
+      [
+        "game 3 network",
+        "\\bpc?ock\\b|\\bpeacock\\b"
+      ],
+      [
+        "game 3 preview",
+        "\\bwinner-take-all\\b"
+      ],
+      [
+        "Game2 schedule",
+        "game 2.{0,50}(sep(?:tember)?\\.? 30|2026-09-30).{0,25}9(?::00)?\\s*pm"
+      ],
+      [
+        "Game3 schedule",
+        "game 3.{0,50}(oct(?:ober)?\\.? 1|2026-10-01).{0,25}9(?::00)?\\s*pm"
+      ],
+      [
+        "Game3 network",
+        "(peacock|pcock)"
+      ],
+      [
+        "Game3 preview",
+        "astros.{0,20}white sox.{0,30}winner.take.all"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "team",
+            "item_key": "chicago-white-sox",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "team",
+            "item_key": "houston-astros",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--8": {
+    "task": "Dana is deciding which College Football contenders to watch. Compare the AP poll's top four teams: records, the leader's first-place votes, which team rose two places to fourth, and their next opponents. Check the fourth-ranked team's spread and next kickoff time, then follow the second- and fourth-ranked teams in Dana's account (dana.k@test.com, password TestPass123!).",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/college-football/standings",
+      "^/favorites$",
+      "georgia\\-bulldogs\\-team$",
+      "miami\\-\\(fl\\)\\-hurricanes\\-team$"
+    ],
+    "claims": [
+      [
+        "top four",
+        "texas.{0,80}georgia.{0,80}notre dame.{0,80}miami"
+      ],
+      [
+        "Texas votes",
+        "texas.{0,80}62.{0,20}first.place"
+      ],
+      [
+        "records",
+        "all 4.{0,20}4-0|each.{0,20}4-0"
+      ],
+      [
+        "Miami rise",
+        "miami.{0,40}(rose|up|risen).{0,10}2.{0,30}(4th|fourth|4)"
+      ],
+      [
+        "Texas opponent",
+        "texas.{0,30}oklahoma"
+      ],
+      [
+        "Georgia opponent",
+        "georgia.{0,30}vanderbilt"
+      ],
+      [
+        "Notre Dame opponent",
+        "notre dame.{0,30}north carolina"
+      ],
+      [
+        "Miami opponent",
+        "miami.{0,30}clemson"
+      ],
+      [
+        "Miami spread",
+        "miami.{0,30}-16\\.5"
+      ],
+      [
+        "Miami kickoff",
+        "oct(?:ober)? 3.{0,15}11:30\\s*pm"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "georgia-bulldogs",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "miami-(fl)-hurricanes",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--9": {
+    "task": "Help Dana compare USC's latest result with Notre Dame's upcoming matchup. Report the final score and venue of USC's most recent completed game, then Notre Dame's poll record, next opponent, venue and spread. Follow USC and Notre Dame's next opponent in dana.k@test.com's account (password TestPass123!) and confirm the additions.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/college-football/standings",
+      "notre-dame.*vs-north-carolina",
+      "oregon.*vs-usc",
+      "^/favorites$",
+      "usc\\-trojans\\-team$",
+      "north\\-carolina\\-tar\\-heels\\-team$"
+    ],
+    "claims": [
+      [
+        "Notre Dame record",
+        "notre dame.{0,40}4-0"
+      ],
+      [
+        "Notre Dame opponent",
+        "north carolina"
+      ],
+      [
+        "next venue",
+        "kenan stadium"
+      ],
+      [
+        "Notre Dame spread",
+        "(nd|notre dame).{0,50}-21\\.5"
+      ],
+      [
+        "USC result",
+        "oregon.{0,30}41.{0,30}usc.{0,15}27|usc.{0,30}(lost|loss).{0,15}27.{0,5}41|oregon.{0,20}(beat|defeated).{0,20}usc.{0,10}41.{0,5}27"
+      ],
+      [
+        "USC venue",
+        "los angeles memorial coliseum"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "usc-trojans",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "north-carolina-tar-heels",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--10": {
+    "task": "Carol wants a sports-talk watchlist centered on The Herd and First Things First. Compare their newest episode titles, including The Herd's posting age, and check Colin Cowherd's newest video for a sense of his current topics. Follow both shows in Carol's account (carol.d@test.com, password TestPass123!) and confirm they appear in her favorites.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/shows/the-herd",
+      "/shows/first-things-first",
+      "/personalities/colin-cowherd",
+      "^/favorites$"
+    ],
+    "claims": [
+      [
+        "Herd episode",
+        "herd.{0,100}arch manning underdelivering"
+      ],
+      [
+        "Herd age",
+        "6 days ago"
+      ],
+      [
+        "FTF episode",
+        "trevor lawrence vs drake maye.{0,80}oregon.{0,30}must.win.{0,30}usc"
+      ],
+      [
+        "Cowherd video",
+        "cowherd.{0,70}arch manning underdelivering"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "show",
+            "item_key": "the-herd-with-colin-cowherd",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "show",
+            "item_key": "first-things-first",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--11": {
+    "task": "Help Bob decide what to watch from Tom Brady and FOX NFL Sunday. Report Brady's role and newest video title, plus the show's newest episode title and available episode count. Follow Brady in Bob's account (bob.c@test.com, password TestPass123!) and confirm he is in the personality favorites.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/shows/fox-nfl-sunday",
+      "/personalities/tom-brady",
+      "^/favorites$"
+    ],
+    "claims": [
+      [
+        "Brady role",
+        "brady.{0,30}announcer"
+      ],
+      [
+        "Brady newest",
+        "brady.{0,60}(newest|latest).{0,20}fox nfl sunday"
+      ],
+      [
+        "show count",
+        "fox nfl sunday.{0,30}16 episodes"
+      ],
+      [
+        "show newest",
+        "brady shares thoughts on why chargers are struggling"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "personality",
+            "item_key": "tom-brady",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--12": {
+    "task": "Prepare Dana's watchlist for the Cardinals–Giants game whose total is 44.5. Find it through the betting hub, report its spread, kickoff time and venue, and compare both teams' current records. Follow both teams in Dana's account (dana.k@test.com, password TestPass123!) and confirm the saved matchup participants.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/betting",
+      "cardinals-vs-new-york-giants",
+      "^/favorites$",
+      "arizona\\-cardinals\\-team$",
+      "new\\-york\\-giants\\-team$"
+    ],
+    "claims": [
+      [
+        "spread",
+        "cardinals.{0,40}-1\\.5"
+      ],
+      [
+        "kickoff",
+        "(oct(?:ober)?\\.? 4|2026-10-04).{0,30}5(?::00)?\\s*pm"
+      ],
+      [
+        "venue",
+        "metlife stadium"
+      ],
+      [
+        "Cardinals record",
+        "cardinals.{0,30}1-2"
+      ],
+      [
+        "Giants record",
+        "giants.{0,30}2-1"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "arizona-cardinals",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "item_type": "team",
+            "item_key": "new-york-giants",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--13": {
+    "task": "Enter the NFL Week 3 Pick 6 contest as alice.j@test.com (password TestPass123!). Choose a winner for each of the six matchups and submit the entry. Report your graded score, how it compares with the highest score on the leaderboard, and the number of entries on that board.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/fox-super-6/nfl-week-3-pick-6/entries/",
+      "/leaderboard"
+    ],
+    "claims": [
+      [
+        "board highest",
+        "(highest|leader|top).{0,35}6(?:/6| of 6| out of 6| points)?"
+      ],
+      [
+        "board count",
+        "4 entries"
+      ]
+    ],
+    "state": {},
+    "contest": {
       "user_id": 1,
-      "item_type": "team",
-      "item_key": "tampa-bay-rays",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
+      "contest_id": 1,
+      "strategy": "any"
+    }
+  },
+  "FOX Sports--14": {
+    "task": "Submit Dana's alternating home/away strategy in the NFL Week 3 Pick 6 contest (dana.k@test.com, password TestPass123!): home teams for questions 1, 3 and 5, away teams for 2, 4 and 6. Report the score and misses, and investigate the first missed matchup by checking its correct winner, venue and spread. Include the contest's entry deadline.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/fox-super-6/nfl-week-3-pick-6/entries/",
+      "week\\-3\\-baltimore\\-ravens\\-vs\\-dallas\\-cowboys\\-sep\\-27\\-2026\\-game\\-boxscore\\-11137"
+    ],
+    "claims": [
+      [
+        "deadline",
+        "(sep(?:tember)?\\.? 24.{0,5}2026|2026-09-24).{0,15}12(?::00)?\\s*pm"
+      ]
+    ],
+    "state": {},
+    "contest": {
+      "user_id": 4,
+      "contest_id": 1,
+      "strategy": "alternating"
+    }
+  },
+  "FOX Sports--15": {
+    "task": "Create a FOX Sports account for Riley Quinn (riley.quinn@test.com, choose a password of at least 8 characters) to follow Texas college football. Check the Longhorns' record and next opponent, and the newest Big Noon Kickoff episode. Follow Texas and Big Noon Kickoff, then sign back in and confirm both remain in the new account's favorites.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/shows/big-noon-kickoff",
+      "^/favorites$",
+      "texas\\-longhorns\\-team$",
+      "^/signup$"
+    ],
+    "claims": [
+      [
+        "Texas record",
+        "(texas|longhorns).{0,30}4-0"
+      ],
+      [
+        "next opponent",
+        "oklahoma"
+      ],
+      [
+        "newest episode",
+        "brady quinn.{0,30}concerns.{0,30}oregon.{0,20}defense"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "item_type": "team",
+            "item_key": "texas-longhorns",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "item_type": "show",
+            "item_key": "big-noon-kickoff",
+            "added_at": "2026-09-30"
+          }
+        ]
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "name": "Riley Quinn",
+            "email": "riley.quinn@test.com",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d{2}\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "signup_password_column": "password_hash"
+  },
+  "FOX Sports--16": {
+    "task": "Alice is preparing a wild-card playoff reading list. Find the wild-card power-rankings story, report its publication date and how many teams it says start the playoffs, then identify the first-ranked team and check that team's record and next scheduled playoff matchup. Follow that team in Alice's account (alice.j@test.com, password TestPass123!) for updates.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "mlb-wild-card-playoffs-yankees-red-sox",
+      "atlanta-braves-team-schedule",
+      "^/favorites$",
+      "atlanta\\-braves\\-team$"
+    ],
+    "claims": [
+      [
+        "publication date",
+        "2026-09-27|sep(?:tember)?\\.? 27.{0,4}2026"
+      ],
+      [
+        "playoff starters",
+        "8 teams"
+      ],
+      [
+        "first ranked",
+        "(1st|first|top|#1|number 1).{0,30}(atlanta )?braves|braves.{0,30}(1st|first|top|#1|number 1)"
+      ],
+      [
+        "Braves record",
+        "braves.{0,40}94-68"
+      ],
+      [
+        "next matchup",
+        "phillies.{0,70}(sep(?:tember)?\\.? 30|2026-09-30).{0,30}6(?::00)?\\s*pm"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "item_type": "team",
+            "item_key": "atlanta-braves",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--17": {
+    "task": "Bob wants to follow the more reliable finisher among the top two NASCAR Cup drivers. Compare their points, wins, top-ten finishes and DNFs, choose the driver with fewer DNFs, and report the points gap. Check the next race's name, track, time and network, then follow the chosen driver in Bob's account (bob.c@test.com, password TestPass123!).",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/nascar/cup-series/standings",
+      "/nascar/drivers/2",
+      "^/favorites$"
+    ],
+    "claims": [
+      [
+        "Larson stats",
+        "larson.{0,40}2282 points.{0,30}2 wins.{0,30}17 top.(?:ten|10).{0,30}3 dnfs?"
+      ],
+      [
+        "Hamlin stats",
+        "hamlin.{0,40}2256 points.{0,30}4 wins.{0,30}20 top.(?:ten|10).{0,30}0 dnfs?"
+      ],
+      [
+        "choice",
+        "hamlin.{0,30}(fewer|zero|0) dnfs"
+      ],
+      [
+        "points gap",
+        "26.point gap|gap.{0,15}26"
+      ],
+      [
+        "race",
+        "south point 400"
+      ],
+      [
+        "track",
+        "las vegas motor speedway"
+      ],
+      [
+        "start",
+        "9(?::30)\\s*pm"
+      ],
+      [
+        "network",
+        "\\busa\\b"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "item_type": "driver",
+            "item_key": "2",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--18": {
+    "task": "Help Carol assess the Giants' trade for J.J. McCarthy. Find the news story and report its publication date and what it says about his chances of replacing Jaxson Dart long-term. Check McCarthy's Giants roster/player entry and report his position and college, then follow the Giants and McCarthy in Carol's account (carol.d@test.com, password TestPass123!).",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "giants-trade-j-j-mccarthy",
+      "new-york-giants-team-roster",
+      "^/favorites$",
+      "new\\-york\\-giants\\-team$",
+      "jj\\-mccarthy\\-player$"
+    ],
+    "claims": [
+      [
+        "mccarthy long-term chances",
+        "(no\\s+intention[\\s\\S]{0,60}dart|slim|viable\\s+backup[\\s\\S]{0,80}at\\s+best|never\\s+get[\\s\\S]{0,20}dart)"
+      ],
+      [
+        "story publish date",
+        "2026-09-28|september\\s+28"
+      ],
+      [
+        "position",
+        "mccarthy.{0,50}(qb|quarterback)"
+      ],
+      [
+        "college",
+        "mccarthy.{0,80}michigan"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "team",
+            "item_key": "new-york-giants",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "player",
+            "item_key": "jj-mccarthy",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
+  },
+  "FOX Sports--19": {
+    "task": "Carol wants to understand how the 98-win MLB team finished its regular season. Identify the team, division and home record, then trace its most recent completed game through the schedule to the boxscore. Report the score, venue, recap headline and winning team's season record. Follow both teams in Carol's account (carol.d@test.com, password TestPass123!) for their postseason updates.",
+    "initial_digest": "8a20885356c4d5364cce4ee4acc187f4b190a059fb75e5df3a3f6f23bd871dec",
+    "paths": [
+      "/mlb/standings",
+      "tampa-bay-rays-team-schedule",
+      "tampa-bay-rays-vs-philadelphia-phillies-sep-27",
+      "^/favorites$",
+      "tampa\\-bay\\-rays\\-team$",
+      "philadelphia\\-phillies\\-team$"
+    ],
+    "claims": [
+      [
+        "98 win team",
+        "\\btampa\\s+bay\\s+rays\\b|\\brays\\b"
+      ],
+      [
+        "division",
+        "al\\s+east"
+      ],
+      [
+        "home record",
+        "55-26"
+      ],
+      [
+        "recent final result",
+        "(rays.{0,100}(?:7-3 loss|lost 3-7|lost 3 to 7)|phillies.{0,30}(?:won|beat|defeated).{0,30}(?:7-3|rays.{0,10}7-3))"
+      ],
+      [
+        "boxscore venue",
+        "\\bcitizens\\s+bank\\s+park\\b"
+      ],
+      [
+        "recap headline",
+        "\\bphillies\\s+knock\\s+off\\s+rays\\b|\\bstott\\b"
+      ],
+      [
+        "phillies record",
+        "88-74"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "team",
+            "item_key": "tampa-bay-rays",
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "item_type": "team",
+            "item_key": "philadelphia-phillies",
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    }
   }
- },
- "FOX Sports--17": {
-  "task": "Open the NASCAR page and report the top two drivers with their point totals, the name and track of the next race, and which network airs it. Switch to the UFC page and report the winner of the most recent event's main result and where it took place, plus the winner of the event before it. Log in as bob.c@test.com (password TestPass123!), follow the Chiefs and their quarterback Patrick Mahomes, then from the roster follow tight end Travis Kelce and defensive end George Karlaftis, and report how many teams and players Bob follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nascar$",
-   "^/ufc$",
-   "^/login$",
-   "kansas-city-chiefs-team$",
-   "patrick-mahomes-ii-player$",
-   "kansas-city-chiefs-team-roster$",
-   "travis-kelce-player$",
-   "george-karlaftis-player$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "nascar leader",
-    "\\bkyle\\s+larson\\b"
-   ],
-   [
-    "larson points",
-    "2282|2,282"
-   ],
-   [
-    "second driver",
-    "\\bdenny\\s+hamlin\\b"
-   ],
-   [
-    "hamlin points",
-    "2256|2,256"
-   ],
-   [
-    "next race",
-    "\\bsouth\\s+point\\s+400\\b"
-   ],
-   [
-    "next race track",
-    "\\blas\\s+vegas\\s+motor\\s+speedway\\b"
-   ],
-   [
-    "next race network",
-    "\\busa\\b"
-   ],
-   [
-    "ufc winner",
-    "(j\\.\\s*van|van)[\\s\\S]{0,30}w\\b|van\\s+won|j\\.\\s*van"
-   ],
-   [
-    "ufc venue",
-    "\\bcrypto\\.com\\s+arena\\b"
-   ],
-   [
-    "ufc location",
-    "\\blos\\s+angeles\\b"
-   ],
-   [
-    "prior event winner",
-    "j\\.\\s*silva|silva"
-   ],
-   [
-    "prior event venue",
-    "gila\\s+river\\s+arena"
-   ],
-   [
-    "bob team count",
-    "\\b3\\s+teams?\\b"
-   ],
-   [
-    "bob player count",
-    "\\b5\\s+players?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "team",
-      "item_key": "kansas-city-chiefs",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "player",
-      "item_key": "patrick-mahomes-ii",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "player",
-      "item_key": "travis-kelce",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 2,
-      "item_type": "player",
-      "item_key": "george-karlaftis",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--18": {
-  "task": "Open the news story about the Giants trading for J.J. McCarthy and report what it says about his chances of replacing Jaxson Dart long-term, plus its publish date. From the NFL news hub report how many stories are listed, then open the story about plays that stood out in Week 3 and report the two quarterbacks its opening paragraph names and what it calls Herbert's play. Report the hub's most recent story source. Log in as carol.d@test.com (password TestPass123!), follow the Giants, then from the roster follow quarterback J.J. McCarthy, and report how many teams and players Carol follows.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/nfl/news$",
-   "giants-trade-j-j-mccarthy",
-   "plays-that-stood-out",
-   "^/login$",
-   "new-york-giants-team$",
-   "new-york-giants-team-roster$",
-   "jj-mccarthy-player$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "mccarthy long-term chances",
-    "(no\\s+intention[\\s\\S]{0,60}dart|slim|viable\\s+backup[\\s\\S]{0,80}at\\s+best|never\\s+get[\\s\\S]{0,20}dart)"
-   ],
-   [
-    "story publish date",
-    "2026-09-28|september\\s+28"
-   ],
-   [
-    "hub story count",
-    "\\b53\\b"
-   ],
-   [
-    "opening qb 1",
-    "justin\\s+herbert"
-   ],
-   [
-    "opening qb 2",
-    "lamar\\s+jackson"
-   ],
-   [
-    "herbert play name",
-    "\\bmeatball\\s+sub\\b"
-   ],
-   [
-    "most recent story source",
-    "\\bfox\\s+sports\\b"
-   ],
-   [
-    "carol team count",
-    "\\b3\\s+teams?\\b"
-   ],
-   [
-    "carol player count",
-    "\\b3\\s+players?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "team",
-      "item_key": "new-york-giants",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "player",
-      "item_key": "jj-mccarthy",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- },
- "FOX Sports--19": {
-  "task": "Find the MLB team that won 98 games and report its division and home record. Open its schedule and report the result of its most recent final game, then open that game's boxscore and report the venue and the recap headline, and open the winning team's page and report its record. Search for the 98-win team and report what kinds of results appear. Log in as carol.d@test.com (password TestPass123!), follow that team and the winning team, and report how many players and teams Carol follows in total.",
-  "initial_digest": "25499c92536a857801b548ec3ac1eddb898cf212a5dd126f280e3a593038f179",
-  "paths": [
-   "^/mlb/standings$",
-   "tampa-bay-rays-team$",
-   "tampa-bay-rays-team-schedule",
-   "tampa-bay-rays-vs-philadelphia-phillies-sep-27",
-   "philadelphia-phillies-team$",
-   "^/search",
-   "^/login$",
-   "^/favorites$"
-  ],
-  "claims": [
-   [
-    "98 win team",
-    "\\btampa\\s+bay\\s+rays\\b|\\brays\\b"
-   ],
-   [
-    "division",
-    "al\\s+east"
-   ],
-   [
-    "home record",
-    "55-26"
-   ],
-   [
-    "recent final result",
-    "3-7|'3',\\s*'7'|3\\s*(,|to|-)\\s*7"
-   ],
-   [
-    "boxscore venue",
-    "\\bcitizens\\s+bank\\s+park\\b"
-   ],
-   [
-    "recap headline",
-    "\\bphillies\\s+knock\\s+off\\s+rays\\b|\\bstott\\b"
-   ],
-   [
-    "phillies record",
-    "88-74"
-   ],
-   [
-    "rays search kinds",
-    "player|team|story|game"
-   ],
-   [
-    "carol team count",
-    "\\b4\\s+teams?\\b"
-   ],
-   [
-    "carol player count",
-    "\\b2\\s+players?\\b"
-   ]
-  ],
-  "state": {
-   "favorites": {
-    "added": [
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "team",
-      "item_key": "tampa-bay-rays",
-      "added_at": "2026-09-30"
-     },
-     {
-      "id": {
-       "regex": "\\d+"
-      },
-      "user_id": 3,
-      "item_type": "team",
-      "item_key": "philadelphia-phillies",
-      "added_at": "2026-09-30"
-     }
-    ]
-   }
-  }
- }
 }

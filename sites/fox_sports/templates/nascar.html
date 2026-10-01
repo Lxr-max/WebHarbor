@@ -9,7 +9,7 @@
       {% for d in drivers %}
       <tr>
         <td class="cell-strong">{{ d.rank }}</td>
-        <td class="cell-team">{{ d.driver }}</td>
+        <td class="cell-team"><a href="{{ url_for('nascar_driver', driver_id=d.rank) }}">{{ d.driver }}</a></td>
         <td class="cell-strong">{{ d.points }}</td>
         <td>{{ d.back }}</td>
         <td></td>

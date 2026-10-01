@@ -12,10 +12,12 @@
 {% set player_favs = [] %}
 {% set show_favs = [] %}
 {% set person_favs = [] %}
+{% set driver_favs = [] %}
 {% for f in favorites %}
   {% if f.item_type == 'team' %}{% set _ = team_favs.append(f) %}
   {% elif f.item_type == 'player' %}{% set _ = player_favs.append(f) %}
   {% elif f.item_type == 'show' %}{% set _ = show_favs.append(f) %}
+  {% elif f.item_type == 'driver' %}{% set _ = driver_favs.append(f) %}
   {% else %}{% set _ = person_favs.append(f) %}{% endif %}
 {% endfor %}
 
@@ -88,5 +90,11 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
+{% if driver_favs %}
+<section class="section"><h2>Drivers ({{ driver_favs|length }})</h2>
+<ul class="search-results">{% for f in driver_favs %}{% set d=drivers.get(f.item_key) %}{% if d %}
+<li><a href="{{ url_for('nascar_driver', driver_id=d.rank) }}">{{ d.driver }}</a> — {{ d.points }} points</li>
+{% endif %}{% endfor %}</ul></section>
 {% endif %}
 {% endblock %}
