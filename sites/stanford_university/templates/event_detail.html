@@ -13,7 +13,7 @@
     {% if event.location_name %}<div class="fact"><div class="k">Location</div><div class="v">{{ event.location_name }}{% if event.room_number %} {{ event.room_number }}{% endif %}</div></div>{% endif %}
     {% if event.address %}<div class="fact"><div class="k">Address</div><div class="v">{{ event.address }}</div></div>{% endif %}
     <div class="fact"><div class="k">Format</div><div class="v">{{ event.experience or '—' }}</div></div>
-    <div class="fact"><div class="k">Cost</div><div class="v">{% if event.free %}Free{% elif event.ticket_cost %}{{ event.ticket_cost }}{% else %}Ticketed{% endif %}</div></div>
+    <div class="fact"><div class="k">Cost</div><div class="v">{% if event.free %}Free{% elif event.ticket_cost %}{{ event.ticket_cost }}{% else %}Admission cost not listed{% endif %}</div></div>
   </div>
   {% if event.description %}<p>{{ event.description }}</p>{% endif %}
   {% if event.tags %}<p>{% for t in event.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
@@ -22,7 +22,7 @@
   <table class="data">
     <tr><th>Starts</th><th>Ends</th><th>Location</th></tr>
     {% for i in event.instances %}
-      <tr><td>{{ i.start }}</td><td>{{ i.end or '—' }}</td><td>{{ i.location or event.location_name or '—' }}</td></tr>
+      <tr><td>{{ i.start or 'Time not listed' }}</td><td>{{ i.end or '—' }}</td><td>{{ i.location or event.location_name or '—' }}</td></tr>
     {% endfor %}
   </table>
   {% endif %}

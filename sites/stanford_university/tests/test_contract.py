@@ -1,3 +1,4 @@
+from pathlib import Path
 """Contract tests: every route renders, filters work, seed counts hold,
 and CSRF-protected state changes behave like the real site."""
 import json
@@ -20,7 +21,7 @@ def test_health(client):
     assert counts["news"] == 210
     assert counts["events"] > 500
     assert counts["calendar"] == 185
-    assert counts["libraries"] == 29  # 30 -> 29: philosophy duplicate deduped (review fix #3)
+    assert counts["libraries"] == 27  # Merge the philosophy, science and earth-science roster aliases.
     assert counts["users"] == 4
 
 
@@ -261,7 +262,7 @@ def test_faculty_photo_url_maps_to_packed_assets():
 def test_responsive_css_rules_present():
     """Audit regression: the narrow-viewport rules (scrollable data tables,
     wrapping filter selects, clamped card grids, URL wrapping) must stay."""
-    css = open("static/css/site.css").read()
+    css = open(Path(__file__).resolve().parents[1] / "static/css/site.css").read()
     assert "@media (max-width: 860px)" in css
     assert "table.data { display: block; overflow-x: auto; }" in css
     assert ".filters select { max-width: 100%; }" in css
