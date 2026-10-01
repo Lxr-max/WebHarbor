@@ -490,8 +490,11 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/nyse && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/university_of_michigan && \
     (cd /opt/WebSyn/university_of_michigan && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/university_of_michigan.db instance_seed/university_of_michigan.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/stanford_university && \
+    (cd /opt/WebSyn/stanford_university && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/stanford_university.db instance_seed/stanford_university.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40147
+EXPOSE 8101 40000-40148
 
 CMD ["/opt/websyn_start.sh"]

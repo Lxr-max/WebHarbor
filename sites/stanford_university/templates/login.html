@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Log in — Stanford University{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Log in</h1>
+  <form method="post" action="{{ url_for('login', next=request.args.get('next', '')) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="you@example.com">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <button class="btn solid" type="submit">Log in</button>
+  </form>
+  <div class="alt">New here? <a href="{{ url_for('signup') }}">Create an account</a></div>
+</div>
+{% endblock %}

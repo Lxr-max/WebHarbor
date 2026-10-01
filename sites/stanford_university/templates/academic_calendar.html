@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Academic Calendar 2026-27 — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Stanford Academic Calendar: 2026-2027</h2>
+</div>
+<p>Key dates and deadlines for Stanford's quarter-based academic year. Jump to a quarter:</p>
+<div class="form-actions" style="margin:0 0 20px">
+  {% for q in quarters %}
+    <a class="btn {% if q == quarter %}solid{% endif %}" href="{{ url_for('academic_calendar', quarter=q) }}">{{ q|capitalize }} Quarter</a>
+  {% endfor %}
+</div>
+<table class="data">
+  <tr><th style="width:260px">Date</th><th>Event / deadline</th></tr>
+  {% for e in entries %}
+    <tr><td><strong>{{ e.when_text }}</strong></td><td>{{ e.what }}</td></tr>
+  {% else %}
+    <tr><td colspan="2"><div class="empty">No entries.</div></td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
