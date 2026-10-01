@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Request Information — University of Michigan Admissions{% endblock %}
+{% block content %}
+<h1>Request Information</h1>
+<p class="page-sub">Get on the mailing list and ask the Office of Undergraduate Admissions a question.</p>
+
+{% if error %}
+<div class="error-box">{{ error }}</div>
+{% endif %}
+
+<form class="stack" method="post" action="{{ url_for('request_info') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="name">Full name</label>
+  <input type="text" id="name" name="name" required>
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
+  <label for="audience">I am a...</label>
+  <select id="audience" name="audience" required>
+    <option value="">Choose one</option>
+    <option>High School Student</option>
+    <option>Transfer Student</option>
+    <option>International Student</option>
+    <option>Parent or Guardian</option>
+    <option>Counselor</option>
+    <option>K-8 Student</option>
+  </select>
+  <label for="message">Your question (optional)</label>
+  <textarea id="message" name="message" rows="5" placeholder="Ask about majors, costs, campus visits..."></textarea>
+  <p><button class="btn" type="submit">Submit request</button></p>
+</form>
+{% endblock %}

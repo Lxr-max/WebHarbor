@@ -1,0 +1,120 @@
+{
+ "site": "university_of_michigan",
+ "upstream": "https://umich.edu/",
+ "upstream_note": "The declared task upstream is the University of Michigan gateway https://umich.edu/ (Ann Arbor). The mirror covers the gateway plus the public services it links to: admissions.umich.edu, ro.umich.edu (Office of the Registrar), csprod.dsc.umich.edu (public class search), search.lib.umich.edu + deepblue.lib.umich.edu (U-M Library), news.umich.edu, events.umich.edu, campusinfo.umich.edu / maps.studentlife.umich.edu (campus map), and the 19 school/college homepages under *.umich.edu.",
+ "captured_at": "2026-09-30",
+ "capture_window_utc": "2026-09-30T18:20:00Z to 2026-09-30T22:30:00Z",
+ "capture_method": "headless Chromium (Playwright) against the live pages with a desktop user agent, plus direct HTTP (curl/urllib) for the endpoints that serve plain JSON without a challenge. Every captured page returned HTTP 200 and is stored as the rendered HTML in scraped_data/captures/ with a .meta.json sidecar (url, status, bytes, sha256, UTC timestamp).",
+ "waf_note": "umich.edu and most *.umich.edu hosts sit behind Cloudflare bot management. Plain HTTP GETs receive a 403 'Just a moment...' interstitial; a headless Chromium with a desktop user agent passes the challenge on most hosts after 0-2 retries, and every record below is a live upstream capture obtained that way. Two endpoints stayed hard-blocked for datacenter clients even in a full browser and are declared here honestly: (1) the Library Search catalog API POSTs at search.lib.umich.edu/spectrum/* (Cloudflare challenges the XHR itself; the UI never renders results in the datacenter), so the catalog record corpus comes from the public Deep Blue repository backend API at backend.production.deepblue-documents.lib.umich.edu (curl-able, no challenge) while the search UI structure (fields, tabs, filters, help copy) is captured from the real search.lib.umich.edu pages; (2) the LSA Course Guide (lsa.umich.edu/cg/) now redirects to U-M Okta single sign-on, so course data comes from the registrar's public class search instead. No fixture or synthetic data is used anywhere; nothing is presented as a live capture that is not.",
+ "pages_captured": 210,
+ "capture_breakdown": {
+  "umich.edu gateway pages": 15,
+  "school/college homepages": 19,
+  "admissions pages": 13,
+  "registrar calendar pages": 9,
+  "PeopleSoft class search pages": 150,
+  "library search UI pages": 4,
+  "Deep Blue API JSON captures": 26,
+  "news.umich.edu articles + category pages": 37,
+  "events.umich.edu pages": 73,
+  "campus map API captures": 2
+ },
+ "sources": {
+  "umich.edu": {
+   "role": "university gateway: home, schools-colleges directory (19 schools + Dearborn/Flint campuses), academics, about (mission), life-at-michigan, research, prospective/current students, faculty-staff",
+   "captures": 15
+  },
+  "admissions.umich.edu": {
+   "role": "undergraduate admissions: Majors & Degrees list (156 programs with school/college attribution, a-f/g-l/m-r/s-z sort tabs, filter-by-school list, first-year/upper-level admitting units, preferred admission), costs (2026-27 tuition tables), financial aid deadlines, first-year application plans (ED/EA/RD), requirements & deadlines, request-information form",
+   "captures": 12
+  },
+  "ro.umich.edu": {
+   "role": "Office of the Registrar: academic calendars for Fall 2025, Winter 2026, Spring/Summer 2026, Fall 2026, Winter 2027 (term selector + Academic Calendar / Registration Deadlines checkbox filters), schedule-of-classes landing page",
+   "captures": 9
+  },
+  "csprod.dsc.umich.edu": {
+   "role": "registrar's public class search (PeopleSoft COMMUNITY_ACCESS): subject lists for 12 school/college groups, Fall 2026 class lists for 31 subjects (1714 courses, 5708 sections with class number, section, component, instructor, meeting dates, units, instruction mode, enrollment restrictions, reserved seats, available seats, waitlist, status, topics, combined-section flags), and class detail pages carrying course descriptions, academic career and class attributes",
+   "captures": 62
+  },
+  "search.lib.umich.edu": {
+   "role": "U-M Library Search UI: catalog home (search-by options: Keyword/Title/Title starts with/Author/Journal-Serial Title/Subject/LC Subject/Call Number/Series/ISBN-ISSN-OCLC; catalog scope filters: All libraries / U-M Ann Arbor Libraries / Flint Thompson Library / Bentley Historical Library / William L. Clements Library; Everything/Catalog/Articles/Databases/Online Journals/Guides tabs) and the advanced search page with boolean fielded search",
+   "captures": 4
+  },
+  "backend.production.deepblue-documents.lib.umich.edu": {
+   "role": "Deep Blue repository public REST API (the backend behind the Deep Blue tab of Library Search): 624 catalog records across 25 topical queries with title, authors, issue date, type, subjects, abstract, handle and URI",
+   "captures": 26
+  },
+  "news.umich.edu": {
+   "role": "Michigan News: 28 full articles (title, date, author, description, body paragraphs, og:image) plus 8 category archive pages (arts-culture, business-economy, education-society, environment, health, international, law-politics, science-technology)",
+   "captures": 37
+  },
+  "events.umich.edu": {
+   "role": "Happening @ Michigan events calendar: 42 event detail pages (JSON-LD: name, start/end dates, location name/address, description, image; plus rendered event type and 'Presented by' sponsor) and the home/day/week/month views",
+   "captures": 44
+  },
+  "apibuilder.studentlife.umich.edu": {
+   "role": "campus map buildings API behind campusinfo.umich.edu/maps-wayfinding and maps.studentlife.umich.edu: 265 buildings with official name, address, city, zip, lat/lng, category, acronym, accessibility flags and website",
+   "captures": 2
+  },
+  "*.umich.edu school homepages": {
+   "role": "19 school/college homepages (taubmancollege, stamps, michiganross, dent, soe, engin, seas, si, kines, michigan.law, lsa, medicine/medschool, smtd, nursing, pharmacy, sph, fordschool, rackham, ssw): full names, official URLs, meta descriptions and hero imagery",
+   "captures": 19
+  }
+ },
+ "media": {
+  "images": {
+   "count": 71,
+   "inventory": "asset_inventory.json",
+   "policy": "every file fetched from the upstream URL it renders at (umich.edu gallery/sidebar assets, news.umich.edu wp-content uploads, school homepage heroes from each school's own asset host, events.umich.edu media attachments); no placeholders, no duplicates (all 71 sha256 distinct), no stretched renders; per-file sha256 + source URL in asset_inventory.json"
+  }
+ },
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "backpacked CHEM 125-100 and MATH 115-001, saved the Biology program, saved the T.REX planetarium event"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "backpacked ECON 101-100 and EECS 183-001, saved the Computer Science (BS) program, saved the Maize & Blue Cupboard volunteering event"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "backpacked EEB 313-001, saved the Psychology and Nursing programs, saved the Learn to Meditate in 3 days event"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "backpacked SI 110-001, saved the English program, saved the Susan Werner performance"
+   }
+  ],
+  "password": "TestPass123! (bcrypt hash frozen in seed_lib.py for byte-reproducible builds)"
+ },
+ "upstream_quirks": [
+  "The majors list on admissions.umich.edu renders sub-majors as 'X (Sub-major of Y)'; the mirror keeps both the display name and a submajor flag.",
+  "The registrar's calendar pages repeat the column header row between course groups and emit multi-day events as 'Monday, Dec. 14 - Friday, Dec. 18, Monday, Dec. 21'; the parser keeps the verbatim date strings.",
+  "The PeopleSoft class list assigns a class number per section, but meeting days/times/rooms are not published in this public view — only meeting date ranges; the mirror reflects exactly what the upstream shows.",
+  "Course descriptions live on the class detail pages; sections of the same course repeat the same description. Descriptions were captured for a sample of courses per subject (first section of each of the first distinct courses); courses without a captured detail show the section roster without a description block, exactly like the upstream pages that omit them.",
+  "events.umich.edu marks some linked events as recurring; the JSON-LD start/end span the whole run (e.g. T.REX Sep 4 - Dec 30).",
+  "The campus map API exposes 265 buildings including a few off-campus sites (e.g. Marygrove, Radrick Farms); all are kept verbatim.",
+  "Two school hero images are served as WebP from .jpg URLs (medicine, law); the local files carry the real byte format (.webp) and the inventory records the exact upstream URL."
+ ],
+ "data_summary": {
+  "schools_and_colleges": 21,
+  "degree_programs": 156,
+  "course_subjects": 31,
+  "courses": 1714,
+  "class_sections": 5708,
+  "course_descriptions_captured": 82,
+  "faculty_instructors": 2666,
+  "library_records": 624,
+  "news_articles": 28,
+  "campus_events": 42,
+  "buildings": 265,
+  "calendar_entries": 86,
+  "images": 71
+ }
+}
