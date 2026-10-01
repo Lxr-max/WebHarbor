@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}The History of NYSE{% endblock %}
+{% block content %}
+<div class="wrap" style="max-width: 920px;">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / About / History of the NYSE</p>
+  <h1 class="page-title">The History of NYSE</h1>
+  <p class="page-sub">The New York Stock Exchange is where icons and disruptors come to build on their success and shape the future.</p>
+  <div class="timeline">
+    {% for block in blocks %}
+      <section class="timeline-item">
+        {% if block.heading %}<h3>{{ block.heading }}</h3>{% endif %}
+        {% for para in block.body() %}
+          <p>{{ para }}</p>
+        {% endfor %}
+        {% set bimg = None %}
+      </section>
+    {% endfor %}
+  </div>
+  <div class="grid cols-2">
+    {% for image in images %}
+      {% if image.img %}
+        <figure class="card">
+          <img src="{{ image.img }}" alt="{{ image.alt }}">
+          <figcaption class="card-pad muted">{{ image.alt }}</figcaption>
+        </figure>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

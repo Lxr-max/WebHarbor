@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Financial Aid — University of Michigan Admissions{% endblock %}
+{% block content %}
+<h1>Financial Aid</h1>
+<p class="page-sub">#1 Best Value College in the State of Michigan — The Princeton Review</p>
+
+<p>Whether it's scholarships, grants, or connecting students to federal aid, the University of Michigan has numerous resources and ways to help eligible students and their families pay for college. The Office of Financial Aid is your number one resource for finding out how to apply for aid, what you need to do to qualify, and what types of financial aid are available.</p>
+
+<h2>Important Dates</h2>
+<table class="list">
+  <tr><th>Date</th><th>Item</th></tr>
+  {% for d in aid %}
+  <tr>
+    <td>{{ d.date }}</td>
+    <td>{{ d.item_list()|join(' ') }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Types of Aid</h2>
+<p>Students at U-M are typically awarded three types of financial aid: <strong>scholarships and grants</strong>, <strong>loans</strong>, and <strong>Work-Study</strong>.</p>
+
+<h2>If You're an International Student</h2>
+<p>International undergraduate students who hold temporary visas such as the student visa are not eligible for U.S. federal financial aid and have very limited opportunities for University of Michigan scholarships. International students on temporary visas are not eligible for financial aid, and are expected to pay the full cost of attendance.</p>
+
+<p><a class="btn small" href="{{ url_for('admissions_costs') }}">See estimated costs</a></p>
+{% endblock %}

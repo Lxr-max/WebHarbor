@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}IPO History | NYSE{% endblock %}
+{% block content %}<div class="wrap"><p class="crumbs"><a href="{{ url_for('ipo_recent') }}">IPO Center</a> / History</p>
+<h1>IPO History</h1><p>Search historical offerings in the captured S&amp;P Global IPO snapshot.</p>
+<form class="filters" method="get"><div class="field"><label for="q">Issuer or ticker</label><input id="q" name="q" value="{{ q }}" type="search"></div><button class="btn" type="submit">Search</button></form>
+<p class="count-line">{{ rows|length }} matching offerings</p><div class="table-wrap"><table class="data"><thead><tr><th>Price Date</th><th>Filing Date</th><th>Issuer</th><th>Ticker</th><th>Industry</th><th>Proceeds ($)</th></tr></thead><tbody>{% for row in rows %}<tr><td>{{ row.price_date }}</td><td>{{ row.filed_date }}</td><td>{{ row.issuer }}</td><td>{{ row.symbol }}</td><td>{{ row.industry }}</td><td>{{ '{:,.0f}'.format(row.proceeds) if row.proceeds else '--' }}</td></tr>{% else %}<tr><td colspan="6">No matching offerings.</td></tr>{% endfor %}</tbody></table></div></div>{% endblock %}
