@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Recipes{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Recipes</h1>
+  <p class="rich">Party tips! Tasty tales! We got &rsquo;em all.</p>
+</div>
+
+<div class="filterbar">
+  <strong>Filters:</strong>
+  {% for tag, label in categories %}
+  <a class="fun-tag {{ 'active' if tag in active }}" href="{{ facet_url(categories=[tag] if tag not in active else toggle(active, tag), new_page=1) }}">{{ label }}</a>
+  {% endfor %}
+</div>
+<div class="filterbar">
+  {% for t in tag_chips %}
+  <a class="fun-tag {{ 'active' if t in active_tags }}" href="{{ facet_url(tags=[t] if t not in active_tags else toggle(active_tags, t), new_page=1) }}">{{ t }}</a>
+  {% endfor %}
+</div>
+<div class="filterbar">
+  <span class="result-count">{{ total }} recipe{{ 's' if total != 1 }}</span>
+</div>
+
+<div class="recipe-grid">
+  {% for r in recipes %}
+  <article class="recipe-card">
+    <a href="{{ url_for('recipe_detail', slug=r.slug) }}">
+      {% if dam_url(r.image_src) %}<img src="{{ dam_url(r.image_src) }}" alt="{{ r.title }}">{% endif %}
+    </a>
+    <div class="body">
+      <h3><a href="{{ url_for('recipe_detail', slug=r.slug) }}">{{ r.title }}</a></h3>
+      <div class="recipe-cats">
+        {% for c in r.cats() %}{{ c | title }}{% if not loop.last %}, {% endif %}{% endfor %}
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
+{% if total_pages > 1 %}
+<nav class="pager">
+  {% if page > 1 %}<a href="{{ facet_url(new_page=page-1) }}">&larr; Previous page</a>{% endif %}
+  {% for pg in range(1, total_pages + 1) %}
+    {% if pg == page %}<span class="current">{{ pg }}</span>
+    {% elif (pg - page)|abs <= 2 or pg <= 2 or pg > total_pages - 2 %}<a href="{{ facet_url(new_page=pg) }}">{{ pg }}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page < total_pages %}<a href="{{ facet_url(new_page=page+1) }}">Next page &rarr;</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

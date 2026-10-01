@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Unsubscribe{% endblock %}
+{% block content %}
+<div class="form-card">
+  <h2>I&rsquo;ve decided to Unsubscribe</h2>
+  <p class="rich">Sorry to see you go! Enter the email address you subscribed with and we&rsquo;ll take you off the list.</p>
+  <form method="post" action="{{ url_for('unsubscribe') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" required>
+    <button class="btn" type="submit">UNSUBSCRIBE</button>
+  </form>
+</div>
+{% endblock %}

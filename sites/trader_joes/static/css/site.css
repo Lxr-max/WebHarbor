@@ -1,0 +1,310 @@
+/* trader_joes mirror — Trader Joe's visual language.
+   Palette and type echo the upstream site: TJ red (#c1272d family),
+   cream panels, Kalam handwriting for display headings. */
+
+@font-face { font-family: 'Kalam'; font-weight: 300; font-style: normal;
+  src: url('../fonts/kalam_light.woff2') format('woff2'); }
+@font-face { font-family: 'Kalam'; font-weight: 400; font-style: normal;
+  src: url('../fonts/kalam_regular.woff2') format('woff2'); }
+@font-face { font-family: 'Kalam'; font-weight: 700; font-style: normal;
+  src: url('../fonts/kalam_bold.woff2') format('woff2'); }
+
+:root {
+  --tj-red: #c8102e;
+  --tj-dark: #8a0b20;
+  --tj-cream: #fdf8ef;
+  --tj-ink: #211a12;
+  --tj-muted: #6b5f52;
+  --tj-line: #e4dccc;
+  --tj-blue: #1d5c8f;
+  --tj-green: #3d6b35;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--tj-ink);
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+a { color: var(--tj-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3, .display { font-family: 'Kalam', cursive; font-weight: 700; color: var(--tj-ink); }
+img { max-width: 100%; }
+
+/* ---------- header ---------- */
+.topbar { background: var(--tj-cream); border-bottom: 1px solid var(--tj-line); font-size: 14px; }
+.topbar-inner { display: flex; align-items: center; gap: 18px; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+.my-store { font-family: 'Kalam', cursive; color: var(--tj-dark); font-weight: 700; }
+.my-store-name { border-bottom: 2px dotted var(--tj-dark); }
+.topnav { display: flex; gap: 16px; }
+.topnav a { color: var(--tj-ink); font-size: 14px; }
+.searchform { margin-left: auto; display: flex; }
+.searchform input {
+  border: 2px solid var(--tj-ink); border-right: none; padding: 6px 10px;
+  width: 220px; font-size: 14px; outline: none;
+}
+.searchbtn {
+  background: var(--tj-ink); color: #fff; border: none; padding: 6px 14px;
+  font-size: 14px; cursor: pointer;
+}
+.shopping-list-link { color: var(--tj-ink); font-weight: 700; white-space: nowrap; }
+.badge {
+  display: inline-block; background: var(--tj-red); color: #fff;
+  border-radius: 12px; font-size: 12px; padding: 1px 8px; margin-left: 4px;
+}
+.mainbar { background: #fff; border-bottom: 3px solid var(--tj-red); }
+.mainbar-inner { display: flex; align-items: center; gap: 36px; padding-top: 14px; padding-bottom: 14px; }
+.logo img { height: 34px; width: auto; }
+.mainnav { display: flex; gap: 28px; align-items: center; }
+.mainnav > a, .nav-item > a {
+  font-family: 'Kalam', cursive; font-weight: 700; font-size: 21px;
+  color: var(--tj-ink); text-transform: none;
+}
+.nav-item { position: relative; }
+.nav-item > a { display: block; padding: 4px 2px; }
+.nav-drop {
+  display: none; position: absolute; left: 0; top: 100%; background: #fff;
+  border: 1px solid var(--tj-line); border-top: 3px solid var(--tj-red);
+  min-width: 250px; z-index: 40; box-shadow: 0 8px 18px rgba(0,0,0,.12);
+  padding: 8px 0;
+}
+.nav-item:hover .nav-drop, .nav-item:focus-within .nav-drop { display: block; }
+.nav-drop a { display: block; padding: 7px 18px; color: var(--tj-ink); font-size: 15px; }
+.nav-drop a:hover { background: var(--tj-cream); text-decoration: none; color: var(--tj-dark); }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--tj-cream); border-top: 6px solid var(--tj-red); margin-top: 48px; }
+.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr) repeat(3, 1.4fr); gap: 26px; padding: 36px 20px 20px; }
+.footer-button { border: 2px solid var(--tj-ink); border-radius: 10px; text-align: center; padding: 14px 10px; background: #fff; align-self: start; }
+.footer-heading { margin: 0 0 8px; font-size: 20px; }
+.cta {
+  display: inline-block; background: var(--tj-red); color: #fff; padding: 8px 22px;
+  font-family: 'Kalam', cursive; font-weight: 700; letter-spacing: .5px; border-radius: 6px;
+}
+.cta:hover { background: var(--tj-dark); text-decoration: none; }
+.footer-col h3 { font-size: 18px; margin: 0 0 8px; }
+.footer-col a { display: block; color: var(--tj-ink); padding: 3px 0; font-size: 14px; }
+.footer-bottom { display: flex; align-items: center; gap: 22px; padding: 18px 20px 30px; border-top: 1px solid var(--tj-line); flex-wrap: wrap; }
+.footer-bottom p { margin: 0; font-size: 13px; color: var(--tj-muted); }
+.follow { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.follow img { height: 22px; width: 22px; }
+.legal { margin-left: auto; display: flex; gap: 14px; flex-wrap: wrap; }
+.legal a { font-size: 12px; color: var(--tj-muted); }
+
+/* ---------- generic page furniture ---------- */
+.page { padding: 26px 20px 10px; }
+.page-title { font-size: 34px; margin: 0 0 6px; }
+.breadcrumbs { font-size: 13px; color: var(--tj-muted); margin-bottom: 14px; }
+.breadcrumbs a { color: var(--tj-muted); }
+.note {
+  display: flex; gap: 12px; background: var(--tj-cream); border: 1px solid var(--tj-line);
+  padding: 12px 16px; font-size: 14px; margin: 14px 0; border-radius: 8px;
+}
+.note .note-title { font-family: 'Kalam', cursive; font-weight: 700; color: var(--tj-dark); white-space: nowrap; }
+.rich { line-height: 1.6; }
+.rich p { margin: 0 0 12px; }
+.rich b { color: var(--tj-dark); }
+.btn {
+  display: inline-block; background: var(--tj-red); color: #fff; border: none;
+  padding: 9px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
+  border-radius: 5px; letter-spacing: .4px;
+}
+.btn:hover { background: var(--tj-dark); text-decoration: none; }
+.btn-secondary { background: #fff; color: var(--tj-ink); border: 2px solid var(--tj-ink); }
+.btn-secondary:hover { background: var(--tj-cream); }
+
+/* ---------- product cards ---------- */
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.card {
+  background: #fff; border: 1px solid var(--tj-line); border-radius: 10px;
+  padding: 12px; text-align: center; position: relative;
+  display: flex; flex-direction: column;
+}
+.card .label-chip {
+  position: absolute; top: 8px; left: 8px; background: var(--tj-red); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: .5px; padding: 2px 7px; border-radius: 4px;
+}
+.card .label-chip.seasonal { background: var(--tj-green); }
+.card-img { height: 165px; display: flex; align-items: center; justify-content: center; }
+.card-img img { max-height: 158px; max-width: 100%; object-fit: contain; }
+.card-title { font-size: 15px; font-weight: 700; margin: 8px 0 2px; line-height: 1.25; min-height: 38px; }
+.card-title a { color: var(--tj-ink); }
+.card-sub { font-size: 12px; color: var(--tj-muted); min-height: 30px; }
+.card-price { font-family: 'Kalam', cursive; font-weight: 700; font-size: 17px; margin: 2px 0 8px; }
+.card-price .na { color: var(--tj-muted); font-size: 14px; }
+.add-btn {
+  margin-top: auto; background: #fff; border: 2px solid var(--tj-ink); color: var(--tj-ink);
+  font-size: 11px; font-weight: 700; padding: 7px 0; cursor: pointer; border-radius: 5px;
+  letter-spacing: .5px; width: 100%;
+}
+.add-btn:hover { background: var(--tj-ink); color: #fff; }
+
+/* ---------- category page ---------- */
+.cat-layout { display: grid; grid-template-columns: 260px 1fr; gap: 28px; padding: 20px 20px 40px; }
+.facets h3 { font-size: 19px; margin: 18px 0 8px; }
+.facets .facet-group { border-bottom: 1px solid var(--tj-line); padding-bottom: 12px; }
+.facet {
+  display: block; font-size: 14px; padding: 3px 0; color: var(--tj-ink); cursor: pointer;
+}
+.facet .count { color: var(--tj-muted); font-size: 12px; }
+.facet.active { color: var(--tj-dark); font-weight: 700; }
+.fun-tag {
+  display: inline-block; border: 1px solid var(--tj-line); background: var(--tj-cream);
+  border-radius: 14px; padding: 3px 11px; font-size: 12px; margin: 0 6px 6px 0; color: var(--tj-ink);
+}
+.fun-tag.active { background: var(--tj-red); border-color: var(--tj-red); color: #fff; }
+.cat-head { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+.cat-head .page-title { margin: 0; }
+.result-count { color: var(--tj-muted); font-size: 14px; }
+.sort-form { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.sort-form select { border: 1px solid var(--tj-ink); padding: 5px 8px; font-size: 14px; }
+.pager { display: flex; align-items: center; gap: 8px; justify-content: center; margin: 26px 0; }
+.pager a, .pager span {
+  padding: 6px 12px; border: 1px solid var(--tj-line); border-radius: 6px; font-size: 14px;
+}
+.pager .current { background: var(--tj-ink); color: #fff; border-color: var(--tj-ink); }
+.pager .disabled { color: #bbb; border-color: #eee; }
+
+/* ---------- pdp ---------- */
+.pdp-layout { display: grid; grid-template-columns: 480px 1fr; gap: 36px; padding: 24px 20px; }
+.pdp-gallery img { border: 1px solid var(--tj-line); border-radius: 10px; width: 100%; }
+.pdp-title { font-size: 32px; margin: 0 0 10px; }
+.pdp-price { font-family: 'Kalam', cursive; font-size: 26px; font-weight: 700; }
+.pdp-badges { margin: 10px 0; }
+.pdp-badges .chip {
+  display: inline-block; background: var(--tj-cream); border: 1px solid var(--tj-line);
+  color: var(--tj-dark); font-size: 12px; font-weight: 700; border-radius: 14px;
+  padding: 3px 12px; margin: 0 6px 6px 0;
+}
+.pdp-section { margin: 22px 0 0; }
+.pdp-section h2 { font-size: 22px; margin: 0 0 8px; }
+.pdp-section .rich { font-size: 15px; }
+.spec-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.spec-table th, .spec-table td { border: 1px solid var(--tj-line); padding: 6px 10px; text-align: left; }
+.spec-table th { background: var(--tj-cream); font-family: 'Kalam', cursive; }
+.nutrition-table { border-collapse: collapse; font-size: 13px; width: 100%; max-width: 560px; }
+.nutrition-table th, .nutrition-table td { border: 1px solid var(--tj-line); padding: 4px 10px; }
+.nutrition-table th { background: var(--tj-cream); text-align: left; }
+.related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px; }
+
+/* ---------- recipes / editorial cards ---------- */
+.recipe-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px 20px 40px; }
+.recipe-card { background: #fff; border: 1px solid var(--tj-line); border-radius: 10px; overflow: hidden; }
+.recipe-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+.recipe-card .body { padding: 12px 14px 16px; }
+.recipe-card h3 { margin: 0 0 6px; font-size: 18px; }
+.recipe-card h3 a { color: var(--tj-ink); }
+.recipe-cats { font-size: 12px; color: var(--tj-muted); }
+.editorial-row { display: grid; grid-template-columns: 340px 1fr; gap: 26px; padding: 18px 20px; border-bottom: 1px solid var(--tj-line); }
+.editorial-row img { border-radius: 8px; width: 100%; height: 200px; object-fit: cover; }
+.editorial-row h3 { margin: 0 0 6px; font-size: 22px; }
+.editorial-row .date { font-size: 12px; color: var(--tj-muted); }
+
+/* ---------- store search ---------- */
+.store-form { display: flex; gap: 10px; align-items: center; padding: 22px 20px; flex-wrap: wrap; }
+.store-form input[type=text] { border: 2px solid var(--tj-ink); padding: 9px 12px; font-size: 15px; width: 320px; }
+.store-form select { border: 2px solid var(--tj-ink); padding: 8px 10px; font-size: 14px; }
+.store-row { display: flex; gap: 18px; padding: 16px 20px; border-bottom: 1px solid var(--tj-line); align-items: flex-start; }
+.store-row .dist { font-family: 'Kalam', cursive; font-weight: 700; color: var(--tj-dark); min-width: 76px; font-size: 17px; }
+.store-row h3 { margin: 0 0 4px; font-size: 20px; }
+.store-row h3 a { color: var(--tj-ink); }
+.store-row .addr { font-size: 14px; }
+.hours-table { border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.hours-table td { padding: 2px 12px 2px 0; }
+
+/* ---------- forms ---------- */
+.form-card { max-width: 560px; background: var(--tj-cream); border: 1px solid var(--tj-line); border-radius: 12px; padding: 26px 30px; margin: 30px auto; }
+.form-card h2 { margin-top: 0; }
+.form-card label { display: block; font-weight: 700; font-size: 14px; margin: 12px 0 4px; }
+.form-card input[type=text], .form-card input[type=email], .form-card input[type=password], .form-card input[type=search] {
+  width: 100%; border: 2px solid var(--tj-ink); padding: 9px 12px; font-size: 15px;
+}
+.form-card .btn { margin-top: 18px; width: 100%; }
+.form-error { color: var(--tj-red); font-weight: 700; font-size: 14px; margin: 10px 0 0; }
+.form-ok { color: var(--tj-green); font-weight: 700; font-size: 15px; margin: 10px 0 0; }
+.hidden-token { position: absolute; left: -9999px; }
+
+/* ---------- home ---------- */
+.hero {
+  background: linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)), var(--tj-dark);
+  color: #fff; text-align: center; padding: 70px 20px 66px;
+}
+.hero h1 { color: #fff; font-size: 44px; margin: 0 0 14px; }
+.hero .hero-kicker { font-family: 'Kalam', cursive; font-size: 20px; color: #ffd98a; }
+.home-section { padding: 34px 20px; border-bottom: 1px solid var(--tj-line); }
+.home-section h2 { font-size: 28px; margin: 0 0 18px; }
+.home-section .see-all { display: inline-block; margin-left: 12px; font-size: 14px; }
+.ann-list a { display: block; padding: 8px 0; font-size: 15px; border-bottom: 1px dotted var(--tj-line); color: var(--tj-ink); }
+.ann-list .date { color: var(--tj-muted); font-size: 12px; margin-right: 10px; }
+.hover-hand:hover { text-decoration: none; color: var(--tj-dark); }
+
+/* ---------- misc ---------- */
+.filterbar { display: flex; gap: 10px; align-items: center; padding: 18px 20px 6px; flex-wrap: wrap; }
+.filterbar .fun-tag { cursor: pointer; }
+.cms-page { max-width: 860px; padding: 30px 20px 60px; }
+.cms-page h1 { font-size: 34px; margin-bottom: 18px; }
+.cms-page .rich img { border-radius: 8px; margin: 10px 0; }
+.alert-banner { background: #fff3cd; border: 1px solid #e6c878; padding: 10px 16px; border-radius: 8px; margin: 14px 0; font-size: 14px; }
+.table-plain { border-collapse: collapse; font-size: 14px; width: 100%; }
+.table-plain th, .table-plain td { border-bottom: 1px solid var(--tj-line); padding: 8px 12px; text-align: left; }
+.table-plain th { font-family: 'Kalam', cursive; font-size: 16px; }
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .cat-layout { grid-template-columns: 1fr; }
+  .pdp-layout { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .recipe-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- narrow viewports ----------
+   Audit fix F-2: at <=740px the fixed 220px header search input, the
+   320px store-search input, the 5-track card grid and the two-column
+   layouts forced a ~430px min-content on every page (41/41 key pages
+   overflowed at 390/320; desktop 1440 was clean). Only narrow-viewport
+   media queries are added — rendering above 740px is byte-identical. */
+@media (max-width: 740px) {
+  /* header: the search form takes its own full-width row */
+  .topbar-inner { gap: 10px 14px; }
+  .searchform { width: 100%; margin-left: 0; order: 3; }
+  .searchform input { width: auto; flex: 1 1 auto; min-width: 0; }
+  .mainbar-inner { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
+  .mainnav { flex-wrap: wrap; justify-content: center; gap: 8px 18px; }
+  /* card grids: tracks that can actually shrink */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .recipe-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  /* two-column layouts collapse to one */
+  .cat-layout { grid-template-columns: minmax(0, 1fr); }
+  .pdp-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  /* announcements rows carry an inline 240px template that must lose
+     to the one-column collapse at phone widths */
+  .editorial-row { grid-template-columns: minmax(0, 1fr) !important; }
+  .editorial-row img { height: auto; }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  /* the store search box no longer pins a 320px input */
+  .store-form input[type=text] { width: auto; flex: 1 1 160px; min-width: 0; }
+  /* the sort control takes its own row instead of stretching the head */
+  .sort-form { margin-left: 0; width: 100%; }
+  .pager { flex-wrap: wrap; }
+  /* tables scroll inside their own box instead of the page */
+  .table-plain, .nutrition-table, .hours-table, .spec-table {
+    display: block; overflow-x: auto;
+  }
+  .form-card { padding: 18px 16px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .follow { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .grid, .related-grid, .recipe-grid { grid-template-columns: minmax(0, 1fr); }
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero h1 { font-size: 32px; }
+  .page-title { font-size: 28px; }
+  .pdp-title { font-size: 26px; }
+  .store-form { flex-direction: column; align-items: stretch; }
+  .store-form input[type=text] { width: 100%; flex: 0 0 auto; }
+}
