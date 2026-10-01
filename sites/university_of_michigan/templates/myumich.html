@@ -5,7 +5,7 @@
 <p class="page-sub">Welcome back, {{ current_user.name }}. Your Backpack, saved programs, saved events and information requests.</p>
 
 <h2>Backpack <span class="count-pill">{{ backpack|length }} classes</span></h2>
-<p>Classes you backpack before registration. Backpacking does not enroll you — it saves a seat in your plan.</p>
+<p>Classes you backpack before registration. Backpacking does not enroll you — it saves the class in your plan without reserving a seat.</p>
 <table class="list">
   <tr><th>Class Nbr</th><th>Course</th><th>Section</th><th>Instructor</th><th>Status</th></tr>
   {% for b in backpack %}

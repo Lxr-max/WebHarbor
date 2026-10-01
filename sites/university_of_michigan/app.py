@@ -35,6 +35,10 @@ from markupsafe import Markup
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def decode_source_text(value):
+    """Decode double-escaped Unicode in captured text, leaving HTML escaped."""
+    return re.sub(r'\\u([0-9a-fA-F]{4})', lambda m: chr(int(m[1], 16)), value)
+
 app = Flask(__name__, instance_path=os.path.join(BASE_DIR, 'instance'))
 app.config["SECRET_KEY"] = os.environ.get("UMICH_SECRET_KEY") or "webharbor-umich-dev-key"
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
@@ -299,7 +303,7 @@ class NewsArticle(db.Model):
 
     def body_list(self):
         try:
-            return json.loads(self.body or '[]')
+            return [decode_source_text(p) for p in json.loads(self.body or '[]')]
         except json.JSONDecodeError:
             return []
 
@@ -400,7 +404,7 @@ class Deadline(db.Model):
 
     def item_list(self):
         try:
-            return json.loads(self.items or '[]')
+            return [decode_source_text(p) for p in json.loads(self.items or '[]')]
         except json.JSONDecodeError:
             return []
 
