@@ -116,7 +116,11 @@ All registered websites and their default ports, in registration order from left
 | CoinMarketCap | 40135 | Cars.com | 40136 | Airbnb | 40137 |
 | Backcountry | 40138 | Disney | 40139 | ICLR | 40140 |
 | Red Bull | 40141 | dblp | 40142 | Microsoft Azure | 40143 |
-| FOX Sports | 40144 | University of Michigan | 40220 |  |  |
+| FOX Sports | 40144 | Samsung | 40219 |  |  |
+
+| nyse | pending |  |  |  |  |
+
+| university_of_michigan | pending |  |  |  |  |
 
 ## 🤝 Contribute
 

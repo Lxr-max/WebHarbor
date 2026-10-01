@@ -1,0 +1,76 @@
+{
+ "site": "samsung",
+ "upstream": "https://www.samsung.com/us/",
+ "captured_at": "2026-09-30",
+ "upstream_reachability": {
+  "probed_at": "2026-09-30",
+  "http": "curl -L https://www.samsung.com/us/ -> HTTP 200; catalog, buy, spec and support endpoints all answered 200 to coherent browser-header requests",
+  "conclusion": "the declared upstream is live and reachable, so the mirror is a real capture; no fixture fallback was used and none was needed"
+ },
+ "capture_method": "direct HTTP GETs (curl / requests, Chrome UA) against the live HTML pages, plus the public JSON APIs the live pages themselves load: the product-finder search API (sribsrch.ecom.samsung.com estoresearch pf_search) for the eight catalogs, the buy-tool __NEXT_DATA__ payloads embedded in the live /buy/ pages for the configurators, the spec-compare and family-list APIs (searchapi.samsung.com v6) for the Galaxy specification tables, and the static support / warranty / legal pages. No headless browser was required; no WAF bypass was needed (plain coherent requests were served).",
+ "sources": {
+  "www.samsung.com/us/": {
+   "role": "primary site: home page heroes, the eight catalog hubs, product pages, buy configurators, support home, warranty center, contact page",
+   "pages_captured": 18
+  },
+  "sribsrch.ecom.samsung.com (estoresearch pf_search)": {
+   "role": "the product-finder API the live catalog grids load: full result sets for Smartphones (42 SKUs), Tablets (11), Watches (14), Audio (3), Mobile Accessories (314), TVs (42), Laundry (39) and Refrigerators (40) — 505 real SKUs with names, model codes, prices, ratings, review counts, series and facet filters",
+   "endpoints": [
+    "https://sribsrch.ecom.samsung.com/estoresearch-api/v1/scom/us/pf_search"
+   ],
+   "records": 505
+  },
+  "www.samsung.com/us/.../buy/ (__NEXT_DATA__)": {
+   "role": "the live buy-tool payloads for six flagship configurators: Galaxy S26 Ultra (45 variants), Galaxy S26 (83), Galaxy Z Fold8 Ultra (31), Galaxy Z Flip8 (26), Galaxy Tab S11 (12) and Galaxy Watch9 (16) — 213 real model codes with prices, stock state, ratings and the full storage/color/carrier option trees",
+   "records": 213,
+   "note": "the /buy/ URLs for two Bespoke refrigerator models redirect to their product pages on the live site (no configurator is served there), so no refrigerator configurator is shipped; the six shipped configurators are exactly the ones the live site serves"
+  },
+  "searchapi.samsung.com/v6 (mktpd spec + family list)": {
+   "role": "the specification tables the live compare tool renders: 25 Galaxy model families (SM-S948, SM-S947, SM-S942, SM-F976, SM-F971, SM-F776, ... SM-S711) with 1,775 spec rows (display, weight, storage, camera, battery, processor, durability, connectivity, Galaxy AI), plus the family list that maps every model code to its marketing name",
+   "endpoints": [
+    "https://searchapi.samsung.com/v6/front/b2c/product/mktpd/spec/compare/",
+    "https://searchapi.samsung.com/v6/front/b2c/product/family/list/newhybris"
+   ],
+   "records": 1775
+  },
+  "www.samsung.com/us/support/legal/ (LGL10000312, LGL10000309)": {
+   "role": "the real standard-limited-warranty legal text (limitations of remedies, implied-warranty terms, Samsung Electronics America contact block) quoted by the warranty center",
+   "pages_captured": 2
+  },
+  "images.samsung.com / image-us.samsung.com": {
+   "role": "all imagery: 505 catalog card images, 213 buy-page variant images, 4 home heroes, the warranty-checker category icons and the site logo",
+   "assets": 825,
+   "bytes": 111734000,
+   "note": "every file was fetched from the exact upstream URL it renders at; identical upstream artwork reused across variants is stored once and referenced by every page that uses it; seven upstream files are served with a .png URL but JPEG bytes and are stored under their true extension"
+  }
+ },
+ "fixtures": {
+  "content": {
+   "classification": "none",
+   "note": "every content record in source_data/*.json is derived from the real captures above; nothing is invented"
+  },
+  "benchmark_users": {
+   "classification": "authored-benchmark-accounts",
+   "note": "the four benchmark accounts (alice.j / bob.c / carol.d / dana.k @test.com, password TestPass123!) follow the shared WebHarbor benchmark-user convention (frozen bcrypt hash so the seed DB stays byte-reproducible); their fixture orders, wishlist entries and support tickets are account-surface infrastructure, not upstream content"
+  },
+  "images": {
+   "classification": "live-capture",
+   "note": "all 825 images under static/images/ were downloaded from the upstream CDNs; asset_inventory.json records per-file sha256, bytes and the exact source URL, and scripts/check_asset_inventory.py enforces exact coverage, hash integrity and real format headers at image build time"
+  }
+ },
+ "determinism": {
+  "seed": "the SQLite seed is materialized at image build time (PYTHONHASHSEED=0, no wall clock, no RNG in any seed row; order / ticket timestamps are fixed strings, runtime timestamps belong to runtime rows only) and is byte-identical across resets",
+  "transforms": "scripts_dev/build_source_data.py converts the raw captures in scraped_data/ (gitignored) into the tracked source_data/*.json byte-reproducibly; scripts_dev/build_contract.py regenerates verify/contract.json from the seed digest and the honest-path audit answers"
+ },
+ "registration": {
+  "sites_index": 219,
+  "container_port": 40219,
+  "expose": "8101 40000-40219",
+  "declared_slot": "audit-wave slot: index 219 / port 40219 (origin/main site count 145 at PR time + audit position 75 - 1 per the standing parallel-wave merge order; the pre-freeze normalization 133/40133 was the 134-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
+ },
+ "verification": {
+  "tasks": "20 seven-key rows (web_name / id / ques / web / upstream_url / verifier_path / judge_rubric) in sites/samsung/tasks.jsonl",
+  "honest_steps": "scripts_dev/validate_tasks.py drives every task's honest path twice on fresh databases: 330 atomic actions total, min 15 / max 20 per task, both rounds agreeing; reads are never counted and no task can be finished in fewer than 15 honest steps",
+  "contract": "verify/contract.json + verify/verify_N.py grade browser evidence (page paths, decoded screenshots), scoped factual claims and exact database deltas against the reviewed seed; scripts_dev/walk_tasks.py proves all 20 tasks pass the verifier in two independent rounds"
+ }
+}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Buy {{ config.product_slug }}{{ '' }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="/{{ category_slug }}/{{ product_slug }}/">{{ config.product_slug.replace('-', ' ').title() }}</a> &rsaquo; <span>Buy</span>
+</div>
+
+<div class="buy-layout">
+  <div class="buy-gallery">
+    {% for image in gallery %}
+    <img class="product-hero" src="{{ url_for('static', filename='images/' ~ image) }}" alt="{{ cp.title if cp else '' }}">
+    {% endfor %}
+  </div>
+  <div class="buy-config">
+    <h1>Buy {{ config.product_slug.replace('-', ' ').title() }}</h1>
+    {% if cp %}
+    <p class="product-modelcode">Model code: {{ cp.model_code }}</p>
+    <p class="product-price">{{ (cp.price or 0)|money }}{% if cp.msrp and cp.price and cp.msrp > cp.price %} <s>{{ cp.msrp|money }}</s>{% endif %}</p>
+    <p class="product-rating">{% if cp.rating %}{{ cp.rating|stars }} &starf; &middot; {{ cp.review_count }} reviews{% endif %}</p>
+    <p class="product-stock">{{ 'In stock' if cp.stock == 'InStock' else cp.stock }}</p>
+    {% endif %}
+
+    {% for option_name, items, pick in levels %}
+    <fieldset class="option-group">
+      <legend>{{ option_name }}</legend>
+      <div class="option-buttons">
+        {% for item in items %}
+        <a class="option-btn {{ 'selected' if item == pick }}"
+           href="?{% for k, v in selected.items() %}{% if k != option_name %}{{ k }}={{ v }}&amp;{% endif %}{% endfor %}{{ option_name }}={{ item }}">{{ item }}</a>
+        {% endfor %}
+      </div>
+    </fieldset>
+    {% endfor %}
+
+    {% if cp %}
+    <form method="post" action="{{ request.path }}" class="add-to-cart">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="model_code" value="{{ cp.model_code }}">
+      {% for name, value in selected.items() %}
+      <input type="hidden" name="{{ name }}" value="{{ value }}">
+      {% endfor %}
+      <label for="qty">Quantity</label>
+      <select id="qty" name="qty">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button type="submit" class="btn btn-large">Add to Cart</button>
+    </form>
+    {% endif %}
+    <p class="muted">Prices and availability captured from the Samsung US buy tool on 2026-09-30.</p>
+  </div>
+</div>
+{% endblock %}
