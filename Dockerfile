@@ -480,8 +480,11 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/microsoft_azure && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/fox_sports && \
     (cd /opt/WebSyn/fox_sports && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/fox_sports.db instance_seed/fox_sports.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/steam && \
+    (cd /opt/WebSyn/steam && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/steam.db instance_seed/steam.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40144
+EXPOSE 8101 40000-40224
 
 CMD ["/opt/websyn_start.sh"]

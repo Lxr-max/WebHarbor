@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import game_card, price_block, review_line, os_line %}
+{% block title %}Welcome to Steam{% endblock %}
+{% block content %}
+
+<div class="home-hero">
+  <h2>Featured &amp; Recommended</h2>
+  <p>Today's top sellers on the Steam store, straight from the live charts.</p>
+  <div class="hero-rail">
+    {% for game in topsellers[:4] %}
+    <a class="rail-card" href="{{ game.url }}">
+      <img src="{{ _img(game.header_img) }}" alt="{{ game.name }}">
+      <div class="cap">
+        <div class="t">{{ game.name }}</div>
+        <div class="p">{{ price_block(game) }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="home-section">
+  <h2>Top Sellers <a href="{{ url_for('search', sort='Relevance_DESC') }}">See all &raquo;</a></h2>
+  <div class="game-grid">
+    {% for game in topsellers[4:12] %}
+      {{ game_card(game) }}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="home-section">
+  <h2>Special Offers <a href="{{ url_for('specials') }}">See all specials &raquo;</a></h2>
+  <div class="game-grid">
+    {% for game in specials[:8] %}
+      {{ game_card(game) }}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="home-section">
+  <h2>New Releases <a href="{{ url_for('search', sort='Released_DESC') }}">See all new &raquo;</a></h2>
+  <div class="game-grid">
+    {% for game in newreleases[:8] %}
+      {{ game_card(game) }}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="home-section">
+  <h2>Browse by Genre</h2>
+  <div class="genre-chips">
+    {% for genre in genres %}
+      <a class="genre-chip" href="{{ url_for('genre_page', slug=genre|slugify) }}">{{ genre }}</a>
+    {% endfor %}
+  </div>
+  <div class="home-stats">
+    The mirror catalog holds {{ counts.games }} games, {{ counts.specials }} on special,
+    {{ counts.free }} free to play, {{ counts.bundles }} bundles,
+    {{ "{:,}".format(counts.reviews) }} user reviews and {{ counts.news }} news posts.
+  </div>
+</div>
+
+{% endblock %}
