@@ -12,7 +12,7 @@
     {% endfor %}
   </div>
   <div class="buy-config">
-    <h1>Buy {{ config.product_slug.replace('-', ' ').title() }}</h1>
+    <h1>Buy {{ cp.title if cp else config.product_slug.replace('-', ' ').title() }}</h1>
     {% if cp %}
     <p class="product-modelcode">Model code: {{ cp.model_code }}</p>
     <p class="product-price">{{ (cp.price or 0)|money }}{% if cp.msrp and cp.price and cp.msrp > cp.price %} <s>{{ cp.msrp|money }}</s>{% endif %}</p>

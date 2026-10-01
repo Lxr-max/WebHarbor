@@ -33,8 +33,9 @@
   <div class="coverage-card">
     <h3>{{ chosen_product.name }}</h3>
     <p class="muted">Model code: {{ chosen_product.model_code }} &middot; Category: {{ chosen_cat.name }}</p>
-    <p><strong>Coverage status: Active (standard limited warranty)</strong></p>
+    <p><strong>Standard limited warranty information</strong></p>
     <p>{{ coverage }}</p>
+    <p>Individual device coverage is not verified here. A purchase date and proof of purchase are required to establish whether your device is still covered.</p>
     <p class="muted">Source: <a href="{{ chosen_cat.legal_url }}">{{ chosen_cat.legal_url }}</a></p>
     <p><a href="{{ url_for('warranty') }}">Check another product</a></p>
   </div>
@@ -47,7 +48,7 @@
     {% for faq in faqs %}
     <details class="faq-item">
       <summary>{{ faq.question }}</summary>
-      <p>{{ faq.answer }}</p>
+      <p>{{ faq.answer|plain_entities }}</p>
     </details>
     {% endfor %}
   </div>

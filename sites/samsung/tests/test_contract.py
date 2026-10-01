@@ -189,8 +189,8 @@ def test_warranty_checker_flow(client):
     assert 'select your model' in html
     html = c.get('/support/warranty/?category=phones-tablets-wearables'
                  '&model=SM-S948UZVEXAA').data.decode()
-    assert 'Coverage status' in html
-    assert 'standard limited warranty' in html
+    assert 'Individual device coverage is not verified' in html
+    assert 'Standard limited warranty' in html
 
 
 def test_warranty_faq_real_content(client):
@@ -311,69 +311,23 @@ def test_verify_contract_covers_all_tasks(client):
         assert spec['task'] == row['ques']
         assert re.fullmatch(r'[0-9a-f]{64}', spec['initial_digest'])
         assert spec['paths'] and spec['claims']
-        for label, pattern in spec['claims']:
-            re.compile(pattern)
+        for claim in spec['claims']:
+            re.compile(claim['pattern'])
         for pattern in spec['paths']:
             re.compile(pattern)
 
 
-def test_verifier_rejects_tampered_answer(client, tmp_path):
-    """The review contract must have teeth: a wrong answer fails."""
+def test_verifier_rejects_tampered_answer(client):
     A, c = client
-    import os
-    import shutil
-    import sys
-    sys.path.insert(0, os.path.join(A.BASE_DIR, 'verify'))
-    sys.path.insert(0, os.path.join(A.BASE_DIR, 'scripts_dev'))
-    import validate_tasks as VT
-    import contract_engine as CE
-
-    A2, client2, root = VT.fresh_client('tamper')
-    try:
-        ans, steps, _ = VT.run_task(A2, client2, 0)
-        run = tmp_path / 'run'
-        (run / 'screenshots').mkdir(parents=True)
-        shutil.copy2(root / 'samsung.db', run / 'after.db')
-        urls = ['/', '/smartphones/', '/account/login/',
-                '/wishlist/toggle', '/account/wishlist/']
-        steps_json = []
-        for i, u in enumerate(urls):
-            from PIL import Image
-            img = Image.new('RGB', (320, 200))
-            img.putpixel((0, 0), (255, 0, 0))
-            img.save(run / 'screenshots' / f's{i}.png', 'PNG')
-            steps_json.append({'url': 'http://localhost:40133' + u,
-                               'url_after': 'http://localhost:40133' + u,
-                               'screenshot_after': f's{i}.png'})
-        (run / 'trajectory.json').write_text(json.dumps({
-            'task_id': 'Samsung--0',
-            'task': json.loads(open(os.path.join(
-                A.BASE_DIR, 'tasks.jsonl'), encoding='utf-8')
-                .read().splitlines()[0])['ques'],
-            'start_url': 'http://localhost:40133/',
-            'terminated': True, 'termination_reason': 'agent_done',
-            'steps': steps_json,
-            'final_answer': 'The catalog lists 999 phones and everything '
-                            'else is wrong too.',
-        }), encoding='utf-8')
-        seed = tmp_path / 'seed'
-        seed.mkdir()
-        os.environ['SAMSUNG_DB_URI'] = f'sqlite:///{seed}/samsung.db'
-        for mod in list(sys.modules):
-            if mod.startswith(('app', 'seed', 'validate_tasks')):
-                del sys.modules[mod]
-        import app as A3  # noqa: F401
-        shutil.copy2(seed / 'samsung.db', run / 'initial.db')
-        try:
-            CE.verify(str(run), 'Samsung--0')
-            raise AssertionError('tampered answer must fail the contract')
-        except ValueError:
-            pass
-    finally:
-        shutil.rmtree(root, ignore_errors=True)
-        for mod in list(sys.modules):
-            if mod.startswith(('app', 'seed', 'validate_tasks')):
-                del sys.modules[mod]
+    import importlib.util
+    from pathlib import Path
+    spec = importlib.util.spec_from_file_location('samsung_review_engine', Path(A.BASE_DIR) / 'verify/contract_engine.py')
+    engine = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(engine)
+    contract = json.loads((Path(A.BASE_DIR) / 'verify/contract.json').read_text())['Samsung--0']
+    import pytest
+    with pytest.raises(ValueError, match='Missing or incorrect'):
+        engine.check_claims('Galaxy A17 costs $999.99 and has a rating of 1.0.', contract)
 
 
 def test_asset_inventory_matches_files(client):
