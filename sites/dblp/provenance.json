@@ -1,0 +1,108 @@
+{
+ "site": "dblp",
+ "upstream": "https://dblp.org/",
+ "upstream_note": "The assignment text named https://dblp.com/ as the upstream, but dblp.com is a parked domain (a registrar lander that JavaScript-redirects to /lander; verified 2026-09-30 for http/https and www variants). The dblp computer science bibliography described by the assignment (paper/author/conference/journal search, author profiles, publication statistics, venue browsing) is served exclusively at https://dblp.org/ (mirrors dblp.uni-trier.de / dblp.dagstuhl.de). All captures come from the real service at dblp.org and upstream_url in tasks.jsonl declares https://dblp.org/.",
+ "captured_at": "2026-09-30",
+ "capture_method": "Real HTTP captures against the live dblp.org. dblp.org sits behind an Anubis proof-of-work gate (v1.27.0); every capture session solved the gate's sha256 challenge exactly as the upstream JavaScript does (same endpoint, same difficulty, real compute spent) and then fetched the fully-rendered public pages with a real browser User-Agent. Nothing is synthesized: each tracked field in source_data/*.json traces to a capture file in scraped_data/captures/ (page + .meta.json sidecar with URL/status/bytes/fetched_at). Captures are rate-limited and Content-Length-verified.",
+ "sources": {
+  "dblp.org/": {
+   "role": "home page (search box, dblp blog news, statistics block, browse links)",
+   "pages_captured": 1
+  },
+  "dblp.org/search*": {
+   "role": "combined search, publication search (incl. pagination), author search, venue search pages — captured as structure references and upstream hit-count context",
+   "pages_captured": 5
+  },
+  "dblp.org/db/conf/<venue>/index.html and /db/journals/<journal>/index.html": {
+   "role": "venue stream pages for the 21 captured venues: venue names, note lines, venue information (ISO abbreviations, ISSN), edition/volume lists",
+   "pages_captured": 24
+  },
+  "dblp.org/db/.../<edition>.xml": {
+   "role": "the upstream ToC .xml variant of every captured edition/volume: full records with dblp keys, authors+pid+orcid, titles, pages, volumes, years, mdate, doi, ee links, crossref, editors, publishers, section headers",
+   "pages_captured": 112
+  },
+  "dblp.org/db/.../<edition>.html (toc headlines)": {
+   "role": "the upstream table-of-contents page headline (h1) of every captured conference edition (37 pages), fetched verbatim 2026-09-30 to reproduce upstream's short display name (e.g. 'ACM SIGMOD Conference 2022: Philadelphia, PA, USA') on the mirror's edition pages; tracked in source_data/edition_display.json. Journal volume pages show the full volume title upstream, which the mirror already renders, so no journal capture is needed.",
+   "pages_captured": 37
+  },
+  "dblp.org/pid/<key>.xml": {
+   "role": "upstream person records for the 170 most-published corpus authors: display names, upstream record counts (n), homepage/authority urls, affiliation notes (incl. 'former'), unicode names, awards",
+   "pages_captured": 170
+  },
+  "dblp.org/rec/<key>.html and .bib": {
+   "role": "record detail page and BibTeX response captured as format references for the mirror's record pages and BibTeX generator",
+   "pages_captured": 2
+  },
+  "dblp.org/img/*": {
+   "role": "every image the mirror renders: header logo, favicons, entry-type icon sprite, action icons (paper/details/bibtex/download), footer funder logos, CC0 badge",
+   "images_fetched": 18,
+   "inventory": "asset_inventory.json"
+  }
+ },
+ "corpus": {
+  "venues": 21,
+  "venue_list": [
+   "conf/sigmod",
+   "conf/nips (NeurIPS)",
+   "conf/icml",
+   "conf/kdd",
+   "conf/cvpr",
+   "conf/acl",
+   "conf/sigcomm",
+   "conf/sosp",
+   "conf/stoc",
+   "conf/sp",
+   "conf/www",
+   "conf/iclr",
+   "journals/tods",
+   "journals/vldb (The VLDB Journal)",
+   "journals/jmlr",
+   "journals/tmlr",
+   "journals/tois",
+   "journals/pacmmod",
+   "journals/tifs",
+   "journals/cacm",
+   "journals/pvldb"
+  ],
+  "publications": 36585,
+  "author_records": 204300,
+  "distinct_authors": 97090,
+  "authors_with_upstream_profile": 170,
+  "editions_volumes": 70
+ },
+ "trim_policy": "The upstream dblp carries 8,779,805 publications across 7,159 conference series and 1,901 journals (homepage counters captured 2026-09-30 and shown on the mirror's home page as upstream context). The mirror corpus is bounded and declared: the huge ML/CV venues (NeurIPS, ICML, CVPR, ICLR) keep their most recent main edition only; ACL and KDD keep 2 recent years; WWW keeps 2; SIGMOD, SIGCOMM, SOSP, STOC, S&P keep 3 recent main editions (SIGMOD's 2023+ papers are cross-published in PACMMOD, so the PACMMOD journal carries them); journals keep 2-5 recent volumes as listed in scripts_dev/build_source_data.py (JOURNAL_VOLUMES). Within a kept edition every record the upstream ToC XML carries is kept. Author profiles carry the author's records that fall inside this corpus; the upstream dblp record count (n) is shown on profile pages as context. Search hit counts, venue statistics, coauthor indexes and per-year charts are computed over the captured corpus; the pages state 'records in this mirror' where upstream would show global counts. The full untrimmed upstream snapshots (all 112 fetched edition XMLs incl. editions outside the corpus bound, 322 captures total) live in the gitignored scraped_data/captures/.",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "ML researcher (Stanford University, graph neural networks/transformers): watches the 3 most-published NeurIPS corpus authors plus the NeurIPS and ICML venues, saved searches 'graph neural network' (labeled GNN papers) and 'transformer', 6 saved NeurIPS papers with 'graph' titles in My Library, 3 search-history rows"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "database researcher (University of Washington, query optimization/learned indexes): watches the 2 most-published SIGMOD corpus authors plus SIGMOD, PVLDB and PACMMOD venues, saved search 'query optimization', 5 saved PVLDB papers with 'query' titles in the DB reading list collection, 3 history rows"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "security researcher (Carnegie Mellon University, side channels/fuzzing): watches the 2 most-published IEEE S&P corpus authors plus the S&P and TIFS venues, saved searches 'side-channel' and 'fuzzing', 4 saved S&P papers in My Library, 2 history rows"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "NLP/IR researcher (KAIST, question answering/retrieval): watches the 2 most-published ACL corpus authors plus the ACL and TOIS venues, saved search 'question answering' (labeled QA), 5 saved ACL papers with 'question' titles in the QA papers collection, 5 history rows"
+   }
+  ],
+  "fixture_note": "dblp.org has no public user accounts (its curation area is internal), so the personal area (login/registration, watchlists of authors and venues, saved searches, saved papers with collections and BibTeX export, search history, profile) is fixture-built following the u_s_customs/zara/ziprecruiter precedent: every author, venue and publication they reference is a real captured upstream row (real dblp pid, real venue stream, real record key), selected by deterministic queries at seed time; affiliation/interest texts and frozen timestamps are authored fixtures modeling plausible personal-library flows over the real corpus.",
+  "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash and every row comes from the tracked source_data/*.json snapshots in a fixed sorted order; two consecutive builds produce byte-identical databases and /reset/dblp restores instance == instance_seed byte-for-byte.",
+  "timezone": "UTC"
+ },
+ "waf_note": "dblp.org is protected by the Anubis anti-bot proof-of-work gate and aggressively rate-limits (HTTP 429 followed by connection drops when the limit is exceeded — observed and respected during capture with 9s spacing and exponential backoff). All captures are real upstream responses obtained after solving the gate's PoW challenge as designed; no content is synthesized and no live upstream feature is faked. The one upstream asset that could not be fetched would be recorded in asset_inventory.json's missing_upstream list; the current list is empty (all 18 images fetched).",
+ "derived_fields": "search_text (per-publication folded haystack of title + author names + venue name) powers the prefix search; the search semantics (case-insensitive prefix, $ exact-word suffix, space AND, | OR, venue:/year:/streamid: filters) follow the operators the upstream search pages document and support. BibTeX entries are generated to match the upstream .bib format (field order, DBLP: key naming, timestamp line from the upstream mdate) — verified against the captured rec/<key>.bib reference. Venue statistics (records by year, frequent authors), author per-year charts and coauthor indexes are computed from the corpus at render time. These derivations are deterministic and declared here.",
+ "images": {
+  "count": 18,
+  "inventory": "asset_inventory.json",
+  "policy": "every file fetched from its exact upstream URL (dblp.org/img/...); no placeholders, no duplicates, no resizing or stretching"
+ }
+}

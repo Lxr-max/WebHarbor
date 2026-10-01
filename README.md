@@ -115,7 +115,7 @@ All registered websites and their default ports, in registration order from left
 | Verizon | 40132 | ZipRecruiter | 40133 | Carvana | 40134 |
 | CoinMarketCap | 40135 | Cars.com | 40136 | Airbnb | 40137 |
 | Backcountry | 40138 | Disney | 40139 | ICLR | 40140 |
-| Red Bull | 40141 |  |  |  |  |
+| Red Bull | 40141 | dblp | 40142 |  |  |
 
 ## 🤝 Contribute
 

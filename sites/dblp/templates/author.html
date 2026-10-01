@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as m %}
+{% block title %}{{ a.name }}{% endblock %}
+{% block main %}
+<header id="headline" class="person">
+  <h1>{{ a.name }}</h1>
+  {% if a.homepage() %}
+  <nav class="person-home"><a href="{{ a.homepage() }}" rel="nofollow">homepage</a></nav>
+  {% endif %}
+</header>
+
+<section class="section" id="person-info">
+  <header class="hide-head h2"><h2>Person information</h2></header>
+  <div class="hide-body">
+    <ul class="person-info-list">
+      {% for aff in a.affiliations_list() %}
+      <li><em>affiliation{{ ' (former)' if aff.label == 'former' else '' }}:</em> {{ aff.text }}</li>
+      {% endfor %}
+      {% if a.uname %}<li><em>unicode name:</em> {{ a.uname }}</li>{% endif %}
+      {% for aw in a.awards_list() %}
+      <li><em>award{{ ' (' ~ aw.label ~ ')' if aw.label else '' }}:</em> {{ aw.text }}</li>
+      {% endfor %}
+    </ul>
+    {% if a.n_upstream %}
+    <p class="upstream-count">dblp lists {{ a.n_upstream }} records for this
+      author upstream; this mirror snapshot carries {{ n_pubs }} of them.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% set homonyms = a.homonyms() %}
+{% if homonyms %}
+<section class="section homonyms" id="homonyms">
+  <header class="hide-head h2"><h2>Other persons with the same name</h2></header>
+  <div class="hide-body">
+    <ul class="homonym-list">
+      {% for h in homonyms %}
+      <li><a href="/pid/{{ h.pid }}.html">{{ h.name }}</a>
+        <small>{{ h.pub_count() }} records in this mirror</small></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if current_user.is_authenticated %}
+<div class="watch-controls">
+  {% if false %}{% endif %}
+  <form method="post" action="{{ url_for('watchlist_add_author') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="pid" value="{{ a.pid }}">
+    <input type="hidden" name="next" value="/pid/{{ a.pid }}.html">
+    <button type="submit" class="watch-btn">add {{ a.name }} to watchlist</button>
+  </form>
+</div>
+{% endif %}
+
+<section class="section" id="publications">
+  <header class="h1"><h1>{{ n_pubs }} publications</h1></header>
+  <div class="section-body">
+    {% for dec, years in decades %}
+    <header class="hide-head h2"><h2>{{ dec }}</h2></header>
+    <div class="hide-body">
+      {% for y, pubs in years %}
+      <header class="h3"><h3>{{ y }}</h3></header>
+      <ul class="publ-list">
+        {% for p in pubs %}
+        <li class="entry {{ p.rtype }}" id="{{ p.rec_key }}">
+          <div class="box"><img alt="" title="{{ p.type_label }}" src="{{ img('n') or '' }}"></div>
+          {{ m.publ_nav(p) }}
+          {{ m.cite_line(p) }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" id="coauthors">
+  <header class="h1"><h1>Coauthor Index</h1></header>
+  <div class="section-body">
+    {% if coauthors %}
+    <ul class="coauthor-list">
+      {% for c, n in coauthors %}
+      <li><span class="count"><a href="/pid/{{ c.pid }}.html?view=joint" title="show joint publications">{{ n }}</a></span>
+        <a href="/pid/{{ c.pid }}.html">{{ c.name }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-matches">no coauthors in this mirror snapshot</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section" id="person-stats">
+  <header class="h1"><h1>Person statistics</h1></header>
+  <div class="section-body">
+    <p><b>records by year</b></p>
+    <div class="stat-chart">
+      {% set max_n = (per_year | map(attribute=1) | max) or 1 %}
+      {% for y, n in per_year %}
+      <div class="stat-bar-row">
+        <span class="stat-year">{{ y }}</span>
+        <span class="stat-bar-track"><span class="stat-bar" data-count="{{ n }}" style="width: {{ (n * 100 / max_n) | round(2) }}%"></span></span>
+        <span class="stat-count">{{ n }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

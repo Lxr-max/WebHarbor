@@ -471,8 +471,11 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/iclr && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/red_bull && \
     (cd /opt/WebSyn/red_bull && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/red_bull.db instance_seed/red_bull.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/dblp && \
+    (cd /opt/WebSyn/dblp && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/dblp.db instance_seed/dblp.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40141
+EXPOSE 8101 40000-40142
 
 CMD ["/opt/websyn_start.sh"]

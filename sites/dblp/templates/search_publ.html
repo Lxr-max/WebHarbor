@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as m %}
+{% block title %}Search dblp for Publications{% endblock %}
+{% block main %}
+<header id="headline" class="completesearch">
+  <h1>Search dblp for Publications</h1>
+</header>
+
+<section id="search-results" class="section">
+  {% if not q %}
+  <p class="no-query">Please enter a search query</p>
+  {% else %}
+  <p class="result-count">found {{ total }} matches</p>
+
+  <div id="refine-section" class="refine">
+    <h3>Refine list</h3>
+    <div class="refine-by year">
+      <p><b>refine by year</b></p>
+      <ul class="options">
+        {% for y, n in refine_years %}
+        <li><a href="{{ url_for('search_publ', q=q, h=h, f=0, year=y, type=sel_type or '') }}">{{ y }} ({{ n }})</a></li>
+        {% endfor %}
+        {% if sel_year %}
+        <li class="clear"><a href="{{ url_for('search_publ', q=q, h=h, f=0, type=sel_type or '') }}">clear year filter</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="refine-by type">
+      <p><b>refine by type</b></p>
+      <ul class="options">
+        {% for t, n in refine_types %}
+        <li><a href="{{ url_for('search_publ', q=q, h=h, f=0, type=t, year=sel_year or '') }}">{{ type_labels.get(t, t) }} ({{ n }})</a></li>
+        {% endfor %}
+        {% if sel_type %}
+        <li class="clear"><a href="{{ url_for('search_publ', q=q, h=h, f=0, year=sel_year or '') }}">clear type filter</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <ul class="result-list publ-list">
+    {% for p in rows %}
+    <li class="entry {{ p.rtype }}" id="{{ p.rec_key }}">
+      <div class="box"><img alt="" title="{{ p.type_label }}" src="{{ img('n') or '' }}"></div>
+      {{ m.publ_nav(p) }}
+      {{ m.cite_line(p) }}
+    </li>
+    {% else %}
+    <li class="no-matches">no matches</li>
+    {% endfor %}
+  </ul>
+
+  <div class="publ pager">
+    {% set prev_f = f - h if f >= h else 0 %}
+    {% if f > 0 %}
+    <a href="{{ url_for('search_publ', q=q, h=h, f=prev_f) }}">[&lt;&lt; previous]</a>
+    {% endif %}
+    {% set page_no = (f // h) + 1 %}
+    <span>page {{ page_no }}</span>
+    {% if f + h < total %}
+    <a href="{{ url_for('search_publ', q=q, h=h, f=f + h) }}">[next &gt;&gt;]</a>
+    {% endif %}
+  </div>
+
+  {% if current_user.is_authenticated %}
+  <form class="save-search-form" method="post"
+        action="{{ url_for('saved_searches_add') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="query" value="{{ q }}">
+    <input type="hidden" name="search_type" value="publ">
+    <input type="hidden" name="next" value="{{ request.full_path }}">
+    <button type="submit">save this search</button>
+  </form>
+  {% endif %}
+  {% endif %}
+</section>
+{% endblock %}
