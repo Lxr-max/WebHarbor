@@ -1,54 +1,60 @@
 {
- "site": "steam",
- "upstream": "https://store.steampowered.com/",
- "captured_at": "2026-10-01",
- "capture_window_utc": "2026-10-01T00:54:13Z to 2026-10-01T01:06:43Z (two passes: base scrape + specials/bundles pass)",
- "capture_method": "Every tracked record is a real upstream capture from store.steampowered.com and its public APIs. Catalog rows come from the live search endpoint (/search/results/), per-game details and system requirements from /api/appdetails, review summaries and user reviews from /appreviews, news from the public ISteamNews API, bundles from /bundle/ pages, and the store home page as served HTML. All 894 HTTP captures carry a .meta record in scraped_data/captures.json (gitignored) with the exact URL, HTTP status and fetch timestamp; 892 returned HTTP 200 and the two 429 rate-limit responses were retried successfully (the scraper backs off and re-fetches on 429). No synthesized records.",
- "waf_note": "None. store.steampowered.com and api.steampowered.com serve plain HTTP to a desktop user agent with no anti-bot challenge; no fixture fallback was needed at any point. The appdetails endpoint rate-limits (HTTP 429) under burst load; the scraper honors it with exponential backoff and the two throttled responses above were retried to 200 within the same window.",
- "sources": {
-  "store.steampowered.com/ (home page)": {
-   "role": "Store front capture: header/nav structure and the top-sellers / new-releases / specials rails that seed the mirror's home page ordering",
-   "captures": 1
+  "site": "steam",
+  "upstream": "https://store.steampowered.com/",
+  "captured_at": "2026-10-01",
+  "capture_window_utc": "2026-10-01T00:54:13Z to 2026-10-01T01:06:43Z (two passes: base scrape + specials/bundles pass)",
+  "capture_method": "Every tracked record is a real upstream capture from store.steampowered.com and its public APIs. Catalog rows come from the live search endpoint (/search/results/), per-game details and system requirements from /api/appdetails, review summaries and user reviews from /appreviews, news from the public ISteamNews API, bundles from /bundle/ pages, and the store home page as served HTML. All 894 HTTP captures carry a .meta record in scraped_data/captures.json (gitignored) with the exact URL, HTTP status and fetch timestamp; 892 returned HTTP 200 and the two 429 rate-limit responses were retried successfully (the scraper backs off and re-fetches on 429). No synthesized records.",
+  "waf_note": "None. store.steampowered.com and api.steampowered.com serve plain HTTP to a desktop user agent with no anti-bot challenge; no fixture fallback was needed at any point. The appdetails endpoint rate-limits (HTTP 429) under burst load; the scraper honors it with exponential backoff and the two throttled responses above were retried to 200 within the same window.",
+  "sources": {
+    "store.steampowered.com/ (home page)": {
+      "role": "Store front capture: header/nav structure and the top-sellers / new-releases / specials rails that seed the mirror's home page ordering",
+      "captures": 1
+    },
+    "store.steampowered.com/search/results/": {
+      "role": "Five live search snapshots: top sellers (100 rows), new releases (100), specials (100), free games (100) and discounted games under $10 (100) - the rows carry appid, title, release date, OS support, review summary, review percentage, review count, capsule image URL, price and discount",
+      "captures": 12
+    },
+    "store.steampowered.com/search/?developer=...&publisher=...": {
+      "role": "25 live creator-facet search pages (Valve, CAPCOM, FromSoftware, Paradox Interactive, SEGA, Bandai Namco, Coffee Stain, Grinding Gear Games, ...) captured to validate the publisher/developer rosters the mirror derives from the per-game credits",
+      "captures": 25
+    },
+    "store.steampowered.com/api/appdetails?appids=<id>&cc=us&l=english": {
+      "role": "Full detail records for 121 products (113 games + 8 DLC): price and discount, short/about/detailed descriptions, supported languages, genres, categories, publishers, developers, platforms, release dates, achievements, DLC lists, screenshot URLs, and the Windows/macOS/Linux minimum+recommended system-requirement blocks",
+      "captures": 100
+    },
+    "store.steampowered.com/appreviews/<id>?json=1&filter=recent&language=english": {
+      "role": "Real review summaries and up to 12 real user reviews per game: author, games owned, playtime, helpful/funny votes, purchase type, early-access flag, full review text and timestamps (1,137 review rows over 99 games)",
+      "captures": 80
+    },
+    "api.steampowered.com/ISteamNews/GetNewsForApp/v2/": {
+      "role": "Real news feeds per game: title, feed label, feed name, author, date and body (766 posts over 99 games, deduplicated across shared feeds)",
+      "captures": 80
+    },
+    "store.steampowered.com/app/<id>/ (bundle discovery)": {
+      "role": "36 app pages fetched to discover the bundle IDs linked from real game pages (the only purpose of these captures; detail data itself comes from the appdetails API)",
+      "captures": 36
+    },
+    "store.steampowered.com/bundle/<id>/": {
+      "role": "8 real bundles (Valve Complete Pack, Portal Bundle, Dead Cells: Medley of Pain, Windblown + Dead Cells, Rift + Celeste, Slay the Spire Collection, Motion Twin's Mosh Pit Mayhem, Shovel Knight: Treasure Trove + Celeste) with item lists, per-item prices, bundle price and base discount",
+      "captures": 22
+    },
+    "shared CDN hosts (shared.akamai.steamstatic.com, shared.fastly.steamstatic.com, cdn.cloudflare.steamstatic.com)": {
+      "role": "756 real upstream images fetched from their exact source URLs: per-game header images (460x215), search capsules (231x87), up to four screenshots per product (1920x1080 native), and the Steam store wordmark. Every file's bytes and sha256 are pinned in asset_inventory.json; the scraper refuses duplicate bytes, undersized payloads and non-image responses, so there are no placeholders, no duplicates and no stretched resizes."
+    }
   },
-  "store.steampowered.com/search/results/": {
-   "role": "Five live search snapshots: top sellers (100 rows), new releases (100), specials (100), free games (100) and discounted games under $10 (100) - the rows carry appid, title, release date, OS support, review summary, review percentage, review count, capsule image URL, price and discount",
-   "captures": 12
+  "authored_rows": "The only authored rows are the four benchmark user accounts (Alice Johnson, Bob Smith, Carol Martinez, Dana Kim with the frozen bcrypt hash of TestPass123!) and their deterministic fixture wishlists and orders, which are benchmark-account infrastructure, not upstream content. Every game, price, discount, review, news post, bundle and image comes from the live upstream.",
+  "catalog_notes": "The mirror catalog is a curated subset of the live store (121 products of the ~90k on Steam), selected for genre, price, platform, review-score and discount spread so every search facet produces meaningful results. Search excludes the four unreleased (coming_soon) titles in the catalog; they remain reachable from the home top-sellers rail and direct links. Creator pages list the subset of each creator's games present in the catalog, labeled as such.",
+  "image_integrity": "756 files, 259.6 MB total; 31 distinct native dimensions (no rescaling was applied); sha256-pinned per file with exact source URL in the tracked asset_inventory.json; the scraper's duplicate-bytes check guarantees no file shares bytes with another.",
+  "registration": {
+    "sites_index": 224,
+    "container_port": 40224,
+    "expose": "8101 40000-40224",
+    "declared_slot": "audit-wave slot: index 224 / port 40224 (origin/main site count 145, fresh at PR time, + audit position 80 - 1 per the standing parallel-wave merge order; the contribution's pre-freeze declaration 140/40140 was the 141-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
   },
-  "store.steampowered.com/search/?developer=...&publisher=...": {
-   "role": "25 live creator-facet search pages (Valve, CAPCOM, FromSoftware, Paradox Interactive, SEGA, Bandai Namco, Coffee Stain, Grinding Gear Games, ...) captured to validate the publisher/developer rosters the mirror derives from the per-game credits",
-   "captures": 25
-  },
-  "store.steampowered.com/api/appdetails?appids=<id>&cc=us&l=english": {
-   "role": "Full detail records for 121 products (113 games + 8 DLC): price and discount, short/about/detailed descriptions, supported languages, genres, categories, publishers, developers, platforms, release dates, achievements, DLC lists, screenshot URLs, and the Windows/macOS/Linux minimum+recommended system-requirement blocks",
-   "captures": 100
-  },
-  "store.steampowered.com/appreviews/<id>?json=1&filter=recent&language=english": {
-   "role": "Real review summaries and up to 12 real user reviews per game: author, games owned, playtime, helpful/funny votes, purchase type, early-access flag, full review text and timestamps (1,137 review rows over 99 games)",
-   "captures": 80
-  },
-  "api.steampowered.com/ISteamNews/GetNewsForApp/v2/": {
-   "role": "Real news feeds per game: title, feed label, feed name, author, date and body (766 posts over 99 games, deduplicated across shared feeds)",
-   "captures": 80
-  },
-  "store.steampowered.com/app/<id>/ (bundle discovery)": {
-   "role": "36 app pages fetched to discover the bundle IDs linked from real game pages (the only purpose of these captures; detail data itself comes from the appdetails API)",
-   "captures": 36
-  },
-  "store.steampowered.com/bundle/<id>/": {
-   "role": "8 real bundles (Valve Complete Pack, Portal Bundle, Dead Cells: Medley of Pain, Windblown + Dead Cells, Rift + Celeste, Slay the Spire Collection, Motion Twin's Mosh Pit Mayhem, Shovel Knight: Treasure Trove + Celeste) with item lists, per-item prices, bundle price and base discount",
-   "captures": 22
-  },
-  "shared CDN hosts (shared.akamai.steamstatic.com, shared.fastly.steamstatic.com, cdn.cloudflare.steamstatic.com)": {
-   "role": "756 real upstream images fetched from their exact source URLs: per-game header images (460x215), search capsules (231x87), up to four screenshots per product (1920x1080 native), and the Steam store wordmark. Every file's bytes and sha256 are pinned in asset_inventory.json; the scraper refuses duplicate bytes, undersized payloads and non-image responses, so there are no placeholders, no duplicates and no stretched resizes."
+  "review": {
+    "source_pr": 340,
+    "hf_revision": "10f93ea09d96971638dda931bc5170f0948c7616",
+    "upstream_comparison": "Live browser comparison; existing captured assets retained.",
+    "task_revision": "Coherent research or saved-state goals with aligned rubrics and deterministic verifiers."
   }
- },
- "authored_rows": "The only authored rows are the four benchmark user accounts (Alice Johnson, Bob Smith, Carol Martinez, Dana Kim with the frozen bcrypt hash of TestPass123!) and their deterministic fixture wishlists and orders, which are benchmark-account infrastructure, not upstream content. Every game, price, discount, review, news post, bundle and image comes from the live upstream.",
- "catalog_notes": "The mirror catalog is a curated subset of the live store (121 products of the ~90k on Steam), selected for genre, price, platform, review-score and discount spread so every search facet produces meaningful results. Search excludes the four unreleased (coming_soon) titles in the catalog; they remain reachable from the home top-sellers rail and direct links. Creator pages list the subset of each creator's games present in the catalog, labeled as such.",
- "image_integrity": "756 files, 259.6 MB total; 31 distinct native dimensions (no rescaling was applied); sha256-pinned per file with exact source URL in the tracked asset_inventory.json; the scraper's duplicate-bytes check guarantees no file shares bytes with another.",
- "registration": {
-  "sites_index": 224,
-  "container_port": 40224,
-  "expose": "8101 40000-40224",
-  "declared_slot": "audit-wave slot: index 224 / port 40224 (origin/main site count 145, fresh at PR time, + audit position 80 - 1 per the standing parallel-wave merge order; the contribution's pre-freeze declaration 140/40140 was the 141-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
- }
 }

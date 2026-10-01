@@ -321,3 +321,5 @@ footer.global-footer a:hover { color: #fff; }
   .spec-table th { width: 104px; }
   .review-score .bar { flex-basis: 100%; }
 }
+
+.hero-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.hero-rail .rail-card:first-child{grid-column:span 3;display:grid;grid-template-columns:2fr 1fr;align-items:center;background:#101f30}.hero-rail .rail-card:first-child img{width:100%;height:310px;object-fit:cover}.hero-rail .rail-card:first-child .cap{padding:22px;font-size:23px}@media(max-width:600px){.hero-rail{grid-template-columns:1fr}.hero-rail .rail-card:first-child{grid-column:auto;display:block}.hero-rail .rail-card:first-child img{height:auto}}
