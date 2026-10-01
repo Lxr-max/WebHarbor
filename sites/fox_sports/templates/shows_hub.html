@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Shows | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>FOX Sports Shows</h1></div>
+<div class="shows-grid">
+  {% for show in shows %}
+  <a class="show-card" href="/shows/{{ show.slug }}">
+    {% if show.art and image(show.art) %}<img src="{{ image(show.art) }}" alt="{{ show.title }}">{% endif %}
+    <h3>{{ show.title }}</h3>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}
