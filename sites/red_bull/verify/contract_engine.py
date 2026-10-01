@@ -164,6 +164,7 @@ def verify(run_dir,task_id):
         check_relations(initial,after,check)
     check_downloads(run, spec.get('downloads', []))
     answer=traj.get('final_answer','');check_claims(answer,spec['claims'])
+    if spec.get('cart_answers'):check_cart_answers(initial,after,answer)
     if spec.get('alternatives'):
         valid = False
         for option in spec['alternatives']:
@@ -247,3 +248,12 @@ def check_downloads(run, requirements):
 def bib_digest(text):
     entries = sorted(re.sub(r"\s+", " ", entry).strip() for entry in re.split(r"(?=^@\w+\{)", text, flags=re.M) if entry.strip())
     return hashlib.sha256(json.dumps(entries).encode()).hexdigest()
+
+
+def check_cart_answers(initial, after, answer):
+    for key, row in after['cart_items'].items():
+        if key in initial['cart_items']:continue
+        variant = initial['shop_variants'][json.dumps([row['variant_id']])]
+        product = initial['shop_products'][json.dumps([variant['product_id']])]
+        pattern = re.escape(norm(product['title'])) + r'.{0,180}?(?:size|option)\s*(?:is|was|=)?\s*' + re.escape(norm(variant['title'])) + r'(?!\w)'
+        check_claims(answer, [(product['title']+' selected option matches cart', pattern)])
