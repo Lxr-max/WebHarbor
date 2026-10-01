@@ -554,7 +554,8 @@ def program_detail(code):
     if compare_code and compare_code != code:
         compare = Program.query.filter_by(code=compare_code).first()
     return render_template('program_detail.html', program=program,
-                           dept_names=dept_names, compare=compare)
+                           dept_names=dept_names, compare=compare,
+                           comparison_options=Program.query.order_by(Program.name).all())
 
 
 @app.route('/courses')
@@ -785,16 +786,16 @@ def admission_aid():
         except ValueError:
             income = None
             family = None
-        if income is not None and income >= 0 and 1 <= (family or 2) <= 10:
+        if income is not None and income >= 0 and 1 <= family <= 10:
             if income < 100000:
                 tuition = 'No tuition responsibility'
                 room = 'No tuition or room and board responsibility'
             elif income < 150000:
                 tuition = 'No tuition responsibility'
                 room = ('Room and board responsibility applies '
-                        '(tuition-free does not extend below the $150,000 threshold)')
+                        '(the no-room-and-board threshold is below $100,000)' )
             else:
-                tuition = ('Tuition responsibility applies above the $150,000 '
+                tuition = ('No automatic tuition exemption at or above $150,000; '
                           'threshold; the full net price calculator accounts for '
                           'assets and family circumstances')
                 room = ('Room and board responsibility applies; the full net '

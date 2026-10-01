@@ -22,16 +22,15 @@
   to cover your college costs.</p>
   <h2>Estimate your cost</h2>
   <p>The average need-based scholarship in the current freshman class is more than
-  $70,000. Use the net price calculator tool to see what level of financial aid you
-  can expect to receive if you attend.</p>
-  <h2>Net price estimator</h2>
-  <p>Enter your family's financial information for a quick estimate based on
-  Stanford's published aid thresholds. For a full award estimate use the
+  $70,000. These published thresholds assume assets typical of the income level; individual awards require a full assessment.</p>
+  <h2>Published aid thresholds</h2>
+  <p>Check your household income against
+  Stanford's published aid thresholds. Household size is recorded for context; this simplified comparison does not calculate an individual award. For a full award estimate use the
   official Stanford net price calculator.</p>
   <form method="get" action="{{ url_for('admission_aid') }}" class="filters" style="max-width:560px">
     <input type="text" name="income" placeholder="Annual household income (e.g. 120000)" aria-label="Annual household income" required>
     <input type="text" name="family" placeholder="Family members in household (1-10)" aria-label="Family members">
-    <button class="btn solid" type="submit">Estimate my cost</button>
+    <button class="btn solid" type="submit">Check thresholds</button>
   </form>
   {% if estimate %}
   <div class="facts">

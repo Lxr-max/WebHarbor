@@ -26,7 +26,7 @@
   {% endif %}
   <h2>Compare programs</h2>
   <form method="get" action="{{ url_for('program_detail', code=program.code) }}" class="filters" style="max-width:520px">
-    <input type="text" name="compare" value="{{ compare.code if compare else '' }}" placeholder="Compare with program code (e.g. CS-MS)">
+    <select name="compare" aria-label="Compare with program"><option value="">Choose a program</option>{% for option in comparison_options %}{% if option.code != program.code %}<option value="{{ option.code }}" {% if compare and compare.code == option.code %}selected{% endif %}>{{ option.name }} ({{ option.code }})</option>{% endif %}{% endfor %}</select>
     <button class="btn" type="submit">Compare</button>
   </form>
   {% if compare %}

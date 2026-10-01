@@ -2,6 +2,8 @@
 {% block title %}Stanford University{% endblock %}
 {% block content %}
 <section class="hero">
+  <img class="campus-hero" src="{{ url_for('static', filename='images/upstream/admissions/adm_afford_banner.jpg') }}" alt="Stanford campus">
+  <div class="hero-copy">
   <h1>Advancing the Frontier</h1>
   <p>At Stanford, a spirit of optimism and possibility energizes our mission of discovery
   and learning. Here you'll find a place of intellectual expansiveness, wide-ranging
@@ -10,6 +12,7 @@
   in all we do – this is Stanford.</p>
   <a class="btn" href="{{ url_for('admission') }}">Admission &amp; Aid</a>
   <a class="btn" href="{{ url_for('courses') }}" style="margin-left:10px">Explore Courses</a>
+  </div>
 </section>
 
 <section class="section">
@@ -51,7 +54,7 @@
   </div>
   <div class="grid cols-3">
     <div class="card"><div class="pad">
-      <h3><a href="{{ url_for('departments') }}">Departments A-Z</h3>
+      <h3><a href="{{ url_for('departments') }}">Departments A-Z</a></h3>
       <p>Browse the {{ depts_count }} academic departments and programs across the seven schools.</p>
     </div></div>
     <div class="card"><div class="pad">

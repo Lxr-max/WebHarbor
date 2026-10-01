@@ -276,6 +276,8 @@ def build_records():
     # carries one complete record instead of a duplicate with empty fields.
     HOURS_NAME_ALIASES = {
         'tanner memorial library of philosophy': 'philosophy library (tanner)',
+        'robin li and melissa ma science library': 'science library (li and ma)',
+        'branner earth sciences library & map collections': 'earth sciences library & map collections (branner)',
     }
     hours_by_name = {}
     for hh in libraries_raw.get('hours', []):
