@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}IPO Pricing Stats{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('ipo_recent') }}">IPO Center</a> / IPO Pricing Stats</p>
+  <h1 class="page-title">IPO Pricing Stats by Sector</h1>
+  <p class="page-sub">How recent IPOs priced relative to their filed ranges, and how each sector has performed since pricing.</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Sector</th><th class="num">Deals</th>
+          <th class="num">Priced Above</th><th class="num">Priced Within</th><th class="num">Priced Below</th>
+          <th class="num">% Above</th><th class="num">% Within</th><th class="num">% Below</th>
+          <th class="num">Avg 1-day (%)</th><th class="num">Avg 30-day (%)</th><th class="num">Proceeds ($)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r.sector }}</td>
+            <td class="num">{{ r.deals }}</td>
+            <td class="num">{{ r.priced_above }}</td>
+            <td class="num">{{ r.priced_within }}</td>
+            <td class="num">{{ r.priced_below }}</td>
+            <td class="num">{{ r.pct_above }}%</td>
+            <td class="num">{{ r.pct_within }}%</td>
+            <td class="num">{{ r.pct_below }}%</td>
+            <td class="num">{{ fmt_pct(r.avg_1day) if r.avg_1day is not none else '--' }}</td>
+            <td class="num">{{ fmt_pct(r.avg_30day) if r.avg_30day is not none else '--' }}</td>
+            <td class="num">{{ fmt_money(r.proceeds) if r.proceeds else '--' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">LAST UPDATED: {{ updated }} &middot; Source: {{ source }}</p>
+</div>
+{% endblock %}

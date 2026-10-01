@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Search{% if q %} &ldquo;{{ q }}&rdquo;{% endif %}</h1>
+  {% if not q %}
+    <p class="page-sub">Search NYSE listings, bell ceremonies and IPO issuers from the header search box.</p>
+  {% else %}
+    <section class="section-head"><h2>Listings</h2><span class="muted">{{ symbol_rows | length }}</span></section>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Symbol</th><th>Name</th><th>Exchange</th><th class="num">Last</th></tr></thead>
+        <tbody>
+          {% for row in symbol_rows %}
+            <tr>
+              <td>{% if row.href %}<a href="{{ row.href }}">{{ row.quote.symbol }}</a>{% else %}{{ row.quote.symbol }}{% endif %}</td>
+              <td>{{ row.quote.name }}</td>
+              <td class="muted">{{ row.quote.exchg }}</td>
+              <td class="num">{{ fmt_price(row.quote.last) if row.quote.last is not none else '--' }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="4">No listings match.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <section class="section-head"><h2>Bell Events</h2><span class="muted">{{ events | length }}</span></section>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Title</th><th>Type</th><th>When</th></tr></thead>
+        <tbody>
+          {% for e in events %}
+            <tr><td>{{ e.plain_title() }}</td><td>{{ e.etype }}</td><td class="muted">{{ e.date_label }}</td></tr>
+          {% else %}
+            <tr><td colspan="3">No bell events match.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <section class="section-head"><h2>IPO Issuers</h2><span class="muted">{{ ipos | length }}</span></section>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Issuer</th><th>Ticker</th><th>Status</th><th>Price Date</th></tr></thead>
+        <tbody>
+          {% for d in ipos %}
+            <tr><td>{{ d.issuer }}</td><td>{{ d.symbol or '--' }}</td><td>{{ d.status }}</td><td class="muted">{{ d.price_date or '--' }}</td></tr>
+          {% else %}
+            <tr><td colspan="4">No IPO issuers match.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

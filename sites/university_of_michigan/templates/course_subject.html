@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ subject }} Courses — University of Michigan{% endblock %}
+{% block content %}
+<h1>{{ subject }} Courses <span class="count-pill">Fall 2026</span></h1>
+<p class="page-sub">School: {{ school }} &middot; {{ courses|length }} courses</p>
+
+{% for c in courses %}
+<h3>{{ c.code() }} — {{ c.title }}</h3>
+{% if c.description %}
+<p>{{ c.description }}</p>
+{% endif %}
+{% if c.attribute_list() %}
+<p>{% for a in c.attribute_list() %}<span class="badge type" style="margin:2px">{{ a }}</span>{% endfor %}</p>
+{% endif %}
+<table class="list">
+  <tr><th>Class Nbr</th><th>Section</th><th>Instructor</th><th>Units</th><th>Mode</th><th>Status</th><th></th></tr>
+  {% for s in c.sections %}
+  <tr>
+    <td><a href="{{ url_for('class_detail', nbr=s.class_nbr) }}">{{ s.class_nbr }}</a></td>
+    <td>{{ s.label() }}</td>
+    <td>{% if s.instructor %}<a href="{{ url_for('faculty', q=s.instructor) }}">{{ s.instructor }}</a>{% else %}Staff{% endif %}</td>
+    <td>{{ s.units }}</td>
+    <td>{{ s.mode or '' }}</td>
+    <td><span class="badge {{ 'open' if 'Open' in (s.status or '') else ('wait' if 'Wait' in (s.status or '') else 'closed') }}">{{ s.status or '—' }}</span></td>
+    <td><a class="btn small" href="{{ url_for('class_detail', nbr=s.class_nbr) }}">Class detail</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endfor %}
+{% endblock %}

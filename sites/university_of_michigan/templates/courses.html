@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Course Catalog — University of Michigan{% endblock %}
+{% block content %}
+<h1>Course Catalog <span class="count-pill">Fall 2026</span></h1>
+<p class="page-sub">The public class search for the University of Michigan, Ann Arbor. Browse by subject or search by keyword.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('courses') }}">
+    <div>
+      <label for="q">Keyword</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder="course title, subject or description">
+    </div>
+    <div>
+      <label for="school">School / College</label>
+      <select id="school" name="school">
+        <option value="">All schools &amp; colleges</option>
+        {% for s in schools %}
+        <option value="{{ s }}" {% if s == school %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} courses</span>
+</div>
+
+<h2>Browse by Subject</h2>
+<p>
+  {% for s in subjects %}
+  <a class="badge type" style="margin:2px" href="{{ url_for('course_subject', code=s) }}">{{ s }}</a>
+  {% endfor %}
+</p>
+
+{% for subject, rows in by_subject.items() %}
+<h3>{{ subject }} <span class="count-pill">{{ rows|length }} courses</span></h3>
+<table class="list">
+  <tr><th>Course</th><th>Title</th><th>Units</th><th>Sections</th></tr>
+  {% for c in rows[:6] %}
+  <tr>
+    <td><a href="{{ url_for('course_subject', code=subject) }}">{{ c.code() }}</a></td>
+    <td>{{ c.title }}</td>
+    <td>{{ c.sections[0].units if c.sections else '' }}</td>
+    <td>{{ c.sections|length }}</td>
+  </tr>
+  {% endfor %}
+  {% if rows|length > 6 %}
+  <tr><td colspan="4"><a href="{{ url_for('course_subject', code=subject) }}">See all {{ rows|length }} {{ subject }} courses &raquo;</a></td></tr>
+  {% endif %}
+</table>
+{% endfor %}
+{% endblock %}
