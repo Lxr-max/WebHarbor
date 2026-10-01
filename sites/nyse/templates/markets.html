@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Markets{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / Markets</p>
+  <h1 class="page-title">Markets</h1>
+  <p class="page-sub">A delayed snapshot of the most active securities on the New York Stock Exchange and NYSE American, as captured on the mirror date.</p>
+
+  <section class="section-head"><h2>NYSE Most Active</h2></section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Symbol</th><th>Name</th><th class="num">Volume</th><th class="num">Last</th></tr></thead>
+      <tbody>
+        {% for m in movers_nyse %}
+          <tr>
+            <td>{% if quote_exists[m.symbol] %}<a href="/quote/XNYS:{{ m.symbol }}">{{ m.symbol }}</a>{% else %}{{ m.symbol }}{% endif %}</td>
+            <td>{{ m.name }}</td>
+            <td class="num">{{ fmt_volume(m.volume) }}</td>
+            <td class="num">{{ fmt_price(m.last_price) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <section class="section-head"><h2>NYSE American Most Active</h2></section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Symbol</th><th>Name</th><th class="num">Volume</th><th class="num">Last</th></tr></thead>
+      <tbody>
+        {% for m in movers_american %}
+          <tr>
+            <td>{% if quote_exists[m.symbol] %}<a href="/quote/XASE:{{ m.symbol }}">{{ m.symbol }}</a>{% else %}{{ m.symbol }}{% endif %}</td>
+            <td>{{ m.name }}</td>
+            <td class="num">{{ fmt_volume(m.volume) }}</td>
+            <td class="num">{{ fmt_price(m.last_price) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">{{ note }}</p>
+</div>
+{% endblock %}

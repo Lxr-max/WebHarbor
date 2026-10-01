@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}The New York Stock Exchange | NYSE{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="NYSE">
+      <img src="{{ url_for('static', filename='icons/nyse_logo.svg') }}" alt="NYSE Logo" class="brand-logo">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="{{ url_for('listings') }}" class="nav-link">Listings</a>
+      <a href="{{ url_for('listings_directory', tab='stock') }}" class="nav-link">Listings Directory</a>
+      <a href="{{ url_for('markets') }}" class="nav-link">Markets</a>
+      <a href="{{ url_for('ipo_recent') }}" class="nav-link">IPO Center</a>
+      <a href="{{ url_for('bell_calendar') }}" class="nav-link">The Bell</a>
+      <a href="{{ url_for('history') }}" class="nav-link">About</a>
+    </nav>
+    <div class="header-tools">
+      <form class="header-search" action="{{ url_for('search') }}" method="get" role="search">
+        <input type="search" name="q" placeholder="Search NYSE" value="{{ request.args.get('q','') }}" aria-label="Search NYSE">
+        <button type="submit" aria-label="Search">&#9906;</button>
+      </form>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('watchlist') }}" class="account-link">Watchlist</a>
+        <a href="{{ url_for('alerts') }}" class="account-link">Alerts</a>
+        <a href="{{ url_for('logout') }}" class="account-link solid">Log Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="account-link">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Listings</h4>
+        <a href="{{ url_for('listings') }}">Why List on NYSE</a>
+        <a href="{{ url_for('listings_directory', tab='stock') }}">Listings Directory</a>
+        <a href="{{ url_for('history') }}">History of the NYSE</a>
+      </div>
+      <div class="footer-col">
+        <h4>Markets</h4>
+        <a href="{{ url_for('markets') }}">Market Movers</a>
+        <a href="{{ url_for('market_update') }}">Today&rsquo;s Stock Market</a>
+      </div>
+      <div class="footer-col">
+        <h4>IPO Center</h4>
+        <a href="{{ url_for('ipo_recent') }}">Recent IPOs</a>
+        <a href="{{ url_for('ipo_pricing_stats') }}">IPO Pricing Stats</a>
+        <a href="{{ url_for('ipo_filings') }}">Filings</a>
+        <a href="{{ url_for('ipo_backlog') }}">The Backlog</a>
+      </div>
+      <div class="footer-col">
+        <h4>The Bell</h4>
+        <a href="{{ url_for('bell') }}">About the Bell</a>
+        <a href="{{ url_for('bell_calendar') }}">Bell Calendar</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('watchlist') }}">My Watchlist</a>
+          <a href="{{ url_for('alerts') }}">My Price Alerts</a>
+          <a href="{{ url_for('logout') }}">Log Out</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('signup') }}">Create Account</a>
+        {% endif %}
+      </div>
+    </div>
+    <p class="footer-note">NYSE mirror for offline agent evaluation &mdash; not affiliated with, endorsed by, or connected to Intercontinental Exchange, Inc. Market data delayed minimum of 15 minutes.</p>
+  </div>
+</footer>
+</body>
+</html>
