@@ -1,0 +1,65 @@
+{
+ "site": "microsoft_azure",
+ "upstream": "https://azure.microsoft.com/",
+ "captured_at": "2026-09-30",
+ "upstream_reachability": {
+  "probed_at": "2026-09-30",
+  "http": "curl -L https://azure.microsoft.com/ -> HTTP 200, final URL https://azure.microsoft.com/en-us, edge IP 23.0.194.168",
+  "conclusion": "the declared upstream is live and reachable, so the mirror is a real capture; no fixture fallback was used"
+ },
+ "capture_method": "direct HTTP GETs (curl, Chrome UA) against the live HTML pages, plus the public JSON endpoints the live pricing calculator and the customer-stories hub load (same versioned feeds the pages use); no headless browser and no WAF bypass were needed",
+ "sources": {
+  "azure.microsoft.com": {
+   "role": "primary site: home, products catalog (138 products across 21 categories), 23 captured product pages, pricing hub (50 cards), 4 pricing-details pages (AKS, Linux VMs, Cosmos DB, Managed Disks), free-services feed (85 services), Azure blog (21 posts), cloud-computing dictionary (86 articles), geographies and support pages",
+   "pages_captured": 40
+  },
+  "azure.microsoft.com pricing calculator service APIs": {
+   "role": "the versioned JSON the live calculator loads: virtual machines (46,781-SKU feed, 62 regions), kubernetes service (control-plane tiers + node sizes), storage (graduated block-blob tiers), cosmos db (provisioned / serverless / gateway), region list (31 geographies) and 24 currencies",
+   "curation": "the tracked calculator.json keeps a real subset: 55 VM sizes (Linux + Windows, 2,943 regional per-hour prices), 22 AKS node sizes plus all 5 control-plane tiers, 11 storage SKUs including every graduated tier, and 12 Cosmos DB SKUs — every price value is captured verbatim; the full 62 MB VM feed stays in scraped_data/ (gitignored)",
+   "endpoints": [
+    "https://azure.microsoft.com/api/v3/pricing/virtual-machines/calculator/region/en-us",
+    "https://azure.microsoft.com/api/v3/pricing/kubernetes-service/calculator/region/en-us",
+    "https://azure.microsoft.com/api/v3/pricing/storage/calculator/region/en-us",
+    "https://azure.microsoft.com/api/v3/pricing/cosmos-db/calculator/region/en-us",
+    "https://azure.microsoft.com/api/v3/pricing/calculator/regions/en-us",
+    "https://azure.microsoft.com/api/v3/pricing/calculator/currencies/en-us"
+   ]
+  },
+  "customers.microsoft.com": {
+   "role": "customer-stories search API (filters product:azure) and every story page: 142 stories with industries, products, quotes, challenge/solution sections",
+   "endpoints": [
+    "https://customers.microsoft.com/en-us/search?filters=product%3Aazure",
+    "https://customers.microsoft.com/en-us/story/<slug>"
+   ],
+   "stories": 142
+  },
+  "cdn-dynmedia-1.microsoft.com": {
+   "role": "all imagery: page heroes, product-page artwork, 50 pricing-hub icons, free-services artwork, geographies and support imagery, 142 story header images and company logos, 21 blog card images, 86 dictionary article heroes",
+   "assets": 519,
+   "note": "identical artwork served by the CDN for multiple pages is stored once and referenced by every page that uses it (24 duplicate groups collapsed to canonical files); one story header (27016 Muleshoe Area Medical Center) returns HTTP 403 on the CDN and is rendered without a header image; the header logo comes from uhf.microsoft.com"
+  }
+ },
+ "fixtures": {
+  "content": {
+   "classification": "none",
+   "note": "every content record in source_data/*.json is derived from the real captures above; nothing is invented"
+  },
+  "benchmark_users": {
+   "classification": "authored-benchmark-accounts",
+   "note": "the four benchmark accounts (alice.chen/bob.alvarez/carol.ito/dana.osei @test.com, password TestPass123!) follow the shared WebHarbor benchmark-user convention (frozen bcrypt hash so the seed DB stays byte-reproducible); they are account-surface infrastructure, not upstream content"
+  },
+  "images": {
+   "classification": "live-capture",
+   "note": "all 515 images under static/images/ were downloaded from the upstream CDNs; asset_inventory.json records per-file sha256, bytes and the exact source URL, and scripts/check_asset_inventory.py enforces exact coverage, hash integrity and real format headers at image build time"
+  }
+ },
+ "determinism": {
+  "seed": "the SQLite seed is materialized at image build time (PYTHONHASHSEED=0, no wall clock, no RNG in any seed row; estimate/favorite timestamps are runtime data, not seed data) and is byte-identical across resets",
+  "transforms": "scripts_dev/build_source_data.py converts the raw captures in scraped_data/ (gitignored) into the tracked source_data/*.json byte-reproducibly"
+ },
+ "registration": {
+  "sites_index": 212,
+  "container_port": 40212,
+  "expose": "8101 40000-40212"
+ }
+}

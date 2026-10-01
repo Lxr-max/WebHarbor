@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}{{ brand }} — Cloud Computing{% endblock %}
+{% block content %}
+<section class="hero">
+  {% if site.hero.image %}<img class="hero-bg" src="{{ img(site.hero.image) }}" alt="">{% endif %}
+  <div class="shell">
+    <h1>{{ site.hero.title }}</h1>
+    <p class="hero-sub">{{ site.description }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('pricing') }}">Explore pricing</a>
+      <a class="btn btn-outline" href="{{ url_for('free_services') }}">Start free</a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2>Explore tools for bringing your vision to life</h2>
+    <div class="card-grid">
+      {% for prod in featured %}
+      <a class="card" href="{{ url_for('product_detail', slug=prod.slug) }}">
+        <h3>{{ prod.name }}</h3>
+        <p>{{ prod.desc }}</p>
+        <span class="card-link">Explore the product →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt">
+  <div class="shell two-col">
+    <div>
+      <h2>Global infrastructure designed to support the world’s most advanced AI</h2>
+      <p>Azure operates {{ geos }} geographies and {{ regions }} regions worldwide. Choose the Azure geography and region that best meets your needs, and compare service availability and pricing by region.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('geographies') }}">Explore Azure geographies</a>
+        <a class="btn btn-outline" href="{{ url_for('products_by_region') }}">Products by region</a>
+      </div>
+    </div>
+    <div>
+      <h2>See how customers are innovating with Azure</h2>
+      <div class="story-mini-grid">
+        {% for story in stories %}
+        <a class="story-mini" href="{{ url_for('customer_story', slug=story.slug) }}">
+          {% if story.header_image and (story.slug ~ '-header.webp') %}
+          <img src="{{ img(story.header_image) }}" alt="{{ story.title }}" loading="lazy">
+          {% endif %}
+          <span>{{ story.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      <a class="btn btn-outline" href="{{ url_for('customer_stories') }}">All customer stories</a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2>Discover what’s happening on Azure</h2>
+    <div class="card-grid">
+      {% for post in posts %}
+      <a class="card" href="{{ url_for('blog_post', slug=post.slug) }}">
+        <img class="card-img" src="{{ img(post.image) }}" alt="{{ post.title }}" loading="lazy">
+        <h3>{{ post.title }}</h3>
+        <p class="card-meta">{{ post.date }} · {{ post.read_time }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
