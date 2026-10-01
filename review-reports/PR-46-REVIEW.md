@@ -1,5 +1,8 @@
 # Review of PR #46: site registry audit
 
+Historical snapshot. See [the PR #110 revision report](PR-110-REGISTRY-AUDIT.md)
+for shared-parser changes and the current 140-site validation.
+
 Original contribution: [aiming-lab/WebHarbor#46](https://github.com/aiming-lab/WebHarbor/pull/46), authored by @Lxr-max / XuanRui LI.
 
 ## Scope and fixed versions

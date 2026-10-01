@@ -32,9 +32,10 @@ def build_repo(
     sites: list[str] | None = None,
     site_dirs: list[str] | None = None,
     task_ports: dict[str, int] | None = None,
-    docker_expose: str = "EXPOSE 8101 40000-40014",
+    docker_expose: str | None = None,
 ) -> None:
     sites = ["amazon"] if sites is None else sites
+    docker_expose = docker_expose or f"EXPOSE 8101 40000-{40000 + len(sites) - 1}"
     site_dirs = list(sites) if site_dirs is None else site_dirs
     task_ports = (
         {site: 40000 + index for index, site in enumerate(sites)}
@@ -117,6 +118,9 @@ def build_repo(
             + "\n",
         )
 
+    write(root / '.gitignore', 'sites/*/instance_seed/\nsites/*/static/images/\nsites/*/static/external_cache/\n')
+    git_init_and_add(root)
+
 
 class AuditSiteRegistryTests(unittest.TestCase):
     def test_valid_minimal_registry_passes(self) -> None:
@@ -169,22 +173,24 @@ class AuditSiteRegistryTests(unittest.TestCase):
                 messages,
             )
 
-    def test_task_url_port_mismatch_warns(self) -> None:
+    def test_task_url_port_mismatch_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             build_repo(root, task_ports={"amazon": 49999})
             result = audit.audit_repository(root)
-            messages = [warning.message for warning in result.warnings]
+            messages = [error.message for error in result.errors]
             self.assertTrue(
                 any("does not match registered port" in message for message in messages),
                 messages,
             )
-            self.assertEqual(result.exit_code, 0)
+            self.assertEqual(result.exit_code, 1)
 
     def test_warning_only_exits_zero_but_strict_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            build_repo(root, task_ports={"amazon": 49999})
+            build_repo(root)
+            write(root / "sites/amazon/logs/debug.log", "log")
+            git_init_and_add(root)
             normal = audit.audit_repository(root, strict=False)
             strict = audit.audit_repository(root, strict=True)
             self.assertEqual(normal.exit_code, 0)
@@ -222,10 +228,10 @@ class AuditSiteRegistryTests(unittest.TestCase):
 
             result = audit.audit_repository(root)
 
-            self.assertEqual(len(result.errors), 0)
+            self.assertGreater(len(result.errors), 0)
             self.assertTrue(
-                any("invalid port" in warning.message for warning in result.warnings),
-                result.warnings,
+                any("invalid port" in error.message for error in result.errors),
+                result.errors,
             )
 
     def test_invalid_utf8_task_file_is_reported_without_traceback(self) -> None:
@@ -387,7 +393,7 @@ class AuditSiteRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             build_repo(root)
-            write(root / ".gitignore", "sites/*/instance/\n")
+            write(root / ".gitignore", (root / ".gitignore").read_text() + "sites/*/instance/\n")
             git_init_and_add(root)
             write(root / "sites" / "amazon" / "instance" / "runtime.db", "runtime\n")
 
@@ -481,6 +487,134 @@ class AuditSiteRegistryTests(unittest.TestCase):
                 any("out-of-range EXPOSE token" in error.message for error in result.errors),
                 result.errors,
             )
+
+class ReviewRegressionTests(unittest.TestCase):
+    def test_hidden_cache_is_not_a_site_but_unregistered_site_still_warns(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_repo(root)
+            (root / 'sites/.cache/huggingface').mkdir(parents=True)
+            result = audit.audit_repository(root, strict=True)
+            self.assertEqual(result.exit_code, 0)
+            self.assertEqual(result.site_directories_found, 1)
+            self.assertEqual([s.site for s in result.sites], ['amazon'])
+
+    def test_web_services_require_tcp_and_protocol_must_be_valid(self):
+        for expose in ('EXPOSE 8101/udp 40000/udp', 'EXPOSE 8101/garbage 40000/tcp',
+                       'EXPOSE 8101/tcp 40000/tcp 45000/tcp'):
+            with self.subTest(expose=expose), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                build_repo(root, docker_expose=expose)
+                self.assertEqual(audit.audit_repository(root, strict=True).exit_code, 1)
+
+    def test_http_url_contract_is_shared_by_all_static_checks(self):
+        import check_site_registry as compact
+        import validate_tasks as tasks
+        for url, expected in [('http://localhost:40000/', 0), ('http://127.0.0.1:40000/', 0),
+                              ('https://localhost:40000/', 1), ('http://localhost:40001/', 1)]:
+            with self.subTest(url=url), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                build_repo(root)
+                task_path = root / 'sites/amazon/tasks.jsonl'
+                task = json.loads(task_path.read_text())
+                task.update(id='Amazon--0', web=url)
+                task_path.write_text(json.dumps(task) + '\n')
+                self.assertEqual(audit.audit_repository(root, strict=True).exit_code, expected)
+                self.assertEqual(tasks.run_validation(root=root)['exit_code'], expected)
+                from unittest.mock import patch
+                from contextlib import redirect_stdout, redirect_stderr
+                with patch.object(compact, 'ROOT', root), redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    self.assertEqual(compact.main(), expected)
+
+    def test_git_failures_and_non_worktrees_never_look_clean(self):
+        from unittest.mock import patch
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_repo(root)
+            for side_effect in (FileNotFoundError('missing git'), subprocess.TimeoutExpired('git', 30)):
+                with self.subTest(error=side_effect), patch.object(audit.subprocess, 'run', side_effect=side_effect):
+                    output = io.StringIO()
+                    self.assertEqual(audit.main(['--json'], root=root, stdout=output), 1)
+                    self.assertIn('Git inspection failed', json.loads(output.getvalue())['errors'][0]['message'])
+            shutil.rmtree(root / '.git')
+            self.assertEqual(audit.audit_repository(root).exit_code, 1)
+
+    def test_asset_ignores_must_be_in_root_and_effective(self):
+        cases = ('missing', 'info-only', 'negated')
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                build_repo(root)
+                ignore = root / '.gitignore'
+                if case != 'negated':
+                    contents = ignore.read_text()
+                    ignore.write_text('')
+                    if case == 'info-only':
+                        (root / '.git/info/exclude').write_text(contents)
+                else:
+                    ignore.write_text(ignore.read_text() + '!sites/amazon/static/images/\n')
+                result = audit.audit_repository(root, strict=True)
+                self.assertEqual(result.exit_code, 1)
+                self.assertTrue(any('not ignored by root .gitignore' in f.message for f in result.errors))
+
+    def test_nested_positive_ignore_and_empty_placeholder_are_supported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_repo(root)
+            write(root / 'sites/amazon/.gitignore', 'static/images/\n')
+            write(root / 'sites/amazon/static/images/.gitkeep', '')
+            subprocess.run(['git', 'add', '-f', 'sites/amazon/static/images/.gitkeep'], cwd=root, check=True)
+            self.assertEqual(audit.audit_repository(root, strict=True).exit_code, 0)
+
+    def test_real_tracked_assets_and_nonempty_placeholders_fail(self):
+        for filename in ('photo.jpg', '.gitkeep'):
+            with self.subTest(filename=filename), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                build_repo(root)
+                path = f'sites/amazon/static/images/{filename}'
+                write(root / path, 'asset bytes')
+                subprocess.run(['git', 'add', '-f', path], cwd=root, check=True)
+                result = audit.audit_repository(root, strict=True)
+                self.assertEqual(result.exit_code, 1)
+                self.assertTrue(any(f.message == 'HF-managed asset is tracked in Git' for f in result.errors))
+
+    def test_tracked_runtime_file_missing_on_disk_still_warns(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_repo(root)
+            path = root / 'sites/amazon/instance/state.db'
+            write(path, 'runtime')
+            git_init_and_add(root)
+            path.unlink()
+            result = audit.audit_repository(root, strict=True)
+            self.assertEqual(result.exit_code, 1)
+            self.assertTrue(any('runtime-like path' in f.message for f in result.warnings))
+
+    def test_actual_cli_json_exit_and_read_only_behavior(self):
+        import hashlib
+        import shutil
+        for bad in (False, True):
+            with self.subTest(bad=bad), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                build_repo(root)
+                scripts = root / 'scripts'
+                scripts.mkdir()
+                for name in ('audit_site_registry.py', 'validate_tasks.py', 'site_registry.py'):
+                    shutil.copyfile(Path(__file__).parent / name, scripts / name)
+                if bad:
+                    (root / '.gitignore').write_text('')
+                def hashes():
+                    return {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                            for p in root.rglob('*') if p.is_file()}
+                before = hashes()
+                result = subprocess.run([sys.executable, '-B', str(scripts / 'audit_site_registry.py'),
+                                         '--json', '--strict'], capture_output=True, text=True, cwd=root)
+                self.assertEqual(result.stderr, '')
+                self.assertEqual(result.returncode, int(bad))
+                self.assertEqual(json.loads(result.stdout)['summary']['exit_code'], int(bad))
+                self.assertEqual(before, hashes())
+
 
 
 if __name__ == "__main__":
