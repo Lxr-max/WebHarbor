@@ -13,3 +13,22 @@ def test_external_continuations_stay_local(target):
 def test_internal_continuations_survive(target):
     with site.app.test_request_context('/'):
         assert site.local_redirect(target, '/').location == target
+
+
+def test_restart_seeding_preserves_changed_benchmark_email():
+    from pathlib import Path
+    with site.app.app_context():
+        user = site.db.session.get(site.User, 1)
+        original = user.email
+        user.email = 'changed-benchmark@example.com'
+        site.db.session.commit()
+        path = Path(site.db.engine.url.database)
+        before = path.read_bytes()
+        try:
+            site.main()
+            site.db.session.remove()
+            assert path.read_bytes() == before
+            assert site.db.session.get(site.User, 1).email == 'changed-benchmark@example.com'
+        finally:
+            site.db.session.get(site.User, 1).email = original
+            site.db.session.commit()
