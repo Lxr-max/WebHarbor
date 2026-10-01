@@ -433,6 +433,18 @@ def _conference_meta():
     }
 
 
+
+def local_redirect(target, fallback):
+    """Keep form continuations on this mirror, including encoded URL variants."""
+    from urllib.parse import unquote
+    value = target or ''
+    decoded = unquote(value)
+    if (not decoded.startswith('/') or decoded.startswith('//')
+            or '\\' in decoded
+            or any(ord(c) < 32 for c in decoded)):
+        value = fallback
+    return redirect(value)
+
 @app.route('/')
 def home():
     conf = _conference_meta()
@@ -524,11 +536,11 @@ def bookmarks_toggle():
     if row:
         db.session.delete(row)
         db.session.commit()
-        return redirect(request.form.get('back') or url_for('mystuff'))
+        return local_redirect(request.form.get('back'), url_for('mystuff'))
     db.session.add(Bookmark(user_id=current_user.id, paper_id=paper.id,
                             added_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('back') or url_for('mystuff'))
+    return local_redirect(request.form.get('back'), url_for('mystuff'))
 
 
 @app.route('/schedule')
@@ -596,11 +608,11 @@ def schedule_save():
     if row:
         db.session.delete(row)
         db.session.commit()
-        return redirect(request.form.get('back') or url_for('mystuff'))
+        return local_redirect(request.form.get('back'), url_for('mystuff'))
     db.session.add(ScheduleSave(user_id=current_user.id, event_id=event.id,
                                 added_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('back') or url_for('mystuff'))
+    return local_redirect(request.form.get('back'), url_for('mystuff'))
 
 
 @app.route('/workshops')
@@ -865,9 +877,7 @@ def login():
     if user and bcrypt.check_password_hash(user.password_hash, password):
         login_user(user)
         target = request.args.get('next') or request.form.get('next')
-        if target and target.startswith('/'):
-            return redirect(target)
-        return redirect(url_for('home'))
+        return local_redirect(target, url_for('home'))
     return render_template('login.html', error='Invalid email or password.')
 
 
