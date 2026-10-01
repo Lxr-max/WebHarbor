@@ -465,8 +465,14 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/backcountry && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/disney && \
     (cd /opt/WebSyn/disney && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/disney.db instance_seed/disney.db && rm -rf instance __pycache__)
 
+# dblp validates its downloaded upstream imagery against the tracked
+# inventory and rebuilds its deterministic SQLite seed from tracked upstream
+# snapshot data (captured 2026-09-30; see sites/dblp/provenance.json).
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/dblp && \
+    (cd /opt/WebSyn/dblp && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/dblp.db instance_seed/dblp.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40139
+EXPOSE 8101 40000-40211
 
 CMD ["/opt/websyn_start.sh"]
