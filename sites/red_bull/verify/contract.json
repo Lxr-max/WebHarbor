@@ -828,7 +828,8 @@
         "hoodie\\s+details(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?xs\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$114\\.95(?!\\w|\\.\\d)"
       ]
     ],
-    "same_cart_token": true
+    "same_cart_token": true,
+    "cart_answers": true
   },
   "Red Bull--12": {
     "task": "Build me an FC Red Bull Salzburg gift bundle using the two cheapest products in the shop. Put one of the cheapest and two of the second-cheapest product in my cart, in any available sizes. Tell me the brand's product count, both chosen titles, sizes and unit prices, and the final quantities and subtotal. Leave the bundle ready for checkout.",
@@ -914,7 +915,8 @@
         "fc\\s+red\\s+bull\\s+salzburg(?!\\s+trazom\\s+tote\\s+bag|\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii)(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?products\\s*(?:is|was|are|were|of|at|=)?\\s*10(?!\\w|\\.\\d)"
       ]
     ],
-    "same_cart_token": true
+    "same_cart_token": true,
+    "cart_answers": true
   },
   "Red Bull--13": {
     "task": "I'm Bob (bob.c@test.com, TestPass123!), preparing for the Iowa motocross event already in my registrations. Review that booking and the event page to confirm the date, venue, ticket type and code, and explain which era of bikes it celebrates. Save the event to my favorites so I can get back to its information easily, keeping my existing favorites.",
