@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Earnings Calendar - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Earnings Calendar</h2>
+  <p class="muted">Week of {{ month_day_year(start) }} – {{ month_day_year(end) }}. BMO = before market open, AMC = after market close.</p>
+
+  <div class="day-tabs">
+    {% for d in days %}
+    <a class="day-tab {{ 'active' if d == anchor }}" href="/calendar/earnings?day={{ d }}">
+      {{ month_day_year(d) }} ({{ counts.get(d, 0) }})
+    </a>
+    {% endfor %}
+  </div>
+
+  <p>
+    <a href="/calendar/earnings?day={{ prev_week }}">&laquo; Previous week ({{ month_day_year(prev_week) }})</a>
+    &nbsp;·&nbsp;
+    <a href="/calendar/earnings?day={{ this_week }}">This week</a>
+    &nbsp;·&nbsp;
+    <a href="/calendar/earnings?day={{ next_week }}">Next week ({{ month_day_year(next_week) }}) &raquo;</a>
+  </p>
+
+  <form class="filter-form" action="/calendar/earnings" method="get">
+    <input type="hidden" name="day" value="{{ anchor }}">
+    <div class="field">
+      <label for="symbol">Filter by symbol contains</label>
+      <input type="text" id="symbol" name="symbol" value="{{ symbol_q }}" placeholder="e.g. A">
+    </div>
+    <div class="field">
+      <label for="time">Announcement time</label>
+      <select id="time" name="time">
+        <option value="">All times</option>
+        <option value="BMO" {{ 'selected' if time_filter == 'BMO' }}>Before market open</option>
+        <option value="AMC" {{ 'selected' if time_filter == 'AMC' }}>After market close</option>
+      </select>
+    </div>
+    <button class="btn primary" type="submit">Apply</button>
+    <a class="btn" href="/calendar/earnings?day={{ anchor }}">Clear</a>
+  </form>
+
+  <div class="table-scroll">
+  <table class="yf">
+    <thead>
+      <tr>
+        <th>Symbol</th><th>Company</th><th>Event Name</th><th>Date</th><th>Call Time</th>
+        <th class="num">EPS Estimate</th><th class="num">Reported EPS</th><th class="num">Surprise (%)</th><th class="num">Market Cap</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for e in events %}
+      <tr>
+        <td>{% if e.ticker in quote_symbols %}<a href="/quote/{{ e.ticker|urlencode }}"><strong>{{ e.ticker }}</strong></a>{% else %}<strong>{{ e.ticker }}</strong>{% endif %}</td>
+        <td>{{ e.company }}</td>
+        <td>{{ e.event_name }}</td>
+        <td>{{ month_day_year(e.day) }}</td>
+        <td><span class="pill {{ 'bmo' if e.time_type == 'BMO' else ('amc' if e.time_type == 'AMC' else 'other') }}">{{ e.time_type or '—' }}</span></td>
+        <td class="num">{{ fmt_num(e.eps_estimate) if e.eps_estimate is not none else '—' }}</td>
+        <td class="num">{{ fmt_num(e.eps_actual) if e.eps_actual is not none else '—' }}</td>
+        <td class="num {{ 'up' if (e.surprise_pct or 0) > 0 else ('down' if (e.surprise_pct or 0) < 0) }}">{{ fmt_num(e.surprise_pct) if e.surprise_pct is not none else '—' }}</td>
+        <td class="num">{{ fmt_big(e.market_cap) if e.market_cap is not none else '—' }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="9" class="muted">No earnings events match the current filters for this week.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="muted">{{ events|length }} event{{ '' if events|length == 1 else 's' }} shown.</p>
+</div>
+{% endblock %}

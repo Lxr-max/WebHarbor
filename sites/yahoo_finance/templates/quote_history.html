@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from '_quote_macros.html' import quote_tabs, quote_header with context %}
+{% block title %}{{ q.symbol }} Historical Data - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  {{ quote_header() }}
+  {{ quote_tabs('history') }}
+  <h2 class="section-title">Historical Prices (last month, daily closes)</h2>
+  {% if points %}
+  <div class="table-scroll">
+  <table class="yf">
+    <thead><tr><th>Date</th><th class="num">Close</th></tr></thead>
+    <tbody>
+    {% for p in points|reverse %}
+      <tr><td>{{ month_day_year(p.bar_date) }}</td><td class="num">{{ fmt_price(p.close) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="muted">No historical prices captured for {{ q.symbol }}.</p>
+  {% endif %}
+</div>
+{% endblock %}
