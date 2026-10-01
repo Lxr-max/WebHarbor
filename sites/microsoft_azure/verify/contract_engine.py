@@ -20,6 +20,7 @@ def norm(text):
     text = str(text).replace('|', ' ').replace('**', '').casefold()
     text = text.replace('−', '-').replace('®', '').replace('™', '')
     text = text.replace('’', "'").replace('–', '-').replace('—', '-')
+    text = re.sub(r'\b([0-9][0-9,.]*)\s*usd\b', r'$\1', text)
     text = re.sub(r'\busd\s*', '$', text)
     text = re.sub(r'(?<=\d),(?=\d)', '', text)
     text = re.sub(r'\b(zero|one|two|three|four|five|six|seven|eight|nine|ten)\b(?!-tone)',
@@ -65,6 +66,8 @@ def canonical_json(value):
 
 def matches(value, expected):
     if isinstance(expected, dict):
+        if 'json_value' in expected:
+            return canonical_json(json.loads(value)) == canonical_json(expected['json_value'])
         if 'regex' in expected:
             return re.fullmatch(expected['regex'], str(value), re.I) is not None
         if 'one_of' in expected:
@@ -114,6 +117,8 @@ def check_claims(answer, claims):
             raise ValueError('Missing or incorrect ' + label)
         for m in hits:
             claim = m.group()
+            if re.search(r'\b(?:reference (?:number|id)|unrelated (?:number|value))\b', claim + ' ' + text[max(0, m.start()-22):m.start()]):
+                raise ValueError('Reference value substituted for ' + label)
             if re.search(r'\b(?:not|never|incorrect|false)\s*$',
                          text[max(0, m.start() - 18):m.start()]):
                 raise ValueError('Negated ' + label)
@@ -168,6 +173,7 @@ def verify(run_dir, task_id):
     initial = database(run / 'initial.db')
     after = database(run / 'after.db')
     check_state(initial, after, spec)
+    check_signup_password(traj, initial, after, spec)
     answer = traj.get('final_answer', '')
     check_claims(answer, spec['claims'])
     for pattern in spec.get('forbidden', []):
@@ -201,6 +207,15 @@ def main(task_id):
     return 0 if result['pass'] else 1
 
 
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1]) if len(sys.argv) > 1 and not sys.argv[1].startswith('-')
-             else main(None))
+
+
+
+def check_signup_password(traj, initial, after, spec):
+    column = spec.get('signup_password_column')
+    if not column:
+        return
+    import bcrypt
+    rows = [r for k,r in after['users'].items() if k not in initial['users']]
+    passwords = [(s.get('params') or {}).get('text', '') for s in traj['steps'] if 'password' in str(s.get('params', {}).get('target', ''))]
+    if len(rows) != 1 or not any(len(p) >= 8 and bcrypt.checkpw(p.encode(), rows[0][column].encode()) for p in passwords):
+        raise ValueError('New account password does not match the submitted password')
