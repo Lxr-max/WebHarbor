@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block title %}Pricing calculator — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Azure pricing calculator</h1>
+  <p class="lead">Estimate your monthly costs for Azure Virtual Machines, Azure Kubernetes Service, Azure Storage and Azure Cosmos DB. Prices are the live pay-as-you-go rates captured from the Azure pricing calculator service APIs, by region. Estimates assume 730 hours per month for always-on compute.</p>
+
+  {% if error %}<div class="flash flash-error">{{ error }}</div>{% endif %}
+
+  <nav class="tab-bar">
+    <a class="tab {% if service == 'virtual-machines' %}active{% endif %}" href="{{ url_for('calculator', service='virtual-machines') }}">Virtual Machines</a>
+    <a class="tab {% if service == 'kubernetes-service' %}active{% endif %}" href="{{ url_for('calculator', service='kubernetes-service') }}">Kubernetes Service</a>
+    <a class="tab {% if service == 'storage' %}active{% endif %}" href="{{ url_for('calculator', service='storage') }}">Storage</a>
+    <a class="tab {% if service == 'cosmos-db' %}active{% endif %}" href="{{ url_for('calculator', service='cosmos-db') }}">Cosmos DB</a>
+  </nav>
+
+  <form method="post" action="{{ url_for('calculator', service=service) }}" class="calc-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="service" value="{{ service }}">
+
+    <div class="calc-config">
+      {% if service == 'virtual-machines' %}
+      <label>Virtual machine size
+        <select name="size" required>
+          {% for s in vm_sizes %}
+          <option value="{{ s.key }}" {% if form.size == s.key %}selected{% endif %}>
+            {{ s.size_slug|upper }} — {{ s.os|capitalize }} — {{ s.cores }} vCPU, {{ s.ram_gb }} GB RAM
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Quantity <input type="number" name="quantity" min="1" max="500" value="{{ form.quantity or '1' }}" required></label>
+      <label>Hours per month <input type="number" name="hours" min="1" max="730" value="{{ form.hours or '730' }}" required></label>
+
+      {% elif service == 'kubernetes-service' %}
+      <label>Control plane SLA tier
+        <select name="tier">
+          {% for t in control_tiers %}
+          <option value="{{ t.tier }}" {% if form.tier == t.tier or (not form.tier and t.tier == 'SLA') %}selected{% endif %}>{{ t.tier }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Node virtual machine size
+        <select name="size" required>
+          {% for s in aks_sizes %}
+          <option value="{{ s.key }}" {% if form.size == s.key %}selected{% endif %}>
+            {{ s.size_slug|upper }} — {{ s.os|capitalize }} — {{ s.cores }} vCPU, {{ s.ram_gb }} GB RAM
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Node count <input type="number" name="nodes" min="1" max="100" value="{{ form.nodes or '3' }}" required></label>
+      <label>Hours per month <input type="number" name="hours" min="1" max="730" value="{{ form.hours or '730' }}" required></label>
+
+      {% elif service == 'storage' %}
+      <p class="form-note">Block blob storage (General Purpose v2, Hot tier, LRS) — capacity is billed on graduated tiers: the first 50,000 GB per month at the tier-1 rate, the next 461,200 GB at the tier-2 rate, and the remainder at the tier-3 rate.</p>
+      <label>Capacity (GB per month) <input type="number" name="capacity_gb" min="0" max="100000000" value="{{ form.capacity_gb or '1024' }}" required></label>
+      <label>Write operations (batches of 10,000) <input type="number" name="write_10k" min="0" max="1000000" value="{{ form.write_10k or '100' }}" required></label>
+      <label>Read operations (batches of 10,000) <input type="number" name="read_10k" min="0" max="1000000" value="{{ form.read_10k or '1000' }}" required></label>
+
+      {% else %}
+      <label>Workload
+        <select name="mode">
+          <option value="single" {% if form.mode == 'single' or not form.mode %}selected{% endif %}>Provisioned throughput — single-region writes</option>
+          <option value="multiple" {% if form.mode == 'multiple' %}selected{% endif %}>Provisioned throughput — multi-region writes</option>
+          <option value="serverless" {% if form.mode == 'serverless' %}selected{% endif %}>Serverless</option>
+        </select>
+      </label>
+      <label>Throughput (RU/s, multiples of 100) <input type="number" name="ru_s" min="0" max="1000000" step="100" value="{{ form.ru_s or '400' }}" required></label>
+      <label>Storage (GB) <input type="number" name="storage_gb" min="0" max="10000000" value="{{ form.storage_gb or '100' }}" required></label>
+      <label>Dedicated gateway (D4s)
+        <select name="gateway">
+          <option value="no" {% if form.gateway == 'no' or not form.gateway %}selected{% endif %}>None</option>
+          <option value="yes" {% if form.gateway == 'yes' %}selected{% endif %}>Add dedicated gateway</option>
+        </select>
+      </label>
+      {% endif %}
+
+      <label>Region
+        <select name="region" required>
+          {% for r in regions %}
+          <option value="{{ r.slug }}" {% if form.region == r.slug or (not form.region and r.slug == 'us-east') %}selected{% endif %}>{{ r.display_name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Currency
+        <select name="currency">
+          {% for c in currencies %}
+          <option value="{{ c.code }}" {% if form.currency == c.code or (not form.currency and c.code == 'usd') %}selected{% endif %}>{{ c.display_name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Calculate estimate</button>
+  </form>
+
+  {% if estimate %}
+  <section class="estimate-result">
+    <h2>Estimate result</h2>
+    <table class="data-table">
+      <thead><tr><th>Line item</th><th>Rate</th><th>Monthly</th></tr></thead>
+      <tbody>
+        {% for line in estimate.lines %}
+        <tr>
+          <td>{{ line.label }}</td>
+          <td>{% if line.rate is not none %}${{ '%.6f'|format(line.rate) }}{% else %}—{% endif %}</td>
+          <td>${{ '%.2f'|format(line.amount) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><th>Estimated monthly cost ({{ estimate.currency|upper }})</th><th></th><th>{{ estimate.monthly_display }}</th></tr>
+      </tfoot>
+    </table>
+
+    {% if current_user.is_authenticated %}
+    <h3>Save this estimate</h3>
+    <form method="post" action="{{ url_for('save_estimate') }}" class="save-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="service" value="{{ service }}">
+      <input type="hidden" name="currency" value="{{ form.currency or 'usd' }}">
+      {% for key in ['size','quantity','hours','tier','nodes','capacity_gb','write_10k','read_10k','mode','ru_s','storage_gb','gateway'] %}
+        {% if form.get(key) %}<input type="hidden" name="{{ key }}" value="{{ form.get(key) }}">{% endif %}
+      {% endfor %}
+      <input type="hidden" name="region" value="{{ form.region or 'us-east' }}">
+      <label>Estimate name <input type="text" name="name" placeholder="e.g. Production web tier" required></label>
+      <button class="btn btn-primary" type="submit">Save estimate</button>
+    </form>
+    {% else %}
+    <p><a href="{{ url_for('login', next=url_for('calculator', service=service)) }}">Sign in</a> or <a href="{{ url_for('signup') }}">create a free account</a> to save this estimate.</p>
+    {% endif %}
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

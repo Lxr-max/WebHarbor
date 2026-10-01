@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Cloud computing terminology — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Cloud computing terminology</h1>
+  <p class="lead">Learn the language of cloud computing with the Azure cloud computing dictionary — {{ items|length }} plain-language articles on cloud, AI and infrastructure concepts.</p>
+
+  <form class="filter-bar" method="get" action="{{ url_for('dictionary') }}">
+    <input type="search" name="q" placeholder="Search terminology, e.g. container, RAG, IaaS" value="{{ q }}" aria-label="Search the dictionary">
+    <button class="btn btn-primary" type="submit">Search</button>
+    {% if q %}<a class="btn btn-ghost" href="{{ url_for('dictionary') }}">Clear</a>{% endif %}
+  </form>
+
+  <p class="result-count">{{ items|length }} article{{ '' if items|length == 1 else 's' }}{% if q %} matching “{{ q }}”{% endif %}</p>
+
+  <div class="card-grid">
+    {% for a in items %}
+    <a class="card" href="{{ url_for('dictionary_article', slug=a.slug) }}">
+      <h3>{{ a.title }}</h3>
+      <p>{{ a.description }}</p>
+      <span class="card-link">Read the article →</span>
+    </a>
+    {% else %}
+    <p>No articles match your search.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

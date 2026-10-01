@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Azure pricing — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Azure pricing</h1>
+  <p class="lead">Get the details on pricing for Azure products and services. Compare options, estimate your monthly costs with the pricing calculator, and see what you can use for free.</p>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="{{ url_for('calculator') }}">Open the pricing calculator</a>
+    <a class="btn btn-outline" href="{{ url_for('free_services') }}">Explore free services</a>
+  </div>
+
+  <h2>Pricing by product</h2>
+  <div class="pricing-grid">
+    {% for card in cards %}
+    {% set seg = card.href.rstrip('/').split('/')[-1] %}
+    {% set page = {'virtual-machines': 'virtual-machines-linux'}.get(seg, seg) %}
+    <a class="pricing-card" href="{{ card.href if card.href.startswith('http') else (url_for('pricing_details', page=page) if page in ['kubernetes-service','virtual-machines-linux','cosmos-db','managed-disks'] else url_for('pricing')) }}">
+      {% if card.icon %}<img src="{{ img(card.icon) }}" alt="" width="32" height="32" loading="lazy">{% endif %}
+      <span>{{ card.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
