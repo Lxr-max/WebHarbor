@@ -34,3 +34,22 @@ def test_cross_filtered_facets_are_attainable(client):
         page = client.get(unescape(href)).get_data(as_text=True)
         actual = re.search(r'found (\d+) matches', page).group(1)
         assert actual == count and int(actual) > 0
+
+
+def test_restart_seeding_preserves_changed_benchmark_email():
+    from pathlib import Path
+    with site.app.app_context():
+        user = site.db.session.get(site.User, 1)
+        original = user.email
+        user.email = 'changed-benchmark@example.com'
+        site.db.session.commit()
+        path = Path(site.db.engine.url.database)
+        before = path.read_bytes()
+        try:
+            site.main()
+            site.db.session.remove()
+            assert path.read_bytes() == before
+            assert site.db.session.get(site.User, 1).email == 'changed-benchmark@example.com'
+        finally:
+            site.db.session.get(site.User, 1).email = original
+            site.db.session.commit()

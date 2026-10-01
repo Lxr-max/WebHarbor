@@ -1145,7 +1145,7 @@ def seed_database():
 
 
 def seed_benchmark_users():
-    if User.query.filter_by(email='alice.j@test.com').first():
+    if User.query.count() > 0:
         return
     from seed_lib import build_benchmark_users
     build_benchmark_users(db, bcrypt)
