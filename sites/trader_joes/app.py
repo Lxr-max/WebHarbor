@@ -575,17 +575,15 @@ def inject_globals():
 
 @app.route('/')
 def home():
+    home_record = db.session.get(CMSPage, 'home')
+    home_data = json.loads(home_record.blocks) if home_record else {}
     featured = []
-    for sku in _load('home_content.json').get('featured_products', {}).get('skus', []):
+    for sku in home_data.get('featured_products', {}).get('skus', []):
         p = Product.query.filter_by(sku=sku).first()
         if p:
             featured.append(p)
-    whats_new = []
-    for sku in _load('home_content.json').get('whats_new', {}).get('skus', []):
-        p = Product.query.filter_by(sku=sku).first()
-        if p:
-            whats_new.append(p)
-    recipes_raw = _load('home_content.json').get('recipes', {}).get('cards', [])
+    whats_new = _sort_products(None, 'Date', Product.query.filter_by(new_product=1).all())[:5]
+    recipes_raw = home_data.get('recipes', {}).get('cards', [])
     recipe_cards = []
     for card in recipes_raw:
         slug = (card.get('pagePath') or '').rsplit('/', 1)[-1]
@@ -594,18 +592,21 @@ def home():
             recipe_cards.append({'card': card, 'recipe': r})
     anns = (Announcement.query.order_by(Announcement.publish_date.desc())
             .limit(4).all())
-    hero = _load('home_content.json').get('hero', {})
+    hero = home_data.get('hero', {})
     hero_link = None
     if hero.get('recipeOrPdp') == 'recipe' and hero.get('link'):
         slug = hero['link'].rsplit('/', 1)[-1]
         if Recipe.query.filter_by(slug=slug).first():
             hero_link = url_for('recipe_detail', slug=slug)
+    hero_guide = Editorial.query.filter_by(title=hero.get('title')).first()
+    if hero_guide:
+        hero_link = url_for('guide_detail', slug=hero_guide.slug)
     editorial = (Editorial.query.filter_by(kind='story')
                  .order_by(Editorial.publish_date.desc()).limit(4).all())
     return render_template('home.html', hero=hero, hero_link=hero_link,
                            whats_new=whats_new, featured=featured,
                            recipe_cards=recipe_cards,
-                           announcements=anns, editorial=editorial)
+                           announcements=anns, editorial=editorial, hero_guide=hero_guide)
 
 
 @app.route('/home')
@@ -1017,7 +1018,9 @@ def shopping_list():
         if product:
             rows.append((item, product))
     total = sum(i.quantity for i, _ in rows)
-    return render_template('shopping_list.html', rows=rows, total=total)
+    estimated_cost = sum(round(p.retail_price * 100) * i.quantity for i, p in rows if p.retail_price is not None) / 100
+    prices_complete = all(p.retail_price is not None for _, p in rows)
+    return render_template('shopping_list.html', rows=rows, total=total, estimated_cost=estimated_cost, prices_complete=prices_complete)
 
 
 @app.route('/home/shopping-list/add/<sku>', methods=['POST'])

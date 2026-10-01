@@ -96,7 +96,7 @@
         <tr><th>Calories per serving</th><td>{{ panel.get('calories_per_serving') or '' }}</td></tr>
         <tr><th>Servings per container</th><td>{{ panel.get('servings_per_container') or '' }}</td></tr>
         {% for d in panel.get('details') or [] %}
-        <tr><th>{{ d.get('nutritional_item') }}</th><td>{{ d.get('amount') }}{% if d.get('percent_dv') %} ({{ d.get('percent_dv') }}% DV){% endif %}</td></tr>
+        <tr><th>{{ d.get('nutritional_item') }}</th><td>{{ d.get('amount') }}{% if d.get('percent_dv') %} ({{ '%g'|format(d.get('percent_dv')|float * 100) }}% DV){% endif %}</td></tr>
         {% endfor %}
       </table>
       {% endfor %}

@@ -14,7 +14,11 @@ def test_home_renders(client):
     html = r.data.decode()
     assert "Trader Joe's" in html
     assert "What's New" in html
-    assert 'Pumpkin Cream Cheese Spread' in html  # seeded new product rail
+    from app import Product, _sort_products
+    with client.application.app_context():
+        newest = _sort_products(None, 'Date', Product.query.filter_by(new_product=1).all())[:5]
+    from markupsafe import escape
+    assert all(str(escape(p.item_title)) in html for p in newest)
     assert 'So, What Else is New?' in html
 
 
