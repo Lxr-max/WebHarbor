@@ -57,6 +57,9 @@ RUN cd /opt/WebSyn/fedex && rm -rf instance instance_seed && \
 RUN python3 /opt/WebSyn/webmd_doctor/check_generated_assets.py
 RUN cd /opt/WebSyn/webmd_doctor && rm -rf instance instance_seed && \
     PYTHONHASHSEED=0 python seed_data.py && rm -rf instance __pycache__
+# Repair captured arXiv titles before this database becomes the reset seed.
+RUN python3 /opt/WebSyn/arxiv/migrate_seed.py
+
 # Healthline's downloaded seed carries tracked corrections (image reassignment) and the
 # pinned archive bundles unreferenced images; apply the deterministic migration and prune
 # the unreferenced files before they are shipped.
