@@ -17,7 +17,15 @@ from PIL import Image
 
 def norm(text):
     text = str(text).replace('|', ' ').replace('**', '').casefold().replace('−', '-').replace('®', '').replace('™', '').replace('’', "'").replace('–', '-').replace('—', '-')
-    text = text.replace('&', 'and')
+    text = text.replace('&', 'and').replace('‑','-').replace('–','-')
+    text = re.sub(r'\s+-\s+', ' ', text)
+    text = text.replace('noon', '12:00').replace('midnight', '00:00')
+    text = re.sub(r'\b(\d{1,2})(?::(\d{2}))?\s*([ap])(?:\.?m\.?)?\b', lambda m:f'{int(m[1])%12+(12 if m[3]=="p" else 0):02d}:{int(m[2] or 0):02d}',text)
+    text = re.sub(r'\b(?:mins?|minutes)\b','minutes',text)
+    text = re.sub(r'\boz\b','ounces',text)
+    text = re.sub(r'\bgb\b','gigabytes',text)
+    text = re.sub(r'\bmb\b','megabytes',text)
+    text = re.sub(r'\b(?:ram|memory)\b','memory',text)
     text = re.sub(r'(?<!\d)(\d+)\s*(?:h|hours?)\s*(\d+)\s*(?:min|minutes?)\b', lambda m:str(int(m[1])*60+int(m[2]))+' minutes', text)
     text = re.sub(r'(?<!\d):|:(?!\d)', ' ', text)
     text = re.sub(r'(?<=\d),(?=\d)', '', text)
@@ -28,6 +36,7 @@ def norm(text):
     # a trailing "usd" is only folded away when it follows a number
     # ("350 usd" -> "350") so ticker spellings like BTC-USD survive
     text = re.sub(r'\$\s*', '', text)
+    text = text.replace('us dollars', '').replace('dollars', '')
     text = re.sub(r'(\d)\s*%', r'\1 percent', text)
     text = re.sub(r'(?<=\d)\s*usd\b', '', text)
     return re.sub(r'\s+', ' ', text).strip()
@@ -41,7 +50,7 @@ def database(path):
         data={}
         for (table,) in con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
             keys=[r[1] for r in sorted(con.execute(f'PRAGMA table_info("{table}")'),key=lambda r:r[5]) if r[5]]
-            data[table]={json.dumps([r[k] for k in keys]):dict(r) for r in con.execute(f'SELECT * FROM "{table}"')}
+            data[table]={json.dumps([r[k] for k in keys],default=str):{k:(v.decode() if isinstance(v,bytes) else v) for k,v in dict(r).items()} for r in con.execute(f'SELECT * FROM "{table}"')}
         return data
 
 
@@ -122,11 +131,11 @@ def check_claims(answer,claims):
             # its later positive facts. Preserve all other explicit negations.
             claim=re.sub(r'\bnot yet rated\b', 'unrated', claim)
             claim=re.sub(r'\bnot (?:provided|available|shown|listed|captured|submitted|confirmed)\b(?!\s*$)', 'unavailable', claim)
-            if re.search(r'\b(?:reference(?: number| id)?|unrelated number|example amount)\b',claim) and not re.search(r'reference|unrelated|example',pattern):raise ValueError('Unrelated value used for '+label)
+            if re.search(r'\b(?:reference(?: number| id)?|unrelated number|example amount)\b',claim[-150:]) and not re.search(r'reference|unrelated|example',pattern):raise ValueError('Unrelated value used for '+label)
             if re.search(r'\b(?:not|never|incorrect|false)\s*$',text[max(0,m.start()-18):m.start()]):
                 raise ValueError('Negated '+label)
             # An inserted negation must not turn an expected positive claim into a pass.
-            if re.search(r"\b(?:not|never|isn't|aren't|doesn't|don't|cannot)\b",claim) and not re.search(r'not|never|ineligible|unavailable|prohibit',pattern):
+            if re.search(r"\b(?:not|never|isn't|aren't|doesn't|don't|cannot)\b",claim[-150:]) and not re.search(r'not|never|ineligible|unavailable|prohibit',pattern):
                 raise ValueError('Contradicted '+label)
 
 
@@ -146,7 +155,7 @@ def verify(run_dir,task_id):
                 # before the first navigation: about:blank carries no
                 # origin and no content, so it is skipped by the origin
                 # gate (r1 review LOW finding; foreign origins still fail).
-                if u.scheme=='about':
+                if step[key]=='about:blank':
                     continue
                 if (u.scheme,u.hostname,u.port)!=origin:raise ValueError('Browser evidence changes origin')
         u=urlsplit(step.get('url_after',step.get('url','')));urls.append(unquote(u.path+('?' + u.query if u.query else '')))

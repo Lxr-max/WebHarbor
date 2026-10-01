@@ -459,3 +459,9 @@ def test_seed_database_byte_identical(tmp_path):
                        stdout=subprocess.DEVNULL)
         hashes.append(hashlib.sha256(target.read_bytes()).hexdigest())
     assert hashes[0] == hashes[1]
+
+@pytest.mark.parametrize('threshold', ['nan', 'inf', '-inf', '0', '-1'])
+def test_review_alert_rejects_invalid_threshold(client, threshold):
+    login(client, 'alice.j@test.com')
+    response = client.post('/alerts/create', data=with_csrf(client, '/quote/AAPL', {'symbol':'AAPL','direction':'above','threshold':threshold}))
+    assert response.status_code == 400

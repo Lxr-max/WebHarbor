@@ -1,75 +1,81 @@
 {
- "site": "yahoo_finance",
- "upstream": "https://finance.yahoo.com/",
- "captured_at": "2026-10-01",
- "capture_window_utc": "2026-10-01T01:52Z to 2026-10-01T04:38Z (market data); 2026-10-01T05:00Z to 2026-10-01T06:12Z (news bodies)",
- "capture_method": "Plain HTTP against finance.yahoo.com public endpoints and server-rendered pages with a desktop browser user agent, using Yahoo's own documented anonymous crumb flow (fc.yahoo.com cookie + query*/v1/test/getcrumb) exactly as the live pages do: no login, no anti-bot bypass, no synthetic records. The quote snapshot is the v7 /finance/quote batch; per-symbol detail is v10 /quoteSummary (assetProfile, summaryDetail, defaultKeyStatistics, financialData, calendarEvents, incomeStatementHistory, summaryProfile); daily chart series is v8 /finance/chart; predefined screens are /v1/finance/screener/predefined/saved; the screener universe backbone is POST /v1/finance/screener per sector; trending is /v1/finance/trending/US; the earnings calendar is POST /v1/finance/visualization (entityIdType sp_earnings, the calendar page's own request); the news streams are the nexus-gateway-prod.media.yahoo.com GraphQL operation FinanceTopicArticleStream with the exact query and variables the live topic pages send (topic UUIDs captured from the live pages), plus the per-symbol news from query2.finance.yahoo.com/v1/finance/search; article bodies and metadata come from the finance.yahoo.com article HTML (JSON-LD NewsArticle block + server-rendered <article> paragraphs). Every request is archived raw with a .meta.json sidecar (URL, method, status, bytes, timestamp) under scraped_data/captures/ (gitignored). Sector/industry aggregates on the Sectors pages are computed from the captured per-symbol snapshot (documented derivation, no invented values).",
- "sources": {
-  "finance.yahoo.com": {
-   "role": "primary site: market strip, quote pages (summary/statistics/financials/profile/history/news tabs), screener, earnings calendar, news hub, article pages, sectors",
-   "public_endpoints": [
-    "https://query1.finance.yahoo.com/v7/finance/quote",
-    "https://query1.finance.yahoo.com/v10/finance/quoteSummary/<SYM>?modules=...",
-    "https://query1.finance.yahoo.com/v8/finance/chart/<SYM>",
-    "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved",
-    "https://query1.finance.yahoo.com/v1/finance/screener",
-    "https://query1.finance.yahoo.com/v1/finance/trending/US",
-    "https://query1.finance.yahoo.com/v1/finance/visualization",
-    "https://query2.finance.yahoo.com/v1/finance/search",
-    "https://nexus-gateway-prod.media.yahoo.com/ (FinanceTopicArticleStream)"
-   ],
-   "universe": "318 symbols: top-15 US listings per each of the 11 GICS sectors, all members of the six captured predefined screens, the major indices, futures, crypto pairs and ETFs",
-   "quote_snapshot": 318,
-   "earnings_events": 902,
-   "news_articles": 385,
-   "article_bodies": 371
-  }
- },
- "media": {
-  "images": {
-   "count": 140,
-   "inventory": "asset_inventory.json",
-   "policy": "every file fetched from the upstream URL it renders at (news thumbnails from Yahoo's s.yimg.com mysterio resizes and provider originals on media.zenfs.com); no placeholders, no duplicates, no stretching; verified with Pillow at download time"
+  "site": "yahoo_finance",
+  "upstream": "https://finance.yahoo.com/",
+  "captured_at": "2026-10-01",
+  "capture_window_utc": "2026-10-01T01:52Z to 2026-10-01T04:38Z (market data); 2026-10-01T05:00Z to 2026-10-01T06:12Z (news bodies)",
+  "capture_method": "Plain HTTP against finance.yahoo.com public endpoints and server-rendered pages with a desktop browser user agent, using Yahoo's own documented anonymous crumb flow (fc.yahoo.com cookie + query*/v1/test/getcrumb) exactly as the live pages do: no login, no anti-bot bypass, no synthetic records. The quote snapshot is the v7 /finance/quote batch; per-symbol detail is v10 /quoteSummary (assetProfile, summaryDetail, defaultKeyStatistics, financialData, calendarEvents, incomeStatementHistory, summaryProfile); daily chart series is v8 /finance/chart; predefined screens are /v1/finance/screener/predefined/saved; the screener universe backbone is POST /v1/finance/screener per sector; trending is /v1/finance/trending/US; the earnings calendar is POST /v1/finance/visualization (entityIdType sp_earnings, the calendar page's own request); the news streams are the nexus-gateway-prod.media.yahoo.com GraphQL operation FinanceTopicArticleStream with the exact query and variables the live topic pages send (topic UUIDs captured from the live pages), plus the per-symbol news from query2.finance.yahoo.com/v1/finance/search; article bodies and metadata come from the finance.yahoo.com article HTML (JSON-LD NewsArticle block + server-rendered <article> paragraphs). Every request is archived raw with a .meta.json sidecar (URL, method, status, bytes, timestamp) under scraped_data/captures/ (gitignored). Sector/industry aggregates on the Sectors pages are computed from the captured per-symbol snapshot (documented derivation, no invented values).",
+  "sources": {
+    "finance.yahoo.com": {
+      "role": "primary site: market strip, quote pages (summary/statistics/financials/profile/history/news tabs), screener, earnings calendar, news hub, article pages, sectors",
+      "public_endpoints": [
+        "https://query1.finance.yahoo.com/v7/finance/quote",
+        "https://query1.finance.yahoo.com/v10/finance/quoteSummary/<SYM>?modules=...",
+        "https://query1.finance.yahoo.com/v8/finance/chart/<SYM>",
+        "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved",
+        "https://query1.finance.yahoo.com/v1/finance/screener",
+        "https://query1.finance.yahoo.com/v1/finance/trending/US",
+        "https://query1.finance.yahoo.com/v1/finance/visualization",
+        "https://query2.finance.yahoo.com/v1/finance/search",
+        "https://nexus-gateway-prod.media.yahoo.com/ (FinanceTopicArticleStream)"
+      ],
+      "universe": "318 symbols: top-15 US listings per each of the 11 GICS sectors, all members of the six captured predefined screens, the major indices, futures, crypto pairs and ETFs",
+      "quote_snapshot": 318,
+      "earnings_events": 902,
+      "news_articles": 385,
+      "article_bodies": 371
+    }
   },
-  "icons": {
-   "note": "static/icons/*.svg are original hand-drawn wordmark tiles describing the mirror (the u_s_customs/nyse precedent); all photographic media is upstream-fetched"
+  "media": {
+    "images": {
+      "count": 140,
+      "inventory": "asset_inventory.json",
+      "policy": "every file fetched from the upstream URL it renders at (news thumbnails from Yahoo's s.yimg.com mysterio resizes and provider originals on media.zenfs.com); no placeholders, no duplicates, no stretching; verified with Pillow at download time"
+    },
+    "icons": {
+      "note": "static/icons/*.svg are original hand-drawn wordmark tiles describing the mirror (the u_s_customs/nyse precedent); all photographic media is upstream-fetched"
+    }
+  },
+  "fixtures": {
+    "benchmark_users": [
+      {
+        "email": "alice.j@test.com",
+        "display": "Alice Johnson",
+        "fixture": "watchlist MSFT/NVDA/TSLA/SPY; alerts NVDA below 150, TSLA above 480"
+      },
+      {
+        "email": "bob.c@test.com",
+        "display": "Bob Chen",
+        "fixture": "watchlist JPM/XOM/KO; alert KO above 70"
+      },
+      {
+        "email": "carol.d@test.com",
+        "display": "Carol Davis",
+        "fixture": "watchlist LLY/UNH/PFE; alerts LLY below 900, PFE above 30"
+      },
+      {
+        "email": "dana.k@test.com",
+        "display": "Dana Kim",
+        "fixture": "watchlist AAPL/AMZN/META/QQQ; alert META below 600"
+      }
+    ],
+    "policy": "authored fixtures following the u_s_customs / nyse / disney precedent: every symbol they reference is a real captured upstream quote; every timestamp is the frozen mirror date 2026-09-30 so the seed is byte-reproducible"
+  },
+  "mirror_semantics": {
+    "market_date": "2026-09-30 close (captured after the close, 2026-10-01 UTC)",
+    "deterministic_seed": "instance_seed/yahoo_finance.db is rebuilt from source_data/*.json at image build time with PYTHONHASHSEED=0; two builds are byte-identical and the seed is hashseed-independent",
+    "earnings_week": "Sunday-Saturday weeks, default week 2026-09-27..2026-10-03 (the upstream calendar's own convention), day tabs carry per-day counts, filters: symbol substring and BMO/AMC"
+  },
+  "rate_limit_note": "All endpoints answered 200 across the capture (no 429s); the crumb was requested twice over the window and refreshed as the sessions rolled.",
+  "registration": {
+    "sites_index": 223,
+    "container_port": 40223,
+    "expose": "8101 40000-40223",
+    "declared_slot": "audit-wave slot: index 223 / port 40223 (origin/main site count 145 at PR time + audit position 79 - 1 per the standing parallel-wave merge order; the contributor's pre-freeze normalization 143/40143 was the 144-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
+  },
+  "review": {
+    "source_pr": 339,
+    "hf_revision": "10f93ea09d96971638dda931bc5170f0948c7616",
+    "upstream_comparison": "Live browser comparison; existing captured assets retained.",
+    "task_revision": "Coherent research or saved-state goals with aligned rubrics and deterministic verifiers."
   }
- },
- "fixtures": {
-  "benchmark_users": [
-   {
-    "email": "alice.j@test.com",
-    "display": "Alice Johnson",
-    "fixture": "watchlist MSFT/NVDA/TSLA/SPY; alerts NVDA below 150, TSLA above 480"
-   },
-   {
-    "email": "bob.c@test.com",
-    "display": "Bob Chen",
-    "fixture": "watchlist JPM/XOM/KO; alert KO above 70"
-   },
-   {
-    "email": "carol.d@test.com",
-    "display": "Carol Davis",
-    "fixture": "watchlist LLY/UNH/PFE; alerts LLY below 900, PFE above 30"
-   },
-   {
-    "email": "dana.k@test.com",
-    "display": "Dana Kim",
-    "fixture": "watchlist AAPL/AMZN/META/QQQ; alert META below 600"
-   }
-  ],
-  "policy": "authored fixtures following the u_s_customs / nyse / disney precedent: every symbol they reference is a real captured upstream quote; every timestamp is the frozen mirror date 2026-09-30 so the seed is byte-reproducible"
- },
- "mirror_semantics": {
-  "market_date": "2026-09-30 close (captured after the close, 2026-10-01 UTC)",
-  "deterministic_seed": "instance_seed/yahoo_finance.db is rebuilt from source_data/*.json at image build time with PYTHONHASHSEED=0; two builds are byte-identical and the seed is hashseed-independent",
-  "earnings_week": "Sunday-Saturday weeks, default week 2026-09-27..2026-10-03 (the upstream calendar's own convention), day tabs carry per-day counts, filters: symbol substring and BMO/AMC"
- },
- "rate_limit_note": "All endpoints answered 200 across the capture (no 429s); the crumb was requested twice over the window and refreshed as the sessions rolled.",
- "registration": {
-  "sites_index": 223,
-  "container_port": 40223,
-  "expose": "8101 40000-40223",
-  "declared_slot": "audit-wave slot: index 223 / port 40223 (origin/main site count 145 at PR time + audit position 79 - 1 per the standing parallel-wave merge order; the contributor's pre-freeze normalization 143/40143 was the 144-site collision caliber recorded by the r1/r2 reviews, reconciled by merge order as with the other in-flight waves)"
- }
 }
