@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Energy Drinks. Vitalizes Body and Mind.®{% endblock %}
+{% block content %}
+<h1 class="page-title">Red Bull Energy Drinks</h1>
+<p class="page-sub">Vitalizes body and mind.® Browse every Red Bull flavor — the Original, Zero, Sugarfree and the seasonal Editions.</p>
+
+<div class="chip-row">
+  <a class="chip {{ 'active' if not active_line }}" href="{{ url_for('energydrink') }}">All</a>
+  {% for line in lines %}
+  <a class="chip {{ 'active' if active_line == line }}" href="{{ url_for('energydrink', line=line) }}">{{ line }}</a>
+  {% endfor %}
+</div>
+
+<div class="grid cols-4">
+  {% for p in products %}
+  <a class="card" href="{{ url_for('product_detail', slug=p.slug) }}">
+    <div class="thumb"><img src="{{ p.can_image }}" alt="{{ p.name }} can"></div>
+    <div class="body">
+      <span class="tag">{{ p.line }}</span>
+      <h3>{{ p.name }}</h3>
+      {% if p.flavor %}<p>{{ p.flavor }}</p>{% endif %}
+      <p class="meta">{{ p.sizes_list() | join(' · ') }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

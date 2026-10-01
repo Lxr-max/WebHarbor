@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Invited Talks{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Invited Talks</h1>
+  <span class="count">{{ rows | length }} talks</span>
+</div>
+{% for e in rows %}
+  <div class="sched-event sched-invited-talk">
+    <div class="time">{{ fmt_date(e.date) }}<br>{{ fmt_time(e.start) }}–{{ fmt_time(e.end) }}</div>
+    <div class="body">
+      <h3><a href="{{ url_for('event_detail', eid=e.id) }}">{{ e.title }}</a></h3>
+      <div class="meta">
+        {% if e.speaker %}<b>{{ e.speaker }}</b>{% endif %}
+        {% if e.overflow_room %} &middot; Overflow Room: {{ e.overflow_room }}{% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

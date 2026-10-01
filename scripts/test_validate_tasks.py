@@ -621,6 +621,7 @@ class ValidateTasksTests(unittest.TestCase):
                 scripts = root / "scripts"
                 scripts.mkdir()
                 shutil.copyfile(vt.__file__, scripts / "validate_tasks.py")
+                shutil.copyfile(Path(vt.__file__).with_name("site_registry.py"), scripts / "site_registry.py")
                 before = {p.relative_to(root): p.read_bytes() for p in root.rglob("*") if p.is_file()}
                 command = [sys.executable, "-B", str(scripts / "validate_tasks.py"), "--json"]
                 if strict:
