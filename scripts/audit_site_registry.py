@@ -8,16 +8,22 @@ runtime state or Hugging Face managed assets.
 from __future__ import annotations
 
 import argparse
-import ast
 import json
 import re
-import shlex
 import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
+
+
+try:
+    from .site_registry import parse_site_array, parse_docker_ports
+    from .validate_tasks import validate_local_web
+except ImportError:
+    from site_registry import parse_site_array, parse_docker_ports
+    from validate_tasks import validate_local_web
 
 
 RUNTIME_SUBDIRS = (
@@ -183,71 +189,8 @@ def slug_is_valid(slug: str) -> bool:
     return bool(re.fullmatch(r"[a-z0-9_]+", slug))
 
 
-def parse_site_array(text: str, file_label: str) -> tuple[list[str], int]:
-    declaration_prefix = r"^" if Path(file_label).suffix == ".py" else r"^[ \t]*"
-    sites_match = re.search(
-        declaration_prefix + r"SITES\s*=\s*(\(.*?\)|\[.*?\])",
-        text,
-        re.DOTALL | re.MULTILINE,
-    )
-    if not sites_match:
-        raise ValueError(f"Could not parse SITES from {file_label}")
-    sites_block = sites_match.group(1)
-    if sites_block.startswith("("):
-        try:
-            sites = shlex.split(sites_block[1:-1], comments=True, posix=True)
-        except ValueError as exc:
-            raise ValueError(f"Could not parse SITES from {file_label}: {exc}") from exc
-    else:
-        sites = ast.literal_eval(sites_block)
-        if not isinstance(sites, list):
-            raise ValueError(f"SITES is not a list in {file_label}")
-    if not all(isinstance(site, str) and site for site in sites):
-        raise ValueError(f"SITES must contain only non-empty strings in {file_label}")
-    base_match = re.search(
-        declaration_prefix + r"BASE_PORT\s*=\s*(\d+)", text, re.MULTILINE
-    )
-    if not base_match:
-        raise ValueError(f"Could not parse BASE_PORT from {file_label}")
-    return sites, int(base_match.group(1))
-
-
 def build_port_map(sites: list[str], base_port: int) -> dict[str, int]:
     return {site: base_port + index for index, site in enumerate(sites)}
-
-
-def parse_docker_ports(dockerfile: Path) -> dict[str, Any]:
-    exposed: set[int] = set()
-    invalid_expose_tokens: list[str] = []
-    text = dockerfile.read_text(encoding="utf-8")
-    lines = re.sub(r"\\\s*\n", " ", text).splitlines()
-    for line in lines:
-        stripped = line.split("#", 1)[0].strip()
-        tokens = stripped.split()
-        if not tokens or tokens[0].upper() != "EXPOSE":
-            continue
-        for raw_token in tokens[1:]:
-            port_token, separator, protocol = raw_token.partition("/")
-            if separator and not protocol:
-                invalid_expose_tokens.append(f"invalid EXPOSE token '{raw_token}'")
-                continue
-            port_match = re.fullmatch(r"(\d+)(?:-(\d+))?", port_token)
-            if not port_match:
-                invalid_expose_tokens.append(f"invalid EXPOSE token '{raw_token}'")
-                continue
-            start = int(port_match.group(1))
-            end = int(port_match.group(2)) if port_match.group(2) else start
-            if end < start:
-                invalid_expose_tokens.append(f"descending EXPOSE range '{raw_token}'")
-                continue
-            if start < 1 or end > 65535:
-                invalid_expose_tokens.append(f"out-of-range EXPOSE token '{raw_token}'")
-                continue
-            exposed.update(range(start, end + 1))
-    return {
-        "exposed_ports": sorted(exposed),
-        "invalid_expose_tokens": invalid_expose_tokens,
-    }
 
 
 def parse_assetpaths(assetpaths_path: Path) -> list[str]:
@@ -276,24 +219,68 @@ def parse_readme_reset_examples(readme_path: Path) -> set[str]:
     return set(re.findall(r"/reset/([A-Za-z0-9_]+)", text))
 
 
-def git_tracked_files(root: Path, site: str, relative_dir: str) -> list[str]:
+class InspectionError(ValueError):
+    """A required read-only repository inspection could not complete."""
+
+
+def git_read(root: Path, *args: str, data: bytes | None = None,
+             allowed_codes: tuple[int, ...] = (0,)) -> bytes:
     try:
-        completed = subprocess.run(
-            ["git", "ls-files", f"sites/{site}/{relative_dir}"],
-            cwd=root,
-            check=False,
-            capture_output=True,
-            text=True,
+        result = subprocess.run(
+            ["git", "-c", "core.excludesFile=/dev/null", *args], cwd=root,
+            input=data, capture_output=True, timeout=30,
         )
-    except OSError:
-        return []
-    if completed.returncode != 0:
-        return []
-    return [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise InspectionError(f"Git inspection failed: {exc}") from None
+    if result.returncode not in allowed_codes:
+        raise InspectionError(f"Git inspection failed ({args[0]}): "
+                              f"{result.stderr.decode(errors='replace').strip()}")
+    return result.stdout
+
+
+def inspect_git(root: Path, sites: list[str], patterns: list[str],
+                collector: FindingCollector) -> set[str]:
+    top = Path(git_read(root, 'rev-parse', '--show-toplevel').decode().strip()).resolve()
+    if top != root.resolve():
+        raise InspectionError("audit root must be the Git worktree root")
+    tracked = {p.decode() for p in git_read(root, 'ls-files', '-z').split(b'\0') if p}
+    # Probe hypothetical children: this needs no downloaded assets or file writes.
+    managed = [f"sites/{site}/{suffix}" for site in sites
+               for suffix in ('instance_seed', 'static/images', 'static/external_cache')
+               if pattern_covers_site(patterns, site, suffix)]
+    root_ignore_patterns = parse_assetpaths(root / ".gitignore")
+    if managed:
+        probes = [f"{directory}/.__webharbor_ignore_probe__" for directory in managed]
+        output = git_read(root, 'check-ignore', '--no-index', '--stdin', '-z', '-v',
+                          '--non-matching', data=b'\0'.join(p.encode() for p in probes) + b'\0',
+                          allowed_codes=(0, 1))
+        fields = output.split(b'\0')[:-1]
+        if len(fields) != len(probes) * 4:
+            raise InspectionError("Git returned an incomplete ignore inspection")
+        for index, directory in enumerate(managed):
+            source, _, pattern, path = [f.decode() for f in fields[index * 4:index * 4 + 4]]
+            if path != probes[index]:
+                raise InspectionError("Git ignore result does not match requested path")
+            parts = directory.split('/')
+            root_covers = pattern_covers_site(root_ignore_patterns, parts[1], '/'.join(parts[2:]))
+            repository_rule = source == '.gitignore' or (
+                source.endswith('/.gitignore') and not Path(source).is_absolute()
+                and '..' not in Path(source).parts
+            )
+            if not root_covers or not repository_rule or not pattern or pattern.startswith('!'):
+                collector.error(f"HF-managed directory is not ignored by root .gitignore: {directory}",
+                                file=str(root / '.gitignore'), site=directory.split('/')[1])
+    for path in sorted(tracked):
+        if Path(path).name == '.gitkeep' and git_read(root, 'cat-file', '-s', ':' + path).strip() == b'0':
+            continue  # Empty directory placeholders are also excluded by check_asset_inventory.py.
+        if any(path == directory or path.startswith(directory + '/') for directory in managed):
+            collector.error("HF-managed asset is tracked in Git", file=path,
+                            site=path.split('/')[1])
+    return tracked
 
 
 def parse_tasks_jsonl(
-    tasks_path: Path, collector: FindingCollector, site: str
+    tasks_path: Path, collector: FindingCollector, site: str, expected_port: int | None = None
 ) -> tuple[int, int | None, str | None]:
     if not tasks_path.exists():
         collector.error("registered site is missing tasks.jsonl", file=str(tasks_path), site=site)
@@ -368,7 +355,7 @@ def parse_tasks_jsonl(
             hostname = parsed.hostname
             port = parsed.port
         except ValueError as exc:
-            collector.warn(
+            collector.error(
                 f"task web URL has an invalid port or host: {exc}",
                 file=str(tasks_path),
                 site=site,
@@ -376,31 +363,12 @@ def parse_tasks_jsonl(
                 task_id=str(task_id) if task_id else None,
             )
             continue
-        if parsed.scheme not in {"http", "https"}:
-            collector.warn(
-                "task web URL must use http or https",
-                file=str(tasks_path),
-                site=site,
-                line=line_number,
-                task_id=str(task_id) if task_id else None,
-            )
-        if hostname not in {"localhost", "127.0.0.1"}:
-            collector.warn(
-                "task web URL should point to localhost or 127.0.0.1",
-                file=str(tasks_path),
-                site=site,
-                line=line_number,
-                task_id=str(task_id) if task_id else None,
-            )
-        if port is None:
-            collector.warn(
-                "task web URL should include an explicit port",
-                file=str(tasks_path),
-                site=site,
-                line=line_number,
-                task_id=str(task_id) if task_id else None,
-            )
-        else:
+        findings = []
+        validate_local_web(web_url, site, expected_port, tasks_path, line_number,
+                           tasks_path.parents[2], findings, {})
+        for finding in findings:
+            collector.error(finding.message, file=str(tasks_path), site=site, line=line_number)
+        if port is not None:
             ports.add(port)
 
     if not seen_task_objects:
@@ -433,7 +401,7 @@ def human_status(errors: int, warnings: int) -> str:
     return "OK"
 
 
-def audit_repository(root: Path, *, site: str | None = None, strict: bool = False) -> AuditResult:
+def _audit_repository(root: Path, *, site: str | None = None, strict: bool = False) -> AuditResult:
     collector = FindingCollector()
 
     readme_path = root / "README.md"
@@ -452,7 +420,8 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
             collector=collector,
         )
 
-    site_dirs = sorted(path.name for path in sites_root.iterdir() if path.is_dir())
+    site_dirs = sorted(path.name for path in sites_root.iterdir()
+                       if path.is_dir() and not path.name.startswith("."))
     required_paths = (websyn_path, control_path, site_runner_path, dockerfile_path)
     for required_path in required_paths:
         if not required_path.is_file():
@@ -545,6 +514,11 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
     for invalid_expose_token in docker_ports["invalid_expose_tokens"]:
         collector.error(invalid_expose_token, file=str(dockerfile_path))
 
+    expected_tcp = {8101, *websyn_port_map.values()}
+    if exposed_ports - expected_tcp:
+        collector.error(f"Dockerfile exposes unregistered TCP ports: {sorted(exposed_ports - expected_tcp)}",
+                        file=str(dockerfile_path))
+
     registered_site_ports = {
         site_slug: websyn_port_map[site_slug] for site_slug in websyn_sites
     }
@@ -565,6 +539,13 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
 
     if not asset_patterns:
         collector.warn(".assetpaths is missing or empty", file=str(assetpaths_path))
+
+    try:
+        tracked_files = inspect_git(root, sites_to_check, asset_patterns, collector)
+    except (InspectionError, UnicodeError) as exc:
+        collector.error(str(exc), file=str(root))
+        return incomplete_audit_result(root, strict=strict, collector=collector,
+                                       site_directories_found=len(site_dirs))
 
     site_summaries: list[SiteSummary] = []
     total_task_count = 0
@@ -637,29 +618,18 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
 
         if in_sites_dir:
             for runtime_subdir in RUNTIME_SUBDIRS:
-                runtime_path = site_dir / runtime_subdir
-                if runtime_path.is_file():
-                    tracked = git_tracked_files(root, site_slug, runtime_subdir)
-                    if tracked:
-                        collector.warn(
-                            f"runtime-like path is a file: {runtime_subdir}",
-                            file=str(runtime_path),
-                            site=site_slug,
-                        )
-                elif runtime_path.is_dir():
-                    tracked = git_tracked_files(root, site_slug, runtime_subdir)
-                    if tracked:
-                        collector.warn(
-                            f"runtime-like path has tracked files: {runtime_subdir}",
-                            file=str(runtime_path),
-                            site=site_slug,
-                        )
+                prefix = f"sites/{site_slug}/{runtime_subdir}"
+                tracked = [p for p in tracked_files if p == prefix or p.startswith(prefix + '/')]
+                if tracked:
+                    message = (f"runtime-like path is a file: {runtime_subdir}" if prefix in tracked
+                               else f"runtime-like path has tracked files: {runtime_subdir}")
+                    collector.warn(message, file=str(site_dir / runtime_subdir), site=site_slug)
 
         task_count = 0
         task_port = None
         task_web_name = None
         if in_sites_dir:
-            task_count, task_port, task_web_name = parse_tasks_jsonl(tasks_path, collector, site_slug)
+            task_count, task_port, task_web_name = parse_tasks_jsonl(tasks_path, collector, site_slug, websyn_port or control_port)
             total_task_count += task_count
             if tasks_path.exists():
                 task_files_checked += 1
@@ -679,14 +649,6 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
                 task_ports_seen[task_port] = site_slug
 
             expected_port = websyn_port or control_port
-            if task_port is not None and expected_port is not None and task_port != expected_port:
-                collector.warn(
-                    f"task web URL port {task_port} does not match registered port {expected_port}",
-                    file=str(tasks_path),
-                    site=site_slug,
-                    port=task_port,
-                )
-
             if expected_port is not None and expected_port not in exposed_ports:
                 collector.error(
                     "Dockerfile does not expose the registered site port",
@@ -756,6 +718,15 @@ def audit_repository(root: Path, *, site: str | None = None, strict: bool = Fals
         sites=site_summaries,
         ports=ports_payload,
     )
+
+
+def audit_repository(root: Path, *, site: str | None = None, strict: bool = False) -> AuditResult:
+    try:
+        return _audit_repository(root, site=site, strict=strict)
+    except (OSError, UnicodeError, ValueError) as exc:
+        collector = FindingCollector()
+        collector.error(f"repository inspection failed: {exc}", file=str(root))
+        return incomplete_audit_result(root, strict=strict, collector=collector)
 
 
 def render_human(result: AuditResult) -> str:

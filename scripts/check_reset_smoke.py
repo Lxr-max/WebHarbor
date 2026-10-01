@@ -11,13 +11,11 @@ against a source the caller actually pointed at.
 from __future__ import annotations
 
 import argparse
-import ast
 import hashlib
 import json
 import math
 import os
 import re
-import shlex
 import subprocess
 import sys
 from dataclasses import asdict, dataclass, field
@@ -27,6 +25,12 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
+
+
+try:  # Support both `python scripts/tool.py` and package imports.
+    from .site_registry import RegistryError, parse_site_array
+except ImportError:
+    from site_registry import RegistryError, parse_site_array
 
 
 @dataclass
@@ -153,61 +157,6 @@ class Collector:
         file: str | None = None,
     ) -> None:
         self.warnings.append(Message("WARN", message, site=site, url=url, file=file))
-
-
-class RegistryError(Exception):
-    """A site registry could not be read or the two registries disagree."""
-
-
-def parse_site_array(text: str, file_label: str) -> tuple[list[str], int]:
-    try:
-        if file_label.endswith(".sh"):
-            # Strip comments lexically; do not execute the startup script.
-            lexer = shlex.shlex(text, posix=True, punctuation_chars="()=")
-            lexer.whitespace_split = True
-            tokens = list(lexer)
-            # shlex groups adjacent punctuation; normalize literal assignments.
-            expanded = []
-            for token in tokens:
-                if token and set(token) <= set("()="):
-                    expanded.extend(token)
-                else:
-                    expanded.append(token)
-            tokens = expanded
-            start = tokens.index("SITES")
-            if tokens[start + 1:start + 3] != ["=", "("]:
-                raise ValueError("SITES must be a literal array")
-            end = tokens.index(")", start + 3)
-            sites = tokens[start + 3:end]
-            base = tokens.index("BASE_PORT")
-            if tokens[base + 1] != "=":
-                raise ValueError("BASE_PORT must be literal")
-            base_port = int(tokens[base + 2])
-        else:
-            values = {}
-            for node in ast.parse(text).body:
-                if isinstance(node, ast.Assign):
-                    names = [target.id for target in node.targets if isinstance(target, ast.Name)]
-                elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-                    names = [node.target.id]
-                else:
-                    continue
-                for name in names:
-                    if name in {"SITES", "BASE_PORT"}:
-                        values[name] = ast.literal_eval(node.value)
-            sites, base_port = values["SITES"], values["BASE_PORT"]
-        if not isinstance(sites, list) or not sites or any(
-            not isinstance(site, str) or not re.fullmatch(r"[A-Za-z0-9_]+", site)
-            for site in sites
-        ):
-            raise ValueError("SITES must be a nonempty list of valid site names")
-        if len(sites) != len(set(sites)):
-            raise ValueError("SITES contains duplicate entries")
-        if type(base_port) is not int or not 1 <= base_port <= 65536 - len(sites):
-            raise ValueError("BASE_PORT or resulting port range is invalid")
-        return sites, base_port
-    except (ValueError, KeyError, IndexError, TypeError, SyntaxError) as exc:
-        raise RegistryError(f"Could not parse SITES / BASE_PORT from {file_label}: {exc}") from None
 
 
 def build_port_map(sites: list[str], base_port: int) -> dict[str, int]:
