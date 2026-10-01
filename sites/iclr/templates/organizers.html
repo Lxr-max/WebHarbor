@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Organizers{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Organizers</h1>
+  <span class="count">The organizing committee</span>
+</div>
+{% for role, rows in roles %}
+  <h2 class="muted" style="font-size:1.02rem">{{ role }}{% if rows | length > 1 %}s{% endif %} ({{ rows | length }})</h2>
+  <div class="grid cols3" style="margin-bottom:18px">
+    {% for o in rows %}
+      <div class="person">
+        {% if o.photo %}
+          <img class="avatar" src="{{ img(o.photo) }}" alt="{{ o.name }}">
+        {% else %}
+          <div class="initials">{{ o.name[:1] }}</div>
+        {% endif %}
+        <div>
+          <h3>{{ o.name }}</h3>
+          <div class="inst">{{ o.institution or '' }}</div>
+          {% if o.bio %}<p class="small muted">{{ o.bio[:220] }}{% if o.bio | length > 220 %}…{% endif %}</p>{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+{% endblock %}
