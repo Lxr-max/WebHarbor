@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} — Stanford Report{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('news') }}">Stanford Report</a>{% if article.category %} › <a href="{{ url_for('news', category=article.category) }}">{{ article.category }}</a>{% endif %}</div>
+<div class="detail-head">
+  <h1>{{ article.title }}</h1>
+  <div class="meta">
+    {{ article.published_display }}{% if article.writers %} · By {{ article.writers|join(', ') }}{% endif %}
+    {% if article.featured_unit %} · {{ article.featured_unit }}{% endif %}
+  </div>
+</div>
+<div class="detail-body">
+  {% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" style="width:100%;border-radius:10px;margin-bottom:18px;">{% endif %}
+  {% if article.description %}<p><strong>{{ article.description }}</strong></p>{% endif %}
+  {% for para in article.body %}
+    {% if para|length > 3 %}<p>{{ para }}</p>{% endif %}
+  {% endfor %}
+  <p>
+    {% if article.main_topic %}<span class="tag cardinal">{{ article.main_topic }}</span>{% endif %}
+    {% for t in article.topics %}<span class="tag">{{ t }}</span>{% endfor %}
+  </p>
+  {% if related %}
+  <h2>Related stories</h2>
+  <div class="grid cols-2">
+    {% for a in related %}
+      <div class="card"><div class="pad">
+        <div class="meta">{{ a.category }} · {{ a.published_display }}</div>
+        <h3><a href="{{ url_for('news_detail', slug=a.slug) }}">{{ a.title }}</a></h3>
+      </div></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Libraries — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Stanford Libraries</h2>
+  <span class="count">{{ libraries|length }} locations · Hours for {{ week_label }}</span>
+</div>
+<div class="filters">
+  <form method="get" action="{{ url_for('libraries') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search library name or location" aria-label="Search libraries">
+    <button class="btn solid" type="submit">Search</button>
+  </form>
+</div>
+<table class="data">
+  <tr><th>Library</th><th>Location</th><th>Hours this week</th></tr>
+  {% for l in libraries %}
+    <tr>
+      <td><a href="{{ url_for('library_detail', slug=l.slug) }}">{{ l.name }}</a></td>
+      <td>{{ l.location or '—' }}</td>
+      <td>
+        {% if l.hours_rows %}
+          {% for row in l.hours_rows[:2] %}
+            {{ row.desk }}: {{ row.hours|join(', ') }}{% if not loop.last %}<br>{% endif %}
+          {% endfor %}
+        {% else %}See detail page{% endif %}
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="3"><div class="empty">No libraries match that search.</div></td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

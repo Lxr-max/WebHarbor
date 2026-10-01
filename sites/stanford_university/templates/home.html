@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Stanford University{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Advancing the Frontier</h1>
+  <p>At Stanford, a spirit of optimism and possibility energizes our mission of discovery
+  and learning. Here you'll find a place of intellectual expansiveness, wide-ranging
+  perspectives, and freedom to explore new lines of thinking. Alive with ideas and
+  innovation, approaching questions with openness and curiosity, pursuing excellence
+  in all we do – this is Stanford.</p>
+  <a class="btn" href="{{ url_for('admission') }}">Admission &amp; Aid</a>
+  <a class="btn" href="{{ url_for('courses') }}" style="margin-left:10px">Explore Courses</a>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Stanford News</h2>
+    <span class="count">Latest from the Stanford Report</span>
+  </div>
+  <div class="grid cols-2">
+    {% for a in top_news %}
+      <div class="card">
+        {% if a.image_url %}<a href="{{ url_for('news_detail', slug=a.slug) }}"><img src="{{ a.image_url }}" alt="{{ a.title }}"></a>{% endif %}
+        <div class="pad">
+          <div class="meta">{{ a.category }} · {{ a.published_display }}</div>
+          <h3><a href="{{ url_for('news_detail', slug=a.slug) }}">{{ a.title }}</a></h3>
+          <p>{{ a.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>The Seven Schools</h2>
+  </div>
+  <div class="grid cols-4">
+    {% for key, name in schools %}
+      <div class="card"><div class="pad">
+        <h3><a href="{{ url_for('departments', school=key) }}">{{ name }}</a></h3>
+      </div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Academics at Stanford</h2>
+    <span class="count">{{ depts_count }} departments · {{ courses_count }} courses · {{ faculty_count }} faculty profiles</span>
+  </div>
+  <div class="grid cols-3">
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('departments') }}">Departments A-Z</h3>
+      <p>Browse the {{ depts_count }} academic departments and programs across the seven schools.</p>
+    </div></div>
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('courses') }}">Course Catalog</a></h3>
+      <p>Search {{ courses_count }} Stanford Bulletin courses with department, career, term and WAYS filters.</p>
+    </div></div>
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('faculty') }}">Faculty Directory</a></h3>
+      <p>Find Stanford faculty by name or department, with profiles, research interests and publications.</p>
+    </div></div>
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('programs') }}">Degree Programs</a></h3>
+      <p>Explore majors, minors, coterminal and graduate programs in the 2026-27 bulletin.</p>
+    </div></div>
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('academic_calendar') }}">Academic Calendar</a></h3>
+      <p>Quarter dates, enrollment deadlines and key academic milestones for 2026-27.</p>
+    </div></div>
+    <div class="card"><div class="pad">
+      <h3><a href="{{ url_for('libraries') }}">Libraries</a></h3>
+      <p>Locations, hours and study spaces across the Stanford Libraries.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Upcoming Events</h2>
+    <span class="count"><a href="{{ url_for('events') }}">All campus events</a></span>
+  </div>
+  <div class="grid cols-4">
+    {% for e in upcoming %}
+      <div class="card">
+        {% if e.photo_url %}<a href="{{ url_for('event_detail', eid=e.eid) }}"><img src="{{ e.photo_url }}" alt="{{ e.title }}"></a>{% endif %}
+        <div class="pad">
+          <div class="meta">{{ e.first_date }}{% if e.location_name %} · {{ e.location_name }}{% endif %}</div>
+          <h3><a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.title }}</a></h3>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
