@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}#{{ tag }} — Tumblr{% endblock %}
+{% block content %}
+<div class="hub-hero" {% if hub and hub.background_color %}style="background-color: {{ hub.background_color }}"{% endif %}>
+  {% if hub and hub.header_image %}
+    {% if hub_post %}
+      <a href="{{ url_for('permalink', name=hub_post.blog.name, post_id=hub_post.id) }}" title="Open the featured post">
+        <img class="hub-hero-img" src="{{ hub.header_image }}" alt="{{ tag }}">
+      </a>
+    {% else %}
+      <img class="hub-hero-img" src="{{ hub.header_image }}" alt="{{ tag }}">
+    {% endif %}
+  {% endif %}
+  <div class="hub-hero-overlay">
+    <h1 class="hub-title">#{{ tag }}</h1>
+    {% if hub %}
+      <div class="hub-stats">
+        <span class="hub-stat"><strong>{{ hub.followers_count }}</strong> followers</span>
+        <span class="hub-stat"><strong>{{ hub.new_posts_count }}</strong> new posts today</span>
+        {% if hub.post_count_int %}<span class="hub-stat"><strong>{{ '{:,}'.format(hub.post_count_int) }}</strong> total posts</span>{% endif %}
+      </div>
+      {% if hub.blog_name %}
+        <div class="hub-artist">
+          {% if hub.blog_avatar %}<img class="avatar a32" src="{{ hub.blog_avatar }}" alt="">{% endif %}
+          <span>Header by <a href="{{ url_for('blog_page', name=hub.blog_name) }}">{{ hub.blog_name }}</a></span>
+        </div>
+      {% endif %}
+      {% if user %}
+        <button class="action-btn follow-btn hub-follow" data-blog-name="{{ tag }}" data-follow-url="{{ url_for('toggle_follow', name=tag) }}"><span class="follow-label">Follow</span></button>
+      {% else %}
+        <a class="btn btn-primary" href="{{ url_for('login') }}">Follow #{{ tag }}</a>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+{% if hub and hub.editorial_description_text %}
+  <div class="hub-editorial">
+    <h2>About #{{ tag }}</h2>
+    <p>{{ hub.editorial_description_text }}</p>
+  </div>
+{% endif %}
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    <div class="feed-header">
+      <h2>Recent posts tagged #{{ tag }}</h2>
+      <span class="feed-count">{{ '{:,}'.format(pagination.total) }} posts</span>
+    </div>
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% else %}
+      <div class="empty-state">No posts tagged #{{ tag }} yet.</div>
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+
+  <aside class="side-col">
+    {% if hub and hub.related() %}
+      <div class="side-card">
+        <h3>Related tags</h3>
+        {% for rel in hub.related() %}
+          <a class="related-row" href="{{ url_for('tagged', tag=rel.tag|trim) }}">
+            {% if rel.thumb %}<img class="related-thumb" src="{{ rel.thumb }}" alt="">{% endif %}
+            <span class="related-text">
+              <span class="related-name">#{{ rel.tag }}</span>
+              {% if rel.new_posts_count %}<span class="related-new">{{ rel.new_posts_count }} new</span>{% endif %}
+            </span>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="side-card">
+      <h3>Tag tips</h3>
+      <p class="side-copy">The first five tags on a post decide where it shows up. Tag pages mix fresh posts with the day's most-liked entries.</p>
+    </div>
+  </aside>
+</div>
+{% endblock %}

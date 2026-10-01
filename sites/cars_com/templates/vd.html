@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block title %}{{ l.title }} For Sale {{ l.price | money }} | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('shopping_results') }}">Cars for Sale</a> &rsaquo; <a href="{{ url_for('shopping_results', stock_type=l.stock_type|lower) }}">Search Results</a> &rsaquo; <span>{{ l.title }}</span></nav>
+{% endblock %}
+{% block content %}
+<article class="vd">
+  <header class="vd-head">
+    <div class="vd-gallery">
+      {% if l.photo_list() %}
+      <img class="vd-photo-main" src="{{ url_for('static', filename=l.photo_list()[0]) }}" alt="{{ l.title }}">
+      <div class="vd-thumbs">
+        {% for p in l.photo_list()[:6] %}
+        <img src="{{ url_for('static', filename=p) }}" alt="{{ l.title }} photo {{ loop.index }}">
+        {% endfor %}
+      </div>
+      <p class="muted">{{ l.photo_list() | length }} photos</p>
+      {% endif %}
+    </div>
+    <div class="vd-info">
+      <h1>{{ l.title }}</h1>
+      <div class="vd-price-row">
+        <span class="price-big">{{ l.price | money }}</span>
+        <span class="mileage">{{ l.mileage | mileagefmt }} mi.</span>
+        {% if l.stock_type == 'Certified' %}<span class="badge badge-cpo">Certified Pre-Owned</span>{% endif %}
+      </div>
+      {% if l.monthly_est %}
+      <p class="monthly">Est. payment ${{ l.monthly_est }}/mo
+        <span class="muted">(based on {{ '%0.1f' % (l.monthly_apr or 7.0) }}% APR, {{ l.monthly_months or 72 }} months)</span></p>
+      {% endif %}
+      {% if l.deal_badge %}
+      <div class="deal-badge">
+        <span class="badge badge-{{ l.deal_badge | lower | replace(' ', '-') }}">{{ l.deal_badge }}</span>
+        {% if l.good_deal_low %}
+        <p class="muted">The good deal range for this vehicle is between ${{ '{:,}'.format(l.good_deal_low) }} and ${{ '{:,}'.format(l.good_deal_high) }}.</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if l.price_breakdown_rows() %}
+      <table class="price-breakdown">
+        <caption>Vehicle price breakdown</caption>
+        {% for label, amount in l.price_breakdown_rows() %}
+        <tr><th>{{ label }}</th><td>{{ amount }}</td></tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      <div class="vd-actions">
+        <a class="btn btn-primary" href="#contact-seller">Confirm Availability</a>
+        {% if l.dealer and l.dealer.phone_new or l.dealer and l.dealer.phone_used %}
+        <p>Call Directly to {{ l.dealer.phone_new or l.dealer.phone_used }}</p>
+        {% endif %}
+        <form method="post" action="{{ url_for('save_car', listing_id=l.id) }}" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="btn btn-outline">♥ Save</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  {% if l.price_history_rows() %}
+  <section class="vd-section">
+    <h2>Price history</h2>
+    <table class="history-table">
+      <thead><tr><th>Date</th><th>Change</th><th>Price</th></tr></thead>
+      <tbody>
+        {% for row in l.price_history_rows() %}
+        <tr><td>{{ row.date }}</td><td>{{ row.change }}</td><td>{{ row.price }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  <section class="vd-section">
+    <h2>Features &amp; specs</h2>
+    <p>
+      {% if l.vin %}VIN: {{ l.vin }}{% if l.stock_number %} / Stock #: {{ l.stock_number }}{% endif %}{% endif %}
+    </p>
+    <ul class="spec-summary">
+      {% if l.exterior_color %}<li>{{ l.exterior_color }} exterior color</li>{% endif %}
+      {% if l.interior_color %}<li>{{ l.interior_color }} interior color</li>{% endif %}
+      {% if l.fuel_type %}<li>{{ l.fuel_type }} fuel type</li>{% endif %}
+      {% if l.engine_desc %}<li>{{ l.engine_desc }} engine</li>{% endif %}
+      {% if l.mpg %}<li>{{ l.mpg }} mpg</li>{% endif %}
+      {% if l.drivetrain %}<li>{{ l.drivetrain }} drivetrain</li>{% endif %}
+      {% if l.transmission %}<li>{{ l.transmission }} transmission</li>{% endif %}
+      {% if l.cylinders %}<li>{{ l.cylinders }} cylinders</li>{% endif %}
+    </ul>
+    {% if l.feature_dict() %}
+    <div class="feature-groups">
+      {% for group, items in l.feature_dict().items() %}
+      <div class="feature-group">
+        <h3>{{ group }}</h3>
+        <ul>{% for item in items %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  {% if l.seller_notes %}
+  <section class="vd-section">
+    <h2>Seller's notes</h2>
+    <p class="seller-notes">{{ l.seller_notes }}</p>
+  </section>
+  {% endif %}
+
+  {% if l.stock_type == 'Certified' and l.cpo_program %}
+  <section class="vd-section">
+    <h2>History &amp; condition</h2>
+    <h3>Manufacturer Certified Pre-Owned</h3>
+    <p>{{ l.cpo_program }}</p>
+    {% if l.history_json() %}
+    <p>History report summary: Owner {{ l.history_json().get('owners') }}, Accidents {{ l.history_json().get('accidents') }}, Title {{ l.history_json().get('title') }}.</p>
+    {% endif %}
+  </section>
+  {% elif l.history_json() %}
+  <section class="vd-section">
+    <h2>History &amp; condition</h2>
+    <p>History report summary: Owner {{ l.history_json().get('owners') }}, Accidents {{ l.history_json().get('accidents') }}, Title {{ l.history_json().get('title') }}.</p>
+  </section>
+  {% endif %}
+
+  {% if dealer %}
+  <section class="vd-section" id="contact-seller">
+    <h2>Seller's info</h2>
+    <div class="dealer-card">
+      <h3><a href="{{ url_for('dealer_page', dealer_id=dealer.id, slug=dealer.slug) }}">{{ dealer.name }}</a>
+        <span class="muted">{{ dealer.review_count | mileagefmt }} reviews{% if dealer.rating %} &middot; ★ {{ dealer.rating }}{% endif %}</span></h3>
+      {% if dealer.hours_list() %}
+      <table class="hours-table">
+        {% for row in dealer.hours_list() %}
+        <tr><th>{{ row.day }}</th><td>{{ row.hours }}</td></tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      {% if dealer.address %}<p>{{ dealer.address }}</p>{% endif %}
+      <div class="vd-actions">
+        <a class="btn btn-outline" href="{{ url_for('dealer_page', dealer_id=dealer.id, slug=dealer.slug) }}">Visit dealership page</a>
+        <a class="btn btn-outline" href="{{ url_for('dealer_inventory', dealer_id=dealer.id, slug=dealer.slug) }}">See all cars at this dealership</a>
+        {% if dealer.phone_new %}<p>Call Directly to {{ dealer.phone_new }}</p>{% endif %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if similar %}
+  <section class="vd-section">
+    <h2>Similar cars at this dealership</h2>
+    <ul class="similar-list">
+      {% for s in similar %}
+      <li>
+        <a href="{{ url_for('vehicle_detail', listing_id=s.id) }}">{{ s.title }}</a>
+        <span>{{ s.price | money }}{% if s.mileage %} &middot; {{ s.mileage | mileagefmt }} mi{% endif %}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('dealer_inventory', dealer_id=dealer.id, slug=dealer.slug) }}">See all cars at this dealership</a>
+  </section>
+  {% endif %}
+
+  {% if others %}
+  <section class="vd-section">
+    <h2>More {{ l.year }} {{ l.make }} {{ l.model }} listings</h2>
+    <ul class="similar-list">
+      {% for s in others %}
+      <li>
+        <a href="{{ url_for('vehicle_detail', listing_id=s.id) }}">{{ s.title }}</a>
+        <span>{{ s.price | money }}{% if s.mileage %} &middot; {{ s.mileage | mileagefmt }} mi{% endif %}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if l.consumer_rating %}
+  <section class="vd-section">
+    <h2>Consumer reviews</h2>
+    <p>{{ l.consumer_recommend_pct }}% of drivers recommend the {{ l.year }} {{ l.make }} {{ l.model }} &middot;
+       {{ l.consumer_rating }} / 5 Based on {{ l.consumer_review_count }} reviews</p>
+    {% if l.consumer_categories_json() %}
+    <ul class="rating-cats">
+      {% for cat, score in l.consumer_categories_json().items() %}
+      <li>{{ cat }} {{ score }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if l.consumer_reviews_rows() %}
+    <div class="review-list">
+      {% for r in l.consumer_reviews_rows() %}
+      <div class="review">
+        <p class="review-head">By {{ r.author }}{% if r.from %} from {{ r.from }}{% endif %}
+          {% if r.ownership %} &middot; {{ r.ownership }}{% endif %} &middot; {{ r.date }}</p>
+        <p class="review-body">{{ r.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

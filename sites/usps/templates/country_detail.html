@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ country.name }} — Country Conditions for Mailing | USPS{% endblock %}
+{% block meta %}USPS country listing for {{ country.name }}: prohibitions, restrictions, observations and customs forms.{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('countries_index') }}">Individual Country Listings</a> &rsaquo; {{ country.name }}</p>
+<h1>Conditions for Mailing — {{ country.name }}</h1>
+<div class="panel">
+  <table class="data">
+    <tr><th>Service</th><th>Price Group</th><th>Max Weight</th></tr>
+    <tr><td>Priority Mail Express International</td><td>{{ country.pmei_group or 'n/a' }}</td><td>{{ country.pmei_max_lbs or 'n/a' }} lbs</td></tr>
+    <tr><td>Priority Mail International</td><td>{{ country.pmi_group or 'n/a' }}</td><td>{{ country.pmi_max_lbs or 'n/a' }} lbs</td></tr>
+    <tr><td>First-Class Mail International</td><td>{{ country.fcmi_group or 'n/a' }}</td><td>4 lbs</td></tr>
+    <tr><td>First-Class Package International Service</td><td>{{ country.fcpis_group or 'n/a' }}</td><td>4 lbs</td></tr>
+  </table>
+  <p><a href="{{ url_for('postcalc_intl') }}?country={{ country.name }}">Calculate prices to {{ country.name }}</a></p>
+</div>
+<h2>Prohibitions</h2>
+{% if prohibitions %}
+<ul class="bullets">{% for item in prohibitions %}<li>{{ item }}</li>{% endfor %}</ul>
+{% else %}<p>The country listing records no additional prohibitions for {{ country.name }}.</p>{% endif %}
+<h2>Restrictions</h2>
+{% if restrictions %}
+<ul class="bullets">{% for item in restrictions %}<li>{{ item }}</li>{% endfor %}</ul>
+{% else %}<p>The country listing records no additional restrictions for {{ country.name }}.</p>{% endif %}
+<h2>Observations</h2>
+{% if observations %}
+<ul class="bullets">{% for item in observations %}<li>{{ item }}</li>{% endfor %}</ul>
+{% else %}<p>No observations recorded for {{ country.name }}.</p>{% endif %}
+<h2>Service Details &amp; Customs Forms</h2>
+{% for code, info in services.items() %}
+  <h3>{{ {'ggx': 'Global Express Guaranteed', 'pmei': 'Priority Mail Express International', 'pmi': 'Priority Mail International', 'fcmi': 'First-Class Mail International', 'fcpis': 'First-Class Package International Service'}.get(code, code) }}</h3>
+  <ul class="bullets">
+    {% if info.weight_limit %}<li>Weight limit: {{ info.weight_limit }}</li>{% endif %}
+    {% for f in info.customs_forms %}<li>Customs: {{ f }}</li>{% endfor %}
+    {% for n in info.notes %}<li>{{ n }}</li>{% endfor %}
+  </ul>
+{% else %}
+<p>No per-service details recorded.</p>
+{% endfor %}
+<p class="note">Source: the USPS International Mail Manual Individual Country Listing for {{ country.name }} (Postal Explorer).</p>
+{% endblock %}

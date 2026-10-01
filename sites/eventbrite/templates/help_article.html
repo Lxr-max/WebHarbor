@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ a.title }} | Eventbrite Help Center{% endblock %}
+{% block content %}
+<div class="eb-container eb-page" style="max-width:720px;">
+  <p class="eb-muted"><a href="{{ url_for('help_index') }}">← Help Center</a> · {{ a.section }}</p>
+  <h1 class="eb-h1">{{ a.title }}</h1>
+  <p>{{ a.body }}</p>
+  {% if a.slug == 'attending-refunds' %}
+  <h2>Who handles a refund request?</h2>
+  <p>The event organizer sets the refund policy and handles refund requests. Sign in, open Tickets, select the order and tickets, then choose Request a refund and submit your details. The organizer should respond within five business days. Contact the organizer if that option is unavailable.</p>
+  <h2>Cancelled or postponed events</h2>
+  <p>If the organizer refuses or does not respond, Eventbrite may help when the event was cancelled within the last 45 days, or postponed for more than 90 days without a new date. Eligible buyers have 45 days and until the event is rescheduled to contact Eventbrite. Only payments processed through Eventbrite Payment Processing can be refunded by Eventbrite.</p>
+  <p class="eb-muted">Review supplement based on <a href="https://www.eventbrite.com/help/en-us/articles/721549/can-i-get-a-refund/">Eventbrite's Request a refund guidance</a>, accessed September 29, 2026. This mirror's transactions are simulated.</p>
+  {% endif %}
+</div>
+{% endblock %}

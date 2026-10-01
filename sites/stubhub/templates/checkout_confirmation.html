@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Order confirmed | StubHub{% endblock %}
+{% block content %}
+<div class="confirmation-page">
+  <div class="confirmation-card">
+    <div class="confirmation-check">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1a7f37" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m8 12.5 2.5 2.5L16 9.5"></path></svg>
+    </div>
+    <h1>You're going!</h1>
+    <p class="confirmation-sub">Order <strong>{{ order.order_number }}</strong> is confirmed. We've emailed your receipt to {{ order.user.email }}.</p>
+
+    <section class="confirmation-event">
+      <h2>{{ order.event.name }}</h2>
+      <p>{{ order.event.date_full }} • {{ 'TBA' if order.event.is_time_tbd else order.event.local_starts_at.strftime('%-I:%M %p') }}</p>
+      <p>{{ order.event.venue.name }}, {{ order.event.venue.city }}, {{ order.event.venue.state or order.event.venue.country }}</p>
+    </section>
+
+    <section class="confirmation-seats">
+      <div class="seat-line">
+        {% if order.listing %}
+        <div><strong>{{ order.listing.section }}</strong><p>Row {{ order.listing.row or '—' }}{% if order.listing.seats %} · Seats {{ order.listing.seats }}{% endif %}</p></div>
+        {% endif %}
+        <div><strong>{{ order.quantity }} ticket{{ 's' if order.quantity > 1 }}</strong><p>Seats together</p></div>
+        <div><strong>{{ {'instant': 'Instant download', 'mobile': 'Mobile transfer', 'ups': 'UPS delivery'}[order.delivery_method] }}</strong><p>Delivery method</p></div>
+      </div>
+    </section>
+
+    <section class="summary-rows confirmation-summary">
+      <div class="row"><span>Tickets ({{ order.quantity }} × ${{ '{:,}'.format(order.unit_price) }})</span><span>${{ '{:,.0f}'.format(order.subtotal()) }}</span></div>
+      <div class="row muted"><span>Delivery</span><span>{{ 'Free' if not order.delivery_fee else '${:,.2f}'.format(order.delivery_fee) }}</span></div>
+      <div class="row muted"><span>Order processing fee</span><span>${{ '{:,.2f}'.format(order.processing_fee) }}</span></div>
+      <div class="row total"><span>Total paid</span><span>${{ '{:,.2f}'.format(order.total) }}</span></div>
+    </section>
+
+    <div class="confirmation-actions">
+      <a href="/secure/myaccount/purchases/{{ order.order_number }}" class="btn btn-primary">Track your order</a>
+      <a href="{{ order.event.url_path }}" class="btn btn-outline">Back to event</a>
+    </div>
+    <p class="muted small">Paid with {{ order.card_last4 }}. Tickets will appear in your account under Orders.</p>
+  </div>
+</div>
+{% endblock %}

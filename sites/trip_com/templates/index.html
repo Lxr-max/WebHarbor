@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1>Every check-in is a new beginning</h1>
+  <p>We price match &middot; Hotel booking guarantee &middot; Save more with Trip Coins</p>
+  <div class="widget">
+    <div class="widget-tabs">
+      <a class="widget-tab active" href="{{ url_for('hotels_home') }}">Hotels &amp; Homes</a>
+      <a class="widget-tab" href="{{ url_for('flights_home') }}">Flights</a>
+      <a class="widget-tab" href="{{ url_for('things_to_do_home') }}">Attractions &amp; Tours</a>
+    </div>
+    <form class="widget-row" action="{{ url_for('hotel_list') }}" method="get">
+      <div class="wfield wfield-grow">
+        <label for="h-city">Destination / property name</label>
+        <input id="h-city" name="city" list="city-list" placeholder="City, area or property" value="Las Vegas" required>
+        <datalist id="city-list">
+          {% for c in cities %}<option value="{{ c.name }}">{% endfor %}
+        </datalist>
+      </div>
+      <div class="wfield">
+        <label for="h-in">Check-in</label>
+        <input id="h-in" name="checkin" type="date" value="{{ DEFAULT_CHECKIN.isoformat() }}">
+      </div>
+      <div class="wfield">
+        <label for="h-out">Check-out</label>
+        <input id="h-out" name="checkout" type="date" value="{{ DEFAULT_CHECKOUT.isoformat() }}">
+      </div>
+      <div class="wfield">
+        <label>Rooms &amp; guests</label>
+        <select name="adults">
+          <option value="1">1 adult</option>
+          <option value="2" selected>2 adults</option>
+          <option value="3">3 adults</option>
+          <option value="4">4 adults</option>
+        </select>
+      </div>
+      <button class="btn btn-lg" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="hero-badges">
+    <span>&#9733; We price match</span><span>&#10003; Hotel stay guarantee</span>
+    <span>&#9733; Earn Trip Coins on every booking</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Explore top destinations</h2>
+    <a href="{{ url_for('hotels_home') }}">More</a>
+  </div>
+  <div class="card-grid">
+    {% for c in cities %}
+    <a class="city-card" href="{{ url_for('hotel_list', city=c.name) }}">
+      {% if c.image %}<img src="{{ url_for('static', filename='images/' + c.image) }}" alt="{{ c.name }}">{% endif %}
+      <div class="cc-body">
+        <div class="cc-name">{{ c.display }}</div>
+        <div class="cc-sub">{{ c.blurb }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Stay cozy at our handpicked hotels</h2>
+    <a href="{{ url_for('hotel_list', city='Las Vegas') }}">See all</a>
+  </div>
+  <div class="card-grid">
+    {% for h in featured_hotels %}
+    <a class="hotel-card" href="{{ url_for('hotel_detail', hotel_id=h.id) }}">
+      {% if h.img %}<img src="{{ url_for('static', filename='images/' + h.img) }}" alt="{{ h.name }}">{% endif %}
+      <div class="hc-body">
+        <div class="hc-city">{{ h.district or 'Top rated' }}</div>
+        <div class="hc-name">{{ h.name }}</div>
+        <div><span class="hc-score">{{ '%.1f'|format(h.rating) }}</span> <span class="hc-reviews">{{ h.reviews_count }} reviews</span></div>
+        <div class="hc-price">From ${{ '%d'|format(h.price) }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Popular things to do</h2>
+    <a href="{{ url_for('things_to_do_home') }}">More</a>
+  </div>
+  <div class="card-grid">
+    {% for a in attractions %}
+    <a class="attr-card" href="{{ url_for('attraction_detail', attraction_id=a.id) }}">
+      {% if a.img %}<img src="{{ url_for('static', filename='images/' + a.img) }}" alt="{{ a.name }}">{% endif %}
+      <div class="ac-body">
+        <div class="ac-name">{{ a.name }}</div>
+        <div class="ac-meta">{{ '%.1f'|format(a.rating) }}/5 &middot; {{ a.reviews_count }} reviews</div>
+        <div class="ac-price">From ${{ '%.2f'|format(a.price_from) }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Trip.com Guides</h2>
+    <a href="{{ url_for('guide_index') }}">More</a>
+  </div>
+  <div class="card-grid">
+    {% for g in guides %}
+    <a class="guide-card" href="{{ url_for('guide_article', slug=g.slug) }}">
+      {% if g.img %}<img src="{{ url_for('static', filename='images/' + g.img) }}" alt="{{ g.title }}">{% endif %}
+      <div class="gc-body"><div class="hc-name">{{ g.title }}</div></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

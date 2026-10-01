@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} Tickets | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › {{ category }}</div>
+  <h1 class="page-title">{{ category }} Tickets</h1>
+  <p class="page-sub">Browse verified tickets for upcoming {{ category|lower }} events. Filter by date, city, price and category.</p>
+
+  <form class="filter-bar" method="get">
+    <span class="filter-label">Filters:</span>
+    <select name="sub" aria-label="Category filter">
+      <option value="">All Categories</option>
+      {% for sub, count in subs %}
+      <option value="{{ sub }}" {{ 'selected' if args.get('sub') == sub }}>{{ sub }} ({{ count }})</option>
+      {% endfor %}
+    </select>
+    <select name="city" aria-label="City filter">
+      <option value="">All Cities</option>
+      {% for city, count in cities %}
+      <option value="{{ city }}" {{ 'selected' if args.get('city') == city }}>{{ city }} ({{ count }})</option>
+      {% endfor %}
+    </select>
+    <label class="filter-label">From</label>
+    <input type="date" name="date_from" value="{{ args.get('date_from','') }}">
+    <label class="filter-label">To</label>
+    <input type="date" name="date_to" value="{{ args.get('date_to','') }}">
+    <label class="filter-label">Max price $</label>
+    <input type="number" name="price_max" min="0" step="10" value="{{ args.get('price_max','') }}" style="width:90px">
+    <select name="sort" aria-label="Sort by">
+      <option value="date" {{ 'selected' if sort == 'date' }}>Date</option>
+      <option value="price" {{ 'selected' if sort == 'price' }}>Lowest Price</option>
+    </select>
+    <button class="btn btn-primary" type="submit" style="padding: 8px 16px">Apply Filters</button>
+    <a class="filter-label" href="/discover/{{ genre_key }}">Clear All</a>
+  </form>
+  <p class="results-note">{{ events|length }} Results</p>
+
+  {% if events %}
+  <ul>
+    {% for e in events %}
+    <li class="event-row">
+      <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+      <div class="er-main">
+        <div class="er-name">
+          <a href="/event/{{ e.id }}">{{ e.name }}</a>
+          {% if e.multi_date %}<span class="badge badge-multi">Multiple Dates</span>{% endif %}
+          {% if e.partner %}<span class="badge badge-partner">On partner site</span>{% endif %}
+          {% if e.status == 'soldout' %}<span class="badge badge-soldout">Sold Out</span>{% endif %}
+          {% if e.status == 'cancelled' %}<span class="badge badge-cancelled">Cancelled</span>{% endif %}
+        </div>
+        <div class="er-sub">{{ e.city_state }} — <a href="/venue/{{ e.venue.id }}">{{ e.venue.name }}</a></div>
+        <div class="er-time">{{ e.time_line }}</div>
+        <div class="price-tag">{{ price_band(e) }}</div>
+      </div>
+      <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty-state">
+    <h3>No events match these filters</h3>
+    <p>Try removing a filter or browsing all cities.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

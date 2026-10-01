@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ a.title }} | Speedo{% endblock %}
+{% block content %}
+<article class="article-body">
+  <h1>{{ a.title }}</h1>
+  <div class="date">{{ a.published }}</div>
+  {% if a.image %}
+  <div class="article-hero">
+    <img src="{{ url_for('static', filename='images/' + a.image) }}" alt="{{ a.title }}">
+  </div>
+  {% endif %}
+  {{ a.body }}
+</article>
+<p style="text-align:center;margin-bottom:40px;"><a class="link-btn" href="/blogs/news/">Back to blog</a></p>
+{% endblock %}

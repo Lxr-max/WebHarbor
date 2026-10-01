@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Book Cheap Flights, Airline Tickets &amp; Flight Deals | Trip.com{% endblock %}
+{% block content %}
+<div class="widget" style="margin-top:8px">
+  <div class="widget-tabs">
+    <a class="widget-tab" href="{{ url_for('hotels_home') }}">Hotels &amp; Homes</a>
+    <span class="widget-tab active">Flights</span>
+    <a class="widget-tab" href="{{ url_for('things_to_do_home') }}">Attractions &amp; Tours</a>
+  </div>
+  <form class="widget-row" action="{{ url_for('flight_list') }}" method="get">
+    <div class="wfield">
+      <label>Trip type</label>
+      <select name="triptype" id="triptype">
+        <option value="rt" selected>Round-trip</option>
+        <option value="ow">One-way</option>
+      </select>
+    </div>
+    <div class="wfield">
+      <label for="dcity">Leaving from</label>
+      <input id="dcity" name="dcity" list="ap-list" placeholder="City or airport" required>
+    </div>
+    <div class="wfield">
+      <label for="acity">Going to</label>
+      <input id="acity" name="acity" list="ap-list" placeholder="City or airport" required>
+    </div>
+    <div class="wfield">
+      <label for="ddate">Depart</label>
+      <input id="ddate" name="ddate" type="date" value="2026-10-20">
+    </div>
+    <div class="wfield">
+      <label for="rdate">Return</label>
+      <input id="rdate" name="rdate" type="date" value="2026-10-27">
+    </div>
+    <div class="wfield">
+      <label for="cabin">Cabin</label>
+      <select id="cabin" name="cabin">
+        <option>Economy</option>
+        <option>Premium economy</option>
+        <option>Business</option>
+        <option>First</option>
+      </select>
+    </div>
+    <button class="btn btn-lg" type="submit">Search</button>
+  </form>
+  <datalist id="ap-list">
+    {% for a in airports %}<option value="{{ a.code }}">{{ a.name }} ({{ a.city }}){% endfor %}
+  </datalist>
+</div>
+
+<div class="section">
+  <h2>Popular routes</h2>
+  <div class="card-grid">
+    {% for r in routes %}
+    <a class="city-card" href="{{ url_for('flight_list', dcity=r.origin_code, acity=r.dest_code, ddate='2026-10-20', rdate='2026-10-27') }}">
+      <div class="cc-body">
+        <div class="cc-name">{{ r.origin_city }} &#8594; {{ r.dest_city }}</div>
+        <div class="cc-sub">{{ r.origin_code }} to {{ r.dest_code }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <div class="panel">
+    <h2>Why book flights with Trip.com?</h2>
+    <div class="surround-list" style="grid-template-columns:1fr 1fr">
+      <div><b>Flight price transparency</b> — taxes and fees included, right from the start.</div>
+      <div><b>Clear cancellation &amp; change policies</b> — fees and conditions shown upfront.</div>
+      <div><b>Global network</b> — partnered with 640+ airlines worldwide.</div>
+      <div><b>24/7 customer support</b> — in English and 18 more languages.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

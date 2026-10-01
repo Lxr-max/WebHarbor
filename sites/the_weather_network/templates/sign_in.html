@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Sign In - The Weather Network{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Sign in</h1>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <form method="post" action="/en/account/sign-in">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="{{ email or '' }}" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <div style="margin-top:18px">
+      <button class="btn" type="submit">Sign in</button>
+    </div>
+  </form>
+  <p class="alt">New here? <a href="/en/account/register" style="color:#1a5fa8">Create an account</a></p>
+</div>
+{% endblock %}

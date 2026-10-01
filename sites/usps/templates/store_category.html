@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | The Postal Store | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('store_home') }}">The Postal Store</a> &rsaquo; {{ title }}</p>
+<h1>{{ title }}</h1>
+
+<p class="note">Browse: <a href="{{ url_for('store_home') }}">Store home</a> &middot;
+  <a href="{{ url_for('store_category', category='stamps-new-releases') }}">New Releases</a> &middot;
+  <a href="{{ url_for('store_category', category='stamps-all') }}">All Stamps</a> &middot;
+  <a href="{{ url_for('store_category', category='shipping-supplies-priority-mail') }}">Priority Mail Supplies</a> &middot;
+  <a href="{{ url_for('store_category', category='cards-envelopes') }}">Cards &amp; Envelopes</a> &middot;
+  <a href="{{ url_for('store_category', category='gifts-collectors') }}">Collectibles &amp; Gifts</a> &middot;
+  <a href="{{ url_for('store_cart') }}">Cart</a></p>
+{% if products %}
+<div class="grid">
+  {% for p in products %}
+    <div class="card store-tile">
+      {% if p.image %}<a href="{{ url_for('store_product', slug=p.slug) }}"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}"></a>{% endif %}
+      <h3><a href="{{ url_for('store_product', slug=p.slug) }}">{{ p.name }}</a></h3>
+      {% if p.price is not none %}<p class="price">{{ p.price | usd }}</p>{% endif %}
+      <form action="{{ url_for('store_cart_add') }}" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="sku" value="{{ p.sku }}">
+        <label class="note">Qty <input type="number" name="qty" min="1" value="1" style="width:60px"></label>
+        <button class="btn" type="submit">Add to Cart</button>
+        <a class="btn secondary" href="{{ url_for('store_cart') }}">Cart</a>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>No products in this category right now — <a href="{{ url_for('store_home') }}">browse other categories</a>.</p>
+{% endif %}
+{% endblock %}

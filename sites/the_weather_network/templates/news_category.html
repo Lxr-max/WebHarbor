@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ cat_label }}{% if sub_label %} - {{ sub_label }}{% endif %} - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / <a href="/en/news">News</a> / {{ cat_label }}</div>
+<h1 class="page-title">{{ cat_label }}{% if sub_label %} — {{ sub_label }}{% endif %}</h1>
+<div class="subcat-row">
+  <a href="/en/news/{{ cat_key }}" class="{% if not sub_key %}on{% endif %}">All {{ cat_label }}</a>
+  {% for sk, sl in subs %}
+  <a href="/en/news/{{ cat_key }}/{{ sk }}" class="{% if sub_key == sk %}on{% endif %}">{{ sl }}</a>
+  {% endfor %}
+</div>
+
+{% if articles %}
+<div class="news-list">
+  {% for art in articles %}
+  <a class="news-card" href="{{ art.path }}">
+    <div class="nc-thumb">
+      {% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}
+    </div>
+    <div class="nc-title">
+      <span class="cat-chip" style="background:{{ sub_key|category_colour }}">{{ art.subcategory_key|title }}</span><br>
+      {{ art.headline }}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty-note">No stories in this section yet.</p>
+{% endif %}
+{% endblock %}

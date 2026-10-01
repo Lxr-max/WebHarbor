@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{% if page_title %}{{ page_title }}{% else %}{{ guide.title }} - US Appliance{% endif %}{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('buying_guides') }}">Appliance Buying Guides</a></li>
+<li aria-current="page"><span>{{ guide.title }}</span></li>
+{% endblock %}
+{% block content %}
+<section class="container guide-page">
+  <h1 class="page-heading">{{ guide.title }}</h1>
+  <div class="guide-body">{{ guide.body | replace('\n## ', '</p><h2>') | replace('## ', '<h2>') | safe }}</div>
+</section>
+{% endblock %}

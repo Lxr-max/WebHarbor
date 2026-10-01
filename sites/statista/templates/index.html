@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Empowering people with data</h1>
+  <p class="hero__sub">Insights and facts across 170 industries and 150+ countries</p>
+  <form class="heroSearch" action="/serp" method="get" role="search">
+    <input type="search" name="q" placeholder="Statista Search — statistics, reports, topics…" aria-label="Statista Search">
+    <button type="submit">Search</button>
+  </form>
+  <div class="heroChips">
+    <span>Popular topics</span>
+    <a class="chip" href="/serp?q=social+media+usage">Social media usage</a>
+    <a class="chip" href="/serp?q=e-commerce+worldwide">E-commerce worldwide</a>
+    <a class="chip" href="/topics/3104/artificial-intelligence-ai-worldwide/">Artificial intelligence (AI)</a>
+    <a class="chip" href="/serp?q=netflix">Netflix</a>
+    <a class="chip" href="/serp?q=global+inflation">Global inflation</a>
+    <a class="chip" href="/topics/6077/tiktok/">TikTok</a>
+    <a class="chip" href="/serp?q=electric+vehicles">Electric vehicles</a>
+    <a class="chip" href="/serp?q=gaming">Gaming</a>
+  </div>
+</section>
+
+<div class="trusted">
+  <p class="trusted__label">Trusted by more than 23,000 companies</p>
+  <div class="trusted__logos">
+    <span>Google</span><span>Samsung</span><span>PayPal</span><span>Telekom</span><span>Adobe</span><span>P&amp;G</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section__head">
+    <div>
+      <p class="section__kicker">Insights at scale</p>
+      <h2 class="section__title">Your foundation for better decisions</h2>
+    </div>
+  </div>
+  <div class="cardGrid">
+    <a class="card" href="/outlook/">
+      <div class="card__body">
+        <span class="card__tag">Market Insights</span>
+        <span class="card__title">Know how big any market really is</span>
+        <span class="card__snippet">1000+ markets you can size and analyze in seconds.</span>
+      </div>
+    </a>
+    <a class="card" href="/serp?q=consumer+insights&amp;content_type=Statistics">
+      <div class="card__body">
+        <span class="card__tag">Consumer Insights</span>
+        <span class="card__title">See what consumers actually think</span>
+        <span class="card__snippet">Cross any behavior by income, age, or region &amp; more.</span>
+      </div>
+    </a>
+    <a class="card" href="/pricing/">
+      <div class="card__body">
+        <span class="card__tag">Statista+</span>
+        <span class="card__title">Ground AI answers in reliable data</span>
+        <span class="card__snippet">Plug 50K+ trusted sources directly into your AI stack.</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <div>
+      <p class="section__kicker">Trending statistics</p>
+      <h2 class="section__title">Get facts and insights on topics that matter</h2>
+    </div>
+    <a class="section__more" href="/recent/statistics/">Browse recent statistics</a>
+  </div>
+  <div class="cardGrid">
+    {% for s in trending %}
+    <a class="card" href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+      {% if s.has_hero %}
+      <span class="card__img"><img src="/static/images/stat_{{ s.id }}_hero.png" alt="{{ s.title }}" loading="lazy"></span>
+      {% elif s.has_thumb %}
+      <span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>
+      {% endif %}
+      <div class="card__body">
+        <span class="card__meta">{{ s.last_update }}{% if s.breadcrumb %} | {{ s.breadcrumb[0] }}{% endif %}</span>
+        <span class="card__title">{{ s.title|truncate(88) }}</span>
+        {% if s.summary %}<span class="card__snippet">{{ s.summary|striptags|snippetize(150, "…") }}</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <div>
+      <p class="section__kicker">Popular topics</p>
+      <h2 class="section__title">Starting point of your research</h2>
+    </div>
+    <a class="section__more" href="/recent/topics/">Browse recent topics</a>
+  </div>
+  <div class="pillList">
+    {% for t in topics %}
+    <a class="pill" href="/topics/{{ t.id }}/{{ t.slug }}/">{{ t.name }}</a>
+    {% endfor %}
+    <a class="pill" href="/serp?q=gross+domestic+product">GDP</a>
+    <a class="pill" href="/serp?q=employment">Employment</a>
+    <a class="pill" href="/serp?q=population">Population</a>
+    <a class="pill" href="/serp?q=poverty">Poverty</a>
+    <a class="pill" href="/serp?q=forecasts">Forecasts</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <div>
+      <p class="section__kicker">Market Insights</p>
+      <h2 class="section__title">Discover data on your market</h2>
+    </div>
+    <a class="section__more" href="/outlook/">Discover our market insights</a>
+  </div>
+  <p class="section__sub">Gain access to valuable and comparable market data for over 190+ countries, territories, and regions with our Market Insights. Get deep insights into important figures, e.g., revenue metrics, key performance indicators, and much more.</p>
+  <div class="pillList">
+    {% for seg in segments %}
+    <a class="pill" href="/outlook/{{ seg.slug }}/">{{ seg.name }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <div>
+      <p class="section__kicker">Statista accounts</p>
+      <h2 class="section__title">Access all statistics starting from $2,388 USD yearly*</h2>
+    </div>
+    <a class="section__more" href="/pricing/">Compare plans</a>
+  </div>
+  <div class="planGrid">
+    <div class="plan">
+      <h3>Basic Account</h3>
+      <p class="who">For single users</p>
+      <p class="price">$0 USD</p>
+      <p class="per">Always free</p>
+      <ul><li>Free Statistics</li></ul>
+      <a class="btn btn--primary" href="/register">Register now</a>
+    </div>
+    <div class="plan">
+      <h3>Starter Account</h3>
+      <p class="who">For single users</p>
+      <p class="price">$199 USD</p>
+      <p class="per">per month, billed annually</p>
+      <ul><li>Free + Premium Statistics</li></ul>
+      <a class="btn btn--ghost" href="/pricing/">Buy now</a>
+    </div>
+    <div class="plan">
+      <h3>Personal Account</h3>
+      <p class="who">For single users</p>
+      <p class="price">$649 USD</p>
+      <p class="per">per month, billed annually</p>
+      <ul><li>Free + Premium Statistics</li><li>Report previews</li></ul>
+      <a class="btn btn--ghost" href="/pricing/">Buy now</a>
+    </div>
+    <div class="plan plan--hot">
+      <h3>Professional Account</h3>
+      <p class="who">For teams of up to 99 users</p>
+      <p class="price">$2,388 USD</p>
+      <p class="per">yearly</p>
+      <ul><li>Free + Premium Statistics</li><li>Reports</li><li>API access</li></ul>
+      <a class="btn btn--primary" href="/pricing/">Buy now</a>
+    </div>
+  </div>
+  <p class="formNote">* For commercial use only. All prices do not include sales tax. The account requires an annual contract and will renew after one year to the regular list price.</p>
+</section>
+{% endblock %}

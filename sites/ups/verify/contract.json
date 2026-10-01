@@ -1,0 +1,957 @@
+{
+  "UPS--0": {
+    "task": "I am coordinating two incoming deliveries. Track 1Z58F0E70312456012 and 1Z58F0E71248779034 together. Open the first shipment's detail page and report the latest scan (status, location, day and time) and how many facility stops it made after leaving Seattle. Open the second shipment and report the pickup location's name, street address, and the date it must be picked up by. Then find that pickup location in the location locator (ZIP 10001) and report its ground drop-off time.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "latest scan out for delivery.{0,25}maspeth.{0,20}2026-09-28.{0,15}8:52"
+      ],
+      [
+        "fact 2",
+        "4 facility stops"
+      ],
+      [
+        "fact 3",
+        "337 10th ave"
+      ],
+      [
+        "fact 4",
+        "2026-10-05"
+      ],
+      [
+        "fact 5",
+        "ground drop-off.{0,20}6:30pm.{0,20}3:30pm"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z58F0E70312456012$",
+      "^/track/detail/1Z58F0E71248779034$",
+      "^/locations/255850$"
+    ]
+  },
+  "UPS--1": {
+    "task": "Track shipment 1Z58F0E70291534227 and open its detail page. Report the current status, the full exception reason, and the scheduled delivery date. Open the linked article explaining tracking statuses and report what causes an Exception and where the reason is noted. Open the delivery change page and report the change options offered. Then, from the support center, open the UPS Delivery Intercept article and report the web-request fee and the phone-request fee. Also report the shipper's name and city.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "status.{0,10}exception"
+      ],
+      [
+        "fact 2",
+        "address information.{0,45}incorrect"
+      ],
+      [
+        "fact 3",
+        "sender has been notified"
+      ],
+      [
+        "fact 4",
+        "pending corrected address"
+      ],
+      [
+        "fact 5",
+        "2026-09-25"
+      ],
+      [
+        "fact 6",
+        "unexpected error.{0,45}delivery date"
+      ],
+      [
+        "fact 7",
+        "shipment progress"
+      ],
+      [
+        "fact 8",
+        "hold for pickup"
+      ],
+      [
+        "fact 9",
+        "deliver to another address"
+      ],
+      [
+        "fact 10",
+        "reschedule delivery"
+      ],
+      [
+        "fact 11",
+        "web request.{0,10}18"
+      ],
+      [
+        "fact 12",
+        "phone request.{0,10}21"
+      ],
+      [
+        "fact 13",
+        "harbor lane apparel.{0,15}portland"
+      ]
+    ],
+    "paths": [
+      "^/support/article/understanding\\-tracking\\-status$",
+      "^/track/detail/1Z58F0E70291534227/change\\-delivery$",
+      "^/support/article/ups\\-delivery\\-intercept$"
+    ]
+  },
+  "UPS--2": {
+    "task": "Shipment 1Z58F0E70312456012 is out for delivery while you're at work, so have UPS hold it for pickup instead. Change its delivery to hold at the UPS Access Point closest to ZIP 10001. Report the location's name, street address, and the distance shown when you select it. Return to the tracking detail page and report the confirmation text of the new activity entry. Then open that location's detail page from the location locator and report its city and ground drop-off time.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "shipments": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "hold_location_id": "152025",
+            "hold_by": "2026-10-05"
+          }
+        }
+      },
+      "tracking_changes": {
+        "added": [
+          {
+            "id": 1,
+            "shipment_id": 1,
+            "change_type": "hold",
+            "detail": "152025",
+            "request_day": "2026-09-28"
+          }
+        ],
+        "updated": {}
+      },
+      "tracking_events": {
+        "added": [
+          {
+            "id": 105,
+            "shipment_id": 1,
+            "seq": 12,
+            "day": "2026-09-28",
+            "time": "\u2014",
+            "status": "Hold for Pickup Requested",
+            "location": "New York, NY",
+            "description": "Delivery changed: the package will be held for pickup at Deepchhaya Deli & Grocery, 334 W 37Th St, New York, NY 10018. Bring a government-issued photo ID.",
+            "package_n": null
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "deepchhaya deli.{0,15}grocery"
+      ],
+      [
+        "fact 2",
+        "334 w 37th st"
+      ],
+      [
+        "fact 3",
+        "0\\.3 miles"
+      ],
+      [
+        "fact 4",
+        "(?:new activity|delivery changed|confirms).{0,100}held for pickup"
+      ],
+      [
+        "fact 5",
+        "new york"
+      ],
+      [
+        "fact 6",
+        "ground drop-off.{0,20}4:00pm"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z58F0E70312456012/change\\-delivery$",
+      "^/locations/152025$"
+    ]
+  },
+  "UPS--3": {
+    "task": "Use Calculate Time and Cost for a 5 lb package (12x10x8 inches) from New York 10001 to Chicago 60601 with a residential destination. Report the cheapest service and its price, the most expensive service and its price, and how many services total were quoted. Then rerun the same estimate with the residential box unchecked and report how much the cheapest service's price changes.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "6 services"
+      ],
+      [
+        "fact 2",
+        "cheapest.{0,20}ups ground.{0,15}21\\.40"
+      ],
+      [
+        "fact 3",
+        "most expensive.{0,35}next day air early.{0,15}243\\.57"
+      ],
+      [
+        "fact 4",
+        "(?:changes by \\$0|does not change|no change)"
+      ]
+    ],
+    "paths": [
+      "^/ctc$"
+    ]
+  },
+  "UPS--4": {
+    "task": "A contract must reach a client's Chicago office by 10:30 a.m. tomorrow morning. From the Compare Services page, list every guaranteed service that delivers by 10:30 a.m. the next business day. Run a 1 lb estimate from New York 10001 to Chicago 60601 and report which of those services is cheapest, its exact price, and its delivered-by commitment. Then open that service's detail page from Compare Services and report its latest pickup time and its maximum weight per package.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "next day air early and ups next day air"
+      ],
+      [
+        "fact 2",
+        "cheapest.{0,65}134\\.98"
+      ],
+      [
+        "fact 3",
+        "10:30 a\\.m.{0,30}september 29"
+      ],
+      [
+        "fact 4",
+        "latest pickup.{0,10}9:00 p\\.m"
+      ],
+      [
+        "fact 5",
+        "maximum.{0,25}150"
+      ]
+    ],
+    "paths": [
+      "^/services/compare$",
+      "^/ctc$",
+      "^/services/1DA$"
+    ]
+  },
+  "UPS--5": {
+    "task": "Create a shipment as a guest: from Alice Johnson, 350 5th Ave, New York, NY 10001 to Bay Line Gifts, 1200 Market St, San Francisco, CA 94105, a 5 lb package (12x10x8) worth $950. Choose the cheapest service and add Signature Required. On the confirmation page report the tracking number, the scheduled delivery date, and the declared value charge shown. Then verify the tracking number resolves on the Track page.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "shipments": {
+        "added": [
+          {
+            "id": 15,
+            "tracking_number": "1Z5F71X90370000152",
+            "user_id": null,
+            "direction": "outbound",
+            "service_code": "GND",
+            "shipper_name": "Alice Johnson",
+            "from_city": "New York",
+            "from_state": "NY",
+            "to_name": "Bay Line Gifts",
+            "to_city": "San Francisco",
+            "to_state": "CA",
+            "to_zip": "94105",
+            "weight_lb": 5.0,
+            "packages": 1,
+            "signature": "Signature Required",
+            "scheduled_delivery": "2026-10-01",
+            "status": "Label Created",
+            "delivered_on": null,
+            "delivered_time": null,
+            "signed_by": null,
+            "left_at": null,
+            "hold_location_id": null,
+            "hold_by": null,
+            "is_international": 0,
+            "declared_value": 950.0,
+            "multi_package": 0,
+            "exception_note": null,
+            "created_in_session": 1
+          }
+        ],
+        "updated": {}
+      },
+      "tracking_events": {
+        "added": [
+          {
+            "id": 105,
+            "shipment_id": 15,
+            "seq": 1,
+            "day": "2026-09-28",
+            "time": "\u2014",
+            "status": "Label Created",
+            "location": "New York, NY",
+            "description": "Shipping information received by UPS. Drop off your package at a UPS location or hand it to a UPS driver to start its journey.",
+            "package_n": null
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "2026-10-01"
+      ],
+      [
+        "fact 2",
+        "declared value charge.{0,15}17(?:\\.00)?\\b"
+      ],
+      [
+        "fact 3",
+        "label created"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z5F71X90370000152$"
+    ]
+  },
+  "UPS--6": {
+    "task": "Log in as Dave Miller (dave.m@test.com / TestPass123!). In your account, find the shipment whose status is Label Created and report its tracking number, service, and scheduled delivery date. That package is ready today, so schedule a future-day pickup for it at 1701 South MoPac Expressway, Austin, TX 78746: one package, 9.8 lbs, on September 30, 2026 between 9:00 AM and 5:00 PM. Use Dave Miller and phone 512-555-0104 as the pickup contact. Report the pickup confirmation number and the fee shown.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "pickup_requests": {
+        "added": [
+          {
+            "id": 1,
+            "confirmation_number": "PK1000001",
+            "user_id": 4,
+            "contact_name": "Dave Miller",
+            "email": "",
+            "company": "Dave Miller",
+            "address_line1": "1701 South MoPac Expressway",
+            "city": "Austin",
+            "state": "TX",
+            "zip": "78746",
+            "phone": "512-555-0104",
+            "pickup_date": "2026-09-30",
+            "earliest_time": "9:00 AM",
+            "latest_time": "5:00 PM",
+            "packages": 1,
+            "weight_lb": 9.8,
+            "service": "UPS Next Day Air Saver\u00ae",
+            "saturday": 0,
+            "fee_usd": 9.65,
+            "payment": "Pay driver at pickup",
+            "status": "Scheduled"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "1z7r4t920199330245"
+      ],
+      [
+        "fact 2",
+        "next day air saver"
+      ],
+      [
+        "fact 3",
+        "scheduled delivery.{0,15}2026-09-29"
+      ],
+      [
+        "fact 4",
+        "confirmation.{0,12}pk1000001"
+      ],
+      [
+        "fact 5",
+        "fee.{0,12}9\\.65"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z7R4T920199330245$",
+      "^/pickup/confirm/[^/]+$"
+    ]
+  },
+  "UPS--7": {
+    "task": "I need a convenient UPS location near ZIP 10001 for a prepaid parcel, with a staffed fallback if I need help. Compare the nearest drop box, The UPS Store, and UPS Access Point. Report each name, street address, and distance; include the drop box's latest ground collection time and the staffed locations' phone numbers where listed. Recommend the most useful option for an unattended drop-off and identify the staffed fallback.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "tishman speyer.{0,15}66 hudson blvd e.{0,15}0\\.1 miles"
+      ],
+      [
+        "fact 2",
+        "ground collection.{0,20}1:30pm"
+      ],
+      [
+        "fact 3",
+        "ups store.{0,15}337 10th ave.{0,15}0\\.2 miles.{0,15}2124577300"
+      ],
+      [
+        "fact 4",
+        "deepchhaya deli.{0,15}grocery.{0,15}334 w 37th st.{0,15}0\\.3 miles"
+      ],
+      [
+        "fact 5",
+        "no phone.{0,10}listed"
+      ],
+      [
+        "fact 6",
+        "(?:choose|recommend).{0,25}tishman"
+      ],
+      [
+        "fact 7",
+        "ups store.{0,30}staffed fallback"
+      ]
+    ],
+    "paths": [
+      "^/locations/235041$",
+      "^/locations/255850$",
+      "^/locations/152025$"
+    ]
+  },
+  "UPS--8": {
+    "task": "Log in as Dave Miller (dave.m@test.com / TestPass123!) and open the multi-package shipment going to Seattle. Report how many packages it contains, how many are delivered, and how many are in transit. Report who signed for the delivered package and the delivery day. For package 2, report the latest scan status and location. Then track that shipment's number on the Track page and report its current status and latest scan facility shown there.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "3 packages.{0,10}1 delivered.{0,10}2 in transit"
+      ],
+      [
+        "fact 2",
+        "t\\. olsen.{0,15}2026-09-26"
+      ],
+      [
+        "fact 3",
+        "package 2.{0,25}departed from facility.{0,10}commerce city"
+      ],
+      [
+        "fact 4",
+        "tracking.{0,35}in transit.{0,30}commerce city"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z7R4T920399120014$"
+    ]
+  },
+  "UPS--9": {
+    "task": "Log in as Alice Johnson (alice.j@test.com / TestPass123!). Her ceramic bowls arrived damaged, so file a claim for shipment 1Z58F0E70371234458 as the receiver: report the problem as damaged, describe the merchandise as 'hand-thrown ceramic bowl set', 2 items valued at $180.00. Report the claim number, the claim's current status, and how long the resolution note says a resolution typically takes.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "claims": {
+        "added": [
+          {
+            "id": 1,
+            "claim_id": "CLM4000001",
+            "user_id": 1,
+            "tracking_number": "1Z58F0E70371234458",
+            "email": "alice.j@test.com",
+            "role": "receiver",
+            "problem_type": "damaged",
+            "merchandise": "hand-thrown ceramic bowl set",
+            "item_count": 2,
+            "item_value": 180.0,
+            "currency": "USD",
+            "status": "Claim Review in Progress",
+            "events": "[{\"day\": \"2026-09-28\", \"label\": \"Claim Reported\", \"done\": true}, {\"day\": \"2026-09-28\", \"label\": \"Claim Review in Progress\", \"done\": true}, {\"day\": \"\", \"label\": \"Documentation Under Review\", \"done\": false}, {\"day\": \"\", \"label\": \"Resolution\", \"done\": false}]",
+            "filed_day": "2026-09-28",
+            "resolution_note": "Unless additional investigation is required, you can typically expect a resolution to your claim in 8 to 10 business days."
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "clm4000001"
+      ],
+      [
+        "fact 2",
+        "claim review in progress"
+      ],
+      [
+        "fact 3",
+        "8 (?:to|-) 10 business days"
+      ]
+    ],
+    "paths": [
+      "^/claims/status/CLM4000001$"
+    ]
+  },
+  "UPS--10": {
+    "task": "Shipment 1ZF5R8210372885301 has not arrived and I need to decide whether to wait or pursue a claim. Check its current status and last scan, read the linked status explanation about extra delivery time, and consult the claims FAQ for the Ground Saver claim deadline. Explain what the tracking record establishes and the limit I need to watch; do not file a claim.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "transferred to post office"
+      ],
+      [
+        "fact 2",
+        "sender requested.{0,30}local post office"
+      ],
+      [
+        "fact 3",
+        "extra day or 2|extra 1 or 2 days"
+      ],
+      [
+        "fact 4",
+        "claims.{0,35}until the exception scan"
+      ],
+      [
+        "fact 5",
+        "(?:cutoff|deadline).{0,25}(?:reached|passed)|already.{0,20}transfer"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1ZF5R8210372885301$",
+      "^/support/article/understanding\\-tracking\\-status$",
+      "^/claims$"
+    ]
+  },
+  "UPS--11": {
+    "task": "My Portland shop ships three days a week, with occasional Saturday parcels. Compare Daily Pickup, UPS Smart Pickup and three-day Day-Specific Pickup using their weekly fees, and identify the cheapest regular arrangement. Check the same-day and future-day On-Call fees and the Smart Pickup Saturday charge so I can judge whether paying for occasional collections makes more sense. Explain which figures are weekly costs and which apply to an individual pickup.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "daily pickup.{0,10}39"
+      ],
+      [
+        "fact 2",
+        "smart pickup.{0,10}18\\.50"
+      ],
+      [
+        "fact 3",
+        "day-specific pickup.{0,20}3 days.{0,10}23\\.25"
+      ],
+      [
+        "fact 4",
+        "smart pickup.{0,20}cheapest"
+      ],
+      [
+        "fact 5",
+        "9\\.65 future-day"
+      ],
+      [
+        "fact 6",
+        "15\\.75 same-day"
+      ],
+      [
+        "fact 7",
+        "saturday.{0,15}8\\b"
+      ]
+    ],
+    "paths": [
+      "^/business/daily\\-pickup$",
+      "^/business/smart\\-pickup$",
+      "^/business/day\\-specific\\-pickup$",
+      "^/business/weekend\\-pickup$"
+    ]
+  },
+  "UPS--12": {
+    "task": "Bob's ground shipment 1ZW362F70355812012 to Atlanta must be redirected. Open its tracking detail and the delivery change page, and report which change options are offered. Find the UPS Delivery Intercept support article and report the fee for a web request, the fee for a phone request, and the available actions an intercept can take. Then find the closest UPS Access Point to ZIP 30301 as an alternative hold location and report its name and street address. Finish by reporting the shipment's current status and latest scan location.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "hold for pickup"
+      ],
+      [
+        "fact 2",
+        "deliver to another address"
+      ],
+      [
+        "fact 3",
+        "reschedule delivery"
+      ],
+      [
+        "fact 4",
+        "web fee.{0,10}18"
+      ],
+      [
+        "fact 5",
+        "phone fee.{0,10}21"
+      ],
+      [
+        "fact 6",
+        "return to sender"
+      ],
+      [
+        "fact 7",
+        "will call"
+      ],
+      [
+        "fact 8",
+        "cvs store #\\s*10043.{0,15}235 peachtree st ne"
+      ],
+      [
+        "fact 9",
+        "status.{0,10}in transit"
+      ],
+      [
+        "fact 10",
+        "latest scan.{0,15}louisville"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1ZW362F70355812012/change\\-delivery$",
+      "^/support/article/ups\\-delivery\\-intercept$",
+      "^/locations/166158$"
+    ]
+  },
+  "UPS--13": {
+    "task": "I am checking why shipment 1Z99624Y0371728890 has gaps between scans. Find its service, scheduled delivery date, and second-to-last scan location and date. Use the tracking-status help article to explain what a Label Created status establishes and why a long-distance shipment may travel without a new scan. Summarize whether a scan gap alone proves the package has stopped moving.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "ups ground.{0,35}2026-10-02"
+      ],
+      [
+        "fact 2",
+        "second-to-last scan.{0,35}louisville.{0,15}2026-09-27"
+      ],
+      [
+        "fact 3",
+        "label created.{0,60}shipment details and billing information"
+      ],
+      [
+        "fact 4",
+        "long-distance.{0,65}destination hub"
+      ],
+      [
+        "fact 5",
+        "does not prove.{0,35}stopped"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z99624Y0371728890$",
+      "^/support/article/understanding\\-tracking\\-status$"
+    ]
+  },
+  "UPS--14": {
+    "task": "You need a package picked up this Saturday. From the Saturday Delivery and Pickup Options page, report the fee for a Saturday pickup with UPS Smart Pickup and the Saturday stop charge for a scheduled Saturday pickup. Then schedule a Saturday pickup for October 3, 2026, one package of 5 lbs, at 88 King Street, San Francisco, CA 94107, between 9:00 AM and 5:00 PM, using Alice Johnson, phone 415-555-0101, and UPS Ground as the pickup contact and service, and report the total fee shown on the review step and the confirmation number.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "pickup_requests": {
+        "added": [
+          {
+            "id": 1,
+            "confirmation_number": "PK1000001",
+            "user_id": null,
+            "contact_name": "Alice Johnson",
+            "email": "",
+            "company": "Alice Johnson",
+            "address_line1": "88 King Street",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94107",
+            "phone": "415-555-0101",
+            "pickup_date": "2026-10-03",
+            "earliest_time": "9:00 AM",
+            "latest_time": "5:00 PM",
+            "packages": 1,
+            "weight_lb": 5.0,
+            "service": "UPS Ground",
+            "saturday": 1,
+            "fee_usd": 16.6,
+            "payment": "Pay driver at pickup",
+            "status": "Scheduled"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "smart pickup saturday fee.{0,10}8"
+      ],
+      [
+        "fact 2",
+        "saturday stop charge.{0,10}12"
+      ],
+      [
+        "fact 3",
+        "(?:review total|total fee).{0,15}16\\.60"
+      ],
+      [
+        "fact 4",
+        "pk1000001"
+      ]
+    ],
+    "paths": [
+      "^/business/weekend\\-pickup$",
+      "^/pickup/confirm/[^/]+$"
+    ]
+  },
+  "UPS--15": {
+    "task": "Find The UPS Store closest to ZIP 60601 and open its detail page. Report its name, street address, phone number, its hours on Monday and Tuesday, and its latest air and ground drop-off times. Report the name and address of the nearest UPS Access Point to 60601 and which of the two is closer. Then open the Pack and Ship page in The UPS Store section and report what it says about the packing experts.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "323 e wacker dr.{0,20}3122688290"
+      ],
+      [
+        "fact 2",
+        "monday.{0,15}9:00 am.{0,5}3:00 pm"
+      ],
+      [
+        "fact 3",
+        "tuesday.{0,10}8:00 am.{0,5}6:00 pm"
+      ],
+      [
+        "fact 4",
+        "air and ground.{0,30}3:00pm"
+      ],
+      [
+        "fact 5",
+        "cvs store #\\s*8910.{0,15}205 n columbus dr"
+      ],
+      [
+        "fact 6",
+        "closer at 0\\.1 miles"
+      ],
+      [
+        "fact 7",
+        "certified packing experts.{0,40}fragile and high-value"
+      ]
+    ],
+    "paths": [
+      "^/locations/94892$",
+      "^/locations/173942$",
+      "^/store/pack\\-and\\-ship$"
+    ]
+  },
+  "UPS--16": {
+    "task": "I need to weigh a fast delivery option against Ground for a 5 lb parcel from San Francisco 94105 to Seattle 98101. Compare their delivery commitments and Saturday availability, then quote the shipment and report UPS 2nd Day Air A.M.'s price and delivered-by date. Check that service's guarantee and latest pickup time and Ground's maximum package weight so I can decide whether the faster option fits my dispatch plans.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "2nd day air a\\.m.{0,50}10:30 a\\.m.{0,20}noon.{0,30}second business day"
+      ],
+      [
+        "fact 2",
+        "latest pickup.{0,10}9:00 p\\.m"
+      ],
+      [
+        "fact 3",
+        "quote.{0,15}79\\.99"
+      ],
+      [
+        "fact 4",
+        "10:30 a\\.m.{0,30}september 30"
+      ],
+      [
+        "fact 5",
+        "ground.{0,30}1-5 business days"
+      ],
+      [
+        "fact 6",
+        "maximum.{0,10}150"
+      ],
+      [
+        "fact 7",
+        "saturday availability.{0,140}3 day select"
+      ],
+      [
+        "fact 8",
+        "a\\.m\\..{0,20}not among"
+      ]
+    ],
+    "paths": [
+      "^/services/2DM$",
+      "^/ctc$",
+      "^/services/GND$"
+    ]
+  },
+  "UPS--17": {
+    "task": "Log in as Alice Johnson (alice.j@test.com / TestPass123!). From your account dashboard, report how many shipments are listed and each one's current status. Open the one that is out for delivery and report its scheduled delivery date, the delivery change options offered, and the facility where it went out for delivery. Change its delivery to hold at the UPS Access Point closest to ZIP 10001 and report the confirmation text. Finally report the web-request UPS Delivery Intercept fee from the support pages.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {
+      "shipments": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "hold_location_id": "152025",
+            "hold_by": "2026-10-05"
+          }
+        }
+      },
+      "tracking_changes": {
+        "added": [
+          {
+            "id": 1,
+            "shipment_id": 1,
+            "change_type": "hold",
+            "detail": "152025",
+            "request_day": "2026-09-28"
+          }
+        ],
+        "updated": {}
+      },
+      "tracking_events": {
+        "added": [
+          {
+            "id": 105,
+            "shipment_id": 1,
+            "seq": 12,
+            "day": "2026-09-28",
+            "time": "\u2014",
+            "status": "Hold for Pickup Requested",
+            "location": "New York, NY",
+            "description": "Delivery changed: the package will be held for pickup at Deepchhaya Deli & Grocery, 334 W 37Th St, New York, NY 10018. Bring a government-issued photo ID.",
+            "package_n": null
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "4 shipments"
+      ],
+      [
+        "fact 2",
+        "delivered,? exception,? awaiting customer pickup and out for delivery"
+      ],
+      [
+        "fact 3",
+        "scheduled for 2026-09-28"
+      ],
+      [
+        "fact 4",
+        "maspeth"
+      ],
+      [
+        "fact 5",
+        "hold for pickup"
+      ],
+      [
+        "fact 6",
+        "deliver to another address"
+      ],
+      [
+        "fact 7",
+        "reschedule delivery"
+      ],
+      [
+        "fact 8",
+        "hold at deepchhaya deli.{0,15}grocery.{0,15}334 w 37th st"
+      ],
+      [
+        "fact 9",
+        "confirms.{0,40}held.{0,20}pickup"
+      ],
+      [
+        "fact 10",
+        "web-request fee.{0,10}18"
+      ]
+    ],
+    "paths": [
+      "^/track/detail/1Z58F0E70312456012/change\\-delivery$",
+      "^/support/article/ups\\-delivery\\-intercept$"
+    ]
+  },
+  "UPS--18": {
+    "task": "I am considering a private mailbox near ZIP 10001 for my small business. Use The UPS Store's mailbox and in-store-services pages to explain what mailbox customers receive and which three additional store services would help manage business correspondence. Find the closest UPS Store within 15 miles, report how many stores the locator offers, and give the closest store's name, address, phone number and weekday hours so I can plan a visit.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "real street address"
+      ],
+      [
+        "fact 2",
+        "all carriers"
+      ],
+      [
+        "fact 3",
+        "signature"
+      ],
+      [
+        "fact 4",
+        "text alerts"
+      ],
+      [
+        "fact 5",
+        "24-hour access at participating"
+      ],
+      [
+        "fact 6",
+        "notari"
+      ],
+      [
+        "fact 7",
+        "passport.{0,15}photos"
+      ],
+      [
+        "fact 8",
+        "shredding"
+      ],
+      [
+        "fact 9",
+        "5 ups stores"
+      ],
+      [
+        "fact 10",
+        "337 10th ave.{0,15}2124577300"
+      ],
+      [
+        "fact 11",
+        "monday.{0,10}11:00 am.{0,5}5:00 pm"
+      ],
+      [
+        "fact 12",
+        "tuesday through friday.{0,10}8:00 am.{0,5}8:00 pm"
+      ]
+    ],
+    "paths": [
+      "^/store/services$",
+      "^/store/mailboxes$",
+      "^/locations/255850$"
+    ]
+  },
+  "UPS--19": {
+    "task": "I am deciding whether overnight delivery is worth the extra cost for a 15 lb parcel, 16 by 12 by 10 inches, from New York 10001 to Chicago 60601. Quote UPS Ground and Next Day Air Early, reporting their prices and delivery commitments and the billable weight. Open the overnight quote's charge breakdown to explain its transportation charge, delivery-area surcharge and fuel surcharge, and calculate the premium over Ground.",
+    "initial_digest": "e45620388d82d0008866959d260f27633ca8e15761275ac6d3b42eaff25045cd",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "ups ground.{0,10}32\\.80.{0,55}september 30"
+      ],
+      [
+        "fact 2",
+        "next day air early.{0,10}335\\.33.{0,25}8:00 a\\.m.{0,30}september 29"
+      ],
+      [
+        "fact 3",
+        "billable weight.{0,10}15(?:\\.0)? lbs"
+      ],
+      [
+        "fact 4",
+        "transportation.{0,10}246\\.68"
+      ],
+      [
+        "fact 5",
+        "delivery-area surcharge.{0,10}4\\.50"
+      ],
+      [
+        "fact 6",
+        "fuel surcharge.{0,10}84\\.15"
+      ],
+      [
+        "fact 7",
+        "premium.{0,25}302\\.53"
+      ]
+    ],
+    "paths": [
+      "^/ctc$"
+    ]
+  }
+}

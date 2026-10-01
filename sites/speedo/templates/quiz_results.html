@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block title %}Your {{ 'Swimwear Match' if quiz_key == 'swimsuit' else 'Goggles Match' }} | Speedo{% endblock %}
+{% block content %}
+<div class="quiz-results-head">
+  <h1>Your {{ 'Swimwear Match' if quiz_key == 'swimsuit' else 'Swimming Goggles Chosen for You' }}</h1>
+  <p>{{ quiz.results_intro }}</p>
+</div>
+<div class="page-width">
+  {% if cards %}
+  <div class="product-grid" style="justify-items:center;">
+    {% for c in cards %}
+    <div style="width:100%;max-width:320px;">
+      {{ card(c) }}
+      <form method="post" action="/cart/add" style="margin-top:10px;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="slug" value="{{ c.product.slug }}">
+        <input type="hidden" name="size" value="{{ c.product.available_sizes()[0] if c.product.available_sizes() else '' }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="btn btn-primary" style="width:100%;">Add to bag</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h2>No matches found</h2>
+    <p>Try different answers in the quiz.</p>
+  </div>
+  {% endif %}
+  <div style="text-align:center;margin:30px 0 50px;">
+    <form method="post" action="{{ url_for(quiz_key + '_quiz') }}" style="display:inline;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="restart">
+      <button type="submit" class="btn btn-secondary">Retake Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

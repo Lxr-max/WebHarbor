@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; Guides &gt; <b>{{ article.title }}</b></div>
+<div class="panel article-body" style="max-width:820px">
+  {% if article.img %}<img src="{{ url_for('static', filename='images/' + article.img) }}" alt="{{ article.title }}" style="border-radius:8px;margin-bottom:16px;max-height:300px;width:100%;object-fit:cover">{% endif %}
+  <h1>{{ article.title }}</h1>
+  <div class="bc-meta" style="margin:6px 0 18px">{{ article.city }} &middot; Trip.com Guides</div>
+  {{ article.body | safe }}
+</div>
+{% endblock %}

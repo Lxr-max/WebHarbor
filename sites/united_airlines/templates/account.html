@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}My account — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-account-page">
+  <div class="ua-account-head">
+    <div>
+      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+      <p>MileagePlus number <strong>{{ user.mp_number }}</strong> ·
+        Status: <strong>{{ user.tier }}</strong></p>
+    </div>
+    <div class="ua-account-balance">
+      <div><span>Award miles</span><strong>{{ '{:,}'.format(user.award_miles) }}</strong></div>
+      <div><span>PQF</span><strong>{{ user.pqf }}</strong></div>
+      <div><span>PQP</span><strong>{{ '{:,}'.format(user.pqp) }}</strong></div>
+      {% if user.plus_points %}<div><span>PlusPoints</span><strong>{{ '{:,}'.format(user.plus_points) }}</strong></div>{% endif %}
+    </div>
+  </div>
+
+  {% if progress %}
+  <div class="ua-progress">
+    <h2>Premier® qualification progress — {{ progress.tier }}</h2>
+    <p>{{ progress.have_pqf }} PQF (need {{ progress.need_pqf }}) ·
+      {{ '{:,}'.format(progress.have_pqp) }} PQP (need {{ '{:,}'.format(progress.need_pqp) }})</p>
+    <div class="ua-progress-bar">
+      <div class="ua-progress-fill" style="width: {{ [100, (progress.have_pqp / progress.need_pqp * 100)|round|int]|min }}%"></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="ua-account-grid">
+    <div class="ua-account-card">
+      <h2>My trips</h2>
+      {% set bookings = user.bookings %}
+      {% if bookings %}
+        {% for booking in bookings %}
+        <a class="ua-trip-row" href="{{ url_for('trip_detail', conf=booking.confirmation) }}">
+          <span class="ua-pnr">{{ booking.confirmation }}</span>
+          <span>{{ booking.route_label }}</span>
+          <span class="ua-status-{{ booking.status }}">{{ booking.status|capitalize }}</span>
+        </a>
+        {% endfor %}
+      {% else %}
+        <p class="ua-quiet">No trips yet. <a href="{{ url_for('home') }}">Book a flight</a>.</p>
+      {% endif %}
+    </div>
+
+    <div class="ua-account-card">
+      <h2>Account activity</h2>
+      {% if user.activities %}
+      <table class="ua-table">
+        <thead><tr><th>Date</th><th>Description</th><th>Channel</th><th>Miles</th><th>PQP</th></tr></thead>
+        <tbody>
+          {% for act in user.activities|sort(attribute='date', reverse=True) %}
+          <tr>
+            <td>{{ act.date }}</td>
+            <td>{{ act.description }}</td>
+            <td>{{ act.channel }}</td>
+            <td>{{ act.miles if act.miles else '' }}</td>
+            <td>{{ act.pqp if act.pqp else '' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="ua-quiet">No account activity yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('home') }}">Search flights</a>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('mileageplus') }}">Program details</a>
+  </div>
+</section>
+{% endblock %}

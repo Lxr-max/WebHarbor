@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ answer.question }} | Super Lawyers Answers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('answers_home') }}">Ask a Lawyer</a> ›
+    <a href="/answers/{{ answer.topic_slug }}/">{{ answer.topic_slug|replace('-', ' ')|title }}</a> ›
+    <span>{{ answer.state_slug|replace('-', ' ')|title }}</span>
+  </nav>
+  <h1>{{ answer.question }}</h1>
+  <p class="answer-meta">
+    Asked in {{ answer.asked_in }} on {{ answer.asked_on }}
+    {% if answer.last_answered_on %} · Last answered on {{ answer.last_answered_on }}{% endif %}
+  </p>
+  <h2>{{ answer.answer_count }} answer{{ 's' if answer.answer_count != 1 }}</h2>
+
+  <div class="answer-block">
+    <p><strong>Answered by:</strong></p>
+    <div class="answerer">
+      {% set answering = answer.answerer %}
+      {% if answering %}
+      <img src="{{ url_for('static', filename=answering.photo()) }}" alt="{{ answering.name }}" width="160" height="200">
+      {% elif answer.answerer_photo_path %}
+      <img src="{{ url_for('static', filename=answer.answerer_photo_path) }}" alt="{{ answer.answerer_name }}" width="160" height="200">
+      {% endif %}
+      <div>
+        {% if answering %}
+          <h3><a href="/profiles/{{ answering.state_slug }}/{{ answering.city_slug }}/lawyer/{{ answering.slug }}/{{ answering.uuid }}.html">{{ answering.name }}</a></h3>
+        {% else %}
+          <h3>{{ answer.answerer_name }}</h3>
+        {% endif %}
+        <p>{{ answer.answerer_city }}</p>
+        {% if answer.answerer_firm %}<p>{{ answer.answerer_firm }}</p>{% endif %}
+        {% if answer.answerer_phone %}
+        <p><a class="serp-phone" href="tel:{{ answer.answerer_phone|replace('-', '') }}"><span class="phone-icon" aria-hidden="true"></span>{{ answer.answerer_phone }}</a></p>
+        {% endif %}
+        {% if answering %}
+        <p><a class="btn btn-outline" href="/profiles/{{ answering.state_slug }}/{{ answering.city_slug }}/lawyer/{{ answering.slug }}/{{ answering.uuid }}.html">View profile</a></p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="answer-body">
+      {% for para in answer.body %}<p>{{ para }}</p>{% endfor %}
+    </div>
+  </div>
+
+  <h3>Don't see what you are looking for? Ask a Super Lawyers Selectee - it's free!</h3>
+  <form class="ask-form" method="get" action="/answers/search/">
+    <label for="ask-q2">Enter your legal issue</label>
+    <input id="ask-q2" type="search" name="q" placeholder="e.g. divorce, custody, personal injury">
+    <button class="btn btn-primary" type="submit">Search answers</button>
+  </form>
+</div>
+{% endblock %}

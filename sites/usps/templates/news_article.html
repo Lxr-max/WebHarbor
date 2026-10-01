@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.clean_title or article.title }} | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('newsroom') }}">Newsroom</a> &rsaquo; {{ article.clean_title or article.title }}</p>
+<h1>{{ article.clean_title or article.title }}</h1>
+<p class="note">{{ article.date | longdate }}{% if article.release_type %} &middot; {{ article.release_type | title }}{% endif %}</p>
+{% for img in images %}
+  <div class="hero-banner"><img src="{{ url_for('static', filename=img.path) }}" alt="{{ img.alt }}"></div>
+{% endfor %}
+{% for p in paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+{% endblock %}

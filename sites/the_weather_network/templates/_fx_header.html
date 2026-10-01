@@ -1,0 +1,22 @@
+{% macro fx_header(loc, obs, tab, updated='') %}
+<div class="breadcrumb">
+  <a href="/en">Weather</a> /
+  {% if loc.channel != 'city' %}<a href="/en/{{ loc.url_prefix }}">{{ loc.channel|replace('campground','camping')|title }}</a> /{% endif %}
+  {{ loc.name }}
+</div>
+<div class="fx-surface">
+  <div class="fx-head">
+    <h1>{{ loc.name }}{% if loc.prov_code %}, {{ loc.prov_code }}{% elif loc.prov %}, {{ loc.prov }}{% endif %} {{ {'current':'Current Weather','hourly':'Hourly Forecast','7-days':'7 Days Weather','14-days':'14 Days Weather','weekend':'Weekend Forecast','monthly':'Monthly Report'}[tab] }}</h1>
+    {% if obs and updated %}<span class="fx-updated">{{ updated }}</span>{% endif %}
+  </div>
+  <nav class="fx-tabs">
+    <a href="{{ loc.url('current') }}" class="{% if tab == 'current' %}active{% endif %}">Current</a>
+    <a href="{{ loc.url('hourly') }}" class="{% if tab == 'hourly' %}active{% endif %}">Hourly</a>
+    <a href="{{ loc.url('7-days') }}" class="{% if tab == '7-days' %}active{% endif %}">7 Days</a>
+    <a href="{{ loc.url('14-days') }}" class="{% if tab == '14-days' %}active{% endif %}">14 Days</a>
+    <a href="{{ loc.url('weekend') }}" class="{% if tab == 'weekend' %}active{% endif %}">Weekend</a>
+    {% if loc.channel == 'city' %}<a href="{{ loc.url('monthly') }}" class="{% if tab == 'monthly' %}active{% endif %}">Monthly</a>{% endif %}
+  </nav>
+  {{ caller() }}
+</div>
+{% endmacro %}

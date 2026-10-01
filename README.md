@@ -42,7 +42,7 @@ Build this checkout to run its registered web environments (published image tags
 
 ```bash
 ./scripts/build.sh webharbor:dev
-docker run -e WEBSYN_CONTROL_TOKEN -p 8101:8101 -p 40000-40093:40000-40093 webharbor:dev
+docker run -e WEBSYN_CONTROL_TOKEN -p 8101:8101 -p 40000-40132:40000-40132 webharbor:dev
 ```
 
 Then point your agent at `http://localhost:40000` through `http://localhost:40093` to explore 94 local mirrors. The table below lists every site in port order.
@@ -66,8 +66,8 @@ git clone https://github.com/aiming-lab/WebHarbor && cd WebHarbor
 
 All registered websites and their default ports, in registration order from left to right across each row. A site's container port is `40000 + index` (see the `SITES` array and `BASE_PORT` in `websyn_start.sh`, and the `EXPOSE` line in the `Dockerfile`).
 
-| Website | Default port | Website | Default port | Website | Default port |
-| --- | --- | --- | --- | --- | --- |
+| Website | Port | Website | Port | Website | Port |
+|---|---|---|---|---|---|
 | Allrecipes | 40000 | Amazon | 40001 | Apple | 40002 |
 | ArXiv | 40003 | BBC News | 40004 | Booking | 40005 |
 | GitHub | 40006 | Google Flights | 40007 | Google Maps | 40008 |
@@ -101,6 +101,20 @@ All registered websites and their default ports, in registration order from left
 | OhioMeansJobs | 40090 | Ohio.gov | 40091 | NFL | 40092 |
 | MTA | 40093 | Public Storage | 40094 | Raising Cane’s | 40095 |
 | RE/MAX | 40096 | Parkers | 40097 | Ryanair | 40098 |
+| Chess.com | 40099 | Porsche | 40100 | Qatar Airways | 40101 |
+| SoundCloud | 40102 | Speedo | 40103 | SourceForge | 40104 |
+| StubHub | 40105 | SpotHero | 40106 | Student.com | 40107 |
+| Statista | 40108 | Thumbtack | 40109 | Ticketmaster | 40110 |
+| Trip.com | 40111 | The Weather Network | 40112 | Super Lawyers | 40113 |
+| TourRadar | 40114 | Apartments.com | 40115 | Eventbrite | 40116 |
+| Fandom | 40117 | Mayo Clinic | 40118 | SmartAsset | 40119 |
+| U.S. DOJ | 40120 | CVS | 40121 | CBP.gov | 40122 |
+| UPS | 40123 | United Airlines | 40124 | US Appliance | 40125 |
+| USCIS | 40126 | Tumblr | 40127 | Zara | 40128 |
+| USPS | 40129 | Wanderlog | 40130 | Virginia DMV | 40131 |
+| Verizon | 40132 | ZipRecruiter | 40133 | Carvana | 40134 |
+| CoinMarketCap | 40135 | Cars.com | 40136 | Airbnb | 40137 |
+| Backcountry | 40138 | Disney | 40139 |  |  |
 
 ## 🤝 Contribute
 

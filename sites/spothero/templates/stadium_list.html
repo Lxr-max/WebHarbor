@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Stadium Parking | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>Stadium Parking</h1>
+    <p>Book parking at NFL, MLB, NBA, and NHL venues across North America.</p>
+  </div>
+  {% for league in stadiums %}
+  <section class="section-tight">
+    <h2>{{ league.league }}</h2>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Stadium Name</th><th>Team Name</th><th>Reserve Parking</th></tr></thead>
+      <tbody>
+        {% for s in league.stadiums %}
+        <tr>
+          <td>{{ s.name }}</td>
+          <td>{{ s.team }}</td>
+          <td>{% if s.slug in dest_slugs %}<a class="btn btn-primary btn-sm" href="{{ url_for('destination_page', city_slug=s.city_slug, slug=s.slug) }}">Book Now</a>{% else %}<a class="btn btn-primary btn-sm" href="https://spothero.com/destination/{{ s.city_slug }}/{{ s.slug }}" rel="noopener">Book Now</a>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

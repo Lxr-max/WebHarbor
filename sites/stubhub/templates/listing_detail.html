@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ evt.name }} Tickets | StubHub{% endblock %}
+{% block content %}
+<div class="modal-page">
+  <div class="modal-card">
+    <a class="modal-close" href="{{ evt.url_path }}?quantity={{ quantity }}" aria-label="Back to listings">✕</a>
+    <div class="modal-media">
+      {% if listing.seat_view_file %}
+      <img src="{{ listing.seat_view_file }}" alt="View from {{ listing.section }}">
+      {% endif %}
+    </div>
+    <div class="modal-body">
+      <h1>Great seats, ready for checkout</h1>
+      <p class="modal-event">{{ evt.name }}</p>
+      <p class="modal-when">{{ evt.date_full }} • {{ 'TBA' if evt.is_time_tbd else evt.local_starts_at.strftime('%-I:%M %p') }}</p>
+      <p class="modal-venue">{{ evt.venue.name }}, {{ evt.venue.city }}, {{ evt.venue.state or evt.venue.country }}</p>
+
+      <div class="seat-summary">
+        <div>
+          <strong>{{ listing.section }}</strong>
+          <p>Row {{ listing.row or '—' }}{% if listing.seats %} · Seats {{ listing.seats }}{% endif %}</p>
+        </div>
+        <div>
+          <strong>{{ listing.quantity }} ticket{{ 's' if listing.quantity > 1 }}</strong>
+          <p>Seats together</p>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        {% for feat in listing.feature_list %}
+        <span class="feat">{{ feat }}</span>
+        {% endfor %}
+        {% for badge in listing.badge_list %}
+        <span class="badge badge-info">{{ badge }}</span>
+        {% endfor %}
+      </div>
+
+      <form method="post" action="/secure/checkout/start" class="qty-select-form">
+        <input type="hidden" name="listing_id" value="{{ listing.id }}">
+        <label for="qty">How many tickets?</label>
+        <select name="quantity" id="qty">
+          {% for n in range(1, listing.quantity + 1) %}
+          <option value="{{ n }}" {{ 'selected' if n == quantity }}>{{ n }} ticket{{ 's' if n > 1 }}</option>
+          {% endfor %}
+        </select>
+        <p class="filter-note">You'll be seated together</p>
+
+        <div class="price-breakdown">
+          <div class="row"><span>{{ '${:,}'.format(listing.price) }} × {{ quantity }} ticket{{ 's' if quantity > 1 }}</span>
+            <span>${{ '{:,.0f}'.format(listing.price * quantity) }}</span></div>
+          <div class="row muted"><span>Ticket price includes all fees</span><span>—</span></div>
+          <div class="row muted"><span>Order processing fee</span><span>Calculated at checkout</span></div>
+          <div class="row total"><span>Total</span><span>${{ '{:,.2f}'.format(listing.price * quantity + 2.95) }}</span></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-wide">Continue to checkout</button>
+      </form>
+      <p class="fanprotect">
+        <img src="{{ url_for('static', filename='icons/fanprotect.svg') }}" alt="" width="16" height="16">
+        Every order is 100% guaranteed
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

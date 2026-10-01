@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Attorney Top Lists selected in {{ state.name }}{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('top_lists_hub') }}">Top Lists</a> ›
+    <span>{{ state.name }}</span>
+  </nav>
+  <h1>Attorney Top Lists selected in {{ state.name }}</h1>
+
+  <h2>Current {{ state.name }} Top Lists</h2>
+  <div class="link-grid">
+    {% for lst in lists if lst.year >= 2026 %}
+      <a href="/top-lists/{{ lst.state_slug }}/{{ lst.slug }}/{{ lst.id }}/">{{ lst.title }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>All {{ state.name }} Top Lists</h2>
+  <div class="link-grid">
+    {% for lst in lists if lst.year < 2026 %}
+      <a href="/top-lists/{{ lst.state_slug }}/{{ lst.slug }}/{{ lst.id }}/">{{ lst.title }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Other options</h2>
+  <ul class="muted-list">
+    <li><a href="{{ url_for('attorneys_home') }}">Find Super Lawyers selectees in {{ state.name }}</a></li>
+    <li><a href="{{ url_for('top_lists_hub') }}">Browse all Top Lists on SuperLawyers.com</a></li>
+  </ul>
+</div>
+{% endblock %}

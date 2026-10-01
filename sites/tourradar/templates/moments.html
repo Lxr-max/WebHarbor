@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Traveler Moments - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px;">
+  <div class="section-head">
+    <h1>Traveler Moments</h1>
+    <span style="color:var(--text-2);">500k experiences shared by travelers</span>
+  </div>
+  <div class="grid-cards">
+    {% for m in moments %}
+    <div class="moment-card">
+      <img src="/static/images/{{ m.image }}" alt="{{ m.tour_name }}">
+      <div class="who"><b>{{ m.author }}</b> &bull; {{ m.tour_name }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

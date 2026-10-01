@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}DMV Online Account{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › DMV Online Account</nav>
+  <div class="page-title"><h1>DMV Online Account</h1></div>
+  <div class="card-grid" style="grid-template-columns: minmax(300px,1fr) minmax(300px,1fr);">
+    <div class="card">
+      <h2>Log In / View Account</h2>
+      <form class="flow" method="post" action="{{ url_for('account_login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field"><label for="email">Email address</label>
+          <input id="email" type="email" name="email" required></div>
+        <div class="field"><label for="password">Password</label>
+          <input id="password" type="password" name="password" required></div>
+        <button class="btn" type="submit">Log in</button>
+      </form>
+      <p class="hint">Forgot your password? Call DMV customer service at (804) 497-7100.</p>
+    </div>
+    <div class="card">
+      <h2>What you can do online</h2>
+      <ul class="flow">
+        <li>Vehicle registration renewal (with multi-year discounts)</li>
+        <li>Driver's license renewal and replacement</li>
+        <li>Change your address</li>
+        <li>Purchase special license plates</li>
+        <li>Request your driving or vehicle record</li>
+        <li>View your transactions and appointment history</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

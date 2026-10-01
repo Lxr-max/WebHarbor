@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Search Jobs</h1>
+<p>Explore the exciting opportunities available at CBP. We offer competitive recruitment and retention incentives for newly hired law enforcement personnel.</p>
+<form class="filters" method="get" action="{{ url_for('careers_search') }}">
+  <div class="field"><label for="q">Search roles by title</label>
+    <input id="q" type="search" name="q" value="{{ q }}" placeholder="e.g. Border Patrol Agent, Attorney"></div>
+  <div class="field"><label for="org">Program Office</label>
+    <select id="org" name="org">
+      <option value="">None</option>
+      {% for o in orgs %}<option value="{{ o }}" {% if o == org %}selected{% endif %}>{{ o }}</option>{% endfor %}
+    </select></div>
+  <div class="field"><label for="category">Category</label>
+    <select id="category" name="category">
+      <option value="">None</option>
+      {% for c in categories %}<option value="{{ c }}" {% if c == category %}selected{% endif %}>{{ c }}</option>{% endfor %}
+    </select></div>
+  <button class="btn" type="submit">Search</button>
+  <a class="btn btn-ghost" href="{{ url_for('careers_search') }}">Reset</a>
+</form>
+<p class="note">{{ rows|length }} postings.</p>
+<table class="data">
+  <tr><th>Job</th><th>Category</th><th>Org</th><th>Salary</th><th>Closing</th><th></th></tr>
+  {% for j in rows %}
+  <tr>
+    <td><a href="{{ url_for('job_detail', control=j.control) }}">{{ j.title }}</a></td>
+    <td>{{ j.category }}</td>
+    <td>{{ j.org }}</td>
+    <td>{{ j.salary }}</td>
+    <td>{{ j.closing }}</td>
+    <td><a class="btn" href="{{ url_for('job_detail', control=j.control) }}">View</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

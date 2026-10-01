@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Cars.com{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('home') }}">Cars<span class="brand-dot">.</span>com</a>
+    <nav class="main-nav">
+      <a href="{{ url_for('shopping_new') }}" class="{{ 'active' if request.path.startswith('/shopping/new') }}">Buy</a>
+      <a href="{{ url_for('offer_start') }}" class="{{ 'active' if request.path.startswith('/sell') }}">Sell</a>
+      <a href="{{ url_for('research_home') }}" class="{{ 'active' if request.path.startswith('/research') }}">Research</a>
+      <a href="{{ url_for('loan_calculator') }}" class="{{ 'active' if request.path.startswith('/car-loan') }}">Finance</a>
+    </nav>
+    <div class="header-right">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('garage') }}">Your Garage</a>
+        <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="link-button">Log Out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('authn_login') }}">Log In</a>
+        <a href="{{ url_for('authn_register') }}" class="btn btn-outline">Sign Up</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+<main id="main-content">
+{% block breadcrumb %}{% endblock %}
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Cars for Sale</h4>
+      <a href="{{ url_for('shopping_new') }}">Shop All New Cars</a>
+      <a href="{{ url_for('shopping_used') }}">Used Cars</a>
+      <a href="{{ url_for('shopping_cpo') }}">Certified Pre-Owned Cars</a>
+      <a href="{{ url_for('shopping_fso') }}">Cars for Sale by Owner</a>
+      <a href="{{ url_for('shopping_style', style='suv') }}">SUVs</a>
+      <a href="{{ url_for('shopping_style', style='truck') }}">Trucks</a>
+      <a href="{{ url_for('shopping_style', style='electric') }}">Electric Cars</a>
+    </div>
+    <div class="footer-col">
+      <h4>Research</h4>
+      <a href="{{ url_for('research_home') }}">Research Cars</a>
+      <a href="{{ url_for('compare_home') }}">Compare Cars</a>
+      <a href="{{ url_for('dealers_index') }}">Find a Dealership</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sell</h4>
+      <a href="{{ url_for('offer_start') }}">Get an Instant Offer</a>
+      <a href="{{ url_for('offer_start') }}">What's My Car Worth?</a>
+    </div>
+    <div class="footer-col">
+      <h4>Finance</h4>
+      <a href="{{ url_for('loan_calculator') }}">Car Payment Calculator</a>
+    </div>
+  </div>
+  <div class="footer-note">
+    <p>Cars.com mirror for offline agent benchmarks — a frozen snapshot of cars.com taken {{ MIRROR_TS }}. Not affiliated with Cars.com.
+    {{ counts_footer if counts_footer is defined }}</p>
+  </div>
+</footer>
+</body>
+</html>

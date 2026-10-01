@@ -1,0 +1,778 @@
+{
+  "U.S. DOJ--0": {
+    "task": "I'm preparing a briefing on DOJ's 2025\u20132026 efforts to remove barriers to competition. Compare the Bayer seed-program announcement with the veterinary-accreditation announcement: explain the conduct addressed in each, name Bayer's program and its two removed restrictions, and distinguish Bayer's commitments from the warning given to veterinary accreditation bodies. Include both release dates and numbers.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/antitrust\\-division\\-secures\\-seed\\-tying\\-and\\-loyalty\\-program\\-commitments\\-bayer(?:/|\\?|$)",
+      "^/opa/pr/justice\\-department\\-reaffirms\\-veterinary\\-accreditation\\-standards\\-and\\-procedures\\-are\\-subject(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "bayer",
+          "may 20.*2026",
+          "26-533",
+          "premier performance",
+          "corn",
+          "soybean",
+          "discount",
+          "competitor",
+          "seven years|7 years"
+        ],
+        "entity": "bayer:?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "veterinary",
+          "december 15.*2025",
+          "25-1176",
+          "avma",
+          "hospital",
+          "no position",
+          "antitrust"
+        ],
+        "entity": "veterinary accreditation:?"
+      }
+    ]
+  },
+  "U.S. DOJ--1": {
+    "task": "I'm following the Google open-web advertising case from the liability decision to the ordered remedy. Compare DOJ's April 2025 victory announcement with its September 2026 relief announcement. Give the first release's publication and updated dates and trial timing, then explain how the later relief addresses the tie between Google\u2019s products and why DOJ says that is needed.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/department\\-justice\\-prevails\\-landmark\\-antitrust\\-case\\-against\\-google(?:/|\\?|$)",
+      "^/opa/pr/department\\-justice\\-again\\-wins\\-substantial\\-relief\\-against\\-google(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "published april 17.*2025",
+          "updated april 14.*2026",
+          "15.day",
+          "september 2024"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "court.ordered",
+          "adx",
+          "dfp",
+          "prebid",
+          "other publisher",
+          "tie",
+          "without",
+          "both"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--2": {
+    "task": "Compare the July 8, 2025 antitrust whistleblower-program announcement with the January 29, 2026 first-payment release. What maximum reward percentage did the launch announce, what minimum recovery and award range does the later release specify, and what two remedial obligations did EBLOCK undertake in addition to its fine?",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/justice\\-departments\\-antitrust\\-division\\-announces\\-whistleblower\\-rewards\\-program(?:/|\\?|$)",
+      "^/opa/pr/antitrust\\-division\\-and\\-us\\-postal\\-service\\-award\\-first\\-ever\\-1m\\-payment\\-whistleblower\\-reporting(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "launch",
+          "up to 30%"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "at least \\$1000000",
+          "15 to 30 percent"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "eblock",
+          "compliance program",
+          "cooperat",
+          "investigation",
+          "prosecution"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--3": {
+    "task": "I'm comparing how DOJ describes civil healthcare settlements. Use the September 2026 Crown Medical Solutions and Maryland long-term-care pharmacy releases to explain the alleged billing conduct and period, settlement amount, and whether liability was determined in each case. Include the named whistleblowers and any settlement shares the releases disclose; distinguish allegations from findings.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/crown\\-medical\\-solutions\\-and\\-its\\-owners\\-pay\\-825000\\-fraudulent\\-billing\\-scheme(?:/|\\?|$)",
+      "^/opa/pr/maryland\\-long\\-term\\-care\\-pharmacy\\-pays\\-53m\\-settle\\-allegations\\-billing\\-drugs\\-without\\-valid(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "crown",
+          "\\$825000",
+          "medicare",
+          "unnecessary",
+          "november 1.*2017",
+          "april 30.*2019",
+          "karen martinelli",
+          "\\$123750",
+          "no liability"
+        ],
+        "entity": "crown(?: medical solutions)?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "remedi",
+          "\\$5300000",
+          "medicare",
+          "medicaid",
+          "without valid prescriptions",
+          "january 1.*2015",
+          "march 31.*2021",
+          "maureen gearhart",
+          "laura griffieth",
+          "no exact share",
+          "no liability"
+        ],
+        "entity": "remedi(?: seniorcare)?"
+      }
+    ]
+  },
+  "U.S. DOJ--4": {
+    "task": "I'm preparing a comparison of two criminal healthcare-fraud cases. Compare the September 2026 Arizona addiction-treatment clinic and Texas mental-health clinic releases: identify the clinics, targeted benefit programs, billing periods where stated, and the defendants' case outcomes. Explain the Arizona obstruction conduct and distinguish its sentence from the procedural stage of the Texas case.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/arizona\\-addiction\\-treatment\\-clinic\\-owner\\-sentenced\\-14\\-years\\-prison\\-leadership\\-role\\-69m(?:/|\\?|$)",
+      "^/opa/pr/texas\\-mental\\-health\\-clinic\\-owner\\-convicted\\-26m\\-scheme\\-defraud\\-military\\-health\\-benefits(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "arizona",
+          "tusa integrated",
+          "ahcccs",
+          "american indian",
+          "may 2022",
+          "march 2023",
+          "fake medical records",
+          "subpoena",
+          "14 years"
+        ],
+        "entity": "arizona:?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "texas",
+          "kevin",
+          "acuity tms of plano",
+          "fort worth",
+          "emerald coast",
+          "tricare",
+          "does not state",
+          "sentencing.*pending",
+          "not an imposed sentence"
+        ],
+        "entity": "texas:?"
+      }
+    ]
+  },
+  "U.S. DOJ--5": {
+    "task": "For a briefing on the practical limits DOJ seeks to put on business conduct, compare the September 2026 Google relief announcement with the Bayer seed-program commitments. Explain Google's two Prebid integration pairs, publishers' control over their data and the oversight duration, then contrast that with the two purchasing restrictions Bayer removed. Make clear which measures concern court-ordered relief and which are company commitments.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/opa/pr/department\\-justice\\-again\\-wins\\-substantial\\-relief\\-against\\-google(?:/|\\?|$)",
+      "^/opa/pr/antitrust\\-division\\-secures\\-seed\\-tying\\-and\\-loyalty\\-program\\-commitments\\-bayer(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "google",
+          "court.ordered",
+          "adx.prebid",
+          "dfp.prebid",
+          "access",
+          "export",
+          "own",
+          "data",
+          "six years|6 years"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "bayer",
+          "corn",
+          "soybean",
+          "discount",
+          "rival technology",
+          "seven years|7 years",
+          "commitment"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--6": {
+    "task": "I'm considering the U.S. Trustee Program's California Trial Attorney (Bankruptcy) vacancy posted September 25, 2026. Compare it with the California BOP Consolidated Legal Center Attorney vacancy posted that day to assess where I could work and at which grade: give each posting's job identifier where supplied, duty cities, grades, and minimum post-J.D. experience. Keep the BOP institutions covered separate from its duty locations.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/legal\\-careers/job/trial\\-attorney\\-bankruptcy\\-0(?:/|\\?|$)",
+      "^/legal\\-careers/job/consolidated\\-legal\\-center\\-clc\\-attorney\\-43(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "ust",
+          "trial attorney-r16-09-2026",
+          "los angeles",
+          "riverside",
+          "santa ana",
+          "gs-13.*1\\.5",
+          "gs-14.*2\\.5",
+          "gs-15.*4 years"
+        ],
+        "entity": "ust:?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "bop",
+          "no separate job id",
+          "no.*numerical minimum|or numerical minimum",
+          "gs-12",
+          "gs-13",
+          "gs-14",
+          "mdc los angeles",
+          "fcc lompoc",
+          "fci terminal island",
+          "fcc victorville"
+        ],
+        "entity": "bop:?"
+      }
+    ]
+  },
+  "U.S. DOJ--7": {
+    "task": "I'm weighing a move for one of the California BOP or UST attorney vacancies posted September 25, 2026. Compare their possible duty locations and relocation-expense policies, and explain which four institutions the BOP Los Angeles legal team covers. Summarize how the UST application should indicate preferred offices so I can choose a location without submitting an application.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/legal\\-careers/job/consolidated\\-legal\\-center\\-clc\\-attorney\\-43(?:/|\\?|$)",
+      "^/legal\\-careers/job/trial\\-attorney\\-bankruptcy\\-0(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "bop",
+          "mdc los angeles",
+          "fcc lompoc",
+          "relocation expenses are not authorized",
+          "fci terminal island",
+          "fcc victorville"
+        ],
+        "entity": "bop"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "ust",
+          "los angeles",
+          "riverside",
+          "santa ana",
+          "no authorized relocation",
+          "preferred",
+          "cover letter"
+        ],
+        "entity": "ust"
+      }
+    ]
+  },
+  "U.S. DOJ--8": {
+    "task": "Compare the California BOP Consolidated Legal Center Attorney and UST Trial Attorney (Bankruptcy) vacancies posted September 25, 2026. For each, summarize the application documents, any resume or writing-sample length limits stated in its Application Process section, and the relocation-expense policy. Include the UST instructions for packaging the application and identifying preferred field offices; do not submit an application.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/legal\\-careers/job/consolidated\\-legal\\-center\\-clc\\-attorney\\-43(?:/|\\?|$)",
+      "^/legal\\-careers/job/trial\\-attorney\\-bankruptcy\\-0(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "bop",
+          "resume",
+          "references",
+          "cover letter",
+          "writing sample",
+          "no.*length limit",
+          "relocation is not authorized"
+        ],
+        "entity": "bop"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "ust",
+          "two pages",
+          "under ten pages",
+          "transcripts",
+          "sf-50",
+          "appraisal",
+          "dd-214",
+          "optional",
+          "200 words",
+          "one pdf",
+          "ustp.employment@usdoj.gov",
+          "trial attorney-r16-09-2026",
+          "preferred",
+          "cover letter",
+          "relocation is not authorized"
+        ],
+        "entity": "ust"
+      }
+    ]
+  },
+  "U.S. DOJ--9": {
+    "task": "Compare the Criminal Division's ICHIP Netherlands and Resident Legal Advisor Albania detail vacancies posted September 22, 2026. For each, report the planned assignment length and start timing, the embassy city, and the travel expectation. Also identify the security clearance both postings require.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/legal\\-careers/job/international\\-computer\\-hacking\\-and\\-intellectual\\-property\\-attorney\\-advisor\\-ichip\\-6(?:/|\\?|$)",
+      "^/legal\\-careers/job/resident\\-legal\\-advisor\\-albania(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "ichip",
+          "at least 14 months",
+          "january 2027",
+          "the hague",
+          "extensive travel",
+          "europe"
+        ],
+        "entity": "ichip netherlands"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "albania",
+          "14 months",
+          "october 2026",
+          "tirana",
+          "extensive travel",
+          "other countries"
+        ],
+        "entity": "resident legal advisor albania"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "both",
+          "top.secret",
+          "clearance"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--10": {
+    "task": "I'm planning applications to the Public Trust and Financial Integrity Section and National Enforcement Section trial-attorney vacancies in the September 2026 snapshot. Compare their duty-location options, application-review timing, and submission instructions, including required documents and email subject lines. Flag any differences that would affect preparing the two applications; do not send anything.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/legal\\-careers/job/trial\\-attorney\\-269(?:/|\\?|$)",
+      "^/legal\\-careers/job/trial\\-attorney\\-270(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "public trust",
+          "washington",
+          "newark",
+          "houston",
+          "miami",
+          "chicago",
+          "los angeles"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "national enforcement",
+          "washington",
+          "june 15.*2026",
+          "rolling"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "both",
+          "pdf",
+          "cover letter",
+          "two pages",
+          "ten pages",
+          "frauddivisionhiring@usdoj.gov",
+          "sf-50",
+          "veteran"
+        ]
+      },
+      {
+        "label": "Fact 4",
+        "all": [
+          "subject",
+          "trial attorney \\(public trust and financial integrity section\\)",
+          "last name, first name",
+          "trial attorney \\(national enforcement section\\)"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--11": {
+    "task": "I used to send bankruptcy correspondence to the Woodland Hills U.S. Trustee office and need to attend a chapter 11 meeting for that division. Use Region 16's closure notice and local meeting guidance to explain where my correspondence now goes, including the effective closure date, full address and phone, and how I should find the joining instructions for an ordinary chapter 11 case versus a subchapter V case.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/ust\\-regions\\-r16(?:/|\\?|$)",
+      "^/ust/ust\\-regions\\-r16/region\\-16\\-section\\-341\\-meetings\\-1(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "closed",
+          "september 30.*2025",
+          "915 wilshire",
+          "1850",
+          "los angeles",
+          "90017",
+          "213\\D*894\\D*0405"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "chapter 11",
+          "telephonic",
+          "section 6",
+          "form 309",
+          "section 7",
+          "subchapter v"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--12": {
+    "task": "Navigate through U.S. Trustee Region 16 to the Los Angeles office's Local Section 341 Meeting Information for the Los Angeles Division. For the chapter 7, 12, and 13 video-meeting rollout, give the case-filing cutoff and meeting-start date. Then state how chapter 11 meetings are held and which sections of Official Form 309 provide joining information for ordinary chapter 11 and subchapter V cases.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/ust\\-regions\\-r16(?:/|\\?|$)",
+      "^/ust/ust\\-regions\\-r16/region\\-16\\-section\\-341\\-meetings\\-1(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "los angeles",
+          "may 1.*2024",
+          "june 3.*2024",
+          "zoom"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "chapter 11",
+          "telephonic",
+          "section 6",
+          "form 309",
+          "section 7",
+          "subchapter v"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--13": {
+    "task": "Use the U.S. Trustee office directory to compare Region 16's Santa Ana and Riverside field offices. For each office, report the Assistant United States Trustee, the full mailing address including suite, the office phone number, and the division served.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/ust\\-regions\\-r16/region\\-16\\-central\\-district\\-california\\-santa\\-ana\\-division(?:/|\\?|$)",
+      "^/ust/ust\\-regions\\-r16/region\\-16\\-central\\-district\\-california\\-riverside\\-division(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "santa ana",
+          "kenneth misken",
+          "411 west fourth",
+          "7160",
+          "92701",
+          "714\\D*338\\D*3400",
+          "santa ana division"
+        ],
+        "entity": "santa ana:?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "riverside",
+          "abram s. feuerstein",
+          "3801 university",
+          "720",
+          "92501",
+          "951\\D*276\\D*6990",
+          "riverside division"
+        ],
+        "entity": "riverside:?"
+      }
+    ]
+  },
+  "U.S. DOJ--14": {
+    "task": "I'm choosing the correct guidance for preparing Chapter 11 operating reports. Locate the Monthly Operating Report and Post-confirmation Report instruction documents, give their titles, download links and displayed modification dates, and use the troubleshooting guidance to explain whether generating a court-filing PDF actually files it and the minimum Adobe Reader version. Distinguish instructions from blank forms.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/chapter\\-11\\-operating\\-reports(?:/|\\?|$)",
+      "^/ust/chapter\\-11\\-operating\\-reports/morpcr\\-troubleshooting\\-tips(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "monthly operating report instructions",
+          "post.confirmation report instructions",
+          "december 7.*2022"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "does not file",
+          "cm/ecf",
+          "adobe reader 10.0",
+          "higher"
+        ]
+      },
+      {
+        "label": "Document link: UST Form 11-MOR \u2013 Monthly Operating Report Instructions",
+        "all": [
+          "/ust/file/1452396/download"
+        ]
+      },
+      {
+        "label": "Document link: UST Form 11-PCR \u2013 Post-confirmation Report Instructions",
+        "all": [
+          "/ust/file/1452391/download"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--15": {
+    "task": "A Mac user preparing a Post-confirmation Report gets the message 'An error occurred during the submit process. There was a problem connecting to the server' when generating the court-filing PDF. Use the UST operating-reports page and its Troubleshooting Tips to identify the Mac-specific PCR download link, the two instructions under that exact error, and the minimum Adobe Reader and operating-system requirements for the Mac form.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/chapter\\-11\\-operating\\-reports(?:/|\\?|$)",
+      "^/ust/chapter\\-11\\-operating\\-reports/morpcr\\-troubleshooting\\-tips(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "mac",
+          "post.confirmation report",
+          "download",
+          "macos",
+          "fill",
+          "generate"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "adobe reader",
+          "10.0",
+          "higher",
+          "latest macos"
+        ]
+      },
+      {
+        "label": "Document link: UST Form 11-PCR \u2013 Post-confirmation Report",
+        "all": [
+          "/ust/file/1456356/download"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--16": {
+    "task": "I'm preparing a Post-confirmation Report and see the exact error 'Error: Nothing Done', without 'Unknown Format'. Use the operating-reports page and its troubleshooting guidance to identify the PCR instructions and their modification date, explain the two corrective steps for that error, and clarify what remains to be done after Generate PDF for Court Filing and Remove Watermark. Include the troubleshooting page's updated date.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/ust/chapter\\-11\\-operating\\-reports(?:/|\\?|$)",
+      "^/ust/chapter\\-11\\-operating\\-reports/morpcr\\-troubleshooting\\-tips(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "post.confirmation report instructions",
+          "december 7.*2022",
+          "latest form",
+          "hard return",
+          "address",
+          "signature block",
+          "page 1"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "does not submit",
+          "cm/ecf",
+          "updated july 9.*2025"
+        ]
+      },
+      {
+        "label": "Document link: UST Form 11-PCR \u2013 Post-confirmation Report Instructions",
+        "all": [
+          "/ust/file/1452391/download"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--17": {
+    "task": "I'm following up on an OIP request submitted before January 28, 2020 and deciding whether I need to appeal. Find the legacy portal guidance and explain how to obtain status information or previously uploaded documents, including the complete mailing address and phone, and how OIP says it will respond to requests pending on January 29, 2020. Then explain the administrative appeal deadline, what starts it and how to identify the original request; do not submit anything.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/oip/submit\\-and\\-track\\-request\\-or\\-appeal(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "foiaonline",
+          "6th floor",
+          "441 g street",
+          "20530-0001",
+          "202\\D*514\\D*3642",
+          "january 29.*2020",
+          "email"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "appeal",
+          "component",
+          "request number",
+          "90 days",
+          "date",
+          "response letter",
+          "one appeal per"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--18": {
+    "task": "I'm preparing a FOIA request involving both Solicitor General records and Office of Public Affairs records. Compare the two components' contact guidance so I can route the records request correctly: give each component's request channels (email if listed) and mailing address, its named public liaison and liaison phone, and distinguish those channels from ordinary media inquiries. Do not send a request.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/oip/find\\-foia\\-contact\\-doj/list(?:/|\\?|$)",
+      "^/opa/opa\\-freedom\\-information\\-act(?:/|\\?|$)",
+      "^/opa/contact\\-office(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "solicitor general",
+          "osgfoia@usdoj.gov",
+          "950 pennsylvania",
+          "7115",
+          "20530-0001",
+          "shannon munro",
+          "202\\D*514\\D*2203"
+        ],
+        "entity": "solicitor general:?"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "public affairs",
+          "information policy",
+          "online request",
+          "not.*email",
+          "6th floor",
+          "441 g street",
+          "20530",
+          "eric hotchkiss",
+          "202\\D*514\\D*3642"
+        ],
+        "entity": "public affairs:?"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "media inquiries",
+          "information for journalists",
+          "202\\D*514\\D*2007",
+          "distinct"
+        ]
+      }
+    ]
+  },
+  "U.S. DOJ--19": {
+    "task": "Find the FOIA Requester Service Center phone for the Executive Office for U.S. Attorneys in DOJ's contact directory. Then use OIP's administrative-appeal guidance to explain what identifies the original request, the appeal filing deadline and its starting event, and how multiple original requests should be handled. Report the guidance only; do not submit a request or appeal.",
+    "initial_digest": "307a663fea33ada7afe545e6dcee15e918e398eb6174a76a9542e4c7427b2246",
+    "state": {},
+    "paths": [
+      "^/oip/find\\-foia\\-contact\\-doj/list(?:/|\\?|$)",
+      "^/oip/submit\\-and\\-track\\-request\\-or\\-appeal(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "service center",
+          "202\\D*252\\D*6020"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "appeal",
+          "component",
+          "request number",
+          "90 days",
+          "date",
+          "response letter",
+          "one appeal per"
+        ]
+      }
+    ]
+  }
+}

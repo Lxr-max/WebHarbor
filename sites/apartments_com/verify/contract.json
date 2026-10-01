@@ -1,0 +1,635 @@
+{
+  "Apartments.com--0": {
+    "task": "I drive an electric car and need a two-bedroom apartment in Miami for no more than $4,000 per month. Find available rentals in buildings with both EV charging and parking, report the number of matching buildings, and identify the cheapest matching unit with its building, address and rent.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/fl/miami/park\\-crest\\-residences\\-miami\\-fl\\-008(?:/|\\?|$)",
+      "^/fl/miami/park\\-crest\\-residences\\-miami\\-fl\\-008/unit/9383(?:/|\\?|$)",
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "8 matching buildings|eight matching buildings"
+        ],
+        "scope": "8 matching buildings|eight matching buildings"
+      },
+      {
+        "label": "2",
+        "all": [
+          "0211",
+          "park crest residences",
+          "3139 biscayne",
+          "2471",
+          "per month|monthly"
+        ],
+        "scope": "0211"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--1": {
+    "task": "Search for available 2-bedroom rentals in Brickell, Miami at no more than $3,500 per month. Sort by price low to high and report the building name, address, and cheapest matching unit rent.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/fl/miami/park\\-vista\\-tower\\-miami\\-fl\\-033(?:/|\\?|$)",
+      "^/fl/miami/park\\-vista\\-tower\\-miami\\-fl\\-033/unit/9799(?:/|\\?|$)",
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "park vista tower",
+          "8535 washington",
+          "3072",
+          "per month|monthly"
+        ],
+        "scope": "park vista tower"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--2": {
+    "task": "I am considering The Boulevard at 6081 S 1st St in Austin. Check its Walk Score and available units, then send its manager a message as Jane Doe, jane.doe@example.com, asking about the cheapest available unit and including that unit number and listed rent. Report the Walk Score and unit availability count.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "messages": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": null,
+            "building_id": 314,
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "phone": "",
+            "body": {
+              "contains": [
+                "1107",
+                "\\$?2,?149",
+                "availab"
+              ]
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/tx/austin/the\\-boulevard\\-austin\\-tx\\-000(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "boulevard",
+          "walk score 36",
+          "9 available units"
+        ],
+        "scope": "boulevard"
+      },
+      {
+        "label": "2",
+        "all": [
+          "1107",
+          "2149",
+          "per month|monthly"
+        ],
+        "scope": "1107"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--3": {
+    "task": "Compare Mosaic at 2392 5th Ave in New York with Beacon at 4690 Pike St in Seattle. Which has the higher Walk Score, and what rent range is shown for each?",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/ny/new\\-york/mosaic\\-new\\-york\\-ny\\-000(?:/|\\?|$)",
+      "^/wa/seattle/beacon\\-seattle\\-wa\\-000(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mosaic",
+          "walk score 78",
+          "3213",
+          "5751"
+        ],
+        "scope": "mosaic"
+      },
+      {
+        "label": "2",
+        "all": [
+          "beacon",
+          "walk score 76",
+          "2077",
+          "3904"
+        ],
+        "scope": "beacon"
+      },
+      {
+        "label": "3",
+        "all": [
+          "mosaic",
+          "higher walk score"
+        ],
+        "scope": "mosaic"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--4": {
+    "task": "Find the cheapest currently available 1-bedroom unit in San Francisco in a building that allows dogs and has in-unit laundry. Report the building name, address, unit number, and rent.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/ca/san\\-francisco/vista\\-lofts\\-san\\-francisco\\-ca\\-024(?:/|\\?|$)",
+      "^/ca/san\\-francisco/vista\\-lofts\\-san\\-francisco\\-ca\\-024/unit/6524(?:/|\\?|$)",
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "vista lofts",
+          "353 minna",
+          "1308",
+          "2534"
+        ],
+        "scope": "vista lofts"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--5": {
+    "task": "Use the SoMa San Francisco preset in Draw search to find a place near my new office. Identify the returned building and its cheapest available one-bedroom unit, then message its manager as Jane Doe, jane.doe@example.com, asking to confirm the unit's listed rent and availability date. Include those details in the message.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "messages": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": null,
+            "building_id": 353,
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "phone": "",
+            "body": {
+              "contains": [
+                "1216",
+                "\\$?2,?593",
+                "2026-06-01|june 1",
+                "confirm|availab"
+              ]
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/ca/san\\-francisco/4548\\-mission\\-st\\-san\\-francisco\\-ca\\-004(?:/|\\?|$)",
+      "^/search/draw(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "4548 mission st"
+        ],
+        "scope": "4548 mission st"
+      },
+      {
+        "label": "2",
+        "all": [
+          "1216",
+          "2593",
+          "june 1.*2026|2026-06-01"
+        ],
+        "scope": "1216"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--6": {
+    "task": "Submit an in-person tour request for Mosaic Apartments at 8205 Collins Ave in Miami for October 3, 2026 at 2:00 PM using Jane Doe and jane.doe@example.com. Report the confirmation number.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "tour_requests": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": null,
+            "building_id": 521,
+            "unit_id": null,
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "phone": "",
+            "preferred_date": "2026-10-03",
+            "preferred_time": "2:00 PM",
+            "tour_type": "In-Person",
+            "move_in_date": "",
+            "message": "",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/fl/miami/mosaic\\-apartments\\-miami\\-fl\\-000(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "confirmation",
+          "tr-000001"
+        ],
+        "scope": "confirmation"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--7": {
+    "task": "I want to contact the best-reviewed building in Chicago\u2019s Streeterville neighborhood. Compare the top two buildings by displayed rating and review count, then message the higher-rated building as Jane Doe, jane.doe@example.com, asking about pet restrictions. Report both buildings' names, addresses, ratings, and review counts.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "messages": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": null,
+            "building_id": 145,
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "phone": "",
+            "body": {
+              "contains": [
+                "pet",
+                "restriction|polic"
+              ]
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/il/chicago/the\\-wynwood\\-at\\-chicago\\-chicago\\-il\\-038(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "wynwood",
+          "3637 e grand",
+          "4\\.8",
+          "25 reviews"
+        ],
+        "scope": "wynwood"
+      },
+      {
+        "label": "2",
+        "all": [
+          "crescent lofts",
+          "3943 w washington",
+          "4\\.3",
+          "12 reviews"
+        ],
+        "scope": "crescent lofts"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--8": {
+    "task": "Compare daily convenience at 1060 W 21st St and The Aspen at 8650 Mission St, both in New York. For each building, report the nearest grocery store and distance, plus the highest-rated nearby school and its rating and distance. Explain which building has the shorter grocery trip.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/ny/new\\-york/1060\\-w\\-21st\\-st\\-new\\-york\\-ny\\-009(?:/|\\?|$)",
+      "^/ny/new\\-york/the\\-aspen\\-new\\-york\\-ny\\-054(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "1060 w 21st",
+          "h-e-b",
+          "0\\.8 miles",
+          "cesar chavez",
+          "7/10",
+          "2\\.2 miles"
+        ],
+        "scope": "1060 w 21st"
+      },
+      {
+        "label": "2",
+        "all": [
+          "aspen",
+          "kroger",
+          "0\\.4 miles",
+          "pacific high",
+          "10/10",
+          "0\\.2 miles"
+        ],
+        "scope": "aspen"
+      },
+      {
+        "label": "3",
+        "all": [
+          "aspen",
+          "shorter grocery"
+        ],
+        "scope": "aspen"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--9": {
+    "task": "Filter for luxury apartments in Los Angeles with both a rooftop and a pool. Sort by price low to high and report the cheapest result's name, address, and displayed rent range.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/ca/los\\-angeles/pacific\\-los\\-angeles\\-ca\\-048(?:/|\\?|$)",
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "pacific",
+          "6613 wilshire"
+        ],
+        "scope": "pacific"
+      },
+      {
+        "label": "2",
+        "all": [
+          "matching.available.unit",
+          "2143",
+          "4797"
+        ],
+        "scope": "matching.available.unit"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--10": {
+    "task": "Sign in as alice.j@test.com with password Password123!. I am considering The Aspen at 8650 Mission St in New York because of its nearby school rated at least 8. Check that school\u2019s profile, report its name, rating, distance from the building and grade range, and add The Aspen to Favorites so I can return to this option.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": 13,
+            "user_id": 1,
+            "building_id": 17,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/ny/new\\-york/the\\-aspen\\-new\\-york\\-ny\\-054(?:/|\\?|$)",
+      "^/school/pacific\\-high\\-school\\-new\\-york\\-ny\\-5(?:/|\\?|$)",
+      "^/favorites(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "pacific high",
+          "10/10",
+          "0\\.2 miles",
+          "9-12"
+        ],
+        "scope": "pacific high"
+      },
+      {
+        "label": "2",
+        "all": [
+          "aspen",
+          "saved|favorites"
+        ],
+        "scope": "aspen"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--11": {
+    "task": "Sign in as alice.j@test.com with password Password123!. On The Symphony at 3430 N Clark St in Chicago, submit a review titled 'Great spot near the lake' with 5 stars overall and a short positive body. Confirm the review appears and report the updated displayed review count.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "buildings": {
+        "added": [],
+        "updated": {
+          "[107]": {
+            "review_count": 21
+          }
+        }
+      },
+      "reviews": {
+        "added": [
+          {
+            "id": 12497,
+            "building_id": 107,
+            "author_name": "Alice Johnson",
+            "rating": 5,
+            "rating_value": 5,
+            "rating_location": 5,
+            "rating_office_staff": 5,
+            "rating_maintenance": 5,
+            "rating_amenities": 5,
+            "title": "Great spot near the lake",
+            "body": {
+              "contains": [
+                "welcoming|lovely|helpful|great|good|excellent"
+              ]
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "user_id": 1,
+            "helpful_count": 0,
+            "flagged": 0
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/il/chicago/the\\-symphony\\-chicago\\-il\\-000(?:/|\\?|$)",
+      "^/il/chicago/the\\-symphony\\-chicago\\-il\\-000/reviews(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "great spot near the lake",
+          "5 stars"
+        ],
+        "scope": "great spot near the lake"
+      },
+      {
+        "label": "2",
+        "all": [
+          "review count",
+          "21"
+        ],
+        "scope": "review count"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--12": {
+    "task": "Sign in as alice.j@test.com with password Password123!. Search New York for available 2-bedroom rentals at no more than $4,000, save it as 'NYC 2BR under 4000', then report the total number of saved searches in the account.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {
+      "saved_searches": {
+        "added": [
+          {
+            "id": 5,
+            "user_id": 1,
+            "name": "NYC 2BR under 4000",
+            "query_string": {
+              "query": {
+                "city": "New York",
+                "beds": "2",
+                "price_max": "4000"
+              }
+            },
+            "email_frequency": "daily",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/search(?:/|\\?|$)",
+      "^/saved\\-searches(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saved",
+          "nyc 2br under 4000"
+        ],
+        "scope": "saved"
+      },
+      {
+        "label": "2",
+        "all": [
+          "2 saved searches|two saved searches"
+        ],
+        "scope": "2 saved searches|two saved searches"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--13": {
+    "task": "Find the cheapest Seattle unit that is currently available on or before June 30, 2026 in a building with parking. Report the building name, address, unit number, rent, and available date.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/wa/seattle/the\\-camden\\-lofts\\-seattle\\-wa\\-003(?:/|\\?|$)",
+      "^/wa/seattle/the\\-camden\\-lofts\\-seattle\\-wa\\-003/unit/6890(?:/|\\?|$)",
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "camden lofts",
+          "1251 westlake",
+          "4015",
+          "1814",
+          "june 26.*2026|2026-06-26"
+        ],
+        "scope": "camden lofts"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--14": {
+    "task": "Prepare a move-in budget for One Pacific Tower at 3375 Geary Blvd in San Francisco using the first available unit in its displayed ordering. Use the Move-In Cost Estimator with that unit\u2019s rent, the building\u2019s security deposit, application and administrative fees, and $600 for moving. Report the five components and the total.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/ca/san\\-francisco/one\\-pacific\\-tower\\-san\\-francisco\\-ca\\-001(?:/|\\?|$)",
+      "^/tools/affordability(?:/|\\?|$)",
+      "^/tools/move\\-in\\-cost(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "first month rent",
+          "3711",
+          "security deposit",
+          "2565",
+          "application fee",
+          "85",
+          "administrative fee",
+          "169",
+          "moving cost",
+          "600"
+        ],
+        "scope": "first month rent"
+      },
+      {
+        "label": "2",
+        "all": [
+          "total",
+          "7130"
+        ],
+        "scope": "total"
+      }
+    ],
+    "view_tables": []
+  },
+  "Apartments.com--15": {
+    "task": "Browse student-housing properties and determine which city has the most listings. Report the city and count; if tied, report all tied cities.",
+    "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
+    "state": {},
+    "paths": [
+      "^/search(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "new york",
+          "san antonio",
+          "tie",
+          "\\b5 each|five each"
+        ],
+        "scope": "new york"
+      }
+    ],
+    "view_tables": []
+  }
+}

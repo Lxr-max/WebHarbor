@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+  {% for alert in data.alerts %}
+  <div class="alert-box alert-box--{{ alert.type or 'info' }}">
+    <p><strong>{{ alert.type|capitalize if alert.type else 'Alert' }}:</strong> {{ alert.text }}</p>
+  </div>
+  {% endfor %}
+
+  <section class="hero-cards">
+    <div class="card card--tool">
+      <h2>Manage Your Case</h2>
+      <p>Use our online tools and resources to manage your case:</p>
+      <ul class="tick-list">
+        <li><a href="{{ url_for('casestatus') }}">Check your case status</a></li>
+        <li><a href="{{ url_for('processing_times') }}">Check case processing times</a></li>
+        <li><a href="{{ url_for('account_address') }}">Change your address</a></li>
+        <li><a href="{{ url_for('appointment_landing') }}">Schedule an appointment</a></li>
+      </ul>
+      <a class="btn btn--primary" href="{{ url_for('casestatus') }}">Case Status Online</a>
+    </div>
+    <div class="card card--tool">
+      <h2>File Online</h2>
+      <p>Filing a form online is easier and faster than paper filing. It gives you a simple and personalized experience.</p>
+      <ul class="tick-list">
+        <li><a href="/file-online/forms-available-to-file-online">Forms available to file online</a></li>
+        <li><a href="/file-online">Create a USCIS online account</a></li>
+      </ul>
+      <a class="btn btn--primary" href="{{ url_for('forms_catalog') }}">Find a Form</a>
+    </div>
+    <div class="card card--tool">
+      <h2>Explore by Topic</h2>
+      <p>Browse immigration information by topic to find the benefits and processes that apply to you.</p>
+      <ul class="tick-list">
+        <li><a href="/green-card">Green Card</a></li>
+        <li><a href="/citizenship">Citizenship</a></li>
+        <li><a href="/humanitarian">Humanitarian</a></li>
+        <li><a href="/working-in-the-united-states">Working in the United States</a></li>
+      </ul>
+      <a class="btn btn--primary" href="/topics">All Topics</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">USCIS Online Tools</h2>
+    <div class="tool-grid">
+      {% for label, href, blurb in tools %}
+      <a class="tool-tile" href="{{ href }}">
+        <h3>{{ label }}</h3>
+        <p>{{ blurb }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section section--split">
+    <div>
+      <h2 class="section__title">News &amp; Alerts</h2>
+      {% for item in alerts %}
+      <article class="news-teaser">
+        <span class="news-teaser__kind news-teaser__kind--alert">Alert</span>
+        <h3><a href="{{ url_for('news_detail', kind='alerts', slug=item.slug) }}">{{ item.title }}</a></h3>
+        <p class="news-teaser__date">{{ item.release_date }}</p>
+        {% if item.teaser %}<p>{{ item.teaser[:220] }}</p>{% endif %}
+      </article>
+      {% endfor %}
+      {% for item in releases %}
+      <article class="news-teaser">
+        <span class="news-teaser__kind">News Release</span>
+        <h3><a href="{{ url_for('news_detail', kind='news-releases', slug=item.slug) }}">{{ item.title }}</a></h3>
+        <p class="news-teaser__date">{{ item.release_date }}</p>
+        {% if item.teaser %}<p>{{ item.teaser[:220] }}</p>{% endif %}
+      </article>
+      {% endfor %}
+      <p><a href="{{ url_for('newsroom') }}">Visit the Newsroom</a></p>
+    </div>
+    <div>
+      <h2 class="section__title">Explore by Topic</h2>
+      <ul class="topic-list">
+        <li><a href="/green-card">Green Card</a></li>
+        <li><a href="/citizenship">Citizenship and Naturalization</a></li>
+        <li><a href="/working-in-the-united-states">Working in the United States</a></li>
+        <li><a href="/family">Family</a></li>
+        <li><a href="/humanitarian">Humanitarian</a></li>
+        <li><a href="/adoption">Adoption</a></li>
+        <li><a href="/military/military">Military Members</a></li>
+        <li><a href="/visit-the-us">Visit the U.S.</a></li>
+        <li><a href="/i-9-central">I-9 Central</a></li>
+        <li><a href="/avoid-scams">Avoid Scams</a></li>
+      </ul>
+    </div>
+  </section>
+</div>
+{% endblock %}

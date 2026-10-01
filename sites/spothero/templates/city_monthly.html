@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ city.display_name }} Monthly Parking | Book now on SpotHero and save{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>Find and reserve monthly parking in {{ city.display_name }}</h1>
+    <form method="get" action="{{ url_for('search') }}" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <input type="hidden" name="kind" value="monthly">
+      <input type="hidden" name="latitude" value="{{ city.lat }}">
+      <input type="hidden" name="longitude" value="{{ city.lng }}">
+      <input name="search_string" value="{{ city.name }}, {{ city.state }}, USA" style="flex:1;min-width:240px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <input type="date" name="monthly_start" value="2026-09-26" style="border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <button class="btn btn-primary" type="submit">Find Parking Spots</button>
+    </form>
+  </div>
+
+  <section class="section-tight">
+    <h2>{{ city.display_name }} Monthly Parking</h2>
+    <p class="muted">Looking for a long term parking solution? SpotHero offers monthly parking options that make it easy to park near work or home. To get started, search for your options nearby and click "Book Now" for all the details about each garage. Have questions about monthly parking options? We love to help! Give us a call at {{ city.monthly_phone or '844-324-7768' }}.</p>
+  </section>
+
+  <section class="section-tight">
+    <h2>Featured Monthly Rates</h2>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Parking Facility</th><th>Monthly Rates</th><th></th></tr></thead>
+      <tbody>
+        {% for f, rate in featured %}
+        <tr>
+          <td><a href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x', kind='monthly') }}">{{ f.title }}</a></td>
+          <td>${{ rate }}</td>
+          <td><a class="btn btn-primary btn-sm" href="{{ url_for('purchase_hourly', facility=f.id, kind='monthly', starts='2026-09-26T00:00', ends='2026-10-26T00:00') }}">Book Now</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <h2>FAQs</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">How much is monthly parking in {{ city.display_name }}?</button>
+        <div class="accordion-panel" style="display:none"><p>On average, monthly parking in {{ city.display_name }} ranges from ${{ featured[0][1] if featured else 50 }} to ${{ featured[-1][1] if featured else 300 }} depending on location. Monthly parking is an easy way to save money on daily parking near home or work.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">Where is the cheapest monthly parking in {{ city.display_name }}?</button>
+        <div class="accordion-panel" style="display:none"><p>The cheapest monthly parking spot in {{ city.display_name }} is listed at ${{ featured[0][1] if featured else 50 }} per month at {{ featured[0][0].title if featured else 'the featured facilities above' }}.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">Will you prorate my monthly parking spot?</button>
+        <div class="accordion-panel" style="display:none"><p>No, monthly parking is not prorated. If you have an extenuating circumstance, please call our Customer Heroes at (844) 324-7768.</p></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">How does the monthly billing cycle work?</button>
+        <div class="accordion-panel" style="display:none"><p>Most locations are set up with the billing cycle to be on the 1st and the 15th of every month. Some facilities do offer a flexible start date: you can start parking any day of the month you like and are billed 5 days prior to the start of the following month.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

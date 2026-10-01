@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Legal Questions &amp; Answers by top-rated attorneys | Super Lawyers Answers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Search results for "{{ q }}"</h1>
+  <div class="answer-cards">
+    {% for answer in results %}
+      <a class="answer-card" href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">
+        <h3>{{ answer.question }}</h3>
+        <p class="answer-meta">Answered by {{ answer.answerer_name }} · {{ answer.answer_count }} answer{{ 's' if answer.answer_count != 1 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+  {% if not results %}
+  <p>No answers matched that search. <a href="{{ url_for('ask_question') }}">Ask a Super Lawyers Selectee</a> - it's free!</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Renew Vehicle Registration{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('account_dashboard') }}">My Account</a> › Renew Registration</nav>
+  <div class="page-title"><h1>Renew Vehicle Registration</h1></div>
+  <div class="card">
+    <h2>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
+    <dl class="kv">
+      <dt>Plate</dt><dd>{{ vehicle.plate }}</dd>
+      <dt>Registration expires</dt><dd>{{ vehicle.registration_expires }}</dd>
+      <dt>Vehicle type</dt><dd>{{ vehicle.vehicle_type }}</dd>
+      {% if vehicle.emissions_locality %}<dt>Emissions program</dt><dd>Your locality requires emissions inspection — a $2.00 per-year program fee applies at renewal.{% endif %}</dd>
+      {% if vehicle.electric %}<dt>Electric vehicle</dt><dd>The electric-vehicle highway use fee applies at renewal.</dd>{% endif %}
+    </dl>
+  </div>
+  <div class="card">
+    <h2>Renew for multiple years and save</h2>
+    <p>You're saving $1 per year by using the internet to renew your registration. If eligible,
+    save another $3 when you renew for two years or $4 when you renew for three years.</p>
+    <p class="hint">Vehicles garaged in Arlington, Fairfax, Loudoun, Prince William, Stafford,
+    Alexandria, Fairfax, Falls Church, Manassas or Manassas Park, which require an
+    every-other-year emissions inspection, are not eligible for the three-year renewal option.</p>
+  </div>
+  {% if preview %}
+  <div class="card">
+    <h2>Fee preview — {{ preview.years }}-year renewal</h2>
+    <table class="data">
+      {% for line, amount in preview.lines %}<tr><td>{{ line }}</td><td>{{ amount }}</td></tr>{% endfor %}
+      <tr><th>Total due</th><th>{{ preview.total }}</th></tr>
+    </table>
+  </div>
+  {% endif %}
+  <form class="flow" method="post" action="{{ url_for('vehicle_renew', vid=vehicle.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="choice">
+      <legend>How many years would you like to renew for?</legend>
+      <label class="radio-row"><input type="radio" name="years" value="1" {% if not years or years == 1 %}checked{% endif %}> One year</label>
+      <label class="radio-row"><input type="radio" name="years" value="2" {% if years == 2 %}checked{% endif %}> Two years (save $3 online)</label>
+      <label class="radio-row"><input type="radio" name="years" value="3" {% if years == 3 %}checked{% endif %}> Three years (save $4 online)</label>
+    </fieldset>
+    <p>
+      <a class="btn btn--secondary" href="{{ url_for('vehicle_renew', vid=vehicle.id, years=1) }}">Preview 1-year total</a>
+      <a class="btn btn--secondary" href="{{ url_for('vehicle_renew', vid=vehicle.id, years=2) }}">Preview 2-year total</a>
+      {% if not (vehicle.emissions_locality) %}
+      <a class="btn btn--secondary" href="{{ url_for('vehicle_renew', vid=vehicle.id, years=3) }}">Preview 3-year total</a>
+      {% endif %}
+    </p>
+    <button class="btn" type="submit">Pay and renew registration</button>
+  </form>
+</div>
+{% endblock %}

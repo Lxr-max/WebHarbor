@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Messages - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Messages</h1>
+  {% if not threads %}<p class="muted">No conversations yet. Message a pro from their profile.</p>{% endif %}
+  {% for t in threads %}
+  <div class="match-card">
+    <a href="{{ t.pro.url() }}"><img src="{{ url_for('static', filename='images/avatars/' + t.pro.avatar) }}" alt="{{ t.pro.name }}"></a>
+    <div>
+      <a href="/account/messages/{{ t.id }}"><b>{{ t.pro.name }}</b></a>
+      <div class="muted">{{ t.pro.category.name }} · {{ t.pro.city }}, {{ t.pro.state }}</div>
+      <div class="muted">{{ (t.messages|last).body if t.messages else '' }}</div>
+    </div>
+    <a class="btn btn-outline btn-sm" href="/account/messages/{{ t.id }}">Open</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

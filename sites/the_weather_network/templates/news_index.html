@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}News - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / News</div>
+<h1 class="page-title">News</h1>
+<p class="muted">Weather and science news with expert analysis from The Weather Network's forecast team.</p>
+
+{% for cat in cats %}
+<section class="section">
+  <div class="section-head">
+    <h2>{{ cat.label }}</h2>
+    <a class="more-link" href="/en/news/{{ cat.key }}">More {{ cat.label }}</a>
+  </div>
+  <div class="subcat-row">
+    <a href="/en/news/{{ cat.key }}" class="{% if not sub_key %}on{% endif %}">All</a>
+    {% for sk, sl in cat.subs %}
+    <a href="/en/news/{{ cat.key }}/{{ sk }}">{{ sl }}</a>
+    {% endfor %}
+  </div>
+  <div class="news-list">
+    {% for art in cat.latest %}
+    <a class="news-card" href="{{ art.path }}">
+      <div class="nc-thumb">{% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}</div>
+      <div class="nc-title">{{ art.headline }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

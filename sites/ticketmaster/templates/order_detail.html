@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order.order_no }} | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a href="/member">Your Account</a>
+      <a href="/member/profile">Edit Profile</a>
+      <a href="/member/payment">Payment Options</a>
+      <a class="active" href="/member">Orders</a>
+      <a href="/member/favorites">My Favorites</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <div class="crumbs"><a href="/member">Your Account</a> › Orders › {{ order.order_no }}</div>
+      <h1>Order {{ order.order_no }}</h1>
+      <table class="table">
+        <tr><th>Event</th><td><a href="/event/{{ order.event.id }}">{{ order.event.name }}</a></td></tr>
+        <tr><th>Event Date</th><td>{{ order.event.date_pretty }}{% if order.event.time %}, {{ order.event.time }}{% endif %}</td></tr>
+        <tr><th>Venue</th><td>{{ order.event.venue.name }}, {{ order.event.city_state }}</td></tr>
+        <tr><th>Seats</th><td>Sec {{ order.section }} • Row {{ order.row }} ({{ order.section_desc }})</td></tr>
+        <tr><th>Quantity</th><td>{{ order.qty }}</td></tr>
+        <tr><th>Delivery</th><td>{{ 'Mobile Transfer' if order.delivery == 'mobile' else 'Mobile Entry - E-Ticket' }}</td></tr>
+        <tr><th>Payment</th><td>{{ order.card_brand }} •••• {{ order.card_last4 }}</td></tr>
+        <tr><th>Placed</th><td>{{ order.placed_at }}</td></tr>
+        <tr><th>Status</th><td>{{ order.status }}</td></tr>
+        <tr><th>Face Value</th><td>${{ '%.2f'|format(order.face_total) }}</td></tr>
+        <tr><th>Service Fee</th><td>${{ '%.2f'|format(order.fee_total) }}</td></tr>
+        <tr><th>Total</th><td><b>${{ '%.2f'|format(order.total) }}</b></td></tr>
+      </table>
+      <p style="margin-top:16px"><a class="btn btn-outline" href="/member">Back to Orders</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

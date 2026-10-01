@@ -1,6 +1,6 @@
 ---
 name: clone-website
-description: "Phase 1: Clone a real website into a local Flask mirror that fits the WebHarbor repo layout. Scaffolds with ./scripts/new_site.py, harvests real assets (images, CSS), builds SQLAlchemy models, generates Jinja2 templates matching the original design, and produces an idempotent seed DB. The result is a runnable site under sites/<name>/ with auth, basic CRUD, and real product/article imagery. Use when starting a new WebHarbor website contribution."
+description: "Build a new WebHarbor Flask mirror from a real website, with browser-captured source evidence, aligned assets, working interactions, and deterministic seed data. Use for Phase 1 of a website contribution."
 ---
 
 # Clone Website — Initial Mirror Construction
@@ -64,6 +64,21 @@ in three places (must stay in sync):
 ### Reconnaissance & scraping: drive a real browser with Playwright
 
 Modern target sites (Amazon, Booking, Apple, Coursera, ...) are JS-heavy SPAs / hydrated React apps. `requests.get(url)` returns an empty shell — no products, no images, no cards. Recon and scraping both **must** be done by driving a real Chromium via Playwright (or an equivalent real-browser tool); only that path produces the rendered DOM and the real image URLs the live site actually serves. The `agent_demo/` env already has Playwright + Chromium installed via `uv sync` — reuse it.
+
+Before scraping, define a **Snapshot Contract** for this mirror in a tracked
+`sites/<your_site>/provenance.json` manifest (or extend its existing asset manifest):
+
+- `capture_id` and `captured_at`: identify the capture session; record individual capture times when pages are collected at different times
+- `locale`, `timezone`, `viewport`: fixed browser settings used for all captures
+- `modules`: upstream URLs and relevant state per mirrored page type (`home`, `list`, `detail`, `search`, `auth`, ...), including query/filter state and requested/final URLs when redirects occur
+- `evidence`: screenshot/DOM references in the retained review artifacts, linked from the PR; keep these references valid after cleanup
+
+Use the recorded baseline consistently. If a source URL, page state, or design
+changes, record the new capture and refresh the affected evidence. This does not
+restrict ordinary navigation among entities within a module. Raw captures may
+live temporarily in ignored `scraped_data/`; retain the final evidence outside
+that scratch directory and keep lightweight provenance in git. Do not record
+cookies, tokens, or private account data.
 
 Minimum scraping recipe — render the page, then pull the post-hydration DOM and the resolved image `src` attributes:
 
@@ -131,6 +146,14 @@ Drive the live site with Playwright (recipe above) and download assets into `scr
 
 **Critical**: use REAL images from the live site, captured via Playwright + a follow-up `httpx.get` of the resolved URL. Never use placeholders, colored rectangles, AI-generated stock photos, or `requests.get(target_url)` HTML (it returns a JS shell without the image URLs). Multimodal fidelity is a core WebHarbor differentiator and is the #1 reason agents reject reviews.
 
+Apply **Resource Alignment Rules** before seeding:
+
+- Keep entity-level asset mappings in the tracked provenance/asset manifest with at least:
+  - `entity_key` (stable id/slug), `title`, `upstream_url`, `image_url`, `local_path`, and the retained file's SHA-256 digest
+- Seed rows must join assets by `entity_key` (or another stable key), not by list index position.
+- Use the matching upstream image when retrievable. Record unavailable assets and any sourced alternative honestly; do not silently substitute unrelated imagery. Keep attribution in `NOTICE.md`.
+- During review, sample-check `title -> image -> upstream_url` triplets for semantic consistency.
+
 ### Step 4: Backend build
 
 Edit `sites/<your_site>/app.py`:
@@ -175,6 +198,12 @@ Create Jinja2 templates under `sites/<your_site>/templates/`:
 Match the original site's color scheme, typography, and navigation. Don't
 ship a generic Bootstrap theme.
 
+Enforce **Interactive Parity** for major controls:
+
+- Tabs/chips/filters/sort controls must change content state, not only active CSS class.
+- Visible controls must produce meaningful, testable behavior. Client-side behavior is valid for presentation state; persistent actions must save the intended state. Omit unsupported controls or clearly disable them.
+- Keep implementation details and grading hints out of user-facing copy. Preserve disclosures needed to understand simulated payments, bookings, prices, or other consequential actions.
+
 ### Step 6: Seed data
 
 Edit `sites/<your_site>/seed_data.py` so that `seed_database()` is **idempotent**:
@@ -209,23 +238,93 @@ Then run the site once locally to produce `instance/<site>.db`, copy it to
 
 ### Step 7: Verify locally
 
+For a new or changed mirror, build from the current checkout and validate the
+combined code and pinned assets. Run commands from the repository root in Bash.
+Choose an unused container name and host ports; publish only the affected site.
+Derive its container port from the current registry rather than copying an old range.
+
 ```bash
+set -euo pipefail
+export WH_REVIEW_SITE=your_site  # replace with the registered site name
+WH_REVIEW_CONTAINER=wh-clone-review
+WH_REVIEW_CONTROL_PORT=8201     # choose unused host ports
+WH_REVIEW_SITE_PORT=41000
+export WEBSYN_CONTROL_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(48))')"
+
+python3 scripts/check_site_registry.py
+WH_REVIEW_CONTAINER_PORT="$(python3 - <<'PYPORT'
+import os
+from scripts.check_site_registry import ROOT, BASE_PORT, parse_start_sites
+sites = parse_start_sites(ROOT / "websyn_start.sh")
+print(BASE_PORT + sites.index(os.environ["WH_REVIEW_SITE"]))
+PYPORT
+)"
+python3 -m py_compile "sites/$WH_REVIEW_SITE/app.py"
+./scripts/fetch_assets.sh
 ./scripts/build.sh webharbor:dev
-docker run -d --rm --name wh-test \
-  -p 8201:8101 -p 41000-41046:40000-40046 webharbor:dev
+docker run -e WEBSYN_CONTROL_TOKEN -d --rm --name "$WH_REVIEW_CONTAINER" \
+  -p "127.0.0.1:$WH_REVIEW_CONTROL_PORT:8101" \
+  -p "127.0.0.1:$WH_REVIEW_SITE_PORT:$WH_REVIEW_CONTAINER_PORT" webharbor:dev
 
-# your new site is on port 41000 + its index
-curl -so /dev/null -w "%{http_code}\n" http://localhost:41000NN/
+# Poll authenticated health with a bounded deadline; fail if startup never completes.
+WH_REVIEW_CONTROL_URL="http://127.0.0.1:$WH_REVIEW_CONTROL_PORT"
+wh_wait_ready() {
+  local attempt
+  for attempt in {1..120}; do
+    if curl -fsS --max-time 5 \
+      -H "Authorization: Bearer $WEBSYN_CONTROL_TOKEN" \
+      "$WH_REVIEW_CONTROL_URL/health" >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 1
+  done
+  return 1
+}
+wh_wait_ready
+curl -fsS --max-time 10 "http://127.0.0.1:$WH_REVIEW_SITE_PORT/" >/dev/null
 
-# byte-identical reset invariant
-curl -X POST http://localhost:8201/reset/<your_site>
-docker exec wh-test md5sum \
-  /opt/WebSyn/<your_site>/instance/<your_site>.db \
-  /opt/WebSyn/<your_site>/instance_seed/<your_site>.db
-# both md5s MUST match
+# Reset restores seed bytes. Adapt the database filename for this site's seed.
+wh_assert_seed() {
+  docker exec "$WH_REVIEW_CONTAINER" python3 -c \
+    'import pathlib, sys; sys.exit(0 if pathlib.Path(sys.argv[1]).read_bytes() == pathlib.Path(sys.argv[2]).read_bytes() else 1)' \
+    "/opt/WebSyn/$WH_REVIEW_SITE/instance/$WH_REVIEW_SITE.db" \
+    "/opt/WebSyn/$WH_REVIEW_SITE/instance_seed/$WH_REVIEW_SITE.db"
+}
+curl -fsS --max-time 90 -H "Authorization: Bearer $WEBSYN_CONTROL_TOKEN" \
+  -X POST "$WH_REVIEW_CONTROL_URL/reset/$WH_REVIEW_SITE"
+wh_assert_seed
+
+# A whole-container restart restores seeds again via websyn_start.sh.
+docker restart "$WH_REVIEW_CONTAINER"
+wh_wait_ready
+wh_assert_seed
 ```
 
-Then drive the mirror through Playwright (same recipe as recon, but pointing at `http://localhost:41000+i/`): screenshot the homepage, one listing page, one detail page, the login flow, and one search. Diff visually against the screenshots you captured in Step 2. If something looks like a coloured rectangle or "Image" alt text, you're missing real assets — go back to Step 3.
+For each seed database, require byte equality after reset and container startup.
+Also test **state preservation** separately: make a persistent change through the
+UI, record the saved state, call authenticated `POST /restart/<site>`, require
+`ready: true`, and verify that change survives. A site restart must not restore the
+seed. Reset the dirty site afterward and repeat the seed-byte comparison. For
+SQLite WAL databases, use a consistent snapshot including committed WAL data
+when comparing persistent state.
+
+Drive the mirror through Playwright at the selected host port. Compare pages to
+the recorded upstream baseline at matching viewport and page state. Retain the
+final screenshots and review evidence; do not count HTTP probes as visual checks.
+
+Acceptance gates:
+
+- **Images**: load lazy images by scrolling; require key images to decode (`complete` and `naturalWidth > 0`), and check failed asset requests. HTTP 200 alone is insufficient.
+- **Semantics**: sample representative entities on listing and detail pages; verify title, image and destination refer to the same upstream entity.
+- **Visuals**: compare the homepage and at least two relevant core page types (or every type if fewer exist); also inspect a narrow viewport. Record and resolve material differences.
+- **Interactions**: exercise visible navigation, filters, sorting and forms relevant to the mirror; verify displayed results and saved state, not only active styles.
+- **Determinism**: verify seed-byte equality after dirty-state reset and container startup, and saved-state preservation after a site restart.
+
+Run the full image build and registry checks, then focus browser and reset checks
+on affected sites. Confirm authenticated health reports every registered site
+ready, and keep existing port assignments unchanged. Report exactly which checks
+ran and any blockers. After collecting evidence, stop only the owned test container:
+`docker stop "$WH_REVIEW_CONTAINER"`.
 
 ## Output
 
@@ -236,7 +335,7 @@ After Phase 1, you should have:
 - `sites/<your_site>/static/` with real CSS/JS/icons (and images under HF assets)
 - `sites/<your_site>/instance_seed/<site>.db` with seeded data
 - Site registered in `websyn_start.sh`, `control_server.py`, `Dockerfile`
-- All 47 sites still return 200 on the alt-port container
+- Global registry checks and authenticated all-site health pass; affected sites render successfully on the chosen host ports
 - Byte-identical reset passes
 - No `README.md`, reports, or unreferenced one-off scripts left in `sites/<your_site>/`; all docs English
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Welcome | USPS{% endblock %}</title>
+  <meta name="description" content="{% block meta %}Welcome to USPS.com. Find information on our most convenient and affordable shipping and mailing services.{% endblock %}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="top-banner">
+  <div class="wrap">
+    <span>Official USPS&reg; Website</span>
+    <span class="right">USPS Customer Service: 1-800-ASK-USPS&reg; (1-800-275-8777)</span>
+  </div>
+</header>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/chrome/logo-sb.svg') }}" alt="USPS.com home">
+    </a>
+    <form class="header-search" action="{{ url_for('site_search') }}" method="get">
+      <input type="text" name="q" placeholder="Search USPS.com" aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="header-links">
+      <a href="{{ url_for('store_cart') }}">Cart</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('account') }}">My USPS</a>
+        <a href="{{ url_for('logout') }}">Sign Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign In</a>
+      {% endif %}
+    </nav>
+  </div>
+  <nav class="main-nav">
+    <div class="wrap">
+      {% for section, items in nav %}
+        <div class="nav-item">
+          <a href="{{ items[0][1] }}">{{ section }}</a>
+          <ul class="nav-drop">
+            {% for label, href in items %}
+              <li><a href="{{ href }}">{{ label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </nav>
+</header>
+
+<div class="hero-strip">
+  <div class="wrap">
+    {% for label, href, icon in quick_tools %}
+      <a class="quick-tool" href="{{ href }}">
+        <img src="{{ url_for('static', filename=icon) }}" alt="">
+        <span>{{ label }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="wrap"><ul class="flashes">
+      {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+    </ul></div>
+  {% endif %}
+{% endwith %}
+
+<main class="wrap">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <h4>Quick Tools</h4>
+        <ul>
+          <li><a href="{{ url_for('tracking_home') }}">Track a Package</a></li>
+          <li><a href="{{ url_for('postcalc_home') }}">Calculate a Price</a></li>
+          <li><a href="{{ url_for('locations_home') }}">Find a Post Office</a></li>
+          <li><a href="{{ url_for('pickup_home') }}">Schedule a Pickup</a></li>
+          <li><a href="{{ url_for('store_home') }}">Buy Stamps</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Mail &amp; Ship</h4>
+        <ul>
+          <li><a href="/ship/mail-shipping-services.htm">Send Mail &amp; Packages</a></li>
+          <li><a href="/ship/priority-mail.htm">Priority Mail</a></li>
+          <li><a href="/ship/ground-advantage.htm">Ground Advantage</a></li>
+          <li><a href="{{ url_for('clicknship_home') }}">Click-N-Ship</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Manage Your Mail</h4>
+        <ul>
+          <li><a href="{{ url_for('hold_mail_page') }}">Hold Mail</a></li>
+          <li><a href="{{ url_for('coa_page') }}">Change My Address</a></li>
+          <li><a href="{{ url_for('po_boxes') }}">PO Boxes</a></li>
+          <li><a href="/manage/informed-delivery.htm">Informed Delivery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>International</h4>
+        <ul>
+          <li><a href="{{ url_for('countries_index') }}">Country Listings</a></li>
+          <li><a href="/international/customs-forms.htm">Customs Forms</a></li>
+          <li><a href="/international/shipping-restrictions.htm">Shipping Restrictions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help &amp; Newsroom</h4>
+        <ul>
+          <li><a href="/help/claims.htm">File a Claim</a></li>
+          <li><a href="/help/missing-mail.htm">Missing Mail</a></li>
+          <li><a href="{{ url_for('newsroom') }}">Newsroom</a></li>
+          <li><a href="{{ url_for('service_alerts') }}">Service Alerts</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">Copyright&copy; 2026 United States Postal Service. This is a research mirror and is not affiliated with or endorsed by USPS.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+ "site": "backcountry",
+ "upstream": "https://www.backcountry.com/",
+ "captured_at": "2026-09-30",
+ "capture_method": "www.backcountry.com sits behind an AWS WAF (CloudFront) that answers plain HTTP clients and headless browsers with a JavaScript challenge plus an image-puzzle CAPTCHA. All captures were made with a real headful Chromium (Playwright under Xvfb, persistent profile, automation flags disabled) that passed the WAF challenge and drove the live public storefront; every functional page was captured as-rendered (the Next.js __NEXT_DATA__ payload embedded in each page), and the managed product/campaign/review media was fetched directly from the CDN URLs the live pages serve. No WAF-protected page is reproduced from anything other than a real upstream response; nothing is synthesized and nothing pretends to be live.",
+ "sources": {
+  "www.backcountry.com": {
+   "role": "primary storefront: the home page (campaign carousels, category tiles, announcement bar), six catalog category pages (Hike & Camp, Ski, Men's Clothing, Women's Clothing, Climb, Bike) with their upstream facet trees, sort options and page-1 product grids, seven brand landing pages (Patagonia, The North Face, Outdoor Research, Black Diamond, Salomon, Smartwool, Fjallraven), the full shop-all-brands directory (965 brands, letter-grouped), six search result pages (tent, sleeping bag, down jacket, headlamp, ski boots, climbing rope), 211 product detail pages (colors, sizes, stock levels, prices, discounts, tech specs, bullet points, descriptions, breadcrumbs), the guest cart page, and the shipping-policy / return-policy / Summit Club info pages",
+   "pages_captured": 236,
+   "product_detail_pages": 211,
+   "review_rows": 1674,
+   "questions": 99,
+   "answers": 92
+  },
+  "content.backcountry.com": {
+   "role": "Backcountry's ContentStack media CDN: every managed image fetched from its exact upstream delivery URL — product grid tiles at /images/items/large/ (440px), color swatch thumbs at /images/items/160/, PDP gallery shots at /images/items/1200/, brand logos, the site wordmark, and the home campaign card art under /v3/assets/...",
+   "images_fetched": 4471
+  },
+  "photos-us.bazaarvoice.com": {
+   "role": "Backcountry's Bazaarvoice photo host: customer review photos embedded in the captured review wall, fetched at their exact upstream URLs",
+   "images_fetched": "included in the 4471 (review-photos/)"
+  }
+ },
+ "media": {
+  "images": {
+   "count": 4471,
+   "bytes": 259956012,
+   "inventory": "asset_inventory.json",
+   "policy": "every file fetched from the upstream URL it renders at; no placeholders, no duplicates, no stretching. One upstream CMS asset (TNF.png) serves JPEG bytes under a .png URL and is skipped rather than shipped under a mismatched magic; its home card renders text-only."
+  }
+ },
+ "trim_policy": "The full as-rendered upstream HTML lives in the gitignored scraped_data/ captures (see scripts_dev/capture.py + build_source_data.py). The tracked source_data/ snapshots trim as follows: each of the six mirrored categories keeps the upstream page-1 grid order but only the first 12 products (every one with a captured PDP); each of the seven brand grids keeps the first 10; each of the six search snapshots keeps the first 10. Upstream totalCounts, facet counts, facet trees and sort option lists remain the upstream values — the visible grids show the captured subset, exactly as grids keep upstream totals while lists trim to the captured top. Product galleries keep up to 3 upstream detail shots for the default color and 1 per additional color (at the 1200px and 440px sizes the live PDP renders). Search is served from the six captured snapshots for those terms; other terms are computed over the captured catalog (declared on the search page).",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "cart with the STIO Hometown Down jacket (Abyss L) + 2x Smartwool 250 crew (Chalk Violet Heather S), wishlist with 3 captured products, 2 Colorado addresses, 2 orders (delivered 8004128041, shipped 8004193147), 1 written review on the Copper Spur UL2 tent"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "empty cart, wishlist with the Rapha Pro Team jersey, 1 Chicago address, 1 shipped order 8004277560, 1 written review on the BGA Slickrock pant"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "cart with the Black Diamond Momentum shoe (White/Black, Men's 10.0), wishlist with 2 climb products, 1 Santa Monica address, no orders"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "cart with the Smith I/O MAG XL goggles + Marker Griffon binding, 2 addresses (Seattle default), 1 returned order 8004384012, 1 written review on the Helly Hansen Alpha 4.0"
+   }
+  ],
+  "fixture_note": "The upstream account area (cart, wish list, orders, checkout) requires live accounts, so authenticated state is fixture-built following the u_s_customs / zara precedent: every product they reference carries its real captured upstream name, prices, color, size, stock and SKU; order numbers, statuses, addresses and cards are authored fixture data modeling the upstream flows. Guest carts (cookie-scoped rows merged into the account on login) mirror the upstream guest cart.",
+  "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash; consecutive builds produce byte-identical databases and /reset/backcountry restores instance == instance_seed byte-for-byte.",
+  "timezone": "UTC"
+ },
+ "waf_note": "backcountry.com is behind an AWS WAF JavaScript challenge with an image-puzzle CAPTCHA fallback. The capture used a real headful Chromium that passed the challenge; where a deterministic direct fetch was impossible, the mirror uses only what the real browser captured. The untrimmed captures live in the gitignored scraped_data/ so every tracked value can be re-derived.",
+ "scripts": {
+  "capture.py": "headful-Chromium capture harness (WAF-passing) that recorded every page's as-rendered HTML + metadata sidecar",
+  "build_source_data.py": "extracts the tracked source_data/*.json snapshots from the captures",
+  "download_images.py": "fetches every referenced upstream image at its exact URL and writes asset_inventory.json",
+  "validate_tasks.py + walker_lib.py": "honest step-measuring Chromium walker for the 20 benchmark tasks (two independent rounds)",
+  "Dockerfile.dev": "single-site dev image replicating the exact real-Dockerfile backcountry block"
+ },
+ "search_totals_note": "Search totals reconciliation (review round, item C-1): the six captured search totalCount values (tent 447, sleeping bag 509, down jacket 2302, headlamp 86, ski boots 1817, climbing rope 380) are the upstream 'vertex_search_enabled' A/B experiment's variant arm (Vertex AI Search), the arm both capture sessions were assigned - experiments.decisions.vertex_search_enabled.arm == 'variant' in every captured __NEXT_DATA__, with facet counts summing exactly to each total and base64 pagination cursors consistent with it (tent: 11 pages, last starts at offset 419; ski boots: 44 pages, last starts at 1805). An independent fresh-profile session on 2026-09-30T06:04Z was assigned the same arm and reproduced 448/510/2303/86/1816/379 (+-1 drift, same facet taxonomy, Gender/Age/Price sums equal to the totals). Sessions assigned the control arm see the legacy search backend instead: lower counts (e.g. 207 for tent) and a different facet taxonomy (Capacity/Season/Customer Reviews instead of Gender/Age/Clothing Size/Shoe Size/Insulation). Both arms are live upstream experiences; the mirror snapshots the variant arm it was captured from, coherently (page-1 grids and totals from the same arm), so no value was altered. Raw payloads: original captures + the 2026-09-30 recapture are retained in the review/fix evidence directories."
+}

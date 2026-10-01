@@ -1,0 +1,61 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-27",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the www.ticketmaster.com mirror: homepage with Highlights / Trending Searches / Happening This Weekend / Popular Near You carousels and city tiles, discovery browsing across Concerts / Sports / Arts & Theater / Family with date/city/price/category filters and sorts, scored site search over events/artists/venues, event pages with real ticket listings (quantity, price, ticket-type and accessible filters; Lowest Price / Best Seats / Highest Price sorts), the ticket-selection side panel with the face-value + service-fee price breakdown, guest and signed-in checkout (delivery, payment with saved cards or a new card, review, confirmation with order number), artist pages with ratings and favorites, venue pages with upcoming events, member area (orders, order detail, profile, payment methods, favorites), gift cards page with balance check, help centre with topic articles, sell landing page, VIP page, legal pages, presale timelines and site-wide CSRF-protected forms."
+  },
+  {
+   "path": "seed_data.py (build_seed / build_benchmark_users)",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. All content rows come from the tracked source_data_artists.json / source_data_venues.json / source_data_events.json snapshots; ticket listings follow the upstream pattern captured on the real event pages (Sec MC \u2022 Row O \u2014 Standard Admission \u2014 $40.60 incl. fees, with the 37.6% service fee calibrated from the captured Reno breakdown $29.50 face + $11.10 fee); section inventories per venue type mirror the captured seat manifests (ORCH/MEZZ/BALC for theaters, numbered sections for arenas, GA for clubs); presale timelines reuse the real Citi VIP/venue presale copy captured on the event pages. Faces are quantized to $0.50 as upstream, so _detie_minimums breaks minimum-price ties within each (event, ticket type) \u2014 across all listings and among the 4+ seats together subset, +$0.01 face on the later listing \u2014 keeping every 'cheapest <type>' question uniquely answerable while the first-displayed cheapest listing (and every benchmark order built from it) stays byte-stable. Benchmark users use a frozen bcrypt hash, favorites are pinned to explicit event/artist fixture IDs so the demo accounts do not drift when the catalog grows, and PYTHONHASHSEED=0 keeps the SQLite seed byte-reproducible on every build."
+  },
+  {
+   "path": "source_data_events.json",
+   "classification": "captured-upstream-content",
+   "scope": "621 real upcoming US events captured on 2026-09-27 from the rendered ticketmaster.com and ticketmaster.ca search/discover/event pages (the .ca market pages serve the same Ticketmaster platform and artist/venue IDs for touring events; US-venue events only): event names verbatim from the rendered cards (e.g. 'Hamilton', 'Metallica: Life Burns Faster', 'Worcester Railers vs. Trois Rivieres Lions - Bluey Day', 'Disney On Ice presents Find Your Hero'), with real event IDs, dates, times, cities, venues, categories and lineups. Two parking/dinner add-on events keep the upstream add-on pattern. The 9 additional rows are the real near-name US events from the rendered search results for 'power to the people' (The High Kings' Power of the People 2027 US tour dates at Town Hall / Birchmere / Chevalier Theatre / Bijou Theatre / Goodyear Theater, The Casualties' People Over Power Tour at Neighborhood Theatre Tap Room, and Hiss Golden Messenger's I'm People Tour at Irving Plaza), captured the same day so the fee-breakdown task's search leg returns real competitors; their rendered search cards embed no image URLs, so those rows carry no image rather than substituting media (keeps the pinned 778-asset bundle byte-identical)."
+  },
+  {
+   "path": "source_data_artists.json",
+   "classification": "captured-upstream-content",
+   "scope": "130 real artists, teams and shows with their real Ticketmaster artist IDs and names captured from the search/event/artist pages; ratings and review counts captured from the rendered artist pages (e.g. Metallica 4.7/10000 reviews, Trans-Siberian Orchestra 4.6/1617, Jo Koy 4.6/543, WWE 4.4/1519, Wicked (Touring) 4.7/936, Disney Presents The Lion King (Touring) 4.8/1244, The High Kings 4.9/87, The Casualties 5.0/3, Hiss Golden Messenger 4.7/22 \u2014 the last three captured 2026-09-27 from the rendered artist pages of the near-name distractor events)."
+  },
+  {
+   "path": "source_data_venues.json",
+   "classification": "captured-upstream-content",
+   "scope": "171 real venues with names and cities captured from the event cards; street addresses for the venues whose rendered venue pages were captured (e.g. Sphere 255 Sands Avenue Las Vegas, Barclays Center 620 Atlantic Ave Brooklyn, Yankee Stadium 1 East 161st Street Bronx, TD Garden 100 Legends Way Boston, Madison Square Garden 7th Ave & 32nd Street New York; Town Hall 123 West 43rd Street New York, Birchmere 3701 Mt. Vernon Ave Alexandria, Chevalier Theatre 30 Forest Street Medford, Bijou Theatre 803 S. Gay St. Knoxville, Goodyear Theater 1201 East Market Street Akron, Neighborhood Theatre Tap Room 511 E 36th St Charlotte and Irving Plaza 17 Irving Place New York captured 2026-09-27 from the rendered venue pages of the near-name distractor events)."
+  },
+  {
+   "path": "source_data_content.json",
+   "classification": "captured-upstream-content",
+   "scope": "Site chrome captured from the rendered pages on 2026-09-27: header nav and mega-menu taxonomy (Music/Sports/Arts & Theater/Family top categories and popular shows), homepage Trending Searches chips (Harry Styles, Karol G, WWE, Doja Cat, Weezer, Gorillaz, Teddy Swims, Jingle Ball, Hans Zimmer, Jo Koy), the 8 homepage city tiles, footer columns and legal links, the gift cards page copy ($25-$1000, E-Gift/Physical, 1-800-745-3000), the sale-timeline labels (Happening Now / General Sale / Past Sales), checkout delivery options (Mobile Transfer / Mobile Entry E-Ticket) and the 'We're All In: prices include fees' banner; 12 help-centre topics written from the captured help.ticketmaster.com structure (Presale, Accessible Tickets, VIP Packages, Mobile Tickets, Transfers, Selling, Refunds, Ticket Limits, Delayed Delivery, Order Status, Payment Options, Contact Us)."
+  },
+  {
+   "path": "static/images/**",
+   "classification": "captured-upstream-media",
+   "scope": "778 media files downloaded from their real Ticketmaster CDN URLs on 2026-09-27: 610 event images (the event's own captured image, or the artist's real image as the upstream event cards do), 125 artist/team images from the rendered artist pages (s1.ticketm.net ARTIST_PAGE_3_2 crops), 35 venue photos (s1.ticketm.net dbimages) and 8 homepage city tiles (prismic-images.tmol.io). The Ticketmaster wordmark is the real inline SVG extracted from the rendered header/footer. Every file's source URL, byte size and SHA-256 are recorded in asset_inventory.json; images were re-encoded (max 1000px wide, JPEG quality 84) with no content substitution."
+  },
+  {
+   "path": "scripts_dev/build_source_data.py",
+   "classification": "mirror-code",
+   "scope": "Capture pipeline reference: the tool that parsed the rendered upstream pages (search results, event pages with their embedded seat manifests and presale data, artist pages with ratings, venue pages with addresses) into the tracked source_data_*.json snapshots and staged the real images into static/images/."
+  },
+  {
+   "path": "scripts_dev/build_inventory.py + staged_manifest.json + city_urls.json",
+   "classification": "mirror-code",
+   "scope": "Regenerates asset_inventory.json from the staged image tree together with the tracked source-URL map, and validates JPEG framing the same way the repo-level check_asset_inventory.py gate does."
+  },
+  {
+   "path": "tests/test_mirror.py",
+   "classification": "mirror-code",
+   "scope": "Pytest suite covering seed idempotence, scored search, discovery filters, event listing filters and sorts, the price breakdown math (face value + 37.6% service fee), the full guest and signed-in checkout chain through confirmation, auth, member area (orders, profile, payment methods, favorites), gift cards and the help centre."
+  },
+  {
+   "path": "templates/index.html, templates/base.html, static/css/main.css, app.py (homepage), static/images (23 replacements)",
+   "classification": "reviewer-refinement",
+   "scope": "2026-09-29: deterministic distinct-performer homepage shelves, featured-event presentation, real Saturday/Sunday range, popular-list thumbnails and readable typographic wordmark. Live Ticketmaster homepage was HTTP 403; layout is an editorial adaptation of the prior capture. Official Columbus Crew and Myst\u00e8re replacement images and provenance are recorded individually in asset_inventory.json."
+  }
+ ]
+}
