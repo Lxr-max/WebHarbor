@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Field Office — {{ office.field_office }}</h1>
+<p>Ports of entry served by the {{ office.field_office }} Field Office.</p>
+<table class="data">
+  <tr><th>Port Name</th><th>State</th><th>Address</th></tr>
+  {% for p in peers %}
+  <tr><td><a href="{{ url_for('port_detail', slug=p.slug) }}">{{ p.name }}</a></td><td>{{ p.state }}</td><td>{{ p.address }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

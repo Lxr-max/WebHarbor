@@ -1,0 +1,925 @@
+{
+ "schema_version": 1,
+ "site": "uscis",
+ "asset_count": 153,
+ "assets": [
+  {
+   "path": "static/images/chrome/uscis_logo.png",
+   "bytes": 37247,
+   "sha256": "b99cc3d3dd0bf50ba7e4b70b87c7c79bb1e087f0a02b8cf84d031c866794f7ee",
+   "source_url": "https://www.uscis.gov/sites/default/files/USCIS_Sig_FC.png"
+  },
+  {
+   "path": "static/images/upstream/0000_uscis_n_400_online_filing_benefits_760_v6_en.png",
+   "bytes": 1167147,
+   "sha256": "8f59771e5619f822c65c5ed83f5d14a3acc4ea847d5d0e020c284b502d66f1a6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-about-uscis/USCIS_N-400_Online_Filing_Benefits_760_V6_En%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0001_x_no_circle.svg",
+   "bytes": 305,
+   "sha256": "47c80a8b2ffef74850f3c752ae7f5c27e049249204b76c54e551354699e4b5e5",
+   "source_url": "https://www.uscis.gov/profiles/uscisd8_gov/themes/custom/uscis_design/assets/custom/images/x_no_circle.svg"
+  },
+  {
+   "path": "static/images/upstream/0002_icon_dot_gov_2x.png",
+   "bytes": 980,
+   "sha256": "b904cf8a29d9e2a2e04d6fc4ddbeac66f811d9e6af0c13b2c34cec0dde4deea5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/site/icon-dot-gov@2x.png"
+  },
+  {
+   "path": "static/images/upstream/0003_icon_https_2x.png",
+   "bytes": 987,
+   "sha256": "f1e1c9f3b5b4b4ea4431fbe0d7662faa1d908a9564f87db5b9e8db344473ee96",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/site/icon-https@2x.png"
+  },
+  {
+   "path": "static/images/upstream/0005_check_20image_0.jpg",
+   "bytes": 168739,
+   "sha256": "ee55106a75ff6b9036139a68c3cc4ca15d0ff641e7f7e9682e0de3d4b529dd09",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Check%20Image_0.jpg"
+  },
+  {
+   "path": "static/images/upstream/0006_web_homepagetile_protectamerica_486x201_v1_v.png",
+   "bytes": 162409,
+   "sha256": "b2ead8e9187b4e3060bb5e123b65b459f5a76fc63c5665cfe11d0bc00bc25389",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/Web_HomePageTile_ProtectAmerica_486x201_V1_V1%402x.png?itok=ZrT4LiDf"
+  },
+  {
+   "path": "static/images/upstream/0007_uscis_gov_knowbeforeyougo_blank_486x201_402x.jpg",
+   "bytes": 15076,
+   "sha256": "ff4a7a3579be7a09265ed908887d70be6855817643ffcd03b57153329cfc7095",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/USCIS.Gov_KnowBeforeYouGo_Blank_486x201%402x.jpg?itok=WACKDKRV"
+  },
+  {
+   "path": "static/images/upstream/0008_uscis_homepage_file_online_486x201_402x.jpg",
+   "bytes": 16458,
+   "sha256": "4e1d167c339459853e5d059cf5d95edc4bf5c407e7105093a329beab1b78fc6c",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/USCIS_Homepage_File-Online_486x201%402x.jpg?itok=kfQR5G6J"
+  },
+  {
+   "path": "static/images/upstream/0009_uscis_homepage_manage_your_case_486x201_402x.jpg",
+   "bytes": 12752,
+   "sha256": "5cb6c14818999186afd11777420d5776b3cfef0ed06b39d4b2b7acce2dccde62",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/USCIS_Homepage_Manage-Your-Case_486x201%402x.jpg?itok=3rloZE2A"
+  },
+  {
+   "path": "static/images/upstream/0010_uscis_homepage_research_225x136_402x.jpg",
+   "bytes": 17976,
+   "sha256": "4d01d6acf8dcfc3da28eebd5ea376dddf909cc1b7b84f5091d53b995ef90ae17",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/USCIS_Homepage_Research_225x136%402x.jpg?itok=sl4Oci7E"
+  },
+  {
+   "path": "static/images/upstream/0011_uscis_homepage_verify_486x201_402x.jpg",
+   "bytes": 18921,
+   "sha256": "1c7ab7bf3ebad8b75b64c60b6bd568eb4c067a90dc7b6792ddc6f8bb5d880b2b",
+   "source_url": "https://www.uscis.gov/sites/default/files/styles/large/public/images/home/USCIS_Homepage_Verify_486x201%402x.jpg?itok=I1cYMG4Y"
+  },
+  {
+   "path": "static/images/upstream/0012_pause_icon.svg",
+   "bytes": 330,
+   "sha256": "62ad848d1ee575292c22aa77740da4753bc642dfa5a9fee4c7d2cadc6e69dfbc",
+   "source_url": "https://www.uscis.gov/profiles/uscisd8_gov/themes/custom/uscis_design/assets/uswds/img/usa-icons/pause_icon.svg"
+  },
+  {
+   "path": "static/images/upstream/0013_adoption.jpg",
+   "bytes": 128504,
+   "sha256": "f2286fd45c87905c6ccda4c3b924eda5f5bfe2418918e57ce2c84cf44239b33b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Adoption.jpg"
+  },
+  {
+   "path": "static/images/upstream/0014_uscis_careers_241x161_v1_402x.jpg",
+   "bytes": 103640,
+   "sha256": "da468e0e7bdb98ddfa985f414c079c76a6fca01d7f0bc4df506eed56a3f64f1f",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Careers_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0015_family.jpg",
+   "bytes": 113466,
+   "sha256": "e122d7f9e1983eea20b8fd4f4224a27019909f9becc57d9e0afd1ee15b4cb14e",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Family.jpg"
+  },
+  {
+   "path": "static/images/upstream/0016_humanitarian.jpg",
+   "bytes": 144539,
+   "sha256": "2ddc5f9783472cb9424989736d68184f4ace432d5ddb2a28ca4cc3d732572267",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Humanitarian.jpg"
+  },
+  {
+   "path": "static/images/upstream/0017_military.jpg",
+   "bytes": 107864,
+   "sha256": "9e582b362cd84aa0746df218f5343885f491fdfbd99c7d270a785fc48e1908ff",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Military.jpg"
+  },
+  {
+   "path": "static/images/upstream/0018_scams_fraud_and_misconduct.jpg",
+   "bytes": 69613,
+   "sha256": "a921826dfc1e3f8b7bc27c3f1ab422d4bd252f4e4e45b384a7c5c55e56163856",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Scams_Fraud_and_Misconduct.jpg"
+  },
+  {
+   "path": "static/images/upstream/0019_visit_the_u_s_.jpg",
+   "bytes": 122602,
+   "sha256": "a97ee69ebaed4b24481e546df96b41f363dc6ee627e74bdb4a544afdaecba799",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Visit_the_U.S..jpg"
+  },
+  {
+   "path": "static/images/upstream/0020_working_in_the_u_s_.jpg",
+   "bytes": 123764,
+   "sha256": "372fc6e0be31c0339f8b4aa855db289d710309f840ed03bc38154b39b56b0fa0",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Working_in_the_U.S..jpg"
+  },
+  {
+   "path": "static/images/upstream/0021_field_office_page_image_241x180.png",
+   "bytes": 133561,
+   "sha256": "e4cdbac6880e875ef96db93d6d4d95b29bd6a0daa5da73a85af230f1ef6ddad1",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-about-uscis/Field_Office_Page_image_241x180.png"
+  },
+  {
+   "path": "static/images/upstream/0022_mtrushmore_241x161_v3_402x.png",
+   "bytes": 945784,
+   "sha256": "770967a64ed996625189c541b494f1e831bccbe97a38f565c6d2cd0577133f6b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/MtRushmore_241x161_V3%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0023_uscis_apply_20for_20citizenship_crc_241x161_.jpg",
+   "bytes": 118246,
+   "sha256": "b2225c8b6fb71a656c3fa24a0a34ebe61ff1628a6e05f301fd723527b4880550",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Apply%20for%20Citizenship_CRC_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0024_uscis_study_materials_and_resources_crc_241x.jpg",
+   "bytes": 235898,
+   "sha256": "b0812cdff9f6bea7598392d8c1740776b6b5857d5b9d67f71740aec322e38ce1",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Study-Materials-and-Resources_CRC_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0025_uscis_resources_for_educational_programs_crc.jpg",
+   "bytes": 61236,
+   "sha256": "dfdb65f95831d23d76984665547488a46c89dacad5aff5379ff49fc0849945e5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Resources-for-Educational-Programs_CRC_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0026_uscis_oututreach_tools_crc_241x161_v1_402x.jpg",
+   "bytes": 120546,
+   "sha256": "67ef08ec8b92d5c0dcb16abdb9fe5678a8343cd287eb7d20e4c883690f919b38",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Oututreach-Tools_CRC_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0027_aos_webgraphic_v6_en_760_402x.png",
+   "bytes": 193996,
+   "sha256": "1d269513eb7ff66e262951d2af8a80955a7bbb65f337ad44639be4a0b7a48d68",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-green-card/AoS_WebGraphic_V6_En_760%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0028_uscis_online_tools_241x161_v1_402x.png",
+   "bytes": 48564,
+   "sha256": "13f293c58b34819c7777d4b00a31d9e8a1092d3ccad879d4c8b67ce2c191f2fc",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Online-Tools_241x161_V1%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0029_uscis_explore_my_options_241x161_v1_402x.jpg",
+   "bytes": 144842,
+   "sha256": "68f49811cb9dc6c433e5cc5e1479fdba84f4e8654f7546a632a8a14cce018748",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Explore-My-Options_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0030_uscis_case_status_online_241x161_v3_402x.jpg",
+   "bytes": 36748,
+   "sha256": "77b8a5de52803113d9a0c5951135138c25d8a630f3cc39940a6ae78c47402e2b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Case-Status-Online_241x161_V3%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0031_uscis_change_of_address_241x161_v1_402x.jpg",
+   "bytes": 60034,
+   "sha256": "6657576828342e145d3ce32cac85dc72f8a1fcafc02c4f5e7906f3502ecfa6e0",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Change-of-Address_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0032_uscis_report_studies_241x161_v1_402x.jpg",
+   "bytes": 65218,
+   "sha256": "4e48f179bb0c37c12cd1762148038ed12c874325d7e76b7adbde0e6d856af6c7",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Report-Studies_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0033_iris_requestrecords_govbanner_760x250_v3_ltg.png",
+   "bytes": 552889,
+   "sha256": "cb82af1318a98dcdcb712a1a22d9d71a277f4a55b2268f8f70c0bfe3fdcf45ad",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/IRIS_RequestRecords_govBanner_760x250_V3_LtGreen%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0034_ooc_web_civicstest2025_info_241x161_v2_402x.jpg",
+   "bytes": 227987,
+   "sha256": "5ec3ee74a25420b378e9fea17131f96f13be0ebb21ccca295bd699f5f7f6c863",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-citizenship/OoC_Web_CivicsTest2025_Info_241x161_V2%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0035_ooc_web_civicstest2025_resources_241x161_v3_.jpg",
+   "bytes": 447380,
+   "sha256": "043ec055232ae15b138addd91f378d7ea804d856d7787ef1cc5e7a55e765172b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-citizenship/OoC_Web_CivicsTest2025_Resources_241x161_V3%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0036_onlineaccount_icon.png",
+   "bytes": 556,
+   "sha256": "261e78aa5ca97fdb3770a1d2d7ea6c86e09182b810e818d31457bb79276908ad",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/OnlineAccount_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0037_cais_unlockaccount_v2.png",
+   "bytes": 1456,
+   "sha256": "a289b2ee37739432e740c92ae9c6f131b28cd69707ec2d91c17e58029a1fc261",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/CAIS_UnlockAccount_V2.png"
+  },
+  {
+   "path": "static/images/upstream/0038_emma_icon.png",
+   "bytes": 1323,
+   "sha256": "6d65e263331fc729e46fe41e50a893668d429ea7e1d16ccecf48cec2e6ac719b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/Emma_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0039_fileonline_icon.png",
+   "bytes": 642,
+   "sha256": "f4239cf235d2d55a6d08401f79ffd33e69d8dac9b06e81e7bcc87490fba81ff5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/FileOnline_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0040_erequest_icon.png",
+   "bytes": 1744,
+   "sha256": "a277b836c9bb458da9758bf98bdde8671996294cabaadc509746f5c0bb8af566",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ERequest_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0041_changeofaddress_icon.png",
+   "bytes": 1005,
+   "sha256": "aa4ba5d09637396e624d956ea01fb80dd729c8ad83ccb0e858e24ce1408edb24",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ChangeOfAddress_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0042_casestatus_icon.png",
+   "bytes": 1069,
+   "sha256": "7962273ef63e9e84613e51cde2f3864a4d21188e346a531c700d17effccc2fe3",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/CaseStatus_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0043_appointments_icon.png",
+   "bytes": 606,
+   "sha256": "d8775071dcb4e283ee1be9d20d0f0f159e528cdcfddf134f1f3118f79d9c5f57",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/Appointments_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0044_n400earlyfiling_icon.png",
+   "bytes": 558,
+   "sha256": "5d760215db8568daef75d95bb0588b27a5a4a5be1a234d8d09a63362894cfd96",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/N400EarlyFiling_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0045_caseprocessingtimes_icon.png",
+   "bytes": 1310,
+   "sha256": "eeee66093ddc3e9546401c6ccdfd6456c4ba059683fe77e3424115137cb559e6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/CaseProcessingTimes_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0046_findadoctor_icon.png",
+   "bytes": 1776,
+   "sha256": "7b492f36aeee00cc0f61da05c1a3177ddfc4d1ae49bcd7ed8236cd4aa27fc789",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/FindADoctor_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0047_officelocator_icon.png",
+   "bytes": 1666,
+   "sha256": "6e8aef470200c3542219071adce40ccd4d06d72080948063d81eb2cb105ec9fb",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/OfficeLocator_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0048_formsandfees_icon.png",
+   "bytes": 1239,
+   "sha256": "8e4521c7c2e6c4208c37c6a21e8debe2a2d92b048cc7ea9383a3cea7119fa7ac",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/FormsAndFees_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0049_mobileapp_icon.png",
+   "bytes": 524,
+   "sha256": "4332fd1132ca4e38aa189bffdb09ccf4e09553277dda95a5585543c95b7b6147",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/MobileApp_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0050_naturalizationeligibilitytool_icon.png",
+   "bytes": 1517,
+   "sha256": "51bb819ebd62ef3cb489b05326df34d9bc410b94979757d1c737e78a6e19ccf5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/NaturalizationEligibilityTool_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0051_citizenshipresourcecenter_icon.png",
+   "bytes": 1202,
+   "sha256": "a1fd27388088d49288b34b26990ffa73db0468e032a06ca502b5f16a76e7c4ec",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/CitizenshipResourceCenter_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0052_practicecivicstest_icon.png",
+   "bytes": 969,
+   "sha256": "02d4b8c5d7de1370fac629e7f863245f26d635ede6636076a9be959604f3b686",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/PracticeCivicsTest_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0053_joinapresentation_icon.png",
+   "bytes": 711,
+   "sha256": "d7cfda5ea5e971086d2ac4b7db3726b4f96d4f2a20d9a727fe58385ab7f0626c",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/JoinAPresentation_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0054_avoidscams_icon.png",
+   "bytes": 1307,
+   "sha256": "a6336f4b3257a97d7c4ebc0b826e4a8526f5e042f05e9c5e7777b6eb5a2ab97c",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/AvoidScams_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0055_authorizedproviders_icon.png",
+   "bytes": 1322,
+   "sha256": "d4e228fa2a8280baca0d2993638bc6a2204fd0f3a22dcadce9a224710baf6584",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/AuthorizedProviders_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0056_multilingualresourcecenter_icon.png",
+   "bytes": 1505,
+   "sha256": "b4d6ffc866c90b02b7302274a85cf082ecc3e56aa12e8afd3ff9b585c3f02395",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/MultilingualResourceCenter_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0057_i9central_icon.png",
+   "bytes": 1978,
+   "sha256": "3711279616f44bb3720790c77855c6038428dccfc93d39b54b7235cd24754e71",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/I9Central_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0058_everify_icon.png",
+   "bytes": 1221,
+   "sha256": "4501b1e2cc8275758019f4eaf950cf8e436b1fe0db9172890649c4d236283021",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/EVerify_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0059_readingroom_icon.png",
+   "bytes": 1995,
+   "sha256": "e7ea7e43c61f16b56a98b522ee63f76133e84419a131933714726f43b2183fe8",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ReadingRoom_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0060_immigrationandcitizenshipdata_icon.png",
+   "bytes": 395,
+   "sha256": "837b0ae3eeb8c85627fb18cd405501efae75ffd33fe00684f9b23f04c7974c4f",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ImmigrationAndCitizenshipData_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0061_foia_icon.png",
+   "bytes": 1293,
+   "sha256": "56995eff03981ff3dd857be0e60312aeab5142c14334392b80442cceb3263b05",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/FOIA_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0062_uscishistory_icon.png",
+   "bytes": 1100,
+   "sha256": "5ea9d36f233444a31b0e1150eda54da244bd3057dca7a83046cef54c586f80f4",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/USCISHistory_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0063_contactus_icon.png",
+   "bytes": 1418,
+   "sha256": "5a0504b66b72b498a7af63b3b347a2491c0b60d7df88366a0728e9026e031463",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ContactUs_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0064_classlocator_icon.png",
+   "bytes": 643,
+   "sha256": "2ff1d8078eb5224cbc685c832f60e0114375b2126b1e9a06e057cb2ee30e1029",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-tools/ClassLocator_icon.png"
+  },
+  {
+   "path": "static/images/upstream/0065_formi_9_thumbnail.png",
+   "bytes": 293782,
+   "sha256": "da9c1379fb80d4fff539bd64db0510637d2cace03ea40fb775ee3ef050ebda05",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/FormI-9-Thumbnail.png"
+  },
+  {
+   "path": "static/images/upstream/0066_uscis_prevent_discrimination_241x161_v1_402x.jpg",
+   "bytes": 163484,
+   "sha256": "fffca606cdb104d3ad212b6e18fc5fbd80f61a611eef61fced1d83696c1f6399",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Prevent-Discrimination_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0067_uscis_learning_resources_241x161_v1_402x.jpg",
+   "bytes": 84434,
+   "sha256": "fef486414d3cc3391d8f4bb7fc1e118898e2e99160f4cb4b82c34d442503a5b2",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Learning-Resources_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0068_uscis_handbook_for_employers_241x161_v1_402x.jpg",
+   "bytes": 167897,
+   "sha256": "bcc02a36afd58bf6cc3a8945d6892461e5edc510727325048623087293805a00",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Handbook-for-Employers_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0069_uscis_temporary_worker_241x161_v1_402x.jpg",
+   "bytes": 83878,
+   "sha256": "4814d218626b81e543de1fc72da0998345a19bb3d458dfeb7d68c827238f4982",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Temporary-Worker_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0070_uscis_permanent_worker_241x161_v1_402x.jpg",
+   "bytes": 82689,
+   "sha256": "f28a00359b50103e908386c43a0acb0b27ba7d5ee133dfde6710bf5c4e442af9",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Permanent-Worker_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0071_uscis_students_and_exchange_visitors_241x161.jpg",
+   "bytes": 112454,
+   "sha256": "e1324c8fe6e45202e94a8ddd6f1600a3cc8634407cd0f88d640c9104c7cf7997",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Students-and-Exchange-Visitors_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0072_uscis_temporary_visitors_for_business_241x16.jpg",
+   "bytes": 114429,
+   "sha256": "3c96c0591bf0877e0d89ccfb7573cb6476e2c3a1792c7a3648f76261aa97e9c6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Temporary-Visitors-for-Business_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0073_opa_working_in_the_u_s_241x161_v1_402x.jpg",
+   "bytes": 81958,
+   "sha256": "1e126f57829865c09808f98b79d059ac4c7e8326d60e70285260204f66d201bc",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/OPA_Working-in-the-U.S._241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0074_uscis_before_you_start_241x161_v1_402x.jpg",
+   "bytes": 65371,
+   "sha256": "87a3ffef678d8e03441a338a394cbd202a0655dcea4ceedb10dc987360242c98",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Before-You-Start_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0075_uscis_after_approval_241x161_v1_402x.jpg",
+   "bytes": 104862,
+   "sha256": "dc219beb0bbdc715079768e3614880598c4de2c9efc8b8628907f71f782771e5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_After-Approval_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0076_uscis_immigration_through_adoption_241x161_v.jpg",
+   "bytes": 244545,
+   "sha256": "fb830834791ee484bf1504162b87c2a9bd1d9a7119a663c8bfb8304efbd3d94a",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Immigration-Through-Adoption_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0077_uscis_before_child_immigrates_241x161_v1_402.jpg",
+   "bytes": 85320,
+   "sha256": "122d1fd6d0e1c43c33be0eaa0f84618ff08dc92cff16bdf265f2601bfd2b061a",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Before-Child_Immigrates_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0078_uscis_adoption_country_info.jpg",
+   "bytes": 72067,
+   "sha256": "2126f6b7dc03eee64cb57eac4fdec1106c8dab153aef29ae737d5232a279ff4b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Adoption-country-info.jpg"
+  },
+  {
+   "path": "static/images/upstream/0079_after_your_child_enters_us.jpg",
+   "bytes": 61751,
+   "sha256": "f31c69066a2d32038667ecc57042ad4e4ad44a44145bdeed9a993fe526482e58",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/After-Your-Child-Enters-US.jpg"
+  },
+  {
+   "path": "static/images/upstream/0080_uscis_home_study_information_241x161_v1_402x.jpg",
+   "bytes": 113263,
+   "sha256": "ece02fdf9a88945ffe03ffb7a6acd14bba669eeda4f35b8c57a2181ce088fbbe",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Home-Study-Information_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0081_uscis_adoption_contact_information_241x161_v.jpg",
+   "bytes": 98538,
+   "sha256": "8a5cf1b6f1c408188fa8a2d75973d4fe6baff59aff30e3f3d8738364b3e0037e",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Adoption-Contact-Information_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0082_uscis_naturalization_through_military_servic.jpg",
+   "bytes": 134261,
+   "sha256": "25c08467aa9a270732e6657d5a69a96a4e7c2865f91b78bef46d94055e9ebe6e",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Naturalization-Through-Military-Service_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0083_uscis_citizenship_for_family_members_241x161.jpg",
+   "bytes": 143704,
+   "sha256": "8c94cffe4d4ef792ae9f467ac8c95c55e2f662002ad5c9075ed1e72a044b9d12",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Citizenship-for-Family-Members_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0084_uscis_family_based_survivor_benefits_241x161.jpg",
+   "bytes": 106520,
+   "sha256": "89c3ce519482f307ab45cad480d4d6bceda26565b858aa5c010a97f79256f756",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Family-Based-Survivor-Benefits_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0085_uscis_discretionary_options_241x161_v1_402x.jpg",
+   "bytes": 132773,
+   "sha256": "ed9d40d2646c193e6914e41b7a60cf3b63f3ae6f3da617bbaead0d016c3376f5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Discretionary-Options_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0086_uscis_all_news_241x161_v1_402x.jpg",
+   "bytes": 77094,
+   "sha256": "e37b473144123f6b76f5c286c05862284197686146f9bb480977d3c570a53e1b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_All-News_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0087_uscis_news_video_gallery_241x161_v1_402x.jpg",
+   "bytes": 114804,
+   "sha256": "50d7ec5d998dbd486630c174c9d56436e0da886a8e76909843664f17d11d4d91",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_News_Video-Gallery_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0088_uscis_immigration_citizenship_data_241x161_v.jpg",
+   "bytes": 168537,
+   "sha256": "540d52db7c1e323ddf9d9a927fdabf8190f130a1c6a1285cb9a9f08bf89efc71",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Immigration-Citizenship-Data_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0089_newsroom_smgfx_241x161_402x.png",
+   "bytes": 8347,
+   "sha256": "9a1ec3ac823a538cf3324812285d6cb650ca9986509a52f5e7b5cd848b57dbf3",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Newsroom_SMgfx_241x161%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0090_uscis_news_speeches_statements_241x161_v1_40.jpg",
+   "bytes": 88677,
+   "sha256": "a3a46125753d3290a19f207bdbed4429c3232ff340af30da69d83652570e1a3e",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_News_Speeches-Statements_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0091_uscis_electronic_reading_room_241x161_v2_402.jpg",
+   "bytes": 107913,
+   "sha256": "70671c6744e058e4498c1bfe74d3377549dac4b6e75ba35bdd82ff941018982a",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Electronic-Reading-Room_241x161_V2%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0092_uscis_media_contacts_241x161_v1_402x.jpg",
+   "bytes": 132324,
+   "sha256": "fdb8a3212423d517dc2b9fa08925b5293aa0ccbaf40bd1abe98958a972868f14",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Media-Contacts_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0093_uscis_local_engagements_241x161_v1_402x.jpg",
+   "bytes": 61475,
+   "sha256": "47e7183b63ef4469a93128538115de71b80122daafb812031efb26682ccf7e87",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Local_Engagements_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0094_uscis_save_case_check_241x161_402x.png",
+   "bytes": 67666,
+   "sha256": "bf6d5a6d703ef2a338aadaa778e56f448daa9f4064242c32ab91a5a193fc7a7b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-save/USCIS_SAVE_Case-Check_241x161%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0095_uscis_organization_241x161_v1_402x.jpg",
+   "bytes": 129118,
+   "sha256": "9fbe3df5dba99977a71c06d07222b467ba96396e644cf0ac2ee703009e838798",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Organization_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0096_uscis_leadership_241x161_v1_402x.jpg",
+   "bytes": 96545,
+   "sha256": "9cefe3d45afd69883ffa95782e8bb782b428a8f42de5199e38745ae3a580c512",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Leadership_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0097_uscis_laws_policies_regulations_241x161_v1_4.jpg",
+   "bytes": 85269,
+   "sha256": "baacfac31bc9dc8e9f36360c8928eb057b910f8651cb6b3b84bd6ba93a2187e6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Laws-Policies-Regulations_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0098_uscis_our_history_241x161_v2_402x.jpg",
+   "bytes": 116469,
+   "sha256": "afaa6ebe27be0b14f5cd4025894d2d3e0a03645eafd82f3e03ee8e72ce7ff3c4",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Our-History_241x161_V2%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0099_uscis_n_400_763x282_v1_402x.jpg",
+   "bytes": 532768,
+   "sha256": "a96cb5c73ff0a4165c7ee5131cb165f7937404abc65a1fa3d28646064bd48114",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-citizenship/USCIS_N-400_763x282_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0100_uscis_green_card_eligibility_241x161_v1_402x.jpg",
+   "bytes": 184530,
+   "sha256": "b636cbc3077287a5b8bcc3cd6d28add076b538e3b3f5a7fa55149b14093deefb",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Green-Card-Eligibility_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0101_uscis_green_card_process_and_procedures_241x.jpg",
+   "bytes": 194958,
+   "sha256": "91cc386183b671003b2f823f4039d87474cfc200aa87bd675f05eb8c875a6c2a",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Green-Card-Process-and-Procedures_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0102_uscis_how_to_apply_for_green_card_241x161_v1.jpg",
+   "bytes": 91620,
+   "sha256": "0949ad7451c2d03c96639e464d3c52d7e2cdfcf90ae1bb3072cf33f05075a1c0",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_How-to-Apply-for-Green-Card_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0103_uscis_green_card_pending_241x161_v1_402x.jpg",
+   "bytes": 72477,
+   "sha256": "ba4c4d9d3bdd9d5b11a6f82b4dd9e86835b20ceaa10b284f4c5c3f0fe3cd24d6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Green-Card-Pending_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0104_uscis_replace_your_green_card_241x161_v1_402.jpg",
+   "bytes": 115635,
+   "sha256": "bb30aa650cbdb6350e6fce673c5ef83924505393c79bfa2f0edaca7066f573c0",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Replace-Your-Green-Card_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0105_uscis_adjustment_of_status_guidance_241x161_.jpg",
+   "bytes": 98456,
+   "sha256": "4c14b46d5a17e8f6ed4feb3da4d5a2841ee01dba06a6fed24618e7d10449497b",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Adjustment-of-Status-Guidance_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0106_uscis_create_account_241x161_v1_402x.jpg",
+   "bytes": 66420,
+   "sha256": "40a42833ac24a480cae465e02d7d507ff7d2aa225d1762d0baf75d49e7ba0be6",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Create-Account_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0107_uscis_ecomm_topic_onlineaccountvideos_241x16.jpg",
+   "bytes": 118766,
+   "sha256": "e1e7d11902a1588d39d3efd839a1082cb06295f1ba7969fa6048b0e3da8de2df",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Ecomm_Topic-OnlineAccountVideos_241x161%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0108_uscis_benefits_of_online_filing_241x161_v1_4.jpg",
+   "bytes": 97164,
+   "sha256": "c43cdb2b5e041064cd27db0db91614215de1c02b79d420cff14a0a02ae5b5809",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Benefits-of-Online-Filing_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0109_uscis_how_to_241x161_v1_402x.jpg",
+   "bytes": 147119,
+   "sha256": "fb07cd13fefd84828997a001355af998ba9507f639ce1b7cae6103bb3a833f69",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_How-To_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0110_uscis_tips_online_filing_241x161_v1_402x.jpg",
+   "bytes": 110839,
+   "sha256": "1a65eee5a4eef0e7dfacca3e33ff5f842c46bf96d675df6a7ec3299fbf6e437e",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/USCIS_Tips-Online-Filing_241x161_V1%402x.jpg"
+  },
+  {
+   "path": "static/images/upstream/0111_web_fileonline_onlinefilingoptions_241x161_v.png",
+   "bytes": 646674,
+   "sha256": "a0f12d6cc3c82b076e7691135405db9ddd9f1f043aa9a1dc0489f73fc4f13718",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/Web_FileOnline_OnlineFilingOptions_241x161_V1%402x.png"
+  },
+  {
+   "path": "static/images/upstream/0112_marriage_fraud_nr_1.png",
+   "bytes": 442801,
+   "sha256": "3987d88fa538e265fc7a7059dab0d6bbf5b58441a8366bf5b728d145b1536ff7",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-about-uscis/Marriage_Fraud_NR_1.png"
+  },
+  {
+   "path": "static/images/upstream/0113_marriage_fraud_nr_2.png",
+   "bytes": 657451,
+   "sha256": "f1286db88928558c1e02c823b94daae544694a2f77b01f01a2953a2a3d7900d4",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-about-uscis/Marriage_Fraud_NR_2.png"
+  },
+  {
+   "path": "static/images/upstream/0114_marriage_fraud_nr_3.png",
+   "bytes": 145534,
+   "sha256": "380222644f6224cc475c1ab191bae35d2bd1913323f9dd23295f082ec48b4e1a",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/article-about-uscis/Marriage_Fraud_NR_3.png"
+  },
+  {
+   "path": "static/images/upstream/0115_juarez_20sanchez_montiel_0.png",
+   "bytes": 82757,
+   "sha256": "72827ea9b0a4362628c23ea9e61a7a4edbc436f17e235c4d2b55d6d1dfbdcb30",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/social-media/Juarez%20Sanchez-Montiel_0.png"
+  },
+  {
+   "path": "static/images/upstream/0116_sun_picture_1.png",
+   "bytes": 334148,
+   "sha256": "1214338b329b606e9e6b380fe46af39e1d135cf860914f93db764655c1d35586",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/sun-picture_1.png"
+  },
+  {
+   "path": "static/images/upstream/0117_sun_picture_2.png",
+   "bytes": 481577,
+   "sha256": "48712de1dc88e70d37e9ac6a1fbc9c41e11c5cd14145d9cb14d1dc37820e6fd5",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/topic-landing/sun-picture_2.png"
+  },
+  {
+   "path": "static/images/upstream/0118_roberts_20nemiro_20news_20release.png",
+   "bytes": 72085,
+   "sha256": "6bd49cbb6a202376e3b36a97ca4de4975223b552afc8f8e67089cea46b4317a7",
+   "source_url": "https://www.uscis.gov/sites/default/files/images/social-media/Roberts%20Nemiro%20News%20Release.png"
+  },
+  {
+   "path": "static/external_cache/forms/G-1151.pdf",
+   "bytes": 709443,
+   "sha256": "746dbf855cf1511b70e84cd5acbcd006478b7e156cf0d752be5af1e6c2b50c23",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/guides/G-1151.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/ar-11.pdf",
+   "bytes": 291691,
+   "sha256": "f02879c3dcb820468e24d0dc6987c232ae6bb5ae0814881f80f3d606251cd0ff",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/ar-11.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/g-1055.pdf",
+   "bytes": 658208,
+   "sha256": "d2e7badcf5f0f364732382091f2fa467da8ff3030d8646c1ba5032a9905ed317",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/g-1145.pdf",
+   "bytes": 250968,
+   "sha256": "f06c73937567793cbad9e5c0a5a025ba3823406ebc16b69bb1aee9964cf5b8f8",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1145.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/g-1450.pdf",
+   "bytes": 278599,
+   "sha256": "59d0e7b8e7a007a063b3fca5faee97d5ff11f043285b5ccf2cfb3fb499d40c93",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1450.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/g-1450instr.pdf",
+   "bytes": 214614,
+   "sha256": "e920405c7493d1db99465fc31915b94f63c67ea9fe052c50a6450344f13716bf",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1450instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-130.pdf",
+   "bytes": 729861,
+   "sha256": "7fc733d4639995d6ad4798f1031464d044bd0da4233caa4ada886e79e762a88f",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-130.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-130a.pdf",
+   "bytes": 465583,
+   "sha256": "1d2b2ca97b28abcd2c7e0d336396218b50d582c66450baddfbfda4ee7e779d18",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-130a.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-130instr.pdf",
+   "bytes": 286856,
+   "sha256": "8d1f0eeeab76c2f94964971170e5e9a79895b570c28feb164c28f448666cf29b",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-130instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-131.pdf",
+   "bytes": 652991,
+   "sha256": "e177bbae35c3df634e7269f1094c93a11c6edf6849fa5fe66fbe3726498d59b5",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-131.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-131instr.pdf",
+   "bytes": 558328,
+   "sha256": "ab1a23d11fbd7b0f2993724ef29b0d20d5e40ea70d3a7bdc5e9ab2fb15f987f5",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-131instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-134.pdf",
+   "bytes": 511302,
+   "sha256": "e887f9dbb4660ff9eec47d740c00358e45fcfb9c04a9776d8d95cda2e7a5e0d8",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-134.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-485.pdf",
+   "bytes": 1822050,
+   "sha256": "24c18fc20b34f34d797ca2abe46dec797b8890ef4ade1effaa0f93c2aa1357e9",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-485.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-485instr.pdf",
+   "bytes": 607827,
+   "sha256": "41f7e0cfd5dbf9ee0b0e6358b2d2ceba45ee115198fbdb6ff05ddfa0f2a67ac2",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-485instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-693.pdf",
+   "bytes": 695449,
+   "sha256": "ac8d8032f4bf1421ed2ce76c9754aa5f68b636cbb9b18b5ab16bf09bca5403d2",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-693.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-693instr.pdf",
+   "bytes": 347725,
+   "sha256": "734f0b3070596d3f706e0da32f66feb3c60dee21d353e8ad3e151be6a40767cf",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-693instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-751.pdf",
+   "bytes": 627011,
+   "sha256": "064f773369f0bda068e3a4fbe1a1c6447a8830cfd6777a8d5a81148be5a36510",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-751.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-751instr.pdf",
+   "bytes": 277430,
+   "sha256": "106d7eb1d2a5c7cf804848b6afdc696dbef70d0ef5ec462126221e98ae9c23c1",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-751instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-765.pdf",
+   "bytes": 467424,
+   "sha256": "9ac0eae287749d4c2dfa0a591f464cc2124c18647c10e999b59484f090e0dc7d",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-765.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-765instr.pdf",
+   "bytes": 580406,
+   "sha256": "2bf87fd107831352d2ceec4c32ebadf11f9f4b5ada6e8a9acc793d3dfe5be10f",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-765instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-765ws.pdf",
+   "bytes": 260301,
+   "sha256": "d79f9b55ee1ad2abb8cd5337865ef1c0b073d26e79cbd6b18daa39382bf487bd",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-765ws.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-821.pdf",
+   "bytes": 861313,
+   "sha256": "d6281d7ee4699228744e2cee80590d222d92a6c9e87eb86d657f0cd683ea91d3",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-821.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-9-spanish.pdf",
+   "bytes": 607025,
+   "sha256": "7ebe72cbd3d0cb9a12a659762c22bc9a4928af31721322c3404686ada9774233",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-9-spanish.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-9.pdf",
+   "bytes": 524095,
+   "sha256": "780f348c34df694bb0b4dbbfaf9f22b99b9757b80d16a37ba89aadf069597281",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-9.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-90.pdf",
+   "bytes": 508291,
+   "sha256": "fd436062284fd572224509e0e17a795f915734f7e7c0fca8a161d0a9976f83a0",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-90.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-90instr.pdf",
+   "bytes": 280278,
+   "sha256": "86904a56f7c971d736d9298b98fa42b2a4ae752725b19cb5973796bea1f5669c",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-90instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-912.pdf",
+   "bytes": 502386,
+   "sha256": "c5c5f61c9954e812133f702a0edfacd5cb7ff597c703017789de87735bf2c276",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-912.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-912instr.pdf",
+   "bytes": 486223,
+   "sha256": "d1cb9f27aedd1102666cfd58c9e1b28cfbbf8277376422f193ab6cfa43274de3",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-912instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i-9instr.pdf",
+   "bytes": 297017,
+   "sha256": "c66c3818fbecbfb87b5f0560f4dfd4086905daf72ca29dba15ce4c8d49dc4ca3",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/i9-INS-Spanish.pdf",
+   "bytes": 414263,
+   "sha256": "19f56b7adac97d325403b803ee8e9bf3b4c2a52ca30d555c5ee5ad78368cd0a4",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/i9-INS-Spanish.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/n-336.pdf",
+   "bytes": 452545,
+   "sha256": "7ac08198f35352d2142a02b11a1afffd62245005e9d9a4f9b46e7464eef56d41",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/n-336.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/n-336instr.pdf",
+   "bytes": 323740,
+   "sha256": "d4808ad414f46ed91c40e4456730b4547c354c1d6fb7636bfb28fd63d4126930",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/n-336instr.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/n-400.pdf",
+   "bytes": 776244,
+   "sha256": "8b33868ba071e261bf5e8d87d9667860d1f6d2c4de76101eb1e674404a82d909",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/n-400.pdf"
+  },
+  {
+   "path": "static/external_cache/forms/n-400instr.pdf",
+   "bytes": 1044673,
+   "sha256": "26fd4c556eb7c75b13cbc3e864f18773ab390c9827b0a1a34d23090cd00089d2",
+   "source_url": "https://www.uscis.gov/sites/default/files/document/forms/n-400instr.pdf"
+  }
+ ]
+}

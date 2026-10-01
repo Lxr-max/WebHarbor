@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Page not found - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 30px 16px 60px; max-width:860px;">
+  <div class="panel" style="text-align:center;">
+    <h1 style="font-size:26px;">Sorry, we couldn't find that page</h1>
+    <p style="color:var(--text-2);">Oops! This page no longer exists. Please use one of the navigation links or the search box to find your next tour!</p>
+    <a class="btn btn-lg" href="/">Go to homepage</a>
+  </div>
+  <h2 style="margin-top:26px;">Here is a list of tours that we know you will love</h2>
+  {% include '_tour_cards.html' %}
+</div>
+{% endblock %}

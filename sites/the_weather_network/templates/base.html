@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}The Weather Network: Weather forecasts, maps, news and videos{% endblock %}</title>
+<meta name="description" content="{% block description %}The Weather Network — weather forecasts, maps, news and videos.{% endblock %}">
+<link rel="icon" href="/static/images/brand/favicon.png" sizes="144x144">
+<link rel="shortcut icon" href="/static/images/brand/favicon.ico">
+<link rel="stylesheet" href="/static/css/twn.css">
+<script>
+/* header search dropdown — mirrors the upstream location search box */
+document.addEventListener('DOMContentLoaded', function () {
+  var input = document.querySelector('input[name="search"]');
+  var box = document.getElementById('search-results');
+  if (!input || !box) return;
+  var timer = null;
+  input.addEventListener('input', function () {
+    clearTimeout(timer);
+    var q = input.value.trim();
+    if (q.length < 2) { box.innerHTML = ''; box.style.display = 'none'; return; }
+    timer = setTimeout(function () {
+      fetch('/en/search/suggest?q=' + encodeURIComponent(q)).then(function (r) {
+        return r.json();
+      }).then(function (data) {
+        if (!data.results.length) {
+          box.innerHTML = '<div class="no-results">No locations found for “' + q.replace(/[<>&]/g, '') + '”.</div>';
+        } else {
+          box.innerHTML = data.results.map(function (r) {
+            return '<a href="' + r.url + '"><div class="sr-name">' + r.name + '</div>' +
+                   '<div class="sr-sub">' + r.sub + '</div></a>';
+          }).join('');
+        }
+        box.style.display = 'block';
+      });
+    }, 180);
+  });
+  document.addEventListener('click', function (e) {
+    if (!box.contains(e.target) && e.target !== input) box.style.display = 'none';
+  });
+});
+</script>
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to main content</a>
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="header-logo" href="/en" aria-label="The Weather Network">{% include '_logo.html' %}</a>
+    <nav class="header-nav">
+      <a class="nav-link {% if request.path == '/en' or request.path.startswith('/en/city') or request.path.startswith('/en/school') or request.path.startswith('/en/airport') or request.path.startswith('/en/ski') or request.path.startswith('/en/golf') or request.path.startswith('/en/beach') or request.path.startswith('/en/camping') or request.path.startswith('/en/cottage') or request.path.startswith('/en/marine') or request.path.startswith('/en/attraction') or request.path.startswith('/en/park') or request.path.startswith('/en/vacation') %}active{% endif %}" href="/en">WEATHER</a>
+      <a class="nav-link {% if request.path.startswith('/en/maps') %}active{% endif %}" href="/en/maps/radar">MAPS</a>
+      <a class="nav-link {% if request.path.startswith('/en/news') %}active{% endif %}" href="/en/news">NEWS</a>
+      <a class="nav-link {% if request.path.startswith('/en/video') %}active{% endif %}" href="/en/video">VIDEO</a>
+    </nav>
+    <div class="header-right">
+      <div class="search-wrap">
+        <form action="/en/search" method="get" style="display:flex">
+          <input class="search-input" type="text" name="search" autocomplete="off"
+                 placeholder="Enter location" aria-label="Search for a location">
+        </form>
+        <div class="search-results" id="search-results" style="display:none"></div>
+      </div>
+      <div class="unit-toggle">
+        <a href="/en/account/preferences?unit=metric" class="{% if unit == 'metric' %}on{% endif %}" data-noform>°C</a>
+        <a href="/en/account/preferences?unit=imperial" class="{% if unit == 'imperial' %}on{% endif %}" data-noform>°F</a>
+      </div>
+      <a class="welcome-btn" href="{{ '/en/account' if session.get('user_id') else '/en/account/sign-in' }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        {{ 'My account' if session.get('user_id') else 'Welcome' }}
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}{% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="/en/info/help-centre">Help Centre</a></li>
+          <li><a href="/en/info/privacy-policy-global">Privacy Policy</a></li>
+          <li><a href="/en/info/terms-of-use">Terms Of Use</a></li>
+          <li><a href="/en/info/ai-code-of-ethics">AI Code of Ethics</a></li>
+          <li><a href="/en/info/accessibility-and-accommodation">Accessibility and Accommodation</a></li>
+          <li><a href="/en/info/about-us">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Weather Tools</h2>
+        <ul>
+          <li><a href="/en/info/weather-apis">Weather APIs</a></li>
+          <li><a href="/en/info/about-our-mobile-apps">About Our Mobile Apps</a></li>
+          <li><a href="/en/alerts/ca">Active Alerts</a></li>
+          <li><a href="/en/maps/radar">Radar Map</a></li>
+          <li><a href="/en/vacation">Vacation Weather</a></li>
+          <li><a href="/en/info/fast-channels">FAST Channels</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="/en/explore/discover-and-learn">Discover &amp; Learn</a></li>
+          <li><a href="/en/explore/el-nino-la-nina">El Niño and La Niña</a></li>
+          <li><a href="/en/explore/indigenous">Indigenous News</a></li>
+          <li><a href="/en/explore/experiencing-canada">Experiencing Canada</a></li>
+          <li><a href="/en/news">News</a></li>
+          <li><a href="/en/video">Video</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-badges">
+      <img src="/static/images/brand/badge_brandspark_en.png" alt="BrandSpark most trusted">
+      <img src="/static/images/brand/badge_gold_medal_en.png" alt="Gold medal trust">
+      <span class="muted small">Canada's #1 most trusted weather brand and news source*
+        <br>*2026 BrandSpark® Canadian Trust Study &amp; 2026 Pollara Trust in Media Study</span>
+    </div>
+    <div class="footer-social">
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_facebook.svg" alt="Facebook"></a>
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_instagram.svg" alt="Instagram"></a>
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_youtube.svg" alt="YouTube"></a>
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_tiktok.svg" alt="TikTok"></a>
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_threads.svg" alt="Threads"></a>
+      <a href="/en/info/about-us"><img src="/static/images/brand/social_twitter.svg" alt="X"></a>
+    </div>
+    <div class="footer-note">©2026 Pelmorex Corp — The Weather Network mirror for offline benchmark use.</div>
+  </div>
+</footer>
+</body>
+</html>

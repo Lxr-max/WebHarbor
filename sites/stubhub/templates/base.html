@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Buy sports, concert and theater tickets on StubHub!{% endblock %}</title>
+<meta name="description" content="Buy and sell sports tickets, concert tickets, theater tickets and Broadway tickets on StubHub!">
+<link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+<script src="{{ url_for('static', filename='js/search-suggest.js') }}" defer></script>
+</head>
+<body data-brand="stubhub">
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="StubHub home">
+      <img src="{{ url_for('static', filename='icons/stubhub-logo.svg') }}" alt="StubHub">
+      <span class="logo-tagline">Buy sports, concert and theater tickets on StubHub!</span>
+    </a>
+    <nav class="main-nav" aria-label="Categories">
+      <ul>
+        {% for node in top_nodes %}
+        <li class="nav-item has-menu">
+          <a href="/{{ node.slug }}-tickets/category/{{ node.upstream_id }}" class="nav-link">{{ node.name }}</a>
+          {% if node.children %}
+          <div class="nav-menu">
+            {% for child in node.children|sort(attribute='sort') %}
+            <a href="/{{ child.slug }}-tickets/{{ 'grouping' if child.kind == 'grouping' else 'category' }}/{{ child.upstream_id }}">{{ child.name }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+        <li class="nav-item"><a href="/gift-cards" class="nav-link">Gift Cards</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="/explore" class="header-link">Explore</a>
+      <a href="/selltickets" class="header-link">Sell</a>
+      <a href="/favorites" class="header-link">Favorites</a>
+      {% if current_user.is_authenticated %}
+      <div class="account-menu">
+        <button class="header-link account-btn" type="button">My Tickets</button>
+        <div class="account-dropdown">
+          <a href="/secure/myaccount">My Tickets</a>
+          <a href="/secure/myaccount/purchases">Orders</a>
+          <a href="/secure/myaccount/listings">My Listings</a>
+          <a href="/secure/myaccount/sales">My Sales</a>
+          <a href="/secure/myaccount/payments">Payments</a>
+          <form method="post" action="/secure/logout" class="logout-form">
+            <button type="submit" class="linklike">Sign Out</button>
+          </form>
+        </div>
+      </div>
+      {% else %}
+      <a href="/secure/myaccount/listings" class="header-link">My Tickets</a>
+      <a href="/secure/login" class="header-link">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<div class="search-strip">
+  <form action="/search" method="get" class="search-form" role="search">
+    <input type="search" name="q" placeholder="Search events, artists, teams and more"
+           value="{{ request.args.get('q', '') }}" aria-label="Search events, artists, teams and more">
+    <button type="submit" class="search-btn" aria-label="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.8-3.8"></path></svg>
+    </button>
+  </form>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-stack">
+    {% for category, message in messages %}
+    <div class="flash flash-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div class="footer-brand">
+      <div class="footer-logo">StubHub</div>
+      <p>StubHub is the world's top destination for ticket buyers and resellers. Prices may be higher or lower than face value.</p>
+      <div class="trust-row">
+        <div class="trust-item"><strong>Buy and sell with confidence</strong><span>Customer service all the way to your seat</span></div>
+        <div class="trust-item"><strong>Every order is 100% guaranteed</strong><span>We've got you covered from click to curtain</span></div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Our Company</h4>
+      <a href="/about">About Us</a>
+      <a href="/opendistribution">Open Distribution</a>
+      <a href="/affiliates">Affiliate Program</a>
+      <a href="/careers">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Have Questions?</h4>
+      <a href="/helpCenter">Help Center</a>
+      <a href="/gift-cards">Gift Cards</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2000-2026 StubHub. All Rights Reserved. Use of this website signifies your agreement to our User Agreement, Privacy Notice and Cookie Notice. You are buying tickets from a third party; StubHub is not the ticket seller. Prices are set by sellers and may be above face value.</p>
+  </div>
+</footer>
+</body>
+</html>

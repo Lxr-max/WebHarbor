@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Log In — University of Michigan{% endblock %}
+{% block content %}
+<h1>Log In</h1>
+<p class="page-sub">Log in to use the Backpack, save programs and events, and manage your information requests.</p>
+
+{% if error %}
+<div class="error-box">{{ error }}</div>
+{% endif %}
+
+<form class="stack" method="post" action="{{ url_for('login') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% if request.args.get('next') %}<input type="hidden" name="next" value="{{ request.args.get('next') }}">{% endif %}
+  <label for="email">Email (uniqname or full address)</label>
+  <input type="email" id="email" name="email" required>
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" required>
+  <p><button class="btn" type="submit">Log in</button></p>
+</form>
+<p>New here? <a href="{{ url_for('signup') }}">Create an account</a>.</p>
+{% endblock %}

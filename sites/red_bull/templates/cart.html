@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Your cart | Red Bull Shop{% endblock %}
+{% block content %}
+<h1 class="page-title">Your cart</h1>
+
+{% if items %}
+<table class="cart-table">
+  <tr><th></th><th>Product</th><th>Option</th><th>Price</th><th>Quantity</th><th>Update</th><th></th></tr>
+  {% for i in items %}
+  <tr>
+    <td><img src="{{ i.variant.product.image }}" alt="{{ i.variant.product.title }}"></td>
+    <td><a href="{{ url_for('shop_product', handle=i.variant.product.handle) }}"><strong>{{ i.variant.product.title }}</strong></a></td>
+    <td>{{ i.variant.title }}</td>
+    <td>${{ '%.2f' | format(i.variant.price) }}</td>
+    <td>
+      <form id="update-{{ i.id }}" class="inline-form" method="post" action="{{ url_for('cart_update') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="item_id" value="{{ i.id }}">
+        <input class="qty-input" name="quantity" type="number" min="1" value="{{ i.quantity }}">
+      </form>
+    </td>
+    <td><button type="submit" form="update-{{ i.id }}" class="btn btn-dark">Update</button></td>
+    <td>
+      <form class="inline-form" method="post" action="{{ url_for('cart_remove') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="item_id" value="{{ i.id }}">
+        <button type="submit" class="btn btn-outline">Remove</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="cart-summary">
+  <div class="row"><span>Subtotal</span><span>${{ '%.2f' | format(subtotal) }}</span></div>
+  <div class="row"><span>Shipping</span><span>Free</span></div>
+  <div class="row total"><span>Total</span><span>${{ '%.2f' | format(subtotal) }}</span></div>
+  <p style="margin-top:14px"><a class="btn btn-red" href="{{ url_for('shop_checkout') }}">Checkout</a></p>
+  <p class="form-note">You will be asked to log in to your Red Bull account to place the order.</p>
+</div>
+{% else %}
+<p class="page-sub">Your cart is empty. <a href="{{ url_for('shop') }}">Browse the shop</a>.</p>
+{% endif %}
+{% endblock %}

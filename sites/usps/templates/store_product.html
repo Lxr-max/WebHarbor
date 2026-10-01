@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} | The Postal Store | USPS{% endblock %}
+{% block meta %}{{ product.description or '' }}{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('store_home') }}">The Postal Store</a> &rsaquo; <a href="{{ url_for('store_category', category=product.category) }}">{{ product.category.replace('-', ' ').title() }}</a> &rsaquo; {{ product.name }}</p>
+<div class="grid product-hero">
+  <div class="card">
+    {% if product.image %}<img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">{% endif %}
+    {% if gallery %}
+      <div class="grid" style="margin-top:10px">
+        {% for g in gallery %}{% if g %}<img src="{{ url_for('static', filename=g) }}" alt="{{ product.name }}" style="height:80px">{% endif %}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="card">
+    <h1>{{ product.name }}</h1>
+
+<p class="note">Browse: <a href="{{ url_for('store_home') }}">Store home</a> &middot;
+  <a href="{{ url_for('store_category', category='stamps-new-releases') }}">New Releases</a> &middot;
+  <a href="{{ url_for('store_category', category='stamps-all') }}">All Stamps</a> &middot;
+  <a href="{{ url_for('store_category', category='shipping-supplies-priority-mail') }}">Priority Mail Supplies</a> &middot;
+  <a href="{{ url_for('store_category', category='cards-envelopes') }}">Cards &amp; Envelopes</a> &middot;
+  <a href="{{ url_for('store_category', category='gifts-collectors') }}">Collectibles &amp; Gifts</a> &middot;
+  <a href="{{ url_for('store_cart') }}">Cart</a></p>
+    <p>SKU: {{ product.sku }}</p>
+    {% if product.price is not none %}<p class="totals">{{ product.price | usd }}</p>{% endif %}
+    {% if product.description %}<p>{{ product.description }}</p>{% endif %}
+    <form action="{{ url_for('store_cart_add') }}" method="post" class="flow">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="sku" value="{{ product.sku }}">
+      <label>Quantity <input type="number" name="qty" min="1" value="1"></label>
+      <button class="btn" type="submit">Add to Cart</button>
+      <a class="btn secondary" href="{{ url_for('store_cart') }}">View Cart</a>
+    </form>
+    <p class="note">Stamps and most store items ship free with USPS shipping. Allow 3–5 business days for delivery.</p>
+  </div>
+</div>
+{% if related %}
+<h2>Related Products</h2>
+<div class="grid">
+  {% for p in related %}
+    <div class="card store-tile">
+      {% if p.image %}<a href="{{ url_for('store_product', slug=p.slug) }}"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}"></a>{% endif %}
+      <h3><a href="{{ url_for('store_product', slug=p.slug) }}">{{ p.name }}</a></h3>
+      <p class="price">{{ p.price | usd }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

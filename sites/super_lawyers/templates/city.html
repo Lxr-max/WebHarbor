@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Find a Top Rated Attorney in {{ city.name }}, {{ state_abbr(state.slug) }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('attorneys_home') }}">Browse attorneys</a> ›
+    <a href="/attorneys/{{ state.slug }}/">{{ state.name }}</a> ›
+    <span>{{ city.name }}</span>
+  </nav>
+  <h1>{{ city.name }}, {{ state.name }} Super Lawyers rated attorneys</h1>
+
+  <h2>All practice areas in {{ city.name }}, {{ state.name }}</h2>
+  <p>Find outstanding lawyers by selecting a practice area below.</p>
+  <div class="link-grid four-col">
+    {% for practice in practices %}
+      <a href="/attorneys/{{ practice.slug }}/{{ state.slug }}/{{ city.slug }}/">{{ practice.name }}</a>
+    {% endfor %}
+  </div>
+
+  {% if other_cities %}
+  <h2>Super Lawyers rated attorneys in other {{ state.name }} cities</h2>
+  <div class="link-grid four-col">
+    {% for other in other_cities %}
+      <a href="/attorneys/{{ state.slug }}/{{ other.slug }}/">{{ other.name }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h3>Are you searching for a top lawyer in {{ city.name }}, {{ state.name }}?</h3>
+  <p>Through the Super Lawyers directory, we index attorneys who practice quality and
+  excellence in their work. It is easy to browse attorney listings in your immediate
+  area, search for a specific individual referred by a friend, or start narrowing your
+  search by practice area.</p>
+  <p>When you find attorneys who interest you, spend time and explore their profiles.
+  There you will find the attorney's contact, education, and biographical information
+  to supplement your research.</p>
+</div>
+{% endblock %}

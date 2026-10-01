@@ -1,0 +1,14 @@
+{
+  "catalog_type": "synthetic_offline_fixture",
+  "display_identifier_prefix": "SIM-MAYO-",
+  "registry_claim": false,
+  "identity_repair": {
+    "legacy_identifier": "NCT05123456",
+    "legacy_fixture_subject": "Stage III non-small cell lung cancer",
+    "official_record_subject": "Knee osteoarthritis after ACL reconstruction",
+    "official_record_intervention": "Radiography",
+    "official_api": "https://clinicaltrials.gov/api/v2/studies/NCT05123456",
+    "verified_on": "2026-09-22"
+  },
+  "scope_note": "The 40 local records are templated fixtures for deterministic UI workflows. They are not represented as ClinicalTrials.gov or Mayo Clinic registry captures."
+}

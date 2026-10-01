@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ cat.name }} - ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>{{ cat.name }}</h1>
+  <p class="snapshot">{{ articles|length }} articles in this snapshot</p>
+</section>
+{% if subcats %}
+<nav class="blog-subcats">
+  {% for sub in subcats %}<a href="/blog/category/{{ sub.slug }}/">{{ sub.name }}</a>{% endfor %}
+</nav>
+{% endif %}
+<div class="blog-list">
+  {% for art in articles %}
+  <article class="blog-card">
+    {% if art.hero_url() %}<img src="{{ art.hero_url() }}" alt="" class="blog-hero">{% endif %}
+    <h2><a href="/blog/{{ art.slug }}/">{{ art.title }}</a></h2>
+    <p class="byline">By {{ art.author }} · {{ art.published[:10] }}</p>
+    {% if art.excerpt %}<p class="excerpt">{{ art.excerpt }}</p>{% endif %}
+  </article>
+  {% endfor %}
+  {% if not articles %}<p>No articles in this category yet.</p>{% endif %}
+</div>
+{% endblock %}

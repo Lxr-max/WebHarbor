@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Payment Methods | Speedo{% endblock %}
+{% block content %}
+<div class="page-width account-layout">
+  <aside class="account-nav">
+    <h2>My Account</h2>
+    <ul>
+      <li><a href="{{ url_for('account') }}">Orders</a></li>
+      <li><a href="{{ url_for('account_profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('account_addresses') }}">Addresses</a></li>
+      <li><a class="active" href="{{ url_for('account_payment') }}">Payment Methods</a></li>
+      <li><a href="{{ url_for('account_wishlist') }}">Wishlist</a></li>
+      <li>
+        <form method="post" action="{{ url_for('logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="link-btn">Sign Out</button>
+        </form>
+      </li>
+    </ul>
+  </aside>
+  <section class="account-main">
+    <h1>Payment Methods</h1>
+    <p class="account-sub">Saved cards for faster checkout.</p>
+    {% for c in cards %}
+    <div class="address-card">
+      <strong>{{ c.label }} — {{ c.brand }}</strong> ending in {{ c.last4 }} &middot; exp {{ '%02d' % c.exp_month }}/{{ c.exp_year }}
+      {% if c.is_default %}<span class="default-tag">Default</span>{% endif %}
+      <form method="post" style="margin-top:10px;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="delete_id" value="{{ c.id }}">
+        <button type="submit" class="link-btn">Remove</button>
+      </form>
+    </div>
+    {% endfor %}
+    <h2 style="font-size:16px;text-transform:uppercase;margin:24px 0 12px;">Add a new card</h2>
+    <form method="post" class="auth-card" style="margin:0;max-width:520px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="label">Label</label>
+        <input type="text" id="label" name="label" placeholder="Personal" value="Personal"></div>
+      <div class="field"><label for="card_number">Card number</label>
+        <input type="text" id="card_number" name="card_number" inputmode="numeric" placeholder="1234 5678 9012 3456" required></div>
+      <div class="field-grid">
+        <div class="field"><label for="exp_month">Expiration month</label>
+          <input type="text" id="exp_month" name="exp_month" placeholder="MM" maxlength="2" inputmode="numeric" required></div>
+        <div class="field"><label for="exp_year">Expiration year</label>
+          <input type="text" id="exp_year" name="exp_year" placeholder="YY" maxlength="2" inputmode="numeric" required></div>
+      </div>
+      <label style="font-size:13.5px;display:flex;gap:8px;align-items:center;margin:10px 0;">
+        <input type="checkbox" name="make_default"> Set as default card
+      </label>
+      <button type="submit" class="btn btn-primary">Save card</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

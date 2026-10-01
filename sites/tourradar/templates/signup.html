@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Create account - TourRadar{% endblock %}
+{% block content %}
+<div style="background: linear-gradient(160deg, #12313f, #1d5d7a); min-height: 560px; display:flex; align-items:center; justify-content:center; padding: 40px 16px;">
+  <div style="background:#fff; border-radius:16px; max-width:440px; width:100%; padding:34px; box-shadow:0 10px 40px rgba(0,0,0,.25);">
+    <div style="text-align:center; margin-bottom:18px;">
+      <svg width="44" height="44" viewBox="0 0 32 32" fill="none" style="margin:0 auto;">
+        <circle cx="16" cy="16" r="15" fill="#177fa4"/>
+        <path d="M9 21 L16 8 L23 21 L19.5 21 L16 14.5 L12.5 21 Z" fill="#fff"/>
+      </svg>
+      <h1 style="font-size:20px; margin-top:8px;">Create your account</h1>
+      <p style="font-size:13px; color:var(--text-2);">Save wishlists, book adventures and unlock member savings.</p>
+    </div>
+
+    <div class="tabs" style="justify-content:center;">
+      <a href="/login">Log in</a>
+      <a class="active" href="/signup">Create account</a>
+    </div>
+
+    <form method="post" class="form-grid" style="grid-template-columns:1fr;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field">
+        <label>Full name</label>
+        <input type="text" name="display_name" placeholder="Your name" autofocus>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label>Password (min. 8 characters)</label>
+        <input type="password" name="password" minlength="8" required>
+      </div>
+      <button class="btn btn-lg" type="submit" style="width:100%; margin-top:6px;">Create account</button>
+    </form>
+    <p style="text-align:center; font-size:12.5px; margin-top:14px;">Already have an account? <a href="/login">Log in</a></p>
+    <p style="text-align:center; font-size:11px; color:var(--text-3);">&copy; 2026 TourRadar. All rights reserved.<br>Privacy Policy &middot; Terms of Service</p>
+  </div>
+</div>
+{% endblock %}

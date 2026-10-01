@@ -1,0 +1,92 @@
+{
+  "site": "stanford_university",
+  "upstream": "https://www.stanford.edu/",
+  "captured_at": "2026-09-30",
+  "capture_window_utc": "2026-09-30T23:40Z to 2026-10-01T02:20Z",
+  "capture_method": "Every tracked record is a real upstream capture from stanford.edu and its public subdomains. Courses (5,420 rows after dedup) and degree programs come from the live Coursedog catalog API that powers bulletin.stanford.edu (app.coursedog.com/api/v1/cm/stanford/courses and /programs, fetched with the catalog's own X-Requested-With: catalog header); the 150 department records and 355 program detail pages come from the bulletin's server-rendered pages (NUXT payload decode, including the per-department About Us copy and subject codes); faculty profiles (1,670 rows, deduped to 1,535 across 22 departments) come from the public Stanford Profiles (CAP) API at profiles.stanford.edu/proxy/api/cap (orgs/<code>/profiles?affiliations=capFaculty plus the keyword search API); campus events (596 rows) come from the Stanford Localist calendar API at events.stanford.edu/api/2/events; the 2026-27 academic calendar (185 entries) is parsed from studentservices.stanford.edu; the 17 library pages, the weekly hours tables (20 libraries) and the admission/financial-aid copy come from library.stanford.edu, library-hours.stanford.edu, admission.stanford.edu and financialaid.stanford.edu, with the Tanner philosophy library's location and about copy re-captured from philosophy.stanford.edu (library.stanford.edu's Tanner page 307-redirects to the department site, which hosts the library's current pages); the homepage sections and Stanford Report news (210 stories with full body text, categories, topics, writers and dates) were captured with headless Chromium (Playwright) because news.stanford.edu and its story pages sit behind a Cloudflare browser check \u2014 the same headless-Chromium approach used for the u_s_customs capture; plain HTTP GETs with a desktop browser user agent were used everywhere else. No login, no paywall, no synthetic content records.",
+  "blocked_upstream_note": "explorecourses.stanford.edu refuses bulk reads from this capture host ('Stop that evilness!' guard on the search endpoint); the course catalog is captured from the equivalent live bulletin.stanford.edu catalog API instead, which serves the same 2026-27 course data. registrar.stanford.edu redirects its academic calendar to a login page; the calendar is captured from the public studentservices.stanford.edu copy instead. Both substitutions are recorded here rather than presented as direct captures.",
+  "sources": {
+    "app.coursedog.com (bulletin.stanford.edu catalog API)": {
+      "role": "Course catalog: 5,420 Active, non-archived courses with descriptions (20 undergraduate + 20 graduate rows per subject code plus a curated flagship list), and the 100-program index",
+      "captures": "2 API dumps"
+    },
+    "bulletin.stanford.edu (server-rendered pages)": {
+      "role": "150 department records (names, subject codes, About Us copy) and 355 program detail pages (catalog descriptions, unit minimums, requirement groups); the sitemap provided the A-Z roster",
+      "captures": "506 pages"
+    },
+    "profiles.stanford.edu (CAP API)": {
+      "role": "Faculty directory: 1,670 faculty rows across 22 departments with titles, bios, research interests, education, publications and profile photos",
+      "captures": "per-org paginated API"
+    },
+    "news.stanford.edu (Stanford Report, via headless Chromium)": {
+      "role": "210 news stories: titles, publication timestamps, categories, main topics, topic tags, featured units, writers, descriptions and full body text, plus hero imagery",
+      "captures": "29 listing pages + 211 story pages"
+    },
+    "events.stanford.edu (Localist API)": {
+      "role": "Campus events: 596 events spanning 2026-08 through 2027-09 (up to 60 per month, verified/featured first) with descriptions, instances, locations, costs, tags and photos",
+      "captures": "60 paginated API responses"
+    },
+    "studentservices.stanford.edu": {
+      "role": "The 2026-27 Stanford Academic Calendar: 185 dated entries across Autumn/Winter/Spring/Summer quarters",
+      "captures": 1
+    },
+    "library.stanford.edu + library-hours.stanford.edu": {
+      "role": "17 library detail pages (locations, phones, about copy, quick links, research subjects) and the weekly hours tables for 20 libraries; the Tanner philosophy library's location and about copy come from philosophy.stanford.edu, where library.stanford.edu's Tanner page now redirects (Building 90, Room 91F in the Main Quad)",
+      "captures": "21 pages"
+    },
+    "admission.stanford.edu + financialaid.stanford.edu": {
+      "role": "Undergraduate admission requirements, Restrictive Early Action / Regular Decision / Arts Portfolio deadlines, application fee, aid thresholds and aid-at-a-glance copy",
+      "captures": "12 pages"
+    },
+    "www.stanford.edu": {
+      "role": "Homepage hero copy, section text, story cards and imagery; the Block S mark from the bulletin asset host",
+      "captures": 1
+    }
+  },
+  "media": {
+    "images": {
+      "count": 691,
+      "inventory": "asset_inventory.json",
+      "policy": "every file fetched from the upstream URL it renders at (homepage storyblok CDN, news.stanford.edu hero images via headless Chromium, CAP profile photos, Localist event photos, library sites-pro media, admission.stanford.edu banners); no placeholders, no duplicates (byte-identical upstream duplicates are deduplicated with the alias source URLs recorded), no stretching",
+      "note": "one news image is stored as .webp because the upstream CDN serves WebP bytes for its .jpg URL; the source URL is recorded in the inventory"
+    }
+  },
+  "fixtures": {
+    "benchmark_users": [
+      {
+        "email": "alice.j@test.com",
+        "display": "Alice Johnson",
+        "fixture": "course planner with CS106A, MATH51, PHYSICS41; saved event Climber Coffee"
+      },
+      {
+        "email": "bob.c@test.com",
+        "display": "Bob Chen",
+        "fixture": "course planner with ECON1, PSYCH1; saved event Trust and Safety Research Conference"
+      },
+      {
+        "email": "carol.d@test.com",
+        "display": "Carol Davis",
+        "fixture": "saved event Lunchtime Curator Talk | JANE!"
+      },
+      {
+        "email": "dana.k@test.com",
+        "display": "Dana Kim",
+        "fixture": "course planner with BIO102; saved event Environmental Behavioral Sciences Seminar"
+      }
+    ],
+    "note": "planner rows and saved events are deterministic benchmark fixtures keyed to the benchmark users; every course and event they reference is a real captured upstream record; the net price estimator applies the aid thresholds exactly as published on the upstream admission pages"
+  },
+  "determinism": {
+    "seed": "PYTHONHASHSEED=0 python3 seed_data.py at image build time",
+    "password": "frozen bcrypt hash (TestPass123!)",
+    "clock": "BENCHMARK_NOW frozen at 2026-09-30; all 'upcoming' filters compare against the frozen date, never the wall clock",
+    "schema": "no index=True columns; CREATE INDEX statements emitted in sorted order so two seed builds are byte-identical",
+    "verified": "byte-identical instance/ vs instance_seed/ after rebuild (sha256 65c57cd4\u2026 across repeated builds, including PYTHONHASHSEED=random)"
+  },
+  "review": {
+    "source_pr": 338,
+    "hf_revision": "10f93ea09d96971638dda931bc5170f0948c7616",
+    "upstream_comparison": "Live browser comparison; existing captured assets retained.",
+    "task_revision": "Coherent research or saved-state goals with aligned rubrics and deterministic verifiers."
+  }
+}

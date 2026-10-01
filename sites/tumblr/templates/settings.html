@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Settings — Tumblr{% endblock %}
+{% block content %}
+<div class="narrow-wrap">
+  <div class="page-head">
+    <h1>Account settings</h1>
+    <p class="page-sub">Signed in as {{ user.email }}</p>
+  </div>
+
+  <div class="settings-card">
+    <h2>Blog settings — {{ user_blog.name }}</h2>
+    <form method="post">
+      <input type="hidden" name="action" value="profile">
+      <label class="field">
+        <span class="field-label">Blog title</span>
+        <input class="composer-title" type="text" name="title" value="{{ user_blog.display_title() }}">
+      </label>
+      <label class="field">
+        <span class="field-label">Description</span>
+        <textarea name="description" rows="4">{{ user_blog.description }}</textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Save blog settings</button>
+    </form>
+  </div>
+
+  <div class="settings-card">
+    <h2>Change password</h2>
+    <form method="post">
+      <input type="hidden" name="action" value="password">
+      <label class="field">
+        <span class="field-label">Current password</span>
+        <input class="composer-title" type="password" name="old_password" required>
+      </label>
+      <label class="field">
+        <span class="field-label">New password (8+ characters)</span>
+        <input class="composer-title" type="password" name="new_password" required>
+      </label>
+      <button class="btn btn-primary" type="submit">Update password</button>
+    </form>
+  </div>
+
+  <div class="settings-card">
+    <h2>Account</h2>
+    <dl class="blog-facts">
+      <dt>Email</dt><dd>{{ user.email }}</dd>
+      <dt>Username</dt><dd>{{ user.username }}</dd>
+      <dt>Blog</dt><dd><a href="{{ url_for("blog_page", name=user_blog.name) }}">{{ user_blog.name }}</a></dd>
+      <dt>Posts</dt><dd>{{ '{:,}'.format(user_blog.posts_count or 0) }}</dd>
+    </dl>
+  </div>
+</div>
+{% endblock %}

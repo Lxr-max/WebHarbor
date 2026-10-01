@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Ticketmaster Gift Cards | Give Live Entertainment!{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › Gift Cards</div>
+  <h1 class="page-title">{{ gc['title'] }}</h1>
+  <p class="page-sub">{{ gc['blurb'] }}</p>
+  <p style="max-width:760px; margin-bottom:26px">{{ gc['body'] }}</p>
+
+  <div class="avp-tabs"><span class="active">Buy</span><span>Check Balance</span><span>FAQ</span><span>Terms of Use</span><span>Bulk Orders</span></div>
+
+  <div class="checkout-grid">
+    <div>
+      <h3 style="margin-bottom:10px">Choose a gift card</h3>
+      <div class="denoms">
+        {% for d in gc['denominations'] %}
+        <span class="denom">${{ d }}</span>
+        {% endfor %}
+      </div>
+      <form class="form-card gc-form" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="buy">
+        <div class="field">
+          <label for="amount">Amount ($25 – $1000)</label>
+          <input id="amount" type="number" name="amount" min="25" max="1000" step="5" required>
+        </div>
+        <div class="field">
+          <label for="type">Type</label>
+          <select id="type" name="type">
+            {% for t in gc['types'] %}<option>{{ t }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="email">Recipient email</label>
+          <input id="email" type="email" name="email" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Buy Gift Card</button>
+      </form>
+
+      <h3 style="margin:30px 0 10px">Check your balance</h3>
+      <form class="form-card gc-form" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="balance">
+        <div class="field">
+          <label for="code">Gift card number</label>
+          <input id="code" type="text" name="code" required placeholder="XXXX-XXXX-XXXX">
+        </div>
+        <button class="btn btn-outline" type="submit">Check Balance</button>
+        {% if balance is not none %}
+        <p style="margin-top:14px"><b>{{ code }}:</b> current balance <b>${{ balance }}</b></p>
+        {% endif %}
+      </form>
+    </div>
+    <aside class="order-summary">
+      <h4>Gift Card Info</h4>
+      <div class="row"><span>Types</span><span>{{ gc['types']|join(', ') }}</span></div>
+      <div class="row"><span>Amounts</span><span>$25 – $1000</span></div>
+      <div class="row"><span>Order by phone</span><span>{{ gc['phone'] }}</span></div>
+      <p style="font-size:12px; color:var(--tm-gray); margin-top:10px">Gift cards never expire and can be used toward any event on Ticketmaster.</p>
+    </aside>
+  </div>
+</div>
+{% endblock %}

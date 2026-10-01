@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}{{ team.full_name }} News | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/{{ team.league }}">{{ LEAGUE_NAMES.get(team.league, team.league) }}</a> &gt;
+  <a href="/{{ team.league }}/teams">TEAMS</a> &gt;
+  <span>{{ team.full_name|upper }}</span>
+</div>
+<section class="team-head">
+  {% if team.logo and image(team.logo) %}<img class="team-logo" src="{{ image(team.logo) }}" alt="{{ team.full_name }}">{% endif %}
+  <div>
+    <h1>{{ team.full_name|upper }}</h1>
+    <p class="team-record">
+      {% if team.rank %}<span class="tag tag-rank">#{{ team.rank }}</span>{% endif %}
+      {{ team.record or '' }}{% if team.note %} &middot; {{ team.note }}{% endif %}
+      {% if team.streak %} &middot; {{ team.streak }}{% endif %}
+    </p>
+    {% if team.next_opponent %}
+    <p class="team-next">
+      Next Game {{ team.next_homeaway }} {{ team.next_opponent }}
+      {% if team.next_day %} &middot; {{ team.next_day }}{% endif %}
+      {% if team.next_time %} {{ team.next_time }}{% endif %}
+      {% if team.next_spread %} &middot; {{ team.next_spread }} TOTAL {{ team.next_total or '' }}{% endif %}
+    </p>
+    {% endif %}
+  </div>
+  <nav class="team-tabs">
+    <a class="active" href="/{{ team.league }}/{{ team.slug }}-team" aria-current="page">News</a>
+    <a href="/{{ team.league }}/{{ team.slug }}-team-schedule">Schedule</a>
+    <a href="/{{ team.league }}/{{ team.slug }}-team-roster">Roster</a>
+  </nav>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Player News</h2></div>
+  {% if news %}
+  <ul class="news-list">
+    {% for item in news %}
+    <li>
+      <h4>{{ item.player }} &ndash; {{ item.headline }}</h4>
+      {% if item.story %}<p>{{ item.story }}</p>{% endif %}
+      {% if item.impact %}<p class="muted impact">Impact &mdash; {{ item.impact }}</p>{% endif %}
+      <span class="muted">{{ item.time_ago }} &middot; {{ item.source }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="muted">No player news right now.</p>
+  {% endif %}
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Games</h2></div>
+  <div class="game-grid">
+    {% for game in games %}
+      {% include '_game_card.html' %}
+    {% endfor %}
+  </div>
+</section>
+
+{% if current_user.is_authenticated %}
+<section class="section">
+  <form method="post" action="{{ url_for('favorites_toggle') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="item_type" value="team">
+    <input type="hidden" name="item_key" value="{{ team.slug }}">
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button type="submit" class="btn">{{ 'Unfollow' if is_favorited('team', team.slug) else 'Follow' }} {{ team.short or team.full_name }}</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}

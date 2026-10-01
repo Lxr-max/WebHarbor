@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ coin.name }} Historical Data | CoinMarketCap{% endblock %}
+{% block body %}
+<div class="coin-head">
+  {% if coin_logo(coin) %}<img src="{{ coin_logo(coin) }}" alt="{{ coin.name }} logo">{% endif %}
+  <div class="names"><h1>{{ coin.name }} <span class="sym">{{ coin.symbol }}</span> Historical Data</h1></div>
+  <span class="rank-badge">Rank #{{ coin.rank }}</span>
+</div>
+<p class="muted">Daily OHLCV captured from coinmarketcap.com (UTC). {{ total }} rows in the {{ days }}-day view.</p>
+<p><a href="/currencies/{{ coin.slug }}/">← Back to {{ coin.name }}</a></p>
+
+<div class="range-tabs">
+  {% for d in available_days %}
+    <a class="{{ 'active' if d == days else '' }}"
+       href="/currencies/{{ coin.slug }}/historical-data/?days={{ d }}">{{ d }}d</a>
+  {% endfor %}
+</div>
+
+<table>
+  <thead><tr>
+    <th>Date</th><th class="num">Open</th><th class="num">High</th><th class="num">Low</th>
+    <th class="num">Close</th><th class="num">Volume</th><th class="num">Market Cap</th>
+  </tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.date }}</td>
+      <td class="num">{{ r.open | price }}</td>
+      <td class="num">{{ r.high | price }}</td>
+      <td class="num">{{ r.low | price }}</td>
+      <td class="num">{{ r.close | price }}</td>
+      <td class="num">{{ r.volume | usd }}</td>
+      <td class="num">{{ r.market_cap | usd }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="pager">
+  {% if page > 1 %}
+    <a href="/currencies/{{ coin.slug }}/historical-data/?days={{ days }}&page={{ page - 1 }}">← Previous</a>
+  {% endif %}
+  <span>Page {{ page }} of {{ pages }}</span>
+  {% if page < pages %}
+    <a href="/currencies/{{ coin.slug }}/historical-data/?days={{ days }}&page={{ page + 1 }}">Next →</a>
+  {% endif %}
+</div>
+{% endblock %}

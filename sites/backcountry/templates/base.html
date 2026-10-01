@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Backcountry - Outdoor Gear &amp; Clothing for Ski, Snowboard, Camp, &amp; More{% endblock %}</title>
+<link rel="stylesheet" href="/static/css/site.css">
+<link rel="icon" href="{{ img('/images/brand/favicon.ico') or '/static/icons/favicon.ico' }}">
+</head>
+<body>
+<div class="announce-bar" role="region" aria-label="Announcements">
+  <div class="announce-track">
+    {% for a in announcements %}
+      <span class="announce-item{% if loop.index == 1 %} first{% endif %}">{{ a.text }}{% if mirror_link(a.link) %} <a href="{{ mirror_link(a.link) }}">See Details</a>{% endif %}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-top">
+    <a class="logo" href="/" aria-label="Backcountry home">
+      <img src="{{ img('/images/brand/bcs_logo.png') }}" alt="Backcountry" width="210" height="30">
+    </a>
+    <form class="header-search" action="/search" method="get" role="search">
+      <input type="search" name="q" value="{{ request.args.get('q','') }}"
+             placeholder="Search for gear, brands, activities…" aria-label="Search products">
+      <button type="submit" aria-label="Run search">Search</button>
+    </form>
+    <nav class="header-links" aria-label="Account">
+      {% if current_user.is_authenticated %}
+        <a href="/account">Hi, {{ current_user.display_name.split(' ')[0] }}</a>
+      {% else %}
+        <a href="/login">Sign In</a>
+      {% endif %}
+      <a href="/wish-list">Wish List</a>
+      <a href="/cart" class="cart-link">Cart, contains {{ cart_count }} item{{ 's' if cart_count != 1 else '' }}</a>
+    </nav>
+  </div>
+  <nav class="site-nav" aria-label="Categories">
+    {% for label, items in nav %}
+      <div class="nav-item">
+        <a href="/cat/{{ items[0][1] }}">{{ label }}</a>
+      </div>
+    {% endfor %}
+    <a href="/shop-all-brands">Brands</a>
+    <a href="/cat/hike-camp?sale=30">Sale</a>
+  </nav>
+</header>
+
+<main id="main">
+{% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <h4>Help</h4>
+      <a href="/info/shipping-policy">Shipping Policy</a>
+      <a href="/info/return-policy">Return Policy</a>
+      <a href="/cart">Your Cart</a>
+      <a href="/account">Order Status</a>
+    </div>
+    <div>
+      <h4>Account</h4>
+      {% if current_user.is_authenticated %}
+        <a href="/account">My Account</a>
+      {% else %}
+        <a href="/login">Sign In / Register</a>
+      {% endif %}
+      <a href="/wish-list">Wish List</a>
+      <a href="/account/addresses">Addresses</a>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="/cat/hike-camp">Hike &amp; Camp</a>
+      <a href="/cat/ski">Ski</a>
+      <a href="/cat/climb">Climb</a>
+      <a href="/cat/bike">Bike</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="/shop-all-brands">All Brands</a>
+      <a href="/info/loyalty">Summit Club+</a>
+      <span class="muted">Mirror snapshot frozen {{ MIRROR_TS }}</span>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>This WebHarbor mirror is a frozen snapshot of backcountry.com captured for offline
+    benchmark research; it is not affiliated with or endorsed by the upstream site.</p>
+  </div>
+</footer>
+<script src="/static/js/site.js" defer></script>
+</body>
+</html>

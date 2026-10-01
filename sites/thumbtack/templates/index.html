@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>For everything home could be.</h1>
+      <p class="hero-sub">Find local pros for repairs, upgrades, and projects big or small — all in one place.</p>
+      <form class="hero-search" action="/search" method="get">
+        <input type="text" name="q" placeholder="Describe your project or problem — be as detailed as you'd like!" aria-label="Describe your project or problem">
+        <button class="btn btn-primary" type="submit">Find a pro</button>
+      </form>
+      <p class="hero-note">No calls or text until you message a pro.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>4.9</b><span>from 15M+ reviews</span></div>
+        <div class="hero-stat"><b>300K+</b><span>local pros</span></div>
+        <div class="hero-stat"><b>100M+</b><span>home projects</span></div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="{{ url_for('static', filename='images/hero/hero_home.webp') }}" alt="Kitchen remodel with white oak cabinets and marble counters">
+      <span class="hero-tag">KITCHEN REMODEL · White oak cabinets, marble counters</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-head">Pros for every project in Redmond, Washington.</h2>
+  <p class="section-sub">Tell us what you need, and we'll match you with the best local pros.</p>
+  <div class="chip-row">
+    {% for c in cats %}
+    <a class="chip" href="{{ c.url() }}">
+      <img src="{{ url_for('static', filename='images/icons/' + c.icon) }}" alt="{{ c.name }}">
+      {{ c.plural.capitalize() }}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-head">Popular right now</h2>
+  <p class="section-sub">The services your neighbors hired most this month.</p>
+  <div class="card-grid">
+    {% for c in popular %}
+    <a class="svc-card" href="{{ c.url() }}">
+      <img src="{{ url_for('static', filename='images/icons/' + c.image) }}" alt="{{ c.name }}">
+      <div class="svc-body">
+        <div class="svc-name">{{ c.name }}</div>
+        <div class="svc-meta">{{ c.pros|length }} pros near you · Free price estimates</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section band">
+  <div class="section">
+    <h2>Why customers love Thumbtack.</h2>
+    <p style="color:#EAF6FA; max-width:720px;">Every day, millions of customers like you rely on Thumbtack to care for their homes — and we've got your back if things don't go as planned.</p>
+    <div class="band-grid">
+      <div class="band-card"><h3>Get to a hire faster.</h3><p>Share details about your project in your own words, so we can find your best fit.</p></div>
+      <div class="band-card"><h3>Only see local, trusted pros.</h3><p>We'll only show you pros we're confident can do the job.</p></div>
+      <div class="band-card"><h3>A job done right — guaranteed.</h3><p>If the job isn't done as agreed you could get up to $2,500 back. <a href="/guarantee" style="color:#B3EBFF;">Terms apply.</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-head">Explore more projects.</h2>
+  <div class="card-grid" style="margin-top:18px;">
+    <a class="svc-card" href="/prices">
+      <img src="{{ url_for('static', filename='images/hero/explore_prices.jpg') }}" alt="Cost guides">
+      <div class="svc-body"><div class="svc-name">Cost guides</div>
+      <div class="svc-meta">Estimate costs for all your home projects</div></div>
+    </a>
+    <a class="svc-card" href="/k/roofing/near-me">
+      <img src="{{ url_for('static', filename='images/hero/explore_maintenance.jpg') }}" alt="Maintenance tips">
+      <div class="svc-body"><div class="svc-name">Maintenance tips</div>
+      <div class="svc-meta">Tips to keep your home in great shape</div></div>
+    </a>
+    <a class="svc-card" href="/near-me">
+      <img src="{{ url_for('static', filename='images/hero/explore_guides.jpg') }}" alt="Project guides">
+      <div class="svc-body"><div class="svc-name">Project guides</div>
+      <div class="svc-meta">How-to guides for DIY and hiring pros</div></div>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-head">Popular cities</h2>
+  <div class="chip-row">
+    {% for city in city_links %}
+    <a class="chip" href="/{{ city.state }}/{{ city.slug }}">{{ city.name }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

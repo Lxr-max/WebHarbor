@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ deal.title }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>{{ deal.title }}</h1>
+  {% if deal.image %}<img class="ua-deal-hero" src="{{ url_for('static', filename=deal.image.replace('static/', '')) }}" alt="{{ deal.title }}">{% endif %}
+  <p class="ua-lead">{{ deal.summary }}</p>
+  <p><strong>{{ deal.origin.city }} ({{ deal.origin_code }}) → {{ deal.dest.city }} ({{ deal.dest_code }})</strong>
+    · from ${{ '%d'|format(deal.fare_from) }} one way · {{ deal.category }}</p>
+  {% if flights %}
+  <h2>Nonstop flights on this route</h2>
+  <table class="ua-table">
+    <thead><tr><th>Flight</th><th>Departs</th><th>Arrives</th><th>Aircraft</th></tr></thead>
+    <tbody>
+      {% for flight in flights %}
+      <tr><td>UA {{ flight.flight_number }}</td><td>{{ flight.departure }}</td><td>{{ flight.arrival }}</td><td>{{ flight.aircraft.name }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('flight_search', origin=deal.origin_code, destination=deal.dest_code) }}">Search flights on this route</a>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('deals') }}">Back to deals</a>
+  </div>
+</section>
+{% endblock %}

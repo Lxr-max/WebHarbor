@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Podcast{% endblock %}
+{% block content %}
+<section class="hero" style="padding: 46px 20px;">
+  <h1>Inside Trader Joe&rsquo;s</h1>
+  <p class="hero-kicker">Our podcast: the stories behind your favorite products</p>
+</section>
+<div class="page">
+  <h2 class="page-title" style="font-size:26px;">Inside the Episode</h2>
+  {% if episodes %}
+  <p class="rich">{{ episodes[0].description | truncate(400) }}</p>
+  {% endif %}
+</div>
+<div class="page">
+  <h2 class="page-title" style="font-size:26px;">Listen and Subscribe</h2>
+  <p class="rich">Find Inside Trader Joe&rsquo;s on Apple Podcasts, Spotify, iHeart and wherever you get your podcasts.</p>
+</div>
+<div class="page">
+  <h2 class="page-title" style="font-size:26px;">More Episodes</h2>
+  <table class="table-plain">
+    <thead><tr><th>#</th><th>Episode</th><th>Published</th><th>Summary</th></tr></thead>
+    <tbody>
+    {% for ep in episodes %}
+    <tr>
+      <td>{{ ep.idx }}</td>
+      <td><b>{{ ep.title }}</b></td>
+      <td>{{ ep.pub_date }}</td>
+      <td>{{ ep.description | truncate(160) }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}My Account{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › My Account</nav>
+  <div class="page-title"><h1>DMV Online Account — {{ current_user.display_name }}</h1>
+  <p class="hint">Account {{ current_user.account_number }} · {{ current_user.street }}, {{ current_user.city }}, {{ current_user.state }} {{ current_user.zip }}</p></div>
+
+  <h2>Driver's License / ID Card</h2>
+  <div class="card">
+    <dl class="kv">
+      <dt>Credential</dt><dd>{{ license.credential_type }} — Class {{ license.class_type }}</dd>
+      <dt>Number</dt><dd>{{ license.number }}</dd>
+      <dt>Status</dt><dd>{{ license.status }}</dd>
+      <dt>Expires</dt><dd>{{ license.expires }}</dd>
+      <dt>REAL ID</dt><dd>{% if license.real_id %}REAL ID compliant{% else %}Not REAL ID compliant{% endif %}</dd>
+      <dt>Organ donor</dt><dd>{% if license.organ_donor %}Yes{% else %}No{% endif %}</dd>
+    </dl>
+    <a class="btn" href="{{ url_for('license_renew') }}">Renew my license</a>
+    <a class="btn btn--secondary" href="{{ url_for('license_replace') }}">Replace my license</a>
+    {% if not license.real_id %}<a class="btn btn--gold" href="{{ url_for('licenses_ids_real_id') }}">Get a REAL ID</a>{% endif %}
+  </div>
+
+  <h2>Vehicles</h2>
+  {% for vehicle in vehicles %}
+  <div class="card">
+    <h3>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h3>
+    <dl class="kv">
+      <dt>Plate</dt><dd>{{ vehicle.plate }}{% if vehicle.plate_design != 'standard' %} ({{ vehicle.plate_design|replace('-',' ')|title }} plate){% endif %}</dd>
+      <dt>VIN</dt><dd>{{ vehicle.vin }}</dd>
+      <dt>Title number</dt><dd>{{ vehicle.title_number }}</dd>
+      <dt>Registration expires</dt><dd>{{ vehicle.registration_expires }}</dd>
+      <dt>Vehicle type</dt><dd>{{ vehicle.vehicle_type }}</dd>
+      <dt>Emissions inspection area</dt><dd>{{ 'Yes — $2.00/year program fee' if vehicle.emissions_locality else 'No' }}</dd>
+      {% if vehicle.electric %}<dt>Electric vehicle</dt><dd>Yes — highway use fee applies at renewal</dd>{% endif %}
+    </dl>
+    <a class="btn" href="{{ url_for('vehicle_renew', vid=vehicle.id) }}">Renew registration</a>
+  </div>
+  {% endfor %}
+
+  <h2>Appointments</h2>
+  {% if appointments %}
+  <table class="data">
+    <tr><th>Confirmation</th><th>Service</th><th>Office</th><th>Date</th><th>Time</th><th>Status</th></tr>
+    {% for a in appointments %}
+    <tr><td>{{ a.confirmation }}</td><td>{{ a.service }}</td><td>{{ a.office_slug|replace('-',' ')|title }}</td>
+        <td>{{ a.appt_date }}</td><td>{{ a.appt_time }}</td><td>{{ a.status }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No appointments. <a href="{{ url_for('appointment_new') }}">Reserve your spot</a>.</p>
+  {% endif %}
+
+  <h2>Recent Transactions</h2>
+  {% if transactions %}
+  <table class="data">
+    <tr><th>Receipt</th><th>Type</th><th>Summary</th><th>Total</th><th>Date</th></tr>
+    {% for t in transactions %}
+    <tr><td><a href="{{ url_for('receipt_view', receipt=t.receipt) }}">{{ t.receipt }}</a></td>
+        <td>{{ t.kind }}</td><td>{{ t.summary }}</td><td>{{ t.total }}</td><td>{{ t.created_at }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No online transactions yet.</p>
+  {% endif %}
+
+  <h2>More services</h2>
+  <p>
+    <a class="btn btn--secondary" href="{{ url_for('account_address_change') }}">Change my address</a>
+    <a class="btn btn--secondary" href="{{ url_for('account_records') }}">Request my record</a>
+    <a class="btn btn--secondary" href="{{ url_for('plates_search') }}">Browse license plates</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Get your instant offer | Carvana{% endblock %}
+{% block body %}
+<p class="co-note">Demo appraisal for this offline simulation; this is not a live Carvana purchase offer.</p>
+<div class="sell-page">
+  <h1>Get your instant offer</h1>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="sell-form" method="post" action="/sell-my-car/offer">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="est-row"><label for="s-vin">VIN (17 characters)</label><input id="s-vin" type="text" name="vin" maxlength="17" placeholder="1HGCM82633A004352" required></div>
+    <div class="est-row"><label for="s-mileage">Current mileage</label><input id="s-mileage" type="number" name="mileage" min="0" max="300000" placeholder="45000" required></div>
+    <div class="est-row">
+      <label for="s-condition">Vehicle condition</label>
+      <select id="s-condition" name="condition">
+        <option value="excellent">Excellent — like new</option>
+        <option value="good" selected>Good — normal wear</option>
+        <option value="fair">Fair — needs some work</option>
+        <option value="rough">Rough — significant issues</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-blue big">See my offer</button>
+  </form>
+</div>
+{% endblock %}

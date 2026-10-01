@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% block title %}{{ search_title }} | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('shopping_results') }}">Cars for Sale</a> &rsaquo; <span>Search Results</span></nav>
+{% endblock %}
+{% block content %}
+<div class="srp-layout">
+  <form class="filters" method="get" action="{{ url_for('shopping_results') }}" id="filter-form">
+    <div class="filters-head">
+      <h2>Filters</h2>
+      <span class="result-count-pill">{{ total }} results</span>
+    </div>
+
+    <div class="filter-group">
+      <h3>Basics</h3>
+      <div class="filter-item">
+        <label for="f-stock">New/Used</label>
+        <select id="f-stock" name="stock_type">
+          {% for slug, label in [('all', 'New, used & CPO'), ('new_cpo', 'New & CPO'), ('new', 'New'), ('used', 'Used'), ('cpo', 'Certified Pre-Owned')] %}
+          <option value="{{ slug }}" {{ 'selected' if (args.get('stock_type', 'all') == slug) }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-price-min">Price</label>
+        <div class="range-row">
+          <input id="f-price-min" type="number" name="list_price_min" min="0" placeholder="Min" value="{{ args.get('list_price_min', '') }}">
+          <span>to</span>
+          <input id="f-price-max" type="number" name="list_price_max" min="0" placeholder="Max" value="{{ args.get('list_price_max', '') }}">
+        </div>
+      </div>
+      <div class="filter-item">
+        <label for="f-mileage">Max mileage</label>
+        <input id="f-mileage" type="number" name="mileage_max" min="0" placeholder="Max miles" value="{{ args.get('mileage_max', '') }}">
+      </div>
+      <div class="filter-item">
+        <label for="f-deal">Deal rating</label>
+        <select id="f-deal" name="deal_ratings">
+          <option value="">All deal ratings</option>
+          {% for slug, label in [('great', 'Great Deal'), ('good', 'Good Deal'), ('fair', 'Fair Deal')] %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('deal_ratings') == slug }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-seller">Seller type</label>
+        <select id="f-seller" name="seller_type">
+          <option value="">All seller types</option>
+          <option value="dealership" {{ 'selected' if args.get('seller_type') == 'dealership' }}>Dealership</option>
+          <option value="private_seller" {{ 'selected' if args.get('seller_type') == 'private_seller' }}>Private seller</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Vehicle Details</h3>
+      <div class="filter-item">
+        <label for="f-year-min">Year</label>
+        <div class="range-row">
+          <input id="f-year-min" type="number" name="year_min" placeholder="Min" value="{{ args.get('year_min', '') }}">
+          <span>to</span>
+          <input type="number" name="year_max" placeholder="Max" value="{{ args.get('year_max', '') }}">
+        </div>
+      </div>
+      <div class="filter-item">
+        <label for="f-make">Make</label>
+        <select id="f-make" name="makes[]">
+          <option value="">All makes</option>
+          {% for slug, name in makes %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('makes[]') == slug or (args.getlist('makes[]') and slug in args.getlist('makes[]')) }}>{{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-model">Model</label>
+        <select id="f-model" name="models[]">
+          <option value="">All models</option>
+          {% for slug, name in models %}
+          <option value="{{ slug }}" {{ 'selected' if slug in args.getlist('models[]') }}>{{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-keyword">Keyword search</label>
+        <input id="f-keyword" type="text" name="keyword" placeholder="Keywords" value="{{ args.get('keyword', '') }}">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Style</h3>
+      <div class="filter-item">
+        <label for="f-body">Body style</label>
+        <select id="f-body" name="body_style_slugs">
+          <option value="">All body styles</option>
+          {% for slug, label in body_labels.items() %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('body_style_slugs') == slug }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-ext-color">Exterior color</label>
+        <select id="f-ext-color" name="exterior_color_slugs">
+          <option value="">All exterior colors</option>
+          {% for c in colors %}
+          <option value="{{ c }}" {{ 'selected' if args.get('exterior_color_slugs') == c }}>{{ c | title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Performance</h3>
+      <div class="filter-item">
+        <label for="f-fuel">Fuel type</label>
+        <select id="f-fuel" name="fuel_slugs">
+          <option value="">All fuel types</option>
+          {% for slug, label in fuel_labels.items() %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('fuel_slugs') == slug }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-trans">Transmission</label>
+        <select id="f-trans" name="transmission_slugs">
+          <option value="">All transmissions</option>
+          {% for slug, label in transmission_labels.items() %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('transmission_slugs') == slug }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-drive">Drivetrain</label>
+        <select id="f-drive" name="drivetrain_slugs">
+          <option value="">All drivetrains</option>
+          {% for slug, label in drivetrain_labels.items() %}
+          <option value="{{ slug }}" {{ 'selected' if args.get('drivetrain_slugs') == slug }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-cyl">Cylinders</label>
+        <select id="f-cyl" name="cylinder_counts">
+          <option value="">All cylinders</option>
+          {% for c in cylinders %}
+          <option value="{{ c }}" {{ 'selected' if args.get('cylinder_counts') == c }}>{{ c }} cylinders</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Location</h3>
+      <div class="filter-item">
+        <label for="f-dist">Distance</label>
+        <select id="f-dist" name="maximum_distance">
+          <option value="">All miles</option>
+          {% for d in distances %}
+          <option value="{{ d }}" {{ 'selected' if args.get('maximum_distance')|int == d }}>{{ d }} miles</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="f-zip">ZIP</label>
+        <input id="f-zip" type="text" name="zip" value="{{ args.get('zip', zip) }}">
+      </div>
+      <div class="filter-item checkbox">
+        <input type="checkbox" id="f-photos" name="only_with_photos" value="1" {{ 'checked' if args.get('only_with_photos') }}>
+        <label for="f-photos">Cars with photos only</label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit">Update results</button>
+  </form>
+
+  <div class="srp-main">
+    <div class="srp-head">
+      <h1>{{ search_title }}</h1>
+      <div class="srp-tools">
+        <span class="srp-total">{{ total }} results</span>
+        <label for="sort-select" class="muted">Sort</label>
+        <form method="get" class="sort-form" id="sort-form">
+          {% for k in ['stock_type', 'makes[]', 'models[]', 'list_price_min', 'list_price_max', 'mileage_max', 'year_min', 'year_max', 'body_style_slugs', 'exterior_color_slugs', 'fuel_slugs', 'transmission_slugs', 'drivetrain_slugs', 'cylinder_counts', 'deal_ratings', 'seller_type', 'keyword', 'only_with_photos', 'maximum_distance', 'zip'] %}
+            {% if args.get(k) %}<input type="hidden" name="{{ k }}" value="{{ args.get(k) }}">{% endif %}
+          {% endfor %}
+          <select id="sort-select" name="sort" onchange="document.getElementById('sort-form').submit()">
+            {% for slug, label in sorts %}
+            <option value="{{ slug }}" {{ 'selected' if sort == slug }}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </form>
+        {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('save_search') }}" class="inline-form save-search-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="query_string" value="{{ request.full_path if request.query_string else request.path }}">
+          <label for="ss-name">Name this search</label>
+          <input id="ss-name" type="text" name="name" value="{{ search_title }}">
+          <label for="ss-freq">Alerts</label>
+          <select id="ss-freq" name="alert_frequency">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="off">Off</option>
+          </select>
+          <button type="submit" class="btn btn-outline btn-small">Save this search</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+
+    <ol class="srp-list">
+      {% for l in pagination.items %}
+      <li class="vehicle-card" id="vehicle-card-{{ l.id }}">
+        <a class="card-media" href="{{ url_for('vehicle_detail', listing_id=l.id) }}">
+          {% if l.photo_list() %}
+          <img src="{{ url_for('static', filename=l.photo_list()[0]) }}" alt="{{ l.title }}{% if l.exterior_color %} — {{ l.exterior_color }}{% endif %}">
+          {% else %}
+          <div class="no-photo">No photos</div>
+          {% endif %}
+          {% if l.total_photos %}<span class="photo-count">{{ l.total_photos }} photos</span>{% endif %}
+        </a>
+        <div class="card-body">
+          <div class="card-price-row">
+            <span class="price">{{ l.price | money }}</span>
+            <span class="mileage">{{ l.mileage | mileagefmt }} mi.</span>
+          </div>
+          {% if l.monthly_est %}
+          <div class="monthly">Est. ${{ l.monthly_est }}/mo</div>
+          {% endif %}
+          <h2 class="card-title">
+            <a href="{{ url_for('vehicle_detail', listing_id=l.id) }}">{{ l.title }}</a>
+          </h2>
+          {% if l.deal_badge %}
+          <span class="badge badge-{{ l.deal_badge | lower | replace(' ', '-') }}">{{ l.deal_badge }}</span>
+          {% endif %}
+          <div class="card-seller">
+            <span class="seller-name">{{ l.seller_name or 'Private seller' }}</span>
+            {% if l.city %}
+            <span class="muted">{{ l.city }}{{ ',' if l.state }} {{ l.state }} {% if l.distance_miles is not none %}({{ l.distance_miles }} mi){% endif %}</span>
+            {% endif %}
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-primary btn-small" href="{{ url_for('vehicle_detail', listing_id=l.id) }}">Check Availability</a>
+            <form method="post" action="{{ url_for('save_car', listing_id=l.id) }}" class="inline-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="next" value="{{ request.full_path }}">
+              <button type="submit" class="btn btn-outline btn-small">♥ Save</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {% else %}
+      <li class="empty">No results match those filters. Widen the filters and try again.</li>
+      {% endfor %}
+    </ol>
+
+    <div class="pagination">
+      {% if pagination.has_prev %}
+      <a class="btn btn-outline" href="{{ url_for('shopping_results', **dict(request.args, page=pagination.prev_num)) }}">&lsaquo; Prev</a>
+      {% endif %}
+      <span class="muted">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+      {% if pagination.has_next %}
+      <a class="btn btn-outline" href="{{ url_for('shopping_results', **dict(request.args, page=pagination.next_num)) }}">Next &rsaquo;</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Cancel trip — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Cancel trip {{ booking.confirmation }}</h1>
+  <div class="ua-booking-summary">
+    <div class="ua-leg">{{ booking.route_label }}</div>
+    <div class="ua-price-line">Total paid: ${{ '%.2f'|format(booking.total) }}</div>
+    <div class="ua-price-line">Bag fees paid: ${{ '%.2f'|format(booking.total_bag_fees()) }}</div>
+    {% if booking.cabin == 'BE' %}
+      <p>Basic Economy tickets are not refundable. If you cancel, the ticket
+        value stays as a future flight credit that never expires.</p>
+    {% else %}
+      <p>Your ticket will be refunded to the original payment method.</p>
+    {% endif %}
+  </div>
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="ua-btn ua-btn-danger" type="submit">
+      {% if booking.cabin == 'BE' %}Cancel and keep a future flight credit{% else %}Cancel and refund ${{ '%.2f'|format(booking.total + booking.total_bag_fees()) }}{% endif %}
+    </button>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('trip_detail', conf=booking.confirmation) }}">Keep this trip</a>
+  </form>
+</section>
+{% endblock %}

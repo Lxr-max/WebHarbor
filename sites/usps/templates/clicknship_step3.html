@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Click-N-Ship — Service & Pay | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('clicknship_home') }}">Click-N-Ship</a> &rsaquo; Create a Label</p>
+<h1>Choose a Service &amp; Pay</h1>
+<div class="steps">
+  {% for s in steps %}<span class="step-pill {{ 'active' if loop.index == step }}">{{ s }}</span>{% endfor %}
+</div>
+<div class="panel">
+  <form action="{{ url_for('clicknship_label') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>Services for {{ data.get('weight_lbs', '1') }} lb, Zone {{ data.get('zone', 4) }}</h3>
+    <table class="data">
+      <tr><th>Service</th><th>Price</th><th>Choose</th></tr>
+      {% for code, label, price in data.get('options', []) %}
+        <tr>
+          <td>{{ label }}</td><td>{{ price | usd }}</td>
+          <td><input type="radio" name="service" value="{{ code }}" {{ 'checked' if loop.first }} required></td>
+        </tr>
+      {% endfor %}
+    </table>
+    <h3>Extra services</h3>
+    <div class="checkbox-row"><label><input type="checkbox" name="insurance" value="1"> Add insurance</label>
+      &nbsp; Insured value: <input type="number" name="insured_value" min="0.01" step="0.01" value="100"> USD</div>
+    <div class="checkbox-row"><label><input type="checkbox" name="signature" value="1"> Signature Confirmation</label></div>
+    <h3>Review</h3>
+    <p>
+      <strong>From:</strong> {{ data.get('sender_name') }}, {{ data.get('sender_street') }}, {{ data.get('sender_city') }}, {{ data.get('sender_state') }} {{ data.get('sender_zip') }}<br>
+      <strong>To:</strong> {{ data.get('recipient_name') }}, {{ data.get('recipient_street') }}, {{ data.get('recipient_city') }}, {{ data.get('recipient_state') }} {{ data.get('recipient_zip') }}<br>
+      <strong>Weight:</strong> {{ data.get('weight_lbs') }} lb &nbsp; <strong>Packaging:</strong> {{ data.get('box_type', 'own') }}
+    </p>
+    <button class="btn" type="submit">Pay &amp; Print Label</button>
+    <a class="btn secondary" href="{{ url_for('clicknship_create', step=2) }}">Back</a>
+  </form>
+</div>
+{% endblock %}

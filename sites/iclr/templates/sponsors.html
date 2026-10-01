@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Sponsors{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Sponsors &amp; Exhibitors</h1>
+  <span class="count">We thank our sponsors and exhibitors for all their support!</span>
+</div>
+{% for tier, rows in tiers %}
+  <div class="tier">
+    <h2>{{ tier }}</h2>
+    <div class="chips">
+      {% for s in rows %}
+        <a class="chip" href="{{ s.url }}" rel="noopener" target="_blank">{{ s.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

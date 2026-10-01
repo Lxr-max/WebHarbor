@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}{{ op.name }} - {{ '{:,}'.format(op.reviews_count) }} Reviews - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; {{ op.name }}</div>
+  <div class="panel" style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+    {% if op.logo %}<img src="/static/images/{{ op.logo }}" alt="{{ op.name }}" style="width:150px; height:100px; object-fit:contain;">{% endif %}
+    <div style="flex:1; min-width:260px;">
+      <h1 style="margin-bottom:2px;">{{ op.name }}</h1>
+      {% if op.badge %}<span class="badge {{ op.badge }}">{{ op.badge|title }}</span>{% endif %}
+      {% if op.hq %}<div style="color:var(--text-2); font-size:13px; margin-top:4px;">Headquarters in {{ op.hq }}</div>{% endif %}
+    </div>
+    <div style="text-align:right;">
+      <div class="rating-line" style="justify-content:flex-end;"><span class="rating-badge" style="font-size:15px;">{{ '%.1f'|format(op.rating) }}</span></div>
+      <div style="font-size:13px; color:var(--text-2);">{{ '{:,}'.format(op.reviews_count) }} reviews &bull; {{ op.tours|length }} tours</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:16px;">
+    <div>
+      <div class="panel operator-adventures">
+        <h2>Adventures by {{ op.name }}</h2>
+        {% include '_tour_cards.html' with context %}
+        {% if total_tours > 12 %}
+        <p><a href="/search?q={{ op.name|urlencode }}">See all {{ total_tours }} {{ op.name }} tours</a></p>
+        {% endif %}
+      </div>
+      <div class="panel">
+        <h2>{{ op.name }} Reviews</h2>
+        {% for r in reviews %}
+        <div class="review">
+          <div class="head">
+            {% if r.avatar %}<img class="avatar" src="/static/images/{{ r.avatar }}" alt="{{ r.author }}">{% endif %}
+            <div><div class="name">{{ r.author }}</div><div class="when">{{ r.month }} &bull; {{ r.tour.name if r.tour }}</div></div>
+            <span class="score">{{ '%.1f'|format(r.rating) }}</span>
+          </div>
+          <div class="body">{{ r.body }}</div>
+          {% if r.reply %}<div class="reply"><b>Reply from: {{ r.reply_by or op.name }}</b><br>{{ r.reply }}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <h2>Operator details</h2>
+        <table class="table-simple">
+          <tr><th>Rating</th><td>{{ '%.1f'|format(op.rating) }}</td></tr>
+          <tr><th>Number of reviews</th><td>{{ '{:,}'.format(op.reviews_count) }}</td></tr>
+          <tr><th>Number of tours</th><td>{{ total_tours }}</td></tr>
+          {% if op.age_min %}<tr><th>Age range</th><td>{{ op.age_min }}-{{ op.age_max or '99' }}</td></tr>{% endif %}
+          <tr><th>Response rate</th><td>{{ op.response_rate or '80%' }}</td></tr>
+          <tr><th>Response time</th><td>{{ op.response_time or 'within 1 day' }}</td></tr>
+        </table>
+      </div>
+      {% if op.about %}
+      <div class="panel">
+        <h2>About {{ op.name }}</h2>
+        <p style="color:var(--text-2);">{{ op.about }}</p>
+      </div>
+      {% endif %}
+      {% if op.awards_list %}
+      <div class="panel">
+        <h2>Awards</h2>
+        <ul style="color:var(--text-2);">{% for a in op.awards_list %}<li>{{ a }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

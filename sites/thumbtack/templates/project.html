@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.category.name }} project - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>{{ project.category.name }} project</h1>
+  <p class="muted">Zip {{ project.zip }} · Started {{ project.created_at.strftime('%b %d, %Y') }} · Timeline: {{ project.timeline }}</p>
+  <p><span class="status-chip status-{{ project.status }}">{{ project.status|capitalize }}</span></p>
+  {% if project.details %}<p class="muted">"{{ project.details }}"</p>{% endif %}
+  {% if project.answer_list %}
+  <p class="muted">{% for q, a in project.answer_list %}<b>{{ q }}</b> {{ a }}<br>{% endfor %}</p>
+  {% endif %}
+
+  <h2 style="margin-top:24px;">Quotes from local pros</h2>
+  {% for m in project.matches %}
+  <div class="match-card">
+    <a href="{{ m.pro.url() }}"><img src="{{ url_for('static', filename='images/avatars/' + m.pro.avatar) }}" alt="{{ m.pro.name }}"></a>
+    <div>
+      <a href="{{ m.pro.url() }}"><b>{{ m.pro.name }}</b></a>
+      {% if m.pro.top_pro %}<span class="badge badge-toppro">Top Pro</span>{% endif %}
+      <div class="muted">{{ m.pro.rating_word }} {{ '%.1f'|format(m.pro.rating) }} ({{ m.pro.review_count }}) · {{ m.pro.hires }} hires · {{ m.pro.city }}, {{ m.pro.state }}</div>
+      {% if m.responded %}
+      <div class="rating-line"><b>${{ '{:,}'.format(m.quote_amount) }}</b> <span class="muted">quote · responded {{ m.pro.responds_label }}</span></div>
+      <div class="quote-snippet">"{{ m.response_note }}"</div>
+      {% else %}
+      <div class="muted">Hasn't responded yet.</div>
+      {% endif %}
+      {% if m.hired %}<span class="badge badge-value">Hired</span>{% endif %}
+    </div>
+    <div>
+      {% if m.responded and project.status == 'matched' and not m.hired %}
+      <form method="post" action="/projects/{{ project.id }}/hire/{{ m.id }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-primary btn-sm" type="submit">Hire</button>
+      </form>
+      {% endif %}
+      <a class="btn btn-outline btn-sm" href="/message/{{ m.pro.service_pk }}">Message</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div style="margin-top:24px; display:flex; gap:10px; flex-wrap:wrap;">
+    {% if project.status == 'matched' %}
+    <form method="post" action="/projects/{{ project.id }}/cancel">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn btn-outline btn-sm" type="submit">Cancel project</button>
+    </form>
+    {% endif %}
+    {% if project.status == 'hired' %}
+    <form method="post" action="/projects/{{ project.id }}/complete">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn btn-outline btn-sm" type="submit">Mark complete</button>
+    </form>
+    <a class="btn btn-accent btn-sm" href="/projects/{{ project.id }}/review">Leave a review</a>
+    {% endif %}
+    {% if project.status == 'completed' %}
+    <a class="btn btn-accent btn-sm" href="/projects/{{ project.id }}/review">Leave a review</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

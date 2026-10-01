@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Entertaining{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Entertaining</h1>
+  <p class="rich">Hosting wisdom, party plans and crowd-pleasing spreads from the Crew.</p>
+</div>
+<div class="page" style="padding-top:0;">
+  {% for row in rows %}
+  <article class="editorial-row">
+    <div>
+      <span class="date">{{ row.category }} &middot; {{ row.publish_date }}</span>
+      <h3>{{ row.title }}</h3>
+      <div class="rich">{{ row.description | rich | safe }}</div>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{% if results %}Attorney search results{% else %}Find a Top Rated Attorney Near You | Super Lawyers{% endif %}{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Attorney search{% if q %} results for "{{ q }}"{% if where %} near {{ where }}{% endif %}{% endif %}</h1>
+  <p class="lead">{{ results|length }} attorney{{ 's' if results|length != 1 }} found.</p>
+
+  <div class="serp-list">
+    {% for lawyer in results %}
+    <article class="serp-card">
+      <div class="serp-photo">
+        <a href="/profiles/{{ lawyer.state_slug }}/{{ lawyer.city_slug }}/lawyer/{{ lawyer.slug }}/{{ lawyer.uuid }}.html" aria-label="View profile of {{ lawyer.name }}">
+          <img src="{{ url_for('static', filename=lawyer.photo('card')) }}" alt="{{ lawyer.name }}" width="175" height="219" loading="lazy">
+        </a>
+      </div>
+      <div class="serp-body">
+        <h2 class="serp-name">
+          <a href="/profiles/{{ lawyer.state_slug }}/{{ lawyer.city_slug }}/lawyer/{{ lawyer.slug }}/{{ lawyer.uuid }}.html">{{ lawyer.name }}</a>
+        </h2>
+        {% if lawyer.firm %}
+          <a class="serp-firm" href="/profiles/{{ lawyer.firm.state_slug }}/{{ lawyer.firm.city_slug }}/lawfirm/{{ lawyer.firm.slug }}/{{ lawyer.firm.uuid }}.html">{{ lawyer.firm.name }}</a>
+        {% endif %}
+        {% if lawyer.phone %}
+          <a class="serp-phone" href="tel:{{ lawyer.phone|replace('-', '') }}"><span class="phone-icon" aria-hidden="true"></span>{{ lawyer.phone }}</a>
+        {% endif %}
+        <span class="serp-city">{{ lawyer.city_slug|replace('-', ' ')|title }}, {{ lawyer.state_slug|replace('-', ' ')|title }}</span>
+        {% if lawyer.side_practice_areas %}<p class="serp-tagline">{{ lawyer.side_practice_areas }}</p>{% endif %}
+        {% if lawyer.tagline %}<p class="serp-tagline">{{ lawyer.tagline }}</p>{% endif %}
+        <div class="serp-actions">
+          <a class="btn btn-outline" href="/profiles/{{ lawyer.state_slug }}/{{ lawyer.city_slug }}/lawyer/{{ lawyer.slug }}/{{ lawyer.uuid }}.html">View profile</a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% if not results %}
+  <p>No attorneys matched that search. Try a practice area like "personal injury" with a
+  location like "Seattle, WA".</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ po.name }}, {{ po.state }} | USPS Locations{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('locations_home') }}">Find USPS Locations</a> &rsaquo; {{ po.name }}</p>
+<h1>{{ po.name }} Post Office</h1>
+<div class="grid">
+  <div class="card">
+    <h3>Address</h3>
+    <p>{{ po.address }}<br>{{ po.city }}, {{ po.state }} {{ po.zip5 }}</p>
+    <p><strong>Phone:</strong> {{ po.phone }}</p>
+    {% if po.county %}<p><strong>County:</strong> {{ po.county }}</p>{% endif %}
+  </div>
+  <div class="card">
+    <h3>Hours</h3>
+    <p><strong>Mon–Fri:</strong> {{ hours.mon_fri | h12 }}</p>
+    <p><strong>Sat:</strong> {{ hours.sat | h12 }}</p>
+    <p><strong>Sun:</strong> {{ hours.sun | h12 }}</p>
+    <p><strong>Self-service lobby:</strong> {{ hours.lobby | h12 }}</p>
+  </div>
+  <div class="card">
+    <h3>Services</h3>
+    <ul class="bullets">
+      {% for s in services %}<li>{{ s }}</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+{% if po.est_date %}<p><strong>Established:</strong> {{ po.est_date | longdate }}{% if po.discont_date %} &middot; <strong>Discontinued:</strong> {{ po.discont_date | longdate }}{% endif %}</p>{% endif %}
+{% if po.postmaster %}<p><strong>Postmaster:</strong> {{ po.postmaster }}{% if po.postmaster_since %} (since {{ po.postmaster_since | longdate }}){% endif %}</p>{% endif %}
+{% if po.has_po_boxes %}
+  <p><a class="btn" href="{{ url_for('po_box_reserve', po_key=po.po_key) }}">Reserve a PO Box here</a></p>
+{% endif %}
+{% endblock %}

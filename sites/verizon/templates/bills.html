@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Bills — My Verizon{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Your bills</h1>
+  <table class="data-table">
+    <thead><tr><th>Period</th><th>Total</th><th>Due date</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for b in bills %}
+      <tr>
+        <td>{{ b.period }}</td>
+        <td>${{ b.total }}</td>
+        <td>{{ b.due_date }}</td>
+        <td>{{ b.status }}</td>
+        <td><a href="{{ url_for('bill_detail', bill_id=b.id) }}">View bill detail</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a class="btn btn-primary" href="{{ url_for('account_pay') }}">Make a payment</a>
+</section>
+{% endblock %}

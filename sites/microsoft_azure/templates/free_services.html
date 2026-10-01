@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Azure free services — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Azure free services</h1>
+  <p class="lead">Build in the cloud with {{ items|length }} Azure services you can use free — some always free, others free for 12 months with your Azure account.</p>
+  <div class="icon-strip">
+    {% for icon in icons %}<img src="{{ img(icon) }}" alt="" width="26" height="26" loading="lazy">{% endfor %}
+  </div>
+
+  <form class="filter-bar" method="get" action="{{ url_for('free_services') }}">
+    <select name="category" aria-label="Filter by category">
+      <option value="">All categories</option>
+      {% for c in cats %}
+      <option value="{{ c }}" {% if c == active_category %}selected{% endif %}>{{ c|replace('-', ' ')|title }}</option>
+      {% endfor %}
+    </select>
+    <select name="period" aria-label="Filter by free period">
+      <option value="">All periods</option>
+      {% for p in periods %}
+      <option value="{{ p }}" {% if p == active_period %}selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-primary" type="submit">Filter</button>
+    {% if active_category or active_period %}
+    <a class="btn btn-ghost" href="{{ url_for('free_services') }}">Clear filters</a>
+    {% endif %}
+  </form>
+
+  <p class="result-count">{{ items|length }} free service{{ '' if items|length == 1 else 's' }}</p>
+
+  <div class="card-grid">
+    {% for f in items %}
+    <div class="card free-card">
+      <h3>{{ f.name }}</h3>
+      <p>{{ f.detail }}</p>
+      <p class="card-meta"><span class="chip">{{ f.eyebrow }}</span></p>
+    </div>
+    {% else %}
+    <p>No services match your filters.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

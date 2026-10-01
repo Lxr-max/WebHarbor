@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Settings — {{ trip.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">{{ trip.title }} — settings</h1>
+      <p class="small muted" style="margin:4px 0 0">Rename the trip, change dates, manage sharing or delete it.</p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+      <a class="on" href="{{ url_for('plan_settings', edit_key=trip.edit_key) }}">Settings</a>
+    </nav>
+  </div>
+
+  <div class="trip-grid">
+    <div class="card">
+      <h2>Trip details</h2>
+      <form method="post" action="{{ url_for('plan_settings', edit_key=trip.edit_key) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label for="title">Trip name</label>
+        <input type="text" id="title" name="title" value="{{ trip.title }}">
+        <label for="start_date">Start date</label>
+        <input type="date" id="start_date" name="start_date" value="{{ trip.start_date or '' }}">
+        <label for="end_date">End date</label>
+        <input type="date" id="end_date" name="end_date" value="{{ trip.end_date or '' }}">
+        <label for="travelers">Travelers</label>
+        <input type="number" id="travelers" name="travelers" min="1" max="12" value="{{ trip.travelers }}" class="tiny" style="max-width:110px">
+        <label for="privacy">Who can see this trip</label>
+        <select id="privacy" name="privacy">
+          <option value="private" {% if trip.privacy == 'private' %}selected{% endif %}>Private — only members</option>
+          <option value="link" {% if trip.privacy == 'link' %}selected{% endif %}>Anyone with the link</option>
+          <option value="public" {% if trip.privacy == 'public' %}selected{% endif %}>Public — listed on my profile</option>
+        </select>
+        <p class="small muted">The trip currently spans {{ day_count }} day{{ 's' if day_count != 1 }}.</p>
+        <p style="margin-top:12px"><button class="btn btn-primary" type="submit">Save settings</button></p>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Sharing</h2>
+      <p class="small muted">The share link shows a read-only view of this trip:</p>
+      <p class="small stat"><a href="{{ url_for('trip_view', view_key=trip.view_key) }}">{{ trip.view_key }}</a></p>
+      <h2 style="margin-top:20px">Danger zone</h2>
+      <p class="small muted">Deleting the trip removes its itinerary, checklist, budget and collaborators.</p>
+      <form method="post" action="{{ url_for('plan_settings', edit_key=trip.edit_key) }}"
+            onsubmit="return confirm('Delete this trip? This cannot be undone.');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="delete">
+        <button class="btn btn-danger" type="submit">Delete this trip</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

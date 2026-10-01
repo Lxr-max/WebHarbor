@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ e.name }} | Walt Disney World{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="breadcrumb"><a href="{{ url_for('parks') }}">Parks &amp; Travel</a> / <a href="{{ url_for('attractions') }}">Attractions</a> / {{ e.name }}</p>
+  <div class="detail" style="grid-template-columns: 1fr 380px">
+    <div>
+      <h1>{{ e.name }}</h1>
+      <div class="meta-rows">
+        <div class="meta-item"><span class="k">Park</span><span class="v">{{ e.park }}</span></div>
+        <div class="meta-item"><span class="k">Type</span><span class="v">{{ e.entity_type }}</span></div>
+        <div class="meta-item"><span class="k">Height Requirement</span><span class="v">{% if e.height %}{{ e.height }}" or taller{% else %}Any height{% endif %}</span></div>
+      </div>
+      <div class="chips" style="margin:8px 0 18px">
+        {% for i in e.interest_list() %}<span class="chip">{{ i }}</span>{% endfor %}
+        {% for a in e.age_list() %}<span class="chip">{{ a }}</span>{% endfor %}
+      </div>
+
+      {% if detail.get('chips') %}
+      <div class="chips" style="margin-bottom:16px">
+        {% for c in detail['chips'] %}<span class="chip">{{ c }}</span>{% endfor %}
+      </div>
+      {% endif %}
+
+      {% if detail.get('sections') %}
+      {% for sec in detail['sections'] %}
+      <h2 class="h2">{{ sec.heading }}</h2>
+      {% for p in sec.paragraphs %}<p class="synopsis">{{ p }}</p>{% endfor %}
+      {% endfor %}
+      {% endif %}
+
+      {% if not detail.get('sections') %}<p class="snapshot-note">No attraction-specific description was captured for this listing.</p>{% endif %}
+      {% if related %}
+      <h2 class="h2">Related Activities</h2>
+      <div class="grid cols-4">
+        {% for r in related %}
+        <a class="card" href="{{ url_for('attraction_detail', park=r.park_slug, slug=r.slug) }}">
+          <div class="card-body">
+            <p class="card-title">{{ r.name }}</p>
+            <p class="card-meta">{{ r.park }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin:18px 0">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="type" value="attraction">
+        <input type="hidden" name="key" value="{{ e.key }}">
+        <input type="hidden" name="back" value="{{ url_for('attraction_detail', park=e.park_slug, slug=e.slug) }}">
+        <button class="btn" type="submit">{{ 'Remove from Favorites' if is_favorite('attraction', e.key) else 'Add to Favorites' }}</button>
+      </form>
+      {% endif %}
+    </div>
+    <div>
+      {% for im in e.image_list() %}{% if img(im) %}<img style="border-radius:8px;margin-bottom:12px" src="{{ img(im) }}" alt="{{ e.alt or e.name }}">{% endif %}{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

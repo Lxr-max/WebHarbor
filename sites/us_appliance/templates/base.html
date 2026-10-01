@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}US Appliance Low Prices Online on Major Home Appliances.{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<div class="usa-top-banner">
+  <div class="container usa-top-banner-inner">
+    <p class="usa-phone"><a href="tel:877-628-9913">Call for Best Deals 877-628-9913</a></p>
+    <ul class="usa-top-links">
+      <li><a href="{{ url_for('deals_page') }}">Top Deals</a></li>
+      <li><a href="{{ url_for('delivery_page') }}">Free Shipping</a></li>
+      <li><a href="{{ url_for('finance_center') }}">Financing</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="usa-header">
+  <div class="container usa-header-inner">
+    <a class="usa-logo" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/site/logo.png') }}" alt="US Appliance">
+    </a>
+    <form class="usa-search" action="{{ url_for('search') }}" method="get" role="search">
+      <input type="text" name="search_query" id="nav-quick-search" class="usa-search-input"
+             placeholder="What are you looking for today?" autocomplete="off"
+             value="{{ request.args.get('search_query', '') }}">
+      <button type="submit" class="usa-search-btn" aria-label="Search">Search</button>
+    </form>
+    <nav class="usa-account">
+      {% if current_user %}
+        <a href="{{ url_for('account') }}" class="usa-account-link">Hi, {{ current_user.name.split()[0] }}</a>
+        <a href="{{ url_for('logout') }}" class="usa-account-link">Sign out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="usa-account-link">Sign in</a>
+        <a href="{{ url_for('login', action='create_account') }}" class="usa-account-link">Register</a>
+      {% endif %}
+      <a href="{{ url_for('cart') }}" class="usa-cart-link" data-cart>
+        Cart <span class="cart-pill">{{ cart_count }}</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<nav class="usa-nav">
+  <div class="container">
+    <ul class="usa-nav-list">
+      {% for cat in nav_categories %}
+      <li class="usa-nav-item">
+        <a href="/{{ cat.slug }}.html" class="usa-nav-link">{{ cat.name }}</a>
+        {% if cat.kids %}
+        <ul class="usa-nav-drop">
+          <li><a href="/{{ cat.slug }}.html">All {{ cat.name }}</a></li>
+          {% for kid in cat.kids %}
+          <li><a href="/{{ kid.slug }}.html">{{ kid.name }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="container">
+    {% for m in messages %}
+    <div class="alert flash">{{ m }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<nav class="usa-crumbs" aria-label="breadcrumbs">
+  <div class="container">
+    <ol class="crumbs">
+      {% block crumbs %}<li><a href="{{ url_for('home') }}">Home</a></li>{% endblock %}
+    </ol>
+  </div>
+</nav>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<section class="usa-newsletter">
+  <div class="container usa-newsletter-inner">
+    <h2>Sign up for deals and offers</h2>
+    <p>To receive special offers &amp; promotions</p>
+    <form class="usa-newsletter-form" method="post" action="{{ url_for('newsletter') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <input type="email" name="nl_email" placeholder="Email Address" required aria-label="Email Address">
+      <button type="submit" class="button button--primary">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="usa-footer">
+  <div class="container usa-footer-grid">
+    <div class="usa-footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="{{ url_for('customer_service') }}">Customer Service</a></li>
+        <li><a href="{{ url_for('order_tracking') }}">Track Your Order</a></li>
+        <li><a href="{{ url_for('delivery_page') }}">Shipping-Delivery Information</a></li>
+        <li><a href="{{ url_for('faq_page') }}">FAQ</a></li>
+        <li><a href="{{ url_for('buying_guides') }}">Appliance Buying Guides</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="usa-footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="{{ url_for('deals_page') }}">Top Deals Today</a></li>
+        <li><a href="{{ url_for('clearance_page') }}">Buy More Save More</a></li>
+        <li><a href="{{ url_for('finance_offers') }}">Finance Offers</a></li>
+        <li><a href="{{ url_for('rebates_page') }}">Rebate Offers</a></li>
+        <li><a href="{{ url_for('price_match') }}">Price Match</a></li>
+      </ul>
+    </div>
+    <div class="usa-footer-col">
+      <h4>Connect With Us</h4>
+      <ul>
+        <li><a href="{{ url_for('why_us') }}">About Us</a></li>
+        <li><a href="{{ url_for('why_us') }}">Why Shop US Appliance?</a></li>
+        <li><a href="{{ url_for('testimonials') }}">Customer Reviews</a></li>
+        <li><a href="{{ url_for('returns_page') }}">Return Policy</a></li>
+        <li><a href="{{ url_for('salestax_page') }}">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="usa-footer-col usa-footer-hours">
+      <h4>Call Us</h4>
+      <p>Monday - Friday: 8am - 6pm EST.</p>
+      <p class="usa-footer-phone">Call 877-628-9913 (toll-free)</p>
+      <p>US Appliance<br>111 Corporate Drive<br>Auburn Hills, MI 48326</p>
+    </div>
+  </div>
+  <div class="container usa-footer-legal">
+    <p>&copy; US Appliance 2026. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="{{ url_for('static', filename='js/site.js') }}"></script>
+</body>
+</html>

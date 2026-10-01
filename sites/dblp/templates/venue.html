@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}{{ v.name }}{% endblock %}
+{% block main %}
+<header id="headline" class="stream">
+  <h1>{{ v.name }}{% if v.abbr and not v.name.endswith('(' ~ v.abbr ~ ')') %} ({{ v.abbr }}){% endif %}</h1>
+  {% if v.note %}<div class="note-line">{{ v.note }}</div>{% endif %}
+</header>
+
+<section class="section" id="venue-stats">
+  <header class="hide-head h2"><h2>Venue statistics</h2></header>
+  <div class="hide-body">
+    <div class="stat-seg hist-yt">
+      <p><b>records by year</b> ({{ n_records }} records in this mirror)</p>
+      <div class="stat-chart">
+        {% set max_n = (years | map(attribute=1) | max) or 1 %}
+        {% for y, n in years %}
+        <div class="stat-bar-row">
+          <span class="stat-year">{{ y }}</span>
+          <span class="stat-bar-track"><span class="stat-bar" data-count="{{ n }}" style="width: {{ (n * 100 / max_n) | round(2) }}%"></span></span>
+          <span class="stat-count">{{ n }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="stat-seg top-authors">
+      <p><b>frequent authors</b></p>
+      <ul class="options">
+        {% for a, n in top_authors %}
+        <li><a href="/pid/{{ a.pid }}.html">{{ a.name }}</a> ({{ n }})</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% if v.info_list() %}
+<section class="section" id="venue-info">
+  <header class="hide-head h2"><h2>Venue Information</h2></header>
+  <div class="hide-body">
+    <ul class="venue-info-list">
+      {% for row in v.info_list() %}
+      <li><em>{{ row.label }}:</em> {{ row.text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<div class="stream-search">
+  <p>view this stream in <a href="/search/publ?q=streamid%3A{{ v.stream }}%3A">dblp search</a></p>
+</div>
+
+{% if current_user.is_authenticated %}
+<div class="watch-controls">
+  <form method="post" action="{{ url_for('watchlist_add_venue') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="stream" value="{{ v.stream }}">
+    <input type="hidden" name="next" value="/db/{{ v.stream }}/index.html">
+    <button type="submit" class="watch-btn">add {{ v.abbr or v.name }} to watchlist</button>
+  </form>
+</div>
+{% endif %}
+
+<section class="section" id="editions">
+  <header class="h1"><h1>{{ 'Volumes' if v.vtype == 'journal' else 'Editions' }}</h1></header>
+  <div class="section-body">
+    <ul class="edition-list">
+      {% for ed in editions %}
+      <li class="edition" id="{{ ed.key.replace('/', '_') }}">
+        <a href="/db/{{ v.stream }}/{{ ed.toc }}.html">{{ ed.list_title() }}</a>
+        <small class="edition-meta">{{ ed.n_records }} records
+          {% if ed.editors_list() %} &middot; edited by
+            {% for e in ed.editors_list() %}{% if not loop.first %}, {% endif %}{{ e.name }}{% endfor %}{% endif %}
+        </small>
+      </li>
+      {% else %}
+      <li class="no-matches">no editions captured in this mirror snapshot</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

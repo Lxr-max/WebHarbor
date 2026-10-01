@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} Teams | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ league_name }} Teams</h1>
+  <nav class="league-tabs">
+    <a href="/{{ league }}">Home</a>
+    <a href="/scores/{{ league }}">Scores</a>
+    <a href="/{{ league }}/schedule">Schedule</a>
+    <a href="/{{ league }}/standings">Standings</a>
+    <a class="active" href="/{{ league }}/teams" aria-current="page">Teams</a>
+    <a href="/{{ league }}/players">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+<div class="teams-grid">
+  {% for t in teams %}
+  <a class="team-card" href="/{{ league }}/{{ t.slug }}-team">
+    {% if t.logo and image(t.logo) %}<img src="{{ image(t.logo) }}" alt="{{ t.full_name }}">{% endif %}
+    <span class="team-card-name">{{ t.full_name }}</span>
+    {% if t.record %}<span class="muted">{{ t.record }}{% if t.note %} &middot; {{ t.note }}{% endif %}</span>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

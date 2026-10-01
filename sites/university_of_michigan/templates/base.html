@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}University of Michigan{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap masthead">
+    <a class="brand" href="{{ url_for('home') }}">
+      <img class="block-m-img" src="/static/images/core/block-m-maize.png" alt="Block M">
+      <span class="brand-text">University of Michigan</span>
+    </a>
+    <form class="site-search" action="{{ url_for('search') }}" method="get">
+      <input type="text" name="q" placeholder="Search all of Michigan" value="{{ request.args.get('q','') }}">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="account-nav">
+      {% if current_user.is_authenticated %}
+        <span class="whoami">{{ current_user.name }}</span>
+        <a href="{{ url_for('myumich') }}">My U-M</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('signup') }}">Sign up</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+<nav class="mainnav">
+  <div class="wrap">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('schools') }}">Schools &amp; Colleges</a>
+    <a href="{{ url_for('programs') }}">Majors &amp; Degrees</a>
+    <a href="{{ url_for('courses') }}">Courses</a>
+    <a href="{{ url_for('faculty') }}">Faculty</a>
+    <a href="{{ url_for('library') }}">Library</a>
+    <a href="{{ url_for('news') }}">News</a>
+    <a href="{{ url_for('events') }}">Events</a>
+    <a href="{{ url_for('calendars') }}">Calendars</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('campus_map') }}">Campus Map</a>
+  </div>
+</nav>
+<main class="wrap">
+  {% with messages = [] %}{% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>University of Michigan &middot; 1109 Geddes Ave., Ann Arbor, MI 48109-1079 &middot; +1 (734) 764-1817</p>
+    <p class="mirror-note">WebHarbor offline mirror of umich.edu built for agent evaluation — not affiliated with the University of Michigan.</p>
+  </div>
+</footer>
+</body>
+</html>

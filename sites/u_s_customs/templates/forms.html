@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Newsroom › {{ page.title if page else 'CBP Forms' }}</div>
+<h1 class="page-title">CBP Forms</h1>
+<form class="filters" method="get" action="{{ url_for('forms_catalog') }}">
+  <div class="field"><label for="q">Search Title or Form Number</label>
+    <input id="q" type="search" name="q" value="{{ q }}" placeholder="e.g. 7501, Entry Summary, I-94"></div>
+  <button class="btn" type="submit">Search</button>
+  <a class="btn btn-ghost" href="{{ url_for('forms_catalog') }}">Reset</a>
+</form>
+<p class="note">{{ rows|length }} entries found.</p>
+<table class="data">
+  <tr><th>Form Number</th><th>Title</th><th>Date</th><th></th></tr>
+  {% for f in rows %}
+  <tr>
+    <td><a href="{{ url_for('form_detail', catalog_key=f.catalog_key) }}">CBP Form {{ f.form_number }}</a></td>
+    <td>{{ f.name }}</td>
+    <td>{{ f.listed_date }}</td>
+    <td><a class="btn" href="{{ url_for('form_download', catalog_key=f.catalog_key) }}">Download PDF</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

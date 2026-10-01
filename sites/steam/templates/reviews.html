@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import pager %}
+{% block title %}{{ game.name }} Reviews{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo;
+  <a href="{{ game.url }}">{{ game.name }}</a> &rsaquo; Reviews</div>
+
+<div class="page-header">
+  <h1>{{ game.name }} &mdash; User Reviews</h1>
+</div>
+
+<div class="review-score">
+  <div>
+    <div class="desc">{{ game.review_score_desc or 'No reviews yet' }}</div>
+    <div class="nums">{{ "{:,}".format(game.total_reviews) }} total reviews ({{ "{:,}".format(game.total_positive) }} positive, {{ "{:,}".format(game.total_negative) }} negative)</div>
+  </div>
+  <div class="bar"><span style="width: {{ game.review_pct }}%;"></span></div>
+</div>
+
+<form method="get" action="{{ url_for('app_reviews', appid=game.appid) }}" class="filter-panel" style="margin-bottom:14px;max-width:520px;">
+  <div style="display:flex;gap:12px;align-items:flex-end;">
+    <div class="filter-group" style="margin:0;">
+      <span class="lbl">Show</span>
+      <select name="filter">
+        {% for key, label in review_filters.items() %}
+          <option value="{{ key }}" {% if which == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group" style="margin:0;">
+      <span class="lbl">Sort by</span>
+      <select name="sort">
+        {% for key, label in review_sorts.items() %}
+          <option value="{{ key }}" {% if sort == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Apply</button>
+  </div>
+</form>
+
+<div>
+  {% if reviews %}
+    {% for review in reviews %}
+      <div class="review-card">
+        <div class="head">
+          <span class="thumb {{ 'up' if review.voted_up else 'down' }}">{{ '👍' if review.voted_up else '👎' }}</span>
+          <span class="who">{{ review.author }} <small>&mdash; reviewed {{ review.timestamp_created|datefmt }}</small></span>
+        </div>
+        <div class="meta">
+          <span class="badge">{{ 'Recommended' if review.voted_up else 'Not Recommended' }}</span>
+          {% if review.steam_purchase %}<span class="badge">Steam Purchase</span>{% endif %}
+          {% if review.received_for_free %}<span class="badge">Received for free</span>{% endif %}
+          {% if review.early_access %}<span class="badge">Early Access Review</span>{% endif %}
+          <span class="badge">{{ review.author_games|default(0) }} games owned</span>
+        </div>
+        <div class="body">{{ review.text }}</div>
+        <div class="foot">
+          {{ review.playtime_forever|hours }} hrs on record
+          {% if review.playtime_at_review %} &middot; {{ review.playtime_at_review|hours }} hrs at review time{% endif %}
+          &middot; {{ "{:,}".format(review.votes_up) }} people found this review helpful
+          {% if review.votes_funny %} &middot; {{ "{:,}".format(review.votes_funny) }} found it funny{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    {% if pages > 1 %}
+      {{ pager(url_for('app_reviews', appid=game.appid, filter=which, sort=sort), page, pages) }}
+    {% endif %}
+  {% else %}
+    <div class="empty-state"><p>No reviews match this filter.</p></div>
+  {% endif %}
+</div>
+
+{% endblock %}

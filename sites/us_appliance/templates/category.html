@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block title %}{% if page_title %}{{ page_title }}{% else %}US Appliance Low Prices Online on Major Home Appliances.{% endif %}{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>{{ cat.name }}</span></li>
+{% endblock %}
+{% block content %}
+<section class="container page-head">
+  <h1 class="page-heading">{{ heading }}</h1>
+  {% if cat.parent is none %}
+  <p class="category-blurb">At US Appliance we carry a huge selection of Major Appliances. Our experts are on hand to answer your questions or give you recommendations for your specific needs.</p>
+  {% endif %}
+</section>
+
+{% if cat.children %}<nav class="container category-children" aria-label="Subcategories"><ul>
+{% for child in cat.children|sort(attribute='position') %}<li><a href="/{{ child.slug }}.html">{{ child.name }}</a></li>{% endfor %}
+</ul></nav>{% endif %}
+{% for group in cat.tile_groups_list() %}
+<section class="container tile-group">
+  <h2 class="section-heading">{{ group.heading }}</h2>
+  <div class="tile-row">
+    {% for item in group["items"] %}
+    <a class="slide-tile" href="{{ item.href }}">
+      <div class="slide-img">
+        {% if item.img_local %}
+        <img src="{{ url_for('static', filename='images/' ~ item.img_local) }}" alt="{{ item.alt }}">
+        {% endif %}
+      </div>
+      <span class="slide-title">{{ item.title }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<section class="container category-grid-section">
+  <div class="cat-layout">
+    <aside class="cat-filters">
+      <form class="filter-form" method="get" action="/{{ cat.slug }}.html">
+        <input type="hidden" name="query" value="c{{ cat.id }}">
+        <h4>Filter Products</h4>
+        <div class="filter-group">
+          <label>Brands</label>
+          <div class="filter-options">
+            {% for b in brands_in_cat %}
+            <label class="filter-option">
+              <input type="checkbox" name="brand" value="{{ b }}"
+                     {% if b in filters['brand'] %}checked{% endif %}> {{ b }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Price Range</label>
+          <input class="filter-input" type="number" step="any" name="price_from" placeholder="From"
+                 value="{{ filters['price_from'] }}" aria-label="Price from">
+          <input class="filter-input" type="number" step="any" name="price_to" placeholder="to"
+                 value="{{ filters['price_to'] }}" aria-label="Price to">
+        </div>
+        <div class="filter-group">
+          <label class="filter-option">
+            <input type="checkbox" name="on_sale" value="1"
+                   {% if filters['on_sale'] == '1' %}checked{% endif %}> On sale today
+          </label>
+        </div>
+        <button type="submit" class="button button--primary">Refine</button>
+        <a class="filter-clear" href="/{{ cat.slug }}.html">Clear all</a>
+      </form>
+    </aside>
+
+    <div class="cat-results">
+      <div class="result-bar">
+        <p class="result-count">{{ total }} products</p>
+        <form class="sort-form" method="get" action="/{{ cat.slug }}.html">
+          {% if filters['brand'] %}{% for b in filters['brand'] %}<input type="hidden" name="brand" value="{{ b }}">{% endfor %}{% endif %}
+          {% if filters['price_from'] %}<input type="hidden" name="price_from" value="{{ filters['price_from'] }}">{% endif %}
+          {% if filters['price_to'] %}<input type="hidden" name="price_to" value="{{ filters['price_to'] }}">{% endif %}
+          {% if filters['on_sale'] %}<input type="hidden" name="on_sale" value="1">{% endif %}
+          <label for="sort">Sort By:</label>
+          <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
+            <option value="featured" {% if filters['sort'] == 'featured' %}selected{% endif %}>Featured Items</option>
+            <option value="newest" {% if filters['sort'] == 'newest' %}selected{% endif %}>Newest Items</option>
+            <option value="bestselling" {% if filters['sort'] == 'bestselling' %}selected{% endif %}>Best Selling</option>
+            <option value="alphaasc" {% if filters['sort'] == 'alphaasc' %}selected{% endif %}>A to Z</option>
+            <option value="alphadesc" {% if filters['sort'] == 'alphadesc' %}selected{% endif %}>Z to A</option>
+            <option value="avgcustomerreview" {% if filters['sort'] == 'avgcustomerreview' %}selected{% endif %}>By Review</option>
+            <option value="priceasc" {% if filters['sort'] == 'priceasc' %}selected{% endif %}>Price: Ascending</option>
+            <option value="pricedesc" {% if filters['sort'] == 'pricedesc' %}selected{% endif %}>Price: Descending</option>
+          </select>
+        </form>
+      </div>
+
+      {% if products %}
+      <div class="prod-grid">
+        {% for p in products %}
+        {{ macros.prod_card(p) }}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="empty-note">No products matched your filters.</p>
+      {% endif %}
+
+      {% if pages > 1 %}
+      <nav class="pagination" aria-label="pagination">
+        <ul class="pagination-list">
+          {% if page > 1 %}
+          <li class="pagination-item"><a href="/{{ cat.slug }}.html?query=c{{ cat.id }}{% if filters['brand'] %}{% for b in filters['brand'] %}&brand={{ b }}{% endfor %}{% endif %}{% if filters['price_from'] %}&price_from={{ filters['price_from'] }}{% endif %}{% if filters['price_to'] %}&price_to={{ filters['price_to'] }}{% endif %}{% if filters['on_sale'] %}&on_sale=1{% endif %}&sort={{ filters['sort'] }}&page={{ page - 1 }}">&laquo; Previous</a></li>
+          {% endif %}
+          {% for n in range(1, pages + 1) %}
+          <li class="pagination-item {% if n == page %}pagination-item--current{% endif %}">
+            <a href="/{{ cat.slug }}.html?query=c{{ cat.id }}{% if filters['brand'] %}{% for b in filters['brand'] %}&brand={{ b }}{% endfor %}{% endif %}{% if filters['price_from'] %}&price_from={{ filters['price_from'] }}{% endif %}{% if filters['price_to'] %}&price_to={{ filters['price_to'] }}{% endif %}{% if filters['on_sale'] %}&on_sale=1{% endif %}&sort={{ filters['sort'] }}&page={{ n }}">{{ n }}</a>
+          </li>
+          {% endfor %}
+          {% if page < pages %}
+          <li class="pagination-item"><a href="/{{ cat.slug }}.html?query=c{{ cat.id }}{% if filters['brand'] %}{% for b in filters['brand'] %}&brand={{ b }}{% endfor %}{% endif %}{% if filters['price_from'] %}&price_from={{ filters['price_from'] }}{% endif %}{% if filters['price_to'] %}&price_to={{ filters['price_to'] }}{% endif %}{% if filters['on_sale'] %}&on_sale=1{% endif %}&sort={{ filters['sort'] }}&page={{ page + 1 }}">Next &raquo;</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

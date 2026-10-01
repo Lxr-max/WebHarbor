@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}{{ heading }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    <a href="{{ url_for('products_hub') }}">Products</a>
+    {% if parent %} &rsaquo; <a href="{{ category_link(parent) }}">{{ parent.name }}</a>{% endif %}
+    &rsaquo; {{ heading }}
+  </div>
+  <div class="cat-head">
+    <h1 class="page-title">{{ heading }}</h1>
+    <span class="result-count">{{ total }} product{{ 's' if total != 1 }}</span>
+    <form class="sort-form" method="get" action="{{ url_for('category', slug=cat.url_key, cat_id=cat.id) }}">
+      {% if active_chars or active_tags %}
+      <input type="hidden" name="filters" value="{{ request.args.get('filters','') }}">
+      {% endif %}
+      <label for="sortBy">Sort by</label>
+      <select name="sortBy" id="sortBy" onchange="this.form.submit()">
+        {% for s in ['Date', "What's new", 'Going fast', 'Price Low to High', 'Price High to Low', 'Popularity'] %}
+        <option value="{{ s }}" {% if s == sort %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+      <noscript><button class="btn btn-secondary" type="submit">Go</button></noscript>
+    </form>
+  </div>
+</div>
+
+<div class="cat-layout">
+  <aside class="facets">
+    {% if children %}
+    <div class="facet-group">
+      <h3>All {{ cat.name }}</h3>
+      {% for c in children %}
+      <a class="facet" href="{{ category_link(c) }}">{{ c.name }} <span class="count">({{ c.product_count }})</span></a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if char_facets %}
+    <div class="facet-group">
+      <h3>Filters</h3>
+      {% for c, n in char_facets %}
+      <a class="facet {{ 'active' if c in active_chars }}" href="{{ facet_url(new_chars=toggle(active_chars, c), new_page=1) }}">{{ c }} <span class="count">({{ n }})</span></a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if tag_facets %}
+    <div class="facet-group">
+      <h3>Fun Tags</h3>
+      {% for t, n in tag_facets[:18] %}
+      <a class="fun-tag {{ 'active' if t in active_tags }}" href="{{ facet_url(new_tags=toggle(active_tags, t), new_page=1) }}">{{ t }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </aside>
+
+  <section>
+    {% if not products %}
+    <p class="rich">No products match the current filters. Try clearing a filter to see more.</p>
+    {% endif %}
+    <div class="grid">
+      {% for p in products %}
+      <article class="card">
+        {% if p.product_label %}<span class="label-chip{% if p.product_label == 'SEASONAL' %} seasonal{% endif %}">{{ p.product_label }}</span>{% endif %}
+        {% if p.new_product %}<span class="label-chip seasonal" style="position:absolute;top:34px;left:8px;">NEW</span>{% endif %}
+        <a class="card-img" href="{{ product_link(p) }}">
+          {% if dam_url(p.primary_image) %}<img src="{{ dam_url(p.primary_image) }}" alt="{{ p.item_title }}">{% endif %}
+        </a>
+        <div class="card-title"><a href="{{ product_link(p) }}">{{ p.item_title }}</a></div>
+        <div class="card-sub">{{ (p.category_names | from_json)[-1] if (p.category_names | from_json) else '' }}</div>
+        <div class="card-price">{% if p.availability != '1' %}<span class="na">Not available/{{ p.sales_size }} {{ p.sales_uom_description }}</span>{% else %}${{ '%.2f' | format(p.retail_price) if p.retail_price is not none else '' }}/{{ p.sales_size }} {{ p.sales_uom_description }}{% endif %}</div>
+        <form method="post" action="{{ url_for('shopping_list_add', sku=p.sku) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ facet_url(new_page=page) }}">
+          <button class="add-btn" type="submit">ADD TO LIST</button>
+        </form>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if total_pages > 1 %}
+    <nav class="pager">
+      {% if page > 1 %}
+      <a href="{{ facet_url(new_page=page-1) }}">&larr; Previous page</a>
+      {% else %}
+      <span class="disabled">&larr; Previous page</span>
+      {% endif %}
+      {% for pg in range(1, total_pages + 1) %}
+        {% if pg == page %}
+        <span class="current">{{ pg }}</span>
+        {% elif pg <= 3 or pg > total_pages - 2 or (pg - page)|abs <= 2 %}
+        <a href="{{ facet_url(new_page=pg) }}">{{ pg }}</a>
+        {% elif (pg - page)|abs == 3 %}
+        <span class="disabled">&hellip;</span>
+        {% endif %}
+      {% endfor %}
+      {% if page < total_pages %}
+      <a href="{{ facet_url(new_page=page+1) }}">Next page &rarr;</a>
+      {% else %}
+      <span class="disabled">Next page &rarr;</span>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

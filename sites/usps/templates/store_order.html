@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmed | The Postal Store | USPS{% endblock %}
+{% block content %}
+<h1>Thank You — Your Order Is Confirmed</h1>
+<div class="panel">
+  <p><strong>Order number:</strong> {{ order.order_number }}</p>
+  <p><strong>Total:</strong> {{ order.total | usd }} &middot; <strong>Status:</strong> {{ order.status }}</p>
+  <table class="data">
+    <tr><th>Item</th><th>SKU</th><th>Qty</th><th>Price</th></tr>
+    {% for item in (order.items | from_json) %}
+      <tr><td>{{ item.name }}</td><td>{{ item.sku }}</td><td>{{ item.qty }}</td><td>{{ item.price | usd }}</td></tr>
+    {% endfor %}
+  </table>
+  <p class="note">A confirmation was sent to {{ order.email }}.</p>
+</div>
+{% endblock %}

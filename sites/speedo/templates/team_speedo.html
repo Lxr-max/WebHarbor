@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Team Speedo | Swim Athlete Profiles{% endblock %}
+{% block content %}
+<div class="page-width">
+  <div class="content-page" style="max-width:none;text-align:center;padding-bottom:0;">
+    <h1 style="font-size:36px;text-transform:uppercase;">Meet the world&rsquo;s fastest</h1>
+    <p style="color:#555;max-width:640px;margin:12px auto 0;">Find out more about the Team Speedo athletes who always turn the speed-ometer up to 11.</p>
+  </div>
+  <div class="team-grid">
+    {% for a in athletes %}
+    <a class="athlete-card" href="/pages/team-speedo-{{ a.slug }}">
+      <img src="{{ url_for('static', filename='images/' + a.card_image) if a.card_image else '' }}" alt="{{ a.name }}" loading="lazy">
+      <div class="athlete-overlay">
+        <h3>{{ a.name }}</h3>
+        <span class="team">Team {{ a.team }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Schools &amp; Colleges — University of Michigan{% endblock %}
+{% block content %}
+<h1>Schools &amp; Colleges</h1>
+<p class="page-sub">Students discover their passions and map out their futures in our 19 nationally recognized schools and colleges — the heart and soul of the U-M experience at Ann Arbor. While our U-M Dearborn and U-M Flint campuses provide inspiration and direction to more than 17,000 students.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('schools') }}">
+    <div>
+      <label for="campus">Campus</label>
+      <select id="campus" name="campus" onchange="this.form.submit()">
+        <option value="">All campuses</option>
+        {% for c in campuses %}
+        <option value="{{ c }}" {% if c == campus %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Filter</button>
+  </form>
+  <span class="count-pill">{{ count }} schools &amp; colleges</span>
+</div>
+
+<div class="grid">
+  {% for s in schools %}
+  <div class="card">
+    {% if s.image %}<img class="card-img" src="{{ s.image }}" alt="{{ s.full_name }}">{% endif %}
+    <h3><a href="{{ url_for('school_detail', slug=s.slug) }}">{{ s.short_name }}</a></h3>
+    <span class="meta">{{ s.full_name }}</span>
+    <span class="meta">Campus: {{ s.campus }}</span>
+    {% if s.blurb %}
+    <span class="blurb">{{ s.blurb[:160] }}{% if s.blurb|length > 160 %}&hellip;{% endif %}</span>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

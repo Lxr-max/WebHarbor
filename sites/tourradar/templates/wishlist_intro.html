@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Saved Adventures - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px;">
+  <h1>Saved adventures</h1>
+  <div class="panel" style="text-align:center;">
+    <h2>Don&rsquo;t lose your saved adventures!</h2>
+    <p style="color:var(--text-2);">Your wish-listed adventures are saved temporarily and will disappear if you do not save them to your account. Login or create an account to stay up to date with price changes and to access your saved adventures!</p>
+    <a class="btn btn-lg" href="/login">Log In</a>
+    <a class="btn btn-outline btn-lg" href="/signup">Sign Up</a>
+  </div>
+  <div class="two-col">
+    <div class="panel">
+      <h3>Top Destinations</h3>
+      <div class="chip-row">
+        {% for d in top_dests %}<a class="chip" href="/d/{{ d.slug }}">{{ d.name }}</a>{% endfor %}
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Top Operators</h3>
+      {% for o in top_ops %}
+      <div class="op-chip">
+        {% if o.logo %}<img src="/static/images/{{ o.logo }}" alt="{{ o.name }}">{% endif %}
+        <div><b><a href="/o/{{ o.slug }}">{{ o.name }}</a></b>
+        <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(o.rating) }}</span> ({{ '{:,}'.format(o.reviews_count) }} reviews)</div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

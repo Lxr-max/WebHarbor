@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Traveler details — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Who is traveling?</h1>
+  <div class="ua-booking-summary">
+    {% for key, flight, cabin, day in flights %}
+      <div class="ua-leg">
+        <strong>{{ flight.origin_code }} → {{ flight.dest_code }}</strong>
+        UA {{ flight.flight_number }} · {{ day }} · {{ flight.departure }}–{{ flight.arrival }}
+        · {{ dict(fare_cabins)[cabin] }}
+      </div>
+    {% endfor %}
+    <div class="ua-price-line">Travelers: {{ pax_count }} · Total: ${{ '%.2f'|format(price) }}</div>
+  </div>
+
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="ua-fieldset">
+      <legend>Contact information</legend>
+      <label class="ua-field">Email
+        <input type="email" name="contact_email" required placeholder="you@example.com">
+      </label>
+      <label class="ua-field">Phone
+        <input type="tel" name="contact_phone" placeholder="+1 555 555 5555">
+      </label>
+    </fieldset>
+    {% for i in range(pax_count) %}
+    <fieldset class="ua-fieldset">
+      <legend>Traveler {{ i + 1 }}</legend>
+      <label class="ua-field ua-inline">Title
+        <select name="title_{{ i }}">
+          {% for t in ['Mr', 'Mrs', 'Ms', 'Mx'] %}<option>{{ t }}</option>{% endfor %}
+        </select>
+      </label>
+      <label class="ua-field ua-inline">First name
+        <input type="text" name="first_{{ i }}" required>
+      </label>
+      <label class="ua-field ua-inline">Last name
+        <input type="text" name="last_{{ i }}" required>
+      </label>
+      <label class="ua-field ua-inline">Date of birth
+        <input type="date" name="dob_{{ i }}">
+      </label>
+      <label class="ua-field ua-inline">Gender
+        <select name="gender_{{ i }}">
+          <option value="">Prefer not to say</option>
+          <option value="F">F</option>
+          <option value="M">M</option>
+          <option value="X">X</option>
+        </select>
+      </label>
+      <label class="ua-field ua-inline">MileagePlus number <em class="ua-optional">(optional)</em>
+        <input type="text" name="mp_{{ i }}" inputmode="numeric" placeholder="e.g. 123456789">
+      </label>
+    </fieldset>
+    {% endfor %}
+    <button class="ua-btn ua-btn-primary" type="submit">Continue to payment</button>
+  </form>
+</section>
+{% endblock %}

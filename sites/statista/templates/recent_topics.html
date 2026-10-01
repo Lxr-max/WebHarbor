@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Recent Topics | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Recent topics</span>
+</nav>
+<h1>Recent Topics</h1>
+<section class="section">
+  <div class="cardGrid">
+    {% for t in topics %}
+    <a class="card" href="/topics/{{ t.id }}/{{ t.slug }}/">
+      <div class="card__body">
+        <span class="card__meta">Topic | {{ t.published_date }}</span>
+        <span class="card__title">{{ t.name }}</span>
+        <span class="card__snippet">{{ t.description|striptags|truncate(150) }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

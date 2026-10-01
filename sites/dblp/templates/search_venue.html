@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Search dblp for venues{% endblock %}
+{% block main %}
+<header id="headline" class="completesearch">
+  <h1>Search dblp for venues</h1>
+</header>
+
+<section class="section">
+  {% if not q %}
+  <p class="no-query">Please enter a search query</p>
+  {% else %}
+  <p class="result-count">All {{ total }} matches</p>
+  <ul class="result-list venue-list">
+    {% for v in rows %}
+    <li class="entry venue" id="{{ v.stream.replace('/', '_') }}">
+      <a href="/db/{{ v.stream }}/index.html">{{ v.name }}</a>
+      {% if v.abbr and not v.name.endswith('(' ~ v.abbr ~ ')') %}<small>({{ v.abbr }})</small>{% endif %}
+      <small class="count">{{ v.record_count() }} records in this mirror</small>
+    </li>
+    {% else %}
+    <li class="no-matches">no matches</li>
+    {% endfor %}
+  </ul>
+
+  {% if current_user.is_authenticated %}
+  <form class="save-search-form" method="post"
+        action="{{ url_for('saved_searches_add') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="query" value="{{ q }}">
+    <input type="hidden" name="search_type" value="venue">
+    <input type="hidden" name="next" value="{{ request.full_path }}">
+    <button type="submit">save this search</button>
+  </form>
+  {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Wireless, Internet, TV and Phone Services{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Introducing</p>
+      <h1>Simplicity Plan</h1>
+      <p class="hero-price">$30<span>/month per line</span></p>
+      <p class="hero-note">After AutoPay and $15/mo switch discount. Plus taxes and fees.</p>
+      <a class="btn btn-primary" href="{{ url_for('plans_simplicity') }}">Explore the Simplicity Plan</a>
+      <a class="btn btn-secondary" href="{{ url_for('smartphones') }}">Shop smartphones</a>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-card">
+        <h3>Your phone, your way</h3>
+        <p>With a single line for $30/mo, you have three easy ways to get the phone you want.</p>
+        <ul>
+          <li><strong>Bring</strong> your own phone — connect it to our best 5G network.</li>
+          <li><strong>Buy</strong> a new phone right now — flexible financing options.</li>
+          <li><strong>Upgrade</strong> to the latest phone every year.</li>
+        </ul>
+      </div>
+      <div class="hero-card">
+        <h3>Get iPhone 18 Pro. No trade-in needed.</h3>
+        <p>No activation or upgrade fees. And get the latest iPhone every year.</p>
+        <p class="price">All for $80/mo. When you switch to Verizon with Simplicity Plan.</p>
+        <a class="btn btn-secondary" href="{{ url_for('device_detail', slug='apple-iphone-18-pro') }}">Shop iPhone 18 Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container section">
+  <h2>Shop devices</h2>
+  <p>Browse all {{ device_count }} smartphones — {{ brands|join(', ') }}.</p>
+  <div class="grid">
+    {% for d in spotlight %}
+    <a class="tile" href="{{ url_for('device_detail', slug=d.slug) }}">
+      {% set imgs = d.hero_images() %}
+      {% if imgs %}<img src="/{{ imgs[0] }}" alt="{{ d.name }}">{% endif %}
+      <h3>{{ d.name }}</h3>
+      {% set m = d.terms_map().get('36') %}
+      {% if m %}<p class="tile-price">Starts at ${{ m }}/mo for 36 months, 0% APR</p>{% endif %}
+      {% if d.full_price %}<p class="tile-retail">Retail price: ${{ d.full_price }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('smartphones') }}">See all smartphones</a>
+</section>
+<section class="container section">
+  <h2>Verizon Prepaid</h2>
+  <p>No contract, no credit check, and a 3-year price lock guarantee on any phone plan.</p>
+  <a class="btn btn-primary" href="{{ url_for('plans_prepaid') }}">Compare prepaid plans</a>
+</section>
+<section class="container section">
+  <h2>Help when you need it most</h2>
+  <div class="grid grid-3">
+    <div class="tile"><h3>Find a store</h3><p>{{ store_count }} stores nationwide — book an appointment, explore local promotions.</p><a href="{{ url_for('stores_home') }}">Store locator</a></div>
+    <div class="tile"><h3>Troubleshoot your device</h3><p>Tell us what's going on and we'll guide you along the way.</p><a href="{{ url_for('troubleshoot') }}">Start troubleshooting</a></div>
+    <div class="tile"><h3>Trade in and save</h3><p>Tell us the device and its condition to get your trade-in value.</p><a href="{{ url_for('trade_in_estimate') }}">Estimate your trade-in</a></div>
+  </div>
+</section>
+{% endblock %}

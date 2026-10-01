@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Flight status — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-search-page">
+  <h1>Flight status</h1>
+  <div class="ua-widget-tabs" role="tablist">
+    <a class="ua-tab active" href="{{ url_for('flight_status') }}">Search status</a>
+  </div>
+  <div class="ua-status-forms">
+    <form method="get" action="{{ url_for('flight_status_results') }}" class="ua-form">
+      <h2>By flight number</h2>
+      <input type="hidden" name="mode" value="number">
+      <label class="ua-field">Flight number
+        <input type="text" name="number" placeholder="e.g. 178 or UA178">
+      </label>
+      <label class="ua-field">Date <input type="date" name="date" value="{{ today }}"></label>
+      <button class="ua-btn ua-btn-primary" type="submit">Search</button>
+    </form>
+    <form method="get" action="{{ url_for('flight_status_results') }}" class="ua-form">
+      <h2>By route</h2>
+      <input type="hidden" name="mode" value="route">
+      <label class="ua-field">Origin <input type="text" name="origin" maxlength="3" placeholder="e.g. SFO"></label>
+      <label class="ua-field">Destination <input type="text" name="destination" maxlength="3" placeholder="e.g. ORD"></label>
+      <label class="ua-field">Date <input type="date" name="date" value="{{ today }}"></label>
+      <button class="ua-btn ua-btn-primary" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

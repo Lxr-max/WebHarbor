@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Online Practice Exams{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('licenses_ids_exams') }}">Exams &amp; Study Materials</a> › Online Practice Exams</nav>
+  <div class="page-title"><h1>Study and Practice for a Driver's License</h1></div>
+  <p>The two-part knowledge exam tests your knowledge of traffic signs, motor vehicle laws, and
+  safe driving. Practice with the sample exam questions for each manual section below. You must
+  correctly answer all ten traffic sign questions in part one of the exam, and at least 80 percent
+  of the general knowledge questions in part two, to pass.</p>
+  <div class="card-grid">
+    {% for s in sections %}
+    <div class="card">
+      <div class="eyebrow">Section {{ s.number }}</div>
+      <h3>{{ s.title }}</h3>
+      <p class="hint">{{ counts.get(s.number, 0) }} sample questions</p>
+      <a class="btn" href="{{ url_for('practice_exam_section', section=s.number) }}">Take the practice exam</a>
+    </div>
+    {% endfor %}
+  </div>
+  <p>First, study the <a href="{{ url_for('drivers_manual') }}">Virginia Driver's Manual</a>.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="home-hero">
+  <h1>{{ chrome.hero_copy }}</h1>
+  <p class="hero-date">{{ now_heading }}</p>
+
+  <h2 style="font-size:19px;font-weight:600;color:#121212">Your current location</h2>
+  <div class="loc-cards" style="margin:10px 0 22px">
+    {% for h in hero_locs %}
+    <a class="loc-card" href="{{ h.loc.url() }}">
+      <div>
+        <div class="lc-name">{{ h.loc.name }}</div>
+        <div class="lc-sub">{{ h.loc.display_sub }}</div>
+      </div>
+      <div class="lc-right">
+        {% if h.obs %}
+        <img src="{{ h.obs.icon|wxicon }}" alt="{{ h.obs.text }}" style="width:40px;height:40px">
+        <span class="lc-temp">{{ h.obs.temp|temp(unit) }}</span>
+        {% else %}<span class="lc-temp">--</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <h2 style="font-size:19px;font-weight:600;color:#121212">Popular locations</h2>
+  <div class="loc-cards" style="margin:10px 0 8px">
+    {% for h in hero_locs %}
+    <a class="loc-card" href="{{ h.loc.url() }}">
+      <div>
+        <div class="lc-name">{{ h.loc.name }}</div>
+        <div class="lc-sub">{{ h.loc.display_sub }}</div>
+      </div>
+      <div class="lc-right">
+        {% if h.obs %}<span class="lc-temp">{{ h.obs.temp|temp(unit) }}</span>{% else %}<span class="lc-temp">--</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Weather and science news with expert analysis</h2>
+    <a class="more-link" href="/en/news">Read more news</a>
+  </div>
+  <div class="news-rail">
+    {% for item in rail %}
+      {% if item.kind == 'article' and item.article %}
+      <a class="news-card" href="{{ item.article.path }}">
+        <div class="nc-thumb">
+          {% if item.article.thumb %}<img loading="lazy" src="/static/images/{{ item.article.thumb }}" alt="{{ item.article.headline }}">{% endif %}
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% elif item.video %}
+      <a class="news-card" href="/en/video/{{ item.video.mediaid }}">
+        <div class="nc-thumb">
+          <img loading="lazy" src="/static/images/videos/{{ item.video.mediaid }}.jpg" alt="{{ item.video.title }}">
+          <span class="nc-dur">{{ item.video.duration_label }}</span>
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Radar Map</h2>
+    <a class="more-link" href="/en/maps/radar">See all maps</a>
+  </div>
+  <div class="radar-block" style="max-width:640px">
+    <img src="/static/images/maps/basemap_toronto.webp" alt="Radar map">
+    <div class="radar-overlay"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Active Alerts</h2>
+    <a class="more-link" href="/en/alerts/ca">View full list</a>
+  </div>
+  <p style="font-size:17px;color:#121212">Canada: <a href="/en/alerts/ca" style="color:#1a5fa8"><b>{{ alerts_total }} Alerts in effect</b></a></p>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Discover &amp; Learn</h2>
+    <a class="more-link" href="/en/explore/discover-and-learn">View all topics</a>
+  </div>
+  <div class="hub-row">
+    {% for hub in chrome.hub_tiles %}
+    <a class="hub-tile" href="{{ hub.href }}">
+      <img loading="lazy" src="/static/images/brand/{{ hub.image }}" alt="{{ hub.alt }}">
+      <div class="ht-title">{{ hub.alt }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="promo-banner">
+  <img src="/static/images/{{ chrome.promos.current_weather }}" alt="The Weather Network promo">
+</div>
+
+<section class="section">
+  <div class="news-rail">
+    {% for item in feed %}
+      {% if item.kind == 'article' and item.article %}
+      <a class="news-card" href="{{ item.article.path }}">
+        <div class="nc-thumb">
+          {% if item.article.thumb %}<img loading="lazy" src="/static/images/{{ item.article.thumb }}" alt="{{ item.article.headline }}">{% endif %}
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% elif item.video %}
+      <a class="news-card" href="/en/video/{{ item.video.mediaid }}">
+        <div class="nc-thumb">
+          <img loading="lazy" src="/static/images/videos/{{ item.video.mediaid }}.jpg" alt="{{ item.video.title }}">
+          <span class="nc-dur">{{ item.video.duration_label }}</span>
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Explore local weather in Canada</h2></div>
+  {% for prov in province_cards %}
+    <h3 style="font-size:15px;font-weight:600;color:#121212;margin:16px 0 2px">{{ prov.name }}</h3>
+    <div class="city-chips">
+      {% for city in prov.cities %}
+      <a href="{{ city.url() }}">{{ city.name }}</a>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

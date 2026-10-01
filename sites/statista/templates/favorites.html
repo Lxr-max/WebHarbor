@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Favorites | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/account">My Statista</a>
+  <span class="sep"></span><span>Favorites</span>
+</nav>
+<h1>Favorites</h1>
+<div class="acctNav">
+  <a href="/account">Overview</a>
+  <a class="on" href="/account/favorites">Favorites</a>
+  <a href="/account/downloads">Download history</a>
+</div>
+
+{% if stats %}
+<section class="section">
+  <div class="section__head"><h2>Saved statistics</h2></div>
+  <div class="cardGrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+    {% for s in stats %}
+    <div class="card">
+      <a href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+        {% if s.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>{% endif %}
+        <div class="card__body">
+          <span class="card__meta">
+            {% if s.premium %}<span class="card__tag card__tag--premium">Premium Statistic</span>
+            {% else %}<span class="card__tag">Statistic</span>{% endif %}
+            {{ s.last_update }} | {{ s.region }}
+          </span>
+          <span class="card__title">{{ s.title|truncate(88) }}</span>
+        </div>
+      </a>
+      <form method="post" action="/favorite/stat/{{ s.id }}" style="padding:0 16px 14px;">
+        <input type="hidden" name="back" value="/account/favorites">
+        <button type="submit" class="favBtn on">★ Remove from favorites</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<p>You have not saved any statistics yet. Open a statistic and press “Save to favorites”.</p>
+{% endif %}
+
+{% if reports %}
+<section class="section">
+  <div class="section__head"><h2>Saved reports</h2></div>
+  <ul class="outlineList">
+    {% for r in reports %}
+    <li><a href="/study/{{ r.id }}/{{ r.slug }}/">{{ r.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+Seed is deterministically rebuilt at Docker build time from the tracked
+source_data/ snapshots by `PYTHONHASHSEED=0 python3 seed_data.py` (its
+__main__ block bootstraps the app engine, writes instance/statista.db and
+freezes a byte-identical copy as instance_seed/statista.db — the same
+contract as the mta / imgur / instructure build-generated seeds). The
+instance_seed/ directory is therefore NOT part of the HF asset bundle and
+is wiped by the Dockerfile stanza before the rebuild; only static media
+ships in the tarball.
+
+The rebuild is byte-deterministic on one SQLite build (not just
+digest-deterministic): the statistics indexes are created by a
+fixed-order after_create hook in app.py instead of model-declared
+Index() entries, because SQLAlchemy's create_all() iterates
+Table.indexes — a set whose order follows ASLR-dependent object hashes.
+Verifiers pin the logical schema digest e3571669… and rows digest
+aa83591b… (inquiries table included; regional chart 256626 recovered;
+conversion-rate statistic 439576 stores its country table). A host
+md5 can differ across SQLite versions and is not the contract.

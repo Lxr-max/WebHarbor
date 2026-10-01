@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Find USPS Locations | USPS{% endblock %}
+{% block meta %}Find USPS Post Offices, hours, phone numbers and services near you.{% endblock %}
+{% block content %}
+<h1>Find USPS Locations</h1>
+<div class="panel">
+  <form action="{{ url_for('locations_home') }}" method="get" class="flow">
+    <label>City and State, or ZIP Code
+      <input type="text" name="q" placeholder="e.g. Beverly Hills, CA or 90210" value="{{ q }}"></label>
+    <label>Filter by service
+      <select name="service">
+        <option value="">All services</option>
+        {% for f in service_filters %}
+          <option value="{{ f }}" {{ 'selected' if service == f }}>{{ f }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+{% if q %}
+  <h2>Results for "{{ q }}"</h2>
+  {% if results %}
+    <table class="data">
+      <tr><th>Post Office</th><th>City</th><th>State</th><th>ZIP</th><th>Est.</th><th></th></tr>
+      {% for po in results %}
+        <tr>
+          <td><a href="{{ url_for('location_detail', po_key=po.po_key) }}">{{ po.name }}</a></td>
+          <td>{{ po.city }}</td><td>{{ po.state }}</td><td>{{ po.zip5 }}</td>
+          <td>{% if po.est_date %}{{ po.est_date | longdate }}{% else %}—{% endif %}</td>
+          <td><a href="{{ url_for('location_detail', po_key=po.po_key) }}">Details</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <div class="error-box">No locations found. Expand your search area or remove the service filter.</div>
+  {% endif %}
+  {% if truncated %}
+    <p class="note">Showing the first {{ results | length }} of {{ total }} matching locations — search a 2-letter state code or a ZIP Code to see every match.</p>
+  {% endif %}
+{% endif %}
+<p class="note">The facility directory is seeded from the official USPS Postmaster Finder database; operational details are mirror fixtures for benchmark use.</p>
+{% endblock %}

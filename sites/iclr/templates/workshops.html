@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Workshops{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Workshops</h1>
+  <span class="count">{{ rows | length }} workshops &middot; Sunday April 26 – Monday April 27</span>
+</div>
+{% for e in rows %}
+  <div class="sched-event sched-workshop">
+    <div class="time">{{ fmt_date(e.date) }}<br>{{ fmt_time(e.start) }}–{{ fmt_time(e.end) }}</div>
+    <div class="body">
+      <h3><a href="{{ url_for('event_detail', eid=e.id) }}">{{ e.title }}</a></h3>
+      <div class="meta">{{ e.people_list() | join(' ⋅ ') }}</div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

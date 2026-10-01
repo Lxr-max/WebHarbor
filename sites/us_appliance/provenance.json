@@ -1,0 +1,68 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-28/29",
+ "upstream": "https://www.us-appliance.com/",
+ "capture_method": "Anonymous requests against the public us-appliance.com storefront: the BigCommerce storefront GraphQL API (token embedded in each upstream page, 50-product pages) for the full catalog, server-rendered HTML pages for category landings, search, product pages and every support/marketing page, and the public ShopperApproved merchant-review widget payloads for customer reviews. Images were downloaded from the upstream CDN (cdn11.bigcommerce.com) at its 320w product size plus original-size image-manager assets, transcoded to match their file extension. All raw responses are stored verbatim under scraped_data/ (gitignored) and normalized into the frozen source_data_*.json snapshots.",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the us-appliance.com mirror: category landing pages with 'Shop by' tiles and faceted product grids (brand/price/on-sale filters, the 8 upstream sort options, 12-per-page pagination), keyword search with Products / News & Information tabs plus the advanced-search form (brand dropdown, price range), product pages with galleries, model/code, Now/Was pricing, ZIP availability check, color variants, frequently-bought-together rails and spec-sheet PDF links, cart with the free-shipping threshold rules, guest+account checkout with standard vs in-home delivery and card/financing forms, order confirmation, account area with order history and per-order tracking timelines, order tracking by number+email with the four carrier cards, brand zones, deals, rebates, financing, delivery, testimonials, buying guides, FAQ, price-match request form and the customer-service hub."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. Materializes the frozen source_data_*.json snapshots into SQLite (518 categories with landing tiles, 12,778 products with real prices/specs/promo fields, related-product rails, 300 ShopperApproved merchant reviews, 46 manufacturer rebates, 9 buying guides, 12 FAQ items, content blocks for every support page) and builds the mirror-native benchmark fixtures: Alice/Bob/Carol/David with frozen sha256 password hashes plus 8 seeded orders across Processing/Shipped/In Transit/Out for Delivery/Delivered/Cancelled states with carriers, tracking numbers, taxes and event timelines. Whole-function idempotence gates keep /reset byte-identical; PYTHONHASHSEED=0 keeps builds reproducible."
+  },
+  {
+   "path": "source_data_products.json",
+   "classification": "captured-upstream-content",
+   "scope": "The full 12,778-product catalog as served by the us-appliance.com BigCommerce GraphQL API on 2026-09-28: names, slugs, SKUs, model numbers, brands, prices and compare-at ('Was') prices, availability states, dimensions, weights, rich feature descriptions, custom merchandising fields (color, promo messages, badges, free-shipping flags, spec-sheet PDF links, color-variant links, ZIP-availability flags, pageview popularity), review summaries, category memberships, related products and image references."
+  },
+  {
+   "path": "source_data_categories.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 518-node category tree from the upstream GraphQL categoryTree plus the 'Shop by ...' landing-page tile groups (image + link + title) scraped from every captured category landing page."
+  },
+  {
+   "path": "source_data_brands.json",
+   "classification": "captured-upstream-content",
+   "scope": "101 brand names with their upstream advanced-search brand ids, per-brand product counts, and the 33-brand rebate offer structure scraped from the upstream rebates page widget data."
+  },
+  {
+   "path": "source_data_content.json",
+   "classification": "captured-upstream-content",
+   "scope": "Frozen support-page content: the 12-question FAQ with answers and links, the delivery page (free-shipping threshold, in-home delivery option, small-item rates, delivery times, surcharge list), the four carrier tracking blocks, both finance offers with terms and eligible brands, the customer-service hub navigation, contact details, 300 ShopperApproved merchant reviews (names, dates, ratings, comments, sub-ratings) plus the 20,841-total review summary, nine appliance buying guides, homepage hero/category tiles/brand logo strip/promo banners, the deals-page structure, and the returns/why-us/warranty/sales-tax/stock-message page bodies."
+  },
+  {
+   "path": "source_data_images.json",
+   "classification": "derived-index",
+   "scope": "Download manifest mapping every managed image file to its upstream source URL (21,582 files: product cards, product galleries at the upstream 320w size, category tiles, homepage tiles, brand logos, hero banners)."
+  },
+  {
+   "path": "static/images/",
+   "classification": "captured-upstream-media",
+   "scope": "21,582 files (377 MB) downloaded from the upstream CDN (cdn11.bigcommerce.com images/stencil/... and image-manager/...): every catalog product's default image, up to two gallery extras for available products, category landing tiles, homepage category tiles, the nine brand-logo strip images, hero and promo banners and the merchant-reviews badge. Every file's upstream URL, byte size and sha256 is recorded in asset_inventory.json; asset_inventory passes scripts/check_asset_inventory.py."
+  },
+  {
+   "path": "asset_inventory.json",
+   "classification": "asset-manifest",
+   "scope": "schema_version 1 inventory of every managed static asset with bytes, sha256 and the upstream source URL it was fetched from."
+  },
+  {
+   "path": "scripts_dev/",
+   "classification": "build-tooling",
+   "scope": "Capture/build pipeline (not shipped in the image): capture_catalog.py (GraphQL pagination), capture_pages.py (support-page capture), build_source_data.py (normalization into the frozen snapshots), download_images.py (CDN fetch + format transcode), build_asset_inventory.py (manifest)."
+  },
+  {
+   "path": "scraped_data/",
+   "classification": "build-time-only",
+   "scope": "Verbatim upstream responses (GraphQL pages, support-page HTML, ShopperApproved widget JS) used to build source_data_*.json; gitignored and dockerignored, never shipped in the image."
+  },
+  {
+   "path": "benchmark fixtures note",
+   "classification": "mirror-native",
+   "scope": "Benchmark users (alice.j/bob.c/carol.d/david.k @test.com, shared WebHarbor test password), their seeded orders with carriers/tracking numbers, and the checkout tax rule (6% for MI deliveries, $0 elsewhere) are mirror-native fixtures invented for the benchmark; every product, price, image and support-page fact rendered by the site is upstream-sourced."
+  }
+ ]
+}

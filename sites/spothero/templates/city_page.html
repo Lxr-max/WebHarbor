@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}{{ city.display_name }} Parking from ${{ city.json_field('rates')[0].low if city.json_field('rates') else 6 }} | Book Now on SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>Find and reserve parking in {{ city.display_name }}</h1>
+    <p>Compare garages, lots, and valets near your destination and book in seconds.</p>
+    <form class="search-form" method="get" action="{{ url_for('search') }}" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <input type="hidden" name="kind" value="address">
+      <input type="hidden" name="latitude" value="{{ city.lat }}">
+      <input type="hidden" name="longitude" value="{{ city.lng }}">
+      <input type="hidden" name="starts" value="2026-09-26T12:00">
+      <input type="hidden" name="ends" value="2026-09-26T20:00">
+      <input name="search_string" placeholder="Where are you going?" data-autocomplete style="flex:1;min-width:240px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <button class="btn btn-primary" type="submit">Find Parking Spots</button>
+    </form>
+  </div>
+
+  <section class="section-tight">
+    <h2>{{ city.display_name }} Parking Rates</h2>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Parking Type</th><th>SpotHero Average Price Offered</th></tr></thead>
+      <tbody>
+        {% for r in city.json_field('rates') %}
+        <tr><td>{{ r.label }}</td><td>${{ r.low }} - ${{ r.high }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  {% if city.json_field('popular_destinations') %}
+  <section class="section-tight">
+    <h3>Popular Destinations | {{ city.display_name }}</h3>
+    <div class="link-columns">
+      {% for d in city.json_field('popular_destinations') %}
+      {% set parts = d.href.strip('/').split('/') %}
+      <a href="{{ url_for('destination_page', city_slug=parts[1], slug=parts[2]) if parts[0] == 'destination' and parts|length >= 3 and parts[2] in dest_slugs else ('https://spothero.com' ~ d.href if (d.href or '').startswith('/') else d.href) }}">{{ d.title }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if city.json_field('neighborhoods') %}
+  <section class="section-tight">
+    <h3>Popular Neighborhoods</h3>
+    <div class="link-columns">
+      {% for d in city.json_field('neighborhoods') %}
+      {% set parts = d.href.strip('/').split('/') %}
+      <a href="{{ url_for('destination_page', city_slug=parts[1], slug=parts[2]) if parts[0] == 'destination' and parts|length >= 3 and parts[2] in dest_slugs else ('https://spothero.com' ~ d.href if (d.href or '').startswith('/') else d.href) }}">{{ d.title }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if city.json_field('venues') %}
+  <section class="section-tight">
+    <h3>Popular Venues</h3>
+    <div class="link-columns">
+      {% for d in city.json_field('venues') %}
+      {% set parts = d.href.strip('/').split('/') %}
+      <a href="{{ url_for('destination_page', city_slug=parts[1], slug=parts[2]) if parts[0] == 'destination' and parts|length >= 3 and parts[2] in dest_slugs else ('https://spothero.com' ~ d.href if (d.href or '').startswith('/') else d.href) }}">{{ d.title }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if city.json_field('airports') %}
+  <section class="section-tight">
+    <h2>{{ city.display_name }} Airport Parking</h2>
+    <div class="link-columns">
+      {% for a in city.json_field('airports') %}
+      {% set code = a.href.rstrip('/').split('/')[-1].replace('-parking','').upper() %}
+      <a href="{{ url_for('airport_by_code', code=code) if code in airport_codes else a.href }}">{{ a.title }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if city.event_copy %}
+  <section class="section-tight">
+    <h2>{{ city.display_name }} Event Parking</h2>
+    <p class="muted">{{ city.event_copy }}</p>
+  </section>
+  {% endif %}
+
+  {% if city.json_field('faqs') %}
+  <section class="section-tight">
+    <h2>FAQs</h2>
+    <div class="accordion">
+      {% for f in city.json_field('faqs') %}
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">{{ f.q }}</button>
+        <div class="accordion-panel" style="display:none"><p>{{ f.a }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

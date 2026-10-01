@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}My Account - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; My Account</div>
+  <h1>Welcome back, {{ current_user.display_name }}</h1>
+  <div class="tabs">
+    <a class="active" href="/account">Tour Management</a>
+    <a href="/wishlists">Saved adventures</a>
+    <a href="/account/profile">Profile</a>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="panel">
+        <h2>Your bookings</h2>
+        {% for b in bookings %}
+        <div class="dep-row" style="flex-wrap:wrap;">
+          <img src="{{ b.tour.hero_url }}" alt="{{ b.tour.name }}" style="width:110px; height:70px; object-fit:cover; border-radius:6px;">
+          <div class="dates" style="flex:1; min-width:180px;">
+            <b><a href="/booking/{{ b.ref }}">{{ b.tour.name }}</a></b>
+            <span>Reference {{ b.ref }} &bull; Departs {{ b.departure_label }}</span>
+            <span>{{ b.travelers_list|length }} traveler{{ '' if b.travelers_list|length == 1 else 's' }} &bull; {{ b.room_type }}</span>
+          </div>
+          <div class="price">
+            <span class="flag {{ 'guaranteed' if b.status == 'confirmed' else '' }}">{{ b.status|title }}</span>
+            <b>{{ money2(b.total) }}</b>
+            <span style="color:var(--text-3); font-size:11px;">Paid today {{ money2(b.due_today) }}</span>
+          </div>
+          <a class="btn btn-outline btn-sm" href="/booking/{{ b.ref }}">Manage</a>
+        </div>
+        {% else %}
+        <p style="color:var(--text-2);">You have no bookings yet. <a href="/">Find your next adventure</a>.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <h2>Profile</h2>
+        <table class="table-simple">
+          <tr><th>Name</th><td>{{ current_user.display_name }}</td></tr>
+          <tr><th>Email</th><td>{{ current_user.email }}</td></tr>
+          <tr><th>Phone</th><td>{{ current_user.phone or 'Not set' }}</td></tr>
+          <tr><th>Nationality</th><td>{{ current_user.nationality or 'Not set' }}</td></tr>
+        </table>
+        <a class="btn btn-outline btn-sm" href="/account/profile">Edit profile</a>
+        <a class="btn btn-ghost btn-sm" href="/logout">Log out</a>
+      </div>
+      <div class="panel">
+        <h2>Why book with TourRadar?</h2>
+        <ul style="color:var(--text-2); font-size:13px;">
+          <li>Trusted and vetted operators</li>
+          <li>Best price guarantee</li>
+          <li>24/7 customer support</li>
+          <li>Unlock exclusive TourRadar+ member savings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
