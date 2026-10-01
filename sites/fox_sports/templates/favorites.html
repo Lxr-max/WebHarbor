@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}My Favs | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>My Favs</h1></div>
+<p class="muted">Signed in as {{ current_user.name }} ({{ current_user.email }})</p>
+<p class="lead">Follow your favorite leagues, teams, players and shows to personalize your FOX Sports experience.</p>
+{% if not favorites %}
+<p class="muted">You are not following anything yet. Open a team, player, show or personality page and use the Follow button.</p>
+{% endif %}
+
+{% set team_favs = [] %}
+{% set player_favs = [] %}
+{% set show_favs = [] %}
+{% set person_favs = [] %}
+{% for f in favorites %}
+  {% if f.item_type == 'team' %}{% set _ = team_favs.append(f) %}
+  {% elif f.item_type == 'player' %}{% set _ = player_favs.append(f) %}
+  {% elif f.item_type == 'show' %}{% set _ = show_favs.append(f) %}
+  {% else %}{% set _ = person_favs.append(f) %}{% endif %}
+{% endfor %}
+
+{% if team_favs %}
+<section class="section">
+  <div class="section-head"><h2>Teams ({{ team_favs|length }})</h2></div>
+  <div class="teams-grid">
+    {% for f in team_favs %}
+    {% set t = teams.get(f.item_key) %}
+    {% if t %}
+    <a class="team-card" href="/{{ t.league }}/{{ t.slug }}-team">
+      {% if t.logo and image(t.logo) %}<img src="{{ image(t.logo) }}" alt="{{ t.full_name }}">{% endif %}
+      <span class="team-card-name">{{ t.full_name }}</span>
+      <span class="muted">{{ t.record or '' }}{% if t.note %} &middot; {{ t.note }}{% endif %}
+        {% if t.next_opponent %}<br>Next: {{ t.next_homeaway }} {{ t.next_opponent }}{% if t.next_spread %} ({{ t.next_spread }}){% endif %}{% endif %}
+      </span>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if player_favs %}
+<section class="section">
+  <div class="section-head"><h2>Players ({{ player_favs|length }})</h2></div>
+  <ul class="search-results">
+    {% for f in player_favs %}
+    {% set p = players.get(f.item_key) %}
+    {% if p %}
+    <li class="search-hit">
+      <a href="/{{ p.league }}/{{ p.slug }}-player"><span class="hit-title">{{ p.name }}</span></a>
+      <span class="muted">#{{ p.number }} {{ p.pos }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if show_favs %}
+<section class="section">
+  <div class="section-head"><h2>Shows ({{ show_favs|length }})</h2></div>
+  <div class="shows-grid">
+    {% for f in show_favs %}
+    {% set s = shows.get(f.item_key) %}
+    {% if s %}
+    <a class="show-card" href="/shows/{{ s.slug }}">
+      {% if s.art and image(s.art) %}<img src="{{ image(s.art) }}" alt="{{ s.title }}">{% endif %}
+      <h3>{{ s.title }}</h3>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if person_favs %}
+<section class="section">
+  <div class="section-head"><h2>Personalities ({{ person_favs|length }})</h2></div>
+  <div class="people-grid">
+    {% for f in person_favs %}
+    {% set person = people.get(f.item_key) %}
+    {% if person %}
+    <a class="person-card" href="/personalities/{{ person.slug }}">
+      {% if person.art and image(person.art) %}<img src="{{ image(person.art) }}" alt="{{ person.name }}">{% endif %}
+      <h3>{{ person.name }}</h3>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

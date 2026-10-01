@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}FOX Super 6 | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>FOX Super 6</h1></div>
+<p class="lead">Enter our free-to-play game by predicting the correct answers of 6 questions for your chance at weekly prizes! Finish in the top 6 to win a prize.</p>
+{% for contest in contests %}
+<section class="section">
+  <div class="section-head"><h2>{{ contest.title }}</h2></div>
+  <p>{{ contest.description }}</p>
+  <p class="muted">Deadline: {{ contest.deadline }} &middot; Status: {{ contest.status }}</p>
+  <div class="btn-row">
+    {% if current_user.is_authenticated %}
+      <a class="btn" href="{{ url_for('super6_enter', slug=contest.slug) }}">Make Your Picks</a>
+    {% else %}
+      <a class="btn" href="{{ url_for('login', next='/fox-super-6/' + contest.slug + '/enter') }}">Sign In to Play</a>
+    {% endif %}
+    <a class="btn btn-secondary" href="{{ url_for('super6_leaderboard', slug=contest.slug) }}">Leaderboard</a>
+  </div>
+</section>
+{% endfor %}
+{% if my_entries %}
+<section class="section">
+  <div class="section-head"><h2>My Entries</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Contest</th><th>Score</th><th>Entry</th></tr></thead>
+    <tbody>
+      {% for entry in my_entries %}
+      <tr>
+        <td class="cell-team">{{ contest.title if contest else '' }}</td>
+        <td class="cell-strong">{{ entry.score or 0 }} / 6</td>
+        <td><a href="{{ url_for('super6_entry', contest_slug=contest.slug if contest else '', entry_id=entry.id) if contest else '#' }}">View entry</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+{% endblock %}
