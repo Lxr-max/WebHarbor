@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}My U-M{% endblock %}
+{% block content %}
+<h1>My U-M</h1>
+<p class="page-sub">Welcome back, {{ current_user.name }}. Your Backpack, saved programs, saved events and information requests.</p>
+
+<h2>Backpack <span class="count-pill">{{ backpack|length }} classes</span></h2>
+<p>Classes you backpack before registration. Backpacking does not enroll you — it saves a seat in your plan.</p>
+<table class="list">
+  <tr><th>Class Nbr</th><th>Course</th><th>Section</th><th>Instructor</th><th>Status</th></tr>
+  {% for b in backpack %}
+  {% set s = sections.get(b.section_id) %}
+  {% set c = courses.get(s.course_id) if s else None %}
+  <tr>
+    <td><a href="{{ url_for('class_detail', nbr=s.class_nbr) }}">{{ s.class_nbr }}</a></td>
+    <td>{% if c %}{{ c.code() }} — {{ c.title }}{% endif %}</td>
+    <td>{{ s.label() }}</td>
+    <td>{{ s.instructor or 'Staff' }}</td>
+    <td><span class="badge {{ 'open' if 'Open' in (s.status or '') else ('wait' if 'Wait' in (s.status or '') else 'closed') }}">{{ s.status or '—' }}</span></td>
+  </tr>
+  {% endfor %}
+  {% if not backpack %}
+  <tr><td colspan="5">Your Backpack is empty. Open a class detail page and use &ldquo;Add this class to my Backpack&rdquo;.</td></tr>
+  {% endif %}
+</table>
+
+<h2>Saved Programs <span class="count-pill">{{ saved_programs|length }} programs</span></h2>
+<table class="list">
+  <tr><th>Program</th><th>School / College</th></tr>
+  {% for sp in saved_programs %}
+  {% set p = programs.get(sp.program_id) %}
+  <tr>
+    <td><a href="{{ url_for('program_detail', pid=p.id) }}">{{ p.name }}</a></td>
+    <td>{{ p.school }}</td>
+  </tr>
+  {% endfor %}
+  {% if not saved_programs %}
+  <tr><td colspan="2">No saved programs yet. Browse <a href="{{ url_for('programs') }}">Majors &amp; Degrees</a>.</td></tr>
+  {% endif %}
+</table>
+
+<h2>Saved Events <span class="count-pill">{{ saved_events|length }} events</span></h2>
+<table class="list">
+  <tr><th>When</th><th>Event</th><th>Type</th></tr>
+  {% for se in saved_events %}
+  {% set e = events.get(se.event_id) %}
+  <tr>
+    <td>{{ fmt_when(e.start) }}</td>
+    <td><a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.name }}</a></td>
+    <td>{{ e.type }}</td>
+  </tr>
+  {% endfor %}
+  {% if not saved_events %}
+  <tr><td colspan="3">No saved events yet. Browse <a href="{{ url_for('events') }}">Happening @ Michigan</a>.</td></tr>
+  {% endif %}
+</table>
+
+<h2>Information Requests <span class="count-pill">{{ info_requests|length }}</span></h2>
+<table class="list">
+  <tr><th>Date</th><th>Audience</th><th>Message</th></tr>
+  {% for r in info_requests %}
+  <tr>
+    <td>{{ r.created }}</td>
+    <td>{{ r.audience }}</td>
+    <td>{{ r.message or '—' }}</td>
+  </tr>
+  {% endfor %}
+  {% if not info_requests %}
+  <tr><td colspan="3">No requests yet. <a href="{{ url_for('request_info') }}">Request information</a>.</td></tr>
+  {% endif %}
+</table>
+{% endblock %}

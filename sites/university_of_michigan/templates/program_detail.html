@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}{{ program.name }} — Majors &amp; Degrees{% endblock %}
+{% block content %}
+<h1>{{ program.name }}</h1>
+<p class="page-sub">
+  {% if program.submajor %}Sub-major &middot; {% endif %}
+  Offered by the {{ program.school }}
+</p>
+
+<h2>Offered By</h2>
+{% if school %}
+<p><a href="{{ url_for('school_detail', slug=school.slug) }}">{{ school.full_name }}</a>
+{% if school.url %} &middot; <a href="{{ school.url }}">{{ school.url }}</a>{% endif %}</p>
+{% if school.blurb %}<p>{{ school.blurb }}</p>{% endif %}
+{% else %}
+<p>{{ program.school }}</p>
+{% endif %}
+
+<h2>All Programs From This Unit</h2>
+<table class="list">
+  <tr><th>Program</th><th>Type</th></tr>
+  {% if school %}
+  {% for p in school.programs() %}
+  <tr>
+    <td><a href="{{ url_for('program_detail', pid=p.id) }}">{{ p.name }}</a></td>
+    <td>{% if p.submajor %}Sub-major{% else %}Major / Degree{% endif %}</td>
+  </tr>
+  {% endfor %}
+  {% endif %}
+</table>
+
+{% if current_user.is_authenticated %}
+<h2>Your Interest</h2>
+<form method="post" action="{{ url_for('program_save', program_id=program.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn maize" type="submit">Save this program to My U-M</button>
+</form>
+{% endif %}
+{% endblock %}

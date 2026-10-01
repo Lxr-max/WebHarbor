@@ -120,6 +120,8 @@ All registered websites and their default ports, in registration order from left
 
 | nyse | pending |  |  |  |  |
 
+| university_of_michigan | pending |  |  |  |  |
+
 ## 🤝 Contribute
 
 We have built 30 high-quality mirrors covering the [WebVoyager](https://github.com/MinorJerry/WebVoyager) benchmark. The next goal is **100+ sites**, covering everything in [Online-Mind2Web](https://huggingface.co/datasets/osunlp/Online-Mind2Web). We are inviting the community to build this together.

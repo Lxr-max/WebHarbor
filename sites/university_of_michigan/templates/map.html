@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Maps &amp; Wayfinding — Campus Information{% endblock %}
+{% block content %}
+<h1>Interactive Campus Map</h1>
+<p class="page-sub">Search for specific buildings, identify directions from place to place, and explore campus. When using the map you can toggle between the four different campuses — Central, North, Medical, and Athletic. {{ total }} buildings match.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('campus_map') }}">
+    <div>
+      <label for="q">Building search</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder="building name, department, room, zip or acronym">
+    </div>
+    <div>
+      <label for="category">Building category</label>
+      <select id="category" name="category">
+        <option value="">All categories</option>
+        {% for c in categories %}
+        <option value="{{ c }}" {% if c == category %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} buildings</span>
+</div>
+
+<h2>Buildings <span class="count-pill">{{ total }}</span></h2>
+<table class="list">
+  <tr><th>Official Building Name</th><th>Address</th><th>Category</th><th>Acronym</th></tr>
+  {% for b in buildings %}
+  <tr>
+    <td><a href="{{ url_for('building_detail', slug=b.slug) }}">{{ b.name }}</a></td>
+    <td>{{ b.address }}{% if b.city %}, {{ b.city }}{% endif %} {{ b.zip }}</td>
+    <td>{{ b.category }}</td>
+    <td>{{ b.acronym or '—' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
