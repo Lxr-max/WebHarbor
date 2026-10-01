@@ -659,6 +659,19 @@ def _record_search(q, kind):
 
 # ------------------------------------------------------------------ routes --
 
+
+def local_redirect(target, fallback):
+    """Keep form continuations on this mirror, including encoded URL variants."""
+    from urllib.parse import unquote, urlsplit
+    value = target or ''
+    decoded = unquote(value)
+    parsed = urlsplit(decoded)
+    if (not decoded.startswith('/') or decoded.startswith('//')
+            or parsed.scheme or parsed.netloc or '\\' in decoded
+            or any(ord(c) < 32 for c in decoded)):
+        value = fallback
+    return redirect(value)
+
 @app.route('/_health')
 def health():
     return jsonify(ok=True,
@@ -709,15 +722,18 @@ def search_publ():
     total = rows.count()
     page = rows.offset(f).limit(h).all()
     _record_search(q, 'publ')
-    # refine facets computed over the unfiltered result set
+    # Each facet respects the other active filter, so every advertised
+    # count is attainable; retain all years, including the oldest.
     base = search_publications(q) if q else Publication.query.filter(
         Publication.id < 0)
     years = {}
     types = {}
     for r in base.with_entities(Publication.year, Publication.rtype):
-        years[r.year] = years.get(r.year, 0) + 1
-        types[r.rtype] = types.get(r.rtype, 0) + 1
-    refine_years = sorted(years.items(), reverse=True)[:12]
+        if not rtype or r.rtype == rtype:
+            years[r.year] = years.get(r.year, 0) + 1
+        if not year or r.year == year:
+            types[r.rtype] = types.get(r.rtype, 0) + 1
+    refine_years = sorted(years.items(), reverse=True)
     refine_types = sorted(types.items(), key=lambda t: -t[1])
     return render_template('search_publ.html', q=q, rows=page,
                            total=total, h=h, f=f,
@@ -877,7 +893,7 @@ def authn_login():
                 u.password_hash, request.form.get('password', '')):
             login_user(u)
             dest = request.args.get('next') or url_for('account')
-            return redirect(dest)
+            return local_redirect(dest, url_for('account'))
         return render_template('authn_login.html', error='Invalid credentials.')
     return render_template('authn_login.html', error=None)
 
@@ -957,7 +973,7 @@ def watchlist_add_author():
         db.session.add(WatchAuthor(user_id=current_user.id, author_pid=pid,
                                    added_at=MIRROR_TS))
         db.session.commit()
-    return redirect(request.form.get('next') or url_for('watchlist'))
+    return local_redirect(request.form.get('next'), url_for('watchlist'))
 
 
 @app.route('/account/watchlist/author/remove', methods=['POST'])
@@ -981,7 +997,7 @@ def watchlist_add_venue():
         db.session.add(WatchVenue(user_id=current_user.id, venue_id=v.id,
                                   added_at=MIRROR_TS))
         db.session.commit()
-    return redirect(request.form.get('next') or url_for('watchlist'))
+    return local_redirect(request.form.get('next'), url_for('watchlist'))
 
 
 @app.route('/account/watchlist/venue/remove', methods=['POST'])
@@ -1015,7 +1031,7 @@ def saved_searches_add():
                                    search_type=kind, label=label,
                                    created_at=MIRROR_TS))
         db.session.commit()
-    return redirect(request.form.get('next') or url_for('saved_searches'))
+    return local_redirect(request.form.get('next'), url_for('saved_searches'))
 
 
 @app.route('/account/saved-searches/<int:sid>/delete', methods=['POST'])
@@ -1055,7 +1071,7 @@ def saved_papers_add():
                                   collection=collection, note=note,
                                   saved_at=MIRROR_TS))
         db.session.commit()
-    return redirect(request.form.get('next') or url_for('saved_papers'))
+    return local_redirect(request.form.get('next'), url_for('saved_papers'))
 
 
 @app.route('/account/papers/<int:sid>/remove', methods=['POST'])
@@ -1065,7 +1081,7 @@ def saved_papers_remove(sid):
     if s:
         db.session.delete(s)
         db.session.commit()
-    return redirect(request.form.get('next') or url_for('saved_papers'))
+    return local_redirect(request.form.get('next'), url_for('saved_papers'))
 
 
 @app.route('/account/papers/export.bib')
