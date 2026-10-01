@@ -620,7 +620,23 @@ def _graduated_cost(tiers, quantity):
     return total
 
 
+def _bounded_number(value, low, high, *, integer=True, multiple=1):
+    import math
+    number = float(value)
+    if not math.isfinite(number) or not low <= number <= high or (integer and not number.is_integer()) or number % multiple:
+        raise ValueError('Value outside supported range')
+    return number
+
+
+def _validate_currency(currency):
+    if not Currency.query.filter_by(code=currency).first():
+        raise ValueError('Unknown currency')
+
+
 def _compute_vm_estimate(size_key, region, quantity, hours, currency):
+    _bounded_number(quantity, 1, 500)
+    _bounded_number(hours, 1, 730)
+    _validate_currency(currency)
     size = VmSize.query.filter_by(key=size_key).first()
     if not size or region not in size.price_map:
         return None
@@ -639,6 +655,9 @@ def _compute_vm_estimate(size_key, region, quantity, hours, currency):
 
 
 def _compute_aks_estimate(tier, size_key, region, node_count, hours, currency):
+    _bounded_number(node_count, 1, 100)
+    _bounded_number(hours, 1, 730)
+    _validate_currency(currency)
     control = AksControlPlane.query.filter_by(tier=tier).first()
     size = AksSize.query.filter_by(key=size_key).first()
     if not size or region not in size.price_map:
@@ -677,6 +696,10 @@ READ_LABEL = 'Read operations (per 10k)'
 
 
 def _compute_storage_estimate(region, capacity_gb, write_10k, read_10k, currency):
+    _bounded_number(capacity_gb, 0, 100000000)
+    _bounded_number(write_10k, 0, 1000000)
+    _bounded_number(read_10k, 0, 1000000)
+    _validate_currency(currency)
     hot = StorageSku.query.filter_by(
         sku='general-purpose-v2-block-blob-structured-hot-lrs').first()
     writes = StorageSku.query.filter_by(
@@ -711,6 +734,11 @@ COSMOS_MODES = ('single', 'multiple', 'serverless')
 
 
 def _compute_cosmos_estimate(region, mode, ru_s, storage_gb, gateway, currency):
+    _bounded_number(ru_s, 100, 1000000, multiple=100)
+    _bounded_number(storage_gb, 0, 10000000)
+    _validate_currency(currency)
+    if mode not in ('single', 'multiple') or gateway not in ('yes', 'no'):
+        return None
     storage_sku = CosmosSku.query.filter_by(sku='storage').first()
     gateway_sku = CosmosSku.query.filter_by(
         sku='dedicated-gateway-d4s').first()
@@ -944,7 +972,7 @@ def calculator():
                 error = ('That combination is not available in the selected '
                          'region — pick another region, size or tier.')
         except (ValueError, TypeError):
-            error = 'Invalid quantity — please enter whole numbers.'
+            error = 'Use supported quantities, hours and currency within the displayed limits.'
     if estimate is not None:
         estimate['monthly_display'] = _money(estimate['monthly'], estimate['currency'])
     form = request.form if request.method == 'POST' else {}
@@ -961,27 +989,30 @@ def save_estimate():
     service = request.form.get('service', '')
     currency = request.form.get('currency', 'usd')
     estimate = None
-    if service == 'virtual-machines':
-        estimate = _compute_vm_estimate(
-            request.form.get('size', ''), request.form.get('region', ''),
-            request.form.get('quantity', '1'),
-            request.form.get('hours', str(HOURS_PER_MONTH)), currency)
-    elif service == 'kubernetes-service':
-        estimate = _compute_aks_estimate(
-            request.form.get('tier', 'SLA'), request.form.get('size', ''),
-            request.form.get('region', ''), request.form.get('nodes', '3'),
-            request.form.get('hours', str(HOURS_PER_MONTH)), currency)
-    elif service == 'storage':
-        estimate = _compute_storage_estimate(
-            request.form.get('region', ''),
-            request.form.get('capacity_gb', '1024'),
-            request.form.get('write_10k', '100'),
-            request.form.get('read_10k', '1000'), currency)
-    elif service == 'cosmos-db':
-        estimate = _compute_cosmos_estimate(
-            request.form.get('region', ''), request.form.get('mode', 'single'),
-            request.form.get('ru_s', '400'), request.form.get('storage_gb', '100'),
-            request.form.get('gateway', 'no'), currency)
+    try:
+        if service == 'virtual-machines':
+            estimate = _compute_vm_estimate(
+                request.form.get('size', ''), request.form.get('region', ''),
+                request.form.get('quantity', '1'),
+                request.form.get('hours', str(HOURS_PER_MONTH)), currency)
+        elif service == 'kubernetes-service':
+            estimate = _compute_aks_estimate(
+                request.form.get('tier', 'SLA'), request.form.get('size', ''),
+                request.form.get('region', ''), request.form.get('nodes', '3'),
+                request.form.get('hours', str(HOURS_PER_MONTH)), currency)
+        elif service == 'storage':
+            estimate = _compute_storage_estimate(
+                request.form.get('region', ''),
+                request.form.get('capacity_gb', '1024'),
+                request.form.get('write_10k', '100'),
+                request.form.get('read_10k', '1000'), currency)
+        elif service == 'cosmos-db':
+            estimate = _compute_cosmos_estimate(
+                request.form.get('region', ''), request.form.get('mode', 'single'),
+                request.form.get('ru_s', '400'), request.form.get('storage_gb', '100'),
+                request.form.get('gateway', 'no'), currency)
+    except (ValueError, TypeError, OverflowError):
+        abort(400, 'Invalid estimate configuration')
     if estimate is None:
         flash('That estimate is not available in the selected region.', 'error')
         return redirect(url_for('calculator'))
@@ -1203,7 +1234,7 @@ def login():
         if user and bcrypt.check_password_hash(user.pw_hash, password):
             login_user(user)
             flash(f'Signed in as {user.name}.', 'success')
-            return redirect(request.args.get('next') or url_for('account'))
+            return redirect(local_return_url(request.args.get('next'), url_for('account')))
         flash('Invalid email or password.', 'error')
     return render_template('login.html')
 
@@ -1229,6 +1260,18 @@ def account():
                            favorites=favorites, fav_products=fav_products)
 
 
+
+def local_return_url(value, fallback):
+    """Accept only an unambiguous local absolute path."""
+    from urllib.parse import urlsplit, unquote
+    if not isinstance(value, str):
+        return fallback
+    decoded = unquote(value)
+    if not decoded.startswith('/') or decoded.startswith('//') or '\\' in decoded or any(ord(c) < 32 or ord(c) == 127 for c in decoded):
+        return fallback
+    parsed = urlsplit(decoded)
+    return value if not parsed.scheme and not parsed.netloc else fallback
+
 @app.route('/favorites/toggle', methods=['POST'])
 @login_required
 def toggle_favorite():
@@ -1247,7 +1290,7 @@ def toggle_favorite():
                                 created_ts=_now_iso()))
         db.session.commit()
         flash(f'Added {prod.name} to your favorites.', 'success')
-    return redirect(request.form.get('next') or url_for('product_detail', slug=slug))
+    return redirect(local_return_url(request.form.get('next'), url_for('product_detail', slug=slug)))
 
 
 @app.errorhandler(404)

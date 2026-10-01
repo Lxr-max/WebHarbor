@@ -130,3 +130,5 @@ fieldset.calc-service { border: none; padding: 0; }
    GitHub card description is one 40-char token); let narrow viewports
    break inside such tokens instead of overflowing the card. */
 .card p, .story-card p, .story-card-body p { overflow-wrap: break-word; }
+
+.support-icons img { width: 96px; height: 80px; object-fit: contain; }

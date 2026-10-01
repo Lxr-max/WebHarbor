@@ -53,7 +53,7 @@
       <label>Hours per month <input type="number" name="hours" min="1" max="730" value="{{ form.hours or '730' }}" required></label>
 
       {% elif service == 'storage' %}
-      <p class="form-note">Block blob storage (General Purpose v2, Hot tier, LRS) — capacity is billed on graduated tiers: the first 50,000 GB per month at the tier-1 rate, the next 461,200 GB at the tier-2 rate, and the remainder at the tier-3 rate.</p>
+      <p class="form-note">Block blob storage (General Purpose v2, Hot tier, LRS) — capacity is billed on graduated tiers: the first 51,200 GB per month at the tier-1 rate, the next 460,800 GB at the tier-2 rate, and the remainder at the tier-3 rate.</p>
       <label>Capacity (GB per month) <input type="number" name="capacity_gb" min="0" max="100000000" value="{{ form.capacity_gb or '1024' }}" required></label>
       <label>Write operations (batches of 10,000) <input type="number" name="write_10k" min="0" max="1000000" value="{{ form.write_10k or '100' }}" required></label>
       <label>Read operations (batches of 10,000) <input type="number" name="read_10k" min="0" max="1000000" value="{{ form.read_10k or '1000' }}" required></label>
@@ -63,10 +63,10 @@
         <select name="mode">
           <option value="single" {% if form.mode == 'single' or not form.mode %}selected{% endif %}>Provisioned throughput — single-region writes</option>
           <option value="multiple" {% if form.mode == 'multiple' %}selected{% endif %}>Provisioned throughput — multi-region writes</option>
-          <option value="serverless" {% if form.mode == 'serverless' %}selected{% endif %}>Serverless</option>
+          
         </select>
       </label>
-      <label>Throughput (RU/s, multiples of 100) <input type="number" name="ru_s" min="0" max="1000000" step="100" value="{{ form.ru_s or '400' }}" required></label>
+      <label>Throughput (RU/s, multiples of 100) <input type="number" name="ru_s" min="100" max="1000000" step="100" value="{{ form.ru_s or '400' }}" required></label>
       <label>Storage (GB) <input type="number" name="storage_gb" min="0" max="10000000" value="{{ form.storage_gb or '100' }}" required></label>
       <label>Dedicated gateway (D4s)
         <select name="gateway">
@@ -99,7 +99,7 @@
   <section class="estimate-result">
     <h2>Estimate result</h2>
     <table class="data-table">
-      <thead><tr><th>Line item</th><th>Rate</th><th>Monthly</th></tr></thead>
+      <thead><tr><th>Line item</th><th>Rate (USD)</th><th>Monthly (USD)</th></tr></thead>
       <tbody>
         {% for line in estimate.lines %}
         <tr>
