@@ -659,6 +659,21 @@ class ApartmentsRegressionTests(unittest.TestCase):
         self.assertIn(b'$7,130', response.data)
         self.assertNotIn(b'$12,098', response.data)
 
+    def test_student_housing_lists_every_student_building(self):
+        m = self.module
+        with self.app.app_context():
+            expected = m.Building.query.filter_by(is_student_housing=True).order_by(
+                m.Building.rating_avg.desc(), m.Building.id.asc()
+            ).all()
+        html = self.client.get("/student-housing").get_data(as_text=True)
+        self.assertGreater(len(expected), 24)
+        self.assertIn(f"See all {len(expected)} matching rentals", html)
+        self.assertIn(f"<h2>{len(expected)} Student Housing properties</h2>", html)
+        self.assertNotIn("+ matching rentals", html)
+        self.assertEqual(html.count('class="listing-card"'), len(expected))
+        positions = [html.index(f"/{b.slug}/") for b in expected]
+        self.assertEqual(positions, sorted(positions))
+
 
 if __name__ == "__main__":
     unittest.main()
