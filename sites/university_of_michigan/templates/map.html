@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Maps &amp; Wayfinding — Campus Information{% endblock %}
 {% block content %}
-<h1>Interactive Campus Map</h1>
-<p class="page-sub">Search for specific buildings, identify directions from place to place, and explore campus. When using the map you can toggle between the four different campuses — Central, North, Medical, and Athletic. {{ total }} buildings match.</p>
+<h1>Campus Map &amp; Building Directory</h1>
+<p class="page-sub">Find campus buildings, their addresses and categories. {{ total }} buildings match.</p>
 
 <div class="filterbar">
   <form method="get" action="{{ url_for('campus_map') }}">

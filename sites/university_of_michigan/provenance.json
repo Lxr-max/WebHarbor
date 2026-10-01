@@ -63,7 +63,7 @@
  },
  "media": {
   "images": {
-   "count": 71,
+   "count": 72,
    "inventory": "asset_inventory.json",
    "policy": "every file fetched from the upstream URL it renders at (umich.edu gallery/sidebar assets, news.umich.edu wp-content uploads, school homepage heroes from each school's own asset host, events.umich.edu media attachments); no placeholders, no duplicates (all 71 sha256 distinct), no stretched renders; per-file sha256 + source URL in asset_inventory.json"
   }
@@ -116,5 +116,16 @@
   "buildings": 265,
   "calendar_entries": 86,
   "images": 71
+ },
+ "registration": {
+  "sites_index": 147,
+  "container_port": 40147,
+  "expose": "8101 40000-40147"
+ },
+ "review": {
+  "date": "2026-10-01",
+  "task_revision": "coherent-goals-v1",
+  "evidence": "/data/webharbor-prs/final/pr337: scripted browser regressions, independent source/state expectations and grading controls.",
+  "upstream_check": "Gateway, admissions, news and events returned Cloudflare 403 during browser comparison on 2026-10-01; existing source captures used, with this live-comparison limitation retained."
  }
 }

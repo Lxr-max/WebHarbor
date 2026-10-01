@@ -1,0 +1,965 @@
+{
+  "University of Michigan--0": {
+    "task": "Alice is exploring Aerospace Engineering for Fall 2026. Find the program and its offering school, review the first listed AEROSP course section, and save that section to her Backpack. Report the course, class number and instructor. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/courses/class/24649",
+      "/myumich",
+      "/programs/2",
+      "/schools-colleges/engineering"
+    ],
+    "state": {
+      "backpack_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "section_id": 104,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "course",
+        "pattern": "aerosp\\ 200",
+        "forbidden": []
+      },
+      {
+        "label": "course title",
+        "pattern": "intro\\ aero\\ entrprs",
+        "forbidden": []
+      },
+      {
+        "label": "class number",
+        "pattern": "(?:class\\s*(?:number|no\\.?|#))\\s*(?::|is|of|=)?\\s*\\$?24649(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "instructor",
+        "pattern": "george\\ halow",
+        "forbidden": []
+      },
+      {
+        "label": "offering school",
+        "pattern": "college\\ of\\ engineering",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--1": {
+    "task": "Help me start a Great Lakes literature review. In the Library Catalog, compare the first two Article records alphabetically that match Great Lakes. Report each title, first author, issue year and Deep Blue handle so I can retrieve the papers.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/library/item/ff908be4\\-9bf9\\-4454\\-96c5\\-5e7fb52961b8",
+      "/library/item/82396ede\\-52b5\\-4e80\\-83d3\\-e0e9cb46a3fc"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "author",
+        "pattern": "yeo,\\ a\\.\\ j\\.",
+        "forbidden": [],
+        "scope": "assessing\\ the\\ potential\\ for\\ medium\\-range\\ ice\\ forecasts\\ in\\ the\\ laurentian\\ great\\ lakes.*?(?=burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes|$)"
+      },
+      {
+        "label": "year",
+        "pattern": "2024",
+        "forbidden": [],
+        "scope": "assessing\\ the\\ potential\\ for\\ medium\\-range\\ ice\\ forecasts\\ in\\ the\\ laurentian\\ great\\ lakes.*?(?=burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes|$)"
+      },
+      {
+        "label": "handle",
+        "pattern": "2027\\.42/194861",
+        "forbidden": [],
+        "scope": "assessing\\ the\\ potential\\ for\\ medium\\-range\\ ice\\ forecasts\\ in\\ the\\ laurentian\\ great\\ lakes.*?(?=burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes|$)"
+      },
+      {
+        "label": "author",
+        "pattern": "jude,\\ david\\ j\\.",
+        "forbidden": [],
+        "scope": "burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes.*"
+      },
+      {
+        "label": "year",
+        "pattern": "2013",
+        "forbidden": [],
+        "scope": "burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes.*"
+      },
+      {
+        "label": "handle",
+        "pattern": "2027\\.42/141895",
+        "forbidden": [],
+        "scope": "burbot\\ early\\ life\\ history\\ strategies\\ in\\ the\\ great\\ lakes.*"
+      }
+    ]
+  },
+  "University of Michigan--2": {
+    "task": "Compare the academic calendars for Winter 2026, Fall 2026 and Winter 2027 to help me plan a year away from work. Report the start of classes, final examination period and commencement date for each term, noting any term that omits one of those entries.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/calendars\\?.*Winter",
+      "/calendars\\?.*Fall"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "Winter 2026 Classes begin",
+        "pattern": "wednesday,\\s+jan\\.\\s+7\\s*classes\\s+begin",
+        "forbidden": [],
+        "scope": "winter\\ 2026:.*?(?=fall\\ 2026:|winter\\ 2027:|$)"
+      },
+      {
+        "label": "Winter 2026 Examinations. Grades due 72 hours after exam.",
+        "pattern": "thursday,\\s+april\\s+23\\s+\\-\\s+thursday,\\s+april\\s+30\\s*examinations\\.\\s+grades\\s+due\\s+72\\s+hours\\s+after\\s+exam\\.",
+        "forbidden": [],
+        "scope": "winter\\ 2026:.*?(?=fall\\ 2026:|winter\\ 2027:|$)"
+      },
+      {
+        "label": "Winter 2026 Commencement Activities",
+        "pattern": "friday,\\s+may\\s+1\\s+\\-\\s+sunday,\\s+may\\s+3\\s*commencement\\s+activities",
+        "forbidden": [],
+        "scope": "winter\\ 2026:.*?(?=fall\\ 2026:|winter\\ 2027:|$)"
+      },
+      {
+        "label": "Fall 2026 Classes begin fall term",
+        "pattern": "monday,\\s+aug\\.\\s+31\\s*classes\\s+begin\\s+fall\\s+term",
+        "forbidden": [],
+        "scope": "fall\\ 2026:.*?(?=winter\\ 2027:|$)"
+      },
+      {
+        "label": "Fall 2026 Examinations",
+        "pattern": "monday,\\s+dec\\.\\s+14\\s+\\-\\s+friday,\\s+dec\\.\\s+18,\\s+monday,\\s+dec\\.\\s+21\\s*examinations",
+        "forbidden": [],
+        "scope": "fall\\ 2026:.*?(?=winter\\ 2027:|$)"
+      },
+      {
+        "label": "Fall 2026 Commencement",
+        "pattern": "sunday,\\s+dec\\.\\s+20\\s*commencement",
+        "forbidden": [],
+        "scope": "fall\\ 2026:.*?(?=winter\\ 2027:|$)"
+      },
+      {
+        "label": "Winter 2027 Classes begin",
+        "pattern": "wednesday,\\s+jan\\.\\s+13\\s*classes\\s+begin",
+        "forbidden": [],
+        "scope": "winter\\ 2027:.*?(?=$|$)"
+      },
+      {
+        "label": "Winter 2027 Examinations",
+        "pattern": "thursday,\\s+april\\s+29\\s+\\-\\s+friday,\\s+april\\s+30,\\s+monday,\\s+may\\s+3\\s+\\-\\s+thursday,\\s+may\\s+6\\s*examinations",
+        "forbidden": [],
+        "scope": "winter\\ 2027:.*?(?=$|$)"
+      },
+      {
+        "label": "Winter 2027 Commencement Activities",
+        "pattern": "thursday,\\s+may\\s+6\\s+\\-\\s+sunday,\\s+may\\s+9\\s*commencement\\s+activities",
+        "forbidden": [],
+        "scope": "winter\\ 2027:.*?(?=$|$)"
+      }
+    ]
+  },
+  "University of Michigan--3": {
+    "task": "Alice wants a Fall 2026 class taught by Alexander Stark. Find his faculty profile, review his second listed section and save it to her Backpack. Report the course, class number, instruction mode and status. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/courses/class/10712",
+      "/myumich"
+    ],
+    "state": {
+      "backpack_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "section_id": 888,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "course",
+        "pattern": "chem\\ 125",
+        "forbidden": []
+      },
+      {
+        "label": "course title",
+        "pattern": "gen\\ chem\\ lab\\ i",
+        "forbidden": []
+      },
+      {
+        "label": "class number",
+        "pattern": "(?:class\\s*(?:number|no\\.?|#))\\s*(?::|is|of|=)?\\s*\\$?10712(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "instruction mode",
+        "pattern": "(?:(?:instruction )?mode)\\s*(?::|is|of|=)?\\s*\\$?in\\s+person(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "section status",
+        "pattern": "(?:(?:enrollment )?status)\\s*(?::|is|of|=)?\\s*\\$?closed(?!\\w)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--4": {
+    "task": "Dana wants a midday wellbeing activity. Find Lunchtime Yoga, check its date, time, venue and sponsor, and save it to her U-M events. Report those details and confirm it is saved. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/events/138074"
+    ],
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "event_id": 10,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "start",
+        "pattern": "2026\\-09\\-18\\ 12:00",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=$|$)"
+      },
+      {
+        "label": "location",
+        "pattern": "school\\ of\\ kinesiology\\ building",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=$|$)"
+      },
+      {
+        "label": "sponsor",
+        "pattern": "kinesiology\\ community\\ programs",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=$|$)"
+      }
+    ]
+  },
+  "University of Michigan--5": {
+    "task": "I'm planning a parent visit that includes Michigan Union, Michigan League and the Museum of Natural History. Find their campus-map addresses, then send an admissions information request as a Parent or Guardian asking when the next campus tour is. Use Alice's account and report the addresses and confirmation. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/map/building/michigan-union",
+      "/map/building/michigan-league",
+      "/map/building/museum-of-natural-history-1",
+      "/admissions/request",
+      "/admissions/request-info/thanks"
+    ],
+    "state": {
+      "info_requests": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Alice Johnson",
+            "email": "alice.j@test.com",
+            "audience": "Parent or Guardian",
+            "message": {
+              "regex": "(?=.*(?:tour|visit)).+"
+            },
+            "created": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "building address",
+        "pattern": "michigan\\s+union.{0,400}530\\s+state\\s+st",
+        "forbidden": []
+      },
+      {
+        "label": "building address",
+        "pattern": "michigan\\s+league.{0,400}911\\s+n\\.\\s+university\\s+ave",
+        "forbidden": []
+      },
+      {
+        "label": "building address",
+        "pattern": "museum\\s+of\\s+natural\\s+history.{0,400}1105\\s+n\\s+university\\s+ave\\.",
+        "forbidden": []
+      },
+      {
+        "label": "request confirmation",
+        "pattern": "(?:request.{0,30}(?:received|submitted)|thank you,? alice\\s+johnson)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--6": {
+    "task": "Carol is interested in a meditation session. Find Heartfulness Meditation, check its date, time, location and sponsor, and save the event to My U-M. Report the details and confirm it is saved. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/events/143758"
+    ],
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "event_id": 19,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "start",
+        "pattern": "2026\\-01\\-16\\ 12:00",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      },
+      {
+        "label": "location",
+        "pattern": "virtual",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      },
+      {
+        "label": "sponsor",
+        "pattern": "information\\ and\\ technology\\ services\\ \\(its\\)",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      }
+    ]
+  },
+  "University of Michigan--7": {
+    "task": "Dana wants to plan an introductory writing class for Fall 2026. Find ENGLISH 125, review its first listed section and add that section to her Backpack. Report the course title, class number, instructor and instruction mode. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/courses/class/11009",
+      "/myumich"
+    ],
+    "state": {
+      "backpack_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "section_id": 2230,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "course",
+        "pattern": "english\\ 125",
+        "forbidden": []
+      },
+      {
+        "label": "course title",
+        "pattern": "writing\\&academic\\ inq",
+        "forbidden": []
+      },
+      {
+        "label": "class number",
+        "pattern": "(?:class\\s*(?:number|no\\.?|#))\\s*(?::|is|of|=)?\\s*\\$?11009(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "instructor",
+        "pattern": "margarita\\ maria\\ rodriguez\\ morales",
+        "forbidden": []
+      },
+      {
+        "label": "instruction mode",
+        "pattern": "(?:(?:instruction )?mode)\\s*(?::|is|of|=)?\\s*\\$?in\\s+person(?!\\w)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--8": {
+    "task": "Alice is considering the Business program at Ross. Find the program through Majors & Degrees, check the offering school's full name and its available course subjects, and save the program to My U-M. Report the school and course subjects. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/programs/22",
+      "/schools-colleges/ross"
+    ],
+    "state": {
+      "saved_programs": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "program_id": 22,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "Business school",
+        "pattern": "business.{0,150}ross\\s+school\\s+of\\s+business",
+        "forbidden": []
+      },
+      {
+        "label": "Ross subjects",
+        "pattern": "(?:course subjects|subjects).{0,70}strategy",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--9": {
+    "task": "Carol is interested in the link between psychology and the brain. Find Biopsychology, Cognition, and Neuroscience, verify its offering school, and save it to her programs. Report its name, school and whether it is listed as a sub-major. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/programs/21"
+    ],
+    "state": {
+      "saved_programs": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "program_id": 21,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "Biopsychology, Cognition, and Neuroscience school",
+        "pattern": "biopsychology,\\s+cognition,\\s+and\\s+neuroscience.{0,150}college\\s+of\\s+literature,\\s+science,\\s+and\\s+the\\s+arts\\s+\\(lsa\\)",
+        "forbidden": []
+      },
+      {
+        "label": "program type",
+        "pattern": "biopsychology,\\s+cognition,\\s+and\\s+neuroscience\\s*(?:major / degree|is (?:a )?(?:major|not a sub-major))",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--10": {
+    "task": "Find the first two alphabetically listed machine-learning Thesis records in the Library Catalog. Compare their titles, first authors and issue years, and include their Deep Blue handles for a reading list.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/library/item/4ce0f3e6\\-c731\\-479e\\-abc8\\-c1fdb71cca1d",
+      "/library/item/cb545af2\\-430b\\-4455\\-8be4\\-d3a11ec14995"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "author",
+        "pattern": "lee,\\ kyuseok",
+        "forbidden": [],
+        "scope": "an\\ energy\\-efficient\\ cmos\\ image\\ sensor\\ with\\ embedded\\ machine\\ learning\\ algorithm.*?(?=applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics|$)"
+      },
+      {
+        "label": "year",
+        "pattern": "2019",
+        "forbidden": [],
+        "scope": "an\\ energy\\-efficient\\ cmos\\ image\\ sensor\\ with\\ embedded\\ machine\\ learning\\ algorithm.*?(?=applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics|$)"
+      },
+      {
+        "label": "handle",
+        "pattern": "2027\\.42/149934",
+        "forbidden": [],
+        "scope": "an\\ energy\\-efficient\\ cmos\\ image\\ sensor\\ with\\ embedded\\ machine\\ learning\\ algorithm.*?(?=applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics|$)"
+      },
+      {
+        "label": "author",
+        "pattern": "ho,\\ steve",
+        "forbidden": [],
+        "scope": "applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics.*"
+      },
+      {
+        "label": "year",
+        "pattern": "2025",
+        "forbidden": [],
+        "scope": "applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics.*"
+      },
+      {
+        "label": "handle",
+        "pattern": "2027\\.42/197225",
+        "forbidden": [],
+        "scope": "applied\\ machine\\ learning\\ for\\ big\\ data\\ genomics.*"
+      }
+    ]
+  },
+  "University of Michigan--11": {
+    "task": "Dana wants to see Holly Bowling perform. Find the performance in the events calendar, review its date, time, location and description, and save it to My U-M. Tell me when and where to attend. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/events/148714"
+    ],
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "event_id": 33,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "start",
+        "pattern": "2026\\-10\\-02\\ 20:00",
+        "forbidden": [],
+        "scope": "holly\\s+bowling.*?(?=$|$)"
+      },
+      {
+        "label": "location",
+        "pattern": "ark\\ reserved",
+        "forbidden": [],
+        "scope": "holly\\s+bowling.*?(?=$|$)"
+      },
+      {
+        "label": "sponsor",
+        "pattern": "michigan\\ union\\ ticket\\ office\\ \\(muto\\)",
+        "forbidden": [],
+        "scope": "holly\\s+bowling.*?(?=$|$)"
+      },
+      {
+        "label": "performance description",
+        "pattern": "(?:solo )?pian(?:ist|o)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--12": {
+    "task": "Bob is deciding whether to apply Early Decision or Regular Decision. Compare the deadlines, decision dates and binding commitment, then send an admissions information request as a High School Student asking how financial aid affects an Early Decision commitment. Report the comparison and request confirmation. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/admissions/apply",
+      "/admissions/request",
+      "/admissions/request-info/thanks"
+    ],
+    "state": {
+      "info_requests": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Bob Chen",
+            "email": "bob.c@test.com",
+            "audience": "High School Student",
+            "message": {
+              "regex": "(?=.*(?:financial|aid))(?=.*early decision).+"
+            },
+            "created": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "application deadline",
+        "pattern": "nov\\.\\ 1",
+        "forbidden": [],
+        "scope": "early\\s+decision\\s+\\(ed\\).*?(?=early action|regular decision|important dates|$)"
+      },
+      {
+        "label": "decision date",
+        "pattern": "by\\ dec\\.\\ 24",
+        "forbidden": [],
+        "scope": "early\\s+decision\\s+\\(ed\\).*?(?=early action|regular decision|important dates|$)"
+      },
+      {
+        "label": "application deadline",
+        "pattern": "feb\\.\\ 1",
+        "forbidden": [],
+        "scope": "regular\\s+decision\\s+\\(rd\\).*?(?=early action|regular decision|important dates|$)"
+      },
+      {
+        "label": "decision date",
+        "pattern": "by\\ april\\ 2",
+        "forbidden": [],
+        "scope": "regular\\s+decision\\s+\\(rd\\).*?(?=early action|regular decision|important dates|$)"
+      },
+      {
+        "label": "ED binding",
+        "pattern": "early decision(?: \\(ed\\))?\\s+(?:yes\\s*-\\s*binding|is binding)",
+        "forbidden": []
+      },
+      {
+        "label": "RD nonbinding",
+        "pattern": "regular decision(?: \\(rd\\))?\\s+(?:no|is non-?binding|is not binding)",
+        "forbidden": []
+      },
+      {
+        "label": "request confirmation",
+        "pattern": "(?:request.{0,30}(?:received|submitted)|thank you,? bob\\s+chen)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--13": {
+    "task": "Alice wants a MATH class taught by Saha. Find the matching instructor, review their first listed section and add it to her Backpack. Report the instructor, course title, class number and enrollment status. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/courses/class/20116",
+      "/myumich"
+    ],
+    "state": {
+      "backpack_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "section_id": 3174,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "course",
+        "pattern": "math\\ 115",
+        "forbidden": []
+      },
+      {
+        "label": "course title",
+        "pattern": "calculus\\ i",
+        "forbidden": []
+      },
+      {
+        "label": "class number",
+        "pattern": "(?:class\\s*(?:number|no\\.?|#))\\s*(?::|is|of|=)?\\s*\\$?20116(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "instructor",
+        "pattern": "archishman\\ saha",
+        "forbidden": []
+      },
+      {
+        "label": "section status",
+        "pattern": "(?:(?:enrollment )?status)\\s*(?::|is|of|=)?\\s*\\$?closed(?!\\w)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--14": {
+    "task": "Prepare a brief reading comparison of Michigan News' El Ni\u00f1o study and its article about public preferences for natural climate-change solutions. Report each title and publication date, summarize the central finding, and distinguish the scientific climate result from the public-opinion result.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/news/el-ninos-more-intense-over-last-40-years-than-previous-1000-according-",
+      "/news/clearing-the-air-public-prefers-natural-approaches-to-curbing-climate-"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "article and publication date",
+        "pattern": "el\\s+ni\u00f1os\\s+more\\s+intense\\s+over\\s+last\\s+40\\s+years\\s+than\\s+previous\\s+thousand.{0,40}2026-08-27",
+        "forbidden": []
+      },
+      {
+        "label": "article and publication date",
+        "pattern": "clearing\\s+the\\s+air:\\s+public\\s+prefers\\s+'natural'\\s+approaches\\s+to\\s+curbing\\s+climate\\s+change.{0,40}2026-08-13",
+        "forbidden": []
+      },
+      {
+        "label": "El Nino finding",
+        "pattern": "variability.{0,40}40\\s*%.{0,15}(?:stronger|greater|higher).{0,80}pre-?industrial",
+        "forbidden": []
+      },
+      {
+        "label": "public preference finding",
+        "pattern": "(?:public support.{0,160}(?:perceive|perceived).{0,50}natural|(?:perceived|seem|considered).{0,35}natural.{0,70}(?:public support|popular))",
+        "forbidden": []
+      },
+      {
+        "label": "study distinction",
+        "pattern": "(?:physical climate.{0,130}public attitudes|climate dynamics.{0,80}public opinion)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--15": {
+    "task": "Carol is planning a nursing-school visit. Find the School of Nursing's campus-map address, check which undergraduate nursing program it offers, then request admissions information as a High School Student asking about nursing tours. Report the address, program and confirmation. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/map/building/school-of-nursing-building-2",
+      "/programs/112",
+      "/admissions/request",
+      "/admissions/request-info/thanks"
+    ],
+    "state": {
+      "info_requests": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Carol Davis",
+            "email": "carol.d@test.com",
+            "audience": "High School Student",
+            "message": {
+              "regex": "(?=.*nursing)(?=.*(?:tour|visit)).+"
+            },
+            "created": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "building address",
+        "pattern": "school\\s+of\\s+nursing\\s+building\\s+2.{0,400}426\\s+north\\s+ingalls\\s+st",
+        "forbidden": []
+      },
+      {
+        "label": "Nursing school",
+        "pattern": "nursing.{0,150}school\\s+of\\s+nursing",
+        "forbidden": []
+      },
+      {
+        "label": "request confirmation",
+        "pattern": "(?:request.{0,30}(?:received|submitted)|thank you,? carol\\s+davis)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--16": {
+    "task": "Dana wants to include STATS 250 in her Fall 2026 plan. Review its first listed section and save it to her Backpack. Report the course title, class number, instructor, instruction mode and status; do not enroll her. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/courses/class/13492",
+      "/myumich"
+    ],
+    "state": {
+      "backpack_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "section_id": 5418,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "course",
+        "pattern": "stats\\ 250",
+        "forbidden": []
+      },
+      {
+        "label": "course title",
+        "pattern": "intr\\ stat\\&data\\ anlys",
+        "forbidden": []
+      },
+      {
+        "label": "class number",
+        "pattern": "(?:class\\s*(?:number|no\\.?|#))\\s*(?::|is|of|=)?\\s*\\$?13492(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "instructor",
+        "pattern": "alicia\\ romero",
+        "forbidden": []
+      },
+      {
+        "label": "instruction mode",
+        "pattern": "(?:(?:instruction )?mode)\\s*(?::|is|of|=)?\\s*\\$?in\\s+person(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "section status",
+        "pattern": "(?:(?:enrollment )?status)\\s*(?::|is|of|=)?\\s*\\$?open(?!\\w)",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--17": {
+    "task": "Carol already saved Nursing and wants to compare Pharmaceutical Sciences as another health-care degree. Find both program pages, compare their offering schools, and add Pharmaceutical Sciences to her saved programs while retaining Nursing. Report both programs and schools. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/programs/112",
+      "/programs/116"
+    ],
+    "state": {
+      "saved_programs": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "program_id": 116,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "Nursing school",
+        "pattern": "nursing.{0,150}school\\s+of\\s+nursing",
+        "forbidden": []
+      },
+      {
+        "label": "Pharmaceutical Sciences school",
+        "pattern": "pharmaceutical\\s+sciences.{0,150}college\\s+of\\s+pharmacy",
+        "forbidden": []
+      }
+    ]
+  },
+  "University of Michigan--18": {
+    "task": "Bob is deciding between Lunchtime Yoga and Heartfulness Meditation. Compare their dates, times, locations and sponsors, then save Lunchtime Yoga to his events. Report the comparison and confirm the saved choice. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/events/138074",
+      "/events/143758"
+    ],
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "event_id": 10,
+            "added_at": "2026-09-30"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "start",
+        "pattern": "2026\\-09\\-18\\ 12:00",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=heartfulness\\s+meditation|$)"
+      },
+      {
+        "label": "location",
+        "pattern": "school\\ of\\ kinesiology\\ building",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=heartfulness\\s+meditation|$)"
+      },
+      {
+        "label": "sponsor",
+        "pattern": "kinesiology\\ community\\ programs",
+        "forbidden": [],
+        "scope": "lunchtime\\s+yoga.*?(?=heartfulness\\s+meditation|$)"
+      },
+      {
+        "label": "start",
+        "pattern": "2026\\-01\\-16\\ 12:00",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      },
+      {
+        "label": "location",
+        "pattern": "virtual",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      },
+      {
+        "label": "sponsor",
+        "pattern": "information\\ and\\ technology\\ services\\ \\(its\\)",
+        "forbidden": [],
+        "scope": "heartfulness\\s+meditation.*?(?=$|$)"
+      }
+    ]
+  },
+  "University of Michigan--19": {
+    "task": "Alice is estimating undergraduate costs before applying. Compare the total lower-division budgets for Michigan residents and nonresidents, identify the difference and when the FAFSA becomes available, then request admissions information as a High School Student asking about need-based aid for nonresidents. Report the figures and request confirmation. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "4185e7573004d46d5fe2068882ae65afbbb222f6a731260a4f9c04225bf9bf58",
+    "paths": [
+      "/admissions/costs",
+      "/admissions/aid",
+      "/admissions/request",
+      "/admissions/request-info/thanks"
+    ],
+    "state": {
+      "info_requests": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Alice Johnson",
+            "email": "alice.j@test.com",
+            "audience": "High School Student",
+            "message": {
+              "regex": "(?=.*(?:need|aid))(?=.*nonresident).+"
+            },
+            "created": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "budget",
+        "pattern": "(?:michigan residents)\\s*(?::|is|of|=)?\\s*\\$?40194(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "budget",
+        "pattern": "(?:nonresidents)\\s*(?::|is|of|=)?\\s*\\$?88394(?!\\w)",
+        "forbidden": []
+      },
+      {
+        "label": "budget difference",
+        "pattern": "(?:difference\\s*(?:is|:)?\\s*\\$?48200|nonresidents pay\\s*\\$?48200 more)",
+        "forbidden": []
+      },
+      {
+        "label": "FAFSA availability",
+        "pattern": "fafsa.{0,30}(?:oct(?:ober)?\\.? 1|10/1)",
+        "forbidden": []
+      },
+      {
+        "label": "request confirmation",
+        "pattern": "(?:request.{0,30}(?:received|submitted)|thank you,? alice\\s+johnson)",
+        "forbidden": []
+      }
+    ]
+  }
+}
