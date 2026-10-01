@@ -29,7 +29,7 @@ def test_tasks_shape():
             'verifier_path', 'judge_rubric'}
     for task in tasks:
         assert set(task.keys()) == keys, task['id']
-        assert task['web'] == 'http://localhost:40223/'
+        assert task['web'] == 'http://localhost:40149/'
         assert task['upstream_url'] == 'https://finance.yahoo.com/'
         assert len(task['ques'].split()) <= 100, task['id']
         # reviewer track: rubrics re-frozen as reviewer-authored judging

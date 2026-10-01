@@ -18,6 +18,7 @@ chart, screener, trending, earnings-visualization and news-stream APIs,
 see provenance.json); the SQLite seed is materialized deterministically at
 image build time (PYTHONHASHSEED=0).
 """
+import math
 import json
 import os
 import re
@@ -561,7 +562,8 @@ def home():
             .order_by(NewsArticle.pub_time.desc()).limit(6).all())
     return render_template('home.html', strip=strip, cards=cards,
                            trending=trending_quotes, movers=movers,
-                           news=news, strip_labels=STRIP_LABELS)
+                           news=news, strip_labels=STRIP_LABELS,
+                           lead_news=NewsArticle.query.filter(NewsArticle.thumb_name.isnot(None), NewsArticle.thumb_name != "").order_by(NewsArticle.pub_time.desc()).first())
 
 
 @app.route('/lookup')
@@ -1040,7 +1042,7 @@ def alerts_create():
     except (TypeError, ValueError):
         threshold = None
     if direction not in ('above', 'below') or threshold is None \
-            or threshold <= 0:
+            or not math.isfinite(threshold) or threshold <= 0:
         return render_template('alerts_error.html', quote=q,
                                href=symbol_href(symbol),
                                message='Choose a direction and a positive '
