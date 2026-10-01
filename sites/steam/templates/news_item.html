@@ -14,7 +14,7 @@
     Posted {{ item.date|datefmt }}
     {% if game %} about <a href="{{ game.url }}">{{ game.name }}</a>{% endif %}
   </div>
-  <div class="news-body">{{ item.contents }}</div>
+  <div class="news-body">{{ item.contents|news_format }}</div>
   {% if item.url %}
     <p style="margin-top:14px;"><a href="{{ url_for('news_game', appid=game.appid) if game else url_for('news_hub') }}">All news for this game &raquo;</a></p>
   {% endif %}

@@ -45,7 +45,7 @@
     {% for review in reviews %}
       <div class="review-card">
         <div class="head">
-          <span class="thumb {{ 'up' if review.voted_up else 'down' }}">{{ '&#128077;' if review.voted_up else '&#128078;' }}</span>
+          <span class="thumb {{ 'up' if review.voted_up else 'down' }}">{{ '👍' if review.voted_up else '👎' }}</span>
           <span class="who">{{ review.author }} <small>&mdash; reviewed {{ review.timestamp_created|datefmt }}</small></span>
         </div>
         <div class="meta">

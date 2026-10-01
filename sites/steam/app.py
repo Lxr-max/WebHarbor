@@ -45,7 +45,7 @@ from flask_login import (LoginManager, UserMixin, current_user,
                          login_required, login_user, logout_user)
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
-from markupsafe import Markup
+from markupsafe import Markup, escape
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -173,11 +173,27 @@ def _hours_filter(minutes):
         return ''
 
 
+@app.template_filter('news_format')
+def _news_format(text):
+    """Render the captured Steam BBCode using a small escaped tag allowlist."""
+    content = str(escape(text or ''))
+    tags = {'p': 'p', 'list': 'ul', '*': 'li', 'b': 'strong', 'i': 'em',
+            'h1': 'h2', 'h2': 'h3', 'h3': 'h4', 'quote': 'blockquote'}
+    for tag, html_tag in tags.items():
+        content = re.sub(r'\[' + re.escape(tag) + r'\]', '<' + html_tag + '>', content, flags=re.I)
+        content = re.sub(r'\[/' + re.escape(tag) + r'\]', '</' + html_tag + '>', content, flags=re.I)
+    # Source links stay text: browsing the mirror must remain offline.
+    content = re.sub(r'\[/?url(?:=[^\]]*)?\]', '', content, flags=re.I)
+    content = re.sub(r'\[img\].*?\[/img\]', '', content, flags=re.I | re.S)
+    content = content.replace('\\[', '[')
+    return Markup(content)
+
+
 @app.template_filter('datefmt')
 def _datefmt_filter(ts):
     try:
         return datetime.fromtimestamp(int(ts), tz=timezone.utc) \
-            .strftime('%B %-d, %Y')
+            .strftime('%B %-d, %Y at %H:%M UTC')
     except (TypeError, ValueError, OSError):
         return ''
 
@@ -496,8 +512,8 @@ def _search_query(f):
             # a numeric cap means paid games up to that price; the Free
             # option below covers the zero-price catalog
             q = q.filter(Game.price_cents > 0, Game.price_cents <= cap)
-        except ValueError:
-            pass
+        except (TypeError, ValueError):
+            abort(400)
     if f['os']:
         q = q.filter(Game.platforms.contains(f'"{f["os"]}": true'))
     if f['review_type'] and f['review_type'] != 'all':
@@ -763,7 +779,12 @@ def cart():
 @app.route('/cart/add', methods=['POST'])
 def cart_add():
     kind = request.form.get('kind') or 'game'
-    qty = max(1, min(10, int(request.form.get('qty') or 1)))
+    try:
+        qty = int(request.form.get('qty', '1'))
+    except (TypeError, ValueError):
+        abort(400)
+    if kind not in ('game', 'bundle') or not 1 <= qty <= 10:
+        abort(400)
     if kind == 'bundle':
         bid = request.form.get('bundle_id')
         bundle = Bundle.query.filter_by(bundle_id=int(bid)).first() \
@@ -800,10 +821,17 @@ def cart_add():
     return redirect(url_for('cart'))
 
 
+def _form_item_id():
+    try:
+        return int(request.form.get('item_id', '0'))
+    except (TypeError, ValueError):
+        abort(400)
+
+
 @app.route('/cart/update', methods=['POST'])
 def cart_update():
     item = CartItem.query.filter_by(
-        id=int(request.form.get('item_id') or 0),
+        id=_form_item_id(),
         cart_key=_cart_key()).first()
     if item:
         try:
@@ -811,15 +839,15 @@ def cart_update():
             if 1 <= qty <= 10:
                 item.qty = qty
                 db.session.commit()
-        except ValueError:
-            pass
+        except (TypeError, ValueError):
+            abort(400)
     return redirect(url_for('cart'))
 
 
 @app.route('/cart/remove', methods=['POST'])
 def cart_remove():
     item = CartItem.query.filter_by(
-        id=int(request.form.get('item_id') or 0),
+        id=_form_item_id(),
         cart_key=_cart_key()).first()
     if item:
         db.session.delete(item)
@@ -841,6 +869,8 @@ def checkout():
                           'zipcode', 'payment_method')}
         if not all(data.values()):
             flash('Please fill in every field.', 'error')
+        elif data['payment_method'] not in ('Visa', 'Mastercard', 'American Express', 'PayPal', 'Steam Wallet'):
+            flash('Choose a supported payment method.', 'error')
         elif '@' not in data['email'] or '.' not in data['email']:
             flash('Please enter a valid email address.', 'error')
         else:
