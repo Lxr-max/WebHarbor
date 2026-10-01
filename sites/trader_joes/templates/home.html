@@ -2,9 +2,9 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <section class="hero">
-  <p class="hero-kicker">WATCH THE VIDEO</p>
+  {% if hero_guide and dam_url(hero_guide.hero) %}<img class="hero-image" src="{{ dam_url(hero_guide.hero) }}" alt="{{ hero.title }}">{% endif %}
   <h1>{{ hero.title }}</h1>
-  {% if hero_link %}<a class="cta" href="{{ hero_link }}">Check out the recipe</a>{% endif %}
+  {% if hero_link %}<a class="cta" href="{{ hero_link }}">Explore the guide</a>{% endif %}
 </section>
 
 <section class="home-section">

@@ -45,7 +45,9 @@
       {% endfor %}
     </tbody>
   </table>
-  <p class="result-count">Total {{ total }}</p>
+  <p class="result-count">Total items: {{ total }}</p>
+  <p class="estimated-total">Estimated product total: ${{ "%.2f"|format(estimated_cost) }}{% if not prices_complete %} (priced items only){% endif %}</p>
+  <p>Based on captured product prices, before tax. This list is not an order.</p>
   {% endif %}
 </div>
 

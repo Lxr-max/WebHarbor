@@ -1,0 +1,1509 @@
+{
+  "Trader Joe's--0": {
+    "task": "Alice is replacing her pumpkin baking mix with a gluten-free bakery option. Find the cheapest Gluten Free product in Bakery, check its ingredients, allergens and calories per serving, and add it to her shopping list while removing Pumpkin Bread & Muffin Mix. Report the selected product, price and final list total. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "sku": "076907",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[3]"
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/category/bakery\\-11(?:\\?|$)",
+      "/home/products/pdp/076907\\-gluten\\-free\\-donut\\-holes\\-chocolate\\-glazed\\-076907(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Glazed Chocolate Donut Holes price",
+        "glazed\\s+chocolate\\s+donut\\s+holes.{0,100}?3\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Glazed Chocolate Donut Holes package size",
+        "glazed\\s+chocolate\\s+donut\\s+holes.{0,160}?6\\s+ounces"
+      ],
+      [
+        "Glazed Chocolate Donut Holes Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Glazed Chocolate Donut Holes Ingredients sugar",
+        "\\bsugar\\b"
+      ],
+      [
+        "Glazed Chocolate Donut Holes Ingredients confectioners",
+        "\\bconfectioners\\b"
+      ],
+      [
+        "Glazed Chocolate Donut Holes Allergens",
+        "glazed\\s+chocolate\\s+donut\\s+holes.{0,400}?(?:contains|allergens?).{0,25}?egg"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?32\\.32"
+      ],
+      [
+        "Glazed Chocolate Donut Holes Nutrition calories",
+        "glazed\\s+chocolate\\s+donut\\s+holes.{0,1500}?calories(?:\\s+per\\s+serving)?.{0,10}?240"
+      ]
+    ]
+  },
+  "Trader Joe's--1": {
+    "task": "Create Jordan Vale's account at jordan.vale@test.com with a password of at least eight characters and prepare a pumpkin breakfast shopping list. Find Pumpkin O's Cereal and Pumpkin Cream Cheese Spread in the product catalog, check their sizes and prices, and save two cereals and one spread. Report the list and total.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "sku": "053711",
+            "quantity": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "sku": "051533",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "email": "jordan.vale@test.com",
+            "name": "Jordan Vale",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-10-01"
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/pdp/053711\\-hol\\-cereal\\-tj\\-s\\-o\\-s\\-pumpkin\\-053711(?:\\?|$)",
+      "/home/products/pdp/051533\\-pumpkin\\-cream\\-cheese\\-051533(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Pumpkin O's Cereal price",
+        "pumpkin\\s+o's\\s+cereal(?:(?!\\b(?:pumpkin\\s+cream\\s+cheese\\s+spread)\\b).){0,100}?3\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Pumpkin O's Cereal package size",
+        "pumpkin\\s+o's\\s+cereal(?:(?!\\b(?:pumpkin\\s+cream\\s+cheese\\s+spread)\\b).){0,160}?12\\s+ounces"
+      ],
+      [
+        "Pumpkin O's Cereal Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Pumpkin O's Cereal Ingredients whole",
+        "\\bwhole\\b"
+      ],
+      [
+        "Pumpkin O's Cereal Ingredients grain",
+        "\\bgrain\\b"
+      ],
+      [
+        "Pumpkin O's Cereal Allergens",
+        "pumpkin\\s+o's\\s+cereal(?:(?!\\b(?:pumpkin\\s+cream\\s+cheese\\s+spread)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:pumpkin\\s+cream\\s+cheese\\s+spread)\\b).){0,25}?wheat"
+      ],
+      [
+        "Pumpkin Cream Cheese Spread price",
+        "pumpkin\\s+cream\\s+cheese\\s+spread(?:(?!\\b(?:pumpkin\\s+o's\\s+cereal)\\b).){0,100}?2\\.79(?!\\d|\\.\\d)"
+      ],
+      [
+        "Pumpkin Cream Cheese Spread package size",
+        "pumpkin\\s+cream\\s+cheese\\s+spread(?:(?!\\b(?:pumpkin\\s+o's\\s+cereal)\\b).){0,160}?8\\s+ounces"
+      ],
+      [
+        "Pumpkin Cream Cheese Spread Ingredients pasteurized",
+        "\\bpasteurized\\b"
+      ],
+      [
+        "Pumpkin Cream Cheese Spread Ingredients cream",
+        "\\bcream\\b"
+      ],
+      [
+        "Pumpkin Cream Cheese Spread Allergens",
+        "pumpkin\\s+cream\\s+cheese\\s+spread(?:(?!\\b(?:pumpkin\\s+o's\\s+cereal)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:pumpkin\\s+o's\\s+cereal)\\b).){0,25}?milk"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?9\\.77"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "shopping_items",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "Trader Joe's--2": {
+    "task": "Bob wants to make the bacon, apple and brie panini. Find that recipe and report its servings, preparation time, ingredients and cooking directions. Follow its bread link to check the product's size and price, then add that bread to Bob's shopping list and report the resulting total. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "sku": "096399",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/recipes/bacon\\-apple\\-brie\\-panini(?:\\?|$)",
+      "/home/products/pdp/ciabatta\\-demi\\-baguette\\-096399(?:\\?|$)",
+      "/home/products/pdp/096399\\-ciabatta\\-demi\\-baguette\\-096399(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Bacon, Apple, and Brie Panini servings",
+        "bacon,\\s+apple,\\s+and\\s+brie\\s+panini(?:(?!\\b(?:ciabatta\\s+demi\\-baguette)\\b).){0,120}?(?:serves\\s+1\\s+2|1\\s+2\\s*(?:servings|people))"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini preparation time",
+        "bacon,\\s+apple,\\s+and\\s+brie\\s+panini(?:(?!\\b(?:ciabatta\\s+demi\\-baguette)\\b).){0,180}?15\\s+minutes\\s+25\\s+minutes"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini ingredients ciabatta",
+        "\\bciabatta\\b"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini ingredients demi-baguette",
+        "\\bdemi\\-baguette\\b"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini directions directions",
+        "\\bdirections\\b"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini directions grill",
+        "\\bgrill\\b"
+      ],
+      [
+        "Bacon, Apple, and Brie Panini directions panini",
+        "\\bpanini\\b"
+      ],
+      [
+        "Ciabatta Demi-Baguette price",
+        "ciabatta\\s+demi\\-baguette(?:(?!\\b(?:bacon,\\s+apple,\\s+and\\s+brie\\s+panini)\\b).){0,100}?1\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Ciabatta Demi-Baguette package size",
+        "ciabatta\\s+demi\\-baguette(?:(?!\\b(?:bacon,\\s+apple,\\s+and\\s+brie\\s+panini)\\b).){0,160}?6\\.2\\s+ounces"
+      ],
+      [
+        "Ciabatta Demi-Baguette Ingredients unbleached",
+        "\\bunbleached\\b"
+      ],
+      [
+        "Ciabatta Demi-Baguette Ingredients enriched",
+        "\\benriched\\b"
+      ],
+      [
+        "Ciabatta Demi-Baguette Allergens",
+        "ciabatta\\s+demi\\-baguette(?:(?!\\b(?:bacon,\\s+apple,\\s+and\\s+brie\\s+panini)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:bacon,\\s+apple,\\s+and\\s+brie\\s+panini)\\b).){0,25}?wheat\\.,\\s+may\\s+contain\\s+traces\\s+of\\s+soy,\\s+sesame,\\s+walnut,\\s+hazelnut"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?30\\.43"
+      ]
+    ]
+  },
+  "Trader Joe's--3": {
+    "task": "Bob needs a convenient store near ZIP 98052. Compare the two closest stores within five miles, including addresses, phone numbers and Monday hours, then set the closest as My Store. Report the chosen store and confirm it appears in the header. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "user_stores": {
+        "updated": {
+          "[2]": {
+            "clientkey": "140"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/store\\-search(?:\\?|$)",
+      "/home/store\\-search/store/140(?:\\?|$)",
+      "/home/store\\-search/store/131(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Redmond (140) address and phone",
+        "15932\\s+redmond\\s+way"
+      ],
+      [
+        "Redmond (140) address and phone",
+        "redmond,\\s+wa\\s+98052"
+      ],
+      [
+        "Redmond (140) address and phone",
+        "425\\-883\\-1624"
+      ],
+      [
+        "Redmond (140) hours",
+        "monday\\s+09:00\\s+21:00"
+      ],
+      [
+        "Bellevue (131) address and phone",
+        "15563\\s+ne\\s+24th\\s+st"
+      ],
+      [
+        "Bellevue (131) address and phone",
+        "bellevue,\\s+wa\\s+98007"
+      ],
+      [
+        "Bellevue (131) address and phone",
+        "425\\-641\\-5069"
+      ]
+    ]
+  },
+  "Trader Joe's--4": {
+    "task": "I bought Fiesta Salad with Shrimp in Austin with a use-by date of August 10, 2026. Check the recall notice to determine whether it is affected, explain the stated risk and what I should do, and give Customer Relations' contact details. To plan a refund visit, find the closest store to ZIP 78701 within five miles and report its address, phone and Saturday hours.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {},
+    "paths": [
+      "/home/announcements(?:\\?|$)",
+      "/home/store\\-search(?:\\?|$)",
+      "/home/store\\-search/store/452(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Salmonella risk",
+        "fiesta.{0,350}?salmonella|salmonella.{0,350}?fiesta"
+      ],
+      [
+        "Affected date range",
+        "08/07/2026.{0,80}?08/12/2026"
+      ],
+      [
+        "Affected Texas purchase",
+        "(?:austin|texas).{0,120}?(?:affected|falls\\s+within)|affected.{0,120}?(?:austin|texas)"
+      ],
+      [
+        "Customer Relations telephone",
+        "626.{0,3}599.{0,3}3817"
+      ],
+      [
+        "Return for refund",
+        "return.{0,70}?refund"
+      ],
+      [
+        "Austin - Seaholm (452) address and phone",
+        "211\\s+walter\\s+seaholm\\s+dr,\\s+ste\\s+100"
+      ],
+      [
+        "Austin - Seaholm (452) address and phone",
+        "austin,\\s+tx\\s+78701"
+      ],
+      [
+        "Austin - Seaholm (452) address and phone",
+        "512\\-474\\-2263"
+      ]
+    ]
+  },
+  "Trader Joe's--5": {
+    "task": "I have gift cards 6510000000654321, 6510000000112233, 6510000000987654 and 6510000000445566. Check their individual balances and combined spending budget, and find the support number for cards without a scratch-off PIN. Compare that budget with the listed prices of Gluten Free Multigrain Bread and Organic Brown Rice & Quinoa Fusilli Pasta, and tell me whether it covers one of each.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {},
+    "paths": [
+      "/home/gift\\-card\\-balance\\-inquiry(?:\\?|$)",
+      "/home/products/pdp/062146\\-multigrain\\-bread\\-gluten\\-free\\-062146(?:\\?|$)",
+      "/home/products/pdp/051524\\-org\\-brwn\\-rice\\-quinoa\\-fusilli\\-051524(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "6510000000654321 balance",
+        "4321.{0,70}?51\\.37"
+      ],
+      [
+        "6510000000112233 balance",
+        "2233.{0,70}?0\\.00"
+      ],
+      [
+        "6510000000987654 balance",
+        "7654.{0,70}?100\\.00"
+      ],
+      [
+        "6510000000445566 balance",
+        "5566.{0,70}?12\\.49"
+      ],
+      [
+        "Gluten Free Multigrain Bread price",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Gluten Free Multigrain Bread package size",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,160}?15\\.2\\s+ounces"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients water",
+        "\\bwater\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients starch",
+        "\\bstarch\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Allergens",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,25}?egg"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta price",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,100}?3\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta package size",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,160}?16\\s+ounces"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta Ingredients organic",
+        "\\borganic\\b"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta Ingredients brown",
+        "\\bbrown\\b"
+      ],
+      [
+        "combined card budget",
+        "(?:balance|budget).{0,30}?163\\.86"
+      ],
+      [
+        "combined product price",
+        "(?:cost|price).{0,30}?8\\.48"
+      ],
+      [
+        "budget covers both",
+        "(?:balance|budget).{0,30}?covers\\s+both"
+      ],
+      [
+        "no PIN support",
+        "888.{0,3}556.{0,3}6619"
+      ]
+    ]
+  },
+  "Trader Joe's--6": {
+    "task": "Dana wants a vegan freezer meal. Filter From The Freezer to Vegan and compare the two highest-priced matches, checking their prices, sizes, ingredients and allergens. Add the cheaper of those two to her shopping list and report its name and the new list total. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "sku": "072949",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/category/from\\-the\\-freezer\\-95(?:\\?|$)",
+      "/home/products/pdp/077515\\-jumeokbap\\-korean\\-rice\\-balls\\-077515(?:\\?|$)",
+      "/home/products/pdp/072949\\-meatless\\-korean\\-bulgogi\\-072949(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Jumeokbap price",
+        "jumeokbap(?:(?!\\b(?:korean\\s+beefless\\s+bulgogi)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Jumeokbap package size",
+        "jumeokbap(?:(?!\\b(?:korean\\s+beefless\\s+bulgogi)\\b).){0,160}?10\\.58\\s+ounces"
+      ],
+      [
+        "Jumeokbap Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Jumeokbap Ingredients water",
+        "\\bwater\\b"
+      ],
+      [
+        "Jumeokbap Ingredients sauce",
+        "\\bsauce\\b"
+      ],
+      [
+        "Jumeokbap Allergens",
+        "jumeokbap(?:(?!\\b(?:korean\\s+beefless\\s+bulgogi)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:korean\\s+beefless\\s+bulgogi)\\b).){0,25}?soy,\\s+sesame,\\s+wheat"
+      ],
+      [
+        "Korean Beefless Bulgogi price",
+        "korean\\s+beefless\\s+bulgogi(?:(?!\\b(?:jumeokbap)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Korean Beefless Bulgogi package size",
+        "korean\\s+beefless\\s+bulgogi(?:(?!\\b(?:jumeokbap)\\b).){0,160}?10\\s+ounces"
+      ],
+      [
+        "Korean Beefless Bulgogi Allergens",
+        "korean\\s+beefless\\s+bulgogi(?:(?!\\b(?:jumeokbap)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:jumeokbap)\\b).){0,25}?soy,\\s+wheat"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?4\\.99"
+      ]
+    ]
+  },
+  "Trader Joe's--7": {
+    "task": "Alice wants to serve a pumpkin dish with matching groceries. Find Fall Turkey Chili With Pumpkin and inspect the recipe for its servings, preparation time and ingredients. Find the pumpkin product from those ingredients in the catalog, check its price and size, and add it to her shopping list. Report the recipe and the saved product. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "updated": {
+          "[2]": {
+            "quantity": 2
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/recipes/fall\\-turkey\\-chili\\-with\\-pumpkin(?:\\?|$)",
+      "/home/products/pdp/066573\\-hol\\-org\\-pumpkin\\-066573(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Fall Turkey Chili With Pumpkin servings",
+        "fall\\s+turkey\\s+chili\\s+with\\s+pumpkin(?:(?!\\b(?:organic\\s+pumpkin)\\b).){0,120}?(?:serves\\s+6|6\\s*(?:servings|people))"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin preparation time",
+        "fall\\s+turkey\\s+chili\\s+with\\s+pumpkin(?:(?!\\b(?:organic\\s+pumpkin)\\b).){0,180}?40\\s+minutes"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin ingredients tablespoon",
+        "\\btablespoon\\b"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin ingredients imported",
+        "\\bimported\\b"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin directions directions",
+        "\\bdirections\\b"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin directions large",
+        "\\blarge\\b"
+      ],
+      [
+        "Fall Turkey Chili With Pumpkin directions saucepan",
+        "\\bsaucepan\\b"
+      ],
+      [
+        "Organic Pumpkin price",
+        "organic\\s+pumpkin(?:(?!\\b(?:fall\\s+turkey\\s+chili\\s+with\\s+pumpkin)\\b).){0,100}?2\\.79(?!\\d|\\.\\d)"
+      ],
+      [
+        "Organic Pumpkin package size",
+        "organic\\s+pumpkin(?:(?!\\b(?:fall\\s+turkey\\s+chili\\s+with\\s+pumpkin)\\b).){0,160}?15\\s+ounces"
+      ],
+      [
+        "Organic Pumpkin Ingredients product",
+        "\\bproduct\\b"
+      ],
+      [
+        "Organic Pumpkin Ingredients nutrition",
+        "\\bnutrition\\b"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?35\\.11"
+      ]
+    ]
+  },
+  "Trader Joe's--8": {
+    "task": "Carol wants a pantry product suitable for both vegan and kosher diets. Apply both filters in For the Pantry, compare the first two matches' prices, sizes and ingredient lists, and add the first match to her shopping list. Report its dietary badges and the final list total. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "sku": "084349",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/category/for\\-the\\-pantry\\-137(?:\\?|$)",
+      "/home/products/pdp/084349\\-granola\\-butter\\-084349(?:\\?|$)",
+      "/home/products/pdp/097210\\-turbinado\\-raw\\-cane\\-sugar\\-097210(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Granola Butter price",
+        "granola\\s+butter(?:(?!\\b(?:fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar)\\b).){0,100}?5\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Granola Butter package size",
+        "granola\\s+butter(?:(?!\\b(?:fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar)\\b).){0,160}?12\\s+ounces"
+      ],
+      [
+        "Granola Butter Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Granola Butter Ingredients olive",
+        "\\bolive\\b"
+      ],
+      [
+        "Granola Butter Ingredients coconut",
+        "\\bcoconut\\b"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar price",
+        "fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar(?:(?!\\b(?:granola\\s+butter)\\b).){0,100}?3\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar package size",
+        "fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar(?:(?!\\b(?:granola\\s+butter)\\b).){0,160}?24\\s+ounces"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar Ingredients turbinado",
+        "\\bturbinado\\b"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar Ingredients sugar",
+        "\\bsugar\\b"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?23\\.55"
+      ],
+      [
+        "Granola Butter badges Gluten Free",
+        "granola\\s+butter(?:(?!\\b(?:fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar)\\b).){0,600}?gluten\\s+free"
+      ],
+      [
+        "Granola Butter badges Vegan",
+        "granola\\s+butter(?:(?!\\b(?:fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar)\\b).){0,600}?vegan"
+      ],
+      [
+        "Granola Butter badges Kosher",
+        "granola\\s+butter(?:(?!\\b(?:fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar)\\b).){0,600}?kosher"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar badges Fair Trade",
+        "fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar(?:(?!\\b(?:granola\\s+butter)\\b).){0,600}?fair\\s+trade"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar badges Vegan",
+        "fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar(?:(?!\\b(?:granola\\s+butter)\\b).){0,600}?vegan"
+      ],
+      [
+        "Fair Trade Turbinado Raw Cane Sugar badges Kosher",
+        "fair\\s+trade\\s+turbinado\\s+raw\\s+cane\\s+sugar(?:(?!\\b(?:granola\\s+butter)\\b).){0,600}?kosher"
+      ]
+    ]
+  },
+  "Trader Joe's--9": {
+    "task": "I'm choosing something to bake for dessert. Apply Desserts and Let's Bake! in Recipes and compare the first two recipes, reporting their serving ranges, preparation times, ingredients and cooking directions. Recommend the quicker option, or explain if their time ranges overlap.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {},
+    "paths": [
+      "/home/recipes(?:\\?|$)",
+      "/home/recipes/blueberry\\-corn\\-cake(?:\\?|$)",
+      "/home/recipes/chocolate\\-almond\\-crescent\\-cookies(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Blueberry Corn Cake servings",
+        "blueberry\\s+corn\\s+cake(?:(?!\\b(?:chocolate\\s+almond\\s+crescent\\s+cookies)\\b).){0,120}?(?:serves\\s+9|9\\s*(?:servings|people))"
+      ],
+      [
+        "Blueberry Corn Cake preparation time",
+        "blueberry\\s+corn\\s+cake(?:(?!\\b(?:chocolate\\s+almond\\s+crescent\\s+cookies)\\b).){0,180}?55\\s+minutes"
+      ],
+      [
+        "Blueberry Corn Cake ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Blueberry Corn Cake ingredients canola",
+        "\\bcanola\\b"
+      ],
+      [
+        "Blueberry Corn Cake ingredients greasing",
+        "\\bgreasing\\b"
+      ],
+      [
+        "Blueberry Corn Cake directions directions",
+        "\\bdirections\\b"
+      ],
+      [
+        "Blueberry Corn Cake directions preheat",
+        "\\bpreheat\\b"
+      ],
+      [
+        "Blueberry Corn Cake directions grease",
+        "\\bgrease\\b"
+      ],
+      [
+        "Chocolate Almond Crescent Cookies servings",
+        "chocolate\\s+almond\\s+crescent\\s+cookies(?:(?!\\b(?:blueberry\\s+corn\\s+cake)\\b).){0,120}?(?:serves\\s+8|8\\s*(?:servings|people))"
+      ],
+      [
+        "Chocolate Almond Crescent Cookies preparation time",
+        "chocolate\\s+almond\\s+crescent\\s+cookies(?:(?!\\b(?:blueberry\\s+corn\\s+cake)\\b).){0,180}?70\\s+minutes\\s+90\\s+minutes"
+      ],
+      [
+        "Chocolate Almond Crescent Cookies ingredients ounce",
+        "\\bounce\\b"
+      ],
+      [
+        "Chocolate Almond Crescent Cookies ingredients almond",
+        "\\balmond\\b"
+      ],
+      [
+        "Chocolate Almond Crescent Cookies directions large",
+        "\\blarge\\b"
+      ],
+      [
+        "quicker recipe",
+        "blueberry\\s+corn\\s+cake(?:(?!\\b(?:chocolate\\s+almond\\s+crescent\\s+cookies)\\b).){0,70}?(?:quicker|faster|shorter)"
+      ]
+    ]
+  },
+  "Trader Joe's--10": {
+    "task": "Carol is deciding between Brookline and the first store listed for Massachusetts. Compare their addresses, phone numbers and Sunday hours, then set Brookline as her My Store and confirm the header reflects it. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "user_stores": {
+        "updated": {
+          "[3]": {
+            "clientkey": "501"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/store\\-search(?:\\?|$)",
+      "/home/store\\-search/store/511(?:\\?|$)",
+      "/home/store\\-search/store/501(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Acton (511) address and phone",
+        "145\\s+great\\s+rd"
+      ],
+      [
+        "Acton (511) address and phone",
+        "acton,\\s+ma\\s+01720"
+      ],
+      [
+        "Acton (511) address and phone",
+        "978\\-266\\-8908"
+      ],
+      [
+        "Acton (511) hours",
+        "sunday\\s+09:00\\s+21:00"
+      ],
+      [
+        "Brookline (501) address and phone",
+        "1317\\s+beacon\\s+st"
+      ],
+      [
+        "Brookline (501) address and phone",
+        "brookline,\\s+ma\\s+02446"
+      ],
+      [
+        "Brookline (501) address and phone",
+        "617\\-278\\-9997"
+      ],
+      [
+        "Brookline (501) hours",
+        "sunday\\s+08:00\\s+21:00"
+      ]
+    ]
+  },
+  "Trader Joe's--11": {
+    "task": "I want to try the seasoning featured in the One Seasoning Wonder guide. Identify the featured product and compare the guide's first two showcased recipes: report their titles, serving ranges, preparation times and ingredients so I can decide how to use the seasoning.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {},
+    "paths": [
+      "/home/discover/guides/one\\-seasoning\\-wonder(?:\\?|$)",
+      "/home/recipes/polenta\\-veggie\\-stacks(?:\\?|$)",
+      "/home/recipes/umami\\-parm\\-popcorn(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Guide discover",
+        "\\bdiscover\\b"
+      ],
+      [
+        "Guide guides",
+        "\\bguides\\b"
+      ],
+      [
+        "Guide seasoning",
+        "\\bseasoning\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks servings",
+        "polenta\\s+and\\s+veggie\\s+stacks(?:(?!\\b(?:umami\\s+parm\\s+popcorn)\\b).){0,120}?(?:serves\\s+4|4\\s*(?:servings|people))"
+      ],
+      [
+        "Polenta & Veggie Stacks preparation time",
+        "polenta\\s+and\\s+veggie\\s+stacks(?:(?!\\b(?:umami\\s+parm\\s+popcorn)\\b).){0,180}?30\\s+minutes\\s+35\\s+minutes"
+      ],
+      [
+        "Polenta & Veggie Stacks ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks ingredients favorite",
+        "\\bfavorite\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks ingredients olive",
+        "\\bolive\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks directions directions",
+        "\\bdirections\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks directions preheat",
+        "\\bpreheat\\b"
+      ],
+      [
+        "Polenta & Veggie Stacks directions sheet",
+        "\\bsheet\\b"
+      ],
+      [
+        "Umami Parm Popcorn servings",
+        "umami\\s+parm\\s+popcorn(?:(?!\\b(?:polenta\\s+and\\s+veggie\\s+stacks)\\b).){0,120}?(?:serves\\s+2\\s+4|2\\s+4\\s*(?:servings|people))"
+      ],
+      [
+        "Umami Parm Popcorn preparation time",
+        "umami\\s+parm\\s+popcorn(?:(?!\\b(?:polenta\\s+and\\s+veggie\\s+stacks)\\b).){0,180}?20\\s+minutes"
+      ],
+      [
+        "Umami Parm Popcorn ingredients clarified",
+        "\\bclarified\\b"
+      ],
+      [
+        "Umami Parm Popcorn ingredients butter",
+        "\\bbutter\\b"
+      ],
+      [
+        "Umami Parm Popcorn directions small",
+        "\\bsmall\\b"
+      ],
+      [
+        "featured seasoning",
+        "mushroom.{0,50}?company.{0,60}?umami\\s+seasoning"
+      ]
+    ]
+  },
+  "Trader Joe's--12": {
+    "task": "Alice wants to bake a pumpkin-spiced treat. Find Pumpkin Pie Spice and review its price, size and ingredients. Find the Pumpkin Bars recipe and confirm it lists that spice, report its servings, time and directions, then add the spice to Alice's shopping list and report the new total. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "sku": "011364",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/pdp/011364\\-hol\\-spice\\-pumpkin\\-pie\\-1\\-8oz\\-011364(?:\\?|$)",
+      "/home/recipes/pumpkin\\-bars(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Pumpkin Pie Spice price",
+        "pumpkin\\s+pie\\s+spice(?:(?!\\b(?:pumpkin\\s+bars)\\b).){0,100}?2\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Pumpkin Pie Spice package size",
+        "pumpkin\\s+pie\\s+spice(?:(?!\\b(?:pumpkin\\s+bars)\\b).){0,160}?1\\.8\\s+ounces"
+      ],
+      [
+        "Pumpkin Pie Spice Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Pumpkin Pie Spice Ingredients cinnamon",
+        "\\bcinnamon\\b"
+      ],
+      [
+        "Pumpkin Pie Spice Ingredients ginger",
+        "\\bginger\\b"
+      ],
+      [
+        "Pumpkin Bars servings",
+        "pumpkin\\s+bars(?:(?!\\b(?:pumpkin\\s+pie\\s+spice)\\b).){0,120}?(?:serves\\s+16|16\\s*(?:servings|people))"
+      ],
+      [
+        "Pumpkin Bars preparation time",
+        "pumpkin\\s+bars(?:(?!\\b(?:pumpkin\\s+pie\\s+spice)\\b).){0,180}?50\\s+minutes"
+      ],
+      [
+        "Pumpkin Bars ingredients stick",
+        "\\bstick\\b"
+      ],
+      [
+        "Pumpkin Bars ingredients unsalted",
+        "\\bunsalted\\b"
+      ],
+      [
+        "Pumpkin Bars directions directions",
+        "\\bdirections\\b"
+      ],
+      [
+        "Pumpkin Bars directions preheat",
+        "\\bpreheat\\b"
+      ],
+      [
+        "Pumpkin Bars directions grease",
+        "\\bgrease\\b"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?35\\.31"
+      ]
+    ]
+  },
+  "Trader Joe's--13": {
+    "task": "Carol is comparing gluten-free staples. Review Gluten Free Multigrain Bread, Organic Brown Rice & Quinoa Fusilli Pasta and Gluten Free Norwegian Crispbread for prices, sizes, first ingredients and dietary badges. Replace the crispbread on her list with one additional multigrain bread, preserving the pasta, and report the final list and total. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "removed": [
+          "[11]"
+        ],
+        "updated": {
+          "[12]": {
+            "quantity": 2
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/products/pdp/062146\\-multigrain\\-bread\\-gluten\\-free\\-062146(?:\\?|$)",
+      "/home/products/pdp/051524\\-org\\-brwn\\-rice\\-quinoa\\-fusilli\\-051524(?:\\?|$)",
+      "/home/products/pdp/059721\\-gluten\\-free\\-crispbread\\-059721(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Gluten Free Multigrain Bread price",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Gluten Free Multigrain Bread package size",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,160}?15\\.2\\s+ounces"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients water",
+        "\\bwater\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Ingredients starch",
+        "\\bstarch\\b"
+      ],
+      [
+        "Gluten Free Multigrain Bread Allergens",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,25}?egg"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta price",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,100}?3\\.49(?!\\d|\\.\\d)"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta package size",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,160}?16\\s+ounces"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta Ingredients organic",
+        "\\borganic\\b"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta Ingredients brown",
+        "\\bbrown\\b"
+      ],
+      [
+        "Gluten Free Norwegian Crispbread price",
+        "gluten\\s+free\\s+norwegian\\s+crispbread(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,100}?4\\.79(?!\\d|\\.\\d)"
+      ],
+      [
+        "Gluten Free Norwegian Crispbread package size",
+        "gluten\\s+free\\s+norwegian\\s+crispbread(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,160}?7\\.55\\s+ounces"
+      ],
+      [
+        "Gluten Free Norwegian Crispbread Ingredients sunflower",
+        "\\bsunflower\\b"
+      ],
+      [
+        "Gluten Free Norwegian Crispbread Ingredients seeds",
+        "\\bseeds\\b"
+      ],
+      [
+        "Gluten Free Norwegian Crispbread Allergens",
+        "gluten\\s+free\\s+norwegian\\s+crispbread(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:gluten\\s+free\\s+multigrain\\s+bread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,25}?may\\s+contain\\s+traces\\s+of\\s+soy"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?13\\.47"
+      ],
+      [
+        "Gluten Free Multigrain Bread badges Gluten Free",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,600}?gluten\\s+free"
+      ],
+      [
+        "Gluten Free Multigrain Bread badges Kosher",
+        "gluten\\s+free\\s+multigrain\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta)\\b).){0,600}?kosher"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta badges Gluten Free",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,600}?gluten\\s+free"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta badges Organic",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,600}?organic"
+      ],
+      [
+        "Organic Brown Rice & Quinoa Fusilli Pasta badges Kosher",
+        "organic\\s+brown\\s+rice\\s+and\\s+quinoa\\s+fusilli\\s+pasta(?:(?!\\b(?:gluten\\s+free\\s+norwegian\\s+crispbread|gluten\\s+free\\s+multigrain\\s+bread)\\b).){0,600}?kosher"
+      ]
+    ]
+  },
+  "Trader Joe's--14": {
+    "task": "Carol is revising her gluten-free dinner shopping list. Remove the crispbread, reduce the fusilli pasta by one, then add Gluten Free White Sandwich Bread and Gluten Free Breaded Shrimp after checking their ingredients and allergens. Report all final quantities and the list total. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "sku": "054292",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "sku": "071651",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[10]",
+          "[11]"
+        ]
+      }
+    },
+    "paths": [
+      "/home/shopping\\-list(?:\\?|$)",
+      "/home/products/pdp/054292\\-gluten\\-free\\-white\\-bread\\-054292(?:\\?|$)",
+      "/home/products/pdp/071651\\-shrimp\\-gluten\\-free\\-breaded\\-071651(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Gluten Free White Sandwich Bread price",
+        "gluten\\s+free\\s+white\\s+sandwich\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+breaded\\s+shrimp)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Gluten Free White Sandwich Bread package size",
+        "gluten\\s+free\\s+white\\s+sandwich\\s+bread(?:(?!\\b(?:gluten\\s+free\\s+breaded\\s+shrimp)\\b).){0,160}?12\\s+ounces"
+      ],
+      [
+        "Gluten Free White Sandwich Bread Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Gluten Free White Sandwich Bread Ingredients product",
+        "\\bproduct\\b"
+      ],
+      [
+        "Gluten Free White Sandwich Bread Ingredients nutrition",
+        "\\bnutrition\\b"
+      ],
+      [
+        "Gluten Free Breaded Shrimp price",
+        "gluten\\s+free\\s+breaded\\s+shrimp(?:(?!\\b(?:gluten\\s+free\\s+white\\s+sandwich\\s+bread)\\b).){0,100}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Gluten Free Breaded Shrimp package size",
+        "gluten\\s+free\\s+breaded\\s+shrimp(?:(?!\\b(?:gluten\\s+free\\s+white\\s+sandwich\\s+bread)\\b).){0,160}?12\\s+ounces"
+      ],
+      [
+        "Gluten Free Breaded Shrimp Ingredients shrimp",
+        "\\bshrimp\\b"
+      ],
+      [
+        "Gluten Free Breaded Shrimp Ingredients water",
+        "\\bwater\\b"
+      ],
+      [
+        "Gluten Free Breaded Shrimp Allergens",
+        "gluten\\s+free\\s+breaded\\s+shrimp(?:(?!\\b(?:gluten\\s+free\\s+white\\s+sandwich\\s+bread)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:gluten\\s+free\\s+white\\s+sandwich\\s+bread)\\b).){0,25}?coconut,\\s+shrimp"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?19\\.97"
+      ]
+    ]
+  },
+  "Trader Joe's--15": {
+    "task": "Bob wants the cheese featured in the Just Here for the Cheese guide. Find the guide, identify its first featured product, and check that product's price, size, ingredients and allergens before adding it to Bob's shopping list. Report the guide date, product and final total. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "sku": "052381",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/discover/guides/just\\-here\\-for\\-cheese(?:\\?|$)",
+      "/home/products/pdp/052381\\-english\\-cheddar\\-w\\-caramelized\\-onions\\-052381(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Guide discover",
+        "\\bdiscover\\b"
+      ],
+      [
+        "Guide guides",
+        "\\bguides\\b"
+      ],
+      [
+        "Guide cheese",
+        "\\bcheese\\b"
+      ],
+      [
+        "Cheddar Cheese with Caramelized Onions price",
+        "cheddar\\s+cheese\\s+with\\s+caramelized\\s+onions.{0,100}?11\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Cheddar Cheese with Caramelized Onions package size",
+        "cheddar\\s+cheese\\s+with\\s+caramelized\\s+onions.{0,160}?1\\s+lb"
+      ],
+      [
+        "Cheddar Cheese with Caramelized Onions Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Cheddar Cheese with Caramelized Onions Ingredients cheddar",
+        "\\bcheddar\\b"
+      ],
+      [
+        "Cheddar Cheese with Caramelized Onions Allergens",
+        "cheddar\\s+cheese\\s+with\\s+caramelized\\s+onions.{0,400}?(?:contains|allergens?).{0,25}?milk"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?40\\.93"
+      ],
+      [
+        "guide date",
+        "2024\\-01\\-29"
+      ]
+    ]
+  },
+  "Trader Joe's--16": {
+    "task": "Dana is planning a weekend grocery stop in Bellingham. Compare the two closest stores returned for ZIP 98225 within five miles, including full addresses, phone numbers, Saturday and Sunday hours. Set the James Street store as My Store and confirm it in the header. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "user_stores": {
+        "updated": {
+          "[4]": {
+            "clientkey": "151"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/store\\-search(?:\\?|$)",
+      "/home/store\\-search/store/151(?:\\?|$)",
+      "/home/store\\-search/store/274(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Bellingham (151) address and phone",
+        "2410\\s+james\\s+st"
+      ],
+      [
+        "Bellingham (151) address and phone",
+        "bellingham,\\s+wa\\s+98225"
+      ],
+      [
+        "Bellingham (151) address and phone",
+        "360\\-734\\-5166"
+      ],
+      [
+        "Bellingham (151) hours",
+        "saturday\\s+08:00\\s+21:00"
+      ],
+      [
+        "Bellingham (151) hours",
+        "sunday\\s+08:00\\s+21:00"
+      ],
+      [
+        "Bellingham - North (274) address and phone",
+        "4255\\s+meridian\\s+st,\\s+suite\\s+200"
+      ],
+      [
+        "Bellingham - North (274) address and phone",
+        "bellingham,\\s+wa\\s+98226"
+      ],
+      [
+        "Bellingham - North (274) address and phone",
+        "360\\-217\\-2007"
+      ]
+    ]
+  },
+  "Trader Joe's--17": {
+    "task": "Bob is stocking cheese for snacks. Compare Shredded Unexpected Cheddar Cheese with American Heritage Cream Cheese with Chives & Onions for price, size, ingredients, allergens and dietary badges. Increase the cheddar already on his list by one and add the cream cheese, then report the final quantities and total. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "sku": "086001",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "updated": {
+          "[8]": {
+            "quantity": 3
+          }
+        }
+      }
+    },
+    "paths": [
+      "/home/products/pdp/065191\\-shredded\\-unexpected\\-cheddar\\-065191(?:\\?|$)",
+      "/home/products/pdp/086001\\-american\\-heritage\\-chive\\-cream\\-cheese\\-086001(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Shredded Unexpected Cheddar Cheese price",
+        "shredded\\s+unexpected\\s+cheddar\\s+cheese(?:(?!\\b(?:american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions)\\b).){0,100}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Shredded Unexpected Cheddar Cheese package size",
+        "shredded\\s+unexpected\\s+cheddar\\s+cheese(?:(?!\\b(?:american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions)\\b).){0,160}?8\\s+ounces"
+      ],
+      [
+        "Shredded Unexpected Cheddar Cheese Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Shredded Unexpected Cheddar Cheese Ingredients cheddar",
+        "\\bcheddar\\b"
+      ],
+      [
+        "Shredded Unexpected Cheddar Cheese Ingredients cheese",
+        "\\bcheese\\b"
+      ],
+      [
+        "Shredded Unexpected Cheddar Cheese Allergens",
+        "shredded\\s+unexpected\\s+cheddar\\s+cheese(?:(?!\\b(?:american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions)\\b).){0,25}?milk"
+      ],
+      [
+        "American Heritage\u00ae Cream Cheese with Chives & Onions price",
+        "american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions(?:(?!\\b(?:shredded\\s+unexpected\\s+cheddar\\s+cheese)\\b).){0,100}?2\\.79(?!\\d|\\.\\d)"
+      ],
+      [
+        "American Heritage\u00ae Cream Cheese with Chives & Onions package size",
+        "american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions(?:(?!\\b(?:shredded\\s+unexpected\\s+cheddar\\s+cheese)\\b).){0,160}?8\\s+ounces"
+      ],
+      [
+        "American Heritage\u00ae Cream Cheese with Chives & Onions Ingredients product",
+        "\\bproduct\\b"
+      ],
+      [
+        "American Heritage\u00ae Cream Cheese with Chives & Onions Ingredients details",
+        "\\bdetails\\b"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?36\\.72"
+      ],
+      [
+        "American Heritage\u00ae Cream Cheese with Chives & Onions badges Kosher",
+        "american\\s+heritage\\s+cream\\s+cheese\\s+with\\s+chives\\s+and\\s+onions(?:(?!\\b(?:shredded\\s+unexpected\\s+cheddar\\s+cheese)\\b).){0,600}?kosher"
+      ]
+    ]
+  },
+  "Trader Joe's--18": {
+    "task": "Bob wants to try the first two products in What's New. Open both product pages and compare their prices, sizes, ingredients and limited-time labels. Add one of each to his shopping list, preserving existing quantities of unrelated items, and report the final list total. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "sku": "085369",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "sku": "084191",
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/products/category/products\\-2(?:\\?|$)",
+      "/home/products/pdp/085369\\-bare\\-bones\\-scct\\-garden\\-085369(?:\\?|$)",
+      "/home/products/pdp/084191\\-org\\-straw\\-van\\-non\\-dairy\\-yogurt\\-084191(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Bare Bones Succulent Garden price",
+        "bare\\s+bones\\s+succulent\\s+garden(?:(?!\\b(?:strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative)\\b).){0,100}?8\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Bare Bones Succulent Garden package size",
+        "bare\\s+bones\\s+succulent\\s+garden(?:(?!\\b(?:strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative)\\b).){0,160}?1\\s+each"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative price",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,100}?1\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative package size",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,160}?5\\s+ounces"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative Ingredients water",
+        "\\bwater\\b"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative Ingredients organic",
+        "\\borganic\\b"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative Allergens",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,400}?(?:contains|allergens?)(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,25}?cashew"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?39\\.92"
+      ],
+      [
+        "Bare Bones Succulent Garden badges LIMITED TIME",
+        "bare\\s+bones\\s+succulent\\s+garden(?:(?!\\b(?:strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative)\\b).){0,600}?limited\\s+time"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative badges Dairy Free",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,600}?dairy\\s+free"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative badges Organic",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,600}?organic"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative badges Vegan",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,600}?vegan"
+      ],
+      [
+        "Strawberry Vanilla Organic Greek Style Cashew & Coconut Culture Yogurt Alternative badges Kosher",
+        "strawberry\\s+vanilla\\s+organic\\s+greek\\s+style\\s+cashew\\s+and\\s+coconut\\s+culture\\s+yogurt\\s+alternative(?:(?!\\b(?:bare\\s+bones\\s+succulent\\s+garden)\\b).){0,600}?kosher"
+      ]
+    ]
+  },
+  "Trader Joe's--19": {
+    "task": "Alice wants to try a product featured in the newest Discover guide. Read the guide, identify its first featured product and check its price, size and ingredients. Add two of that product to Alice's shopping list and report the guide title and date plus the final product quantity and list total. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "fd8e8d55eb72947f4a6a44489f78585ebd5bda957394edaca41115032ae2f123",
+    "state": {
+      "shopping_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "sku": "063804",
+            "quantity": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/home/discover/guides/one\\-seasoning\\-wonder(?:\\?|$)",
+      "/home/products/pdp/063804\\-spice\\-mushroom\\-umami\\-seasoning\\-063804(?:\\?|$)",
+      "/home/shopping\\-list(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Guide discover",
+        "\\bdiscover\\b"
+      ],
+      [
+        "Guide guides",
+        "\\bguides\\b"
+      ],
+      [
+        "Guide seasoning",
+        "\\bseasoning\\b"
+      ],
+      [
+        "TJ's Mushroom & Company Multipurpose Umami Seasoning Blend price",
+        "tj's\\s+mushroom\\s+and\\s+company\\s+multipurpose\\s+umami\\s+seasoning\\s+blend.{0,100}?2\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "TJ's Mushroom & Company Multipurpose Umami Seasoning Blend package size",
+        "tj's\\s+mushroom\\s+and\\s+company\\s+multipurpose\\s+umami\\s+seasoning\\s+blend.{0,160}?2\\.1\\s+ounces"
+      ],
+      [
+        "TJ's Mushroom & Company Multipurpose Umami Seasoning Blend Ingredients ingredients",
+        "\\bingredients\\b"
+      ],
+      [
+        "TJ's Mushroom & Company Multipurpose Umami Seasoning Blend Ingredients kosher",
+        "\\bkosher\\b"
+      ],
+      [
+        "TJ's Mushroom & Company Multipurpose Umami Seasoning Blend Ingredients dried",
+        "\\bdried\\b"
+      ],
+      [
+        "final estimated total",
+        "(?:estimated(?:\\s+product)?\\s+total|list\\s+total|total\\s+cost).{0,30}?38\\.30"
+      ],
+      [
+        "guide date",
+        "2026\\-09\\-16"
+      ]
+    ]
+  }
+}

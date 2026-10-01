@@ -24,7 +24,18 @@ MIRROR_TS = '2026-10-01'
 
 def _load(name):
     with open(os.path.join(SOURCE, name), encoding='utf-8') as f:
-        return json.load(f)
+        return _decode_capture(json.load(f))
+
+
+def _decode_capture(value):
+    """Decode literal Unicode escapes left by the source capture once."""
+    if isinstance(value, str):
+        return re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m[1], 16)), value)
+    if isinstance(value, list):
+        return [_decode_capture(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _decode_capture(item) for key, item in value.items()}
+    return value
 
 
 def _num(value):
@@ -54,6 +65,8 @@ def build_seed(db, bcrypt):
     """Materialize the catalog, recipes, stores, editorial and CMS content."""
     from app import (Announcement, Category, CMSPage, Editorial,
                      Entertaining, PodcastEpisode, Product, Recipe, Store)
+
+    db.session.add(CMSPage(page='home', title='Home', h1='Home', blocks=json.dumps(_load('home_content.json'), sort_keys=True)))
 
     # ---- categories (the upstream categoryList tree) ----
     tree = _load('categories.json')['root']

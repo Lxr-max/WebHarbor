@@ -37,7 +37,7 @@ def test_real_browser_and_adversarial_controls(task_id,tmp_path):
     src=Path(RUNS)/f'task-{int(task_id.split("--")[-1]):02d}';c=CONTRACT[task_id]
     assert E.verify(src,task_id)['pass']
     original=json.loads((src/'trajectory.json').read_text());answer=original['final_answer']
-    for text in [answer.upper(), '**Review findings**\n\n'+answer.replace(': ', ' — '), re.sub(r'\$([\d,.]+)',r'\1 USD',answer), answer.replace(' GB',' gigabytes').replace(' mins',' minutes').replace(' Oz',' ounces')]:E.check_claims(text,c['claims'])
+    for text in [answer.upper(), '**Review findings**\n\n'+answer.replace(': ', ' — '), re.sub(r'\$([\d,.]+)(?![\w.])',r'\1 USD',answer), answer.replace(' GB',' gigabytes').replace(' mins',' minutes').replace(' Oz',' ounces')]:E.check_claims(text,c['claims'])
     # Delete each required claim independently. All removed claims must fail.
     for label,pattern in c['claims']:
         changed=re.sub(pattern,'[incorrect]',E.norm(answer),flags=re.I)
