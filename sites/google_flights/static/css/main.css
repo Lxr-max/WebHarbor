@@ -250,6 +250,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .search-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 24px;
 }
@@ -288,6 +289,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .search-field {
   flex: 1;
+  min-width: 0;
   border: 1px solid var(--g-grey-400);
   padding: 12px 16px;
   font-family: var(--font-body);
@@ -1990,6 +1992,10 @@ img { max-width: 100%; height: auto; display: block; }
    ============================================================ */
 @media (max-width: 1024px) {
   .gbar-nav { display: none; }
+  /* Keep route and date pairs readable before the mobile stack takes over. */
+  .search-row { flex-direction: column; gap: 12px; }
+  .search-route-fields, .search-dates { flex: auto; }
+  .search-dates { margin-left: 0; }
   .fd-grid, .checkout-grid, .bag-grid { grid-template-columns: 1fr; }
   .fd-sidebar, .bag-summary { position: static; }
   .account-grid { grid-template-columns: 1fr; }
@@ -2008,7 +2014,7 @@ img { max-width: 100%; height: auto; display: block; }
   .search-field-from { padding-right: 16px; }
   .search-field-to { border-left: 1px solid var(--g-grey-400); padding-left: 16px; }
   .search-swap { display: none; }
-  .search-dates .search-field { border-left: 1px solid var(--g-grey-400); border-top: none; }
+  .search-dates .search-field + .search-field { border-left: 1px solid var(--g-grey-400); }
   .footer-top { grid-template-columns: 1fr; }
   .dest-gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
   .dest-hero { height: 240px; }
@@ -2016,4 +2022,8 @@ img { max-width: 100%; height: auto; display: block; }
   .auth-row2 { grid-template-columns: 1fr; }
   .deal-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .gbar-logo::after { display: none; }
+  .search-dates { flex-direction: column; gap: 8px; }
 }
