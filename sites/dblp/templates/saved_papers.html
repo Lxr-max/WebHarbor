@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as m %}
+{% block title %}My dblp: saved papers{% endblock %}
+{% block main %}
+<header id="headline"><h1>My dblp: saved papers</h1></header>
+<nav class="account-nav">
+  <ul>
+    <li><a href="{{ url_for('account') }}">dashboard</a></li>
+    <li><a href="{{ url_for('watchlist') }}">watchlist</a></li>
+    <li><a href="{{ url_for('saved_searches') }}">saved searches</a></li>
+    <li><a href="{{ url_for('saved_papers') }}">saved papers</a></li>
+    <li><a href="{{ url_for('search_history') }}">search history</a></li>
+    <li><a href="{{ url_for('account_profile') }}">profile</a></li>
+    <li>
+      <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="link-btn">log out</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+{% for collection, rows in groups %}
+<section class="section" id="collection-{{ loop.index }}">
+  <header class="h2">
+    <h2>{{ collection }} ({{ rows|length }}
+      {% if rows|length == 1 %}record{% else %}records{% endif %})</h2>
+  </header>
+  <div class="section-body">
+    <p class="export-links">
+      <a class="bibtex-download"
+         href="{{ url_for('saved_papers_export', collection=collection) }}">
+        <img alt="" src="{{ img('download.dark.16x16') or '' }}" class="icon">
+        export this collection as BibTeX</a>
+    </p>
+    <ul class="publ-list">
+      {% for r in rows %}
+      <li class="entry {{ r.publication.rtype }}" id="{{ r.publication.rec_key }}">
+        <div class="box"><img alt="" title="{{ r.publication.type_label }}" src="{{ img('n') or '' }}"></div>
+        {{ m.publ_nav(r.publication) }}
+        {{ m.cite_line(r.publication) }}
+        {% if r.note %}<small class="note">&ldquo;{{ r.note }}&rdquo;</small>{% endif %}
+        <small class="added">saved {{ r.saved_at }}</small>
+        <form method="post" action="{{ url_for('saved_papers_remove', sid=r.id) }}"
+              class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ url_for('saved_papers') }}">
+          <button type="submit" class="link-btn">remove</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% else %}
+<section class="section">
+  <div class="section-body">
+    <p class="no-matches">no saved papers yet &mdash; open a record page and press
+      &ldquo;save record to my library&rdquo;</p>
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

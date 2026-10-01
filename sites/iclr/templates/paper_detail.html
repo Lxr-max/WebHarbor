@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.title }}{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1 style="font-size:1.35rem">{{ p.title }}</h1>
+</div>
+<div class="card">
+  <p>
+    <span class="badge {{ 'oral' if p.decision == 'Accept (Oral)' else 'poster' }}">{{ p.badge() }}</span>
+    <span class="badge kind">{{ p.decision }}</span>
+    {% if p.topic %}<span class="badge room">{{ p.topic }}</span>{% endif %}
+  </p>
+  <p style="margin-top:14px">
+    {% for a in p.author_list() %}
+      <b>{{ a.name }}</b>{% if a.institution %} <span class="muted">({{ a.institution }})</span>{% endif %}{% if not loop.last %} ⋅{% endif %}
+    {% endfor %}
+  </p>
+  <table class="data">
+    <tr><th style="width:180px">Session</th><td>{{ p.session or '—' }}</td></tr>
+    {% if p.eventtype == 'Oral' and p.day %}
+      <tr><th>Talk slot</th><td>{{ fmt_date(p.day) }} &middot; {{ fmt_time(p.talk_start) }} – {{ fmt_time(p.talk_end) }} (conference local time, -03)</td></tr>
+    {% elif p.day %}
+      <tr><th>Session window</th><td>{{ fmt_date(p.day) }} &middot; {{ fmt_time(p.session_start) }} – {{ fmt_time(p.session_end) }} (conference local time, -03)</td></tr>
+    {% endif %}
+    <tr><th>Room</th><td>{{ room or '—' }}</td></tr>
+    {% if p.poster_position %}<tr><th>Poster position</th><td>{{ p.poster_position }}</td></tr>{% endif %}
+    {% if p.openreview_url %}<tr><th>OpenReview</th><td><a href="{{ p.openreview_url }}" rel="noopener">{{ p.openreview_url }}</a></td></tr>{% endif %}
+  </table>
+
+  <h2>Abstract</h2>
+  <p>{{ p.abstract }}</p>
+
+  <form method="post" action="{{ url_for('bookmarks_toggle') }}" style="margin-top:16px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="paper_id" value="{{ p.id }}">
+    <input type="hidden" name="back" value="{{ url_for('paper_detail', pid=p.id) }}">
+    {% if current_user.is_authenticated %}
+      <button class="btn {{ 'ghost' if bookmarked else '' }}" type="submit">
+        {{ 'Remove from My Bookmarks' if bookmarked else 'Bookmark this paper' }}</button>
+    {% else %}
+      <a class="btn ghost" href="{{ url_for('login', next=url_for('paper_detail', pid=p.id)) }}">Log in to bookmark</a>
+    {% endif %}
+  </form>
+</div>
+<p><a href="{{ url_for('papers') }}?session={{ p.session | urlencode }}">Other papers in this session »</a></p>
+{% endblock %}

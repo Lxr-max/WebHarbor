@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR Blog — Latest Announcements</h1>
+</div>
+{% for n in rows %}
+  <div class="card">
+    <h2><a href="{{ url_for('news_detail', slug=n.slug) }}">{{ n.title }}</a></h2>
+    <p class="muted small">{{ n.date }}{% if n.author %} &middot; {{ n.author }}{% endif %}</p>
+    {% if n.body_list() %}
+      <p>{{ n.body_list()[0][:220] }}{% if n.body_list()[0] | length > 220 %}…{% endif %}</p>
+    {% endif %}
+  </div>
+{% endfor %}
+{% endblock %}

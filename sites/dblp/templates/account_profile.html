@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}My dblp: profile{% endblock %}
+{% block main %}
+<header id="headline"><h1>My dblp: profile</h1></header>
+<nav class="account-nav">
+  <ul>
+    <li><a href="{{ url_for('account') }}">dashboard</a></li>
+    <li><a href="{{ url_for('watchlist') }}">watchlist</a></li>
+    <li><a href="{{ url_for('saved_searches') }}">saved searches</a></li>
+    <li><a href="{{ url_for('saved_papers') }}">saved papers</a></li>
+    <li><a href="{{ url_for('search_history') }}">search history</a></li>
+    <li><a href="{{ url_for('account_profile') }}">profile</a></li>
+    <li>
+      <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="link-btn">log out</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+<section class="section" id="profile">
+  <div class="section-body">
+    <dl class="record-meta">
+      <dt>email</dt><dd>{{ current_user.email }}</dd>
+      <dt>member since</dt><dd>{{ current_user.created_at }}</dd>
+    </dl>
+    <form method="post" action="{{ url_for('account_profile') }}"
+          class="profile-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>display name
+        <input type="text" name="display_name" value="{{ current_user.display_name }}"></label>
+      <label>affiliation
+        <input type="text" name="affiliation" value="{{ current_user.affiliation or '' }}"></label>
+      <label>research interests
+        <input type="text" name="research_interests"
+               value="{{ current_user.research_interests or '' }}"></label>
+      <button type="submit">save profile</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as m %}
+{% block title %}search dblp: {{ q }}{% endblock %}
+{% block main %}
+<header id="headline" class="completesearch">
+  <h1>Search dblp</h1>
+</header>
+
+{% if not q %}
+<section class="section">
+  <p class="no-query">Please enter a search query</p>
+</section>
+{% else %}
+
+<section class="section search-section" id="author-results">
+  <header class="hide-head h2"><h2>Author search results</h2></header>
+  <div class="hide-body">
+    {% set n_authors = author_rows.count() if author_rows else 0 %}
+    <p class="result-count">All {{ n_authors }} matches</p>
+    <ul class="result-list">
+      {% for a in author_rows.limit(10).all() %}
+      <li><a href="/pid/{{ a.pid }}.html">{{ a.name }}</a>
+        <small class="note">{{ a.affiliations_list()[0].text if a.affiliations_list() else '' }}</small></li>
+      {% else %}
+      <li class="no-matches">no matches</li>
+      {% endfor %}
+    </ul>
+    {% if n_authors > 10 %}
+    <p class="more-link"><a href="{{ url_for('search_author', q=q) }}">all {{ n_authors }} matches</a></p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section search-section" id="venue-results">
+  <header class="hide-head h2"><h2>Venue search results</h2></header>
+  <div class="hide-body">
+    {% set n_venues = venue_rows.count() if venue_rows else 0 %}
+    <p class="result-count">All {{ n_venues }} matches</p>
+    <ul class="result-list">
+      {% for v in venue_rows.limit(10).all() %}
+      <li><a href="/db/{{ v.stream }}/index.html">{{ v.name }}</a>
+        {% if v.abbr and not v.name.endswith('(' ~ v.abbr ~ ')') %}<small>({{ v.abbr }})</small>{% endif %}</li>
+      {% else %}
+      <li class="no-matches">no matches</li>
+      {% endfor %}
+    </ul>
+    {% if n_venues > 10 %}
+    <p class="more-link"><a href="{{ url_for('search_venue', q=q) }}">all {{ n_venues }} matches</a></p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section search-section" id="publ-results">
+  <header class="hide-head h2"><h2>Publication search results</h2></header>
+  <div class="hide-body">
+    {% set n_publ = publ_rows.count() if publ_rows else 0 %}
+    <p class="result-count">found {{ n_publ }} matches</p>
+    <ul class="result-list publ-list">
+      {% for p in publ_rows.limit(10).all() %}
+      <li class="entry {{ p.rtype }}" id="{{ p.rec_key }}">
+        <div class="box"><img alt="" title="{{ p.type_label }}" src="{{ img('n') or '' }}"></div>
+        {{ m.publ_nav(p) }}
+        {{ m.cite_line(p) }}
+      </li>
+      {% else %}
+      <li class="no-matches">no matches</li>
+      {% endfor %}
+    </ul>
+    {% if n_publ > 10 %}
+    <p class="more-link"><a href="{{ url_for('search_publ', q=q) }}">all {{ n_publ }} matches</a></p>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
