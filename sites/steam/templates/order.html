@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Order {{ order.order_no }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Order Confirmation</h1>
+</div>
+
+<div class="order-box">
+  <div class="order-no">Thank you! Your order {{ order.order_no }} is confirmed.</div>
+  <div style="margin-top:8px;color:#8f98a0;">Placed {{ order.placed_at }}</div>
+</div>
+
+<div class="order-box">
+  <h2 style="margin:0 0 10px;font-size:15px;">Items</h2>
+  {% for item in order.items %}
+    <div class="order-line">
+      <span class="t">{{ item.title }} &times; {{ item.qty }}</span>
+      <span>{{ (item.unit_price * item.qty)|money }}</span>
+    </div>
+  {% endfor %}
+  <div class="cart-summary">
+    <div class="line"><span>Subtotal</span><span>{{ order.subtotal|money }}</span></div>
+    <div class="line total"><span>Total paid</span><span>{{ order.total|money }}</span></div>
+  </div>
+</div>
+
+<div class="order-box">
+  <h2 style="margin:0 0 10px;font-size:15px;">Billing</h2>
+  <div>{{ order.full_name }}</div>
+  <div>{{ order.address1 }}</div>
+  <div>{{ order.city }}, {{ order.state }} {{ order.zipcode }}</div>
+  <div style="margin-top:6px;color:#8f98a0;">Payment method: {{ order.payment_method }}</div>
+</div>
+
+<p><a class="btn" href="{{ url_for('account') }}">View order history &raquo;</a></p>
+
+{% endblock %}
