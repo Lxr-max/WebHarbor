@@ -1,0 +1,6 @@
+The steam mirror's seed database is generated deterministically at image
+build time from the tracked source_data/ snapshot (PYTHONHASHSEED=0, no
+wall clock, no RNG — see seed_data.py and app.py). The instance_seed/
+directory is therefore not part of the tracked source tree; scripts/build
+materialize it, and the Dockerfile records this file as the marker checked
+by its build steps.
