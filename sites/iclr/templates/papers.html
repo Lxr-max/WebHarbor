@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Papers{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Papers</h1>
+  <span class="count">{{ total }} papers match the current filters</span>
+</div>
+
+<form class="filters" method="get" action="{{ url_for('papers') }}">
+  <div class="field">
+    <label for="q">Search title</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="e.g. diffusion">
+  </div>
+  <div class="field">
+    <label for="topic">Topic</label>
+    <select name="topic" id="topic">
+      <option value="">All topics</option>
+      {% for parent, children in topics_grouped %}
+        <optgroup label="{{ parent }}">
+          {% for t in children %}
+            <option value="{{ t }}" {% if topic == t %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </optgroup>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <label for="decision">Decision</label>
+    <select name="decision" id="decision">
+      <option value="" {% if not decision %}selected{% endif %}>All decisions</option>
+      <option value="Accept (Oral)" {% if decision == 'Accept (Oral)' %}selected{% endif %}>Accept (Oral)</option>
+      <option value="Accept (Poster)" {% if decision == 'Accept (Poster)' %}selected{% endif %}>Accept (Poster)</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="session">Session</label>
+    <select name="session" id="session">
+      <option value="">All sessions</option>
+      {% for s in sessions %}
+        <option value="{{ s }}" {% if session == s %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <label for="sort">Sort by</label>
+    <select name="sort" id="sort">
+      <option value="title" {% if sort == 'title' %}selected{% endif %}>Title A–Z</option>
+      <option value="id" {% if sort == 'id' %}selected{% endif %}>Paper ID</option>
+      <option value="session" {% if sort == 'session' %}selected{% endif %}>Session</option>
+    </select>
+  </div>
+  <button class="btn" type="submit">Apply</button>
+  <a class="btn ghost" href="{{ url_for('papers') }}">Clear</a>
+</form>
+
+<div>
+  {% for p in rows %}
+    <div class="paper-row">
+      <span class="no">#{{ p.id }}</span>
+      <div class="body">
+        <h3><a href="{{ url_for('paper_detail', pid=p.id) }}">{{ p.title }}</a></h3>
+        <div class="meta">{{ p.author_names() | join(' ⋅ ') }}</div>
+        <div class="meta">
+          <span class="badge {{ 'oral' if p.decision == 'Accept (Oral)' else 'poster' }}">{{ p.badge() }}</span>
+          {% if p.session %} &middot; {{ p.session }}{% if p.session_start %} ({{ fmt_time(p.session_start) }}–{{ fmt_time(p.session_end) }}){% endif %}{% endif %}
+          {% if p.poster_position %} &middot; poster {{ p.poster_position }}{% endif %}
+        </div>
+        <div class="topic">{{ p.topic }}</div>
+      </div>
+    </div>
+  {% else %}
+    <div class="card"><p>No papers match. Adjust the filters and try again.</p></div>
+  {% endfor %}
+</div>
+
+{% if pages > 1 %}
+<div class="pager">
+  {% if page > 1 %}<a href="{{ url_for('papers', q=q, topic=topic, decision=decision, session=session, sort=sort, page=page-1) }}">« Prev</a>{% endif %}
+  <span class="cur">Page {{ page }} of {{ pages }}</span>
+  {% if page < pages %}<a href="{{ url_for('papers', q=q, topic=topic, decision=decision, session=session, sort=sort, page=page+1) }}">Next »</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Pricing — {{ title }} — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <nav class="crumbs"><a href="{{ url_for('pricing') }}">Pricing</a> / <span>{{ title }}</span></nav>
+  <h1>Pricing — {{ title }}</h1>
+  <p class="lead">The details below are captured from the live Azure pricing pages. For a custom estimate, use the <a href="{{ url_for('calculator') }}">pricing calculator</a>.</p>
+  {% for table in tables %}
+  <section class="pricing-table">
+    <table class="data-table">
+      {% if table.header_list %}
+      <thead><tr>{% for cell in table.header_list %}<th>{{ cell }}</th>{% endfor %}</tr></thead>
+      {% endif %}
+      <tbody>
+        {% for row in table.row_list %}
+        <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% else %}
+  <p>No pricing tables captured for this service.</p>
+  {% endfor %}
+</div>
+{% endblock %}

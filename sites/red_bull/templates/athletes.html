@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Athletes - Get to know them here{% endblock %}
+{% block content %}
+<h1 class="page-title">Athletes</h1>
+<p class="page-sub">Get to know the Red Bull athletes — the world's best in motorsport, bike, surf, snow, music and more.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('athletes') }}">
+  <div>
+    <label for="discipline">Discipline</label>
+    <select id="discipline" name="discipline">
+      <option value="">All disciplines</option>
+      {% for d in disciplines %}
+      <option value="{{ d }}" {{ 'selected' if active_discipline == d }}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="country">Nationality</label>
+    <select id="country" name="country">
+      <option value="">All countries</option>
+      {% for c in countries %}
+      <option value="{{ c }}" {{ 'selected' if active_country == c }}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('athletes') }}">Reset</a>
+  </div>
+</form>
+
+<div class="chip-row">
+  <a class="chip {{ 'active' if not active_letter }}" href="{{ url_for('athletes', discipline=active_discipline, country=active_country) }}">A–Z</a>
+  {% for l in letters %}
+  <a class="chip {{ 'active' if active_letter == l }}" href="{{ url_for('athletes', letter=l, discipline=active_discipline, country=active_country) }}">{{ l }}</a>
+  {% endfor %}
+</div>
+
+<div class="grid cols-4">
+  {% for a in athletes %}
+  <a class="card" href="{{ url_for('athlete_detail', slug=a.slug) }}">
+    <div class="thumb"><img src="{{ a.hero_image }}" alt="{{ a.name }}"></div>
+    <div class="body">
+      <span class="tag">{{ a.discipline or 'Athlete' }}</span>
+      <h3>{{ a.name }}</h3>
+      <p class="meta">{{ a.nationality or '' }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+<p class="pager"><span class="meta">{{ athletes | length }} athletes</span></p>
+{% endblock %}

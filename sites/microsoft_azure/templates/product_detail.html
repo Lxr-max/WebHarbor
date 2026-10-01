@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}{{ prod.name }} — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <nav class="crumbs"><a href="{{ url_for('products') }}">Products</a> / <span>{{ prod.name }}</span></nav>
+
+  {% if page %}
+  <div class="detail-head">
+    {% if page.hero_image %}<img class="story-hero" src="{{ img(page.hero_image) }}" alt="">{% endif %}
+    <h1>{{ page.title }}</h1>
+    <p class="lead">{{ page.description }}</p>
+    <p class="card-meta">
+      {% for c in prod.category_list %}<span class="chip">{{ c }}</span>{% endfor %}
+    </p>
+  </div>
+
+  {% if page.pricing_url %}
+  {% set seg = page.pricing_url.rstrip('/').split('/')[-1] %}
+  {% set page_slug = {'virtual-machines': 'virtual-machines-linux'}.get(seg, seg) %}
+  <div class="cta-row">
+    <a class="btn btn-primary" href="{{ url_for('pricing_details', page=page_slug) if page_slug in ['kubernetes-service','virtual-machines-linux','cosmos-db','managed-disks'] else url_for('pricing') }}">Explore {{ prod.name }} pricing</a>
+    <a class="btn btn-outline" href="{{ url_for('calculator') }}">Estimate with the pricing calculator</a>
+  </div>
+  {% endif %}
+
+  {% for section in page.section_list %}
+  <section class="band">
+    <h2>{{ section.title }}</h2>
+    <ul class="feature-list">
+      {% for bullet in section.bullets %}
+      <li>{{ bullet }}</li>
+      {% endfor %}
+    </ul>
+    {% if loop.index <= page.content_image_list|length %}
+    <img class="section-img" src="{{ img(page.content_image_list[loop.index0]) }}" alt="" loading="lazy">
+    {% endif %}
+  </section>
+  {% endfor %}
+
+  {% if page.docs_list %}
+  <section class="band band-alt">
+    <h2>Documentation</h2>
+    <ul class="plain-list">
+      {% for d in page.docs_list %}
+      <li><code>{{ d }}</code></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  {% else %}
+  <div class="detail-head">
+    <h1>{{ prod.name }}</h1>
+    <p class="lead">{{ prod.desc }}</p>
+    <p class="card-meta">
+      {% for c in prod.category_list %}<span class="chip">{{ c }}</span>{% endfor %}
+    </p>
+    <p><a href="{{ url_for('pricing') }}">Explore Azure pricing →</a></p>
+  </div>
+  {% endif %}
+
+  {% if current_user.is_authenticated %}
+  <form method="post" action="{{ url_for('toggle_favorite') }}" class="inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="product_slug" value="{{ prod.slug }}">
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button class="btn btn-outline" type="submit">
+      {% if prod.slug in current_user.favorites|map(attribute='product_slug')|list %}Remove from favorites{% else %}Add to favorites{% endif %}
+    </button>
+  </form>
+  {% else %}
+  <p><a href="{{ url_for('login', next=request.path) }}">Sign in</a> to save {{ prod.name }} to your favorites.</p>
+  {% endif %}
+
+  {% if related %}
+  <section class="band">
+    <h2>Related products</h2>
+    <div class="card-grid">
+      {% for r in related %}
+      <a class="card" href="{{ url_for('product_detail', slug=r.slug) }}">
+        <h3>{{ r.name }}</h3>
+        <p>{{ r.desc }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

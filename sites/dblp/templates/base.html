@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head %}
+  <title>{% block title %}dblp: computer science bibliography{% endblock %}</title>
+  {% endblock %}
+  <link rel="apple-touch-icon" type="image/png" sizes="192x192"
+        href="{{ img('dblp.icon.192x192') or '/static/img/dblp.icon.192x192.png' }}">
+  <link rel="icon" type="image/png" sizes="152x152"
+        href="{{ img('dblp.icon.152x152') or '/static/img/dblp.icon.152x152.png' }}">
+  <link rel="shortcut icon" type="image/x-icon" sizes="16x16 24x24 32x32 64x64"
+        href="{{ img('favicon') or '/static/img/favicon.ico' }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header id="banner">
+  <div id="logo">
+    <a href="{{ url_for('home') }}">
+      <img class="logo" src="{{ img('logo.320x120') or '/static/img/logo.320x120.png' }}"
+           alt="dblp computer science bibliography">
+    </a>
+  </div>
+  <nav class="header-nav">
+    <ul>
+      <li class="nav-browse drop-down">
+        <div class="head"><a href="/db/conf/">browse</a></div>
+        <div class="body">
+          <ul>
+            <li><a href="/db/conf/">Conferences</a></li>
+            <li><a href="/db/journals/">Journals</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-search"><a href="{{ url_for('search_publ') }}">search</a></li>
+      <li class="nav-blog"><a href="{{ url_for('home') }}#news-section">Blog</a></li>
+      <li class="nav-statistics"><a href="{{ url_for('home') }}#stats-section">Statistics</a></li>
+      <li class="nav-account">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('account') }}">{{ current_user.display_name }}</a>
+        {% else %}
+          <a href="{{ url_for('authn_login') }}">login</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<div id="search-field-section">
+  <form id="completesearch-form" action="{{ search_action_url() }}" method="get">
+    <input type="search" name="q" value="{{ request.args.get('q','') }}" maxlength="1024"
+           placeholder="search dblp" aria-label="search dblp">
+    <button type="submit">search</button>
+  </form>
+  <nav class="search-kinds">
+    <ul>
+      <li><a href="{{ url_for('search_combined') }}">combined dblp search</a></li>
+      <li><a href="{{ url_for('search_publ') }}">publication search</a></li>
+      <li><a href="{{ url_for('search_author') }}">author search</a></li>
+      <li><a href="{{ url_for('search_venue') }}">venue search</a></li>
+    </ul>
+  </nav>
+</div>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer id="footer">
+  <div class="footer-logos">
+    {% for n in ['bmftr-logo-bottom','dfg-logo-bottom','leibniz-logo-bottom',
+                 'lzi-logo-bottom','rlp-logo-bottom','sl-logo-bottom','utr-logo-bottom'] %}
+      {% set u = img(n) %}
+      {% if u %}<img src="{{ u }}" alt="{{ n.replace('-logo-bottom','') }}">{% endif %}
+    {% endfor %}
+  </div>
+  <div class="footer-meta">
+    <span id="footer-note">retrieved on {{ mirror_date if mirror_date is defined else '2026-09-30' }} from
+      data curated by the dblp team</span><br>
+    <span>all metadata released as open data under CC0 1.0 license</span>
+    {% set cc0 = img('cc0.80x15.black') %}
+    {% if cc0 %}<img src="{{ cc0 }}" alt="CC0">{% endif %}
+  </div>
+</footer>
+</body>
+</html>
