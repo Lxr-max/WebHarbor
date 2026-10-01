@@ -248,7 +248,7 @@ def _event_by_title(db, fragment, kind=None):
 
 def seed_benchmark_users(db):
     from app import (Bookmark, Registration, ScheduleSave, User)
-    if User.query.filter_by(email='alice.j@test.com').first():
+    if User.query.count() > 0:
         return
     users = {}
     for email, name in BENCHMARK_USERS:
