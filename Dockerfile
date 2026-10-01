@@ -487,6 +487,9 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/samsung && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/nyse && \
     (cd /opt/WebSyn/nyse && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/nyse.db instance_seed/nyse.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/university_of_michigan && \
+    (cd /opt/WebSyn/university_of_michigan && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/university_of_michigan.db instance_seed/university_of_michigan.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
 EXPOSE 8101 40000-40219

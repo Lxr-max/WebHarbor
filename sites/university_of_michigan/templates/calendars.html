@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Academic Calendars — Office of the Registrar{% endblock %}
+{% block content %}
+<h1>Academic Calendars</h1>
+<p class="page-sub">Search academic calendars from the U-M Office of the Registrar — term dates, holidays, study days, examinations, and registration deadlines.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('calendars') }}">
+    <div>
+      <label for="term">Academic Term</label>
+      <select id="term" name="term">
+        {% for t in terms %}
+        <option value="{{ t }}" {% if t == term %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="type">Calendar Type</label>
+      <select id="type" name="type">
+        <option value="">All types</option>
+        {% for t in types %}
+        <option value="{{ t }}" {% if t == ctype %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ entries|length }} entries for {{ term }}</span>
+</div>
+
+<h2>{{ term }} <span class="count-pill">{{ entries|length }} entries</span></h2>
+<table class="list">
+  <tr><th>Date</th><th>Event</th><th>Calendar</th></tr>
+  {% for e in entries %}
+  <tr>
+    <td>{{ e.date_str }}</td>
+    <td>{{ e.event }}</td>
+    <td>{{ e.ctype }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

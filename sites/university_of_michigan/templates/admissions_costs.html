@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Costs — University of Michigan Admissions{% endblock %}
+{% block content %}
+<h1>Costs</h1>
+<p class="page-sub">2026-27 estimated costs and fees. When thinking about costs, remember that tuition and fees are only one part of the expenses you will have as a student. Our application fee is $75.</p>
+
+<h2>2026-27 Tuition and Fees</h2>
+<table class="list">
+  <tr>
+    <th>Residency &amp; Level</th>
+    <th>Tuition &amp; Fees*</th>
+    <th>Living Expenses**</th>
+    <th>Books, Course Materials, Supplies &amp; Equipment</th>
+    <th>Transportation</th>
+    <th>Misc Personal Expenses</th>
+    <th>Total Budget</th>
+  </tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.residency }}<br>{{ r.level }}</td>
+    <td>{{ '${:,}'.format(r.tuition_fees) }}</td>
+    <td>{{ '${:,}'.format(r.living) }}</td>
+    <td>{{ '${:,}'.format(r.books) }}</td>
+    <td>{{ '${:,}'.format(r.transport) }}</td>
+    <td>{{ '${:,}'.format(r.personal) }}</td>
+    <td><strong>{{ '${:,}'.format(r.total) }}</strong></td>
+  </tr>
+  {% endfor %}
+</table>
+<p class="page-sub">*Tuition and fees listed are based on approved rates for the 2025-2026 academic year. Rates are approved each June by the U-M Board of Regents and estimated budgets are updated at that time. Tuition and fees may be higher or lower depending on a student's program of study; these estimated budgets use information from the College of Literature, Science, and the Arts. Current tuition information is available through the Office of the Registrar.</p>
+<p class="page-sub">**Based on the unlimited basic residential meal plan.</p>
+
+<h2>More</h2>
+<p>
+  <a class="btn small" href="{{ url_for('admissions_aid') }}">Financial Aid</a>
+  <a class="btn small" href="{{ url_for('admissions_apply') }}">How to Apply</a>
+</p>
+{% endblock %}
