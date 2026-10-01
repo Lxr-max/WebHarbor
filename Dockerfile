@@ -465,11 +465,14 @@ RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/backcountry && \
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/disney && \
     (cd /opt/WebSyn/disney && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/disney.db instance_seed/disney.db && rm -rf instance __pycache__)
 
+RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/iclr && \
+    (cd /opt/WebSyn/iclr && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/iclr.db instance_seed/iclr.db && rm -rf instance __pycache__)
+
 RUN python3 /opt/check_asset_inventory.py /opt/WebSyn/red_bull && \
     (cd /opt/WebSyn/red_bull && rm -rf instance instance_seed && PYTHONHASHSEED=0 python3 seed_data.py && mkdir -p instance_seed && cp instance/red_bull.db instance_seed/red_bull.db && rm -rf instance __pycache__)
 
 RUN python3 /opt/check_seed_databases.py /opt/WebSyn
 
-EXPOSE 8101 40000-40210
+EXPOSE 8101 40000-40141
 
 CMD ["/opt/websyn_start.sh"]
