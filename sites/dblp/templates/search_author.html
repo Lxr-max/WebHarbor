@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Search dblp for authors{% endblock %}
+{% block main %}
+<header id="headline" class="completesearch">
+  <h1>Search dblp for authors</h1>
+</header>
+
+<section class="section">
+  {% if not q %}
+  <p class="no-query">Please enter a search query</p>
+  {% else %}
+  <p class="result-count">All {{ total }} matches</p>
+  <ul class="result-list author-list">
+    {% for a in rows %}
+    <li class="entry author" id="{{ a.pid }}">
+      <a href="/pid/{{ a.pid }}.html">{{ a.name }}</a>
+      {% if a.uname %}<small class="uname">{{ a.uname }}</small>{% endif %}
+      {% set affs = a.affiliations_list() %}
+      {% if affs %}<small class="note">{{ affs[0].text }}</small>{% endif %}
+      <small class="count">{{ a.pub_count() }} records in this mirror</small>
+    </li>
+    {% else %}
+    <li class="no-matches">no matches</li>
+    {% endfor %}
+  </ul>
+
+  <div class="publ pager">
+    {% set prev_f = f - h if f >= h else 0 %}
+    {% if f > 0 %}
+    <a href="{{ url_for('search_author', q=q, h=h, f=prev_f) }}">[&lt;&lt; previous]</a>
+    {% endif %}
+    <span>page {{ (f // h) + 1 }}</span>
+    {% if f + h < total %}
+    <a href="{{ url_for('search_author', q=q, h=h, f=f + h) }}">[next &gt;&gt;]</a>
+    {% endif %}
+  </div>
+
+  {% if current_user.is_authenticated %}
+  <form class="save-search-form" method="post"
+        action="{{ url_for('saved_searches_add') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="query" value="{{ q }}">
+    <input type="hidden" name="search_type" value="author">
+    <input type="hidden" name="next" value="{{ request.full_path }}">
+    <button type="submit">save this search</button>
+  </form>
+  {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

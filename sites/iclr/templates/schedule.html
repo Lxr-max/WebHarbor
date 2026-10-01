@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Schedule{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Schedule</h1>
+  <span class="count">Rio de Janeiro &middot; April 23–27, 2026 (all times -03)</span>
+</div>
+
+<div class="daytabs">
+  {% for date, label in day_tabs %}
+    <a class="{{ 'cur' if date == selected else '' }}" href="{{ url_for('schedule', date=date) }}">{{ label }}</a>
+  {% endfor %}
+</div>
+
+{% set day = day_events[selected] %}
+<div class="card">
+  <h2>{{ day.label }} — {{ fmt_date(selected) }}</h2>
+</div>
+
+<h2 class="muted" style="font-size:1.0rem">Events</h2>
+{% for e in day.events %}
+  <div class="sched-event sched-{{ e.kind }}">
+    <div class="time">{{ fmt_time(e.start) }}–{{ fmt_time(e.end) }}</div>
+    <div class="body">
+      <h3><a href="{{ url_for('event_detail', eid=e.id) }}">{{ e.title }}</a></h3>
+      <div class="meta">
+        <span class="badge kind">{{ e.kind_label() }}</span>
+        {% if e.speaker %} &middot; {{ e.speaker }}{% endif %}
+        {% if e.overflow_room %} &middot; Overflow Room: {{ e.overflow_room }}{% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+<h2 class="muted" style="font-size:1.0rem">Paper sessions</h2>
+{% for s in day.sessions %}
+  <div class="sched-event sched-session">
+    <div class="time">{{ fmt_time(s.start) }}–{{ fmt_time(s.end) }}</div>
+    <div class="body">
+      <h3>{{ s.title }}</h3>
+      <div class="meta">
+        <span class="badge kind">{{ 'Oral session' if s.kind == 'oral-session' else 'Poster session' }}</span>
+        {% if s.room %} &middot; {{ s.room }}{% endif %}
+        &middot; <a href="{{ url_for('papers') }}?session={{ s.title | urlencode }}">All papers in this session</a>
+      </div>
+      {% if s.kind == 'oral-session' and session_talks.get(s.title) %}
+        <table class="data" style="margin-top:9px">
+          <tr><th style="width:110px">Talk slot</th><th>Paper</th></tr>
+          {% for p in session_talks[s.title] %}
+            <tr>
+              <td class="mono">{{ fmt_time(p.talk_start) }}–{{ fmt_time(p.talk_end) }}</td>
+              <td><a href="{{ url_for('paper_detail', pid=p.id) }}">{{ p.title }}</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

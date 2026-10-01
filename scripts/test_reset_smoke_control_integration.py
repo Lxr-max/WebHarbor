@@ -95,6 +95,7 @@ class ActualControlCliTests(unittest.TestCase):
                 scripts = root / 'scripts'
                 scripts.mkdir()
                 shutil.copyfile(ROOT / 'scripts/check_reset_smoke.py', scripts / 'check_reset_smoke.py')
+                shutil.copyfile(ROOT / 'scripts/site_registry.py', scripts / 'site_registry.py')
                 command = [sys.executable, '-B', str(scripts / 'check_reset_smoke.py'), '--json',
                            '--control-url', f'http://127.0.0.1:{server.server_port}',
                            '--base-host', '127.0.0.1', '--db-root', str(root / 'sites')]

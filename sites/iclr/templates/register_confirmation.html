@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Registration Confirmation{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>Registration Received</h1>
+</div>
+<div class="card" style="max-width:760px">
+  <p class="notice">Your ICLR 2026 registration has been recorded.</p>
+  <table class="data">
+    <tr><th style="width:190px">Registration code</th><td class="mono"><b>{{ r.reg_code }}</b></td></tr>
+    <tr><th>Name</th><td>{{ r.name }}</td></tr>
+    <tr><th>Email</th><td>{{ r.email }}</td></tr>
+    <tr><th>Affiliation type</th><td>{{ r.affiliation }}</td></tr>
+    <tr><th>Registration items</th><td>{{ r.item_list() | join(', ') }}</td></tr>
+    <tr><th>Guest banquet tickets</th><td>{{ r.banquet_tickets }} × ${{ 50 }} USD</td></tr>
+    {% if r.dietary %}<tr><th>Dietary preference</th><td>{{ r.dietary }}</td></tr>{% endif %}
+    <tr><th>Total</th><td><b>${{ r.total_usd }} USD</b></td></tr>
+  </table>
+  {% if current_user.is_authenticated %}
+    <p class="muted small">You can review this registration under My Stuff.</p>
+  {% endif %}
+</div>
+<p><a href="{{ url_for('home') }}">« Back to the conference home</a></p>
+{% endblock %}

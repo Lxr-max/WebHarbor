@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Shop US | Red Bull's Official Online Store{% endblock %}
+{% block content %}
+<h1 class="page-title">Red Bull Shop</h1>
+<p class="page-sub">Red Bull's official online store — apparel, headwear, accessories and team gear.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('shop') }}">
+  <div>
+    <label for="category">Category</label>
+    <select id="category" name="category">
+      <option value="">All categories</option>
+      {% for c in categories %}
+      <option value="{{ c }}" {{ 'selected' if active_category == c }}>{{ c | capitalize }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="vendor">Brand / team</label>
+    <select id="vendor" name="vendor">
+      <option value="">All brands</option>
+      {% for v in vendors %}
+      <option value="{{ v }}" {{ 'selected' if active_vendor == v }}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="sort">Sort</label>
+    <select id="sort" name="sort">
+      <option value="">Featured</option>
+      <option value="price_asc" {{ 'selected' if active_sort == 'price_asc' }}>Price: low to high</option>
+      <option value="price_desc" {{ 'selected' if active_sort == 'price_desc' }}>Price: high to low</option>
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('shop') }}">Reset</a>
+  </div>
+</form>
+
+<div class="grid cols-4">
+  {% for p in products %}
+  {% set low = p.price_range()[0] %}
+  <a class="card" href="{{ url_for('shop_product', handle=p.handle) }}">
+    <div class="thumb"><img src="{{ p.image }}" alt="{{ p.title }}"></div>
+    <div class="body">
+      <span class="tag">{{ p.vendor or p.category }}</span>
+      <h3>{{ p.title }}</h3>
+      {% if low is not none %}<p class="shop-price">${{ '%.2f' | format(low) }}</p>{% endif %}
+      <p class="meta">{{ p.category | capitalize }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('shop', page=page-1, category=active_category, vendor=active_vendor, sort=active_sort) }}">‹ Prev</a>
+  {% endif %}
+  <span class="current">{{ page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('shop', page=page+1, category=active_category, vendor=active_vendor, sort=active_sort) }}">Next ›</a>
+  {% endif %}
+  <span class="meta">{{ total }} products</span>
+</div>
+{% endblock %}

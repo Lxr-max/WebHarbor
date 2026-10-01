@@ -4,16 +4,20 @@
 from __future__ import annotations
 
 import argparse
-import ast
 import ipaddress
 import json
 import re
-import shlex
 from collections import defaultdict
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable
 from urllib.parse import urlparse
+
+try:
+    from .site_registry import parse_site_array
+except ImportError:
+    from site_registry import parse_site_array
+
 
 REQUIRED_FIELDS = ("id", "web_name", "web", "upstream_url", "ques")
 GRADING_FIELDS = ("verifier_path", "judge_rubric")
@@ -112,47 +116,17 @@ def add_finding(
 
 
 def parse_websyn_sites(path: Path) -> list[str]:
-    text = path.read_text(encoding="utf-8")
-    match = re.search(r"^[ \t]*SITES=\((.*?)\)", text, re.DOTALL | re.MULTILINE)
-    if not match:
-        return []
     try:
-        tokens = shlex.split(match.group(1), comments=True, posix=True)
-    except ValueError:
+        return parse_site_array(path.read_text(encoding="utf-8"), str(path), require_base=False, allow_duplicates=True)[0]
+    except (OSError, UnicodeError, ValueError):
         return []
-    return [token for token in tokens if re.fullmatch(r"[A-Za-z0-9_]+", token)]
 
 
 def parse_control_server_sites(path: Path) -> list[str]:
     try:
-        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    except (OSError, SyntaxError, UnicodeError):
+        return parse_site_array(path.read_text(encoding="utf-8"), str(path), require_base=False, allow_duplicates=True)[0]
+    except (OSError, UnicodeError, ValueError):
         return []
-    for node in tree.body:
-        value_node = None
-        if isinstance(node, ast.Assign) and any(
-            isinstance(target, ast.Name) and target.id == "SITES"
-            for target in node.targets
-        ):
-            value_node = node.value
-        elif (
-            isinstance(node, ast.AnnAssign)
-            and isinstance(node.target, ast.Name)
-            and node.target.id == "SITES"
-        ):
-            value_node = node.value
-        if value_node is None:
-            continue
-        try:
-            value = ast.literal_eval(value_node)
-        except (ValueError, TypeError):
-            return []
-        if isinstance(value, (list, tuple)) and all(
-            isinstance(site, str) for site in value
-        ):
-            return list(value)
-        return []
-    return []
 
 
 def load_port_map(root: Path) -> tuple[dict[str, int], list[Finding]]:

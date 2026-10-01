@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Create a dblp account{% endblock %}
+{% block main %}
+<header id="headline"><h1>Create a dblp account</h1></header>
+<section class="section" id="register-section">
+  <div class="section-body">
+    {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+    <form method="post" action="{{ url_for('authn_register') }}"
+          class="register-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>display name <input type="text" name="display_name" required></label>
+      <label>email <input type="email" name="email" required></label>
+      <label>password (min. 8 characters)
+        <input type="password" name="password" required minlength="8"></label>
+      <button type="submit">create account</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
