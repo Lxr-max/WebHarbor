@@ -25,10 +25,13 @@
 <div class="wrap">
 
   {% if hero %}
-  <section class="hero">
+  <section class="home-hero">
+    <img class="home-hero-photo" src="{{ url_for('static', filename='images/upstream/NYSE_Homepage_Collage_AZ.jpg') }}" alt="AstraZeneca celebration at the New York Stock Exchange">
+    <div class="hero home-hero-copy">
     <h1>{{ hero.get('headline', 'The home of market-defining IPOs') }}</h1>
     <p>{{ hero.get('subline', '') }}</p>
     <a class="btn" href="{{ url_for('listings') }}">{{ hero.get('cta', 'Learn more') }}</a>
+    </div>
   </section>
   {% endif %}
 

@@ -173,3 +173,12 @@ class TestSeedDeterminism:
             rows = re.findall(r"<td><a href=\"/quote/[^\"]+\">([A-Z.]+)</a>",
                               html)
             assert len(rows) == expected, rows
+
+
+def test_alert_rejects_nonfinite_threshold(alice_client):
+    from conftest import with_csrf
+    for value in ['nan', 'inf', '-inf']:
+        data = with_csrf(alice_client, '/quote/XNYS:IBM', {
+            'symbol': 'IBM', 'direction': 'above', 'threshold': value,
+        })
+        assert alice_client.post('/alerts/create', data=data).status_code == 400

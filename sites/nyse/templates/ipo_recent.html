@@ -5,6 +5,7 @@
   <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('ipo_recent') }}">IPO Center</a> / Recent IPOs</p>
   <h1 class="page-title">IPO Data &mdash; Recent IPOs</h1>
 
+  <p><a href="{{ url_for('ipo_history') }}">Search captured IPO history</a></p>
   <section class="section-head"><h2>Priced Deals</h2></section>
   <div class="table-wrap">
     <table class="data">
@@ -12,7 +13,7 @@
         <tr>
           <th>Price Date</th><th>Issuer</th><th>Ticker</th><th>Industry</th>
           <th>Bookrunner(s)</th><th>Exchange</th>
-          <th class="num">Amt+ Over. ($MM)</th><th class="num">Offer Price ($)</th><th>Price Vs. Last Range</th>
+          <th class="num">Amt+ Over. ($)</th><th class="num">Offer Price ($)</th><th>Price Vs. Last Range</th>
         </tr>
       </thead>
       <tbody>
@@ -49,7 +50,7 @@
         <tr>
           <th>Price Date</th><th>Filing Date</th><th>Issuer</th><th>Industry</th>
           <th>Bookrunner(s)</th><th class="num">Offer / 1-day</th><th class="num">Offer / Current [%]</th>
-          <th>Relative to Range</th><th class="num">Proceeds ($MM)</th>
+          <th>Relative to Range</th><th class="num">Proceeds ($)</th>
         </tr>
       </thead>
       <tbody>
@@ -73,10 +74,10 @@
   </div>
   <p class="muted">LAST UPDATED: {{ updated }} &middot; Source: {{ source }}</p>
 
-  <section class="section-head"><h2>US IPO Execution ($Bn)</h2></section>
+  <section class="section-head"><h2>US IPO Execution</h2></section>
   <div class="table-wrap">
     <table class="data">
-      <thead><tr><th>Month</th><th class="num">Deals</th><th class="num">Proceeds ($MM)</th></tr></thead>
+      <thead><tr><th>Month</th><th class="num">Deals</th><th class="num">Proceeds ($)</th></tr></thead>
       <tbody>
         {% for m in monthly %}
           <tr>

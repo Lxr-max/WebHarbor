@@ -9,7 +9,7 @@
     "rich_quote_set": {
         "count": 92,
         "content": "full /api/nyseservice/v1/quotes payload: quote header, company facts, board of directors, total returns, the first ten option expiry dates (the upstream UI paginates options by expiry the same way) and the complete five-year daily price history",
-        "symbols": "homepage NYSE most-active board (NU CCL NIO NOK PCG ORCL AMC CDE STLA RIG), NYSE American most-active board (SDEV BTG DNN UEC EQX URG UUUU NG IAUX NAK), NYSE blue chips across sectors, Nasdaq megacaps, SPY, the NYSE-listed 2026 IPOs AERO and NHP, the bell-calendar company ARCO, and the REIT flagship rows AAT and VICI"
+        "symbols": "homepage NYSE most-active board (NU CCL NIO NOK PCG ORCL AMC CDE STLA RIG), NYSE American most-active board (SDEV BTG DNN UEC EQX URG UUUU NG IAUX NAK), NYSE blue chips across sectors, Nasdaq megacaps, SPY, captured IPO symbols AERO and NHP, the bell-calendar company ARCO, and the REIT flagship rows AAT and VICI"
     },
     "light_quote_set": {
         "count": 1190,
@@ -59,5 +59,17 @@
     "waf_note": "None. Every record is a live upstream capture; no deterministic fixture fallback was needed (contrast u_s_customs). The only countermeasure was polite pacing against the quotes endpoint's 429 throttle, as declared above.",
     "benchmark_users": "alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com (password TestPass123!) with authored watchlists and price alerts referencing only real captured quotes; frozen constants keep the SQLite seed byte-reproducible (PYTHONHASHSEED=0).",
     "total_quote_pages": 1282,
-    "directory_rows": 14068
+    "directory_rows": 14068,
+    "registration": {
+        "sites_index": 146,
+        "container_port": 40146,
+        "expose": "8101 40000-40147"
+    },
+    "review": {
+        "date": "2026-10-01",
+        "task_revision": "coherent-goals-v1",
+        "evidence": "/data/webharbor-prs/final/pr336: scripted browser regressions, independent source/state expectations and grading controls.",
+        "upstream_check": "Homepage and listings pages accessible and visually compared on 2026-10-01.",
+        "supplement": "IPO History exposes existing captured ipo_largest records with issuer/ticker search. No market facts or asset archives were synthesized or replaced. Calendar search now includes captured event descriptions; chart windows use elapsed calendar days."
+    }
 }
