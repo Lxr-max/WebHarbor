@@ -1,0 +1,122 @@
+{
+ "site": "iclr",
+ "upstream": "https://iclr.cc/",
+ "upstream_note": "the declared task upstream 'iclr.com' is a GoDaddy parking lander (a 114-byte redirect to /lander with no content); the real ICLR service this mirror targets is https://iclr.cc/ \u2014 the same normalization precedent as the dblp mirror (declared parked dblp.com -> real dblp.org) and the fox_sports mirror (invalid fox_sports.com -> real www.foxsports.com). The task brief's 'entertainment media' domain label is a stale template artifact (disney/fox_sports share the same text); the actual upstream defines the site: the International Conference on Learning Representations.",
+ "captured_at": "2026-09-30",
+ "capture_window_utc": "2026-09-30T10:00:40Z to 2026-09-30T10:04:45Z",
+ "capture_method": "direct HTTP (urllib, Chrome UA) against the public pages of iclr.cc and blog.iclr.cc; no WAF, bot check or login wall was encountered on any public page; every captured page returned HTTP 200 and is stored as the raw body in scraped_data/captures/ with a .meta.json sidecar (url, status, bytes, sha256, UTC timestamp). The accepted-papers dataset (5691 papers with authors, institutions, topics, decisions, sessions, rooms, poster positions, OpenReview links) and the per-paper abstracts come from the upstream's own JSON data files at /static/virtual/data/iclr-2026-orals-posters.json and /static/virtual/data/iclr-2026-abstracts.json, captured verbatim. Event detail pages (invited talks, workshops, socials, town hall, test of time, expo talks, mentorship, breaks, remarks, reception, registration desks) were captured page-by-page from the calendar links. The upstream JSON API (/api/miniconf/*) requires authentication and was not used.",
+ "waf_note": "None. iclr.cc and blog.iclr.cc serve every public page to plain HTTP with a desktop user agent; no fixture fallback was needed and every record is a live upstream capture.",
+ "pages_captured": 277,
+ "capture_breakdown": {
+  "core site pages": 15,
+  "2026 conference pages": 21,
+  "2027 conference pages": 15,
+  "virtual site pages": 8,
+  "virtual event detail pages": 207,
+  "blog.iclr.cc posts": 9,
+  "upstream JSON data files": 2
+ },
+ "sources": {
+  "https://iclr.cc/": {
+   "role": "conference home (defaults to the 2027 edition): 2027 CFP dates, hotel-block notice, venue placeholder, exhibitor blurb",
+   "captures": 1
+  },
+  "https://iclr.cc/Conferences/2026": {
+   "role": "ICLR 2026 conference home: The Fourteenth International Conference on Learning Representations, Rio de Janeiro, Brazil, April 23-27 2026; attendee quick links; announcements",
+   "captures": 20,
+   "pages": [
+    "Dates",
+    "CallForPapers",
+    "CallForWorkshops",
+    "CallForSocials",
+    "CallForBlogPosts",
+    "Pricing",
+    "Sponsors",
+    "VisaTravel",
+    "FinancialAssistance",
+    "ChildCare",
+    "PosterInstructions",
+    "CodeOfConduct",
+    "Committees",
+    "ProgramCommittee",
+    "Board",
+    "AuthorGuide",
+    "ReviewerGuide",
+    "AreaChairGuide",
+    "SeniorAreaChairGuide",
+    "Press"
+   ]
+  },
+  "https://iclr.cc/Conferences/2027": {
+   "role": "ICLR 2027 (upcoming): The Fifteenth International Conference on Learning Representations, California, April 26-30 2027; CFP/guides/AI policies/pricing/board pages",
+   "captures": 14,
+   "pages": [
+    "Dates",
+    "CallForPapers",
+    "CallForWorkshops",
+    "CallForBlogPosts",
+    "Pricing",
+    "Sponsors",
+    "Board",
+    "AuthorGuidelines",
+    "ReviewerGuidelines",
+    "AreaChairGuidelines",
+    "SeniorAreaChairGuidelines",
+    "AIPolicyForAuthors",
+    "AIPolicyForReviewers",
+    "WorkshopGuidelines"
+   ]
+  },
+  "https://iclr.cc/virtual/2026/*": {
+   "role": "the ICLR 2026 virtual site: getting-started/venue facts, papers page, the six-day Rio calendar (Apr 22-27), workshops/orals/socials/blog-track/journal-track listings, invited-talk bios, awards, sponsor list, organizers, town hall, search",
+   "captures": 8
+  },
+  "https://iclr.cc/virtual/2026/{kind}/{id}": {
+   "role": "207 event detail pages parsed from the calendar: 40 workshops (organizers, project pages, abstracts, internal talk schedules), 21 socials, 15 breaks, 12 expo talks/panels, 6 mentorship sessions, 6 registration desks, 2 remarks, 1 reception, 1 test-of-time event, 1 town hall, plus a 40-page deterministic sample of poster detail pages used for fidelity checks",
+   "captures": 207
+  },
+  "https://iclr.cc/static/virtual/data/iclr-2026-orals-posters.json": {
+   "role": "the upstream accepted-papers dataset: 5691 papers (5244 Accept (Poster), 447 Accept (Oral)) with per-paper authors and institutions, topic taxonomy, decision, event type, session, room, start/end instants, poster positions and OpenReview forum links",
+   "captures": 1
+  },
+  "https://iclr.cc/static/virtual/data/iclr-2026-abstracts.json": {
+   "role": "per-paper abstracts keyed by the same event ids",
+   "captures": 1
+  },
+  "https://blog.iclr.cc/": {
+   "role": "the nine conference announcements the site pages reference: ICLR 2026 Outstanding Papers (2 + 1 honorable mention, with the award committee), Test of Time awards from ICLR 2016 (DCGAN, DDPG), keynotes announcement, review-process retrospective, security-incident response, LLM-generated-papers response, LLM usage policies, ICLR 2027 submission policies",
+   "captures": 9
+  },
+  "https://iclr.cc/{About,FAQ,FAQ/CancellationPolicy,Downloads,Help/Contact,public/*,Sponsors/sponsorinfo,Exhibitors/exhibitorinfo,Register2,Register/view-registration,Conferences/FutureMeetings}": {
+   "role": "core site pages: About ICLR text, FAQ question/answer sections, contact-HelpDesk form structure, code of conduct, diversity, privacy, journal-to-conference, sponsor/exhibitor info, registration-closed state",
+   "captures": 15
+  }
+ },
+ "media": {
+  "note": "All 37 images under static/images/ are real upstream fetches; every file's exact source URL, byte length and sha256 are recorded in asset_inventory.json and the download manifest maps each to the captured pages that reference it.",
+  "logos": [
+   "https://iclr.cc/static/core/img/ICLR-logo.svg",
+   "https://iclr.cc/static/core/img/iclr-navbar-logo.svg",
+   "https://blog.iclr.cc/wp-content/uploads/ICLR-Logo.svg",
+   "https://blog.iclr.cc/wp-content/uploads/ICLR-favicon.png"
+  ],
+  "speaker_headshots": [
+   "https://media.iclr.cc/Conferences/ICLR2026/img/headshots/maria_m.jpg",
+   "https://media.iclr.cc/Conferences/ICLR2026/img/headshots/Max_Welling.jpg",
+   "https://media.iclr.cc/Conferences/ICLR2026/img/headshots/Karen_Adolph.jpg",
+   "https://media.iclr.cc/Conferences/ICLR2026/img/headshots/paa.jpg",
+   "https://cs.stanford.edu/~pliang/resources/percy3.jpeg"
+  ],
+  "organizer_portraits": "19 portraits from the exact personal-site URLs the upstream organizers page renders (media.iclr.cc, github.io pages, university pages, i.imgur.com, n-gao.de, colinraffel.com, ...); the two http:// references (imaginarynumber.net, cs.columbia.edu) are fetched over https, which both hosts serve, and the https URL is recorded. Two more upstream portrait URLs were dropped after byte-level verification: www.cs.cornell.edu/~bharathh/me-web.jpg serves a JPEG whose bytes continue 1030 bytes past the EOI marker with a non-image 'SEFT' container trailer (fails the repo's JPEG framing gate), and jyzhao.net/img/jieyuz.jpeg serves an HTML document at the image URL. The mirror renders styled-initial blocks for those organizers instead of shipping broken or non-image assets.",
+  "blog_artwork": "keynote headshots and policy illustrations from blog.iclr.cc/wp-content/uploads",
+  "venue": "the ICLR 2027 venue hero from media.iclr.cc/Conferences/ICLR2027/venue-hero.jpg",
+  "upstream_placeholder_note": "the upstream serves /static/virtual/img/person_placeholder.svg for speakers/organizers without a photo (e.g. Katherine Bouman); the mirror renders a styled-initial block for those people instead of shipping a placeholder asset"
+ },
+ "upstream_data_quirks": [
+  "the orals-posters JSON carries -07:00 timezone labels while the conference ran at UTC-3; the instants are correct (07:42-07:00 == 11:42-03:00) and the mirror renders Rio local times cross-checked against the calendar and session pages",
+  "the 2026/2027 pricing pages render literal CMS tokens like 'The date CancellationDeadline not found.' where the live site's date lookup fails; the mirror keeps the captured policy text and never invents prices (the only captured price is the $50 guest banquet ticket)",
+  "the calendar keeps a 'Rescheduled to Saturday: Percy Liang' placeholder entry (event 10022468) next to the rescheduled Marin talk (10020867); both are mirrored faithfully",
+  "one VerifAI workshop schedule row renders 'Emily McMilin' as both talk title and author; mirrored verbatim"
+ ],
+ "interactive_flows": "Accounts (create profile / login / logout), paper bookmarks, personal-schedule saves, the registration form (captured affiliation types, purchasable items with the upstream exclusivity rule, $50 guest banquet tickets, dietary preference) and the HelpDesk contact form are original mirror code seeded with deterministic benchmark fixtures; every paper, event, workshop, sponsor, organizer and news item they reference is a real captured upstream row."
+}

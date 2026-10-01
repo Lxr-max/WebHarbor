@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}dblp login{% endblock %}
+{% block main %}
+<header id="headline"><h1>dblp login</h1></header>
+<section class="section" id="login-section">
+  <div class="section-body">
+    {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+    <form method="post" action="{{ url_for('authn_login') }}"
+          class="login-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>email <input type="email" name="email" required></label>
+      <label>password <input type="password" name="password" required></label>
+      <button type="submit">log in</button>
+    </form>
+    <p class="form-hint">No account yet?
+      <a href="{{ url_for('authn_register') }}">register</a></p>
+  </div>
+</section>
+{% endblock %}

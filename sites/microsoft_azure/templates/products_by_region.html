@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Products by region — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Products by region</h1>
+  <p class="lead">See where each Azure service is available and compare pay-as-you-go prices across regions. Select a service, then pick up to four regions to compare.</p>
+
+  <nav class="tab-bar">
+    <a class="tab {% if service == 'virtual-machines' %}active{% endif %}" href="{{ url_for('products_by_region', service='virtual-machines') }}">Virtual Machines</a>
+    <a class="tab {% if service == 'kubernetes-service' %}active{% endif %}" href="{{ url_for('products_by_region', service='kubernetes-service') }}">Kubernetes Service</a>
+  </nav>
+
+  <form class="filter-bar" method="get" action="{{ url_for('products_by_region') }}">
+    <input type="hidden" name="service" value="{{ service }}">
+    {% for r in compare %}
+    <input type="hidden" name="region" value="{{ r }}">
+    {% endfor %}
+    <label class="inline-label">Add a region to the comparison
+      <select name="region" aria-label="Region to add">
+        <option value="">— pick a region —</option>
+        {% for row in rows if row.available and row.region.slug not in compare %}
+        <option value="{{ row.region.slug }}">{{ row.region.display_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button class="btn btn-primary" type="submit">Add region to comparison</button>
+    {% if compare %}
+    <a class="btn btn-ghost" href="{{ url_for('products_by_region', service=service) }}">Reset comparison</a>
+    {% endif %}
+  </form>
+  {% if compare %}
+  <p class="result-count">Comparing: {% for r in compare %}<span class="chip">{{ r }}</span> {% endfor %}</p>
+  {% endif %}
+
+  {% if compare %}
+  <h2>Comparing {{ compare|length }} region{{ '' if compare|length == 1 else 's' }} — {{ label }} (per-hour USD)</h2>
+  <table class="data-table">
+    <thead><tr><th>Size</th>{% for r in compare %}<th>{{ region_names[r] }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for row in comparison %}
+      <tr>
+        <td>{{ row.size.size_slug|upper }} ({{ row.size.os|capitalize }})</td>
+        {% for r in compare %}<td>${{ '%.4f'|format(row.prices[r]) }}</td>{% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <h2>Availability by region — {{ label }}</h2>
+  <table class="data-table">
+    <thead><tr><th>Region</th><th>Geography</th><th>Priced sizes</th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.region.display_name }}</td>
+        <td>{{ row.region.geo_slug|replace('-', ' ')|title }}</td>
+        <td>{{ row.available }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

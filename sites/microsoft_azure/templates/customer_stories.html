@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Azure customer stories — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Azure customer stories</h1>
+  <p class="lead">See how companies in every industry use Azure to build, modernize and scale. Filter by industry, by the Microsoft products involved, or search by keyword.</p>
+
+  <form class="filter-bar" method="get" action="{{ url_for('customer_stories') }}">
+    <select name="industry" aria-label="Filter by industry">
+      <option value="">All industries</option>
+      {% for i in industries %}
+      <option value="{{ i }}" {% if i == active_industry %}selected{% endif %}>{{ i }}</option>
+      {% endfor %}
+    </select>
+    <select name="product" aria-label="Filter by product">
+      <option value="">All products</option>
+      {% for p in products_facet %}
+      <option value="{{ p }}" {% if p == active_product %}selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+    <input type="search" name="q" placeholder="Search stories" value="{{ q }}" aria-label="Search stories">
+    <button class="btn btn-primary" type="submit">Filter</button>
+    {% if active_industry or active_product or q %}
+    <a class="btn btn-ghost" href="{{ url_for('customer_stories') }}">Clear filters</a>
+    {% endif %}
+  </form>
+
+  <p class="result-count">{{ items|length }} customer stor{{ 'y' if items|length == 1 else 'ies' }}</p>
+
+  <div class="story-grid">
+    {% for s in items %}
+    <a class="story-card" href="{{ url_for('customer_story', slug=s.slug) }}">
+      {% if s.header_image %}<img src="{{ img(s.header_image) }}" alt="" loading="lazy">{% endif %}
+      <div class="story-card-body">
+        <p class="card-meta">{{ s.industry_list|join(', ') }}</p>
+        <h3>{{ s.title }}</h3>
+        <p class="story-products">{{ s.product_list|join(' · ') }}</p>
+      </div>
+    </a>
+    {% else %}
+    <p>No stories match your filters.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Awards{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Awards</h1>
+</div>
+{% for group, rows in groups %}
+  <div class="tier">
+    <h2>{{ group }}</h2>
+    <div class="grid cols2">
+      {% for a in rows %}
+        <div class="card">
+          <p><span class="badge tier">{{ a.kind }}</span></p>
+          <h3 style="margin:8px 0 4px">{{ a.title }}</h3>
+          <p class="muted small">{{ a.author_list() | join(', ') }}</p>
+          {% if a.citation %}<p class="small">{{ a.citation }}</p>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% if group == 'Outstanding Paper Awards' %}
+      <p class="muted small">Selected by the Outstanding Paper Committee:
+        {{ committee | join(', ') }}.</p>
+    {% endif %}
+  </div>
+{% endfor %}
+{% endblock %}

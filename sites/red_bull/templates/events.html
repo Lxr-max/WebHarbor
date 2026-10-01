@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Events - Get an overview here{% endblock %}
+{% block content %}
+<h1 class="page-title">Events</h1>
+<p class="page-sub">Discover worldwide Red Bull events. Explore the event calendar to see past and upcoming events: bike, motorsport, surfing, winter sport, music, gaming and much more.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('events') }}">
+  <div>
+    <label for="discipline">Discipline</label>
+    <select id="discipline" name="discipline">
+      <option value="">All disciplines</option>
+      {% for d in disciplines %}
+      <option value="{{ d }}" {{ 'selected' if active_discipline == d }}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="">Worldwide</option>
+      {% for code, name in countries %}
+      <option value="{{ code }}" {{ 'selected' if active_country == code }}>{{ name or code }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="status">Time</label>
+    <select id="status" name="status">
+      <option value="">All</option>
+      <option value="upcoming" {{ 'selected' if active_status == 'upcoming' }}>Upcoming</option>
+      <option value="past" {{ 'selected' if active_status == 'past' }}>Past</option>
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('events') }}">Reset</a>
+  </div>
+</form>
+
+<div class="grid cols-3">
+  {% for e in events %}
+  <a class="card" href="{{ url_for('event_detail', slug=e.slug) }}">
+    <div class="thumb"><img src="{{ e.hero_image or e.image }}" alt="{{ e.title }}"></div>
+    <div class="body">
+      <span class="tag">{{ e.discipline }}</span>
+      <h3>{{ e.title }}</h3>
+      <p class="meta">{{ e.date_range_text() }}</p>
+      <p class="meta">{{ e.location_text() }}</p>
+      {% if e.reg_price or e.reg_title %}
+      <span class="badge reg">Registrations open</span>
+      {% elif e.state() == 'past' %}
+      <span class="badge past">Past event</span>
+      {% else %}
+      <span class="badge open">Upcoming event</span>
+      {% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('events', page=page-1, discipline=active_discipline, country=active_country, status=active_status) }}">‹ Prev</a>
+  {% endif %}
+  <span class="current">{{ page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('events', page=page+1, discipline=active_discipline, country=active_country, status=active_status) }}">Next ›</a>
+  {% endif %}
+  <span class="meta">{{ total }} events</span>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}My dblp: saved searches{% endblock %}
+{% block main %}
+<header id="headline"><h1>My dblp: saved searches</h1></header>
+<nav class="account-nav">
+  <ul>
+    <li><a href="{{ url_for('account') }}">dashboard</a></li>
+    <li><a href="{{ url_for('watchlist') }}">watchlist</a></li>
+    <li><a href="{{ url_for('saved_searches') }}">saved searches</a></li>
+    <li><a href="{{ url_for('saved_papers') }}">saved papers</a></li>
+    <li><a href="{{ url_for('search_history') }}">search history</a></li>
+    <li><a href="{{ url_for('account_profile') }}">profile</a></li>
+    <li>
+      <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="link-btn">log out</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+<section class="section" id="saved-searches">
+  <div class="section-body">
+    <ul class="saved-search-list">
+      {% for s in rows %}
+      <li>
+        {% if s.search_type == 'publ' %}
+        <a class="run-link" href="{{ url_for('search_publ', q=s.query_text) }}">run</a>
+        {% elif s.search_type == 'author' %}
+        <a class="run-link" href="{{ url_for('search_author', q=s.query_text) }}">run</a>
+        {% else %}
+        <a class="run-link" href="{{ url_for('search_venue', q=s.query_text) }}">run</a>
+        {% endif %}
+        <span class="query">{{ s.query_text }}</span>
+        <small>{{ s.search_type }} search</small>
+        {% if s.label %}<small class="label">&ldquo;{{ s.label }}&rdquo;</small>{% endif %}
+        <small class="added">saved {{ s.created_at }}</small>
+        <form method="post"
+              action="{{ url_for('saved_searches_delete', sid=s.id) }}"
+              class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="link-btn">delete</button>
+        </form>
+      </li>
+      {% else %}
+      <li class="no-matches">no saved searches yet &mdash; run a search and press
+        &ldquo;save this search&rdquo;</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

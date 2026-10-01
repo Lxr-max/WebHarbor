@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}My account — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>My account</h1>
+  <p class="lead">Signed in as {{ current_user.name }} ({{ current_user.email }}) — {{ current_user.role }}.</p>
+
+  <section class="band">
+    <h2>Saved pricing estimates</h2>
+    {% if estimates %}
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Service</th><th>Configuration</th><th>Monthly</th><th></th></tr></thead>
+      <tbody>
+        {% for e in estimates %}
+        <tr>
+          <td>{{ e.name }}</td>
+          <td>{{ e.service|replace('-', ' ')|title }}</td>
+          <td class="mono">{% for k, v in e.config_map.items() %}{{ k }}={{ v }} {% endfor %}</td>
+          <td>{{ e.monthly_display }}</td>
+          <td>
+            <form method="post" action="{{ url_for('delete_estimate', estimate_id=e.id) }}" class="inline-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-ghost" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No saved estimates yet. <a href="{{ url_for('calculator') }}">Build one with the pricing calculator</a>.</p>
+    {% endif %}
+  </section>
+
+  <section class="band band-alt">
+    <h2>Favorite products</h2>
+    {% if fav_products %}
+    <div class="card-grid">
+      {% for p in fav_products %}
+      <a class="card" href="{{ url_for('product_detail', slug=p.slug) }}"><h3>{{ p.name }}</h3><p>{{ p.desc }}</p></a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p>No favorites yet. Browse the <a href="{{ url_for('products') }}">product catalog</a> and add products you like.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
