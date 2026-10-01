@@ -53,12 +53,12 @@
   <div class="publ pager">
     {% set prev_f = f - h if f >= h else 0 %}
     {% if f > 0 %}
-    <a href="{{ url_for('search_publ', q=q, h=h, f=prev_f) }}">[&lt;&lt; previous]</a>
+    <a href="{{ url_for('search_publ', q=q, h=h, f=prev_f, year=sel_year or '', type=sel_type or '') }}">[&lt;&lt; previous]</a>
     {% endif %}
     {% set page_no = (f // h) + 1 %}
     <span>page {{ page_no }}</span>
     {% if f + h < total %}
-    <a href="{{ url_for('search_publ', q=q, h=h, f=f + h) }}">[next &gt;&gt;]</a>
+    <a href="{{ url_for('search_publ', q=q, h=h, f=f + h, year=sel_year or '', type=sel_type or '') }}">[next &gt;&gt;]</a>
     {% endif %}
   </div>
 

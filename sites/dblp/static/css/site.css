@@ -228,3 +228,6 @@ footer#footer { margin-top: 2rem; border-top: 2px solid #d0d0d0; padding: 0.8rem
   ul.publ-list > li.entry { grid-template-columns: 20px 1fr; }
   .stat-bar-row { flex-wrap: nowrap; }
 }
+
+/* Long electronic-edition URLs must wrap within the record at narrow widths. */
+dl.record-meta dd { min-width: 0; overflow-wrap: anywhere; }
