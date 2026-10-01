@@ -1,0 +1,42 @@
+[
+  {
+    "site": "nyse",
+    "task": "NYSE--9",
+    "label": "Swapped company beta values",
+    "expected": false,
+    "actual": false,
+    "reason": "Missing or incorrect BABA beta",
+    "answer": "ALIBABA GROUP HOLDING LTD SPON ADS EACH REP 8 ORD SHS: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 1.82T; Beta: 0.92; EPS: 4.50; 52 WK LOW\n91.99\nFriday, June 26, 2026; Closing price chart from 2025/09/29 to 2026/09/29\nNIO INC SPON ADS EACH REP 1 ORD SHS CLASS A: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 56.20B; Beta: 0.79; EPS: -0.28; 52 WK LOW\n3.38\nTuesday, September 29, 2026; Closing price chart from 2025/09/29 to 2026/09/29",
+    "synthetic": true
+  },
+  {
+    "site": "nyse",
+    "task": "NYSE--9",
+    "label": "Wrong EPS with correct value in reference",
+    "expected": false,
+    "actual": false,
+    "reason": "Missing or incorrect NIO eps",
+    "answer": "ALIBABA GROUP HOLDING LTD SPON ADS EACH REP 8 ORD SHS: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 1.82T; Beta: 0.79; EPS: 4.50; 52 WK LOW\n91.99\nFriday, June 26, 2026; Closing price chart from 2025/09/29 to 2026/09/29\nNIO INC SPON ADS EACH REP 1 ORD SHS CLASS A: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 56.20B; Beta: 0.92; EPS: 0.28; 52 WK LOW\n3.38\nTuesday, September 29, 2026; Closing price chart from 2025/09/29 to 2026/09/29 Reference number -0.28.",
+    "synthetic": true
+  },
+  {
+    "site": "nyse",
+    "task": "NYSE--9",
+    "label": "Equivalent field punctuation",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "ALIBABA GROUP HOLDING LTD SPON ADS EACH REP 8 ORD SHS: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 1.82T; Beta is 0.79; EPS is 4.50; 52 WK LOW\n91.99\nFriday, June 26, 2026; Closing price chart from 2025/09/29 to 2026/09/29\nNIO INC SPON ADS EACH REP 1 ORD SHS CLASS A: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 56.20B; Beta is 0.92; EPS is -0.28; 52 WK LOW\n3.38\nTuesday, September 29, 2026; Closing price chart from 2025/09/29 to 2026/09/29",
+    "synthetic": true
+  },
+  {
+    "site": "nyse",
+    "task": "NYSE--9",
+    "label": "Common company names",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "Alibaba (BABA): Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 1.82T; Beta: 0.79; EPS: 4.50; 52 WK LOW\n91.99\nFriday, June 26, 2026; Closing price chart from 2025/09/29 to 2026/09/29\nNIO: Sector: Consumer Discretionary; CEO: N/A; Market Capitalization: 56.20B; Beta: 0.92; EPS: -0.28; 52 WK LOW\n3.38\nTuesday, September 29, 2026; Closing price chart from 2025/09/29 to 2026/09/29",
+    "synthetic": true
+  }
+]

@@ -18,9 +18,10 @@ materialized deterministically at image build time (PYTHONHASHSEED=0).
 """
 import html
 import json
+import math
 import os
 import re
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 from flask import (Flask, abort, jsonify, redirect, render_template,
                    request, session, url_for)
@@ -587,7 +588,7 @@ def price_chart(bars, width=860, height=260):
             'width': width, 'height': height}
 
 
-ZOOM_DAYS = {'1W': 7, '1M': 30, '3M': 91, '1Y': 365, '5Y': 1300}
+ZOOM_DAYS = {'1W': 7, '1M': 30, '3M': 91, '1Y': 365, '5Y': 1826}
 
 
 # -------------------------------------------------------------------- routes --
@@ -742,7 +743,9 @@ def quote_page(mic, symbol, index=False):
         all_bars = PriceBar.query.filter_by(symbol=symbol) \
             .order_by(PriceBar.date).all()
         days = ZOOM_DAYS.get(zoom, 183)
-        window = all_bars[-days:]
+        cutoff = ((datetime.strptime(all_bars[-1].date, '%Y/%m/%d').date()
+                   - timedelta(days=days)).strftime('%Y/%m/%d')) if all_bars else ''
+        window = [b for b in all_bars if b.date >= cutoff]
         bars = [{'date': b.date, 'close': b.close} for b in window]
         chart = price_chart(bars)
         expiries = [e.label for e in OptionExpiry.query.filter_by(
@@ -777,6 +780,17 @@ def quote_page(mic, symbol, index=False):
         in_watch=in_watch, alerts=alert_rows, spec=spec,
         mic_name=MIC_NAMES.get(mic, mic), quote_href=quote_href,
         alert_state=alert_state)
+
+
+@app.route('/ipo-center/history')
+def ipo_history():
+    q = (request.args.get('q') or '').strip()
+    query = IpoLargest.query
+    if q:
+        query = query.filter(db.or_(IpoLargest.issuer.ilike('%'+q+'%'),
+                                   IpoLargest.symbol.ilike('%'+q+'%')))
+    rows = query.order_by(IpoLargest.price_date_ms.desc()).all()
+    return render_template('ipo_history.html', rows=rows, q=q, fmt_money=fmt_money)
 
 
 @app.route('/ipo-center/recent-ipo')
@@ -864,7 +878,8 @@ def bell_calendar():
         query = query.filter_by(etype=etype)
     if q:
         like = f'%{q}%'
-        query = query.filter(BellEvent.title.ilike(like))
+        query = query.filter(db.or_(BellEvent.title.ilike(like),
+                                   BellEvent.description.ilike(like)))
     if start:
         try:
             ms = int(datetime.strptime(start, '%Y-%m-%d')
@@ -1023,7 +1038,7 @@ def alerts_create():
     except ValueError:
         threshold = None
     if direction not in ('above', 'below') or threshold is None \
-            or threshold <= 0:
+            or not math.isfinite(threshold) or threshold <= 0:
         return render_template('alerts_error.html', quote=quote,
                                href=sym_href(symbol),
                                message='Choose a direction and a positive '
