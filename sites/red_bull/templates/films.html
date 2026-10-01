@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Films — Movies on Red Bull TV{% endblock %}
+{% block content %}
+<h1 class="page-title">Films</h1>
+<p class="page-sub">Feature films from Red Bull Media House — snow, surf, bike, motorsport and beyond, all on Red Bull TV.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('films') }}">
+  <div>
+    <label for="discipline">Discipline</label>
+    <select id="discipline" name="discipline">
+      <option value="">All disciplines</option>
+      {% for d in disciplines %}
+      <option value="{{ d }}" {{ 'selected' if active_discipline == d }}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('films') }}">Reset</a>
+  </div>
+</form>
+
+<div class="grid cols-4">
+  {% for f in films %}
+  <a class="card" href="{{ url_for('film_detail', slug=f.slug) }}">
+    <div class="thumb"><img src="{{ f.image }}" alt="{{ f.title }}"></div>
+    <div class="body">
+      <span class="tag">{{ f.discipline }}</span>
+      <h3>{{ f.title }}</h3>
+      <p>{{ f.subheading }}</p>
+      {% if f.duration_text() %}<p class="meta">{{ f.duration_text() }}</p>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('films', page=page-1, discipline=active_discipline) }}">‹ Prev</a>
+  {% endif %}
+  <span class="current">{{ page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('films', page=page+1, discipline=active_discipline) }}">Next ›</a>
+  {% endif %}
+  <span class="meta">{{ total }} films</span>
+</div>
+{% endblock %}

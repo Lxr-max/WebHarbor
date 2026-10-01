@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ event.hero_image or event.image }}" alt="{{ event.title }}">
+  <div class="overlay">
+    <span class="kicker">{{ event.discipline }}</span>
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.date_range_text() }}</p>
+    <p>{{ event.location_text() }}</p>
+  </div>
+</section>
+
+<div class="tab-row">
+  <a class="active" href="{{ url_for('event_detail', slug=event.slug) }}">Info</a>
+  {% if event.schedule_items %}
+  <a href="{{ url_for('event_schedule', slug=event.slug) }}">Schedule</a>
+  {% endif %}
+  {% if event.faqs %}
+  <a href="{{ url_for('event_faqs', slug=event.slug) }}">FAQs</a>
+  {% endif %}
+</div>
+
+<div class="detail-layout">
+  <div class="detail-main">
+    <div class="prose">
+      {% if event.standfirst %}
+      <p class="standfirst">{{ event.standfirst }}</p>
+      {% endif %}
+      {% for para in event.description_list() %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+
+    {% if event.series %}
+    <h2 class="section-title">Part of event series</h2>
+    <p><a class="btn btn-outline" href="{{ url_for('event_series', slug=event.series.slug) }}">{{ event.series.title }}</a></p>
+    {% endif %}
+
+    {% if stories %}
+    <h2 class="section-title">Stay updated</h2>
+    <div class="grid cols-3">
+      {% for s in stories %}
+      <a class="card" href="{{ url_for('story_detail', slug=s.slug) }}">
+        <div class="thumb"><img src="{{ s.hero_image }}" alt="{{ s.title }}"></div>
+        <div class="body"><span class="tag">{{ s.discipline }}</span><h3>{{ s.title }}</h3></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if related %}
+    <h2 class="section-title">Related events</h2>
+    <div class="grid cols-3">
+      {% for e in related %}
+      <a class="card" href="{{ url_for('event_detail', slug=e.slug) }}">
+        <div class="thumb"><img src="{{ e.hero_image or e.image }}" alt="{{ e.title }}"></div>
+        <div class="body"><span class="tag">{{ e.discipline }}</span><h3>{{ e.title }}</h3>
+        <p class="meta">{{ e.date_range_text() }}</p></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <aside class="side-panel">
+    <h3>Event facts</h3>
+    <div class="fact-row"><span class="k">Discipline</span><span class="v">{{ event.discipline or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Date</span><span class="v">{{ event.date_range_text() }}</span></div>
+    <div class="fact-row"><span class="k">Venue</span><span class="v">{{ event.venue or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Country</span><span class="v">{{ event.country or event.country_code or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Status</span><span class="v">{{ event.state() | capitalize }}</span></div>
+
+    {% if event.reg_price or event.reg_title or event.reg_type_name %}
+    <h3 style="margin-top:18px">Registration</h3>
+    {% if event.reg_price %}
+    <p class="price-tag">${{ '%.0f' | format(event.reg_price) if event.reg_price == (event.reg_price | int) else '%.2f' | format(event.reg_price) }}{% if event.reg_currency %} {{ event.reg_currency }}{% endif %}</p>
+    {% else %}
+    <p class="price-tag">Free</p>
+    {% endif %}
+    <p class="price-note">{{ event.reg_type_name or 'registration' }} — per participant. {{ event.reg_title or '' }}</p>
+    <p><a class="btn btn-red" href="{{ url_for('event_register', slug=event.slug) }}">Register Now!</a></p>
+    {% else %}
+    <h3 style="margin-top:18px">Spectators</h3>
+    <p class="price-note">No ticket needed — check the event page for details.</p>
+    {% endif %}
+
+    {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin-top:14px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="kind" value="event">
+      <input type="hidden" name="slug" value="{{ event.slug }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button type="submit" class="btn btn-outline">Save to favorites</button>
+    </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

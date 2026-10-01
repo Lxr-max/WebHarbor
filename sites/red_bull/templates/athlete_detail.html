@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{ athlete.name }}: {{ athlete.discipline }} – Red Bull Athlete Profile{% endblock %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ athlete.hero_image }}" alt="{{ athlete.name }}">
+  <div class="overlay">
+    <span class="kicker">Red Bull Athlete</span>
+    <h1>{{ athlete.name }}</h1>
+    <p>{{ athlete.nationality or '' }} · {{ athlete.discipline or '' }}</p>
+  </div>
+</section>
+
+<div class="detail-layout">
+  <div class="detail-main">
+    <p class="standfirst">{{ athlete.standfirst }}</p>
+    <h2 class="section-title">Who is {{ athlete.name }}?</h2>
+    <div class="prose">
+      {% for para in athlete.bio_list() %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="side-panel">
+    <h3>Facts</h3>
+    <div class="fact-row"><span class="k">Date of birth</span><span class="v">{{ athlete.dob or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Birthplace</span><span class="v">{{ athlete.birthplace or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Age</span><span class="v">{{ athlete.age or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Nationality</span><span class="v">{{ athlete.nationality or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Career start</span><span class="v">{{ athlete.career_start or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Disciplines</span><span class="v">{{ athlete.discipline or '—' }}</span></div>
+    {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin-top:14px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="kind" value="athlete">
+      <input type="hidden" name="slug" value="{{ athlete.slug }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button type="submit" class="btn btn-outline">Save to favorites</button>
+    </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}
