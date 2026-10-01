@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block title %}{{ q.symbol }} Stock Price &amp; Quote | NYSE{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs">
+    <a href="{{ url_for('home') }}">NYSE</a> /
+    <a href="{{ url_for('listings_directory', tab='stock') }}">Listings Directory</a> /
+    {{ q.symbol }}
+  </p>
+
+  <section class="quote-head">
+    <div class="qh-name">{{ mic_name }} / {{ q.symbol }}</div>
+    <h1>{{ q.name or q.dispname }}</h1>
+    <span class="quote-price">{{ fmt_price(q.last) }}</span>
+    <span class="quote-change {{ 'pos' if (q.change or 0) > 0 else ('neg' if (q.change or 0) < 0 else '') }}">
+      {{ '+' if (q.change or 0) > 0 else '' }}{{ fmt_price(q.change) }} ({{ fmt_pct(q.pctchg) }}%)
+    </span>
+    <div class="muted">{{ fmt_volume(q.volume) }} Volume</div>
+    <div class="quote-time">As of {{ q.quote_time }} &middot; Quote data is delayed</div>
+
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="k">Today's Low</div><div class="v">{{ fmt_price(q.low) }}</div></div>
+      <div class="stat-cell"><div class="k">Open</div><div class="v">{{ fmt_price(q.open) }}</div></div>
+      <div class="stat-cell"><div class="k">Last</div><div class="v">{{ fmt_price(q.last) }}</div></div>
+      <div class="stat-cell"><div class="k">Today's High</div><div class="v">{{ fmt_price(q.high) }}</div></div>
+      <div class="stat-cell">
+        <div class="k">52 Wk Low</div>
+        <div class="v">{{ fmt_price(q.ann_low) }}</div>
+        <div class="sub">{{ q.wl52date or '' }}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="k">52 Wk High</div>
+        <div class="v">{{ fmt_price(q.ann_high) }}</div>
+        <div class="sub">{{ q.wh52date or '' }}</div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('watchlist_toggle') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="symbol" value="{{ q.symbol }}">
+          <input type="hidden" name="back" value="{{ request.path }}">
+          <button class="btn small {{ 'ghost' if in_watch }}" type="submit">
+            {{ 'Remove from Watchlist' if in_watch else 'Add to Watchlist' }}
+          </button>
+        </form>
+      {% else %}
+        <a class="btn small ghost" href="{{ url_for('login', next=request.path) }}">Log in to add to your watchlist</a>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if chart %}
+  <section class="chart-box">
+    <div class="zoom-tabs" aria-label="Chart zoom">
+      {% for z in ['1W', '1M', '3M', '1Y', '5Y'] %}
+        {% if z == zoom %}<span class="cur">{{ z }}</span>
+        {% elif spec.startswith('index/') %}<a href="{{ url_for('quote_index', symbol=q.symbol, zoom=z) }}">{{ z }}</a>
+        {% else %}<a href="{{ url_for('quote', spec=spec, zoom=z) }}">{{ z }}</a>{% endif %}
+      {% endfor %}
+    </div>
+    <svg viewBox="0 0 {{ chart.width }} {{ chart.height + 34 }}" width="100%" role="img" aria-label="Closing price chart from {{ chart.first_date }} to {{ chart.last_date }}">
+      <path d="{{ chart.area }}" fill="rgba(0,150,214,0.15)" stroke="none"></path>
+      <path d="{{ chart.path }}" fill="none" stroke="#0096d6" stroke-width="2"></path>
+      <text x="4" y="{{ chart.height + 16 }}" font-size="12" fill="#666">{{ chart.first_date }}</text>
+      <text x="{{ chart.width - 4 }}" y="{{ chart.height + 16 }}" font-size="12" text-anchor="end" fill="#666">{{ chart.last_date }}</text>
+      <text x="4" y="14" font-size="12" fill="#666">{{ fmt_price(chart.hi) }}</text>
+      <text x="4" y="{{ chart.height - 2 }}" font-size="12" fill="#666">{{ fmt_price(chart.lo) }}</text>
+    </svg>
+  </section>
+  {% endif %}
+
+  <div class="grid cols-2">
+    <div class="card card-pad">
+      <h3>{{ q.name or q.symbol }}</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <tbody>
+            <tr><th>Country</th><td>{{ q.country or '--' }}</td></tr>
+            <tr><th>CEO</th><td>{{ q.ceo or '--' }}</td></tr>
+            <tr><th>Sector</th><td>{{ q.sector or '--' }}</td></tr>
+            <tr><th>Market Capitalization</th><td>{{ fmt_money(q.market_cap) if q.market_cap else '--' }}</td></tr>
+            <tr><th>Shares Outstanding</th><td>{{ fmt_volume(q.shares_outstanding) if q.shares_outstanding else '--' }}</td></tr>
+            <tr><th>Avg Volume</th><td>{{ fmt_volume(q.ave_vol) or '--' }}</td></tr>
+            <tr><th>Volatility</th><td>{{ fmt_pct(q.volatility) if q.volatility else '--' }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card card-pad">
+      <h3>Key Data</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <tbody>
+            <tr><th>Dividend</th><td>{{ fmt_price(q.dividend) if q.dividend is not none else '--' }}</td></tr>
+            <tr><th>Ex-Dividend Date</th><td>{{ q.div_date or '--' }}</td></tr>
+            <tr><th>Dividend Yield</th><td>{{ fmt_pct(q.div_yield) if q.div_yield is not none else '--' }}</td></tr>
+            <tr><th>Dividend Frequency</th><td>{{ q.div_int or '--' }}</td></tr>
+            <tr><th>Beta</th><td>{{ fmt_pct(q.beta) if q.beta is not none else '--' }}</td></tr>
+            <tr><th>EPS</th><td>{{ fmt_pct(q.eps) if q.eps is not none else '--' }}</td></tr>
+            <tr><th>RSI</th><td>{{ fmt_pct(q.rsi) if q.rsi is not none else '--' }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {% if q.ret_1m is not none or q.ret_3m is not none or q.ret_6m is not none or q.ret_52w is not none or q.ret_3y is not none %}
+  <section class="card card-pad">
+    <h3>Total Return (%)</h3>
+    <div class="returns-bars">
+      {% set rets = [('1 month', q.ret_1m), ('3 month', q.ret_3m), ('6 month', q.ret_6m), ('52 week', q.ret_52w), ('3 year', q.ret_3y)] %}
+      {% set max_abs = (rets | map(attribute=1) | select('ne', none) | map('abs') | max) or 1 %}
+      {% for label, value in rets %}
+        {% if value is not none %}
+          {% set h = ((value | abs) / max_abs * 80) | round | int %}
+          <div class="returns-bar {{ 'neg' if value < 0 }}" style="height: {{ 20 + h }}px; margin-top: {{ 60 - h }}px;">
+            <span class="v">{{ fmt_pct(value) }}</span>
+            <span class="l">{{ label }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div style="clear: both;"></div>
+  </section>
+  {% endif %}
+
+  {% if board %}
+  <section class="section-head"><h2>Board of Directors</h2></section>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Name</th><th class="num">Term (Years)</th></tr></thead>
+      <tbody>
+        {% for member in board %}
+          <tr><td>{{ member.name }}</td><td class="num">{{ member.term_in_years if member.term_in_years is not none else '--' }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  {% if expiries %}
+  <section class="section-head">
+    <h2>Options</h2>
+    {% if put_call_ratio is not none %}<span class="badge">Put/Call Ratio: {{ put_call_ratio }}</span>{% endif %}
+  </section>
+  <p class="muted">The put/call ratio is vital as it reveals market sentiment, helping traders gauge whether the overall mood is bullish or bearish. A put/call ratio over 1 indicates bearish sentiment, while a ratio under 1 suggests bullish sentiment.</p>
+  <div class="opt-tabs" aria-label="Option expiry">
+    {% for exp in expiries %}
+      {% if loop.index == exp_tab %}<span class="cur">{{ exp }}</span>
+      {% elif spec.startswith('index/') %}<a href="{{ url_for('quote_index', symbol=q.symbol, exp=loop.index) }}">{{ exp }}</a>
+      {% else %}<a href="{{ url_for('quote', spec=spec, exp=loop.index) }}">{{ exp }}</a>{% endif %}
+    {% endfor %}
+  </div>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th colspan="5">Calls</th>
+          <th>Strikes</th>
+          <th colspan="5">Puts</th>
+        </tr>
+        <tr>
+          <th class="num">Last</th><th class="num">Bid</th><th class="num">Ask</th><th class="num">Volume</th><th class="num">Openint</th>
+          <th class="num">Strike</th>
+          <th class="num">Last</th><th class="num">Bid</th><th class="num">Ask</th><th class="num">Volume</th><th class="num">Openint</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for strike in strikes %}
+          {% set call = strike_rows[strike].get('call') %}
+          {% set put = strike_rows[strike].get('put') %}
+          <tr>
+            <td class="num">{{ fmt_price(call.recent) if call and call.recent is not none else '--' }}</td>
+            <td class="num">{{ fmt_price(call.bid) if call and call.bid is not none else '--' }}</td>
+            <td class="num">{{ fmt_price(call.ask) if call and call.ask is not none else '--' }}</td>
+            <td class="num">{{ call.volume if call else '--' }}</td>
+            <td class="num">{{ call.open_int if call else '--' }}</td>
+            <td class="num"><strong>{{ fmt_price(strike) }}</strong></td>
+            <td class="num">{{ fmt_price(put.recent) if put and put.recent is not none else '--' }}</td>
+            <td class="num">{{ fmt_price(put.bid) if put and put.bid is not none else '--' }}</td>
+            <td class="num">{{ fmt_price(put.ask) if put and put.ask is not none else '--' }}</td>
+            <td class="num">{{ put.volume if put else '--' }}</td>
+            <td class="num">{{ put.open_int if put else '--' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  {% if current_user.is_authenticated %}
+  <section class="section-head"><h2>Create a Price Alert for {{ q.symbol }}</h2></section>
+  <form class="form-panel" method="post" action="{{ url_for('alerts_create') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="symbol" value="{{ q.symbol }}">
+    <div class="form-row">
+      <label for="direction">Alert me when the price goes</label>
+      <select id="direction" name="direction">
+        <option value="above">Above</option>
+        <option value="below">Below</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="threshold">Target price ($)</label>
+      <input id="threshold" name="threshold" type="number" step="0.01" min="0.01" required placeholder="e.g. 150.00">
+    </div>
+    <div class="form-row">
+      <label for="note">Note (optional)</label>
+      <input id="note" name="note" type="text" maxlength="200" placeholder="Why this level matters">
+    </div>
+    <div class="form-actions">
+      <button class="btn" type="submit">Create Alert</button>
+      <a class="btn ghost" href="{{ url_for('alerts') }}">My Alerts</a>
+    </div>
+  </form>
+  {% if alerts %}
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Direction</th><th class="num">Target ($)</th><th>Status vs. {{ fmt_price(q.last) }}</th><th>Note</th></tr></thead>
+      <tbody>
+        {% for a in alerts %}
+          <tr>
+            <td>{{ a.direction }}</td>
+            <td class="num">{{ fmt_price(a.threshold) }}</td>
+            <td>{% if alert_state(a) == 'triggered' %}<span class="pos">Triggered</span>{% else %}Pending{% endif %}</td>
+            <td>{{ a.note or '--' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+  {% endif %}
+
+</div>
+{% endblock %}

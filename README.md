@@ -118,6 +118,8 @@ All registered websites and their default ports, in registration order from left
 | Red Bull | 40141 | dblp | 40142 | Microsoft Azure | 40143 |
 | FOX Sports | 40144 | Samsung | 40219 |  |  |
 
+| nyse | pending |  |  |  |  |
+
 ## 🤝 Contribute
 
 We have built 30 high-quality mirrors covering the [WebVoyager](https://github.com/MinorJerry/WebVoyager) benchmark. The next goal is **100+ sites**, covering everything in [Online-Mind2Web](https://huggingface.co/datasets/osunlp/Online-Mind2Web). We are inviting the community to build this together.

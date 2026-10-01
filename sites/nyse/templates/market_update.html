@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Today&rsquo;s Stock Market{% endblock %}
+{% block content %}
+<div class="wrap" style="max-width: 900px;">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / Today&rsquo;s Stock Market</p>
+  <h1 class="page-title">Today&rsquo;s Stock Market</h1>
+  {% if article %}
+  <p class="muted">
+    {{ article.get('author') }} &middot; {{ article.get('role') }}<br>
+    {{ article.get('date') }}
+  </p>
+  {% for para in article.get('paragraphs', []) %}
+    <p>{{ para }}</p>
+  {% endfor %}
+  {% endif %}
+  <p><a class="btn ghost" href="{{ url_for('home') }}">Back to home</a></p>
+</div>
+{% endblock %}
