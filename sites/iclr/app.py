@@ -436,12 +436,11 @@ def _conference_meta():
 
 def local_redirect(target, fallback):
     """Keep form continuations on this mirror, including encoded URL variants."""
-    from urllib.parse import unquote, urlsplit
+    from urllib.parse import unquote
     value = target or ''
     decoded = unquote(value)
-    parsed = urlsplit(decoded)
     if (not decoded.startswith('/') or decoded.startswith('//')
-            or parsed.scheme or parsed.netloc or '\\' in decoded
+            or '\\' in decoded
             or any(ord(c) < 32 for c in decoded)):
         value = fallback
     return redirect(value)
