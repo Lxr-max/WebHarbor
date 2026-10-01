@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Page not found{% endblock %}
+{% block content %}
+<div class="wrap">
+  <div class="hero">
+    <h1>Page not found</h1>
+    <p>The page you requested does not exist on this mirror of the New York Stock Exchange.</p>
+    <a class="btn" href="{{ url_for('home') }}">Back to the NYSE home page</a>
+  </div>
+</div>
+{% endblock %}

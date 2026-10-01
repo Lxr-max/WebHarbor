@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Listings Directory for NYSE {{ label }} | NYSE{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('listings') }}">NYSE</a> / Listings Directory</p>
+  <h1 class="page-title">Listings Directory for NYSE {{ label }}</h1>
+
+  <div class="tabs" role="tablist">
+    <a class="tab {{ 'active' if tab == 'stock' }}" href="{{ url_for('listings_directory', tab='stock') }}">Stocks</a>
+    <a class="tab {{ 'active' if tab == 'etf' }}" href="{{ url_for('listings_directory', tab='etf') }}">ETFs</a>
+    <a class="tab {{ 'active' if tab == 'index' }}" href="{{ url_for('listings_directory', tab='index') }}">Indices</a>
+    <a class="tab {{ 'active' if tab == 'reit' }}" href="{{ url_for('listings_directory', tab='reit') }}">REITs</a>
+  </div>
+
+  <form class="filters" method="get" action="{{ url_for('listings_directory', tab=tab) }}">
+    <div class="field">
+      <label for="q">Filter</label>
+      <input id="q" type="search" name="q" value="{{ q }}" placeholder="Search by Symbol or Name">
+    </div>
+    <div class="field">
+      <label for="sort">Sort by</label>
+      <select id="sort" name="sort">
+        <option value="symbol" {{ 'selected' if sort == 'symbol' }}>Symbol</option>
+        <option value="name" {{ 'selected' if sort == 'name' }}>Name</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="order">Order</label>
+      <select id="order" name="order">
+        <option value="asc" {{ 'selected' if order == 'asc' }}>Ascending</option>
+        <option value="desc" {{ 'selected' if order == 'desc' }}>Descending</option>
+      </select>
+    </div>
+    <button class="btn small" type="submit">Apply</button>
+    {% if q %}<a class="btn ghost small" href="{{ url_for('listings_directory', tab=tab) }}">Clear</a>{% endif %}
+  </form>
+
+  <p class="count-line"><strong>{{ total }}</strong> listings match{% if q %} &ldquo;{{ q }}&rdquo;{% endif %} &middot; page {{ page }} of {{ pages }}</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th><a href="{{ url_for('listings_directory', tab=tab, q=q, sort='symbol', order='asc' if sort != 'symbol' or order == 'desc' else 'desc') }}">Symbol</a></th>
+          <th><a href="{{ url_for('listings_directory', tab=tab, q=q, sort='name', order='asc' if sort != 'name' or order == 'desc' else 'desc') }}">Name</a></th>
+          <th>Exchange</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          {% set has_quote = quotes_present.get(r.symbol) %}
+          <tr>
+            <td>
+              {% if has_quote %}<a href="{{ quote_href(r.mic, r.symbol) }}">{{ r.symbol }}</a>
+              {% else %}<span>{{ r.symbol }}</span>{% endif %}
+            </td>
+            <td>{{ r.name }}</td>
+            <td class="muted">{{ mic_names.get(r.mic, r.mic) }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="3">No listings match this filter.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="pager" aria-label="Pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('listings_directory', tab=tab, q=q, sort=sort, order=order, page=1) }}">&laquo; First</a>
+      <a href="{{ url_for('listings_directory', tab=tab, q=q, sort=sort, order=order, page=page-1) }}">&lsaquo; Previous</a>
+    {% else %}
+      <span class="off">&laquo; First</span><span class="off">&lsaquo; Previous</span>
+    {% endif %}
+    {% for p in range([1, page - 2] | max, [pages, page + 2] | min + 1) %}
+      {% if p == page %}<span class="cur">{{ p }}</span>
+      {% else %}<a href="{{ url_for('listings_directory', tab=tab, q=q, sort=sort, order=order, page=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+    {% if page < pages %}
+      <a href="{{ url_for('listings_directory', tab=tab, q=q, sort=sort, order=order, page=page+1) }}">Next &rsaquo;</a>
+      <a href="{{ url_for('listings_directory', tab=tab, q=q, sort=sort, order=order, page=pages) }}">Last &raquo;</a>
+    {% else %}
+      <span class="off">Next &rsaquo;</span><span class="off">Last &raquo;</span>
+    {% endif %}
+  </nav>
+  <p class="muted">Market data delayed minimum of 15 minutes. Directory rows without a link have no captured quote page in this mirror snapshot.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}NYSE: Bell Calendar{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / <a href="{{ url_for('bell') }}">The Bell</a> / Calendar</p>
+  <h1 class="page-title">Bell Calendar</h1>
+  <p class="page-sub">One of the most familiar images of the NYSE on the evening news is the loud ringing of a bell, signaling the opening or closing of the day&rsquo;s trading. Trading floor bells are more than just a colorful tradition &mdash; they are critical to the orderly functioning of the marketplace, assuring that no trades take place before the opening or after the close.</p>
+
+  <form class="filters" method="get" action="{{ url_for('bell_calendar') }}">
+    <div class="field">
+      <label for="q">Search</label>
+      <input id="q" type="search" name="q" value="{{ q }}" placeholder="Search bell events">
+    </div>
+    <div class="field">
+      <label for="type">Type</label>
+      <select id="type" name="type">
+        <option value="">All bells</option>
+        {% for t in types %}
+          <option value="{{ t }}" {{ 'selected' if t == etype }}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="from">From</label>
+      <input id="from" type="date" name="from" value="{{ start }}">
+    </div>
+    <div class="field">
+      <label for="to">To</label>
+      <input id="to" type="date" name="to" value="{{ end }}">
+    </div>
+    <button class="btn small" type="submit">Apply</button>
+    {% if q or etype or start or end %}<a class="btn ghost small" href="{{ url_for('bell_calendar') }}">Clear</a>{% endif %}
+  </form>
+
+  <p class="count-line"><strong>{{ total }}</strong> bell events{% if etype %} of type {{ etype }}{% endif %}{% if q %} matching &ldquo;{{ q }}&rdquo;{% endif %} &middot; page {{ page }} of {{ pages }}</p>
+
+  <div class="bell-grid">
+    {% for e in rows %}
+      <article class="bell-card">
+        {% set eimg = img('https://www.nyse.com' ~ e.image) if e.image else None %}
+        {% if eimg %}<img src="{{ eimg }}" alt="Bell ceremony: {{ e.plain_title() }}">{% endif %}
+        <div class="bell-body">
+          <span class="badge">{{ e.etype }}</span>
+          <h3>{{ e.plain_title() }}</h3>
+          <div class="bell-when">{{ e.date_label }} &middot; {{ e.time_label }}</div>
+          <p class="bell-desc">{{ e.plain_description() }}</p>
+          {% for m in e.media_list() %}
+            <p class="muted"><a href="{{ m.value }}" rel="noopener noreferrer">{{ m.name }}</a></p>
+          {% endfor %}
+        </div>
+      </article>
+    {% else %}
+      <p>No bell events match these filters.</p>
+    {% endfor %}
+  </div>
+
+  <nav class="pager" aria-label="Pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('bell_calendar', q=q, type=etype, from=start, to=end, page=1) }}">&laquo; First</a>
+      <a href="{{ url_for('bell_calendar', q=q, type=etype, from=start, to=end, page=page-1) }}">&lsaquo; Previous</a>
+    {% else %}
+      <span class="off">&laquo; First</span><span class="off">&lsaquo; Previous</span>
+    {% endif %}
+    {% for p in range([1, page - 2] | max, [pages, page + 2] | min + 1) %}
+      {% if p == page %}<span class="cur">{{ p }}</span>
+      {% else %}<a href="{{ url_for('bell_calendar', q=q, type=etype, from=start, to=end, page=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+    {% if page < pages %}
+      <a href="{{ url_for('bell_calendar', q=q, type=etype, from=start, to=end, page=page+1) }}">Next &rsaquo;</a>
+      <a href="{{ url_for('bell_calendar', q=q, type=etype, from=start, to=end, page=pages) }}">Last &raquo;</a>
+    {% else %}
+      <span class="off">Next &rsaquo;</span><span class="off">Last &raquo;</span>
+    {% endif %}
+  </nav>
+</div>
+{% endblock %}

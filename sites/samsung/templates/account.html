@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}My Account{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>My Account</h1></div>
+<div class="account-grid">
+  <section class="account-card">
+    <h2>Profile</h2>
+    <p>{{ current_user.name }}</p>
+    <p class="muted">{{ current_user.email }}</p>
+    <a class="btn btn-small" href="{{ url_for('logout') }}">Sign Out</a>
+  </section>
+  <section class="account-card">
+    <h2>Orders</h2>
+    <p>You have placed <strong>{{ order_count }}</strong> order{{ 's' if order_count != 1 }}.</p>
+    <a class="btn btn-small" href="{{ url_for('orders') }}">View Order History</a>
+  </section>
+  <section class="account-card">
+    <h2>Wishlist</h2>
+    <p><strong>{{ wishlist|length }}</strong> item{{ 's' if wishlist|length != 1 }} saved.</p>
+    <a class="btn btn-small" href="{{ url_for('wishlist') }}">Open Wishlist</a>
+  </section>
+  <section class="account-card">
+    <h2>Support tickets</h2>
+    {% if tickets %}
+    <ul class="ticket-list">
+      {% for t in tickets %}
+      <li>{{ t.ticket_no }} &middot; {{ t.subject }} &middot; {{ t.status }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">No tickets yet.</p>
+    {% endif %}
+    <a class="btn btn-small" href="{{ url_for('contact') }}">Contact Support</a>
+  </section>
+</div>
+{% endblock %}

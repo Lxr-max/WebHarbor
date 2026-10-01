@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ lib.name }} — Stanford Libraries{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('libraries') }}">Libraries</a> › {{ lib.name }}</div>
+<div class="detail-head">
+  <h1>{{ lib.name }}</h1>
+  <div class="meta">{% if lib.phone %}Phone {{ lib.phone }}{% endif %}{% if lib.email %} · {{ lib.email }}{% endif %}</div>
+</div>
+<div class="detail-body">
+  {% if lib.photo_url %}<img src="{{ lib.photo_url }}" alt="{{ lib.name }}" style="width:100%;border-radius:10px;margin-bottom:18px;">{% endif %}
+  {% if lib.location %}<p><strong>Location:</strong> {{ lib.location }}</p>{% endif %}
+  {% if lib.about %}<p>{{ lib.about }}</p>{% endif %}
+  {% if lib.quick_links %}
+  <h2>Quick links</h2>
+  <ul>{% for x in lib.quick_links %}<li>{{ x }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if lib.research_subjects %}
+  <h2>Research support</h2>
+  <p>{% for s in lib.research_subjects %}<span class="tag">{{ s }}</span>{% endfor %}</p>
+  {% endif %}
+  {% if lib.hours_rows %}
+  <h2>Hours ({{ week_label }})</h2>
+  <table class="data">
+    <tr><th>Desk</th>{% for d in lib.hours_days %}<th>{{ d }}</th>{% endfor %}</tr>
+    {% for row in lib.hours_rows %}
+      <tr>
+        <td>{{ row.desk }}</td>
+        {% for h in row.hours %}<td>{{ h or '—' }}</td>{% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

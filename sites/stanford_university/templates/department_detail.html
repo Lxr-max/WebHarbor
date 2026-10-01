@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}{{ dept.name }} — Stanford University{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('departments') }}">Departments</a> › {{ dept.name }}</div>
+<div class="detail-head">
+  <h1>{{ dept.name }}</h1>
+  <div class="meta">{{ school_name }} · Department code {{ dept.code }}{% if dept.subject_code_list %} · Subject{{ dept.subject_code_list|length > 1 and 's' or '' }}: {{ dept.subject_code_list|join(', ') }}{% endif %}</div>
+</div>
+<div class="detail-body">
+  {% if dept.description %}<p>{{ dept.description }}</p>{% endif %}
+
+  <h2>Degree Programs</h2>
+  {% if programs %}
+  <table class="data">
+    <tr><th>Program</th><th>Type</th><th>Units min</th></tr>
+    {% for p in programs %}
+      <tr>
+        <td><a href="{{ url_for('program_detail', code=p.code) }}">{{ p.name }}</a></td>
+        <td>{{ p.type or '—' }}</td>
+        <td>{{ p.units_min if p.units_min else '—' }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}<p>No degree programs are listed for this department in the bulletin.</p>{% endif %}
+
+  {% if courses %}
+  <h2>Courses</h2>
+  <p><a href="{{ url_for('courses', dept=dept.code) }}">View all {{ dept.name }} courses in the catalog</a></p>
+  <table class="data">
+    <tr><th>Code</th><th>Title</th><th>Units</th><th>Terms</th></tr>
+    {% for c in courses[:12] %}
+      <tr>
+        <td><a href="{{ url_for('course_detail', code=c.code) }}">{{ c.code }}</a></td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.units_display }}</td>
+        <td>{{ c.terms|join(', ') }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if faculty %}
+  <h2>Faculty</h2>
+  <p><a href="{{ url_for('faculty', dept=dept.name) }}">View the {{ dept.name }} faculty directory</a></p>
+  <div class="grid cols-3">
+    {% for f in faculty[:6] %}
+      <div class="card"><div class="pad">
+        <h3><a href="{{ url_for('faculty_detail', profile_id=f.profile_id) }}">{{ f.name }}</a></h3>
+        <div class="meta">{{ f.short_title }}</div>
+      </div></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

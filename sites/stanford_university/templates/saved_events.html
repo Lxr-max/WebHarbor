@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Saved Events — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Saved Events</h2>
+  <span class="count">{{ items|length }} saved</span>
+</div>
+{% if items %}
+<div class="grid cols-2">
+  {% for row, e in items %}
+    <div class="card">
+      {% if e.photo_url %}<a href="{{ url_for('event_detail', eid=e.eid) }}"><img src="{{ e.photo_url }}" alt="{{ e.title }}"></a>{% endif %}
+      <div class="pad">
+        <div class="meta">{{ e.first_date }}{% if e.location_name %} · {{ e.location_name }}{% endif %}</div>
+        <h3><a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.title }}</a></h3>
+        <form class="inline-form" method="post" action="{{ url_for('event_unsave') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="eid" value="{{ e.eid }}">
+          <input type="hidden" name="next" value="{{ url_for('saved_events') }}">
+          <button class="btn small" type="submit">Remove</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty">You haven't saved any events yet. Browse
+<a href="{{ url_for('events') }}">campus events</a> and save the ones you want to attend.</div>
+{% endif %}
+<p><a class="btn" href="{{ url_for('events') }}">Browse campus events</a></p>
+{% endblock %}

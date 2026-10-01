@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% from '_quote_macros.html' import quote_tabs, quote_header with context %}
+{% block title %}{{ q.short_name or q.symbol }} Profile - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  {{ quote_header() }}
+  {{ quote_tabs('profile') }}
+  {% if q.description %}
+  <h2 class="section-title">About {{ q.long_name or q.short_name }}</h2>
+  <p class="about-desc">{{ q.description }}</p>
+  {% else %}
+  <p class="muted">No company profile is available for this instrument.</p>
+  {% endif %}
+
+  <h2 class="section-title" style="margin-top:18px;">Company Facts</h2>
+  <div class="profile-facts">
+    <div class="fact"><div class="fact-label">Sector</div><div class="fact-value">{{ q.sector or 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">Industry</div><div class="fact-value">{{ q.industry or 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">Full Time Employees</div><div class="fact-value">{{ fmt_int(q.employees) if q.employees else 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">Fiscal Year Ends</div><div class="fact-value">{{ month_day_year(q.fiscal_year_end) if q.fiscal_year_end else 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">Website</div><div class="fact-value">{% if q.website %}<a href="{{ q.website }}" rel="nofollow">{{ q.website }}</a>{% else %}N/A{% endif %}</div></div>
+    <div class="fact"><div class="fact-label">Country</div><div class="fact-value">{{ q.country or 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">City</div><div class="fact-value">{{ q.city or 'N/A' }}</div></div>
+    <div class="fact"><div class="fact-label">State</div><div class="fact-value">{{ q.state or 'N/A' }}</div></div>
+  </div>
+  {% if q.sector %}
+  <p style="margin-top:16px;"><a href="/sectors/{{ q.sector.lower().replace(' ', '-') }}">{{ q.sector }} sector overview</a></p>
+  {% endif %}
+</div>
+{% endblock %}

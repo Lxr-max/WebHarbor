@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Happening @ Michigan — Events{% endblock %}
+{% block content %}
+<h1>Happening @ Michigan</h1>
+<p class="page-sub">The University of Michigan events calendar. Find amazing things to do: {{ total }} events.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('events') }}">
+    <div>
+      <label for="q">Keywords</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder="search events">
+    </div>
+    <div>
+      <label for="type">Event type</label>
+      <select id="type" name="type">
+        <option value="">All types</option>
+        {% for t in types %}
+        <option value="{{ t }}" {% if t == etype %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="presenter">Sponsor</label>
+      <input type="text" id="presenter" name="presenter" value="{{ presenter }}" placeholder="e.g. Sessions @ Michigan">
+    </div>
+    <div>
+      <label for="month">Month</label>
+      <select id="month" name="month">
+        <option value="">All months</option>
+        {% for m in months %}
+        <option value="{{ m }}" {% if m == month %}selected{% endif %}>{{ m }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} events</span>
+</div>
+
+<table class="list">
+  <tr><th>When</th><th>Event</th><th>Type</th><th>Presented by</th><th>Where</th></tr>
+  {% for e in events %}
+  <tr>
+    <td>{{ fmt_when(e.start) }}</td>
+    <td>{% if e.image %}<img class="row-img" src="{{ e.image }}" alt="{{ e.name }}">{% endif %}<a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.name }}</a></td>
+    <td>{{ e.type }}</td>
+    <td>{{ e.presenter }}</td>
+    <td>{{ e.location_name }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
