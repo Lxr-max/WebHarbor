@@ -2,7 +2,7 @@
 {% block title %}FOX Super 6 | FOX Sports{% endblock %}
 {% block content %}
 <div class="page-head"><h1>FOX Super 6</h1></div>
-<p class="lead">Enter our free-to-play game by predicting the correct answers of 6 questions for your chance at weekly prizes! Finish in the top 6 to win a prize.</p>
+<p class="lead">Practice predicting six captured NFL results. Entries are graded immediately against the frozen results; this offline contest offers no prizes.</p>
 {% for contest in contests %}
 <section class="section">
   <div class="section-head"><h2>{{ contest.title }}</h2></div>
@@ -25,10 +25,11 @@
     <thead><tr><th>Contest</th><th>Score</th><th>Entry</th></tr></thead>
     <tbody>
       {% for entry in my_entries %}
+      {% set entry_contest = contests|selectattr("id", "equalto", entry.contest_id)|first %}
       <tr>
-        <td class="cell-team">{{ contest.title if contest else '' }}</td>
+        <td class="cell-team">{{ entry_contest.title if entry_contest else '' }}</td>
         <td class="cell-strong">{{ entry.score or 0 }} / 6</td>
-        <td><a href="{{ url_for('super6_entry', contest_slug=contest.slug if contest else '', entry_id=entry.id) if contest else '#' }}">View entry</a></td>
+        <td><a href="{{ url_for('super6_entry', contest_slug=entry_contest.slug if entry_contest else '', entry_id=entry.id) if entry_contest else '#' }}">View entry</a></td>
       </tr>
       {% endfor %}
     </tbody>

@@ -345,18 +345,18 @@ def seed_all(db):
     contest = Super6Contest(
         slug='nfl-week-3-pick-6',
         title='NFL Week 3 Pick 6',
-        description=('Predict the winner of all six Week 3 matchups for your '
-                     'shot at the weekly prize. Finish in the top 6 to win.'),
+        description=('Practice picking six captured regular-season Week 3 results. '
+                     'This offline benchmark contest offers no prizes.'),
         prize=super6.get('prize_tiers'),
         how_to_play=_pipe(super6.get('how_to_play')),
-        deadline='2026-09-27 12:00PM', status='graded',
+        deadline='2026-09-24 12:00PM', status='graded',
     )
     db.session.add(contest)
     db.session.flush()
     week3 = sorted(
         [g for g in games
          if g['league'] == 'nfl' and g.get('week') == 3
-         and g['status'] == 'final'],
+         and g['status'] == 'final' and g.get('phase') == 'regular'],
         key=lambda r: r['slug'])
     picked = week3[:6]
     for order, game in enumerate(picked, 1):

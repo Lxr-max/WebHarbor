@@ -394,7 +394,7 @@ def seed_database():
 
 
 def seed_benchmark_users():
-    if User.query.filter_by(email='alice.j@test.com').first():
+    if User.query.count() > 0:
         return
     import seed_lib
     seed_lib.seed_benchmark_users(db)
@@ -700,6 +700,12 @@ def nascar_standings():
     drivers = NascarDriver.query.order_by(NascarDriver.rank).all()
     races = NascarRace.query.order_by(NascarRace.id).all()
     return render_template('nascar.html', drivers=drivers, races=races)
+
+
+@app.route('/nascar/drivers/<int:driver_id>')
+def nascar_driver(driver_id):
+    driver = db.get_or_404(NascarDriver, driver_id)
+    return render_template('nascar_driver.html', driver=driver)
 
 
 @app.route('/nascar')
@@ -1053,7 +1059,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password_hash, password):
             login_user(user)
-            target = request.args.get('next') or url_for('home')
+            target = local_return_url(request.args.get('next'), url_for('home'))
             return redirect(target)
         error = 'Invalid email or password.'
     return render_template('login.html', error=error)
@@ -1102,23 +1108,37 @@ def favorites():
     players = {p.slug: p for p in Player.query.all()}
     shows = {s.slug: s for s in Show.query.all()}
     people = {p.slug: p for p in Personality.query.all()}
+    drivers = {str(d.rank): d for d in NascarDriver.query.all()}
     return render_template('favorites.html', favorites=favs, teams=teams,
-                           players=players, shows=shows, people=people,
+                           players=players, shows=shows, people=people, drivers=drivers,
                            image=_image)
 
+
+
+def local_return_url(value, fallback):
+    """Accept only an unambiguous local absolute path."""
+    from urllib.parse import urlsplit, unquote
+    if not isinstance(value, str):
+        return fallback
+    decoded = unquote(value)
+    if not decoded.startswith('/') or decoded.startswith('//') or '\\' in decoded or any(ord(c) < 32 or ord(c) == 127 for c in decoded):
+        return fallback
+    parsed = urlsplit(decoded)
+    return value if not parsed.scheme and not parsed.netloc else fallback
 
 @app.route('/favorites/toggle', methods=['POST'])
 @login_required
 def favorites_toggle():
     item_type = request.form.get('item_type')
     item_key = request.form.get('item_key')
-    if item_type not in ('team', 'player', 'show', 'personality') or not item_key:
+    if item_type not in ('team', 'player', 'show', 'personality', 'driver') or not item_key:
         abort(400, 'Invalid favorite')
     valid = {
         'team': Team.query.filter_by(slug=item_key).first(),
         'player': Player.query.filter_by(slug=item_key).first(),
         'show': Show.query.filter_by(slug=item_key).first(),
         'personality': Personality.query.filter_by(slug=item_key).first(),
+        'driver': db.session.get(NascarDriver, int(item_key)) if item_key.isdigit() else None,
     }[item_type]
     if not valid:
         abort(400, 'Unknown favorite key')
@@ -1131,7 +1151,7 @@ def favorites_toggle():
         db.session.add(Favorite(user_id=current_user.id, item_type=item_type,
                                 item_key=item_key, added_at=MIRROR_TS))
     db.session.commit()
-    return redirect(request.form.get('next') or url_for('favorites'))
+    return redirect(local_return_url(request.form.get('next'), url_for('favorites')))
 
 
 if __name__ == '__main__':

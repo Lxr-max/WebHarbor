@@ -261,7 +261,7 @@ def test_tasks_jsonl_contract():
         assert not any(k.startswith('answer') for k in row)
         assert row['verifier_path'].startswith(
             'sites/fox_sports/verify/verify_')
-        assert row['web'] == 'http://localhost:40209/'
+        assert row['web'] == 'http://localhost:40144/'
         assert row['upstream_url'] == 'https://www.foxsports.com/'
         assert len(row['ques'].split()) <= 100
         # no URL shortcuts or direct-DB hints leak inside the task text
