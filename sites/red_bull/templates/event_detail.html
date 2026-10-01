@@ -91,7 +91,7 @@
       <input type="hidden" name="kind" value="event">
       <input type="hidden" name="slug" value="{{ event.slug }}">
       <input type="hidden" name="next" value="{{ request.path }}">
-      <button type="submit" class="btn btn-outline">Save to favorites</button>
+      <button type="submit" class="btn btn-outline">{{ 'Remove from favorites' if is_favorite('event', event.slug) else 'Save to favorites' }}</button>
     </form>
     {% endif %}
   </aside>

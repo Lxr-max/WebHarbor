@@ -13,13 +13,13 @@
     <td>{{ i.variant.title }}</td>
     <td>${{ '%.2f' | format(i.variant.price) }}</td>
     <td>
-      <form class="inline-form" method="post" action="{{ url_for('cart_update') }}">
+      <form id="update-{{ i.id }}" class="inline-form" method="post" action="{{ url_for('cart_update') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input type="hidden" name="item_id" value="{{ i.id }}">
         <input class="qty-input" name="quantity" type="number" min="1" value="{{ i.quantity }}">
-    </td>
-    <td><button type="submit" class="btn btn-dark">Update</button></td>
       </form>
+    </td>
+    <td><button type="submit" form="update-{{ i.id }}" class="btn btn-dark">Update</button></td>
     <td>
       <form class="inline-form" method="post" action="{{ url_for('cart_remove') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

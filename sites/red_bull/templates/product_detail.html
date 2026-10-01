@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}{{ product.name }}: {{ product.flavor }} | Energy Drink{% endblock %}
+{% block title %}{{ product.name }}: {{ product.flavor or 'Original' }} | Energy Drink{% endblock %}
 {% block content %}
 <div class="product-layout">
   <div>
     <span class="kicker">{{ product.line }}</span>
     <h1 class="page-title">{{ product.name }}</h1>
-    <p class="page-sub">{{ product.flavor }}</p>
+    <p class="page-sub">{{ product.flavor or 'Original' }}</p>
 
     <div class="can-shot"><img src="{{ product.can_image }}" alt="{{ product.name }} can"></div>
 
@@ -39,8 +39,8 @@
       {% for s in product.sizes_list() %}<span class="badge">{{ s }}</span>{% endfor %}
     </div>
     <h3 style="margin-top:18px">Key figures</h3>
-    <div class="fact-row"><span class="k">Caffeine (per 8.4 fl oz)</span><span class="v">{{ product.caffeine() or '—' }} mg</span></div>
-    <div class="fact-row"><span class="k">Sugars (per 8.4 fl oz)</span><span class="v">{{ product.sugars() or '—' }} g</span></div>
+    <div class="fact-row"><span class="k">Caffeine (per 8.4 fl oz)</span><span class="v">{{ product.caffeine() if product.caffeine() is not none else '—' }} mg</span></div>
+    <div class="fact-row"><span class="k">Sugars (per 8.4 fl oz)</span><span class="v">{% if product.sugars() is not none %}{{ product.sugars() }} g{% elif 'sugarfree' in product.name|lower %}Sugarfree; exact quantity not listed{% else %}Not listed{% endif %}</span></div>
     <div class="fact-row"><span class="k">Product line</span><span class="v">{{ product.line }}</span></div>
     <h3 style="margin-top:18px">More Red Bull</h3>
     {% for r in related %}

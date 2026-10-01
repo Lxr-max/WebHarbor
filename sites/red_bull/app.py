@@ -373,6 +373,9 @@ class ShopOrder(db.Model):
     total = db.Column(db.Float, nullable=False, default=0)
     ship_name = db.Column(db.String(160), nullable=False)
     ship_email = db.Column(db.String(160), nullable=False)
+    ship_address = db.Column(db.String(250))
+    ship_city = db.Column(db.String(120))
+    ship_zip = db.Column(db.String(40))
 
     lines = db.relationship('ShopOrderLine', backref='order')
     user = db.relationship('User')
@@ -439,6 +442,18 @@ def _now_iso():
 
 
 # ------------------------------------------------------------------- views --
+
+
+def local_redirect(target, fallback):
+    """Keep form continuations on this mirror, including encoded URL variants."""
+    from urllib.parse import unquote
+    value = target or ''
+    decoded = unquote(value)
+    if (not decoded.startswith('/') or decoded.startswith('//')
+            or '\\' in decoded
+            or any(ord(c) < 32 for c in decoded)):
+        value = fallback
+    return redirect(value)
 
 @app.route('/_health')
 def health():
@@ -854,7 +869,9 @@ def shop_checkout():
             order = ShopOrder(order_number=order_number, user_id=current_user.id,
                               status='confirmed', placed_at=_now_iso(),
                               total=round(subtotal, 2),
-                              ship_name=form['ship_name'], ship_email=form['ship_email'])
+                              ship_name=form['ship_name'], ship_email=form['ship_email'],
+                              ship_address=form['address'], ship_city=form['city'],
+                              ship_zip=form['zip'])
             db.session.add(order)
             db.session.flush()
             for i in items:
@@ -921,6 +938,15 @@ def account():
                            fav_athletes=fav_athletes)
 
 
+
+@app.context_processor
+def favorite_controls():
+    def is_favorite(kind, slug):
+        return current_user.is_authenticated and Favorite.query.filter_by(
+            user_id=current_user.id, kind=kind, item_slug=slug).first() is not None
+    return {'is_favorite': is_favorite}
+
+
 @app.route('/favorites/toggle', methods=['POST'])
 @login_required
 def favorites_toggle():
@@ -928,6 +954,10 @@ def favorites_toggle():
     slug = request.form.get('slug', '')
     if kind not in ('event', 'film', 'show', 'story', 'athlete') or not slug:
         abort(400)
+    model = {'event': Event, 'film': Film, 'show': Show,
+             'story': Story, 'athlete': Athlete}[kind]
+    if not model.query.filter_by(slug=slug).first():
+        abort(404)
     existing = Favorite.query.filter_by(user_id=current_user.id, kind=kind,
                                         item_slug=slug).first()
     if existing:
@@ -938,7 +968,7 @@ def favorites_toggle():
         db.session.add(Favorite(user_id=current_user.id, kind=kind, item_slug=slug))
         db.session.commit()
         flash('Added to your favorites.')
-    return redirect(request.form.get('next') or url_for('account'))
+    return local_redirect(request.form.get('next'), url_for('account'))
 
 
 @app.errorhandler(404)
