@@ -111,29 +111,27 @@
     "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
     "state": {},
     "paths": [
-      "^/ny/new\\-york/mosaic\\-new\\-york\\-ny\\-000(?:/|\\?|$)",
-      "^/wa/seattle/beacon\\-seattle\\-wa\\-000(?:/|\\?|$)"
+      "(?:^/ny/new\\-york/mosaic\\-new\\-york\\-ny\\-000(?:/|\\?|$)|^/search\\?(?=[^#]*\\bq=2392(?:\\+|%20)))",
+      "(?:^/wa/seattle/beacon\\-seattle\\-wa\\-000(?:/|\\?|$)|^/search\\?(?=[^#]*\\bq=4690(?:\\+|%20)))"
     ],
     "claims": [
       {
         "label": "1",
         "all": [
           "mosaic",
-          "walk score 78",
-          "3213",
-          "5751"
+          "walk(?: score)?\\D*78",
+          "(?:3213\\D+5751|3228\\D+5749)"
         ],
-        "scope": "mosaic"
+        "entity": "mosaic"
       },
       {
         "label": "2",
         "all": [
           "beacon",
-          "walk score 76",
-          "2077",
-          "3904"
+          "walk(?: score)?\\D*76",
+          "(?:2077\\D+3904|2119\\D+3894)"
         ],
-        "scope": "beacon"
+        "entity": "beacon"
       },
       {
         "label": "3",
@@ -367,8 +365,7 @@
     "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
     "state": {},
     "paths": [
-      "^/ca/los\\-angeles/pacific\\-los\\-angeles\\-ca\\-048(?:/|\\?|$)",
-      "^/search(?:/|\\?|$)"
+      "^/search\\?(?=[^#]*\\bcity=Los(?:\\+|%20)Angeles(?:&|$))(?=[^#]*\\bmode=luxury(?:&|$))(?=[^#]*\\bamenity=rooftop(?:&|$))(?=[^#]*\\bamenity=pool(?:&|$))(?=[^#]*\\bsort=price_asc(?:&|$))"
     ],
     "claims": [
       {
@@ -380,13 +377,12 @@
         "scope": "pacific"
       },
       {
-        "label": "2",
+        "label": "rent range",
         "all": [
-          "matching.available.unit",
-          "2143",
-          "4797"
+          "\\b2143\\b",
+          "\\b4797\\b"
         ],
-        "scope": "matching.available.unit"
+        "entity": "pacific"
       }
     ],
     "view_tables": []
@@ -616,20 +612,13 @@
     "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
     "state": {},
     "paths": [
-      "^/search(?:/|\\?|$)"
+      "^/(student-housing(?:/|$)|search\\?(?=[^#]*\\bmode=student(?:&|$)))"
     ],
-    "claims": [
-      {
-        "label": "1",
-        "all": [
-          "new york",
-          "san antonio",
-          "tie",
-          "\\b5 each|five each"
-        ],
-        "scope": "new york"
-      }
-    ],
-    "view_tables": []
+    "claims": [],
+    "view_tables": [],
+    "city_counts": {
+      "new york": 5,
+      "san antonio": 5
+    }
   }
 }
