@@ -504,6 +504,17 @@ def contains_date(answer, iso_date):
     return any(f in a for f in forms)
 
 
+def date_bound_to(answer, aliases, iso_date, competitor_groups=()):
+    """Bind common written/ISO dates to the subject in their sentence or row."""
+    text = "\n".join(normalize_text(line) for line in str(answer or "").splitlines())
+    labels = _label_spans(text, aliases, competitor_groups)
+    pattern = r"\b(?:20\d{2}[-/]\d{2}[-/]\d{2}|\d{1,2}/\d{1,2}/20\d{2}|(?:jan\w*|feb\w*|mar\w*|apr\w*|may|jun\w*|jul\w*|aug\w*|sep\w*|oct\w*|nov\w*|dec\w*)\.?\s+\d{1,2}(?:,?\s+20\d{2})?)\b"
+    clauses = _clause_ranges(text)
+    return any(contains_date(m.group().replace(".", ""), iso_date)
+               and _bound_to_target((m.start(), m.end(), m.group()), labels, clauses, text)
+               for m in re.finditer(pattern, text))
+
+
 # ---------------------------------------------------------------- snapshots
 def db_query(db_path, sql, params=()):
     con = sqlite3.connect(str(db_path))
