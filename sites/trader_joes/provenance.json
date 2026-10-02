@@ -1,0 +1,86 @@
+{
+  "site": "trader_joes",
+  "upstream": "https://www.traderjoes.com/",
+  "captured_at": "2026-09-30/10-01",
+  "capture_window_utc": "2026-09-30T17:30Z to 2026-10-01T02:00Z",
+  "capture_method": "Live capture from www.traderjoes.com. The site fronts its catalog with an Akamai WAF that rejects non-browser TLS fingerprints (plain curl/httpx get HTTP 403 on every path), so every capture was made through a real headful Chromium session (Playwright driving the site's own rendered pages and in-page fetch() against the same endpoints the site's React app calls). The product catalog, per-product detail payloads and the search-page product queries are the exact JSON of the upstream GraphQL API (POST /api/graphql, SearchProducts / SearchProduct / categoryList operations with the upstream variable shapes: categoryId, currentPage, pageSize=15 upstream / 100 for capture, characteristics, funTags, new_product, search, sku). The recipe library, guides, stories, announcements, entertaining list, podcast page and the CMS pages (home, about, FAQ, careers, contact, neighborhood shares, gift card, subscribe, store search, shopping list) are the exact AEM page models (GET <path>.model.json plus the per-recipe recipe_details / recipe_info component models). The global search samples are the exact JSON of GET /services/api/search?q=<term>&current_page=1&page_size=15 for 24 captured queries (recipes + editorial blocks) plus the matching GraphQL product queries. The store directory is the exact JSON of the upstream store-locator REST API (hosted.where2getit.com/traderjoes/rest/locatorsearch, the same service the live store search iframe uses), queried in a ZIP grid across the US and deduplicated by store key; the resulting 673 store records cover every store number in the locations.traderjoes.com sitemap (662 store pages) plus 11 coming-soon stores not yet in the sitemap. The podcast episode list is the upstream RSS feed (insidetjs.libsynpro.com -> rss.libsyn.com, 137 episodes). Every capture is saved as a raw file with a .meta.json sidecar recording the exact URL, HTTP status and capture timestamp under scraped_data/captures/ (gitignored). All requests were plain GET/POST with a desktop browser user agent from the real browser session; no anti-bot bypass beyond using a real browser, no login, no synthetic catalog records.",
+  "waf_note": "www.traderjoes.com sits behind Akamai edge security which denies non-browser clients (HTTP 403 Access Denied with an edgesuite.net reference for curl and headless-shell builds). Captures therefore ran through the full desktop Chromium build; this documents the access path honestly rather than claiming unauthenticated API access.",
+  "sources": {
+    "www.traderjoes.com": {
+      "role": "primary site: home page rails, product catalog (4 top-level categories, 25 subcategories), 1811 per-product detail payloads, the recipe library (544 recipes with ingredients and steps), Discover guides (56) and stories (69), entertaining articles (17), announcements board (58 notices in 5 categories), CMS pages, podcast page, global search",
+      "graphql_operations": [
+        "SearchProducts (category listings, new products, search-page products)",
+        "SearchProduct (per-sku detail)",
+        "categoryList (category tree)"
+      ],
+      "products_captured": 1811,
+      "product_detail_payloads": 1811,
+      "recipes_captured": 544,
+      "guides_captured": 56,
+      "stories_captured": 67,
+      "stories_note": "69 slugs were captured; two upstream 404 pages captured as story slugs (fall-products-2025, talkin-with-; AEM models titled '404 Not Found' rendering 'Oops!') were removed from stories.json and are rejected by a capture-side guard in seed_lib.py, leaving 67 real stories",
+      "announcements_captured": 58,
+      "search_queries_captured": 24
+    },
+    "hosted.where2getit.com": {
+      "role": "the live store locator REST API backing the store search iframe (locatorsearch); full US store directory",
+      "stores_captured": 673
+    },
+    "rss.libsyn.com": {
+      "role": "the Inside Trader Joe's podcast RSS feed rendered by the Listen page",
+      "episodes_captured": 137
+    },
+    "fonts.googleapis.com / fonts.gstatic.com": {
+      "role": "the Kalam webfont family the live site loads (9 woff2 subsets), vendored locally under static/fonts/"
+    }
+  },
+  "media": {
+    "images": {
+      "count": 3462,
+      "inventory": "asset_inventory.json",
+      "policy": "every file is a real upstream download inventoried with per-file SHA-256 and the exact source URL; no placeholders, no duplicates, no stretching. Each image is stored as the upstream webp-640 rendition (the exact bytes the live site serves on narrow screens via its srcSet); the three upstream assets that have no webp rendition are stored in their original format (2 PNG, 1 GIF), and three more referenced upstream assets 404 on the live site and are recorded as upstream-missing (the live pages render broken images for them as well). Byte-identical upstream twins are deduplicated with recorded alias URLs (2 cases)."
+    }
+  },
+  "fixtures": {
+    "benchmark_users": [
+      {
+        "email": "alice.j@test.com",
+        "display": "Alice Johnson",
+        "fixture": "pumpkin-season shopping list (5 items, 8 total quantity), My Store Redmond (140), subscribed to the newsletter"
+      },
+      {
+        "email": "bob.c@test.com",
+        "display": "Bob Chen",
+        "fixture": "freezer-and-snacks shopping list (4 items, 6 total), My Store Boston - Back Bay (510), subscribed to the newsletter"
+      },
+      {
+        "email": "carol.d@test.com",
+        "display": "Carol Davis",
+        "fixture": "gluten-free shopping list (3 items, 4 total), My Store Brookline (501), subscribed to the newsletter"
+      },
+      {
+        "email": "dana.k@test.com",
+        "display": "Dana Kim",
+        "fixture": "empty shopping list, My Store Charlotte - Piper Glen (742), unsubscribed from the newsletter"
+      }
+    ],
+    "gift_cards": "five deterministic gift card numbers with fixed balances back the balance-inquiry flow (the upstream page delegates to an external partner platform, so the mirror implements the flow as original code with seeded fixtures)",
+    "note": "the shopping list, My Store preference, newsletter subscription and gift card balance flows are original mirror code seeded with deterministic benchmark fixtures (u_s_customs / nyse precedent); all catalog, recipe, store, editorial, announcement and podcast content is upstream-sourced"
+  },
+  "determinism": {
+    "seed": "PYTHONHASHSEED=0 python3 seed_data.py at image build time (.build-generated-seed)",
+    "schema": "tables created in sorted-name order with explicit sorted CREATE INDEX statements (SQLAlchemy set-ordered DDL replaced), frozen bcrypt benchmark hashes, frozen mirror timestamp 2026-10-01, sorted iterations throughout",
+    "verified": "3x local rebuilds byte-identical (md5 7f95c9e5ff2b7a3089e37b35b076d2f2; changed from the contribution-round 20ccb46b0992bdfe3b93c9debab4d4e0 by the NEEDS-FIX round: two upstream-404 story artifacts removed and the recipes hours/minutesToCook2 time columns restored); in-container rebuild + /reset byte-identity verified on the fix-round single-site image"
+  },
+  "tasks": {
+    "count": 20,
+    "measurement": "two independent real-browser rounds (headless Chromium against the fix-round single-site container webharbor:tj-fix, port block 46237/47237/48237, per-task control-plane reset + fresh browser context) counting atomic UI actions only (clicks, field fills, select interactions, form submissions, browser back, homepage navigation; page reading never counted; actions the task text does not require are never taken); rounds agree exactly task-by-task with zero fact mismatches: min 15 / max 20 / total 342 (per-task 18,20,18,18,15,20,17,17,16,17,17,15,16,17,18,16,17,18,16,16). The five formerly sub-15 tasks were deepened with real cross-page question points (T9 14->17, T12 14->16, T13 14->17, T16 14->17, T19 13->16) and T17 dropped 22->18 because its registered-mark title now searches directly",
+    "leak_check": "no task text contains its answers; all answers are page-specific facts (prices, quantities, dates, hours, phone numbers, counts) that require navigating the mirror"
+  },
+  "review": {
+    "source_pr": 341,
+    "hf_revision": "10f93ea09d96971638dda931bc5170f0948c7616",
+    "upstream_comparison": "Live site returned HTTP 403; existing contributor captures used for review.",
+    "task_revision": "Coherent research or saved-state goals with aligned rubrics and deterministic verifiers."
+  }
+}

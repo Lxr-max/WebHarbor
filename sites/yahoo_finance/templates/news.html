@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Financial and Business News - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="cols">
+  <div class="card">
+    <h2>Latest Financial News</h2>
+    <div class="topic-tabs">
+      <a class="topic-tab {{ 'active' if topic == 'latest' }}" href="/news?topic=latest">Latest</a>
+      {% for slug, name in topics %}
+      <a class="topic-tab {{ 'active' if topic == slug }}" href="/news?topic={{ slug }}">{{ name }}</a>
+      {% endfor %}
+    </div>
+
+    <form class="filter-form" action="/news" method="get">
+      <input type="hidden" name="topic" value="{{ topic }}">
+      <div class="field">
+        <label for="q">Search all articles</label>
+        <input type="search" id="q" name="q" value="{{ q }}" placeholder="e.g. inflation, Nvidia, earnings">
+      </div>
+      <button class="btn primary" type="submit">Search</button>
+      {% if q %}<a class="btn" href="/news?topic={{ topic }}">Clear</a>{% endif %}
+    </form>
+
+    {% if q %}
+    <p class="muted">{{ total }} article{{ '' if total == 1 else 's' }} match “{{ q }}”{% if topic != 'latest' %} in {{ topic }}{% endif %}.</p>
+    {% endif %}
+
+    <ul class="news-list">
+      {% for art in articles %}
+      <li class="news-item">
+        {% if art.thumb_name %}
+          <img class="thumb" src="{{ url_for('static', filename=art.thumb_name) }}" alt="">
+        {% else %}
+          <span class="thumb-fallback" aria-hidden="true">Y!</span>
+        {% endif %}
+        <div>
+          <h3><a href="{{ art.url_path }}">{{ art.title }}</a></h3>
+          <div class="news-meta">
+            <span>{{ art.provider }}</span>
+            <span>{{ rel_time(art.pub_time) }}</span>
+            {% if art.topics != '[]' %}<span>· {{ art.topics|trim('[]')|replace('"','') }}</span>{% endif %}
+          </div>
+          {% if art.summary %}<p class="news-summary">{{ art.summary }}</p>{% endif %}
+        </div>
+      </li>
+      {% else %}
+      <li><p class="muted">No articles match this view.</p></li>
+      {% endfor %}
+    </ul>
+
+    <div class="pager">
+      {% if page > 1 %}<a href="/news?topic={{ topic }}&q={{ q }}&page={{ page - 1 }}">&laquo; Newer</a>{% endif %}
+      <span class="cur">Page {{ page }} of {{ pages }}</span>
+      {% if page < pages %}<a href="/news?topic={{ topic }}&q={{ q }}&page={{ page + 1 }}">Older &raquo;</a>{% endif %}
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>Follow the market</h2>
+      <p><a href="/calendar/earnings">Earnings calendar</a> — who reports this week.</p>
+      <p><a href="/screener">Stock screener</a> — filter the market snapshot.</p>
+      <p><a href="/sectors">Sector comparison</a> — where money moved.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

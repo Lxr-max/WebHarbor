@@ -1,0 +1,175 @@
+/* University of Michigan mirror — maize & blue */
+:root {
+  --blue: #00274c;
+  --maize: #ffcb05;
+  --light: #f5f7fa;
+  --ink: #1a1a1a;
+  --muted: #5b6b7b;
+  --line: #d8dee6;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.5;
+}
+a { color: #126e82; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+
+/* header */
+.topbar { background: var(--blue); color: #fff; }
+.masthead { display: flex; align-items: center; gap: 18px; padding: 14px 18px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 1.15rem; }
+.brand:hover { text-decoration: none; }
+.block-m {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; background: var(--maize); color: var(--blue);
+  font-weight: 800; font-size: 1.4rem; border-radius: 4px;
+}
+.site-search { display: flex; gap: 6px; flex: 1; min-width: 220px; }
+.site-search input {
+  flex: 1; padding: 8px 10px; border: none; border-radius: 3px; font-size: .95rem;
+}
+.site-search button {
+  background: var(--maize); color: var(--blue); border: none; padding: 8px 14px;
+  font-weight: 700; border-radius: 3px; cursor: pointer;
+}
+.account-nav { display: flex; gap: 14px; align-items: center; font-size: .92rem; }
+.account-nav a { color: var(--maize); }
+.whoami { color: #fff; font-weight: 600; }
+
+/* nav */
+.mainnav { background: #e6ebee; border-bottom: 1px solid var(--line); }
+.mainnav .wrap { display: flex; flex-wrap: wrap; padding: 0 12px; }
+.mainnav a {
+  padding: 10px 12px; color: var(--blue); font-weight: 600; font-size: .92rem;
+  border-bottom: 3px solid transparent;
+}
+.mainnav a:hover { border-bottom-color: var(--maize); text-decoration: none; }
+
+/* page furniture */
+main { padding: 26px 18px 60px; }
+h1 { color: var(--blue); font-size: 1.7rem; margin: 0 0 6px; }
+h2 { color: var(--blue); font-size: 1.25rem; margin: 26px 0 10px; }
+h3 { color: var(--blue); font-size: 1.05rem; margin: 18px 0 8px; }
+.page-sub { color: var(--muted); margin: 0 0 22px; }
+.count-pill {
+  display: inline-block; background: var(--light); border: 1px solid var(--line);
+  border-radius: 14px; padding: 2px 10px; font-size: .85rem; color: var(--muted);
+  margin-left: 8px; vertical-align: middle;
+}
+
+/* filter bar */
+.filterbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end;
+  background: var(--light); border: 1px solid var(--line);
+  padding: 14px; border-radius: 6px; margin-bottom: 20px;
+}
+.filterbar label { display: block; font-size: .8rem; color: var(--muted); font-weight: 600; margin-bottom: 3px; }
+.filterbar input[type=text], .filterbar select {
+  padding: 7px 9px; border: 1px solid var(--line); border-radius: 3px; font-size: .92rem;
+}
+.btn {
+  display: inline-block; background: var(--blue); color: #fff; border: none;
+  padding: 9px 16px; font-size: .92rem; font-weight: 600; border-radius: 3px;
+  cursor: pointer;
+}
+.btn:hover { background: #013a6b; text-decoration: none; color: #fff; }
+.btn.maize { background: var(--maize); color: var(--blue); }
+.btn.maize:hover { background: #e6b800; color: var(--blue); }
+.btn.small { padding: 5px 10px; font-size: .82rem; }
+.btn.danger { background: #8c1c13; }
+
+/* cards & tables */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card {
+  border: 1px solid var(--line); border-radius: 6px; padding: 16px;
+  background: #fff; display: flex; flex-direction: column; gap: 6px;
+}
+.card h3 { margin: 0; }
+.card .meta { color: var(--muted); font-size: .85rem; }
+.card .blurb { font-size: .92rem; }
+table.list { width: 100%; border-collapse: collapse; font-size: .93rem; }
+table.list th {
+  text-align: left; background: var(--blue); color: #fff; padding: 9px 10px;
+  font-size: .85rem; text-transform: uppercase; letter-spacing: .03em;
+}
+table.list td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.list tr:nth-child(even) td { background: #f8fafc; }
+table.plain th { background: none; color: var(--blue); text-transform: none; letter-spacing: 0; border-bottom: 2px solid var(--maize); }
+
+/* badges */
+.badge {
+  display: inline-block; padding: 2px 9px; border-radius: 12px;
+  font-size: .78rem; font-weight: 700;
+}
+.badge.open { background: #e3f4e8; color: #1c6b3c; }
+.badge.closed { background: #fdeaea; color: #8c1c13; }
+.badge.wait { background: #fff4d6; color: #7a5b00; }
+.badge.type { background: var(--light); color: var(--blue); border: 1px solid var(--line); }
+.badge.letter { background: var(--maize); color: var(--blue); }
+
+/* home */
+.hero { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; margin-bottom: 30px; }
+.hero-story { border-left: 5px solid var(--maize); padding-left: 16px; }
+.stat-strip { display: flex; gap: 14px; flex-wrap: wrap; margin: 18px 0 26px; }
+.stat-box {
+  flex: 1; min-width: 180px; background: var(--blue); color: #fff;
+  border-radius: 6px; padding: 16px; text-align: center;
+}
+.stat-box .num { font-size: 1.5rem; font-weight: 800; color: var(--maize); }
+.stat-box .lbl { font-size: .85rem; }
+
+/* pagination */
+.pager { display: flex; gap: 10px; margin-top: 20px; align-items: center; }
+.pager a, .pager span.cur {
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; font-size: .9rem;
+}
+.pager span.cur { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* forms */
+form.stack label { display: block; font-weight: 600; color: var(--blue); margin: 14px 0 4px; }
+form.stack input, form.stack select, form.stack textarea {
+  width: 100%; max-width: 460px; padding: 9px 10px; border: 1px solid var(--line);
+  border-radius: 3px; font-size: .95rem;
+}
+.error-box {
+  background: #fdeaea; color: #8c1c13; border: 1px solid #f0b9b9;
+  border-radius: 4px; padding: 10px 14px; margin: 12px 0;
+}
+.hidden-token { display: none; }
+
+/* footer */
+.site-footer { background: var(--blue); color: #cfe0f0; margin-top: 40px; padding: 22px 0; font-size: .85rem; }
+.site-footer a { color: var(--maize); }
+.mirror-note { color: #8fb0d0; font-size: .78rem; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  /* Data tables shrink below min-content on phone viewports: let them
+     scroll horizontally inside the page instead of overflowing the layout
+     (same pattern the audit round verified 0-overflow at 390/320). */
+  table.list, table.plain { display: block; overflow-x: auto; }
+  /* Filter forms wrap their fields instead of overflowing by their
+     intrinsic input widths. */
+  .filterbar form { display: flex; flex-wrap: wrap; gap: 10px; }
+  .filterbar form > div { min-width: 0; flex: 1 1 140px; }
+  .filterbar input[type=text], .filterbar select { width: 100%; max-width: 100%; }
+}
+
+/* images */
+.block-m-img { width: 38px; height: 38px; border-radius: 4px; }
+.hero-photo { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0 16px; }
+.card-img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px 4px 0 0; margin-bottom: 4px; }
+.row-img { width: 60px; height: 40px; object-fit: cover; border-radius: 3px; vertical-align: middle; margin-right: 8px; }
+
+/* Keep search controls inside their flex item on narrow screens. */
+.site-search input { min-width: 0; width: 100%; }
+.site-search button, .account-nav { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .site-search { flex: 1 0 100%; min-width: 0; }
+  .account-nav { flex-wrap: wrap; }
+}

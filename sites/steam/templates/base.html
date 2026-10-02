@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Welcome to Steam{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/steam.css') }}">
+</head>
+<body>
+<div class="global-header">
+  <div class="header-inner">
+    <a class="header-logo" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/steam-logo.png') }}" alt="Steam">
+    </a>
+    <nav class="header-menu">
+      <a href="{{ url_for('home') }}" {% if request.path == '/' %}class="active"{% endif %}>Store</a>
+      <a href="{{ url_for('search') }}" {% if request.path.startswith('/search') %}class="active"{% endif %}>Search</a>
+      <a href="{{ url_for('specials') }}" {% if request.path.startswith('/specials') %}class="active"{% endif %}>Specials</a>
+      <a href="{{ url_for('news_hub') }}" {% if request.path.startswith('/news') %}class="active"{% endif %}>News</a>
+    </nav>
+    <div class="header-account">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('account') }}"><span class="who">{{ current_user.name }}</span></a> &middot;
+        <a href="{{ url_for('wishlist') }}">Wishlist</a> &middot;
+        <a href="{{ url_for('cart') }}">Cart</a> &middot;
+        <a href="{{ url_for('logout') }}">Sign out</a>
+      {% else %}
+        <a href="{{ url_for('login', next=request.path if request.path != '/' else None) }}">Sign in</a> &middot;
+        <a href="{{ url_for('cart') }}">Cart</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="page-frame {% block frame_class %}{% endblock %}">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+
+<footer class="global-footer">
+  <div class="inner">
+    <span>&copy; 2026 Steam Store Mirror — benchmark artifact, not affiliated with Valve Corporation</span>
+    <a href="{{ url_for('search') }}">Browse</a>
+    <a href="{{ url_for('specials') }}">Specials</a>
+    <a href="{{ url_for('news_hub') }}">News</a>
+    <a href="{{ url_for('wishlist') }}">Wishlist</a>
+  </div>
+</footer>
+</body>
+</html>

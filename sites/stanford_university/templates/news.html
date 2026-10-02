@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Stanford Report — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Stanford Report</h2>
+  <span class="count">{{ total }} stories</span>
+</div>
+<div class="filters">
+  <form method="get" action="{{ url_for('news') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search stories" aria-label="Search news">
+    <select name="category" aria-label="Category">
+      <option value="">All categories</option>
+      {% for c in categories %}
+        <option value="{{ c }}" {% if category == c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+    <select name="topic" aria-label="Topic">
+      <option value="">All topics</option>
+      {% for t in topics %}
+        <option value="{{ t }}" {% if topic == t %}selected{% endif %}>{{ t }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn solid" type="submit">Search</button>
+  </form>
+</div>
+{% if q or category or topic %}
+  <div class="filter-note">Showing stories{% if q %} matching “{{ q }}”{% endif %}{% if category %} · {{ category }}{% endif %}{% if topic %} · topic {{ topic }}{% endif %} —
+    <a href="{{ url_for('news') }}">clear filters</a></div>
+{% endif %}
+<div class="grid cols-2">
+  {% for a in articles %}
+    <div class="card">
+      {% if a.image_url %}<a href="{{ url_for('news_detail', slug=a.slug) }}"><img src="{{ a.image_url }}" alt="{{ a.title }}"></a>{% endif %}
+      <div class="pad">
+        <div class="meta">{{ a.category }}{% if a.main_topic %} · {{ a.main_topic }}{% endif %} · {{ a.published_display }}</div>
+        <h3><a href="{{ url_for('news_detail', slug=a.slug) }}">{{ a.title }}</a></h3>
+        <p>{{ a.description }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="empty">No stories match that search.</div>
+  {% endfor %}
+</div>
+{% if pages > 1 %}
+<div class="pager">
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}<span class="cur">{{ p }}</span>
+    {% else %}<a href="{{ url_for('news', q=q, category=category, topic=topic, page=p) }}">{{ p }}</a>{% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

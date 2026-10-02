@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ item.title[:60] }} — U-M Library Catalog{% endblock %}
+{% block content %}
+<h1>{{ item.title }}</h1>
+<p class="page-sub">
+  {{ item.type }} &middot; Issued {{ item.date_issued }}
+  {% if item.degree %} &middot; {{ item.degree }}{% endif %}
+</p>
+
+<h2>Details</h2>
+<table class="list plain">
+  <tr><th>Author(s)</th><td>{{ item.author_list()|join('; ') or '—' }}</td></tr>
+  <tr><th>Date Issued</th><td>{{ item.date_issued }}</td></tr>
+  <tr><th>Type</th><td>{{ item.type }}</td></tr>
+  {% if item.subject_list() %}
+  <tr><th>Subjects</th><td>{{ item.subject_list()|join(', ') }}</td></tr>
+  {% endif %}
+  <tr><th>Handle</th><td>{{ item.handle }}</td></tr>
+  <tr><th>Deep Blue URI</th><td>{{ item.uri }}</td></tr>
+</table>
+
+{% if item.abstract %}
+<h2>Abstract</h2>
+<p>{{ item.abstract }}</p>
+{% endif %}
+
+<p><a class="btn small" href="{{ url_for('library', q=item.title.split(' ')[0]) }}">Find similar records</a></p>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Price Alerts - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="cols">
+  <div class="card">
+    <h2>My Price Alerts</h2>
+    <p class="muted">Alerts are evaluated against the September 30, 2026 close snapshot.</p>
+    {% if rows %}
+    <div class="table-scroll">
+    <table class="yf">
+      <thead>
+        <tr><th>Symbol</th><th>Company</th><th>Alert</th><th>Note</th><th class="num">Snapshot Price</th><th>Status</th><th>Created</th><th></th></tr>
+      </thead>
+      <tbody>
+      {% for row, q, status in rows %}
+        <tr>
+          <td><a href="/quote/{{ row.symbol|urlencode }}"><strong>{{ row.symbol }}</strong></a></td>
+          <td>{{ q.short_name if q else '—' }}</td>
+          <td>{{ 'Above' if row.direction == 'above' else 'Below' }} {{ fmt_price(row.threshold) }}</td>
+          <td>{{ row.note or '—' }}</td>
+          <td class="num">{{ fmt_price(q.price) if q else '—' }}</td>
+          <td><span class="pill {{ 'amc' if status == 'Triggered' else 'bmo' }}">{{ status }}</span></td>
+          <td>{{ row.created_at }}</td>
+          <td>
+            <form method="post" action="/alerts/delete">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id" value="{{ row.id }}">
+              <button class="btn small danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p class="muted">You have no alerts yet. Create one from any quote page.</p>
+    {% endif %}
+  </div>
+  <div>
+    <div class="card">
+      <h2>Create an alert</h2>
+      <p class="muted">Open a quote page and use the “Create a price alert” panel.</p>
+      <p><a href="/lookup">Search for a symbol</a></p>
+      <p><a href="/watchlist">Back to my watchlist</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

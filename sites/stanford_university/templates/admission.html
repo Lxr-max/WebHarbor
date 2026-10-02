@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Undergraduate Admission — Stanford University{% endblock %}
+{% block content %}
+<div class="detail-head">
+  <h1>Undergraduate Admission &amp; Aid</h1>
+  <div class="meta">Making a world-class education possible</div>
+</div>
+<div class="detail-body">
+  <img src="{{ url_for('static', filename='images/upstream/admissions/adm_apply_banner.jpg') }}" alt="Stanford admission" style="width:100%;border-radius:10px;margin-bottom:18px;">
+  <p>Stanford meets the full demonstrated need, without loans, for every admitted
+  undergraduate who qualifies for financial assistance. Learn how the program works,
+  then use the net price calculator to get an award estimate based on your family's
+  financial situation.</p>
+
+  <h2>Required application components (first-year applicants)</h2>
+  <ul>
+    {% for r in data.requirements %}{% if r and r != 'Required Application Components' %}<li>{{ r }}</li>{% endif %}{% endfor %}
+  </ul>
+
+  <h2>Application deadlines</h2>
+  <table class="data">
+    <tr><th>Plan</th><th>Round</th><th>Common App deadline</th><th>Decision released</th><th>Student reply date</th></tr>
+    {% for d in data.deadlines %}
+      <tr>
+        <td>{{ d.plan }}</td>
+        <td>{{ d.round }}</td>
+        <td>{{ d.deadline }}</td>
+        <td>{{ d.decision }}</td>
+        <td>{{ d.reply }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p>Submit your Common Application by 11:59 p.m. (in your local timezone) on the listed date.
+  The application fee is $100 (nonrefundable), or you may request a fee waiver.
+  ACT or SAT test scores are required. A midyear transcript is due by February 15.</p>
+
+  <h2>Financial aid at a glance</h2>
+  <ul>
+    {% for f in data.aid_facts %}<li>{{ f }}</li>{% endfor %}
+  </ul>
+  <p><a class="btn" href="{{ url_for('admission_aid') }}">How aid works</a></p>
+</div>
+{% endblock %}

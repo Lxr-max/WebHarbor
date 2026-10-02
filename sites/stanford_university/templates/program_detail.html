@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ program.name }} — Stanford University{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('programs') }}">Programs</a> › {{ program.name }}</div>
+<div class="detail-head">
+  <h1>{{ program.name }}</h1>
+  <div class="meta">
+    {{ program.type or 'Program' }}{% if program.level %} · {{ program.level }}{% endif %}
+    · Program code {{ program.code }}
+    {% for code, name in dept_names %} · <a href="{{ url_for('department_detail', code=code) }}">{{ name }}</a>{% endfor %}
+  </div>
+</div>
+<div class="detail-body">
+  {% if program.description %}<p>{{ program.description }}</p>{% endif %}
+  <div class="facts">
+    <div class="fact"><div class="k">Type</div><div class="v">{{ program.type or '—' }}</div></div>
+    <div class="fact"><div class="k">Degree designation</div><div class="v">{{ program.degree_designation or '—' }}</div></div>
+    <div class="fact"><div class="k">Minimum units</div><div class="v">{{ program.units_min if program.units_min is not none else '—' }}</div></div>
+    {% if program.webpage %}<div class="fact"><div class="k">Program webpage</div><div class="v">{{ program.webpage }}</div></div>{% endif %}
+  </div>
+  {% if program.requirements %}
+  <h2>Requirements</h2>
+  <ul>
+    {% for r in program.requirements %}<li>{{ r }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  <h2>Compare programs</h2>
+  <form method="get" action="{{ url_for('program_detail', code=program.code) }}" class="filters" style="max-width:520px">
+    <select name="compare" aria-label="Compare with program"><option value="">Choose a program</option>{% for option in comparison_options %}{% if option.code != program.code %}<option value="{{ option.code }}" {% if compare and compare.code == option.code %}selected{% endif %}>{{ option.name }} ({{ option.code }})</option>{% endif %}{% endfor %}</select>
+    <button class="btn" type="submit">Compare</button>
+  </form>
+  {% if compare %}
+  <table class="data">
+    <tr><th></th><th>{{ program.name }}</th><th>{{ compare.name }}</th></tr>
+    <tr><td>Code</td><td>{{ program.code }}</td><td>{{ compare.code }}</td></tr>
+    <tr><td>Type</td><td>{{ program.type or '—' }}</td><td>{{ compare.type or '—' }}</td></tr>
+    <tr><td>Minimum units</td><td>{{ program.units_min if program.units_min is not none else '—' }}</td><td>{{ compare.units_min if compare.units_min is not none else '—' }}</td></tr>
+    <tr><td>Degree designation</td><td>{{ program.degree_designation or '—' }}</td><td>{{ compare.degree_designation or '—' }}</td></tr>
+    <tr><td>Description</td><td>{{ (program.description or '')[:220] }}</td><td>{{ (compare.description or '')[:220] }}</td></tr>
+    <tr><td></td><td><a href="{{ url_for('program_detail', code=program.code) }}">Open {{ program.code }}</a></td><td><a href="{{ url_for('program_detail', code=compare.code) }}">Open {{ compare.code }}</a></td></tr>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}
