@@ -60,3 +60,13 @@ python3 scripts/check_search_url_realism.py
 
 The check verifies that the UI emits canonical search URLs and that the legacy
 aliases remain wired to the same route handlers.
+
+## Compatibility and edge cases
+
+The deterministic graders normalize these exact canonical routes to the prior
+search representation while preserving origin, query and filter constraints.
+Existing tasks and legacy URLs remain valid. Browser regressions cover filter
+submissions and JavaScript-disabled forms. Queries beginning with a slash, or
+consisting of a dot segment, use the query-string fallback to avoid browser path
+normalization changing the search text. ESPN loads a dedicated search handler
+on its search page; Google Maps filter changes dispatch the form submit event.

@@ -17,6 +17,12 @@ function initPathSearchForms() {
             if (!query) return;
             event.preventDefault();
             const params = new URLSearchParams(new FormData(form));
+            // Dot segments and leading slashes do not survive browser/router
+            // path normalization; keep those literal queries in the fallback.
+            if (query === '.' || query === '..' || query.startsWith('/')) {
+                window.location.href = '/search/' + '?' + params.toString();
+                return;
+            }
             params.delete('q');
             const suffix = params.toString();
             window.location.href = '/search/' + encodeURIComponent(query) + (suffix ? '?' + suffix : '');

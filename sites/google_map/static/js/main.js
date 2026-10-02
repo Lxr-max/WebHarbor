@@ -27,6 +27,12 @@
                 if (!query) return;
                 event.preventDefault();
                 var params = new URLSearchParams(new FormData(form));
+                // Dot segments and leading slashes do not survive browser/router
+                // path normalization; keep those literal queries in the fallback.
+                if (query === '.' || query === '..' || query.startsWith('/')) {
+                    window.location.href = '/maps/search/' + '?' + params.toString();
+                    return;
+                }
                 params.delete('q');
                 var suffix = params.toString();
                 window.location.href = '/maps/search/' + encodeURIComponent(query) + (suffix ? '?' + suffix : '');

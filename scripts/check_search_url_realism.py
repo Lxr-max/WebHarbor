@@ -79,7 +79,7 @@ REQUIRED = [
     ),
     (
         "ESPN path-search submit handler exists",
-        "sites/espn/static/js/main.js",
+        "sites/espn/static/js/search.js",
         ['form[data-path-search="espn"]', "'/search/_/q/' + encodeURIComponent(query)"],
     ),
     (
