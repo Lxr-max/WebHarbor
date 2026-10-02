@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}MileagePlus — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>United MileagePlus®</h1>
+  <p>MileagePlus is United's award-winning loyalty program. Earn award miles
+    on every flight and with 30+ partners, redeem for award travel, and reach
+    Premier® status for upgrades, free bags and priority services.</p>
+  <img class="ua-deal-hero" src="{{ url_for('static', filename='images/mileageplus/2283_PremierProgramUpdate-DT-hero_4098x1290.jpg') }}" alt="Premier program">
+  <img class="ua-half-img" src="{{ url_for('static', filename='images/mileageplus/251026_MPS_ACQ-Bonus_Earn-page_Desktop_800x450.png') }}" alt="MileagePlus earn bonus">
+
+  <h2>Earning miles</h2>
+  <p>You earn miles based on the fare and your status:</p>
+  <table class="ua-table">
+    <thead><tr><th>Member level</th><th>Award miles per $1 of fare</th></tr></thead>
+    <tbody>
+      {% for tier, rate in earn_rates.items() %}
+      <tr><td>{{ tier }}</td><td>{{ rate }}×</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>Every member also earns 1 PQP (Premier qualifying point) per dollar of
+    base fare and 1 PQF (Premier qualifying flight) per flight segment —
+    except Basic Economy, which earns no PQF.</p>
+
+  <h2>Premier® status</h2>
+  <p>Qualify with a combination of PQF and PQP (or a higher PQP-only level).
+    Members must fly at least 4 paid United/United Express segments a year.</p>
+  <table class="ua-table">
+    <thead><tr><th>Tier</th><th>PQF + PQP</th><th>PQP only</th></tr></thead>
+    <tbody>
+      {% for tier in tiers %}
+      <tr>
+        <td>{{ tier.name }}</td>
+        <td>{% if tier.pqf %}{{ tier.pqf }} PQF and {{ '{:,}'.format(tier.pqp) }} PQP{% else %}—{% endif %}</td>
+        <td>{% if tier.pqp_only %}or {{ '{:,}'.format(tier.pqp_only) }} PQP{% else %}—{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Tier benefits</h2>
+  {% for tier in tiers %}
+  <div class="ua-tier-card">
+    <h3>{{ tier.name }}</h3>
+    <ul>
+      {% for benefit in tier.benefits %}<li>{{ benefit }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+
+  <div class="ua-mp-actions">
+    {% if not current_user.is_authenticated %}
+      <a class="ua-btn ua-btn-primary" href="{{ url_for('mp_join') }}">Join MileagePlus — it's free</a>
+      <a class="ua-btn ua-btn-ghost" href="{{ url_for('mp_signin') }}">Sign in</a>
+    {% else %}
+      <a class="ua-btn ua-btn-primary" href="{{ url_for('account') }}">Go to my account</a>
+    {% endif %}
+  </div>
+
+  <h2>Award travel</h2>
+  <p>Redeem miles for any seat on United and United Express flights. Sign in
+    before searching, pick your flights, and choose Book with miles at
+    payment — dynamic award pricing shows the exact miles needed for your
+    chosen fare before you pay. Award redeposit fees ($50) are waived for
+    Premier Platinum and 1K members.</p>
+</section>
+{% endblock %}

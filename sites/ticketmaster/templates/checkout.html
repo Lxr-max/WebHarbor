@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Checkout | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › <a href="/event/{{ d.event.id }}">{{ d.event.name }}</a> › Checkout</div>
+  <div class="checkout-grid">
+    <div>
+      <div class="steps">
+        <span class="step {{ 'done' if step != 'delivery' }}">1. Delivery</span>
+        <span class="step {{ 'active' if step == 'payment' }}">2. Payment</span>
+        <span class="step {{ 'active' if step == 'review' }}">3. Review</span>
+      </div>
+
+      {% if step == 'delivery' %}
+      <form class="form-card" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="delivery">
+        <h3>Choose your delivery method</h3>
+        {% for opt in content['delivery_methods'] %}
+        <label class="radio-row {{ 'selected' if loop.first }}">
+          <input type="radio" name="delivery" value="{{ opt['id'] }}" {{ 'checked' if loop.first }}>
+          <span><b>{{ opt['label'] }}</b><small>{{ opt['note'] }}</small></span>
+        </label>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Continue to Payment</button>
+      </form>
+      {% endif %}
+
+      {% if step == 'payment' %}
+      <form class="form-card" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="payment">
+        <h3>Payment</h3>
+        {% if current_user.is_authenticated and methods %}
+        <p style="font-size:13px; color:var(--tm-gray); margin-bottom:12px">Choose a saved card, or select &ldquo;Use a new card&rdquo; and fill in the details below.</p>
+        {% for m in methods %}
+        <label class="radio-row">
+          <input type="radio" name="method_id" value="{{ m.id }}" {{ 'checked' if loop.first }}>
+          <span><b>{{ m.brand }} •••• {{ m.last4 }}</b>
+          <small>Exp {{ '%02d'|format(m.exp_month) }}/{{ '%02d'|format(m.exp_year % 100) }} — {{ m.holder }}</small></span>
+        </label>
+        {% endfor %}
+        <label class="radio-row">
+          <input type="radio" name="method_id" value="new">
+          <span><b>Use a new card</b><small>Enter the card details below and pay with it for this order.</small></span>
+        </label>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+        <div class="field">
+          <label for="email">Email (for your order confirmation)</label>
+          <input id="email" type="email" name="email" required placeholder="you@example.com">
+        </div>
+        {% endif %}
+        <div class="field">
+          <label for="brand">Card type</label>
+          <select id="brand" name="brand">
+            <option>Visa</option><option>Mastercard</option><option>Amex</option><option>Discover</option>
+          </select>
+        </div>
+        {% if not (current_user.is_authenticated and methods) %}
+        <div class="field">
+          <label for="number">Card number</label>
+          <input id="number" type="text" name="number" inputmode="numeric" placeholder="Card number" required>
+        </div>
+        <div class="field">
+          <label for="holder">Name on card</label>
+          <input id="holder" type="text" name="holder" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="exp_month">Expiry month</label>
+            <input id="exp_month" type="number" name="exp_month" min="1" max="12" placeholder="MM" required>
+          </div>
+          <div class="field">
+            <label for="exp_year">Expiry year</label>
+            <input id="exp_year" type="number" name="exp_year" min="2026" max="2040" placeholder="YYYY" required>
+          </div>
+        </div>
+        {% else %}
+        <div class="field">
+          <label for="number">Card number (only when paying with a new card)</label>
+          <input id="number" type="text" name="number" inputmode="numeric" placeholder="Card number">
+        </div>
+        <div class="field">
+          <label for="holder">Name on card (only when paying with a new card)</label>
+          <input id="holder" type="text" name="holder">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="exp_month">Expiry month</label>
+            <input id="exp_month" type="number" name="exp_month" min="1" max="12" placeholder="MM">
+          </div>
+          <div class="field">
+            <label for="exp_year">Expiry year</label>
+            <input id="exp_year" type="number" name="exp_year" min="2026" max="2040" placeholder="YYYY">
+          </div>
+        </div>
+        {% endif %}
+        <button class="btn btn-primary" type="submit">Continue to Review</button>
+      </form>
+      {% endif %}
+
+      {% if step == 'review' %}
+      <form class="form-card" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="place">
+        <h3>Review your order</h3>
+        <table class="table">
+          <tr><th>Event</th><td><a href="/event/{{ d.event.id }}">{{ d.event.name }}</a></td></tr>
+          <tr><th>Date</th><td>{{ d.event.date_pretty }}{% if d.event.time %}, {{ d.event.time }}{% endif %}</td></tr>
+          <tr><th>Venue</th><td>{{ d.event.venue.name }}, {{ d.event.city_state }}</td></tr>
+          <tr><th>Seats</th><td>Sec {{ d.listing.section }} • Row {{ d.listing.row }} ({{ d.listing.section_desc }})</td></tr>
+          <tr><th>Quantity</th><td>{{ d.qty }} Ticket{{ '' if d.qty == 1 else 's' }}</td></tr>
+          <tr><th>Delivery</th><td>{{ 'Mobile Transfer' if session.get('draft', {}).get('delivery') == 'mobile' else 'Mobile Entry - E-Ticket' }}</td></tr>
+          <tr><th>Payment</th><td>{{ session.get('draft', {}).get('card_brand') }} •••• {{ session.get('draft', {}).get('card_last4') }}</td></tr>
+        </table>
+        <p style="font-size:13px; color:var(--tm-gray); margin:12px 0">By placing this order you agree to the Ticketmaster Terms of Use. {{ content['payment_note'] }}</p>
+        <button class="btn btn-primary" type="submit">Place Order</button>
+      </form>
+      {% endif %}
+    </div>
+
+    <aside class="order-summary">
+      <h4>Order Summary</h4>
+      <div class="row"><span>{{ d.event.name[:34] }}{% if d.event.name|length > 34 %}…{% endif %}</span></div>
+      <div class="row"><span>Sec {{ d.listing.section }} Row {{ d.listing.row }} x {{ d.qty }}</span><span>${{ '%.2f'|format(d.total) }}</span></div>
+      <div class="row"><span>Face Value</span><span>${{ '%.2f'|format(d.face_total) }}</span></div>
+      <div class="row"><span>Service Fee</span><span>${{ '%.2f'|format(d.fee_total) }}</span></div>
+      <div class="row total"><span>Total</span><span>${{ '%.2f'|format(d.total) }}</span></div>
+      <p style="font-size:12px; color:var(--tm-gray); margin-top:8px">{{ content['bnpl'] }}</p>
+    </aside>
+  </div>
+</div>
+{% endblock %}

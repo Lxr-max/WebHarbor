@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ airport.city }} ({{ airport.code }}) — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>{{ airport.city }} — {{ airport.name }}</h1>
+  <div class="ua-spec-grid">
+    <div><span>IATA code</span><strong>{{ airport.code }}</strong></div>
+    <div><span>City</span><strong>{{ airport.city }}</strong></div>
+    <div><span>Country</span><strong>{{ airport.country }}</strong></div>
+    <div><span>Hub</span><strong>{{ 'Yes — United hub' if airport.is_hub else 'No' }}</strong></div>
+    <div><span>Region</span><strong>{{ airport.region }}</strong></div>
+    <div><span>Coordinates</span><strong>{{ '%.3f'|format(airport.latitude) }}, {{ '%.3f'|format(airport.longitude) }}</strong></div>
+  </div>
+  <h2>At the airport</h2>
+  <img class="ua-deal-hero" src="{{ url_for('static', filename='images/airport/boarding-process-image-3x.webp') }}" alt="Boarding process">
+  <p>Priority security programs (TSA PreCheck, CLEAR, NEXUS, SENTRI) are
+    available where offered, and Premier Access speeds check-in, security and
+    boarding for premium cabin and Premier travelers.</p>
+  <h2>United service from {{ airport.city }}</h2>
+  {% set departures = airport.code and [] %}
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('flight_search', origin=airport.code) }}">Search flights from {{ airport.code }}</a>
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('airports_page') }}">All airport guides</a>
+  </div>
+</section>
+{% endblock %}

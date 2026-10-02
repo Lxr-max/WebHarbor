@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}My Sales | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount">My Tickets</a>
+    <a href="/secure/myaccount/purchases">Orders</a>
+    <a href="/secure/myaccount/listings">My Listings</a>
+    <a href="/secure/myaccount/sales" class="active">My Sales</a>
+    <a href="/secure/myaccount/payments">Payments</a>
+  </nav>
+  <h1>My Sales</h1>
+  <div class="account-summary">
+    <div class="account-stat"><strong>{{ '${:,.2f}'.format(total) }}</strong><span>Total paid out</span></div>
+    <div class="account-stat"><strong>{{ sales|length }}</strong><span>Sales</span></div>
+  </div>
+  {% for sale in sales %}
+  <div class="order-row">
+    <div>
+      <strong>{{ sale.event.name }}</strong>
+      <p>{{ sale.event.date_full }} • {{ sale.event.venue.name }}</p>
+      <p class="muted">{{ sale.quantity }} ticket{{ 's' if sale.quantity > 1 }} · {{ sale.section }}{% if sale.row %} Row {{ sale.row }}{% endif %} · order {{ sale.order_number }}</p>
+    </div>
+    <div class="order-side">
+      <span class="badge badge-info">{{ sale.status }}</span>
+      <span>{{ '${:,.2f}'.format(sale.payout) }}</span>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">No sales yet. <a href="/selltickets">Sell your tickets</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Calculate Your Fees{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Calculate Your Fees</h1>
+
+  <div class="alert-box alert-box--info">
+    <p><strong>Alert:</strong> USCIS no longer accepts payments made by personal or business check, money order, or cashier’s check for forms filed by paper unless you qualify for an exemption. When filing by mail, you can pay using a credit, debit, or prepaid card by completing Form G-1450, Authorization for Credit Card Transactions, or you can make a payment directly from a U.S. bank account by completing Form G-1650, Authorization for ACH Transactions.</p>
+  </div>
+
+  <section class="content-section">
+    <h2>What is the Fee Calculator?</h2>
+    <p>The Fee Calculator provides G-1055, Fee Schedule, information for all USCIS forms. It was developed to help reduce the number of rejected applications, petitions, and/or requests due to incorrect filing fees.</p>
+    <h2>How does it work?</h2>
+    <p>Select your form from the dropdown list below.</p>
+  </section>
+
+  <form class="usa-form fee-form" method="get" action="{{ url_for('feecalculator') }}">
+    <label class="form-label" for="form-select"><span class="form-label__title">Select a Form for Fee Information</span></label>
+    <div class="select-wrapper">
+      <select id="form-select" name="form">
+        <option value="">Select a form to view details</option>
+        {% for fee in fees %}
+        <option value="{{ fee.nid }}" {% if record and record.nid == fee.nid %}selected{% endif %}>{{ fee.label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn btn--primary" type="submit">Search</button>
+  </form>
+
+  {% if record %}
+  <section class="fee-result">
+    <h2>{{ record.label }}</h2>
+    {% set form_slug = '/' + record.label.split(',')[0].strip().lower() %}
+    {% if form_slug in mirrored %}
+    <p><a href="{{ form_slug }}">Visit the {{ record.label.rsplit(',', 1)[0].strip() }} page for more information.</a></p>
+    {% endif %}
+    <div class="table-wrap">
+      {% set ncols = record.fee_columns() %}
+      <table class="data-table fee-table">
+        <thead>
+          <tr><th>Filing Category</th><th>Paper Filing Fee</th>{% if ncols > 1 %}<th>Online Filing Fee</th>{% endif %}</tr>
+        </thead>
+        <tbody>
+        {% for row in record.fee_rows() %}
+          <tr>
+            <td>{{ row.category }}</td>
+            {% for fee in row.fees %}<td>{{ fee }}</td>{% endfor %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

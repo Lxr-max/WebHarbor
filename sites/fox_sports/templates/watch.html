@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Watch | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Watch</h1></div>
+<section class="section">
+  <div class="section-head"><h2>Live Now &amp; Recent Moments</h2></div>
+  <ul class="moment-list">
+    {% for tile in tiles %}
+    <li class="moment-item">
+      <span class="moment-tag">{{ 'LIVE NOW' if tile.kind == 'live' else 'MOMENT' }}</span>
+      <span class="moment-title">{{ tile.title }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Latest Episodes</h2></div>
+  <div class="story-grid">
+    {% for ep in episodes %}
+    <a class="story-card" href="/shows/{{ ep.show_slug }}">
+      {% if ep.thumb and image(ep.thumb) %}<img src="{{ image(ep.thumb) }}" alt="{{ ep.title }}" loading="lazy">{% endif %}
+      <h3>{{ ep.title }}</h3>
+      <span class="muted">{{ ep.time_ago }}{% if ep.source %} &middot; {{ ep.source }}{% endif %}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

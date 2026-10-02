@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Download history | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/account">My Statista</a>
+  <span class="sep"></span><span>Download history</span>
+</nav>
+<h1>Download history</h1>
+<div class="acctNav">
+  <a href="/account">Overview</a>
+  <a href="/account/favorites">Favorites</a>
+  <a class="on" href="/account/downloads">Download history</a>
+</div>
+
+{% if events %}
+<div class="tableScroll">
+<table class="dataTable">
+  <tr><th>Item</th><th>Type</th><th>Format</th><th>Date</th></tr>
+  {% for e in events %}
+  <tr>
+    <td>
+      {% if e.stat %}
+      <a href="/{{ e.stat.url_kind }}/{{ e.stat.id }}/{{ e.stat.slug }}/">{{ e.stat.title|truncate(80) }}</a>
+      {% elif e.report %}
+      <a href="/study/{{ e.report.id }}/{{ e.report.slug }}/">{{ e.report.title|truncate(80) }}</a>
+      {% else %}
+      —
+      {% endif %}
+    </td>
+    <td>{% if e.stat %}Statistic{% elif e.report %}Report{% endif %}</td>
+    <td>{{ e.event.fmt|upper }}</td>
+    <td>{{ e.event.created_at.strftime('%B %d, %Y') }}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p>No downloads yet. Open a statistic and press “Download”.</p>
+{% endif %}
+{% endblock %}

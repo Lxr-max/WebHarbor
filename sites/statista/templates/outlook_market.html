@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}{{ market.name }} - {{ market.region }} | Statista Market Forecast{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/outlook/">Market Insights</a>
+  <span class="sep"></span><a href="/outlook/mobility-markets/">Mobility</a>
+  {% if parent %}
+  <span class="sep"></span><a href="{{ parent.url }}">{{ parent.name }}</a>
+  {% elif market.category_slug %}
+  <span class="sep"></span><span>{{ market.category_name }}</span>
+  {% endif %}
+  <span class="sep"></span><span>{{ market.name }} - {{ market.region }}</span>
+</nav>
+
+<div class="statLayout">
+  <div>
+    <h1>{{ market.name }} - {{ market.region }}</h1>
+
+    {% if market.revenue_2026 %}
+    <div class="statMeta" style="border:0;padding:0;margin-top:4px;">
+      <span><b>REVENUE (2026):</b> US${{ market.revenue_2026 }}</span>
+      {% if market.revenue_change %}<span><b>REVENUE CHANGE (2026):</b> {{ market.revenue_change }}%</span>{% endif %}
+      <span><b>Market:</b> {{ market.name }}</span>
+      <span><b>Region:</b> {{ market.region }}</span>
+    </div>
+    {% endif %}
+
+    {% if market.highlights %}
+    <section class="section">
+      <div class="section__head"><h2>Highlights</h2></div>
+      <ul class="outlineList">
+        {% for h in market.highlights %}
+        <li style="font-weight:400;">{{ h|striptags }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if market.key_regions %}
+    <section class="section">
+      <h2>Key regions</h2>
+      <div class="pillList">
+        {% for r in market.key_regions %}
+        <span class="pill">{{ r }}</span>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if definition_html %}
+    <section class="section">
+      <h2>Market definition</h2>
+      <div class="statDesc statDesc--prose">{{ definition_html|safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if market.in_scope or market.out_scope %}
+    <section class="section">
+      <h2>In-Scope / Out-of-scope</h2>
+      <div class="statLayout" style="grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <h3>In-Scope</h3>
+          <ul class="outlineList">
+            {% for i in market.in_scope %}<li style="font-weight:400;">{{ i }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div>
+          <h3>Out-Of-Scope</h3>
+          <ul class="outlineList">
+            {% for o in market.out_scope %}<li style="font-weight:400;">{{ o }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if analyst_opinion_html %}
+    <section class="section">
+      <h2>Analyst Opinion</h2>
+      <div class="statDesc statDesc--prose">{{ analyst_opinion_html|safe }}</div>
+    </section>
+    {% endif %}
+  </div>
+
+  <aside>
+    {% if children %}
+    <div class="sideBox">
+      <h3>Market structure</h3>
+      <ul>
+        {% for c in children %}
+        <li><a href="{{ c.url }}">{{ c.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% if siblings %}
+    <div class="sideBox">
+      <h3>Related markets</h3>
+      <ul>
+        {% for s in siblings %}
+        {% if s.slug != market.slug %}
+        <li><a href="{{ s.url }}">{{ s.name }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="sideBox">
+      <h3>Segment</h3>
+      <ul><li><a href="/outlook/mobility-markets/">Mobility</a></li></ul>
+      <p style="font-size:13px;color:var(--muted);">Source: Statista Market Insights. Most recent update: Jun 2026.</p>
+    </div>
+  </aside>
+</div>
+{% endblock %}

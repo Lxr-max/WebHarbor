@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Create an account | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <h1>Create an account</h1>
+  <p class="lead">Create a Super Lawyers account to save attorneys, set up alerts, and
+  track inquiries.</p>
+
+  <div class="auth-card">
+    <h2>Register</h2>
+    <form method="post" action="{{ url_for('register') }}">
+      <p><label for="display_name">Display name</label>
+         <input id="display_name" name="display_name" maxlength="120" required></p>
+      <p><label for="username">Username</label>
+         <input id="username" name="username" maxlength="80" required></p>
+      <p><label for="email">Email</label>
+         <input id="email" name="email" type="email" required autocomplete="email"></p>
+      <p><label for="password">Password (at least 8 characters)</label>
+         <input id="password" name="password" type="password" minlength="8" required autocomplete="new-password"></p>
+      <button class="btn btn-primary btn-lg" type="submit">Create account</button>
+    </form>
+    <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+  </div>
+</div>
+{% endblock %}

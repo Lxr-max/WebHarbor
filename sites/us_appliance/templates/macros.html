@@ -1,0 +1,60 @@
+{% macro prod_card(p) %}
+<article class="card" data-test="card-{{ p.id }}">
+  <figure class="card-figure">
+    <a href="/{{ p.slug }}.html" class="card-figure__link" aria-label="{{ p.name }}">
+      {% if p.card_image %}
+      <div class="card-img-container">
+        <img class="card-image" src="{{ url_for('static', filename='images/' ~ p.card_image) }}"
+             alt="{{ p.name }}" loading="lazy">
+      </div>
+      {% endif %}
+    </a>
+    <figcaption class="card-figcaption">
+      <div class="card-figcaption-body">
+        {% if p.is_available %}
+        <form method="post" action="{{ url_for('cart', action='add') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="product_id" value="{{ p.id }}">
+          <button type="submit" class="button button--small card-add">Add to Cart</button>
+        </form>
+        {% endif %}
+      </div>
+    </figcaption>
+  </figure>
+  <div class="card-body">
+    {% if p.brand %}<p class="card-text brand-name" data-test-info-type="brandName">{{ p.brand }}</p>{% endif %}
+    <h3 class="card-title">
+      <a href="/{{ p.slug }}.html">{{ p.name }}</a>
+    </h3>
+    <div class="card-text card-price" data-test-info-type="price">
+      {% if p.is_available and p.price is not none %}
+        {% if p.on_sale %}
+        <div class="price-section">
+          <span class="price-now-label">Now:</span>
+          <span class="price price--now">{{ money(p.price) }}</span>
+        </div>
+        <div class="price-section price-was">
+          <span class="was-label">Was:</span>
+          <span class="price price--was">{{ money(p.retail_price) }}</span>
+          <span class="price price--saving">(You save {{ money(p.savings) }})</span>
+        </div>
+        {% if p.promo_message %}<p class="price-promo">{{ p.promo_message }}</p>{% endif %}
+        {% else %}
+        <div class="price-section">
+          <span class="price price--now">{{ money(p.price) }}</span>
+        </div>
+        {% endif %}
+      {% elif not p.is_available %}
+        <p class="card-discontinued">This item is discontinued. Contact Us For A Great Deal On A Comparable Model</p>
+      {% endif %}
+    </div>
+    {% if p.badge %}<span class="card-badge">{{ p.badge }}</span>{% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro stars(rating) %}
+<span class="stars" aria-label="{{ rating }} out of 5 stars">
+  {% for i in range(5) %}{% if rating >= i + 0.75 %}&#9733;{% elif rating >= i + 0.25 %}&#9734;{% else %}&#9734;{% endif %}{% endfor %}
+</span>
+{% endmacro %}

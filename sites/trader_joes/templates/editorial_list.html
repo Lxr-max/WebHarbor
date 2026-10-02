@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Guides' if kind == 'guide' else 'Stories' }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    <a href="{{ url_for('discover') }}">Discover</a> &rsaquo;
+    {{ 'Guides' if kind == 'guide' else 'Stories' }}
+  </div>
+  <h1 class="page-title">{{ 'Guides' if kind == 'guide' else 'Stories' }}</h1>
+  <p class="rich">
+    {% if kind == 'guide' %}
+    Product guides, tasting notes, how-tos and pairing wisdom from the Crew.
+    {% else %}
+    News, notes, contests and the stories behind the shelves.
+    {% endif %}
+  </p>
+</div>
+<div class="page" style="padding-top:0;">
+  {% for row in rows %}
+  <article class="editorial-row">
+    <a href="{{ url_for('guide_detail', slug=row.slug) if row.kind == 'guide' else url_for('story_detail', slug=row.slug) }}">
+      {% if dam_url(row.hero) %}<img src="{{ dam_url(row.hero) }}" alt="{{ row.title }}">{% endif %}
+    </a>
+    <div>
+      <span class="date">{{ 'Guide' if row.kind == 'guide' else 'Story' }} &middot; {{ row.publish_date }}</span>
+      <h3><a href="{{ url_for('guide_detail', slug=row.slug) if row.kind == 'guide' else url_for('story_detail', slug=row.slug) }}">{{ row.title }}</a></h3>
+      {% set first_text = (row.block_list() | selectattr('type', 'equalto', 'text') | list) %}
+      {% if first_text %}
+      <div class="rich">{{ first_text[0]['html'] | plain | truncate(220) }}</div>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

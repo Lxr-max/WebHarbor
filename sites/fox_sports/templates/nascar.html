@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}NASCAR Cup Series Standings | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>2026 NASCAR Cup Series Standings</h1></div>
+<section class="section">
+  <table class="data-table">
+    <thead><tr><th>#</th><th>Driver</th><th>Points</th><th>Back</th><th>+/-</th><th>Starts</th><th>Wins</th><th>Top 5</th><th>Top 10</th><th>DNF</th><th>Stg Wins</th><th>Laps Led</th></tr></thead>
+    <tbody>
+      {% for d in drivers %}
+      <tr>
+        <td class="cell-strong">{{ d.rank }}</td>
+        <td class="cell-team"><a href="{{ url_for('nascar_driver', driver_id=d.rank) }}">{{ d.driver }}</a></td>
+        <td class="cell-strong">{{ d.points }}</td>
+        <td>{{ d.back }}</td>
+        <td></td>
+        <td>{{ d.starts }}</td>
+        <td>{{ d.wins }}</td>
+        <td>{{ d.top5 }}</td>
+        <td>{{ d.top10 }}</td>
+        <td>{{ d.dnf }}</td>
+        <td>{{ d.stage_wins }}</td>
+        <td>{{ d.laps_led }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Race Schedule</h2></div>
+  <table class="data-table">
+    <thead><tr><th>When</th><th>Race</th><th>Track</th><th>City</th><th>Time</th><th>TV</th></tr></thead>
+    <tbody>
+      {% for r in races %}
+      <tr>
+        <td>{{ r.when }}</td>
+        <td class="cell-team">{{ r.name }}</td>
+        <td>{{ r.track }}</td>
+        <td>{{ r.city }}</td>
+        <td>{{ r.time }}</td>
+        <td>{{ r.network }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

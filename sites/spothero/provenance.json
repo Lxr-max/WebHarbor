@@ -1,0 +1,86 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the spothero.com mirror: the hero search with destination/event/airport/monthly autocomplete, address search within a 3.2 km walking radius with covered/self-park/valet/EV/in-and-out filters and price/distance sorting, event parking with venue-local windows, airport parking with shuttle lots and per-day quotes, monthly parking, facility pages with live quote widgets, clearance notes, amenities, Getting There and redemption accordions and driver reviews, guest and account checkout with promo codes, auth, reservation extend/cancel, payment methods with per-card default controls, saved spots, profile, cities/destinations/stadium/FAQ/static pages, and the QR parking pass."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time and boot-time seeder. All content rows come from the tracked source_data_*.json snapshots captured from spothero.com on 2026-09-26: 708 facilities (264 airport lots), 37 destinations with their upstream featured-spot lists and rate tables, 15 cities, 15 airports, 1316 venue-local events, 120 stadium directory rows, 72 FAQs, the FIRSTSPOT10 promo, per-facility review samples, and the four benchmark users with reservations, cards, and saved spots. Seeding is idempotent (whole-function gates) and byte-reproducible under PYTHONHASHSEED=0."
+  },
+  {
+   "path": "source_data_facilities.json",
+   "classification": "captured-upstream-content",
+   "scope": "Frozen snapshot of every harvested facility record as served by spothero.com on 2026-09-26: titles, addresses, coordinates, operator, amenities, restrictions (including oversize/height notices), hours, redemption instructions, ratings and distributions, first-rate info, and airport per-day rates. 708 facilities."
+  },
+  {
+   "path": "source_data_geo.json",
+   "classification": "captured-upstream-content",
+   "scope": "Frozen snapshot of the geographic catalog: 15 city pages with rate ranges and FAQs, 37 destination pages with featured spots, partner copy, rate tables and event lists, 15 airports, 23 venue event calendars with real parking windows, and the 120-row NFL/MLB/NBA/NHL stadium directory."
+  },
+  {
+   "path": "source_data_content.json",
+   "classification": "captured-upstream-content",
+   "scope": "Frozen snapshot of the FAQ accordion (72 Q&As in their upstream categories), the 16 static marketing pages (about, parking guarantee, promo code, careers, press, contact, legal, sell-parking, business, commuter benefits, app), and the FIRSTSPOT10 promo restrictions."
+  },
+  {
+   "path": "asset_inventory.json",
+   "classification": "asset-manifest",
+   "scope": "Per-file inventory (bytes, SHA-256, upstream source URL) for every managed image under static/images and static/external_cache — 2023 real upstream media files. Verified byte- and hash-exact by scripts/check_asset_inventory.py at build time."
+  },
+  {
+   "path": "static/images/facilities/",
+   "classification": "captured-upstream-content",
+   "scope": "Real facility photography served by res.cloudinary.com/spothero at the w_640,h_480,c_fill transforms the live facility and search pages render (up to three photos per facility, 1860 referenced images across 708 facilities)."
+  },
+  {
+   "path": "static/images/redeem/",
+   "classification": "captured-upstream-content",
+   "scope": "The drive-up redemption instruction illustrations served by res.cloudinary.com/spothero (scan-in/scan-out, license-plate recognition, attendant and QR artwork) at the transforms the facility pages render."
+  },
+  {
+   "path": "static/images/site/",
+   "classification": "captured-upstream-content",
+   "scope": "Hero and page art from the live site: the woman-driving-car hero photo, monthly/airport/destination section art, app-store and Google Play badges, the Powered by Google mark, the favicon, and the checkout payment marks (Visa, Mastercard, AmEx, Google Pay, PayPal) served by spothero.com and its cloudinary transforms."
+  },
+  {
+   "path": "static/css/main.css",
+   "classification": "mirror-code",
+   "scope": "Hand-written stylesheet reproducing the captured spothero.com design language (SpotHero blue #002d5b / #1273eb, white cards on gray-50, 8px radius, hero strip, spot cards with photo/meta/price, data tables, accordions, parking-pass card with QR, suggest-box dropdown)."
+  },
+  {
+   "path": "static/js/site.js",
+   "classification": "mirror-code",
+   "scope": "Shared front-end behaviour: debounced destination/event/airport/city autocomplete against /api/suggest with an outside-mousedown-closing dropdown, hourly/monthly toggle, accordion panels, facility live-quote widget, and the empty-destination submit guard."
+  },
+  {
+   "path": "static/icons/",
+   "classification": "mirror-code",
+   "scope": "The SpotHero logo mark as inline SVG sprite."
+  },
+  {
+   "path": "templates/",
+   "classification": "mirror-code",
+   "scope": "Jinja templates reproducing the captured upstream layout: base chrome with nav/footer link columns, home hero with search widget, search results with filters/sorter/event banner, facility pages, checkout and confirmation with the parking pass, account pages (reservations, payment methods, saved spots, profile), auth pages, city/destination/airport/stadium/monthly/FAQ/static pages, and the 404 page."
+  },
+  {
+   "path": "tests/",
+   "classification": "mirror-code",
+   "scope": "Pytest suite: tasks.jsonl contract (five basic keys only, no ground-truth leaks), route smoke tests across every page class, quote determinism, search radius integrity, auth and CRUD flows, and the idempotent-seeding/byte-identity contract."
+  },
+  {
+   "path": "scripts_dev/",
+   "classification": "mirror-code",
+   "scope": "The capture and build pipeline (gitignored outputs): Playwright recon and harvest scripts for facilities, destination pages, searches, events, airports and static pages; the source-data builder that folds the captures into the tracked snapshots; the image collector/downloader/recompressor; the task writer; the asset-inventory builder; and the dev reset helper."
+  },
+  {
+   "path": "scraped_data/",
+   "classification": "build-time-only",
+   "scope": "Resumable raw upstream captures (gitignored, never shipped): rendered page HTML, dehydrated-state facility JSON, search card JSON, image URL manifests, and the honest task walkthrough driver with its recorded results."
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Auto Pay & paper-free billing{% endblock %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Auto Pay & paper-free billing</h1>
+  <p>Save time and never miss a payment. Auto Pay gives you a $10/mo per-line discount on eligible plans when paying by bank draft or the Verizon Visa Card.</p>
+  <form method="post" action="{{ url_for('account_autopay') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="choice">
+      <input type="checkbox" name="autopay" {{ 'checked' if autopay }}> Enroll in Auto Pay
+      <span class="muted">Your monthly bill is paid automatically from your saved payment method on the due date.</span>
+    </label>
+    <label class="choice">
+      <input type="checkbox" name="paper_free" {{ 'checked' if paper_free }}> Go paper-free
+      <span class="muted">Receive bills and notifications by email instead of paper mail.</span>
+    </label>
+    <button type="submit" class="btn btn-primary">Save preferences</button>
+  </form>
+</section>
+{% endblock %}

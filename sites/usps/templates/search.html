@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Search Results | USPS{% endblock %}
+{% block content %}
+<h1>Search Results</h1>
+<form action="{{ url_for('site_search') }}" method="get" class="flow">
+  <label>Search USPS.com <input type="text" name="q" value="{{ q }}"></label>
+  <button class="btn" type="submit">Search</button>
+</form>
+{% if q %}
+  {% for group, rows in results %}
+    <h2>{{ group }}</h2>
+    <ul class="bullets">
+      {% for row in rows %}
+        <li>
+          {% if group == 'Pages' %}<a href="/{{ row.path }}">{{ row.title }}</a>
+          {% elif group == 'Store Products' %}<a href="{{ url_for('store_product', slug=row.slug) }}">{{ row.name }}</a> — {{ row.price | usd }}
+          {% elif group == 'Post Offices' %}<a href="{{ url_for('location_detail', po_key=row.po_key) }}">{{ row.name }}, {{ row.state }} {{ row.zip5 }}</a>
+          {% elif group == 'Countries' %}<a href="{{ url_for('country_detail', slug=row.slug) }}">{{ row.name }}</a>
+          {% else %}<a href="{{ url_for('news_article', slug=row.slug) }}">{{ row.clean_title or row.title }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No results for "{{ q }}".</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}

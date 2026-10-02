@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Saved pros - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Saved pros</h1>
+  <p class="muted">The pros you bookmarked for later.</p>
+  {% if not saved %}<p class="muted">Nothing here yet — browse <a href="/near-me">services near you</a> and save the pros you like.</p>{% endif %}
+  {% for s in saved %}
+  <div class="match-card">
+    <a href="{{ s.pro.url() }}"><img src="{{ url_for('static', filename='images/avatars/' + s.pro.avatar) }}" alt="{{ s.pro.name }}"></a>
+    <div>
+      <a href="{{ s.pro.url() }}"><b>{{ s.pro.name }}</b></a>
+      <div class="muted">{{ s.pro.category.name }} · {{ s.pro.city }}, {{ s.pro.state }}</div>
+      <div class="rating-line"><b>{{ s.pro.rating_word }} {{ '%.1f'|format(s.pro.rating) }}</b> <span class="muted">({{ s.pro.review_count }})</span> · {{ s.pro.hires }} hires</div>
+    </div>
+    <form method="post" action="/account/saved/toggle/{{ s.pro.id }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="/account/saved">
+      <button class="btn btn-outline btn-sm" type="submit">Remove</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

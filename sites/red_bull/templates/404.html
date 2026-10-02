@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found - RedBull.com{% endblock %}
+{% block content %}
+<div class="form-card" style="max-width:560px">
+  <h1 class="page-title">404</h1>
+  <p>Well, this is embarrassing. Where did the page go?!</p>
+  <p><a class="btn btn-red" href="{{ url_for('home') }}">Back to the homepage</a></p>
+</div>
+{% endblock %}

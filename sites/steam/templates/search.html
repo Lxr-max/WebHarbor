@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import search_row, pager %}
+{% block title %}Search {{ '· ' + f.term if f.term else '' }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Steam Store Search</h1>
+  <span class="count">{{ "{:,}".format(total) }} result{{ '' if total == 1 else 's' }}</span>
+</div>
+
+<div class="search-layout">
+  <form class="filter-panel" method="get" action="{{ url_for('search') }}">
+    <h3>Refine your search</h3>
+    <div class="filter-group">
+      <span class="lbl">Search by name</span>
+      <input type="text" name="term" value="{{ f.term }}" placeholder="e.g. portal">
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Genre</span>
+      <select name="genre">
+        <option value="">Any genre</option>
+        {% for genre in genres %}
+          <option value="{{ genre }}" {% if f.genre == genre %}selected{% endif %}>{{ genre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Max price</span>
+      <select name="maxprice">
+        <option value="">Any price</option>
+        <option value="free" {% if f.maxprice == 'free' %}selected{% endif %}>Free</option>
+        {% for point in price_points %}
+          <option value="{{ point }}" {% if f.maxprice == point|string %}selected{% endif %}>Under ${% if point == 0 %}Free{% else %}{{ point }}{% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Operating system</span>
+      <select name="os">
+        <option value="">Any OS</option>
+        <option value="windows" {% if f.os == 'windows' %}selected{% endif %}>Windows</option>
+        <option value="mac" {% if f.os == 'mac' %}selected{% endif %}>macOS</option>
+        <option value="linux" {% if f.os == 'linux' %}selected{% endif %}>Linux / SteamOS</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Review score</span>
+      <select name="review_type">
+        {% for key, label in review_filters.items() %}
+          <option value="{{ key }}" {% if f.review_type == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Offers</span>
+      <label class="chk"><input type="checkbox" name="specials" value="1" {% if f.specials_only %}checked{% endif %}> Discounted items only</label>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Sort by</span>
+      <select name="sort">
+        {% for key, label in sorts.items() %}
+          <option value="{{ key }}" {% if f.sort == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Apply filters</button>
+  </form>
+
+  <div class="search-results">
+    {% if games %}
+      {% for game in games %}
+        {{ search_row(game) }}
+      {% endfor %}
+      {% if pages > 1 %}
+        {{ pager(url_for('search') + qs_without_page(), f.page, pages) }}
+      {% endif %}
+    {% else %}
+      <div class="empty-state">
+        <p>No games matched your filters.</p>
+        <p><a href="{{ url_for('search') }}">Clear all filters</a></p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

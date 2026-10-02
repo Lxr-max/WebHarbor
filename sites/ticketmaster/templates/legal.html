@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › {{ title }}</div>
+  <h1 class="page-title">{{ title }}</h1>
+  <div class="article-body"><p>{{ body }}</p></div>
+</div>
+{% endblock %}

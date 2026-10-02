@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Airport guides — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Airport guides</h1>
+  <p>Hub airports first, then every destination in the frozen flight network.</p>
+  <div class="ua-card-grid">
+    {% for a in airports %}
+    <a class="ua-card ua-card-hub" href="{{ url_for('airport_detail', code=a.code) }}">
+      <span class="ua-card-title">{{ a.city }} — {{ a.name }}</span>
+      <span class="ua-card-cat">{% if a.is_hub %}Hub · {% endif %}{{ a.region }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

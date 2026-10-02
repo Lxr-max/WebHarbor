@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ s.name }} | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('services') }}">Shipping Services</a> &rsaquo; {{ s.name }}</div>
+  <div class="ups-card">
+    <p class="ups-svcbucket">{{ s.bucket }}</p>
+    <h1>{{ s.name }}</h1>
+    <p class="ups-lede">{{ s.tagline }}</p>
+    <p class="ups-commitment">{{ s.commitment }}</p>
+    <div class="ups-svcgrid-inner">
+      <div>
+        <p class="ups-factlabel">Delivery Commitment</p>
+        <p>{{ s.delivered_by_default }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Guaranteed</p>
+        <p>{{ 'Yes — guaranteed on-time delivery' if s.guaranteed else 'No guarantee; day-definite delivery' }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Latest Pickup / Schedule By</p>
+        <p>{{ s.latest_pickup }} / {{ s.schedule_by }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Size Limits</p>
+        <p>Up to {{ s.max_weight_lb }} lbs and {{ s.max_length_in }}&quot; long</p>
+      </div>
+    </div>
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('ctc') }}">Get a Quote</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('ship') }}">Ship Now</a>
+      <a class="ups-btn ups-btn-tertiary" href="{{ url_for('services_compare') }}">Compare Services</a>
+    </div>
+  </div>
+  <div class="ups-card">
+    <h2>Other services to consider</h2>
+    <ul class="ups-svc-list">
+      {% for o in others %}
+      <li><a href="{{ url_for('service_detail', code=o.code) }}">{{ o.name }}</a> — {{ o.tagline }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

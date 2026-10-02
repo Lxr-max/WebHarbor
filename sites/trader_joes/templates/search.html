@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="note">
+    <span class="note-title">Note:</span>
+    <span>You won&rsquo;t find every Trader Joe&rsquo;s product represented on our website. The best place to go for information about our products &ndash; old favorites and new discoveries! &ndash; is your neighborhood Trader Joe&rsquo;s.</span>
+  </div>
+  {% if q %}
+  <h1 class="page-title">{{ total }} result{{ 's' if total != 1 }} for</h1>
+  <p class="display" style="font-size:22px; margin-top:0;">&ldquo;{{ q }}&rdquo;</p>
+  <p class="result-count">All ({{ total }}) &nbsp;|&nbsp; Products ({{ product_total }}) &nbsp;|&nbsp; Recipes ({{ recipe_total }}) &nbsp;|&nbsp; Everything Else ({{ editorial_total }})</p>
+  {% else %}
+  <h1 class="page-title">Search</h1>
+  <p class="rich">Search Trader Joe&rsquo;s products, recipes, guides and stories.</p>
+  {% endif %}
+</div>
+
+{% if q %}
+<section class="home-section">
+  <h2>Products ({{ product_total }})</h2>
+  {% if products %}
+  <div class="grid">
+    {% for p in products %}
+    <article class="card">
+      {% if p.product_label %}<span class="label-chip{% if p.product_label == 'SEASONAL' %} seasonal{% endif %}">{{ p.product_label }}</span>{% endif %}
+      <a class="card-img" href="{{ product_link(p) }}">
+        {% if dam_url(p.primary_image) %}<img src="{{ dam_url(p.primary_image) }}" alt="{{ p.item_title }}">{% endif %}
+      </a>
+      <div class="card-title"><a href="{{ product_link(p) }}">{{ p.item_title }}</a></div>
+      <div class="card-sub">{{ (p.category_names | from_json)[-1] if (p.category_names | from_json) else '' }}</div>
+      <div class="card-price">{{ p.price_text() }}</div>
+      <form method="post" action="{{ url_for('shopping_list_add', sku=p.sku) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ url_for('search', q=q, page=page) }}">
+        <button class="add-btn" type="submit">ADD TO LIST</button>
+      </form>
+    </article>
+    {% endfor %}
+  </div>
+  {% if product_total > products|length %}
+  <p><a class="btn btn-secondary" href="{{ url_for('category', slug='products', cat_id=2) }}">ALL PRODUCTS</a></p>
+  {% endif %}
+  {% else %}
+  <p class="rich">No products matched &ldquo;{{ q }}&rdquo;.</p>
+  {% endif %}
+</section>
+
+<section class="home-section">
+  <h2>Recipes ({{ recipe_total }})</h2>
+  {% if recipes %}
+  <div class="recipe-grid">
+    {% for r in recipes %}
+    <article class="recipe-card">
+      <a href="{{ url_for('recipe_detail', slug=r.slug) }}">
+        {% if dam_url(r.image_src) %}<img src="{{ dam_url(r.image_src) }}" alt="{{ r.title }}">{% endif %}
+      </a>
+      <div class="body">
+        <h3><a href="{{ url_for('recipe_detail', slug=r.slug) }}">{{ r.title }}</a></h3>
+        <div class="recipe-cats">Recipes</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-secondary" href="{{ url_for('recipes') }}">ALL RECIPES</a></p>
+  {% else %}
+  <p class="rich">No recipes matched &ldquo;{{ q }}&rdquo;.</p>
+  {% endif %}
+</section>
+
+<section class="home-section">
+  <h2>Everything Else ({{ editorial_total }})</h2>
+  {% if editorial %}
+  <div class="ann-list">
+    {% for row in editorial %}
+    <a href="{{ url_for('story_detail', slug=row.slug) if row.kind == 'story' else (url_for('guide_detail', slug=row.slug) if row.kind == 'guide' else url_for('entertaining_detail', slug=row.slug)) }}">
+      {{ row.title }} &mdash; {{ row.kind if row.kind in ('story','guide') else 'Entertaining' }}</a>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-secondary" href="{{ url_for('discover') }}">ALL THE REST</a></p>
+  {% else %}
+  <p class="rich">Nothing else matched &ldquo;{{ q }}&rdquo;.</p>
+  {% endif %}
+</section>
+
+{% if total_pages > 1 %}
+<nav class="pager">
+  {% if page > 1 %}<a href="{{ url_for('search', q=q, page=page-1) }}">&larr; Previous page</a>{% endif %}
+  <span class="current">{{ page }} of {{ total_pages }}</span>
+  {% if page < total_pages %}<a href="{{ url_for('search', q=q, page=page+1) }}">Next page &rarr;</a>{% endif %}
+</nav>
+{% endif %}
+{% endif %}
+{% endblock %}

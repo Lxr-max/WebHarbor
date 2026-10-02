@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }} — {{ tab }}{% endblock %}
+{% block content %}
+<h1 class="page-title">{{ event.title }}</h1>
+<p class="page-sub">{{ event.date_range_text() }} · {{ event.location_text() }}</p>
+
+<div class="tab-row">
+  <a href="{{ url_for('event_detail', slug=event.slug) }}">Info</a>
+  {% if event.schedule_items %}
+  <a class="{{ 'active' if tab == 'Schedule' }}" href="{{ url_for('event_schedule', slug=event.slug) }}">Schedule</a>
+  {% endif %}
+  {% if event.faqs %}
+  <a class="{{ 'active' if tab == 'FAQs' }}" href="{{ url_for('event_faqs', slug=event.slug) }}">FAQs</a>
+  {% endif %}
+</div>
+
+{% if tab == 'Schedule' %}
+<div class="detail-main">
+  <h2 class="section-title">Event schedule</h2>
+  {% for item in items %}
+  <div class="faq-item"><p style="white-space:pre-line">{{ item.text }}</p></div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="detail-main">
+  <h2 class="section-title">Frequently asked questions</h2>
+  {% for faq in faqs %}
+  <div class="faq-item">
+    <h3>{{ faq.question }}</h3>
+    <p style="white-space:pre-line">{{ faq.answer }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

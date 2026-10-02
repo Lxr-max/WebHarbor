@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Student Housing in {{ city.name }}, {{ STATE_NAMES[city.state] }} | Off-Campus Apartments | Student.com{% endblock %}
+{% block meta_description %}{{ city.meta_description or ('Compare the best student accommodation in ' + city.name + '. Live with fellow students in properties specifically designed for student living.') }}{% endblock %}
+
+{% block content %}
+<section class="hero" style="min-height:360px">
+  <div class="bg">{% if city.hero %}<img src="{{ city.hero }}" alt="Student housing in {{ city.name }}">{% endif %}</div>
+  <div class="container inner" style="padding:64px 0">
+    <nav class="breadcrumb" style="color:rgba(255,255,255,.8);padding:0 0 10px">
+      <a href="/" style="color:#fff">Home</a> ›
+      <a href="/us/{{ city.state }}/u" style="color:#fff">{{ STATE_NAMES[city.state] }}</a> ›
+      <span>{{ city.name }} Student Housing</span>
+    </nav>
+    <h1>Student living in {{ city.name }}, {{ STATE_NAMES[city.state] }}</h1>
+    {% if city.headline %}<p>{{ city.headline }}</p>{% endif %}
+    <div class="chips">
+      <a href="#popular">Popular properties</a>
+      <a href="#colleges">Popular colleges</a>
+      <a href="#living">Living in {{ city.name }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section container" id="popular">
+  <div class="section-head">
+    <h2>Why Student.com</h2>
+  </div>
+  <div class="grid cols-3">
+    <div class="card" style="padding:24px">
+      <div style="font-size:24px">🏠</div>
+      <h3 style="font-size:17px;margin-top:8px">Curated listings</h3>
+      <p class="muted small">We only show 3+ star rated listings so you can find your student home.</p>
+    </div>
+    <div class="card" style="padding:24px">
+      <div style="font-size:24px">📍</div>
+      <h3 style="font-size:17px;margin-top:8px">Find the area for you</h3>
+      <p class="muted small">Commute times, neighbourhood vibes and hot spots for every property.</p>
+    </div>
+    <div class="card" style="padding:24px">
+      <div style="font-size:24px">🎓</div>
+      <h3 style="font-size:17px;margin-top:8px">Homes near your campus</h3>
+      <p class="muted small">Every home lists exactly how far it is from {{ city.name }}'s colleges.</p>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:40px">
+    <h2>Popular properties in {{ city.name }}</h2>
+    <span class="muted small">{{ properties|length }} properties</span>
+  </div>
+  <div class="grid cols-3">
+    {% for prop in featured %}
+      {% with distance = None, heart_id = None %}{% include "_property_card.html" %}{% endwith %}
+    {% endfor %}
+  </div>
+
+  {% if properties|length > featured|length %}
+  <div class="grid cols-3" style="margin-top:20px" id="all-props">
+    {% for prop in properties %}
+      {% if prop not in featured %}
+        {% with distance = None, heart_id = None %}{% include "_property_card.html" %}{% endwith %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<section class="section container" id="colleges" style="padding-top:0">
+  <div class="section-head"><h2>Popular Colleges</h2></div>
+  <div class="grid cols-4">
+    {% for uni in unis %}
+    <a class="card" style="padding:18px;display:block" href="/us/{{ uni.state }}/{{ uni.city_slug }}/u/{{ uni.slug }}">
+      <div style="font-weight:600;font-size:14px">{{ uni.name }}</div>
+      <div class="muted small" style="margin-top:4px">{% if uni.has_properties %}{{ uni.total_properties }} homes nearby{% else %}Homes coming soon{% endif %}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container" id="living" style="padding-top:0">
+  <div class="section-head"><h2>Living in {{ city.name }}</h2></div>
+  <div class="prose">
+    {# summary is upstream-captured rich text (only structural tags: p/br/a/em/
+       strong/h2/h3/ul/li — verified at harvest time); upstream renders it as HTML,
+       so the mirror does too. #}
+    {% if city.summary %}{{ city.summary | safe }}{% endif %}
+    {% for line in (city.content.editorial_lines or [])[:90] %}
+      {% if loop.index == 1 %}{% else %}<p>{{ line }}</p>{% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head"><h2>Curious about {{ city.name }}?</h2></div>
+  <p class="muted small" style="margin-top:-12px">Have questions about student housing in {{ city.name }}? Our FAQ covers everything you need to know, including rent prices, lease terms and what to look out for.</p>
+  {% set faq = [
+    ('Is there high demand for student apartments in ' ~ city.name ~ '?',
+     'Most students in ' ~ city.name ~ ' choose to live off campus, which means there is high demand for student apartments. Start your search early — the homes closest to campus are usually the first to go.'),
+    ('How much does student housing in ' ~ city.name ~ ' cost?',
+     'Rental costs for student housing in ' ~ city.name ~ ' vary widely depending on the neighborhood and type of property. Shared rooms are usually the most affordable option, while studios and one-bedrooms cost more. Check the "From" price on each listing and use the budget calculator to plan.'),
+    ('Is it a safe city for students?',
+     city.name ~ ' is generally considered a student-friendly city. Popular student areas have strong communities and good transport links — as with any city, visit the property and the neighborhood before signing.'),
+    ('Do I need a visa to study in ' ~ city.name ~ '?',
+     'If you want to study in the US as a non-US citizen, you will need to obtain an F-1 visa from a US embassy or consulate in your home country. Your university issues the I-20 form you need to apply.'),
+  ] %}
+  {% for q, a in faq %}
+  <div class="faq-item">
+    <button type="button">{{ q }} <span>+</span></button>
+    <div class="ans">{{ a }}</div>
+  </div>
+  {% endfor %}
+</section>
+
+{% if jobs_count %}
+<section class="section container" style="padding-top:0">
+  <div class="section-head">
+    <h2>Jobs in {{ city.name }}</h2>
+    <a class="see-all" href="/us/{{ city.state }}/{{ city.slug }}/internships">See more jobs</a>
+  </div>
+  <p class="muted small">{{ jobs_count }} part-time roles, internships and early-career jobs in {{ city.name }}.</p>
+</section>
+{% endif %}
+{% endblock %}

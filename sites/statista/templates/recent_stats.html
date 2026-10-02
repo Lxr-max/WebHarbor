@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Recent Statistics | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Recent statistics</span>
+</nav>
+<h1>Recent Statistics</h1>
+<div class="serpFilters">
+  <span class="lbl">Content type</span>
+  <a class="filterChip {% if not ctype %}on{% endif %}" href="/recent/statistics/">All</a>
+  <a class="filterChip {% if ctype == 'Statistics' %}on{% endif %}" href="/recent/statistics/?content_type=Statistics">Statistics</a>
+  <a class="filterChip {% if ctype == 'Forecasts' %}on{% endif %}" href="/recent/statistics/?content_type=Forecasts">Forecasts</a>
+</div>
+<div class="cardGrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+  {% for s in stats %}
+  <a class="card" href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+    {% if s.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>{% endif %}
+    <div class="card__body">
+      <span class="card__meta">
+        {% if s.premium %}<span class="card__tag card__tag--premium">Premium Statistic</span>
+        {% else %}<span class="card__tag">Statistic</span>{% endif %}
+      </span>
+      <span class="card__title">{{ s.title|truncate(88) }}</span>
+      {% if s.summary %}<span class="card__snippet">{{ s.summary|striptags|snippetize(130, "…") }}</span>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

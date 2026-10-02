@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block title %}TourRadar - Book Tours & Travel Packages{% endblock %}
+{% block content %}
+
+<section class="hero" style="background-image: url('/static/images/site/hero_home.webp')">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner container">
+    <h1>Adventure Simplified</h1>
+    <p class="sub">Find amazing trips, compare real reviews and book with confidence.</p>
+    <form class="search-widget" data-search-form method="get" action="/search">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field">
+        <label for="where">Where to?</label>
+        <input class="value" id="where" name="q" data-suggest type="text" placeholder="Search destinations or tours" autocomplete="off">
+        <div class="suggest-box"></div>
+      </div>
+      <div class="field">
+        <label>When?</label>
+        <input class="value" name="when" type="text" placeholder="Anytime" readonly>
+      </div>
+      <div class="field">
+        <label>Travelers</label>
+        <input class="value" name="travellers" type="text" value="2 Adults" readonly>
+      </div>
+      <button class="btn btn-lg" type="submit">Search</button>
+    </form>
+    <div class="chip-row" style="justify-content:center; margin-top:16px;">
+      <a class="chip" href="/deals/europe">Europe deals</a>
+      <a class="chip" href="/deals/asia">Southeast Asia deals</a>
+      <a class="chip" href="/deals/africa">Morocco deals</a>
+      <a class="chip" href="/deals/europe">Iceland deals</a>
+      <a class="chip" href="/deals/europe">Turkey deals</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Top deals</h2>
+      <a class="more" href="/sales/escape-sale">View all deals</a>
+    </div>
+    <div class="grid-cards">
+      {% for t in deals %}
+      <div class="mini-card">
+        <a href="/t/{{ t.id }}"><img src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+        <div class="inner">
+          <div class="discount-chip" style="position:static; display:inline-block; margin-bottom:6px;">-{{ t.discount_pct }}% OFF</div>
+          <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+          <div class="rating-line">
+            <span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span>
+            <span>{{ t.review_count }} reviews</span>
+            <span>&bull; {{ t.duration_days }} days</span>
+          </div>
+          <div class="price">
+            {% if t.price_from and t.price_from != t.price_current %}
+            <span class="price-was">${{ '{:,}'.format(t.price_from) }}</span>
+            {% endif %}
+            ${{ '{:,}'.format(t.current_price) }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <div class="section-head">
+      <h2>Traveler Moments</h2>
+      <a class="more" href="/moments">See More</a>
+    </div>
+    <div class="grid-cards">
+      {% for m in moments[:8] %}
+      <a class="moment-card" href="/moments">
+        <img src="/static/images/{{ m.image }}" alt="{{ m.tour_name }}">
+        <div class="who"><b>{{ m.author }}</b> &bull; {{ m.tour_name }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Book the Best Tours &amp; River Cruises</h2>
+    <div class="two-col">
+      <div>
+        <p>TourRadar makes exploring and booking organized adventures effortless. Whether through our mobile app or website, we streamline your booking experience, so you can focus on what truly matters: your next great adventure.</p>
+        <h3>Adventure at Your Fingertips</h3>
+        <p>The TourRadar mobile app puts adventure in your pocket. Explore thousands of trips, receive real-time updates, and manage bookings effortlessly. Your next adventure is just a tap away.</p>
+        <ul>
+          <li>Book 50,000+ multi-day tours, safaris, river cruises, and more</li>
+          <li>Win $500 in TourRadar savings every month in app-only giveaways</li>
+          <li>Discover authentic tour moments from real travelers</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Real Traveler Reviews</h3>
+        <p>Make every booking with peace of mind, thanks to genuine reviews from fellow travelers. Explore firsthand accounts of trips, operators, and destinations to ensure your next adventure is exactly what you're looking for. Real experiences, real feedback, real inspiration.</p>
+        <h3>Trust and Confidence</h3>
+        <p>Shop and book thousands of operators in one place with direct messaging, secure and flexible payment options, booking protection, 24/7 customer support, and additional perks. We've got your back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <h2>TourRadar Spotlight</h2>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <img src="/static/images/site/spotlight_escape.webp" alt="Escape Sale">
+        <div class="inner">
+          <h3>Escape Sale</h3>
+          <p>Save up to 70% Off - Limited-time deals on unforgettable tours worldwide. Book now before they're gone.</p>
+          <a class="btn btn-sm" href="/sales/escape-sale">View Deals</a>
+        </div>
+      </div>
+      <div class="mini-card">
+        <img src="/static/images/site/spotlight_plus.webp" alt="TourRadar+">
+        <div class="inner">
+          <h3>TourRadar+</h3>
+          <p>TourRadar's loyalty program unlocks savings on tours in every corner of the world. Join today and your savings grow with every adventure you take.</p>
+          <a class="btn btn-sm" href="/s/solo">Discover more</a>
+        </div>
+      </div>
+      <div class="mini-card">
+        <img src="/static/images/site/spotlight_solo.webp" alt="Solo travelers">
+        <div class="inner">
+          <h3>Empowering Solo Travelers</h3>
+          <p>With curated itineraries and opportunities to connect with travelers, tour operators make solo tours memorable, enriching, and safe.</p>
+          <a class="btn btn-sm" href="/s/solo">Find Your Solo Trip</a>
+        </div>
+      </div>
+      <div class="mini-card">
+        <img src="/static/images/site/spotlight_support.webp" alt="Customer support">
+        <div class="inner">
+          <h3>24/7 Customer Support</h3>
+          <p>Our team of experienced adventure specialists have travelled to hundreds of countries around the globe.</p>
+          <a class="btn btn-sm" href="/contact">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Popular Destinations</h2>
+    {% for group, items in regions|groupby('group_name') %}
+    <h3 style="margin-top:18px;">{{ group }}</h3>
+    <div class="chip-row">
+      {% set gslug = group|lower|replace(' ', '-') %}
+      {% set dslug = 'australia-oceania' if group == 'Australia' else gslug %}
+      {% if gslug in group_dest_slugs %}<a class="chip" href="/srp/d-{{ gslug }}">All Adventures</a>{% endif %}
+      {% if dslug in deal_slugs %}<a class="chip" href="/deals/{{ dslug }}">Deals</a>{% endif %}
+      {% for d in items %}
+      <a class="chip" href="/d/{{ d.slug }}">{{ d.name }}</a>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <h2>The Best Tours and Adventures For Everyone</h2>
+    <div class="chip-row">
+      <a class="chip" href="/s/solo">Solo</a>
+      <a class="chip" href="/f/family">Families</a>
+      <a class="chip" href="/search?q=couples">Couples</a>
+      <a class="chip" href="/search?q=seniors">Seniors</a>
+      <a class="chip" href="/search?q=young adults">Young Adults</a>
+    </div>
+    <h2 style="margin-top:28px;">Travel The World Your Way</h2>
+    <div class="grid-cards">
+      <div class="mini-card"><img src="/static/images/site/way_hiking.jpg" alt="Hiking &amp; Trekking"><div class="inner"><h3>Hiking &amp; Trekking</h3><a href="/f/hiking-trekking">Explore</a></div></div>
+      <div class="mini-card"><img src="/static/images/site/way_river.jpg" alt="River Cruises"><div class="inner"><h3>River Cruises</h3><a href="/f/river-cruise">Explore</a></div></div>
+      <div class="mini-card"><img src="/static/images/site/way_safari.jpg" alt="Safari"><div class="inner"><h3>Safari</h3><a href="/f/safari">Explore</a></div></div>
+      <div class="mini-card"><img src="/static/images/site/way_train.jpg" alt="Train &amp; Rail"><div class="inner"><h3>Train &amp; Rail</h3><a href="/f/train-rail">Explore</a></div></div>
+      <div class="mini-card"><img src="/static/images/site/way_bicycle.jpg" alt="Bicycle"><div class="inner"><h3>Bicycle</h3><a href="/f/bicycle">Explore</a></div></div>
+      <div class="mini-card"><img src="/static/images/site/way_family.jpg" alt="Family"><div class="inner"><h3>Family</h3><a href="/f/family">Explore</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Travel With The Best Tour Operators</h2>
+      <a class="more" href="/operators-list">All operators</a>
+    </div>
+    <div class="grid-cards">
+      {% for o in operators %}
+      <a class="mini-card" href="/o/{{ o.slug }}">
+        <img src="/static/images/{{ o.logo }}" alt="{{ o.name }}">
+        <div class="inner">
+          <h3>{{ o.name }}</h3>
+          <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(o.rating) }}</span> ({{ '{:,}'.format(o.reviews_count) }} reviews)</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <h2>Top Adventures Selected For You</h2>
+    <div class="grid-cards">
+      {% for t in picks %}
+      <div class="mini-card">
+        <a href="/t/{{ t.id }}"><img src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+        <div class="inner">
+          <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+          <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span> ({{ t.review_count }})</div>
+          <div class="price">{{ t.duration_days }} days from {{ money(t.current_price) }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="text-align:center; max-width:640px;">
+    <h2>Save up to 50% on tours</h2>
+    <p>Sign up for our newsletter to get exclusive access to members only deals by email.</p>
+    <form method="post" action="/newsletter" class="search-widget" style="max-width:520px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="/">
+      <div class="field" style="border:none; flex:2;">
+        <label for="nl-email">Your email</label>
+        <input class="value" id="nl-email" name="email" type="email" placeholder="Your email" required>
+      </div>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+    <p style="font-size:11px; color:var(--text-3); margin-top:8px;">By submitting this form, I agree to the TourRadar T&amp;Cs and Privacy policy.</p>
+  </div>
+</section>
+{% endblock %}

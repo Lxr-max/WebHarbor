@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class sandiego_chrome legacy_chrome l-allow-natural-width{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}{{ p.name }} / News{% endblock %}
+{% block content %}
+<section id="page-body" class="neighborhood-Projects project-{{ p.shortname }} mountpoint-news">
+<div class="l-two-column-page">
+  <div class="l-gutter"></div>
+  <div class="l-content-column">
+    <div class="grid-20 pad">
+      <h2 class="dark title"><span>{{ p.name }} / News: Recent posts</span></h2>
+      <div>
+        {% for n in posts %}
+        <div style="margin-bottom: 10px">
+          <h3>{{ n.title }}</h3>
+          <div class="markdown_content"><p>{{ n.body }}</p></div>
+          <em class="grid-19">Posted by {% set _u = user_href(n.author) %}{% if _u %}<a href="/u/{{ _u }}/profile/" class="user-mention">{{ n.author }}</a>{% else %}{{ n.author }}{% endif %} <span title="{{ n.date }}">{{ n.date }}</span></em>
+          <div style="clear: both"></div>
+        </div>
+        <hr/>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

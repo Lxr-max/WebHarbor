@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Gift Cards | StubHub{% endblock %}
+{% block content %}
+<div class="gift-page">
+  <div class="gift-hero">
+    <h1>StubHub gift cards</h1>
+    <p>Give the gift of live events. Delivered by email, redeemable on millions of tickets.</p>
+  </div>
+  <div class="gift-cols">
+    <form method="post" action="/gift-cards/purchase" class="gift-form">
+      <h2>Choose an amount</h2>
+      <div class="amount-grid">
+        {% for amount in amounts %}
+        <label class="amount-chip">
+          <input type="radio" name="amount" value="{{ amount }}" {{ 'checked' if amount == 100 }}>
+          <span>${{ amount }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      <h2>Choose a design</h2>
+      <div class="design-row">
+        {% for design in ['classic', 'birthday', 'holiday', 'sports', 'concert'] %}
+        <label class="design-chip">
+          <input type="radio" name="design" value="{{ design }}" {{ 'checked' if design == 'classic' }}>
+          <span>{{ design|capitalize }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      <h2>Recipient</h2>
+      <label>Recipient name
+        <input type="text" name="recipient_name" placeholder="Who is it for?" required>
+      </label>
+      <label>Recipient email
+        <input type="email" name="recipient_email" placeholder="their@email.com" required>
+      </label>
+      <label>Message <span class="muted">(optional)</span>
+        <textarea name="message" rows="3" placeholder="Add a personal note"></textarea>
+      </label>
+      <button type="submit" class="btn btn-primary btn-wide">Buy gift card</button>
+      {% if not current_user.is_authenticated %}
+      <p class="muted small">You'll need to sign in to complete the purchase.</p>
+      {% endif %}
+    </form>
+    <aside class="gift-aside">
+      <h2>Your gift cards</h2>
+      {% for order in orders %}
+      <div class="order-row">
+        <div>
+          <strong>${{ order.amount }} gift card</strong>
+          <p>To {{ order.recipient_name }} ({{ order.recipient_email }})</p>
+          {% if order.message %}<p class="muted">"{{ order.message }}"</p>{% endif %}
+          <p class="muted">Code {{ order.code }} · {{ order.status }} · purchased {{ order.created_at.strftime('%b %-d, %Y') }}</p>
+        </div>
+      </div>
+      {% else %}
+      <p class="muted">No gift cards yet.</p>
+      {% endfor %}
+    </aside>
+  </div>
+</div>
+{% endblock %}

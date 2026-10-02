@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Not Found{{ '' }}{% endblock %}
+{% block content %}
+<div class="auth-layout">
+  <section class="auth-card">
+    <h1>Page not found</h1>
+    <p>The page you requested is not available. Use the menu above to keep shopping.</p>
+    <a class="btn" href="{{ url_for('home') }}">Back to Home</a>
+  </section>
+</div>
+{% endblock %}

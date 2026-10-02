@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Tumblr{% endblock %}
+{% block content %}
+<div class="dash-head">
+  <h1>Dashboard</h1>
+  <p class="page-sub">Posts from the {{ following_count }} blogs you follow.</p>
+  <nav class="dash-tabs">
+    <a class="tab active" href="{{ url_for('dashboard') }}">Following feed</a>
+    <a class="tab" href="{{ url_for('likes') }}">Likes</a>
+    <a class="tab" href="{{ url_for('following') }}">Following</a>
+    <a class="tab" href="{{ url_for('new_post') }}">New post</a>
+  </nav>
+</div>
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% else %}
+      <div class="empty-state">Follow some blogs from Explore to fill your dashboard.</div>
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>Make a post</h3>
+      <p class="side-copy">Share text, a photo, a quote or a link with your followers.</p>
+      <a class="btn btn-primary wide" href="{{ url_for('new_post') }}">New post</a>
+    </div>
+    <div class="side-card">
+      <h3>Tags you follow</h3>
+      <div class="tag-cloud">
+        {% for hub in tumblr_tag_hubs %}
+          <a class="tag" href="{{ url_for('tagged', tag=hub.tag) }}">#{{ hub.tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+</div>
+{% endblock %}

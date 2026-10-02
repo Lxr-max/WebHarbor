@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}Calculate Time and Cost | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Calculate Time and Cost</div>
+  <h1>Calculate Time and Cost</h1>
+  <p class="ups-lede">Quickly get estimated shipping quotes for our global package delivery services. Provide the origin, destination, and weight of your shipment to compare service details then sort your results by time or cost to find the most cost-effective shipping service.</p>
+
+  <div class="ups-card">
+    <form method="post" action="{{ url_for('ctc') }}" class="ups-ctc-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="ups-ctc-cols">
+        <div class="ups-ctc-col">
+          <h2 class="ups-stephead"><span class="ups-stepnum">1</span> Where and When?</h2>
+          <label>Ship From: City</label>
+          <input name="origin_city" value="{{ form.get('origin_city','') }}" placeholder="City">
+          <label>Ship From: ZIP Code <span class="ups-req">*</span></label>
+          <input name="origin_zip" value="{{ form.get('origin_zip','') }}" placeholder="ZIP Code" maxlength="5">
+          <label class="ups-check"><input type="checkbox" name="residential" {{ 'checked' if form.get('residential') }}> The destination is a residence</label>
+        </div>
+        <div class="ups-ctc-col">
+          <h2 class="ups-stephead"><span class="ups-stepnum">2</span> Enter Detail to Show Cost</h2>
+          <label>Ship To: City</label>
+          <input name="dest_city" value="{{ form.get('dest_city','') }}" placeholder="City">
+          <label>Ship To: ZIP Code <span class="ups-req">*</span></label>
+          <input name="dest_zip" value="{{ form.get('dest_zip','') }}" placeholder="ZIP Code" maxlength="5">
+          <label>Weight (lbs) <span class="ups-req">*</span></label>
+          <input name="weight" value="{{ form.get('weight','') }}" placeholder="Weight">
+        </div>
+        <div class="ups-ctc-col">
+          <h2 class="ups-stephead"><span class="ups-stepnum">3</span> My Packaging</h2>
+          <label>Length (in)</label>
+          <input name="length" value="{{ form.get('dims',{}).get('length','') }}" placeholder="Length">
+          <label>Width (in)</label>
+          <input name="width" value="{{ form.get('dims',{}).get('width','') }}" placeholder="Width">
+          <label>Height (in)</label>
+          <input name="height" value="{{ form.get('dims',{}).get('height','') }}" placeholder="Height">
+        </div>
+      </div>
+      <div class="ups-form-actions">
+        <button class="ups-btn ups-btn-primary" type="submit" name="action" value="estimate">Update</button>
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('ctc') }}">Clear</a>
+      </div>
+    </form>
+  </div>
+
+  {% if errors is defined and errors %}
+    <div class="ups-card ups-errors">
+      <p><img src="/static/images/ups-warning.png" alt="" width="16"> Please complete the highlighted fields:</p>
+      <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+
+  {% if rows %}
+    <div class="ups-card ups-ctc-results">
+      <h2>Showing Results For: {{ form.get('origin_city','') }} {{ form.get('origin_zip','') }} &rarr; {{ form.get('dest_city','') }} {{ form.get('dest_zip','') }}</h2>
+      <p class="ups-hint">Pickup times are for UPS On-Call Pickup&reg; services and are subject to change.
+        {% if interpolated %}Weight was interpolated between captured quotes ({{ form.get('weight_num') }} lbs).{% endif %}
+        {% if form.get('residential') %}Residential destination: air services include a $12.08 residential surcharge.{% endif %}</p>
+      <table class="ups-quotetable">
+        <thead>
+          <tr><th>Service</th><th>Time</th><th>Cost (All Packages)</th></tr>
+        </thead>
+        <tbody>
+          {% for r in rows %}
+          <tr>
+            <td>
+              <p class="ups-qsvc">{{ r.service_name }}</p>
+              <p class="ups-hint">Latest Pickup Time: {{ r.latest_pickup }}</p>
+              <p class="ups-hint">Schedule by: {{ r.schedule_by }}</p>
+            </td>
+            <td>
+              <p><strong>Days In Transit: {{ r.days_in_transit }}</strong></p>
+              <p>Delivered By: {{ r.delivered_by }}</p>
+              {% if r.guaranteed %}<p class="ups-guarantee">Guaranteed</p>{% endif %}
+            </td>
+            <td>
+              <p class="ups-qprice">${{ '%.2f'|format(r.price_usd) }} <span class="ups-currency">USD *</span></p>
+              <p class="ups-hint">Billable Weight: {{ '%.1f'|format(r.billable_weight_lb or 0) }} lbs.</p>
+              {% if r._breakdown and r._breakdown.transportation_usd %}
+                <details class="ups-qbreak">
+                  <summary>View Details</summary>
+                  <p>Transportation: ${{ '%.2f'|format(r._breakdown.transportation_usd or 0) }}</p>
+                  {% if r._breakdown.delivery_area_surcharge_usd %}
+                  <p>Delivery Area Surcharge: ${{ '%.2f'|format(r._breakdown.delivery_area_surcharge_usd) }}</p>
+                  {% endif %}
+                  {% if r._breakdown.fuel_surcharge_usd %}
+                  <p>Fuel Surcharge: ${{ '%.2f'|format(r._breakdown.fuel_surcharge_usd) }}</p>
+                  {% endif %}
+                  <p>Charges Per Package: ${{ '%.2f'|format(r._breakdown.charges_per_package_usd or r.price_usd) }}</p>
+                </details>
+              {% endif %}
+              <a class="ups-btn ups-btn-secondary" href="{{ url_for('ship') }}">Ship Now</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="ups-hint">* Quotes are estimates based on the retail rates captured from the Calculate Time and Cost tool on 2026-09-28. Final prices may vary based on final shipment characteristics.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

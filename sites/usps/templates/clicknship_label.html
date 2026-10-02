@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Shipping Label Created | USPS{% endblock %}
+{% block content %}
+<h1>Your Shipping Label Is Ready</h1>
+<div class="panel">
+  <p class="badge">Shipping Label Created</p>
+  <p><strong>Tracking Number:</strong> {{ shipment.tracking_number }}</p>
+  <p><strong>Service:</strong> {{ label }} — {{ shipment.price_paid | usd }} paid
+    {% if extras %}(includes {{ extras | join(', ') }}){% endif %}</p>
+  <p><strong>From:</strong> {{ shipment.sender_name }}, {{ shipment.sender_city }}, {{ shipment.sender_state }} {{ shipment.sender_zip }}</p>
+  <p><strong>To:</strong> {{ shipment.recipient_name }}, {{ shipment.recipient_city }}, {{ shipment.recipient_state }} {{ shipment.recipient_zip }}</p>
+  <p><strong>Expected delivery:</strong> {{ shipment.expected_date | longdate }}</p>
+  <a class="btn" href="{{ url_for('tracking_result', number=shipment.tracking_number) }}">Track This Package</a>
+</div>
+<p class="note">Print the label on plain paper or a sticky label sheet, tape it flat to your package, and hand it to your carrier or drop it at any Post Office. Free Package Pickup is available at <a href="{{ url_for('pickup_home') }}">Schedule a Pickup</a>.</p>
+{% endblock %}

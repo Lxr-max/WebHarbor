@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Bag | Disney Store{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Your Bag</h1>
+  {% if rows %}
+  <table class="table">
+    <thead>
+      <tr><th>Product</th><th>Price</th><th>Qty</th><th>Line total</th><th>Update</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td><a href="{{ url_for('product_detail', pid=r.product.pid) }}">{{ r.product.name }}</a></td>
+        <td>${{ '%.2f'|format(r.product.price or 0) }}</td>
+        <td>
+          <form method="post" action="{{ url_for('bag_update') }}" style="display:flex;gap:8px;align-items:center">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="row_id" value="{{ r.row.id }}">
+            <input type="number" name="qty" value="{{ r.row.qty }}" min="0" max="10" style="width:64px;padding:6px;border:1px solid var(--line);border-radius:4px">
+            <button class="btn" type="submit">Update</button>
+          </form>
+        </td>
+        <td>${{ '%.2f'|format(r.line) }}</td>
+        <td class="card-meta">set qty to 0 to remove</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p style="font-size:18px;font-weight:800;margin-top:18px">Total: ${{ '%.2f'|format(total) }}</p>
+  <p><a class="btn" href="{{ url_for('checkout') }}">Checkout</a></p>
+  {% else %}
+  <p class="empty">Your bag is empty. <a href="{{ url_for('shop') }}">Continue shopping</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

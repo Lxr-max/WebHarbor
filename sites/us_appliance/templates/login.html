@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Login</span></li>
+{% endblock %}
+{% block content %}
+<section class="container login-page">
+  <h1 class="page-heading">Sign in</h1>
+  <div class="login-row">
+    <form class="login-form" method="post" action="{{ url_for('login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="login_email">Email Address:</label>
+        <input class="form-input" name="email" id="login_email" type="email" required>
+      </div>
+      <div class="form-field">
+        <label for="login_pass">Password:</label>
+        <input class="form-input" id="login_pass" type="password" name="password" autocomplete="off" required>
+      </div>
+      <div class="form-actions">
+        <input type="submit" class="button button--primary" value="Sign in">
+        <a class="forgot-password" href="{{ url_for('login') }}?action=reset_password">Forgot your password?</a>
+      </div>
+    </form>
+    <div class="new-customer">
+      <div class="panel">
+        <h2 class="panel-title">New Customer?</h2>
+        <p>Create an account with us and you'll be able to:</p>
+        <ul>
+          <li>Check out faster</li>
+          <li>Save multiple shipping addresses</li>
+          <li>Track your orders</li>
+          <li>See exclusive member pricing</li>
+        </ul>
+        <p><a class="button" href="{{ url_for('login', action='create_account') }}">Create an Account</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

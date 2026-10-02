@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1>U.S. Customs and Border Protection</h1>
+  <p>CBP provides information on border security, trade, travel, customs regulations, trusted traveler programs and enforcement news to the public.</p>
+</div>
+
+<section aria-label="Traveler quick links">
+  <div class="quick-links">
+    <a class="quick-card" href="{{ url_for('esta_page') }}">
+      <img src="{{ url_for('static', filename='images/upstream/0148_estaicon.png.webp') }}" alt="ESTA icon" onerror="this.style.display='none'">
+      <span>Apply for an ESTA</span>
+      <small>Visa Waiver Program travelers</small>
+    </a>
+    <a class="quick-card" href="{{ url_for('i94_request') }}">
+      <span>Find an I-94 Record</span>
+      <small>Arrival/departure records</small>
+    </a>
+    <a class="quick-card" href="{{ url_for('ttp_overview') }}">
+      <span>Trusted Traveler Programs</span>
+      <small>Global Entry · NEXUS · SENTRI</small>
+    </a>
+    <a class="quick-card" href="{{ url_for('bwt') }}">
+      <span>View Border Wait Times</span>
+      <small>{{ crossings }} crossings in this snapshot</small>
+    </a>
+    <a class="quick-card" href="{{ url_for('ports_landing') }}">
+      <span>Locate a Port of Entry</span>
+      <small>Addresses, hours and contacts</small>
+    </a>
+    <a class="quick-card" href="{{ url_for('careers_home') }}">
+      <span>Career Paths</span>
+      <small>CBP operates at 328 ports of entry</small>
+    </a>
+  </div>
+</section>
+
+<div class="home-cards">
+  <div class="card">
+    <img class="card-img" src="{{ url_for('static', filename='images/upstream/0216_25_0827_card_border-wall.jpg.webp') }}" alt="Border wall at sunrise" onerror="this.src='{{ url_for('static', filename='images/chrome/CBPwSealwhite_225x69.png') }}'">
+    <div class="card-body">
+      <h3>Border Security</h3>
+      <p>Safeguarding America's borders, promoting economic prosperity and security.</p>
+      <a class="more" href="/border-security/ports-entry">At Ports of Entry →</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3>Latest News Releases</h3>
+      {% for r in releases %}
+      <p><a href="{{ url_for('release_detail', kind=('national-media-release' if r.category == 'National Media Release' else 'local-media-release'), slug=r.slug) }}">{{ r.title }}</a><br>
+        <span class="note">{{ r.date }} — {{ r.category }}</span></p>
+      {% endfor %}
+      <a class="more" href="{{ url_for('media_releases') }}">All media releases →</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3>Trade &amp; Travel Tools</h3>
+      <p><a href="{{ url_for('forms_catalog') }}">CBP Forms</a> — 97 downloadable forms, from CBP Form 19 (Protest) to Form 7501 (Entry Summary).</p>
+      <p><a href="/trade/basic-import-export">Basic Import and Export</a> — what you need to know before importing goods or a vehicle.</p>
+      <p><a href="{{ url_for('careers_search') }}">CBP Jobs</a> — {{ jobs|length }} recent postings from USAJOBS.</p>
+      <a class="more" href="{{ url_for('site_search') }}">Search the site →</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ author.name }}, Author - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / <a href="/en/news">News</a> / Author</div>
+<div class="author-head">
+  {% if author.avatar %}<img class="author-avatar" src="/static/images/{{ author.avatar }}" alt="{{ author.name }}">{% endif %}
+  <div>
+    <h1 class="page-title">{{ author.name }}</h1>
+    {% if author.title %}<div class="muted">{{ author.title }}</div>{% endif %}
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-head"><h2>Stories by {{ author.name }}</h2></div>
+  {% if arts %}
+  <div class="news-grid">
+    {% for art in arts %}
+    <a class="news-card" href="{{ art.path }}">
+      <div class="nc-thumb">
+        {% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}
+      </div>
+      <div class="nc-title">
+        <span class="cat-chip" style="background:{{ art.category_key|category_colour }}">{{ art.category_key|title }}</span><br>
+        {{ art.headline }}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-note">No stories by this author are in this archive.</p>
+  {% endif %}
+</section>
+{% endblock %}

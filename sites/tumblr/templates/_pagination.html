@@ -1,0 +1,13 @@
+{% if pagination.pages > 1 %}
+<nav class="pagination">
+  {% set args = request.view_args.copy() %}
+  {% set args = args.update(request.args.to_dict()) or args %}
+  {% if pagination.has_prev %}
+    <a class="page-btn" href="{{ url_for(request.endpoint, **dict(args, page=pagination.page-1)) }}">← Newer</a>
+  {% endif %}
+  <span class="page-status">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+  {% if pagination.has_next %}
+    <a class="page-btn" href="{{ url_for(request.endpoint, **dict(args, page=pagination.page+1)) }}">Older →</a>
+  {% endif %}
+</nav>
+{% endif %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Help and Support Center | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Help and Support Center</div>
+  <h1>Help and Support Center</h1>
+  <div class="ups-card">
+    <form method="get" action="{{ url_for('support') }}" class="ups-locatorform">
+      <label for="support-q" class="ups-sr-only">Search support articles</label>
+      <input id="support-q" name="q" value="{{ q }}" placeholder="Search help articles (e.g., tracking status)">
+      <button class="ups-btn ups-btn-primary" type="submit">Search</button>
+    </form>
+    {% if q %}
+      <p class="ups-lede">{{ articles|length }} article{{ 's' if articles|length != 1 }} matching &ldquo;{{ q }}&rdquo;</p>
+    {% endif %}
+  </div>
+
+  {% if not q %}
+  <div class="ups-cardgrid">
+    <a class="ups-card" href="{{ url_for('support') }}?q=track">
+      <img src="/static/images/ups-package-logo.png" alt=""><h3>Tracking</h3>
+      <p>Understanding Tracking Status, Delivery Notice, Missed Package Delivery.</p></a>
+    <a class="ups-card" href="{{ url_for('support') }}?q=shipping">
+      <img src="/static/images/ups-boxes-packaging.png" alt=""><h3>Shipping</h3>
+      <p>Shipping Cost Estimator, Domestic and International Shipping, Packaging and Shipping Supplies.</p></a>
+    <a class="ups-card" href="{{ url_for('support') }}?q=delivery">
+      <img src="/static/images/ups-package-redirect-truck.png" alt=""><h3>Delivery Changes</h3>
+      <p>Change Delivery, Deliver to New Address, Schedule a Pickup, Delivery Preferences.</p></a>
+    <a class="ups-card" href="{{ url_for('support') }}?q=claim">
+      <img src="/static/images/ups-file-folder.png" alt=""><h3>Claims</h3>
+      <p>File a Claim, Check My Claims.</p></a>
+  </div>
+  {% endif %}
+
+  {% for cat, arts in categories.items() %}
+  <div class="ups-card">
+    <h2>{{ cat }}</h2>
+    <ul class="ups-svc-list">
+      {% for a in arts %}
+      <li><a href="{{ url_for('support_article', key=a.key) }}">{{ a.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Blog | Speedo{% endblock %}
+{% block content %}
+<div class="page-width">
+  <h1 class="cart-page-title">All the latest, no shallow stuff</h1>
+  <div class="blog-grid">
+    {% for art in articles %}
+    <a class="blog-card" href="/blogs/news/{{ art.slug }}">
+      {% if art.image %}<img src="{{ url_for('static', filename='images/' + art.image) }}" alt="{{ art.title }}" loading="lazy">{% endif %}
+      <h3>{{ art.title }}</h3>
+      <div class="date">{{ art.published }}</div>
+      <div class="summary">{{ art.summary }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

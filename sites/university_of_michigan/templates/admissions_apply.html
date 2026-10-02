@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Apply — University of Michigan Admissions{% endblock %}
+{% block content %}
+<h1>Apply</h1>
+<p class="page-sub">First-year application plans, requirements and deadlines. Students who submit an application before they have received a high school diploma will apply as a first-year student.</p>
+
+<h2>First-year Application Plans</h2>
+<p>Students have three application plans to choose from when applying to U-M.</p>
+<table class="list">
+  <tr><th>Plan</th><th>Binding</th><th>Application Deadline</th><th>Financial Aid Deadline</th><th>Decision Date</th><th>Commitment Date</th></tr>
+  {% for p in plans %}
+  <tr>
+    <td>{{ p.plan }}</td>
+    <td>{{ 'Yes — binding' if p.binding else 'No' }}</td>
+    <td>{{ p.deadline }}</td>
+    <td>{{ p.aid_deadline or '—' }}</td>
+    <td>{{ p.decision }}</td>
+    <td>{{ p.commit }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Important Dates</h2>
+<table class="list">
+  <tr><th>Date</th><th>Items</th></tr>
+  {% for d in deadlines %}
+  <tr>
+    <td>{{ d.date }}</td>
+    <td>{{ d.item_list()|join('<br>')|safe }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>First-year Admitting Units</h2>
+<p>{{ units.get('first_year_admitting_units_text','') }}</p>
+{% if units.get('first_year_units') %}
+<p>{% for u in units['first_year_units'] %}<span class="badge type" style="margin:2px">{{ u }}</span>{% endfor %}</p>
+{% endif %}
+
+<h2>Upper-level Admitting Units</h2>
+<p>{{ units.get('upper_level_admitting_units_text','') }}</p>
+
+<h2>Application Checklist</h2>
+<ul>
+  <li>Completed Common Application with $75 application fee payment</li>
+  <li>High school transcript</li>
+  <li>School Report (Common App)</li>
+  <li>One Teacher Evaluation (core academic teacher or other non-relative who can speak directly to the student's academic aptitude, potential, and classroom performance)</li>
+  <li>SAT or ACT score, if available and you wish them to be considered</li>
+  <li>TOEFL, IELTS, MET, etc. scores (for non-native speakers of English)</li>
+</ul>
+
+<p><a class="btn small" href="{{ url_for('request_info') }}">Request more information</a></p>
+{% endblock %}

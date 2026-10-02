@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}My Verizon — Sign in{% endblock %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Sign in to My Verizon</h1>
+  <form method="post" action="{{ url_for('account_login') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>User ID or email <input type="email" name="email" required></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+  <p>New to Verizon? <a href="{{ url_for('account_register') }}">Register</a>.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block title %}Stays in {{ dest.city }}, {{ dest.region }} | Airbnb{% endblock %}
+{% block content %}
+<h1 style="font-size:26px;margin-top:24px;">Stays in {{ dest.city }}, {{ dest.region }}</h1>
+<p class="muted small">{{ listings|length }} captured stays shown</p>
+
+<div class="search-layout">
+  <aside class="filters">
+    <form method="get" action="{{ url_for('stays_search', slug=dest.slug) }}">
+      <input type="hidden" name="checkin" value="{{ checkin }}">
+      <input type="hidden" name="checkout" value="{{ checkout }}">
+      <input type="hidden" name="adults" value="{{ adults }}">
+      <h3>Filters</h3>
+      <div class="fgroup">
+        <h4>Price range (trip price, includes all fees)</h4>
+        {% if panel.price and panel.price.text %}
+        <p class="small muted">Upstream market range: {{ panel.price.text }}</p>
+        {% endif %}
+        <div class="range">
+          <input type="number" name="price_min" placeholder="Min $" value="{{ '%d' % filters.price_min if filters.price_min else '' }}" aria-label="Minimum price">
+          <input type="number" name="price_max" placeholder="Max $" value="{{ '%d' % filters.price_max if filters.price_max else '' }}" aria-label="Maximum price">
+        </div>
+        {% if panel.price and panel.price.histogram %}
+        <div class="hist" aria-label="Upstream price distribution histogram">
+          {% set mx = (panel.price.histogram or [])|max if panel.price.histogram else 1 %}
+          {% for h in panel.price.histogram %}
+          <i class="{{ 'on' if loop.index0 >= 8 and loop.index0 <= 30 else '' }}" style="height: {{ (h / mx * 100)|round|int }}%"></i>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="fgroup">
+        <h4>Type of place</h4>
+        {% for cat, label in room_labels.items() %}
+        <label class="chk"><input type="checkbox" name="room_category" value="{{ cat }}" {{ 'checked' if cat in filters.room_category }}>{{ label }}</label>
+        {% endfor %}
+      </div>
+      <div class="fgroup">
+        <h4>Rooms and beds</h4>
+        <label class="chk">Bedrooms
+          <select name="bedrooms" style="width:80px">
+            <option value="">Any</option>
+            {% for n in [1, 2, 3, 4] %}
+            <option value="{{ n }}" {{ 'selected' if filters.bedrooms == n }}>{{ n }}+</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label class="chk">Beds
+          <select name="beds" style="width:80px">
+            <option value="">Any</option>
+            {% for n in [1, 2, 3, 4] %}
+            <option value="{{ n }}" {{ 'selected' if filters.beds == n }}>{{ n }}+</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label class="chk">Bathrooms
+          <select name="baths" style="width:80px">
+            <option value="">Any</option>
+            {% for n in [1, 2, 3] %}
+            <option value="{{ n }}" {{ 'selected' if filters.baths == n }}>{{ n }}+</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="fgroup">
+        <h4>Standout stays</h4>
+        <label class="chk"><input type="checkbox" name="guest_favorite" value="1" {{ 'checked' if filters.guest_favorite }}>Guest favorite <span class="muted small">({{ facets.guest_favorite }})</span></label>
+        <label class="chk"><input type="checkbox" name="superhost" value="1" {{ 'checked' if filters.superhost }}>Superhost <span class="muted small">({{ facets.superhost }})</span></label>
+      </div>
+      <div class="fgroup">
+        <h4>Booking options</h4>
+        <label class="chk"><input type="checkbox" name="instant_book" value="1" {{ 'checked' if filters.instant_book }}>Instant Book <span class="muted small">({{ facets.instant_book }})</span></label>
+        <label class="chk"><input type="checkbox" name="pets" value="1" {{ 'checked' if filters.pets }}>Allows pets <span class="muted small">({{ facets.pets }})</span></label>
+      </div>
+      <div class="fgroup">
+        <h4>Property type</h4>
+        {% for pt, cnt in ptypes %}
+        <label class="chk"><input type="checkbox" name="property_type" value="{{ pt }}" {{ 'checked' if pt in filters.property_type }}>{{ pt }} <span class="muted small">({{ cnt }})</span></label>
+        {% endfor %}
+      </div>
+      <div class="fgroup">
+        <h4>Amenities</h4>
+        {% for label, key, cnt in amenities %}
+        <label class="chk"><input type="checkbox" name="amenities" value="{{ key }}" {{ 'checked' if key in filters.amenities }}>{{ label }} <span class="muted small">({{ cnt }})</span></label>
+        {% endfor %}
+      </div>
+      <div class="fgroup">
+        <h4>Sort by</h4>
+        <select name="sort">
+          {% for key, label in sort_options.items() %}
+          <option value="{{ key }}" {{ 'selected' if filters.sort == key }}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="btn btn-rausch" type="submit">Apply filters</button>
+      &nbsp;<a class="btn btn-ghost btn-sm" href="{{ url_for('stays_search', slug=dest.slug) }}">Clear all</a>
+    </form>
+  </aside>
+
+  <section>
+    <div class="filterbar">
+      {% if filters.guest_favorite %}<span class="fchip">Guest favorite</span>{% endif %}
+      {% if filters.superhost %}<span class="fchip">Superhost</span>{% endif %}
+      {% if filters.instant_book %}<span class="fchip">Instant Book</span>{% endif %}
+      {% if filters.pets %}<span class="fchip">Allows pets</span>{% endif %}
+      {% for c in filters.room_category %}<span class="fchip">{{ room_labels.get(c, c) }}</span>{% endfor %}
+      {% for p in filters.property_type %}<span class="fchip">{{ p }}</span>{% endfor %}
+      {% for a in filters.amenities %}<span class="fchip">{{ a|title }}</span>{% endfor %}      {% if filters.price_min or filters.price_max %}<span class="fchip">${{ filters.price_min or 0 }} – ${{ filters.price_max or '∞' }}</span>{% endif %}
+      {% if filters.bedrooms %}<span class="fchip">{{ filters.bedrooms }}+ bedrooms</span>{% endif %}
+      {% if filters.beds %}<span class="fchip">{{ filters.beds }}+ beds</span>{% endif %}
+      {% if filters.baths %}<span class="fchip">{{ filters.baths }}+ baths</span>{% endif %}
+    </div>
+    {% if not listings %}
+    <div class="note">No captured stays match these filters. Clear some filters to see all {{ facets.total }} stays.</div>
+    {% endif %}
+    <div class="cards">
+      {% for lst in listings %}
+      <a class="card" href="{{ url_for('listing_detail', lid=lst.id, checkin=checkin or lst.quote_checkin, checkout=checkout or lst.quote_checkout, adults=adults or 2) }}">
+        <div class="ph">
+          {% if lst.photo_list() %}<img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}" loading="lazy">{% endif %}
+        </div>
+        <div class="body">
+          <div class="row1">
+            <span>{{ lst.title }}</span>
+            {% if lst.rating %}<span class="rating-star">&#9733; {{ lst.rating }} <span class="revcount">({{ lst.reviews_count }})</span></span>
+            {% else %}<span class="badge badge-muted">New</span>{% endif %}
+          </div>
+          <div class="row2"><span class="muted">{{ lst.name }}</span></div>
+          <div class="row2">
+            <span>
+              {% if lst.is_guest_favorite %}<span class="badge badge-gold">Guest favorite</span>{% endif %}
+              {% if lst.is_superhost %}<span class="badge badge-muted">Superhost</span>{% endif %}
+            </span>
+          </div>
+          <div class="row2">
+            <span><strong>{{ '$%.2f'|format(lst.nightly_price) if lst.nightly_price else 'Price unavailable' }}</strong> night
+              {% if lst.quote_total %}<span class="muted">&middot; {{ '$%.2f'|format(lst.quote_total) }} for {{ lst.quote_nights }} nights</span>{% endif %}
+            </span>
+            <span class="muted small">{{ lst.bedrooms or 0 }} bd &middot; {{ lst.baths or 0 }} ba</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

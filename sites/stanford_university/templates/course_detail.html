@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.code }}: {{ course.title }} — Stanford University{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('courses') }}">Courses</a> › {{ course.code }}</div>
+<div class="detail-head">
+  <h1>{{ course.code }} — {{ course.title }}</h1>
+  <div class="meta">
+    {% for code, name in dept_names %}<a href="{{ url_for('department_detail', code=code) }}">{{ name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
+    · {{ course.career or '—' }}
+  </div>
+</div>
+<div class="detail-body">
+  <p>{{ course.description }}</p>
+  <div class="facts">
+    <div class="fact"><div class="k">Units</div><div class="v">{{ course.units_display or '—' }}</div></div>
+    <div class="fact"><div class="k">Grading basis</div><div class="v">{{ course.grade_mode or '—' }}</div></div>
+    <div class="fact"><div class="k">Terms offered</div><div class="v">{{ course.terms|join(', ') or '—' }}</div></div>
+    <div class="fact"><div class="k">Components</div><div class="v">{{ course.components|join(', ') or '—' }}</div></div>
+  </div>
+  {% if course.ways %}
+  <h2>WAYS requirement</h2>
+  <p>{% for w in course.ways %}<span class="chip">{{ w }}</span>{% endfor %}</p>
+  {% endif %}
+  {% if prereqs %}
+  <h2>Prerequisites</h2>
+  <ul>{% for p in prereqs %}<li>{{ p }}</li>{% endfor %}</ul>
+  {% endif %}
+  <div class="form-actions">
+    {% if current_user.is_authenticated %}
+    <form class="inline-form" method="post" action="{{ url_for('planner_add') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="code" value="{{ course.code }}">
+      <input type="hidden" name="next" value="{{ url_for('course_detail', code=course.code) }}">
+      <button class="btn solid" type="submit">Add to course planner</button>
+    </form>
+    <a class="btn" href="{{ url_for('planner') }}">View planner</a>
+    {% else %}
+    <a class="btn solid" href="{{ url_for('login', next=url_for('course_detail', code=course.code)) }}">Log in to add to planner</a>
+    {% endif %}
+  </div>
+  {% if related %}
+  <h2>More {{ course.subject }} courses</h2>
+  <table class="data">
+    <tr><th>Code</th><th>Title</th><th>Units</th></tr>
+    {% for c in related %}
+      <tr><td><a href="{{ url_for('course_detail', code=c.code) }}">{{ c.code }}</a></td><td>{{ c.title }}</td><td>{{ c.units_display }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{
+  "site": "usps",
+  "upstream": "https://www.usps.com/",
+  "captured_at": "2026-09-28",
+  "capture_method": "direct HTTP (requests) against the live pages and public JSON APIs; headless Chromium (Playwright) for The Postal Store product pages",
+  "sources": {
+    "www.usps.com": {
+      "role": "primary site: ship/manage/international/help/business/shop content pages, quick-tool copy, site chrome and imagery",
+      "pages_captured": 43
+    },
+    "pe.usps.com": {
+      "role": "Notice 123 retail price list (domestic and international zone/group grids, flat rate, extra services, PO Box fees) and the Individual Country Listings from the International Mail Manual",
+      "endpoints": [
+        "https://pe.usps.com/text/dmm300/Notice123.htm",
+        "https://pe.usps.com/text/imm/immiclstg.htm"
+      ],
+      "rate_rows": 4731,
+      "countries": 49
+    },
+    "webpmt.usps.gov": {
+      "role": "official Postmaster Finder JSON API backing about.usps.com's Postmaster Finder: Post Office directory (names, ZIP Codes, states, establishment/discontinuance dates) and postmaster rosters",
+      "endpoints": [
+        "https://webpmt.usps.gov/postmaster-finder/by-state",
+        "https://webpmt.usps.gov/postmaster-finder/by-zip",
+        "https://webpmt.usps.gov/postmaster-finder/by-city-v2",
+        "https://webpmt.usps.gov/postmaster-finder/get-states"
+      ],
+      "post_offices": 6282,
+      "roster_cities": 18,
+      "roster_note": "each city's postmaster roster is captured up to the first 12 named entries (the scraper's [:12] window), so a city's page shows the earliest historical postmasters rather than the full modern list; the 'since' date on a facility is the last captured roster entry"
+    },
+    "store.usps.com": {
+      "role": "The Postal Store: product categories, titles, SKUs, prices, descriptions and the ecp asset images",
+      "products": 53
+    },
+    "about.usps.com": {
+      "role": "newsroom national releases (2026) and service alerts",
+      "endpoints": [
+        "https://about.usps.com/newsroom/national-releases/2026/data.json",
+        "https://about.usps.com/newsroom/service-alerts/"
+      ],
+      "releases": 14,
+      "service_alerts": 4,
+      "capture_note": "release bodies are verbatim paragraphs; the holiday-dates release's date table markup was not captured (its recommendations text was), and a few paragraphs with scrape-extraction artifacts are repaired at render time (see app.py _fix_mojibake)"
+    },
+    "tools.usps.com": {
+      "role": "static tool landing pages (locations home) used to model the locator experience; the interactive tool endpoints (ZipLookup, TrackConfirm, find-location getLocations) are bot-protected and returned Access Denied during capture",
+      "pages_captured": 1
+    }
+  },
+  "media": {
+    "images": {
+      "count": 389,
+      "inventory": "asset_inventory.json",
+      "policy": "every file fetched from the upstream URL it renders at; no placeholders, no stretching. 5 file pairs share a sha256 because USPS itself serves the same bytes at two different upstream URLs (both source URLs are recorded per file in asset_inventory.json and were re-verified to return identical bytes)"
+    }
+  },
+  "fixtures": {
+    "benchmark_users": [
+      "alice.j@test.com",
+      "bob.c@test.com",
+      "carol.d@test.com",
+      "dana.k@test.com"
+    ],
+    "password": "TestPass123! (frozen bcrypt hash; documented in tasks that require sign-in)",
+    "policy": "interactive flows (tracking timelines, Click-N-Ship labels, pickups, Hold Mail, Change of Address, PO Box reservations, store cart/checkout, claims, Informed Delivery) are original mirror code seeded with deterministic fixtures; facility street addresses, phone numbers and hours in the location directory are deterministic mirror fixtures layered on the real Postmaster Finder roster"
+  },
+  "reviewed_corrections": {
+    "po_box_fees": "Re-extracted all five size columns for each fee group from Notice 123. Previous parser mislabeled fee-group rows as sizes. Mirrored offices use benchmark fee group 2, not a claim about real local pricing.",
+    "tracking": "Authored fixture final delivery scans now agree with the delivery timestamp."
+  }
+}

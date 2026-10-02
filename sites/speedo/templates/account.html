@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}My Account | Speedo{% endblock %}
+{% block content %}
+<div class="page-width account-layout">
+  <aside class="account-nav">
+    <h2>My Account</h2>
+    <ul>
+      <li><a class="active" href="{{ url_for('account') }}">Orders</a></li>
+      <li><a href="{{ url_for('account_profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('account_addresses') }}">Addresses</a></li>
+      <li><a href="{{ url_for('account_payment') }}">Payment Methods</a></li>
+      <li><a href="{{ url_for('account_wishlist') }}">Wishlist</a></li>
+      <li>
+        <form method="post" action="{{ url_for('logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="link-btn">Sign Out</button>
+        </form>
+      </li>
+    </ul>
+  </aside>
+  <section class="account-main">
+    <h1>Hi, {{ current_user.name.split()[0] }}</h1>
+    <p class="account-sub">{{ current_user.email }}</p>
+    <h2 style="font-size:17px;text-transform:uppercase;margin-bottom:12px;">Order History</h2>
+    {% for order in orders %}
+    <article class="order-row">
+      <div class="order-row-head">
+        <span><strong>{{ order.order_number }}</strong> &middot; {{ order.placed_on }}</span>
+        <span class="order-status {{ 'dispatched' if order.status == 'Dispatched' else 'processing' }}">{{ order.status }}</span>
+      </div>
+      <div class="order-items-line">
+        {% for item in order.items %}{{ item.qty }} &times; {{ item.product_name }}{% if item.size %} ({{ item.size }}){% endif %}{{ ", " if not loop.last else "" }}{% endfor %}
+      </div>
+      <div class="order-row-foot">
+        <span>Total £{{ '%.2f' % order.total }} &middot; {{ order.shipping_method }} &middot; {{ order.card_brand }} ****{{ order.card_last4 }}</span>
+        <a href="{{ url_for('account_order', order_number=order.order_number) }}">View order</a>
+      </div>
+    </article>
+    {% else %}
+    <p>You have no orders yet.</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Page Not Found</h1>
+  <p>The page you requested could not be found. You can use the search box above, browse the topics below, or return to the <a href="{{ url_for('home') }}">USCIS home page</a>.</p>
+  <ul class="tick-list">
+    <li><a href="{{ url_for('forms_catalog') }}">All Forms</a></li>
+    <li><a href="{{ url_for('casestatus') }}">Case Status Online</a></li>
+    <li><a href="{{ url_for('processing_times') }}">Processing Times</a></li>
+    <li><a href="{{ url_for('newsroom') }}">Newsroom</a></li>
+  </ul>
+</div>
+{% endblock %}

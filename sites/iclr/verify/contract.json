@@ -1,0 +1,998 @@
+{
+  "iclr--0": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), building a reading list on diffusion for deep reinforcement learning. Find the papers whose titles mention diffusion in the Reinforcement Learning -> Deep RL topic. Bookmark the alphabetically first match so I can visit its poster. Tell me how many papers fit, the chosen title, its session and poster position, and how many bookmarks I now have.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 1,
+            "paper_id": 10008059,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10008059(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Search matches",
+        "search(?:(?!(?:accelerating\\s+diffusion\\s+planners\\s+in\\s+offline\\s+rl\\s+via\\s+reward\\s*-\\s*aware\\s+consistency\\s+trajectory\\s+distillation|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:matches|results|hits|papers|count)\\s*(?:is|was|are|were|of|at|=)?\\s*4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Accelerating Diffusion Planners in Offline RL via Reward-Aware Consistency Trajectory Distillation session",
+        "accelerating\\s+diffusion\\s+planners\\s+in\\s+offline\\s+rl\\s+via\\s+reward\\s*-\\s*aware\\s+consistency\\s+trajectory\\s+distillation(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+2\\s+pavilion\\s+4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Accelerating Diffusion Planners in Offline RL via Reward-Aware Consistency Trajectory Distillation poster position",
+        "accelerating\\s+diffusion\\s+planners\\s+in\\s+offline\\s+rl\\s+via\\s+reward\\s*-\\s*aware\\s+consistency\\s+trajectory\\s+distillation(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#4618(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:search|accelerating\\s+diffusion\\s+planners\\s+in\\s+offline\\s+rl\\s+via\\s+reward\\s*-\\s*aware\\s+consistency\\s+trajectory\\s+distillation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*4(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--1": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!), looking for oral-accepted work on language models to read before ICLR. Find papers with language model in the title and an Accept (Oral) decision, and bookmark the alphabetically first match. Tell me the number of matches, the chosen title, and when and where its presentation is scheduled, distinguishing the displayed talk slot from a poster position. Confirm my bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 2,
+            "paper_id": 10007869,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10007869(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Search matches",
+        "search(?:(?!(?:benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:matches|results|hits|papers|count)\\s*(?:is|was|are|were|of|at|=)?\\s*38(?!\\w|\\.\\d)"
+      ],
+      [
+        "Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models session",
+        "benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+2\\s+pavilion\\s+4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models time",
+        "benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*thu,\\s+apr\\s+23,\\s+2026\\s+\u00b7\\s+3:15\\s+pm\\s+\\s*-\\s*\\s+5:45\\s+pm\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models room",
+        "benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?room\\s*(?:is|was|are|were|of|at|=)?\\s*pavilion\\s+4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models poster position",
+        "benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models(?:(?!(?:search|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#3809(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:search|benchmarking\\s+empirical\\s+privacy\\s+protection\\s+for\\s+adaptations\\s+of\\s+large\\s+language\\s+models)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--2": {
+    "task": "I'm Carol (carol.d@test.com, TestPass123!), preparing visits to Poster Session 4 Pavilion 4 and Poster Session 1 Pavilion 4. Compare the alphabetically first paper in each session: give their titles, poster positions and first-author institutions. Save the Session 1 paper to my bookmarks and confirm the resulting total so I can find it on the day.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 3,
+            "paper_id": 10010780,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10010518(?:$|\\?)",
+      "/papers/10010780(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "3D-aware Disentangled Representation for Compositional Reinforcement Learning poster position",
+        "3d\\s*-\\s*aware\\s+disentangled\\s+representation\\s+for\\s+compositional\\s+reinforcement\\s+learning(?:(?!(?:\\$\\\\pi\\^3\\$\\s+permutation\\s*-\\s*equivariant\\s+visual\\s+geometry\\s+learning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#4712(?!\\w|\\.\\d)"
+      ],
+      [
+        "3D-aware Disentangled Representation for Compositional Reinforcement Learning first author",
+        "3d\\s*-\\s*aware\\s+disentangled\\s+representation\\s+for\\s+compositional\\s+reinforcement\\s+learning(?:(?!(?:\\$\\\\pi\\^3\\$\\s+permutation\\s*-\\s*equivariant\\s+visual\\s+geometry\\s+learning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*sungbin\\s+mun\\s+\\(seoul\\s+national\\s+university\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "$\\pi^3$: Permutation-Equivariant Visual Geometry Learning poster position",
+        "\\$\\\\pi\\^3\\$\\s+permutation\\s*-\\s*equivariant\\s+visual\\s+geometry\\s+learning(?:(?!(?:3d\\s*-\\s*aware\\s+disentangled\\s+representation\\s+for\\s+compositional\\s+reinforcement\\s+learning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#3316(?!\\w|\\.\\d)"
+      ],
+      [
+        "$\\pi^3$: Permutation-Equivariant Visual Geometry Learning first author",
+        "\\$\\\\pi\\^3\\$\\s+permutation\\s*-\\s*equivariant\\s+visual\\s+geometry\\s+learning(?:(?!(?:3d\\s*-\\s*aware\\s+disentangled\\s+representation\\s+for\\s+compositional\\s+reinforcement\\s+learning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*yifan\\s+wang\\s+\\(shanghai\\s+jiao\\s+tong\\s+university\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:3d\\s*-\\s*aware\\s+disentangled\\s+representation\\s+for\\s+compositional\\s+reinforcement\\s+learning|\\$\\\\pi\\^3\\$\\s+permutation\\s*-\\s*equivariant\\s+visual\\s+geometry\\s+learning)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--3": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!). Help me prepare for Thursday's Oral Session 1A LLMs and Reasoning. Identify its opening and closing papers and their talk slots, and tell me the room and number of talks. Bookmark the closing paper for follow-up reading and confirm my bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 2,
+            "paper_id": 10009682,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10007766(?:$|\\?)",
+      "/papers/10009682(?:$|\\?)",
+      "/schedule(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Overthinking Reduction with Decoupled Rewards and Curriculum Data Scheduling time",
+        "overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling(?:(?!(?:rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format|oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*thu,\\s+apr\\s+23,\\s+2026\\s+\u00b7\\s+10:30\\s+am\\s+\\s*-\\s*\\s+10:40\\s+am\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Overthinking Reduction with Decoupled Rewards and Curriculum Data Scheduling room",
+        "overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling(?:(?!(?:rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format|oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?room\\s*(?:is|was|are|were|of|at|=)?\\s*amphitheater(?!\\w|\\.\\d)"
+      ],
+      [
+        "RAIN-Merging: A Gradient-Free Method to Enhance Instruction Following in Large Reasoning Models with Preserved Thinking Format time",
+        "rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format(?:(?!(?:overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling|oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*thu,\\s+apr\\s+23,\\s+2026\\s+\u00b7\\s+11:30\\s+am\\s+\\s*-\\s*\\s+11:40\\s+am\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "RAIN-Merging: A Gradient-Free Method to Enhance Instruction Following in Large Reasoning Models with Preserved Thinking Format room",
+        "rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format(?:(?!(?:overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling|oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?room\\s*(?:is|was|are|were|of|at|=)?\\s*amphitheater(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oral Session 1A LLMs and Reasoning talks",
+        "oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning(?:(?!(?:overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling|rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?talks\\s*(?:is|was|are|were|of|at|=)?\\s*6(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:overthinking\\s+reduction\\s+with\\s+decoupled\\s+rewards\\s+and\\s+curriculum\\s+data\\s+scheduling|rain\\s*-\\s*merging\\s+a\\s+gradient\\s*-\\s*free\\s+method\\s+to\\s+enhance\\s+instruction\\s+following\\s+in\\s+large\\s+reasoning\\s+models\\s+with\\s+preserved\\s+thinking\\s+format|oral\\s+session\\s+1a\\s+llms\\s+and\\s+reasoning)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--4": {
+    "task": "I'm Dana (dana.k@test.com, TestPass123!), choosing a Sunday workshop on strategic decision making. Compare VerifAI-2, AI for Peace, and AI for Mechanism Design and Strategic Decision Making (AIMS) using their abstracts and programs. Summarize each workshop's focus and opening program item, then add AIMS to my schedule and confirm its date, time and my saved-event total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 4,
+            "event_id": 10000779,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10000774(?:$|\\?)",
+      "/events/10000779(?:$|\\?)",
+      "/events/10000804(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild time",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:ai\\s+for\\s+peace|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sun,\\s+apr\\s+26,\\s+2026\\s+\\(sun\\s+26\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild first program item",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:ai\\s+for\\s+peace|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+opening\\s+remarks(?!\\w|\\.\\d)"
+      ],
+      [
+        "AI for Peace time",
+        "ai\\s+for\\s+peace(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sun,\\s+apr\\s+26,\\s+2026\\s+\\(sun\\s+26\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "AI for Peace first program item",
+        "ai\\s+for\\s+peace(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+welcome(?!\\w|\\.\\d)"
+      ],
+      [
+        "AI for Mechanism Design and Strategic Decision Making (AIMS) time",
+        "ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+peace|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sun,\\s+apr\\s+26,\\s+2026\\s+\\(sun\\s+26\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "AI for Mechanism Design and Strategic Decision Making (AIMS) first program item",
+        "ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+peace|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+opening\\s+remarks(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+peace|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\))\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild focus",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:ai\\s+for\\s+peace|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?verification.{0,70}ai systems"
+      ],
+      [
+        "AI for Peace focus",
+        "ai\\s+for\\s+peace(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?ai.{0,60}peace.{0,60}conflict"
+      ],
+      [
+        "AI for Mechanism Design and Strategic Decision Making (AIMS) focus",
+        "ai\\s+for\\s+mechanism\\s+design\\s+and\\s+strategic\\s+decision\\s+making\\s+\\(aims\\)(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|ai\\s+for\\s+peace|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?mechanism design.{0,80}strategic decision"
+      ]
+    ]
+  },
+  "iclr--5": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), planning which invited talks to attend. Compare Images of the Hidden Universe with Marin: Open Development of Frontier AI: who is speaking, what is each talk about, and when does each run? Add the Marin talk to my schedule and confirm the resulting event total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 1,
+            "event_id": 10020867,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10020867(?:$|\\?)",
+      "/events/10020868(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Images of the Hidden Universe time",
+        "images\\s+of\\s+the\\s+hidden\\s+universe(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*fri,\\s+apr\\s+24,\\s+2026\\s+\\(fri\\s+24\\s+apr\\)\\s+\u00b7\\s+1:45\\s+pm\\s+\\s*-\\s*\\s+2:45\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Images of the Hidden Universe speaker",
+        "images\\s+of\\s+the\\s+hidden\\s+universe(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?speaker\\s*(?:is|was|are|were|of|at|=)?\\s*katherine\\s+bouman(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marin: Open Development of Frontier AI time",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:images\\s+of\\s+the\\s+hidden\\s+universe|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sat,\\s+apr\\s+25,\\s+2026\\s+\\(sat\\s+25\\s+apr\\)\\s+\u00b7\\s+5:45\\s+pm\\s+\\s*-\\s*\\s+6:45\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marin: Open Development of Frontier AI speaker",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:images\\s+of\\s+the\\s+hidden\\s+universe|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?speaker\\s*(?:is|was|are|were|of|at|=)?\\s*percy\\s+liang(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:images\\s+of\\s+the\\s+hidden\\s+universe|marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Images of the Hidden Universe focus",
+        "images\\s+of\\s+the\\s+hidden\\s+universe(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?computational imaging.{0,100}black holes"
+      ],
+      [
+        "Marin: Open Development of Frontier AI focus",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:images\\s+of\\s+the\\s+hidden\\s+universe|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?open development.{0,80}frontier ai"
+      ]
+    ]
+  },
+  "iclr--6": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), interested in open development of frontier AI. Find the Marin invited talk, check its speaker and abstract, and compare its timing with Poster Session 6 Pavilion 3 so I know whether I can attend both in full. Save the talk to my schedule and report the two time windows and whether they overlap.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 1,
+            "event_id": 10020867,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10020867(?:$|\\?)",
+      "/schedule(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Marin: Open Development of Frontier AI time",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:account|poster\\s+session\\s+6\\s+pavilion\\s+3|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sat,\\s+apr\\s+25,\\s+2026\\s+\\(sat\\s+25\\s+apr\\)\\s+\u00b7\\s+5:45\\s+pm\\s+\\s*-\\s*\\s+6:45\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marin: Open Development of Frontier AI speaker",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:account|poster\\s+session\\s+6\\s+pavilion\\s+3|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?speaker\\s*(?:is|was|are|were|of|at|=)?\\s*percy\\s+liang(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|poster\\s+session\\s+6\\s+pavilion\\s+3|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Poster Session 6 Pavilion 3 time",
+        "poster\\s+session\\s+6\\s+pavilion\\s+3(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|account|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*3:15\\s+pm\\s*-\\s*5:45\\s+pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Visit plan overlap",
+        "visit\\s+plan(?:(?!(?:marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai|account|poster\\s+session\\s+6\\s+pavilion\\s+3)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?overlap\\s*(?:is|was|are|were|of|at|=)?\\s*no\\s+overlap;\\s+the\\s+poster\\s+session\\s+ends\\s+when\\s+marin\\s+starts(?!\\w|\\.\\d)"
+      ],
+      [
+        "Marin: Open Development of Frontier AI focus",
+        "marin\\s+open\\s+development\\s+of\\s+frontier\\s+ai(?:(?!(?:account|poster\\s+session\\s+6\\s+pavilion\\s+3|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?open development.{0,80}frontier ai"
+      ]
+    ]
+  },
+  "iclr--7": {
+    "task": "I'm Carol (carol.d@test.com, TestPass123!), making an award-paper reading list. Compare Transformers are Inherently Succinct, LLMs Get Lost In Multi-Turn Conversation and The Polar Express on the awards page, explaining which award each received and naming their first authors. Find Transformers are Inherently Succinct in the papers browser, bookmark it, and tell me its session, poster position and my new bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 3,
+            "paper_id": 10008853,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/awards(?:$|\\?)",
+      "/papers/10008853(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Transformers are Inherently Succinct award",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|the\\s+polar\\s+express|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*outstanding\\s+paper(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct first author",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|the\\s+polar\\s+express|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*pascal\\s+bergstr\u00e4sser(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation award",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|the\\s+polar\\s+express|transformers\\s+are\\s+inherently\\s+succinct|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*outstanding\\s+paper(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation first author",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|the\\s+polar\\s+express|transformers\\s+are\\s+inherently\\s+succinct|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*philippe\\s+laban(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Polar Express award",
+        "the\\s+polar\\s+express(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|transformers\\s+are\\s+inherently\\s+succinct|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*honorable\\s+mention(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Polar Express first author",
+        "the\\s+polar\\s+express(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|transformers\\s+are\\s+inherently\\s+succinct|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*noah\\s+amsel(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct session",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|the\\s+polar\\s+express|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+2\\s+pavilion\\s+3(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct poster position",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|the\\s+polar\\s+express|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p3\\s*-\\s*\\#619(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|the\\s+polar\\s+express|transformers\\s+are\\s+inherently\\s+succinct)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--8": {
+    "task": "I want to visit both ICLR Outstanding Papers. Identify the two winning papers and their first authors, then find their individual entries in the papers browser. Prepare a short visit plan with each paper's session, date, time window and poster position, and tell me whether the sessions overlap. Do not change any account or bookmarks.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {},
+    "paths": [
+      "/awards(?:$|\\?)",
+      "/papers/10008853(?:$|\\?)",
+      "/papers/10009146(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Transformers are Inherently Succinct award",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*outstanding\\s+paper(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct first author",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*pascal\\s+bergstr\u00e4sser(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation award",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|transformers\\s+are\\s+inherently\\s+succinct|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*outstanding\\s+paper(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation first author",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|transformers\\s+are\\s+inherently\\s+succinct|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*philippe\\s+laban(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation session",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|transformers\\s+are\\s+inherently\\s+succinct|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+1\\s+pavilion\\s+3(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation time",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|transformers\\s+are\\s+inherently\\s+succinct|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*thu,\\s+apr\\s+23,\\s+2026\\s+\u00b7\\s+10:30\\s+am\\s+\\s*-\\s*\\s+1:00\\s+pm\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation poster position",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|transformers\\s+are\\s+inherently\\s+succinct|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p3\\s*-\\s*\\#1505(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct session",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+2\\s+pavilion\\s+3(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct time",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*thu,\\s+apr\\s+23,\\s+2026\\s+\u00b7\\s+3:15\\s+pm\\s+\\s*-\\s*\\s+5:45\\s+pm\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Transformers are Inherently Succinct poster position",
+        "transformers\\s+are\\s+inherently\\s+succinct(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p3\\s*-\\s*\\#619(?!\\w|\\.\\d)"
+      ],
+      [
+        "Visit plan overlap",
+        "visit\\s+plan(?:(?!(?:transformers\\s+are\\s+inherently\\s+succinct|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|transformers\\s+are\\s+inherently\\s+succinct)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?overlap\\s*(?:is|was|are|were|of|at|=)?\\s*no\\s+overlap;\\s+both\\s+posters\\s+are\\s+on\\s+thursday\\s+in\\s+separate\\s+sessions(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--9": {
+    "task": "Register Rosa Parks (rosa.p@test.com) for the mirrored ICLR conference as a Full time student attending Conference Sessions and Workshops, with two guest banquet tickets and no dietary preference. Choose the registration items consistently with the form's inclusivity rule. Report the confirmation code, included registration items, guest-ticket unit price and total charged by the mirror.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "registrations": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "user_id": null,
+            "name": "Rosa Parks",
+            "email": "rosa.p@test.com",
+            "affiliation": "Full time student",
+            "items": {
+              "json_set": [
+                "Conference Sessions and Workshops"
+              ]
+            },
+            "banquet_tickets": 2,
+            "dietary": null,
+            "total_usd": 100,
+            "reg_code": {
+              "regex": "ICLR26-[A-F0-9]{8}"
+            },
+            "created": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/register(?:$|\\?)",
+      "/register/confirmation/ICLR26-[A-F0-9]{8}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Registration code",
+        "registration(?:(?!(?!)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*iclr26-[a-f0-9]{8}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration items",
+        "registration(?:(?!(?!)).){0,1800}?(?:items|registration items|includes)\\s*(?:is|was|are|were|of|at|=)?\\s*conference\\s+sessions\\s+and\\s+workshops(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration total",
+        "registration(?:(?!(?!)).){0,1800}?(?:total|cost|charged)\\s*(?:is|was|are|were|of|at|=)?\\s*\\$100\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration banquet tickets",
+        "registration(?:(?!(?!)).){0,1800}?banquet\\s+tickets\\s*(?:is|was|are|were|of|at|=)?\\s*2\\s+\u00d7\\s+\\$50\\s+\\$(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "registrations",
+        "reg_code"
+      ]
+    ]
+  },
+  "iclr--10": {
+    "task": "Create an ICLR profile for Rosa Parks using rosa.p@test.com and password Research2026!. Add Escaping Policy Contraction to the new account's reading list. Sign out and back in to confirm the bookmark persists, then tell me the paper's decision, session and poster position and the account's bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 5,
+            "paper_id": 10006831,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "rosa.p@test.com",
+            "name": "Rosa Parks",
+            "password_hash": {
+              "bcrypt_password": "Research2026!"
+            },
+            "joined": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10006831(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Escaping Policy Contraction: Contraction-Aware PPO (CaPPO) for Stable Language Model Fine-Tuning decision",
+        "escaping\\s+policy\\s+contraction\\s+contraction\\s*-\\s*aware\\s+ppo\\s+\\(cappo\\)\\s+for\\s+stable\\s+language\\s+model\\s+fine\\s*-\\s*tuning(?:(?!(?:account|persistence)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?decision\\s*(?:is|was|are|were|of|at|=)?\\s*accept\\s+\\(poster\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Escaping Policy Contraction: Contraction-Aware PPO (CaPPO) for Stable Language Model Fine-Tuning session",
+        "escaping\\s+policy\\s+contraction\\s+contraction\\s*-\\s*aware\\s+ppo\\s+\\(cappo\\)\\s+for\\s+stable\\s+language\\s+model\\s+fine\\s*-\\s*tuning(?:(?!(?:account|persistence)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+4\\s+pavilion\\s+4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Escaping Policy Contraction: Contraction-Aware PPO (CaPPO) for Stable Language Model Fine-Tuning poster position",
+        "escaping\\s+policy\\s+contraction\\s+contraction\\s*-\\s*aware\\s+ppo\\s+\\(cappo\\)\\s+for\\s+stable\\s+language\\s+model\\s+fine\\s*-\\s*tuning(?:(?!(?:account|persistence)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#4602(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:escaping\\s+policy\\s+contraction\\s+contraction\\s*-\\s*aware\\s+ppo\\s+\\(cappo\\)\\s+for\\s+stable\\s+language\\s+model\\s+fine\\s*-\\s*tuning|persistence)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Persistence result",
+        "persistence(?:(?!(?:escaping\\s+policy\\s+contraction\\s+contraction\\s*-\\s*aware\\s+ppo\\s+\\(cappo\\)\\s+for\\s+stable\\s+language\\s+model\\s+fine\\s*-\\s*tuning|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:result|status)\\s*(?:is|was|are|were|of|at|=)?\\s*bookmark\\s+remains\\s+after\\s+signing\\s+back\\s+in(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--11": {
+    "task": "I'm Help Tester (help@test.com), considering a Sunday workshop visit. Check the workshop dates and the registration form's one-day options, then ask the HelpDesk Workshops team whether a Sunday Workshop 1 Day Pass covers AI for Peace. Use subject Workshop question and explain that I only intend to attend that Sunday workshop. Report which pass you asked about and whether the mirror confirmed submission.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "contact_messages": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1,
+            "name": "Help Tester",
+            "email": "help@test.com",
+            "topic": "workshop-chairs@iclr.cc",
+            "subject": "Workshop question",
+            "body": {
+              "regex": "(?is)(?=.*Sunday)(?=.*(?:workshop|pass))(?=.*AI for Peace).+"
+            },
+            "created": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/helpdesk(?:$|\\?)",
+      "/register(?:$|\\?)",
+      "/workshops(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Workshop inquiry pass type",
+        "workshop\\s+inquiry(?:(?!(?!)).){0,1800}?pass\\s+type\\s*(?:is|was|are|were|of|at|=)?\\s*sunday\\s+workshop\\s+1\\s+day\\s+pass(?!\\w|\\.\\d)"
+      ],
+      [
+        "Workshop inquiry result",
+        "workshop\\s+inquiry(?:(?!(?!)).){0,1800}?(?:result|status)\\s*(?:is|was|are|were|of|at|=)?\\s*message\\s+sent\\s+to\\s+the\\s+iclr\\s+helpdesk(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--12": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), checking whether my existing ICLR booking needs attention. Review my registration in My Stuff and the conference's registration deadlines. Tell me the booking code, registered items, banquet-ticket count and total, along with the dietary-preference and cancellation deadlines. Leave the booking unchanged.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {},
+    "paths": [
+      "/dates(?:$|\\?)",
+      "/mystuff(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Registration code",
+        "registration(?!\\s+cancellation)(?:(?!(?:dietary\\s+preference|registration\\s+cancellation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*iclr26\\s*-\\s*a1b2c3d4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration items",
+        "registration(?!\\s+cancellation)(?:(?!(?:dietary\\s+preference|registration\\s+cancellation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:items|registration items|includes)\\s*(?:is|was|are|were|of|at|=)?\\s*conference\\s+sessions\\s+and\\s+workshops(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration banquet tickets",
+        "registration(?!\\s+cancellation)(?:(?!(?:dietary\\s+preference|registration\\s+cancellation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?banquet\\s+tickets\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration total",
+        "registration(?!\\s+cancellation)(?:(?!(?:dietary\\s+preference|registration\\s+cancellation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:total|cost|charged)\\s*(?:is|was|are|were|of|at|=)?\\s*\\$50(?!\\w|\\.\\d)"
+      ],
+      [
+        "Dietary preference deadline",
+        "dietary\\s+preference(?:(?!(?:registration|registration\\s+cancellation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?deadline\\s*(?:is|was|are|were|of|at|=)?\\s*mar\\s+31\\s+'26\\s+\\(anywhere\\s+on\\s+earth\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration cancellation deadline",
+        "registration\\s+cancellation(?:(?!(?:registration|dietary\\s+preference)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?deadline\\s*(?:is|was|are|were|of|at|=)?\\s*apr\\s+02\\s+'26\\s+10:00\\s+pm\\s+utc(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--13": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), looking for a workshop on verifying AI systems. Compare VerifAI-2 and I Can't Believe It's Not Better using their abstracts and the first item in each program. Tell me their organizers, dates and start times, then save VerifAI-2 to my schedule and confirm my event total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 1,
+            "event_id": 10000774,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10000772(?:$|\\?)",
+      "/events/10000774(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "I Can't Believe It's Not Better: Where Large Language Models need to improve time",
+        "i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*mon,\\s+apr\\s+27,\\s+2026\\s+\\(mon\\s+27\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "I Can't Believe It's Not Better: Where Large Language Models need to improve first program item",
+        "i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+opening\\s+remarks\\s+\\s*-\\s*\\s+welcome\\s+and\\s+introduction\\s+to\\s+icbinb\\s+arno\\s+blaas\\s+\u22c5\\s+fan\\s+feng\\s+\u22c5\\s+jennifer\\s+williams(?!\\w|\\.\\d)"
+      ],
+      [
+        "I Can't Believe It's Not Better: Where Large Language Models need to improve organizers",
+        "i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?organizers\\s*(?:is|was|are|were|of|at|=)?\\s*arno\\s+blaas\\s+\u22c5\\s+priya\\s+dcosta\\s+\u22c5\\s+fan\\s+feng\\s+\u22c5\\s+zhaoying\\s+pan\\s+\u22c5\\s+nikolai\\s+rozanov\\s+\u22c5\\s+jennifer\\s+williams\\s+\u22c5\\s+yubin\\s+xie\\s+\u22c5\\s+rui\\s+yang(?!\\w|\\.\\d)"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild time",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sun,\\s+apr\\s+26,\\s+2026\\s+\\(sun\\s+26\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild first program item",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+opening\\s+remarks(?!\\w|\\.\\d)"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild organizers",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?organizers\\s*(?:is|was|are|were|of|at|=)?\\s*celine\\s+lee\\s+\u22c5\\s+ameesh\\s+shah\\s+\u22c5\\s+theo\\s+x\\.\\s+olausson\\s+\u22c5\\s+sean\\s+welleck\\s+\u22c5\\s+armando\\s+solar\\s*-\\s*lezama\\s+\u22c5\\s+tao\\s+yu(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve|verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "I Can't Believe It's Not Better: Where Large Language Models need to improve focus",
+        "i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve(?:(?!(?:verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?language models.{0,60}fail.{0,60}improve"
+      ],
+      [
+        "VerifAI-2: The Second Workshop on AI Verification in the Wild focus",
+        "verifai\\s*-\\s*2\\s+the\\s+second\\s+workshop\\s+on\\s+ai\\s+verification\\s+in\\s+the\\s+wild(?:(?!(?:i\\s+can't\\s+believe\\s+it's\\s+not\\s+better\\s+where\\s+large\\s+language\\s+models\\s+need\\s+to\\s+improve|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?verification.{0,70}ai systems"
+      ]
+    ]
+  },
+  "iclr--14": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!), planning my Saturday conference afternoon. Check the Town Hall's purpose and time and compare it with my existing saved event to see whether I can attend both in full. Add the Town Hall to my schedule and report the final event titles, their time windows and any overlap.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 2,
+            "event_id": 10020467,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10020467(?:$|\\?)",
+      "/mystuff(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Town Hall time",
+        "town\\s+hall(?:(?!(?:account|i\\s+can't\\s+believe\\s+it's\\s+not\\s+better|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sat,\\s+apr\\s+25,\\s+2026\\s+\\(sat\\s+25\\s+apr\\)\\s+\u00b7\\s+1:00\\s+pm\\s+\\s*-\\s*\\s+1:45\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:town\\s+hall|i\\s+can't\\s+believe\\s+it's\\s+not\\s+better|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "I Can't Believe It's Not Better time",
+        "i\\s+can't\\s+believe\\s+it's\\s+not\\s+better(?:(?!(?:town\\s+hall|account|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*mon,\\s+apr\\s+27,\\s+2026\\s+9:00\\s+am\\s*-\\s*5:00\\s+pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Visit plan overlap",
+        "visit\\s+plan(?:(?!(?:town\\s+hall|account|i\\s+can't\\s+believe\\s+it's\\s+not\\s+better)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?overlap\\s*(?:is|was|are|were|of|at|=)?\\s*no\\s+overlap;\\s+town\\s+hall\\s+is\\s+saturday\\s+and\\s+the\\s+existing\\s+workshop\\s+is\\s+monday(?!\\w|\\.\\d)"
+      ],
+      [
+        "Town Hall focus",
+        "town\\s+hall(?:(?!(?:account|i\\s+can't\\s+believe\\s+it's\\s+not\\s+better|visit\\s+plan)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?iclr community.{0,60}discuss"
+      ]
+    ]
+  },
+  "iclr--15": {
+    "task": "I'm Dana (dana.k@test.com, TestPass123!), preparing to explore Poster Session 3 Pavilion 3. Find its alphabetically first paper, check its abstract and first author's institution, and bookmark it. Tell me the session's paper count, the chosen title and poster position, what the paper studies, and my new bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 4,
+            "paper_id": 10007326,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10007326(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Session papers",
+        "session(?:(?!(?:\\$\\\\ell_1\\$\\s+latent\\s+distance\\s+based\\s+continuous\\s*-\\s*time\\s+graph\\s+representation|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?papers\\s*(?:is|was|are|were|of|at|=)?\\s*503(?!\\w|\\.\\d)"
+      ],
+      [
+        "$\\ell_1$ Latent Distance based Continuous-time Graph Representation poster position",
+        "\\$\\\\ell_1\\$\\s+latent\\s+distance\\s+based\\s+continuous\\s*-\\s*time\\s+graph\\s+representation(?:(?!(?:session|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p3\\s*-\\s*\\#117(?!\\w|\\.\\d)"
+      ],
+      [
+        "$\\ell_1$ Latent Distance based Continuous-time Graph Representation first author",
+        "\\$\\\\ell_1\\$\\s+latent\\s+distance\\s+based\\s+continuous\\s*-\\s*time\\s+graph\\s+representation(?:(?!(?:session|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*zhao\\s*-\\s*rong\\s+lai\\s+\\(jinan\\s+university\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:session|\\$\\\\ell_1\\$\\s+latent\\s+distance\\s+based\\s+continuous\\s*-\\s*time\\s+graph\\s+representation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*3(?!\\w|\\.\\d)"
+      ],
+      [
+        "$\\ell_1$ Latent Distance based Continuous-time Graph Representation focus",
+        "\\$\\\\ell_1\\$\\s+latent\\s+distance\\s+based\\s+continuous\\s*-\\s*time\\s+graph\\s+representation(?:(?!(?:session|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?continuous-time graph representation.{0,60}latent distances"
+      ]
+    ]
+  },
+  "iclr--16": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), interested in the Outstanding Paper about multi-turn conversations. Confirm the award and authors, locate the paper in the papers browser, and bookmark it for later reading. Tell me its decision, session and poster position, what problem its abstract studies, and my resulting bookmark total.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [],
+        "added": [
+          {
+            "id": 8,
+            "user_id": 1,
+            "paper_id": 10009146,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/awards(?:$|\\?)",
+      "/papers/10009146(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "LLMs Get Lost In Multi-Turn Conversation award",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?award\\s*(?:is|was|are|were|of|at|=)?\\s*outstanding\\s+paper(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation first author",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:first author|lead author)\\s*(?:is|was|are|were|of|at|=)?\\s*philippe\\s+laban(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation session",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+1\\s+pavilion\\s+3(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation poster position",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p3\\s*-\\s*\\#1505(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation decision",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?decision\\s*(?:is|was|are|were|of|at|=)?\\s*accept\\s+\\(oral\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation authors",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?authors\\s*(?:is|was|are|were|of|at|=)?\\s*philippe\\s+laban\\s+\\(microsoft\\)\\s+\u22c5\\s+hiroaki\\s+hayashi\\s+\\(salesforce\\s+research\\)\\s+\u22c5\\s+yingbo\\s+zhou\\s+\\(salesforce\\s+research\\)\\s+\u22c5\\s+jennifer\\s+neville\\s+\\(microsoft\\s+research\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation|llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*4(?!\\w|\\.\\d)"
+      ],
+      [
+        "LLMs Get Lost In Multi-Turn Conversation focus",
+        "llms\\s+get\\s+lost\\s+in\\s+multi\\s*-\\s*turn\\s+conversation(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?performance.{0,70}reliability.{0,70}multi-turn.{0,70}underspecified"
+      ]
+    ]
+  },
+  "iclr--17": {
+    "task": "I'm Carol (carol.d@test.com, TestPass123!), changing my conference priorities from frontier-model development to peace applications. Replace the Marin talk in my saved schedule with AI for Peace while keeping my other saved events. Tell me when AI for Peace takes place, its first program item, and the final saved-event titles and count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "schedule_saves": {
+        "removed": [
+          "[2]"
+        ],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 3,
+            "event_id": 10000804,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/10000804(?:$|\\?)",
+      "/events/10020867(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "AI for Peace time",
+        "ai\\s+for\\s+peace(?:(?!(?:account|saved\\s+schedule)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sun,\\s+apr\\s+26,\\s+2026\\s+\\(sun\\s+26\\s+apr\\)\\s+\u00b7\\s+9:00\\s+am\\s+\\s*-\\s*\\s+5:00\\s+pm\\s+\u00b7\\s+conference\\s+local\\s+time\\s+\\(\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "AI for Peace first program item",
+        "ai\\s+for\\s+peace(?:(?!(?:account|saved\\s+schedule)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+program\\s+item\\s*(?:is|was|are|were|of|at|=)?\\s*9:00\\s+am\\s+welcome(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account saved events",
+        "account(?:(?!(?:ai\\s+for\\s+peace|saved\\s+schedule)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:saved events|events|schedule count)\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Saved schedule events",
+        "saved\\s+schedule(?:(?!(?:ai\\s+for\\s+peace|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?events\\s*(?:is|was|are|were|of|at|=)?\\s*verifai\\s*-\\s*2\\s+and\\s+ai\\s+for\\s+peace(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "iclr--18": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!). Register me as Bob Chen, bob.c@test.com, with Academic affiliation for the Sunday Workshop 1 Day Pass, one guest banquet ticket and a Halal dietary preference. Confirm the new booking appears in My Stuff and report its code, items, total and my registration count. Keep any existing booking intact.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "registrations": {
+        "removed": [],
+        "added": [
+          {
+            "id": 2,
+            "user_id": 2,
+            "name": "Bob Chen",
+            "email": "bob.c@test.com",
+            "affiliation": "Academic",
+            "items": {
+              "json_set": [
+                "Sunday Workshop 1 Day Pass"
+              ]
+            },
+            "banquet_tickets": 1,
+            "dietary": "Halal",
+            "total_usd": 50,
+            "reg_code": {
+              "regex": "ICLR26-[A-F0-9]{8}"
+            },
+            "created": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/register(?:$|\\?)",
+      "/register/confirmation/ICLR26-[A-F0-9]{8}(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Registration code",
+        "registration(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*iclr26-[a-f0-9]{8}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration items",
+        "registration(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:items|registration items|includes)\\s*(?:is|was|are|were|of|at|=)?\\s*sunday\\s+workshop\\s+1\\s+day\\s+pass(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration total",
+        "registration(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:total|cost|charged)\\s*(?:is|was|are|were|of|at|=)?\\s*\\$50\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Registration banquet tickets",
+        "registration(?:(?!(?:account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?banquet\\s+tickets\\s*(?:is|was|are|were|of|at|=)?\\s*1\\s+\u00d7\\s+\\$50\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account registrations",
+        "account(?:(?!(?:registration)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?registrations\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "registrations",
+        "reg_code"
+      ]
+    ]
+  },
+  "iclr--19": {
+    "task": "I'm Dana (dana.k@test.com, TestPass123!), dropping Personality Subnetworks from my conference reading plan. Locate its saved bookmark, check its session and abstract to confirm it is the intended paper, and remove only that bookmark. Report the paper's poster position and session time and my remaining bookmarked titles and count.",
+    "initial_digest": "35eb4f433045ed1a9f34b6c688187673b8ffe90aa6c39080592fa20be3584613",
+    "state": {
+      "bookmarks": {
+        "removed": [
+          "[6]"
+        ],
+        "added": [],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/papers/10006395(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Your Language Model Secretly Contains Personality Subnetworks session",
+        "your\\s+language\\s+model\\s+secretly\\s+contains\\s+personality\\s+subnetworks(?:(?!(?:account|remaining\\s+bookmarks)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?session\\s*(?:is|was|are|were|of|at|=)?\\s*poster\\s+session\\s+5\\s+pavilion\\s+4(?!\\w|\\.\\d)"
+      ],
+      [
+        "Your Language Model Secretly Contains Personality Subnetworks time",
+        "your\\s+language\\s+model\\s+secretly\\s+contains\\s+personality\\s+subnetworks(?:(?!(?:account|remaining\\s+bookmarks)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:time(?:\\s+window)?|scheduled|runs?|takes place)\\s*(?:is|was|are|were|of|at|=)?\\s*sat,\\s+apr\\s+25,\\s+2026\\s+\u00b7\\s+10:30\\s+am\\s+\\s*-\\s*\\s+1:00\\s+pm\\s+\\(conference\\s+local\\s+time,\\s+\\s*-\\s*03\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Your Language Model Secretly Contains Personality Subnetworks poster position",
+        "your\\s+language\\s+model\\s+secretly\\s+contains\\s+personality\\s+subnetworks(?:(?!(?:account|remaining\\s+bookmarks)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:poster position|poster|position)\\s*(?:is|was|are|were|of|at|=)?\\s*p4\\s*-\\s*\\#4003(?!\\w|\\.\\d)"
+      ],
+      [
+        "Account bookmarks",
+        "account(?:(?!(?:your\\s+language\\s+model\\s+secretly\\s+contains\\s+personality\\s+subnetworks|remaining\\s+bookmarks)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:bookmarks?|bookmarked papers|saved papers)\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Remaining bookmarks title",
+        "remaining\\s+bookmarks(?:(?!(?:your\\s+language\\s+model\\s+secretly\\s+contains\\s+personality\\s+subnetworks|account)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?title\\s*(?:is|was|are|were|of|at|=)?\\s*p\\s*-\\s*genrm\\s+personalized\\s+generative\\s+reward\\s+model\\s+with\\s+test\\s*-\\s*time\\s+user\\s*-\\s*based\\s+scaling(?!\\w|\\.\\d)"
+      ]
+    ]
+  }
+}

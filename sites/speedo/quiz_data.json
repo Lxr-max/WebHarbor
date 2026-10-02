@@ -1,0 +1,97 @@
+{
+  "swimsuit": {
+    "title": "Swimwear Quiz",
+    "intro": "Lido, lake, ocean, or pool. Wherever you swim this season, we\u2019ve got you covered. Take our 2-minute quiz to find the swimsuit that\u2019s right for you.",
+    "results_intro": "Based on your answers, we\u2019ve selected swimwear made for your swim style. Streamlined, comfortable and built for frequent sessions, they\u2019re made to work hard in the water. Whether you\u2019re swimming lengths, building your endurance, or lounging by the water, our swimwear can do it all.",
+    "steps": [
+      {
+        "question": "Who are you shopping for?",
+        "key": "who",
+        "options": [
+          {"label": "Women's"},
+          {"label": "Men's"}
+        ]
+      },
+      {
+        "question": "What type of swimming do you do?",
+        "key": "swim",
+        "options": [
+          {"label": "Fitness"},
+          {"label": "Training"},
+          {"label": "Racing"},
+          {"label": "Recreation"}
+        ]
+      },
+      {
+        "question": "What style of swimwear do you prefer?",
+        "key": "style",
+        "options_by_prev": {
+          "Racing": [
+            {"label": "Fastskin Ignite"},
+            {"label": "Fastskin Valor"},
+            {"label": "Fastskin Intent"}
+          ],
+          "women_default": [
+            {"label": "One-Piece"},
+            {"label": "Two-Piece"}
+          ],
+          "men_default": [
+            {"label": "Jammers"},
+            {"label": "Briefs"},
+            {"label": "Aquashorts"}
+          ],
+          "men_recreation": [
+            {"label": "Swim Shorts"},
+            {"label": "Briefs"}
+          ]
+        }
+      },
+      {
+        "question": "What's your style preference?",
+        "key": "pref",
+        "options": [
+          {"label": "Minimal"},
+          {"label": "Bold Prints"},
+          {"label": "Classic Black"}
+        ]
+      }
+    ]
+  },
+  "goggles": {
+    "title": "Goggles Quiz",
+    "intro": "Find the right goggles for your swim. Answer three quick questions and we\u2019ll match you with goggles built for your sessions.",
+    "results_intro": "We\u2019ve selected swimming goggles based on your quiz results to help you find the right fit for your swim style. Designed for comfort, visibility and performance, these goggles are ideal for everything from fitness swimming and lane sessions to everyday time in the pool.",
+    "steps": [
+      {
+        "question": "Who are you finding goggles for?",
+        "key": "who",
+        "options": [
+          {"label": "Adults"},
+          {"label": "Kids"}
+        ]
+      },
+      {
+        "question": "What type of swimming will your goggles be for?",
+        "key": "swim",
+        "options": [
+          {"label": "Fitness"},
+          {"label": "Open Water & Recreation"},
+          {"label": "Training"},
+          {"label": "Racing"}
+        ]
+      },
+      {
+        "question": "What lens type would you like?",
+        "key": "lens",
+        "options": [
+          {"label": "Clear"},
+          {"label": "Colour"},
+          {"label": "Smoke"},
+          {"label": "Mirror"},
+          {"label": "Polarised"},
+          {"label": "All lens types"}
+        ]
+      }
+    ]
+  }
+}

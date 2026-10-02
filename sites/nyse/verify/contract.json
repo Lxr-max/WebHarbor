@@ -1,0 +1,1069 @@
+{
+  "NYSE--0": {
+    "task": "Research Agilent for Alice's watchlist: check its sector, CEO and the lowest strike in the third options expiry, then save it and set a price alert below $170 with the note Lab spinout. Report the alert status. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*A(?:\\?|$)",
+      "/alerts$",
+      "\\bexp=3"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "A",
+            "direction": "below",
+            "threshold": 170.0,
+            "note": "Lab spinout",
+            "created_at": "2026-09-29"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "A",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "A sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?healthcare(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "A ceo",
+        "pattern": "ceo\\s*(?::|is|of|=)?\\s*\\$?padraig\\ mcdonnell(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\ba\\s+below\\s+170\\.00\\s+[0-9.]+\\s+pending|a.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      },
+      {
+        "label": "lowest strike",
+        "pattern": "lowest strike\\s*\\$?60\\.00",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--1": {
+    "task": "Create a NYSE account for Jordan Vale, jordan.vale@test.com, with password TestPass123!. Find the most heavily traded NYSE stock in the Markets snapshot, review its sector, CEO and 52-week high, and add it to the new watchlist. Report the symbol and those details.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*NOK(?:\\?|$)"
+    ],
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "email": "jordan.vale@test.com",
+            "name": "Jordan Vale",
+            "password_hash": {
+              "regex": "(?:b')?\\$2b\\$12\\$[./A-Za-z0-9]{53}'?"
+            },
+            "joined": "2026-09-29"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "symbol": "NOK",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "NOK sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?technology(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "NOK ceo",
+        "pattern": "ceo\\s*(?::|is|of|=)?\\s*\\$?justin\\ hotard(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "NOK ann_high",
+        "pattern": "52 (?:wk|week) high\\s*(?::|is|of|=)?\\s*\\$?17\\.45(?![\\w])",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--2": {
+    "task": "Prepare a September 2026 Opening Bell briefing: report how many ceremonies are listed, and identify the earliest and latest ceremonies with their dates and descriptions.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/bell/calendar\\?",
+      "from=2026-09-01",
+      "to=2026-09-30",
+      "type=Opening\\+Bell|type=Opening\\ Bell"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "Opening Bell count",
+        "pattern": "opening\\ bell:\\s*21 bell events",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell ceremony title",
+        "pattern": "smithsonian's\\ national\\ museum\\ of\\ the\\ american\\ latino\\ rings\\ the\\ opening\\ bell",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell date",
+        "pattern": "september\\ 30th,\\ 2026",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell ceremony title",
+        "pattern": "redwire\\ \\(nyse:\\ rdw\\)\\ rings\\ the\\ opening\\ bell",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell date",
+        "pattern": "september\\ 1st,\\ 2026",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--3": {
+    "task": "Help Bob monitor Coca-Cola for an entry above $100. Check its last price and 52-week high, review the available five-year chart period, then create the alert with the note Blue-chip entry and report its status. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*KO(?:\\?|$)",
+      "/alerts$",
+      "zoom=5Y"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "KO",
+            "direction": "above",
+            "threshold": 100.0,
+            "note": "Blue-chip entry",
+            "created_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "KO last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?86\\.84(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "KO ann_high",
+        "pattern": "52 (?:wk|week) high\\s*(?::|is|of|=)?\\s*\\$?92\\.49(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\bko\\s+above\\s+100\\.00\\s+[0-9.]+\\s+pending|ko.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      },
+      {
+        "label": "KO chart range",
+        "pattern": "chart from 2021/09/30 to 2026/09/29",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--4": {
+    "task": "Compare SPY's second and third listed options expiries before I choose one. Report each expiry date, the lowest and highest strikes available, the put/call ratio, and SPY's current price and 52-week high.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*SPY(?:\\?|$)",
+      "\\bexp=2",
+      "\\bexp=3"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "SPY last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?764\\.20(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "SPY ann_high",
+        "pattern": "52 (?:wk|week) high\\s*(?::|is|of|=)?\\s*\\$?779\\.37(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "expiry date",
+        "pattern": "thursday,\\ october\\ 01,\\ 2026",
+        "forbidden": []
+      },
+      {
+        "label": "expiry date",
+        "pattern": "friday,\\ october\\ 02,\\ 2026",
+        "forbidden": []
+      },
+      {
+        "label": "lowest strike",
+        "pattern": "lowest strike\\s*\\$?550\\.00",
+        "forbidden": []
+      },
+      {
+        "label": "highest strike",
+        "pattern": "highest strike\\s*\\$?950\\.00",
+        "forbidden": []
+      },
+      {
+        "label": "lowest strike",
+        "pattern": "lowest strike\\s*\\$?500\\.00",
+        "forbidden": []
+      },
+      {
+        "label": "highest strike",
+        "pattern": "highest strike\\s*\\$?930\\.00",
+        "forbidden": []
+      },
+      {
+        "label": "put-call ratio",
+        "pattern": "put/call ratio:\\s*1\\.97",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--5": {
+    "task": "Replace AAT on Carol's watchlist with the second REIT when the directory is sorted by company name. Check that REIT's sector, last price and first board member before saving it, then confirm which symbols remain. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*ACR(?:\\?|$)"
+    ],
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "ACR",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "removed": [
+          "[6]"
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "ACR sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?financials(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "ACR last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?10\\.10(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "first board member",
+        "pattern": "dawanna\\ williams",
+        "forbidden": []
+      },
+      {
+        "label": "remaining watchlist ACR",
+        "pattern": "\\bacr\\b"
+      }
+    ]
+  },
+  "NYSE--6": {
+    "task": "Prepare an IPO market briefing using the latest snapshot: compare the leading issuer and proceeds in the 30-, 90- and 180-day Largest IPO windows, check the 30-day leader's filing and pricing dates in IPO history, and identify the busiest pricing sector and backlog industry with their deal counts.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/ipo-center/",
+      "window=90",
+      "window=180"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "30-day issuer",
+        "pattern": "accelevation\\ holdings\\ corp\\.",
+        "forbidden": []
+      },
+      {
+        "label": "30-day proceeds",
+        "pattern": "30 days:.{0,100}proceeds\\s*\\$?540\\.00m",
+        "forbidden": []
+      },
+      {
+        "label": "leader filing date",
+        "pattern": "filing date\\s*09/02/2026",
+        "forbidden": []
+      },
+      {
+        "label": "leader pricing date",
+        "pattern": "pricing date\\s*09/29/2026",
+        "forbidden": []
+      },
+      {
+        "label": "90-day issuer",
+        "pattern": "csquare,\\ inc\\.",
+        "forbidden": []
+      },
+      {
+        "label": "90-day proceeds",
+        "pattern": "90 days:.{0,100}proceeds\\s*\\$?1\\.21b",
+        "forbidden": []
+      },
+      {
+        "label": "180-day issuer",
+        "pattern": "space\\ exploration\\ technologies\\ corp\\.",
+        "forbidden": []
+      },
+      {
+        "label": "180-day proceeds",
+        "pattern": "180 days:.{0,100}proceeds\\s*\\$?86\\.25b",
+        "forbidden": []
+      },
+      {
+        "label": "busiest pricing sector",
+        "pattern": "healthcare(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?31\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "busiest backlog industry",
+        "pattern": "technology(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?18\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--7": {
+    "task": "Find the most heavily traded NYSE American stock in the Markets snapshot for Dana. Check its last price and 52-week low, create a price alert above $5, and report the symbol and whether the alert is pending or triggered. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*SDEV(?:\\?|$)",
+      "/alerts$"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "SDEV",
+            "direction": "above",
+            "threshold": 5.0,
+            "note": null,
+            "created_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "SDEV last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?3\\.27(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "SDEV ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?0\\.78(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\bsdev\\s+above\\s+5\\.00\\s+[0-9.]+\\s+pending|sdev.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--8": {
+    "task": "Compare September 2026 Opening and Closing Bell activity. For each type, report the number of ceremonies and the earliest ceremony's host, date and purpose so I can see how the month's bell schedule began.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/bell/calendar\\?",
+      "from=2026-09-01",
+      "to=2026-09-30",
+      "type=Opening\\+Bell|type=Opening\\ Bell",
+      "type=Closing\\+Bell|type=Closing\\ Bell"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "Opening Bell count",
+        "pattern": "opening\\ bell:\\s*21 bell events",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell ceremony title",
+        "pattern": "redwire\\ \\(nyse:\\ rdw\\)\\ rings\\ the\\ opening\\ bell",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell date",
+        "pattern": "september\\ 1st,\\ 2026",
+        "forbidden": []
+      },
+      {
+        "label": "Closing Bell count",
+        "pattern": "closing\\ bell:\\s*21 bell events",
+        "forbidden": []
+      },
+      {
+        "label": "Closing Bell ceremony title",
+        "pattern": "a10\\ networks\\ \\(nyse:\\ aten\\)\\ rings\\ the\\ closing\\ bell",
+        "forbidden": []
+      },
+      {
+        "label": "Closing Bell date",
+        "pattern": "september\\ 1st,\\ 2026",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--9": {
+    "task": "Compare Alibaba and NIO as potential watchlist candidates: report each company's sector, CEO, market capitalization, beta, EPS and 52-week low, and the date range covered by each one-year chart.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*BABA(?:\\?|$)",
+      "/quote/[^?]*NIO(?:\\?|$)",
+      "zoom=1Y",
+      "zoom=1Y"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "BABA sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?consumer\\ discretionary(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "BABA ceo",
+        "pattern": "ceo\\s*(?::|is|of|=)?\\s*\\$?(?:n/a|not (?:listed|available|provided)|unavailable)(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "BABA market_cap",
+        "pattern": "market cap(?:italization)?\\s*(?::|is|of|=)?\\s*\\$?1\\.82t(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "BABA beta",
+        "pattern": "beta\\s*(?::|is|of|=)?\\s*\\$?0\\.79(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "BABA eps",
+        "pattern": "eps\\s*(?::|is|of|=)?\\s*\\$?4\\.50(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "BABA ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?91\\.99(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b).*?(?=(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b)|$)"
+      },
+      {
+        "label": "NIO sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?consumer\\ discretionary(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "NIO ceo",
+        "pattern": "ceo\\s*(?::|is|of|=)?\\s*\\$?(?:n/a|not (?:listed|available|provided)|unavailable)(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "NIO market_cap",
+        "pattern": "market cap(?:italization)?\\s*(?::|is|of|=)?\\s*\\$?56\\.20b(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "NIO beta",
+        "pattern": "beta\\s*(?::|is|of|=)?\\s*\\$?0\\.92(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "NIO eps",
+        "pattern": "eps\\s*(?::|is|of|=)?\\s*\\$?\\-0\\.28(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "NIO ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?3\\.38(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:nio\\ inc\\ spon\\ ads\\ each\\ rep\\ 1\\ ord\\ shs\\ class\\ a|\\bnio\\b).*?(?=(?:alibaba\\ group\\ holding\\ ltd\\ spon\\ ads\\ each\\ rep\\ 8\\ ord\\ shs|\\balibaba\\b|\\bbaba\\b)|$)"
+      },
+      {
+        "label": "BABA chart range",
+        "pattern": "chart from 2025/09/29 to 2026/09/29",
+        "forbidden": []
+      },
+      {
+        "label": "NIO chart range",
+        "pattern": "chart from 2025/09/29 to 2026/09/29",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--10": {
+    "task": "Create a NYSE account for Priya Nair, priya.nair@test.com, with password TestPass123!, and start her watchlist with NIO. Check NIO's sector, last price and 52-week low first, and report those details with confirmation it is saved.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*NIO(?:\\?|$)"
+    ],
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "email": "priya.nair@test.com",
+            "name": "Priya Nair",
+            "password_hash": {
+              "regex": "(?:b')?\\$2b\\$12\\$[./A-Za-z0-9]{53}'?"
+            },
+            "joined": "2026-09-29"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "symbol": "NIO",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "NIO sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?consumer\\ discretionary(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "NIO last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?3\\.40(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "NIO ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?3\\.38(?![\\w])",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--11": {
+    "task": "Help Carol research Realty companies among the REIT listings. Compare the first two matching quotes' last prices, volumes and sectors, save the higher-volume one to her watchlist, and report your comparison. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*ABR(?:\\?|$)",
+      "/quote/[^?]*ACR(?:\\?|$)"
+    ],
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "ABR",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "ABR last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?3\\.97(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty).*?(?=(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty)|$)"
+      },
+      {
+        "label": "ABR volume",
+        "pattern": "(?:volume\\s*[:=]?\\s*843|843\\s+volume)",
+        "forbidden": [],
+        "scope": "(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty).*?(?=(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty)|$)"
+      },
+      {
+        "label": "ABR sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?financials(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty).*?(?=(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty)|$)"
+      },
+      {
+        "label": "ACR last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?10\\.10(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty).*?(?=(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty)|$)"
+      },
+      {
+        "label": "ACR volume",
+        "pattern": "(?:volume\\s*[:=]?\\s*0|0\\s+volume)",
+        "forbidden": [],
+        "scope": "(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty).*?(?=(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty)|$)"
+      },
+      {
+        "label": "ACR sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?financials(?![\\w])",
+        "forbidden": [],
+        "scope": "(?:acres\\ commercial\\ realty\\ corp|\\bacr\\b|acres commercial realty).*?(?=(?:arbor\\ realty\\ trust\\ inc|\\babr\\b|arbor realty)|$)"
+      }
+    ]
+  },
+  "NYSE--12": {
+    "task": "Bob wants to monitor the second symbol on his watchlist instead of his old AAPL price alert. Check the replacement's beta and RSI, create an alert below $150, remove the AAPL alert, and report the remaining alerts and their statuses. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*TSLA(?:\\?|$)",
+      "/alerts$"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "TSLA",
+            "direction": "below",
+            "threshold": 150.0,
+            "note": null,
+            "created_at": "2026-09-29"
+          }
+        ],
+        "removed": [
+          "[2]"
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "TSLA beta",
+        "pattern": "beta\\s*(?::|is|of|=)?\\s*\\$?1\\.84(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "TSLA rsi",
+        "pattern": "rsi\\s*(?::|is|of|=)?\\s*\\$?44\\.80(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\btsla\\s+below\\s+150\\.00\\s+[0-9.]+\\s+pending|tsla.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      },
+      {
+        "label": "retained alert status",
+        "pattern": "tsla\\s+above\\s+200\\.00\\s+352\\.84\\s+triggered|tsla.{0,30}above.{0,15}\\$?200.{0,50}triggered"
+      }
+    ]
+  },
+  "NYSE--13": {
+    "task": "Prepare an IPO-related bell-calendar briefing for January\u2013June 2026. Search for IPO and compare the matching Opening and Closing Bell ceremonies: report each count and the host, date and purpose of the earliest event, or explain if a group has no matches.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/bell/calendar\\?",
+      "from=2026-01-01",
+      "to=2026-06-30",
+      "type=Opening\\+Bell|type=Opening\\ Bell",
+      "type=Closing\\+Bell|type=Closing\\ Bell"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "Opening Bell count",
+        "pattern": "opening\\ bell:\\s*3 bell events",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell ceremony title",
+        "pattern": "13th\\ annual\\ connor\\ group\\ ipo\\ summit\\ rings\\ the\\ opening\\ bell",
+        "forbidden": []
+      },
+      {
+        "label": "Opening Bell date",
+        "pattern": "february\\ 27th,\\ 2026",
+        "forbidden": []
+      },
+      {
+        "label": "Closing Bell count",
+        "pattern": "closing\\ bell:\\s*0 bell events",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--14": {
+    "task": "Research IBM for Alice: check its CEO, sector and 52-week range, save it to her watchlist, and set an alert below $200. Report IBM's last price and the alert status. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*IBM(?:\\?|$)",
+      "/alerts$"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "IBM",
+            "direction": "below",
+            "threshold": 200.0,
+            "note": null,
+            "created_at": "2026-09-29"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "IBM",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "IBM sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?technology(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "IBM ceo",
+        "pattern": "ceo\\s*(?::|is|of|=)?\\s*\\$?arvind\\ krishna(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "IBM ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?199\\.19(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "IBM ann_high",
+        "pattern": "52 (?:wk|week) high\\s*(?::|is|of|=)?\\s*\\$?332\\.46(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "IBM last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?219\\.99(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\bibm\\s+below\\s+200\\.00\\s+[0-9.]+\\s+pending|ibm.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--15": {
+    "task": "Assess the IPO filing pipeline for New York Stock Exchange versus NASDAQ. For each exchange, report the number of Filed deals and the first listed issuer, then compare their first Postponed issuer, or state if there is none.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/ipo-center/"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "New York Stock Exchange Filed count",
+        "pattern": "new\\ york\\ stock\\ exchange\\ filed.{0,20}\\b1\\b",
+        "forbidden": []
+      },
+      {
+        "label": "New York Stock Exchange Filed issuer",
+        "pattern": "ives\\ ultra\\ ai\\ opportunities\\ inc\\.",
+        "forbidden": []
+      },
+      {
+        "label": "New York Stock Exchange Postponed issuer",
+        "pattern": "bamboo\\ insurance\\ services,\\ inc\\.",
+        "forbidden": []
+      },
+      {
+        "label": "NASDAQ Filed count",
+        "pattern": "nasdaq\\ filed.{0,20}\\b1\\b",
+        "forbidden": []
+      },
+      {
+        "label": "NASDAQ Filed issuer",
+        "pattern": "fitness\\ fanatics\\ ltd",
+        "forbidden": []
+      },
+      {
+        "label": "NASDAQ Postponed issuer",
+        "pattern": "oura\\ inc\\.",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--16": {
+    "task": "Alice wants a Disney price alert above $200 with the note Media momentum. Review Disney's sector, dividend yield and 52-week low, create the alert, and report its status together with those figures. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*DIS(?:\\?|$)",
+      "/alerts$"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "DIS",
+            "direction": "above",
+            "threshold": 200.0,
+            "note": "Media momentum",
+            "created_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "DIS sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?media\\ \\&\\ communications(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "DIS div_yield",
+        "pattern": "dividend yield\\s*(?::|is|of|=)?\\s*\\$?1\\.42(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "DIS ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?92\\.19(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\bdis\\s+above\\s+200\\.00\\s+[0-9.]+\\s+pending|dis.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--17": {
+    "task": "Alice is considering Coca-Cola as an income holding. Check its dividend yield, beta and last price, add it to her watchlist if needed, and create an alert below $80. Report the alert status and the figures you checked. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*KO(?:\\?|$)",
+      "/alerts$"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "KO",
+            "direction": "below",
+            "threshold": 80.0,
+            "note": null,
+            "created_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "KO div_yield",
+        "pattern": "dividend yield\\s*(?::|is|of|=)?\\s*\\$?2\\.44(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "KO beta",
+        "pattern": "beta\\s*(?::|is|of|=)?\\s*\\$?0\\.34(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "KO last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?86\\.84(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\bko\\s+below\\s+80\\.00\\s+[0-9.]+\\s+pending|ko.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      }
+    ]
+  },
+  "NYSE--18": {
+    "task": "Dana is replacing NIO on her watchlist with Delta Air Lines. Find the airline through the stock directory, review its sector, last price and volume, save it and remove NIO. Confirm her final watchlist symbols. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*DAL(?:\\?|$)"
+    ],
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "DAL",
+            "added_at": "2026-09-29"
+          }
+        ],
+        "removed": [
+          "[8]"
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "DAL sector",
+        "pattern": "sector\\s*(?::|is|of|=)?\\s*\\$?industrials(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "DAL last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?84\\.39(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "DAL volume",
+        "pattern": "(?:volume\\s*[:=]?\\s*237448|237448\\s+volume)",
+        "forbidden": []
+      },
+      {
+        "label": "remaining watchlist SPY",
+        "pattern": "\\bspy\\b"
+      },
+      {
+        "label": "remaining watchlist AMC",
+        "pattern": "\\bamc\\b"
+      },
+      {
+        "label": "remaining watchlist DAL",
+        "pattern": "\\bdal\\b"
+      }
+    ]
+  },
+  "NYSE--19": {
+    "task": "Carol wants to follow Grupo Aeromexico after its IPO. Find its historical offering's date, industry and proceeds, then review AERO's current price and 52-week low before adding it to her watchlist and creating an alert above $16. Report those details and the alert status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "27dba7b2792f26fb9c29c0fc6dd291a9dda72017f22a7eb72e1344ad0e083390",
+    "paths": [
+      "/quote/[^?]*AERO(?:\\?|$)",
+      "/alerts$",
+      "/ipo-center/",
+      "/ipo-center/history\\?q=Aeromexico"
+    ],
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "AERO",
+            "direction": "above",
+            "threshold": 16.0,
+            "note": null,
+            "created_at": "2026-09-29"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "AERO",
+            "added_at": "2026-09-29"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "AERO last",
+        "pattern": "last(?: price)?\\s*(?::|is|of|=)?\\s*\\$?15\\.84(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "AERO ann_low",
+        "pattern": "52 (?:wk|week) low\\s*(?::|is|of|=)?\\s*\\$?12\\.26(?![\\w])",
+        "forbidden": []
+      },
+      {
+        "label": "new alert status",
+        "pattern": "\\baero\\s+above\\s+16\\.00\\s+[0-9.]+\\s+pending|aero.{0,70}alert.{0,30}pending",
+        "forbidden": []
+      },
+      {
+        "label": "IPO industry",
+        "pattern": "industry\\s*consumer\\ services",
+        "forbidden": []
+      },
+      {
+        "label": "IPO proceeds",
+        "pattern": "proceeds\\s*\\$?222819175\\b",
+        "forbidden": []
+      },
+      {
+        "label": "offering date",
+        "pattern": "date\\s*11/05/2025",
+        "forbidden": []
+      }
+    ]
+  }
+}

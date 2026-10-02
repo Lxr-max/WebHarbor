@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}404 Not Found{% endblock %}
+{% block content %}
+<div class="cms-page" style="text-align:center;">
+  <h1 class="display" style="font-size:52px;">404</h1>
+  <p class="rich">We looked everywhere, but couldn&rsquo;t find that page. It may have moved, or it may never have existed at all.</p>
+  <p><a class="btn" href="{{ url_for('home') }}">BACK TO THE HOME PAGE</a></p>
+</div>
+{% endblock %}

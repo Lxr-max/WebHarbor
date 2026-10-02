@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Service Alerts | USPS{% endblock %}
+{% block content %}
+<h1>USPS Service Alerts</h1>
+<p>Service alerts inform customers about suspensions and weather events affecting mail delivery.</p>
+<ul class="bullets">
+  {% for a in alerts %}
+    <li><a href="{{ url_for('news_article', slug=a.slug) }}">{{ a.clean_title or a.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

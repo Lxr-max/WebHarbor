@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Your Garage | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <span>Your Garage</span></nav>
+{% endblock %}
+{% block content %}
+<div class="garage-page">
+  <h1>Your Garage</h1>
+  <p class="muted">Signed in as {{ current_user.display_name }} ({{ current_user.email }})</p>
+
+  <section class="vd-section">
+    <h2>Saved cars</h2>
+    {% if saved %}
+    <ol class="srp-list">
+      {% for sc, l in saved %}
+      <li class="vehicle-card" id="saved-{{ l.id }}">
+        <a class="card-media" href="{{ url_for('vehicle_detail', listing_id=l.id) }}">
+          {% if l.photo_list() %}<img src="{{ url_for('static', filename=l.photo_list()[0]) }}" alt="{{ l.title }}">{% endif %}
+        </a>
+        <div class="card-body">
+          <div class="card-price-row"><span class="price">{{ l.price | money }}</span>
+            <span class="mileage">{{ l.mileage | mileagefmt }} mi.</span></div>
+          <h3 class="card-title"><a href="{{ url_for('vehicle_detail', listing_id=l.id) }}">{{ l.title }}</a></h3>
+          <form method="post" action="{{ url_for('save_car', listing_id=l.id) }}" class="inline-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="next" value="{{ url_for('garage') }}">
+            <button type="submit" class="btn btn-outline btn-small">Remove from garage</button>
+          </form>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p>No saved cars yet. Save a car from any listing to keep it here.</p>
+    {% endif %}
+  </section>
+
+  <section class="vd-section">
+    <h2>Saved searches</h2>
+    {% if searches %}
+    <ul class="link-list">
+      {% for s in searches %}
+      <li><a href="{{ s.query_string }}">{{ s.name }}</a>
+        <span class="muted"> &middot; alert frequency: {{ s.alert_frequency }}</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No saved searches yet. Save a search from the results page.</p>
+    {% endif %}
+  </section>
+
+  <section class="vd-section">
+    <h2>Instant Offer requests</h2>
+    {% if offers %}
+    <ul class="link-list">
+      {% for o in offers %}
+      <li>{{ o.year }} {{ o.make | title }} {{ o.model | title }} {{ o.trim }} — offer
+        ${{ '{:,}'.format(o.offer_low) }} - ${{ '{:,}'.format(o.offer_high) }}
+        <span class="muted">({{ o.mileage | mileagefmt }} mi, ZIP {{ o.zip }}, {{ o.created_at }})</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Instant Offer requests yet. <a href="{{ url_for('offer_start') }}">Value your car</a>.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

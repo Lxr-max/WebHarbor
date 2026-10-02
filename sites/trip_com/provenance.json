@@ -1,0 +1,66 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-27",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the us.trip.com mirror: hotel search over 11 captured cities with price/star/rating/area/facility filters and 4 sort modes, hotel detail with galleries and room rates, the hotel booking chain (guest details, promo codes, card validation, price breakdown with taxes and Trip Coins), flight search with airline/stop/departure-time filters and outbound+return selection, passenger booking with promo codes, attractions & tours listing with category filters, package booking, account area (sign-in/register, profile, my bookings with cancellation, wishlist, coupons, Trip Coins), deals page, travel guides and site-wide scored search."
+  },
+  {
+   "path": "seed_data.py (build_seed / build_benchmark_users)",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. All content rows come from the tracked source_data_*.json snapshots; benchmark users use a frozen bcrypt password hash at seed time and every seed function is gated at the function level so PYTHONHASHSEED=0 builds are byte-reproducible."
+  },
+  {
+   "path": "source_data_cities.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 11 destination cities with their real upstream hotel cityIds (Las Vegas 26282, New York 633, Los Angeles 347, Orlando 1187, San Francisco 313, Chicago 549, Miami 25773, New Orleans 1186, Hong Kong 58, Beijing 1, Shanghai 2); city IDs match the upstream list-page URLs captured on 2026-09-27."
+  },
+  {
+   "path": "source_data_hotels.json",
+   "classification": "captured-upstream-content",
+   "scope": "1,110 hotel records captured from the rendered /hotels/list results pages for the 8 hotel cities (2026-10-04 to 2026-10-05 search window): name, guest score, review count, review tags, district, nearby landmark, nightly price and tax-inclusive total, card image URL. For the 96 hotels with full detail captures: star rating (from the detail-page star-level aria-label), street address, check-in/check-out times, amenity list, surroundings, guest reviews with reviewer country/traveller type, gallery photo URLs, and the complete room-rate table (room names, bed types, views, sizes, capacities, per-night price and tax-inclusive total, free-cancellation and breakfast rate variants) parsed from the rendered 'Choose your room' sections. 78 of these are bookable (rooms parsed); the rest are listed with sold-out state for the search window, matching upstream behavior."
+  },
+  {
+   "path": "source_data_flights.json",
+   "classification": "captured-upstream-content + mirror-authored-from-upstream-topology",
+   "scope": "Six domestic routes (SFO-JFK, LAX-JFK, ORD-MIA, LAS-LAX, MIA-LGA, SFO-LAS) with 722 individual flight legs captured from the one-way results pages (outbound legs, 411) and the ShowFareNext return pages (return legs, 311): airline, departure/arrival times, terminals, durations, nonstop/stopover detail, one-way fare, baggage inclusion. Flight numbers are mirror-authored: generated deterministically per airline from the carrier's real IATA two-letter prefix (DL/UA/AA/B6/F9/AS/WN/NK/SY) following the upstream numbering style, since the results cards do not display them."
+  },
+  {
+   "path": "source_data_attractions.json",
+   "classification": "captured-upstream-content",
+   "scope": "140 attractions & tours captured from the /things-to-do/experiences listing pages for Orlando, Hong Kong, Beijing and Shanghai on 2026-09-27: product names, ratings, review counts, booked counts, from-prices, categories derived from the upstream listing grouping (City passes / Day tours / Tours / Tickets / Activities). For the 16 attractions with detail captures: highlights, product-detail prose, validity windows and gallery photos. Each attraction books through a single package at its captured from-price, matching the upstream single-product page."
+  },
+  {
+   "path": "source_data_content.json (coupons)",
+   "classification": "mirror-authored",
+   "scope": "Four promo codes follow the upstream new-user promo-code flow (disclosed on the homepage 'First booking offer' module, the deals page and the coupon guide pages): TRIPNEW20 (20% off hotels over $100), FLYTRIP10 (10% off flights over $150), ACTIVITY15 (15% off attractions over $50) and SAVE25 ($25 off any booking over $200). Discount mechanics mirror the upstream checkout: enter code at booking, applied before Trip Coins accrual."
+  },
+  {
+   "path": "source_data_content.json (guides)",
+   "classification": "mirror-authored-from-upstream-policies",
+   "scope": "Five travel-guide articles in the upstream Trip.com Guides format (Las Vegas first-timers, Orlando theme-park planning, New York weekends, San Francisco neighborhoods, plus Trip Coins and free-cancellation explainers). Factual statements follow the captured upstream policies: the ~1%-of-spend Trip Coins rate observed on the captured room cards ($1.27 on $127), the 11:59 PM free-cancellation deadline shown on room cards, and the resort-fee/tax display behavior."
+  },
+  {
+   "path": "static/images/**",
+   "classification": "captured-upstream-media",
+   "scope": "1,791 media files downloaded from their real us.trip.com CDN URLs (ak-d.tripcdn.com / dimg04.tripcdn.com) on 2026-09-27: 1,110 hotel card images, gallery photos for the 96 detail-captured hotels, 140 attraction images, 11 city tiles and 6 guide tiles. City tiles and guide tiles reuse upstream hotel/attraction media for the same cities, exactly as the upstream pages do. Every file's source URL, byte size and sha256 is recorded in asset_inventory.json."
+  },
+  {
+   "path": "static/icons/favicon.png",
+   "classification": "mirror-authored",
+   "scope": "Locally generated 32x32 PNG favicon in the upstream brand blue (#2c61fe) with a white take-off streak; the upstream favicon is not redistributed."
+  },
+  {
+   "path": "static/css/main.css",
+   "classification": "mirror-authored-from-upstream-design",
+   "scope": "Stylesheet rebuilt from the upstream design tokens captured on 2026-09-27: brand blue #2c61fe, ink #121826, secondary #4f5563, tertiary #6f7685, quaternary gray #ebedf1, page background #f0f2f5, blue-rate #173cd2 for prices, orange #ffb400 for stars, Helvetica Neue/Arial base font with the upstream 12-14px scale, 10px card radii and the upstream card/panel shadow style."
+  },
+  {
+   "path": "tests/test_mirror.py",
+   "classification": "mirror-code",
+   "scope": "Pytest suite covering the hotel booking chain end-to-end (search through confirmation with the tax and Trip Coin math), the flight round-trip chain, attraction booking, promo-code application and rejection, auth, wishlist, cancellation and the seed idempotence gates."
+  }
+ ]
+}

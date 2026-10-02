@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Frequently Asked Questions{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Frequently Asked Questions</span></li>
+{% endblock %}
+{% block content %}
+<section class="container faq-page">
+  <h1 class="page-heading">Frequently Asked Questions</h1>
+  <div class="faq-list">
+    {% for item in items %}
+    <details class="faq-item" {% if loop.first %}open{% endif %}>
+      <summary class="faq-q">{{ item.question }}</summary>
+      <div class="faq-a">
+        <p>{{ item.answer }}</p>
+        {% for link in item.links() %}
+        {% if link.href and not link.href.startswith('javascript') %}
+        <p><a href="{{ link.href }}"{% if link.href.startswith('http') %} target="_blank"{% endif %}>{{ link.text }}</a></p>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

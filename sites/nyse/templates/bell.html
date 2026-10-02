@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}The NYSE Bell{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / The Bell</p>
+  <h1 class="page-title">The NYSE Bell</h1>
+  {% for para in intro.get('intro', []) %}
+    <p class="page-sub">{{ para }}</p>
+  {% endfor %}
+  <p><a class="btn" href="{{ url_for('bell_calendar') }}">Bell Calendar</a></p>
+
+  <section class="section-head"><h2>Recent Ceremonies</h2></section>
+  <div class="bell-grid">
+    {% for e in recent %}
+      <article class="bell-card">
+        {% set eimg = img('https://www.nyse.com' ~ e.image) if e.image else None %}
+        {% if eimg %}<img src="{{ eimg }}" alt="Bell ceremony: {{ e.plain_title() }}">{% endif %}
+        <div class="bell-body">
+          <span class="badge">{{ e.etype }}</span>
+          <h3>{{ e.plain_title() }}</h3>
+          <div class="bell-when">{{ e.date_label }} &middot; {{ e.time_label }}</div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

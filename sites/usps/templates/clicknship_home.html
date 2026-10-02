@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Click-N-Ship | USPS{% endblock %}
+{% block meta %}Pay for postage online with Click-N-Ship and print shipping labels from your home or office.{% endblock %}
+{% block content %}
+<h1>Click-N-Ship</h1>
+<div class="panel">
+  <h3>Print shipping labels from your home or office</h3>
+  <p>Click-N-Ship lets you pay for postage online and print labels with a few steps:</p>
+  <ol>
+    <li>Sign in to your USPS.com account.</li>
+    <li>Enter sender and recipient addresses.</li>
+    <li>Enter package weight and dimensions.</li>
+    <li>Choose a service and any extra services (insurance, signature, Certified Mail).</li>
+    <li>Pay and print your label — your tracking number is ready immediately.</li>
+  </ol>
+  {% if current_user.is_authenticated %}
+    <a class="btn" href="{{ url_for('clicknship_create') }}">Create a Label</a>
+  {% else %}
+    <a class="btn" href="{{ url_for('login', next=url_for('clicknship_create')) }}">Sign In to Create a Label</a>
+  {% endif %}
+</div>
+<div class="grid">
+  <div class="card"><h3>Commercial Rates</h3><p>Ship online and get lower Commercial Rates than at the Post Office counter.</p></div>
+  <div class="card"><h3>USPS Label Delivery</h3><p>No printer? For an extra $1.65 per label, USPS prints your label and delivers it to you.</p></div>
+  <div class="card"><h3>Free Package Pickup</h3><p>Leave your package in your usual pickup location and your carrier collects it — no charge.</p></div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Shop | Disney Store{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Disney Store</h1>
+  <p class="page-sub">The official Disney online shop &mdash; clothes, toys, accessories and sale.</p>
+  <div class="grid cols-4">
+    {% for slug, label in collections %}
+    <a class="card" href="{{ url_for('shop_collection', collection=slug) }}">
+      <div class="card-body">
+        <p class="card-title">{{ label }}</p>
+        <p class="card-meta">Shop {{ label|lower }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="section-head"><h2>Featured Products</h2></div>
+  <div class="grid cols-5">
+    {% for p in featured %}
+    <a class="card" href="{{ url_for('product_detail', pid=p.pid) }}">
+      <div class="card-img">
+        {% if p.image_list() %}<img src="{{ img(p.image_list()[0]) }}" alt="{{ p.name }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ p.name }}</p>
+        <p class="card-meta price">${{ '%.2f'|format(p.price or 0) }}</p>
+        {% if p.rating %}<p class="card-meta"><span class="stars">&#9733; {{ '%.1f'|format(p.rating) }}</span>{% if p.reviews %} <span class="reviews-count">({{ p.reviews }} Reviews)</span>{% endif %}</p>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p style="margin-top:22px"><a class="btn" href="{{ url_for('bag') }}">View Bag</a></p>
+</div>
+{% endblock %}

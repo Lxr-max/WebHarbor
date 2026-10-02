@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Results for "{{ q }}" | Super Lawyers Resources{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Results 1 to {{ results|length }} out of {{ total }} for "{{ q }}"</h1>
+  <h2>Search our legal article resources</h2>
+  <form class="inline-search" method="get" action="/resources/search/">
+    <input type="search" name="q" value="{{ q }}" aria-label="Search legal article resources">
+    <button class="btn btn-primary" type="submit">Search legal resources</button>
+  </form>
+
+  <div class="resource-results">
+    {% for article in results %}
+      <a class="resource-result" href="/resources/{{ article.path }}/">
+        <h2>{{ article.title }}</h2>
+      </a>
+    {% endfor %}
+    {% if not results %}
+      <p>No legal article resources matched that search. Try a broader term
+      like "car accident" or "divorce".</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Your cart{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Your cart</h1>
+  {% if cart %}
+  <table class="data-table">
+    <thead><tr><th>Device</th><th>Color</th><th>Storage</th><th>Term</th><th>Protection</th><th>Plan</th><th>Monthly line</th><th></th></tr></thead>
+    <tbody>
+      {% for item in cart %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.color }}</td>
+        <td>{{ item.storage }}</td>
+        <td>{% if item.term == 'full' %}Pay in full{% else %}{{ item.term }} mos{% endif %}</td>
+        <td>{{ item.protection or '—' }}</td>
+        <td>{{ plan_names.get(item.plan_id|int) or '—' }}</td>
+        <td>${{ item_monthly[loop.index0] }}/mo</td>
+        <td>
+          <form method="post" action="{{ url_for('cart_remove', index=loop.index0) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-ghost">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="card cart-summary">
+    <h2>Monthly total: ${{ total_monthly }}</h2>
+    <p class="muted">Due today: ${{ total_today }} (taxes may apply at checkout)</p>
+    <a class="btn btn-primary" href="{{ url_for('checkout') }}">Check out</a>
+    <a class="btn btn-secondary" href="{{ url_for('smartphones') }}">Continue shopping</a>
+  </div>
+  {% else %}
+  <p>Your cart is empty. <a href="{{ url_for('smartphones') }}">Shop smartphones</a>.</p>
+  {% endif %}
+</section>
+{% endblock %}

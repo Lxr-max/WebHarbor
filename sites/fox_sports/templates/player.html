@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{{ player.name }} - {{ league|upper }} | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/{{ player.league }}">{{ LEAGUE_NAMES.get(player.league, player.league) }}</a> &gt;
+  {% if team %}<a href="/{{ player.league }}/{{ team.slug }}-team">{{ team.full_name|upper }}</a> &gt;{% endif %}
+  <span>{{ player.name|upper }}</span>
+</div>
+<section class="player-head">
+  <div>
+    <h1>{{ player.name|upper }}</h1>
+    <p class="muted">#{{ player.number }} - {{ player.pos }} - {{ team.full_name if team else player.team|replace('-',' ')|title }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Bio</h2></div>
+  <table class="data-table">
+    <tbody>
+      <tr><td class="cell-label">Position</td><td class="cell-strong">{{ player.pos }}</td><td class="cell-label">Age</td><td class="cell-strong">{{ player.age }}</td></tr>
+      <tr><td class="cell-label">Height</td><td class="cell-strong">{{ player.height }}</td><td class="cell-label">Weight</td><td class="cell-strong">{{ player.weight }}</td></tr>
+      <tr><td class="cell-label">{% if player.league == 'mlb' %}School{% else %}College{% endif %}</td><td class="cell-strong">{{ player.college }}</td><td class="cell-label">Group</td><td class="cell-strong">{{ player.group_name }}</td></tr>
+    </tbody>
+  </table>
+</section>
+{% if stats %}
+<section class="section">
+  <div class="section-head"><h2>League Leaderboard Entries</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Category</th><th>Value</th><th>League Rank</th></tr></thead>
+    <tbody>
+      {% for s in stats %}
+      <tr><td class="cell-team">{{ s.label }}</td><td class="cell-strong">{{ s.value }}</td><td>#{{ s.rank }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+<section class="section">
+  <div class="section-head"><h2>News</h2></div>
+  {% if news %}
+  <ul class="news-list">
+    {% for item in news %}
+    <li>
+      <h4>{{ item.headline }}</h4>
+      {% if item.story %}<p>{{ item.story }}</p>{% endif %}
+      {% if item.impact %}<p class="muted impact">Impact &mdash; {{ item.impact }}</p>{% endif %}
+      <span class="muted">{{ item.time_ago }} &middot; {{ item.source }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="muted">No news for {{ player.name }} right now.</p>
+  {% endif %}
+</section>
+{% if current_user.is_authenticated %}
+<section class="section">
+  <form method="post" action="{{ url_for('favorites_toggle') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="item_type" value="player">
+    <input type="hidden" name="item_key" value="{{ player.slug }}">
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button type="submit" class="btn">{{ 'Unfollow' if is_favorited('player', player.slug) else 'Follow' }} {{ player.name }}</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}
