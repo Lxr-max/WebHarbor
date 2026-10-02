@@ -1411,21 +1411,21 @@ def student_housing():
 @app.route("/senior-housing")
 def senior_housing():
     rows = Building.query.filter_by(is_senior_housing=True)\
-        .order_by(Building.rating_avg.desc()).limit(24).all()
+        .order_by(Building.rating_avg.desc(), Building.id.asc()).all()
     return render_template("specialty.html",
                            title="Senior Housing",
                            subtitle="55+ communities with accessibility features and engagement programs.",
-                           buildings=rows, mode="senior")
+                           buildings=rows, mode="senior", capped=False)
 
 
 @app.route("/military-housing")
 def military_housing():
     rows = Building.query.filter_by(is_military_housing=True)\
-        .order_by(Building.rating_avg.desc()).limit(24).all()
+        .order_by(Building.rating_avg.desc(), Building.id.asc()).all()
     return render_template("specialty.html",
                            title="Military Housing",
                            subtitle="On-base and nearby rentals with flexible PCS-friendly leases.",
-                           buildings=rows, mode="military")
+                           buildings=rows, mode="military", capped=False)
 
 
 # ─── List your property landing ─────────────────────────────────────────────
