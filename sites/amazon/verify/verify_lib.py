@@ -238,9 +238,9 @@ def price_in(final, price):
 # "N dollars".
 
 _PRICE_BIND_WINDOW = 240
-_DOLLAR_RE = re.compile(r"\$\s*(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d{2}))?(?![\d])")
+_DOLLAR_RE = re.compile(r"(?:\$|\busd\s*)\s*(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?(?![\d]|\.\d)")
 _CENTS_RE = re.compile(
-    r"(?<![\d.$])(\d{1,3}(?:,\d{3})+|\d+)\.(\d{2})(?![\d])")
+    r"(?<![\d.$])(\d{1,3}(?:,\d{3})+|\d+)\.(\d{2,})(?![\d])")
 _DOLLARS_WORD_RE = re.compile(
     r"(?<![\d.$])(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d{2}))?\s+dollars?\b", re.I)
 
@@ -281,6 +281,32 @@ _THRESHOLD_RE = re.compile(
 )
 
 
+# Prefer each sentence or table row when attaching values to subjects.
+# Commas and conjunctions remain soft boundaries for multi-fact prose.
+_STATEMENT_END = re.compile(r"\n|[!?]|\.(?!\d)(?=\s|$)")
+_NEGATED = re.compile(r"\b(?:not(?!\s+only\b)|never|isn't|isnt|wasn't|wasnt|aren't|arent)\b", re.I)
+
+
+class _BindingClauses(list):
+    def __init__(self, ranges, text):
+        super().__init__(ranges)
+        self.text = text
+        self.boundaries = list(_STATEMENT_END.finditer(text))
+
+    def same_statement(self, a, b):
+        low, high = sorted((a[0], b[0]))
+        return not any(low < m.start() < high for m in self.boundaries)
+
+    def affirmative(self, label, value):
+        start, end = min(label[0], value[0]), max(label[1], value[1])
+        # Include a negator directly before the subject/value as well as one
+        # between them, but not a separate earlier clause.
+        prefix = self.text[:start]
+        prefix = re.split(r"[;,:\n.!?]", prefix)[-1]
+        prefix = re.split(r"\band\b", prefix)[-1]
+        return not _NEGATED.search(prefix + self.text[start:end])
+
+
 def _clause_ranges(text):
     text = text or ""
     ranges = []
@@ -311,7 +337,7 @@ def _clause_ranges(text):
                 continue
         i += 1
     ranges.append((last, len(text)))
-    return ranges or [(0, 0)]
+    return _BindingClauses(ranges or [(0, 0)], text)
 
 
 def _clause_index(pos, ranges):
@@ -336,6 +362,9 @@ def _nearest(span, others, window, clauses, prefer):
     spans beat other clauses. The other side is used only when the preferred
     side has nothing, so '$29.99 Amazon Essentials' still binds.
     """
+    local = [other for other in others
+             if clauses.same_statement(span, other) and _gap(span, other) <= window]
+    others = local or others
     origin = _clause_index(span[0], clauses)
     buckets = {key: [] for key in (
         "in_follow", "in_precede", "out_follow", "out_precede")}
@@ -353,6 +382,7 @@ def _nearest(span, others, window, clauses, prefer):
             continue
         same = (_touches_clause(other, clauses, origin)
                 or _touches_clause(span, clauses, _clause_index(other[0], clauses)))
+        same = same and clauses.same_statement(span, other)
         buckets[("in_" if same else "out_") + side].append(((gap, other[0]), other))
     if prefer == "follow":
         order = ("in_follow", "in_precede", "out_follow", "out_precede")
@@ -367,6 +397,8 @@ def _nearest(span, others, window, clauses, prefer):
 def _binds(label, value, value_spans, labels, window, clauses):
     nearest = _nearest(label, value_spans, window, clauses, "follow")
     if nearest is None or not _num_eq(nearest[2], value):
+        return False
+    if not clauses.affirmative(label, nearest):
         return False
     back = _nearest(nearest, labels, window, clauses, "precede")
     return back is not None and back[0] == label[0] and back[1] == label[1]
@@ -410,7 +442,7 @@ def price_bound_to(final, aliases, price, competitor_groups=()):
     """True when `price` is mutually nearest to this product, not merely
     co-present with its name. `aliases` name the product; each competitor
     group is the alias list of another product."""
-    text = norm(final)
+    text = "\n".join(norm(line) for line in (final or "").splitlines())
     labels = _label_spans(text, aliases, competitor_groups)
     prices = _price_spans(text)
     clauses = _clause_ranges(text)
@@ -439,7 +471,7 @@ def _color_count_spans(text):
 
 def price_and_count_bound_to(final, aliases, price, count, competitor_groups=()):
     """One mention of the product owns both this price and this color count."""
-    text = norm(final)
+    text = "\n".join(norm(line) for line in (final or "").splitlines())
     labels = _label_spans(text, aliases, competitor_groups)
     prices = _price_spans(text)
     counts = _color_count_spans(text)
