@@ -258,6 +258,32 @@ def _overlaps(start, end, spans):
     return any(not (end <= s or e <= start) for s, e in spans)
 
 
+# Prefer each sentence or table row when attaching values to subjects.
+# Commas and conjunctions remain soft boundaries for multi-fact prose.
+_STATEMENT_END = re.compile(r"\n|[!?]|\.(?!\d)(?=\s|$)")
+_NEGATED = re.compile(r"\b(?:not(?!\s+only\b)|never|isn't|isnt|wasn't|wasnt|aren't|arent)\b", re.I)
+
+
+class _BindingClauses(list):
+    def __init__(self, ranges, text):
+        super().__init__(ranges)
+        self.text = text
+        self.boundaries = list(_STATEMENT_END.finditer(text))
+
+    def same_statement(self, a, b):
+        low, high = sorted((a[0], b[0]))
+        return not any(low < m.start() < high for m in self.boundaries)
+
+    def affirmative(self, label, value):
+        start, end = min(label[0], value[0]), max(label[1], value[1])
+        # Include a negator directly before the subject/value as well as one
+        # between them, but not a separate earlier clause.
+        prefix = self.text[:start]
+        prefix = re.split(r"[;,:\n.!?]", prefix)[-1]
+        prefix = re.split(r"\band\b", prefix)[-1]
+        return not _NEGATED.search(prefix + self.text[start:end])
+
+
 def _clause_ranges(text):
     ranges = []
     last = 0
@@ -270,7 +296,7 @@ def _clause_ranges(text):
         ranges.append((last, match.start()))
         last = match.end()
     ranges.append((last, len(text or "")))
-    return ranges or [(0, 0)]
+    return _BindingClauses(ranges or [(0, 0)], text)
 
 
 def _clause_index(pos, ranges):
@@ -281,6 +307,9 @@ def _clause_index(pos, ranges):
 
 
 def _nearest(span, others, window, clauses):
+    local = [other for other in others
+             if clauses.same_statement(span, other) and _gap(span, other) <= window]
+    others = local or others
     origin = _clause_index(span[0], clauses)
     in_clause = []
     outside = []
@@ -292,7 +321,8 @@ def _nearest(span, others, window, clauses):
             continue
         follows = 0 if other[0] >= span[1] else 1
         item = ((gap, follows, other[0]), other)
-        if _clause_index(other[0], clauses) == origin:
+        if (_clause_index(other[0], clauses) == origin
+                and clauses.same_statement(span, other)):
             in_clause.append(item)
         else:
             outside.append(item)
@@ -311,6 +341,8 @@ def _value_eq(a, b):
 def _binds(label, value, value_spans, labels, clauses):
     nearest = _nearest(label, value_spans, _BIND_WINDOW, clauses)
     if nearest is None or not _value_eq(nearest[2], value):
+        return False
+    if not clauses.affirmative(label, nearest):
         return False
     back = _nearest(nearest, labels, _BIND_WINDOW, clauses)
     return back is not None and back[0] == label[0] and back[1] == label[1]
@@ -364,7 +396,7 @@ def _number_spans(text):
 
 
 def _bound_value(final, aliases, value, competitor_groups, value_spans):
-    text = norm(final)
+    text = "\n".join(norm(line) for line in (final or "").splitlines())
     groups = [("target", list(aliases))]
     for index, group in enumerate(competitor_groups or []):
         groups.append((f"c{index}", list(group)))
