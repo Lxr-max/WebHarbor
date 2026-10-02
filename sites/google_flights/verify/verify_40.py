@@ -36,11 +36,12 @@ def main(j, traj, ans):
             "expected the /explore destinations page for origin SEA (Seattle)")
     catalog = set(map(tuple, GROUND_TRUTH["destinations"]))
     cities = sorted({city for city, _price in catalog})
-    n = 0
+    matched_cities = set()
     for city, price in catalog:
         competitors = [[other] for other in cities if other.casefold() != city.casefold()]
         if bound_label_price(ans, [city], price, competitors):
-            n += 1
+            matched_cities.add(city.casefold())
+    n = len(matched_cities)
     j.check("answer_recommends_destinations", n >= 3,
             f"{n} consistent (destination, from-price) recommendations; final={ans[:200]!r}")
 
