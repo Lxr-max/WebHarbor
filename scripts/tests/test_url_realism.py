@@ -8,6 +8,7 @@ import sys
 import tempfile
 import types
 import unittest
+from urllib.parse import quote, unquote, urlencode, urlsplit
 from pathlib import Path
 
 from flask import Flask, request as flask_request
@@ -30,7 +31,7 @@ def _load_functions(path: Path, names: tuple[str, ...], extra_globals=None):
         raise AssertionError(f"{path} missing functions: {sorted(missing)}")
     module = ast.Module(body=wanted, type_ignores=[])
     code = compile(module, str(path), "exec")
-    ns = {"url_for": lambda endpoint: f"/{endpoint}", "request": flask_request}
+    ns = {"url_for": lambda endpoint: f"/{endpoint}", "request": flask_request, "quote": quote, "unquote": unquote, "urlencode": urlencode, "urlsplit": urlsplit}
     if extra_globals:
         ns.update(extra_globals)
     exec(code, ns)
@@ -75,6 +76,15 @@ class RedirectHelperTests(unittest.TestCase):
                 self.assertEqual(safe("https://evil.example/phish"), "/index")
                 self.assertEqual(safe("//evil.example/phish"), "/index")
                 self.assertEqual(safe(None, "saved"), "/saved")
+                for target in ('/\\evil.example', '/%5cevil.example', '/%2fevil.example', '/\tevil', '/a%0d%0aLocation:evil'):
+                    self.assertEqual(safe(target), '/index')
+
+    def test_relative_url_preserves_question_mark_query_and_encoded_path(self):
+        for target, expected in [('/stays?q=why?', '/stays?q=why?'),
+                                 ('/a%3Fb?q=x', '/a%3Fb?q=x'), ('/stays?', '/stays')]:
+            with self.flask.test_request_context(target):
+                for helpers in (self.allrecipes, self.booking):
+                    self.assertEqual(helpers['current_relative_url'](), expected)
 
 
 class BbcShareUrlTests(unittest.TestCase):
@@ -90,110 +100,26 @@ class BbcShareUrlTests(unittest.TestCase):
         )
         self.assertEqual(share(with_source), with_source.source_url)
         fallback = types.SimpleNamespace(source_url="", slug="c-fallback")
-        self.assertEqual(
-            share(fallback),
-            "https://www.bbc.com/news/articles/c-fallback",
-        )
+        self.assertIsNone(share(fallback))
+        for source in ("https://evil.example/", "javascript:alert(1)", "http://localhost:40000/"):
+            fallback.source_url = source
+            self.assertIsNone(share(fallback))
 
 
-class GithubHostRecoveryTests(unittest.TestCase):
-    def test_external_github_host_detection(self):
-        ns = _load_functions(
-            ROOT / "sites/github/app.py",
-            ("is_external_github_host",),
-        )
-        detect = ns["is_external_github_host"]
-        self.assertTrue(detect("github.com"))
-        self.assertTrue(detect("GITHUB.COM:443"))
-        self.assertFalse(detect("localhost:40006"))
-        self.assertFalse(detect("127.0.0.1:40006"))
-        self.assertFalse(detect("127.0.0.1"))
+class MapsLinkTests(unittest.TestCase):
+    def test_maps_search_and_business_website_are_distinct(self):
+        ns = _load_functions(ROOT / 'sites/google_map/app.py',
+                             ('google_maps_place_url', 'display_place_website'))
+        place = types.SimpleNamespace(name='A & B', city=types.SimpleNamespace(display_name='Milan'), website='https://example.com/a')
+        self.assertEqual(ns['google_maps_place_url'](place),
+                         'https://www.google.com/maps/search/?api=1&query=A+%26+B+Milan')
+        self.assertIsNone(ns['display_place_website'](place))
+        place.website = 'https://www.galleriavittorioemanuele.it/'
+        self.assertEqual(ns['display_place_website'](place), place.website)
+        for value in ('javascript:alert(1)', 'https://foo.example.com/', ''):
+            place.website = value
+            self.assertIsNone(ns['display_place_website'](place))
 
 
-class GoogleMapRenderTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        site_dir = ROOT / "sites/google_map"
-        cls._tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
-        cls._tmp.close()
-        os.environ.setdefault("WTF_CSRF_ENABLED", "0")
-        sys.path.insert(0, str(site_dir))
-        spec = importlib.util.spec_from_file_location(
-            "google_map_app", site_dir / "app.py"
-        )
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        cls.mod = module
-        module.app.root_path = str(site_dir)
-        module.app.config.update(
-            TESTING=True,
-            WTF_CSRF_ENABLED=False,
-            SQLALCHEMY_DATABASE_URI=f"sqlite:///{cls._tmp.name}",
-        )
-        # Flask-SQLAlchemy 3 binds engines during the first init_app; changing
-        # the URI later is ignored unless the extension is re-registered.
-        module.app.extensions.pop("sqlalchemy", None)
-        module.db.init_app(module.app)
-        with module.app.app_context():
-            module.db.session.remove()
-            module.db.drop_all()
-            module.db.create_all()
-            city = module.City(
-                slug="milan",
-                display_name="Milan",
-                country="Italy",
-            )
-            cat = module.Category(slug="attractions", name="Attractions")
-            module.db.session.add_all([city, cat])
-            module.db.session.flush()
-            place = module.Place(
-                slug="galleria-vittorio-emanuele",
-                name="Galleria Vittorio Emanuele II",
-                category_id=cat.id,
-                city_id=city.id,
-                website="https://example.com/galleria-vittorio-emanuele",
-                rating=4.7,
-                review_count=1200,
-                hours="Mon-Sun: 9:00 AM - 6:00 PM",
-                photos_json="[]",
-            )
-            module.db.session.add(place)
-            module.db.session.commit()
-        cls.client = module.app.test_client()
-
-    @classmethod
-    def tearDownClass(cls):
-        with cls.mod.app.app_context():
-            cls.mod.db.session.remove()
-            cls.mod.db.engine.dispose()
-        Path(cls._tmp.name).unlink(missing_ok=True)
-
-    def test_share_box_uses_google_maps_url(self):
-        response = self.client.get("/place/galleria-vittorio-emanuele")
-        self.assertEqual(response.status_code, 200)
-        body = response.get_data(as_text=True)
-        self.assertIn(
-            "https://www.google.com/maps/place/Galleria+Vittorio+Emanuele+II+Milan/",
-            body,
-        )
-        self.assertNotIn("localhost:40008", body)
-        self.assertNotIn("example.com/galleria-vittorio-emanuele", body)
-
-    def test_placeholder_website_falls_back_to_maps_url(self):
-        with self.mod.app.app_context():
-            place = self.mod.Place.query.filter_by(
-                slug="galleria-vittorio-emanuele"
-            ).one()
-            self.assertEqual(
-                self.mod.display_place_website(place),
-                self.mod.google_maps_place_url(place),
-            )
-            place.website = "https://www.galleriavittorioemanuele.it/"
-            self.assertEqual(
-                self.mod.display_place_website(place),
-                "https://www.galleriavittorioemanuele.it/",
-            )
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

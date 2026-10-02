@@ -24,7 +24,7 @@ import string
 import secrets
 from datetime import datetime, timedelta
 from pathlib import Path
-from urllib.parse import quote_plus
+from urllib.parse import urlencode, urlsplit
 
 from flask import (Flask, render_template, request, redirect, url_for,
                    flash, jsonify, abort, session, send_from_directory)
@@ -414,17 +414,24 @@ def ensure_default_lists(user):
 
 
 def google_maps_place_url(place):
-    """Return a real Google Maps place URL for a local mirror Place row."""
+    """Construct a supported Maps search URL without claiming a place ID."""
     query = f"{place.name} {place.city.display_name if place.city else ''}".strip()
-    return f"https://www.google.com/maps/place/{quote_plus(query)}/"
+    return 'https://www.google.com/maps/search/?' + urlencode({'api': '1', 'query': query})
 
 
 def display_place_website(place):
-    """Use the stored website unless it is a synthetic placeholder."""
-    website = (place.website or "").strip()
-    if website and "example.com" not in website:
-        return website
-    return google_maps_place_url(place)
+    """Hide absent or placeholder business websites instead of inventing one."""
+    website = (place.website or '').strip()
+    try:
+        parsed = urlsplit(website)
+        host = parsed.hostname or ''
+        if (parsed.scheme in {'http', 'https'} and host
+                and host != 'example.com' and not host.endswith('.example.com')
+                and not parsed.username and not parsed.password):
+            return website
+    except ValueError:
+        pass
+    return None
 
 
 @app.context_processor

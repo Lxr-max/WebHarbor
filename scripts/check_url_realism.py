@@ -62,7 +62,7 @@ REQUIRED = [
     (
         "GitHub host recovery must serve in place",
         ROOT / "sites/github/app.py",
-        ["def is_external_github_host(host):", "if is_external_github_host(host):"],
+        ["def _redirect_external_github():"],
     ),
 ]
 

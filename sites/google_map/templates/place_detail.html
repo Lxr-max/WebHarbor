@@ -111,11 +111,13 @@
                 <div class="row-icon"><span class="material-icons-outlined">phone</span></div>
                 <div class="row-content">{{ place.phone }}</div>
             </div>
+            {% set website_url = display_place_website(place) %}
+            {% if website_url %}
             <div class="pd-row">
                 <div class="row-icon"><span class="material-icons-outlined">language</span></div>
-                {% set website_url = display_place_website(place) %}
                 <div class="row-content"><a href="{{ website_url }}" target="_blank" rel="noopener">{{ website_url|replace('https://', '') }}</a></div>
             </div>
+            {% endif %}
             {% if place.parking_info %}
             <div class="pd-row">
                 <div class="row-icon"><span class="material-icons-outlined">local_parking</span></div>

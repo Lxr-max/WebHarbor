@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Allrecipes Mirror - Flask Application"""
 import os
+from urllib.parse import quote, unquote
 import re
 import json
 import random
@@ -238,13 +239,17 @@ def utility_processor():
 
 
 def current_relative_url():
-    path = request.full_path.rstrip('?')
-    return path or url_for('index')
+    path = quote(request.path, safe="/:@!$&'()*+,;=-._~")
+    return path + ('?' + request.query_string.decode('ascii', errors='replace')
+                   if request.query_string else '')
 
 
 def safe_redirect_target(target, default_endpoint='index'):
-    if target and target.startswith('/') and not target.startswith('//'):
-        return target
+    if isinstance(target, str) and target.startswith('/'):
+        decoded = unquote(target)
+        if (not decoded.startswith('//') and '\\' not in decoded
+                and not any(ord(c) < 32 or ord(c) == 127 for c in decoded)):
+            return target
     return url_for(default_endpoint)
 
 

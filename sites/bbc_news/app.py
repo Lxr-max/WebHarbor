@@ -12,6 +12,7 @@ Adaptation of the mirror-web pattern to a news site:
   Subscription = Topic alerts (email-me-when-X-updates)
 """
 import os
+from urllib.parse import urlsplit
 import re
 import json
 import random
@@ -49,9 +50,17 @@ csrf = CSRFProtect(app)
 
 
 def bbc_article_share_url(article):
-    if article.source_url:
-        return article.source_url
-    return f"https://www.bbc.com/news/articles/{article.slug}"
+    """Only share a recorded BBC source; never invent an upstream article."""
+    source = (article.source_url or '').strip()
+    try:
+        parsed = urlsplit(source)
+        if (parsed.scheme == 'https' and parsed.hostname in
+                {'bbc.com', 'www.bbc.com', 'bbc.co.uk', 'www.bbc.co.uk'}
+                and not parsed.username and not parsed.password):
+            return source
+    except ValueError:
+        pass
+    return None
 
 
 # =======================================================================

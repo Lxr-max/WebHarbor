@@ -29,14 +29,12 @@ Fix:
 - The share box now uses a real Google Maps place URL:
 
 ```text
-https://www.google.com/maps/place/<place+city>/
+https://www.google.com/maps/search/?api=1&query=<place+city>
 ```
 
-- Future Google Map seed data writes Google Maps place URLs instead of
-  `example.com` placeholders.
-- Runtime rendering falls back to the Google Maps place URL when an existing
-  packaged seed database still contains an `example.com` placeholder. No HF
-  archive rewrite is required.
+- Future seeds leave unknown business websites blank. Runtime rendering hides
+  existing placeholder websites; a Maps search link is not a business website.
+  No HF archive rewrite is required.
 
 ### Booking And Allrecipes Return URLs
 
@@ -62,9 +60,9 @@ field from the source dataset. Both `article_detail.html` extra JS and
 Fix:
 
 - Article detail now passes `article_share_url` to the template.
-- The copy button writes the real `source_url`, or a BBC article fallback URL
-  when no source URL exists.
-- `main.js` copies `data-share-url` / `window.BBC_ARTICLE_SHARE_URL` instead of
+- The copy button writes a validated BBC `source_url`. It is omitted when no
+  recorded BBC source exists, rather than inventing an article URL.
+- The duplicate inline clipboard handler is removed. `main.js` copies `data-share-url` / `window.BBC_ARTICLE_SHARE_URL` instead of
   the mirror location.
 
 ### GitHub External-Host Recovery
