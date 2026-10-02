@@ -15,7 +15,7 @@ Answer matching uses finite language patterns. It accepts the documented prose, 
 Review evidence and the dashboard are retained under `/data/webharbor-prs/final/pr239/`. The recordings are scripted browser regressions with reviewer-authored summaries, not independent agent discovery.
 
 Specialty housing evidence may come from the complete student-housing page or
-its filtered search. Counts bind to each city. Property comparisons also accept
-address-specific search cards; their matching-available-unit rent ranges can
-legitimately differ from the overall property range. Luxury-result tasks accept
+its filtered search. Counts bind to each city. The property comparison now explicitly distinguishes the overall advertised
+range from the matching-available-unit range, using the property and search
+surfaces to inform one rental choice. Ranges must match both property and meaning. Luxury-result tasks accept
 the fully filtered/sorted results without an unnecessary detail-page visit.

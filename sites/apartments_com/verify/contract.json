@@ -107,42 +107,59 @@
     "view_tables": []
   },
   "Apartments.com--3": {
-    "task": "Compare Mosaic at 2392 5th Ave in New York with Beacon at 4690 Pike St in Seattle. Which has the higher Walk Score, and what rent range is shown for each?",
+    "task": "I am comparing Mosaic at 2392 5th Ave in New York with Beacon at 4690 Pike St in Seattle for a walkable rental. Which has the higher Walk Score? For each building, distinguish its overall advertised rent range from the rent range currently shown for matching available units, so I can compare what is advertised with what I could rent.",
     "initial_digest": "5cfffdd7df943aaabcfbced4232ae07378ee809f36e1b9ca6d15f10c9271bb49",
     "state": {},
     "paths": [
-      "(?:^/ny/new\\-york/mosaic\\-new\\-york\\-ny\\-000(?:/|\\?|$)|^/search\\?(?=[^#]*\\bq=2392(?:\\+|%20)))",
-      "(?:^/wa/seattle/beacon\\-seattle\\-wa\\-000(?:/|\\?|$)|^/search\\?(?=[^#]*\\bq=4690(?:\\+|%20)))"
+      "^/ny/new\\-york/mosaic\\-new\\-york\\-ny\\-000(?:/|\\?|$)",
+      "^/wa/seattle/beacon\\-seattle\\-wa\\-000(?:/|\\?|$)"
     ],
     "claims": [
       {
-        "label": "1",
+        "label": "Mosaic Walk Score",
+        "entity": "mosaic",
         "all": [
-          "mosaic",
-          "walk(?: score)?\\D*78",
-          "(?:3213\\D+5751|3228\\D+5749)"
-        ],
-        "entity": "mosaic"
+          "walk(?: score)?\\D*78\\b"
+        ]
       },
       {
-        "label": "2",
+        "label": "Beacon Walk Score",
+        "entity": "beacon",
         "all": [
-          "beacon",
-          "walk(?: score)?\\D*76",
-          "(?:2077\\D+3904|2119\\D+3894)"
-        ],
-        "entity": "beacon"
+          "walk(?: score)?\\D*76\\b"
+        ]
       },
       {
-        "label": "3",
+        "label": "higher score",
         "all": [
           "mosaic",
           "higher walk score"
-        ],
-        "scope": "mosaic"
+        ]
       }
     ],
-    "view_tables": []
+    "view_tables": [],
+    "rental_ranges": {
+      "mosaic": {
+        "advertised": [
+          3213,
+          5751
+        ],
+        "available": [
+          3228,
+          5749
+        ]
+      },
+      "beacon": {
+        "advertised": [
+          2077,
+          3904
+        ],
+        "available": [
+          2119,
+          3894
+        ]
+      }
+    }
   },
   "Apartments.com--4": {
     "task": "Find the cheapest currently available 1-bedroom unit in San Francisco in a building that allows dogs and has in-unit laundry. Report the building name, address, unit number, and rent.",

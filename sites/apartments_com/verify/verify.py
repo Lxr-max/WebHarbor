@@ -172,6 +172,30 @@ def check_city_counts(answer, expected):
             raise ValueError('Incorrect or missing student-housing count for ' + city)
 
 
+def check_rental_ranges(answer, expected):
+    text = norm(answer)
+    entity = "|".join(map(re.escape, expected))
+    labels = list(re.finditer(entity, text))
+    for name, ranges in expected.items():
+        passages = [text[m.end():labels[i+1].start() if i+1<len(labels) else len(text)]
+                    for i,m in enumerate(labels) if m.group()==name]
+        for kind, values in ranges.items():
+            aliases = r"(?:overall|advertised|property)" if kind == 'advertised' else r"(?:matching|available)"
+            found = False
+            for passage in passages:
+                for clause in re.split(r"[;\n]|(?<=[.!?])\s+", passage):
+                    matches = list(re.finditer(r"(?<![\d.])\$?(\d+)\s*(?:-|to)\s*\$?(\d+)(?!\d|\.\d)",clause))
+                    for match in matches:
+                        if [int(match[1]), int(match[2])] != values:continue
+                        # The range must be described by the requested rental meaning,
+                        # not supplied as an unrelated number elsewhere in the answer.
+                        before=clause[:match.start()];after=clause[match.end():]
+                        before=re.split(r"\band\b|,",before)[-1]
+                        after=re.split(r"\band\b|,",after)[0]
+                        if re.search(aliases,before+' '+after) and not re.search(r"\b(?:not|wrong|incorrect)\b",before):found=True
+            if not found:raise ValueError('Missing or misattributed '+kind+' rent range for '+name)
+
+
 def verify(run_dir):
     run=Path(run_dir).resolve();traj=json.loads((run/'trajectory.json').read_text())
     specs=json.loads(Path(__file__).with_name('contract.json').read_text())
@@ -202,6 +226,7 @@ def verify(run_dir):
     initial=database(run/'initial.db');after=database(run/'after.db');check_state(initial,after,spec)
     answer=traj['final_answer'];check_claims(answer,spec['claims'])
     if spec.get('city_counts'):check_city_counts(answer,spec['city_counts'])
+    if spec.get('rental_ranges'):check_rental_ranges(answer,spec['rental_ranges'])
     for table,field in spec.get('answer_state',[]):
         added=[r for k,r in after[table].items() if k not in initial[table]]
         if len(added)!=1 or str(added[0][field]).casefold() not in answer.casefold():raise ValueError('Answer does not match saved confirmation')

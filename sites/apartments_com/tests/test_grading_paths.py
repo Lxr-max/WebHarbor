@@ -30,9 +30,13 @@ def test_wrong_counts(answer):
 def test_student_paths(path,ok):
  assert bool(re.search(C['Apartments.com--15']['paths'][0],path)) is ok
 
-def test_search_cards_are_valid_for_property_comparison():
- g.check_claims('Mosaic: Walk Score 78, $3,228–$5,749; higher Walk Score.\nBeacon: Walk Score 76, $2,119–$3,894.',C['Apartments.com--3']['claims'])
- for pat,path in zip(C['Apartments.com--3']['paths'],['/search?q=2392+5th+Ave','/search?q=4690+Pike+St']):assert re.search(pat,path)
+def test_comparison_distinguishes_both_rental_ranges():
+ answer='Mosaic: Walk Score 78; overall advertised rent $3,213–$5,751; available units $3,228–$5,749. Higher Walk Score: Mosaic.\nBeacon: Walk Score 76; advertised rent $2,077–$3,904; matching available units $2,119–$3,894.'
+ g.check_claims(answer,C['Apartments.com--3']['claims'])
+ g.check_rental_ranges(answer,C['Apartments.com--3']['rental_ranges'])
+ for wrong in [answer.replace('3,213','3,228'),answer.replace('available units $3,228–$5,749','available units unknown'),answer.replace('overall advertised rent $3,213–$5,751; available units $3,228–$5,749','available units $3,213–$5,751; overall advertised rent $3,228–$5,749')]:
+  with pytest.raises(ValueError):g.check_rental_ranges(wrong,C['Apartments.com--3']['rental_ranges'])
+
 
 def test_luxury_query_needs_all_filters_and_sort():
  pattern=C['Apartments.com--9']['paths'][0]
