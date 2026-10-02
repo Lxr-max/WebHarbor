@@ -3,6 +3,7 @@ GitHub Mirror - Flask Application
 A faithful reproduction of GitHub's design and features.
 """
 import os
+from urllib.parse import quote
 import json
 import re
 import math
@@ -448,7 +449,7 @@ def _redirect_external_github():
     m = re.match(r'^/(https?:)?/*github\.com/(.*)$', path)
     if m:
         rest = m.group(2) or ''
-        new_path = '/' + rest.lstrip('/\\')
+        new_path = '/' + quote(rest.lstrip('/\\'), safe="/:@!$&'()*+,;=-._~")
         qs = request.query_string.decode('utf-8', errors='ignore')
         if qs:
             new_path += '?' + qs
