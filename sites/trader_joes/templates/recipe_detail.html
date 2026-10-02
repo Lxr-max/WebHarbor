@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}{{ recipe.title }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    <a href="{{ url_for('recipes') }}">Recipes</a> &rsaquo;
+    {{ recipe.title }}
+  </div>
+</div>
+
+<div class="pdp-layout">
+  <div class="pdp-gallery">
+    {% if dam_url(recipe.image_src) %}
+    <img src="{{ dam_url(recipe.image_src) }}" alt="{{ recipe.title }}">
+    {% endif %}
+    {% if recipe.tags() %}
+    <div class="pdp-badges" style="margin-top:12px;">
+      {% for t in recipe.tags() %}<span class="chip">{{ t }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div>
+    <h1 class="pdp-title">{{ recipe.title }}</h1>
+    <div class="pdp-badges">
+      {% for c in recipe.cats() %}<span class="chip">{{ c | title }}</span>{% endfor %}
+    </div>
+    {% if recipe.description %}
+    <section class="pdp-section">
+      <div class="rich">{{ recipe.description | rich | safe }}</div>
+    </section>
+    {% endif %}
+
+    <section class="pdp-section">
+      <h2>Ingredients</h2>
+      <ul class="rich">
+        {% for ing in recipe.ingredient_list() %}
+        <li>{{ ing }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <p class="rich"><b>Serves</b> {% if recipe.serves_max %}{{ recipe.serves_min }} - {{ recipe.serves_max }}{% else %}{{ recipe.serves_min }}{% endif %}
+      &nbsp;&middot;&nbsp; <b>Time</b> {{ recipe.time_text() }}</p>
+
+    {% if recipe.direction_blocks() %}
+    <section class="pdp-section">
+      <h2>Directions</h2>
+      <ol class="rich">
+        {% for block in recipe.direction_blocks() %}
+        <li>
+          {% if block.get('title') %}<b>{{ block['title'] }}</b> {% endif %}
+          {{ (block.get('text') or '') | rich | safe }}
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+{% if linked_products %}
+<section class="home-section">
+  <h2>Featured Products</h2>
+  <div class="related-grid">
+    {% for p in linked_products %}
+    <article class="card">
+      <a class="card-img" href="{{ product_link(p) }}">
+        {% if dam_url(p.primary_image) %}<img src="{{ dam_url(p.primary_image) }}" alt="{{ p.item_title }}">{% endif %}
+      </a>
+      <div class="card-title"><a href="{{ product_link(p) }}">{{ p.item_title }}</a></div>
+      <div class="card-price">{{ p.price_text() }}</div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Orders | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount">My Tickets</a>
+    <a href="/secure/myaccount/purchases" class="active">Orders</a>
+    <a href="/secure/myaccount/listings">My Listings</a>
+    <a href="/secure/myaccount/sales">My Sales</a>
+    <a href="/secure/myaccount/payments">Payments</a>
+  </nav>
+  <h1>Orders</h1>
+  {% for order in orders %}
+  <a class="order-row" href="/secure/myaccount/purchases/{{ order.order_number }}">
+    <div>
+      <strong>{{ order.event.name }}</strong>
+      <p>{{ order.event.date_full }} • {{ order.event.venue.name }}</p>
+      <p class="muted">Order {{ order.order_number }} · placed {{ order.placed_at.strftime('%b %-d, %Y') }}</p>
+    </div>
+    <div class="order-side">
+      <span class="badge badge-info">{{ order.status }}</span>
+      <span>{{ order.quantity }} ticket{{ 's' if order.quantity > 1 }}</span>
+      <span>{{ '${:,.2f}'.format(order.total) }}</span>
+    </div>
+  </a>
+  {% else %}
+  <p class="muted">No orders yet. <a href="/">Find an event</a>.</p>
+  {% endfor %}
+
+  <section class="account-section">
+    <h2>Gift cards</h2>
+    {% for card in gift_cards %}
+    <div class="order-row">
+      <div>
+        <strong>${{ card.amount }} gift card</strong>
+        <p>To {{ card.recipient_name }} ({{ card.recipient_email }})</p>
+        <p class="muted">Code {{ card.code }} · {{ card.status }} · purchased {{ card.created_at.strftime('%b %-d, %Y') }}</p>
+      </div>
+      <div class="order-side">
+        <span class="badge badge-info">Gift card</span>
+      </div>
+    </div>
+    {% else %}
+    <p class="muted">No gift card purchases. <a href="/gift-cards">Buy a gift card</a>.</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

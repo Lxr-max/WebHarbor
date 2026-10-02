@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Degree Programs — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Degree Programs</h2>
+  <span class="count">{{ total }} programs in the 2026-27 bulletin</span>
+</div>
+<div class="filters">
+  <form method="get" action="{{ url_for('programs') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search program name or code" aria-label="Search programs">
+    <select name="kind" aria-label="Filter by kind">
+      <option value="">All types</option>
+      <option value="Major" {% if kind == 'Major' %}selected{% endif %}>Major</option>
+      <option value="Minor" {% if kind == 'Minor' %}selected{% endif %}>Minor</option>
+      <option value="MS" {% if kind == 'MS' %}selected{% endif %}>MS</option>
+      <option value="PhD" {% if kind == 'PhD' %}selected{% endif %}>PhD</option>
+      <option value="Coterm" {% if kind == 'Coterm' %}selected{% endif %}>Coterminal</option>
+    </select>
+    <select name="dept" aria-label="Filter by department">
+      <option value="">All departments</option>
+      {% for code in dept_codes %}
+        <option value="{{ code }}" {% if dept == code %}selected{% endif %}>{{ code }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn solid" type="submit">Search</button>
+  </form>
+</div>
+{% if q or kind or dept %}
+  <div class="filter-note">Filtered{% if q %} by “{{ q }}”{% endif %}{% if kind %} · type {{ kind }}{% endif %}{% if dept %} · department {{ dept }}{% endif %} —
+    <a href="{{ url_for('programs') }}">clear filters</a></div>
+{% endif %}
+<table class="data">
+  <tr><th>Program</th><th>Code</th><th>Type</th><th>Department</th></tr>
+  {% for p in programs %}
+    <tr>
+      <td><a href="{{ url_for('program_detail', code=p.code) }}">{{ p.name }}</a></td>
+      <td>{{ p.code }}</td>
+      <td>{{ p.type or '—' }}</td>
+      <td>{% for c in p.departments %}<a href="{{ url_for('department_detail', code=c) }}">{{ dept_name(c) if dept_name else c }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="4"><div class="empty">No programs match that search.</div></td></tr>
+  {% endfor %}
+</table>
+{% if pages > 1 %}
+<div class="pager">
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}<span class="cur">{{ p }}</span>
+    {% else %}<a href="{{ url_for('programs', q=q, kind=kind, dept=dept, page=p) }}">{{ p }}</a>{% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

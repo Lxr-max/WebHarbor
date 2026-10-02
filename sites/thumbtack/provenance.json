@@ -1,0 +1,66 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the www.thumbtack.com mirror: home search + category tiles, per-category near-me listings with the captured filter-question sidebars and Recommended/Highest rated/Most hires/Fastest response sort tabs, pro profiles (About/Services/Photos/Reviews/Credentials with rating distribution, review topics, business hours, payment methods, Top Pro status), the request-a-quote wizard that matches projects with the category's top pros and collects deterministic in-band quotes, hiring, completion and review submission, saved pros, messaging threads with category+keyword-aware deterministic pro replies, the account area (login/register/profile/projects/saved/messages), scored token-overlap site search, cost-guide pages (/p/...), the /prices index, services-near-me index, city pages, the Thumbtack Guarantee and How-it-works pages, and the Join-as-a-pro enrollment form."
+  },
+  {
+   "path": "seed_data.py (build_seed / seed_benchmark_users / seed_user_activity)",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. All content rows come from the tracked source_data_*.json snapshots; benchmark users use a frozen bcrypt password hash at seed time, and the routes indexes are created with explicit SQL inside the app (PYTHONHASHSEED=0 plus the explicit index pass keep the SQLite seed byte-reproducible on every build)."
+  },
+  {
+   "path": "source_data_categories.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 16 mirrored service categories with their real upstream /k/<slug>/near-me h1s, descriptions, filter-question sets (captured from the rendered filter sidebar on 2026-09-26), right-rail quote-form questions, near-me groups, and cost-guide links."
+  },
+  {
+   "path": "source_data_pros.json",
+   "classification": "captured-upstream-content",
+   "scope": "177 real pro profiles captured from the rendered public profile pages on 2026-09-26: names, cities, ratings, review counts, Thumbtack hires, Top Pro status, response times from the right rail, payment methods, business hours, service attributes, review-topic tags, rating distributions, and per-pro review texts with their Details lines (bedrooms/bathrooms/service type/pets/frequency) and JSON-LD star ratings. Pro avatar and portfolio image ids reference the captured production CDN URLs in scraped_data/image_manifest.json."
+  },
+  {
+   "path": "source_data_content.json",
+   "classification": "captured-upstream-content",
+   "scope": "26 cost guides captured from the public /p/ pages (titles, national price ranges, low/high-end ranges, price tables with their section headings, FAQ text), homepage city links, guarantee copy, how-it-works steps, the prices-page featured national averages, the services-near-me popular list, and the category-aware pro-reply pools written from the captured pro communication patterns."
+  },
+  {
+   "path": "scripts_dev/build_source_data.py",
+   "classification": "mirror-code",
+   "scope": "Builds the three source_data_*.json snapshots from the raw Playwright harvest under scraped_data/harvest/ (card texts, filter DOM extractions, profile innerText + JSON-LD review data). Idempotent and deterministic; also emits scraped_data/image_manifest.json mapping every managed image to its real production CDN source URL."
+  },
+  {
+   "path": "scripts_dev/download_images.py",
+   "classification": "mirror-code",
+   "scope": "Fetches every image listed in scraped_data/image_manifest.json from its captured production-next-images-cdn.thumbtack.com URL into static/images/. Idempotent; run after build_source_data.py."
+  },
+  {
+   "path": "build_inventory.py",
+   "classification": "mirror-code",
+   "scope": "Generates asset_inventory.json (byte lengths, SHA-256, source URLs) for every file under static/images/ and static/external_cache/, gated by scripts/check_asset_inventory.py during the Docker build."
+  },
+  {
+   "path": "scripts_dev/write_tasks.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic generator for tasks.jsonl (20 goal-style benchmark tasks, contributor keys only)."
+  },
+  {
+   "path": "static/fonts/ThumbtackRiseVF.woff2",
+   "classification": "captured-upstream-asset",
+   "scope": "The Rise variable font served by fonts.thumbtack.com and referenced by the upstream stylesheets; attribution recorded in NOTICE.md."
+  },
+  {
+   "path": "static/images/",
+   "classification": "captured-upstream-asset",
+   "scope": "1,159 real images fetched from production-next-images-cdn.thumbtack.com on 2026-09-26: pro avatars (width/320 aspect 1-1), project portfolio photos (width/640 webp), homepage hero and explore cards, and category icons from the homepage explore-menu capture. Every file's byte length, SHA-256 and source URL are recorded in asset_inventory.json."
+  },
+  {
+   "path": "templates/",
+   "classification": "mirror-code",
+   "scope": "21 Jinja templates replicating the upstream layout: sticky header with the real thumbtack wordmark SVG, navy #07344A hero with the search pill, category chip rows, pro cards with Top Pro/Great value/In high demand/Online now badges, the filter sidebar, pro profile tabs, quote wizard, project matches with quotes, account pages, cost-guide layouts, and the navy footer with city links."
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmation {{ order.number }} | Backcountry.com{% endblock %}
+{% block body %}
+<div class="confirm-page">
+  <h1>Thanks for your order!</h1>
+  <p class="confirm-number">Your order number is <strong>{{ order.number }}</strong></p>
+  <p class="confirm-meta">Placed {{ order.placed_at }} &middot; Status: {{ order.status_label }}
+    {% if order.guest_email %} &middot; Confirmation sent to {{ order.guest_email }}{% endif %}</p>
+
+  <section class="confirm-items">
+    <h2>Order Summary</h2>
+    <ul class="summary-items">
+      {% for it in order.items %}
+      <li>
+        <span class="sum-name">{{ it.product_name }}
+          <em>{{ it.brand_name }} &middot; {{ it.color_name }} / {{ it.size_name }} × {{ it.quantity }}</em></span>
+        <span class="sum-price">{{ money(it.unit_price * it.quantity) }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <dl class="summary-rows">
+      <div><dt>Subtotal</dt><dd>{{ money(order.subtotal_cents) }}</dd></div>
+      {% if order.savings_cents %}<div><dt>Item Savings</dt><dd class="savings">-{{ money(order.savings_cents) }}</dd></div>{% endif %}
+      <div><dt>Shipping ({{ order.shipping_method }})</dt><dd>{% if order.shipping_cents == 0 %}FREE!{% else %}{{ money(order.shipping_cents) }}{% endif %}</dd></div>
+      <div class="summary-total"><dt>Total</dt><dd>{{ money(order.total_cents) }}</dd></div>
+    </dl>
+    <p class="payment-line">Paid with card ending in {{ order.payment_last4 }}</p>
+  </section>
+
+  <section class="confirm-address">
+    <h2>Shipping To</h2>
+    <p>
+      <strong>{{ order.address.full_name }}</strong><br>
+      {{ order.address.line1 }}{% if order.address.line2 %}<br>{{ order.address.line2 }}{% endif %}<br>
+      {{ order.address.city }}, {{ order.address.state }} {{ order.address.zip }}<br>
+      {{ order.address.phone }}
+    </p>
+  </section>
+
+  <p class="confirm-actions">
+    <a class="btn btn-primary" href="/">Continue Shopping</a>
+    {% if current_user.is_authenticated %}<a class="btn btn-secondary" href="/account">View My Orders</a>{% endif %}
+  </p>
+</div>
+{% endblock %}

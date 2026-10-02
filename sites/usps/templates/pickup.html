@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Schedule a Pickup | USPS{% endblock %}
+{% block meta %}Schedule a free USPS Package Pickup from your home or office.{% endblock %}
+{% block content %}
+<h1>Schedule a Pickup</h1>
+<p>USPS Package Pickup is free for most services — your carrier collects your packages at your usual mail location.</p>
+{% if result %}
+  {% if result.errors %}
+    <div class="error-box">
+      {% for e in result.errors %}<p>{{ e }}</p>{% endfor %}
+    </div>
+  {% else %}
+    <div class="panel">
+      <h3>Pickup Scheduled — Confirmation {{ result.confirmation }}</h3>
+      <p><strong>Date:</strong> {{ result.date | longdate }}</p>
+      <p><strong>Location:</strong> {{ result.address }}</p>
+      <p>Your carrier will collect your package(s) during regular delivery hours. Keep the confirmation number for your records.</p>
+      <p><a class="btn" href="{{ url_for('home') }}">Done</a></p>
+    </div>
+  {% endif %}
+{% endif %}
+<div class="panel">
+  <form class="flow" action="{{ url_for('pickup_home') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>Pickup address</h3>
+    <label>Street address <input type="text" name="street" required></label>
+    <label>City <input type="text" name="city" required></label>
+    <label>State <input type="text" name="state" maxlength="2" required></label>
+    <label>ZIP Code <input type="text" name="zip" maxlength="5" required></label>
+    <label>Pickup date <input type="date" name="pickup_date" min="{{ today }}" required></label>
+    <label>Number of packages <input type="number" name="package_count" min="1" value="1"></label>
+    <label>Approximate total weight (lbs) <input type="text" name="weight" placeholder="e.g. 5"></label>
+    <label>Services included
+      <select name="services" multiple size="3">
+        <option>Priority Mail</option>
+        <option>Priority Mail Express</option>
+        <option>Ground Advantage</option>
+        <option>International</option>
+        <option>Returns</option>
+      </select>
+    </label>
+    <label>Phone <input type="text" name="phone"></label>
+    <label>Email <input type="email" name="email"></label>
+    <label>Pickup instructions <input type="text" name="instructions" placeholder="e.g. Packages at front desk"></label>
+    <button class="btn" type="submit">Schedule Pickup</button>
+  </form>
+</div>
+<p class="note">Same-day pickup is available in most areas when submitted before the cutoff time displayed on usps.com for your location.</p>
+{% endblock %}

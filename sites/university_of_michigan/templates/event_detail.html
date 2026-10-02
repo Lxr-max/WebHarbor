@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.name }} — Happening @ Michigan{% endblock %}
+{% block content %}
+<h1>{{ event.name }}</h1>
+{% if event.image %}<img class="hero-photo" src="{{ event.image }}" alt="{{ event.name }}">{% endif %}
+<p class="page-sub">
+  <span class="badge type">{{ event.type or 'Event' }}</span>
+  {% if event.presenter %} &middot; Presented by: {{ event.presenter }}{% endif %}
+</p>
+
+<h2>When / Where</h2>
+<table class="list plain">
+  <tr><th>Starts</th><td>{{ fmt_when(event.start) }}</td></tr>
+  <tr><th>Ends</th><td>{{ fmt_when(event.end) }}</td></tr>
+  <tr><th>Location</th><td>{{ event.location_name }}{% if event.street %}, {{ event.street }}{% endif %}{% if event.city %}, {{ event.city }}{% endif %}</td></tr>
+</table>
+
+{% if event.description %}
+<h2>About this event</h2>
+<p>{{ event.description }}</p>
+{% endif %}
+
+<h2>Save this event</h2>
+{% if current_user.is_authenticated %}
+{% if saved %}
+<p>This event is saved in <a href="{{ url_for('myumich') }}">My U-M</a>.</p>
+{% else %}
+<form method="post" action="{{ url_for('event_save', eid=event.eid) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn maize" type="submit">Save to My U-M</button>
+</form>
+{% endif %}
+{% else %}
+<p><a href="{{ url_for('login', next=url_for('event_detail', eid=event.eid)) }}">Log in</a> to save events and build your own calendar.</p>
+{% endif %}
+{% endblock %}

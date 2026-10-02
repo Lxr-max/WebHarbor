@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }}: {{ product.flavor or 'Original' }} | Energy Drink{% endblock %}
+{% block content %}
+<div class="product-layout">
+  <div>
+    <span class="kicker">{{ product.line }}</span>
+    <h1 class="page-title">{{ product.name }}</h1>
+    <p class="page-sub">{{ product.flavor or 'Original' }}</p>
+
+    <div class="can-shot"><img src="{{ product.can_image }}" alt="{{ product.name }} can"></div>
+
+    {% if product.flavor_text %}
+    <h2 class="section-title">Red Bull gives you wiiings</h2>
+    <div class="prose"><p>{{ product.flavor_text }}</p></div>
+    {% endif %}
+
+    <h2 class="section-title">Benefits</h2>
+    <div class="benefit-grid">
+      {% for b in product.benefits_list() %}
+      <div class="benefit">{{ b }}</div>
+      {% endfor %}
+    </div>
+
+    <h2 class="section-title">The formula that gives you wiiings</h2>
+    <p class="page-sub">Ingredients — Available sizes: {{ product.sizes_list() | join(', ') }}</p>
+    <div class="ingredient-list">
+      {% for i in product.ingredients_list() %}
+      <div class="ingredient">
+        <h4>{{ i.title }}</h4>
+        <p>{{ i.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="side-panel">
+    <h3>Available sizes</h3>
+    <div class="size-badges">
+      {% for s in product.sizes_list() %}<span class="badge">{{ s }}</span>{% endfor %}
+    </div>
+    <h3 style="margin-top:18px">Key figures</h3>
+    <div class="fact-row"><span class="k">Caffeine (per 8.4 fl oz)</span><span class="v">{{ product.caffeine() if product.caffeine() is not none else '—' }} mg</span></div>
+    <div class="fact-row"><span class="k">Sugars (per 8.4 fl oz)</span><span class="v">{% if product.sugars() is not none %}{{ product.sugars() }} g{% elif 'sugarfree' in product.name|lower %}Sugarfree; exact quantity not listed{% else %}Not listed{% endif %}</span></div>
+    <div class="fact-row"><span class="k">Product line</span><span class="v">{{ product.line }}</span></div>
+    <h3 style="margin-top:18px">More Red Bull</h3>
+    {% for r in related %}
+    <div class="fact-row"><span class="k"><a href="{{ url_for('product_detail', slug=r.slug) }}">{{ r.name }}</a></span></div>
+    {% endfor %}
+  </aside>
+</div>
+{% endblock %}

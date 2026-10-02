@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Map — {{ trip.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">{{ trip.title }} — map</h1>
+      <p class="small muted" style="margin:4px 0 0">Every stop on the itinerary, in order, with travel distances between stops.</p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a class="on" href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+    </nav>
+  </div>
+
+  <div class="map-card">
+    <svg class="map-canvas" viewBox="0 0 {{ width }} {{ height }}" role="img" aria-label="Trip map">
+      <rect x="0" y="0" width="{{ width }}" height="{{ height }}" fill="#eaf0fb"/>
+      <g stroke="#d3e0f5" stroke-width="1">
+        {% for i in range(0, width | int, 80) %}
+          <line x1="{{ i }}" y1="0" x2="{{ i }}" y2="{{ height }}"/>
+        {% endfor %}
+        {% for i in range(0, height | int, 80) %}
+          <line x1="0" y1="{{ i }}" x2="{{ width }}" y2="{{ i }}"/>
+        {% endfor %}
+      </g>
+      {% if points %}
+        <polyline points="{% for p in points %}{{ p.x }},{{ p.y }}{% if not loop.last %} {% endif %}{% endfor %}"
+                  fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-dasharray="7 5" opacity="0.85"/>
+      {% endif %}
+      {% for p in points %}
+        <circle cx="{{ p.x }}" cy="{{ p.y }}" r="13" fill="#4f46e5" stroke="#fff" stroke-width="2"/>
+        <text x="{{ p.x }}" y="{{ p.y + 4 }}" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">{{ p.pin }}</text>
+      {% endfor %}
+    </svg>
+    <div class="map-legend">
+      {% for p in points %}
+        <div class="row">
+          <div class="dot" style="width:26px;height:26px;border-radius:50%;background:#eef2ff;color:#3730a3;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem">{{ p.pin }}</div>
+          <div>
+            <div class="stat">{{ p.place.name }}</div>
+            <div class="small muted">{{ p.section.heading }}{% if p.entry.start_time %} · {{ p.entry.start_time }}{% endif %}</div>
+          </div>
+          <div class="small muted">
+            {{ '%.4f'|format(p.place.latitude) }}, {{ '%.4f'|format(p.place.longitude) }}
+          </div>
+        </div>
+      {% else %}
+        <p class="muted" style="margin:0">No stops with coordinates yet — add places to the itinerary to see them on the map.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if legs %}
+    <h2 style="margin-top:22px">Distances between stops</h2>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="money-table">
+        <tr><th>From</th><th>To</th><th class="num">Distance</th></tr>
+        {% for leg in legs %}
+          <tr>
+            <td>{{ leg.a.place.name }}</td>
+            <td>{{ leg.b.place.name }}</td>
+            <td class="num">{{ leg.km }} km · {{ leg.mi }} mi</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

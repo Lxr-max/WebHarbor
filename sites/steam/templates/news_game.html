@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ game.name }} News{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo;
+  <a href="{{ url_for('news_hub') }}">News</a> &rsaquo; {{ game.name }}</div>
+
+<div class="page-header">
+  <h1>News for {{ game.name }}</h1>
+  <span class="count">{{ items|length }} post{{ '' if items|length == 1 else 's' }}</span>
+</div>
+
+{% for item in items %}
+  <div class="news-card">
+    <div class="feed">{{ item.feedlabel }}{% if item.author %} &middot; {{ item.author }}{% endif %}</div>
+    <div class="t"><a href="{{ url_for('news_item', gid=item.gid) }}">{{ item.title }}</a></div>
+    <div class="d">Posted {{ item.date|datefmt }}</div>
+  </div>
+{% else %}
+  <div class="empty-state"><p>No news posts for this game.</p></div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,167 @@
+{
+  "users": [
+    {
+      "email": "alice.j@test.com",
+      "display_name": "Alice Johnson",
+      "account_number": "USC100241",
+      "street": "1200 Crystal Drive",
+      "city": "Arlington",
+      "state": "VA",
+      "zip": "22202",
+      "cases": [
+        {
+          "receipt": "SRC2210123456",
+          "form_number": "I-485",
+          "form_title": "Application to Register Permanent Residence or Adjust Status",
+          "case_type": "Employment-based adjustment of status (I-485 filed with I-765 and I-131)",
+          "office_code": "WAS",
+          "office_name": "Washington",
+          "filed_date": "2026-05-12",
+          "current_status": "Case Is Being Actively Reviewed",
+          "status_date": "2026-08-30",
+          "history": [
+            {"date": "05/14/2026", "status": "Case Was Received", "note": "Your application for permanent residence was received by the USCIS Texas Service Center."},
+            {"date": "05/22/2026", "status": "Biometrics Appointment Was Scheduled", "note": "We scheduled you for a biometrics appointment at the Application Support Center in Fairfax, VA on 06/03/2026."},
+            {"date": "06/05/2026", "status": "Biometrics Appointment Was Completed", "note": "Your biometrics were captured. Your case is ready for review."},
+            {"date": "08/30/2026", "status": "Case Is Being Actively Reviewed", "note": "We are actively reviewing your Form I-485. No action is required on your part at this time."}
+          ]
+        },
+        {
+          "receipt": "SRC2210567890",
+          "form_number": "I-765",
+          "form_title": "Application for Employment Authorization",
+          "case_type": "Employment authorization filed concurrently with Form I-485",
+          "office_code": "WAS",
+          "office_name": "Washington",
+          "filed_date": "2026-05-12",
+          "current_status": "New Card Is Being Produced",
+          "status_date": "2026-09-18",
+          "history": [
+            {"date": "05/14/2026", "status": "Case Was Received", "note": "Your Form I-765 was received by the USCIS Texas Service Center."},
+            {"date": "06/05/2026", "status": "Biometrics Appointment Was Completed", "note": "Your biometrics were captured for your employment authorization application."},
+            {"date": "09/18/2026", "status": "New Card Is Being Produced", "note": "We approved your Form I-765 and we are producing your new Employment Authorization Document."}
+          ]
+        }
+      ],
+      "appointments": [
+        {
+          "reason": "ADIT Stamp",
+          "reason_detail": "Need a temporary I-551 stamp in my passport while my green card is produced.",
+          "office_designation": "WAS",
+          "office_name": "Washington",
+          "appt_date": "2026-10-08",
+          "appt_time": "10:30 AM",
+          "confirmation": "USCWAS2610081030"
+        }
+      ]
+    },
+    {
+      "email": "bob.c@test.com",
+      "display_name": "Bob Chen",
+      "account_number": "USC100242",
+      "street": "355 E Wacker Dr",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60601",
+      "cases": [
+        {
+          "receipt": "LIN2210890123",
+          "form_number": "N-400",
+          "form_title": "Application for Naturalization",
+          "case_type": "Naturalization application (5-year permanent resident)",
+          "office_code": "CHI",
+          "office_name": "Chicago",
+          "filed_date": "2026-02-10",
+          "current_status": "Interview Was Scheduled",
+          "status_date": "2026-09-20",
+          "history": [
+            {"date": "02/13/2026", "status": "Case Was Received", "note": "Your Form N-400 was received by the USCIS Nebraska Service Center."},
+            {"date": "03/02/2026", "status": "Biometrics Appointment Was Scheduled", "note": "We scheduled you for a biometrics appointment at the Application Support Center in Chicago, IL."},
+            {"date": "03/18/2026", "status": "Biometrics Appointment Was Completed", "note": "Your biometrics were captured."},
+            {"date": "09/20/2026", "status": "Interview Was Scheduled", "note": "We scheduled your naturalization interview for 10/21/2026 at the USCIS Chicago Field Office, 101 West Ida B. Wells Drive, Chicago, IL 60605. Please bring your green card, state ID, and re-entry permits."}
+          ]
+        }
+      ],
+      "appointments": []
+    },
+    {
+      "email": "carol.d@test.com",
+      "display_name": "Carol Davis",
+      "account_number": "USC100243",
+      "street": "15 Beacon St",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02108",
+      "cases": [
+        {
+          "receipt": "WAC2210456789",
+          "form_number": "I-130",
+          "form_title": "Petition for Alien Relative",
+          "case_type": "Petition filed for a spouse (immediate relative)",
+          "office_code": "BOS",
+          "office_name": "Boston",
+          "filed_date": "2026-04-02",
+          "current_status": "Request for Initial Evidence Was Sent",
+          "status_date": "2026-07-15",
+          "history": [
+            {"date": "04/04/2026", "status": "Case Was Received", "note": "Your Form I-130 was received by the USCIS California Service Center."},
+            {"date": "07/15/2026", "status": "Request for Initial Evidence Was Sent", "note": "We mailed you a request for initial evidence for your Form I-130. Please submit the evidence listed on the notice."}
+          ]
+        }
+      ],
+      "appointments": []
+    },
+    {
+      "email": "dana.k@test.com",
+      "display_name": "Dana Kim",
+      "account_number": "USC100244",
+      "street": "1001 Fannin St",
+      "city": "Houston",
+      "state": "TX",
+      "zip": "77002",
+      "cases": [
+        {
+          "receipt": "MSC2210112233",
+          "form_number": "I-90",
+          "form_title": "Application to Replace Permanent Resident Card",
+          "case_type": "Green card replacement (card expiring)",
+          "office_code": "HOU",
+          "office_name": "Houston",
+          "filed_date": "2026-03-20",
+          "current_status": "New Card Is Being Produced",
+          "status_date": "2026-09-05",
+          "history": [
+            {"date": "03/22/2026", "status": "Case Was Received", "note": "Your Form I-90 was received by the National Benefits Center."},
+            {"date": "04/10/2026", "status": "Case Was Approved", "note": "Your Form I-90 was approved. Your replacement Permanent Resident Card will be produced."},
+            {"date": "09/05/2026", "status": "New Card Is Being Produced", "note": "We are producing your new Permanent Resident Card and will mail it to the address you provided."}
+          ]
+        },
+        {
+          "receipt": "YSC2210667788",
+          "form_number": "I-131",
+          "form_title": "Application for Travel Documents, Parole Documents, and Arrival and Departure Documents",
+          "case_type": "Re-entry permit application",
+          "office_code": "HOU",
+          "office_name": "Houston",
+          "filed_date": "2026-06-18",
+          "current_status": "Case Was Received",
+          "status_date": "2026-06-20",
+          "history": [
+            {"date": "06/20/2026", "status": "Case Was Received", "note": "Your Form I-131 was received by the USCIS Potomac Service Center."}
+          ]
+        }
+      ],
+      "appointments": [
+        {
+          "reason": "Emergency Advance Parole (EAP)",
+          "reason_detail": "Need emergency travel authorization for a family medical emergency abroad.",
+          "office_designation": "HOU",
+          "office_name": "Houston",
+          "appt_date": "2026-10-06",
+          "appt_time": "09:45 AM",
+          "confirmation": "USCHOU2610060945"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Store Search{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Store Search</h1>
+  <p class="rich">Find a Trader Joe&rsquo;s store near you. Search by city, state or ZIP code, or browse stores by state.</p>
+</div>
+
+<form class="store-form" method="get" action="{{ url_for('store_search') }}">
+  <input type="text" name="q" value="{{ q }}" placeholder="City, State or ZIP" aria-label="Search stores">
+  <label for="radius">within</label>
+  <select name="radius" id="radius">
+    {% for r in radius_choices %}
+    <option value="{{ r }}" {% if r == radius %}selected{% endif %}>{{ r }} miles</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">SEARCH</button>
+  <label for="state">or browse by state</label>
+  <select name="state" id="state" onchange="this.form.submit()">
+    <option value="">-- State --</option>
+    {% for s in states %}
+    <option value="{{ s }}" {% if s == state %}selected{% endif %}>{{ s }}</option>
+    {% endfor %}
+  </select>
+  <noscript><button class="btn btn-secondary" type="submit">Go</button></noscript>
+</form>
+
+{% if state %}
+<div class="page" style="padding-top:0;">
+  <h2 class="page-title" style="font-size:24px;">Trader Joe&rsquo;s Stores in {{ state }} ({{ results|length }})</h2>
+</div>
+{% for s in results %}
+<div class="store-row">
+  <div>
+    <h3><a href="{{ url_for('store_detail', clientkey=s.clientkey) }}">{{ s.name }}</a></h3>
+    <div class="addr">{{ s.address_text() }}</div>
+    <div class="addr">{{ s.phone }}</div>
+  </div>
+  <form method="post" action="{{ url_for('set_my_store', clientkey=s.clientkey) }}" style="margin-left:auto;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ url_for('store_search', state=state) }}">
+    <button class="btn btn-secondary" type="submit">SET AS MY STORE</button>
+  </form>
+</div>
+{% endfor %}
+{% elif results is not none %}
+<div class="page" style="padding-top:0;">
+  {% if origin %}
+  <h2 class="page-title" style="font-size:24px;">Stores within {{ radius }} miles of {{ origin.city }}, {{ origin.state }} {{ origin.postalcode }} ({{ results|length }})</h2>
+  {% elif results %}
+  <h2 class="page-title" style="font-size:24px;">{{ results|length }} store{{ 's' if results|length != 1 }}</h2>
+  {% else %}
+  <h2 class="page-title" style="font-size:24px;">No stores found</h2>
+  <p class="rich">No locations were found using your search criteria. Please try another input address to search for locations.</p>
+  {% endif %}
+</div>
+{% for s in results %}
+<div class="store-row">
+  <div class="dist">{{ '%.1f' | format(s.distance_from(origin.latitude, origin.longitude)) if origin and s.distance_from(origin.latitude, origin.longitude) is not none else '' }} mi</div>
+  <div>
+    <h3><a href="{{ url_for('store_detail', clientkey=s.clientkey) }}">{{ s.name }}</a>{% if s.coming_soon %} <span class="chip">Coming Soon</span>{% endif %}</h3>
+    <div class="addr">{{ s.address_text() }}</div>
+    <div class="addr">{{ s.phone }}</div>
+  </div>
+  <form method="post" action="{{ url_for('set_my_store', clientkey=s.clientkey) }}" style="margin-left:auto;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ url_for('store_search', q=q, radius=radius) }}">
+    <button class="btn btn-secondary" type="submit">SET AS MY STORE</button>
+  </form>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

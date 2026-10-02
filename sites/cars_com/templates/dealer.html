@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}{{ d.name }} | Car Dealership in {{ d.city }}, {{ d.state }} | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('dealers_index') }}">Find a dealer</a> &rsaquo; <span>{{ d.name }}</span></nav>
+{% endblock %}
+{% block content %}
+<article class="dealer-page">
+  <header class="dealer-head">
+    <h1>{{ d.name }}</h1>
+    <p class="muted">{% if d.rating %}★ {{ d.rating }} &middot; {{ d.review_count | mileagefmt }} reviews{% endif %}
+      {% if d.distance_miles is not none %} &middot; {{ d.distance_miles }} miles from {{ DEFAULT_ZIP }}{% endif %}
+      {% if d.awards %} &middot; {{ d.awards }} awards{% endif %}</p>
+    <p class="dealer-address">{{ d.address }}</p>
+    <p class="dealer-phones">
+      {% if d.phone_new %}New: {{ d.phone_new }}{% endif %}
+      {% if d.phone_used %} &middot; Used: {{ d.phone_used }}{% endif %}
+      {% if d.phone_service %} &middot; Service: {{ d.phone_service }}{% endif %}
+    </p>
+    <div class="dealer-actions">
+      <a class="btn btn-primary" href="{{ url_for('dealer_inventory', dealer_id=d.id, slug=d.slug) }}">View inventory ({{ inventory_count }} cars)</a>
+      <a class="btn btn-outline" href="{{ url_for('dealer_reviews', dealer_id=d.id, slug=d.slug) }}">Reviews</a>
+    </div>
+  </header>
+
+  {% if d.hours_list() %}
+  <section class="vd-section">
+    <h2>Hours</h2>
+    <table class="hours-table">
+      {% for row in d.hours_list() %}
+      <tr><th>{{ row.day }}</th><td>{{ row.hours }}</td></tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  {% if d.about %}
+  <section class="vd-section">
+    <h2>About {{ d.name }}</h2>
+    <p>{{ d.about }}</p>
+    {% if d.highlights_list() %}
+    <h3>Highlights</h3>
+    <ul>{% for h in d.highlights_list() %}<li>{{ h }}</li>{% endfor %}</ul>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if d.review_list() %}
+  <section class="vd-section">
+    <h2>Reviews</h2>
+    <a href="{{ url_for('dealer_reviews', dealer_id=d.id, slug=d.slug) }}">See all reviews</a>
+    <div class="review-list">
+      {% for r in d.review_list()[:3] %}
+      <div class="review">
+        <p class="review-head">By {{ r.author }}{% if r.visit_type %} &middot; {{ r.visit_type }}{% endif %}{% if r.rating %} &middot; ★ {{ r.rating }}{% endif %} &middot; {{ r.date }}</p>
+        <p class="review-body">{{ r.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if d.sales_team_list() %}
+  <section class="vd-section">
+    <h2>Sales team</h2>
+    <ul class="team-list">
+      {% for t in d.sales_team_list() %}
+      <li>{{ t.name }} — {{ t.role }} <span class="muted">{{ t.reviews }} reviews</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if d.service_menu_list() %}
+  <section class="vd-section">
+    <h2>Service</h2>
+    <ul>{% for s in d.service_menu_list() %}<li>{{ s }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

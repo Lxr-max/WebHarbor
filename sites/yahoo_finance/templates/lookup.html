@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}{% if q %}{{ q }} - Yahoo Finance Search{% else %}Search - Yahoo Finance{% endif %}{% endblock %}
+{% block content %}
+<div class="cols">
+  <div>
+    <div class="card">
+      <h2>Search</h2>
+      <form class="filter-form" action="/lookup" method="get">
+        <div class="field">
+          <label for="s">Find quotes, companies, or news</label>
+          <input type="search" id="s" name="s" value="{{ q }}" placeholder="e.g. Apple, AAPL, semiconductors">
+        </div>
+        <button class="btn primary" type="submit">Search</button>
+      </form>
+    </div>
+
+    {% if q %}
+    <div class="card">
+      <h2>Quotes matching "{{ q }}"</h2>
+      {% if quotes %}
+      <div class="table-scroll">
+      <table class="yf">
+        <thead><tr><th>Symbol</th><th>Name</th><th>Exchange</th><th>Type</th><th class="num">Last</th><th class="num">Chg %</th><th class="num">Market Cap</th></tr></thead>
+        <tbody>
+        {% for row in quotes %}
+          <tr>
+            <td><a href="/quote/{{ row.symbol|urlencode }}"><strong>{{ row.symbol }}</strong></a></td>
+            <td>{{ row.short_name or row.long_name }}</td>
+            <td>{{ row.full_exchange or row.exchange }}</td>
+            <td>{{ row.quote_type }}</td>
+            <td class="num">{{ fmt_price(row.price) }}</td>
+            <td class="num {{ 'up' if (row.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(row.change_pct, 2, sign=True) }}</td>
+            <td class="num">{{ fmt_big(row.market_cap) }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+      {% else %}
+      <p class="muted">No quotes matched "{{ q }}".</p>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>News matching "{{ q }}"</h2>
+      {% if news %}
+      <ul class="news-list">
+        {% for art in news %}
+        <li class="news-item">
+          {% if art.thumb_name %}
+            <img class="thumb" src="{{ url_for('static', filename=art.thumb_name) }}" alt="">
+          {% else %}
+            <span class="thumb-fallback" aria-hidden="true">Y!</span>
+          {% endif %}
+          <div>
+            <h3><a href="{{ art.url_path }}">{{ art.title }}</a></h3>
+            <div class="news-meta"><span>{{ art.provider }}</span><span>{{ rel_time(art.pub_time) }}</span></div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="muted">No news matched "{{ q }}".</p>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div>
+    <div class="card">
+      <h2>Looking for stocks?</h2>
+      <p><a href="/screener">Try the stock screener</a> — filter by sector, market cap, P/E and dividend yield.</p>
+      <p><a href="/calendar/earnings">Check the earnings calendar</a></p>
+      <p><a href="/sectors">Compare sector performance</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

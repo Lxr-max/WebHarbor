@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Sign up - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>Join Thumbtack</h1>
+  <p class="muted">One account for every home project — quotes, bookings, and messages.</p>
+  <div class="auth-card">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-row">
+        <label>Full name</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label>Password (8+ characters)</label>
+        <input type="password" name="password" required minlength="8">
+      </div>
+      <div class="form-row">
+        <label>Zip code</label>
+        <input type="text" name="zip" placeholder="98052">
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Create account</button>
+    </form>
+    <p class="muted" style="margin-top:16px;">Already have an account? <a href="/login">Log in</a></p>
+  </div>
+</div>
+{% endblock %}

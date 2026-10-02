@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My Tickets | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount" class="active">My Tickets</a>
+    <a href="/secure/myaccount/purchases">Orders</a>
+    <a href="/secure/myaccount/listings">My Listings</a>
+    <a href="/secure/myaccount/sales">My Sales</a>
+    <a href="/secure/myaccount/payments">Payments</a>
+  </nav>
+  <h1>Hi {{ current_user.display_name }}</h1>
+  <div class="account-summary">
+    <div class="account-stat"><strong>{{ orders|length }}</strong><span>Recent orders</span></div>
+    <div class="account-stat"><strong>{{ listings }}</strong><span>Active listings</span></div>
+    <div class="account-stat"><strong>{{ sales }}</strong><span>Completed sales</span></div>
+  </div>
+  <section class="account-section">
+    <h2>Recent orders</h2>
+    {% for order in orders %}
+    <a class="order-row" href="/secure/myaccount/purchases/{{ order.order_number }}">
+      <div><strong>{{ order.event.name }}</strong><p>{{ order.event.date_full }}</p></div>
+      <div class="order-side"><span>{{ order.quantity }} ticket{{ 's' if order.quantity > 1 }}</span><span>{{ '${:,.2f}'.format(order.total) }}</span></div>
+    </a>
+    {% else %}
+    <p class="muted">No orders yet. <a href="/">Find an event</a>.</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

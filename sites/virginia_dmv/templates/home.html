@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Virginia Department of Motor Vehicles{% endblock %}
+{% block content %}
+{% set hero = data.sections[0] if data.sections else None %}
+<div class="hero">
+  <div class="container">
+    {% if hero %}
+    <h1>{{ hero.paragraphs[0] if hero.paragraphs else 'Virginia Department of Motor Vehicles' }}</h1>
+    {% if hero.paragraphs|length > 1 %}<p>{{ hero.paragraphs[1] }}</p>{% endif %}
+    <div class="card-grid">
+      {% for link in hero.links %}
+      {% set target = mirror_href(link.href) %}
+      {% if target %}<a class="card card--flat" href="{{ target }}"><h3>{{ link.label }}</h3></a>
+      {% else %}<div class="card card--flat"><h3>{{ link.label }}</h3></div>{% endif %}
+      {% endfor %}
+    </div>
+    {% if not current_user.is_authenticated %}
+    <p>Already have an account? <a class="btn btn--gold" href="{{ url_for('account_login') }}">Log in</a> to get started today.</p>
+    {% else %}
+    <p>Welcome back, {{ current_user.display_name }}. <a class="btn btn--gold" href="{{ url_for('account_dashboard') }}">Open My Account</a></p>
+    {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+<div class="container">
+  {% for alert in site_alerts %}
+  <div class="alert" role="alert">
+    <h2>{{ alert.heading }}</h2>
+    <p>{{ alert.message }}</p>
+  </div>
+  {% endfor %}
+
+  {% if data.cards %}
+  <div class="card-grid">
+    {% for card in data.cards %}
+    {% set target = mirror_href(card.href) %}
+    {% if target %}
+    <a class="card card--flat" href="{{ target }}">
+    {% else %}
+    <div class="card card--flat">
+    {% endif %}
+      {% if card.eyebrow %}<div class="eyebrow">{{ card.eyebrow }}</div>{% endif %}
+      <h3>{{ card.label }}</h3>
+    {% if target %}</a>{% else %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% set tail_sections = data.sections[1:] if data.sections else [] %}
+  {% for sec in tail_sections %}
+    {% if sec.heading %}<h2>{{ sec.heading }}</h2>{% endif %}
+    {% for p in sec.paragraphs %}<p>{{ p }}</p>{% endfor %}
+    {% if sec.links %}
+      <ul class="flow">
+        {% for link in sec.links %}
+        <li>{% set target = mirror_href(link.href) %}
+          {% if target %}<a href="{{ target }}">{{ link.label }}</a>
+          {% else %}{{ link.label }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% for list in sec.lists %}
+      <ul class="flow">
+        {% for item in list %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    {% endfor %}
+  {% endfor %}
+
+  <h2>News</h2>
+  <div class="card-grid">
+    {% for article in news %}
+    <a class="card card--flat" href="{{ url_for('news_article', slug=article.slug) }}">
+      <div class="eyebrow">{{ article.published[:10] if article.published else 'DMV News' }}</div>
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.paras()[0][:140] if article.paras() else '' }}…</p>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a href="{{ url_for('news_list') }}">Get More News</a></p>
+</div>
+{% endblock %}

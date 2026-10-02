@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page not found | Statista{% endblock %}
+{% block content %}
+<div style="text-align:center;padding:60px 0;">
+  <h1>Page not found</h1>
+  <p class="section__sub">The page you requested does not exist. Try the search instead.</p>
+  <form class="heroSearch" style="max-width:520px;margin:20px auto 0;" action="/serp" method="get">
+    <input type="search" name="q" placeholder="Search statistics, reports…">
+    <button type="submit">Search</button>
+  </form>
+</div>
+{% endblock %}

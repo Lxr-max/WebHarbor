@@ -1,0 +1,69 @@
+{
+    "site": "carvana",
+    "upstream": "https://www.carvana.com/",
+    "captured_at": "2026-09-29",
+    "capture_method": "carvana.com sits behind Cloudflare bot management: plain HTTP clients receive a 403 cf-mitigated challenge page. All captures were made with a real headful Chromium (Playwright under Xvfb, persistent profile, retry-until-rendered harness in scraped_data/capture.py) rendering the exact public site; every page recorded is the fully-rendered DOM plus the JSON-LD and the Next.js app-router RSC flight payloads the page itself embeds. Nothing is synthesized: each tracked field traces to a capture file in scraped_data/captures/ (page + .meta.json sidecar with URL/status/timestamp; VDP captures add an .apis.json sidecar with the exact XHR request/response pairs the page fired). The per-vehicle pricing terms were captured by replaying the site's own pricing API (apik.carvana.io/merch/search/api/v2/pricing) from inside the browser session with the captured zip5, in batches of 24 vehicle ids.",
+    "sources": {
+        "www.carvana.com/": {
+            "role": "primary site: home; 97 car-search pages (all cars, 30 makes, 50 models, 8 body styles, 7 filter combinations — each with its filter panel, result totals and the upstream live-inventory count); 54 vehicle detail pages; 12 informational pages (how it works, financing, help hub, reviews, certified program, vending machine, care plans, insurance, repairs, EV guide, value tracker, sell/trade); 18 help-center Q&A articles; 6 help section hubs",
+            "serps_captured": 97,
+            "vdp_pages_captured": 54,
+            "info_pages_captured": 12,
+            "help_articles_captured": 18
+        },
+        "cdnblob.fastly.carvana.io/": {
+            "role": "vehicle card photos: every corpus vehicle's listing photo fetched from its exact upstream CDN URL (<stock>/post-large/normalized/zoomcrop/)",
+            "images_fetched": 1528
+        },
+        "vexgateway.fastly.carvana.io/": {
+            "role": "vehicle photo pipeline: for each fully-captured vehicle, the hero frame and the stabilized 360-spin frames from the exact upstream execution URLs (image_stabilized_XXX.jpg, hero_1440x1080.jpg)",
+            "images_fetched": 213
+        },
+        "assets.fastly.carvana.io/": {
+            "role": "brand assets: the header logo SVG",
+            "images_fetched": 1
+        },
+        "apik.carvana.io/merch/search/api/v2/pricing": {
+            "role": "per-vehicle financing terms: APR, default term, monthly payment at $0 down and estimated taxes & fees, captured for 1,542 of the 1,544 corpus vehicles (the two remaining vehicles fall back to the captured upstream default: 6.99% APR)",
+            "pricing_terms_captured": 1542
+        },
+        "apik.carvana.io/merch/reviews/api/review/sv": {
+            "role": "owner reviews per vehicle make/model (rating, date, author, text) captured from the XHR the vehicle pages fire",
+            "reviews_captured": 722
+        },
+        "spinnerdata.carvana.io/spinnerdata/": {
+            "role": "photo-gallery manifest per vehicle (64 spin-frame URLs, hero, interior tiling) captured from the XHR the vehicle pages fire",
+            "manifests_captured": 54
+        }
+    },
+    "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/captures/. The tracked source_data/ snapshots trim as follows: the vehicle corpus keeps every vehicle row the captured search pages carry (1,544 distinct vehicleIds across 97 pages; each row keeps year, make, model, trim, body style, mileage, price with kbbValue/msrp/marketAdjustment, colors, fuel, MPG, seating, VIN, stock number, location and card photo URL); vehicle detail records (54) keep the full captured spec/feature/option/narrative/inspection/history payloads; reviews keep every captured review row. Upstream search totals are preserved per captured page (srp_snapshots) and shown as context on the search page; the visible result counts are computed over the captured corpus and the pages state this. Where the upstream posted the same vehicle on several search pages, each distinct vehicleId is kept exactly once. The credit-tier APR table mirrors the upstream soft-pull modal's presented ranges.",
+    "fixtures": {
+        "benchmark_users": [
+            {
+                "email": "alice.j@test.com",
+                "display": "Alice Johnson",
+                "fixture": "Seattle commuter profile; 3 saved cars (2023 Toyota RAV4, 2019 Tesla Model 3, 2022 Honda Civic); 1 financed order (CV-100026, 2022 Honda Civic, $2,500 down, 60 months at 6.24%, delivery scheduled 2026-10-02 12:00 PM - 2:00 PM to Seattle, WA) with a 3-entry status timeline"
+            },
+            {
+                "email": "bob.c@test.com",
+                "display": "Bob Chen",
+                "fixture": "Scottsdale truck-guy profile; 2 saved trucks (2019 Ford F150 SuperCrew Cab, 2022 Jeep Wrangler); 1 delivered financed order (CV-100019, F150 SuperCrew Cab, $4,000 down, 72 months at 6.99%) with a 5-entry status timeline through delivery; 1 claimed trade-in offer (TI-90013, 2014 Ford F-150 XLT SuperCrew, 96,500 miles)"
+            },
+            {
+                "email": "carol.d@test.com",
+                "display": "Carol Davis",
+                "fixture": "Chicago profile; 1 saved car (2013 BMW 3 Series); no orders"
+            },
+            {
+                "email": "dana.k@test.com",
+                "display": "Dana Kim",
+                "fixture": "Boston EV-curious profile; 2 saved cars (2025 Tesla Model Y, 2020 Toyota Camry Hybrid); 1 cash order in financing review (CV-100033, Model Y, delivery scheduled 2026-10-05 8:00 AM - 10:00 AM to Boston, MA) with a 2-entry timeline"
+            }
+        ],
+        "fixture_note": "The upstream account area (saved cars, orders, delivery scheduling, profiles) requires live accounts, so authenticated state is fixture-built following the u_s_customs/zara/ziprecruiter precedent: every vehicle referenced is a real captured upstream row (real vehicleId, stock number, VIN, price, photos); profile text, saved-car sets, order terms, delivery schedules and status timelines are authored fixtures modeling the upstream flows. All timestamps are frozen constants relative to the 2026-09-29 snapshot date. The sell-your-car instant offer is computed deterministically from a stable SHA-256 hash of the VIN anchored on the captured KBB valuation baseline ($21,790 median across the snapshot) with the upstream condition multipliers, so the same VIN always yields the same offer.",
+        "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash and every row comes from the tracked source_data/*.json snapshots in a fixed order; two consecutive builds produce byte-identical databases and /reset/carvana restores instance == instance_seed byte-for-byte.",
+        "timezone": "UTC"
+    },
+    "waf_note": "carvana.com is behind Cloudflare bot management (plain HTTP clients get 403 cf-mitigated challenges; HEAD requests are refused). The capture used real headful Chromium sessions that rendered the pages; nothing is reproduced from anything other than a real upstream response. Sixteen upstream card-photo URLs now return 404 upstream (the vehicles' photo sessions were retired after capture); those vehicles render without a card photo and the dead URLs are recorded in asset_inventory.json's missing_upstream list rather than substituting anything.",
+    "derived_fields": "Body-style keys are normalized to the display names the upstream filter panel uses (Suv->SUV, Pickup->Truck, MiniVan->Minivan). The single-owner flag is derived from the VDP 'Single Owner' highlight tag the upstream renders; accident-free comes from the captured isAutocheckReportAccidentVehicle field. The financing estimator implements the standard amortization formula (M = P*r/(1-(1+r)^-n)) over the captured per-vehicle APR and estimated taxes & fees, which reproduces the upstream $0-down estimate for the captured vehicles (e.g. the 2025 Nissan Altima's captured $361/mo); credit-tier APRs mirror the upstream soft-pull modal's presented ranges. These derivations are deterministic and declared here."
+}

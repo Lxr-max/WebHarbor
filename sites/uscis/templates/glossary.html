@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Glossary{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Glossary</h1>
+  <p>Look up definitions of immigration terms and acronyms used across USCIS.</p>
+
+  <form class="filter-bar" method="get" action="{{ url_for('glossary') }}">
+    <div class="filter-bar__field">
+      <label for="q">Search glossary</label>
+      <input id="q" type="text" name="q" value="{{ q }}" placeholder="Search terms and definitions">
+    </div>
+    <button class="btn btn--primary" type="submit">Search</button>
+  </form>
+
+  <nav class="letter-index" aria-label="Glossary letter index">
+    <a href="{{ url_for('glossary') }}" {% if not letter %}class="active"{% endif %}>All</a>
+    {% for l in letters %}
+    <a href="{{ url_for('glossary', letter=l) }}" {% if letter == l %}class="active"{% endif %}>{{ l }}</a>
+    {% endfor %}
+  </nav>
+
+  <p class="result-count">{{ rows|length }} term{{ 's' if rows|length != 1 else '' }}</p>
+
+  <div class="glossary-list">
+    {% for term in rows %}
+    <details class="glossary-item">
+      <summary>{{ term.term }}</summary>
+      <p>{{ term.definition }}</p>
+    </details>
+    {% else %}
+    <p>No terms matched your search.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('resources_hub') }}">Legal resources</a> ›
+    {% if topic %}<a href="/resources/{{ topic.slug }}/">{{ topic.title }}</a> ›{% endif %}
+    <span>{{ article.title }}</span>
+  </nav>
+  <article class="resource-article">
+    {% for block in article.blocks %}
+      {% if block.tag == "h1" %}<h1>{{ block.text }}</h1>
+      {% elif block.tag == "h2" %}<h2>{{ block.text }}</h2>
+      {% elif block.tag == "h3" %}<h3>{{ block.text }}</h3>
+      {% elif block.tag == "h4" %}<h4>{{ block.text }}</h4>
+      {% elif block.tag == "li" %}<li>{{ block.text }}</li>
+      {% else %}<p>{{ block.text }}</p>{% endif %}
+    {% endfor %}
+  </article>
+
+  <h2>What do I do next?</h2>
+  <p>Ready to take action? Use Super Lawyers to find a top rated attorney near you.</p>
+  <form class="inline-search" method="get" action="/attorneys/search/">
+    <input type="search" name="q" placeholder="Search legal issue" aria-label="Search legal issue">
+    <input type="search" name="where" placeholder="Location" aria-label="Location">
+    <button class="btn btn-primary" type="submit">Find lawyers</button>
+  </form>
+
+  <h2>Additional {{ topic.title if topic else article.topic_slug|replace('-', ' ')|title }} articles</h2>
+  <div class="link-grid">
+    {% for other in siblings %}
+      {% if other.id != article.id %}
+      <a href="/resources/{{ other.path }}/">{{ other.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

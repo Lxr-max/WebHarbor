@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Log In | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight" style="max-width:520px">
+  <div class="panel">
+    <h1 style="font-size:24px">Log in</h1>
+    <p class="muted">Welcome back! Log in to manage your reservations.</p>
+    {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+    <form method="post" action="{{ url_for('login') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+      <div class="field">
+        <label for="email">Email</label>
+        <div class="control"><input id="email" name="email" type="email" required placeholder="you@example.com" style="padding-left:12px"></div>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="control"><input id="password" name="password" type="password" required style="padding-left:12px"></div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Log In</button>
+    </form>
+    <p class="small muted" style="margin-top:14px">New to SpotHero? <a href="{{ url_for('signup') }}">Sign up</a></p>
+  </div>
+</div>
+{% endblock %}

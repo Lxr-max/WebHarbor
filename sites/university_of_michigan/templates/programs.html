@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Majors &amp; Degrees — University of Michigan{% endblock %}
+{% block content %}
+<h1>Majors &amp; Degrees</h1>
+<p class="page-sub">Put your grand imagination to work. Search {{ total }} undergraduate programs across U-M's schools and colleges.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('programs') }}">
+    <div>
+      <label for="q">Search by keyword</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder="e.g. engineering, biology">
+    </div>
+    <div>
+      <label for="school">School / College</label>
+      <select id="school" name="school">
+        <option value="">All schools &amp; colleges</option>
+        {% for s in schools %}
+        <option value="{{ s }}" {% if s == school %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="letter">Sort</label>
+      <select id="letter" name="letter">
+        <option value="">a-z</option>
+        {% for l in letters %}
+        <option value="{{ l }}" {% if l == letter %}selected{% endif %}>{{ l }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} programs match</span>
+</div>
+
+<table class="list">
+  <tr><th>Program</th><th>School / College</th></tr>
+  {% for p in programs %}
+  <tr>
+    <td><a href="{{ url_for('program_detail', pid=p.id) }}">{{ p.name }}</a>{% if p.submajor %} <span class="badge type">sub-major</span>{% endif %}</td>
+    <td>{{ p.school }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if total > per_page %}
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('programs', q=q, school=school, letter=letter, page=page-1) }}">&laquo; Previous</a>
+  {% endif %}
+  <span class="cur">Page {{ page }} of {{ (total + per_page - 1) // per_page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('programs', q=q, school=school, letter=letter, page=page+1) }}">Next &raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

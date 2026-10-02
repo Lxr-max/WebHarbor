@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Filing Fees{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Filing Fees</h1>
+  <p>Use this page to find the current fee for the form you are filing. Fees are also shown in the <a href="{{ url_for('feecalculator') }}">fee calculator</a>, which lists every filing category for each form.</p>
+  <p>The tables below list every form with its fee rows exactly as published in the G-1055 fee schedule.</p>
+
+  <input class="table-search" type="search" id="fee-search" placeholder="Filter forms by number or title..." onkeyup="filterFees()">
+  <div class="fee-groups" id="fee-groups">
+    {% for fee in fees %}
+    <section class="fee-group" data-label="{{ fee.label|lower }}">
+      <h2 class="fee-group__title">{{ fee.label }}</h2>
+      <div class="table-wrap">
+        <table class="data-table fee-table">
+          <thead>
+            <tr><th>Filing Category</th><th>Paper Filing Fee</th>{% if fee.fee_columns() > 2 %}<th>Online Filing Fee</th>{% endif %}</tr>
+          </thead>
+          <tbody>
+          {% for row in fee.fee_rows() %}
+          <tr><td>{{ row.category }}</td>{% for f in row.fees %}<td>{{ f }}</td>{% endfor %}</tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+  <script>
+    function filterFees() {
+      const q = document.getElementById('fee-search').value.toLowerCase();
+      document.querySelectorAll('.fee-group').forEach(function (g) {
+        g.style.display = (!q || g.dataset.label.indexOf(q) !== -1) ? '' : 'none';
+      });
+    }
+  </script>
+</div>
+{% endblock %}

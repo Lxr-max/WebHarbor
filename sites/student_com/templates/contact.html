@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Contact Us • Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px"><a href="/">Home</a> › <span>Contact</span></nav>
+  <h1>Connect with our team</h1>
+  <p class="muted" style="margin-top:10px;max-width:720px">If you have any questions please don't hesitate to contact us by WhatsApp, live chat, phone or email - we're always happy to help!</p>
+</div>
+
+<section class="section container">
+  <div class="grid cols-4">
+    <div class="card" style="padding:24px;text-align:center">
+      <div style="font-size:26px">💬</div>
+      <h3 style="font-size:15px;margin-top:8px">WhatsApp</h3>
+      <p class="small muted">Chat to us on WhatsApp</p>
+    </div>
+    <div class="card" style="padding:24px;text-align:center">
+      <div style="font-size:26px">🖥️</div>
+      <h3 style="font-size:15px;margin-top:8px">Live chat</h3>
+      <p class="small muted">Contact our team</p>
+    </div>
+    <div class="card" style="padding:24px;text-align:center">
+      <div style="font-size:26px">📞</div>
+      <h3 style="font-size:15px;margin-top:8px">Toll-free phone</h3>
+      <p class="small muted">+44 800 316 2918</p>
+    </div>
+    <div class="card" style="padding:24px;text-align:center">
+      <div style="font-size:26px">✉️</div>
+      <h3 style="font-size:15px;margin-top:8px">Email</h3>
+      <p class="small muted">contact@student.com</p>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-top:40px;gap:40px;align-items:start">
+    <div class="card" style="padding:32px">
+      <h2>Got further questions?</h2>
+      <p class="muted small" style="margin-top:8px">Contact Student.com, the world's leading student housing marketplace. Whether you're searching for a place to rent or looking to list your property, reach out to us by our contact form and our team will be in touch.</p>
+      <form id="contact-form" style="margin-top:18px" novalidate>
+        <div class="field" id="ct-name-field">
+          <label for="ct-name">Your name</label>
+          <input type="text" id="ct-name" name="name" required>
+          <div class="err">Please fill in your name</div>
+        </div>
+        <div class="field" id="ct-email-field">
+          <label for="ct-email">Email</label>
+          <input type="email" id="ct-email" name="email" required>
+          <div class="err">Please fill in a valid email</div>
+        </div>
+        <div class="field">
+          <label for="ct-topic">Topic</label>
+          <select id="ct-topic" name="topic">
+            <option>Booking with Student.com</option>
+            <option>Fees and payments</option>
+            <option>Availability and pricing</option>
+            <option>Security and privacy</option>
+            <option>Cancellation policy</option>
+            <option>Listing my property</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field" id="ct-msg-field">
+          <label for="ct-message">Message</label>
+          <textarea id="ct-message" name="message" rows="4" required></textarea>
+          <div class="err">Please add a message</div>
+        </div>
+        <button class="btn primary full" type="submit" id="contact-submit">Send message</button>
+      </form>
+      <p class="small" id="contact-ok" style="display:none;color:#1a7f37;margin-top:12px">Thanks! Our team will get back to you shortly.</p>
+    </div>
+    <div class="card" style="padding:32px;background:linear-gradient(109deg,#bfb9f6 1.41%,#ff9a48 149.7%)">
+      <h2>List your property on Student.com</h2>
+      <p class="small" style="margin-top:8px">List your student property on Student.com and reach a global audience of active student renters. Our platform makes it easy to showcase your rooms.</p>
+      <p class="small" style="margin-top:8px">With dedicated support and smart marketing tools, we help you fill rooms faster. Join our landlord community today.</p>
+      <a class="btn primary" href="/list-your-property" style="margin-top:16px">List your property</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var bad = false;
+    [["ct-name-field", "ct-name"], ["ct-email-field", "ct-email"], ["ct-msg-field", "ct-message"]].forEach(function (pair) {
+      var el = document.getElementById(pair[1]);
+      var invalid = !el.value.trim() || (pair[1] === "ct-email" && !/^[^@]+@[^@]+\.[^@]+$/.test(el.value));
+      document.getElementById(pair[0]).classList.toggle("invalid", invalid);
+      if (invalid) bad = true;
+    });
+    if (bad) return;
+    var btn = document.getElementById("contact-submit");
+    btn.disabled = true; btn.textContent = "Sending...";
+    fetch("/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", "X-CSRFToken": window.CSRF_TOKEN },
+      body: new URLSearchParams(new FormData(e.target)).toString(),
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      btn.disabled = false; btn.textContent = "Send message";
+      if (res.ok) {
+        document.getElementById("contact-form").reset();
+        document.getElementById("contact-ok").style.display = "block";
+      } else { alert(res.error || "Something went wrong"); }
+    });
+  });
+</script>
+{% endblock %}

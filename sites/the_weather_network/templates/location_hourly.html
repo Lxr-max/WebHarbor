@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{{ loc.name }}, {{ loc.prov_code }} Hourly Weather - The Weather Network{% endblock %}
+{% from '_fx_header.html' import fx_header %}
+{% block content %}
+{% call fx_header(loc, obs, tab, updated) %}
+  <h2 style="font-size:16px;font-weight:600">Temperature Chart</h2>
+  <div style="display:flex;gap:6px;overflow-x:auto;padding:8px 0">
+    {% set max_t = hourly|map(attribute='temp')|select|map('float')|max %}
+    {% set min_t = hourly|map(attribute='temp')|select|map('float')|min %}
+    {% for h in hourly %}
+    <div style="min-width:64px;text-align:center">
+      <div class="hc-temp" style="font-size:18px;font-weight:600;color:#fff">{{ h.temp|temp(unit) }}</div>
+      <div style="height:120px;display:flex;align-items:flex-end;justify-content:center">
+        <div style="width:10px;background:#ffea53;border-radius:4px;height:{{ ((h.temp - min_t) / (max_t - min_t if max_t != min_t else 1) * 100)|round|int }}%"></div>
+      </div>
+      <div class="hc-time">{{ h.hour_label }}</div>
+      <div class="hc-feels">Feels {{ h.feels|temp(unit) }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% set ns = namespace(last_day='') %}
+  {% for h in hourly %}
+    {% if h.day_label != ns.last_day %}
+      {% set ns.last_day = h.day_label %}
+      <h3 style="font-size:15px;font-weight:600;margin:18px 0 4px;color:#fff">{{ h.day_label }}</h3>
+    {% endif %}
+    <div class="period-row">
+      <div class="pr-label">{{ h.hour_label }}</div>
+      <div class="pr-main">
+        <img src="{{ h.icon|wxicon }}" alt="{{ h.text }}">
+        <span class="pr-temp">{{ h.temp|temp(unit) }}</span>
+        <span class="small" style="opacity:.85">{{ h.text }} · Feels {{ h.feels|temp(unit) }}</span>
+      </div>
+      <div class="pr-meta">
+        Wind {{ h.wind_speed|speed(unit) }} {{ h.wind_dir }} · Gust {{ h.wind_gust|speed(unit) }}<br>
+        Humidity {{ h.rh }}% · P.O.P. {{ h.pop }}%
+      </div>
+    </div>
+  {% endfor %}
+{% endcall %}
+{% endblock %}

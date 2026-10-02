@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}{{ guide.title }} — Wanderlog guide{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="guide-hero">
+    {% if guide.header_image %}<img src="{{ guide.header_image }}" alt="{{ guide.title }}">{% endif %}
+    <div class="overlay">
+      <h1>{{ guide.title }}</h1>
+      <p>
+        <span class="stat">{{ '{:,}'.format(guide.view_count) }} views</span> ·
+        <span class="stat">{{ '{:,}'.format(guide.like_count) }} likes</span> ·
+        <span class="stat">{{ guide.place_count }} places</span>
+        {% if guide.distinction %}<span class="badge {{ guide.distinction }}">{{ guide.distinction|capitalize }}</span>{% endif %}
+      </p>
+    </div>
+  </div>
+
+  <div class="trip-grid">
+    <div>
+      {% for s in sections %}
+        <div class="day-card">
+          <h2>{{ s.heading or 'Notes' }}</h2>
+          {% if s.notes %}<p class="muted">{{ s.notes }}</p>{% endif %}
+          {% for b in blocks_by_section[s.id] %}
+            <div class="block">
+              {% if b.place_id %}
+                {% set place = b.place %}
+                {% if place.image %}<img class="cover" src="{{ place.image }}" alt="{{ place.name }}">{% else %}<div></div>{% endif %}
+                <div>
+                  <h3>
+                    {% if place.wl_id %}
+                      <a href="{{ url_for('place_details', pid=place.wl_id) }}">{{ place.name }}</a>
+                    {% else %}
+                      {{ place.name }}
+                    {% endif %}
+                  </h3>
+                  <div class="place-facts">
+                    {% if place.address %}<span>📍 {{ place.address }}</span>{% endif %}
+                    {% if place.rating %}<span>★ {{ place.rating }}</span>{% endif %}
+                    {% if place.price_level %}<span>{% for i in range(place.price_level) %}${% endfor %}</span>{% endif %}
+                    {% if place.phone %}<span>☎ {{ place.phone }}</span>{% endif %}
+                    {% if place.website %}<span>🌐 {{ place.website }}</span>{% endif %}
+                  </div>
+                  {% if place.weekday_text %}<div class="hours">{% for line in (place.weekday_text | from_json) %}{{ line }}
+{% endfor %}</div>{% endif %}
+                  {% if b.note %}<p class="small">{{ b.note }}</p>{% endif %}
+                </div>
+              {% else %}
+                <div></div>
+                <div><p class="small muted">{{ b.text_note }}</p></div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="author-row">
+          {% if author.avatar %}<img class="avatar-lg" src="{{ author.avatar }}" alt="{{ author.display_name }}">{% endif %}
+          <div>
+            <h3 style="margin:0"><a href="{{ url_for('user_profile', username=author.username) }}">{{ author.display_name }}</a>
+              {% if author.is_pro %}<span class="badge pro">Pro</span>{% endif %}</h3>
+            <span class="small muted">@{{ author.username }} ·
+              {{ author.visit_geos_count }} geos · {{ author.countries_count }} countries</span>
+          </div>
+        </div>
+        {% if guide.author_blurb %}<p class="small muted">{{ guide.author_blurb }}</p>{% endif %}
+        <p class="small muted">Edited {{ guide.edited_at[:10] }} · created {{ guide.created_at[:10] }}</p>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>Like this guide</h3>
+        <p class="small muted">{{ '{:,}'.format(guide.like_count) }} travelers liked this guide.</p>
+        {% if current_user.is_authenticated %}
+          <form method="post" action="{{ url_for('guide_like', key=guide.key) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn {{ 'btn-ghost' if liked else 'btn-primary' }}" type="submit">
+              {{ 'Remove my like' if liked else '❤ Like this guide' }}</button>
+          </form>
+        {% else %}
+          <p class="small"><a href="{{ url_for('login') }}">Log in</a> to like this guide.</p>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h3>Comments ({{ comments|length }})</h3>
+        {% for c in comments %}
+          <div style="border-top:1px dashed var(--line);padding:10px 0">
+            <div class="author-row">
+              {% set cu = comment_users[c.id] %}
+              {% if cu and cu.avatar %}<img class="avatar-sm" src="{{ cu.avatar }}" alt="">{% endif %}
+              <div>
+                <div class="stat">{% if cu %}<a href="{{ url_for('user_profile', username=cu.username) }}">{{ cu.display_name }}</a>{% else %}Traveler{% endif %}</div>
+                <div class="small muted">{{ c.created_at[:10] }}</div>
+              </div>
+            </div>
+            <p class="small" style="margin:4px 0 0">{{ c.body }}</p>
+          </div>
+        {% else %}
+          <p class="small muted">No comments yet.</p>
+        {% endfor %}
+        {% if current_user.is_authenticated %}
+          <form method="post" action="{{ url_for('guide_comment', key=guide.key) }}" style="margin-top:10px">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label for="body">Add a comment</label>
+            <textarea id="body" name="body" rows="3" required></textarea>
+            <p><button class="btn btn-primary btn-sm" type="submit">Post comment</button></p>
+          </form>
+        {% else %}
+          <p class="small"><a href="{{ url_for('login') }}">Log in</a> to join the conversation.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

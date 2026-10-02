@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Why should I use TourRadar? - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; Why should I use TourRadar?</div>
+  <h1>Why should I use TourRadar?</h1>
+  {% for h, b in [["Trusted and vetted operators", "Every operator on TourRadar is vetted before listing. Shop 2,500 operators with verified reviews from real travelers."], ["Best price guarantee", "Find the same adventure cheaper elsewhere and we'll refund the difference."], ["Your money is protected", "TourRadar is an authorized agent of every operator we work with, and we handle payments securely."], ["24/7 customer support", "Our adventure specialists answer questions before, during and after your booking."], ["TourRadar+ member savings", "Unlock savings up to 7% across all adventures as you travel more."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

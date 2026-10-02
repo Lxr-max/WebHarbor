@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="/travel/international-visitors">For International Visitors</a> › Electronic System for Travel Authorization</div>
+<h1 class="page-title">{{ page.title }}</h1>
+<div class="two-col">
+  <div>
+    <div class="content-lines">
+      {% for line in page.lines %}<p>{{ line }}</p>{% endfor %}
+    </div>
+    <div class="callout">
+      <strong>Important Notice</strong>
+      <p>You must have an e-Passport to use the VWP. An e-Passport is an enhanced secure passport with an embedded electronic chip. You can readily identify an e-Passport, because it has a unique international symbol on the cover.</p>
+    </div>
+    <h2>Apply for an ESTA</h2>
+    <p>The ESTA application collects biographic information and answers to VWP eligibility questions. Applications may be submitted at any time prior to travel. The fee for the application is <strong>${{ '%.2f'|format(fee) }} USD</strong>.</p>
+    <p>
+      <a class="btn" href="{{ url_for('esta_apply') }}">Create New Application</a>
+      <a class="btn btn-secondary" href="{{ url_for('esta_check') }}">Check ESTA Status</a>
+    </p>
+  </div>
+  <aside class="sidebar">
+    <h3>Visa Waiver Program Countries ({{ countries|length }})</h3>
+    <ul>
+      {% for c in countries %}<li>{{ c.name }}</li>{% endfor %}
+    </ul>
+    <h3>How do I apply?</h3>
+    <ul>
+      <li>Answer Disclaimers</li>
+      <li>Enter Applicant Information</li>
+      <li>Enter Personal Information</li>
+      <li>Enter Travel Information</li>
+      <li>Answer Eligibility Questions</li>
+      <li>Review Application</li>
+      <li>Pay</li>
+    </ul>
+  </aside>
+</div>
+{% endblock %}

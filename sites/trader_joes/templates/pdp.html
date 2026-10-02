@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.item_title }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    {% for c in crumbs %}
+    {% if c.level >= 1 %}<a href="{{ category_link(c) }}">{{ c.name }}</a> &rsaquo; {% endif %}
+    {% endfor %}
+    {{ product.item_title }}
+  </div>
+</div>
+
+<div class="pdp-layout">
+  <div class="pdp-gallery">
+    {% if dam_url(product.primary_image) %}
+    <img src="{{ dam_url(product.primary_image) }}" alt="{{ product.item_title }}">
+    {% endif %}
+    {% if product.other_images_list() %}
+    <div class="grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 10px;">
+      {% for oi in product.other_images_list() %}
+        {% if dam_url(oi) %}<img style="border:1px solid #e4dccc; border-radius:6px;" src="{{ dam_url(oi) }}" alt="{{ product.item_title }} view {{ loop.index }}">{% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div>
+    <h1 class="pdp-title">{{ product.item_title }}</h1>
+    <div class="pdp-price">
+      {% if product.availability != '1' %}
+      <span class="na">Not available</span>
+      {% else %}
+      ${{ '%.2f' | format(product.retail_price) if product.retail_price is not none else '' }}
+      <span class="pdp-size">/ {{ product.sales_size }} {{ product.sales_uom_description }}</span>
+      {% endif %}
+    </div>
+    {% if product.product_label %}
+    <div class="pdp-badges"><span class="chip">{{ product.product_label }}</span></div>
+    {% endif %}
+    {% if product.chars() %}
+    <div class="pdp-badges">
+      {% for c in product.chars() %}<span class="chip">{{ c }}</span>{% endfor %}
+    </div>
+    {% endif %}
+    {% if product.country_of_origin %}
+    <p class="rich"><b>Country of Origin:</b> {{ product.country_of_origin }}</p>
+    {% endif %}
+    <form method="post" action="{{ url_for('shopping_list_add', sku=product.sku) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="{{ product_link(product) }}">
+      <button class="btn" type="submit">ADD TO LIST</button>
+    </form>
+
+    {% if product.item_description %}
+    <section class="pdp-section">
+      <div class="rich">{{ product.item_description | rich | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if product.item_story_marketing %}
+    <section class="pdp-section">
+      <h2>Trader Joe's Loves...</h2>
+      <div class="rich">{{ product.item_story_marketing | rich | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if product.use_and_demo %}
+    <section class="pdp-section">
+      <h2>Use &amp; Demo</h2>
+      <div class="rich">{{ product.use_and_demo | rich | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if product.ingredient_list() %}
+    <section class="pdp-section">
+      <h2>Ingredients</h2>
+      <p class="rich">{{ product.ingredient_list() | join(', ') }}</p>
+    </section>
+    {% endif %}
+
+    {% if product.allergen_list() %}
+    <section class="pdp-section">
+      <h2>Allergens</h2>
+      <p class="rich"><b>Contains:</b> {{ product.allergen_list() | join(', ') }}</p>
+    </section>
+    {% endif %}
+
+    {% if product.nutrition_panels() %}
+    <section class="pdp-section">
+      <h2>Nutrition</h2>
+      {% for panel in product.nutrition_panels() %}
+      <h3 style="font-size:17px;">{{ panel.get('panel_title') or 'Nutrition Facts' }}</h3>
+      <table class="nutrition-table">
+        <tr><th>Serving Size</th><td>{{ panel.get('serving_size') or '' }}</td></tr>
+        <tr><th>Calories per serving</th><td>{{ panel.get('calories_per_serving') or '' }}</td></tr>
+        <tr><th>Servings per container</th><td>{{ panel.get('servings_per_container') or '' }}</td></tr>
+        {% for d in panel.get('details') or [] %}
+        <tr><th>{{ d.get('nutritional_item') }}</th><td>{{ d.get('amount') }}{% if d.get('percent_dv') %} ({{ '%g'|format(d.get('percent_dv')|float * 100) }}% DV){% endif %}</td></tr>
+        {% endfor %}
+      </table>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

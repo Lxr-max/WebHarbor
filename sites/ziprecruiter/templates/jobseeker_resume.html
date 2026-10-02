@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}My Resume | ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>My Resume</h1>
+  <nav class="account-nav">
+    <a href="/jobseeker/profile">Profile</a>
+    <a href="/jobseeker/resume" class="active">Resume</a>
+    <a href="/jobseeker/saved-jobs">Saved Jobs</a>
+    <a href="/jobseeker/applications">Applications</a>
+    <a href="/jobseeker/alerts">Job Alerts</a>
+  </nav>
+</section>
+{% if res %}
+<section class="resume-preview">
+  <h2>{{ res.title or 'My Resume' }} <span class="muted">· updated {{ res.updated_at[:10] }} ·
+    {{ ['empty','started','partial','nearly complete','complete'][res.completeness()] }}</span></h2>
+  {% if res.summary %}<h3>Summary</h3><p>{{ res.summary }}</p>{% endif %}
+  {% if res.exp_rows() %}
+  <h3>Experience</h3>
+  <ul class="resume-list">
+    {% for role, employer, start, end, text in res.exp_rows() %}
+    <li><strong>{{ role }}</strong> — {{ employer }} <span class="muted">{{ start }} – {{ end }}</span>
+      {% if text %}<p>{{ text }}</p>{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if res.edu_rows() %}
+  <h3>Education</h3>
+  <ul class="resume-list">
+    {% for degree, school, year in res.edu_rows() %}
+    <li><strong>{{ degree }}</strong> — {{ school }} <span class="muted">{{ year }}</span></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if res.skill_rows() %}
+  <h3>Skills</h3>
+  <p>{% for skill, yrs in res.skill_rows() %}<span class="badge">{{ skill }}{% if yrs %} ({{ yrs }}y){% endif %}</span> {% endfor %}</p>
+  {% endif %}
+</section>
+{% endif %}
+<section class="account-layout">
+  <form method="post" action="/jobseeker/resume" class="account-form wide">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h2>Resume details</h2>
+    <label for="rv-title">Resume title</label>
+    <input id="rv-title" type="text" name="title" value="{{ res.title if res else '' }}" placeholder="e.g. Registered Nurse — ICU">
+    <label for="rv-summary">Professional summary</label>
+    <textarea id="rv-summary" name="summary" rows="3">{{ res.summary if res else '' }}</textarea>
+
+    <h3>Experience (up to 3)</h3>
+    {% for i in range(1, 4) %}
+    <fieldset>
+      <legend>Position {{ i }}</legend>
+      <input type="text" name="exp_role_{{ i }}" placeholder="Job title"
+             value="{{ res.exp_rows()[i-1][0] if res and res.exp_rows()|length >= i else '' }}">
+      <input type="text" name="exp_employer_{{ i }}" placeholder="Employer"
+             value="{{ res.exp_rows()[i-1][1] if res and res.exp_rows()|length >= i else '' }}">
+      <input type="text" name="exp_start_{{ i }}" placeholder="Start (e.g. 2021-06)"
+             value="{{ res.exp_rows()[i-1][2] if res and res.exp_rows()|length >= i else '' }}">
+      <input type="text" name="exp_end_{{ i }}" placeholder="End (e.g. Present)"
+             value="{{ res.exp_rows()[i-1][3] if res and res.exp_rows()|length >= i else '' }}">
+      <textarea name="exp_text_{{ i }}" rows="2" placeholder="What you did there"
+             >{{ res.exp_rows()[i-1][4] if res and res.exp_rows()|length >= i else '' }}</textarea>
+    </fieldset>
+    {% endfor %}
+
+    <h3>Education (up to 2)</h3>
+    {% for i in range(1, 3) %}
+    <fieldset>
+      <legend>Degree {{ i }}</legend>
+      <input type="text" name="edu_degree_{{ i }}" placeholder="Degree"
+             value="{{ res.edu_rows()[i-1][0] if res and res.edu_rows()|length >= i else '' }}">
+      <input type="text" name="edu_school_{{ i }}" placeholder="School"
+             value="{{ res.edu_rows()[i-1][1] if res and res.edu_rows()|length >= i else '' }}">
+      <input type="text" name="edu_year_{{ i }}" placeholder="Year"
+             value="{{ res.edu_rows()[i-1][2] if res and res.edu_rows()|length >= i else '' }}">
+    </fieldset>
+    {% endfor %}
+
+    <h3>Skills (up to 12)</h3>
+    <div class="skills-grid">
+      {% for i in range(1, 13) %}
+      <span>
+        <input type="text" name="skill_{{ i }}" placeholder="Skill"
+               value="{{ res.skill_rows()[i-1][0] if res and res.skill_rows()|length >= i else '' }}">
+        <input type="text" name="skill_yrs_{{ i }}" placeholder="yrs"
+               value="{{ res.skill_rows()[i-1][1] if res and res.skill_rows()|length >= i else '' }}" size="3">
+      </span>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn-green">Save Resume</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo;
+  <a href="{{ url_for('news_hub') }}">News</a> &rsaquo; {{ item.title }}</div>
+
+<div class="game-area">
+  <div class="feed" style="color:#8f98a0;font-size:11px;text-transform:uppercase;letter-spacing:.04em;">
+    {{ item.feedlabel }} &middot; {{ item.feedname }}{% if item.author %} &middot; {{ item.author }}{% endif %}
+  </div>
+  <h1>{{ item.title }}</h1>
+  <div style="color:#8f98a0;font-size:12px;margin-bottom:12px;">
+    Posted {{ item.date|datefmt }}
+    {% if game %} about <a href="{{ game.url }}">{{ game.name }}</a>{% endif %}
+  </div>
+  <div class="news-body">{{ item.contents|news_format }}</div>
+  {% if item.url %}
+    <p style="margin-top:14px;"><a href="{{ url_for('news_game', appid=game.appid) if game else url_for('news_hub') }}">All news for this game &raquo;</a></p>
+  {% endif %}
+</div>
+
+{% endblock %}

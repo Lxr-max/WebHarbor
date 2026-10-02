@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Customer Service{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Customer Service</span></li>
+{% endblock %}
+{% block content %}
+<section class="container support-page">
+  <h1 class="page-heading">Customer Service</h1>
+  <p>Don't forget, our factory-trained sales experts can provide great advice and recommendations to help you find the perfect appliances for your home.</p>
+  <div class="hub-grid">
+    {% for section in hub %}
+    <div class="hub-section">
+      <h2>{{ section.section }}</h2>
+      <ul class="hub-list">
+        {% for item in section["items"] %}
+        <li><a href="{{ item.href }}">{% if item.href.startswith('/') %}{{ item.text }}{% else %}{{ item.text }}{% endif %}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

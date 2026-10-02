@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight" style="max-width:520px">
+  <div class="panel">
+    <h1 style="font-size:24px">Sign up</h1>
+    <p class="muted">Create an account to book and manage parking.</p>
+    {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+    <form method="post" action="{{ url_for('signup') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="datetime-row">
+        <div class="field">
+          <label for="first_name">First name</label>
+          <div class="control"><input id="first_name" name="first_name" value="{{ form.get('first_name','') }}" required style="padding-left:12px"></div>
+        </div>
+        <div class="field">
+          <label for="last_name">Last name</label>
+          <div class="control"><input id="last_name" name="last_name" value="{{ form.get('last_name','') }}" required style="padding-left:12px"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <div class="control"><input id="email" name="email" type="email" value="{{ form.get('email','') }}" required style="padding-left:12px"></div>
+      </div>
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <div class="control"><input id="phone" name="phone" type="tel" value="{{ form.get('phone','') }}" style="padding-left:12px"></div>
+      </div>
+      <div class="field">
+        <label for="password">Password (8+ characters)</label>
+        <div class="control"><input id="password" name="password" type="password" required minlength="8" style="padding-left:12px"></div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+    </form>
+    <p class="small muted" style="margin-top:14px">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+  </div>
+</div>
+{% endblock %}

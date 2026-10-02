@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ post.blog.name }} — Tumblr{% endblock %}
+{% block content %}
+<div class="permalink-layout">
+  <section class="permalink-main">
+    {% with post=post, liked=liked, reblogged=reblogged, following=following %}
+      {% include '_post_card.html' %}
+    {% endwith %}
+
+    <div class="notes-panel">
+      <div class="notes-head">
+        <h2 data-live-notes>{{ '{:,}'.format(post.live_note_count()) }} notes</h2>
+        <div class="notes-tabs">
+          <span class="notes-tab active">All</span>
+          <span class="notes-tab" data-live-likes>{{ '{:,}'.format(post.live_like_count()) }} likes</span>
+          <span class="notes-tab">{{ '{:,}'.format(post.live_reblog_count()) }} reblogs</span>
+        </div>
+      </div>
+      <ol class="notes-list">
+        {% for note in notes %}
+          <li class="note-row note-{{ note.type }}">
+            {% if note.avatar %}<img class="avatar a32 {{ note.avatar_shape }}" src="{{ note.avatar }}" alt="">{% else %}<span class="avatar a32 avatar-fallback">{{ note.blog_name[:1] }}</span>{% endif %}
+            <div class="note-body">
+              <span class="note-actor">
+                {% if note.blog_exists %}
+                  <a href="{{ url_for('blog_page', name=note.blog_name) }}">{{ note.blog_name }}</a>
+                {% else %}
+                  <span title="Blog not on this mirror">{{ note.blog_name }}</span>
+                {% endif %}
+              </span>
+              {% if note.type == 'like' %}<span class="note-type"> liked this</span>
+              {% elif note.type == 'reblog' %}<span class="note-type"> reblogged this{% if note.added_text %} and added:</span><span class="note-added">{{ note.added_text }}</span>{% else %}</span>{% endif %}
+              {% elif note.type == 'reply' %}<span class="note-type"> replied:</span><span class="note-added">{{ note.reply_text }}</span>
+              {% endif %}
+              <span class="note-when">{{ time_ago(note.timestamp) }}</span>
+            </div>
+          </li>
+        {% else %}
+          <li class="empty-state">No captured notes for this post on the mirror.</li>
+        {% endfor %}
+      </ol>
+      {% if more_notes %}
+        <a class="btn btn-ghost wide" href="{{ url_for('permalink', name=post.blog.name, post_id=post.id, notes=note_offset + 30) }}">Show more notes</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>Post details</h3>
+      <dl class="blog-facts">
+        <dt>Posted by</dt><dd><a href="{{ url_for('blog_page', name=post.blog.name) }}">{{ post.blog.name }}</a></dd>
+        <dt>Posted</dt><dd>{{ post.date_str or time_ago(post.timestamp) }}</dd>
+        <dt>Type</dt><dd>{{ post.type }}</dd>
+        <dt>Notes</dt><dd data-live-notes>{{ '{:,}'.format(post.live_note_count()) }}</dd>
+        <dt>Likes</dt><dd data-live-likes>{{ '{:,}'.format(post.live_like_count()) }}</dd>
+        <dt>Reblogs</dt><dd>{{ '{:,}'.format(post.live_reblog_count()) }}</dd>
+      </dl>
+    </div>
+    {% if user %}
+    <div class="side-card">
+      <h3>Share this post</h3>
+      <a class="btn btn-primary wide" href="{{ url_for('reblog', post_id=post.id) }}">Reblog to {{ user.username }}</a>
+    </div>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

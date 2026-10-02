@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}{{ coin.name }} price, {{ coin.symbol }} chart, and market cap | CoinMarketCap{% endblock %}
+{% block body %}
+<div class="coin-head">
+  {% if coin_logo_large(coin) %}<img src="{{ coin_logo_large(coin) }}" alt="{{ coin.name }} logo">{% endif %}
+  <div class="names">
+    <h1>{{ coin.name }} <span class="sym">{{ coin.symbol }}</span></h1>
+  </div>
+  <span class="rank-badge">Rank #{{ coin.rank }}</span>
+  <form method="post" action="/watchlist/toggle/{{ coin.slug }}" class="inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ request.full_path }}">
+    <button type="submit" class="star-btn {{ 'on' if coin.id in watched else '' }}"
+            aria-label="Toggle {{ coin.name }} in watchlist">{{ '★' if coin.id in watched else '☆' }}</button>
+  </form>
+  <span class="muted">{{ '{:,}'.format(coin.watch_count) if coin.watch_count else 0 }} watching
+    {% if coin.watch_ranking %}· #{{ coin.watch_ranking }} on Watchlist{% endif %}</span>
+</div>
+
+<div class="price-line">
+  <span class="big">{{ coin.price | price }}</span>
+  <span class="{{ coin.pct_24h | pct_class }}">{{ coin.pct_24h | pct }} <small>(24h)</small></span>
+</div>
+<div class="changes">
+  <span>1h <b class="{{ coin.pct_1h | pct_class }}">{{ coin.pct_1h | pct }}</b></span>
+  <span>24h <b class="{{ coin.pct_24h | pct_class }}">{{ coin.pct_24h | pct }}</b></span>
+  <span>7d <b class="{{ coin.pct_7d | pct_class }}">{{ coin.pct_7d | pct }}</b></span>
+  <span>30d <b class="{{ coin.pct_30d | pct_class }}">{{ coin.pct_30d | pct }}</b></span>
+  <span>60d <b class="{{ coin.pct_60d | pct_class }}">{{ coin.pct_60d | pct }}</b></span>
+  <span>90d <b class="{{ coin.pct_90d | pct_class }}">{{ coin.pct_90d | pct }}</b></span>
+  <span>1y <b class="{{ coin.pct_1y | pct_class }}">{{ coin.pct_1y | pct }}</b></span>
+  <span>YTD <b class="{{ coin.pct_ytd | pct_class }}">{{ coin.pct_ytd | pct }}</b></span>
+</div>
+
+<div class="chart-box">
+  <div class="range-tabs">
+    {% for r in available_ranges %}
+      <a class="{{ 'active' if r == chart_range else '' }}"
+         href="/currencies/{{ coin.slug }}/?range={{ r }}">{{ r }}</a>
+    {% endfor %}
+  </div>
+  {% if chart %}{{ chart }}{% else %}<p class="muted">No chart data captured for this range.</p>{% endif %}
+</div>
+
+<div class="grid">
+  <div class="metric"><div class="label">Market Cap</div>
+    <div class="value">{{ coin.market_cap | usd }}</div>
+    {% if coin.dominance %}<div class="sub">Dominance: {{ '%.2f' % coin.dominance }}%</div>{% endif %}</div>
+  <div class="metric"><div class="label">Fully Diluted Market Cap</div>
+    <div class="value">{{ coin.fdv | usd }}</div></div>
+  <div class="metric"><div class="label">Volume 24h</div>
+    <div class="value">{{ coin.volume_24h | usd }}</div>
+    <div class="sub">Reported: {{ coin.volume_reported_24h | usd }}</div></div>
+  <div class="metric"><div class="label">Volume/Mkt Cap (24h)</div>
+    <div class="value">{{ '%.4f' % coin.turnover if coin.turnover else '--' }}</div></div>
+  <div class="metric"><div class="label">Circulating Supply</div>
+    <div class="value">{{ coin.circulating_supply | supply(coin.symbol) }}</div>
+    <div class="sub">Source: {{ coin.supply_source_map().get('circulatingSupply') or '--' }}</div></div>
+  <div class="metric"><div class="label">Total Supply</div>
+    <div class="value">{{ coin.total_supply | supply(coin.symbol) }}</div></div>
+  <div class="metric"><div class="label">Max Supply</div>
+    <div class="value">{{ coin.max_supply | supply(coin.symbol) if coin.max_supply else '-- (not submitted)' }}</div></div>
+  <div class="metric"><div class="label">All-Time High</div>
+    <div class="value">{{ coin.ath | price }}</div>
+    <div class="sub">{{ coin.ath_pct | pct }} · {{ coin.ath_ts | date }}</div></div>
+  <div class="metric"><div class="label">All-Time Low</div>
+    <div class="value">{{ coin.atl | price }}</div>
+    <div class="sub">{{ coin.atl_pct | pct }} · {{ coin.atl_ts | date }}</div></div>
+  <div class="metric"><div class="label">24h Range</div>
+    <div class="value">{{ coin.low_24h | price }} – {{ coin.high_24h | price }}</div></div>
+  <div class="metric"><div class="label">52-Week Range</div>
+    <div class="value">{{ coin.low_52w | price }} – {{ coin.high_52w | price }}</div></div>
+</div>
+
+<div class="section-head">
+  <h2>{{ coin.name }} Markets</h2>
+  <a href="/currencies/{{ coin.slug }}/markets/">View all markets →</a>
+</div>
+<table>
+  <thead><tr><th>#</th><th>Exchange</th><th>Pair</th><th class="num">Price</th>
+    <th class="num">Volume (24h)</th><th class="num">Volume %</th><th class="num">Market Score</th></tr></thead>
+  <tbody>
+    {% for p in pairs %}
+    <tr>
+      <td>{{ p.rank }}</td>
+      <td>{% if p.exchange_slug in existing_exchange_slugs %}
+        <a href="/exchanges/{{ p.exchange_slug }}/">{{ p.exchange_name }}</a>
+      {% else %}{{ p.exchange_name }}{% endif %}</td>
+      <td>{{ p.pair }}</td>
+      <td class="num">{{ p.price | price }}</td>
+      <td class="num">{{ p.volume_usd | usd }}</td>
+      <td class="num">{{ '%.2f' % p.volume_pct if p.volume_pct is not none else '--' }}%</td>
+      <td class="num">{{ p.market_score or '--' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="section-head">
+  <h2>Historical Data</h2>
+  <a href="/currencies/{{ coin.slug }}/historical-data/">View historical data →</a>
+</div>
+<p class="muted">Daily OHLCV for {{ coin.name }} — open, high, low, close, volume and market cap.</p>
+
+{% if coin.description %}
+<h2>What Is {{ coin.name }} ({{ coin.symbol }})?</h2>
+<div class="prose">
+  {{ coin.description | rich_text }}
+</div>
+{% endif %}
+
+{% set holders = coin.holders_map() %}
+{% if holders and holders.get('holderCount') %}
+<h2>{{ coin.name }} Holders</h2>
+<p class="muted">{{ '{:,}'.format(holders.holderCount) }} addresses hold {{ coin.symbol }}
+  {% if holders.get('dailyActive') %}· {{ '{:,}'.format(holders.dailyActive) }} daily active{% endif %}</p>
+{% endif %}
+
+{% set platforms = coin.platforms_list() %}
+{% if platforms %}
+<h2>Token Contracts</h2>
+{% for p in platforms %}
+  <p><b>{{ p.get('contractPlatform') }}</b>:
+     <span class="contract">{{ p.get('contractAddress') }}</span></p>
+{% endfor %}
+{% endif %}
+
+<h2>{{ coin.name }} Tags</h2>
+<div>
+  {% for t in coin.tags_list() %}
+    {% if t.slug in sector_slugs %}
+      <a class="tag-chip" href="/view/{{ t.slug }}/">{{ t.name }}</a>
+    {% else %}
+      <span class="tag-chip">{{ t.name }}</span>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if similar %}
+<h2>Similar Coins</h2>
+<table>
+  <thead><tr><th>Name</th><th class="num">Price</th><th class="num">24h %</th><th class="num">7d %</th></tr></thead>
+  <tbody>
+    {% for c in similar %}
+    <tr>
+      <td><a class="coin-cell" href="/currencies/{{ c.slug }}/">
+        {% if coin_logo(c) %}<img src="{{ coin_logo(c) }}" alt="">{% endif %}
+        <span class="coin-name">{{ c.name }}</span> <span class="coin-symbol">{{ c.symbol }}</span></a></td>
+      <td class="num">{{ c.price | price }}</td>
+      <td class="num {{ c.pct_24h | pct_class }}">{{ c.pct_24h | pct }}</td>
+      <td class="num {{ c.pct_7d | pct_class }}">{{ c.pct_7d | pct }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if related %}
+<h2>Related Coins</h2>
+<div>
+  {% for c in related %}
+    <a class="tag-chip" href="/currencies/{{ c.slug }}/">{{ c.name }} ({{ c.symbol }})</a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<h2>Links</h2>
+{% set urls = coin.urls_map() %}
+{% for key, values in urls.items() %}
+  {% if values %}
+  <p><b>{{ key.replace('_', ' ') | title }}:</b>
+    {% for v in values %}<a href="{{ v }}" rel="nofollow">{{ v }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  {% endif %}
+{% endfor %}
+{% endblock %}

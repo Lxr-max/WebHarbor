@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | Red Bull Shop{% endblock %}
+{% block content %}
+<h1 class="page-title">Checkout</h1>
+<p class="page-sub">Placing your order as {{ current_user.display_name }} ({{ current_user.email }}).</p>
+
+{% if errors %}
+<div class="form-errors">
+  {% for e in errors %}<p>{{ e }}</p>{% endfor %}
+</div>
+{% endif %}
+
+<div class="form-card" style="max-width:640px">
+  <h3 style="margin-top:0">Shipping details</h3>
+  <form method="post" action="{{ url_for('shop_checkout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="ship_name">Full name</label>
+    <input id="ship_name" name="ship_name" value="{{ form.get('ship_name', current_user.display_name) }}" required>
+    <label for="ship_email">Email</label>
+    <input id="ship_email" name="ship_email" type="email" value="{{ form.get('ship_email', current_user.email) }}" required>
+    <label for="address">Street address</label>
+    <input id="address" name="address" value="{{ form.get('address','') }}" required>
+    <label for="city">City</label>
+    <input id="city" name="city" value="{{ form.get('city','') }}" required>
+    <label for="zip">ZIP code</label>
+    <input id="zip" name="zip" value="{{ form.get('zip','') }}" required>
+    <p style="margin-top:16px"><button type="submit" class="btn btn-red">Place order</button></p>
+  </form>
+</div>
+
+<table class="cart-table" style="margin-top:22px">
+  <tr><th>Product</th><th>Option</th><th>Price</th><th>Qty</th></tr>
+  {% for i in items %}
+  <tr>
+    <td>{{ i.variant.product.title }}</td>
+    <td>{{ i.variant.title }}</td>
+    <td>${{ '%.2f' | format(i.variant.price) }}</td>
+    <td>{{ i.quantity }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="cart-summary">
+  <div class="row total"><span>Total</span><span>${{ '%.2f' | format(subtotal) }}</span></div>
+</div>
+{% endblock %}

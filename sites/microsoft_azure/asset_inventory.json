@@ -1,0 +1,3121 @@
+{
+ "schema_version": 1,
+ "site": "microsoft_azure",
+ "asset_count": 519,
+ "assets": [
+  {
+   "path": "static/images/blog/azure-databricks-delivers-proven-business-value.jpg",
+   "bytes": 1159596,
+   "sha256": "01a73be8f86280650e5e8e6cbe2770ddac64419654c9e2797c4171d238de965a",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/07/Azure-Databricks-Forrester-2.jpg"
+  },
+  {
+   "path": "static/images/blog/beyond-the-benchmark-how-an-adaptive-approach-drives-scientific-discovery.jpg",
+   "bytes": 369203,
+   "sha256": "290f06219fa4608f52e5691c9b139e66e1c992abf458b2fda5bc56ceac75842d",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/GettyImages-1491306471-rgb-scaled.jpg"
+  },
+  {
+   "path": "static/images/blog/built-to-bounce-back-how-azure-resiliency-evolved.jpg",
+   "bytes": 1163453,
+   "sha256": "bcb9abbdf4eac31123ffe69581e76dbba657f0aaec0752f0713960d828fa4cea",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/07/Future-Resilience-Trust.jpg"
+  },
+  {
+   "path": "static/images/blog/designing-agent-first-platforms-what-changes-when-agents-do-the-work.webp",
+   "bytes": 51880,
+   "sha256": "ff11853204985f780e1520e7f2db175431a6b75a1054044f9edbddb65009d2f4",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/AI-Sandboxes-Banner-9.21.26.webp"
+  },
+  {
+   "path": "static/images/blog/enhancing-microsoft-azure-virtual-machine-lifecycle.jpg",
+   "bytes": 1421544,
+   "sha256": "4a2edf9fee13dad53886745b635713f21abdfad6470b1e7cfe93e906e1323c16",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Azure-VM-Lifecycle-1b.jpg"
+  },
+  {
+   "path": "static/images/blog/enterprise-ai-transformation-relies-on-the-end-to-end-platform-azure-was-built-for-this-moment.webp",
+   "bytes": 239468,
+   "sha256": "109496d04f2de35423aeb153d9a6a99729771f1888f59568672225406c304455",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/MQ_SCPS_Forrester_Blog_Thumbnail_Hero1.webp"
+  },
+  {
+   "path": "static/images/blog/fabcon-and-sqlcon-2026-in-barcelona-building-the-data-foundation-for-microsoft-copilot-and-agents.jpg",
+   "bytes": 2163699,
+   "sha256": "ced74d1e17e416139c536ad9dbf00f044b5f95598d27577a59cc26edb9a4a284",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Azure_SQLCon-3-Azure.jpg"
+  },
+  {
+   "path": "static/images/blog/from-commit-to-cloud-powering-whats-next-for-postgresql.jpg",
+   "bytes": 578070,
+   "sha256": "d137bc6ff6bb59fe72a030da02f45567a48dd0fdd11d29ee1afacce95a426d3e",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/05/Azure-PostgreSQL-community-1.jpg"
+  },
+  {
+   "path": "static/images/blog/gpt-6-astra-frontier-intelligence-for-work-now-generally-available-in-microsoft-foundry.webp",
+   "bytes": 48972,
+   "sha256": "408a616120c5c98eab6234178fda35ed4dc5e2122c836a5c7b5f10b787f7aea6",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/nowga_allcustomers.webp"
+  },
+  {
+   "path": "static/images/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry.gif",
+   "bytes": 175134,
+   "sha256": "88eb2fc715a8d352859a0403bc94c442c6296ac3bc40dd42e4038e8eb891176c",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/MSFT-Foudry-9-22_10.gif"
+  },
+  {
+   "path": "static/images/blog/inside-microsofts-marketing-team-scaling-expertise-with-ai.jpg",
+   "bytes": 862853,
+   "sha256": "9c34068b6b63734a2786eaf0019ec5d4158b09f0ce39d2c6e55353c4b99ac57c",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/08/Azure-Foundry-AI-at-Scale-3.jpg"
+  },
+  {
+   "path": "static/images/blog/managed-postgresql-vs-self-hosted-postgresql-key-benefits-and-trade-offs.jpg",
+   "bytes": 1306704,
+   "sha256": "345d6e26e464a488edd8e840e957754a9f90b932572bacd35a207fd8673cfd5b",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/08/FY26AE-Azure-Composite-Mint-003-H.jpg"
+  },
+  {
+   "path": "static/images/blog/microsoft-named-a-leader-in-the-2026-gartner-magic-quadrant-for-container-management.webp",
+   "bytes": 169144,
+   "sha256": "0c3741ea1227408106c4a920c60037e65ea9338e76a6bdf70b270698c34fbca0",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/MQ-Container-Management-Blog-Thumbnail-Hero2.webp"
+  },
+  {
+   "path": "static/images/blog/microsoft-recognized-as-a-leader-in-the-2026-gartner-magic-quadrant-for-distributed-hybrid-infrastructure.jpg",
+   "bytes": 1108047,
+   "sha256": "b1ba97a3fe3d129377436f2cbcd29623287941d68ee6c2d2d9a47b7fe4b09635",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Microsoft-Gartner-Hybrid-Infrastructure-1.jpg"
+  },
+  {
+   "path": "static/images/blog/ship-agents-faster-with-expanded-model-choice-voice-agents-and-continuous-optimization.jpg",
+   "bytes": 427519,
+   "sha256": "bcb16a5d24a42b56b6698fd95934e1c71f2a9a96a3c5a15638317a0bbcc9d87f",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Foundry-Optimization-3-1.jpg"
+  },
+  {
+   "path": "static/images/blog/the-economics-of-agent-optimization-context-engineering-for-enterprise-ai-agents.jpg",
+   "bytes": 1410347,
+   "sha256": "04f8117321a152116dcf623f887298afa38a5a61f2593df78203349bfcf982dd",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Foundry-Economics-Series_3.jpg"
+  },
+  {
+   "path": "static/images/blog/the-economics-of-agent-optimization-how-ai-agent-governance-controls-cost-and-proves-roi.jpg",
+   "bytes": 1298035,
+   "sha256": "0e37384f677a6b52e0ab4fc3cdb0f7dfe883c2b34b1218d0b75491ba123209a7",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Foundry-Economics-Series_4.jpg"
+  },
+  {
+   "path": "static/images/blog/the-future-of-infrastructure-resiliency-starts-with-modernization.jpg",
+   "bytes": 1052063,
+   "sha256": "95a97f773cbafdf168c299cce91074c89c575ff88aa8e4e3a85a5970cf29aac9",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Future-of-Azure-IaaS-1.jpg"
+  },
+  {
+   "path": "static/images/blog/the-patch-window-is-collapsing-why-security-needs-a-new-control-plane.jpg",
+   "bytes": 365519,
+   "sha256": "393912f74f020bf117852815290124f8140bea0f6f781143fb50813d02a7696f",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/08/image-1.jpg"
+  },
+  {
+   "path": "static/images/blog/two-zones-or-three-a-design-framework-for-zone-resilient-azure-workloads.jpg",
+   "bytes": 883638,
+   "sha256": "9da529150e1a665498f852e69d38effc7b64b417df13a5268d8ad6666ad75e06",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/FY26AE-Azure-Composite-EnergyBlue-010-H.jpg"
+  },
+  {
+   "path": "static/images/blog/your-architecture-diagram-is-not-your-resilience.jpg",
+   "bytes": 744046,
+   "sha256": "ee72216702d08ed8c1415e3a621f122821bd315836a065f427bceae33c922501",
+   "source_url": "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2026/09/Designing-for-Resilience-6.jpg"
+  },
+  {
+   "path": "static/images/dict/artificial-intelligence-vs-machine-learning.webp",
+   "bytes": 4482,
+   "sha256": "f23c9a898cfe602c4a02bb207117ec3b69241529bb43773d65c1ca3fb83b896d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-fl-wav-ow?wid=800"
+  },
+  {
+   "path": "static/images/dict/benefits-of-cloud-migration.webp",
+   "bytes": 4046,
+   "sha256": "914865a83cc8f9aa22f15caf897cdeebb67368449b53b30761ad2e3f79459c59",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-green-wave-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/choosing-a-cloud-service-provider.webp",
+   "bytes": 6026,
+   "sha256": "5697af28bfc96ace46b7df629342787d9d53e7d0f6939ef0c442d9d01b3ee21d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-full-ellipse-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/cloud-computing-dictionary.webp",
+   "bytes": 4122,
+   "sha256": "58b348cff81ce54cdb91b82e09a69cf10cf0b6950eacd708e98dbf916c4a0a44",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1060840-hero-background-1600x384px?wid=800"
+  },
+  {
+   "path": "static/images/dict/kubernetes-vs-docker.webp",
+   "bytes": 6730,
+   "sha256": "85b40491cb582e1fc9b682eb98b926fdae0fce6beb2816132fc413bcc5203e02",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-full-wave-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/scaling-out-vs-scaling-up.webp",
+   "bytes": 41086,
+   "sha256": "5aec786002cac0c8c67c483df48dc9c8737ae5e658b0e109d0d2382bc7c9ab31",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/scaling-out-vs-scaling-up_overview-image?wid=800"
+  },
+  {
+   "path": "static/images/dict/types-of-cloud-computing.webp",
+   "bytes": 4410,
+   "sha256": "bbf5a9293d1c89f316a888dfd440dca83226e92410a50f6913f0442de58fcd5f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/128060-hero-background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-databases.webp",
+   "bytes": 5596,
+   "sha256": "f4e1e162f29dd5b172f0311457b4cce6ce643c81d83a2fe0a1a1bff954ee37a4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/162301-hero-background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-iaas-paas-and-saas.webp",
+   "bytes": 6556,
+   "sha256": "0309c899f9dc9196d5fd937e0f380a7dc29e34f9ee27c64a570e6981567f6211",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/158909-WhatAreIaaS-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-large-language-models-llms.webp",
+   "bytes": 6904,
+   "sha256": "a562cee73ff93bff715907af272f198d172fd640c08e3a8235826750a5ff3b0c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359392-mobile-hero-article-media-360x202?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-machine-learning-algorithms.webp",
+   "bytes": 3520,
+   "sha256": "004d35738a651cfd04c01288be0cc0a576184bb8dcf182312e055b16ba59a011",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-bl-elp-ow?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-multimodal-large-language-models.webp",
+   "bytes": 6976,
+   "sha256": "c7df54d4765208487f759d5edf4554717a41af8e8f462a7801ff1caebdb8c4f3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359417-mobile-heroarticle-media-360x202?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-private-public-hybrid-clouds.webp",
+   "bytes": 3272,
+   "sha256": "03785442199a45202edc1943575b3fef71fc93d3aef3bcac030c0951ca15d324",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/101200-What-Are-Public-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-are-small-language-models.webp",
+   "bytes": 4736,
+   "sha256": "9162033e54af85ba4934dcfb826c7b3a0f4eeb6d4faebc8b8c2bf99acb6ff199",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359440-Hero-BG-1600x580px?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-cloud-provider.webp",
+   "bytes": 6128,
+   "sha256": "b806013f5c6e6b1f7ce01cdfd3f13ccaf706b664b9edb3cccce99619113b0b42",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1067136-What-Is-Cloud-Provider-Background?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-cloud-server.webp",
+   "bytes": 6808,
+   "sha256": "64acbca27d85c98341f179e1156bee195e669a7df83b82b35ec1ee09f8e5acb9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1043871-background-hero-1040908?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-container.webp",
+   "bytes": 7388,
+   "sha256": "5e06f63d8d892e3f9f386a0580cf92f841610eb927204c98e8aac172bac84bbe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/81502-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-data-governance.webp",
+   "bytes": 6022,
+   "sha256": "fcdaf83f2cd6d5e501563ab9ea3f76acc7e132287d44ac8982b327fae3063476",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/what-is-data-governance?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-private-cloud.webp",
+   "bytes": 6102,
+   "sha256": "068675b4f58d17e793692a0724a0b1c1e6ba03a4ecc2d38afa7162e47d134e6e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1043184-hero-background-1600x616?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-public-cloud.webp",
+   "bytes": 4248,
+   "sha256": "f8fd72fe7d98bcbfb013a395cd4d7e05aed205cb39ee84e13526857d23e7ddb0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1026341-Hero-Background?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-qubit.webp",
+   "bytes": 3068,
+   "sha256": "22183ae95bb6cf4ec1685520fa6fc08d82ba9cebe451b12c955fb325997f4fb1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-green-cylinder-01-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-relational-database.webp",
+   "bytes": 6300,
+   "sha256": "9625bec5939539ac63e84763274a53753e499cda9d86923d0adc76fbf5a50b0a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1096475-Hero-BG?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-virtual-machine.webp",
+   "bytes": 3252,
+   "sha256": "acaa3c96891dd1ca8b221257e34ee6aa1616eda0751e18f0e5627e52de042392",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1042826-background-hero-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-a-vpn.webp",
+   "bytes": 9588,
+   "sha256": "35364008471b523ab41563ae650658b7f647525666341ef9dbf9c7b3ec0de518",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-vpn?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-aiaas.webp",
+   "bytes": 5182,
+   "sha256": "a26d3e41c3518815da489a743d0a2ec88cf38e255f7bd296d15ccf3fd9849af5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/321741-Hero-BG-2000x1333-Mobile?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-an-ai-model.webp",
+   "bytes": 3646,
+   "sha256": "368a02ab1609c5c6c9b4f858b7bfee450e24d909246087cbb3bb14fd53c2dbd2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/75395-Hero-Background?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-an-ai-platform.webp",
+   "bytes": 4166,
+   "sha256": "6c5c12232c2ca06a64f64b7a3a970a2c6e4c65f514fd93345e8456ad29714e2b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/96358-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-application-migration.webp",
+   "bytes": 3816,
+   "sha256": "46df83df60e7aaddbd0cb3f8c3d25bb8babe5b24d5fe2a94a9b9a38883381d66",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-bl-cyl-ow?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-artificial-intelligence.webp",
+   "bytes": 6132,
+   "sha256": "c781326bc4f64bff3d13145ecc2b936873d0baeb34e3136b349ba87fe5a48335",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-gn-cyl-ow-1?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-azure.webp",
+   "bytes": 48582,
+   "sha256": "68f7277e0fc48fd3fff2d6c31b02b5af79b267fd9cca1ead45fbdf1ca3e47a51",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/vn33r8vd-WhatIsAzure-hero-photo-752x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-caching.webp",
+   "bytes": 51682,
+   "sha256": "484e0860a040d5183b598ef55f5664156f7d304ebd0d97bab85b0e647731aa0c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1071186-Hero-Thumbnail-752x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-architecture.webp",
+   "bytes": 3506,
+   "sha256": "9dcbaa1050fa9c66cd2c49d833ec3d60701d250e6fac473d9e562613df4a74ef",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1059957-hero-background-1600x616?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-bursting.webp",
+   "bytes": 3888,
+   "sha256": "efad9c1cce586947dba4609f36f7ea5b2271bbf714ea7953873a35995eb6c43a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-magenta-cylinder-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-computing.webp",
+   "bytes": 39822,
+   "sha256": "b22412d768f45ef32b8b12891487b1f5ad1e35bc35e4a9dac7822c943645e315",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/qyx2qj74-380952-hero-photo-752x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-infrastructure.webp",
+   "bytes": 4566,
+   "sha256": "6345004ac31b585f6d52a364cb856f4e209b0493b2236ad24c5d84446cf59859",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-background-1037817?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-migration.webp",
+   "bytes": 4746,
+   "sha256": "7adb591ea76f2bc6fa587ecc13c8004b35027296159b1a2f023b2c1d91b3fa6c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/967565-desktop-hero-artical-hero-bg-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cloud-scalability.webp",
+   "bytes": 3524,
+   "sha256": "3ba7d9e19a931c5a854f5e1544828fc455e65bcb67853603eedc9ff92836cfbd",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/693750-background-hero-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-cognitive-ai.webp",
+   "bytes": 2896,
+   "sha256": "41ee1ecd6ef3a92c2bf3e35ff6681c34c450719d4cbf296b4bc4c46d10913046",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/background-hero-1026344?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-computer-network.webp",
+   "bytes": 2680,
+   "sha256": "f35994fa08f0b881d3f2430790ea5dae5ed444b900194592d18bee0cd58e89ea",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t4-bl-cyl-ow-1?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-computer-vision.webp",
+   "bytes": 4780,
+   "sha256": "6ade701a1871d0029c873d74e5727212afb12a2c0833ee03b680079b25987b4d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1033275-desktop-heroarticle-hero-bg-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-data-integration.webp",
+   "bytes": 6268,
+   "sha256": "80a5d398b99f86f69ca86a1179222e3351f517190af8c481dfeb2f3d3626b675",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-fl-elp-ow?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-data-migration.webp",
+   "bytes": 15742,
+   "sha256": "95b6c8ab35d66a65d280b45114e2cbee7002b039bf6ca48be5feb18838f08980",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/what-is-data-migration?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-database-sharding.webp",
+   "bytes": 4812,
+   "sha256": "dc447272a37e8a3c541bf70c1d179f1ad52a61a07d2d8767434718a20f01ae60",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t5-bl-wav-ow-02?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-deep-learning.webp",
+   "bytes": 5156,
+   "sha256": "2c9fefdbdd42e6d17394ca2e6058d3a124eef6e4c543e855f9c3b442bd57eb9f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1033226-heroarticle-hero-bg?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-disaster-recovery.webp",
+   "bytes": 4240,
+   "sha256": "5f813b1ecbd4cafa33fe0c6fff57dea3deab20504a44fc1109491692d4eb2e70",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t2-bl-wav-ow?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-edge-computing.webp",
+   "bytes": 4054,
+   "sha256": "63095602e060e256cebdc6dd713bd948368788d2ab0049d4b2a6fddc6bc72fe7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/74900-WhatIs-Edge-Computing-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-face-recognition.webp",
+   "bytes": 3640,
+   "sha256": "2b4bf4c65b4815b47d757c17367a767962ba65336ee9825af583dc856d484d8e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-blue-ellipse-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-gpt.webp",
+   "bytes": 6504,
+   "sha256": "5dad6305606f8a9c5b043bfe3e42d25c5a42c8f1a57938bc8f3c70fa5070f2ae",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359437-mobile-heroarticle-media-360x202?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-grid-computing.webp",
+   "bytes": 3936,
+   "sha256": "d47ba6b56d64260fddc7e805fabc3f0412595990dd7cdadf0cd31228c2d84625",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-full-ellipse-01-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-hybrid-cloud-computing.webp",
+   "bytes": 4008,
+   "sha256": "50f4ce1d44baffc3921e3fdb2c2c3bc261305a79ac2bdaaf93eca7c401a7ac0b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1039211-heroarticle?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-iaas.webp",
+   "bytes": 3320,
+   "sha256": "ed475dad1e3c07306486c948a0b9bbb854d97ba61dbda68f6f5d6ae85afca4f9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1025522-Background-Hero-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-llm-evaluation.webp",
+   "bytes": 4718,
+   "sha256": "7573e876a774ab351c4cb7b8b72148091b9c402f8323a8a99fc6997d2c8b69f8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1039942-desktop-heroarticle-hero-bg-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-machine-learning-platform.webp",
+   "bytes": 3664,
+   "sha256": "07f9af78bee4c913ff6036696ec0fb32c805ec7c4514f57e39b639180b6cb7dc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1027585-background-hero-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-mobile-app-development.webp",
+   "bytes": 20880,
+   "sha256": "779f7390143baba4b841d3eda3f82a70953f44b4cf795dd646c542af0ba90e4a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-69?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-models-as-a-service-maas.webp",
+   "bytes": 6002,
+   "sha256": "b7e12540440868a4837c079aff93f12771bbf77bb100d9e601bce57bafcf2f82",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359441-mobile-heroarticle-media-360x202?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-paas.webp",
+   "bytes": 7124,
+   "sha256": "9187843496533d058037692d24763a11ab6bcddaa1a6f68cf2e3cc807a2d89d8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1025053-background-hero-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-quantum-computing.webp",
+   "bytes": 3138,
+   "sha256": "efedf4596f5d46a2c081acc2adf0b2260f68adcb1826b65d69e25b9549b709f5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-full-cylinder-01-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-retrieval-augmented-generation-rag.webp",
+   "bytes": 12314,
+   "sha256": "b3a80418df04d141ab728ba2acb57b2ff55fcc544d8da479b048568a298a86b7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/359435-desktop-heroarticle-media-752x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-saas.webp",
+   "bytes": 5892,
+   "sha256": "2ed15aa4c518459b1d7ba7bd18f31c276c2da3d25189aa925ffb7c5575c7efe2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1023355-Hero-Background?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-serverless-computing.webp",
+   "bytes": 3736,
+   "sha256": "de3c4c1b095bec431b67222957bb8a711f7d19b2f1a1be0296dee3f7b6dadfd5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-green-ellipse-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-sql-database.webp",
+   "bytes": 3818,
+   "sha256": "8197b68f19a566ac0576544dc01242baecb72c0817dc59df06df98599e3765bb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/159550-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-the-cloud.webp",
+   "bytes": 118192,
+   "sha256": "259f9cbea7b7b88a6378396e6df75971ef21abdd8177d11aae7720e374677dd9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/vge7kpxd-386128-what-is-cloud-hero?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-virtual-desktop-infrastructure-vdi.webp",
+   "bytes": 2604,
+   "sha256": "57cbdb714506af44130043eebdc02a774d50604e8439a42015e294f0b3d49d33",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/99502-Hero-Background-1600x580?wid=800"
+  },
+  {
+   "path": "static/images/dict/what-is-virtualization.webp",
+   "bytes": 7092,
+   "sha256": "374a5a02e1852f0205c99307b152d8cb2cc27f0d19e5ec3c9fec348583fe5bd0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-magenta-ellipse-seo-light?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-beyond-free-services-background-1600x1300.webp",
+   "bytes": 6794,
+   "sha256": "96ae09c240e02af7fba4e92429cc691e98f4f7fdbae43d955b4376c9f8fc21fe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-beyond-free-services-background-1600x1300?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-free-service-type-icon-01-26x26-resmode-sharp2-op-usm-1-5-0-65-15-0-qlt-100.svg",
+   "bytes": 1204,
+   "sha256": "897cf5da013fda093d3c1c5332be70a57a27032acc277dd969e07f36bb3a75ab",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/659343-free-service-type-icon-01-26x26?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=100"
+  },
+  {
+   "path": "static/images/free-icons/659343-free-service-type-icon-02-26x26-resmode-sharp2-op-usm-1-5-0-65-15-0-qlt-100.svg",
+   "bytes": 3009,
+   "sha256": "b5725be38859073b9b0b5a4eccc936209005baf71c4362359a671a15008ca297",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/659343-free-service-type-icon-02-26x26?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=100"
+  },
+  {
+   "path": "static/images/free-icons/659343-hero-background-1600x588.webp",
+   "bytes": 5856,
+   "sha256": "20e45e9a57521857d0cdaa2fda402a00db132df3074ff126460169d674bf17f8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-hero-background-1600x588?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-next-steps-01-656x470.webp",
+   "bytes": 44782,
+   "sha256": "707f56e56e4da095b2c140139acf7bbeb486476ea12fce229764eab947c6eed6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-next-steps-01-656x470?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-next-steps-02-416x178.webp",
+   "bytes": 18244,
+   "sha256": "878fc6a349fe670e9ef0d027465a6b8e86e836aea5de9197f4c09040013301b7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-next-steps-02-416x178?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-next-steps-03-416x178.webp",
+   "bytes": 17208,
+   "sha256": "bb79ddbd7abe360d83731ea7bb657dadc0437f2a22802a8053bb8a28555fe79a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-next-steps-03-416x178?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/659343-next-steps-04-416x178.webp",
+   "bytes": 30060,
+   "sha256": "f196573ba2ede77816968aec56a0313c342e850bfe612790b2739e868b594a87",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/659343-next-steps-04-416x178?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/acom-icons-instagram-black-white-24x24.webp",
+   "bytes": 642,
+   "sha256": "a9d0b93cc2be882fe981e0d78b53bb6d0ad2ae8f4932a14ec5895aff923a1ccd",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-icons-instagram-black-white-24x24?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/acom-icons-linkedin-black-white-24x24.webp",
+   "bytes": 188,
+   "sha256": "2805ecf12493106bb8b6190642f19df53ca7c069fd57766a4f38db792414dd71",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-icons-linkedIn-black-white-24x24?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/acom-icons-x-black-white-24x24.webp",
+   "bytes": 568,
+   "sha256": "5301a69b2a859e6b8f5480da1a95ab8575f013b84fd77debc680c3a94acc0d91",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-icons-x-black-white-24x24?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/acom-icons-youtube-black-white-24x24.webp",
+   "bytes": 172,
+   "sha256": "b5308ee297395581576cf366058952367f9cbb05570d2992a4e84f934eea4578",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-icons-youtube-black-white-24x24?wid=800"
+  },
+  {
+   "path": "static/images/free-icons/acom-social-icon-azure.svg",
+   "bytes": 2270,
+   "sha256": "52efb7be976e0a4b617c597927120cbb6c58e8e7ed4c866a947d879d17433d69",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/acom_social_icon_azure"
+  },
+  {
+   "path": "static/images/geographies/desktop-hero-bg-4x-344573.webp",
+   "bytes": 10938,
+   "sha256": "01154fe30407114d2eade799a764f9afc9a57d0816aaee277ab9af60422a1630",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/desktop-hero-bg-4x-344573?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/desktop-pricing-img-2x-344573.webp",
+   "bytes": 92950,
+   "sha256": "86fb04e07e43bc4e39d7edd43bd2c59ebf9de786d70291e9c54307d53f4f2ba0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/desktop-pricing-img-2x-344573?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/isc-20datacenter.webp",
+   "bytes": 60986,
+   "sha256": "0cf275f3cc1829215be17b6404cce0be0877f4b02dc2eca83e5fd5e66203d6e0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/ISC%20Datacenter?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/mobile-geographies-bg-2x-344573.jpg",
+   "bytes": 31936,
+   "sha256": "47c0c762239d93cc137adfbb85cd7089f1ef5751fb72cd56c6f3df9c7848ef2b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/mobile-geographies-bg-2x-344573?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/mobile-geographies-update-img1-2x.webp",
+   "bytes": 43762,
+   "sha256": "730e6de3922d31327db3a13bd50d7e23cd4fdb73601186f779c8733c7ed14b26",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Mobile-Geographies-update-img1@2x?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/mobile-geographies-update-img2-2x.webp",
+   "bytes": 42334,
+   "sha256": "171f8dd92be1e81fbc35c124fe79a060d01ed64d93c075d989ba6376108803ed",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Mobile-Geographies-update-img2@2x?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/mobile-geographies-update-img3-2x.webp",
+   "bytes": 22088,
+   "sha256": "cd84f1fb5f2c83412d4dfa304694b01e671ba321ab3e35180564c4b4b72fa988",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Mobile-Geographies-update-img3@2x?wid=1200"
+  },
+  {
+   "path": "static/images/geographies/mobile-pricing-bg-2x-344573.jpg",
+   "bytes": 21505,
+   "sha256": "2a1b2d4a9bfe3dbfddcf6d4de2462471def130689b31557476ccc50f034527f1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/mobile-pricing-bg-2x-344573?wid=1200"
+  },
+  {
+   "path": "static/images/home/3229800-accordion-img01-800x513.webp",
+   "bytes": 230568,
+   "sha256": "38ce58f3ff364ad1473c352fb1c515b445b704681c6ad693bde574e68f829234",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-Accordion-Img01-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/3229800-accordion-img02-800x513.webp",
+   "bytes": 275668,
+   "sha256": "0fc9a587d96f4857c97fa74b9764d317469dd92a59ba48d82487fc03dd64f52d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-Accordion-Img02-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/3229800-accordion-img05-800x513.webp",
+   "bytes": 207254,
+   "sha256": "8accae92cb9f54389f5c94f628ba37d15ffff8783d3d07ec3b4771ea2fbb1d47",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-Accordion-Img05-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/3229800-aiassist-background-1600x320.webp",
+   "bytes": 33544,
+   "sha256": "df34d594b5064e7474847d75e7cb12456d903fe055a8321228ce749620cc006a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-AIAssist-Background-1600x320?wid=1600"
+  },
+  {
+   "path": "static/images/home/3229800-feturednews-background-1600x806.jpg",
+   "bytes": 30269,
+   "sha256": "1f6483ac14778778d8f2fdfdbb93178fc8c612001d342f7d9e8ce7ff1ad234e4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-FeturedNews-Background-1600x806?wid=1600"
+  },
+  {
+   "path": "static/images/home/3229800-productaccordion-background-1600x1121.webp",
+   "bytes": 25898,
+   "sha256": "38aa1d1ad3c526e81d6413642b47cf184beac0b3fafbf1b11f0eb790c91409b1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3229800-ProductAccordion-Background-1600x1121?wid=1600"
+  },
+  {
+   "path": "static/images/home/3517412-solutions-1-3-800x513.webp",
+   "bytes": 236694,
+   "sha256": "671073ab05bf3048cb7046369d2ee63ee2dbf3e7dd5bddbbb1e723ad26239105",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3517412-Solutions-1-3-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/3517412-solutions-1-4-800x513.webp",
+   "bytes": 211328,
+   "sha256": "86526be819a03d219f67f45b77078c11a11eed29b6d7bf5eef029fc53edc3119",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3517412-Solutions-1-4-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/3517412-solutions-2-2-800x513.webp",
+   "bytes": 244720,
+   "sha256": "b0315c23a122b8381ac349b3991a45efe626efce26a09c349369bb6c2f465b8e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3517412-Solutions-2.2-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/976645-solutions-2-1-800x513.webp",
+   "bytes": 211836,
+   "sha256": "3842a938dce558415e6debd51df57c0f3255baa630d99e08c81de3c6cd17a1b0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/976645-Solutions-2-1-800x513?wid=1600"
+  },
+  {
+   "path": "static/images/home/bg-hero-2.webp",
+   "bytes": 42346,
+   "sha256": "b611d67cfba251ff7b183a4a497e1f6c6d3722e3f196afd468d27f792b6b32b8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BG-hero-2?wid=1600"
+  },
+  {
+   "path": "static/images/home/microsoft-logo.png",
+   "bytes": 4054,
+   "sha256": "112fec798b78aa02e102a724b5cb1990c0f909bc1d8b7b1fa256eab41bbc0960",
+   "source_url": "https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png"
+  },
+  {
+   "path": "static/images/home/news-explore-the-purpose-built-infrastructure.webp",
+   "bytes": 43664,
+   "sha256": "67774bc578a7b5a835c339b1be705c7bbffc0c919a80152f08e572f4d899bb8e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/News_Explore_the_purpose_built_infrastructure?wid=1600"
+  },
+  {
+   "path": "static/images/home/news-fast-isolated-sandbox.webp",
+   "bytes": 44566,
+   "sha256": "a74a84e0160b3b441ebac7e8f347d72cf1588e6c73cc02bc7a4a0e960a4c8c41",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/News-Fast-isolated-sandbox?wid=1600"
+  },
+  {
+   "path": "static/images/home/news-see-how-microsofts-marketers.webp",
+   "bytes": 42444,
+   "sha256": "636f32b84b4c083176d4f8662deb8b4a9db383bf0699bfea4fb2ee9af2110710",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/News_See_how_Microsofts_marketers?wid=1600"
+  },
+  {
+   "path": "static/images/pricing-icons/1479035-azure-automation-icon-24x24.svg",
+   "bytes": 3757,
+   "sha256": "bd75e668d531947f8f0e6bbc82bccc8bf87e734bb9e84a46201dae297889249f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1479035-Azure-Automation-icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/1479035-azure-backup-icon-24x24.svg",
+   "bytes": 1311,
+   "sha256": "5b2e8a82a2454bb0a32cfa74f2f14a2a51bc4e13de1b2aad6f99a40ffc51e8a0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1479035-Azure-Backup-icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/1479035-azure-files-icon-24x24.svg",
+   "bytes": 1239,
+   "sha256": "d974c9c4b59dca62282c6676bd90f1ecda68b6f2c8918fd4caec281cae4450ea",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1479035-Azure-Files-icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/1479035-ip-addresses-in-azure-icon-24x24.svg",
+   "bytes": 3515,
+   "sha256": "83d1d49fefe96eb0bfc57d8215f5a1c314f8dcb9ef23fa230ff48ded474f1a78",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1479035-IP-addresses-in-Azure-icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/1479035-microsoft-entra-domain-services-icon-24x24.svg",
+   "bytes": 3918,
+   "sha256": "cd6eed973b05bf45a25b96f4d0d2cecac4f34417a2c6faac9cb24f7807f954b1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1479035-Microsoft-Entra-Domain-Services-icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/3469951-azure-ai-foundry-control-plane.svg",
+   "bytes": 4994,
+   "sha256": "fce29b11387b2c7ba1a90f5383f338fa6ac592937c6624a58077f78729b27058",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/3469951-Azure-AI-Foundry-Control-Plane"
+  },
+  {
+   "path": "static/images/pricing-icons/3469951-azure-openai-in-foundry-models-icon-24x24.svg",
+   "bytes": 8208,
+   "sha256": "d91089117f37c31390a3a8dab0b6ebcc9a42f96d7b0b689cf2de9b550448e518",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/3469951-Azure-OpenAI-in-Foundry-Models-Icon-24x24"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card1-azurevirtualmachines.svg",
+   "bytes": 1805,
+   "sha256": "5cdb8e71305770cbfa0208c9ad373168af4c4b93301af0362573282b4b586d4a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card1-AzureVirtualMachines"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card2-azurestorage.svg",
+   "bytes": 3839,
+   "sha256": "4a0cd7739d1c0fec5a7247aa9e0f2c6cb9825d46e56e0f26952cd0b5afae1d9f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card2-AzureStorage"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card3-azuresqldatabase.svg",
+   "bytes": 4253,
+   "sha256": "840f3f008dfd3605ef61b7b60be0ee4fc27c1aadacd5c2d0e7db12d641538f37",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card3-AzureSQLDatabase"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card4-azureappservice.svg",
+   "bytes": 2333,
+   "sha256": "55b85bf6870941bca65517b6afe61ce3d61011619be84c7dcfd3de301608c2b1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card4-AzureAppService"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card6-azureblobstorage.svg",
+   "bytes": 2855,
+   "sha256": "843a5c4825258f1430f3e7b7242ec71d99f11b139e79ef853af2ce61892d2965",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card6-AzureBlobStorage"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card7-azurecosmosdb.svg",
+   "bytes": 7078,
+   "sha256": "8e0f02518519e165e04543e588e74fa253370172ce6a6289df0681fcdebc8657",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card7-AzureCosmosDB"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab1-card8-azurefunctions.svg",
+   "bytes": 2923,
+   "sha256": "ba16a43448c195ed825a4259579fef04f9efeb80a46047e62a7fa2652e3aebad",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab1-Card8-AzureFunctions"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab10-card4-azuredatamanagerforenergy.svg",
+   "bytes": 2020,
+   "sha256": "62e58038b2062109bbdfc265884b390e161120519e0b6a42afd52f4f5cbd1cd9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab10-Card4-AzureDataManagerforEnergy"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab10-card5-azureservicebus.svg",
+   "bytes": 4947,
+   "sha256": "573bec83d7bbd2c0de06d7f7cfd4a79172071999340179194802a3dd7a8c94c7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab10-Card5-AzureServiceBus"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab11-card4-azureautomanage.svg",
+   "bytes": 3795,
+   "sha256": "bae1417a388a27820f716a7f3b7a4c247387f5f67a53d04842d5604caf737d51",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab11-Card4-AzureAutomanage"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab11-card5-azuresiterecovery.svg",
+   "bytes": 1987,
+   "sha256": "1c89b03a4f78f4411acba1a36c67147ea0b1818444f024b09e6ba5ea0bd0b80d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab11-Card5-AzureSiteRecovery"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card2-azurevpngateway.svg",
+   "bytes": 6273,
+   "sha256": "5a6c516d208f8236c0ebfd6e259aa7b01e2d126279ac16576ab33b8f05b07b65",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card2-AzureVPNGateway"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card3-azurebandwidth.svg",
+   "bytes": 3115,
+   "sha256": "9a1e84a62bbb38a9ae496f12ed11939309101a34d6a9e800fab6efab756e71bc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card3-AzureBandwidth"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card4-azurenetworkwatcher.svg",
+   "bytes": 5005,
+   "sha256": "a7ae454ae145377750e781bc52ddfa943a3776c2d0f24ec42dacf4596642009f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card4-AzureNetworkWatcher"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card5-azureapplicationgateway.svg",
+   "bytes": 8205,
+   "sha256": "fb9373e0d36d1c74886127ff428e9ed02c7011322693710a61dd781145c8b7ee",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card5-AzureApplicationGateway"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card6-azureexpressroute.svg",
+   "bytes": 1867,
+   "sha256": "488b283a233207cba1dd288766c2372feb9aee7445f7447aebe8ea7e8df1c7e1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card6-AzureExpressRoute"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab12-card7-azureloadbalancer.svg",
+   "bytes": 2679,
+   "sha256": "171f3271fbc8878464bac558c5cac24586b0f32f22c25cc3d10f008284895b46",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab12-Card7-AzureLoadBalancer"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab13-card1-azurekeyvault.svg",
+   "bytes": 5158,
+   "sha256": "d83c7cdc525c6fca84a241d9798d7a398b8b750f71fd45b88fd50c75f9a85d6f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab13-Card1-AzureKeyVault"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab13-card2-microsoftdefenderforcloud.svg",
+   "bytes": 3305,
+   "sha256": "b0c3edbcd2145375f3f6a41442a63b55d1f3d314d8912d26ccbf431f673c3e30",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab13-Card2-MicrosoftDefenderforCloud"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab13-card3-microsoftsentinel.svg",
+   "bytes": 2887,
+   "sha256": "6542bd7264e05b891058bdb0696bff33abdf6dcba0b3cfad57f7ae2cbc7d0dda",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab13-Card3-MicrosoftSentinel"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab13-card7-azureddosprotection.svg",
+   "bytes": 3839,
+   "sha256": "cde92d1b594eaf5d064d85179c57ab530ea6797e4b51bb0a32cd1196c7f58980",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab13-Card7-AzureDDoSProtection"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab13-card8-azurededicatedhsm.svg",
+   "bytes": 4861,
+   "sha256": "4137ddfb3de9dcaf6035900c3f17554217a29bd9a818b350ae6752b79dd42db7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab13-Card8-AzureDedicatedHSM"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab14-card3-azuremanageddisks.svg",
+   "bytes": 2442,
+   "sha256": "05bb674f2234c987160a6ef6855381a2d2572daa71b0e5ed89a04668a41d4f01",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab14-Card3-AzureManagedDisks"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab14-card5-azuretablestorage.svg",
+   "bytes": 1041,
+   "sha256": "be466ce40174c034e2655e0168eedfeadb483ae0265c1817e62dc6358e567c91",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab14-Card5-AzureTableStorage"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab14-card6-azuredatalakestorage.svg",
+   "bytes": 3287,
+   "sha256": "071827f50e63bda0a7e2bb6d03c9cf048342cbab9b94b3a52377bae4e10e4767",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab14-Card6-AzureDataLakeStorage"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab14-card7-azuredatabox.svg",
+   "bytes": 3930,
+   "sha256": "6bb723ee45e4b5780c33a205746fb0d9614de2b6ff94d6fdb6af3e4e3894439b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab14-Card7-AzureDataBox"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab14-card8-azurenetappfiles.svg",
+   "bytes": 3858,
+   "sha256": "ddef651209896ceb1f386eefc3391306c21f1cf61d051498c080d837cc0638b0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab14-Card8-AzureNetAppFiles"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab15-card6-azurecommunicationservices.svg",
+   "bytes": 4326,
+   "sha256": "c9cc3c7f9c54d32b89cfdf1dad5168cf05dd59bedbfbd3fa0315a3cb9e10d39a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab15-Card6-AzureCommunicationServices"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab3-card1-microsoftfabric.svg",
+   "bytes": 6596,
+   "sha256": "333dea39cff1e7177739798372c2c8fb3d357c89161391b798813aee2f305bcf",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab3-Card1-MicrosoftFabric"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab3-card2-azuredatabricks.svg",
+   "bytes": 567,
+   "sha256": "f846396be4b4d34a507d394c5b20b8fcfd1a1021ad0a0637afebe2520e93021e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab3-Card2-AzureDatabricks"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab3-card3-azuresynapseanalytics.svg",
+   "bytes": 2901,
+   "sha256": "5674c9ba8ffd61c88bb695a7bd0a3ef9ffb9350198b046b2fb10eca7b7cf5c44",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab3-Card3-AzureSynapseAnalytics"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab3-card4-azureanalysisservices.svg",
+   "bytes": 2575,
+   "sha256": "c1f0a9781f65cae617e68b96080c7766c5307694ad878ff9fd6a6a9e5f3958f9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab3-Card4-AzureAnalysisServices"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab3-card6-microsoftpowerbi.svg",
+   "bytes": 1757,
+   "sha256": "77244fed611a4ee6287df831e16cd24dbe303b0fa3201b713dc060c8215fbbf1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab3-Card6-MicrosoftPowerBI"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab4-card1-azurevirtualmachinescalesets.svg",
+   "bytes": 2784,
+   "sha256": "f2df1531506a956b999a5ca64c6d0bac4c7bdf3247d63c34376dab3044a049e3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab4-Card1-AzureVirtualMachineScaleSets"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab4-card4-azurekubernetesservice.svg",
+   "bytes": 4296,
+   "sha256": "1c699714660340cf8c429fedddd4082b99b4fac008397f64399eedcad06562fc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab4-Card4-AzureKubernetesService"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab6-card2-azurecosmosdb.svg",
+   "bytes": 7067,
+   "sha256": "fd14a36731477c76814c9a62c816690edffebe52e18e6b177ee731cba85cb181",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab6-Card2-AzureCosmosDB"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab6-card3-azuresql.svg",
+   "bytes": 3477,
+   "sha256": "343071893bd38c3446db47bad3da2da976f61ff633ba38e43c8c585a3d660f80",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab6-Card3-AzureSQL"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab6-card4-azuredatabaseformysql.svg",
+   "bytes": 2849,
+   "sha256": "16fb3a176c228e59b666233a7a8f10c16f3d54d0acb455751be7e8d9e2357f5a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab6-Card4-AzureDatabaseforMySQL"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab6-card5-azuredatabaseforpostgresql.svg",
+   "bytes": 7397,
+   "sha256": "4bed6f115a1a2346801ffd4946023458d4fed27cdda75a7c1c65c039124e92ea",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab6-Card5-AzureDatabaseforPostgreSQL"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab7-card8-azuremanagedconfidentialconsortiumframework.svg",
+   "bytes": 4765,
+   "sha256": "135c4a96620b3d37ae34f9a24d552aaa2e7343077c7ab72a50e3f99d516a2e23",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab7-Card8-AzureManagedConfidentialConsortiumFramework"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab8-card1-azuredevops.svg",
+   "bytes": 734,
+   "sha256": "b6c3298ffeee0f4f6f5ad22df6529fb44ccd2e2ea11a0fab7a9dab6b47ac2a4c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab8-Card1-AzureDevOps"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab8-card3-azureloadtesting.svg",
+   "bytes": 3324,
+   "sha256": "8c430b106e3c12e71d8065be113c43add80d9042cd7beb97e5b023c8e3b9bb3b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab8-Card3-AzureLoadTesting"
+  },
+  {
+   "path": "static/images/pricing-icons/pricing-by-product-logos-tab8-card4-azuremonitor.svg",
+   "bytes": 3042,
+   "sha256": "f0fe562b61224e182be6e302ff76f0ac6c88145cdd3dcf7c485ff5219c92f0f5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Pricing-By-Product-Logos-Tab8-Card4-AzureMonitor"
+  },
+  {
+   "path": "static/images/products/api-management/180957-azure-api-management-hero-background-1600x678.webp",
+   "bytes": 9266,
+   "sha256": "64b83d8a648f2a22635cb7cdb00d3da33a50c64e096030655bcd1136fcfca3e1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/180957-Azure-API-Management-Hero-Background-1600x678?wid=1000"
+  },
+  {
+   "path": "static/images/products/api-management/180957-hero-icon.svg",
+   "bytes": 3638,
+   "sha256": "ebb37ef0d22bb9fa0cec1c03255194b3d9b18dfcae34609f0dd118d95df01ebe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/180957-Hero-Icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=48&hei=48&qlt=100&fit=constrain"
+  },
+  {
+   "path": "static/images/products/api-management/180957-overview-01-800x513.webp",
+   "bytes": 33882,
+   "sha256": "181835ef9b5e83a1f54205a4aca49261bf9a91f775272cd82ddc1e431f39b983",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/180957-Overview-01-800x513?wid=1000"
+  },
+  {
+   "path": "static/images/products/app-service/1027611-mobile-hero-bg-360x203.webp",
+   "bytes": 8096,
+   "sha256": "a4c0c9adf9421e34813f5d496f7a51f0d76549f4b50cc9bedba194a8eb156b07",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1027611-mobile-hero-bg-360x203?wid=1000"
+  },
+  {
+   "path": "static/images/products/app-service/azure-app-services-video-2-tbmnl-en-us.webp",
+   "bytes": 25860,
+   "sha256": "841625a7949443dac66c946226ae4f79d9851ca8de59e458adc92bf67c490e52",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Azure-App-Services-Video-2_tbmnl_en-us?wid=1000"
+  },
+  {
+   "path": "static/images/products/app-service/azureappservice-hero-icon-appservice.svg",
+   "bytes": 2340,
+   "sha256": "029e9afa2d61e5673e86408dbb84fee3fa91ea3931ce9c17ea1648c43cfd59da",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/AzureAppService-Hero-Icon-AppService?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=85"
+  },
+  {
+   "path": "static/images/products/azure-sql/3252550-acom-icon-database-48x48.svg",
+   "bytes": 1941,
+   "sha256": "e12d49a8b56530590716f01bfb55667f9b443316c45d8dd2bbd986bab16b9e22",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/3252550-ACOM-icon-Database-48x48?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=100"
+  },
+  {
+   "path": "static/images/products/azure-sql/azuresql-hero-bg-4x.webp",
+   "bytes": 6918,
+   "sha256": "c766f511790cd192f6cafe5b7be41df667fdab45f100f7f9b94fae8b36771a88",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/AzureSQL-Hero-BG-4x?wid=1000"
+  },
+  {
+   "path": "static/images/products/azure-sql/azuresql-overview-bg-2x.webp",
+   "bytes": 4584,
+   "sha256": "42ffde56daa79a98477c99bb0e7a1f2ec395476073214c5459b57ae8687154de",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/AzureSQL-Overview-BG-2x?wid=1000"
+  },
+  {
+   "path": "static/images/products/backup/207464-accordion-background-1600x882.jpg",
+   "bytes": 8264,
+   "sha256": "d38105ceca22dbf4656cd4602941626fe27649d96633fde0353466292688ce46",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207464-Accordion-Background-1600x882?wid=1000"
+  },
+  {
+   "path": "static/images/products/backup/207464-hero-background-1600x580.webp",
+   "bytes": 4138,
+   "sha256": "fb10fd5cab5ee22ce87948728c54940677f7ca9ed7f670e7560cb60e9304b93f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207464-Hero-Background-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/backup/207464-overview-01-800x498.webp",
+   "bytes": 13110,
+   "sha256": "d2617d226255e4241e5e60e502656d8b479d44eae947d2aa97b7171cbf709a07",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207464-overview-01-800x498?wid=1000"
+  },
+  {
+   "path": "static/images/products/container-apps/1028196-henro-background-1600x616.webp",
+   "bytes": 6774,
+   "sha256": "98dcebd227f33279e4c693497f703911c158043f3361e01ca6a916025ee4fa44",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1028196-henro-background-1600x616?wid=1000"
+  },
+  {
+   "path": "static/images/products/container-apps/1033441-azure-icon.svg",
+   "bytes": 3027,
+   "sha256": "09d1b27a7991d0a213a67195e6273f8bc4ce2b73d01f683eb1ff6a403bddbb03",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1033441-azure-icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=17&hei=17&qlt=100&fit=constrain"
+  },
+  {
+   "path": "static/images/products/container-apps/azure-icon-getstartedwithazure-64x64.webp",
+   "bytes": 3302,
+   "sha256": "ccd51369c6c0b3782909a1b9e78afd6191b4d5dc45c11bc3be5b1202fe723f2e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Azure_Icon_GetStartedWithAzure_64x64?wid=1000"
+  },
+  {
+   "path": "static/images/products/container-instances/acom-blue-z6sz1zru-01-accordion-2000x1545.webp",
+   "bytes": 45940,
+   "sha256": "10dc19c51f6568a94cd053e8d30ac22151042745dcfa7a596654d67faa3a3e1a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-blue-z6sz1zru-01-Accordion-2000x1545?wid=1000"
+  },
+  {
+   "path": "static/images/products/container-instances/bg-acom-fl-md-tr-all.webp",
+   "bytes": 7054,
+   "sha256": "791875ada8ea784827040d0a93e1cd80d710e90c4be5e136a296dab70eb81152",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-fl-md-tr-all?wid=1000"
+  },
+  {
+   "path": "static/images/products/container-instances/hero-acom-t4-fl-cyl-bl.webp",
+   "bytes": 6116,
+   "sha256": "52f5f6e86cfa321758e1d8050d284742ef79f9ea5a5f666b225705cdfb39f669",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t4-fl-cyl-bl?wid=1000"
+  },
+  {
+   "path": "static/images/products/cosmos-db/1031652-mobile-verticalaccordion-overview-media-tab2-accordion2-328x227.webp",
+   "bytes": 24258,
+   "sha256": "e8c421b1ce57832e14e816312b0b38a8182c6ee69903cc2d4ed4c377eb7a29ce",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1031652-mobile-verticalaccordion-overview-media-tab2-accordion2-328x227?wid=1000"
+  },
+  {
+   "path": "static/images/products/cosmos-db/191343-azure-cosomos-dn-hero-background-1600x616.webp",
+   "bytes": 8862,
+   "sha256": "496cd84b51e95f8ba3648cda8faa1b15b325e4c48f8785d1356d94016062e1b2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/191343-azure-cosomos-dn-hero-background-1600x616?wid=1000"
+  },
+  {
+   "path": "static/images/products/cosmos-db/191343-overview-background-1600x905.jpg",
+   "bytes": 8245,
+   "sha256": "d8609a6684eadfa82bbe87808a2b19fb01da91d06512979410270731bd422db7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/191343-overview-background-1600x905?wid=1000"
+  },
+  {
+   "path": "static/images/products/databricks/415450-background-hero-1600x678.webp",
+   "bytes": 8864,
+   "sha256": "9c4bc7f69035173a53e4610ca82d4fb5f49db3e08dfd920c361556874a4d2177",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/415450-background-hero-1600x678?wid=1000"
+  },
+  {
+   "path": "static/images/products/databricks/hero-icon-product-azure-databricks-24x24-328736.svg",
+   "bytes": 562,
+   "sha256": "598a59cf363636c2e5a7ede6f8ef3db38bc5e58fde08c1b08b0a318f3fca664f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/hero-icon-product-azure-databricks-24x24-328736?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=85"
+  },
+  {
+   "path": "static/images/products/defender-for-cloud/351400-sci-latest-news-651x375-live-page-size.webp",
+   "bytes": 33576,
+   "sha256": "8054c2ef1f06ec89f096ce1226c2ab79385e9951255976bc7582531a05f4c29a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/351400-sci-latest-news-651x375-live-page-size?wid=1000"
+  },
+  {
+   "path": "static/images/products/defender-for-cloud/72002-hero-background-1600x700.webp",
+   "bytes": 5760,
+   "sha256": "3158841483d6aa58a2942b640a2e49fc4764481f2761333654baf31036b051e2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/72002-hero-background-1600x700?wid=1000"
+  },
+  {
+   "path": "static/images/products/defender-for-cloud/72002-hero-thumbnail-568x320.webp",
+   "bytes": 68188,
+   "sha256": "72b9b9d7e3afe7710514c27749278c27ac84a8e47e99319e67005b5b95f5e1eb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/72002-hero-thumbnail-568x320?wid=1000"
+  },
+  {
+   "path": "static/images/products/devops/1062064-hero-background.webp",
+   "bytes": 6754,
+   "sha256": "c37e8f681d12d69263b91ced958ee8fab288c70ff7a2bd1cb8addbf418079366",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1062064-Hero-Background?wid=1000"
+  },
+  {
+   "path": "static/images/products/devops/1062064-overview-01-800x513.webp",
+   "bytes": 29438,
+   "sha256": "ccc83fe23027d887d25c22569d995d4d354f16e2a95a0f607686b33b58bc0655",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1062064-Overview-01-800x513?wid=1000"
+  },
+  {
+   "path": "static/images/products/devops/1062064-overview-background.jpg",
+   "bytes": 10221,
+   "sha256": "9e4da1bc0b7f2bdf53c35c1b86624895c35ce3cb3ee852ee7a2ac007762c94af",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1062064-Overview-Background?wid=1000"
+  },
+  {
+   "path": "static/images/products/expressroute/5vbsbvr1-hero-acom-t4-m-hex-ow.webp",
+   "bytes": 6540,
+   "sha256": "84869b4f130985e737275204e959068c3bd26a6c7d24829b9a7da35a3fcb7e17",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/5vbsbvr1-hero-acom-t4-m-hex-ow?wid=1000"
+  },
+  {
+   "path": "static/images/products/expressroute/acom-magenta-63kmi84o-2.webp",
+   "bytes": 92630,
+   "sha256": "90af997816ef23b3fa1318ba5e6a68a0b4b540ad33488ce0589ad2c1d041b2ed",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-magenta-63kmi84o-2?wid=1000"
+  },
+  {
+   "path": "static/images/products/expressroute/acom-magenta-tgr6odft-1.webp",
+   "bytes": 30166,
+   "sha256": "02d4bef881a2c7aed6f17f8430147fee568f6ba906fe9758fc14dab314e5809b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-magenta-tgr6odft-1?wid=1000"
+  },
+  {
+   "path": "static/images/products/functions/1061076-azurefunctions-thumbnail.webp",
+   "bytes": 25880,
+   "sha256": "3e26b147c6ed0958e4e651bfcc2df10f462392ccb908afc735ead0c3f0d8d720",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1061076_AzureFunctions_Thumbnail?wid=1000"
+  },
+  {
+   "path": "static/images/products/functions/182243-background-hero-1600x580.webp",
+   "bytes": 7444,
+   "sha256": "00b7e614ea43358da943ece9705aa22387108df6afd518b8ff3dedaee14fa8f2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/182243-Background-Hero-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/functions/hero-icon-1.webp",
+   "bytes": 1234,
+   "sha256": "61d83368a5722f31367d47cfc9182ccb8e05f91266749c1c63c5379e964fbd06",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero-icon-1?wid=1000"
+  },
+  {
+   "path": "static/images/products/key-vault/386317-01-accordion-2000x1545.webp",
+   "bytes": 46206,
+   "sha256": "ce9af5769d044f46d9e451595cb663a0f4935a57241e1541e7ac3cade2d2374b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/386317-01-accordion-2000x1545?wid=1000"
+  },
+  {
+   "path": "static/images/products/key-vault/386317-02-acordion-2000x1545.webp",
+   "bytes": 63522,
+   "sha256": "6005641554f5cc1bec5029af6245a2d57abd59308b7afe863b1be5e74f25de73",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/386317-02-acordion-2000x1545?wid=1000"
+  },
+  {
+   "path": "static/images/products/key-vault/386317-hero-acom-bg.webp",
+   "bytes": 5778,
+   "sha256": "776dacc9e733f42aaa53acfabe16fc591301fe3372b10ffa6fcb22e82b43fd70",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/386317-hero-acom-bg?wid=1000"
+  },
+  {
+   "path": "static/images/products/kubernetes-service/1028212-desktop-heroslim-hero-bg-1600x580.webp",
+   "bytes": 10022,
+   "sha256": "14f945bd08a0ce548629761907059d6992ed6cd08cf3c9846c2d64d8ca0584c0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1028212-desktop-heroslim-hero-bg-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/kubernetes-service/1028212-mobile-verticalaccordion-overview-bg-360x881.webp",
+   "bytes": 7946,
+   "sha256": "b1376bc26f4b76da6b2db547fbdaefdc19e2685fb62e28ae479ecd0228ac4d26",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1028212-mobile-verticalaccordion-overview-bg-360x881?wid=1000"
+  },
+  {
+   "path": "static/images/products/kubernetes-service/1028212-mobile-verticalaccordion-overview-media-accordion3-328x227.webp",
+   "bytes": 15202,
+   "sha256": "97cee108bb0018cd99fae94664a702ff4131fa545bedf388d34ee695b4dd24ca",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1028212-mobile-verticalaccordion-overview-media-accordion3-328x227?wid=1000"
+  },
+  {
+   "path": "static/images/products/kubernetes-service/icon-azure-kubernetes-services-20x20.svg",
+   "bytes": 4188,
+   "sha256": "67698d9acec51c79ca38e4961645513b969023735ab3709ac41e427a568e30df",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Icon-Azure_Kubernetes_Services-20x20"
+  },
+  {
+   "path": "static/images/products/machine-learning/desktop-overview-image-1-2x.webp",
+   "bytes": 30096,
+   "sha256": "db9cf61cb2fe9d5fa8fe02f4e11d7468a34d467543737cc30f0653f916b4ad99",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Desktop-overview-image-1@2x?wid=1000"
+  },
+  {
+   "path": "static/images/products/machine-learning/desktop-overview-image-2-2x.webp",
+   "bytes": 48152,
+   "sha256": "2dfcbd4245dc663ec14cf5c9385fbae5fb2c1d481ae812cade0640c53408fe5f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Desktop-overview-image-2@2x?wid=1000"
+  },
+  {
+   "path": "static/images/products/machine-learning/revised-mobile-hero-bg-2x.webp",
+   "bytes": 9100,
+   "sha256": "842beb921c89cea8b79f0c2166b4616107a26b47d950a65e8f41c7a4de25921f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Revised-mobile-hero-BG@2x?wid=1000"
+  },
+  {
+   "path": "static/images/products/monitor/160400-azure-monitor-background-1600x678.webp",
+   "bytes": 7626,
+   "sha256": "b663f36d2c23083a022a7faad08393ecd04fe88e3032a403dfed90eea672b6e8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/160400-Azure-Monitor-Background-1600x678?wid=1000"
+  },
+  {
+   "path": "static/images/products/monitor/160400-overview-01-800x636.webp",
+   "bytes": 18912,
+   "sha256": "7616e0e1024f01ecfd69d339cab32e917a0787ea051d5f1127e93bfcd3c8eaf3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/160400-Overview-01-800x636?wid=1000"
+  },
+  {
+   "path": "static/images/products/monitor/160400-overview-background-1600x956.jpg",
+   "bytes": 8220,
+   "sha256": "c57503b650fc7225ee5aedd1a2950dcb936b7f4569de899ebc562fdc7766d334",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/160400-Overview-Background-1600x956?wid=1000"
+  },
+  {
+   "path": "static/images/products/mysql/697825-hero-background-1600x580.webp",
+   "bytes": 7264,
+   "sha256": "2e80366b7840a4e508c78ac38055fe0f4d78920cd19eef7fd18d0c08a1c82788",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/697825-Hero-Background-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/mysql/697825-overview-background-1600x833.jpg",
+   "bytes": 7566,
+   "sha256": "1e7cc615debc5a0c0bf44b00b6b14d04fa4a5c6f1a212324a9e3331af2f330a7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/697825-Overview-Background-1600x833?wid=1000"
+  },
+  {
+   "path": "static/images/products/postgresql/3527411-hero-background-1600x678.webp",
+   "bytes": 12562,
+   "sha256": "ae90fbf754d1fe26629f72d4fe50b6701f5e9413111dc8a67e184a55bd5f2301",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3527411-Hero-Background-1600x678?wid=1000"
+  },
+  {
+   "path": "static/images/products/postgresql/3527411-productaccordion-background-1600x905.webp",
+   "bytes": 9886,
+   "sha256": "4e7805d095bf9190e33eec419309df8d0bf3e9c535a1b7653b8b5789ef199f14",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/3527411-ProductAccordion-Background-1600x905?wid=1000"
+  },
+  {
+   "path": "static/images/products/products-hero.webp",
+   "bytes": 18794,
+   "sha256": "763aac881b582b08c9c058b34b442034a649c81935af8cb958a17222f83769c2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/products-hero?wid=1600"
+  },
+  {
+   "path": "static/images/products/service-bus/azure-service-bus-acom-full-01-lifestyleacc-image-2000x1545.webp",
+   "bytes": 45890,
+   "sha256": "a8f26f21fa55d0db0c481ad27ecd3f367092b9eabb875855d37d40f2c0a18ea0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/azure-service-bus-acom-full-01-lifestyleacc-image-2000x1545?wid=1000"
+  },
+  {
+   "path": "static/images/products/service-bus/bx9fpnkq-bg-acom-fl-md-af-elp.webp",
+   "bytes": 18362,
+   "sha256": "8dc8df34c3c2a658713c7610998fe5cda25453da2ef09539be2108faa8c8cab0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bx9fpnkq-bg-acom-fl-md-af-elp?wid=1000"
+  },
+  {
+   "path": "static/images/products/site-recovery/207354-hero-background-1600x580.webp",
+   "bytes": 6614,
+   "sha256": "d19a64bb20b2273a2c169e1188a6b83a4a6fa382f3b7989ea051ec31d62d321c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207354-Hero-Background-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/site-recovery/207354-overview-01-800x513.webp",
+   "bytes": 17188,
+   "sha256": "557654314c490c6ce49a07167b153dc4937e574f9fd5340ad9740fea208d18f9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207354-Overview-01-800x513?wid=1000"
+  },
+  {
+   "path": "static/images/products/site-recovery/207354-overview-background-1600x866.jpg",
+   "bytes": 9156,
+   "sha256": "14398a9d0f9e831e1b3bf82c5d065d55ba1ff616fc167d4c331448159e3a3247",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/207354-Overview-Background-1600x866?wid=1000"
+  },
+  {
+   "path": "static/images/products/storage/acom-lifestyle26-2000-1125.webp",
+   "bytes": 60924,
+   "sha256": "b81311fee3619ed022be7de0bab2a8587d88f5ab1ce6934001d4c48897b4bbc8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/ACOM-lifestyle26-2000-1125?wid=1000"
+  },
+  {
+   "path": "static/images/products/storage/bg-acom-bl-lg-bh-all-4.jpg",
+   "bytes": 10079,
+   "sha256": "9e5adb07e11da86bb281b2fb9f45d4a9276ac2a52065868b52f25a9c478504ad",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/bg-acom-bl-lg-bh-all-4?wid=1000"
+  },
+  {
+   "path": "static/images/products/storage/hero-acom-t4-fl-wav-bl.webp",
+   "bytes": 9422,
+   "sha256": "d3857ffbcc943cf79dffc8f70a0cb482fefebe8309b9c0df03bd327820f9a14a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/hero-acom-t4-fl-wav-bl?wid=1000"
+  },
+  {
+   "path": "static/images/products/virtual-machines/524651-desktop-heroslim-hero-bg-1600x580.webp",
+   "bytes": 8510,
+   "sha256": "8beb7672c167c9012cf8b54ed45a77184f183e05875c1ce4912b32c5aef4d42e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/524651-desktop-heroslim-hero-bg-1600x580?wid=1000"
+  },
+  {
+   "path": "static/images/products/virtual-machines/524651-desktop-heroslim-hero-cardicon-azurevirtualmachines-24x24.svg",
+   "bytes": 1765,
+   "sha256": "7101936a5c123f01d143f5dc1122fde69ec353846c5525a44eaed141319d691c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/524651-desktop-heroslim-hero-cardicon-azurevirtualmachines-24x24?resMode=sharp2&op_usm=1.5,0.65,15,0&qlt=85"
+  },
+  {
+   "path": "static/images/products/virtual-machines/524651-mobile-verticalaccordion-overview-bg-360x975.webp",
+   "bytes": 17846,
+   "sha256": "7397581774b5a874b526a5bb3e3dff18313837454f3a77501282e3c96524de7f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/524651-mobile-verticalaccordion-overview-bg-360x975?wid=1000"
+  },
+  {
+   "path": "static/images/products/vpn-gateway/acom-blue-vc9u57l2-01-accordion-1920x1080.webp",
+   "bytes": 72684,
+   "sha256": "f3989d8e5531495b7e3b20caafdf2875b717f9ec900dae5a6c4067605fd86a9d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/acom-blue-vc9u57l2-01-Accordion-1920x1080?wid=1000"
+  },
+  {
+   "path": "static/images/products/vpn-gateway/b0xasnh5-bg-acom-fl-lg-bh-all.jpg",
+   "bytes": 11544,
+   "sha256": "a09a525eb11bf429a87ed3f2233a2ec128f2f32615120e3cfd13951a086364f0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/b0xasnh5-bg-acom-fl-lg-bh-all?wid=1000"
+  },
+  {
+   "path": "static/images/stories/25565-cooper-university-health-care-microsoft-dragon-copilot-header.webp",
+   "bytes": 25482,
+   "sha256": "9463761ce5a4ad85f3f7a4743863a73fd219bb80d4aa728182e103706956ec88",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25565_Cooper%20University%20Health%20Care%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25565-cooper-university-health-care-microsoft-dragon-copilot-logo.webp",
+   "bytes": 4220,
+   "sha256": "6eddf025584366755a587a56cfc73a2bf03ff6d77258be0e0c141a2189c3a8d1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25565_Cooper%20University%20Health%20Care%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25668-transcard-azure-ai-foundry-header.webp",
+   "bytes": 13084,
+   "sha256": "e8c49850972458e9175c08f5fbd390e0f3313c17559e5290231a7518817cc311",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25668_Transcard%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25668-transcard-azure-ai-foundry-logo.webp",
+   "bytes": 2200,
+   "sha256": "0a3aee648f14552be7102cdae7faf9d21bf0a449e26f2a8bd81f8d0e104c882a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25668_Transcard%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25715-ford-motor-company-microsoft-teams-header.webp",
+   "bytes": 37636,
+   "sha256": "9af77dcbff53157442be393c2ab40ae4d5636383a300271d5adf0ca1a474cda4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25715_Ford%20Motor%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25715-ford-motor-company-microsoft-teams-logo.webp",
+   "bytes": 4752,
+   "sha256": "f90086196b6346784f6490218c849fbd0ba42b7b9b025fc2b370fc5d3836a379",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25715_Ford%20Motor%20Company%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25721-ey-global-services-limited-azure-document-intelligence-in-foundry-tools-header.webp",
+   "bytes": 51560,
+   "sha256": "e95dbab52cccf5a5f07f91362cb81ad57391fd589049d985f2ee81bac4f42c99",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25721_EY%20Global%20Services%20Limited%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25721-ey-global-services-limited-azure-document-intelligence-in-foundry-tools-logo.webp",
+   "bytes": 1942,
+   "sha256": "d982254cfd5a1316b69a3832ac14b448a911ce759a0727b777bec667f87be1aa",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25721_EY%20Global%20Services%20Limited%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25730-levi-strauss-and-company-windows-header.webp",
+   "bytes": 20338,
+   "sha256": "11ec15549b83d185c3e0244b7628bc87ad143497fee5daf9624ded06c0238c1a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25730_LEVI%20STRAUSS%20AND%20COMPANY%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25730-levi-strauss-and-company-windows-logo.webp",
+   "bytes": 2968,
+   "sha256": "47e66123456805982a5ac76865c7b791fb52d9a2df11f1a73072da90435b9e10",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25730_LEVI%20STRAUSS%20AND%20COMPANY%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25760-ey-global-services-limited-microsoft-power-platform-header.webp",
+   "bytes": 31502,
+   "sha256": "7bbb7c1437f58ccc4caf07423d16352dca669481f1c6c7c90093eada8ee1146f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25760_EY%20Global%20Services%20Limited%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25760-ey-global-services-limited-microsoft-power-platform-logo.webp",
+   "bytes": 3430,
+   "sha256": "b86da414d1ae34d2d3c3993b386823d9bd3488084105caccb42bb5b635df6308",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25760_EY%20Global%20Services%20Limited%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25765-icertis-microsoft-defender-for-cloud-header.webp",
+   "bytes": 41624,
+   "sha256": "feb1c94033e9c2de1df00f6d8dfb3c48f38e4e1d19c0933db39b1ea464501ec3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25765_Icertis%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25765-icertis-microsoft-defender-for-cloud-logo.webp",
+   "bytes": 2094,
+   "sha256": "381ec95ec84a7c3903cd2eef2e3f926ff8839c3298f8fe01ec320b2bad66dfd1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25765_Icertis%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25850-alaska-airlines-azure-openai-header.webp",
+   "bytes": 31796,
+   "sha256": "d1ae5fc0fbac0e4ffdc8e7d88dee6bc78d34236b41e5917c0c275735539c1e55",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25850_Alaska%20Airlines%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25850-alaska-airlines-azure-openai-logo.webp",
+   "bytes": 3538,
+   "sha256": "451f12fe6c9ac1e58c0cf14c8108e749391bf6f5a2728f48e380f0f959636a8c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25850_Alaska%20Airlines%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25852-managed-health-care-associates-azure-migrate-header.webp",
+   "bytes": 24200,
+   "sha256": "88a884698eaea6c266d944708b0bc150ac7858b5665e8aeea64dd1bfe09c55d3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25852_Managed%20Health%20Care%20Associates%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25852-managed-health-care-associates-azure-migrate-logo.webp",
+   "bytes": 3370,
+   "sha256": "813cb443faaaf724a2882b0345644d3c879453bcc1558469634610417a283e20",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25852_Managed%20Health%20Care%20Associates%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25855-contraforce-microsoft-defender-header.webp",
+   "bytes": 21090,
+   "sha256": "0ae5703a94a6c31206ba32bb3ae67913f3621ad910c0e5d33e73b0c9aa652ba5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25855_ContraForce%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25855-contraforce-microsoft-defender-logo.webp",
+   "bytes": 2618,
+   "sha256": "d2e35281aa40dfc16045ddbf758418f17a6b405e34036ec989141a2d4867ede7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25855_ContraForce%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25858-trinet-microsoft-365-e5-header.webp",
+   "bytes": 37296,
+   "sha256": "b251696fc8c0c09e20d5608f0c17810258439fb6aa6281fde17e4d3c0e4e73e7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25858_TriNet%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25858-trinet-microsoft-365-e5-logo.webp",
+   "bytes": 1718,
+   "sha256": "0a4b7ce4d8318af236827b7bb80df9d2c480034ae5820c81cb33f515a3aa8c62",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25858_TriNet%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25862-nsf-international-azure-openai-header.webp",
+   "bytes": 34122,
+   "sha256": "af4ebaff55635d9b9045b40903f6d3cb6bde26730d0fee019321b493b0698319",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25862_NSF%20International%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25862-nsf-international-azure-openai-logo.webp",
+   "bytes": 4404,
+   "sha256": "5b73eefd8838a6c51a98cb8f2fddc41da96cb6f5522cd15425137c6841afb145",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25862_NSF%20International%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25863-phenomenex-dynamics-365-supply-chain-management-header.webp",
+   "bytes": 34798,
+   "sha256": "7bacbaf107242c219d62ab1661ca78e532854faac2c513c18a8586abc876c40c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25863_Phenomenex%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25863-phenomenex-dynamics-365-supply-chain-management-logo.webp",
+   "bytes": 2528,
+   "sha256": "4386ebb0dd63fe140848e4a4d817af0ef62b104b5408c9fbf3b61a81d12df831",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25863_Phenomenex%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25879-dunaway-microsoft-copilot-studio-header.webp",
+   "bytes": 25592,
+   "sha256": "b24332f4631187a04c65febcaeff551533a35f00f572f865802d901600880f56",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25879_Dunaway%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25879-dunaway-microsoft-copilot-studio-logo.webp",
+   "bytes": 2234,
+   "sha256": "2a9b726468b082a9bd0f9d979f05b391ae1460540fbe303e077244b5208d0c5a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25879_Dunaway%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25891-intermountain-health-microsoft-dragon-copilot-header.webp",
+   "bytes": 22580,
+   "sha256": "a4826569c757aaecb5c2d3b602133824736fb5959598dfbc54ee436d73ddd30d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25891_Intermountain%20Health%20Header%20Image-1?wid=800"
+  },
+  {
+   "path": "static/images/stories/25891-intermountain-health-microsoft-dragon-copilot-logo.webp",
+   "bytes": 1884,
+   "sha256": "c9f9608256ae4872df10d9bb5d32046ddeb23b695271767fec38b59b91eba1d6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25891_Intermountain%20Health%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25893-niq-microsoft-foundry-header.webp",
+   "bytes": 38504,
+   "sha256": "a7ef7ba1ce50776455ce2d0855f18efdf6d182e66187ad668cfa1b4e2e69f7d8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25893_NIQ%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25893-niq-microsoft-foundry-logo.webp",
+   "bytes": 1810,
+   "sha256": "a3d1ea186d38183594961050a3514494444d8d1a254f37f5ed924e5665af1328",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25893_NIQ%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25978-boston-water-and-sewer-commission-power-bi-header.webp",
+   "bytes": 38140,
+   "sha256": "496cce9f191673e38d667096967d75059a8400a72c0353a79083a04462dc4587",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25978_Boston%20Water%20and%20Sewer%20Commission%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25978-boston-water-and-sewer-commission-power-bi-logo.webp",
+   "bytes": 3750,
+   "sha256": "aac6771ed2b3d614b98a26793973a99095a538ef6a2cd0640faf01847db83f6d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25978_Boston%20Water%20and%20Sewer%20Commission%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25984-spinx-microsoft-fabric-header.webp",
+   "bytes": 51222,
+   "sha256": "c0a258efa44340e34ac1a5300156637a7d3d7eed3462d30be5cea5441041e7fe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25984_Spinx%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25984-spinx-microsoft-fabric-logo.webp",
+   "bytes": 5008,
+   "sha256": "bdd30b36fc8a39d55bf13d101493ce22eac1674cb541358fe5362d1d17f5f04d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25984_Spinx%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25989-hertz-microsoft-power-platform-header.webp",
+   "bytes": 27682,
+   "sha256": "7e3e77b551e6ee53ff2ea41f43fb6faf5f97f0aabbe340e39e986dd70b02ccd9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25989_Hertz%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25989-hertz-microsoft-power-platform-logo.webp",
+   "bytes": 2184,
+   "sha256": "f003ee012495dd901cb0dad30e9deb01309052a79296dc8c05514a6f532c956f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25989_Hertz%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/25991-relativity-azure-openai-in-foundry-models-header.webp",
+   "bytes": 24398,
+   "sha256": "36867ffc69b2c30f209c7d853eb44db9ccd28bf92d53201a6943f0ddd9a195a6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25991_Relativity%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/25991-relativity-azure-openai-in-foundry-models-logo.webp",
+   "bytes": 1846,
+   "sha256": "2f38641de91830d5f19b9edb6f583102ed96b86c7e9271bf09b675d7cfc64ce0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/25991_Relativity%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26011-southern-states-material-handling-microsoft-fabric-header.webp",
+   "bytes": 68914,
+   "sha256": "7feaf5787544f4ef7db71ced1a16b4958b2a0dfb3ef4bd13dd30628ace0ec042",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26011_Southern%20States%20Material%20Handling%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26011-southern-states-material-handling-microsoft-fabric-logo.webp",
+   "bytes": 3528,
+   "sha256": "333c5333663bbd521a308df8e5627eca5b605a9d15113a75111c1d3e8a75825f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26011_Southern%20States%20Material%20Handling%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26018-eisneramper-microsoft-foundry-header.webp",
+   "bytes": 37208,
+   "sha256": "5ad1828f471858d3cc5ec8a736da9d82bf186a56a9440cf0db2cc7b90952d547",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26018_EisnerAmper%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26018-eisneramper-microsoft-foundry-logo.webp",
+   "bytes": 1304,
+   "sha256": "5d92d1c3ad20f5ddfd98a77b70f1f617902e19bc5ed52b6f99126b69819e0876",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26018_EisnerAmper%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26024-snohomish-county-azure-speech-in-foundry-tools-header.webp",
+   "bytes": 21376,
+   "sha256": "f851e87004319ffa9a6d8df502f84bcf29cf99860e4c32a95ef2ad9d1e788ba9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26024_Snohomish%20County%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26024-snohomish-county-azure-speech-in-foundry-tools-logo.webp",
+   "bytes": 2724,
+   "sha256": "411294f7723ccc3e1bbedc85d9c3c8b62b896a379535dad473a44b45cff97d15",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26024_Snohomish%20County%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26035-unitedlex-dynamics-365-finance-header.webp",
+   "bytes": 74276,
+   "sha256": "71e0638b543729c8a7a5d6be45a0058592176e4ba587174e22897b4bc1498b47",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26035_UnitedLex%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26035-unitedlex-dynamics-365-finance-logo.webp",
+   "bytes": 1314,
+   "sha256": "73904cd5224d7e2b51916608fed4f4d0db69e7d06c957a6c20d2258e919d1f6f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26035_UnitedLex%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26042-campbell-scientific-microsoft-fabric-header.webp",
+   "bytes": 42202,
+   "sha256": "7fcbadecc12e10ad75194d976c6536c09793421391057d2d0c2747113ded3b0a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26042_Campbell%20Scientific%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26042-campbell-scientific-microsoft-fabric-logo.webp",
+   "bytes": 2000,
+   "sha256": "47b8a599dd5196126893767836f8f38c9575153c9411991d4f177c7cbc28c2e9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26042_Campbell%20Scientific%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26043-servicenow-azure-header.webp",
+   "bytes": 29320,
+   "sha256": "a138911d1d710de8e71b6f2b3746bf79618b801262076b5a4469eca6156cb44f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26043_ServiceNow%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26043-servicenow-azure-logo.webp",
+   "bytes": 2120,
+   "sha256": "728d69f3e34c63c4387a5d4b2a72e44343881b4d1d68375220c4f9a4dd2f1bd0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26043_ServiceNow%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26049-levi-strauss-and-company-surface-laptop-header.webp",
+   "bytes": 25926,
+   "sha256": "beb9f176b415802700b390c9e6398d389376e629b7f6f04c6795c87b1a75867b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26049_Levi%20Strauss%20and%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26055-devresults-azure-header.webp",
+   "bytes": 20442,
+   "sha256": "f4f3409ed7d9df4199365b7deb47ee5498d4e2a90a9b28334eabeec1eacd1965",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26055_DevResults%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26055-devresults-azure-logo.webp",
+   "bytes": 1782,
+   "sha256": "306713effb705e9d5ef9ed31b25e0f86f61f259725f9a1ba791a21b5e35c0464",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26055_DevResults%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26105-replit-azure-openai-in-foundry-models-header.webp",
+   "bytes": 13948,
+   "sha256": "ebe89b92291fb4aa6c6bdfc3b35d1fee78b541c80642d24d81fba68a91ee3791",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26105_Replit%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26105-replit-azure-openai-in-foundry-models-logo.webp",
+   "bytes": 1942,
+   "sha256": "e34f3a93acd0b4807dd3b2dd19feb9a73844d93479c172cdea5bc144dbfca655",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26105_Replit%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26106-access-community-health-network-azure-header.webp",
+   "bytes": 22680,
+   "sha256": "660329a1c7c0ea769641bcccc8ddd27cf1d26bb0b6b691ae57effbdb8bdd1f39",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26106_Access%20Community%20Health%20Network%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26106-access-community-health-network-azure-logo.webp",
+   "bytes": 3088,
+   "sha256": "cd12704a52c93c121d17f7709e0750323f701864fbb2e21185922fc1b3555a1c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26106_Access%20Community%20Health%20Network%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26110-ablelight-azure-header.webp",
+   "bytes": 32158,
+   "sha256": "6cd4181594ac17f19cc6137822bc0117f457dd8600065cfbbe606f721d35e6fa",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26110_AbleLight%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26110-ablelight-azure-logo.webp",
+   "bytes": 1544,
+   "sha256": "4979d55b108f55d3b1ef99f1e36f9424602c60e0481582b695479809257d8547",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26110_AbleLight%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26119-msc-dynamics-365-sales-header.webp",
+   "bytes": 47294,
+   "sha256": "aa364aeca53e7fee74edfac38c89672779c4782807773e1345db297046715413",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26119_MSC%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26119-msc-dynamics-365-sales-logo.webp",
+   "bytes": 1856,
+   "sha256": "dba9db675ef16698442ee62368f64a8176aa95326acbf22d0af6e55896990ca0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26119_MSC%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26141-pepsico-microsoft-teams-header.webp",
+   "bytes": 27508,
+   "sha256": "14db5cdd31734380164022ffe61d61aa2e18e6a1fd81dc640aaf35c53ad62ed9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26141_PepsiCo%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26141-pepsico-microsoft-teams-logo.webp",
+   "bytes": 4074,
+   "sha256": "7a2d6ca66487b97a0b6f75206a78efdf95cedbd7766ddfd043c066a1aeb1b670",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26141_PepsiCo%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26160-pwc-microsoft-365-enterprise-header.webp",
+   "bytes": 49700,
+   "sha256": "ac558bf7a1caad405505a537d0d3e54c3fdc6bcbab7144293530cc5c6bd3fb17",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26160_PwC%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26160-pwc-microsoft-365-enterprise-logo.webp",
+   "bytes": 2106,
+   "sha256": "9bd5d98913ef82cfd3215e69bfe572a5cf30dadbfb8291692120124f2c9d0e70",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26160_PwC%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26166-microsoft-microsoft-copilot-studio-header.webp",
+   "bytes": 26774,
+   "sha256": "796d7d5af6806a1bfa97fb66accb8213cc1d97636eb1309c159b854120bbe69e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26166_Microsoft%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26166-microsoft-microsoft-copilot-studio-logo.webp",
+   "bytes": 1778,
+   "sha256": "f18b6633daabfa188f6b6582a7da17b66fbe977d9304be21b590039d0ed57130",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26166_Microsoft%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26190-graebel-dynamics-365-finance-header.webp",
+   "bytes": 25462,
+   "sha256": "091e0c8028fb0244652db33baf991ebbc14d8e784f24b6d475cdc3ce24745e8c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26190_Graebel%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26190-graebel-dynamics-365-finance-logo.webp",
+   "bytes": 1840,
+   "sha256": "ca4589df95953c324e0c69f84403abff0264dfd52fa8ab4121682c2c79fe7fcb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26190_Graebel%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26196-microsoft-azure-sql-database-header.webp",
+   "bytes": 32604,
+   "sha256": "cd2cbbd58b48b7af0568294e8b45042a5a174638275551339b0dbc898a5cebe8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26196_Microsoft%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26196-microsoft-azure-sql-database-logo.webp",
+   "bytes": 822,
+   "sha256": "946e9f0d183435741b7fde00e62ed26612e56648e0af7fb54c0f7af47a9810be",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26196_Microsoft%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26197-regal-rexnord-microsoft-copilot-studio-header.webp",
+   "bytes": 40150,
+   "sha256": "861b4bd80e7a162119a61e84b3463983222c52c6320e036cf12083389e9501fc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26197_Regal%20Rexnord%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26197-regal-rexnord-microsoft-copilot-studio-logo.webp",
+   "bytes": 2690,
+   "sha256": "2332c5aab6788b15347136df65ba4bc281a046b74a3a6d62b558035e8103244d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26197_Regal%20Rexnord%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26203-milliman-azure-header.webp",
+   "bytes": 21212,
+   "sha256": "be63528891d51708242397bc18a812829f1122d1cdcefcfce75cd0df89cd9805",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26203_Milliman%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26203-milliman-azure-logo.webp",
+   "bytes": 1826,
+   "sha256": "ab7751c2eb5c3cae2dac6284c737051e59eb42434000e3b47253304f93a0124b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26203_Milliman%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26210-trust-for-the-national-mall-azure-header.webp",
+   "bytes": 23912,
+   "sha256": "81f1405271d73190def363346c12dab4910d0649ecc07b1b0afe1327c1728234",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26210_Trust%20for%20the%20National%20Mall%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26210-trust-for-the-national-mall-azure-logo.webp",
+   "bytes": 4074,
+   "sha256": "d7e65add5b9497be1504ce004de03e3440e6f5f96f9e26124a645170e119a633",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26210_Trust%20for%20the%20National%20Mall%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26220-riddell-azure-header.webp",
+   "bytes": 23186,
+   "sha256": "08670ad220efa871119df9150b4cecd57137593621970fbffd3e7f7a3d104b54",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26220_Riddell%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26220-riddell-azure-logo.webp",
+   "bytes": 3192,
+   "sha256": "645fb13601ecf52f9d0848af8ec031f1ecb7c1ee9154ac48e50ce38923c34b62",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26220_Riddell%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26227-activision-blizzard-oracle-database-at-azure-header.webp",
+   "bytes": 33762,
+   "sha256": "2e41f0ec3c0d14e973437dae6883530dbe2729f8816c683ac6d6865b719b13b7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26227_Activision%20Blizzard%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26227-activision-blizzard-oracle-database-at-azure-logo.webp",
+   "bytes": 2836,
+   "sha256": "e86b4dc3359f0971ce7020942a6cc06c6a5ea40b686eda26647c532256ea3dc8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26227_Activision%20Blizzard%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26230-the-church-of-jesus-christ-of-latter-day-saints-dynamics-365-finance-header.webp",
+   "bytes": 29982,
+   "sha256": "57cf05e40d3ded648a21446ba0f95d2b8d9abac454d58e232a902036ed915e80",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26230_The%20Church%20of%20Jesus%20Christ%20of%20Latter%20day%20Saints%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26230-the-church-of-jesus-christ-of-latter-day-saints-dynamics-365-finance-logo.webp",
+   "bytes": 3598,
+   "sha256": "49816b8199f65fc42bb874b861f958503f85eb4625f2029f51158f7e2007940a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26230_The%20Church%20of%20Jesus%20Christ%20of%20Latter%20day%20Saints%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26233-verdantas-microsoft-copilot-studio-header.webp",
+   "bytes": 68110,
+   "sha256": "ef8c430cae02ca9719d0f00308f1d29d65e6cc1d030e35b80a758294e1b86405",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26233_Verdantas%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26233-verdantas-microsoft-copilot-studio-logo.webp",
+   "bytes": 2470,
+   "sha256": "e50a555af2e63bb830216c01fc4dd8ab1c0bd3c560bb614cbc49f63d8d76a046",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26233_Verdantas%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26248-university-of-rochester-medical-center-microsoft-dragon-copilot-header.webp",
+   "bytes": 51740,
+   "sha256": "7970aeed29c802c4af65fd2fc7e9cc1ce35c42a2a0dc002bdcf7333a6e9cddeb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26248_University%20of%20Rochester%20Medical%20Center%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26248-university-of-rochester-medical-center-microsoft-dragon-copilot-logo.webp",
+   "bytes": 3898,
+   "sha256": "37d2e1dd95f885cbf262b3d026a7c1e46b16bd11694467d96e5c6791e0712989",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26248_University%20of%20Rochester%20Medical%20Center%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26249-the-marzetti-company-azure-virtual-desktop-header.webp",
+   "bytes": 33176,
+   "sha256": "91db0095d8ef05b4e32333d186ef5a27f123cc2ece24127a87be95f624d42ac0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26249_The%20Marzetti%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26249-the-marzetti-company-azure-virtual-desktop-logo.webp",
+   "bytes": 2042,
+   "sha256": "9ebc3f7548094970bca65f9ba278ced51d25e751602ba342c9968d928601d2f3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26249_The%20Marzetti%20Company%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26257-manpowergroup-microsoft-365-e5-header.webp",
+   "bytes": 24750,
+   "sha256": "f8b854c0ce943f130b6406f83c861a52be4cafc624a06b5c22ee70aac2cf73a3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26257_ManpowerGroup%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26257-manpowergroup-microsoft-365-e5-logo.webp",
+   "bytes": 1634,
+   "sha256": "dc4013d6b40e75e29115d309ca8f539b250120c93bd270468047cdd87171328b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26257_ManpowerGroup%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26258-broward-county-public-schools-microsoft-365-copilot-header.webp",
+   "bytes": 18846,
+   "sha256": "13c56fcd916c880ed666db3e92d7445ea228b060bc18ff92ef90b3778d4fd16e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26258_Broward%20County%20Public%20Schools%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26258-broward-county-public-schools-microsoft-365-copilot-logo.webp",
+   "bytes": 3582,
+   "sha256": "bd68062532011f5436b57b2d40faa741e6a3c22dc4950421a7dc1cb848c9736d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26258_Broward%20County%20Public%20Schools%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26265-unifi-microsoft-copilot-studio-header.webp",
+   "bytes": 33398,
+   "sha256": "7212bcab1d2eebf9a2b06a1af39cf264bc6848a8aba67c074b393760a505f16f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26265_Unifi%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26265-unifi-microsoft-copilot-studio-logo.webp",
+   "bytes": 4162,
+   "sha256": "9a1433eb50e226941087f0d74e76eced655019a32e74a3377efb4bbd0ea67db1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26265_Unifi%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26266-aalo-atomics-azure-header.webp",
+   "bytes": 22092,
+   "sha256": "66d6aed531c6c51984fd32ab3a1ff16bf3bb535dde838228bf065026e6e3cd08",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26266_Aalo%20Atomics%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26266-aalo-atomics-azure-logo.webp",
+   "bytes": 1766,
+   "sha256": "a1a0a827e9f9641adece879f2a3d3c799ec843b27938922bbaf8c21806145c87",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26266_Aalo%20Atomics%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26268-kpmg-microsoft-fabric-header.webp",
+   "bytes": 21850,
+   "sha256": "316576d3a869dc5f0483df86542b3881c48f847ff8f7a7b89d69d7febbb4325e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26268_KPMG%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26268-kpmg-microsoft-fabric-logo.webp",
+   "bytes": 3248,
+   "sha256": "bdd8c3af3c53ebe0f929239d10ca366b7315d8ce623ff24300b3cd52046c4954",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26268_KPMG%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26270-microsoft-microsoft-foundry-header.webp",
+   "bytes": 20058,
+   "sha256": "aa4c7e5a4cdf23c8c059972a095b2db317342dff562b462b0c91cd9f8e5c5a9e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26270_Microsoft%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26270-microsoft-microsoft-foundry-logo.webp",
+   "bytes": 1310,
+   "sha256": "3622397d2eadbefc4f8d91439a07f60906f2ae3ca3dd87144d893d8aa512010f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26270_Microsoft%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26278-goodwill-industries-international-power-automate-header.webp",
+   "bytes": 16920,
+   "sha256": "4fd851a9db38cd95c7d5419f9e05c436ae3eeee3cd57b08995c6c8ee210efeaf",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26278_Goodwill%20Industries%20International%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26278-goodwill-industries-international-power-automate-logo.webp",
+   "bytes": 3088,
+   "sha256": "44f02276b785d723c53e94793528ed7f52e7e688b325e705e8a12bf57381b7de",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26278_Goodwill%20Industries%20International%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26279-answer-als-azure-header.webp",
+   "bytes": 36910,
+   "sha256": "11a0ecfcb6dcccd5c8a96f205abb658c7b7a265b463c5c1fbf4062948f89ddc0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26279_Answer%20ALS%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26279-answer-als-azure-logo.webp",
+   "bytes": 4874,
+   "sha256": "e573af07a28ec54c11351a4bf7e515b7c43d692a6eacb0b20abb7ecd06a7fcf5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26279_Answer%20ALS%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26302-copeland-azure-header.webp",
+   "bytes": 40808,
+   "sha256": "f2a5a87b04777d15ebc76e9b9034cf936a68880d6a1801a040e08bdede64769f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26302_Copeland%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26302-copeland-azure-logo.webp",
+   "bytes": 1832,
+   "sha256": "98d73d41670fad880450ce2adf150bed9b282db1fbf9812312c17807ef3617ad",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26302_Copeland%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26308-regard-microsoft-dragon-copilot-header.webp",
+   "bytes": 21802,
+   "sha256": "45f11af9607ad5aca44d4e549a62ae5b3b3d3aa16b35b46f5faf328cabfdaab8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26308_Regard%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26308-regard-microsoft-dragon-copilot-logo.webp",
+   "bytes": 1928,
+   "sha256": "8980d06abda58b1e5ba3c0dbaf27ca54b1c23daae0df9a61f1b78e375984b46d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26308_Regard%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26317-florida-department-of-agriculture-and-consumer-services-azure-header.webp",
+   "bytes": 33210,
+   "sha256": "259d3bb458f978858691c84dceff94d6cbf0a08737d115977d3f8c871d6e04e3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26317_Florida%20Department%20of%20Agriculture%20and%20Consumer%20Services%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26317-florida-department-of-agriculture-and-consumer-services-azure-logo.webp",
+   "bytes": 14756,
+   "sha256": "f7cd40278f7a1001702c8a4a7bb22b1a63c56e8835f0ecfdbecc8c1afca1cced",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26317_Florida%20Department%20of%20Agriculture%20and%20Consumer%20Services%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26318-virtua-health-microsoft-copilot-header.webp",
+   "bytes": 16204,
+   "sha256": "b8486ecd5336aa792de0d75a19f5745cfeb326144782a4c4493ba213523ce26f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26318_Virtua%20Health%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26318-virtua-health-microsoft-copilot-logo.webp",
+   "bytes": 2336,
+   "sha256": "d50c815ba6ae6df384778e96655376562a2ac1f1f8e198250f137d3874402c14",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26318_Virtua%20Health%20Story%20Thumbnail?wid=200"
+  },
+  {
+   "path": "static/images/stories/26333-morningstar-inc-microsoft-copilot-header.webp",
+   "bytes": 25708,
+   "sha256": "db1ef8f2060e1e0dc76577d5f1bdf9966f75eba6ac5e8893ba16d323f0843970",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26333_Morningstar%20Inc%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26333-morningstar-inc-microsoft-copilot-logo.webp",
+   "bytes": 2478,
+   "sha256": "3aa511db0c3f3955409eeae6cc1aab96791fe2284c2baa34c71fca9162e3cbf1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26333_Morningstar%20Inc%20Story%20Thumbnail?wid=200"
+  },
+  {
+   "path": "static/images/stories/26359-crowe-microsoft-365-copilot-header.webp",
+   "bytes": 36816,
+   "sha256": "84b74fa1ffa4406078f6d010eb00f7be221e2b011bf5b7df186d86504fb5e298",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26359_Crowe%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26359-crowe-microsoft-365-copilot-logo.webp",
+   "bytes": 2054,
+   "sha256": "8d526919405eaaa221ae693a3a64c0aaba593ce723378a647fd3cd5c39de2e31",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26359_Crowe%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26360-king-county-housing-authority-microsoft-365-copilot-header.webp",
+   "bytes": 30858,
+   "sha256": "8656d7b055f2044c475f3f78e567f95f09cf6b1fb2f05305c25e6492d8eb1368",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26360_King%20County%20Housing%20Authority%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26360-king-county-housing-authority-microsoft-365-copilot-logo.webp",
+   "bytes": 1724,
+   "sha256": "fff464e1299bafdf292ccc2eae28fb1faae8cfab8b25f5ab3909eb44096fbb6e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26360_King%20County%20Housing%20Authority%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26372-cactus-life-sciences-agents-header.webp",
+   "bytes": 19064,
+   "sha256": "9c6664e57eeed0981fefd092040814b6c554de071da9d554130baa02b7f980e6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26372_Cactus%20Life%20Sciences%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26372-cactus-life-sciences-agents-logo.webp",
+   "bytes": 3184,
+   "sha256": "4f1ba11a5356d701dc629a908581f2346e0727eb914c38ae1ffd91879ffe07b0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26372_Cactus%20Life%20Sciences%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26378-concentrix-microsoft-power-platform-header.webp",
+   "bytes": 37426,
+   "sha256": "3fae1482e509d3992c39584b3e98e87af9baba1393b41f711c165b3efd09a09f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26378_Concentrix%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26378-concentrix-microsoft-power-platform-logo.webp",
+   "bytes": 2182,
+   "sha256": "dc727b624155b8fb57216663bf901bb2627226fbfe491835c242cefed7d120d2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26378_Concentrix%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26380-aifi-azure-header.webp",
+   "bytes": 54200,
+   "sha256": "f307344528a5e74f1cb0de91f1a0c2cde7e0245c9a73feb03d94ca65c019ec57",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26380_AiFi%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26380-aifi-azure-logo.webp",
+   "bytes": 2536,
+   "sha256": "f30c253dae80f6e6648a9e7244992b737937c7c22445e8486151f2ce36f2faf5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26380_AiFi%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26397-conagra-brands-microsoft-copilot-header.webp",
+   "bytes": 45584,
+   "sha256": "dacc7561c1729a899c54f05352f1ef8c6f2c8a72cf605257537118e36fe48f06",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26397_Conagra%20Brands%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26397-conagra-brands-microsoft-copilot-logo.webp",
+   "bytes": 4116,
+   "sha256": "64c3dacd22b4ce776378e8c5313a141a09725ceac9abdfeff95611ade24e9e2b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26397_Conagra%20Brands%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26405-premera-blue-cross-microsoft-365-header.webp",
+   "bytes": 25256,
+   "sha256": "b164cd9d0004198ee0660c64d22d87683eb824d8490fe280e7752caf0abc2c48",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26405_Premera%20Blue%20Cross%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26405-premera-blue-cross-microsoft-365-logo.webp",
+   "bytes": 2874,
+   "sha256": "30634b9c5c40e6df25f6c17d582cd525cd9b8c016b2fa2f5f9bcc9974953a780",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26405_Premera%20Blue%20Cross%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26418-kimley-horn-microsoft-365-header.webp",
+   "bytes": 29668,
+   "sha256": "27ab6a43b5a442fe03783c1378896fba6dd9c61595fd778a918211537a8f37dc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26418_Kimley%20Horn%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26418-kimley-horn-microsoft-365-logo.webp",
+   "bytes": 2660,
+   "sha256": "35ec0999a898d80e8cd9c36e06da2eba91bb7c70e430e816ce47a4d6bab131f5",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26418_Kimley%20Horn%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26420-bmtax-azure-openai-in-foundry-models-header.webp",
+   "bytes": 23906,
+   "sha256": "04575fc43e9be4de0c75a9ca699a83a01cc2b109d8cccc00e5465686b6f578ca",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26420_BMTax%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26420-bmtax-azure-openai-in-foundry-models-logo.webp",
+   "bytes": 1780,
+   "sha256": "6e306fd85a7b100b427631319b80457b6a37b9eaa0deb34e592de67980c7d88a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26420_BMTax%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26421-zurich-north-america-azure-header.webp",
+   "bytes": 46218,
+   "sha256": "9cbaeceeba15a1bb4cb85c38d06ae067af0a9159bb74cf400a73592d1b2d0c6e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26421_Zurich%20North%20America%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26421-zurich-north-america-azure-logo.webp",
+   "bytes": 2338,
+   "sha256": "f329146c8576a836dff64ae1694764e39cff87ed6376977689a3362cc6314ddb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26421_Zurich%20North%20America%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26431-washington-state-department-of-ecology-azure-header.webp",
+   "bytes": 20300,
+   "sha256": "dd64f1121360590825a3d4170a4bcbaee014670041e2afb15158464371b33935",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26431_Washington%20State%20Department%20of%20Ecology%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26431-washington-state-department-of-ecology-azure-logo.webp",
+   "bytes": 3004,
+   "sha256": "1c42646bb0e1a70e77848774988ccb3ce18705c3f2e189c97a0bc886e06dfc1d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26431_Washington%20State%20Department%20of%20Ecology%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26475-eton-solutions-microsoft-fabric-header.webp",
+   "bytes": 22878,
+   "sha256": "2ee82ab915210612526859dad3eb2c1af7d621b29d9298aac27f273ea777a81e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26475_Eton%20Solutions%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26475-eton-solutions-microsoft-fabric-logo.webp",
+   "bytes": 1954,
+   "sha256": "9ed23960a6f703781823f8309efeb8932c81e1f8d7645981ecf48c98f2a75f12",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26475_Eton%20Solutions%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26476-quantum-capital-group-azure-app-service-header.webp",
+   "bytes": 35042,
+   "sha256": "0f2c189707c21a7b6598de765e4e99470f08e85729847da63165a6b449f81373",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26476_Quantum%20Capital%20Group%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26476-quantum-capital-group-azure-app-service-logo.webp",
+   "bytes": 3202,
+   "sha256": "71fede9786bc782bdebc4d1e6b976220fb6ecbb86230e98b71203e045d22c819",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26476_Quantum%20Capital%20Group%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26478-the-university-of-south-florida-microsoft-365-copilot-header.webp",
+   "bytes": 29354,
+   "sha256": "8701ec53f9e7cf3e5915559e1dd47f71da9a937515fdf886b4580be71b06e2fd",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26478_The%20University%20of%20South%20Florida%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26478-the-university-of-south-florida-microsoft-365-copilot-logo.webp",
+   "bytes": 4038,
+   "sha256": "e1f316936f3b8e47fe08b1dec76f59a9385ab7b90ff868cb9bf974e23f96a209",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26478_The%20University%20of%20South%20Florida%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26479-gallagher-microsoft-foundry-header.webp",
+   "bytes": 23718,
+   "sha256": "7b9749cf077e551728b3b65040f3396d15d42cc3d8b60e70f651126707dbaf76",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26479_Gallagher%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26479-gallagher-microsoft-foundry-logo.webp",
+   "bytes": 1906,
+   "sha256": "4415ee2b7f96e8dcf551414181f17705873d69331d1c843e8ceb1ec4d5152b68",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26479_Gallagher%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26485-st-lukes-university-health-network-azure-header.webp",
+   "bytes": 44248,
+   "sha256": "690fde7192a3657fea8cbd14c27642175df0a7ae6337cb9078dc54fabc5b189f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26485_St%20Lukes%20University%20Health%20Network%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26485-st-lukes-university-health-network-azure-logo.webp",
+   "bytes": 4580,
+   "sha256": "46f0a126e9bd884fcc95ba09a7623a9c0f44ba075498ab101f65e13f5915ac69",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26485_St%20Lukes%20University%20Health%20Network%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26491-procter-and-gamble-company-azure-header.webp",
+   "bytes": 67994,
+   "sha256": "95b2c7ed5fd1bb47a4d2dc54493123823eafdbcdf2bf731b0af8942769e3b139",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26491_Procter%20and%20Gamble%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26491-procter-and-gamble-company-azure-logo.webp",
+   "bytes": 4946,
+   "sha256": "a51918cc0eced2379f2b8fb79686d24c9e40cf95c1a060a5434fc1b4d1078dbf",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26491_Procter%20and%20Gamble%20Company%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26496-plaud-azure-speech-in-foundry-tools-header.webp",
+   "bytes": 36502,
+   "sha256": "f47b67b260f1ebab00208b6d7bd298ea3162cac6e2bdf0c1e837ed3af2051dec",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26496_Plaud%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26496-plaud-azure-speech-in-foundry-tools-logo.webp",
+   "bytes": 1382,
+   "sha256": "bac819d372ab1d834daf9708fbc208ef20329532a09730de14a94f3b5f6cdd36",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26496_Plaud%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26503-fm-azure-header.webp",
+   "bytes": 28134,
+   "sha256": "7df8616ed2b9a356999a6414fc74b838d2c1dc5eac0c7c8bf89fdda786757967",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26503_FM%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26503-fm-azure-logo.webp",
+   "bytes": 1034,
+   "sha256": "301e2652fa1037f3b1f360b95f3f8d95591f4677bbdccc354777e5550edec16c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26503_FM%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26514-genworth-microsoft-365-e5-header.webp",
+   "bytes": 23336,
+   "sha256": "68ce314df1acc80a12ccb00de41be8a08801eff98b63cce38e31487c53c328fc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26514_Genworth%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26514-genworth-microsoft-365-e5-logo.webp",
+   "bytes": 3296,
+   "sha256": "e58547a6cce1844fbbba5f05cd36ca339b7abfa39369532271e65131a0b81006",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26514_Genworth%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26531-bpm-microsoft-365-copilot-header.webp",
+   "bytes": 25616,
+   "sha256": "522e2ea0a20f10e3e04608b421b19647f4df6182380e56198976470e3e2f4d89",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26531_BPM%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26531-bpm-microsoft-365-copilot-logo.webp",
+   "bytes": 2526,
+   "sha256": "83d68e55e779e6a390cb36a4fc5471bff32bb4090f24aeab74435b8a45bc55c6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26531_BPM%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26532-servicenow-azure-header.webp",
+   "bytes": 22768,
+   "sha256": "d0e248bfac3cc6ed89edb05206c42778f38c0c735c8ad636acd3945c896d6c7c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26532_ServiceNow%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26532-servicenow-azure-logo.webp",
+   "bytes": 2062,
+   "sha256": "5b8093326b07a9cfb60d5654603e7e6b2e7968d45e0cd78f0ac6aafb1e0b2c31",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26532_ServiceNow%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26533-cincinnati-reds-azure-header.webp",
+   "bytes": 93652,
+   "sha256": "b425fc799c4ac9b7b8915cbe943eac93d3d121a3109d3c07ca925c3b4f4efab6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26533_Cincinnati%20Reds%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26533-cincinnati-reds-azure-logo.webp",
+   "bytes": 4348,
+   "sha256": "581b29a27591c43da420d538d22e8e266ad34f0642306c5c82e63519f4737c54",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26533_Cincinnati%20Reds%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26539-university-of-california-san-diego-github-copilot-header.webp",
+   "bytes": 43070,
+   "sha256": "f4712ff45a46608f23e75a23aa35df91a79073ab731270bf1a63df66e17428b7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26539_University%20of%20California%20San%20Diego%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26539-university-of-california-san-diego-github-copilot-logo.webp",
+   "bytes": 2274,
+   "sha256": "12919094b46d678143e5a95a1bb364a1ff20c3f57db5be9f32b7731cd5c126f6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26539_University%20of%20California%20San%20Diego%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26551-university-of-kentucky-microsoft-365-copilot-header.webp",
+   "bytes": 32658,
+   "sha256": "41e4cc89b32cdb13c5e8df14a366d5bc96b59c9d35fbe08a3b155b6e68caf812",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26551_University%20of%20Kentucky%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26551-university-of-kentucky-microsoft-365-copilot-logo.webp",
+   "bytes": 3168,
+   "sha256": "c1c9fa8e6ebe18895490540895d10414bd17c7deb04a9870f418b81535051440",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26551_University%20of%20Kentucky%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26568-healthequity-microsoft-365-copilot-header.webp",
+   "bytes": 22260,
+   "sha256": "4dc1a0223bd4a77caf60f0546cb923a0fc8bf857116c756c4f526194a6179e9e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26568_HealthEquity%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26568-healthequity-microsoft-365-copilot-logo.webp",
+   "bytes": 1884,
+   "sha256": "c6cd5affdb50d23aed9f82bd42c09e413eec5632b78f6656d79f174583e27f13",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26568_HealthEquity%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26599-unc-health-microsoft-fabric-header.webp",
+   "bytes": 37196,
+   "sha256": "53944eb60d7ef3a7de750025e92202a71417464a2c89e2e52d7916d22bd00a67",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26599_UNC%20HEALTH%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26599-unc-health-microsoft-fabric-logo.webp",
+   "bytes": 3360,
+   "sha256": "ce3c186d008dd85ff1aff3b4477938f382b392d4a13936d0794e3b2f47b43913",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26599_UNC%20HEALTH%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26601-zammo-ai-azure-header.webp",
+   "bytes": 29098,
+   "sha256": "1c992f702f2aace6825b9e83beec1165f131a2afd1dccc4b67c854dea9b01c8f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26601_Zammo%20ai%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26601-zammo-ai-azure-logo.webp",
+   "bytes": 2020,
+   "sha256": "9347dbef5b1bf0551723f8eaf22855300b18c050218a05c5f6b4f764f0af51c2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26601_Zammo%20ai%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26622-syracuse-university-surface-header.webp",
+   "bytes": 65220,
+   "sha256": "1f14cd49ec02f0144fe372ea4f2ac2b24d86d649363a35685f57c99f353c38c1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26622_Syracuse%20University%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26622-syracuse-university-surface-logo.webp",
+   "bytes": 4814,
+   "sha256": "870457f9cae4df837c1ba50508c59059b838bb0bd84acd92f921df60dc11f650",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26622_Syracuse%20University%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26623-ad-council-microsoft-copilot-studio-header.webp",
+   "bytes": 36048,
+   "sha256": "34d0ba42d5a45723424813ffca786e5d9e52de768789074e4748903c8b9b8e39",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26623_Ad%20Council%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26623-ad-council-microsoft-copilot-studio-logo.webp",
+   "bytes": 2920,
+   "sha256": "b6485cdb49ba39883597f1f10eb259f191dbb70ba5f4e2a8d201de11431d8ee4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26623_Ad%20Council%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26627-axis-capital-azure-header.webp",
+   "bytes": 61470,
+   "sha256": "243bb02c32c21e75b8c9d156728c71f5a21782388e13b5a532c3a67430f78f80",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26627_AXIS%20Capital%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26627-axis-capital-azure-logo.webp",
+   "bytes": 3072,
+   "sha256": "d880198ba8e923ff7754d43b9d0d8013515cd0c0270d397796e7a2c3d68b7b8d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26627_AXIS%20Capital%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26635-microsoft-copilot-microsoft-copilot-header.webp",
+   "bytes": 21354,
+   "sha256": "c3effeb73d490401aba0306f2e060ba9bc84e320e515da6ddd13df24ff7036e4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26635_Microsoft%20Copilot%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26635-microsoft-copilot-microsoft-copilot-logo.webp",
+   "bytes": 2318,
+   "sha256": "2fa4f9eda75f6e5b4d171bc73026800bbbfcba789c25f504fa342964d32d20e0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26635_Microsoft%20Copilot%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26639-soleno-life-microsoft-365-business-premium-header.webp",
+   "bytes": 35164,
+   "sha256": "e8b653f0f6636e8da05745339416e0acc9141e7e77b41e0f8e4b7f76447dc0c3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26639_Soleno%20Life%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26639-soleno-life-microsoft-365-business-premium-logo.webp",
+   "bytes": 2590,
+   "sha256": "6c0e32190b55c64287c9d09626aa9ff895ffc65a50c5073e86d087f0242dbbca",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26639_Soleno%20Life%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26647-levi-strauss-and-co-microsoft-foundry-header.webp",
+   "bytes": 34678,
+   "sha256": "17dbe062e6124167954c552359b4b22865e098816b7c626fae0547015d5a8a80",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26647_Levi%20Strauss%20and%20Co%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26648-sight-machine-microsoft-foundry-header.webp",
+   "bytes": 32222,
+   "sha256": "e91e0c78d54f1051fed5d9c4545efddc23c2c4db5288691e3e146cbb81f497c2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26648_Sight%20Machine%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26648-sight-machine-microsoft-foundry-logo.webp",
+   "bytes": 2868,
+   "sha256": "322e835f1964cd905fcc5906ae45e0a6e8ae3919693a752defafc8bc9b6b5b6a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26648_Sight%20Machine%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26704-foodpharma-microsoft-fabric-header.webp",
+   "bytes": 11970,
+   "sha256": "d1e8bbd8c635cb3d039815687807bae772f739e4e1e4b04569e86f0196d951ae",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26704_FoodPharma%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26704-foodpharma-microsoft-fabric-logo.webp",
+   "bytes": 3574,
+   "sha256": "30e5ebebdc9f14455ca2b6923496ac3979449b02d164453a417693d502869d82",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26704_FoodPharma%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26705-levi-strauss-and-company-azure-migrate-header.webp",
+   "bytes": 33350,
+   "sha256": "b3fd60ddc504e9a044e7d4cda3d020a9e9a0a5b88bd209c9462fc26b275e4957",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26705_Levi%20Strauss%20and%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26714-california-state-university-san-marcos-dynamics-365-contact-center-header.webp",
+   "bytes": 27396,
+   "sha256": "c09dae4668be1f9addd163b6013929f5550659ba270e50d72f9904fc2def1cfe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26714_California%20State%20University%20San%20Marcos%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26714-california-state-university-san-marcos-dynamics-365-contact-center-logo.webp",
+   "bytes": 4852,
+   "sha256": "8bde446f262ec4b79e5275f3c51083bc19220040f0bbbabfd82b9ecad730ddbb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26714_California%20State%20University%20San%20Marcos%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26750-beekeeperai-azure-confidential-ledger-header.webp",
+   "bytes": 84380,
+   "sha256": "9c02dc995f21da607d95afd6275878e11a452c9011e66d8cfdafbff9fdd46263",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26750_BeeKeeperAI%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26750-beekeeperai-azure-confidential-ledger-logo.webp",
+   "bytes": 1766,
+   "sha256": "1da12e9010a7f5472d46f154e498870fed15a554032b65a51dafa5da313b2f8c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26750_BeeKeeperAI%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26765-brown-university-health-microsoft-365-copilot-header.webp",
+   "bytes": 53150,
+   "sha256": "b68bf4633c25a79b2f2d2c8ba826ee3c937338db78f84a8417f60f0f5a74f0e9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26765_Brown%20University%20Health%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26765-brown-university-health-microsoft-365-copilot-logo.webp",
+   "bytes": 1940,
+   "sha256": "2d099fac4c361aac9b8d168740b2fddaac2c134a7947d8daa4c1440f2f14fe0a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26765_Brown%20University%20Health%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26767-national-football-league-microsoft-copilot-studio-header.webp",
+   "bytes": 28024,
+   "sha256": "8d30ffbb65364a35386a2eb8b730a173b59c43f780ef219e271b7a6bbbd11b0e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26767_National%20Football%20League%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26767-national-football-league-microsoft-copilot-studio-logo.webp",
+   "bytes": 5188,
+   "sha256": "4a2e38d894720cea208cdafbe9b52e36175faa0bdc6a1509b6cf44dfe33aafe3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26767_National%20Football%20League%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26786-alaska-state-government-azure-vmware-solution-header.webp",
+   "bytes": 62466,
+   "sha256": "3b301b517ec60104cabf409dca6542544fe1577cd86a1582f5d479044a6dde87",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26786_Alaska%20State%20Government%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26786-alaska-state-government-azure-vmware-solution-logo.webp",
+   "bytes": 10316,
+   "sha256": "11e3e93953ab84b86f9d519f7f770726acd03bff96334ab672e011becef5b28d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26786_Alaska%20State%20Government%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26794-sirva-dynamics-365-contact-center-header.webp",
+   "bytes": 14656,
+   "sha256": "5029ca154191f2403131d73fec262a4d37b68ce97267a8907cfa2358604ccc29",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26794_Sirva%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26794-sirva-dynamics-365-contact-center-logo.webp",
+   "bytes": 2136,
+   "sha256": "5cae2b744216e68839dcd3fcb9efe7b94fee7ef81963f5f8f99610c1c2fdf197",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26794_Sirva%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26835-teamdynamix-azure-header.webp",
+   "bytes": 44576,
+   "sha256": "1634f0d7eb61533c059546948c9778211e77802cc6c41ad8f374d817532cc25f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26835_TeamDynamix%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26835-teamdynamix-azure-logo.webp",
+   "bytes": 1988,
+   "sha256": "e5abc7612a0003e3b9e9bc5cd0f5dbd9596b89c00351e303416be20dd40af20b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26835_TeamDynamix%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26836-agco-corp-word-header.webp",
+   "bytes": 50678,
+   "sha256": "8be1d875524d34f0ecdeb61e93e6e9695b786547b8fab3c21f8f0fde95d70b97",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26836_AGCO%20Corp%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26836-agco-corp-word-logo.webp",
+   "bytes": 3096,
+   "sha256": "a9704340aa576b29faa3ea210965e87e11f2ac7276f233451cd917242907e503",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26836_AGCO%20Corp%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26882-xoople-microsoft-planetary-computer-pro-header.webp",
+   "bytes": 41190,
+   "sha256": "f8b5063cc45055b902d8785aada3009250f5262048f23364b794267cd3859a97",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26882_Xoople%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26882-xoople-microsoft-planetary-computer-pro-logo.webp",
+   "bytes": 2256,
+   "sha256": "76fadb5c6d953b0d9d218df62602514e6343dc13d3cd06ae3af5470e3f4f3421",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26882_Xoople%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26907-duke-health-microsoft-defender-header.webp",
+   "bytes": 23698,
+   "sha256": "1b36ceb3403e62504193e430b604e2d2bda95da16ae6519bc11f5c0c5a8e6cbe",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26907_Duke%20Health%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26907-duke-health-microsoft-defender-logo.webp",
+   "bytes": 1702,
+   "sha256": "cc9fa2723b1fbd16b004397725293953c6c023ce254ea21ca6de98657d84279f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26907_Duke%20Health%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26947-state-farm-microsoft-power-platform-header.webp",
+   "bytes": 31922,
+   "sha256": "e0a0b26302d2d1471acca6d12b5d6289fbd7722ee02c4bb78e51ed3c116bfd3d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26947_State%20Farm%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26947-state-farm-microsoft-power-platform-logo.webp",
+   "bytes": 2434,
+   "sha256": "6daac50b68f4b1a76f087a32a17bf42f3d5397e7dc5a1f7785c5841ce03c4935",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26947_State%20Farm%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26948-kohler-company-microsoft-365-copilot-header.webp",
+   "bytes": 35024,
+   "sha256": "3903f149dfa286ca48e72656646c10374be23e1c115e5fc27753c6f61a7d6459",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26948_KOHLER%20Company%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26948-kohler-company-microsoft-365-copilot-logo.webp",
+   "bytes": 1836,
+   "sha256": "5a381ad88e14e59a2a3dad3a9615a36ded3b90cde26cea5bad37d5a113ba40cc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26948_KOHLER%20Company%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26955-accenture-microsoft-defender-xdr-header.webp",
+   "bytes": 20328,
+   "sha256": "0b943849f6d3ccb059b480591faf568fe5a73384b634c79855d46cbfc2c8d9f1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26955_Accenture%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26955-accenture-microsoft-defender-xdr-logo.webp",
+   "bytes": 2252,
+   "sha256": "bd389283b1f348cb752170b4ac8b1d2705e89a31d952e4e050a8ed84b0c1ee84",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26955_Accenture%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26967-city-of-raleigh-azure-header.webp",
+   "bytes": 60624,
+   "sha256": "907c68e87d036332686c8a84b20f323ab271ccc7a8ec0d5294a5b772854bf4ce",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26967_City%20of%20Raleigh%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26967-city-of-raleigh-azure-logo.webp",
+   "bytes": 2294,
+   "sha256": "d6d62001a5f47657c0a82f8a64f782022eda88852815e7f63680c43dd8b3c5ff",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26967_City%20of%20Raleigh%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/26987-planet-dds-azure-header.webp",
+   "bytes": 22666,
+   "sha256": "4001157ba6193964db1bb16f99c45a0c902e73f9553a2ab4e4f1fb3f2dc0758d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26987_Planet%20DDS%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/26987-planet-dds-azure-logo.webp",
+   "bytes": 2396,
+   "sha256": "33f6d6761cffc89dd19d243bcbfa13ff64cd157211dd53853f68b136d0a9086b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/26987_Planet%20DDS%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27013-the-contingent-dataverse-header.webp",
+   "bytes": 35776,
+   "sha256": "80c00b6d2e6569824804aedcc551deaabd5aa408f347f64a0449c9701f64edd7",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27013_The%20Contingent%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27013-the-contingent-dataverse-logo.webp",
+   "bytes": 2874,
+   "sha256": "484e5aeba7859568a604067810e15f869e6bba37f65456b3bf6deedc05834858",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27013_The%20Contingent%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27016-muleshoe-area-medical-center-microsoft-dragon-copilot-logo.webp",
+   "bytes": 2852,
+   "sha256": "a41da09af245a819ef11ba9f808113d39a86be5e58c6bf70aedc86b23ae75bb8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27016_Muleshoe%20Area%20Medical%20Center%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27023-tomorrowio-azure-header.webp",
+   "bytes": 23350,
+   "sha256": "4ccd097b231feb9e90ed5ad352f3828d78b5d61668778419f1da7c2b1b09a73e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27023_Tomorrowio%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27023-tomorrowio-azure-logo.webp",
+   "bytes": 1784,
+   "sha256": "c0675a94cf10e736c7b6c2b2e4ddc1a4bf6e272c7a4f506a78c7a8c6057e8e9d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27023_Tomorrowio%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27030-mercy-microsoft-dragon-copilot-header.webp",
+   "bytes": 22816,
+   "sha256": "02fbca1b11ed6b1158a0a4382e019fe3e734a17d8c51f566034cbd21873c7813",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27030_Mercy%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27030-mercy-microsoft-dragon-copilot-logo.webp",
+   "bytes": 2738,
+   "sha256": "79bea33cf21bac14640f62859245fcdd5889f28deb2b83a85f79bfc6d6b6139c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27030_Mercy%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27049-black-and-veatch-microsoft-365-copilot-header.webp",
+   "bytes": 21388,
+   "sha256": "c750748a6e974cb256476156334a689eb7b74e14a094d3a4080df82012c41a97",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27049_Black%20and%20Veatch%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27049-black-and-veatch-microsoft-365-copilot-logo.webp",
+   "bytes": 3036,
+   "sha256": "46456282e83f00d4e99891d57fe02fe332afb4cba0b9eeaa6d9b03e3a74549d8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27049_Black%20and%20Veatch%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27050-black-and-veatch-microsoft-365-copilot-header.webp",
+   "bytes": 81036,
+   "sha256": "f8ea20c0378b1fcab1c0cd5803135edcbfbd1b379aeb4071bda7c5e6981ae2a4",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27050_Black%20and%20Veatch%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27087-lifetime-products-microsoft-copilot-studio-header.webp",
+   "bytes": 27910,
+   "sha256": "f0b18805d607e6ea8dc061625a22f9460c145f5171c87eed051e6b919e76c78f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27087_Lifetime%20Products%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27087-lifetime-products-microsoft-copilot-studio-logo.webp",
+   "bytes": 2918,
+   "sha256": "a60a9839c2ba57b17837759baad87b62e120b76d2f799d9aa7d91d74f5a40ac2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27087_Lifetime%20Products%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27102-tx-county-of-harris-microsoft-foundry-header.webp",
+   "bytes": 43944,
+   "sha256": "81092f05d7876358529eee11f96317f5c978aae14454eb41780613a9affe537d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27102_TX%20COUNTY%20OF%20HARRIS%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27102-tx-county-of-harris-microsoft-foundry-logo.webp",
+   "bytes": 7810,
+   "sha256": "6f7f590e266f620d77c016815dd15c6ba794b74796efa0ea76df59e1b3713290",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27102_TX%20COUNTY%20OF%20HARRIS%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27103-acme-corrugated-box-microsoft-fabric-header.webp",
+   "bytes": 40592,
+   "sha256": "747cace366df850616afa4e4de253410e856c170d9be65fb36ff1d11a4d6b899",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27103_Acme%20Corrugated%20Box%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27103-acme-corrugated-box-microsoft-fabric-logo.webp",
+   "bytes": 2804,
+   "sha256": "3eb76174ee7ca8de98208821b3cf82203c41a01dd709d5ada0515053edb16d6e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27103_Acme%20Corrugated%20Box%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27106-korn-ferry-international-microsoft-365-enterprise-header.webp",
+   "bytes": 9586,
+   "sha256": "37f4c2f168a457bdbee939198443fe29139e96be8ae2d97860e99c40c5307946",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27106_Korn%20Ferry%20International%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27106-korn-ferry-international-microsoft-365-enterprise-logo.webp",
+   "bytes": 1682,
+   "sha256": "b3b04170b39528b7478015f9e3be14dea95e0029787f77319706fe6c64617ec2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27106_Korn%20Ferry%20International%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27108-hfw-companies-power-bi-header.webp",
+   "bytes": 43734,
+   "sha256": "41bb3a68fcb28c644a9b1c392d5a14efc012c9ddfcdb4e55217fc497ccebdf35",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27108_HFW%20Companies%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27108-hfw-companies-power-bi-logo.webp",
+   "bytes": 1992,
+   "sha256": "1d55a65bd97e6e55af4d9c594705886de89c3cee7160e04747f9f164c0c44943",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27108_HFW%20Companies%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27115-wellstar-health-system-microsoft-foundry-header.webp",
+   "bytes": 23366,
+   "sha256": "048dffce381f8c81470c21108bf1bbf954b51b632dd989155cc872815a80c38c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27115_Wellstar%20Health%20System%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27115-wellstar-health-system-microsoft-foundry-logo.webp",
+   "bytes": 3714,
+   "sha256": "d82446a12e044726e325454f8216deb92eed4367d933ac27bf10a1c2f1a80902",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27115_Wellstar%20Health%20System%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27144-kentucky-cabinet-of-health-and-family-services-azure-integration-services-header.webp",
+   "bytes": 24042,
+   "sha256": "336833ee96dc02b8ae00c5952a8922921b25b1626e9c71291c28492f8cefb49f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27144_Cabinet%20of%20Health%20and%20Family%20Services%20Government%20of%20the%20Commonwealth%20of%20Kentucky%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27144-kentucky-cabinet-of-health-and-family-services-azure-integration-services-logo.webp",
+   "bytes": 5788,
+   "sha256": "e40af47aca61e5ce3e38f3c582fed0477466816fd2391e85a7fb6988eed81005",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27144_Cabinet%20of%20Health%20and%20Family%20Services%20Government%20of%20the%20Commonwealth%20of%20Kentucky%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27168-jetblue-airways-azure-firewall-header.webp",
+   "bytes": 29718,
+   "sha256": "600710aa3bf77f38b06910b49d6ea36f10b70ea82503afc2243be23e2c288197",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27168_JetBlue%20Airways%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27168-jetblue-airways-azure-firewall-logo.webp",
+   "bytes": 2340,
+   "sha256": "4f093d7a2856b23d3e81f85528b25a1e2ab8a88a1f92a377eec7f87ce874680a",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27168_JetBlue%20Airways%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27171-catalent-azure-openai-in-foundry-models-header.webp",
+   "bytes": 29910,
+   "sha256": "b8b8db9fa25f8142ab98d1fec8bb507613cd6b9cccfce4827dfa7bb5ba873b2c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27171_Catalent%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27171-catalent-azure-openai-in-foundry-models-logo.webp",
+   "bytes": 2186,
+   "sha256": "887ce6f58709c286e0b5f953e1185a74e475a3f2aa7d734dc55dae6fc112de26",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27171_Catalent%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27179-public-employee-benefits-administrators-dynamics-365-customer-service-header.webp",
+   "bytes": 29020,
+   "sha256": "97a5ad44c4275e1711311393631a522faa1227bff29c27c340e661dc8fb9d15f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27179_Public%20Employee%20Benefits%20Administrators%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27179-public-employee-benefits-administrators-dynamics-365-customer-service-logo.webp",
+   "bytes": 1626,
+   "sha256": "0bb38b7301f1e01af6fc1b80303aea01a0144a8713620712cf229fd8fec01484",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27179_Public%20Employee%20Benefits%20Administrators%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27209-williams-microsoft-365-copilot-header.webp",
+   "bytes": 40980,
+   "sha256": "f4f11f1d0f60e11a4e4eb29165344bb4bb1bf69a29276827810168e69b3a4b6c",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27209_Williams%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27209-williams-microsoft-365-copilot-logo.webp",
+   "bytes": 2974,
+   "sha256": "ebbbc69e2277792e5399837332e9bd14397c3a65951005cf52e873ea3d21fcad",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27209_Williams%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27230-axalta-coating-systems-microsoft-fabric-header.webp",
+   "bytes": 13866,
+   "sha256": "53ea6f44d4c86b48d8d0e932d9a3fc2d0046e6f527eaaaaee4a4b8b4cd58d9c9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27230_Axalta%20Coating%20Systems%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27230-axalta-coating-systems-microsoft-fabric-logo.webp",
+   "bytes": 3000,
+   "sha256": "1c74539f065d1e5151fd5ff65d0f7686236d910ef05dddba57c32bfcaeae56a1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27230_Axalta%20Coating%20Systems%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27274-24-hour-fitness-dynamics-365-sales-header.webp",
+   "bytes": 48368,
+   "sha256": "45a9f0708a3a42b929ccc7b3acfe07bad6900d696d33b816882c068c6f2f8633",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27274_24%20HOUR%20FITNESS%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27274-24-hour-fitness-dynamics-365-sales-logo.webp",
+   "bytes": 3632,
+   "sha256": "ae6868a78b69f556d49ba6c67515c5900e32faac693765b490b3f4d988bd4b8b",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27274_24%20HOUR%20FITNESS%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27277-avanade-microsoft-security-copilot-header.webp",
+   "bytes": 35434,
+   "sha256": "9ef08d08ff6cd5a7152a09dcec9c7d9b2dcc4fc1fc1b8f2031bd6cab733bb9e1",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27277_Avanade%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27277-avanade-microsoft-security-copilot-logo.webp",
+   "bytes": 2678,
+   "sha256": "7952fedd25667d43740176be1c5fa88512eb34bf4f35cd8317c927847f586574",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27277_Avanade%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27289-pamarco-technologies-dynamics-365-finance-header.webp",
+   "bytes": 42562,
+   "sha256": "c7552e1becf0a1d39c266d7bac74b3ffd5c5f78ba5e9c7c5b2de326b80833195",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27289_Pamarco%20Technologies%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27289-pamarco-technologies-dynamics-365-finance-logo.webp",
+   "bytes": 2958,
+   "sha256": "9398178ef069066a2d79341bbb2c8386cad081287e4b0291403e51b69f93d571",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27289_Pamarco%20Technologies%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27291-bny-azure-openai-in-foundry-models-header.webp",
+   "bytes": 34928,
+   "sha256": "a9f4230db388012e95bc6d0f9ff656c508e34533a993363a3547015d1c97eea8",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27291_BNY%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27291-bny-azure-openai-in-foundry-models-logo.webp",
+   "bytes": 1858,
+   "sha256": "7d83958081d0ee0fc12028e59ba058b9ca609a92aa2dfa10acc3cc3f86b8972d",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27291_BNY%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27299-docusign-microsoft-foundry-header.webp",
+   "bytes": 35658,
+   "sha256": "08d52816fc56dab8b59c9a69b22609c4fd63a0ee5d3fa0b5ccf25167cae93148",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27299_Docusign%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27299-docusign-microsoft-foundry-logo.webp",
+   "bytes": 1738,
+   "sha256": "4aabefae1a2f87abbcf1cdfdd680e5ec40bfb4696c5cda9909d052378ae7289f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27299_Docusign%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27318-moodys-microsoft-365-copilot-header.webp",
+   "bytes": 20528,
+   "sha256": "695d51411112794053d8695f51adc155755f26eba44cd351b5193bb3c35a50fd",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27318_Moodys%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27318-moodys-microsoft-365-copilot-logo.webp",
+   "bytes": 2174,
+   "sha256": "f475aef23d249e712619f41bc668fb5e1394f8bf31f4f5d68295d03c61febe5e",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27318_Moodys%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27320-bny-microsoft-foundry-header.webp",
+   "bytes": 19186,
+   "sha256": "31a70bb0feef6438f9e3c1021c1a49d9c493af6421c9e31e2ee17d28c6f9abb2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27320_BNY%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27320-bny-microsoft-foundry-logo.webp",
+   "bytes": 1824,
+   "sha256": "1a27eaf50f6ea37b6271e18c57ca17141aee679542cb75638d4277d2c9d315b0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27320_BNY%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27322-bny-microsoft-365-copilot-header.webp",
+   "bytes": 40924,
+   "sha256": "c5152344d20f492075c297e17c87afb6a3e620c2b32ca9fe82761e90716905b2",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27322_BNY%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27363-microsoft-azure-kubernetes-service-header.webp",
+   "bytes": 66210,
+   "sha256": "72689d34d41d53fcf31cb2f9f414e58fffdbe8cfa318862464a03f2542764698",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27363_Microsoft%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27363-microsoft-azure-kubernetes-service-logo.webp",
+   "bytes": 1296,
+   "sha256": "4db0458c222442c066fc6ce0b7d22059431c547b7ad7082f26dbdf03094daedc",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27363_Microsoft%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27375-z-s-associates-inc-microsoft-security-copilot-header.webp",
+   "bytes": 48398,
+   "sha256": "9edde167db3f23d5d4418d5ebb6f4428fd287400b17840857b3ffa7a83bdf4e0",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27375_Z%20S%20Associates%20Inc%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27375-z-s-associates-inc-microsoft-security-copilot-logo.webp",
+   "bytes": 2034,
+   "sha256": "5ec8fe3c368bcf598c17475fa16c0389e11178c528c26a3e21ec97c2928fe3ce",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27375_Z%20S%20Associates%20Inc%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27376-atlanta-public-schools-microsoft-power-platform-header.webp",
+   "bytes": 43412,
+   "sha256": "9a5f28a9e421774e51f94e0e97db3749e1ef239997404712ec17874eaf128503",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27376_Atlanta%20Public%20Schools%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27376-atlanta-public-schools-microsoft-power-platform-logo.webp",
+   "bytes": 5224,
+   "sha256": "8764b92e919b985d4cbec6fa4bff6e8361d127546760e161cdd37ff5628120fb",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27376_Atlanta%20Public%20Schools%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/stories/27388-canlak-coatings-microsoft-fabric-header.webp",
+   "bytes": 22734,
+   "sha256": "b107008404bbfbd1793d2e1d2074e5a03485e7ad4fd260d2435af400df3666f6",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27388_Canlak%20Coatings%20Header%20Image?wid=800"
+  },
+  {
+   "path": "static/images/stories/27388-canlak-coatings-microsoft-fabric-logo.webp",
+   "bytes": 4362,
+   "sha256": "a00cb10d189a268fc2cb1727c23739a123961a7c573f440bf07a0d4c7dfbb0ac",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/27388_Canlak%20Coatings%20Logo?wid=200"
+  },
+  {
+   "path": "static/images/support/documents23.svg",
+   "bytes": 1426,
+   "sha256": "6b1694b280794596452f92ebd984e9c5dade050384a0c9520b9cd8d6a73b3578",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/documents23?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=48&hei=48&qlt=75&fit=constrain"
+  },
+  {
+   "path": "static/images/support/media-03.webp",
+   "bytes": 27362,
+   "sha256": "b25ddb999d310b44fbdbbcfc3a31e353a5d3df9a12d1589f969d961dbef0bc7f",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/media-03?wid=800"
+  },
+  {
+   "path": "static/images/support/messages05-1.svg",
+   "bytes": 322,
+   "sha256": "db6677d1e674ce8c6f66fd164bf984c75e2111a9bfc6f4eab0ef50ee186e74d3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/messages05-1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=48&hei=48&qlt=75&fit=constrain"
+  },
+  {
+   "path": "static/images/support/support-health-icon.svg",
+   "bytes": 2003,
+   "sha256": "7d9d26213731d9497d881f212e95a8624db57c2d4b5e5410092fd1b9c6f975ee",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/support_health_icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=48&qlt=75&fit=constrain"
+  },
+  {
+   "path": "static/images/support/support-hero-image.webp",
+   "bytes": 4704,
+   "sha256": "686a421df4c03d8006ecf9c62298b30e96ddeeba1e78089560b9acaa72701ee9",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/support_hero_image?wid=800"
+  },
+  {
+   "path": "static/images/support/users06.svg",
+   "bytes": 1605,
+   "sha256": "92487e8e7d2f87646f5d6adef62ea7449910c452d2e056bf1ba01685aeb45dd3",
+   "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/users06?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=48&hei=44&qlt=75&fit=constrain"
+  }
+ ]
+}

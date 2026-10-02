@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} Scores | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ league_name }} Scores</h1>
+  <nav class="league-tabs">
+    <a href="/{{ league }}">Home</a>
+    <a class="active" href="/scores/{{ league }}" aria-current="page">Scores</a>
+    <a href="/{{ league }}/schedule">Schedule</a>
+    <a href="/{{ league }}/standings">Standings</a>
+    <a href="/{{ league }}/teams">Teams</a>
+    <a href="/{{ league }}/players">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+{% set ns = namespace(current=null) %}
+{% for game in games %}
+  {% if game.date_iso != ns.current %}
+    {% if ns.current is not none %}</div></section>{% endif %}
+    {% set ns.current = game.date_iso %}
+    <section class="section">
+      <div class="section-head"><h2>{{ game.date_iso }}</h2></div>
+      <div class="game-grid">
+  {% endif %}
+  {% include '_game_card.html' %}
+{% endfor %}
+{% if games %}</div></section>{% endif %}
+{% endblock %}

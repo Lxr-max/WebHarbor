@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Field Offices{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Field Offices</h1>
+  <p>Enter your ZIP code to find the USCIS field office with jurisdiction over your location, along with its address and the office that handles your case.</p>
+
+  <form class="usa-form zip-form" method="get" action="{{ url_for('field_office_search') }}">
+    <label class="form-label" for="zip"><span class="form-label__title">ZIP Code</span></label>
+    <div class="input-group input-group--text">
+      <input id="zip" type="text" name="zip" maxlength="5" placeholder="Enter your 5-digit ZIP code" value="{{ zip_q }}">
+      <button class="btn btn--primary" type="submit">Search</button>
+    </div>
+  </form>
+
+  {% if zip_q %}
+    {% if zip_row and office %}
+    <section class="office-result">
+      <h2>{{ office.name }} Field Office</h2>
+      <dl class="office-meta">
+        <dt>Field Office Designation:</dt><dd>{{ office.designation }}</dd>
+        <dt>Address:</dt><dd>{{ office.street }}</dd>
+        <dt>City/State/ZIP:</dt><dd>{{ office.city }}, {{ office.state }} {{ office.zip }}</dd>
+        <dt>District:</dt><dd>{{ office.district_code }} &mdash; {{ office.district_name }}</dd>
+        <dt>Region:</dt><dd>{{ office.region }}</dd>
+        <dt>Service Center:</dt><dd>{{ office.service_center }}</dd>
+      </dl>
+      <p>Your ZIP code <strong>{{ zip_q }}</strong> ({{ zip_row.city }}, {{ zip_row.state }}) is served by the {{ office.name }} Field Office.</p>
+    </section>
+    {% else %}
+    <div class="alert-box alert-box--error">
+      <p>No field office was found for ZIP code {{ zip_q }}. Please check the ZIP code and try again.</p>
+    </div>
+    {% endif %}
+  {% endif %}
+
+  <section class="content-section">
+    <h2>Field Office Locator</h2>
+    <p>USCIS field offices handle scheduled interviews for applications for naturalization, adjustment of status cases, and other interviews. Use the locator above to find the field office serving your ZIP code, its mailing address, and the district and region it belongs to.</p>
+    <h2>Helpful Online Tools</h2>
+    <ul class="tick-list">
+      <li><a href="{{ url_for('casestatus') }}">Check your case status</a></li>
+      <li><a href="{{ url_for('processing_times') }}">Check case processing times</a></li>
+      <li><a href="{{ url_for('appointment_landing') }}">Schedule an appointment online</a></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

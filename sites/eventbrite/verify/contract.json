@@ -1,0 +1,999 @@
+{
+  "Eventbrite--0": {
+    "task": "I am choosing between R&B vs Slow Jams Rooftop and the 15th Annual Bushwick Collective Block Party for a free family outing in New York. Compare their free ticket options and age policies, choose the event that allows children, and report its date and venue. As Jordan Lee, ask that organizer whether there is space to park a stroller.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "event_questions": {
+        "added": [
+          {
+            "id": 48,
+            "user_id": null,
+            "event_id": 2,
+            "question": {
+              "contains": [
+                "stroller",
+                "space|park"
+              ]
+            },
+            "answer": "",
+            "author_name": "Jordan Lee",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/rnb\\-rooftop\\-free\\-rsvp\\-brooklyn\\-2026(?:/|\\?|$)",
+      "^/e/15th\\-annual\\-bushwick\\-collective\\-block\\-party(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "r&b",
+          "free rsvp before 11",
+          "21\\+"
+        ],
+        "scope": "r&b"
+      },
+      {
+        "label": "2",
+        "all": [
+          "bushwick",
+          "free rsvp",
+          "all ages"
+        ],
+        "scope": "bushwick"
+      },
+      {
+        "label": "3",
+        "all": [
+          "chose",
+          "bushwick",
+          "june 6.*2026",
+          "outdoor murals"
+        ],
+        "scope": "chose"
+      },
+      {
+        "label": "4",
+        "all": [
+          "submitted",
+          "jordan lee",
+          "stroller"
+        ],
+        "scope": "submitted"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--1": {
+    "task": "Log in with alice.j@test.com / alice12345. Buy 2 General Admission tickets for 'Science + Fiction: Kim Stanley Robinson'. Use Alice Johnson (alice.j@test.com) and Sam Chen (sam.chen@test.com) as the attendees, then report the order code and total on the receipt.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "issued_tickets": {
+        "added": [
+          {
+            "id": 111,
+            "order_id": 65,
+            "tier_id": 5,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "attendee_name": "Alice Johnson",
+            "attendee_email": "alice.j@test.com"
+          },
+          {
+            "id": 112,
+            "order_id": 65,
+            "tier_id": 5,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "attendee_name": "Sam Chen",
+            "attendee_email": "sam.chen@test.com"
+          }
+        ],
+        "updated": {}
+      },
+      "order_items": {
+        "added": [
+          {
+            "id": 65,
+            "order_id": 65,
+            "tier_id": 5,
+            "qty": 2,
+            "unit_price": 25.0
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "added": [
+          {
+            "id": 65,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "user_id": 1,
+            "event_id": 3,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "total": 50.0,
+            "status": "confirmed",
+            "contact_email": "alice.j@test.com",
+            "contact_name": "Alice Johnson",
+            "contact_phone": "",
+            "notes": "{\"dietary\": \"\"}"
+          }
+        ],
+        "updated": {}
+      },
+      "ticket_tiers": {
+        "added": [],
+        "updated": {
+          "[5]": {
+            "sold": 37
+          }
+        }
+      }
+    },
+    "paths": [
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "order",
+          "50(?:\\.00)?"
+        ],
+        "scope": "order"
+      }
+    ],
+    "view_tables": [],
+    "answer_state": [
+      [
+        "orders",
+        "code"
+      ]
+    ]
+  },
+  "Eventbrite--2": {
+    "task": "Log in with alice.j@test.com / alice12345. I want the less expensive option between AI Product Summit 2026 \u2014 Online and Science + Fiction: Kim Stanley Robinson. Compare their lowest ticket prices and refund policies, save the cheaper event to Likes, and report the price difference and your choice.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": 37,
+            "user_id": 1,
+            "event_id": 4,
+            "saved_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/ai\\-product\\-summit\\-online\\-2026(?:/|\\?|$)",
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)",
+      "^/saved(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "ai product summit",
+          "lowest ticket price",
+          "\\$0\\b",
+          "refunds.*1 day"
+        ],
+        "scope": "ai product summit"
+      },
+      {
+        "label": "2",
+        "all": [
+          "science.*fiction",
+          "lowest ticket price",
+          "\\$15\\b",
+          "refunds.*1 day"
+        ],
+        "scope": "science.*fiction"
+      },
+      {
+        "label": "3",
+        "all": [
+          "ai product summit",
+          "15 cheaper"
+        ],
+        "scope": "ai product summit"
+      },
+      {
+        "label": "4",
+        "all": [
+          "saved ai product summit"
+        ],
+        "scope": "saved ai product summit"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--3": {
+    "task": "This benchmark's event catalog is frozen on May 27, 2026. Filter for online Business conferences in June 2026, open the AI conference result, and report the first speaker's name and title.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {},
+    "paths": [
+      "^/e/ai\\-product\\-summit\\-online\\-2026(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "maya sandoval",
+          "head of ai",
+          "stripe"
+        ],
+        "scope": "maya sandoval"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--4": {
+    "task": "Use search filters to show in-person Music events in Austin with a maximum price of $100. Sort by price low to high, then report the first result's title, venue, and lowest ticket price.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {},
+    "paths": [
+      "^/e/knox\\-cell\\-friends\\-acoustic\\-showcase\\-tx\\-\\-a\\-32(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "knox & cell",
+          "continental club"
+        ],
+        "scope": "knox & cell"
+      },
+      {
+        "label": "2",
+        "all": [
+          "lowest ticket price",
+          "95"
+        ],
+        "scope": "lowest ticket price"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--5": {
+    "task": "Find a Performing & Visual Arts event in New York with refunds up to 1 day before the event. As Jordan Lee, ask its organizer whether that deadline is measured from the event's start time. Report the event, start date, and confirmation that the question was submitted.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "event_questions": {
+        "added": [
+          {
+            "id": 48,
+            "user_id": null,
+            "event_id": 3,
+            "question": {
+              "contains": [
+                "refund",
+                "deadline",
+                "start"
+              ]
+            },
+            "answer": "",
+            "author_name": "Jordan Lee",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "science.*fiction",
+          "june 16.*2026"
+        ],
+        "scope": "science.*fiction"
+      },
+      {
+        "label": "2",
+        "all": [
+          "submitted",
+          "question",
+          "deadline",
+          "start time"
+        ],
+        "scope": "submitted"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--6": {
+    "task": "Identify the sold-out Music event in San Francisco. Join its ticket notification list as jordan.lee@test.com, then report the event, venue, and sold-out ticket tier so I know what I am waiting for.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "waitlist": {
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "event_id": 5,
+            "email": "jordan.lee@test.com",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/fillmore\\-sold\\-out\\-night\\-sf\\-2026(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "brassknuckle five",
+          "sold out",
+          "fillmore"
+        ],
+        "scope": "brassknuckle five"
+      },
+      {
+        "label": "2",
+        "all": [
+          "general admission",
+          "sold out"
+        ],
+        "scope": "general admission"
+      },
+      {
+        "label": "3",
+        "all": [
+          "notification",
+          "jordan.lee@test.com"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--7": {
+    "task": "I am considering AI Product Summit 2026 \u2014 Online. Read its timing, speakers, and ticket tiers, then ask the organizer as Jordan Lee whether a recording of the first speaker's session will be available in my timezone. Include that speaker's name and the event's listed timezone in the question, and report the tier count and highest ticket price.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "event_questions": {
+        "added": [
+          {
+            "id": 48,
+            "user_id": null,
+            "event_id": 4,
+            "question": {
+              "contains": [
+                "recording",
+                "maya sandoval",
+                "america/los_angeles"
+              ]
+            },
+            "answer": "",
+            "author_name": "Jordan Lee",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/ai\\-product\\-summit\\-online\\-2026(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "3 ticket tiers|three ticket tiers",
+          "highest ticket price",
+          "149"
+        ],
+        "scope": "3 ticket tiers|three ticket tiers"
+      },
+      {
+        "label": "2",
+        "all": [
+          "maya sandoval",
+          "america/los_angeles",
+          "question"
+        ],
+        "scope": "maya sandoval"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--8": {
+    "task": "Log in with alice.j@test.com / alice12345. I want to plan for Science + Fiction: Kim Stanley Robinson: save it to Likes and download its calendar file. Report the event start and location from the file, and confirm the event is saved.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": 37,
+            "user_id": 1,
+            "event_id": 3,
+            "saved_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)",
+      "^/saved(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saved",
+          "science.*fiction",
+          "likes"
+        ],
+        "scope": "saved"
+      },
+      {
+        "label": "2",
+        "all": [
+          "june 16.*2026",
+          "8:00 pm.*america/new_york|june 17.*00:00 utc"
+        ],
+        "scope": "june 16.*2026"
+      },
+      {
+        "label": "3",
+        "all": [
+          "location",
+          "pioneer works",
+          "159 pioneer",
+          "brooklyn"
+        ],
+        "scope": "location"
+      }
+    ],
+    "view_tables": [],
+    "ics": [
+      "BEGIN:VCALENDAR",
+      "UID:science-fiction-kim-stanley-robinson@webharbor.eventbrite",
+      "DTSTART:20260617T000000Z",
+      "DTEND:20260617T020000Z",
+      "LOCATION:Pioneer Works\\, Pioneer Works\\, 159 Pioneer St\\, Brooklyn\\, NY 11231"
+    ]
+  },
+  "Eventbrite--9": {
+    "task": "Before buying Science + Fiction: Kim Stanley Robinson, check its refund policy and use the Help Center to explain how a buyer requests a refund and who handles it. Include the event's deadline and the cancellation or postponement circumstances in which Eventbrite may step in.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {},
+    "paths": [
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)",
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson/refund(?:/|\\?|$)",
+      "^/help/search(?:/|\\?|$)",
+      "^/help/attending\\-refunds(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "science.*fiction",
+          "refund",
+          "1 day"
+        ],
+        "scope": "science.*fiction"
+      },
+      {
+        "label": "2",
+        "all": [
+          "tickets",
+          "order",
+          "request a refund"
+        ],
+        "scope": "tickets"
+      },
+      {
+        "label": "3",
+        "all": [
+          "organizer",
+          "policy",
+          "handles"
+        ],
+        "scope": "organizer"
+      },
+      {
+        "label": "4",
+        "all": [
+          "eventbrite",
+          "cancelled",
+          "45 days",
+          "postponed",
+          "90 days"
+        ],
+        "scope": "eventbrite"
+      },
+      {
+        "label": "5",
+        "all": [
+          "eventbrite payment processing"
+        ],
+        "scope": "eventbrite payment processing"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--10": {
+    "task": "Log in with alice.j@test.com / alice12345. Prepare a draft Music event called Neighborhood Listening Session in Chicago at Community Studio, summarized as A relaxed evening to share favorite records. Add a description inviting neighbors to bring a favorite album, schedule it for October 20, 2026 from 18:00 to 20:00, and offer 30 free General Admission tickets. Leave it as a draft for review.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "draft_events": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "title": "Neighborhood Listening Session",
+            "summary": "A relaxed evening to share favorite records",
+            "category_slug": "music",
+            "city_slug": "il--chicago",
+            "is_online": 0,
+            "venue_name": "Community Studio",
+            "start_dt": "2026-10-20 18:00:00.000000",
+            "end_dt": "2026-10-20 20:00:00.000000",
+            "description": {
+              "contains": [
+                "neighbor",
+                "favorite album"
+              ]
+            },
+            "tickets_json": "[{\"name\": \"General Admission\", \"price\": 0.0, \"capacity\": 30}]",
+            "step": 4,
+            "updated_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/create/tickets(?:/|\\?|$)",
+      "^/create/publish(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "neighborhood listening session",
+          "draft",
+          "alice"
+        ],
+        "scope": "neighborhood listening session"
+      },
+      {
+        "label": "2",
+        "all": [
+          "30 free general admission"
+        ],
+        "scope": "30 free general admission"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--11": {
+    "task": "Help me plan promotion for my first event. Read How to promote your first event on Eventbrite and compare the organizer pages for Promote your event and Boost ads. Explain the recommended promotional channels, how Boost differs, and the budget-control feature mentioned, citing the blog author and date.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {},
+    "paths": [
+      "^/blog/p/how\\-to\\-promote\\-your\\-first\\-event(?:/|\\?|$)",
+      "^/organize/promote(?:/|\\?|$)",
+      "^/organize/boost(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "how to promote your first event",
+          "jules park",
+          "may 23.*2026"
+        ],
+        "scope": "how to promote your first event"
+      },
+      {
+        "label": "2",
+        "all": [
+          "email",
+          "social",
+          "partner cross.promotion",
+          "reminders"
+        ],
+        "scope": "email"
+      },
+      {
+        "label": "3",
+        "all": [
+          "boost",
+          "self.serve",
+          "eventbrite",
+          "social",
+          "budget caps",
+          "attribution"
+        ],
+        "scope": "boost"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--12": {
+    "task": "Log in with alice.j@test.com / alice12345. Save '15th Annual Bushwick Collective Block Party', then open Likes and confirm the event title appears there.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": 37,
+            "user_id": 1,
+            "event_id": 2,
+            "saved_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/e/15th\\-annual\\-bushwick\\-collective\\-block\\-party(?:/|\\?|$)",
+      "^/saved(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saved",
+          "bushwick collective block party",
+          "likes"
+        ],
+        "scope": "saved"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--13": {
+    "task": "Log in with alice.j@test.com / alice12345. Buy 1 Free RSVP ticket for 'R&B vs Slow Jams Rooftop' for Maya Lee (maya.lee@test.com), enter dietary note 'No nuts', and report the $0.00 receipt total and order code.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "issued_tickets": {
+        "added": [
+          {
+            "id": 111,
+            "order_id": 65,
+            "tier_id": 1,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "attendee_name": "Maya Lee",
+            "attendee_email": "maya.lee@test.com"
+          }
+        ],
+        "updated": {}
+      },
+      "order_items": {
+        "added": [
+          {
+            "id": 65,
+            "order_id": 65,
+            "tier_id": 1,
+            "qty": 1,
+            "unit_price": 0.0
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "added": [
+          {
+            "id": 65,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "user_id": 1,
+            "event_id": 1,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "total": 0.0,
+            "status": "confirmed",
+            "contact_email": "alice.j@test.com",
+            "contact_name": "Alice Johnson",
+            "contact_phone": "",
+            "notes": "{\"dietary\": \"No nuts\"}"
+          }
+        ],
+        "updated": {}
+      },
+      "ticket_tiers": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "sold": 38
+          }
+        }
+      }
+    },
+    "paths": [
+      "^/e/rnb\\-rooftop\\-free\\-rsvp\\-brooklyn\\-2026(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "order",
+          "\\$0\\b"
+        ],
+        "scope": "order"
+      }
+    ],
+    "view_tables": [],
+    "answer_state": [
+      [
+        "orders",
+        "code"
+      ]
+    ]
+  },
+  "Eventbrite--14": {
+    "task": "Log in with alice.j@test.com / alice12345. Buy two VIP Reception tickets for Science + Fiction: Kim Stanley Robinson for Alice Johnson (alice.j@test.com) and Sam Chen (sam.chen@test.com). Apply SUMMER25 before completing the order, then report the discount, receipt total, and order code.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "issued_tickets": {
+        "added": [
+          {
+            "id": 111,
+            "order_id": 65,
+            "tier_id": 7,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "attendee_name": "Alice Johnson",
+            "attendee_email": "alice.j@test.com"
+          },
+          {
+            "id": 112,
+            "order_id": 65,
+            "tier_id": 7,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "attendee_name": "Sam Chen",
+            "attendee_email": "sam.chen@test.com"
+          }
+        ],
+        "updated": {}
+      },
+      "order_items": {
+        "added": [
+          {
+            "id": 65,
+            "order_id": 65,
+            "tier_id": 7,
+            "qty": 2,
+            "unit_price": 75.0
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "added": [
+          {
+            "id": 65,
+            "code": {
+              "regex": "[A-Z0-9-]{8,40}"
+            },
+            "user_id": 1,
+            "event_id": 3,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "total": 125.0,
+            "status": "confirmed",
+            "contact_email": "alice.j@test.com",
+            "contact_name": "Alice Johnson",
+            "contact_phone": "",
+            "notes": "{\"dietary\": \"\", \"promo_code\": \"SUMMER25\", \"discount\": 25.0}"
+          }
+        ],
+        "updated": {}
+      },
+      "ticket_tiers": {
+        "added": [],
+        "updated": {
+          "[7]": {
+            "sold": 202
+          }
+        }
+      }
+    },
+    "paths": [
+      "^/e/science\\-fiction\\-kim\\-stanley\\-robinson(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "discount",
+          "25(?:\\.00)?"
+        ],
+        "scope": "discount"
+      },
+      {
+        "label": "2",
+        "all": [
+          "total",
+          "125(?:\\.00)?"
+        ],
+        "scope": "total"
+      }
+    ],
+    "view_tables": [],
+    "answer_state": [
+      [
+        "orders",
+        "code"
+      ]
+    ]
+  },
+  "Eventbrite--15": {
+    "task": "Log in with alice.j@test.com / alice12345. I have moved to Chicago and want recommendations focused on Music and Food & Drink. Update my account city and interests accordingly, preserving my other profile details, and confirm the saved preferences.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "users": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "city": "Chicago",
+            "interests": "[\"music\", \"food-drink\"]"
+          }
+        }
+      }
+    },
+    "paths": [
+      "^/account(?:/|\\?|$)",
+      "^/account/interests(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "city",
+          "chicago"
+        ],
+        "scope": "city"
+      },
+      {
+        "label": "2",
+        "all": [
+          "interests",
+          "music",
+          "food & drink"
+        ],
+        "scope": "interests"
+      }
+    ],
+    "view_tables": []
+  },
+  "Eventbrite--16": {
+    "task": "From the homepage, open Sign Up and create a new account for Jordan Lee using jordan.lee@test.com and password JordanPass123. Confirm the header shows Jordan, then log out and confirm the header stays logged out.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "email": "jordan.lee@test.com",
+            "password_hash": {
+              "nonempty": 20
+            },
+            "name": "Jordan Lee",
+            "phone": "",
+            "city": "New York",
+            "interests": "[]",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/register(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "jordan",
+          "account",
+          "jordan.lee@test.com"
+        ],
+        "scope": "jordan"
+      },
+      {
+        "label": "2",
+        "all": [
+          "header",
+          "jordan",
+          "logout",
+          "log in"
+        ],
+        "scope": "header"
+      }
+    ],
+    "view_tables": [],
+    "password": "JordanPass123"
+  },
+  "Eventbrite--17": {
+    "task": "I am choosing a city for an event-focused trip. Compare the West and Northeast region listings, identify the city with the most upcoming events in each, then open both cities to report the first featured event and its date. Report the leading cities and their displayed counts. If a region has tied leaders, note all tied cities and choose any one of them for the featured-event comparison.",
+    "initial_digest": "714cfb653ba0b5bf58ce35f4b35c20c8ef04e9b0739ab9d0a24d86522cd2b251",
+    "state": {},
+    "paths": [
+      "^/region/west(?:/|\\?|$)",
+      "^/d/nv\\-\\-las\\-vegas/all\\-events(?:/|\\?|$)",
+      "^/e/women\\-in\\-cybersecurity\\-2026\\-annual\\-nv\\-\\-l\\-29(?:/|\\?|$)",
+      "^/region/northeast(?:/|\\?|$)",
+      "^/d/ma\\-\\-boston/all\\-events(?:/|\\?|$)",
+      "^/e/soul\\-vs\\-trap\\-party\\-ma\\-\\-b\\-18(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "west",
+          "san francisco",
+          "denver",
+          "las vegas",
+          "32",
+          "may 29.*2026",
+          "women in cybersecurity"
+        ],
+        "scope": "west"
+      },
+      {
+        "label": "2",
+        "all": [
+          "northeast",
+          "boston",
+          "34",
+          "soul vs trap party",
+          "may 28.*2026"
+        ],
+        "scope": "northeast"
+      }
+    ],
+    "view_tables": []
+  }
+}

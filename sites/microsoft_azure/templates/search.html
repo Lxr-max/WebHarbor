@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Search — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Search Azure</h1>
+  <form class="filter-bar" method="get" action="{{ url_for('search') }}">
+    <input type="search" name="q" placeholder="Search products, stories, blog posts and documentation" value="{{ q }}" aria-label="Search Azure">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  {% if q %}
+  <p class="result-count">{{ total }} result{{ '' if total == 1 else 's' }} for “{{ q }}”</p>
+
+  {% for key, label in [('products','Products'), ('stories','Customer stories'), ('blog','Blog posts'), ('dictionary','Documentation')] %}
+  {% if results[key] %}
+  <section class="band">
+    <h2>{{ label }}</h2>
+    <div class="card-grid">
+      {% for row in results[key] %}
+      {% if key == 'products' %}
+      <a class="card" href="{{ url_for('product_detail', slug=row.slug) }}"><h3>{{ row.name }}</h3><p>{{ row.desc }}</p></a>
+      {% elif key == 'stories' %}
+      <a class="card" href="{{ url_for('customer_story', slug=row.slug) }}"><h3>{{ row.title }}</h3><p class="card-meta">{{ row.industry_list|join(', ') }}</p></a>
+      {% elif key == 'blog' %}
+      <a class="card" href="{{ url_for('blog_post', slug=row.slug) }}"><h3>{{ row.title }}</h3><p class="card-meta">{{ row.date }}</p></a>
+      {% else %}
+      <a class="card" href="{{ url_for('dictionary_article', slug=row.slug) }}"><h3>{{ row.title }}</h3><p>{{ row.description }}</p></a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <p>Enter a keyword to search products, customer stories, blog posts and documentation.</p>
+  {% endif %}
+</div>
+{% endblock %}

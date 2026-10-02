@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Order Confirmation</span></li>
+{% endblock %}
+{% block content %}
+<section class="container confirm-page">
+  <div class="confirm-box">
+    <h1 class="page-heading">Thank You! Your order has been placed.</h1>
+    <p class="confirm-number">Your order number is <strong>#{{ order.number }}</strong></p>
+    <p>Your order email is {{ order.email }}. Please note that it may take
+       24-48 hours for the shipping company to post the tracking information in their systems.</p>
+    <table class="confirm-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+      <tbody>
+        {% for item in order.items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.qty }}</td>
+          <td>{{ money(item.price * item.qty) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <dl class="confirm-totals">
+      <dt>Subtotal</dt><dd>{{ money(order.subtotal) }}</dd>
+      <dt>Shipping ({{ order.shipping_method }})</dt>
+      <dd>{% if order.shipping_cost == 0 %}FREE{% else %}{{ money(order.shipping_cost) }}{% endif %}</dd>
+      <dt>Sales Tax</dt><dd>{{ money(order.tax) }}</dd>
+      <dt>Order Total</dt><dd class="confirm-total">{{ money(order.total) }}</dd>
+    </dl>
+    <p>
+      <a class="button" href="{{ url_for('order_tracking') }}">Track Your Order</a>
+      <a class="button button--primary" href="{{ url_for('home') }}">Continue Shopping</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

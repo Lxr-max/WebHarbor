@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>404 &mdash; Page Not Found</h1></div>
+<p class="lead">That page does not exist. Try the <a href="{{ url_for('home') }}">home page</a> or <a href="{{ url_for('search') }}">search</a>.</p>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Case Status Online{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Case Status Online</h1>
+  <p>View case status online for your USCIS applications and petitions. Enter your receipt number to get the current position of your case in the process.</p>
+
+  {% if error %}
+  <div class="alert-box alert-box--error" role="alert">
+    <p><strong>Validation Error(s)</strong></p>
+    <p>You must correct the following error(s) before proceeding:</p>
+    <p>{{ error }}</p>
+  </div>
+  {% endif %}
+
+  {% if result %}
+  <section class="case-result">
+    <h2>{{ result.receipt }}</h2>
+    <p class="case-result__form">{{ result.form_number }}, {{ result.form_title }}</p>
+    {% if result.case_type %}<p>{{ result.case_type }}</p>{% endif %}
+    {% if result.office_name %}<p>Processing office: {{ result.office_name }}</p>{% endif %}
+    <div class="alert-box alert-box--success">
+      <p><strong>Your Current Status:</strong> {{ result.current_status }}</p>
+      <p>Status updated: {{ result.status_date }}</p>
+    </div>
+
+    <h3>Case History</h3>
+    <ol class="timeline">
+      {% for step in result.history() %}
+      <li class="timeline__item{% if loop.last %} timeline__item--current{% endif %}">
+        <span class="timeline__date">{{ step.date }}</span>
+        <span class="timeline__status">{{ step.status }}</span>
+        {% if step.note %}<span class="timeline__note">{{ step.note }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+
+    <form method="post" action="{{ url_for('casestatus') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <p><a class="btn btn--anchor" href="{{ url_for('casestatus') }}">Enter Another Receipt Number</a></p>
+    </form>
+  </section>
+  {% else %}
+  <section class="content-section">
+    <h2>Enter a Receipt Number</h2>
+    <form class="usa-form receipt-form" method="post" action="{{ url_for('casestatus') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label class="form-label" for="receipt"><span class="form-label__title">Receipt Number</span></label>
+      <input id="receipt" name="receipt" type="text" maxlength="16" required
+             placeholder="e.g., SRC2210123456" value="{{ request.form.get('receipt', '') }}">
+      <p class="hint">Your receipt number is a unique 13-character identifier that USCIS assigns to your application or petition. It begins with three letters (such as SRC, LIN, WAC, EAC, MSC, YSC, or IOE) followed by 10 numbers.</p>
+      <button class="btn btn--primary" type="submit">Check Status</button>
+    </form>
+  </section>
+  {% endif %}
+
+  <section class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="tool-grid">
+      <a class="tool-tile" href="{{ url_for('account_address') }}"><h3>Change of Address</h3><p>Report and update your address online so that USCIS can contact you about your status.</p></a>
+      <a class="tool-tile" href="{{ url_for('processing_times') }}"><h3>USCIS Processing Times Information</h3><p>See an estimate of how much time USCIS is taking to process your application or petition at its offices.</p></a>
+      <a class="tool-tile" href="{{ url_for('field_offices') }}"><h3>USCIS Office Locations</h3><p>Find local USCIS offices and get directions to the office.</p></a>
+      <a class="tool-tile" href="/tools/while-my-case-is-pending"><h3>While My Case Is Pending</h3><p>See what you can do while your case is pending and when to contact USCIS.</p></a>
+      <a class="tool-tile" href="{{ url_for('appointment_landing') }}"><h3>Submit a Case Inquiry</h3><p>Submit an online inquiry about your case or request other services.</p></a>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign up — Tumblr{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <h1>Join Tumblr</h1>
+  <form class="auth-form" method="post">
+    <label class="field">
+      <span class="field-label">Email</span>
+      <input class="composer-title" type="email" name="email" placeholder="you@example.com" required>
+    </label>
+    <label class="field">
+      <span class="field-label">Username (your blog name)</span>
+      <input class="composer-title" type="text" name="username" placeholder="e.g. starlight-dreamer" required>
+    </label>
+    <label class="field">
+      <span class="field-label">Password (8+ characters)</span>
+      <input class="composer-title" type="password" name="password" required>
+    </label>
+    <button class="btn btn-primary wide" type="submit">Sign up</button>
+  </form>
+  <p class="auth-alt">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+{% endblock %}

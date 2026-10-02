@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Sell Tickets | StubHub{% endblock %}
+{% block content %}
+<div class="sell-page">
+  <div class="sell-hero">
+    <h1>Sell your tickets</h1>
+    <p>List in minutes, price your own tickets, and get paid when they sell.</p>
+    <form method="get" action="/selltickets" class="sell-search">
+      <input type="search" name="q" placeholder="Search for the event" value="{{ q }}">
+      <button type="submit" class="btn btn-primary">Find the event</button>
+    </form>
+  </div>
+  {% if q %}
+  <div class="event-grid list">
+    {% for evt in results %}
+    {% set card = event_card(evt) %}
+    <a class="event-card row" href="/selltickets/event/{{ evt.upstream_id }}">
+      <time class="event-date-box" datetime="{{ evt.local_starts_at.isoformat() }}">
+        <span class="month">{{ evt.local_starts_at.strftime('%b') }}</span>
+        <span class="day">{{ evt.local_starts_at.day }}</span>
+        <span class="dow">{{ evt.local_starts_at.strftime('%a') }}</span>
+      </time>
+      <div class="event-card-body">
+        <h3>{{ evt.name }}</h3>
+        <p class="event-card-when">{{ card.time }}</p>
+        <p class="event-card-venue">{{ card.venue }}</p>
+        <p class="event-card-city">{{ card.city }}</p>
+      </div>
+      <span class="see-tickets">Sell these tickets</span>
+    </a>
+    {% else %}
+    <p class="muted">No events matched "{{ q }}". Try another search.</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

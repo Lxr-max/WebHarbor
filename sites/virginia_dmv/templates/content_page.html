@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a>{% if page.name != 'home' %} › {{ page.title }}{% endif %}</nav>
+  <div class="page-title"><h1>{{ page.title }}</h1></div>
+
+  {% if page.name == 'licenses-ids' %}
+  <nav class="card" aria-label="License and ID services">
+    <a href="{{ url_for('licenses_ids_license') }}">Driver's License</a> ·
+    <a href="{{ url_for('licenses_ids_license_replace') }}">Replace a License</a> ·
+    <a href="{{ url_for('licenses_ids_cdl') }}">Commercial Driver's License</a> ·
+    <a href="{{ url_for('licenses_ids_real_id') }}">REAL ID</a> ·
+    <a href="{{ url_for('licenses_ids_exams') }}">Exams and Study Materials</a>
+  </nav>
+  {% endif %}
+  {% for alert in site_alerts %}
+  <div class="alert" role="alert">
+    <h2>{{ alert.heading }}</h2>
+    <p>{{ alert.message }}</p>
+  </div>
+  {% endfor %}
+
+  {% if data.sidebar_links %}
+  <div class="card">
+    <h2>On this page</h2>
+    <ul class="flow">
+      {% for link in data.sidebar_links %}
+      <li>{% set target = mirror_href(link.href) %}
+        {% if target %}<a href="{{ target }}">{{ link.label }}</a>
+        {% else %}{{ link.label }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if data.cards %}
+  <div class="card-grid">
+    {% for card in data.cards %}
+    {% set target = mirror_href(card.href) %}
+    {% if target %}
+    <a class="card card--flat" href="{{ target }}">
+    {% else %}
+    <div class="card card--flat">
+    {% endif %}
+      {% if card.eyebrow %}<div class="eyebrow">{{ card.eyebrow }}</div>{% endif %}
+      <h3>{{ card.label }}</h3>
+      {% if card.summary %}<p>{{ card.summary }}</p>{% endif %}
+    {% if target %}</a>{% else %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% for sec in data.sections %}
+    {% if sec.heading %}<h2>{{ sec.heading }}</h2>{% endif %}
+    {% for p in sec.paragraphs %}<p>{{ p }}</p>{% endfor %}
+    {% if sec.links %}
+      <ul class="flow">
+        {% for link in sec.links %}
+        <li>{% set target = mirror_href(link.href) %}
+          {% if target %}<a href="{{ target }}">{{ link.label }}</a>
+          {% else %}{{ link.label }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% for list in sec.lists %}
+      <ul class="flow">
+        {% for item in list %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    {% endfor %}
+    {% for table in sec.tables %}
+      <table class="data">
+        {% for row in table %}
+          {% if loop.first %}<tr>{% for cell in row %}<th>{{ cell }}</th>{% endfor %}</tr>
+          {% else %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endif %}
+        {% endfor %}
+      </table>
+    {% endfor %}
+  {% endfor %}
+</div>
+{% endblock %}

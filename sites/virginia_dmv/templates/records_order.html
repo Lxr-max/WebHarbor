@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Record Request{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('records_request') }}">Request a Record</a> › Order</nav>
+  <div class="page-title"><h1>Request Your DMV Record</h1></div>
+  <p>You can view and order your own driver record or the record for any vehicle you own. Records
+  you view online may be viewed again within 5 days of the original purchase at no charge. A
+  driving or vehicle record costs $8.00 online ($9.00 by mail); a certified copy adds $5.00.</p>
+  <form class="flow" method="post" action="{{ url_for('account_records') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="choice">
+      <legend>Which record?</legend>
+      <label class="radio-row"><input type="radio" name="record_type" value="driver" {% if record_type == 'driver' %}checked{% endif %}> My driving record</label>
+      <label class="radio-row"><input type="radio" name="record_type" value="vehicle" {% if record_type == 'vehicle' %}checked{% endif %}> A vehicle record for a vehicle I own</label>
+    </fieldset>
+    <div class="field">
+      <label for="vehicle_id">Vehicle (for vehicle records)</label>
+      <select id="vehicle_id" name="vehicle_id">
+        {% for v in vehicles %}
+        <option value="{{ v.id }}">{{ v.year }} {{ v.make }} {{ v.model }} — title {{ v.title_number }}, VIN {{ v.vin }}</option>
+        {% endfor %}
+      </select>
+      <p class="hint">To request a vehicle record you need the title number and vehicle
+      identification number (VIN) — both are shown for your vehicles.</p>
+    </div>
+    <fieldset class="choice">
+      <legend>Certified copy?</legend>
+      <label class="check-row"><input type="checkbox" name="certified" value="1" {% if certified %}checked{% endif %}> Certified copy (+$5.00)</label>
+    </fieldset>
+    <fieldset class="choice">
+      <legend>Delivery</legend>
+      <label class="radio-row"><input type="radio" name="delivery" value="online" {% if delivery == 'online' %}checked{% endif %}> View online ($8.00)</label>
+      <label class="radio-row"><input type="radio" name="delivery" value="mail" {% if delivery == 'mail' %}checked{% endif %}> Mail to my address ($9.00)</label>
+    </fieldset>
+    <button class="btn" type="submit">Pay and submit request</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Price Match Request{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Price Match Request</span></li>
+{% endblock %}
+{% block content %}
+<section class="container pricematch-page">
+  <h1 class="page-heading">Price Match Request</h1>
+  <p class="category-blurb">At US Appliance we strive to give our customers the best service and pricing available. If you find a better price at another legitimate authorized retailer, we will not only match the price but we'll match 110% of the difference!</p>
+
+  {% if submitted %}
+  <div class="confirm-box">
+    <h2>Request Received</h2>
+    <p>Thanks {{ req.name }} — we received your price match request for:</p>
+    <ul class="pm-summary">
+      <li>Product: {{ req.product }}</li>
+      <li>Competitor: {{ req.competitor }}</li>
+      <li>Competitor price: {{ money(req.competitor_price) }}</li>
+    </ul>
+    <p>Our sales experts will review your request and reply to {{ req.email }} within one business day.</p>
+  </div>
+  {% else %}
+  <form class="pricematch-form" method="post" action="{{ url_for('price_match') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-field">
+      <label for="name">Your Name</label>
+      <input class="form-input" id="name" name="name" required>
+    </div>
+    <div class="form-row-half">
+      <div class="form-field">
+        <label for="email">Email Address</label>
+        <input class="form-input" type="email" id="email" name="email" required>
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone</label>
+        <input class="form-input" id="phone" name="phone">
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="product">US Appliance Product (name or model)</label>
+      <input class="form-input" id="product" name="product" required>
+    </div>
+    <div class="form-row-half">
+      <div class="form-field">
+        <label for="competitor">Competitor Retailer</label>
+        <input class="form-input" id="competitor" name="competitor" required>
+      </div>
+      <div class="form-field">
+        <label for="price">Competitor Price ($)</label>
+        <input class="form-input" type="number" step="any" id="price" name="price" required>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="url">Link to the competitor's product page</label>
+      <input class="form-input" id="url" name="url">
+    </div>
+    <button class="button button--primary" type="submit">Submit Price Match Request</button>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Let's troubleshoot your device{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Hello, we're here to help you</h1>
+  <p>Tell us what's going on and we'll guide you along the way.</p>
+  <form method="post" action="{{ url_for('troubleshoot') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>What device are you troubleshooting?
+      <select name="family" required>
+        <option value="">Select your device brand</option>
+        {% for f in families %}
+        <option value="{{ f }}" {{ 'selected' if family == f }}>{{ f }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>What's the issue?
+      <select name="issue" required>
+        <option value="">Select the issue</option>
+        {% for i in issues %}
+        <option value="{{ i }}" {{ 'selected' if issue == i }}>{{ i }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button type="submit" class="btn btn-primary">Get help</button>
+  </form>
+  {% if flow %}
+  <div class="card result">
+    <h2>{{ flow.device_family }} — {{ flow.issue }}</h2>
+    <h3>Try these steps</h3>
+    <ol>
+      {% for step in flow.steps_list() %}
+      <li>{{ step }}</li>
+      {% endfor %}
+    </ol>
+    <h3>What this means</h3>
+    <p>{{ flow.resolution }}</p>
+    <p><a href="{{ url_for('stores_home') }}">Find a store</a> to book a repair appointment, or <a href="{{ url_for('support_page', slug='contact_us') }}">contact us</a>.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

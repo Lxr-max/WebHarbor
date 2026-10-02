@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Sign In | USPS{% endblock %}
+{% block content %}
+<h1>Sign In to Your USPS.com Account</h1>
+<div class="panel" style="max-width:480px">
+  <form class="flow" action="{{ url_for('login', next=request.args.get('next')) }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username (email) <input type="text" name="email" required></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button class="btn" type="submit">Sign In</button>
+  </form>
+</div>
+<p class="note">This is a research mirror. Use one of the benchmark accounts (password TestPass123!): alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com.</p>
+{% endblock %}

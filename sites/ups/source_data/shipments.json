@@ -1,0 +1,1146 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-28",
+ "mirror_date": "2026-09-28",
+ "upstream_sources": [
+  "Shipment activity vocabulary and status meanings: ups.com Understanding Tracking Status article and the tracking application UI strings (GetLookupData, captured 2026-09-28).",
+  "Facility locations (Kent WA, Hodgkins IL, Louisville KY, Commerce City CO, Maspeth NY, San Bruno CA, Mesquite TX, Doraville GA, Wilmington MA, Tukwila WA, Ontario CA, Louisville KY Worldport) are real UPS network hub cities.",
+  "Shipments, tracking numbers, personas and addresses are mirror-authored fixtures following the real 1Z tracking-number format; dates are pinned relative to the 2026-09-28 snapshot Monday."
+ ],
+ "users": [
+  {
+   "email": "alice.j@test.com",
+   "name": "Alice Johnson",
+   "password_marker": "benchmark",
+   "address": {
+    "line1": "456 West 37th Street, Apt 12C",
+    "city": "New York",
+    "state": "NY",
+    "zip": "10018"
+   },
+   "is_business": false,
+   "account": null
+  },
+  {
+   "email": "bob.w@test.com",
+   "name": "Bob Wang",
+   "password_marker": "benchmark",
+   "address": {
+    "line1": "233 South Wacker Drive, Suite 4100",
+    "city": "Chicago",
+    "state": "IL",
+    "zip": "60606"
+   },
+   "is_business": true,
+   "account": {
+    "number": "8Y7W31",
+    "plan": "Daily Pickup"
+   }
+  },
+  {
+   "email": "carol.d@test.com",
+   "name": "Carol Diaz",
+   "password_marker": "benchmark",
+   "address": {
+    "line1": "88 King Street, Apt 5",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94107"
+   },
+   "is_business": false,
+   "account": null
+  },
+  {
+   "email": "dave.m@test.com",
+   "name": "Dave Miller",
+   "password_marker": "benchmark",
+   "address": {
+    "line1": "1701 South MoPac Expressway, Suite 200",
+    "city": "Austin",
+    "state": "TX",
+    "zip": "78746"
+   },
+   "is_business": true,
+   "account": {
+    "number": "R9X41T",
+    "plan": "UPS Smart Pickup"
+   }
+  }
+ ],
+ "shipments": [
+  {
+   "tracking_number": "1Z58F0E70312456012",
+   "owner_email": "alice.j@test.com",
+   "direction": "inbound",
+   "service": "GND",
+   "shipper_name": "Cascade Coffee Co.",
+   "shipper_city": "Seattle, WA",
+   "from_city": "Seattle",
+   "from_state": "WA",
+   "to_city": "New York",
+   "to_state": "NY",
+   "to_zip": "10018",
+   "weight_lb": 6.4,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-28",
+   "status": "Out for Delivery",
+   "events": [
+    {
+     "day": "2026-09-21",
+     "time": "2:14 P.M.",
+     "status": "Label Created",
+     "location": "Renton, WA",
+     "description": "Shipping information received by UPS. The sender has created a label; UPS has not received the package yet."
+    },
+    {
+     "day": "2026-09-22",
+     "time": "9:47 P.M.",
+     "status": "Origin Scan",
+     "location": "Kent, WA",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-22",
+     "time": "11:32 P.M.",
+     "status": "Departed from Facility",
+     "location": "Kent, WA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-23",
+     "time": "7:08 A.M.",
+     "status": "Arrived at Facility",
+     "location": "Spokane, WA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "3:14 A.M.",
+     "status": "Departed from Facility",
+     "location": "Spokane, WA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "10:52 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-25",
+     "time": "4:36 A.M.",
+     "status": "Departed from Facility",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "8:11 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "2:45 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "7:22 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "8:52 A.M.",
+     "status": "Out for Delivery",
+     "location": "Maspeth, NY",
+     "description": "The local UPS facility has dispatched the package to a driver for final delivery."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z58F0E71248779034",
+   "owner_email": "alice.j@test.com",
+   "direction": "inbound",
+   "service": "3DS",
+   "shipper_name": "Lakeside Books LLC",
+   "shipper_city": "Madison, WI",
+   "from_city": "Madison",
+   "from_state": "WI",
+   "to_city": "New York",
+   "to_state": "NY",
+   "to_zip": "10018",
+   "weight_lb": 2.1,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-21",
+   "status": "Awaiting Customer Pickup",
+   "hold_location_id": "255850",
+   "hold_by": "2026-10-05",
+   "events": [
+    {
+     "day": "2026-09-18",
+     "time": "4:02 P.M.",
+     "status": "Label Created",
+     "location": "Middleton, WI",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-19",
+     "time": "8:26 P.M.",
+     "status": "Origin Scan",
+     "location": "Madison, WI",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-20",
+     "time": "10:44 A.M.",
+     "status": "Departed from Facility",
+     "location": "Madison, WI",
+     "description": ""
+    },
+    {
+     "day": "2026-09-20",
+     "time": "11:58 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-21",
+     "time": "3:07 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-21",
+     "time": "5:33 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-22",
+     "time": "7:41 A.M.",
+     "status": "Out for Delivery",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-22",
+     "time": "10:15 A.M.",
+     "status": "Delivered to a UPS Access Point",
+     "location": "New York, NY",
+     "description": "Package ready for pickup at: The UPS Store #337 10th Ave, 337 10th Ave, New York, NY 10001. Bring a government-issued photo ID."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z58F0E70291534227",
+   "owner_email": "alice.j@test.com",
+   "direction": "inbound",
+   "service": "2DA",
+   "shipper_name": "Harbor Lane Apparel",
+   "shipper_city": "Portland, OR",
+   "from_city": "Portland",
+   "from_state": "OR",
+   "to_city": "New York",
+   "to_state": "NY",
+   "to_zip": "10018",
+   "weight_lb": 4.8,
+   "packages": 1,
+   "signature": "Signature Required",
+   "scheduled_delivery": "2026-09-25",
+   "status": "Exception",
+   "exception_note": "The address information provided by the sender is incorrect. A second delivery attempt requires corrected address details.",
+   "events": [
+    {
+     "day": "2026-09-22",
+     "time": "11:18 A.M.",
+     "status": "Label Created",
+     "location": "Portland, OR",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-23",
+     "time": "1:02 A.M.",
+     "status": "Origin Scan",
+     "location": "Portland, OR",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-23",
+     "time": "5:44 A.M.",
+     "status": "Departed from Facility",
+     "location": "Portland, OR",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "9:30 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-25",
+     "time": "3:12 A.M.",
+     "status": "Departed from Facility",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "6:40 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "1:20 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "9:52 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "6:12 A.M.",
+     "status": "Exception",
+     "location": "Maspeth, NY",
+     "description": "The address information provided by the sender is incorrect. The sender has been notified. Delivery is pending corrected address information."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z58F0E70371234458",
+   "owner_email": "alice.j@test.com",
+   "direction": "inbound",
+   "service": "GND",
+   "shipper_name": "Blue Ridge Ceramics",
+   "shipper_city": "Asheville, NC",
+   "from_city": "Asheville",
+   "from_state": "NC",
+   "to_city": "New York",
+   "to_state": "NY",
+   "to_zip": "10018",
+   "weight_lb": 11.2,
+   "packages": 1,
+   "signature": "Signature Required",
+   "scheduled_delivery": "2026-09-18",
+   "status": "Delivered",
+   "delivered_on": "2026-09-18",
+   "delivered_time": "2:24 P.M.",
+   "signed_by": "A. JOHNSON",
+   "left_at": "",
+   "events": [
+    {
+     "day": "2026-09-15",
+     "time": "9:30 A.M.",
+     "status": "Label Created",
+     "location": "Asheville, NC",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-15",
+     "time": "10:12 P.M.",
+     "status": "Origin Scan",
+     "location": "Asheville, NC",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-16",
+     "time": "4:26 A.M.",
+     "status": "Departed from Facility",
+     "location": "Asheville, NC",
+     "description": ""
+    },
+    {
+     "day": "2026-09-16",
+     "time": "7:33 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Doraville, GA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-17",
+     "time": "2:15 A.M.",
+     "status": "Departed from Facility",
+     "location": "Doraville, GA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-17",
+     "time": "11:36 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-18",
+     "time": "7:04 A.M.",
+     "status": "Out for Delivery",
+     "location": "Maspeth, NY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-18",
+     "time": "2:24 P.M.",
+     "status": "Delivered",
+     "location": "New York, NY",
+     "description": "Signed for by: A. JOHNSON. Residence."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZW362F70355812012",
+   "owner_email": "bob.w@test.com",
+   "direction": "outbound",
+   "service": "GND",
+   "shipper_name": "Wang's Widgets Inc.",
+   "shipper_city": "Chicago, IL",
+   "from_city": "Chicago",
+   "from_state": "IL",
+   "to_city": "Atlanta",
+   "to_state": "GA",
+   "to_zip": "30301",
+   "to_name": "Peachtree Repair Shop",
+   "weight_lb": 14.6,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-30",
+   "status": "In Transit",
+   "events": [
+    {
+     "day": "2026-09-25",
+     "time": "3:45 P.M.",
+     "status": "Label Created",
+     "location": "Chicago, IL",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-26",
+     "time": "10:22 P.M.",
+     "status": "Origin Scan",
+     "location": "Chicago, IL",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-27",
+     "time": "12:41 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "9:18 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "1:04 A.M.",
+     "status": "Departed from Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZW362F70298641057",
+   "owner_email": "bob.w@test.com",
+   "direction": "outbound",
+   "service": "2DM",
+   "shipper_name": "Wang's Widgets Inc.",
+   "shipper_city": "Chicago, IL",
+   "from_city": "Chicago",
+   "from_state": "IL",
+   "to_city": "Boston",
+   "to_state": "MA",
+   "to_zip": "02110",
+   "to_name": "Concord Dental Clinic",
+   "weight_lb": 3.2,
+   "packages": 1,
+   "signature": "Adult Signature Required",
+   "scheduled_delivery": "2026-09-28",
+   "status": "Out for Delivery",
+   "events": [
+    {
+     "day": "2026-09-25",
+     "time": "5:12 P.M.",
+     "status": "Label Created",
+     "location": "Chicago, IL",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-26",
+     "time": "9:33 P.M.",
+     "status": "Origin Scan",
+     "location": "Chicago, IL",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-27",
+     "time": "12:58 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "6:40 A.M.",
+     "status": "Arrived at Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "4:22 P.M.",
+     "status": "Departed from Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "1:36 A.M.",
+     "status": "Arrived at Facility",
+     "location": "Wilmington, MA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "7:48 A.M.",
+     "status": "Out for Delivery",
+     "location": "Wilmington, MA",
+     "description": "Adult signature required at delivery."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZW362F70377128945",
+   "owner_email": "bob.w@test.com",
+   "direction": "outbound",
+   "service": "GND",
+   "shipper_name": "Wang's Widgets Inc.",
+   "shipper_city": "Chicago, IL",
+   "from_city": "Chicago",
+   "from_state": "IL",
+   "to_city": "Miami",
+   "to_state": "FL",
+   "to_zip": "33101",
+   "to_name": "Bayfront Boutique",
+   "weight_lb": 8.9,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-22",
+   "status": "Label Created",
+   "declared_value": 950.0,
+   "events": [
+    {
+     "day": "2026-09-21",
+     "time": "8:20 A.M.",
+     "status": "Label Created",
+     "location": "Chicago, IL",
+     "description": "Shipping information received by UPS. UPS has not yet received the package from the shipper."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZW362F70311839206",
+   "owner_email": "bob.w@test.com",
+   "direction": "outbound",
+   "service": "GND",
+   "shipper_name": "Wang's Widgets Inc.",
+   "shipper_city": "Chicago, IL",
+   "from_city": "Chicago",
+   "from_state": "IL",
+   "to_city": "Denver",
+   "to_state": "CO",
+   "to_zip": "80202",
+   "to_name": "Front Range Labs",
+   "weight_lb": 21.7,
+   "packages": 2,
+   "signature": null,
+   "scheduled_delivery": "2026-09-24",
+   "status": "Delivered",
+   "delivered_on": "2026-09-24",
+   "delivered_time": "10:06 A.M.",
+   "signed_by": "R. NGUYEN",
+   "left_at": "Reception",
+   "events": [
+    {
+     "day": "2026-09-21",
+     "time": "2:12 P.M.",
+     "status": "Label Created",
+     "location": "Chicago, IL",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-22",
+     "time": "11:15 P.M.",
+     "status": "Origin Scan",
+     "location": "Chicago, IL",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-23",
+     "time": "12:30 A.M.",
+     "status": "Departed from Facility",
+     "location": "Hodgkins, IL",
+     "description": ""
+    },
+    {
+     "day": "2026-09-23",
+     "time": "8:42 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "6:55 A.M.",
+     "status": "Out for Delivery",
+     "location": "Commerce City, CO",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "10:06 A.M.",
+     "status": "Delivered",
+     "location": "Denver, CO",
+     "description": "Signed for by: R. NGUYEN. Commercial location."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZF5R8210349901120",
+   "owner_email": "carol.d@test.com",
+   "direction": "inbound",
+   "service": "GND",
+   "shipper_name": "Sunset Home Goods",
+   "shipper_city": "Los Angeles, CA",
+   "from_city": "Los Angeles",
+   "from_state": "CA",
+   "to_city": "San Francisco",
+   "to_state": "CA",
+   "to_zip": "94107",
+   "weight_lb": 7.3,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-22",
+   "status": "Delivered",
+   "delivered_on": "2026-09-22",
+   "delivered_time": "12:38 P.M.",
+   "signed_by": "",
+   "left_at": "Front Porch",
+   "events": [
+    {
+     "day": "2026-09-19",
+     "time": "6:18 A.M.",
+     "status": "Label Created",
+     "location": "Los Angeles, CA",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-19",
+     "time": "11:52 P.M.",
+     "status": "Origin Scan",
+     "location": "Los Angeles, CA",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-20",
+     "time": "3:26 A.M.",
+     "status": "Departed from Facility",
+     "location": "Ontario, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-21",
+     "time": "6:12 A.M.",
+     "status": "Arrived at Facility",
+     "location": "San Bruno, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-22",
+     "time": "7:33 A.M.",
+     "status": "Out for Delivery",
+     "location": "San Bruno, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-22",
+     "time": "12:38 P.M.",
+     "status": "Delivered",
+     "location": "San Francisco, CA",
+     "description": "Left at: Front Porch. Residence."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1ZF5R8210372885301",
+   "owner_email": "carol.d@test.com",
+   "direction": "inbound",
+   "service": "GSP",
+   "shipper_name": "Golden State Threads",
+   "shipper_city": "Sacramento, CA",
+   "from_city": "Sacramento",
+   "from_state": "CA",
+   "to_city": "San Francisco",
+   "to_state": "CA",
+   "to_zip": "94107",
+   "weight_lb": 1.4,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-27",
+   "status": "Transferred to Post Office",
+   "events": [
+    {
+     "day": "2026-09-24",
+     "time": "1:47 A.M.",
+     "status": "Label Created",
+     "location": "Sacramento, CA",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-24",
+     "time": "9:26 P.M.",
+     "status": "Origin Scan",
+     "location": "Sacramento, CA",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-25",
+     "time": "4:15 A.M.",
+     "status": "Departed from Facility",
+     "location": "Sacramento, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "7:52 A.M.",
+     "status": "Arrived at Facility",
+     "location": "San Bruno, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-27",
+     "time": "5:20 A.M.",
+     "status": "Transferred to Post Office",
+     "location": "San Bruno, CA",
+     "description": "The sender requested the shipment be transferred to the local post office to finish the delivery. Allow an extra day or two for final delivery."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z99624Y0371728890",
+   "owner_email": "carol.d@test.com",
+   "direction": "inbound",
+   "service": "GND",
+   "shipper_name": "Maple Craft Studio",
+   "shipper_city": "Toronto, ON, CA",
+   "from_city": "Toronto",
+   "from_state": "ON, CA",
+   "to_city": "San Francisco",
+   "to_state": "CA",
+   "to_zip": "94107",
+   "weight_lb": 5.6,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-10-02",
+   "status": "In Transit",
+   "is_international": true,
+   "events": [
+    {
+     "day": "2026-09-24",
+     "time": "10:12 A.M.",
+     "status": "Label Created",
+     "location": "Toronto, ON, CA",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-24",
+     "time": "11:48 P.M.",
+     "status": "Origin Scan",
+     "location": "Toronto, ON, CA",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-25",
+     "time": "9:15 P.M.",
+     "status": "Departed from Facility",
+     "location": "Toronto, ON, CA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "7:04 A.M.",
+     "status": "Arrived at Facility",
+     "location": "Louisville, KY",
+     "description": "Import scan; shipment has entered the UPS network within the United States."
+    },
+    {
+     "day": "2026-09-27",
+     "time": "6:18 P.M.",
+     "status": "Departed from Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-28",
+     "time": "4:42 A.M.",
+     "status": "In Transit",
+     "location": "Ontario, CA",
+     "description": "The shipment is moving within the UPS network and on schedule."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z7R4T920399120014",
+   "owner_email": "dave.m@test.com",
+   "direction": "outbound",
+   "service": "GND",
+   "shipper_name": "Miller Outfitters",
+   "shipper_city": "Austin, TX",
+   "from_city": "Austin",
+   "from_state": "TX",
+   "to_city": "Seattle",
+   "to_state": "WA",
+   "to_zip": "98101",
+   "to_name": "Rainier Outdoors",
+   "weight_lb": 42.5,
+   "packages": 3,
+   "signature": null,
+   "scheduled_delivery": "2026-09-29",
+   "status": "In Transit",
+   "multi_package": true,
+   "package_events": {
+    "1": "Delivered",
+    "2": "In Transit",
+    "3": "In Transit"
+   },
+   "packages_detail": [
+    {
+     "n": 1,
+     "weight_lb": 12.2,
+     "status": "Delivered",
+     "delivered_on": "2026-09-26",
+     "delivered_time": "3:12 P.M.",
+     "signed_by": "T. OLSEN",
+     "events": [
+      {
+       "day": "2026-09-24",
+       "time": "7:33 A.M.",
+       "status": "Label Created",
+       "location": "Austin, TX",
+       "description": "Shipping information received by UPS."
+      },
+      {
+       "day": "2026-09-24",
+       "time": "10:18 P.M.",
+       "status": "Origin Scan",
+       "location": "Austin, TX",
+       "description": "UPS has received the shipment."
+      },
+      {
+       "day": "2026-09-25",
+       "time": "1:12 A.M.",
+       "status": "Departed from Facility",
+       "location": "Austin, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-25",
+       "time": "11:48 P.M.",
+       "status": "Arrived at Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-26",
+       "time": "2:06 A.M.",
+       "status": "Departed from Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-26",
+       "time": "6:44 A.M.",
+       "status": "Out for Delivery",
+       "location": "Tukwila, WA",
+       "description": ""
+      },
+      {
+       "day": "2026-09-26",
+       "time": "3:12 P.M.",
+       "status": "Delivered",
+       "location": "Seattle, WA",
+       "description": "Signed for by: T. OLSEN. Commercial location."
+      }
+     ]
+    },
+    {
+     "n": 2,
+     "weight_lb": 15.1,
+     "status": "In Transit",
+     "events": [
+      {
+       "day": "2026-09-24",
+       "time": "7:33 A.M.",
+       "status": "Label Created",
+       "location": "Austin, TX",
+       "description": "Shipping information received by UPS."
+      },
+      {
+       "day": "2026-09-24",
+       "time": "10:18 P.M.",
+       "status": "Origin Scan",
+       "location": "Austin, TX",
+       "description": "UPS has received the shipment."
+      },
+      {
+       "day": "2026-09-25",
+       "time": "1:12 A.M.",
+       "status": "Departed from Facility",
+       "location": "Austin, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-25",
+       "time": "11:48 P.M.",
+       "status": "Arrived at Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-26",
+       "time": "2:06 A.M.",
+       "status": "Departed from Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-27",
+       "time": "8:30 P.M.",
+       "status": "Arrived at Facility",
+       "location": "Commerce City, CO",
+       "description": ""
+      },
+      {
+       "day": "2026-09-28",
+       "time": "3:16 A.M.",
+       "status": "Departed from Facility",
+       "location": "Commerce City, CO",
+       "description": ""
+      }
+     ]
+    },
+    {
+     "n": 3,
+     "weight_lb": 15.2,
+     "status": "In Transit",
+     "events": [
+      {
+       "day": "2026-09-24",
+       "time": "7:33 A.M.",
+       "status": "Label Created",
+       "location": "Austin, TX",
+       "description": "Shipping information received by UPS."
+      },
+      {
+       "day": "2026-09-24",
+       "time": "10:18 P.M.",
+       "status": "Origin Scan",
+       "location": "Austin, TX",
+       "description": "UPS has received the shipment."
+      },
+      {
+       "day": "2026-09-25",
+       "time": "1:12 A.M.",
+       "status": "Departed from Facility",
+       "location": "Austin, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-25",
+       "time": "11:48 P.M.",
+       "status": "Arrived at Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-26",
+       "time": "2:06 A.M.",
+       "status": "Departed from Facility",
+       "location": "Mesquite, TX",
+       "description": ""
+      },
+      {
+       "day": "2026-09-27",
+       "time": "8:30 P.M.",
+       "status": "Arrived at Facility",
+       "location": "Commerce City, CO",
+       "description": ""
+      },
+      {
+       "day": "2026-09-28",
+       "time": "3:16 A.M.",
+       "status": "Departed from Facility",
+       "location": "Commerce City, CO",
+       "description": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z7R4T920199330245",
+   "owner_email": "dave.m@test.com",
+   "direction": "outbound",
+   "service": "1DP",
+   "shipper_name": "Miller Outfitters",
+   "shipper_city": "Austin, TX",
+   "from_city": "Austin",
+   "from_state": "TX",
+   "to_city": "Cincinnati",
+   "to_state": "OH",
+   "to_zip": "45202",
+   "to_name": "Riverbend Cycle",
+   "weight_lb": 9.8,
+   "packages": 1,
+   "signature": null,
+   "scheduled_delivery": "2026-09-29",
+   "status": "Label Created",
+   "events": [
+    {
+     "day": "2026-09-28",
+     "time": "7:55 A.M.",
+     "status": "Label Created",
+     "location": "Austin, TX",
+     "description": "Shipping information received by UPS. UPS has not yet received the package from the shipper."
+    }
+   ]
+  },
+  {
+   "tracking_number": "1Z7R4T920288411685",
+   "owner_email": "dave.m@test.com",
+   "direction": "outbound",
+   "service": "2DA",
+   "shipper_name": "Miller Outfitters",
+   "shipper_city": "Austin, TX",
+   "from_city": "Austin",
+   "from_state": "TX",
+   "to_city": "Boston",
+   "to_state": "MA",
+   "to_zip": "02110",
+   "to_name": "Beacon Interiors",
+   "weight_lb": 18.0,
+   "packages": 1,
+   "signature": "Signature Required",
+   "scheduled_delivery": "2026-09-26",
+   "status": "Delivered",
+   "delivered_on": "2026-09-26",
+   "delivered_time": "11:02 A.M.",
+   "signed_by": "J. FLANAGAN",
+   "left_at": "",
+   "events": [
+    {
+     "day": "2026-09-23",
+     "time": "9:14 A.M.",
+     "status": "Label Created",
+     "location": "Austin, TX",
+     "description": "Shipping information received by UPS."
+    },
+    {
+     "day": "2026-09-24",
+     "time": "12:20 A.M.",
+     "status": "Origin Scan",
+     "location": "Austin, TX",
+     "description": "UPS has received the shipment."
+    },
+    {
+     "day": "2026-09-24",
+     "time": "2:10 A.M.",
+     "status": "Departed from Facility",
+     "location": "Austin, TX",
+     "description": ""
+    },
+    {
+     "day": "2026-09-24",
+     "time": "9:44 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Mesquite, TX",
+     "description": ""
+    },
+    {
+     "day": "2026-09-25",
+     "time": "1:18 A.M.",
+     "status": "Departed from Facility",
+     "location": "Mesquite, TX",
+     "description": ""
+    },
+    {
+     "day": "2026-09-25",
+     "time": "10:42 P.M.",
+     "status": "Arrived at Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "2:30 A.M.",
+     "status": "Departed from Facility",
+     "location": "Louisville, KY",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "5:12 A.M.",
+     "status": "Arrived at Facility",
+     "location": "Wilmington, MA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "7:26 A.M.",
+     "status": "Out for Delivery",
+     "location": "Wilmington, MA",
+     "description": ""
+    },
+    {
+     "day": "2026-09-26",
+     "time": "11:02 A.M.",
+     "status": "Delivered",
+     "location": "Boston, MA",
+     "description": "Signed for by: J. FLANAGAN. Commercial location."
+    }
+   ]
+  }
+ ],
+ "service_alerts": [
+  {
+   "id": "alert-1",
+   "title": "Middle East Service Impacts",
+   "body": "UPS is monitoring the situation in the Middle East. Service delays and disruptions may affect shipments to and from the region. Check back for updates.",
+   "link": "https://www.ups.com/us/en/service-alerts?alertId=alert-1"
+  }
+ ]
+}

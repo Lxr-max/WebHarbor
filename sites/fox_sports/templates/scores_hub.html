@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Scores | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Scores</h1></div>
+{% for slug, name, games in boards %}
+<section class="section">
+  <div class="section-head">
+    <h2>{{ name }}</h2>
+    <a class="see-all" href="{{ url_for('scoreboard', league=slug) }}">All {{ name }} Scores</a>
+  </div>
+  <div class="game-grid">
+    {% for game in games %}
+      {% include '_game_card.html' %}
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}{{ plate.title }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('vehicles') }}">Vehicles</a> › <a href="{{ url_for('plates_search') }}">Search/View Specialized License Plates</a> › {{ plate.title }}</nav>
+  <div class="page-title"><h1>{{ plate.title }}</h1></div>
+  <div class="card-grid" style="grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.4fr);">
+    <div class="card plate-card">
+      <img src="{{ plate.image_path() }}" alt="{{ plate.title }} plate">
+      <p class="hint">{{ plate.category }} plate</p>
+    </div>
+    <div>
+      <dl class="kv">
+        <dt>Personalization Available</dt><dd>{{ plate.personalization_available or 'N/A' }}</dd>
+        <dt>Plate Fee (in addition to registration fee)</dt><dd>{{ plate.plate_fee }}</dd>
+        <dt>Personalized Plate Fee (in addition to registration fee)</dt><dd>{{ plate.personalized_fee }}</dd>
+        <dt>Disabled Symbol Available Upon Request</dt><dd>{{ plate.disabled_symbol or 'N/A' }}</dd>
+        <dt>Number of Character Combinations Available on Plate</dt><dd>{{ plate.char_combinations or 'N/A' }}</dd>
+        {% if plate.type_codes and plate.type_codes != '[]' %}
+        <dt>Plate type codes</dt><dd>{{ plate.type_codes }}</dd>
+        {% endif %}
+      </dl>
+      {% if current_user.is_authenticated %}
+      <a class="btn" href="{{ url_for('plate_purchase', slug=plate.slug) }}">Purchase Plate</a>
+      {% else %}
+      <a class="btn" href="{{ url_for('account_login') }}">Log in to Purchase Plate</a>
+      {% endif %}
+      {% if plate.requirements %}
+      <h2>Requirements</h2>
+      <p>{{ plate.requirements }}</p>
+      {% endif %}
+      {% if plate.revenue_sharing %}
+      <h2>Revenue Sharing Plates</h2>
+      <p>{{ plate.revenue_sharing }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <p><a href="{{ url_for('plates_search') }}">Back to all plates</a></p>
+</div>
+{% endblock %}

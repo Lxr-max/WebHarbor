@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ loc.name }}, {{ loc.prov_code }} Weekend Forecast - The Weather Network{% endblock %}
+{% from '_fx_header.html' import fx_header %}
+{% block content %}
+{% call fx_header(loc, obs, tab, updated) %}
+  <h2 style="font-size:16px;font-weight:600">Weekend Outlook</h2>
+  {% for d in weekend %}
+  <div style="margin:14px 0;padding:16px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.16);border-radius:8px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:19px;font-weight:600;color:#fff">{{ d.full_date_label }}</div>
+        <div class="small" style="color:rgba(255,255,255,.8)">{{ d.day_text }} / {{ d.night_text }}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <img src="{{ d.day_icon|wxicon }}" alt="{{ d.day_text }}" style="width:44px;height:44px">
+        <div style="font-size:26px;font-weight:600;color:#fff">{{ d.day_temp|temp(unit) }}
+          <span class="small" style="font-weight:400;color:rgba(255,255,255,.8)">/ {{ d.night_temp|temp(unit) }}</span></div>
+      </div>
+    </div>
+    <div class="small" style="color:rgba(255,255,255,.85);margin-top:10px">
+      P.O.P. {{ d.pop }}% · {{ precip_label(d.rain, d.rain_range, d.snow, d.snow_range, unit) }} ·
+      Day wind {{ d.day_wind_speed|speed(unit) }} {{ d.day_wind_dir }} (gusts {{ d.day_wind_gust|speed(unit) }}) ·
+      Humidity {{ d.day_rh }}%
+    </div>
+  </div>
+  {% endfor %}
+  <p class="fx-updated">Weekend days are highlighted from the 14-day trend. <a href="{{ loc.url('14-days') }}" style="color:#ffea53">See all 14 days</a>.</p>
+{% endcall %}
+{% endblock %}

@@ -1,0 +1,725 @@
+{
+  "SmartAsset--0": {
+    "task": "I can put $240 a month toward a $6,200 credit card balance at 21% APR. Use the Credit Card Payoff Calculator to compare that plan with paying $300 a month. Report the payoff time and total interest for each plan, and how much sooner the larger payment clears the debt.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/credit\\-card(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "240",
+          "35 months",
+          "interest.*2123"
+        ],
+        "scope": "240"
+      },
+      {
+        "label": "2",
+        "all": [
+          "300",
+          "26 months",
+          "interest.*1563"
+        ],
+        "scope": "300"
+      },
+      {
+        "label": "3",
+        "all": [
+          "9 months sooner"
+        ],
+        "scope": "9 months sooner"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--1": {
+    "task": "Use the Credit Card Payoff Calculator twice for a $3,600 balance at 19.9% APR: first with $150 monthly, then with $225 monthly. Compare the payoff time and total interest shown.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/credit\\-card(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "150",
+          "31 months",
+          "interest.*1029"
+        ],
+        "scope": "150"
+      },
+      {
+        "label": "2",
+        "all": [
+          "225",
+          "19 months",
+          "interest.*618"
+        ],
+        "scope": "225"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--2": {
+    "task": "Use the Student Loan Calculator for a $42,000 balance at 6.2% over 10 years with no extra payment, then change the extra monthly payment to $100. Report how many months and how much interest the extra payment saves.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/student\\-loan(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saves?",
+          "27 months",
+          "3476",
+          "interest"
+        ],
+        "scope": "saves?"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--3": {
+    "task": "Use the Savings Calculator with an $8,000 initial deposit, $350 monthly deposits, 12 years, and 4.25% APY. Report the final balance, deposits, and interest earned.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/savings(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "(?:final|ending) balance(?: is| of)?[:\\s]*\\$?78441\\b"
+        ],
+        "scope": "final balance"
+      },
+      {
+        "label": "2",
+        "all": [
+          "deposits",
+          "58400"
+        ],
+        "scope": "deposits"
+      },
+      {
+        "label": "3",
+        "all": [
+          "interest",
+          "20041"
+        ],
+        "scope": "interest"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--4": {
+    "task": "Use the Federal Income Tax Calculator for a married filer earning $145,000 with $12,000 in pre-tax 401(k) contributions and $20,000 itemized deductions. Report the deduction used, taxable income, federal tax, and displayed tax year.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/income\\-tax(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "2025",
+          "deduction",
+          "31500"
+        ],
+        "scope": "2025"
+      },
+      {
+        "label": "2",
+        "all": [
+          "taxable",
+          "101500"
+        ],
+        "scope": "taxable"
+      },
+      {
+        "label": "3",
+        "all": [
+          "federal tax",
+          "12158"
+        ],
+        "scope": "federal tax"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--5": {
+    "task": "Use the State Income Tax Calculator for $110,000 of income as a single filer in Texas, Pennsylvania, and California. Compare the three estimates and state the limitation notice displayed by the calculator.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/state\\-tax(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "texas",
+          "tax",
+          "(?:\\$|usd\\s*)0\\b"
+        ],
+        "scope": "texas"
+      },
+      {
+        "label": "2",
+        "all": [
+          "pennsylvania",
+          "tax",
+          "3135"
+        ],
+        "scope": "pennsylvania"
+      },
+      {
+        "label": "3",
+        "all": [
+          "california",
+          "tax",
+          "5917"
+        ],
+        "scope": "california"
+      },
+      {
+        "label": "4",
+        "all": [
+          "simplified",
+          "2025",
+          "not.*tax return"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--6": {
+    "task": "Use the Paycheck Calculator for a single filer in Texas earning $92,000, paid biweekly, contributing 7% to a 401(k), with $2,400 annual pre-tax health premiums. Report net pay per period and annual take-home.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/paycheck(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "net",
+          "biweekly",
+          "2560"
+        ],
+        "scope": "net"
+      },
+      {
+        "label": "2",
+        "all": [
+          "annual",
+          "66561"
+        ],
+        "scope": "annual"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--7": {
+    "task": "Use the Cost of Living Calculator to compare a $95,000 salary in Austin, TX with New York, NY, then reverse the cities without changing the salary. Report both equivalent salaries and explain what changes.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/cost\\-of\\-living(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "austin to new york",
+          "149070"
+        ],
+        "scope": "austin to new york"
+      },
+      {
+        "label": "2",
+        "all": [
+          "new york to austin",
+          "60542"
+        ],
+        "scope": "new york to austin"
+      },
+      {
+        "label": "3",
+        "all": [
+          "new york",
+          "more expensive"
+        ],
+        "scope": "new york"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--8": {
+    "task": "Use the Mortgage Calculator for a $620,000 home, $124,000 down payment, 6.4% rate, 30-year term, 1.1% property tax, $1,800 annual insurance, and no HOA. Report monthly principal and interest and total monthly payment.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/mortgage(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "(?:principal and interest|principal & interest|p&i)[:\\s]*\\$?3103\\b"
+        ],
+        "scope": "principal and interest"
+      },
+      {
+        "label": "2",
+        "all": [
+          "total monthly(?: payment)?[:\\s]*\\$?3821\\b"
+        ],
+        "scope": "total monthly"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--9": {
+    "task": "Use the Retirement Calculator for age 41, retirement age 65, $105,000 income, $140,000 current savings, $1,250 monthly contribution, 6.5% return, 2.5% inflation, and 75% income replacement. Report the projected nest egg and whether the result says on track.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/retirement(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "nest egg",
+          "1449947"
+        ],
+        "scope": "nest egg"
+      },
+      {
+        "label": "2",
+        "all": [
+          "on track.*no|not on track|shortfall",
+          "120553"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--10": {
+    "task": "I have $250,000 to invest and need tax planning in California. Use the California financial advisor directory to find the highest-rated Tax specialist whose account minimum I meet. Check their fee structure, then send them a message from jordan.lee@test.com asking for help planning taxes on an upcoming stock sale. Report the advisor, firm, rating, minimum assets, and fee structure.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {
+      "contact_advisors": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": null,
+            "advisor_id": 13,
+            "email": "jordan.lee@test.com",
+            "phone": "",
+            "message": {
+              "contains": [
+                "tax",
+                "stock sale"
+              ]
+            },
+            "consult_requested": 0,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/financial\\-advisor/california(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "karen wright",
+          "robertson stephens",
+          "4\\.81",
+          "100000",
+          "fee.only"
+        ],
+        "scope": "karen wright"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--11": {
+    "task": "I am deciding between California and Florida for a move and want access to a Tax specialist with an account minimum no higher than $250,000. Compare the matching advisor counts in both states and the first listed advisor in each where available, including their firm, rating and minimum assets. Tell me which state offers more choices in this directory.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/financial\\-advisor/california(?:/|\\?|$)",
+      "^/financial\\-advisor/florida(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "california",
+          "1 matching|one matching",
+          "karen wright",
+          "robertson stephens",
+          "4\\.81",
+          "100000"
+        ],
+        "scope": "california",
+        "entity": "california"
+      },
+      {
+        "label": "2",
+        "all": [
+          "florida",
+          "1 matching|one matching",
+          "nancy gonzalez",
+          "carson group",
+          "4\\.45",
+          "100000"
+        ],
+        "scope": "florida",
+        "entity": "florida"
+      },
+      {
+        "label": "3",
+        "all": [
+          "tie",
+          "one|1"
+        ],
+        "scope": "tie"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--12": {
+    "task": "Help me decide whether to itemize. Read How the Standard Deduction Works at /smartreads/how-the-standard-deduction-works, then use its related calculator for a single filer earning $98,000 with $8,000 in pre-tax 401(k) contributions. Compare $12,000 versus $20,000 of itemized deductions. Explain which deduction is used in each case and report both federal tax estimates and the tax year.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/smartreads/how\\-the\\-standard\\-deduction\\-works(?:/|\\?|$)",
+      "^/calculators/income\\-tax(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "12000 itemized",
+          "standard",
+          "15750",
+          "11249"
+        ],
+        "scope": "12000 itemized"
+      },
+      {
+        "label": "2",
+        "all": [
+          "20000 itemized",
+          "itemized deduction",
+          "20000",
+          "10314"
+        ],
+        "scope": "20000 itemized"
+      },
+      {
+        "label": "3",
+        "all": [
+          "tax year",
+          "2025"
+        ],
+        "scope": "tax year"
+      },
+      {
+        "label": "4",
+        "all": [
+          "larger eligible deduction"
+        ],
+        "scope": "larger eligible deduction"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--13": {
+    "task": "Help me understand the tax timing of Roth versus traditional IRAs using the SmartReads comparison article and its related calculator. Model age 40, retirement at 65, $6,000 annual contributions, $20,000 already saved, 6% growth, a 24% current marginal rate and a 22% retirement rate. Explain the contribution and withdrawal tax differences and compare the projected after-tax balances, noting whether this calculation includes reinvesting a traditional IRA tax deduction.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/smartreads/roth\\-ira\\-vs\\-traditional\\-ira\\-a\\-side\\-by\\-side\\-comparison(?:/|\\?|$)",
+      "^/calculators/ira(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "traditional",
+          "contributions",
+          "deductible",
+          "withdrawals",
+          "taxed"
+        ],
+        "scope": "traditional"
+      },
+      {
+        "label": "2",
+        "all": [
+          "roth contributions",
+          "after.tax",
+          "qualified withdrawals",
+          "tax.free"
+        ],
+        "scope": "roth contributions"
+      },
+      {
+        "label": "3",
+        "all": [
+          "roth",
+          "after.tax balance",
+          "415024"
+        ],
+        "scope": "roth"
+      },
+      {
+        "label": "4",
+        "all": [
+          "traditional",
+          "after.tax balance",
+          "323719"
+        ],
+        "scope": "traditional"
+      },
+      {
+        "label": "5",
+        "all": [
+          "excludes reinvesting|does not.*reinvest|doesn.t.*reinvest",
+          "deduction"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--14": {
+    "task": "Register a new account using a unique email, run the Credit Card Payoff Calculator with a $4,200 balance, 18.9% APR, and $175 monthly payment, save it as 'Changed payoff plan', then confirm it appears in Saved Calculations.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {
+      "saved_calcs": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 5,
+            "calc_slug": "credit-card",
+            "label": "Changed payoff plan",
+            "inputs_json": "{\"balance\": \"4200\", \"apr\": \"18.9\", \"monthly_payment\": \"175\"}",
+            "summary": "Paid off in 2y 7m, total interest $1,117",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "password_hash": {
+              "nonempty": 20
+            },
+            "name": {
+              "nonempty": 1
+            },
+            "state": "",
+            "zip_code": "",
+            "is_advisor": 0,
+            "tax_filing_status": "single",
+            "joined_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/calculators/credit\\-card(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saved",
+          "changed payoff plan"
+        ],
+        "scope": "saved"
+      },
+      {
+        "label": "2",
+        "all": [
+          "saved calculations",
+          "4200",
+          "18\\.9",
+          "175"
+        ],
+        "scope": "saved calculations"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--15": {
+    "task": "Sign in at /login with alice.j@test.com and password TestPass123!, run the Savings Calculator with $12,000 initially, $500 monthly, 8 years, and 3.8% APY, save it as 'Eight year reserve', then report the saved summary from the account page.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {
+      "saved_calcs": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "calc_slug": "savings",
+            "label": "Eight year reserve",
+            "inputs_json": "{\"initial\": \"12000\", \"monthly_deposit\": \"500\", \"years\": \"8\", \"apy\": \"3.8\"}",
+            "summary": "Final balance: $72,014 ($12,014 interest)",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/calculators/savings(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "eight year reserve",
+          "saved"
+        ],
+        "scope": "eight year reserve"
+      },
+      {
+        "label": "2",
+        "all": [
+          "final balance",
+          "72014",
+          "12014",
+          "interest"
+        ],
+        "scope": "final balance"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--16": {
+    "task": "Sign in at /login as bob.smith@test.com with password TestPass123!. I can leave $18,000 in a CD for either 12 or 24 months at 4.2% APY. Compare the maturity values and interest, then save the 24-month option as Two-year CD reserve and confirm the saved plan reopens with the same inputs.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {
+      "saved_calcs": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 2,
+            "calc_slug": "cd",
+            "label": "Two-year CD reserve",
+            "inputs_json": "{\"principal\": \"18000\", \"apy\": \"4.2\", \"term_months\": \"24\"}",
+            "summary": "At maturity: $19,544 (1,544 interest)",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/calculators/cd(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "12.month",
+          "18756",
+          "interest.*756"
+        ],
+        "scope": "12.month"
+      },
+      {
+        "label": "2",
+        "all": [
+          "24.month",
+          "19544",
+          "interest.*1544"
+        ],
+        "scope": "24.month"
+      },
+      {
+        "label": "3",
+        "all": [
+          "saved",
+          "two.year cd reserve",
+          "18000",
+          "4\\.2",
+          "24 months"
+        ],
+        "scope": "saved"
+      }
+    ],
+    "view_tables": []
+  },
+  "SmartAsset--17": {
+    "task": "Use the Net Worth Calculator after changing cash to $9,500, savings to $28,000, brokerage to $47,000, retirement to $165,000, home value to $480,000, vehicles to $24,000, mortgage to $310,000, auto loans to $8,000, student loans to $12,000, and credit cards to $3,500. Set other assets and other debt to zero. Report total assets, liabilities, and net worth.",
+    "initial_digest": "7eb6295fb049cef9c691986a5892dd2815a9f6cec49638394cd95969ff3b49fb",
+    "state": {},
+    "paths": [
+      "^/calculators/net\\-worth(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "total assets",
+          "753500"
+        ],
+        "scope": "total assets"
+      },
+      {
+        "label": "2",
+        "all": [
+          "total liabilities",
+          "333500"
+        ],
+        "scope": "total liabilities"
+      },
+      {
+        "label": "3",
+        "all": [
+          "net worth",
+          "420000"
+        ],
+        "scope": "net worth"
+      }
+    ],
+    "view_tables": []
+  }
+}

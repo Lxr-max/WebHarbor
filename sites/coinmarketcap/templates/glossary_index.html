@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Crypto Glossary | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>CoinMarketCap Crypto Glossary</h1>
+<p class="muted">{{ terms | length }} terms captured from the upstream glossary. Terms with full
+  articles are linked.</p>
+
+<form method="get" class="glossary-search"><label for="glossary-q">Find a glossary term</label><input id="glossary-q" name="q" value="{{ query }}"><button type="submit" class="btn btn-primary">Search terms</button></form>
+<div class="glossary-grid">
+  {% for t in terms %}
+    {% if t.content %}
+      <a class="glossary-item" href="/academy/glossary/{{ t.slug }}">
+        <b>{{ t.title }}</b>
+        <p class="muted">{{ t.excerpt }}</p>
+        <span class="diff">{{ t.difficulty or 'Easy' }}</span>
+      </a>
+    {% else %}
+      <div class="glossary-item">
+        <b>{{ t.title }}</b>
+        <p class="muted">{{ t.excerpt }}</p>
+        <span class="diff">{{ t.difficulty or 'Easy' }}</span>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

@@ -21,7 +21,16 @@ PID_DIR = Path('/tmp/websyn_pids')
 
 
 def _process_start_time(pid: int) -> int:
-    data = Path(f'/proc/{pid}/stat').read_bytes()
+    # QEMU user-mode emulation rewrites absolute self-stat reads with its
+    # guest start time, which can differ from the kernel time seen by the
+    # control process. Open relative to the proc directory so both processes
+    # use the kernel's exact identity; never tolerate a timestamp mismatch.
+    directory = os.open(f'/proc/{pid}', os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        with open('stat', 'rb', opener=lambda name, flags: os.open(name, flags, dir_fd=directory)) as source:
+            data = source.read()
+    finally:
+        os.close(directory)
     fields_after_comm = data[data.rindex(b')') + 2:].split()
     return int(fields_after_comm[19])
 

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Methodology | CoinMarketCap{% endblock %}
+{% block body %}
+<h1>Methodology</h1>
+<p class="muted">Captured from coinmarketcap.com's methodology page (rendered {{ mirror_date }} UTC).</p>
+<div class="prose">
+{% for line in text.split('\n') %}
+  {% if line.strip() %}<p>{{ line.strip() }}</p>{% endif %}
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('media_releases') }}">Media Releases</a> › {{ release.category }}</div>
+<h1 class="page-title">{{ release.title }}</h1>
+<p class="note">{{ release.date }} · {{ release.category }}{% if release.location %} · {{ release.location }}{% endif %}</p>
+{% if release.images %}
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:1rem 0;">
+  {% for im in release.images %}
+  <img src="{{ im.src }}" alt="{{ im.alt }}" style="width:100%; border:1px solid var(--rule);">
+  {% endfor %}
+</div>
+{% endif %}
+<div class="content-lines">
+  <p>{{ release.body }}</p>
+</div>
+{% if related %}
+<section>
+  <h2>Related Releases</h2>
+  <ul>
+    {% for r in related %}
+    <li><a href="{{ url_for('release_detail', kind=('national-media-release' if r.category == 'National Media Release' else 'local-media-release'), slug=r.slug) }}">{{ r.title }}</a> <span class="note">{{ r.date }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

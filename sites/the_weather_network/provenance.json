@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-26/27",
+  "upstream": "https://www.theweathernetwork.com/",
+  "records": [
+    {
+      "path": "app.py",
+      "classification": "mirror-code",
+      "scope": "Flask application implementing the theweathernetwork.com mirror: home page (hero city tiles, province grids, latest news rail), scored location search with JSON typeahead, location forecast pages across all eleven channels (city / school / airport / ski / golf / beach / camping / cottage / marine / attraction / park) with current / hourly / 7-day / 14-day / weekend / monthly tabs, weather news (5 categories, 12 subcategories, article pages with jwplayer embed cards and inline figure rendering), the video hub (782 jwplayer videos in the two upstream playlists), Environment Canada alert index and detail pages, the radar map page, the vacation hub, channel index pages, four explore hubs, nine info pages, and the account domain (register / sign-in / sign-out, saved locations, metric-imperial unit preference)."
+    },
+    {
+      "path": "seed_data.py",
+      "classification": "mirror-code",
+      "scope": "Deterministic build-time/boot-time seeder. All rows load from the tracked source_data_*.json snapshots; the benchmark password digest is frozen so the SQLite seed is byte-reproducible (PYTHONHASHSEED=0). Every seed function early-returns on a populated database, keeping /reset/the_weather_network byte-identical. Indexes are created in a fixed order (INDEX_DDL) so the seed layout never flips between builds."
+    },
+    {
+      "path": "source_data_locations.json",
+      "classification": "captured-upstream-content",
+      "scope": "581 real locations (112 city pages plus school, airport, ski, golf, beach, campground, cottage, marine, attraction and park channels) with their verbatim Pelmorex public-API payloads: current observations, 24-hour hourly forecasts, 14-day long-term day/night periods, monthly climate averages, air quality, UV, pollen, health and bug indices — captured 2026-09-26/27 for every placecode."
+    },
+    {
+      "path": "source_data_news.json",
+      "classification": "captured-upstream-content",
+      "scope": "638 real news articles as served by the upstream newsroom API: headline, summary, full body markdown (including the rendered <figure> blocks and markdown inline images captured verbatim), category/subcategory paths, author records with avatars, thumbnails, effective/created/updated dates, keywords and embedded jwplayer video ids."
+    },
+    {
+      "path": "source_data_videos.json",
+      "classification": "captured-upstream-content",
+      "scope": "782 real jwplayer videos (title, description, duration, publish date, playlist memberships) from the upstream video hub's two playlists (MUST WATCH, Animals and Weather)."
+    },
+    {
+      "path": "source_data_alerts.json",
+      "classification": "captured-upstream-content",
+      "scope": "51 real active Environment Canada alerts with placecodes, regions, severities, issued/expires times, full bulletin text and recommended actions, captured 2026-09-27."
+    },
+    {
+      "path": "source_data_site.json",
+      "classification": "captured-upstream-content",
+      "scope": "Site chrome captured from the live pages: hero copy, province navigation, popular/home city lineups, home content lineup, hub tiles, channel menu, vacation hub copy, footer trust notes, FAQ questions, watch-live tile."
+    },
+    {
+      "path": "inline_images.json",
+      "classification": "captured-upstream-media-map",
+      "scope": "Tracked map from every upstream image URL referenced in an article body to its locally captured file under static/images/inline/ (content-addressed by the URL). render_body uses this map to serve the real inline article imagery offline."
+    },
+    {
+      "path": "static/images/ (asset_inventory.json)",
+      "classification": "captured-upstream-media",
+      "scope": "Real upstream media: 638 article thumbnails, 32 author avatars, 782 jwplayer video posters, 35 weather condition icons, 18 radar basemaps/overlays from the Pelmorex map APIs, 19 brand assets (logo, favicons, social icons, footer trust badges, hub tiles, promo banners, watch-live thumbnail), and the full inline article body image corpus captured from the upstream CDNs (images.twnmm.com, j.theweathernetwork.com, cdn.jwplayer.com, images.theconversation.com, upload.wikimedia.org, i.cbc.ca, images.contentful.com, codaio.imgix.net and the other third-party CDNs the upstream articles embed)."
+    },
+    {
+      "path": "static/fonts/*.woff2 (5 files)",
+      "classification": "redistributed-third-party-font",
+      "scope": "The Weather Network webfont subsets served by the upstream site (font awesome and text faces), captured for visual fidelity."
+    },
+    {
+      "path": "static/icons/, static/css/twn.css",
+      "classification": "mirror-code",
+      "scope": "Locally authored stylesheet reproducing the upstream design language (deep blue header, category colours, card grids, forecast tables) plus captured logo SVG marks."
+    }
+  ]
+}

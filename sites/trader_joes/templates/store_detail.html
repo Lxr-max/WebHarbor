@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ store.name }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    <a href="{{ url_for('store_search') }}">Stores</a> &rsaquo;
+    {{ store.name }}
+  </div>
+  <h1 class="page-title">{{ store.name }}</h1>
+  {% if store.coming_soon %}<div class="alert-banner">This store is coming soon!</div>{% endif %}
+  <p class="rich">
+    {{ store.address1 }}{% if store.address2 %}, {{ store.address2 }}{% endif %}<br>
+    {{ store.city }}, {{ store.state }} {{ store.postalcode }}<br>
+    {{ store.phone }}
+  </p>
+  <form method="post" action="{{ url_for('set_my_store', clientkey=store.clientkey) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ url_for('store_detail', clientkey=store.clientkey) }}">
+    <button class="btn" type="submit">SET AS MY STORE</button>
+  </form>
+</div>
+
+<div class="page">
+  <h2 class="page-title" style="font-size:24px;">Hours</h2>
+  <table class="hours-table">
+    {% for day, pair in store.hours_map().items() %}
+    <tr><td><b>{{ day|capitalize }}</b></td><td>{% if pair and pair[0] and pair[1] %}{{ pair[0] }} &ndash; {{ pair[1] }}{% else %}&mdash;{% endif %}</td></tr>
+    {% endfor %}
+  </table>
+  {% if store.holiday_hours %}<p class="rich"><b>Holiday Hours:</b> {{ store.holiday_hours }}</p>{% endif %}
+  {% if store.temp_note %}<div class="alert-banner">{{ store.temp_note }}</div>{% endif %}
+  {% if store.holiday_note %}<div class="alert-banner">{{ store.holiday_note }}</div>{% endif %}
+  {% if store.parking_notes %}<p class="rich"><b>Parking:</b> {{ store.parking_notes }}</p>{% endif %}
+  {% if store.about_copy %}<p class="rich">{{ store.about_copy }}</p>{% endif %}
+</div>
+{% endblock %}

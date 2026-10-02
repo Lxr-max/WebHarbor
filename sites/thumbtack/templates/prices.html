@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Cost Estimates for Home Projects, Events and More - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Want the price of pretty much any service?</h1>
+  <p class="muted">We probably know it. We track millions of cost estimates for thousands of projects.</p>
+  <div class="overview-grid" style="margin:20px 0;">
+    <div class="overview-item"><b>300K+</b>pros in the U.S.</div>
+    <div class="overview-item"><b>~500</b>categories customers can search</div>
+    <div class="overview-item"><b>90M+</b>projects started on Thumbtack</div>
+  </div>
+
+  <h2>Prices of popular services</h2>
+  <div class="card-grid" style="grid-template-columns:repeat(4, minmax(0,1fr));">
+    {% for f in featured %}
+    <div class="rail-card" style="text-align:center;">
+      <div style="font-weight:600;">{{ f.name }}</div>
+      <div class="price-pill">${{ '{:,}'.format(f.price) }}</div>
+      <div class="muted" style="font-size:12px;">National Avg. Price</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2 style="margin-top:32px;">Prices for every service imaginable</h2>
+  {% for group, guides in groups.items() %}
+  <h3 style="margin-top:20px;">{{ group }}</h3>
+  <p class="muted">
+    {% for g in guides %}<a href="{{ g.url() }}" style="margin-right:14px;">{{ g.title }}</a>{% endfor %}
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}ICLR 2026 — Rio de Janeiro{% endblock %}
+{% block content %}
+<div class="hero">
+  <h1>{{ conf.full_name }}</h1>
+  <p class="sub">{{ conf.city }}, {{ conf.country }} &middot; {{ conf.dates }}</p>
+  <p class="sub">Main Conference Thursday April 23 – Saturday April 25 &middot;
+    Workshops Sunday April 26 – Monday April 27</p>
+  <div class="facts">
+    <div><b class="mono">{{ conf.papers }}</b><span>accepted papers</span></div>
+    <div><b class="mono">{{ conf.oral_decisions }}</b><span>oral decisions</span></div>
+    <div><b class="mono">{{ conf.workshops }}</b><span>workshops</span></div>
+    <div><b class="mono">{{ conf.invited_talks }}</b><span>invited talks</span></div>
+    <div><b class="mono">{{ conf.sessions }}</b><span>sessions</span></div>
+  </div>
+  <div class="cta">
+    <a href="{{ url_for('papers') }}">Browse Papers</a>
+    <a href="{{ url_for('schedule') }}">Schedule</a>
+    <a class="ghost" href="{{ url_for('register') }}">Register</a>
+  </div>
+</div>
+
+<div class="grid cols2">
+  <div class="card">
+    <h2>Latest Announcements</h2>
+    {% for n in announcements %}
+      <p style="margin: 8px 0">
+        <a href="{{ url_for('news_detail', slug=n.slug) }}">{{ n.title }}</a>
+        <span class="muted small">— {{ n.date }}</span>
+      </p>
+    {% endfor %}
+    <p><a href="{{ url_for('news') }}">All announcements »</a></p>
+  </div>
+  <div class="card">
+    <h2>ICLR 2027 — Important Dates</h2>
+    <table class="data" style="border:none">
+      {% for d in dates27 %}
+        <tr><td>{{ d.name }}</td><td class="mono">{{ d.date_str }}</td></tr>
+      {% endfor %}
+    </table>
+    <p class="muted small">The Fifteenth International Conference on Learning
+      Representations — California, April 26-30, 2027.</p>
+    <p><a href="{{ url_for('dates') }}">All dates »</a></p>
+  </div>
+  <div class="card">
+    <h2>Conference Venue</h2>
+    <p><b>Riocentro</b>, Rio de Janeiro, Brazil. Registration and badge pickup
+      at the Convention Center Foyer; lost badge fee USD $100 (refundable if
+      the original badge is found).</p>
+    <p><a href="{{ url_for('venue') }}">Conference site »</a></p>
+  </div>
+  <div class="card">
+    <h2>Thank You to Our Sponsors</h2>
+    <div class="tier">
+      <div class="chips">
+        {% for s in sponsors %}
+          <span class="chip small">{{ s.name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <p><a href="{{ url_for('sponsors') }}">All sponsors &amp; exhibitors »</a></p>
+  </div>
+</div>
+{% endblock %}

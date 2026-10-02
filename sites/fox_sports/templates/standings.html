@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} Standings | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>2026 {{ league_name }} Division Standings</h1>
+  <nav class="league-tabs">
+    <a href="/{{ league }}">Home</a>
+    <a href="/scores/{{ league }}">Scores</a>
+    <a href="/{{ league }}/schedule">Schedule</a>
+    <a class="active" href="/{{ league }}/standings" aria-current="page">Standings</a>
+    <a href="/{{ league }}/teams">Teams</a>
+    <a href="/{{ league }}/players">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+{% for division, rows in divisions %}
+<section class="section">
+  <div class="section-head"><h2>{{ division }}</h2></div>
+  <table class="data-table">
+    <thead>
+      {% if league == 'nfl' %}
+      <tr><th>#</th><th>Team</th><th>W-L-T</th><th>PCT</th><th>PF</th><th>PA</th><th>HOME</th><th>AWAY</th><th>CONF</th><th>DIV</th><th>STRK</th></tr>
+      {% else %}
+      <tr><th>#</th><th>Team</th><th>W-L</th><th>PCT</th><th>GB</th><th>HOME</th><th>AWAY</th><th>RS</th><th>RA</th><th>DIFF</th><th>L10</th><th>STRK</th></tr>
+      {% endif %}
+    </thead>
+    <tbody>
+      {% for t in rows %}
+      <tr>
+        <td>{{ t.rank }}</td>
+        <td class="cell-team">
+          {% if t.logo and image(t.logo) %}<img class="row-logo" src="{{ image(t.logo) }}" alt="{{ t.full_name }}">{% endif %}
+          <a href="/{{ league }}/{{ t.slug }}-team">{{ t.full_name }}</a>
+          {% if t.clinch == 'clinched_division' %}<span class="tag tag-z" title="Clinched division">Z</span>{% endif %}
+          {% if t.clinch == 'clinched_playoffs' %}<span class="tag tag-x" title="Clinched playoff berth">X</span>{% endif %}
+        </td>
+        <td class="cell-strong">{{ t.record }}</td>
+        <td>{{ t.pct }}</td>
+        {% if league == 'nfl' %}
+          <td>{{ t.pf }}</td><td>{{ t.pa }}</td>
+          <td>{{ t.home_rec }}</td><td>{{ t.away_rec }}</td>
+          <td>{{ t.conf_rec }}</td><td>{{ t.div_rec }}</td>
+        {% else %}
+          <td>{{ t.gb }}</td>
+          <td>{{ t.home_rec }}</td><td>{{ t.away_rec }}</td>
+          <td>{{ t.runs_for }}</td><td>{{ t.runs_against }}</td>
+          <td>{{ t.run_diff }}</td><td>{{ t.l10 }}</td>
+        {% endif %}
+        <td>{{ t.streak }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endfor %}
+{% endblock %}

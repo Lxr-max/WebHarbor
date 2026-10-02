@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Search CBP.gov</h1>
+<form class="filters" action="{{ url_for('site_search') }}" method="get">
+  <div class="field"><label for="q">Search</label>
+    <input id="q" type="search" name="q" value="{{ q }}" size="40"></div>
+  <button class="btn" type="submit">Search</button>
+</form>
+{% if q %}
+  {% for label, rows in results %}
+    <section>
+      <h2>{{ label }} ({{ rows|length }})</h2>
+      <ul>
+      {% if label == 'Pages' %}
+        {% for r in rows %}<li><a href="{{ r.upstream_path }}">{{ r.title }}</a></li>{% endfor %}
+      {% elif label == 'News Releases' %}
+        {% for r in rows %}<li><a href="{{ url_for('release_detail', kind=('national-media-release' if r.category == 'National Media Release' else 'local-media-release'), slug=r.slug) }}">{{ r.title }}</a> <span class="note">{{ r.date }}</span></li>{% endfor %}
+      {% elif label == 'Forms' %}
+        {% for r in rows %}<li><a href="{{ url_for('form_detail', catalog_key=r.catalog_key) }}">CBP Form {{ r.form_number }} — {{ r.name }}</a></li>{% endfor %}
+      {% elif label == 'Jobs' %}
+        {% for r in rows %}<li><a href="{{ url_for('job_detail', control=r.control) }}">{{ r.title }}</a> <span class="note">{{ r.org }}</span></li>{% endfor %}
+      {% elif label == 'Ports of Entry' %}
+        {% for r in rows %}<li><a href="{{ url_for('port_detail', slug=r.slug) }}">{{ r.name }}</a></li>{% endfor %}
+      {% elif label == 'Border Crossings' %}
+        {% for r in rows %}<li><a href="{{ url_for('bwt_crossing', port_number=r.port_number) }}">{{ r.full_name }}</a></li>{% endfor %}
+      {% endif %}
+      </ul>
+    </section>
+  {% else %}
+    <p>No results for <strong>{{ q }}</strong>.</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}

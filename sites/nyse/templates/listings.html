@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Listings{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / Listings</p>
+  <h1 class="page-title">Listings</h1>
+  {% if meta.get('hero_image') %}
+    {% set hero_img = img('https://www.nyse.com' ~ meta.get('hero_image')) %}
+    {% if hero_img %}<img src="{{ hero_img }}" alt="NYSE listings" style="max-width: min(720px, 100%);">{% endif %}
+  {% endif %}
+  {% for block in blocks %}
+    <section class="timeline-item">
+      {% if block.heading %}<h3>{{ block.heading }}</h3>{% endif %}
+      {% for para in block.body() %}
+        <p>{{ para }}</p>
+      {% endfor %}
+    </section>
+  {% endfor %}
+  <p><a class="btn" href="{{ url_for('listings_directory', tab='stock') }}">Open the Listings Directory</a></p>
+</div>
+{% endblock %}
