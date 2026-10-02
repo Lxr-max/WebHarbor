@@ -620,11 +620,28 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   flex-wrap: wrap;
 }
+.flights-route-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 12px;
+  align-items: center;
+}
+.flights-route-form .search-field { min-width: 0; width: 100%; }
+.flights-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+/* Let comparison tables scroll inside their cards instead of widening the page. */
+.fd-grid > *, .flights-layout > * { min-width: 0; }
 .flights-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px 48px;
 }
+.flights-toolbar { flex-wrap: wrap; gap: 12px; }
 .flights-tabs {
   display: flex;
   border-bottom: 1px solid var(--g-grey-200);
@@ -1999,6 +2016,9 @@ img { max-width: 100%; height: auto; display: block; }
    ============================================================ */
 @media (max-width: 1024px) {
   .gbar-nav { display: none; }
+  .flights-route-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flights-layout { grid-template-columns: minmax(0, 1fr); }
+  .flights-layout .flights-sidebar { position: static !important; }
   /* Keep route and date pairs readable before the mobile stack takes over. */
   .search-row { flex-direction: column; gap: 12px; }
   .search-route-fields, .search-dates { flex: auto; }
@@ -2032,5 +2052,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 @media (max-width: 480px) {
   .gbar-logo::after { display: none; }
+  .flights-route-form { grid-template-columns: minmax(0, 1fr); }
   .search-dates { flex-direction: column; gap: 8px; }
 }

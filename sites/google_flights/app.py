@@ -326,7 +326,7 @@ def make_pnr():
 # (letter-tile placeholders in the published HF bundle). Real Google Flights
 # 70px gstatic PNGs are committed under static/icons/airlines/{IATA}.png so
 # this site does not depend on merging a logos-only google_flights.tar.gz.
-# If a later asset bundle ships the named PNG/SVG, that file is used first.
+# Prefer committed marks; fall back to bundled PNGs, then the stored asset path.
 
 def static_exists(relpath: str) -> bool:
     """True when relpath exists under this app's static/ directory."""

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Regression tests for Google Flights airline logo serving (issue #22)."""
 import re
+import importlib.util
+import tempfile
 import shutil
 import sqlite3
 import sys
@@ -25,11 +27,33 @@ def _airlines():
 
 
 def setUpModule():
+    global _temporary, _gf, _old_path
+    _temporary = tempfile.TemporaryDirectory(prefix='google-flights-logo-tests-')
+    unittest.addModuleCleanup(_temporary.cleanup)
+    runtime = Path(_temporary.name)
+    shutil.copy2(SITE / 'app.py', runtime / 'app.py')
+    for name in ('static', 'templates'):
+        (runtime / name).symlink_to(SITE / name, target_is_directory=True)
+    (runtime / 'instance').mkdir()
     seed = SITE / 'instance_seed' / 'google_flights.db'
     if seed.is_file():
-        instance = SITE / 'instance'
-        instance.mkdir(exist_ok=True)
-        shutil.copy2(seed, instance / 'google_flights.db')
+        shutil.copy2(seed, runtime / 'instance' / 'google_flights.db')
+    _old_path = sys.path[:]
+    sys.path.insert(0, str(SITE))
+    unittest.addModuleCleanup(lambda: sys.path.__setitem__(slice(None), _old_path))
+    spec = importlib.util.spec_from_file_location('google_flights_logo_test_app', runtime / 'app.py')
+    _gf = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = _gf
+    unittest.addModuleCleanup(lambda: sys.modules.pop(spec.name, None))
+    spec.loader.exec_module(_gf)
+    _gf.app.config['TESTING'] = True
+    unittest.addModuleCleanup(_dispose_database)
+
+
+def _dispose_database():
+    with _gf.app.app_context():
+        _gf.db.session.remove()
+        _gf.db.engine.dispose()
 
 
 class AirlineLogoFilesTest(unittest.TestCase):
@@ -60,9 +84,7 @@ class AirlineLogoFilesTest(unittest.TestCase):
 class AirlineLogoResolverTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        sys.path.insert(0, str(SITE))
-        import app as gf
-        cls.gf = gf
+        cls.gf = _gf
 
     def test_prefers_committed_png_over_letter_tile_svg(self):
         flight = SimpleNamespace(
@@ -103,13 +125,10 @@ class AirlineLogoHttpTest(unittest.TestCase):
         seed = SITE / 'instance_seed' / 'google_flights.db'
         if not seed.is_file():
             raise unittest.SkipTest('google_flights seed DB is not present')
-        sys.path.insert(0, str(SITE))
-        import app as gf
-        gf.app.config['TESTING'] = True
-        cls.gf = gf
-        cls.client = gf.app.test_client()
+        cls.gf = _gf
+        cls.client = _gf.app.test_client()
         cls.codes = {code for _name, code, _slug in _airlines()}
-        con = sqlite3.connect(SITE / 'instance' / 'google_flights.db')
+        con = sqlite3.connect(Path(_temporary.name) / 'instance' / 'google_flights.db')
         row = con.execute(
             'SELECT f.id, a.iata, b.iata, f.departure_date, f.airline_code '
             'FROM flight f '
@@ -130,7 +149,7 @@ class AirlineLogoHttpTest(unittest.TestCase):
             finally:
                 resp.close()
 
-    def test_flights_and_search_emit_icon_pngs_not_missing_svgs(self):
+    def test_flights_and_search_emit_icon_pngs_instead_of_tiles(self):
         flight_id, origin, dest, depart, code = self.sample
         flights = self.client.get(
             f'/flights?from={origin}&to={dest}&depart={depart}'
