@@ -233,8 +233,9 @@ def contains_whole_number(answer, value):
 
     86 does not match inside 186, and 36505 matches '36,505'.
     """
-    text = str(answer or "").replace(",", "")
-    return re.search(rf"(?<!\d){int(value)}(?!\d)", text) is not None
+    text = str(answer or "")
+    pattern = r"(?<![\w.,])(?:\d{1,3}(?:,\d{3})+|\d+)(?![\w]|[.,]\d)"
+    return any(int(m.group().replace(",", "")) == int(value) for m in re.finditer(pattern, text))
 
 
 def contains_signed_number(answer, value):
@@ -267,7 +268,7 @@ def week_mentioned(answer, week):
 # kickoff times, years, month-day dates, and ordinals are not bare counts.
 
 _BIND_WINDOW = 240
-_SCORE_RE = re.compile(r"(?<!\d)(\d{1,3})\s*-\s*(\d{1,3})(?!\d)")
+_SCORE_RE = re.compile(r"(?<![\d.])(\d{1,3})\s*(?:-|to)\s*(\d{1,3})(?!\d|\.\d)")
 _TIME_RE = re.compile(r"\b\d{1,2}:\d{2}(?!\d)")
 _YEAR_RE = re.compile(r"\b(?:19|20)\d{2}\b")
 _MONTH_DAY_RE = re.compile(
@@ -277,7 +278,7 @@ _MONTH_DAY_RE = re.compile(
     re.I,
 )
 _ORDINAL_RE = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.I)
-_COUNT_RE = re.compile(r"(?<![\d.])(\d+)(?!\d)")
+_COUNT_RE = re.compile(r"(?<![\w.,$])([+-]?\d+(?:,\d{3})*)(?!\w|[.,]\d)")
 
 
 def _num_eq(a, b):
@@ -313,14 +314,14 @@ def _clause_ranges(text):
             depth += 1
         elif ch == ")" and depth:
             depth -= 1
-        elif depth == 0 and (ch in ",;." or text.startswith("and", i)):
+        elif depth == 0 and (ch in ",;.\n" or text.startswith("and", i)):
             if ch == ",":
                 before = text[i - 1] if i else ""
                 after = text[i + 1] if i + 1 < len(text) else ""
                 if before.isdigit() and after.isdigit():
                     i += 1
                     continue
-            if ch in ",;.":
+            if ch in ",;.\n":
                 ranges.append((last, i))
                 last = i + 1
             elif (i == 0 or not text[i - 1].isalnum()) and (
@@ -346,9 +347,12 @@ def _touches(span, clauses, origin):
     return span[0] < end and span[1] > start
 
 
-def _nearest_label(span, labels, window, clauses):
+def _nearest_label(span, labels, window, clauses, text):
     """The label this value belongs to. A name written before the value wins
     over a later name, and a label in the same clause wins over another clause."""
+    local = [label for label in labels if not re.search(
+        r"[.!?](?:\s|$)|\n", text[min(span[1], label[1]):max(span[0], label[0])])]
+    labels = local or labels
     origin = _clause_index(span[0], clauses)
     buckets = {key: [] for key in ("in_precede", "in_follow", "out_precede", "out_follow")}
     for other in labels:
@@ -408,7 +412,7 @@ def _count_spans(text):
             continue
         if _overlaps(start, end, occupied):
             continue
-        spans.append((start, end, int(match.group(1))))
+        spans.append((start, end, int(match.group(1).replace(",", ""))))
     return spans
 
 
@@ -417,9 +421,13 @@ def _score_spans(text):
             for m in _SCORE_RE.finditer(text or "")]
 
 
-def _bound_to_target(span, labels, clauses):
-    owner = _nearest_label(span, labels, _BIND_WINDOW, clauses)
-    return owner is not None and owner[2] == "target"
+def _bound_to_target(span, labels, clauses, text):
+    owner = _nearest_label(span, labels, _BIND_WINDOW, clauses, text)
+    if owner is None or owner[2] != "target":
+        return False
+    start, end = min(span[0], owner[0]), max(span[1], owner[1])
+    prefix = re.split(r"[;,:\n.!?]|\band\b", text[:start])[-1]
+    return not re.search(r"\b(?:not|never|isn't|wasn't|incorrect|wrong)\b", prefix + text[start:end])
 
 
 def number_bound_to(answer, aliases, number, competitor_groups=()):
@@ -429,25 +437,27 @@ def number_bound_to(answer, aliases, number, competitor_groups=()):
     2026 do not satisfy a +26 differential and December 13 does not satisfy
     bye week 13.
     """
-    text = normalize_text(answer)
+    text = "\n".join(normalize_text(line) for line in str(answer or "").splitlines())
+    text = re.sub(r"\b(?:minus|negative)\s+(\d+)", r"-\1", text)
     labels = _label_spans(text, aliases, competitor_groups)
     if not labels:
         return False
     clauses = _clause_ranges(text)
     wanted = int(number)
-    return any(_num_eq(span[2], wanted) and _bound_to_target(span, labels, clauses)
+    return any(_num_eq(span[2], wanted) and _bound_to_target(span, labels, clauses, text)
                for span in _count_spans(text))
 
 
 def score_bound_to(answer, aliases, left, right, competitor_groups=()):
     """The scoreline left-right is nearest this week or team, not merely present."""
-    text = normalize_text(answer)
+    text = "\n".join(normalize_text(line) for line in str(answer or "").splitlines())
+    text = re.sub(r"\b(?:minus|negative)\s+(\d+)", r"-\1", text)
     labels = _label_spans(text, aliases, competitor_groups)
     if not labels:
         return False
     clauses = _clause_ranges(text)
     wanted = (int(left), int(right))
-    return any(span[2] == wanted and _bound_to_target(span, labels, clauses)
+    return any(span[2] == wanted and _bound_to_target(span, labels, clauses, text)
                for span in _score_spans(text))
 
 

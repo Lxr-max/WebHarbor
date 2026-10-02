@@ -88,7 +88,7 @@ def run_checks(judge, traj, initial_db, after_db):
         others += [["bills"], ["texans"], ["lions"]]
         signed_ok = contains_signed_number(answer, diff) if diff < 0 else True
         judge.check(f"answer_opponent_{name.lower()}_diff",
-                    signed_ok and number_bound_to(answer, [name], abs(diff), others),
+                    number_bound_to(answer, [name], diff, others),
                     f"expected {name} point differential {diff:+d}")
         judge.check(f"answer_opponent_{name.lower()}_coach",
                     contains_phrase(answer, coach),

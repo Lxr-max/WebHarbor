@@ -83,8 +83,7 @@ def run_checks(judge, traj, initial_db, after_db):
     judge.check("answer_w3_network", contains_phrase(answer, NETWORK),
                 f"expected the Week 3 network {NETWORK}")
     judge.check("answer_point_differential",
-                contains_signed_number(answer, -36)
-                and number_bound_to(answer, ["differential"], 36),
+                number_bound_to(answer, ["differential"], -36),
                 "expected point differential -36")
     # DB after-state: exactly David's favorite team changes
     david = user_by_email(after_db, DAVID_EMAIL)
