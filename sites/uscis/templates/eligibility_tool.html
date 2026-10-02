@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Naturalization Eligibility Tool{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Naturalization Eligibility Tool</h1>
+  <p><strong>Before You Begin Form N-400, Application For Naturalization, Please Answer Some Simple Questions To Find Out If You Can Apply For Naturalization.</strong></p>
+  <p>These questions are solely intended to help you determine whether you may be eligible to submit the Application for Naturalization (N-400). This tool does not determine if you are actually eligible for citizenship. After you submit your application, USCIS will review your information and determine if you are eligible for citizenship through naturalization.</p>
+
+  <section class="wizard">
+    {% if answers %}
+    <div class="wizard-trail">
+      <h2>Your answers so far</h2>
+      <ol>
+        {% for a in answers %}<li>{{ a }}</li>{% endfor %}
+      </ol>
+    </div>
+    {% endif %}
+
+    {% if state.outcome %}
+    <div class="alert-box alert-box--{{ 'success' if 'eligible' in (state.text or '')|lower else 'error' }}">
+      <p><strong>{{ state.question }}</strong></p>
+      <div class="wizard-outcome">{{ state.text }}</div>
+    </div>
+    <form method="post" action="{{ url_for('eligibility_tool') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="reset" value="1">
+      <button class="btn btn--secondary" type="submit">Start over</button>
+    </form>
+    {% else %}
+    <form method="post" action="{{ url_for('eligibility_tool') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="state_key" value="{{ state.key }}">
+      <input type="hidden" name="answers" value='{{ answers|tojson }}'>
+      <fieldset class="wizard-question">
+        <legend>{{ state.question }}</legend>
+        {% for opt in state.options() %}
+        <div class="radio-row">
+          <input type="radio" id="opt{{ loop.index }}" name="option" value="{{ opt }}" required>
+          <label for="opt{{ loop.index }}">{{ opt }}</label>
+        </div>
+        {% endfor %}
+      </fieldset>
+      <div class="wizard-actions">
+        <button class="btn btn--primary" type="submit">Next</button>
+        {% if answers %}
+        <button class="btn btn--secondary" type="submit" name="reset" value="1">Start over</button>
+        {% else %}
+        <button class="btn btn--secondary" type="submit" name="reset" value="1">Start over</button>
+        {% endif %}
+      </div>
+    </form>
+    {% endif %}
+  </section>
+
+  <p class="last-reviewed">Last Reviewed/Updated: 09/17/2021</p>
+</div>
+{% endblock %}

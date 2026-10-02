@@ -27,7 +27,7 @@
       document.querySelectorAll(".sidebar-section.open").forEach(function (s) {
         s.classList.remove("open");
       });
-      if (!wasOpen && section.querySelector(".nav-dropdown")) {
+      if (!wasOpen && section.querySelector(".nav-dropdown") && window.matchMedia("(hover: none)").matches) {
         section.classList.add("open");
         positionDropdown(section);
         e.preventDefault();

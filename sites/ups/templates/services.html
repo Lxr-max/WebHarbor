@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Shipping Services | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Shipping Services</div>
+  <h1>Shipping Services</h1>
+  <p class="ups-lede">From overnight delivery to cost-effective ground shipping, our flexible domestic services deliver across town or across the country.</p>
+  <div class="ups-svcgrid">
+    {% for s in services %}
+    <a class="ups-card ups-svccard" href="{{ url_for('service_detail', code=s.code) }}">
+      <p class="ups-svcbucket">{{ s.bucket }}</p>
+      <h2>{{ s.name }}</h2>
+      <p class="ups-svctag">{{ s.tagline }}</p>
+      <ul class="ups-svcfacts">
+        {% if s.days %}<li>{{ s.days }} business day{{ 's' if s.days != 1 }} in transit</li>{% endif %}
+        {% if s.guaranteed %}<li>Guaranteed on-time delivery</li>{% endif %}
+        <li>Up to {{ s.max_weight_lb }} lbs and {{ s.max_length_in }}&quot; long</li>
+        {% if s.saturday_delivery %}<li>Saturday delivery available</li>{% endif %}
+      </ul>
+      <span class="ups-cardlink">View Service <i class="ups-chev">&#8250;</i></span>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="ups-card">
+    <h2>Choosing a service</h2>
+    <p>Compare every domestic service side by side on the <a href="{{ url_for('services_compare') }}">Compare Services</a> page,
+       or get an instant quote for your shipment with <a href="{{ url_for('ctc') }}">Calculate Time and Cost</a>.</p>
+  </div>
+</section>
+{% endblock %}

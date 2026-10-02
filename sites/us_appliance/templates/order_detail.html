@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('account') }}">My Account</a></li>
+<li aria-current="page"><span>Order #{{ order.number }}</span></li>
+{% endblock %}
+{% block content %}
+<section class="container order-detail-page">
+  <h1 class="page-heading">Order #{{ order.number }}</h1>
+  <div class="order-layout">
+    <div class="order-main">
+      <p class="order-status-line">Status: <strong class="status-{{ order.status | lower | replace(' ', '-') }}">{{ order.status }}</strong></p>
+      {% if order.eta %}<p class="order-eta">Estimated delivery: {{ order.eta | dmy }}</p>{% endif %}
+      {% if order.carrier %}
+      <p class="order-carrier">Shipped via {{ order.carrier }} &middot;
+        {% if order.carrier == 'R+L Carriers' %}Pro #{% else %}Tracking #{% endif %}{{ order.tracking }}</p>
+      {% endif %}
+
+      <h2>Items</h2>
+      <table class="confirm-table">
+        <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+        <tbody>
+          {% for item in order.items %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.qty }}</td>
+            <td>{{ money(item.price * item.qty) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h2>Tracking Timeline</h2>
+      <ol class="order-events">
+        {% for event in order.events %}
+        <li class="order-event">
+          <span class="event-date">{{ event.happened_on | dmy }}</span>
+          <span class="event-step">{{ event.step }}</span>
+          <span class="event-note">{{ event.note }}</span>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+    <aside class="order-side">
+      <h2>Summary</h2>
+      <dl class="confirm-totals">
+        <dt>Subtotal</dt><dd>{{ money(order.subtotal) }}</dd>
+        <dt>Shipping ({{ order.shipping_method }})</dt>
+        <dd>{% if order.shipping_cost == 0 %}FREE{% else %}{{ money(order.shipping_cost) }}{% endif %}</dd>
+        <dt>Sales Tax</dt><dd>{{ money(order.tax) }}</dd>
+        <dt>Order Total</dt><dd class="confirm-total">{{ money(order.total) }}</dd>
+      </dl>
+      {% if order.financing %}<p class="cart-note">Financing: {{ order.financing }}</p>{% endif %}
+      <h2>Ship To</h2>
+      <p>{{ order.ship_name }}<br>
+         {{ order.ship_address }}<br>
+         {{ order.ship_city }}, {{ order.ship_state }} {{ order.ship_zip }}</p>
+      <p class="cart-note">Orders can be canceled within 48 hours of placing the order without any fee as long as the order has not shipped.</p>
+      <p><a class="button" href="{{ url_for('account') }}">Back to My Account</a></p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

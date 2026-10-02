@@ -25,7 +25,7 @@
   </div>
   <div class="card" style="margin-top:16px;">
     <h3>About this club</h3>
-    <div class="article-body">{{ club.description or 'No description.' | safe }}</div>
+    <div class="article-body" style="white-space:pre-line">{{ (club.description or 'No description.')|replace('</p>', '</p>\n\n')|striptags }}</div>
   </div>
   <div class="grid grid-2" style="margin-top:16px;">
     <div class="card">

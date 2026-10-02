@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import price_block %}
+{% block title %}My Wishlist{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>My Wishlist</h1>
+  <span class="count">{{ entries|length }} game{{ '' if entries|length == 1 else 's' }}</span>
+</div>
+
+{% if entries %}
+<div class="search-results">
+  {% for entry in entries %}
+    {% set game = entry.game %}
+    <div class="row">
+      <a class="capsule" href="{{ game.url }}">
+        <img src="{{ _img(game.capsule_img) }}" alt="{{ game.name }}">
+      </a>
+      <div class="mid">
+        <a class="t" href="{{ game.url }}">{{ game.name }}</a>
+        <div class="released">Added {{ entry.entry.added_ts }}</div>
+        <div class="m">{{ game.short_desc[:140] }}</div>
+      </div>
+      <div class="result-price">
+        {{ price_block(game) }}
+        <form method="post" action="{{ url_for('wishlist_toggle') }}" style="margin-top:8px;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="appid" value="{{ game.appid }}">
+          <input type="hidden" name="next" value="{{ url_for('wishlist') }}">
+          <button class="btn gray" type="submit" style="padding:4px 10px;">Remove</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>Your wishlist is empty.</p>
+  <p><a href="{{ url_for('specials') }}">Browse specials</a> to find something to add.</p>
+</div>
+{% endif %}
+
+{% endblock %}

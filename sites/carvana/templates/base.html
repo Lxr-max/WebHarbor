@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Carvana | Buy & Finance Used Cars Online | At Home Delivery{% endblock %}</title>
+<link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-bar">
+    <a class="logo" href="/" aria-label="Carvana Homepage" title="Carvana">
+      <img src="{{ logo_url }}" alt="Carvana" width="132" height="32">
+    </a>
+    <form class="header-search" action="/cars" method="get" role="search">
+      <div class="field">
+        <label for="q-make">Make</label>
+        <select id="q-make" name="make">
+          <option value="">Any make</option>
+          {% for mk in header_makes|sort %}<option value="{{ mk }}"{% if request.args.get('make') == mk %} selected{% endif %}>{{ mk }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="q-model">Model</label>
+        <input id="q-model" type="search" name="model" value="{{ request.args.get('model','') }}"
+               placeholder="Any model" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="q-keyword">Keyword</label>
+        <input id="q-keyword" type="search" name="q" value="{{ request.args.get('q','') }}"
+               placeholder="e.g. Civic, Model 3, SUV" autocomplete="off">
+      </div>
+      <button type="submit" aria-label="Search cars">Search</button>
+    </form>
+    <nav class="header-links" aria-label="Account">
+      {% if current_user.is_authenticated %}
+        <a href="/account/favorites">Saved Cars <span class="count">{{ saved_count }}</span></a>
+        <a href="/account/orders">Orders</a>
+        <a href="/account/profile">Hi, {{ current_user.display_name.split(' ')[0] }}</a>
+        <a href="/authn/logout">Log Out</a>
+      {% else %}
+        <a href="/authn/login">Log In</a>
+        <a class="btn-blue" href="/authn/register">Sign Up</a>
+      {% endif %}
+    </nav>
+  </div>
+  <nav class="subnav" aria-label="Sections">
+    <a href="/cars">Search Cars</a>
+    <a href="/sell-my-car">Sell My Car</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/financing">Financing</a>
+    <a href="/certified-program">Carvana Certified</a>
+    <a href="/vehicle-protection-plans">Carvana Care</a>
+    <a href="/faq">Help</a>
+  </nav>
+</header>
+
+<main>
+{% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <h4>Buy</h4>
+      <a href="/cars">Search Cars</a>
+      <a href="/cars?body=SUV">SUVs</a>
+      <a href="/cars?body=Truck">Trucks</a>
+      <a href="/cars?body=Sedan">Sedans</a>
+      <a href="/cars?fuel=Electric">Electric Cars</a>
+      <a href="/certified-program">Carvana Certified</a>
+    </div>
+    <div>
+      <h4>Sell</h4>
+      <a href="/sell-my-car">Sell or Trade</a>
+      <a href="/value-tracker">Value Tracker</a>
+    </div>
+    <div>
+      <h4>Finance &amp; Protect</h4>
+      <a href="/financing">Financing</a>
+      <a href="/vehicle-protection-plans">Carvana Care</a>
+      <a href="/insurance">Car Insurance</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/vending-machine">Vending Machines</a>
+      <a href="/guide-to-buying-a-used-ev">EV Guide</a>
+      <a href="/repairs">Repairs</a>
+      <a href="/faq">Help &amp; Support</a>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>Offline benchmark mirror of carvana.com, snapshot taken {{ snapshot_date }} · {{ vehicle_count }} vehicles captured from the upstream inventory.</p>
+    <p>Carvana is a registered trademark of Carvana Co. This mirror is for benchmark purposes and is not affiliated with or endorsed by Carvana Co.</p>
+  </div>
+</footer>
+</body>
+</html>

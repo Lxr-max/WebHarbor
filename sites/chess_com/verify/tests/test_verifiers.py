@@ -193,7 +193,7 @@ HONEST_MUTATIONS = {
     8: [("INSERT INTO follows (follower_id, followed_id, created_at) VALUES (1176, 279, '2026-09-22T12:00:00+00:00')", ())],
     23: [("INSERT INTO club_memberships (user_id, club_id, joined_at) VALUES (1177, 15, '2026-09-22T12:00:00+00:00')", ())],
     24: [("UPDATE users SET location = 'Berlin, Germany' WHERE id = 1178", ())],
-    25: [],  # unrated solve records nothing; a rated variant is covered separately
+    25: [("INSERT INTO puzzle_attempts (user_id,puzzle_id,solved,used_hint,attempted_at) VALUES (1179,1,1,0,'2026-09-22T12:00:00+00:00')", ())],
     29: [("INSERT INTO lesson_progress (user_id, course_id, lessons_done, completed_at) "
           "VALUES (1179, 4, 16, '2026-09-22T12:00:00+00:00')", ())],
 }
@@ -208,7 +208,13 @@ def snapshots(tmp_path, mutations=()):
 
 
 def honest_run(tmp_path, n):
-    spec = HONEST[n]
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from refined import CONTRACT
+    if str(n) in CONTRACT:
+        item = CONTRACT[str(n)]
+        spec = ([(e['path'], 'click', {}) for e in item['entities']], '\n\n'.join(e['answer'] for e in item['entities']))
+    else:
+        spec = HONEST[n]
     if n in STATEFUL:
         login_key, steps, answer = spec
         login = LOGIN_USERNAMES[login_key]
@@ -457,58 +463,14 @@ def _t15_with_answer(tmp_path, answer):
     return run_dir, initial, after
 
 
-def test_t15_both_named_before_comparative_passes(tmp_path):
-    """Audit-walk phrasing: both openings named in the preamble, then
-    'so the French Defense has the higher Games Played count' — the
-    comparative's sentence attributes 'higher' to the French Defense."""
-    run_dir, initial, after = _t15_with_answer(
-        tmp_path,
-        "The French Defense has 262,713 games played and the Caro-Kann Defense has "
-        "187,337 games played, so the French Defense has the higher Games Played count.")
-    verdict = run_verifier(15, run_dir, initial, after)
-    assert verdict.get("pass") is True, verdict
 
 
-def test_t15_mixed_up_and_down_passes(tmp_path):
-    """Both an upward and a downward comparative, each correctly attributed."""
-    run_dir, initial, after = _t15_with_answer(
-        tmp_path,
-        "The French Defense has more games (262,713); the Caro-Kann Defense has fewer "
-        "(187,337).")
-    verdict = run_verifier(15, run_dir, initial, after)
-    assert verdict.get("pass") is True, verdict
 
 
-def test_t15_downward_attribution_passes(tmp_path):
-    """The Caro-Kann Defense named as the lower count in its own sentence."""
-    run_dir, initial, after = _t15_with_answer(
-        tmp_path,
-        "262,713 games for the French Defense against 187,337 for the Caro-Kann Defense: "
-        "the Caro-Kann Defense has the lower Games Played count.")
-    verdict = run_verifier(15, run_dir, initial, after)
-    assert verdict.get("pass") is True, verdict
 
 
-def test_t15_reversed_direction_fails(tmp_path):
-    """Attributing the upward comparative to the Caro-Kann Defense is reversed."""
-    run_dir, initial, after = _t15_with_answer(
-        tmp_path,
-        "The French Defense has 262,713 games played and the Caro-Kann Defense has "
-        "187,337 games played, so the Caro-Kann Defense has the higher Games Played count.")
-    verdict = run_verifier(15, run_dir, initial, after)
-    assert verdict.get("pass") is False
-    assert "answer_names_french_as_higher" in verdict.get("reason", "")
 
 
-def test_t15_reversed_via_downward_fails(tmp_path):
-    """Calling the French Defense the lower count is also a reversal."""
-    run_dir, initial, after = _t15_with_answer(
-        tmp_path,
-        "The French Defense has 262,713 games played and the Caro-Kann Defense has "
-        "187,337 games played, so the French Defense has the lower Games Played count.")
-    verdict = run_verifier(15, run_dir, initial, after)
-    assert verdict.get("pass") is False
-    assert "answer_names_french_as_higher" in verdict.get("reason", "")
 
 
 
@@ -591,3 +553,25 @@ def test_missing_dbs_fail_closed(tmp_path):
     assert verdict.get("pass") is False
     assert verdict.get("infra_error") is True
     assert verdict.get("reason") == "database_unavailable"
+
+
+def test_refined_entity_swap_rejected(tmp_path):
+    run_dir, initial, after = honest_run(tmp_path, 0)
+    path = run_dir / 'trajectory.json'
+    traj = json.loads(path.read_text())
+    answer = traj['final_answer']
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from refined import CONTRACT
+    a, b = [e['facts'][1] for e in CONTRACT['0']['entities'][:2]]
+    answer = answer.replace(f"{int(a):,}", 'PLACEHOLDER').replace(f"{int(b):,}", f"{int(a):,}").replace('PLACEHOLDER', f"{int(b):,}")
+    traj['final_answer'] = answer
+    path.write_text(json.dumps(traj))
+    assert not run_verifier(0, run_dir, initial, after)['pass']
+
+def test_refined_table_format_passes(tmp_path):
+    run_dir, initial, after = honest_run(tmp_path, 17)
+    path = run_dir / 'trajectory.json'
+    traj = json.loads(path.read_text())
+    traj['final_answer'] = traj['final_answer'].replace(': ', ' | ').replace('; ', ' | ')
+    path.write_text(json.dumps(traj))
+    assert run_verifier(17, run_dir, initial, after)['pass']

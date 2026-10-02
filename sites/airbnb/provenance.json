@@ -1,0 +1,56 @@
+{
+ "site": "airbnb",
+ "upstream": "https://www.airbnb.com/",
+ "captured_at": "2026-09-30",
+ "capture_method": "Every tracked record is a real upstream capture from airbnb.com. Stays/Experiences SERPs and the home page are the exact public HTML documents (listing corpus, filter taxonomy, pagination and price quotes live in the embedded data-deferred-state-0 / data-injector-instances JSON). Listing detail records are the site's own GraphQL payloads: the capture replays the exact StaysPdpSections / StaysPdpReviewsQuery / PdpAvailabilityCalendar / StaysPdpPoliciesQuery / StaysPdpHighlightsQuery / SimilarListingsCarouselQuery requests the public PDP issues (same persisted-query hashes, same variable shapes) plus the fully rendered DOM of a real headful Chromium session (Playwright under Xvfb), including the 'Show all N amenities' modal so the grouped amenity tree matches upstream. Experiences detail records come from the embedded activityListing payload of the public /experiences/<id> pages. Every capture file carries a .meta.json sidecar with the exact URL, HTTP status and capture timestamp in scraped_data/captures/ (gitignored).",
+ "sources": {
+  "www.airbnb.com/": {
+   "role": "primary site: home page; Stays SERPs for 8 US markets (2 pages each plus an explicit second date window); 96 listing detail pages with descriptions, amenity trees, house rules, sleeping arrangements, hosts, 365-day availability calendars, review lists and review-tag taxonomies; 80 experience detail pages with agendas, guest requirements, accessibility features and upcoming availability",
+   "stays_serps_captured": 24,
+   "listing_details_captured": 96,
+   "home_captures": 1
+  },
+  "www.airbnb.com/s/experiences": {
+   "role": "Experiences search for 4 cities with the upstream category/time-of-day/language filter panel",
+   "experience_serps_captured": 4
+  },
+  "www.airbnb.com/experiences/<id>": {
+   "role": "48 experience detail pages: description, agenda (what you'll do), host, guest requirements, accessibility features, reviews and upcoming availability",
+   "experience_details_captured": 80
+  },
+  "a0.muscache.com/": {
+   "role": "photo CDN: every managed image fetched from its exact upstream URL (listing photo-tour images at the CDN's own im_w=720 resize, SERP card photos, experience covers, host avatars)",
+   "images_fetched": 1251
+  }
+ },
+ "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/captures/. The tracked source_data/ snapshots keep: the full captured listing corpus for the 8 markets restricted to the 12 SERP-order listings per market whose PDPs were fully captured (every search card on the mirror resolves to a complete listing page); every listing's full description, amenity groups, house rules, safety items, sleeping arrangements, host block, captured reviews (up to 24 per listing as the upstream PDP returned), 365-day availability calendar and both captured price quotes; experiences keep the SERP cards for 4 cities and the first 12 detail pages per city. The upstream per-market result totals and the upstream price histogram were NOT part of the capture (the captured upstream_total payload is a price-display announcement, and the captured filter panels carry no price histogram), so the search pages show only the captured-corpus counts and facet counts, and the pages state that.",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "default wishlist with a Lake Tahoe cabin, a Scottsdale home and one Austin experience; one confirmed 5-night Scottsdale stay and one cancelled 2-night Austin stay"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "wishlist of the first three captured Asheville listings; one booked Austin experience for 2 guests"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "empty default wishlist; one confirmed 2-night Miami stay"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "two wishlists ('Winter cabins' with two Lake Tahoe listings, 'NYC weekend' with two New York listings); no bookings"
+   }
+  ],
+  "fixture_note": "The upstream wishlist/trips area requires live accounts, so authenticated state is fixture-built following the u_s_customs/zara/ziprecruiter precedent: every listing, experience, review and price they reference is a real captured upstream row (real listing id, name, city, nightly rate), and every timestamp is a frozen constant relative to the 2026-09-30 snapshot date. The request-to-book and experience-book flows are the mirror's own runtime flows modeled on the upstream flow.",
+  "seed_determinism": "The SQLite seed is materialized at image build time (PYTHONHASHSEED=0 python3 seed_data.py); benchmark users use a frozen bcrypt hash and every row comes from the tracked source_data/*.json snapshots in a fixed order; two consecutive builds produce byte-identical databases and /reset/airbnb restores instance == instance_seed byte-for-byte.",
+  "timezone": "UTC"
+ },
+ "waf_note": "airbnb.com serves its SERPs and the experiences pages as complete documents to plain HTTP clients; no bot wall fired during capture. The StaysPdpSections GraphQL endpoint began rejecting plain-HTTP replays mid-capture (422 'stayId must be a global ID of type StayListing'), so all listing detail captures were taken through real headful Chromium sessions (the page's own requests) rather than replayed HTTP calls; nothing is synthesized.",
+ "derived_fields": "The nightly rate and trip totals shown on cards, in the book-it widget and on the confirm pages derive from the captured upstream quotes: the SERP 'N nights x $rate' breakdown gives each listing's exact nightly rate, and the mirror computes any other window as nights x captured nightly rate (the upstream price panel states 'Trip price, includes all fees', so the mirror quotes the trip price the same way and never invents fee line items). The property-type filter uses the captured title-derived property types of the corpus (upstream maps listings to its property buckets server-side and does not expose the mapping in the captured payloads); hotel-style listings whose upstream title carries no 'X in City' pattern keep the destination city as their locality. Filter facet counts are computed over the captured corpus (declared on the search page). The amenity filter panel renders the upstream canonical amenity taxonomy (AMENITY_FILTERS) restricted to the captured corpus, with corpus counts. The amenity flags the mirror filters on are the captured amenity item names plus deterministic canonical tokens (documented keyword rules: any captured item containing 'hot tub' also flags 'hot tub', and so on). The 'Explore other options' section renders the captured nearby-city links. These derivations are deterministic and declared here."
+}

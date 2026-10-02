@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Verify bob joins the Chess School club and reports its stats in Chess.com--23."""
+"""Deterministic verifier for chess_com task 23; see tasks.jsonl and verify/README.md."""
 
 
 from verify_lib import (Judge, check_read_only, check_signed_in_as, check_trajectory_identity,

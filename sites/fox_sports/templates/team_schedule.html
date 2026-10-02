@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ team.full_name }} Schedule | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/{{ team.league }}">{{ LEAGUE_NAMES.get(team.league, team.league) }}</a> &gt;
+  <a href="/{{ team.league }}/{{ team.slug }}-team">{{ team.full_name|upper }}</a> &gt;
+  <span>SCHEDULE</span>
+</div>
+<section class="team-head">
+  {% if team.logo and image(team.logo) %}<img class="team-logo" src="{{ image(team.logo) }}" alt="{{ team.full_name }}">{% endif %}
+  <div>
+    <h1>{{ team.full_name|upper }} SCHEDULE</h1>
+    <p class="team-record">{{ team.record or '' }}{% if team.note %} &middot; {{ team.note }}{% endif %}</p>
+  </div>
+  <nav class="team-tabs">
+    <a href="/{{ team.league }}/{{ team.slug }}-team">News</a>
+    <a class="active" href="/{{ team.league }}/{{ team.slug }}-team-schedule" aria-current="page">Schedule</a>
+    <a href="/{{ team.league }}/{{ team.slug }}-team-roster">Roster</a>
+  </nav>
+</section>
+<table class="data-table">
+  <thead><tr><th>Date</th><th>Matchup</th><th>Result / Time</th><th>Location</th><th>Odds</th></tr></thead>
+  <tbody>
+    {% for game in games %}
+    {% set is_home = game.home_team == team.slug %}
+    <tr>
+      <td>{{ game.date_iso }}</td>
+      <td class="cell-team">
+        <a href="/{{ team.league }}/{{ game.slug }}">
+          {% if is_home %}vs {{ (teams.get(game.away_team).short or teams.get(game.away_team).full_name) if teams.get(game.away_team) else game.away_team|replace('-',' ')|title }}
+          {% else %}at {{ (teams.get(game.home_team).short or teams.get(game.home_team).full_name) if teams.get(game.home_team) else game.home_team|replace('-',' ')|title }}{% endif %}
+        </a>
+        {% if game.week %}<span class="muted">WK {{ game.week }}{% if game.phase == 'preseason' %} (Preseason){% endif %}</span>{% endif %}
+        {% if game.series %}<span class="muted">{{ game.series }}{% if game.series_game %} GM {{ game.series_game }}{% endif %}</span>{% endif %}
+      </td>
+      <td>
+        {% if game.status == 'final' %}
+          {% set my_score = game.home_score if is_home else game.away_score %}
+          {% set opp_score = game.away_score if is_home else game.home_score %}
+          <span class="pill pill-final">FINAL {{ game.away_score }}-{{ game.home_score }}</span>
+        {% else %}
+          {{ game.time or 'Scheduled' }}{% if game.broadcaster %} on {{ game.broadcaster }}{% endif %}
+        {% endif %}
+      </td>
+      <td>{% if game.venue %}{{ game.venue }}{% if game.venue_city %}, {{ game.venue_city }}{% endif %}{% endif %}</td>
+      <td>{% if game.spread %}{{ game.spread }}{% if game.total %} O/U {{ game.total }}{% endif %}{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

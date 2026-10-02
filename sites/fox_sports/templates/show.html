@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}{{ show.title }} Videos | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="{{ url_for('shows_hub') }}">SHOWS</a> &gt;
+  <span>{{ show.title|upper }}</span>
+</div>
+<section class="show-head">
+  {% if show.art and image(show.art) %}<img class="show-art" src="{{ image(show.art) }}" alt="{{ show.title }}">{% endif %}
+  <div>
+    <h1>{{ show.title|upper }}</h1>
+    <nav class="team-tabs">
+      <a class="active" href="/shows/{{ show.slug }}" aria-current="page">Videos &amp; Stories</a>
+    </nav>
+  </div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Episodes</h2></div>
+  <div class="story-grid">
+    {% for ep in episodes %}
+    <div class="story-card episode-card">
+      {% if ep.thumb and image(ep.thumb) %}<img src="{{ image(ep.thumb) }}" alt="{{ ep.title }}" loading="lazy">{% endif %}
+      <h3>{{ ep.title }}</h3>
+      <span class="muted">{{ ep.time_ago }}{% if ep.source %} &middot; {{ ep.source }}{% endif %}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% if current_user.is_authenticated %}
+<section class="section">
+  <form method="post" action="{{ url_for('favorites_toggle') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="item_type" value="show">
+    <input type="hidden" name="item_key" value="{{ show.slug }}">
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button type="submit" class="btn">{{ 'Unfollow' if is_favorited('show', show.slug) else 'Follow' }} {{ show.title }}</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}

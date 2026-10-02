@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Support{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Samsung Support</h1></div>
+<section class="band">
+  <h2>How can we help you?</h2>
+  <div class="tile-grid">
+    {% for cat in cats %}
+    <a class="tile" href="{{ url_for('warranty', category=cat.slug) }}">
+      <img class="tile-icon" src="{{ cat.icon }}" alt="" onerror="this.style.display='none'">
+      <span class="tile-label">{{ cat.name }}</span>
+    </a>
+    {% endfor %}
+    <a class="tile" href="{{ url_for('contact') }}">
+      <span class="tile-label">Contact Us</span>
+      <span class="tile-count">Email our team</span>
+    </a>
+  </div>
+</section>
+<section class="band">
+  <h2>Popular warranty questions</h2>
+  <div class="faq-list">
+    {% for faq in faqs %}
+    <details class="faq-item">
+      <summary>{{ faq.question }}</summary>
+      <p>{{ faq.answer }}</p>
+    </details>
+    {% endfor %}
+  </div>
+  <p><a class="btn" href="{{ url_for('warranty') }}">Open the Warranty Center</a></p>
+</section>
+{% endblock %}

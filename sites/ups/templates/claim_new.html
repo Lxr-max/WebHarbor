@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Start a Claim | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('claims') }}">File a Claim</a> &rsaquo; Start a Claim</div>
+  <h1>Start a Claim</h1>
+  <ol class="ups-steps">
+    <li class="{{ 'is-active' if step == 'start' }}">1. Start a Claim</li>
+    <li class="{{ 'is-active' if step in ('problem','details') }}">2. Claim Details</li>
+    <li class="{{ 'is-active' if step == 'review' }}">3. Confirmation</li>
+  </ol>
+  {% if errors %}<div class="ups-card ups-errors"><p>Please correct the following:</p><ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}
+  <form method="post" action="{{ url_for('claim_new') }}?step={{ step }}" class="ups-card ups-shipform">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if step == 'start' %}
+      <input type="hidden" name="step" value="start">
+      <h2 class="ups-stephead">Start a Claim</h2>
+      <label>UPS Tracking Number <span class="ups-req">*</span></label>
+      <input name="tracking_number" value="{{ data.get('tracking_number','') }}" placeholder="1Z...">
+      <p class="ups-hint">You&rsquo;ll need your tracking number to get started.</p>
+      <label>Are you the receiver of the package? <span class="ups-req">*</span></label>
+      <select name="receiver" required>
+        <option value="">Select One</option>
+        <option value="Yes" {{ 'selected' if data.get('receiver') == 'Yes' }}>Yes</option>
+        <option value="No" {{ 'selected' if data.get('receiver') == 'No' }}>No</option>
+      </select>
+      <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+    {% elif step == 'problem' %}
+      <input type="hidden" name="step" value="problem">
+      {% if shipment %}
+      <div class="ups-claim-shipment">
+        <p class="ups-factlabel">Shipment found</p>
+        <p><strong>{{ shipment.tracking_number }}</strong> — {{ shipment.service_name }}<br>
+        From {{ shipment.shipper_name }} ({{ shipment.from_city }}, {{ shipment.from_state }})
+        to {{ shipment.to_city }}, {{ shipment.to_state }}<br>
+        Status: {{ shipment.status }}{% if shipment.delivered_on %} ({{ shipment.delivered_on }}){% endif %}</p>
+      </div>
+      {% endif %}
+      <h2 class="ups-stephead">What problem are you trying to report?</h2>
+      <label class="ups-radio"><input type="radio" name="problem_type" value="lost" required {{ 'checked' if data.get('problem_type') == 'lost' }}> This package is lost.</label>
+      <label class="ups-radio"><input type="radio" name="problem_type" value="damaged" {{ 'checked' if data.get('problem_type') == 'damaged' }}> This package is damaged.</label>
+      <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+    {% elif step == 'details' %}
+      <input type="hidden" name="step" value="details">
+      <h2 class="ups-stephead">Claim Details</h2>
+      <label>Merchandise Description <span class="ups-req">*</span></label>
+      <input name="merchandise" value="{{ data.get('merchandise','') }}" placeholder="Product name, brand, size, color (be as specific as possible)">
+      <label>Number of Items <span class="ups-req">*</span></label>
+      <input name="item_count" value="{{ data.get('item_count','1') }}">
+      <label>Item Value (USD) <span class="ups-req">*</span></label>
+      <input name="item_value" value="{{ data.get('item_value','') }}">
+      <label>Your Email <span class="ups-req">*</span></label>
+      <input name="email" value="{{ data.get('email','') }}" type="email">
+      <p class="ups-hint">Detailed item descriptions are needed for all UPS claims to expedite processing.</p>
+      <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+    {% elif step == 'review' %}
+      <input type="hidden" name="step" value="review">
+      <h2 class="ups-stephead">Review and Submit</h2>
+      <div class="ups-review-grid">
+        <div><p class="ups-factlabel">Tracking Number</p><p>{{ data.get('tracking_number') }}</p></div>
+        <div><p class="ups-factlabel">Problem</p><p>{{ 'Package is lost' if data.get('problem_type') == 'lost' else 'Package is damaged' }}</p></div>
+        <div><p class="ups-factlabel">Merchandise</p><p>{{ data.get('merchandise') }}<br>{{ data.get('item_count') }} item(s) &middot; ${{ data.get('item_value') }}</p></div>
+        <div><p class="ups-factlabel">Contact</p><p>{{ data.get('email') }}</p></div>
+      </div>
+      <p class="ups-hint">By submitting, you confirm the information is accurate. If your claim is approved, payment is sent via electronic funds transfer (EFT).</p>
+      <button class="ups-btn ups-btn-primary" type="submit">Submit Claim</button>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}

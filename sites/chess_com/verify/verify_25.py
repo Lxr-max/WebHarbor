@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Verify david solves the trainer puzzle and reports the feedback in Chess.com--25."""
+"""Deterministic verifier for chess_com task 25; see tasks.jsonl and verify/README.md."""
 
 
 from verify_lib import (Judge, check_read_only, check_signed_in_as, check_trajectory_identity,
@@ -29,7 +28,11 @@ def run_checks(judge, traj, initial_db, after_db):
     from verify_lib import check_only_tables_changed, user_id_for_email
     delta = table_delta(initial_db, after_db, "puzzle_attempts")
     david = user_id_for_email(after_db, "david.k@test.com")
-    attempts_ok = all(row[1] == david for row in delta["added"]) and not delta["removed"]
+    cols = vl.table_columns(after_db, "puzzle_attempts")
+    added = [dict(zip(cols, row)) for row in delta["added"]]
+    attempts_ok = (len(added) == 1 and added[0]["user_id"] == david and added[0]["puzzle_id"] == 1
+                   and added[0]["solved"] == 1 and added[0]["used_hint"] == 0
+                   and not delta["removed"] and not delta["changed"])
     judge.check("puzzle_attempts_only_david", attempts_ok,
                 f"delta={delta!r} (added rows must belong to david_k)")
     check_only_tables_changed(judge, initial_db, after_db, {"puzzle_attempts"})

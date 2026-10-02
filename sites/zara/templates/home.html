@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="hero-grid">
+  {% for section, camps in campaigns.items() %}
+    {% for c in camps[:1] %}
+      <a class="camp big" href="/us/en/z-stores-st1404.html">
+        <img src="{{ img(c.image) }}" alt="{{ section }} campaign">
+        <span class="camp-label">{{ section }} — NEW SEASON</span>
+      </a>
+    {% endfor %}
+  {% endfor %}
+  {% for section, camps in campaigns.items() %}
+    {% for c in camps[1:3] %}
+      <a class="camp" href="/us/en/z-stores-st1404.html">
+        <img src="{{ img(c.image) }}" alt="{{ section }} campaign">
+        <span class="camp-label">{{ section }}</span>
+      </a>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+{% for section, cats in categories_nav() %}
+<div class="section-band" id="{{ section|lower }}">
+  {% for cat, count in cats %}
+    <a href="{{ cat.path }}">{{ cat.name }}</a>
+  {% endfor %}
+</div>
+<div class="grid" style="padding: 18px 28px 46px">
+  {% for cat, count in cats %}
+    {% set cp = cat.products[0].product if cat.products else None %}
+    {% if cp %}
+      <a class="product-card" href="{{ cp.pdp_path }}">
+        <div class="pimg">
+          {% set g = cp.main_color.gallery_list %}
+          {% if g %}<img src="{{ img(g[0]) }}" alt="{{ cp.name }}">{% endif %}
+        </div>
+        <div class="pname">{{ cat.name }}</div>
+        <div class="pprice">{{ count }} products</div>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Alert error - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card error-panel">
+  <h2>Can’t create that alert</h2>
+  <p class="form-error">{{ message }}</p>
+  <p class="muted">Go back to the quote page and choose a direction and a positive target price.</p>
+  <p><a class="btn primary" href="{{ href }}">Return to the {{ quote.symbol }} quote page</a></p>
+</div>
+{% endblock %}

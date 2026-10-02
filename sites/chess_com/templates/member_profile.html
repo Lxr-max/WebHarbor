@@ -52,7 +52,7 @@
           <tr><th>Category</th><th class="t-right">Rank</th><th class="t-right">Rating</th><th class="t-right">W / D / L</th></tr>
           {% for cat, entry in lb_entries.items() %}
             <tr>
-              <td><b><a href="/leaderboard/live{{ '' if cat == 'blitz' else ('/' + cat if cat in ('bullet', 'rapid') else '') }}">{{ cat|capitalize }}</a></b></td>
+              <td><b><a href="{{ '/leaderboard/live' if cat == 'blitz' else '/leaderboard/live/' + cat if cat in ('bullet', 'rapid') else '/leaderboard/' + cat }}">{{ cat|capitalize }}</a></b></td>
               <td class="t-right">#{{ entry.rank }}</td>
               <td class="t-right">{{ entry.score }}</td>
               <td class="t-right muted">{{ entry.wins or 0 }} / {{ entry.draws or 0 }} / {{ entry.losses or 0 }}</td>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Land your dream Internship | Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <div style="background:linear-gradient(109deg,#bfb9f6 1.41%,#ff9a48 149.7%);border-radius:16px;padding:40px">
+    <h1>Land your dream internship</h1>
+    <p style="max-width:600px;font-size:15px">Thousands of internships, co-ops and early-career roles across our student cities - all in one place, built for students.</p>
+  </div>
+</div>
+
+<section class="container" style="padding-bottom:64px">
+  {% for city_slug, jobs in groups|dictsort %}
+    {% set city = cities.get(city_slug) %}
+    {% if city %}
+    <div class="section-head" style="margin-top:26px">
+      <h2 style="font-size:22px">Jobs in {{ city.name }}</h2>
+      <a class="see-all" href="/us/{{ city.state }}/{{ city.slug }}/internships">See more jobs</a>
+    </div>
+    {% for j in jobs[:3] %}
+    <div class="job-card">
+      <div>
+        <strong>{{ j.title }}</strong>
+        <div class="co">{{ j.company }}</div>
+        <div class="loc">{{ j.location }}</div>
+      </div>
+      <span class="type-chip">{{ j.type or j.raw_type }}</span>
+      <a class="btn" href="{{ j.url }}" target="_blank" rel="noopener">View Job</a>
+    </div>
+    {% endfor %}
+    {% endif %}
+  {% endfor %}
+</section>
+{% endblock %}

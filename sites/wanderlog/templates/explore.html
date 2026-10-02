@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}{{ geo.name }} travel guide — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="guide-hero">
+    {% if geo.image %}<img src="{{ geo.image }}" alt="{{ geo.name }}">{% endif %}
+    <div class="overlay">
+      <h1>{{ geo.name }}{% if geo.state_name %}, {{ geo.state_name }}{% endif %}</h1>
+      <p>{{ geo.country_name }} · {{ geo.subcategory or 'destination' }} ·
+        popularity {{ '{:,}'.format(geo.popularity or 0) }}</p>
+    </div>
+  </div>
+
+  {% if geo.description %}
+    <div class="card" style="margin-bottom:20px">
+      <h2>About {{ geo.name }}</h2>
+      <p style="margin:0">{{ geo.description }}</p>
+    </div>
+  {% endif %}
+
+  <div class="trip-grid">
+    <div>
+      <h2>Where to go and what to eat</h2>
+      <p class="muted">Wanderlog's top picks for {{ geo.name }} — ranked from the entire web.</p>
+      {% for sec in sections %}
+        <div class="day-card">
+          <h2>{{ sec.heading }}</h2>
+          <div class="grid cols-2">
+            {% for b in sec.blocks %}
+              <div class="tile">
+                {% if b.image %}<img class="cover" src="{{ b.image }}" alt="{{ b.name }}">{% endif %}
+                <div class="pad">
+                  <h3>{% if b.place and b.place.wl_id %}<a href="{{ url_for('place_details', pid=b.place.wl_id) }}">{{ b.name }}</a>{% else %}{{ b.name }}{% endif %}</h3>
+                  <p class="small muted" style="margin:0">{{ b.description }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <p class="muted">No Wanderlog place data captured for this destination yet.</p>
+      {% endfor %}
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>Categories</h3>
+        {% for c in categories %}
+          {% if c.list %}
+            <a class="chip" href="{{ url_for('category_list', cid=c.list.id, slug=c.list.slug) }}">
+              {% if c.emoji %}<img src="{{ img('emoji-' + c.emoji) }}" alt="">{% endif %}
+              {{ c.name }}</a>
+          {% else %}
+            <span class="chip static">{% if c.emoji %}<img src="{{ img('emoji-' + c.emoji) }}" alt="">{% endif %}
+              {{ c.name }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>Ranked lists for {{ geo.name }}</h3>
+        {% for cl in lists %}
+          <p style="margin:6px 0">
+            <a href="{{ url_for('category_list', cid=cl.id, slug=cl.slug) }}">{{ cl.title }}</a><br>
+            <span class="small muted">top {{ cl.upstream_count }} by Wanderlog ranking</span>
+          </p>
+        {% else %}
+          <p class="small muted">No ranked lists captured for this destination.</p>
+        {% endfor %}
+      </div>
+
+      <div class="card">
+        <h3>Nearby destinations</h3>
+        {% for n in nearby %}
+          <p style="margin:6px 0"><a href="{{ url_for('explore', gid=n.id) }}">{{ n.name }}</a>
+            <span class="small muted">· {{ n.country_name }}</span></p>
+        {% else %}
+          <p class="small muted">No nearby destinations captured.</p>
+        {% endfor %}
+        {% set pairs = geo.geo_pairs | from_json %}
+        {% if pairs %}
+          <h3 style="margin-top:12px">Popular pairs</h3>
+          {% for p in pairs %}
+            <p class="small muted" style="margin:4px 0">{{ p.fromGeo }} → {{ p.toGeo }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

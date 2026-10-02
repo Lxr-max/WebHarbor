@@ -1,0 +1,74 @@
+{
+ "site": "disney",
+ "upstream": "https://www.disney.com/",
+ "captured_at": "2026-09-29",
+ "capture_window_utc": "2026-09-30T01:44:43Z to 2026-09-30T02:03:33Z (2026-09-29 18:44-19:03 America/Los_Angeles)",
+ "capture_method": "Every tracked record is a real upstream capture from disney.com and its official sub-properties. Matterhorn pages (www.disney.com home, movies.disney.com, games.disney.com) are the exact rendered DOM of a real headless Chromium session (Playwright) plus the page's own embedded Grill.burger structured state, parsed from the same capture. FITT pages (shows.disney.com) are the exact server-rendered HTML. The Angular Walt Disney World finder and the Salesforce Disney Store are fetched as raw HTML over HTTP/1.1 (plain HTTP reached them; no anti-bot bypass was needed). The Disney On Ice schedule is the rendered DOM of the official tickets page. All 543 capture files carry a .meta.json sidecar with the exact URL, HTTP status and capture timestamp in scraped_data/captures/ (gitignored); every capture returned HTTP 200 with zero failures and zero synthesized records.",
+ "waf_note": "None. Unlike u_s_customs (deterministic fixtures declared as non-live) every disney record here is a live upstream capture: www.disney.com, movies.disney.com, shows.disney.com, games.disney.com, liveshows.disney.com render for plain HTTP+headless Chromium; disneyworld.disney.go.com serves raw HTML over HTTP/1.1 (HTTP/2 resets the connection for this client, recorded as a transport note, not a WAF); shopdisney.com/disneystore.com returns raw server-rendered HTML for a desktop Safari user-agent. No site required a fixture fallback.",
+ "sources": {
+  "www.disney.com/": {
+   "role": "Portal home: 23 hero/flex-grid tiles (titles, descriptions, CTA labels+URLs, desktop hero images) parsed from the page's embedded Grill.burger state",
+   "captures": 1
+  },
+  "movies.disney.com/all-movies": {
+   "role": "The 40-movie catalog grid with posters and upstream descriptions",
+   "captures": 1
+  },
+  "movies.disney.com/<slug>": {
+   "role": "40 movie detail pages: rating, runtime, release date (plus raw date), genres, synopsis, Directed By / Produced By / Cast / Awards credits, up to 10 video titles with thumbnails, image galleries with captions, up to 8 related Disney Store products with prices, and up to 8 recommended movies",
+   "captures": 40
+  },
+  "shows.disney.com/all-movies and genre pages": {
+   "role": "The 54-show A-Z catalog with thumbnails and descriptions, plus the upstream genre taxonomy (Animation, Comedy, Action-Adventure, Fantasy, Science Fiction, Variety) from the six official genre pages",
+   "captures": 8
+  },
+  "shows.disney.com/<slug>": {
+   "role": "58 show detail pages: rating, release year, genre line, about text, video titles and recommended shows",
+   "captures": 58
+  },
+  "games.disney.com/": {
+   "role": "Games hub: the 4 official games with hero art and descriptions",
+   "captures": 5
+  },
+  "disneyworld.disney.go.com/attractions/": {
+   "role": "The Walt Disney World finder listing: 267 attractions and entertainment entries with park, upstream interest facets (Big Drops, Thrill Rides, Character Experiences, Fireworks, ...), age facets (Preschoolers..Adults), height requirements, card images and alt texts",
+   "captures": 3
+  },
+  "disneyworld.disney.go.com/attractions|entertainment/<park>/<slug>": {
+   "role": "268 attraction/entertainment detail pages: description sections with headings, fact chips, gallery images and related-activity links",
+   "captures": 268
+  },
+  "www.disneystore.com/ category pages": {
+   "role": "Disney Store Sale / Clothes / Accessories / Toys category grids: 150 products with exact prices, original prices, ratings, categories, characters and target ages from the upstream product-string payloads",
+   "captures": 5
+  },
+  "www.disneystore.com/<product>.html": {
+   "role": "150 product detail pages: prices, Bazaarvoice ratings and review counts, Product Details / Magic in the details / The bare necessities sections and scene7 image sets",
+   "captures": 150
+  },
+  "liveshows.disney.com/": {
+   "role": "Live Shows hub: the Broadway musicals (The Lion King, Aladdin, Beauty and the Beast) and the Disney On Ice tile with their banner art",
+   "captures": 1
+  },
+  "www.disneyonice.com/tickets/": {
+   "role": "Disney On Ice touring schedule: 89 city stops across 5 shows with venues, date ranges and 373 individual performance show times, plus the upstream buy-tickets destinations",
+   "captures": 1
+  },
+  "cdn image hosts": {
+   "role": "1247 real upstream images fetched from their exact source URLs: lumiere-a.akamaihd.net (movie posters, stills, show thumbs, game and hero art), cdn1.parksmedia.wdprapps.disney.com (attraction photography, with the upstream resize parameters and signatures), cdn-ssl.s7.shopdisney.com (product photography) and static-mh.content.disney.io (the Disney wordmark in the nav). Every file's bytes and sha256 are recorded in asset_inventory.json."
+  }
+ },
+ "benchmark_users": {
+  "note": "Four authored benchmark accounts (alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com, password TestPass123!) following the u_s_customs / zara / ziprecruiter fixture precedent: every movie, show, park entity, product and ice event they reference is a real captured upstream row and every timestamp is a frozen constant.",
+  "users": [
+   {"email": "alice.j@test.com", "name": "Alice Johnson", "fixture": "favorites: the movies Moana 2 and Toy Story 5, the Seven Dwarfs Mine Train attraction; one past shop order for the Blaze Doll Set"},
+   {"email": "bob.c@test.com", "name": "Bob Chen", "fixture": "favorites: the shows Gravity Falls and DuckTales plus the Fantasmic entertainment; two booked Disney On Ice tickets for the Kent, WA Jump In! stop"},
+   {"email": "carol.d@test.com", "name": "Carol Davis", "fixture": "favorites: the first two captured Disney Store products; no orders yet"},
+   {"email": "dana.k@test.com", "name": "Dana Kim", "fixture": "favorites: the Hoppers movie, the Living with the Land attraction and one store product"}
+  ]
+ },
+ "tasks": {
+  "count": 20,
+  "audit": "scripts_dev/validate_tasks.py drives each task's honest path through the mirror (real CSRF tokens, forms submitted like a browser) from a pristine seed per task, verifies every premise, collects the answers the task asks for, counts atomic UI actions, and fails any task that leaks its own answers or solves in fewer than 15 honest atomic steps. Two independent rounds must agree."
+ }
+}

@@ -254,3 +254,22 @@ def test_stateful_actions_require_login(client):
     assert r.status_code == 302
     r = client.post("/club/chess-school/join", follow_redirects=False)
     assert r.status_code == 302
+
+
+def test_category_filter_keeps_multi_category_courses(client):
+    text = client.get('/lessons?category=endgames').get_data(as_text=True)
+    assert 'How To Win With Zugzwang' in text
+    assert "Loek" in text
+
+def test_puzzle_claim_without_moves_is_not_a_solve(client, app_module):
+    _login(client, 'david.k@test.com')
+    client.post('/callback/puzzles/solve', json={'puzzle_id': 1, 'solved': True})
+    with app_module.app.app_context():
+        assert app_module.PuzzleAttempt.query.order_by(app_module.PuzzleAttempt.id.desc()).first().solved is False
+
+def test_puzzle_complete_line_records_success(client, app_module):
+    _login(client, 'david.k@test.com')
+    puzzle = client.get('/callback/puzzles/next').get_json()
+    client.post('/callback/puzzles/solve', json={'puzzle_id': puzzle['id'], 'solved': True, 'moves': puzzle['moves']})
+    with app_module.app.app_context():
+        assert app_module.PuzzleAttempt.query.order_by(app_module.PuzzleAttempt.id.desc()).first().solved is True

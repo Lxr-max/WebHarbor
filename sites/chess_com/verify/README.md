@@ -1,26 +1,13 @@
-# Chess.com verifier contract (reviewer-authored)
+# chess_com deterministic task verification
 
-One deterministic verifier per task (`verify_N.py` for `Chess.com--N`), sharing
-`verify_lib.py` — the hardened 9GAG/merriam-webster contract:
+Run each task through the visible UI from a fresh site state. Save `trajectory.json`, decodable before/after PNG screenshots, `initial.db` and `after.db`. Grade with:
 
-1. **Package identity** — task_id match, `terminated`/`agent_done`, non-empty final
-   answer, every recorded URL on the review origin, every screenshot a decodable PNG.
-2. **Navigation gates** — the on-site pages each task names MUST have been opened
-   (correct answer + no navigation = memory shortcut = FAIL).
-3. **Answer checks** — affirmative token/phrase/number/amount/percent/date matching
-   against ground truth HARDCODED in each verifier (never in tasks.jsonl).
-4. **DB after-state** — the seed snapshot must match the frozen chess_com seed
-   (schema sha256, table counts, full rows digest); read-only tasks require every
-   table row-identical, stateful tasks require the exact allowed delta.
-5. **LLM helpers** — advisory only, never load-bearing; verdicts are decided with
-   `--no_llm True`.
+```bash
+python agent_demo/eval_judge.py --run_dir /path/to/run --verifier True
+```
 
-CLI: `python verify_N.py --run_dir DIR [--initial_db P --after_db P --container NAME --no_llm True]`
-emits `{task_id, pass, reason, evidence[]}` and exits 0/1. Without explicit DB paths the
-verifier fetches snapshots from `$WH_CONTAINER` (default `wh-review`) via `docker cp`.
+The verifier checks task identity, local origin, required content visits, requested facts and database outcomes. The initial snapshot must match the frozen seed. Research tasks preserve all rows; stateful tasks permit only the requested changes. Natural prose, bullets and tables are accepted within the deterministic parser's documented patterns. These checks do not provide unrestricted natural-language understanding.
 
-Tests: `verify/tests/test_verifiers.py` (honest PASS, no-op FAIL, wrong-answer FAIL,
-shortcut FAIL, read-only DB tamper, stateful state-mismatch, package tampering,
-fail-closed infra errors). Run:
-`cd agent_demo && uv run --with pytest python -m pytest ../sites/chess_com/verify/tests -q`
-or in the runtime image: `python3 -m pytest verify/tests -q`.
+Research expectations are in `refined_contract.json`. Task 25 requires one successful, unhinted attempt on puzzle 1 for david_k; unchanged attempts are preserved.
+
+Tests use portable local seed fixtures and separately labelled synthetic evidence. Build the seed with `seed_data.py` before running site and verifier tests.

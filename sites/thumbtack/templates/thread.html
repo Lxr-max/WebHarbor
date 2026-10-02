@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ thread.pro.name }} - Messages - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>{{ thread.pro.name }}</h1>
+  <p class="muted">{{ thread.pro.category.name }} · Responds {{ thread.pro.responds_label }}</p>
+  <div style="margin:18px 0;">
+    {% for m in messages %}
+    <div class="msg-bubble {% if m.sender == 'user' %}msg-user{% else %}msg-pro{% endif %}">
+      {% if m.sender == 'pro' %}<b>{{ thread.pro.name }}</b><br>{% endif %}
+      {{ m.body }}
+    </div>
+    {% endfor %}
+  </div>
+  <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-row">
+      <textarea name="body" rows="3" required placeholder="Write a message..."></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Send</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Stanford University{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ url_for('static', filename='images/upstream/icons/favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="masthead">
+  <div class="container">
+    <a class="brand" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/upstream/icons/block_s_red.png') }}" alt="Stanford Block S">
+      Stanford University
+    </a>
+    <nav>
+      <a href="{{ url_for('departments') }}">Departments</a>
+      <a href="{{ url_for('programs') }}">Programs</a>
+      <a href="{{ url_for('courses') }}">Courses</a>
+      <a href="{{ url_for('faculty') }}">Faculty</a>
+      <a href="{{ url_for('news') }}">News</a>
+      <a href="{{ url_for('events') }}">Events</a>
+      <a href="{{ url_for('libraries') }}">Libraries</a>
+      <a href="{{ url_for('admission') }}">Admission &amp; Aid</a>
+    </nav>
+  </div>
+</header>
+<div class="subbar">
+  <div class="container">
+    <a href="{{ url_for('academic_calendar') }}">Academic Calendar 2026-27</a>
+    <a href="{{ url_for('admission_aid') }}">Financial Aid</a>
+    <a href="{{ url_for('planner') }}">Course Planner</a>
+    <a href="{{ url_for('saved_events') }}">Saved Events</a>
+    {% if current_user.is_authenticated %}
+      <span style="margin-left:auto">{{ current_user.name }} · <a href="#" onclick="document.getElementById('logout-form').submit(); return false;">Log out</a></span>
+      <form id="logout-form" method="post" action="{{ url_for('logout') }}" style="display:none">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      </form>
+    {% else %}
+      <a style="margin-left:auto" href="{{ url_for('login') }}">Log in</a>
+      <a href="{{ url_for('signup') }}">Sign up</a>
+    {% endif %}
+  </div>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>Academics</h4>
+        <a href="{{ url_for('departments') }}">Departments A-Z</a><br>
+        <a href="{{ url_for('programs') }}">Degree Programs</a><br>
+        <a href="{{ url_for('courses') }}">Course Catalog</a><br>
+        <a href="{{ url_for('faculty') }}">Faculty Directory</a>
+      </div>
+      <div>
+        <h4>Campus</h4>
+        <a href="{{ url_for('news') }}">Stanford Report</a><br>
+        <a href="{{ url_for('events') }}">Campus Events</a><br>
+        <a href="{{ url_for('academic_calendar') }}">Academic Calendar</a><br>
+        <a href="{{ url_for('libraries') }}">Libraries</a>
+      </div>
+      <div>
+        <h4>Admission</h4>
+        <a href="{{ url_for('admission') }}">Undergraduate Admission</a><br>
+        <a href="{{ url_for('admission_aid') }}">Financial Aid</a><br>
+        <a href="{{ url_for('login') }}">Log in</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Stanford University, Stanford, California 94305</span>
+      <span><a href="#">Terms of Use</a></span>
+      <span><a href="#">Privacy</a></span>
+      <span><a href="#">Non-Discrimination</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+    <p class="notice">This is a WebHarbor benchmark mirror of www.stanford.edu for offline agent
+    evaluation, captured 2026-09-30. Not affiliated with or endorsed by Stanford University.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+[
+  {
+    "site": "samsung",
+    "task": "Samsung--0",
+    "label": "Equivalent currency spelling and case",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "GALAXY A17 5G 128GB (UNLOCKED): USD $249.99. 4.3 \u2605 \u00b7 3481 REVIEWS. MODEL CODE: SM-A176UZKAXAA. SAVED TO THE WISHLIST.",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--0",
+    "label": "Wrong price plus correct reference number",
+    "expected": false,
+    "actual": false,
+    "reason": "Missing or incorrect chosen phone price",
+    "answer": "Galaxy A17 5G 128GB (Unlocked): $299.99. 4.3 \u2605 \u00b7 3481 reviews. Model code: SM-A176UZKAXAA. Saved to the wishlist. Reference ID 249.99.",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--10",
+    "label": "Equivalent unverified coverage statement",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "Galaxy S26 Ultra 512GB (Unlocked)\n\nModel code: SM-S948UZVEXAA \u00b7 Category: Phones, Tablets & Wearables\n\nStandard limited warranty information\n\nStandard limited warranty: this Samsung product is warranted against manufacturing defects in materials and workmanship to the original consumer purchaser for 12 months from the date of purchase (proof of purchase required).\n\nIndividual device coverage is not verified here. A purchase date and proof of purchase are required to establish whether your device is still covered.\n\nSource: /us/support/legal/mobile/#standard-limited-warranty\n\nCheck another product\nHow do I validate my warranty?\n\nIf you believe there is an error in your warranty expiration date, find your registered device on My Page & Products and select View Product Details. Click the info icon \u24d8 next to the warranty information and follow the on-screen instructions to validate your warranty.\nThank you for contacting Samsung Support\n\nYour ticket number is ST-1790881607907.\n\nCategory\nPhones, Tablets & Wearables\nTopic\nWarranty\nSubject\nS26 Ultra screen warranty question\nStatus\nOpen\nBack to Support\nAccount tickets: ST-1790881607907 \u00b7 S26 Ultra screen warranty question \u00b7 Open\nST-100002 \u00b7 Family Hub fridge setup \u00b7 Open",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--10",
+    "label": "Contradictory active coverage claim",
+    "expected": false,
+    "actual": false,
+    "reason": "Contradictory answer",
+    "answer": "Galaxy S26 Ultra 512GB (Unlocked)\n\nModel code: SM-S948UZVEXAA \u00b7 Category: Phones, Tablets & Wearables\n\nStandard limited warranty information\n\nStandard limited warranty: this Samsung product is warranted against manufacturing defects in materials and workmanship to the original consumer purchaser for 12 months from the date of purchase (proof of purchase required).\n\nIndividual device coverage is not verified here. A purchase date and proof of purchase are required to establish whether your device is still covered.\n\nSource: /us/support/legal/mobile/#standard-limited-warranty\n\nCheck another product\nHow do I validate my warranty?\n\nIf you believe there is an error in your warranty expiration date, find your registered device on My Page & Products and select View Product Details. Click the info icon \u24d8 next to the warranty information and follow the on-screen instructions to validate your warranty.\nThank you for contacting Samsung Support\n\nYour ticket number is ST-1790881607907.\n\nCategory\nPhones, Tablets & Wearables\nTopic\nWarranty\nSubject\nS26 Ultra screen warranty question\nStatus\nOpen\nBack to Support\nAccount tickets: ST-1790881607907 \u00b7 S26 Ultra screen warranty question \u00b7 Open\nST-100002 \u00b7 Family Hub fridge setup \u00b7 Open Coverage is: active. The device is currently covered.",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--14",
+    "label": "Wrong rating plus correct reference",
+    "expected": false,
+    "actual": false,
+    "reason": "Missing or incorrect rating",
+    "answer": "Galaxy Buds4 Pro: $249.99; 4.9 \u2605 \u00b7 2470 reviews. Saved to Bob's wishlist. Reference: 4.7.",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--19",
+    "label": "Natural price phrasing",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "Specification\tGalaxy S25 Ultra\nSM-S938\tGalaxy S26 Ultra\nSM-S948\n\nWeight\t218\t214\nPeak Brightness\t2600nits\t2600 nits. Galaxy S25 Ultra costs $1,299.99; Galaxy S26 Ultra costs $1,499.99. S25 Ultra is cheaper but heavier. Saved to the wishlist.",
+    "synthetic": true
+  },
+  {
+    "site": "samsung",
+    "task": "Samsung--7",
+    "label": "Natural total phrasing",
+    "expected": true,
+    "actual": true,
+    "reason": "Accepted",
+    "answer": "Orders \u203a SS-1790881589490\nOrder SS-1790881589490\n\nPlaced 2026-10-01T19:06:29Z \u00b7 Status: Processing\n\nItems\nITEM\tUNIT PRICE\tQTY\tTOTAL\n Galaxy Tab S11 (11\")\t$999.99\t1\t$999.99\nSummary\n\nSubtotal: $999.99\n\nShipping: $0.00\n\nTax is $66.25\n\nTotal is $1,066.24\n\nDelivery\n\nAlice Johnson\n1200 Test Address Ln\nRidgefield Park, NJ 07660\n\nPayment: Samsung Pay",
+    "synthetic": true
+  }
+]

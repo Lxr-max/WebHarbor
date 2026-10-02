@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}My Listings | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount">My Tickets</a>
+    <a href="/secure/myaccount/purchases">Orders</a>
+    <a href="/secure/myaccount/listings" class="active">My Listings</a>
+    <a href="/secure/myaccount/sales">My Sales</a>
+    <a href="/secure/myaccount/payments">Payments</a>
+  </nav>
+  <h1>My Listings</h1>
+  <a href="/selltickets" class="btn btn-primary">Sell tickets</a>
+  {% for listing in listings %}
+  <div class="order-row listing-manage">
+    <div>
+      <strong>{{ listing.event.name }}</strong>
+      <p>{{ listing.event.date_full }} • {{ listing.event.venue.name }}</p>
+      <p class="muted">{{ listing.section }}{% if listing.row %} Row {{ listing.row }}{% endif %}{% if listing.seats %} · Seats {{ listing.seats }}{% endif %} · {{ listing.quantity }} ticket{{ 's' if listing.quantity > 1 }}</p>
+    </div>
+    <div class="order-side">
+      <span>{{ '${:,}'.format(listing.price) }} each</span>
+      <form method="post" action="/secure/myaccount/listings/{{ listing.id }}/update" class="inline-form">
+        <input type="text" name="price" placeholder="New price" class="price-input">
+        <button type="submit" name="action" value="reprice" class="btn btn-small">Update price</button>
+        <button type="submit" name="action" value="delete" class="btn btn-small btn-ghost">Delete</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">No active listings. <a href="/selltickets">Sell your tickets</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}

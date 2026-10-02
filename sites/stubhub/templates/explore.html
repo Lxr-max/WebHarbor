@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}All Events - StubHub{% endblock %}
+{% block content %}
+<div class="grid-toolbar sticky">
+  <span class="location-chip">{{ default_metro.name if default_metro else 'Redmond' }}</span>
+  <span class="toolbar-chip">All dates</span>
+  <span class="toolbar-chip">Price</span>
+  <span class="grid-count">{{ total }} events</span>
+</div>
+<h1 class="explore-title">Explore events near {{ default_metro.name if default_metro else 'Redmond' }}</h1>
+<div class="event-grid list">
+  {% for evt in events %}
+  {% set card = event_card(evt) %}
+  <a class="event-card row" href="{{ card.url }}" title="{{ evt.name }}">
+    <time class="event-date-box" datetime="{{ evt.local_starts_at.isoformat() }}">
+      <span class="month">{{ evt.local_starts_at.strftime('%b') }}</span>
+      <span class="day">{{ evt.local_starts_at.day }}</span>
+      <span class="dow">{{ evt.local_starts_at.strftime('%a') }}</span>
+    </time>
+    <div class="event-card-body">
+      <h3>{{ evt.name }}</h3>
+      <p class="event-card-when">{{ card.time }}</p>
+      <p class="event-card-venue">{{ card.venue }}</p>
+      <p class="event-card-city">{{ card.city }}</p>
+      {% if card.badge %}<span class="event-badge">{{ card.badge }}</span>{% endif %}
+    </div>
+    <span class="see-tickets">See tickets</span>
+  </a>
+  {% endfor %}
+</div>
+{% if total > 30 %}
+<div class="pagination">
+  {% if page > 1 %}<a href="?page={{ page - 1 }}">Prev</a>{% endif %}
+  <span class="page-current">{{ page }}</span>
+  {% if page * 30 < total %}<a href="?page={{ page + 1 }}">Next</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

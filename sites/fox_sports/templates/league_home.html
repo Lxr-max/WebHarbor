@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ league_name }}</h1>
+  <nav class="league-tabs">
+    <a class="active" href="/{{ league }}" aria-current="page">Home</a>
+    <a href="/scores/{{ league }}">Scores</a>
+    <a href="/{{ league }}/schedule">Schedule</a>
+    <a href="/{{ league }}/standings">Standings</a>
+    <a href="/{{ league }}/teams">Teams</a>
+    <a href="/{{ league }}/players">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+<section class="section">
+  <div class="section-head"><h2>Latest Games</h2><a class="see-all" href="/scores/{{ league }}">All Scores</a></div>
+  <div class="game-grid">
+    {% for game in games %}
+      {% include '_game_card.html' %}
+    {% endfor %}
+  </div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Top Stories</h2><a class="see-all" href="/{{ league }}/news">All News</a></div>
+  <div class="story-grid">
+    {% for story in stories %}
+      <a class="story-card" href="/stories/{{ story.league }}/{{ story.slug }}">
+        {% if story.image and image(story.image) %}<img src="{{ image(story.image) }}" alt="{{ story.title }}" loading="lazy">{% endif %}
+        <h3>{{ story.title }}</h3>
+        {% if story.dek %}<p>{{ story.dek }}</p>{% endif %}
+        <span class="muted">{{ story.time_ago or '' }}{% if story.source %} &middot; {{ story.source }}{% endif %}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

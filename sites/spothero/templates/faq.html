@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Frequently Asked Questions | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>How SpotHero Works</h1>
+  </div>
+  <div class="three-col" style="margin-bottom:26px">
+    <div class="feat-card"><h3>Find Parking</h3><p class="muted">Search an address, city, airport, or event and compare garages, lots, and valets near your destination.</p></div>
+    <div class="feat-card"><h3>Pay and Reserve</h3><p class="muted">Book your spot online or in the app and pay once — taxes and fees included at checkout.</p></div>
+    <div class="feat-card"><h3>Arrive and Park</h3><p class="muted">Scan your Parking Pass at the gate. Your spot is guaranteed at the price you paid.</p></div>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+  {% for cat in categories %}
+  <h3 style="margin-top:22px" id="{{ cat|lower|replace(' ','-') }}">{{ cat }}</h3>
+  <div class="accordion">
+    {% for f in faqs if f.category == cat %}
+    <div class="accordion-item">
+      <button class="accordion-button" aria-expanded="false">{{ f.question }}</button>
+      <div class="accordion-panel" style="display:none"><p>{{ f.answer }}</p></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

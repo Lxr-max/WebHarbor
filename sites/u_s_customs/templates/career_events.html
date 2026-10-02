@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">CBP Hiring Events</h1>
+<form class="filters" method="get" action="{{ url_for('careers_events') }}">
+  <div class="field"><label for="q">Search events</label>
+    <input id="q" type="search" name="q" value="{{ q }}"></div>
+  <button class="btn" type="submit">Search</button>
+</form>
+<table class="data">
+  <tr><th>Date</th><th>Event</th><th>Location</th><th>Type</th></tr>
+  {% for e in rows %}
+  <tr><td>{{ e.date }}</td><td>{{ e.event }}</td><td>{{ e.location or 'Online' }}</td><td>{{ e.kind }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

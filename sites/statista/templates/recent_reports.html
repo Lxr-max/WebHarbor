@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Recent Reports | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Recent reports</span>
+</nav>
+<h1>Recent Reports</h1>
+<section class="section">
+  <div class="cardGrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+    {% for r in reports %}
+    <a class="card" href="/study/{{ r.id }}/{{ r.slug }}/">
+      {% if r.has_cover %}<span class="card__img" style="aspect-ratio:712/400;"><img src="/static/images/report_{{ r.id }}_cover.png" alt="{{ r.title }}" loading="lazy"></span>{% endif %}
+      <div class="card__body">
+        <span class="card__meta"><span class="card__tag card__tag--premium">Premium Report</span></span>
+        <span class="card__title">{{ r.title|truncate(80) }}</span>
+        <span class="card__snippet">{{ r.description|striptags|truncate(140) }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

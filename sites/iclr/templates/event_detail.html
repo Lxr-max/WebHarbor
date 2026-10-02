@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}{{ e.title }}{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <span class="badge kind">{{ e.kind_label() }}</span>
+  <h1 style="font-size:1.35rem">{{ e.title }}</h1>
+</div>
+<div class="card">
+  <p class="muted">{{ fmt_date(e.date) }} ({{ e.day_label }}) &middot;
+    {{ fmt_time(e.start) }} – {{ fmt_time(e.end) }} &middot; conference local time (-03)</p>
+  {% if e.people_list() %}
+    <p>{{ e.people_list() | join(' ⋅ ') }}</p>
+  {% elif e.speaker %}
+    <p><b>{{ e.speaker }}</b></p>
+  {% endif %}
+  {% if e.overflow_room %}
+    <p class="muted">Overflow Room: {{ e.overflow_room }}</p>
+  {% endif %}
+
+  {% if e.headshot_url or e.speaker %}
+    <div class="person" style="margin:14px 0">
+      {% if e.headshot_url %}
+        <img class="avatar" src="{{ img(e.headshot_url) }}" alt="{{ e.headshot_alt or e.speaker }}">
+      {% elif e.speaker %}
+        <div class="initials">{{ (e.speaker or '?')[:1] }}</div>
+      {% endif %}
+      <div>
+        {% if e.speaker %}<h3>{{ e.speaker }}</h3>{% endif %}
+        {% if e.speaker_bio %}<p class="small">{{ e.speaker_bio }}</p>{% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if e.abstract %}
+    <h2>Abstract</h2>
+    <p>{{ e.abstract }}</p>
+  {% endif %}
+
+  {% if e.website %}
+    <p><a href="{{ e.website }}" rel="noopener">Project Page</a></p>
+  {% endif %}
+
+  {% if e.schedule_list() %}
+    <h2>Schedule</h2>
+    <table class="data">
+      <tr><th style="width:110px">Time</th><th>Talk</th><th>Speakers</th></tr>
+      {% for s in e.schedule_list() %}
+        <tr>
+          <td class="mono">{{ s.time }}</td>
+          <td>{{ s.title }}</td>
+          <td class="muted small">{{ s.speaker }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('schedule_save') }}" style="margin-top:16px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="event_id" value="{{ e.id }}">
+    <input type="hidden" name="back" value="{{ url_for('event_detail', eid=e.id) }}">
+    {% if current_user.is_authenticated %}
+      <button class="btn {{ 'ghost' if saved else '' }}" type="submit">
+        {{ 'Remove from My Schedule' if saved else 'Add to My Schedule' }}</button>
+    {% else %}
+      <a class="btn ghost" href="{{ url_for('login', next=url_for('event_detail', eid=e.id)) }}">Log in to save</a>
+    {% endif %}
+  </form>
+</div>
+<p><a href="{{ url_for('schedule', date=e.date) }}">Back to the {{ e.day_label }} schedule »</a></p>
+{% endblock %}

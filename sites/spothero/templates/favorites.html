@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Saved Spots | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <nav class="search-toolbar" style="top:0;border-bottom:none;padding-left:0">
+    <a class="chip" href="{{ url_for('account') }}">Reservations</a>
+    <a class="chip" href="{{ url_for('payment_methods') }}">Payment Methods</a>
+    <a class="chip active" href="{{ url_for('favorites') }}">Saved Spots</a>
+    <a class="chip" href="{{ url_for('profile') }}">Profile</a>
+  </nav>
+  <h1 style="font-size:24px;margin-top:18px">Saved spots</h1>
+  {% if favorites %}
+  <div class="spot-list">
+    {% for fav in favorites %}
+    <div class="spot-card">
+      {% if fav.facility.image_list %}
+      <a href="{{ url_for('facility_page', facility_id=fav.facility.id, slug=fav.facility.slug or 'x') }}"><img class="spot-img" src="{{ url_for('static', filename='images/' ~ fav.facility.image_list[0]) }}" alt="Photo of {{ fav.facility.title }}"></a>
+      {% else %}<div class="spot-img"></div>{% endif %}
+      <div>
+        <a class="spot-title" href="{{ url_for('facility_page', facility_id=fav.facility.id, slug=fav.facility.slug or 'x') }}">{{ fav.facility.title }}</a>
+        <div class="spot-meta">
+          <span>{{ fav.facility.street }}, {{ fav.facility.city }}</span>
+          <span class="stars">★</span><span class="rating">{{ '%.1f' % fav.facility.rating_avg }}</span>
+          <span>({{ review_count_display(fav.facility.rating_count) }})</span>
+        </div>
+      </div>
+      <div class="spot-price">
+        <div class="amount">${{ '%.2f' % (fav.facility.monthly_rate or fav.facility.daily_rate) }}</div>
+        <div class="note">{% if fav.facility.monthly_rate %}per month{% else %}starting at{% endif %}</div>
+        <div class="spot-actions">
+          <form method="post" action="{{ url_for('favorites') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="facility_id" value="{{ fav.facility.id }}">
+            <input type="hidden" name="next" value="{{ url_for('favorites') }}">
+            <button class="btn btn-tertiary btn-sm" type="submit">Remove</button>
+          </form>
+          <a class="btn btn-primary btn-sm" href="{{ url_for('facility_page', facility_id=fav.facility.id, slug=fav.facility.slug or 'x') }}">View</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><p>No saved spots yet. Save a facility to book it faster next time.</p></div>
+  {% endif %}
+</div>
+{% endblock %}

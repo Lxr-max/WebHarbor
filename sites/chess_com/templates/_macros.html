@@ -16,7 +16,7 @@
 {%- endmacro %}
 
 {% macro lb_user(entry) -%}
-  <a class="user-tagline" href="{{ url_for('stats_page', type_='blitz', username=entry.username) }}">
+  <a class="user-tagline" href="{{ url_for('stats_page', type_=entry.category, username=entry.username) }}">
     <span class="avatar avatar-40" style="background-image:url('{{ url_for('static', filename='images/avatars/' + entry.avatar_url) if entry.avatar_url else url_for('static', filename='icons/noavatar_l.gif') }}')"></span>
     {% if entry.chess_title %}<span class="user-title">{{ entry.chess_title }}</span>{% endif %}
     <span class="username">{{ entry.username }}</span>

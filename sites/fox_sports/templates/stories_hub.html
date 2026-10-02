@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Stories | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>FOX Sports Stories</h1></div>
+<div class="story-grid">
+  {% for story in stories %}
+  <a class="story-card" href="/stories/{{ story.league }}/{{ story.slug }}">
+    {% if story.image and image(story.image) %}<img src="{{ image(story.image) }}" alt="{{ story.title }}" loading="lazy">{% endif %}
+    <h3>{{ story.title }}</h3>
+    {% if story.dek %}<p>{{ story.dek }}</p>{% endif %}
+    <span class="muted">{{ story.time_ago or (story.published or '')[:10] }}{% if story.source %} &middot; {{ story.source }}{% endif %}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

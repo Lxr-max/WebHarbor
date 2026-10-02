@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block title %}{{ page.title }} | Speedo{% endblock %}
+{% block content %}
+<section class="hub-hero">
+  {% if page.hero_image %}<img src="{{ url_for('static', filename='images/' + page.hero_image) }}" alt="{{ page.title }}">{% endif %}
+  <div class="hub-hero-overlay">
+    <h1>{{ page.title }}</h1>
+    {% for block in page.blocks() if block.get('cta') %}
+    <a class="btn" href="{{ block['cta_href'] }}">{{ block['cta'] }}</a>
+    {% endfor %}
+  </div>
+</section>
+<div class="page-width">
+  {% for block in page.blocks() %}
+    {% if block.get('heading') %}
+    <div class="content-block">
+      <h2>{{ block['heading'] }}</h2>
+      {% for para in block.get('paragraphs', []) %}<p>{{ para }}</p>{% endfor %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% if featured %}
+  <section class="home-section">
+    <div class="section-head">
+      <h2>{{ page.featured_label or 'Featured' }}</h2>
+    </div>
+    <div class="product-grid">
+      {% for c in featured %}{{ card(c) }}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

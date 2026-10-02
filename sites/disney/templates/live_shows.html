@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Live Shows &amp; Musicals | Disney{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Live Shows &amp; Musicals</h1>
+  <p class="page-sub">Broadway musicals and touring ice shows from the official Disney live events hub.</p>
+
+  <div class="section-head"><h2>Disney on Broadway</h2></div>
+  <div class="grid cols-4">
+    {% for m in musicals %}
+    <div class="card">
+      {% if img(m.image) %}<div class="card-img"><img src="{{ img(m.image) }}" alt="{{ m.title }}"></div>{% endif %}
+      <div class="card-body">
+        <p class="card-title">{{ m.title }}</p>
+        <p class="card-meta">Official site: {{ m.url }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="section-head"><h2>Disney On Ice</h2></div>
+  <div class="grid cols-4">
+    {% for t in tours %}
+    <a class="card" href="{{ url_for('doi_schedule') }}">
+      {% if img(t.image) %}<div class="card-img"><img src="{{ img(t.image) }}" alt="{{ t.title }}"></div>{% endif %}
+      <div class="card-body">
+        <p class="card-title">{{ t.title }}</p>
+        <p class="card-meta">{{ events }} upcoming events</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p style="margin-top:22px"><a class="btn" href="{{ url_for('doi_schedule') }}">See the Disney On Ice schedule</a></p>
+</div>
+{% endblock %}

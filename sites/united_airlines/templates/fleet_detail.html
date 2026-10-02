@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}{{ aircraft.name }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>{{ aircraft.name }}</h1>
+  {% if aircraft.description %}<p class="ua-lead">{{ aircraft.description }}</p>{% endif %}
+  {% if aircraft.seat_map_image %}
+  <img class="ua-deal-hero" src="{{ url_for('static', filename=aircraft.seat_map_image) }}" alt="{{ aircraft.name }} seat map">
+  {% endif %}
+  {% if aircraft.cabin_specs %}
+  <h2>Interior specifications</h2>
+  <table class="ua-table">
+    <thead><tr><th>Cabin</th><th>Seats</th><th>Configuration</th><th>Seat pitch</th></tr></thead>
+    <tbody>
+      {% for spec in aircraft.cabin_specs %}
+      <tr>
+        <td>{{ spec.name }}</td>
+        <td>{{ spec.seats }}</td>
+        <td>{{ spec.config }}</td>
+        <td>{{ spec.pitch or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <div class="ua-spec-grid">
+    <div><span>Seat rows</span><strong>{{ aircraft.seat_rows }}</strong></div>
+    <div><span>United First/Business rows</span><strong>{{ aircraft.first_rows }}</strong></div>
+    <div><span>Premium Plus rows</span><strong>{{ aircraft.premium_rows }}</strong></div>
+    <div><span>Economy Plus rows</span><strong>{{ aircraft.economy_plus_rows }}</strong></div>
+    <div><span>Wi-Fi</span><strong>{{ aircraft.wifi or 'Not available' }}</strong></div>
+    <div><span>Power outlets</span><strong>{{ 'Yes' if aircraft.power == 'yes' else aircraft.power }}</strong></div>
+  </div>
+  {% if aircraft.specs %}
+  <h2>Performance</h2>
+  <ul>
+    {% for label, value in aircraft.specs.items() %}
+      <li>{{ label.replace('_', ' ')|capitalize }}: {{ value }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <div class="ua-mp-actions">
+    <a class="ua-btn ua-btn-ghost" href="{{ url_for('fleet') }}">Back to the fleet</a>
+    <a class="ua-btn ua-btn-primary" href="{{ url_for('home') }}">Book a flight</a>
+  </div>
+</section>
+{% endblock %}

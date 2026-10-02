@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block title %}Budget Calculator | Student.com{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:40px 0 64px;max-width:1000px">
+  <nav class="breadcrumb" style="padding:0 0 10px"><a href="/">Home</a> › <span>Budget Calculator</span></nav>
+  <h1>Student budget calculator</h1>
+  <p class="muted" style="max-width:640px">Just fill in your income and costs in our budget calculator and we'll help you figure out what a comfortable rent budget looks like.</p>
+  <div class="grid cols-3" style="margin-top:24px">
+    <div class="card" style="padding:18px"><div style="font-size:22px">⏱️</div><h3 style="font-size:15px;margin-top:6px">Takes 2 minutes</h3></div>
+    <div class="card" style="padding:18px"><div style="font-size:22px">🎓</div><h3 style="font-size:15px;margin-top:6px">Built for students</h3></div>
+    <div class="card" style="padding:18px"><div style="font-size:22px">📊</div><h3 style="font-size:15px;margin-top:6px">Helping you stay on track</h3></div>
+  </div>
+
+  <div class="card" style="padding:32px;margin-top:26px">
+    <div class="steps" id="calc-steps">
+      <div class="step"><div class="n">1</div><strong>Income &amp; Expenses</strong><div class="small muted">Enter your monthly numbers</div></div>
+      <div class="step"><div class="n">2</div><strong>Rent breakdown</strong><div class="small muted">Income minus costs, with a buffer</div></div>
+      <div class="step"><div class="n">3</div><strong>Rent</strong><div class="small muted">Pick a rent that fits</div></div>
+      <div class="step"><div class="n">4</div><strong>Find your home</strong><div class="small muted">Browse within budget</div></div>
+    </div>
+    <p class="small muted" style="margin-top:16px" id="step-label">Step 1 of 4 — Enter your monthly numbers. Just fill in your income and expenses in our budget calculator.</p>
+
+    <!-- step 1 -->
+    <div id="calc-step-1">
+      <h3 style="margin-top:20px">Income per month</h3>
+      <p class="small muted">This can be from grants, loans or part-time work. Estimate is fine — click any number to edit.</p>
+      <div class="calc-grid">
+        <div class="field money"><label>Financial Aid / Scholarships <span class="muted">— grants, refunds, loans</span></label>
+          <input type="number" class="inc" data-key="aid" value="800" min="0"></div>
+        <div class="field money"><label>Jobs / Part-time Work <span class="muted">— take-home pay</span></label>
+          <input type="number" class="inc" data-key="jobs" value="1200" min="0"></div>
+        <div class="field money"><label>Family Support <span class="muted">— from parents/guardians</span></label>
+          <input type="number" class="inc" data-key="family" value="300" min="0"></div>
+        <div class="field money"><label>Savings <span class="muted">— reserves you can pull monthly</span></label>
+          <input type="number" class="inc" data-key="savings" value="0" min="0"></div>
+        <div class="field money"><label>Other <span class="muted">— additional income</span></label>
+          <input type="number" class="inc" data-key="other" value="0" min="0"></div>
+      </div>
+      <div class="summary-row total"><span>Total income (per month)</span><span id="total-income">$2,300</span></div>
+
+      <h3 style="margin-top:26px">Expenses per month</h3>
+      <p class="small muted">These are any costs you expect to pay monthly. Estimate is fine — click any number to edit.</p>
+      <div class="calc-grid">
+        <div class="field money"><label>Tuition Fees <span class="muted">— school fees, course costs</span></label>
+          <input type="number" class="exp" data-key="tuition" value="400" min="0"></div>
+        <div class="field money"><label>Utilities <span class="muted">— electric, water, gas</span></label>
+          <input type="number" class="exp" data-key="utilities" value="120" min="0"></div>
+        <div class="field money"><label>Phone &amp; Internet <span class="muted">— plan + wifi</span></label>
+          <input type="number" class="exp" data-key="phone" value="80" min="0"></div>
+        <div class="field money"><label>Groceries <span class="muted">— food to eat in</span></label>
+          <input type="number" class="exp" data-key="groceries" value="300" min="0"></div>
+        <div class="field money"><label>Transport <span class="muted">— getting around</span></label>
+          <input type="number" class="exp" data-key="transport" value="120" min="0"></div>
+        <div class="field money"><label>Fun &amp; Subscriptions <span class="muted">— streaming, gym, going out</span></label>
+          <input type="number" class="exp" data-key="fun" value="160" min="0"></div>
+        <div class="field money"><label>Other <span class="muted">— additional outgoing expenses</span></label>
+          <input type="number" class="exp" data-key="other" value="0" min="0"></div>
+      </div>
+      <div class="summary-row total"><span>Total expenses (per month)</span><span id="total-expenses">$1,180</span></div>
+      <button class="btn primary" id="to-step-2" style="margin-top:18px">Next: Rent breakdown →</button>
+    </div>
+
+    <!-- step 2 -->
+    <div id="calc-step-2" style="display:none">
+      <h3 style="margin-top:20px">Discover your rent breakdown</h3>
+      <p class="small muted">Here's your finance breakdown and how much you can rent for while keeping a monthly buffer.</p>
+      <div class="summary-row"><span>Income (per month)</span><span id="s2-income" class="pos">+ $2,300</span></div>
+      <div class="summary-row"><span>Expenses (per month)</span><span id="s2-expenses">- $1,180</span></div>
+      <div class="summary-row"><span>Safety buffer (20% of monthly income)</span><span id="s2-buffer">- $460</span></div>
+      <div class="summary-row total"><span>Comfortable rent target</span><span id="s2-target">$660</span></div>
+      <div style="display:flex;gap:10px;margin-top:18px">
+        <button class="btn" id="back-to-1">← Back</button>
+        <button class="btn primary" id="to-step-3">Next: Pick your rent →</button>
+      </div>
+    </div>
+
+    <!-- step 3 -->
+    <div id="calc-step-3" style="display:none">
+      <h3 style="margin-top:20px">Rent-to-income</h3>
+      <p class="small muted">Drag the slider to find how much of your monthly budget you'll have left over after rent and expenses are paid.</p>
+      <div class="field"><label for="rent-slider">Monthly rent estimate</label>
+        <input type="range" id="rent-slider" min="0" max="3000" step="10" value="660">
+        <div style="display:flex;justify-content:space-between" class="small muted">
+          <span>$0</span><span id="rent-label" style="font-size:18px;font-weight:600">$660/mo</span><span>$3,000</span>
+        </div>
+      </div>
+      <div class="summary-row"><span>Left over per month after rent</span><span id="s3-leftover">$460</span></div>
+      <p class="small" id="s3-note">Looking good - you're in budget! 💚</p>
+      <div style="display:flex;gap:10px;margin-top:18px">
+        <button class="btn" id="back-to-2">← Back</button>
+        <button class="btn primary" id="to-step-4">Next: Find your home →</button>
+      </div>
+    </div>
+
+    <!-- step 4 -->
+    <div id="calc-step-4" style="display:none">
+      <h3 style="margin-top:20px">Find your home</h3>
+      <p class="small muted">Now you know your budget, browse from our selection of curated, 3+ star student homes near your college – pre-filtered by your rent target.</p>
+      <div class="field" style="max-width:420px">
+        <label for="college-search">Search for your college</label>
+        <input type="search" id="college-search" placeholder="e.g. The University of Texas at Austin" list="college-list">
+        <datalist id="college-list">
+          {% for u in unis %}
+          <option value="{{ u.name }}">{{ u.city_slug.replace('-', ' ').title() }}, {{ STATE_NAMES[u.state] }}</option>
+          {% endfor %}
+        </datalist>
+      </div>
+      <p class="small muted">*Housing near some colleges isn't available yet so check back soon as we're always adding new housing!</p>
+      <button class="btn primary" id="college-go" style="margin-top:10px">Browse homes within my budget</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function () {
+    var inc = {}, exp = {};
+    function sum(sel) {
+      var t = 0;
+      document.querySelectorAll(sel).forEach(function (i) { t += parseFloat(i.value || 0); });
+      return t;
+    }
+    function fmt(n) { return "$" + Math.round(n).toLocaleString(); }
+    function income() { return sum(".inc"); }
+    function expenses() { return sum(".exp"); }
+    function target() { return Math.max(0, income() - expenses() - 0.2 * income()); }
+    function refresh() {
+      document.getElementById("total-income").textContent = fmt(income());
+      document.getElementById("total-expenses").textContent = fmt(expenses());
+    }
+    document.querySelectorAll(".inc,.exp").forEach(function (i) { i.addEventListener("input", refresh); });
+    refresh();
+
+    var step = 1;
+    function show(n) {
+      step = n;
+      [1, 2, 3, 4].forEach(function (k) {
+        document.getElementById("calc-step-" + k).style.display = k === n ? "block" : "none";
+      });
+      var labels = {
+        1: "Step 1 of 4 — Enter your monthly numbers. Just fill in your income and expenses in our budget calculator.",
+        2: "Step 2 of 4 — Discover your rent breakdown. Here's your finance breakdown and how much you can rent for while keeping a monthly buffer.",
+        3: "Step 3 of 4 — Rent-to-income. Drag the slider to find how much of your monthly budget you'll have left over after rent and expenses are paid.",
+        4: "Step 4 of 4 — Find your home. Browse from our selection of curated, 3+ star student homes near your college.",
+      };
+      document.getElementById("step-label").textContent = labels[n];
+      document.querySelectorAll("#calc-steps .step").forEach(function (s, i) {
+        s.style.borderColor = i + 1 === n ? "#242529" : "rgba(38,38,38,.2)";
+      });
+      if (n === 2) {
+        document.getElementById("s2-income").textContent = "+ " + fmt(income());
+        document.getElementById("s2-expenses").textContent = "- " + fmt(expenses());
+        document.getElementById("s2-buffer").textContent = "- " + fmt(0.2 * income());
+        document.getElementById("s2-target").textContent = fmt(target());
+      }
+      if (n === 3) {
+        var slider = document.getElementById("rent-slider");
+        slider.value = Math.round(target());
+        slider.dispatchEvent(new Event("input"));
+      }
+    }
+    document.getElementById("to-step-2").addEventListener("click", function () { show(2); });
+    document.getElementById("back-to-1").addEventListener("click", function () { show(1); });
+    document.getElementById("to-step-3").addEventListener("click", function () { show(3); });
+    document.getElementById("back-to-2").addEventListener("click", function () { show(2); });
+    document.getElementById("to-step-4").addEventListener("click", function () { show(4); });
+    document.getElementById("rent-slider").addEventListener("input", function () {
+      var rent = parseFloat(this.value);
+      document.getElementById("rent-label").textContent = fmt(rent) + "/mo";
+      var left = income() - expenses() - rent;
+      document.getElementById("s3-leftover").textContent = fmt(left);
+      var note = document.getElementById("s3-note");
+      if (rent <= target()) {
+        note.textContent = "Looking good - you're in budget! 💚 A rent of " + fmt(rent) +
+          "/mo fits well within your comfortable rent target of " + fmt(target()) + "/mo.";
+      } else if (left >= 0) {
+        note.textContent = "Tight but doable — you're above your comfortable target (" + fmt(target()) +
+          "/mo) but still breaking even each month. 🟡";
+      } else {
+        note.textContent = "Over budget — rent of " + fmt(rent) + "/mo leaves you " + fmt(Math.abs(left)) +
+          " short each month. Consider a lower rent or trimming expenses. ❤️";
+      }
+    });
+    document.getElementById("college-go").addEventListener("click", function () {
+      var q = document.getElementById("college-search").value.trim();
+      if (!q) return;
+      window.location.href = "/search?q=" + encodeURIComponent(q);
+    });
+  })();
+</script>
+{% endblock %}

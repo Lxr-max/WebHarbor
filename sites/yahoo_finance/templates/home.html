@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Yahoo Finance - Stock Market Live, Quotes, Charts &amp; News{% endblock %}
+{% block content %}
+{% if lead_news %}<section class="lead-story card"><a href="{{ lead_news.url_path }}"><img src="{{ url_for('static',filename=lead_news.thumb_name) }}" alt=""><div><span>{{ lead_news.provider }}</span><h1>{{ lead_news.title }}</h1><p>{{ lead_news.summary or '' }}</p></div></a></section>{% endif %}
+<div class="hero">
+  <div class="card">
+    <h2>US Markets</h2>
+    <div class="index-cards">
+      {% for c in cards %}
+      <a class="index-card" href="/quote/{{ c.symbol|urlencode }}">
+        <div class="idx-name">{{ c.short_name or c.symbol }}</div>
+        <div class="idx-price">{{ fmt_price(c.price) }}</div>
+        <div class="{{ 'up' if (c.change_pct or 0) >= 0 else 'down' }}">
+          {{ fmt_signed(c.change) }} ({{ fmt_pct(c.change_pct, 2, sign=True) }})
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="card">
+    <h2>Trending Tickers</h2>
+    <table class="yf">
+      <thead><tr><th>#</th><th>Symbol</th><th class="num">Last</th><th class="num">% Chg</th></tr></thead>
+      <tbody>
+      {% for rank, q in trending %}
+        <tr>
+          <td>{{ rank }}</td>
+          <td><a href="/quote/{{ q.symbol|urlencode }}">{{ q.symbol }}</a></td>
+          <td class="num">{{ fmt_price(q.price) }}</td>
+          <td class="num {{ 'up' if (q.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(q.change_pct, 2, sign=True) }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Market Movers</h2>
+  <div class="movers-grid">
+    {% for pid, mover in movers.items() %}
+    <div class="mover-card">
+      <h3>{{ mover.title }}</h3>
+      <table class="yf">
+        <thead><tr><th>Symbol</th><th class="num">Last</th><th class="num">Chg %</th></tr></thead>
+        <tbody>
+        {% for r in mover.rows %}
+          <tr>
+            <td><a href="/quote/{{ r.symbol|urlencode }}">{{ r.symbol }}</a></td>
+            <td class="num">{{ fmt_price(r.price) }}</td>
+            <td class="num {{ 'up' if (r.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(r.change_pct, 2, sign=True) }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <p><a href="/screener?preset={{ pid }}">View all {{ mover.title }}</a></p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="cols">
+  <div class="card">
+    <h2>Latest News</h2>
+    <ul class="news-list">
+      {% for art in news %}
+      <li class="news-item">
+        {% if art.thumb_name %}
+          <img class="thumb" src="{{ url_for('static', filename=art.thumb_name) }}" alt="">
+        {% else %}
+          <span class="thumb-fallback" aria-hidden="true">Y!</span>
+        {% endif %}
+        <div>
+          <h3><a href="{{ art.url_path }}">{{ art.title }}</a></h3>
+          <div class="news-meta">
+            <span>{{ art.provider }}</span>
+            <span>{{ rel_time(art.pub_time) }}</span>
+          </div>
+          {% if art.summary %}<p class="news-summary">{{ art.summary }}</p>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <p><a href="/news">More market news</a></p>
+  </div>
+  <div>
+    <div class="card">
+      <h2>Earnings This Week</h2>
+      <p class="muted">See who reports before and after the bell.</p>
+      <p><a href="/calendar/earnings">Open the earnings calendar</a></p>
+    </div>
+    <div class="card">
+      <h2>Find investments</h2>
+      <p class="muted">Screen stocks by sector, market cap, P/E and dividend yield.</p>
+      <p><a href="/screener">Open the stock screener</a></p>
+      <p><a href="/sectors">Compare sectors &amp; industries</a></p>
+    </div>
+    <div class="card">
+      <h2>My portfolio tools</h2>
+      <p><a href="/login">Sign in</a> to build a watchlist and create price alerts.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title | replace(' | Trader Joe\'s','') }}{% endblock %}
+{% block content %}
+<div class="cms-page">
+  {% if crumbs %}
+  <div class="breadcrumbs">
+    {% for label, link in crumbs %}
+    <a href="{{ link }}">{{ label }}</a> &rsaquo;
+    {% endfor %}
+    {{ page.h1 or page.title }}
+  </div>
+  {% endif %}
+  <h1>{{ page.h1 or (page.title | replace(' | Trader Joe\'s','')) }}</h1>
+  {% for block in page.block_list() %}
+    {% if block['type'] == 'text' %}
+    <div class="rich">{{ block['html'] | rich | safe }}</div>
+    {% elif block['type'] == 'image' %}
+    {% if dam_url(block.get('src')) %}
+    <img style="border-radius:8px; margin:10px 0;" src="{{ dam_url(block.get('src')) }}" alt="{{ block.get('alt') or '' }}">
+    {% endif %}
+    {% elif block['type'] == 'links' %}
+    <div class="facet-group" style="margin:16px 0;">
+      {% if block.get('title') %}<h3>{{ block['title'] }}</h3>{% endif %}
+      {% for item in block.get('items') or [] %}
+      <a class="facet" href="{{ item.get('linkUrl') or item.get('link') or '#' }}">{{ item.get('title') or item.get('label') or item.get('text') }}</a>
+      {% endfor %}
+    </div>
+    {% elif block['type'] == 'button' %}
+    <p><a class="btn" href="{{ block.get('link') or '#' }}">{{ block.get('text') or 'Learn more' }}</a></p>
+    {% elif block['type'] == 'video' %}
+    <div class="note"><span class="note-title">WATCH:</span><span>{{ block.get('title','') }} &mdash; <a href="{{ block.get('src') }}" rel="noopener">{{ block.get('src') }}</a></span></div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

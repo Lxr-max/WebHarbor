@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Informed Delivery | USPS{% endblock %}
+{% block content %}
+<h1>Informed Delivery</h1>
+<p>See images of your incoming mail before it arrives. Daily notifications are generated for letter-sized mailpieces.</p>
+{% for piece in pieces %}
+  <div class="card" style="margin: 8px 0;">
+    <p><strong>{{ piece.mail_date | longdate }}</strong> &middot; <span class="badge">{{ piece.category }}</span> &middot; <span class="note">{{ piece.expected }}</span></p>
+    <p><strong>{{ piece.sender }}</strong> — {{ piece.description }}</p>
+  </div>
+{% else %}
+  <p>No mailpieces in your feed right now.</p>
+{% endfor %}
+{% endblock %}

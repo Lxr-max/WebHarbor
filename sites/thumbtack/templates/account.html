@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Your account - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Hi, {{ current_user.display_name.split(' ')[0] }}</h1>
+  <p class="muted">{{ current_user.email }}{% if current_user.zip %} · Zip {{ current_user.zip }}{% endif %}{% if current_user.phone %} · {{ current_user.phone }}{% endif %}</p>
+  <p><a class="btn btn-outline btn-sm" href="/account/profile">Edit profile</a></p>
+
+  <h2 style="margin-top:28px;">Your projects</h2>
+  {% if not projects %}<p class="muted">No projects yet. <a href="/near-me">Find a pro</a> to get started.</p>{% endif %}
+  {% for pr in projects %}
+  <div class="match-card" style="grid-template-columns:minmax(0,1fr) auto;">
+    <div>
+      <a href="/projects/{{ pr.id }}"><b>{{ pr.category.name }}</b></a>
+      <span class="status-chip status-{{ pr.status }}">{{ pr.status|capitalize }}</span>
+      <div class="muted">Zip {{ pr.zip }} · {{ pr.matches|selectattr('responded')|list|length }} of {{ pr.matches|length }} pros responded</div>
+    </div>
+    <a class="btn btn-outline btn-sm" href="/projects/{{ pr.id }}">View</a>
+  </div>
+  {% endfor %}
+
+  <h2 style="margin-top:28px;">Saved pros ({{ saved|length }})</h2>
+  {% if not saved %}<p class="muted">You haven't saved any pros yet.</p>{% endif %}
+  {% for s in saved[:4] %}
+  <div class="match-card">
+    <a href="{{ s.pro.url() }}"><img src="{{ url_for('static', filename='images/avatars/' + s.pro.avatar) }}" alt="{{ s.pro.name }}"></a>
+    <div><a href="{{ s.pro.url() }}"><b>{{ s.pro.name }}</b></a>
+      <div class="muted">{{ s.pro.category.name }} · {{ s.pro.rating_word }} {{ '%.1f'|format(s.pro.rating) }} ({{ s.pro.review_count }})</div></div>
+    <a class="btn btn-outline btn-sm" href="/account/saved">See all</a>
+  </div>
+  {% endfor %}
+
+  <h2 style="margin-top:28px;">Messages ({{ threads|length }})</h2>
+  {% if not threads %}<p class="muted">No conversations yet.</p>{% endif %}
+  {% for t in threads[:4] %}
+  <div class="match-card">
+    <a href="{{ t.pro.url() }}"><img src="{{ url_for('static', filename='images/avatars/' + t.pro.avatar) }}" alt="{{ t.pro.name }}"></a>
+    <div><a href="/account/messages/{{ t.id }}"><b>{{ t.pro.name }}</b></a>
+      <div class="muted">{{ (t.messages|last).body if t.messages else "" }}</div></div>
+    <a class="btn btn-outline btn-sm" href="/account/messages/{{ t.id }}">Open</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

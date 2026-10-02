@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Award-winning editorial | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Award-winning editorial</h1>
+  <p class="lead">Super Lawyers magazine features the people, practices and ideas that
+  shape the legal profession. Our journalists cover selectees across the country.</p>
+
+  <h2>Recent magazine articles</h2>
+  <div class="article-cards">
+    {% for article in articles %}
+      <a class="article-card" href="/articles/{{ article.state_slug }}/{{ article.slug }}/">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.subtitle }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

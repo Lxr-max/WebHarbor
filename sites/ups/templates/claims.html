@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}File a Claim | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; File a Claim</div>
+  <h1>File a UPS Claim</h1>
+  <p class="ups-lede">Have a problem with a lost or damaged package? Provide us with the details and we&rsquo;ll put all hands on deck to investigate.</p>
+  <div class="ups-card">
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('claim_new') }}">Start a Claim</a>
+      {% if current_user.is_authenticated %}
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('account') }}">View Existing Claim</a>
+      {% endif %}
+    </div>
+    <div class="ups-claimsteps">
+      <div class="ups-claimstep"><span class="ups-stepnum">1</span><h3>Getting Started</h3>
+        <p>Start a claim within 60 days of the scheduled delivery for packages that have been lost or damaged, or if a collect on delivery (C.O.D.) payment wasn&rsquo;t received.</p></div>
+      <div class="ups-claimstep"><span class="ups-stepnum">2</span><h3>Under Review</h3>
+        <p>Check your email — while we review your claim, we may send time-sensitive notifications of action needed, like additional information or photos. Keep any damaged contents and packaging.</p></div>
+      <div class="ups-claimstep"><span class="ups-stepnum">3</span><h3>Resolution</h3>
+        <p>Unless additional investigation is required, you can typically expect a resolution to your claim in 8 to 10 business days. Once approved, payment is sent to the shipper via electronic funds transfer (EFT).</p></div>
+    </div>
+    <h2>What To Keep In Mind</h2>
+    <ul class="ups-svc-list">
+      <li>You&rsquo;ll need your tracking number to get started.</li>
+      <li>Keep any invoice that can provide the value of the package.</li>
+      <li>If you have a damaged package, hold on to the contents and the packaging.</li>
+      <li>If you are the receiver and want updates, reach out to whoever shipped the package with us.</li>
+    </ul>
+  </div>
+  <div class="ups-card">
+    <h2>FAQ</h2>
+    <p><strong>What does my current claim status mean?</strong></p>
+    <ul class="ups-svc-list">
+      <li><em>Claim Issued:</em> the claim was issued and paperwork was sent to the shipper of record.</li>
+      <li><em>Shipment Inspection Scheduled:</em> UPS has scheduled an inspection of the damaged package.</li>
+      <li><em>Claim Reported &ndash; Supporting Document(s) Received:</em> your submitted documents or photos have been successfully uploaded to your claim.</li>
+      <li><em>Claim Review in Progress:</em> your claim is being reviewed by our claims department.</li>
+    </ul>
+    <p><strong>Why can&rsquo;t I submit my claim on UPS.com?</strong></p>
+    <ul class="ups-svc-list">
+      <li><em>Ground Saver Packages:</em> claims are accepted until the exception scan that indicates the package has been handed over to the Post Office is recorded.</li>
+      <li><em>Past Liability:</em> submitting a claim has to be taken care of within a timely manner of delivery — within 60 days of the scheduled delivery.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Verify carol sets her location to Berlin, Germany in Chess.com--24."""
+"""Deterministic verifier for chess_com task 24; see tasks.jsonl and verify/README.md."""
 
 
 from verify_lib import (Judge, check_read_only, check_signed_in_as, check_trajectory_identity,

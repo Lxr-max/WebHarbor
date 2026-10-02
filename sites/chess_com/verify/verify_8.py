@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Verify alice follows GMBrewChess and reports the settings following count in Chess.com--8."""
+"""Deterministic verifier for chess_com task 8; see tasks.jsonl and verify/README.md."""
 
 
 from verify_lib import (Judge, check_read_only, check_signed_in_as, check_trajectory_identity,

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import search_row, pager %}
+{% block title %}{{ label }} Games{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo; Genres &rsaquo; {{ label }}</div>
+<div class="page-header">
+  <h1>{{ label }} Games</h1>
+  <span class="count">{{ "{:,}".format(total) }} game{{ '' if total == 1 else 's' }}</span>
+</div>
+
+<div class="search-layout">
+  <form class="filter-panel" method="get" action="{{ url_for('genre_page', slug=label|slugify) }}">
+    <h3>Filter {{ label }}</h3>
+    <div class="filter-group">
+      <span class="lbl">Search by name</span>
+      <input type="text" name="term" value="{{ f.term }}" placeholder="e.g. portal">
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Max price</span>
+      <select name="maxprice">
+        <option value="">Any price</option>
+        <option value="free" {% if f.maxprice == 'free' %}selected{% endif %}>Free</option>
+        {% for point in price_points %}
+          {% if point %}
+          <option value="{{ point }}" {% if f.maxprice == point|string %}selected{% endif %}>Under ${{ point }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Review score</span>
+      <select name="review_type">
+        {% for key, lab in review_filters.items() %}
+          <option value="{{ key }}" {% if f.review_type == key %}selected{% endif %}>{{ lab }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Sort by</span>
+      <select name="sort">
+        {% for key, lab in sorts.items() %}
+          <option value="{{ key }}" {% if f.sort == key %}selected{% endif %}>{{ lab }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <input type="hidden" name="genre" value="{{ label }}">
+    <button class="btn" type="submit">Apply filters</button>
+  </form>
+
+  <div class="search-results">
+    {% if games %}
+      {% for game in games %}
+        {{ search_row(game) }}
+      {% endfor %}
+      {% if pages > 1 %}
+        {{ pager(url_for('genre_page', slug=label|slugify) + qs_without_page(), f.page, pages) }}
+      {% endif %}
+    {% else %}
+      <div class="empty-state"><p>No {{ label }} games matched your filters.</p></div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

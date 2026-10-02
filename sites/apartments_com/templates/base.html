@@ -1,0 +1,154 @@
+{# Shared layout #}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+<title>{% block title %}Apartments.com — Apartments for Rent{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="logo" href="{{ url_for('index') }}">
+        APARTMENTS<span class="dot">.</span>com
+      </a>
+      <nav>
+        <a href="{{ url_for('search') }}">Search</a>
+        <a href="{{ url_for('cities_index') }}">Cities</a>
+        <a href="{{ url_for('articles_index') }}">Renters Guide</a>
+        <a href="{{ url_for('roommates_index') }}">Roommates</a>
+        <a href="{{ url_for('renters_insurance') }}">Insurance</a>
+        <a href="{{ url_for('moving_services') }}">Movers</a>
+        <a href="{{ url_for('list_property') }}">List a Property</a>
+      </nav>
+      <div class="spacer"></div>
+      <div class="user-menu">
+        {% if compare_buildings %}
+          <a href="{{ url_for('compare') }}">Compare ({{ compare_buildings|length }})</a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('notifications') }}">🔔{% if unread_notifications %} ({{ unread_notifications }}){% endif %}</a>
+          <a href="{{ url_for('favorites_list') }}">Favorites</a>
+          <a href="{{ url_for('account') }}">{{ current_user.name.split(' ')[0] }}</a>
+          <a href="{{ url_for('logout') }}">Sign out</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Sign in</a>
+          <a href="{{ url_for('register') }}" class="btn sm">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container" style="margin-top: 14px;">
+        {% for cat, msg in messages %}
+          <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="cols" style="grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;">
+      <div>
+        <h4>Apartments.com</h4>
+        <p style="font-size:13px;color:#cbd5e1;">The leading marketplace for apartment rentals in the United States.
+        Find apartments, condos, townhomes, and houses for rent across 22+ metros.</p>
+        <form method="post" action="{{ url_for('newsletter_signup') }}" style="margin-top: 14px;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="email" name="email" placeholder="Email for market updates"
+                 style="padding:8px;border-radius:4px;border:none;width:200px;color:#1a2733;">
+          <button class="btn sm" type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h4>Top Metros</h4>
+        {% for label, slug in footer_metros[:8] %}
+          <a href="{{ url_for('city_page', city_slug=slug) }}">{{ label }}</a>
+        {% endfor %}
+        <a href="{{ url_for('cities_index') }}">All cities →</a>
+      </div>
+      <div>
+        <h4>By Amenity</h4>
+        {% for label, slug in footer_amenities[:6] %}
+          <a href="/{{ slug }}">{{ label }}</a>
+        {% endfor %}
+      </div>
+      <div>
+        <h4>By Bedrooms &amp; Price</h4>
+        {% for label, slug in footer_beds %}
+          <a href="/{{ slug }}">{{ label }}</a>
+        {% endfor %}
+        <a href="/apartments-under-1500">Under $1,500</a>
+        <a href="/apartments-under-2000">Under $2,000</a>
+        <a href="/luxury-3000-plus">Luxury $3,000+</a>
+      </div>
+      <div>
+        <h4>Tools &amp; More</h4>
+        <a href="{{ url_for('calc_affordability') }}">Affordability Calculator</a>
+        <a href="{{ url_for('calc_rent_vs_buy') }}">Rent vs Buy</a>
+        <a href="{{ url_for('renters_insurance') }}">Renters Insurance</a>
+        <a href="{{ url_for('moving_services') }}">Moving Services</a>
+        <a href="{{ url_for('roommates_index') }}">Find a Roommate</a>
+        <a href="{{ url_for('glossary_index') }}">Glossary</a>
+      </div>
+    </div>
+    <div class="cols" style="grid-template-columns: 1fr 1fr 1fr 1fr;margin-top:24px;">
+      <div>
+        <h4>Renters</h4>
+        <a href="{{ url_for('articles_index') }}">Renters Guide</a>
+        <a href="{{ url_for('blog_category', category='Moving-Tips') }}">Moving Tips</a>
+        <a href="{{ url_for('search') }}?mode=student">Student Housing</a>
+        <a href="/senior-55-plus">Senior 55+</a>
+        <a href="{{ url_for('search') }}?mode=military">Military Housing</a>
+      </div>
+      <div>
+        <h4>Property Pros</h4>
+        <a href="{{ url_for('list_property') }}">List a Property</a>
+        <a href="{{ url_for('list_property') }}">Property Management Tools</a>
+        <a href="{{ url_for('investors') }}">Investor Relations</a>
+      </div>
+      <div>
+        <h4>Help &amp; Account</h4>
+        <a href="{{ url_for('help_page') }}">Help Center</a>
+        <a href="{{ url_for('help_topic', topic='applying') }}">Applying</a>
+        <a href="{{ url_for('help_topic', topic='lease-signing') }}">Lease Signing</a>
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('notifications') }}">Notifications{% if unread_notifications %} ({{ unread_notifications }}){% endif %}</a>
+        {% endif %}
+        <a href="{{ url_for('sitemap_root') }}">Sitemap</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('careers') }}">Careers</a>
+        <a href="{{ url_for('press') }}">Press</a>
+        <a href="{{ url_for('mobile_app') }}">Mobile App</a>
+      </div>
+    </div>
+    <div class="copy">© {{ current_year }} CoStar Realty Information, Inc. Apartments.com and the running man logo are registered trademarks of CoStar Realty Information, Inc.</div>
+  </footer>
+
+  {% if compare_buildings %}
+  <div class="compare-bar">
+    <strong>Comparing:</strong>
+    <div class="items">
+      {% for b in compare_buildings %}
+        <div class="item">{{ b.name }} <a href="#" style="color:#fff;" onclick="document.getElementById('rm-{{ b.id }}').submit(); return false;">×</a>
+          <form id="rm-{{ b.id }}" method="post" action="{{ url_for('compare_remove', building_id=b.id) }}" style="display:none;"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"></form>
+        </div>
+      {% endfor %}
+    </div>
+    <a class="btn sm" href="{{ url_for('compare') }}">Compare side-by-side</a>
+    <form method="post" action="{{ url_for('compare_clear') }}" style="display:inline;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn sm ghost" style="color:#cbd5e1;border-color:#3b4955;">Clear</button>
+    </form>
+  </div>
+  {% endif %}
+</body>
+</html>

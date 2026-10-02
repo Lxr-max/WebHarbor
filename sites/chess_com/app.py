@@ -405,24 +405,18 @@ def load_user(user_id):
 
 # ------------------------------------------------------------------ helpers
 
-def scored_search(query, items, fields, limit=60, require_all=False):
-    """Token-overlap scored search (multi-word queries must work).
-
-    require_all=True keeps only items matching EVERY token, so a broad token
-    like "chess" cannot flood multi-word results; the search route falls back
-    to plain OR scoring when AND matching is too restrictive.
-    """
+def scored_search(query, items, fields, limit=60):
+    """Token-overlap scored search (multi-word queries must work)."""
     import re as _re
     tokens = [t for t in _re.split(r"\W+", query)
               if t and t.lower() not in STOP_WORDS and len(t) > 1]
     if not tokens:
         return items[:limit]
-    lowered = [t.lower() for t in tokens]
     results = []
     for item in items:
         text = " ".join(str(getattr(item, f, "") or "") for f in fields).lower()
-        score = sum(1 for t in lowered if t in text)
-        if score > 0 and (not require_all or score == len(lowered)):
+        score = sum(1 for t in tokens if t.lower() in text)
+        if score > 0:
             results.append((score, item))
     results.sort(key=lambda pair: (-pair[0], pair[1].id))
     return [item for _, item in results[:limit]]
@@ -604,7 +598,9 @@ def callback_puzzles_solve():
         return jsonify({"ok": False, "error": "invalid puzzle id"}), 400
     if not puzzle:
         return jsonify({"ok": False, "error": "unknown puzzle"}), 404
-    solved = bool(data.get("solved"))
+    submitted = data.get("moves", [])
+    expected = [{"from": m["from"], "to": m["to"]} for m in puzzle.uci_moves]
+    solved = data.get("solved") is True and submitted == expected
     attempt = PuzzleAttempt(user_id=current_user.id, puzzle_id=puzzle.id,
                              solved=solved, used_hint=bool(data.get("hint")),
                              attempted_at=datetime.now(timezone.utc).isoformat(timespec="seconds"))
@@ -623,10 +619,7 @@ def lessons():
     level = request.args.get("level", type=int)
     search = request.args.get("q", "").strip()
     if category:
-        # JSON contains() emits a bracket-inclusive LIKE that only matches single-
-        # category arrays on SQLite; match the quoted token instead so multi-
-        # category courses (e.g. ["endgames", "tactics"]) are found.
-        q = q.filter(db.cast(LessonCourse.categories, db.Text).like(f'%"{category}"%'))
+        q = q.filter(db.cast(LessonCourse.categories, db.Text).contains(json.dumps(category)))
     if level is not None:
         q = q.filter_by(level=level)
     courses = q.order_by(LessonCourse.id).all()
@@ -650,7 +643,7 @@ def lesson_detail(slug):
         progress = LessonProgress.query.filter_by(user_id=current_user.id,
                                                   course_id=course.id).first()
     related = [c for c in LessonCourse.query.filter(
-        LessonCourse.categories.contains([course.categories[0] if course.categories else "strategy"])
+        db.cast(LessonCourse.categories, db.Text).contains(json.dumps(course.categories[0] if course.categories else "strategy"))
     ).limit(5) if c.id != course.id]
     return render_template("lesson_detail.html", course=course, progress=progress,
                            related=related[:4])
@@ -666,7 +659,7 @@ def lesson_complete(slug):
         progress = LessonProgress(user_id=current_user.id, course_id=course.id,
                                    completed_at=datetime.now(timezone.utc).isoformat(timespec="seconds"))
         db.session.add(progress)
-    progress.lessons_done = request.form.get("lessons_done", course.n_lessons, type=int)
+    progress.lessons_done = max(0, min(course.n_lessons, request.form.get("lessons_done", course.n_lessons, type=int)))
     db.session.commit()
     flash(f"Progress saved for {course.title}.", "success")
     return redirect(url_for("lesson_detail", slug=slug))
@@ -910,7 +903,7 @@ def news_index():
 def news_category(slug):
     page = request.args.get("page", 1, type=int)
     per = 12
-    articles = NewsArticle.query.filter(NewsArticle.categories.contains([slug])) \
+    articles = NewsArticle.query.filter(db.cast(NewsArticle.categories, db.Text).contains(json.dumps(slug))) \
         .order_by(NewsArticle.id.desc()).all()
     total = len(articles)
     articles = articles[(page - 1) * per: page * per]
@@ -987,28 +980,18 @@ def search():
     q = request.args.get("q", "").strip()
     results = {}
     if q:
-        import re as _re
-        tokens = [t for t in _re.split(r"\W+", q) if t and t.lower() not in STOP_WORDS and len(t) > 1]
-        strict = len(tokens) > 1  # AND-match multi-word queries; fall back to OR if too sparse
-
-        def run(require_all):
-            return {
-                "articles": scored_search(q, NewsArticle.query.all(),
-                                          ["title", "excerpt"], limit=12, require_all=require_all),
-                "members": scored_search(q, User.query.filter_by(is_real_member=True).all(),
-                                         ["username", "name", "title"], limit=12, require_all=require_all),
-                "openings": scored_search(q, Opening.query.all(),
-                                          ["name", "eco", "moves"], limit=12, require_all=require_all),
-                "lessons": scored_search(q, LessonCourse.query.all(),
-                                         ["title", "description", "author"], limit=12, require_all=require_all),
-                "clubs": scored_search(q, Club.query.all(), ["name", "description"], limit=12, require_all=require_all),
-                "events": scored_search(q, ChessEvent.query.all(), ["name"], limit=12, require_all=require_all),
-                "master_players": scored_search(q, MasterPlayer.query.all(),
-                                                ["name", "slug"], limit=12, require_all=require_all),
-            }
-        results = run(True)
-        if strict and sum(len(v) for v in results.values()) == 0:
-            results = run(False)
+        results["members"] = scored_search(q, User.query.filter_by(is_real_member=True).all(),
+                                          ["username", "name", "title"], limit=12)
+        results["articles"] = scored_search(q, NewsArticle.query.all(),
+                                            ["title", "excerpt"], limit=12)
+        results["openings"] = scored_search(q, Opening.query.all(),
+                                            ["name", "eco", "moves"], limit=12)
+        results["lessons"] = scored_search(q, LessonCourse.query.all(),
+                                           ["title", "description", "author"], limit=12)
+        results["clubs"] = scored_search(q, Club.query.all(), ["name", "description"], limit=12)
+        results["events"] = scored_search(q, ChessEvent.query.all(), ["name"], limit=12)
+        results["master_players"] = scored_search(q, MasterPlayer.query.all(),
+                                                  ["name", "slug"], limit=12)
     return render_template("search.html", q=q, results=results)
 
 

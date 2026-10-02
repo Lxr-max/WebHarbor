@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}My Price Alerts{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / My Price Alerts</p>
+  <h1 class="page-title">My Price Alerts</h1>
+  <p class="page-sub">Your alerts are evaluated against the captured snapshot price shown on each quote page. Create new alerts from any quote page.</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Symbol</th><th>Direction</th><th class="num">Target ($)</th><th class="num">Snapshot Last</th><th>Status</th><th>Note</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td><a href="{{ item.href }}">{{ item.row.symbol }}</a></td>
+            <td>{{ item.row.direction }}</td>
+            <td class="num">{{ fmt_price(item.row.threshold) }}</td>
+            <td class="num">{{ fmt_price(item.quote.last) if item.quote and item.quote.last is not none else '--' }}</td>
+            <td>
+              {% if item.state == 'triggered' %}<span class="badge solid">Triggered</span>
+              {% else %}<span class="badge">Pending</span>{% endif %}
+            </td>
+            <td class="muted">{{ item.row.note or '--' }}</td>
+            <td>
+              <form method="post" action="{{ url_for('alerts_delete') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="id" value="{{ item.row.id }}">
+                <button class="btn small ghost" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="7">You have no price alerts. Open any quote page and use the alert form.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

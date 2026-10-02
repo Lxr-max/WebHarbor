@@ -13,7 +13,6 @@ byte-identical (a fresh random salt would change the DB bytes every build).
 from __future__ import annotations
 
 import json
-import re
 import os
 import shutil
 from pathlib import Path
@@ -116,24 +115,11 @@ def seed_from_source(db):
             trend_direction=e.get("trend_direction"), trend_delta=e.get("trend_delta"),
             snapshot_time=e.get("snapshot_time")))
 
-    # ---- leaderboard stats (compute missing rows from the entries themselves)
+    # ---- leaderboard stats
     for s in src.get("leaderboard_stats", []):
-        pc, avg, dist = s.get("player_count"), s.get("avg_rating"), s.get("distribution")
-        if pc is None or avg is None:
-            scores = sorted(e.get("score") for e in src.get("leaderboard_entries", [])
-                            if e.get("category") == s["category"] and e.get("score"))
-            if scores:
-                pc = pc if pc is not None else len(scores)
-                avg = avg if avg is not None else round(sum(scores) / len(scores), 2)
-                if not dist:
-                    lo, hi = scores[0], scores[-1]
-                    span = max(1, hi - lo)
-                    dist = [0] * 24
-                    for v in scores:
-                        dist[min(23, (v - lo) * 24 // span)] += 1
         db.session.add(LeaderboardStats(
-            category=s["category"], avg_rating=avg,
-            player_count=pc, distribution=dist))
+            category=s["category"], avg_rating=s.get("avg_rating"),
+            player_count=s.get("player_count"), distribution=s.get("distribution")))
 
     # ---- news
     for i, a in enumerate(src.get("news", [])):
@@ -148,39 +134,13 @@ def seed_from_source(db):
 
     # ---- openings (+ variations + top players)
     seen_opening_slugs = set()
-    # Openings: scraped Wikipedia sections carry a language-list + board-coordinate
-    # junk prefix; strip it, hide the duplicated "Openings" heading, and populate
-    # the summary description from the first cleaned paragraph.
-    def _clean_opening(sec_list):
-        cleaned = []
-        first_par = None
-        for sec in sec_list or []:
-            paras = []
-            for para in sec.get("paragraphs") or []:
-                if "87654321abcdefgh" in para:
-                    para = re.sub(r"^.*?87654321abcdefgh\s*", "", para, flags=re.S)
-                para = para.strip()
-                if para:
-                    paras.append(para)
-            if not paras:
-                continue
-            heading = sec.get("heading") or ""
-            if first_par is None:
-                first_par = paras[0]
-            if heading == "Openings":
-                heading = "Introduction"
-            cleaned.append({"heading": heading, "paragraphs": paras})
-        return cleaned, first_par
-
     for order, o in enumerate(src.get("openings", [])):
         if o["slug"] in seen_opening_slugs:
             continue
         seen_opening_slugs.add(o["slug"])
-        cleaned_sections, summary = _clean_opening(o.get("sections") or [])
         row = Opening(
             slug=o["slug"], name=o["name"], eco=o.get("eco"), moves=o.get("moves"),
-            description=o.get("description") or summary,
-            sections=cleaned_sections,
+            description=o.get("description"), sections=o.get("sections") or [],
             popularity=o.get("popularity"), games_count=o.get("games_count"),
             is_variation=bool(o.get("parent")), parent_slug=o.get("parent"), sort_order=order)
         db.session.add(row)
@@ -235,21 +195,11 @@ def seed_from_source(db):
             san_moves=g.get("san_moves") or [], final_fen=g.get("final_fen"),
             has_detail=bool(g.get("has_detail")), colors_known=bool(g.get("colors_known"))))
 
-    # ---- clubs (strip scraped HTML from descriptions to plain text)
-    def _club_text(raw):
-        import html as _html
-        if not raw:
-            return raw
-        text = _html.unescape(str(raw)).replace("</p>", "\n\n").replace("<br>", "\n").replace("<br/>", "\n").replace("<br />", "\n")
-        text = re.sub(r"<[^>]+>", "", text)
-        text = re.sub(r"[ \t]+", " ", text)
-        text = re.sub(r"\n{3,}", "\n\n", text)
-        return text.strip()
-
+    # ---- clubs
     for c in src.get("clubs", []):
         db.session.add(Club(
             slug=c["slug"], name=c["name"], icon=img_name(c.get("icon")),
-            description=_club_text(c.get("description")), members_count=c.get("members_count"),
+            description=c.get("description"), members_count=c.get("members_count"),
             created=c.get("created"), last_activity=c.get("last_activity"),
             country_code=c.get("country_code")))
 

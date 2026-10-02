@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Claim Status | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="/help/claims.htm">File a Claim</a> &rsaquo; Claim Status</p>
+<h1>Check Claim Status</h1>
+{% if result and result.error %}
+  <div class="error-box">{{ result.error }}</div>
+{% endif %}
+<div class="panel">
+  <form class="flow" action="{{ url_for('claim_status') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Claim number <input type="text" name="claim_number" placeholder="e.g. CLM-12345678" required></label>
+    <button class="btn" type="submit">Check Status</button>
+  </form>
+</div>
+{% endblock %}

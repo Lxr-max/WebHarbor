@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ loc.name }}, {{ loc.prov_code }} Monthly Forecast - The Weather Network{% endblock %}
+{% from '_fx_header.html' import fx_header %}
+{% block content %}
+{% call fx_header(loc, obs, tab, updated) %}
+  <h2 style="font-size:16px;font-weight:600">Historical Averages</h2>
+  <div style="margin:10px 0">
+    {% for mk in month_keys %}
+    <a href="{{ loc.url('monthly') }}?m={{ mk }}" class="alert-filter-link" style="display:inline-block;font-size:14px;padding:5px 14px;border-radius:16px;margin-right:8px;{% if mk == active_month %}background:#f6da07;color:#121212;font-weight:600;{% else %}border:1px solid rgba(255,255,255,.4);color:#fff;{% endif %}">{{ mk }}</a>
+    {% endfor %}
+  </div>
+  {% set ns = namespace(week=[]) %}
+  <table style="width:100%;border-collapse:collapse;color:#fff">
+    <thead>
+      <tr>{% for d in ['S','M','T','W','T','F','S'] %}<th style="padding:8px;font-size:14px;color:rgba(255,255,255,.7);font-weight:400">{{ d }}</th>{% endfor %}</tr>
+    </thead>
+    <tbody>
+      <tr>
+      {% for row in rows %}
+        <td style="border:1px solid rgba(255,255,255,.14);padding:10px 6px;text-align:center">
+          <div style="font-size:12px;color:rgba(255,255,255,.65)">{{ row.day_num }}</div>
+          <div style="font-size:17px;font-weight:600">{{ row.tmax|round|int }}°</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.75)">{{ row.tmin|round|int }}°</div>
+        </div>
+        </td>
+        {% if loop.index % 7 == 0 %}</tr><tr>{% endif %}
+      {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+  <p class="fx-updated" style="margin-top:10px">Values are historical daily averages (°C). Forecast vs. historical comparison: the month’s days alternate above/below the long-term mean.</p>
+{% endcall %}
+{% endblock %}

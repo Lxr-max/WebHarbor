@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Find Lawyers: Top Lawyer Lists Selected by Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Super Lawyers Top Lists</h1>
+
+  <h2>Top Lists by region</h2>
+  <div class="link-grid four-col region-grid">
+    {% for region in regions %}
+      {% if region.slug in populated_slugs %}
+      <h3><a href="/top-lists/{{ region.slug }}/">{{ region.name }}</a></h3>
+      {% else %}
+      <h3 class="muted">{{ region.name }}</h3>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2>Recent top 5 practice area lists</h2>
+  <div class="link-grid">
+    {% for lst in top5 %}
+      <a href="/top-lists/{{ lst.state_slug }}/{{ lst.slug }}/{{ lst.id }}/">{{ lst.title }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Recent top 10 lawyer lists</h2>
+  <div class="link-grid">
+    {% for lst in top10 %}
+      <a href="/top-lists/{{ lst.state_slug }}/{{ lst.slug }}/{{ lst.id }}/">{{ lst.title }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Recent top women lawyer lists</h2>
+  <div class="link-grid">
+    {% for lst in women %}
+      <a href="/top-lists/{{ lst.state_slug }}/{{ lst.slug }}/{{ lst.id }}/">{{ lst.title }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Law school lists</h2>
+  <p>Law school lists are published for selected regions each year.</p>
+</div>
+{% endblock %}

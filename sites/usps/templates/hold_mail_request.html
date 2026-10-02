@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Hold Mail Request | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('hold_mail_page') }}">Hold Mail</a> &rsaquo; Request</p>
+<h1>Submit a USPS Hold Mail Request</h1>
+{% if result %}
+  {% if result.errors %}
+    <div class="error-box">{% for e in result.errors %}<p>{{ e }}</p>{% endfor %}</div>
+  {% else %}
+    <div class="panel">
+      <h3>Hold Mail Request Confirmed</h3>
+      <p><strong>Confirmation number:</strong> {{ result.confirmation }}</p>
+      <p><strong>Hold period:</strong> {{ result.start | longdate }} to {{ result.end | longdate }}</p>
+      <p><strong>After the hold:</strong> {{ result.option }}</p>
+      <p>Your mail will be held safely at your local Post Office and delivered per your choice when the hold ends.</p>
+    </div>
+  {% endif %}
+{% endif %}
+<div class="panel">
+  <form class="flow" action="{{ url_for('hold_mail_request') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Start date <input type="date" name="start_date" min="{{ today }}" required></label>
+    <label>End date <input type="date" name="end_date" required></label>
+    <p class="note">USPS can hold mail for 3 to 30 days.</p>
+    <label>How should we deliver your accumulated mail after the hold?
+      <select name="option">
+        <option value="Hold all mail, deliver on end date">Deliver all accumulated mail on the end date</option>
+        <option value="Hold all mail, deliver on first business day after request">Deliver on the first business day after the request</option>
+        <option value="Hold all mail, pick up at Post Office">I will pick it up at the Post Office</option>
+      </select>
+    </label>
+    <button class="btn" type="submit">Submit Request</button>
+  </form>
+</div>
+{% endblock %}

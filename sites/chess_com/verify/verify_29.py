@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Verify david marks Gambit Buffet complete and reports the progress in Chess.com--29."""
+"""Deterministic verifier for chess_com task 29; see tasks.jsonl and verify/README.md."""
 
 
 from verify_lib import (Judge, check_read_only, check_signed_in_as, check_trajectory_identity,

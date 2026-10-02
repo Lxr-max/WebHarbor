@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Alert not created{% endblock %}
+{% block content %}
+<div class="wrap">
+  <div class="form-panel">
+    <h2>Alert not created</h2>
+    <div class="error-box">{{ message }}</div>
+    <p><a class="btn" href="{{ href }}">Back to {{ quote.symbol }}</a></p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Help / FAQ{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>Frequently Asked Questions</h1>
+</div>
+{% for section, rows in sections %}
+  <div class="card">
+    <h2>{{ section }}</h2>
+    {% for row in rows %}
+      {% if row.question != section %}
+        <h3 style="font-size:0.98rem">{{ row.question }}</h3>
+      {% endif %}
+      <p class="small">{{ row.answer }}</p>
+    {% endfor %}
+  </div>
+{% endfor %}
+{% endblock %}

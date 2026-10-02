@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title or title }}{% endblock %}
+{% block content %}
+<section class="container text-page">
+  <h1 class="page-heading">{{ title }}</h1>
+  <div class="text-body">{{ text | replace('\n', '<br>') | safe }}</div>
+</section>
+{% endblock %}

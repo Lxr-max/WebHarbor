@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Find a Top Rated Attorney Near You | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Find top rated lawyers in the U.S.</h1>
+
+  <h2>Fast track your lawyer search</h2>
+  <p>The Super Lawyers directory features detailed profiles of experienced attorneys
+  that exhibit excellence in their practice of law. Our lists include lawyers across
+  the United States in a multitude of practice areas. With our lists, you can both
+  begin and narrow your search for a lawyer that is right for you. After you have a
+  short list of attorneys, you can consult with each before making your decision.</p>
+
+  <h3>Choose your search option</h3>
+  <p>Our Super Lawyers directory gives you multiple options to search for a top
+  attorney in your area. Start with the search box or click on a city, state, or
+  legal issue.</p>
+  <form class="ask-form" method="get" action="/attorneys/search/">
+    <label for="dir-q">Search legal issue or attorney name</label>
+    <input id="dir-q" type="search" name="q" placeholder="Personal injury, divorce, DUI…" autocomplete="off">
+    <label for="dir-where">Location</label>
+    <input id="dir-where" type="search" name="where" placeholder="City, state or ZIP code" autocomplete="off">
+    <button class="btn btn-primary" type="submit">Find lawyers</button>
+  </form>
+
+  <h2>Lawyers in top cities</h2>
+  <p>Select a city to load search results.</p>
+  <div class="link-grid four-col">
+    {% for entry in city_entries %}
+      {% if entry.city %}
+      <a href="/attorneys/{{ entry.state_slug }}/{{ entry.city_slug }}/">{{ entry.city.name }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2>Lawyers by state</h2>
+  <div class="link-grid four-col">
+    {% for state in states %}
+      <a href="/attorneys/{{ state.slug }}/">{{ state.name }}</a>
+    {% endfor %}
+  </div>
+
+  <h2 id="browse-practice-areas">Browse by practice area</h2>
+  <div class="practice-taxonomy">
+    {% for category in categories %}
+    <div class="practice-category">
+      <h3>{{ category.name }}</h3>
+      <ul>
+        {% for practice in category.practices %}
+        <li><a href="/attorneys/{{ practice.slug }}/">{{ practice.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

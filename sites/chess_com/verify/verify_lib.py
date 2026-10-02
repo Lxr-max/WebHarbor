@@ -67,7 +67,7 @@ SCHEMA_SHA256 = "e4f507ee48467cea7d4b3aad0ae5d19eaaea644ae2778d4ce55221be30b745a
 # sha256 over every seed row (table-scanonical, ORDER BY all columns). The seed is rebuilt
 # deterministically at image-build time (PYTHONHASHSEED=0, see .build-generated-seed); the
 # physical file layout may differ between sqlite builds but this logical digest is frozen.
-SEED_ROWS_SHA256 = "821a5fa7327a3a9744843a675be3ac6ad35f9429d5cc04fab3a0123259af19e9"
+SEED_ROWS_SHA256 = "8a80a039b34ff198e27d77f09e1693ae89f4cf8a625841825df264cb78ae4fe4"
 SEED_USERS = {  # email -> (id, username); identity columns never change
     "alice.j@test.com": (1176, "alice_j"),
     "bob.c@test.com": (1177, "bob_c"),
@@ -214,19 +214,11 @@ def search_visited(traj, tokens_any):
 def input_texts(traj):
     values = []
     for step in traj.get("steps") or []:
-        if not isinstance(step, dict):
+        if not isinstance(step, dict) or normalize_text(step.get("action")) not in INPUT_ACTIONS:
             continue
-        # Production runner contract: action name on the step, text under params.
-        if normalize_text(step.get("action")) in INPUT_ACTIONS:
-            params = step.get("params")
-            if isinstance(params, dict) and params.get("text") is not None:
-                values.append(str(params["text"]))
-                continue
-        # Review harness contract: parsed_action {"action": "type", "text": ...}.
-        parsed = step.get("parsed_action")
-        if isinstance(parsed, dict) and normalize_text(parsed.get("action")) in INPUT_ACTIONS:
-            if parsed.get("text") is not None:
-                values.append(str(parsed["text"]))
+        params = step.get("params")
+        if isinstance(params, dict) and params.get("text") is not None:
+            values.append(str(params["text"]))
     return values
 
 
@@ -605,13 +597,6 @@ def _png_decodes(path):
         return False
 
 
-def _file_sha256(path):
-    try:
-        return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-    except OSError:
-        return None
-
-
 def screenshots_decode(traj):
     root = Path(traj.get("_run_dir") or "")
     steps = traj.get("steps")
@@ -624,31 +609,11 @@ def screenshots_decode(traj):
         for key in ("screenshot_before", "screenshot_after"):
             name = step.get(key)
             rel = Path(str(name or ""))
-            if not name or ".." in rel.parts:
+            if not name or rel.is_absolute() or ".." in rel.parts:
                 return False, f"step {index} has unsafe {key}"
             path = next((p for p in (root / "screenshots" / rel, root / rel) if p.is_file()), None)
             if path is None:
                 return False, f"step {index} is missing {key}={name!r}"
-            # Harness trajectories reference absolute paths outside the run dir.
-            # Accept them only when the file's bytes are bound to the frozen
-            # harness record: step input_sha256 (the before image) or the sha256
-            # in the sibling .state.json browser record (the after image).
-            # Relative paths (production runner contract) keep the original
-            # run-dir resolution.
-            if rel.is_absolute():
-                # The before image is bound by the step's input_sha256; the after
-                # image by the sha256 in the sibling .state.json browser record.
-                accepted = {str(step.get("input_sha256") or "")}
-                stem = str(name)[:-4] if str(name).lower().endswith(".png") else str(name)
-                state = Path(stem + ".state.json")
-                if state.is_file():
-                    try:
-                        accepted.add(str(json.loads(state.read_text(encoding="utf-8")).get("sha256") or ""))
-                    except (OSError, ValueError):
-                        pass
-                accepted.discard("")
-                if _file_sha256(path) not in accepted:
-                    return False, f"step {index} has unsafe {key} (absolute path without matching harness sha256)"
             if not _png_decodes(path):
                 return False, f"step {index} {key} is not a decodable non-empty PNG"
             checked += 1
@@ -661,25 +626,16 @@ def check_trajectory_identity(judge, traj, task_id, require_answer=True):
         judge.check("final_answer_nonempty", bool(answer), f"final_answer={answer!r}")
     judge.check("trajectory_task_matches", str(traj.get("task_id") or "").strip() == task_id,
                 f"expected_task_id={task_id!r}, observed_task_id={traj.get('task_id')!r}")
-    # agent_done is the production runner's explicit reason; the review harness
-    # only ever sets terminated=True on the actor's own done submission, and
-    # then writes no termination_reason key at all. An explicit non-agent_done
-    # reason (max_steps / parse_error) still fails.
     judge.check("trajectory_completed",
-                traj.get("terminated") is True and traj.get("termination_reason", "agent_done") == "agent_done",
+                traj.get("terminated") is True and traj.get("termination_reason") == "agent_done",
                 f"terminated={traj.get('terminated')!r}, reason={traj.get('termination_reason')!r}")
     steps = traj.get("steps")
     judge.check("trajectory_has_steps", isinstance(steps, list) and bool(steps),
                 f"steps={len(steps) if isinstance(steps, list) else 'invalid'}")
     recorded = trajectory_urls(traj)
-    # Newer harness contract: trajectories carry no start_url. Derive the required
-    # origin from the first recorded step URL instead (same approach as bandcamp).
-    start_url = traj.get("start_url") or next(
-        (s[k] for s in (traj.get("steps") or []) if isinstance(s, dict)
-         for k in ("url_before", "url") if s.get(k)), "")
     judge.check("all_urls_match_local_origin",
-                bool(recorded) and bool(start_url) and all(_same_local_origin(u, start_url) for u in recorded),
-                f"start_url={start_url!r}, recorded_urls={recorded!r}")
+                bool(recorded) and all(_same_local_origin(u, traj.get("start_url", "")) for u in recorded),
+                f"start_url={traj.get('start_url')!r}, recorded_urls={recorded!r}")
     ok, evidence = screenshots_decode(traj)
     judge.check("screenshots_decode", ok, evidence)
 

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ cat.name }} | ZARA United States{% endblock %}
+{% block body %}
+<div class="breadcrumb">
+  <a href="/">HOME</a> / {{ cat.section }} / {{ cat.name }}
+</div>
+<div class="cat-head">
+  <h1>{{ cat.name }}</h1>
+  <p class="cat-count">{{ cat.upstream_grid_count }} products upstream — {{ total }} shown in this snapshot</p>
+</div>
+<div class="cat-body">
+  <aside class="filters">
+    {% if filters %}
+    <h3>FILTER</h3>
+    <form class="inline" method="get" action="{{ cat.path }}">
+      {% if filters.colors %}
+        <div class="clear"><a href="{{ cat.path }}">CLEAR ALL</a></div>
+        <h3>COLOR</h3>
+        {% for c in filters.colors %}
+          <button type="submit" name="color" value="{{ c.value }}"
+                  class="fbtn {{ 'on' if c.value == selected_color else '' }}">
+            {{ c.value }} <span class="cnt">{{ c.count }}</span>
+          </button>
+        {% endfor %}
+      {% endif %}
+      <h3>SIZE</h3>
+      {% for s in filters.sizes or [] %}
+        <button type="submit" name="size" value="{{ s.value }}"
+                class="fbtn {{ 'on' if s.value == selected_size else '' }}">
+          {{ s.value }} <span class="cnt">{{ s.count }}</span>
+        </button>
+      {% endfor %}
+      <h3>PRICE (USD CENTS)</h3>
+      <div class="price-form">
+        <input type="number" name="price-min" placeholder="MIN"
+               value="{{ price_min if price_min is not none else '' }}">
+        <input type="number" name="price-max" placeholder="MAX"
+               value="{{ price_max if price_max is not none else '' }}">
+        <button type="submit" class="fbtn">APPLY</button>
+      </div>
+    </form>
+    {% endif %}
+  </aside>
+  <section>
+    <div class="sort-bar">
+      <span class="shown-count">{{ products|length }} products</span>
+      <form method="get" action="{{ cat.path }}">
+        {% if selected_color %}<input type="hidden" name="color" value="{{ selected_color }}">{% endif %}
+        {% if selected_size %}<input type="hidden" name="size" value="{{ selected_size }}">{% endif %}
+        <label class="shown-count">SORT BY</label>
+        <select name="sort" onchange="this.form.submit()">
+          <option value="">SELECT</option>
+          {% for o in filters.sort_options or [] %}
+            <option value="{{ o.id }}" {{ 'selected' if sort == o.id else '' }}>{{ o.value }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+    {% if products %}
+    <div class="grid">
+      {% for p in products %}
+        {% set c = p.main_color %}
+        <a class="product-card" href="{{ p.pdp_path }}">
+          <div class="pimg">
+            {% if c and c.gallery_list %}<img src="{{ img(c.gallery_list[0]) }}" alt="{{ p.name }}">
+            {% elif c and c.thumb %}<img src="{{ img(c.thumb) }}" alt="{{ p.name }}">{% endif %}
+          </div>
+          {% if c and c.tags_list %}<span class="ptag">{{ c.tags_list[0] }}</span>{% endif %}
+          <div class="pname">{{ p.name }}</div>
+          <div class="pprice">{{ money(p.price) }}{% if p.is_on_sale and p.old_price %}<span class="pold">{{ money(p.old_price) }}</span>{% endif %}</div>
+          <div class="color-dots">
+            {% for col in p.colors %}
+              <span class="color-dot" title="{{ col.name }}" style="background: {{ col.hex or '#fff' }}"></span>
+            {% endfor %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="center-note">No products match the selected filters</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

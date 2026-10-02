@@ -1,0 +1,1065 @@
+{
+ "description": "Azure has more geographies than any other cloud provider—with robust data sovereignty, residency, compliance, and resiliency capabilities for any application.",
+ "images": [
+  "geographies/desktop-hero-bg-4x-344573.webp",
+  "geographies/desktop-pricing-img-2x-344573.webp",
+  "geographies/isc-20datacenter.webp",
+  "geographies/mobile-geographies-bg-2x-344573.jpg",
+  "geographies/mobile-geographies-update-img1-2x.webp",
+  "geographies/mobile-geographies-update-img2-2x.webp",
+  "geographies/mobile-geographies-update-img3-2x.webp",
+  "geographies/mobile-pricing-bg-2x-344573.jpg"
+ ],
+ "geographies": [
+  {
+   "slug": "united-states",
+   "display_name": "United States",
+   "regions": [
+    {
+     "slug": "us-central",
+     "display_name": "Central US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-east",
+     "display_name": "East US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-east-2",
+     "display_name": "East US 2",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-north-central",
+     "display_name": "North Central US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-south-central",
+     "display_name": "South Central US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-west-central",
+     "display_name": "West Central US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-west",
+     "display_name": "West US",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-west-2",
+     "display_name": "West US 2",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "us-west-3",
+     "display_name": "West US 3",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "united-kingdom",
+   "display_name": "United Kingdom",
+   "regions": [
+    {
+     "slug": "united-kingdom-south",
+     "display_name": "UK South",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "united-kingdom-west",
+     "display_name": "UK West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "united-arab-emirates",
+   "display_name": "United Arab Emirates",
+   "regions": [
+    {
+     "slug": "uae-central",
+     "display_name": "UAE Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "uae-north",
+     "display_name": "UAE North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "switzerland",
+   "display_name": "Switzerland",
+   "regions": [
+    {
+     "slug": "switzerland-north",
+     "display_name": "Switzerland North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "switzerland-west",
+     "display_name": "Switzerland West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "sweden",
+   "display_name": "Sweden",
+   "regions": [
+    {
+     "slug": "sweden-central",
+     "display_name": "Sweden Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "sweden-south",
+     "display_name": "Sweden South",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "spain",
+   "display_name": "Spain",
+   "regions": [
+    {
+     "slug": "spain-central",
+     "display_name": "Spain Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "qatar",
+   "display_name": "Qatar",
+   "regions": [
+    {
+     "slug": "qatar-central",
+     "display_name": "Qatar Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "poland",
+   "display_name": "Poland",
+   "regions": [
+    {
+     "slug": "poland-central",
+     "display_name": "Poland Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "norway",
+   "display_name": "Norway",
+   "regions": [
+    {
+     "slug": "norway-east",
+     "display_name": "Norway East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "norway-west",
+     "display_name": "Norway West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "new-zealand",
+   "display_name": "New Zealand",
+   "regions": [
+    {
+     "slug": "new-zealand-north",
+     "display_name": "New Zealand North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "mexico",
+   "display_name": "Mexico",
+   "regions": [
+    {
+     "slug": "mexico-central",
+     "display_name": "Mexico Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "malaysia",
+   "display_name": "Malaysia",
+   "regions": [
+    {
+     "slug": "malaysia-west",
+     "display_name": "Malaysia West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "korea",
+   "display_name": "Korea",
+   "regions": [
+    {
+     "slug": "korea-central",
+     "display_name": "Korea Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "korea-south",
+     "display_name": "Korea South",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "japan",
+   "display_name": "Japan",
+   "regions": [
+    {
+     "slug": "japan-east",
+     "display_name": "Japan East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "japan-west",
+     "display_name": "Japan West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "italy",
+   "display_name": "Italy",
+   "regions": [
+    {
+     "slug": "italy-north",
+     "display_name": "Italy North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "israel",
+   "display_name": "Israel",
+   "regions": [
+    {
+     "slug": "israel-central",
+     "display_name": "Israel Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "indonesia",
+   "display_name": "Indonesia",
+   "regions": [
+    {
+     "slug": "indonesia-central",
+     "display_name": "Indonesia Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "india",
+   "display_name": "India",
+   "regions": [
+    {
+     "slug": "central-india",
+     "display_name": "Central India",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "south-central-india",
+     "display_name": "India South Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "south-india",
+     "display_name": "South India",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "west-india",
+     "display_name": "West India",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "germany",
+   "display_name": "Germany",
+   "regions": [
+    {
+     "slug": "germany-north",
+     "display_name": "Germany North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "germany-west-central",
+     "display_name": "Germany West Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "france",
+   "display_name": "France",
+   "regions": [
+    {
+     "slug": "france-central",
+     "display_name": "France Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "france-south",
+     "display_name": "France South",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "europe",
+   "display_name": "Europe",
+   "regions": [
+    {
+     "slug": "europe-north",
+     "display_name": "North Europe",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "europe-west",
+     "display_name": "West Europe",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "denmark",
+   "display_name": "Denmark",
+   "regions": [
+    {
+     "slug": "denmark-east",
+     "display_name": "Denmark East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "chile",
+   "display_name": "Chile",
+   "regions": [
+    {
+     "slug": "chile-central",
+     "display_name": "Chile Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "canada",
+   "display_name": "Canada",
+   "regions": [
+    {
+     "slug": "canada-central",
+     "display_name": "Canada Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "canada-east",
+     "display_name": "Canada East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "brazil",
+   "display_name": "Brazil",
+   "regions": [
+    {
+     "slug": "brazil-south",
+     "display_name": "Brazil South",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "brazil-southeast",
+     "display_name": "Brazil Southeast",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "belgium",
+   "display_name": "Belgium",
+   "regions": [
+    {
+     "slug": "belgium-central",
+     "display_name": "Belgium Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "azure-government",
+   "display_name": "Azure Government",
+   "regions": [
+    {
+     "slug": "usgov-arizona",
+     "display_name": "US Gov Arizona",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "usgov-texas",
+     "display_name": "US Gov Texas",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "usgov-virginia",
+     "display_name": "US Gov Virginia",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "austria",
+   "display_name": "Austria",
+   "regions": [
+    {
+     "slug": "austria-east",
+     "display_name": "Austria East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "australia",
+   "display_name": "Australia",
+   "regions": [
+    {
+     "slug": "australia-central",
+     "display_name": "Australia Central",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "australia-central-2",
+     "display_name": "Australia Central 2",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "australia-east",
+     "display_name": "Australia East",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "australia-southeast",
+     "display_name": "Australia Southeast",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "asia-pacific",
+   "display_name": "Asia Pacific",
+   "regions": [
+    {
+     "slug": "asia-pacific-east",
+     "display_name": "East Asia",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "asia-pacific-southeast",
+     "display_name": "Southeast Asia",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  },
+  {
+   "slug": "africa",
+   "display_name": "Africa",
+   "regions": [
+    {
+     "slug": "south-africa-north",
+     "display_name": "South Africa North",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    },
+    {
+     "slug": "south-africa-west",
+     "display_name": "South Africa West",
+     "services": {
+      "virtual-machines": true,
+      "kubernetes-service": true,
+      "storage": true,
+      "cosmos-db": true
+     }
+    }
+   ]
+  }
+ ],
+ "service_availability": {
+  "virtual-machines": {
+   "australia-central": 49,
+   "australia-central-2": 49,
+   "australia-east": 55,
+   "australia-southeast": 55,
+   "brazil-south": 55,
+   "canada-central": 55,
+   "canada-east": 55,
+   "central-india": 55,
+   "us-central": 55,
+   "asia-pacific-east": 55,
+   "us-east": 55,
+   "us-east-2": 55,
+   "france-central": 55,
+   "france-south": 49,
+   "japan-east": 55,
+   "japan-west": 55,
+   "korea-central": 49,
+   "korea-south": 49,
+   "us-north-central": 55,
+   "europe-north": 55,
+   "poland-central": 55,
+   "qatar-central": 49,
+   "us-south-central": 55,
+   "asia-pacific-southeast": 55,
+   "south-india": 55,
+   "united-kingdom-south": 55,
+   "united-kingdom-west": 55,
+   "usgov-arizona": 39,
+   "usgov-texas": 39,
+   "usgov-virginia": 45,
+   "us-west-central": 49,
+   "europe-west": 55,
+   "west-india": 55,
+   "us-west": 55,
+   "us-west-2": 49,
+   "austria-east": 43,
+   "belgium-central": 43,
+   "brazil-southeast": 49,
+   "germany-north": 43,
+   "germany-west-central": 43,
+   "indonesia-central": 43,
+   "israel-central": 43,
+   "italy-north": 43,
+   "malaysia-west": 43,
+   "mexico-central": 49,
+   "new-zealand-north": 43,
+   "norway-east": 43,
+   "norway-west": 43,
+   "south-africa-north": 49,
+   "south-africa-west": 49,
+   "spain-central": 43,
+   "sweden-central": 43,
+   "sweden-south": 43,
+   "switzerland-north": 43,
+   "switzerland-west": 43,
+   "uae-central": 49,
+   "uae-north": 49,
+   "us-west-3": 49,
+   "chile-central": 37,
+   "denmark-east": 20,
+   "south-central-india": 20
+  },
+  "kubernetes-service": {
+   "australia-central": 22,
+   "australia-central-2": 22,
+   "australia-east": 22,
+   "australia-southeast": 22,
+   "brazil-south": 22,
+   "canada-central": 22,
+   "canada-east": 22,
+   "central-india": 22,
+   "us-central": 22,
+   "asia-pacific-east": 22,
+   "us-east": 22,
+   "us-east-2": 22,
+   "france-central": 22,
+   "france-south": 22,
+   "japan-east": 22,
+   "japan-west": 22,
+   "korea-central": 22,
+   "korea-south": 22,
+   "us-north-central": 22,
+   "europe-north": 22,
+   "poland-central": 22,
+   "qatar-central": 22,
+   "us-south-central": 22,
+   "asia-pacific-southeast": 22,
+   "south-india": 22,
+   "united-kingdom-south": 22,
+   "united-kingdom-west": 22,
+   "usgov-arizona": 18,
+   "usgov-texas": 18,
+   "usgov-virginia": 18,
+   "us-west-central": 22,
+   "europe-west": 22,
+   "west-india": 22,
+   "us-west": 22,
+   "us-west-2": 22,
+   "austria-east": 18,
+   "belgium-central": 18,
+   "brazil-southeast": 18,
+   "chile-central": 18,
+   "germany-north": 18,
+   "germany-west-central": 18,
+   "indonesia-central": 18,
+   "israel-central": 18,
+   "italy-north": 18,
+   "malaysia-west": 18,
+   "mexico-central": 18,
+   "new-zealand-north": 18,
+   "norway-east": 18,
+   "norway-west": 18,
+   "south-africa-north": 18,
+   "south-africa-west": 18,
+   "spain-central": 18,
+   "sweden-central": 18,
+   "sweden-south": 18,
+   "switzerland-north": 18,
+   "switzerland-west": 18,
+   "uae-central": 18,
+   "uae-north": 18,
+   "us-west-3": 18,
+   "denmark-east": 10,
+   "south-central-india": 10
+  },
+  "storage": {
+   "australia-central": 8,
+   "australia-central-2": 8,
+   "australia-east": 11,
+   "australia-southeast": 8,
+   "austria-east": 8,
+   "belgium-central": 8,
+   "brazil-south": 11,
+   "brazil-southeast": 7,
+   "canada-central": 11,
+   "canada-east": 8,
+   "central-india": 11,
+   "us-central": 11,
+   "chile-central": 8,
+   "denmark-east": 8,
+   "asia-pacific-east": 11,
+   "us-east": 11,
+   "us-east-2": 11,
+   "france-central": 11,
+   "france-south": 7,
+   "germany-north": 8,
+   "germany-west-central": 11,
+   "south-central-india": 10,
+   "indonesia-central": 9,
+   "israel-central": 8,
+   "italy-north": 9,
+   "japan-east": 11,
+   "japan-west": 8,
+   "korea-central": 10,
+   "korea-south": 8,
+   "malaysia-west": 9,
+   "mexico-central": 8,
+   "new-zealand-north": 8,
+   "us-north-central": 8,
+   "europe-north": 11,
+   "norway-east": 9,
+   "norway-west": 8,
+   "poland-central": 8,
+   "qatar-central": 8,
+   "south-africa-north": 11,
+   "south-africa-west": 8,
+   "us-south-central": 9,
+   "asia-pacific-southeast": 11,
+   "south-india": 8,
+   "spain-central": 9,
+   "sweden-central": 10,
+   "sweden-south": 8,
+   "switzerland-north": 10,
+   "switzerland-west": 8,
+   "uae-central": 8,
+   "uae-north": 10,
+   "united-kingdom-south": 11,
+   "united-kingdom-west": 8,
+   "usgov-arizona": 8,
+   "usgov-texas": 8,
+   "usgov-virginia": 11,
+   "us-west-central": 8,
+   "europe-west": 11,
+   "west-india": 7,
+   "us-west": 8,
+   "us-west-2": 11,
+   "us-west-3": 11
+  },
+  "cosmos-db": {
+   "australia-central": 14,
+   "australia-central-2": 14,
+   "australia-east": 14,
+   "australia-southeast": 14,
+   "austria-east": 14,
+   "belgium-central": 14,
+   "brazil-south": 14,
+   "brazil-southeast": 14,
+   "canada-central": 14,
+   "canada-east": 14,
+   "central-india": 14,
+   "us-central": 12,
+   "chile-central": 14,
+   "denmark-east": 10,
+   "asia-pacific-east": 14,
+   "us-east": 12,
+   "us-east-2": 12,
+   "france-central": 14,
+   "france-south": 14,
+   "germany-north": 14,
+   "germany-west-central": 14,
+   "south-central-india": 12,
+   "indonesia-central": 14,
+   "israel-central": 14,
+   "italy-north": 14,
+   "japan-east": 14,
+   "japan-west": 14,
+   "korea-central": 14,
+   "korea-south": 14,
+   "malaysia-west": 14,
+   "mexico-central": 14,
+   "new-zealand-north": 14,
+   "us-north-central": 12,
+   "europe-north": 14,
+   "norway-east": 14,
+   "norway-west": 14,
+   "poland-central": 11,
+   "qatar-central": 14,
+   "south-africa-north": 14,
+   "south-africa-west": 14,
+   "us-south-central": 12,
+   "asia-pacific-southeast": 14,
+   "south-india": 14,
+   "spain-central": 14,
+   "sweden-central": 14,
+   "sweden-south": 14,
+   "switzerland-north": 14,
+   "switzerland-west": 14,
+   "uae-central": 14,
+   "uae-north": 14,
+   "united-kingdom-south": 12,
+   "united-kingdom-west": 12,
+   "usgov-arizona": 12,
+   "usgov-texas": 12,
+   "usgov-virginia": 12,
+   "us-west-central": 12,
+   "europe-west": 14,
+   "west-india": 14,
+   "us-west": 14,
+   "us-west-2": 12,
+   "us-west-3": 12
+  }
+ }
+}

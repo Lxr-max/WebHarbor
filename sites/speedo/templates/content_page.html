@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }} | Speedo{% endblock %}
+{% block content %}
+<div class="content-page">
+  <h1>{{ page.title }}</h1>
+  {% for block in page.blocks() %}
+  <div class="content-block {{ 'story-timeline' if page.slug == 'our-story' else '' }}">
+    {% if block.get('heading') %}<h2>{{ block['heading'] }}</h2>{% endif %}
+    {% if block.get('subheading') %}<h3>{{ block['subheading'] }}</h3>{% endif %}
+    {% if block.get('image') %}
+    <img src="{{ url_for('static', filename='images/' + block['image']) }}" alt="{{ block.get('heading','') }}">
+    {% endif %}
+    {% for para in block.get('paragraphs', []) %}
+    <p>{{ para }}</p>
+    {% endfor %}
+    {% if block.get('items') %}
+    <ul style="margin:10px 0 12px 22px;">
+      {% for item in block['items'] %}<li style="margin:6px 0;color:#333;">{{ item }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

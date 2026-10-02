@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+{% for c in crumbs %}<li><a href="/{{ c.slug }}.html">{{ c.name }}</a></li>{% endfor %}
+<li aria-current="page"><span>{{ p.name }}</span></li>
+{% endblock %}
+{% block title %}{{ p.name }} - US Appliance{% endblock %}
+{% block content %}
+<section class="container productView">
+  <div class="productView-images" data-image-gallery>
+    <figure class="productView-image" data-image-gallery-main>
+      {% if p.card_image %}
+      <a href="{{ url_for('static', filename='images/' ~ p.card_image) }}" target="_blank">
+        <img class="productView-image--default" id="main-product-image"
+             src="{{ url_for('static', filename='images/' ~ p.card_image) }}"
+             alt="{{ p.name }}">
+      </a>
+      {% endif %}
+    </figure>
+    {% if p.gallery_list() %}
+    <div class="productView-thumbnails-content">
+      <ul class="productView-thumbnails">
+        {% if p.card_image %}
+        <li class="productView-thumbnail">
+          <a class="productView-thumbnail-link currentGalleryImage" href="#"
+             data-gallery-src="{{ url_for('static', filename='images/' ~ p.card_image) }}">
+            <img src="{{ url_for('static', filename='images/' ~ p.card_image) }}" alt="{{ p.name }} main">
+          </a>
+        </li>
+        {% endif %}
+        {% for g in p.gallery_list() %}
+        <li class="productView-thumbnail">
+          <a class="productView-thumbnail-link" href="#"
+             data-gallery-src="{{ url_for('static', filename='images/' ~ g) }}">
+            <img src="{{ url_for('static', filename='images/' ~ g) }}" alt="{{ p.name }} view {{ loop.index }}">
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="productView-details">
+    <h2 class="productView-brand">
+      <a href="{{ url_for('brand_page', slug=p.brand | lower | replace(' & ', ' ') | replace(' ', '-')) }}">Shop: <span>{{ p.brand }}</span></a>
+    </h2>
+    <h1 class="productView-title">{{ p.name }}</h1>
+    <p class="productView-sku">
+      <span>model:</span> <span data-product-mpn="{{ p.mpn }}">{{ p.mpn }}</span>
+      <span>code:</span> <span>{{ p.sku }}</span>
+    </p>
+
+    {% if not p.is_available %}
+    <p class="productView-discontinued">THIS ITEM IS DISCONTINUED. Contact Us For A Great Deal On A Comparable Model</p>
+    {% endif %}
+
+    {% if p.is_available and p.price is not none %}
+      {% if p.promo_message %}<p class="productView-news">{{ p.promo_message }}</p>{% endif %}
+      <div class="productView-price">
+        <div class="price-section">
+          <span class="price-now-label">Now:</span>
+          <span class="price price--now" data-code="{{ money(p.price) }}">{{ money(p.price) }}</span>
+        </div>
+        {% if p.on_sale %}
+        <div class="price-section price-was">
+          <span class="was-label">Was:</span>
+          <span class="price price--was">{{ money(p.retail_price) }}</span>
+          <span class="price price--saving">(<span>{{ money(p.retail_price) }}</span> You save <span data-product-price-saved>{{ money(p.savings) }}</span>)</span>
+        </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if color_variants %}
+    <div class="productView-colors">
+      <p>Color - {{ p.color or 'Options' }}</p>
+      <ul class="productView-color-list">
+        {% for v in color_variants %}
+        <li class="productView-color-item {% if v.id == p.id %}is-active{% endif %}">
+          <a href="/{{ v.slug }}.html">{{ v.color or v.name.split(' - ')[-1] }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <dl class="productView-info">
+      {% if p.width %}<div><dt>Width</dt><dd>{{ p.width }} in.</dd></div>{% endif %}
+      {% if p.height %}<div><dt>Height</dt><dd>{{ p.height }} in.</dd></div>{% endif %}
+      {% if p.depth %}<div><dt>Depth</dt><dd>{{ p.depth }} in.</dd></div>{% endif %}
+      {% if p.weight %}<div><dt>Weight</dt><dd>{{ p.weight }} lb.</dd></div>{% endif %}
+      {% if p.review_count %}
+      <div><dt>Reviews</dt><dd>{{ p.review_count }} reviews, {{ p.rating() }} avg</dd></div>
+      {% endif %}
+    </dl>
+
+    {% if p.is_available %}
+    <div class="productView-availability-form">
+      <div class="form">
+        <div class="form-field">
+          <label class="form-label" for="availabilityInput">Check Availability</label>
+          <input class="form-input" type="text" id="availabilityInput" name="availabilityInput"
+                 placeholder="ZIP code">
+        </div>
+        <button class="button button--primary availability-check" type="button"
+                data-product-id="{{ p.id }}">Check</button>
+        <p class="availability-result" id="availabilityResult" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="add-to-cart-wrapper">
+      <form method="post" action="{{ url_for('cart', action='add') }}" class="form-action">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="product_id" value="{{ p.id }}">
+        <label class="qty-label" for="qty">Qty</label>
+        <input class="qty-input" type="number" id="qty" name="qty" value="1" min="1">
+        <input id="form-action-addToCart" class="button button--primary" type="submit" value="Add to Cart">
+      </form>
+    </div>
+    <p class="productView-news"><a href="{{ url_for('finance_offers') }}#15months">15 Months Special Finance Offer</a></p>
+    {% endif %}
+
+    <p class="productView-freeshipp">
+      <button class="usaButton freeshipp-toggle" type="button">Free Shipping</button>
+    </p>
+    <div id="modal-freeshipp" class="modal-plain" hidden>
+      {% if p.free_shipping or (p.price is not none and p.price >= 999) %}<p>Order This Item Today And Get Free Standard Shipping. If one major appliance item on your order qualifies for free shipping we will ship the entire order for free no matter how many appliances you order.</p>{% else %}<p>Standard delivery is $99 for orders under $999. Orders of $999 or more, or orders containing an item with a free-shipping offer, qualify for free standard delivery.</p>{% endif %}
+      <p>In Home Delivery option upgrade - $199. Major appliance items on your order will be brought into your home into an accessible room of choice. Select In-Home delivery during checkout.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container description-tabs">
+  <div class="description-tabs-title">
+    <ul class="title-section">
+      <li class="tab is-active"><a class="tab-title" href="#tab-description">features</a></li>
+      <li class="tab"><a class="tab-title" href="#tab-reviews">reviews</a></li>
+    </ul>
+  </div>
+  <div class="description-tabs-content">
+    <div class="description-tab" id="tab-description">
+      <h4 class="content-title">features / description:</h4>
+      <div class="tab-content-info">{{ p.description | safe }}</div>
+      {% if p.blurb and not p.description %}<p>{{ p.blurb }}</p>{% endif %}
+      {% if p.pdf_name and p.pdf_link %}
+      <div class="pdfs-links">
+        <a class="pdfs-link" href="{{ p.pdf_link }}" target="_blank">
+          <p>{{ p.pdf_name }}</p><span>PDF</span>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="description-tab" id="tab-reviews">
+      <h4 class="content-title">reviews:</h4>
+      <div class="tab-content-info">
+        {% if p.review_count %}
+        <p>{{ p.review_count }} reviews for this model ({{ p.rating() }} average). Read merchant reviews on the
+          <a href="{{ url_for('testimonials') }}">customer reviews</a> page.</p>
+        {% else %}
+        <p>No reviews yet for this model. Read merchant reviews on the
+          <a href="{{ url_for('testimonials') }}">customer reviews</a> page.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if related %}
+<section class="container also-bought">
+  <h4 class="also-bought-heading">Frequently Bought Together:</h4>
+  <div class="prod-grid">
+    {% for p2 in related[:4] %}
+    {{ macros.prod_card(p2) }}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Order {{ order.order_number }} confirmed | Red Bull Shop{% endblock %}
+{% block content %}
+<h1 class="page-title">Thank you — your order is confirmed</h1>
+<div class="form-card" style="max-width:680px">
+  <div class="fact-row"><span class="k">Order number</span><span class="v">{{ order.order_number }}</span></div>
+  <div class="fact-row"><span class="k">Status</span><span class="v">{{ order.status | capitalize }}</span></div>
+  <div class="fact-row"><span class="k">Placed</span><span class="v">{{ order.placed_at[:10] }}</span></div>
+  <div class="fact-row"><span class="k">Ship to</span><span class="v">{{ order.ship_name }}{% if order.ship_address %}<br>{{ order.ship_address }}<br>{{ order.ship_city }}, {{ order.ship_zip }}{% endif %}</span></div>
+  <div class="fact-row"><span class="k">Total</span><span class="v">${{ '%.2f' | format(order.total) }}</span></div>
+
+  <h3 style="margin-top:20px">Items</h3>
+  <table class="variant-table">
+    <tr><th>Product</th><th>Option</th><th>SKU</th><th>Price</th><th>Qty</th></tr>
+    {% for line in order.lines %}
+    <tr>
+      <td>{{ line.product_title }}</td>
+      <td>{{ line.variant_title }}</td>
+      <td>{{ line.sku or '—' }}</td>
+      <td>${{ '%.2f' | format(line.unit_price) }}</td>
+      <td>{{ line.quantity }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p style="margin-top:16px"><a class="btn btn-red" href="{{ url_for('account') }}">View my orders</a></p>
+</div>
+{% endblock %}

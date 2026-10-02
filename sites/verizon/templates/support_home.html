@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Verizon Support{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Verizon Support</h1>
+  <p>Find the right resources and discover more about your devices and services.</p>
+  <h2>Ask — resolve common issues</h2>
+  <div class="grid grid-3">
+    <div class="tile"><h3>Billing & payments</h3><p>Learn about your bill, and bill payment options.</p><a href="{{ url_for('support_page', slug='contact_us') }}">Billing contact</a></div>
+    <div class="tile"><h3>Fix mobile issues</h3><p>Use our troubleshooter to help resolve issues.</p><a href="{{ url_for('troubleshoot') }}">Troubleshoot your device</a></div>
+    <div class="tile"><h3>Check network status</h3><p>Enter an address to check for network issues in that area.</p><a href="{{ url_for('support_page', slug='network') }}">Network support</a></p></div>
+  </div>
+  <h2>Browse support topics</h2>
+  <ul>
+    <li><a href="{{ url_for('support_page', slug='return_policy') }}">Return policy — 30-day returns and exchanges</a></li>
+    <li><a href="{{ url_for('support_page', slug='contact_us') }}">Contact us — chat and phone options</a></li>
+    <li><a href="{{ url_for('support_page', slug='network') }}">Network support — coverage and notifications</a></li>
+    <li><a href="{{ url_for('troubleshoot') }}">Troubleshoot your device</a></li>
+    <li><a href="{{ url_for('trade_in_home') }}">Device trade-in program</a></li>
+  </ul>
+</section>
+{% endblock %}

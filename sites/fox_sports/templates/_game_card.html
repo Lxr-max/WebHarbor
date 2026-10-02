@@ -1,0 +1,41 @@
+{% set away = teams.get(game.away_team) %}
+{% set home = teams.get(game.home_team) %}
+<a class="game-card status-{{ game.status }}" href="/{{ game.league }}/{{ game.slug }}">
+  <div class="game-card-head">
+    <span>{{ LEAGUE_NAMES.get(game.league, game.league)|upper }}</span>
+    <span>
+      {% if game.week %}WK {{ game.week }} &middot; {% endif %}{{ game.date_iso or '' }}
+      {% if game.series %} &middot; {{ game.series }}{% if game.series_game %} GM {{ game.series_game }}{% endif %}{% endif %}
+    </span>
+  </div>
+  <div class="game-card-body">
+    <div class="game-team-row">
+      <span class="game-team">
+        {% if away and away.logo and image(away.logo) %}<img src="{{ image(away.logo) }}" alt="{{ away.full_name }}">{% endif %}
+        <span>{{ away.full_name if away else (game.away_team or '?')|replace('-',' ')|title }}</span>
+      </span>
+      <span class="game-meta">
+        {% if game.away_record %}<small>{{ game.away_record }}</small>{% endif %}
+        <strong>{% if game.status == 'final' %}{{ game.away_score }}{% elif game.away_abbr %}{{ game.away_abbr }}{% endif %}</strong>
+      </span>
+    </div>
+    <div class="game-team-row">
+      <span class="game-team">
+        {% if home and home.logo and image(home.logo) %}<img src="{{ image(home.logo) }}" alt="{{ home.full_name }}">{% endif %}
+        <span>{{ home.full_name if home else (game.home_team or '?')|replace('-',' ')|title }}</span>
+      </span>
+      <span class="game-meta">
+        {% if game.home_record %}<small>{{ game.home_record }}</small>{% endif %}
+        <strong>{% if game.status == 'final' %}{{ game.home_score }}{% elif game.home_abbr %}{{ game.home_abbr }}{% endif %}</strong>
+      </span>
+    </div>
+  </div>
+  <div class="game-card-foot">
+    {% if game.status == 'final' %}
+      <span class="pill pill-final">FINAL{% if game.recap %} &middot; recap{% endif %}</span>
+    {% else %}
+      <span class="pill">{{ game.time or 'Scheduled' }}{% if game.broadcaster %} on {{ game.broadcaster }}{% endif %}</span>
+    {% endif %}
+    {% if game.spread %}<span class="odds">{{ game.spread }}{% if game.total %} &middot; O/U {{ game.total }}{% endif %}</span>{% endif %}
+  </div>
+</a>
