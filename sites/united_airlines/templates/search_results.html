@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Flight search — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-search-page">
+  <div class="ua-search-head">
+    <h1>Choose your flight{% if params.origin and params.destination %}:
+      {{ params.origin }} → {{ params.destination }}{% endif %}</h1>
+    <form method="get" action="{{ url_for('flight_search') }}" class="ua-search-form">
+      <label>From <select name="origin">
+        {% for a in airports %}<option value="{{ a.code }}" {% if a.code == params.origin %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>{% endfor %}
+      </select></label>
+      <label>To <select name="destination">
+        {% for a in airports %}<option value="{{ a.code }}" {% if a.code == params.destination %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>{% endfor %}
+      </select></label>
+      <label>Depart <input type="date" name="depart" value="{{ params.depart }}"></label>
+      {% if params.return %}<input type="hidden" name="return" value="{{ params.return }}">{% endif %}
+      <label>Travelers
+        <select name="adults">
+          {% for n in range(1, 5) %}<option value="{{ n }}" {% if params.adults|int == n %}selected{% endif %}>{{ n }} adult{{ '' if n == 1 else 's' }}</option>{% endfor %}
+        </select></label>
+      <label>Children
+        <select name="children">
+          {% for n in range(0, 4) %}<option value="{{ n }}" {% if params.children|int == n %}selected{% endif %}>{{ n }}</option>{% endfor %}
+        </select></label>
+      <label>Cabin
+        <select name="cabin">
+          {% for key, label in fare_cabins %}<option value="{{ key }}" {% if key == params.cabin %}selected{% endif %}>{{ label }}</option>{% endfor %}
+        </select></label>
+      <label>Sort
+        <select name="sort">
+          <option value="departure" {% if params.sort == 'departure' %}selected{% endif %}>Departure time</option>
+          <option value="price" {% if params.sort == 'price' %}selected{% endif %}>Lowest price</option>
+          <option value="arrival" {% if params.sort == 'arrival' %}selected{% endif %}>Arrival time</option>
+          <option value="duration" {% if params.sort == 'duration' %}selected{% endif %}>Duration</option>
+        </select></label>
+      <label>Filter
+        <select name="filter">
+          <option value="">All flights</option>
+          <option value="nonstop" {% if params.filter == 'nonstop' %}selected{% endif %}>Nonstop only</option>
+          <option value="morning" {% if params.filter == 'morning' %}selected{% endif %}>Morning (before 12:00)</option>
+          <option value="afternoon" {% if params.filter == 'afternoon' %}selected{% endif %}>Afternoon (12:00–18:00)</option>
+          <option value="evening" {% if params.filter == 'evening' %}selected{% endif %}>Evening (after 18:00)</option>
+        </select></label>
+      <button class="ua-btn ua-btn-primary" type="submit">Search</button>
+    </form>
+  </div>
+
+  {% if error %}
+    <div class="ua-flash ua-flash-error">{{ error }}</div>
+  {% elif results %}
+    <p class="ua-results-count">{{ results|length }} flight{{ '' if results|length == 1 else 's' }} found{% if day %} on {{ day.strftime('%A, %B %-d, %Y') }}{% endif %}</p>
+    <div class="ua-fare-table" role="region" aria-label="Fare comparison">
+      <div class="ua-fare-row ua-fare-head">
+        <span class="ua-fare-col-flight">Flight</span>
+        {% for key, label in fare_cabins %}<span class="ua-fare-col">{{ label }}</span>{% endfor %}
+      </div>
+      {% for flight in results %}
+      <div class="ua-fare-row">
+        <div class="ua-flight-cell">
+          <div class="ua-flight-time">
+            <strong>{{ flight.departure }}</strong> {{ flight.origin.city }} ({{ flight.origin_code }})
+            → <strong>{{ flight.arrival }}</strong> {{ flight.dest.city }} ({{ flight.dest_code }})
+          </div>
+          <div class="ua-flight-meta">
+            UA {{ flight.flight_number }} · {{ flight.aircraft.name }} ·
+            {{ flight.duration_label }} ·
+            {% if flight.stops == 0 %}Nonstop{% else %}{{ flight.stops }} stop{% endif %}
+          </div>
+          {% if flight.status_note %}<div class="ua-flight-status">Status: {{ flight.status_note }}</div>{% endif %}
+        </div>
+        {% for key, label in fare_cabins %}
+          {% set fare = flight.fares().get(key) %}
+          {% if fare %}
+          <form method="post" action="{{ url_for('select_flight', flight_id=flight.id) }}" class="ua-fare-cell">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="cabin" value="{{ key }}">
+            <input type="hidden" name="date" value="{{ params.depart }}">
+            {% if params.return %}<input type="hidden" name="return" value="{{ params.return }}">{% endif %}
+            <input type="hidden" name="adults" value="{{ params.adults }}">
+            <input type="hidden" name="children" value="{{ params.children }}">
+            <button class="ua-fare-btn" type="submit">
+              <span class="ua-fare-amount">${{ '%.2f'|format(fare.amount * mult) }}</span>
+              {% if fare.seats_left <= 4 %}<span class="ua-seats-left">Only {{ fare.seats_left }} left</span>{% endif %}
+            </button>
+          </form>
+          {% else %}
+          <div class="ua-fare-cell ua-fare-unavailable">Not available</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  {% elif params.origin %}
+    <div class="ua-flash">No flights were found for this search. Try another
+      date, origin or destination — the mirror's frozen network covers the
+      routes in the real united.com flight-status snapshot.</div>
+  {% endif %}
+</section>
+{% endblock %}

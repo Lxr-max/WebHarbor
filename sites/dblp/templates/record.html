@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}"{{ p.title }}"{% endblock %}
+{% block main %}
+<header id="headline" class="record">
+  <h1>{{ p.title }}</h1>
+</header>
+
+<section class="section" id="record-details">
+  <header class="hide-head h2"><h2>Details and statistics</h2></header>
+  <div class="hide-body">
+    <dl class="record-meta">
+      <dt>authors</dt>
+      <dd>
+        {% for pa in p.authors() %}{% if not loop.first %}, {% endif -%}
+        <a href="/pid/{{ pa.author_pid }}.html">{{ pa.name }}</a>
+        {% if pa.orcid %}<small class="orcid">ORCID {{ pa.orcid }}</small>{% endif %}
+        {%- endfor %}
+      </dd>
+      <dt>type</dt><dd>{{ p.type_label }}</dd>
+      <dt>venue</dt>
+      <dd><a href="/db/{{ p.stream }}/index.html">{{ p.journal or p.booktitle }}</a></dd>
+      {% if p.volume %}<dt>volume</dt><dd>{{ p.volume }}{% if p.number %}({{ p.number }}){% endif %}</dd>{% endif %}
+      {% if p.pages %}<dt>pages</dt><dd>{{ p.pages }}</dd>{% endif %}
+      <dt>year</dt><dd>{{ p.year }}</dd>
+      {% if p.doi %}<dt>doi</dt><dd>{{ p.doi }}</dd>{% endif %}
+      {% if p.ee_list() %}<dt>ee</dt>
+      <dd>{% for u in p.ee_list() %}{% if not loop.first %}, {% endif -%}
+        <a href="{{ u }}" rel="nofollow">{{ u }}</a>{% endfor %}</dd>{% endif %}
+      {% if p.mdate %}<dt>mdate</dt><dd>{{ p.mdate }}</dd>{% endif %}
+    </dl>
+  </div>
+</section>
+
+<section class="section" id="record-bibtex">
+  <header class="hide-head h2"><h2>BibTeX record</h2></header>
+  <div class="hide-body">
+    <pre class="bibtex">{{ bib }}</pre>
+    <p class="bibtex-downloads">
+      <a href="/rec/{{ p.rec_key }}.bib" class="bibtex-download">
+        <img alt="" src="{{ img('download.dark.16x16') or '' }}" class="icon">
+        download BibTeX</a>
+    </p>
+  </div>
+</section>
+
+{% if current_user.is_authenticated %}
+<section class="section" id="save-record">
+  <header class="hide-head h2"><h2>Save record</h2></header>
+  <div class="hide-body">
+    <form class="save-paper-form" method="post"
+          action="{{ url_for('saved_papers_add') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="key" value="{{ p.rec_key }}">
+      <input type="hidden" name="next" value="/rec/{{ p.rec_key }}.html">
+      <label>collection
+        <input type="text" name="collection" value="My Library">
+      </label>
+      <label>note <input type="text" name="note" placeholder="optional note"></label>
+      <button type="submit">save record to my library</button>
+    </form>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

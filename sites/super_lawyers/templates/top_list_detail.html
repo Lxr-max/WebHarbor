@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ lst.title }} Top List{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('top_lists_hub') }}">Top Lists</a> ›
+    <a href="/top-lists/{{ lst.state_slug }}/">{{ state.name if state else lst.state_slug }}</a> ›
+    <span>{{ lst.title }}</span>
+  </nav>
+  <h1>{{ lst.title }} Top List</h1>
+  <p class="lead">The attorneys below were selected to this Super Lawyers top list for
+  {{ lst.year }}. Selections reflect peer recognition and independent research; see the
+  <a href="/about/selection-process/">selection process</a> for details.</p>
+
+  <div class="toplist-grid" id="other_lawyers">
+    {% for card in cards %}
+    <div class="toplist-card">
+      <a href="/profiles/{{ card.lawyer.state_slug }}/{{ card.lawyer.city_slug }}/lawyer/{{ card.lawyer.slug }}/{{ card.lawyer.uuid }}.html">
+        <img src="{{ url_for('static', filename=card.lawyer.photo('top')) }}" alt="{{ card.lawyer.name }}" width="200" height="250" loading="lazy">
+        <span class="toplist-name">{{ card.lawyer.name }}</span>
+      </a>
+      <span class="toplist-firm">{{ card.entry.firm_name or (card.lawyer.firm.name if card.lawyer.firm else '') }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

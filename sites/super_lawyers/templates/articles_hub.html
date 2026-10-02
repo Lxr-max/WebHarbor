@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Super Lawyers Attorney Feature Articles{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <h1>Attorney feature articles</h1>
+  <h2>Search attorney feature articles</h2>
+  <form class="inline-search" method="get" action="/articles/">
+    <input type="search" name="q" placeholder="Search feature articles" aria-label="Search feature articles">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <h2>Recent magazine articles</h2>
+  <div class="article-cards">
+    {% for article in articles %}
+      <a class="article-card" href="/articles/{{ article.state_slug }}/{{ article.slug }}/">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.subtitle }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if online %}
+  <h2>Online-exclusive journalism</h2>
+  <div class="article-cards">
+    {% for article in online %}
+      <a class="article-card" href="/articles/{{ article.state_slug }}/{{ article.slug }}/">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.subtitle }}</p>
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h2>Articles by state</h2>
+  <div class="link-grid four-col">
+    {% for state in states %}
+      <a href="/articles/?state={{ state.slug }}">{{ state.name }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Have a story idea?</h2>
+  <p>Super Lawyers magazine features selectees doing remarkable work. Award-winning
+  journalists cover the legal profession across the country.</p>
+</div>
+{% endblock %}

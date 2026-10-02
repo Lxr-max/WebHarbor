@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% block title %}Secure booking - {{ tour.name }} - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 18px 16px 60px;">
+  <div class="section-head">
+    <h1 style="font-size:24px;">Your trip overview</h1>
+    <div>
+      <a class="btn btn-outline btn-sm" href="/contact">Help</a>
+      <a class="btn btn-outline btn-sm" href="/t/{{ tour.id }}">Share</a>
+    </div>
+  </div>
+
+  <div class="panel" style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+    <img src="{{ tour.hero_url }}" alt="{{ tour.name }}" style="width:180px; height:110px; object-fit:cover; border-radius:8px;">
+    <div style="flex:1; min-width:240px;">
+      <h2 style="margin-bottom:2px;">{{ tour.name }}</h2>
+      <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(tour.rating) }}</span> ({{ tour.review_count }} reviews)</div>
+      <div style="font-size:13px; color:var(--text-2);">{{ tour.duration_days }} days &bull; {{ tour.group_type or 'Group' }} &bull; {{ tour.guided_language or 'English' }}</div>
+      <div style="font-size:13px; color:var(--text-2);">{{ tour.included_dict.keys()|list|join(', ') if tour.included_dict else 'Accommodation, Guide, Meals, Transport' }}</div>
+      <div style="font-size:12px; color:#1d7a34; margin-top:4px;">{% if dep.instant %}Instant Book: Your spaces will be instantly secured.{% else %}Spaces reserved once your booking is confirmed.{% endif %}</div>
+    </div>
+    <div style="font-size:13px;">
+      <div><b>STARTS</b><br>{{ dep.start_weekday }}, {{ dep.start_label }}<br>in {{ tour.start_city }}</div>
+      <div style="margin-top:8px;"><b>ENDS</b><br>{{ dep.end_weekday }}, {{ dep.end_label }}<br>in {{ tour.end_city }}</div>
+      <a class="btn btn-ghost btn-sm" href="/t/{{ tour.id }}">Change date</a>
+    </div>
+  </div>
+
+  <div class="book-layout">
+    <div>
+      <form method="post" action="/book-now/{{ tour.id }}" id="booking-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="book">
+        <input type="hidden" name="date" value="{{ dep.start_date }}">
+        <input type="hidden" name="travelers" value="{{ n }}">
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">1</span><h3>How many are traveling?</h3></div>
+          <div class="step-body">
+            <div class="attr" data-traveler-stepper style="max-width:280px;">
+              <button class="btn btn-outline btn-sm" type="button" data-minus>&minus;</button>
+              <span data-count="{{ n }}" style="font-weight:700; flex:1; text-align:center;">{{ n }} Traveler{{ '' if n == 1 else 's' }}</span>
+              <button class="btn btn-outline btn-sm" type="button" data-plus>+</button>
+            </div>
+            <p style="font-size:12.5px; color:var(--text-3); margin-top:8px;">Split Tour Payment &mdash; Book once and share the cost with split payments. <a href="/payments">Learn more</a></p>
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">2</span><h3>Select accommodation</h3></div>
+          <div class="step-body">
+            <p style="font-size:13px; color:var(--text-2);">Select your preferred room types for your {{ n }} traveller{{ '' if n == 1 else 's' }}</p>
+            {% for r in rooms %}
+            <label class="room-option">
+              <input type="radio" name="room_type" value="{{ r.key }}" {% if form.get('room_type', 'double') == r.key %}checked{% endif %} style="accent-color:var(--primary);">
+              <div class="names">
+                <b>{{ r.name }}</b>
+                <span>{{ r.shared }}</span>
+                <p>{{ r.desc }}</p>
+              </div>
+              <div class="prices">
+                {% if r.was != r.price %}<s>{{ money(r.was) }}</s>{% endif %}
+                <b style="font-size:16px;">{{ money(r.price) }}</b>
+                <span style="font-size:11px; color:var(--text-3);">per Traveler</span>
+              </div>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">3</span><h3>Add traveler details</h3></div>
+          <div class="step-body">
+            <p style="font-size:12.5px; color:var(--text-3);">Please note: Traveler details should match information on passport</p>
+            {% for i in range(n) %}
+            <div class="traveler-form">
+              <h4 style="margin:0 0 6px;">{% if i == 0 %}Lead Traveler <span style="font-weight:400; color:var(--text-3);">(This traveler will serve as the contact person for the booking.)</span>{% else %}Traveler {{ i + 1 }}{% endif %}</h4>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Title*</label>
+                  <select name="title_{{ i }}">
+                    {% for t in ['Mr.', 'Ms.', 'Mrs.', 'Miss'] %}
+                    <option value="{{ t }}" {% if form.get('title_' ~ i, 'Mr.') == t %}selected{% endif %}>{{ t }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Gender*</label>
+                  <select name="gender_{{ i }}">
+                    <option value="">Select</option>
+                    <option value="Male" {% if form.get('gender_' ~ i) == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if form.get('gender_' ~ i) == 'Female' %}selected{% endif %}>Female</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>First Name*</label>
+                  <input name="first_{{ i }}" value="{{ form.get('first_' ~ i, '') }}" required>
+                </div>
+                <div class="field">
+                  <label>Last Name*</label>
+                  <input name="last_{{ i }}" value="{{ form.get('last_' ~ i, '') }}" required>
+                </div>
+                <div class="field">
+                  <label>Date of Birth*</label>
+                  <input name="dob_{{ i }}" type="date" value="{{ form.get('dob_' ~ i, '') }}">
+                </div>
+                <div class="field">
+                  <label>Nationality*</label>
+                  <select name="nationality_{{ i }}">
+                    <option value="">Select your nationality</option>
+                    {% for nat in ['USA', 'United Kingdom', 'Australia', 'Canada', 'New Zealand', 'Germany', 'France', 'Japan', 'India', 'Brazil', 'South Africa', 'Singapore'] %}
+                    <option value="{{ nat }}" {% if form.get('nationality_' ~ i) == nat %}selected{% endif %}>{{ nat }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                {% if i == 0 %}
+                <div class="field">
+                  <label>Email*</label>
+                  <input name="email" type="email" value="{{ form.get('email', current_user.email if current_user.is_authenticated else '') }}" required>
+                </div>
+                <div class="field">
+                  <label>Phone Number*</label>
+                  <input name="phone" value="{{ form.get('phone', '') }}" required>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">4</span><h3>Travel Insurance</h3></div>
+          <div class="step-body">
+            <p style="font-size:12.5px; color:var(--text-2);">Our travel protection from our award-winning partner, XCover, means you and your travel companions can book with peace of mind.</p>
+            {% for ins in insurance %}
+            <label class="pay-opt">
+              <input type="radio" name="insurance" value="{{ ins.key }}" {% if form.get('insurance', 'none') == ins.key %}checked{% endif %} style="accent-color:var(--primary); margin-top:4px;">
+              <div>
+                <b>{{ ins.name }}</b>
+                {% if ins.price %}<span style="float:right; font-weight:700;">+{{ money2(ins.price) }}</span>{% endif %}
+                <p>{{ ins.desc }}</p>
+              </div>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">5</span><h3>TourRadar savings</h3></div>
+          <div class="step-body">
+            <div class="form-grid">
+              <div class="field full">
+                <label>Redeem Promo Code</label>
+                <input name="promo_code" placeholder="Enter promo code" value="{{ form.get('promo_code', '') }}" style="max-width:280px;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">6</span><h3>Choose payment schedule</h3></div>
+          <div class="step-body">
+            {% set base = (rooms[0].price * n) %}
+            {% set dep_today = (base * 0.10)|round(2) %}
+            {% set due_date = '8 Jan, 2027' %}
+            <label class="pay-opt">
+              <input type="radio" name="payment_schedule" value="deposit" {% if form.get('payment_schedule', 'deposit') == 'deposit' %}checked{% endif %} style="accent-color:var(--primary); margin-top:4px;">
+              <div><b>Deposit Only (10%)</b><p>${{ '%.2f'|format(dep_today) }} today, remaining on {{ due_date }}</p></div>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="payment_schedule" value="installments" {% if form.get('payment_schedule') == 'installments' %}checked{% endif %} style="accent-color:var(--primary); margin-top:4px;">
+              <div><b>7 Installments</b><p>${{ '%.2f'|format(dep_today) }} today, 7 biweekly installments interest free</p></div>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="payment_schedule" value="full" {% if form.get('payment_schedule') == 'full' %}checked{% endif %} style="accent-color:var(--primary); margin-top:4px;">
+              <div><b>Pay in Full</b><p>${{ '%.2f'|format(base) }} today, no additional payments</p></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="book-step">
+          <div class="step-head"><span class="num">7</span><h3>Payment</h3></div>
+          <div class="step-body">
+            <p style="font-size:12.5px; color:var(--text-2);">This is a secure and SSL encrypted payment. Your credit card details are safe.</p>
+            <div class="form-grid">
+              <div class="field full">
+                <label>Cardholder Name</label>
+                <input name="card_name" value="{{ form.get('card_name', '') }}" required>
+              </div>
+              <div class="field full">
+                <label>Card Number *</label>
+                <input name="card_number" placeholder="1234 5678 9012 3456" value="{{ form.get('card_number', '') }}" required>
+              </div>
+              <div class="field">
+                <label>Expiry Date *</label>
+                <input name="expiry" placeholder="MM/YY" value="{{ form.get('expiry', '') }}" required>
+              </div>
+              <div class="field">
+                <label>CVV *</label>
+                <input name="cvv" placeholder="123" value="{{ form.get('cvv', '') }}" required>
+              </div>
+              <div class="field">
+                <label>Billing Country*</label>
+                <select name="billing_country">
+                  {% for c in ['USA', 'United Kingdom', 'Australia', 'Canada', 'New Zealand', 'Germany', 'France'] %}
+                  <option value="{{ c }}" {% if form.get('billing_country') == c %}selected{% endif %}>{{ c }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="field">
+                <label>Zip Code*</label>
+                <input name="zip" value="{{ form.get('zip', '') }}">
+              </div>
+            </div>
+            <label style="display:flex; gap:8px; font-size:13px; margin-top:12px; align-items:flex-start;">
+              <input type="checkbox" name="accept_terms" value="1" style="accent-color:var(--primary);" required>
+              <span>I accept TourRadar's <a href="/terms-conditions">Terms &amp; Conditions</a> and <a href="/privacy">Privacy Policy</a>; and {{ tour.operator_name }}'s payment, cancellation and refund conditions.</span>
+            </label>
+            <button class="btn btn-lg" type="submit" style="width:100%; margin-top:12px;">Book {{ n }} space{{ '' if n == 1 else 's' }}</button>
+            <p style="font-size:12px; color:var(--text-3); margin-top:6px;">You will be charged ${{ '%.2f'|format(dep_today) }} now. The remaining balance is due on {{ due_date }}.</p>
+            <p style="font-size:12px; color:var(--text-3);">TourRadar is an authorized Agent of {{ tour.operator_name }}. TourRadar will charge you in the stated currency.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <aside>
+      <div class="summary-box">
+        <h2>Price Breakdown</h2>
+        <div class="summary-line"><span>{{ rooms[0].name }}</span><span>{{ n }} Traveler{{ '' if n == 1 else 's' }} x {{ money(rooms[0].price) }}.00</span></div>
+        <div class="summary-line"><span>Total due</span><span>{{ money2(rooms[0].price * n) }}</span></div>
+        {% if tour.discount_pct %}
+        <div class="summary-line" style="color:var(--danger);"><span>Escape Sale Discount</span><span>- {{ money2((rooms[0].was - rooms[0].price) * n) }}</span></div>
+        {% endif %}
+        <div class="summary-total"><span>Total</span><span>{{ money2(total) }}</span></div>
+        <div class="summary-line" style="font-size:13px;"><span>Due today</span><span>{{ money2(total * 0.10) }}</span></div>
+        <div class="summary-line" style="font-size:13px;"><span>Due on 8 Jan, 2027</span><span>{{ money2(total * 0.90) }}</span></div>
+        <div class="summary-line" style="font-size:12px; color:var(--text-3); margin-top:8px;"><span>Operated by</span><span>{{ tour.operator_name }}</span></div>
+        <div style="font-size:12px; color:var(--text-3); margin-top:10px;">
+          <b>Why book with us?</b>
+          <ul style="padding-left:18px; margin:6px 0;">
+            <li>Deposit only &mdash; pay {{ money2(rooms[0].price * 0.05) }} upfront per person</li>
+            <li>Your money is protected. TourRadar is an authorized agent of {{ tour.operator_name }}.</li>
+            <li>24/7 customer support before and after booking</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+ "login_modal": "Log In\nSign Up\nEmail Address\nPassword\nForgot password?\nLog In\nOR\nContinue with Google\nContinue with Apple\nContinue with Binance\nContinue with Wallet",
+ "login_error": "Log In\nSign Up\nEmail Address\nPassword\nForgot password?\nYour email and password does not match. Please try again.\nLog In\nOR\nContinue with Google\nContinue with Apple\nContinue with Binance\nContinue with Wallet",
+ "signup_modal": "Log In\nSign Up\nContinue with Google\nContinue with Apple\nContinue with Binance\nContinue with Wallet\nOR CONTINUE WITH EMAIL\nEmail Address\nPassword\nPlease keep me updated by email with the latest crypto news, research findings, reward programs, event updates, coin listings and more information from CoinMarketCap.\nCreate an account\nBy proceeding, you agree to CoinMarketCap\u2019s Terms of Use & Privacy Policy.",
+ "signup_response": {
+  "https://api.coinmarketcap.com/auth/v4/user/signUp": {
+   "status": 200,
+   "body": "{\"data\":{\"securityId\":\"2f2ac9d9e6e943a1a1ed71479b165d02\",\"bizCode\":\"CMC_register\",\"type\":\"binance\"},\"status\":{\"timestamp\":\"2026-09-30T00:48:54.515Z\",\"error_code\":\"1017\",\"error_message\":\"Need Captcha Verification again\",\"elapsed\":\"0\",\"credit_count\":0,\"verifiedUserType\":0},\"header\":{\"code\":1017,\"msg\":\"Need Captcha Verification again\"}}"
+  }
+ },
+ "watchlist_prompt": "Added to Watchlist\nWanna keep this Watchlist? Just sign up in a few easy steps!\nCreate an account"
+}

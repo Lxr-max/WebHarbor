@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Course Catalog — Stanford University{% endblock %}
+{% block content %}
+<div class="section-head">
+  <h2>Course Catalog</h2>
+  <span class="count">{{ total }} courses in the 2026-27 Stanford Bulletin</span>
+</div>
+<div class="filters">
+  <form method="get" action="{{ url_for('courses') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search by code, title or description" aria-label="Search courses">
+    <select name="subject" aria-label="Subject">
+      <option value="">All subjects</option>
+      {% for s in subjects %}
+        <option value="{{ s }}" {% if subject == s %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <select name="career" aria-label="Career">
+      <option value="">All careers</option>
+      <option value="Undergraduate" {% if career == 'Undergraduate' %}selected{% endif %}>Undergraduate</option>
+      <option value="Graduate" {% if career == 'Graduate' %}selected{% endif %}>Graduate</option>
+    </select>
+    <select name="term" aria-label="Term">
+      <option value="">All terms</option>
+      {% for t in ['Autumn', 'Winter', 'Spring', 'Summer'] %}
+        <option value="{{ t }}" {% if term == t %}selected{% endif %}>{{ t }}</option>
+      {% endfor %}
+    </select>
+    <select name="ways" aria-label="WAYS requirement">
+      <option value="">Any WAYS</option>
+      <option value="Formal Reasoning (FR)" {% if ways == 'Formal Reasoning (FR)' %}selected{% endif %}>Formal Reasoning (FR)</option>
+      <option value="Applied Quantitative Reasoning (AQR)" {% if ways == 'Applied Quantitative Reasoning (AQR)' %}selected{% endif %}>Applied Quantitative Reasoning (AQR)</option>
+      <option value="Scientific Method and Analysis (SMA)" {% if ways == 'Scientific Method and Analysis (SMA)' %}selected{% endif %}>Scientific Method and Analysis (SMA)</option>
+      <option value="Creative Expression (CE)" {% if ways == 'Creative Expression (CE)' %}selected{% endif %}>Creative Expression (CE)</option>
+      <option value="Exploring Difference and Power (EDP)" {% if ways == 'Exploring Difference and Power (EDP)' %}selected{% endif %}>Exploring Difference and Power (EDP)</option>
+      <option value="Ethical Reasoning (ER)" {% if ways == 'Ethical Reasoning (ER)' %}selected{% endif %}>Ethical Reasoning (ER)</option>
+    </select>
+    <button class="btn solid" type="submit">Search</button>
+  </form>
+</div>
+{% if q or subject or career or term or ways %}
+  <div class="filter-note">Showing courses{% if q %} matching “{{ q }}”{% endif %}{% if subject %} · subject {{ subject }}{% endif %}{% if career %} · {{ career }}{% endif %}{% if term %} · offered in {{ term }}{% endif %}{% if ways %} · WAYS {{ ways }}{% endif %} —
+    <a href="{{ url_for('courses') }}">clear filters</a></div>
+{% endif %}
+<table class="data">
+  <tr><th>Code</th><th>Title</th><th>Units</th><th>Career</th><th>Terms</th></tr>
+  {% for c in courses %}
+    <tr>
+      <td><a href="{{ url_for('course_detail', code=c.code) }}">{{ c.code }}</a></td>
+      <td>{{ c.title }}</td>
+      <td>{{ c.units_display }}</td>
+      <td>{{ c.career or '—' }}</td>
+      <td>{{ c.terms|join(', ') }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5"><div class="empty">No courses match that search.</div></td></tr>
+  {% endfor %}
+</table>
+{% if pages > 1 %}
+<div class="pager">
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}<span class="cur">{{ p }}</span>
+    {% else %}<a href="{{ url_for('courses', q=q, subject=subject, career=career, term=term, ways=ways, page=p) }}">{{ p }}</a>{% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

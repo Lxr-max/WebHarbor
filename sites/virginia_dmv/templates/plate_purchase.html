@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Purchase {{ plate.title }} Plate{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('plates_search') }}">License Plates</a> › {{ plate.title }} › Purchase</nav>
+  <div class="page-title"><h1>Purchase {{ plate.title }} Plate</h1></div>
+  <div class="card plate-card" style="max-width:420px;">
+    <img src="{{ plate.image_path() }}" alt="{{ plate.title }} plate">
+  </div>
+  <form class="flow" method="post" action="{{ url_for('plate_purchase', slug=plate.slug) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="confirm" value="0">
+    <div class="field">
+      <label for="vehicle_id">Assign this plate to</label>
+      <select id="vehicle_id" name="vehicle_id">
+        {% for v in vehicles %}
+        <option value="{{ v.id }}" {% if selected and selected.id == v.id %}selected{% endif %}>
+          {{ v.year }} {{ v.make }} {{ v.model }} ({{ v.plate }})
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    {% if plate.personalization_available == 'Yes' %}
+    <div class="field">
+      <label for="message">Personalized message (optional, up to {{ plate.char_combinations or 6 }} characters)</label>
+      <input id="message" type="text" name="message" maxlength="{{ plate.char_combinations or 6 }}" value="{{ message }}"
+             placeholder="e.g. HOKIE4U">
+      <p class="hint">Personalized messages are reviewed against DMV guidelines and restrictions.
+      A personalized plate fee of {{ plate.personalized_fee or '$10 annually' }} applies.</p>
+    </div>
+    {% endif %}
+    {% if available is not none %}
+      {% if available %}
+      <p class="result-ok">{{ message }} is available.</p>
+      {% else %}
+      <p class="result-bad">{{ message }} is not available — try a different message.</p>
+      {% endif %}
+    {% endif %}
+    <button class="btn btn--secondary" type="submit" name="check" value="1"
+            {% if not plate.personalization_available == 'Yes' %}disabled{% endif %}>Check availability</button>
+    {% if available is none or available %}
+    <p><button class="btn" type="submit" onclick="this.form.confirm.value='1'">
+      Pay and purchase plate — {{ plate.plate_fee or '$10 annually' }}{% if plate.personalization_available == 'Yes' %} + personalized fee{% endif %}</button></p>
+    {% endif %}
+  </form>
+  <div class="card">
+    <h2>Fee summary</h2>
+    <dl class="kv">
+      <dt>Plate fee (in addition to registration fee)</dt><dd>{{ plate.plate_fee }}</dd>
+      {% if plate.personalization_available == 'Yes' %}
+      <dt>Personalized plate fee (in addition to registration fee)</dt><dd>{{ plate.personalized_fee }}</dd>
+      {% endif %}
+    </dl>
+  </div>
+</div>
+{% endblock %}

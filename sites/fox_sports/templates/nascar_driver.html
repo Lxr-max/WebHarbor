@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ driver.driver }} | FOX Sports{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('nascar_standings') }}">NASCAR Cup Series standings</a></p>
+<h1>{{ driver.driver }}</h1><p>2026 NASCAR Cup Series</p>
+<table class="data-table"><thead><tr><th>Rank</th><th>Points</th><th>Starts</th><th>Wins</th><th>Top 5</th><th>Top 10</th><th>DNF</th><th>Laps led</th></tr></thead>
+<tbody><tr><td>{{ driver.rank }}</td><td>{{ driver.points }}</td><td>{{ driver.starts }}</td><td>{{ driver.wins }}</td><td>{{ driver.top5 }}</td><td>{{ driver.top10 }}</td><td>{{ driver.dnf }}</td><td>{{ driver.laps_led }}</td></tr></tbody></table>
+{% if current_user.is_authenticated %}
+<form method="post" action="{{ url_for('favorites_toggle') }}">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="item_type" value="driver"><input type="hidden" name="item_key" value="{{ driver.rank }}"><input type="hidden" name="next" value="{{ request.path }}">
+<button class="btn" type="submit">{% if is_favorited('driver', driver.rank|string) %}Unfollow{% else %}Follow{% endif %} {{ driver.driver }}</button></form>
+{% else %}<a href="{{ url_for('login', next=request.path) }}">Sign in to follow</a>{% endif %}
+{% endblock %}

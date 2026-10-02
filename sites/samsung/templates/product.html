@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.name }}{{ '' }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="/{{ p.category_slug }}/">{{ CATEGORY_LABELS[p.category_slug] }}</a> &rsaquo; <span>{{ p.name }}</span>
+</div>
+
+<div class="product-layout">
+  <div class="product-gallery">
+    {% if p.image %}<img class="product-hero" src="{{ url_for('static', filename='images/' ~ p.image) }}" alt="{{ p.name }}">{% else %}<div class="img-fallback img-fallback-hero" role="img" aria-label="{{ p.name }}"><span>Image not available</span></div>{% endif %}
+  </div>
+  <div class="product-info">
+    <p class="product-series">{{ p.family or p.series }}</p>
+    <h1>{{ p.name }}</h1>
+    <p class="product-modelcode">Model code: {{ p.model_code }}</p>
+    <p class="product-price">{% if p.price is not none %}{{ p.price|money }}{% if p.msrp and p.sale_price and p.msrp > p.sale_price %} <s>{{ p.msrp|money }}</s>{% endif %}{% if p.monthly_price %} or {{ p.monthly_price|money }}/mo for 36 mo{% endif %}{% else %}See buying options{% endif %}</p>
+    {% if p.rating %}
+    <p class="product-rating">{{ p.rating|stars }} &starf; &middot; {{ p.reviews }} reviews</p>
+    {% endif %}
+    <p class="product-stock">{{ 'In stock &middot; Buy Online' if p.in_stock and p.buy_online else ('Store only' if p.in_stock else 'Out of stock') }}</p>
+
+    {% if p.feature_list %}
+    <h2>Key features</h2>
+    <ul class="product-keyfeatures">
+      {% for feature in p.feature_list %}
+      <li>{{ feature }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="product-cta">
+      {% if config %}
+      <a class="btn btn-large" href="/{{ p.category_slug }}/{{ p.slug }}/buy/">Buy Now</a>
+      {% elif p.buy_online %}
+      <span class="muted">Available through Samsung.com shop</span>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('wishlist_toggle') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="product_slug" value="{{ p.slug }}">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit" class="btn btn-outline">Add to Wishlist</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if specs %}
+<section class="band">
+  <h2>Specifications</h2>
+  <div class="spec-table-wrap">
+  <table class="spec-table">
+    {% set ns = namespace(group='') %}
+    {% for row in specs %}
+      {% if row.group_name %}
+      <tr class="spec-group"><th colspan="2">{{ row.group_name }}</th></tr>
+      {% set ns.group = row.group_name %}
+      {% elif row.attr_name %}
+      <tr><th>{{ row.attr_name }}</th><td>{{ row.attr_value }}</td></tr>
+      {% elif row.attr_value %}
+      {# upstream spec rows without an attribute name (e.g. the Battery
+         group's capacity value) render under their group heading, the
+         same treatment the compare table gives them #}
+      <tr><th></th><td>{{ row.attr_value }}</td></tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+  </div>
+  <p class="muted">Specification table captured from the Samsung spec-compare API for model {{ p.spec_model }}.</p>
+</section>
+{% endif %}
+
+{% if related %}
+<section class="band">
+  <h2>Related products</h2>
+  <div class="product-grid">
+    {% for rp in related %}
+    <a class="product-card" href="/{{ rp.category_slug }}/{{ rp.slug }}/">
+      <div class="product-img">{% if rp.image %}<img src="{{ url_for('static', filename='images/' ~ rp.image) }}" alt="{{ rp.name }}" loading="lazy">{% else %}<div class="img-fallback" role="img" aria-label="{{ rp.name }}"><span>Image not available</span></div>{% endif %}</div>
+      <div class="product-body">
+        <p class="product-name">{{ rp.name }}</p>
+        <p class="product-price">{% if rp.price is not none %}{{ rp.price|money }}{% endif %}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Contact Us</h1></div>
+<div class="contact-layout">
+  <section class="contact-form-card">
+    <h2>Send us a message</h2>
+    <form method="post" action="{{ url_for('contact') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="category">Product category</label>
+      <select id="category" name="category" required>
+        {% for cat in cats %}
+        <option value="{{ cat.name }}" {{ 'selected' if category == cat.slug }}>{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+      <label for="topic">Topic</label>
+      <select id="topic" name="topic" required>
+        {% for t in topics %}
+        <option value="{{ t }}">{{ t }}</option>
+        {% endfor %}
+      </select>
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" value="{{ current_user.email if current_user.is_authenticated else '' }}" required>
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+      <button type="submit" class="btn btn-large btn-block">Send Message</button>
+    </form>
+  </section>
+  <aside class="contact-aside">
+    <h2>Quick help</h2>
+    <ul class="quick-help">
+      <li><a href="{{ url_for('warranty') }}">Check warranty coverage</a></li>
+      <li><a href="{{ url_for('support_home') }}">Browse the warranty FAQ</a></li>
+      <li><a href="{{ url_for('compare') }}">Compare Galaxy models</a></li>
+    </ul>
+    <p class="muted">Still can't find the answer you're looking for? Send us a message and our team will reply by email.</p>
+  </aside>
+</div>
+{% endblock %}

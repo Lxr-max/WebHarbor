@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Active Alerts - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / Canada Alerts</div>
+<h1 class="page-title">Active Alerts</h1>
+<p class="muted">{{ now_heading }}</p>
+
+<div class="alert-filter">
+  <a href="/en/alerts/ca?region=ALL" class="{% if region == 'ALL' %}on{% endif %}">All ({{ total }})</a>
+  {% for code, name in region_codes.items() %}
+    {% if name in counts %}
+    <a href="/en/alerts/ca?region={{ code }}" class="{% if region == code %}on{% endif %}">{{ name }} ({{ counts[name] }})</a>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if alerts %}
+  {% for a in alerts %}
+  <a class="alert-card" href="/en/alerts/ca/{{ a.placecode }}">
+    <div>
+      <div class="ac-loc">{{ a.location_name }}</div>
+      <div class="ac-type"><span class="sev-dot sev-{{ a.treatment }}"></span>{{ a.name }}</div>
+      <div class="ac-issued">Issued at {{ a.issued_label }}</div>
+    </div>
+    <div class="muted small">{{ a.region }}</div>
+  </a>
+  {% endfor %}
+{% else %}
+  <p class="empty-note">No active alerts for this region.</p>
+{% endif %}
+
+<section class="section">
+  <div class="section-head"><h2>Weather Maps</h2><a class="more-link" href="/en/maps/radar">See all maps</a></div>
+</section>
+
+<section class="section">
+  <div class="news-rail">
+    {% for item in feed %}
+      {% if item.kind == 'article' and item.article %}
+      <a class="news-card" href="{{ item.article.path }}">
+        <div class="nc-thumb">
+          {% if item.article.thumb %}<img loading="lazy" src="/static/images/{{ item.article.thumb }}" alt="{{ item.article.headline }}">{% endif %}
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% elif item.video %}
+      <a class="news-card" href="/en/video/{{ item.video.mediaid }}">
+        <div class="nc-thumb">
+          <img loading="lazy" src="/static/images/videos/{{ item.video.mediaid }}.jpg" alt="{{ item.video.title }}">
+          <span class="nc-dur">{{ item.video.duration_label }}</span>
+        </div>
+        <div class="nc-title">{{ item.title }}</div>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

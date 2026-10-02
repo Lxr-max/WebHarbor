@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Message {{ pro.name }} - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>Message {{ pro.name }}</h1>
+  <p class="muted">{{ pro.category.name }} · {{ pro.city }}, {{ pro.state }} · Responds {{ pro.responds_label }}</p>
+  <div class="auth-card">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-row">
+        <label>Your message</label>
+        <textarea name="body" rows="4" required placeholder="Hi {{ pro.name.split(' ')[0] }}, I'd like to ask about..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Send message</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

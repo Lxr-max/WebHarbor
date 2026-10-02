@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ st.name }} Financial Advisors | SmartAsset{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('index') }}">Home</a> &rsaquo;
+  <a href="{{ url_for('advisor_landing') }}">Find an Advisor</a> &rsaquo;
+  <span>{{ st.name }}</span>
+</div>
+<h1>Top Financial Advisors in {{ st.name }}</h1>
+<p class="muted">{{ total }} advisors in {{ st.name }}. Sorted by rating.</p>
+<form class="advisor-filters" method="get">
+  <label>Specialty
+    <select name="specialty">
+      <option value="">All specialties</option>
+      {% for option in specialties %}
+        <option value="{{ option }}" {% if specialty == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Maximum account minimum
+    <select name="max_min_assets">
+      <option value="">Any minimum</option>
+      {% for value, label in [(100000,'$100,000'),(250000,'$250,000'),(500000,'$500,000'),(1000000,'$1,000,000')] %}
+        <option value="{{ value }}" {% if max_min_assets == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button class="btn btn-sm" type="submit">Apply filters</button>
+</form>
+
+<div class="sa-grid sa-cols-3">
+  {% for a in advisors %}
+    <a class="advisor-card" href="{{ url_for('advisor_detail', slug=a.slug) }}" style="text-decoration:none;color:inherit;">
+      <img class="advisor-photo" src="{{ url_for('static', filename='images/advisors/advisor-' + '%03d'|format(a.id) + '.jpg') }}" alt="{{ a.name }}" loading="lazy" decoding="async">
+      <h3 style="margin:0;">{{ a.name }}, {{ a.credentials }}</h3>
+      <div class="muted" style="font-size:.85rem;">{{ a.firm }}</div>
+      <p class="muted" style="font-size:.9rem;">{{ a.city }} &middot; ${{ a.aum_millions }}M AUM &middot; &#9733; {{ a.rating }}</p>
+      <p class="muted" style="font-size:.85rem;">Minimum assets: ${{ a.min_assets|commafy }}</p>
+      <span class="badge">{{ a.specialty }}</span>
+    </a>
+  {% endfor %}
+</div>
+<div class="pagination">
+  {% if page > 1 %}<a href="{{ url_for('advisors_by_state', state_slug=st.slug, page=page - 1, specialty=specialty or None, max_min_assets=max_min_assets) }}">&laquo; Prev</a>{% endif %}
+  {% for p in range(1, pages + 1) %}
+    {% if p == page %}<span class="current">{{ p }}</span>
+    {% else %}<a href="{{ url_for('advisors_by_state', state_slug=st.slug, page=p, specialty=specialty or None, max_min_assets=max_min_assets) }}">{{ p }}</a>{% endif %}
+  {% endfor %}
+  {% if page < pages %}<a href="{{ url_for('advisors_by_state', state_slug=st.slug, page=page + 1, specialty=specialty or None, max_min_assets=max_min_assets) }}">Next &raquo;</a>{% endif %}
+</div>
+{% endblock %}

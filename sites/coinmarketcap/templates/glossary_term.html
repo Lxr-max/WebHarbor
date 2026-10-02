@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}What is {{ term.title }}? | CoinMarketCap Glossary{% endblock %}
+{% block body %}
+<h1>{{ term.title }}</h1>
+<p class="muted">Difficulty: {{ term.difficulty or 'Easy' }}</p>
+<div class="prose">
+  {% if term.content %}{{ term.content | safe }}{% else %}<p>{{ term.excerpt }}</p>{% endif %}
+</div>
+
+{% if others %}
+<h2>More Glossary Terms</h2>
+<div>
+  {% for o in others %}
+    <a class="tag-chip" href="/academy/glossary/{{ o.slug }}">{{ o.title }}</a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ venue.name }} - {{ venue.city }} | Tickets, Event Schedule | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › {{ venue.city }} › {{ venue.name }} Tickets</div>
+  <div class="avp-hero">
+    {% if venue.image %}<img src="{{ url_for('static', filename=venue.image.replace('static/','')) }}" alt="{{ venue.name }}">{% endif %}
+    <div>
+      <h1 class="avp-title">{{ venue.name }} Tickets</h1>
+      {% if venue.address %}<p style="color:var(--tm-gray); margin-top:6px">{{ venue.address }}</p>{% endif %}
+      <p style="margin-top:6px"><a class="find-tickets" href="https://www.google.com/maps/search/?api=1&query={{ (venue.name ~ ' ' ~ venue.city ~ ' ' ~ (venue.state or ''))|urlenc }}">Get Directions &#9662;</a></p>
+    </div>
+  </div>
+
+  <div class="avp-tabs">
+    <span class="active">Events &amp; Add-Ons</span>
+    <span>Seating Chart</span>
+    <span>Discover More</span>
+  </div>
+
+  <div class="section-head"><h2>All Events and Add-Ons</h2></div>
+  <p class="results-note">{{ events|length }} Results</p>
+  {% for cat, evs in cats.items() %}
+  <section>
+    <div class="section-head"><h3 style="font-size:17px">{{ cat }}</h3></div>
+    <ul>
+      {% for e in evs %}
+      <li class="event-row">
+        <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+        <div class="er-main">
+          <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+          <div class="er-sub">{{ e.city_state }} — {{ e.venue.name }}</div>
+          <div class="er-time">{{ e.time_line }}</div>
+          <div class="price-tag">{{ price_band(e) }}</div>
+        </div>
+        <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% else %}
+  <div class="empty-state"><h3>No upcoming events at this venue</h3></div>
+  {% endfor %}
+</div>
+{% endblock %}

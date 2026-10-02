@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Checkout | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>CHECKOUT</h1></div>
+{% if error %}<p class="form-error" style="padding: 0 28px">{{ error }}</p>{% endif %}
+<div class="checkout-grid">
+  <section>
+    <form method="post" action="/us/en/shop/checkout">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px">
+        1. DELIVERY ADDRESS</h3>
+      {% for a in addresses %}
+        <label class="addr-choice {{ 'on' if loop.first else '' }}">
+          <input type="radio" name="address_id" value="{{ a.id }}" onchange="document.getElementById('new-addr').style.display='none'" {{ 'checked' if loop.first else '' }}>
+          {{ a.label }} — {{ a.full_name }}, {{ a.line1 }}, {{ a.city }}, {{ a.state }} {{ a.zip }} · {{ a.phone }}
+        </label>
+      {% endfor %}
+      <label class="addr-choice">
+        <input type="radio" name="address_id" value="new"
+               onchange="document.getElementById('new-addr').style.display='block'"
+               {{ '' if addresses else 'checked' }}>
+        Ship to a new address
+      </label>
+      <div id="new-addr" style="display: {{ 'none' if addresses else 'block' }}">
+        <div class="field"><label>FULL NAME</label><input type="text" name="full_name"></div>
+        <div class="field"><label>ADDRESS</label><input type="text" name="line1"></div>
+        <div class="field"><label>CITY</label><input type="text" name="city"></div>
+        <div class="field"><label>STATE</label><input type="text" name="state"></div>
+        <div class="field"><label>ZIP</label><input type="text" name="zip"></div>
+        <div class="field"><label>PHONE</label><input type="text" name="phone"></div>
+      </div>
+      <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin: 24px 0 10px">
+        2. PAYMENT</h3>
+      <div class="field"><label>CARD NUMBER (16 DIGITS)</label>
+        <input type="text" name="card" placeholder="4111 1111 1111 1111"></div>
+      <div class="field"><label>EXPIRY (MM/YY)</label>
+        <input type="text" name="expiry" placeholder="12/28"></div>
+      <button type="submit" class="btn dark wide" style="margin-top: 14px">PLACE ORDER</button>
+    </form>
+  </section>
+  <aside class="summary">
+    <h3>YOUR ORDER</h3>
+    {% for it in items %}
+      <div class="rowline">
+        <span>{{ it.product.name }} × {{ it.quantity }}<br>
+          <small style="color: var(--muted)">{% if it.color.name %}{{ it.color.name }} · {% endif %}{{ it.size.name }}</small></span>
+        <span>{{ money(it.unit_price * it.quantity) }}</span>
+      </div>
+    {% endfor %}
+    <div class="rowline"><span>SUBTOTAL</span><span>{{ money(subtotal) }}</span></div>
+    <div class="rowline"><span>SHIPPING</span><span>{{ money(shipping) }}</span></div>
+    <div class="rowline total"><span>TOTAL</span><span>{{ money(subtotal + shipping) }}</span></div>
+  </aside>
+</div>
+{% endblock %}

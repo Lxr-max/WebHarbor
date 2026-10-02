@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ jt.name }} Jobs (NOW HIRING){% if where %} in {{ where }}{% endif %} - ZipRecruiter{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>{{ jt.name }} Jobs{% if where %} in {{ where }}{% endif %}</h1>
+  {% if jt.blurb %}<p class="snapshot">{{ jt.blurb }}</p>{% endif %}
+  <p class="snapshot">{{ total }} open {{ jt.name }} roles in this snapshot</p>
+  {% if salary %}
+  <p class="snapshot">Average {{ jt.name }} pay: {{ '$' }}{{ '{:,.0f}'.format(salary.avg_year) }}/year ·
+     median {{ '$' }}{{ '{:,.0f}'.format(salary.median) }}/year —
+     <a href="/Salaries/{{ jt.slug }}-Salary">see the full salary page</a></p>
+  {% endif %}
+</section>
+<ol class="job-list">
+  {% for job in jobs %}
+  <li class="job-card">
+    <article>
+      <div class="card-top">
+        {% if job.company.logo_url() %}<img class="co-logo" src="{{ job.company.logo_url() }}" alt="{{ job.company.name }} logo" width="64" height="32">{% endif %}
+        <p class="co-name"><a href="{{ url_for('company_jobs', company=job.company.slug) }}">{{ job.company.name }}</a></p>
+      </div>
+      <h2 class="job-title"><a href="{{ job.url() }}">{{ job.title }}</a></h2>
+      <p class="job-location">{{ job.city }}, {{ job.state }}{% if job.remote_display() %} • {{ job.remote_display() }}{% endif %}</p>
+      {% if job.salary_text %}<p class="job-salary">{{ job.salary_text }}</p>{% endif %}
+      <p class="card-actions">
+        {% if job.quick_apply %}<span class="badge brand">Quick apply</span>{% endif %}
+        <span>{{ job.employment_display() }}</span>
+        <span class="posted">{{ job.posted_display() }}</span>
+      </p>
+    </article>
+  </li>
+  {% endfor %}
+  {% if not jobs %}<li>No {{ jt.name }} roles in this snapshot.</li>{% endif %}
+</ol>
+{% endblock %}

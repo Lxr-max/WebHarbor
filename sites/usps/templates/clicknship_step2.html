@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Click-N-Ship — Package | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('clicknship_home') }}">Click-N-Ship</a> &rsaquo; Create a Label</p>
+<h1>Package Details</h1>
+<div class="steps">
+  {% for s in steps %}<span class="step-pill {{ 'active' if loop.index == step }}">{{ s }}</span>{% endfor %}
+</div>
+<div class="panel">
+  <form class="flow" action="{{ url_for('clicknship_create', step=2) }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next_step" value="3">
+    <label>Weight (lbs) <input type="number" step="0.1" min="0.5" max="70" name="weight_lbs" value="{{ data.get('weight_lbs', '1') }}"></label>
+    <label>Packaging
+      <select name="box_type">
+        <option value="own" {{ 'selected' if data.get('box_type') == 'own' }}>My own box / envelope</option>
+        <option value="fr-envelope" {{ 'selected' if data.get('box_type') == 'fr-envelope' }}>Priority Mail Flat Rate Envelope</option>
+        <option value="fr-medium" {{ 'selected' if data.get('box_type') == 'fr-medium' }}>Priority Mail Medium Flat Rate Box</option>
+        <option value="fr-large" {{ 'selected' if data.get('box_type') == 'fr-large' }}>Priority Mail Large Flat Rate Box</option>
+      </select>
+    </label>
+    <label>Zone (distance between origin and destination ZIP Codes)
+      <select name="zone">
+        {% for z in range(1, 10) %}
+          <option value="{{ z }}" {{ 'selected' if data.get('zone')|string == z|string }}>Zone {{ z }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <p class="note">Prices shown next are retail rates from the Notice 123 price list.</p>
+    <button class="btn" type="submit">Continue to Service &amp; Pay</button>
+    <a class="btn secondary" href="{{ url_for('clicknship_create', step=1) }}">Back</a>
+  </form>
+</div>
+{% endblock %}

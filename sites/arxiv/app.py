@@ -29,6 +29,8 @@ from flask_bcrypt import Bcrypt
 from flask_wtf import CSRFProtect
 from sqlalchemy import or_, and_, func
 
+from metadata_cleaning import clean_paper_metadata_fields
+
 BASE_DIR = Path(__file__).parent
 DB_DIR = BASE_DIR / "instance"
 DB_DIR.mkdir(exist_ok=True)
@@ -521,7 +523,7 @@ def seed_database():
         if primary_category not in primary_cats and subject_code in primary_cats:
             primary_category = subject_code
         # Titles
-        title = rp.get("title", "").strip()
+        title = clean_paper_metadata_fields(rp).get("title", rp.get("title", "")).strip()
         if not title:
             continue
         # Parse date, falling back to arxiv-id-encoded yymm (e.g. 2604.08525 -> 2026-04)

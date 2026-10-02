@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Flight status results — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-search-page">
+  <h1>Flight status</h1>
+  {% if header %}<p class="ua-results-note">{{ header }}</p>{% endif %}
+  {% if rows %}
+  <div class="ua-status-list">
+    {% for flight in rows %}
+    <div class="ua-status-row">
+      <div class="ua-status-main">
+        <strong>UA {{ flight.flight_number }}</strong>
+        {{ flight.origin_code }} {{ flight.departure }} → {{ flight.dest_code }} {{ flight.arrival }}
+        <span class="ua-status-badge">{{ flight.status_note or 'Scheduled' }}</span>
+      </div>
+      <div class="ua-status-meta">
+        {{ flight.aircraft.name }} · {{ flight.duration_label }} ·
+        {% if flight.gate %}Departs gate {{ flight.gate }} · {% endif %}
+        {% if day <= today %}Status as of the 2026-09-28 operations snapshot{% else %}Scheduled times{% endif %}
+      </div>
+      <div class="ua-status-actions">
+        <a class="ua-link" href="{{ url_for('fleet_detail', key=flight.aircraft_key) }}">Aircraft details</a>
+        <a class="ua-link" href="{{ url_for('airport_detail', code=flight.origin_code) }}">Terminal info</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="ua-flash">No flights were found. Check the flight number or route
+    and date — the mirror's frozen network covers the routes in the real
+    united.com flight-status snapshot.</div>
+  {% endif %}
+  <a class="ua-link" href="{{ url_for('flight_status') }}">New search</a>
+</section>
+{% endblock %}

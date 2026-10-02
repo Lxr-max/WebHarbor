@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Request an Appointment{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Request an Appointment</h1>
+
+  {% if step == 1 %}
+  <section class="appt-step">
+    <p class="step-count">Step 1 of 4 &mdash; Select a service</p>
+    <h2>Which service do you need?</h2>
+    <form method="post" action="{{ url_for('appointment_new') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="pick_reason">
+      <fieldset class="wizard-question">
+        <legend>Appointment service</legend>
+        {% for r in reasons %}
+        <div class="radio-row">
+          <input type="radio" id="reason{{ loop.index }}" name="reason" value="{{ r }}" required>
+          <label for="reason{{ loop.index }}">{{ r }}</label>
+        </div>
+        {% endfor %}
+      </fieldset>
+      <div>
+        <label class="form-label" for="reason_detail"><span class="form-label__title">Briefly describe why you need the appointment (optional)</span></label>
+        <textarea id="reason_detail" name="reason_detail" rows="4" maxlength="500"></textarea>
+      </div>
+      <button class="btn btn--primary" type="submit">Continue</button>
+    </form>
+  </section>
+  {% endif %}
+
+  {% if step == 2 %}
+  <section class="appt-step">
+    <p class="step-count">Step 2 of 4 &mdash; Find your office</p>
+    <h2>Service selected: {{ reason }}</h2>
+    {% if reason_detail %}<p>Your note: {{ reason_detail }}</p>{% endif %}
+    <form method="post" action="{{ url_for('appointment_new') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="find_office">
+      <input type="hidden" name="reason" value="{{ reason }}">
+      <input type="hidden" name="reason_detail" value="{{ reason_detail }}">
+      <label class="form-label" for="zip"><span class="form-label__title">Enter your ZIP code to find the USCIS office near you</span></label>
+      <input id="zip" type="text" name="zip" maxlength="5" required placeholder="5-digit ZIP code" value="{{ zip_q }}">
+      <button class="btn btn--primary" type="submit">Find office</button>
+    </form>
+  </section>
+  {% endif %}
+
+  {% if step == 3 %}
+  <section class="appt-step">
+    <p class="step-count">Step 3 of 4 &mdash; Pick a date and time</p>
+    <h2>Office: {{ office.name }} ({{ office.designation }})</h2>
+    <p>{{ office.street }}, {{ office.city }}, {{ office.state }} {{ office.zip }}</p>
+    <form method="post" action="{{ url_for('appointment_new') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="action" value="pick_slot">
+      <input type="hidden" name="reason" value="{{ reason }}">
+      <input type="hidden" name="reason_detail" value="{{ reason_detail }}">
+      <input type="hidden" name="zip" value="{{ zip_q }}">
+      <input type="hidden" name="office" value="{{ office.designation }}">
+      <fieldset class="wizard-question">
+        <legend>Available appointment slots</legend>
+        {% for slot in slots %}
+        <div class="radio-row">
+          <input type="radio" id="s{{ loop.index }}" name="slot" value="{{ slot.date }}|{{ slot.time }}" required>
+          <label for="s{{ loop.index }}">{{ slot.day }} at {{ slot.time }}</label>
+        </div>
+        {% endfor %}
+      </fieldset>
+      <button class="btn btn--primary" type="submit">Continue</button>
+    </form>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

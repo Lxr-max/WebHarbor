@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Add a place — {{ trip.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">Add a place to “{{ trip.title }}”</h1>
+      <p class="small muted" style="margin:4px 0 0">Search Wanderlog's place catalog and add stops to any day.</p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+    </nav>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <form method="get" action="{{ url_for('plan_add_place', edit_key=trip.edit_key) }}">
+      <label for="q">Search places</label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input type="text" id="q" name="q" value="{{ q }}" style="flex:1;min-width:220px" placeholder="e.g. museum, ramen, Skytree…">
+        <button class="btn btn-primary" type="submit">Search places</button>
+      </div>
+    </form>
+  </div>
+
+  {% if q %}
+    <h2>Places matching “{{ q }}”</h2>
+    {% for place in results %}
+      <div class="card" style="margin-bottom:12px">
+        <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+          {% if place.image %}<img src="{{ place.image }}" alt="{{ place.name }}" style="width:130px;height:90px;object-fit:cover;border-radius:10px">{% endif %}
+          <div style="flex:1;min-width:220px">
+            <div class="stat">
+              {% if place.wl_id %}<a href="{{ url_for('place_details', pid=place.wl_id) }}">{{ place.name }}</a>{% else %}{{ place.name }}{% endif %}
+              {% if place.rating %}<span class="small muted">★ {{ place.rating }}</span>{% endif %}
+            </div>
+            <p class="small muted" style="margin:2px 0">{{ place.description or (place.categories | from_json | join(', ')) }}</p>
+            {% if place.address %}<p class="small muted" style="margin:2px 0">📍 {{ place.address }}</p>{% endif %}
+          </div>
+          <form method="post" action="{{ url_for('plan_entry_add', edit_key=trip.edit_key) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="place_id" value="{{ place.id }}">
+            <label class="small" for="section-{{ place.id }}">Add to</label>
+            <select id="section-{{ place.id }}" name="section_id" style="max-width:200px">
+              {% for s in sections %}<option value="{{ s.id }}">{{ s.heading }}</option>{% endfor %}
+            </select>
+            <p style="margin-top:6px"><button class="btn btn-primary btn-sm" type="submit">Add stop</button></p>
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <p class="muted">No places match “{{ q }}”.</p>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% from '_quote_macros.html' import quote_tabs, quote_header with context %}
+{% block title %}{{ q.symbol }} News - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  {{ quote_header() }}
+  {{ quote_tabs('news') }}
+  <h2 class="section-title">Recent News for {{ q.short_name or q.symbol }}</h2>
+  {% if news %}
+  <ul class="news-list">
+    {% for art in news %}
+    <li class="news-item">
+      {% if art.thumb_name %}
+        <img class="thumb" src="{{ url_for('static', filename=art.thumb_name) }}" alt="">
+      {% else %}
+        <span class="thumb-fallback" aria-hidden="true">Y!</span>
+      {% endif %}
+      <div>
+        <h3><a href="{{ art.url_path }}">{{ art.title }}</a></h3>
+        <div class="news-meta"><span>{{ art.provider }}</span><span>{{ rel_time(art.pub_time) }}</span></div>
+        {% if art.summary %}<p class="news-summary">{{ art.summary }}</p>{% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="muted">No news articles mention {{ q.symbol }} in this snapshot.</p>
+  {% endif %}
+</div>
+{% endblock %}

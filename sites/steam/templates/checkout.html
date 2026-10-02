@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Checkout</h1>
+</div>
+
+<div class="two-col">
+  <div>
+    <div class="game-area">
+      <h2>Order summary</h2>
+      {% for item in items %}
+        <div class="order-line">
+          <span class="t">{{ item.title }} &times; {{ item.qty }}</span>
+          <span>{{ item.total|money }}</span>
+        </div>
+      {% endfor %}
+      <div class="cart-summary">
+        <div class="line total"><span>Total due</span><span>{{ subtotal|money }}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="game-area">
+      <h2>Payment &amp; billing</h2>
+      <form method="post" action="{{ url_for('checkout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-grid">
+          <div class="field full">
+            <label for="full_name">Full name</label>
+            <input type="text" id="full_name" name="full_name" value="{{ current_user.name }}" required>
+          </div>
+          <div class="field full">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
+          </div>
+          <div class="field full">
+            <label for="address1">Billing address</label>
+            <input type="text" id="address1" name="address1" placeholder="Street and number" required>
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          <div class="field">
+            <label for="state">State / Province</label>
+            <input type="text" id="state" name="state" required>
+          </div>
+          <div class="field">
+            <label for="zipcode">ZIP / Postal code</label>
+            <input type="text" id="zipcode" name="zipcode" required>
+          </div>
+          <div class="field">
+            <label for="payment_method">Payment method</label>
+            <select id="payment_method" name="payment_method" required>
+              <option value="Visa">Visa</option>
+              <option value="Mastercard">Mastercard</option>
+              <option value="American Express">American Express</option>
+              <option value="PayPal">PayPal</option>
+              <option value="Steam Wallet">Steam Wallet</option>
+            </select>
+          </div>
+        </div>
+        <p style="margin-top:14px;">
+          <button class="btn" type="submit">Place order</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

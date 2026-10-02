@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Checked bag fee calculator — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Baggage fee calculator</h1>
+  <p>See what your checked bags will cost before you fly. Online prices apply
+    when you prepay at least 24 hours before departure.</p>
+
+  <form method="post" class="ua-form ua-form-inline">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="ua-field">From
+      <select name="origin" required>
+        {% for a in airports %}<option value="{{ a.code }}" {% if request.form.get('origin') == a.code %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>{% endfor %}
+      </select>
+    </label>
+    <label class="ua-field">To
+      <select name="destination" required>
+        {% for a in airports %}<option value="{{ a.code }}" {% if request.form.get('destination') == a.code %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>{% endfor %}
+      </select>
+    </label>
+    <label class="ua-field">Cabin
+      <select name="cabin">
+        {% for key, label in fare_cabins %}<option value="{{ key }}" {% if request.form.get('cabin') == key|string %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+    </label>
+    <label class="ua-field">MileagePlus status
+      <select name="tier">
+        {% for t in tiers %}<option value="{{ t }}" {% if request.form.get('tier') == t|string %}selected{% endif %}>{{ t }}</option>{% endfor %}
+      </select>
+    </label>
+    <label class="ua-field">Number of bags
+      <select name="bags">
+        {% for n in range(1, 5) %}<option value="{{ n }}" {% if request.form.get('bags') == n|string %}selected{% endif %}>{{ n }}</option>{% endfor %}
+      </select>
+    </label>
+    <label class="ua-field">Where
+      <select name="where">
+        <option value="online">Prepay online</option>
+        <option value="airport" {% if request.form.get('where') == 'airport' %}selected{% endif %}>Pay at the airport</option>
+      </select>
+    </label>
+    <button class="ua-btn ua-btn-primary" type="submit">Calculate fees</button>
+  </form>
+
+  {% if result %}
+  <div class="ua-calc-result">
+    <h2>{{ result.origin.city }} ({{ result.origin.code }}) →
+      {{ result.dest.city }} ({{ result.dest.code }})</h2>
+    <p>{{ dict(fare_cabins).get(result.cabin, result.cabin) }} ·
+      {{ result.tier }} · {{ result.bags }} bag{{ '' if result.bags == 1 else 's' }} ·
+      {{ 'prepaid online' if result.where == 'online' else 'paid at the airport' }}</p>
+    <table class="ua-table">
+      <thead><tr><th>Bag</th><th>Fee</th></tr></thead>
+      <tbody>
+        {% for fee in result.fees %}
+        <tr><td>Checked bag {{ loop.index }}</td><td>${{ '%.0f'|format(fee) }}</td></tr>
+        {% endfor %}
+        <tr class="ua-total-row"><td>Total</td><td>${{ '%.2f'|format(result.total) }}</td></tr>
+      </tbody>
+    </table>
+    <p>Weight limit per bag: {{ result.weight_limit }} lb
+      ({% if result.weight_limit == 70 %}32 kg — premium cabin or Premier status{% else %}23 kg — Economy/Premium Economy{% endif %}).</p>
+    {% if result.tier != 'Member' %}
+    <p class="ua-quiet">{{ result.tier }} members flying in Economy get free
+      checked bags (1 for Silver, 2 for Gold, 3 for Platinum/1K) — the first
+      bags on this trip may be free when the traveler's Premier status is on
+      the reservation.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

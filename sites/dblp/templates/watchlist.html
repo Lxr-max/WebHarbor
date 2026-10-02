@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}My dblp: watchlist{% endblock %}
+{% block main %}
+<header id="headline"><h1>My dblp: watchlist</h1></header>
+<nav class="account-nav">
+  <ul>
+    <li><a href="{{ url_for('account') }}">dashboard</a></li>
+    <li><a href="{{ url_for('watchlist') }}">watchlist</a></li>
+    <li><a href="{{ url_for('saved_searches') }}">saved searches</a></li>
+    <li><a href="{{ url_for('saved_papers') }}">saved papers</a></li>
+    <li><a href="{{ url_for('search_history') }}">search history</a></li>
+    <li><a href="{{ url_for('account_profile') }}">profile</a></li>
+    <li>
+      <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="link-btn">log out</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+<section class="section" id="watchlist-authors">
+  <header class="h2"><h2>Watched authors</h2></header>
+  <div class="section-body">
+    <ul class="watch-author-list">
+      {% for row in authors %}
+      <li>
+        <a href="/pid/{{ row.a.pid }}.html">{{ row.a.name }}</a>
+        <small>{{ row.n }} records in this mirror</small>
+        <small class="added">added {{ row.w.added_at }}</small>
+        <form method="post" action="{{ url_for('watchlist_remove_author') }}"
+              class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="pid" value="{{ row.a.pid }}">
+          <button type="submit" class="link-btn">remove</button>
+        </form>
+      </li>
+      {% else %}
+      <li class="no-matches">no authors watched yet</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="watchlist-venues">
+  <header class="h2"><h2>Watched venues</h2></header>
+  <div class="section-body">
+    <ul class="watch-venue-list">
+      {% for w in venues %}
+      <li>
+        <a href="/db/{{ w.venue.stream }}/index.html">{{ w.venue.name }}</a>
+        {% if w.venue.abbr %}<small>({{ w.venue.abbr }})</small>{% endif %}
+        <small class="count">{{ w.venue.record_count() }} records in this mirror</small>
+        <small class="added">added {{ w.added_at }}</small>
+        <form method="post" action="{{ url_for('watchlist_remove_venue') }}"
+              class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="venue_id" value="{{ w.venue_id }}">
+          <button type="submit" class="link-btn">remove</button>
+        </form>
+      </li>
+      {% else %}
+      <li class="no-matches">no venues watched yet</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

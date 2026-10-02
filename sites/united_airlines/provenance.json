@@ -1,0 +1,57 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-28",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the united.com mirror: the home booking widget over the real United fare families (Basic Economy / United Economy / Economy Plus / Premium Plus / United Business / United First), flight search with sort and time-of-day/nonstop filters and Premier member fares, round-trip outbound+return selection, the booking chain (traveler details with name/date-of-birth/MileagePlus validation, card validation for Visa/Mastercard/Amex/Discover, award redemption for signed-in members, confirmation with the six-character confirmation number), My Trips (lookup by confirmation + last name, per-aircraft seat maps with Economy Plus fees, checked bags on the online/airport price ladder with Premier free-bag allowances, flight changes with no change fee and fare difference, cancellations with refund vs future-flight-credit rules), online check-in inside the real 24-hour window with boarding groups, flight status by number and by route over the frozen operations snapshot, the baggage hub with the checked-bag fee calculator, the MileagePlus domain (join, sign in, dashboard with award miles / PQF / PQP progress and the activity ledger, program pages with the real Premier thresholds and 5x-11x earning rates), cabin experience pages, the fleet pages, airport guides, the deals page, the change/cancel policy pages, the help center with scored search and site-wide search. Route shapes follow the live site (/en/us, /flight-status, /check-in, /mytrips, /baggage, /mileageplus, /travel-info/...)."
+  },
+  {
+   "path": "seed_data.py (seed_database / seed_benchmark_users)",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time/boot-time seeder. All catalog rows come from the tracked source_data_*.json snapshots; the four benchmark members (Alice Johnson Premier Silver, Bob Miller Premier Gold, Carol Williams Member, Dave Thomas Premier Platinum) share one frozen bcrypt digest so the SQLite seed is byte-reproducible, and every seed function is gated at the function level for the byte-identical /reset invariant. Benchmark members carry pre-seeded trips (KX42LM SFO-ORD Economy, QT83NB ORD-DEN Economy Plus, ZW57PC IAH-LAX Basic Economy, HD19RK SFO-ORD Business) with legs, passengers and a pre-seeded checked bag."
+  },
+  {
+   "path": "source_data_airports.json",
+   "classification": "captured-upstream-content",
+   "scope": "209 airports with name, city, state, country, latitude, longitude and hub flags, captured from united.com's airport APIs: the /api/airports/lookup per-aircode responses (145 airport codes) layered over the /api/airports/mapairports?allairports=true dump (4,152 stations), scoped to United's own network. All coordinates come from the live airport records; the eight United hubs (ORD, DEN, IAH, EWR, SFO, LAX, GUM, IAD) are flagged per the upstream hub-airports content."
+  },
+  {
+   "path": "source_data_flights.json",
+   "classification": "captured-upstream-content",
+   "scope": "The frozen real-flight network: 55 United and United Express flights (flight number, origin, destination, scheduled departure/arrival times, equipment code, status/gate where captured) extracted from united.com's flight-status APIs — the /api/flightstatus/status/<flight>/<date> per-flight payloads (19 flights with gates and ops status), the /api/flightstatus/trip/<origin>/<dest>/<date> route payloads (5 route searches incl. the connecting itineraries' every real segment), and the /api/flight( |flight)status/amenities per-flight aircraft payloads. Partner-marketed codeshare legs (UA 7xxx/8xxx series operated by other carriers) are excluded: the mirror's network is United and United Express only."
+  },
+  {
+   "path": "source_data_aircraft.json",
+   "classification": "captured-upstream-content",
+   "scope": "24 real equipment types (A319/320/321neo, 737-700/800/900ER/MAX 8/MAX 9, 757-200/300, 767-300/400ER, 777-200/200ER/300ER, 787-8/9/10, E175, CRJ-200) merged from the upstream aircraft pages (SDL CMS payloads with the interior specifications: seats per cabin, seat numbers, configuration, pitch) and the captured amenities payloads (cabins with letter codes and seat totals, engines, wingspan, cruise speed, Wi-Fi provider). Seat map row bands derive from the real 'Number of seats' and 'Seat configuration' rows."
+  },
+  {
+   "path": "source_data_content.json",
+   "classification": "captured-upstream-content",
+   "scope": "217 united.com CMS pages captured from the /api/sdl/getmodelservicepage payloads (baggage checked/carry-on/overweight rules with the real fee and weight tables, Basic Economy rules, cabin experience pages, the MileagePlus program pages with the real Premier qualification thresholds (12 PQF + 4,000 PQP for Silver up to 54 PQF + 18,000 PQP for 1K), 5x-11x earning rates, Premier benefits tables (free bags 1/2/3/3, boarding groups, Star Alliance status), the change/cancellation/refund policy pages, check-in pods, fleet pages, airport guides, help center, deals copy), extracted into ordered content blocks by scripts_dev/sdl_extract.py. The structured facts used by the interactive flows (checked bag $35/$40 online vs $40/$45 airport pricing, 50/70 lb weight limits, Economy Plus from $29, same-day change up to $75, 24-hour flexible booking, Basic Economy carry-on rules) all come from these captured pages."
+  },
+  {
+   "path": "scraped_data/*.json / *.html",
+   "classification": "captured-upstream-content",
+   "scope": "The raw harvest: 232 SDL CMS payloads, 145 airport lookup responses, the mapairports dump, 22 flight-status records, 5 route-schedule payloads, 42 amenities payloads, 17 upgrade-list payloads and the homepage/JS captures, all fetched from the real united.com through web.archive.org replays (see scripts_dev/harvest.py and scripts_dev/harvest_all.py); gitignored + dockerignored, build-time only, tracked via per-file .meta.json sidecars with the upstream URL and SHA-256."
+  },
+  {
+   "path": "static/images/**",
+   "classification": "captured-upstream-imagery",
+   "scope": "88 real united.com media assets: the homepage takeover hero, United/Star Alliance logo renditions, six cabin hero photos (Basic Economy, Economy, Economy Plus, Premium Plus, First/Business, Polaris), 22 real seat map images per aircraft family, United Club and Polaris lounge photos, city deal shots (Chicago, Denver, San Francisco, Washington, LA, Newark/New York, Houston), MileagePlus program and Premier program imagery, Wi-Fi coverage maps, onboard dining photos, baggage and airport-process art. Every file is the byte-exact upstream asset: the per-file SHA-256, size and the media.united.com source URL are recorded in asset_inventory.json (verified by scripts/check_asset_inventory.py)."
+  },
+  {
+   "path": "scripts_dev/*.py",
+   "classification": "mirror-code",
+   "scope": "Build tooling: harvest.py (Wayback replay fetcher with caching, gzip handling and rate-limit backoff), harvest_all.py (the single-queue manifest harvester for SDL/airport/flight captures), build_source_data.py (turns the harvest into the tracked deterministic snapshots), sdl_extract.py (SDL CMS block extractor), harvest_images.py (curated real-image harvest + asset_inventory.json builder), render_page.py (Playwright page renderer used to study the upstream UI)."
+  },
+  {
+   "path": "tasks.jsonl",
+   "classification": "mirror-code",
+   "scope": "21 benchmark tasks (goal-style, 45-74 words each, 15+ honest browser steps each) spanning flight search and comparison, one-way and round-trip booking, award redemption, miles/PQP earning, My Trips seat and bag management, flight changes, cancellations and refunds, Basic Economy rules, check-in with boarding passes, flight status by number and route, the baggage fee calculator and policy research, MileagePlus program research, cabin and fleet research, help-center research, and deal-driven booking."
+  }
+ ],
+ "notes": "Everything an agent sees at request time comes from the SQLite seed built from these tracked snapshots. scraped_data/ is build-time only (gitignored). All 88 image files were verified byte-identical to their recorded upstream source and pass scripts/check_asset_inventory.py."
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ vid.title }} - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / <a href="/en/video">Video</a> / {{ vid.title }}</div>
+<div class="video-player">
+  <img src="/static/images/videos/{{ vid.mediaid }}.jpg" alt="{{ vid.title }}">
+</div>
+<div class="video-meta">
+  <h1>{{ vid.title }}</h1>
+  <p>{{ vid.description }}</p>
+  <p class="muted small">{{ vid.duration_label }} · playlists: {{ vid.pls|join(', ') }}</p>
+</div>
+
+{% if same_pl %}
+<section class="section">
+  <div class="section-head"><h2>More from this playlist</h2></div>
+  <div class="video-grid">
+    {% for v in same_pl %}
+    <a class="news-card" href="/en/video/{{ v.mediaid }}">
+      <div class="nc-thumb">
+        <img loading="lazy" src="/static/images/videos/{{ v.mediaid }}.jpg" alt="{{ v.title }}">
+        <span class="nc-dur">{{ v.duration_label }}</span>
+      </div>
+      <div class="nc-title">{{ v.title }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

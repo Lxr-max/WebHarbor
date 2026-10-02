@@ -1,0 +1,2341 @@
+{
+ "schema_version": 1,
+ "site": "usps",
+ "asset_count": 389,
+ "assets": [
+  {
+   "path": "static/images/chrome/250-landing-promo.png",
+   "bytes": 68743,
+   "sha256": "3a8322148baf7db6e2021147d8c8b965bb3ad1a42f8810222404b60a922bc3e4",
+   "source_url": "https://www.usps.com/assets/images/welcome/featured/250-landing-promo.png"
+  },
+  {
+   "path": "static/images/chrome/bca26-m.jpg",
+   "bytes": 136286,
+   "sha256": "812f750add8c4373a0b1b7ef8437ec91471059277973ac93b4cb2032b85635a3",
+   "source_url": "https://www.usps.com/assets/images/welcome/premium/bca26-m.jpg"
+  },
+  {
+   "path": "static/images/chrome/book-passport-appt.svg",
+   "bytes": 5072,
+   "sha256": "a13a418fc0f29944ef49604c68f93347ed0f4ca5043f50e83b35d3fa814296ba",
+   "source_url": "https://www.usps.com/global-elements/images/book-passport-appt.svg"
+  },
+  {
+   "path": "static/images/chrome/business-go-now.png",
+   "bytes": 26801,
+   "sha256": "3697911e56aa239411b29cf691f1d03dce8054ea080b83f49aa092507bdb0126",
+   "source_url": "https://www.usps.com/business/business-go-now.png"
+  },
+  {
+   "path": "static/images/chrome/calculate_price.svg",
+   "bytes": 2302,
+   "sha256": "55cc2f2700db320a9f9787cb30aa5dd6e20a967f520185c5ff06cc4a0a230ebe",
+   "source_url": "https://www.usps.com/global-elements/images/calculate_price.svg"
+  },
+  {
+   "path": "static/images/chrome/change_address.svg",
+   "bytes": 1869,
+   "sha256": "c966012292b9f4cf22a00b3762e2597d878571aa07a3d228776a0d2ae2ce0b5c",
+   "source_url": "https://www.usps.com/global-elements/images/change_address.svg"
+  },
+  {
+   "path": "static/images/chrome/cns26-9.jpg",
+   "bytes": 170828,
+   "sha256": "3acccc9cc56fba958e345a98ea55ab4ee90209121ad3265590375c56f1fa9990",
+   "source_url": "https://www.usps.com/assets/images/welcome/featured/cns26-9.jpg"
+  },
+  {
+   "path": "static/images/chrome/featured_clicknship.svg",
+   "bytes": 1081,
+   "sha256": "1e3f49ce30e2c486eed4cdb2019fab952f1473dccebe701721ac1f8a5f33bd1a",
+   "source_url": "https://www.usps.com/global-elements/images/featured_clicknship.svg"
+  },
+  {
+   "path": "static/images/chrome/find_zip.svg",
+   "bytes": 1471,
+   "sha256": "7a802e87e3328811a478d5153104c9a1c289af500320227476b20e5f7eee4848",
+   "source_url": "https://www.usps.com/global-elements/images/find_zip.svg"
+  },
+  {
+   "path": "static/images/chrome/free_boxes.svg",
+   "bytes": 1066,
+   "sha256": "e7f5302deeab9b88d80041ad06c64b605baba8c586c50ccd44a2885d5f4d6ef0",
+   "source_url": "https://www.usps.com/global-elements/images/free_boxes.svg"
+  },
+  {
+   "path": "static/images/chrome/hamburger.svg",
+   "bytes": 546,
+   "sha256": "b95f434286744e3dbaf5bc56f41d4ce2640da3038461502f7ac243a5931e9435",
+   "source_url": "https://www.usps.com/assets/images/home/hamburger.svg"
+  },
+  {
+   "path": "static/images/chrome/hold-mail_couple-hugging-after-hiking.jpg",
+   "bytes": 94850,
+   "sha256": "d8fbe37c83ce7378b0c9be7a295b50e37eb27ec5b7c51ff6b30ebadc65c0af66",
+   "source_url": "https://www.usps.com/assets/images/welcome/featured/hold-mail_couple-hugging-after-hiking.jpg"
+  },
+  {
+   "path": "static/images/chrome/holdmail.svg",
+   "bytes": 1448,
+   "sha256": "43183f70dc302d34693ae05182efa89874bbb24278a7cf0e1b64453c837b32a6",
+   "source_url": "https://www.usps.com/global-elements/images/holdmail.svg"
+  },
+  {
+   "path": "static/images/chrome/hs-code-search.svg",
+   "bytes": 2608,
+   "sha256": "a5f149b82270ba440b29305fead90092c7d5ad1895765956b65f757aad0b46c2",
+   "source_url": "https://www.usps.com/global-elements/images/hs-code-search.svg"
+  },
+  {
+   "path": "static/images/chrome/idapp26-3.jpg",
+   "bytes": 87880,
+   "sha256": "56bf27580d1de2656a9da64eb9c8e73d171f94475a856e3f59565f670abf33f6",
+   "source_url": "https://www.usps.com/assets/images/welcome/featured/idapp26-3.jpg"
+  },
+  {
+   "path": "static/images/chrome/international-go-now.png",
+   "bytes": 26841,
+   "sha256": "26bda2594df84f674f30f6ff86b74393efc20f31775f32f0063d366d2a7bd30f",
+   "source_url": "https://www.usps.com/international/international-go-now.png"
+  },
+  {
+   "path": "static/images/chrome/location.svg",
+   "bytes": 2586,
+   "sha256": "1eb270f839bd49a945008d4478ef04bd31431edc0bfeee45235f8b619f2cb18d",
+   "source_url": "https://www.usps.com/global-elements/images/location.svg"
+  },
+  {
+   "path": "static/images/chrome/logo-sb.svg",
+   "bytes": 3557,
+   "sha256": "45efb5dc48f45e18563efd579a7ef931cf5010575ea5445bb6c88048c0bbfda1",
+   "source_url": "https://www.usps.com/global-elements/images/logo-sb.svg"
+  },
+  {
+   "path": "static/images/chrome/logo_mobile.svg",
+   "bytes": 2060,
+   "sha256": "6249ac0e3166f7a695e23d9b3f64a383f9b5ac114a041a17c878a8266cdabfed",
+   "source_url": "https://www.usps.com/global-elements/images/logo_mobile.svg"
+  },
+  {
+   "path": "static/images/chrome/mailman.svg",
+   "bytes": 1827,
+   "sha256": "6474f7a27f5f8c470ca30df5c9c00a50bcee950d0118493e564ec0f35ecaa4af",
+   "source_url": "https://www.usps.com/global-elements/images/mailman.svg"
+  },
+  {
+   "path": "static/images/chrome/manage-go-now.png",
+   "bytes": 15234,
+   "sha256": "1cf8925318d353bb64bd970aedfdb5e11b91c33e7c20f6a8146251f4a2a79d07",
+   "source_url": "https://www.usps.com/manage/manage-go-now.png"
+  },
+  {
+   "path": "static/images/chrome/pme-supplies-26.jpg",
+   "bytes": 40981,
+   "sha256": "bf13cc0fe67c72cc8c94e30bbf61113a478d528e90a87ad18a44f7658bf899f5",
+   "source_url": "https://www.usps.com/assets/images/welcome/carousel/pme-supplies-26.jpg"
+  },
+  {
+   "path": "static/images/chrome/po_box.svg",
+   "bytes": 1639,
+   "sha256": "d7ed3602e7b48b89bdea363ee77407e85c7b5c10273a14d2c8b4057217dfa604",
+   "source_url": "https://www.usps.com/global-elements/images/po_box.svg"
+  },
+  {
+   "path": "static/images/chrome/postmark-home.png",
+   "bytes": 17276,
+   "sha256": "ce3b6ea534a25dc83f247c1938ad2a5a823d8983005820a5d71025e80993214c",
+   "source_url": "https://www.usps.com/assets/images/campaigns/postmark/postmark-home.png"
+  },
+  {
+   "path": "static/images/chrome/pp-red-door.jpg",
+   "bytes": 84528,
+   "sha256": "7c11b775c29ea661badc5164cde43d0826f80c5bb3d0a793f04ac283d9e71018",
+   "source_url": "https://www.usps.com/assets/images/welcome/featured/pp-red-door.jpg"
+  },
+  {
+   "path": "static/images/chrome/schedule_pickup.svg",
+   "bytes": 1775,
+   "sha256": "77db4d74f15c9fca0dfb84f426b52f3b9d7ae05095bfe3e6ea2e1837d09c3c82",
+   "source_url": "https://www.usps.com/global-elements/images/schedule_pickup.svg"
+  },
+  {
+   "path": "static/images/chrome/search.svg",
+   "bytes": 1465,
+   "sha256": "17726f25da5fd2db375e15dd8148be3e02bca2876674da5353d355ce015d6793",
+   "source_url": "https://www.usps.com/global-elements/images/search.svg"
+  },
+  {
+   "path": "static/images/chrome/sept26-cards.jpg",
+   "bytes": 87396,
+   "sha256": "e636a0638cc25e0eb9af4e88ec8d0b72e238220562e6cc267ae61864a1f65fe6",
+   "source_url": "https://www.usps.com/assets/images/welcome/carousel/sept26-cards.jpg"
+  },
+  {
+   "path": "static/images/chrome/sept26-gifts.jpg",
+   "bytes": 41125,
+   "sha256": "9af2929d71ca21193b2c480d1c35b4c2f597672be5149248894576aa54ba6f9f",
+   "source_url": "https://www.usps.com/assets/images/welcome/carousel/sept26-gifts.jpg"
+  },
+  {
+   "path": "static/images/chrome/sept26-stamps.jpg",
+   "bytes": 97766,
+   "sha256": "9750810b3582ca8112affd0fd4dae1fa365cb5dbedad1e9826fac22b7264e6c7",
+   "source_url": "https://www.usps.com/assets/images/welcome/carousel/sept26-stamps.jpg"
+  },
+  {
+   "path": "static/images/chrome/ship-go-now.png",
+   "bytes": 24563,
+   "sha256": "b854897d43678ad97522556989ae1d8329e82e0bb9f7ee090eecb4cce0e2cb6b",
+   "source_url": "https://www.usps.com/ship/ship-go-now.png"
+  },
+  {
+   "path": "static/images/chrome/stamps.svg",
+   "bytes": 1103,
+   "sha256": "51695b6ec62ede9de27333ee6ed18b39c6ac4577568758b038223c687f16000e",
+   "source_url": "https://www.usps.com/global-elements/images/stamps.svg"
+  },
+  {
+   "path": "static/images/chrome/store-go-now.png",
+   "bytes": 30111,
+   "sha256": "f76666afa858e2dcba7a935ad509fbb195cd1df892962511121277a9864bbc0d",
+   "source_url": "https://www.usps.com/store/store-go-now.png"
+  },
+  {
+   "path": "static/images/chrome/supplies-boxes-clr.jpg",
+   "bytes": 40507,
+   "sha256": "d8e22e9e128007e03604465a44445b16a508ebe964747a466543d3b0d2a2cd17",
+   "source_url": "https://www.usps.com/assets/images/welcome/carousel/supplies-boxes-clr.jpg"
+  },
+  {
+   "path": "static/images/chrome/tracking.svg",
+   "bytes": 1561,
+   "sha256": "afb59ff279ba907110413c82fe00e4555832fc7015d5615c75f66e4b8f4ddd0c",
+   "source_url": "https://www.usps.com/global-elements/images/tracking.svg"
+  },
+  {
+   "path": "static/images/chrome/transit-time.svg",
+   "bytes": 2872,
+   "sha256": "7276ffe3c2ea2f87688fe4947c03adb95859e864a4bc7849a2b09ad5015c158a",
+   "source_url": "https://www.usps.com/global-elements/images/transit-time.svg"
+  },
+  {
+   "path": "static/images/news/christmas-cookie-stamp.jpg",
+   "bytes": 87303,
+   "sha256": "ac8be77d86238d39b1c258d2ca0208857fddc5af9a7b8ea2c94a53150cc66ae5",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/christmas-cookie-stamp.jpg"
+  },
+  {
+   "path": "static/images/news/diwali-2026.png",
+   "bytes": 116733,
+   "sha256": "b1807260a11350873f59b570e81545c041c647bb370bd924a72b271072b2989e",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/diwali-2026.png"
+  },
+  {
+   "path": "static/images/news/fentanyl-awareness-semipostal.png",
+   "bytes": 269673,
+   "sha256": "a58b9f336d9f93e5a3eec00f3d5943578ef9fb6fb19eabe8f86ae401cb9a1a47",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/fentanyl-awareness-semipostal.png"
+  },
+  {
+   "path": "static/images/news/hanukkah-2026.png",
+   "bytes": 72802,
+   "sha256": "8a50c0c8ea9e6d89fb3f1dc8516743757c26f927727382978497c9be9e82abd6",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/hanukkah-2026.png"
+  },
+  {
+   "path": "static/images/news/kwanzaa-stamp.jpg",
+   "bytes": 73206,
+   "sha256": "1d1706e7824bb45b658cfdeadf0777dd985ac373ba84196026c798c223fcba4a",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/kwanzaa-stamp.jpg"
+  },
+  {
+   "path": "static/images/news/linda-mccartney.png",
+   "bytes": 590823,
+   "sha256": "54f2de883f93806ffc34764ad0b0306485275975522a9e95c55feb8f7d2046a7",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/linda-mccartney.png"
+  },
+  {
+   "path": "static/images/news/squirrels-and-chipmunks-in-snow-stamps.png",
+   "bytes": 462476,
+   "sha256": "abb68840a6d5365e69d5fb7c4ecd3754c3ea180b03859d1c574072fc46d04d4b",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/squirrels-and-chipmunks-in-snow-stamps.png"
+  },
+  {
+   "path": "static/images/news/us-coast-guard-academy-stamp.png",
+   "bytes": 549860,
+   "sha256": "ae1325d1c656c801a8f49eaf42a179a11e390ba555c49a16302905fe1665ae57",
+   "source_url": "https://about.usps.com/newsroom/national-releases/2026/images/us-coast-guard-academy-stamp.png"
+  },
+  {
+   "path": "static/images/news/usps-trailer.jpg",
+   "bytes": 139289,
+   "sha256": "539c819ca4f2186121d008f10e88c0e2e2243373b286afc422e3bb1f7bab86fe",
+   "source_url": "https://about.usps.com/newsroom/national-releases/2026/images/usps-trailer.jpg"
+  },
+  {
+   "path": "static/images/news/winter-wreath-2026.png",
+   "bytes": 104289,
+   "sha256": "44fa9318ee9cf2f1392f273e5a3387100f195fdb249dd9fb0db2ff674ca49ad2",
+   "source_url": "https://about.usps.com/newsroom/global/images/releases/winter-wreath-2026.png"
+  },
+  {
+   "path": "static/images/pages/address-a-package.jpg",
+   "bytes": 41589,
+   "sha256": "40913f21a0a5ad848f562bb0d88b47525958ca3843564dffc8dd7dd4b8410fad",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/address-a-package.jpg"
+  },
+  {
+   "path": "static/images/pages/apo-box.png",
+   "bytes": 121391,
+   "sha256": "0aa5c3c31cefb5887a3a6fe5edb5326a95858f15c9924b6def07e29cd960563a",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/apo-box.png"
+  },
+  {
+   "path": "static/images/pages/badge-appleappstore.png",
+   "bytes": 5101,
+   "sha256": "6210f520e49266b70058947a8c4062399bbf82850d333acab6d9e82fae0c088f",
+   "source_url": "https://www.usps.com/email/footer/badge-appleappstore.png"
+  },
+  {
+   "path": "static/images/pages/badge-googleplay.png",
+   "bytes": 6675,
+   "sha256": "d91f2f46d05df0e2ee90ef7ffd9cc16c9d47bb56c48d7df4af2739a9eebe8571",
+   "source_url": "https://www.usps.com/email/footer/badge-googleplay.png"
+  },
+  {
+   "path": "static/images/pages/benefits.jpg",
+   "bytes": 148504,
+   "sha256": "ef43bae0dff9f6e8f0397da7634d93049e366b3c7e81645ffa3fefef4e060d1f",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/benefits.jpg"
+  },
+  {
+   "path": "static/images/pages/busy-person-red-shirt.jpg",
+   "bytes": 137306,
+   "sha256": "e6e428eda76e571107f46188ca81809f1193ca5978a37082aac7fa49a58284d3",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/busy-person-red-shirt.jpg"
+  },
+  {
+   "path": "static/images/pages/click-n-ship-label-broker-mobile.jpg",
+   "bytes": 108955,
+   "sha256": "12ef3d9e77e2c207eefe7449828db27cf263c3cda4b3ff107bfd427f3a431f54",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/click-n-ship-label-broker-mobile.jpg"
+  },
+  {
+   "path": "static/images/pages/click-n-ship-mobile-print-later-at-post-office.jpg",
+   "bytes": 76473,
+   "sha256": "da7774ee83c9dbf6cf4bf56d7f76840d22bff33d066dc89371f90cdd7cf58b83",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/click-n-ship-mobile-print-later-at-post-office.jpg"
+  },
+  {
+   "path": "static/images/pages/coworkers-shipping-shipping.jpg",
+   "bytes": 85962,
+   "sha256": "e5720270f01c569fceff5997ab0c0573638b9625b3c672c5edaab25f1b05f112",
+   "source_url": "https://www.usps.com/assets/images/international/coworkers-shipping-shipping.jpg"
+  },
+  {
+   "path": "static/images/pages/create-mail-stamps-hero.jpg",
+   "bytes": 73796,
+   "sha256": "62b9164d4dd05ec2d25005792ab6cb139b2382d57d31b842b426aaf83334ad6e",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/create-mail-stamps-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/ddp-1.jpg",
+   "bytes": 48629,
+   "sha256": "ecbc951af59742df8fcba4cbd2b67304b467c525c5d25c8148fb4f64aa60516d",
+   "source_url": "https://www.usps.com/assets/images/international/ddp-1.jpg"
+  },
+  {
+   "path": "static/images/pages/ddp-hero.jpg",
+   "bytes": 134179,
+   "sha256": "c77a15c02a53f05e01bb5b8807d03e68b337676ba05a07e9507ef0934138df4b",
+   "source_url": "https://www.usps.com/assets/images/international/ddp-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/ddp.jpg",
+   "bytes": 150001,
+   "sha256": "20cbba58b2a6adbef9d43e659969e5b1798ab4e25301396e06ad9518c7b19f59",
+   "source_url": "https://www.usps.com/assets/images/international/ddp.jpg"
+  },
+  {
+   "path": "static/images/pages/dfa-business-cf.jpg",
+   "bytes": 138063,
+   "sha256": "f4af357a02c5f6ef2401e76f88d4e1f5d4041da47e93d61cc7f6a0044c9b8eac",
+   "source_url": "https://www.usps.com/assets/images/business/dfa-business-cf.jpg"
+  },
+  {
+   "path": "static/images/pages/digital-passport.jpg",
+   "bytes": 127851,
+   "sha256": "b8d6f91f3cf422da73970b484f9ba3c19bdf7f75ea7b7fecb59fac5fdca85695",
+   "source_url": "https://www.usps.com/assets/images/international/digital-passport.jpg"
+  },
+  {
+   "path": "static/images/pages/dom-refunds-hero.jpg",
+   "bytes": 59635,
+   "sha256": "ed9681f3593714bf733374306c3181fde9911e0e980023ade9186ac21ccb04fd",
+   "source_url": "https://www.usps.com/assets/images/help/dom-refunds-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/fcm-hero-envelope-colors.jpg",
+   "bytes": 91453,
+   "sha256": "66736da3610f5aca28bcf282ae798a962a2fc8d92d9df1e15eda0bc9a8ff21fa",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/fcm-hero-envelope-colors.jpg"
+  },
+  {
+   "path": "static/images/pages/file-a-claim-hero-desktop.jpg",
+   "bytes": 263271,
+   "sha256": "c3b1c0539674ee194353fb082b18661d094b2c3ed2530c5d677aa97bc98f87ca",
+   "source_url": "https://www.usps.com/assets/images/help/file-a-claim-hero-desktop.jpg"
+  },
+  {
+   "path": "static/images/pages/file-a-claim-international-hero-desktop.jpg",
+   "bytes": 276753,
+   "sha256": "c171c18b28bbe5396d121d03e397ed854bf30bf0a4ec17eea4c50683c401db26",
+   "source_url": "https://www.usps.com/assets/images/help/file-a-claim-international-hero-desktop.jpg"
+  },
+  {
+   "path": "static/images/pages/first-class-mail-mail-services.jpg",
+   "bytes": 49017,
+   "sha256": "ed283aaa4c23edcfaf1fbe2663f9877676181dd71e5b9ac9c5b02ccac3351582",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/first-class-mail-mail-services.jpg"
+  },
+  {
+   "path": "static/images/pages/ground-advantage-service.png",
+   "bytes": 82368,
+   "sha256": "c77f761ffea809895cd0fb3c4e458d1bb50b1b97e4ed3ed4c1ce14ffd5d67bd0",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/ground-advantage-service.png"
+  },
+  {
+   "path": "static/images/pages/guidance-acceptance-desc.jpg",
+   "bytes": 98773,
+   "sha256": "65ec6fbb4a99aa3c0807d59209527ec3d3f8dfa5b2e80af109f5521c0997a313",
+   "source_url": "https://www.usps.com/assets/images/international/guidance-acceptance-desc.jpg"
+  },
+  {
+   "path": "static/images/pages/help-int-claims-video-still.jpg",
+   "bytes": 83892,
+   "sha256": "75ca767632412bb2ba778abdde2293eb6ba1502271f67e5d878734d1585015c3",
+   "source_url": "https://www.usps.com/assets/images/help/help-int-claims-video-still.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-contact-us.jpg",
+   "bytes": 38068,
+   "sha256": "0c53f6a9a3455df61f4d2b7cffcb03da5437c13a14787ab12504c995e161d600",
+   "source_url": "https://www.usps.com/assets/images/help/hero-contact-us.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-deceased.jpg",
+   "bytes": 33047,
+   "sha256": "b7f2cd38a59fc70e7e59e8e02bf4f02e736029d9bfe598302aea16f2af34ea72",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-image-deceased.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-holdmail3.jpg",
+   "bytes": 23643,
+   "sha256": "19bf568a3d0babaffdd0426e05ac4eae4323d2083934f896697a8d117476d18a",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-image-holdmail3.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-international-insurance.jpg",
+   "bytes": 55292,
+   "sha256": "561b17cf72259c8543237e9cae2f2d266399175583e05e87b7344f2f76af50d8",
+   "source_url": "https://www.usps.com/assets/images/international/hero-image-international-insurance.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-mailbox-guidelines.jpg",
+   "bytes": 72840,
+   "sha256": "0219de35d7077927677991ef7a1e415559d6e1f089e9997fc9eb9b5bd499999f",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-image-mailbox-guidelines.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-manage-forward-mail.jpg",
+   "bytes": 41415,
+   "sha256": "e970c86452ee8459a9b2e2dd83731922b3255e2dba92d9c41b47cd8ffc72ea6b",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-image-manage-forward-mail.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-military-shipping.jpg",
+   "bytes": 63917,
+   "sha256": "ecc757cc5173cd3a6087ec3f74ba4f53d6935da976d71d8d08654a6d0d182461",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/hero-image-military-shipping.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-prices.jpg",
+   "bytes": 24259,
+   "sha256": "b945f83d0d6632c5590786d604cd98a77e0e6bcb55332d8a1883d47e21b4916d",
+   "source_url": "https://www.usps.com/assets/images/business/hero-image-prices.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-print-and-ship-international.jpg",
+   "bytes": 509239,
+   "sha256": "a4c74de6a383919d5621dbf88b67bf7576c94a4431aeaf5a8e420bccf5ad34d0",
+   "source_url": "https://www.usps.com/assets/images/international/hero-image-print-and-ship-international.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-image-redirecting-package.jpg",
+   "bytes": 56244,
+   "sha256": "69647d6a951fbdbc45c0202fab13f4d7a738ebc6453a4f259517b28a0193b22d",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-image-redirecting-package.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-money-order.jpg",
+   "bytes": 165393,
+   "sha256": "fbb0f57569b1e10dc2593bfee1fdf37d2969383fbf782eb4439f74dbb61a31c7",
+   "source_url": "https://www.usps.com/assets/images/shop/hero-money-order.jpg"
+  },
+  {
+   "path": "static/images/pages/hero-premium-forwarding-services.jpg",
+   "bytes": 36662,
+   "sha256": "19b224e068900150d8bca9d0c6a2a69112b2f2fe399c5a19985c4e614b8d7d63",
+   "source_url": "https://www.usps.com/assets/images/manage/hero-premium-forwarding-services.jpg"
+  },
+  {
+   "path": "static/images/pages/hero.png",
+   "bytes": 529836,
+   "sha256": "61d838db14b1d75304bb72f0813eeff177b32a952bf5fd2b71ea3d4b5b5518f2",
+   "source_url": "https://www.usps.com/assets/images/ship/online-shipping/hero.png"
+  },
+  {
+   "path": "static/images/pages/hero_mss-hero-image-generic.jpg",
+   "bytes": 104371,
+   "sha256": "147a299143f6f152c24b1954c14ced480755712c869464507780033d67ce8e83",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/hero_mss-hero-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/hero_pm-image-generic.jpg",
+   "bytes": 113564,
+   "sha256": "01fe0d224a46ec2584e5eb7aca035c5a2b203fdde365bcadaf52c897fd93b0ac",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/hero_pm-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/hero_pmei-image-generic.jpg",
+   "bytes": 124790,
+   "sha256": "bbc8bfec532e7167b58daa55276f4d15de39de5d935b20fa2a25e21616a94c58",
+   "source_url": "https://www.usps.com/assets/images/ship/international/hero_pmei-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/hero_pmi-image-generic.jpg",
+   "bytes": 101186,
+   "sha256": "05893fcd5a5dab86725b79a230c8d03e753176b1c0227079d30e2d6366d415db",
+   "source_url": "https://www.usps.com/assets/images/ship/international/hero_pmi-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/hero_po-box.jpg",
+   "bytes": 137295,
+   "sha256": "26bc012fdd78cfe8ee28e9f1fd79d637b84d1f03cf3032c61ad2b37d1b4b0905",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/hero_po-box.jpg"
+  },
+  {
+   "path": "static/images/pages/holiday-shipping-dates.jpg",
+   "bytes": 130839,
+   "sha256": "328f57d1a170cd7133b83343f67bdabaed765de1cdb6e7f34fd2d0eb1524848e",
+   "source_url": "https://www.usps.com/assets/images/campaigns/holiday-26/holiday-shipping-dates.jpg"
+  },
+  {
+   "path": "static/images/pages/how-to-measure-a-package.jpg",
+   "bytes": 177684,
+   "sha256": "a3e4841a11591379eef0bd18583b8dbeaf74dd4667d5a8497cd93b8f2c7dd389",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/how-to-measure-a-package.jpg"
+  },
+  {
+   "path": "static/images/pages/id-app-message-1.png",
+   "bytes": 20587,
+   "sha256": "d2bf15f3d49727ca54f6e2513f7349cbe4af3ffc58be578a0aba8c6037d030f6",
+   "source_url": "https://www.usps.com/manage/images/id-app-message-1.png"
+  },
+  {
+   "path": "static/images/pages/id_hero.jpg",
+   "bytes": 105835,
+   "sha256": "3d8e791f23bd7cc2dc9cab06f1c649c66454ad7e5a33a6f433f47d0c5f50c74e",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/id_hero.jpg"
+  },
+  {
+   "path": "static/images/pages/id_mockups-1.png",
+   "bytes": 54212,
+   "sha256": "3513d7547c6f744bbe41ed4ae97b1d20c64b082c57519d848a692815ec840abb",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/id_mockups-1.png"
+  },
+  {
+   "path": "static/images/pages/id_mockups-3.png",
+   "bytes": 93542,
+   "sha256": "62c2e27a69c8849e549a5fe33adb52d564b77f9dd6334dee90c93423329d180b",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/id_mockups-3.png"
+  },
+  {
+   "path": "static/images/pages/insurance-extra-service-hero-2.jpg",
+   "bytes": 160745,
+   "sha256": "3a483f4fc18ebb03e9e1e4f52bda9a5193e8353ef3a2096ff39f893865643f74",
+   "source_url": "https://www.usps.com/ship/images/insurance-extra-service-hero-2.jpg"
+  },
+  {
+   "path": "static/images/pages/insurance-extra-service-hero.jpg",
+   "bytes": 229633,
+   "sha256": "5cbbceb09507729a4eb4c1b0b6654fef19ee89962bb494b83479d87249f5c2e9",
+   "source_url": "https://www.usps.com/ship/images/insurance-extra-service-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/int-first-class-package.jpg",
+   "bytes": 47021,
+   "sha256": "0310ba4c58e007f4e22e7ebe5880c79a1603bcce1ceb9723ae1e18ecc8eacb0a",
+   "source_url": "https://www.usps.com/assets/images/international/int-first-class-package.jpg"
+  },
+  {
+   "path": "static/images/pages/int-package.jpg",
+   "bytes": 85088,
+   "sha256": "b1ac815a36770374bdeaf810c54a2d34221079923585a7fa4fb6d565064f5ebb",
+   "source_url": "https://www.usps.com/assets/images/international/int-package.jpg"
+  },
+  {
+   "path": "static/images/pages/int-ship-restrictions.jpg",
+   "bytes": 119676,
+   "sha256": "c863c31fec73ab9d1156ac53f42c7044eb12cf782256df9d0fc2a69a715ed985",
+   "source_url": "https://www.usps.com/assets/images/international/int-ship-restrictions.jpg"
+  },
+  {
+   "path": "static/images/pages/international-money-order-fraud.jpg",
+   "bytes": 47620,
+   "sha256": "9c27aa9a7b9efc56ed753308ac6ba5592f753b850bc29c32f5678befd5c87d4a",
+   "source_url": "https://www.usps.com/assets/images/international/international-money-order-fraud.jpg"
+  },
+  {
+   "path": "static/images/pages/international-money-order-hero-desktop.png",
+   "bytes": 438279,
+   "sha256": "56f8104a863822e1b4be936505ce53b34b3de506ddbef60d0aeb915c336d2da4",
+   "source_url": "https://www.usps.com/assets/images/international/international-money-order-hero-desktop.png"
+  },
+  {
+   "path": "static/images/pages/l_empty_expanded.jpg",
+   "bytes": 72048,
+   "sha256": "cbcd93468e80614ae3b3832fd180ff8e8e0df1dffe8a89189212f04be8e90256",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/l_empty_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/l_staged_expanded.jpg",
+   "bytes": 80229,
+   "sha256": "4a48df351e6a530766ffb233fc77a89e10be608568ba36f612b9d5f2df50a05b",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/l_staged_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/l_staged_landing.jpg",
+   "bytes": 33852,
+   "sha256": "6a708ac1ebe64c1b2ab762f2837c72370e90c22afaf0a5386aec5814eef21f32",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/l_staged_landing.jpg"
+  },
+  {
+   "path": "static/images/pages/lady-looking-at-phone-holding-page.jpg",
+   "bytes": 99921,
+   "sha256": "206a2c45bd7e249b0919d68e6f5b60c28e7780a364053f6ecd0708a1b8781690",
+   "source_url": "https://www.usps.com/assets/images/business/lady-looking-at-phone-holding-page.jpg"
+  },
+  {
+   "path": "static/images/pages/legacy-money-order-paymaster-detailed.jpg",
+   "bytes": 159274,
+   "sha256": "cb4b99fc7b30644be97b87caf819038209a2e33de969a3403f5b3e48c3d48307",
+   "source_url": "https://www.usps.com/assets/images/shop/legacy-money-order-paymaster-detailed.jpg"
+  },
+  {
+   "path": "static/images/pages/legacy-money-order-paymaster.jpg",
+   "bytes": 162855,
+   "sha256": "b19b97e0768d94079a4a4f391f5511d1b35fb40614f9a4fbb64afd2ded614a9a",
+   "source_url": "https://www.usps.com/assets/images/shop/legacy-money-order-paymaster.jpg"
+  },
+  {
+   "path": "static/images/pages/legacy-money-order-point-detailed.jpg",
+   "bytes": 140719,
+   "sha256": "c24618de05f66fc8e5ca8de91897e6102cbbdc5ade118012a22cd8e97f9808b3",
+   "source_url": "https://www.usps.com/assets/images/shop/legacy-money-order-point-detailed.jpg"
+  },
+  {
+   "path": "static/images/pages/legacy-money-order-point.jpg",
+   "bytes": 154997,
+   "sha256": "d058835625e80b3770ce938e2c1c8a0e80b6d3aee35e9b84303f441083622678",
+   "source_url": "https://www.usps.com/assets/images/shop/legacy-money-order-point.jpg"
+  },
+  {
+   "path": "static/images/pages/m_empty_expanded.jpg",
+   "bytes": 71717,
+   "sha256": "971bd067dec3b01f314052dfe34ce410d06065ac77f718a0777583eed2722a3a",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/m_empty_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/m_staged_expanded.jpg",
+   "bytes": 97822,
+   "sha256": "df989ae80ca401e740dc7932051dbe08779dbf5ae5089c7485ceb9636493b639",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/m_staged_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/m_staged_landing.jpg",
+   "bytes": 41760,
+   "sha256": "66fda0b0251dfe0c00adc04e3139ed419705b00532a50bedeac9a08ef5df80fb",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/m_staged_landing.jpg"
+  },
+  {
+   "path": "static/images/pages/mail-delivery-notification-opt-in.png",
+   "bytes": 140238,
+   "sha256": "cf82d05787d52f5f25b1b0b40c57e6519ef106c7342edf54148437b043dfa0f8",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/mail-delivery-notification-opt-in.png"
+  },
+  {
+   "path": "static/images/pages/mail-ship-pmi.jpg",
+   "bytes": 146500,
+   "sha256": "bea98d6797e17138441e2caee890dae454bd0957e40e351238f3ffecdded832b",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/mail-ship-pmi.jpg"
+  },
+  {
+   "path": "static/images/pages/measuring-tips.jpg",
+   "bytes": 65958,
+   "sha256": "ee79b50450004e6bfb7a995b51537be7daaae58f04d1d0a85706c3a27576b53d",
+   "source_url": "https://www.usps.com/assets/images/ship/measuring-tips.jpg"
+  },
+  {
+   "path": "static/images/pages/missing-mail-hero.jpg",
+   "bytes": 37422,
+   "sha256": "bb091892fb552506f467c56f5b3b3aa64f07172bafd5614364728dedf9c96e69",
+   "source_url": "https://www.usps.com/assets/images/help/missing-mail-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/money-order-detailed-feb.jpg",
+   "bytes": 155688,
+   "sha256": "a6406dc17acbe1d82e612020b7437f8ac6fef4d934a796936246d08d11bd37ea",
+   "source_url": "https://www.usps.com/assets/images/shop/money-order-detailed-feb.jpg"
+  },
+  {
+   "path": "static/images/pages/money-order-detailed-july.jpg",
+   "bytes": 157019,
+   "sha256": "5ceca8b675dada874a74b9669fd827159e129e4c0d7175b125fd9c4a5e2b6e75",
+   "source_url": "https://www.usps.com/assets/images/shop/money-order-detailed-july.jpg"
+  },
+  {
+   "path": "static/images/pages/money-order-feb.jpg",
+   "bytes": 161326,
+   "sha256": "135d6e4be564f522292fb60671d15258c4f10962c75e914c0b19216613720478",
+   "source_url": "https://www.usps.com/assets/images/shop/money-order-feb.jpg"
+  },
+  {
+   "path": "static/images/pages/money-order-july.jpg",
+   "bytes": 161222,
+   "sha256": "d058ee0569e1db8bbcae4d113ccd98f06b16bd7cac89b3d56a59fd570b0a0ab5",
+   "source_url": "https://www.usps.com/assets/images/shop/money-order-july.jpg"
+  },
+  {
+   "path": "static/images/pages/pack-a-box.jpg",
+   "bytes": 73952,
+   "sha256": "cc1c80014fa972f37df54dc99df44d8b2e2b6641e9f46e1b6def498400cc5cee",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/pack-a-box.jpg"
+  },
+  {
+   "path": "static/images/pages/package-image.jpg",
+   "bytes": 93266,
+   "sha256": "cdfd97b1cc3ad2f4ef7e8a01915808ce36ef17491c4cf099690b5cb457bb6a85",
+   "source_url": "https://www.usps.com/assets/images/business/informed-delivery/package-image.jpg"
+  },
+  {
+   "path": "static/images/pages/personalized-stamped-envelopes.jpg",
+   "bytes": 20985,
+   "sha256": "ff8527ed191cb42a99ed6f2d6bed29b437f0480d08f1da3affa29b98ad076847",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/personalized-stamped-envelopes.jpg"
+  },
+  {
+   "path": "static/images/pages/pme-hero-image-generic.jpg",
+   "bytes": 106871,
+   "sha256": "f52bcbf24df081a6291ca51256236c82e125a73d8d07ceb19acc8f3dac879242",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/pme-hero-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/pmei-hero-image-generic.jpg",
+   "bytes": 41469,
+   "sha256": "d90f1928f363ddb3403e858dcd7502e75a95bb18029c5e6a5e669697e18e3200",
+   "source_url": "https://www.usps.com/assets/images/ship/international/pmei-hero-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/pmi-hero-image-generic.jpg",
+   "bytes": 52201,
+   "sha256": "01357d252b0367406f07b6b937b42d8a3145f8c626e56ed38b12a3016fd85043",
+   "source_url": "https://www.usps.com/assets/images/ship/international/pmi-hero-image-generic.jpg"
+  },
+  {
+   "path": "static/images/pages/po-box-diagram-size1.jpg",
+   "bytes": 21065,
+   "sha256": "90a76db88c6eb10fea30c7356d2bb9a095113273c0b25f087bcf7f1ef6cc711a",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/po-box-diagram-size1.jpg"
+  },
+  {
+   "path": "static/images/pages/po-box-diagram-size2.jpg",
+   "bytes": 21206,
+   "sha256": "31a9281ccc5c495d970c10f7dc39e1332c26df33e5a582b1dc4152bd1c15b6fb",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/po-box-diagram-size2.jpg"
+  },
+  {
+   "path": "static/images/pages/po-box-diagram-size3.jpg",
+   "bytes": 22899,
+   "sha256": "cccc384b63121da073518ebf92b1fa87393c740ddf1d1c4521d9f70b2d576b4a",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/po-box-diagram-size3.jpg"
+  },
+  {
+   "path": "static/images/pages/po-box-diagram-size4.jpg",
+   "bytes": 19344,
+   "sha256": "2009962d7082350bb933e8e10ffaa80a66a7bdd4945a5feba61e1f4105d0d9e9",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/po-box-diagram-size4.jpg"
+  },
+  {
+   "path": "static/images/pages/po-box-diagram-size5.jpg",
+   "bytes": 22892,
+   "sha256": "afdc64b1a47a3b355343f9741209af128587ac45d919509c849fd987918970a6",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/po-box-diagram-size5.jpg"
+  },
+  {
+   "path": "static/images/pages/postage-options-hero-desktop.jpg",
+   "bytes": 79464,
+   "sha256": "d4332952d12a69d8c03881c9bfa3f60d57709fd32962a027990a01adaf81a373",
+   "source_url": "https://www.usps.com/assets/images/business/postage-options-hero-desktop.jpg"
+  },
+  {
+   "path": "static/images/pages/postage-options-permit-imprint.jpg",
+   "bytes": 52959,
+   "sha256": "0c358e8311983a1d7422d5ec45a0d98386e40fffc0730ee808ec35e6e310b879",
+   "source_url": "https://www.usps.com/assets/images/business/postage-options-permit-imprint.jpg"
+  },
+  {
+   "path": "static/images/pages/postage-options-picture-permit-indicia.jpg",
+   "bytes": 55614,
+   "sha256": "04959cfa8bac06248b4768c1f8b8db86e48560d3634893372ec8fcddfdb1844d",
+   "source_url": "https://www.usps.com/assets/images/business/postage-options-picture-permit-indicia.jpg"
+  },
+  {
+   "path": "static/images/pages/postage-options-postage-meter.jpg",
+   "bytes": 56316,
+   "sha256": "b892658b6c268efaf212d505cfdec95208cf92f39655549b1a38b6997c092442",
+   "source_url": "https://www.usps.com/assets/images/business/postage-options-postage-meter.jpg"
+  },
+  {
+   "path": "static/images/pages/postage-options-precanceled-stamps.jpg",
+   "bytes": 59649,
+   "sha256": "99484b8597df11c0acfa173a85f3737b12d8eb408377ef8af190659b978d1f15",
+   "source_url": "https://www.usps.com/assets/images/business/postage-options-precanceled-stamps.jpg"
+  },
+  {
+   "path": "static/images/pages/postmark.png",
+   "bytes": 17276,
+   "sha256": "ce3b6ea534a25dc83f247c1938ad2a5a823d8983005820a5d71025e80993214c",
+   "source_url": "https://www.usps.com/assets/images/campaigns/postmark/postmark.png"
+  },
+  {
+   "path": "static/images/pages/prep-materials.png",
+   "bytes": 231994,
+   "sha256": "200cc069b55a1e8547faa01bc409e4f2b655ae7fbce31a0e4951fe835a02c6cc",
+   "source_url": "https://www.usps.com/assets/images/ship/online-shipping/prep-materials.png"
+  },
+  {
+   "path": "static/images/pages/prevent-damage.jpg",
+   "bytes": 76744,
+   "sha256": "e0ed3c1c7256ab7a973626b0daba86eb817f5e3b1dc49aeec3cd949f8d6a52ab",
+   "source_url": "https://www.usps.com/assets/images/ship/prevent-damage.jpg"
+  },
+  {
+   "path": "static/images/pages/protect-special-envelopes.jpg",
+   "bytes": 53105,
+   "sha256": "a1f09f120942e04792320ddf6a450b0d9f482c36e2463f5374a6ce08465aa62d",
+   "source_url": "https://www.usps.com/assets/images/ship/protect-special-envelopes.jpg"
+  },
+  {
+   "path": "static/images/pages/ready-ship.png",
+   "bytes": 239155,
+   "sha256": "f517599427323ca22a19b41cabf0938d0e32e133c4a103b0d3084c2013f5a707",
+   "source_url": "https://www.usps.com/assets/images/ship/online-shipping/ready-ship.png"
+  },
+  {
+   "path": "static/images/pages/s_empty_expanded.jpg",
+   "bytes": 72362,
+   "sha256": "2fba9a3c8ea6f94fd3302389d61d310933d7b71ff4e4cab5d674e30527ed67d6",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/s_empty_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/s_staged_expanded.jpg",
+   "bytes": 86970,
+   "sha256": "ebf5606ff9ceabbc8f12ac615c586d9b2b4b066f9265b9d8e3a967225beb6fe4",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/s_staged_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/s_staged_landing.jpg",
+   "bytes": 32081,
+   "sha256": "6cca56d7ee9a5ddf7946fd4f48210780b2b2dd6de907287f3a4ccb99cced7517",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/s_staged_landing.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-01.jpg",
+   "bytes": 45179,
+   "sha256": "428b2946d6e9da62551d01edd21562b4871f5911f5e92ffa780baa567970f09b",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-01.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-02.jpg",
+   "bytes": 50144,
+   "sha256": "e752af01db6b5818c1c07ecc0b39be9eef03605136f5147c300d0048a22a422f",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-02.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-03.jpg",
+   "bytes": 43245,
+   "sha256": "59ffd0c680743c2657ece5821478c8daa0f2d3b99c75ebd35734742bc87cbe7a",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-03.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-04.jpg",
+   "bytes": 54162,
+   "sha256": "f65d29b6ec60d613b99152d9e857185aae8f34b689a241a4c7e838537f37ffde",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-04.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-05.jpg",
+   "bytes": 51214,
+   "sha256": "a848d0d60a51ffdad3ae77ce4f7425768a694683653ed8145fcaa31b6ac2732b",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-05.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-06.jpg",
+   "bytes": 41346,
+   "sha256": "2497f41f95cc0f8e1cbe15c35ffef619e45977e213f0189431be55d6905d106b",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-06.jpg"
+  },
+  {
+   "path": "static/images/pages/send-international-packages-07.jpg",
+   "bytes": 55011,
+   "sha256": "1563e2c080c83e4c640c49f90781364a2ce42ff2cc75425db1c560d27ca2b1a5",
+   "source_url": "https://www.usps.com/assets/images/international/send-international-packages-07.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-0.jpg",
+   "bytes": 57905,
+   "sha256": "1d9a84000dee7c0624c841341ce5837f7e17cef30f42c8d97d9aad8fb7d7c378",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-0.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-1.jpg",
+   "bytes": 50355,
+   "sha256": "e1d1e807b0196a14d6f2c481a6ff7c0ac8945543f3a58804c0592f143c09e214",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-1.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-2.jpg",
+   "bytes": 64259,
+   "sha256": "7564835eef12c7656e77fedfaaf803ce1c023bfc20016703f9452ed33d124566",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-2.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-3.jpg",
+   "bytes": 48703,
+   "sha256": "94d1c5da8c1d5485984f0418b2ba555d8f80d6971db576c452726aef7a3c617f",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-3.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-4.jpg",
+   "bytes": 46528,
+   "sha256": "5c278fba091b7c971b3b856945cd8a4398ce13daa4e782d69ac2edb4b39e58ca",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-4.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-4B.jpg",
+   "bytes": 61508,
+   "sha256": "781dcefc108dc8a505b32f240549020dac1882b7b0a5c85cda1447151255d906",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-4B.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-5.jpg",
+   "bytes": 59173,
+   "sha256": "e8a5daffc719de3130586cd75a47b37f6debc281827a0dd01abfc236184efa4c",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-5.jpg"
+  },
+  {
+   "path": "static/images/pages/send-packages-drawer-graphics_step-6.jpg",
+   "bytes": 65474,
+   "sha256": "a3f86a460312549fce72f1ba44c8513dab0aa6902af63c5ad474c4f0169aaceb",
+   "source_url": "https://www.usps.com/assets/images/ship/packages/send-packages-drawer-graphics_step-6.jpg"
+  },
+  {
+   "path": "static/images/pages/send-step-1.jpg",
+   "bytes": 31462,
+   "sha256": "720c8d7e0949afd874aa5be28f5dfa3d7189bb94d8e9a68f688609593b12bbda",
+   "source_url": "https://www.usps.com/assets/images/ship/send-step-1.jpg"
+  },
+  {
+   "path": "static/images/pages/send-step-2.jpg",
+   "bytes": 43136,
+   "sha256": "ef429ab4f5ab826cf1b29115e472c5f4213f1b510c78da5f1f6dc00dd836f71e",
+   "source_url": "https://www.usps.com/assets/images/ship/send-step-2.jpg"
+  },
+  {
+   "path": "static/images/pages/send-step-3.jpg",
+   "bytes": 42148,
+   "sha256": "9909788f88bf2ab8f1b9316aaee1ffe6b677c99986478e5f556671e0c4083ca5",
+   "source_url": "https://www.usps.com/assets/images/ship/send-step-3.jpg"
+  },
+  {
+   "path": "static/images/pages/send-step-4.jpg",
+   "bytes": 45432,
+   "sha256": "073d413cab32a5337ec7ae479f4f5b95c39ae73abe0a3495e1e218f6f834e3f7",
+   "source_url": "https://www.usps.com/assets/images/ship/send-step-4.jpg"
+  },
+  {
+   "path": "static/images/pages/ship_customsforms.jpg",
+   "bytes": 55926,
+   "sha256": "61fb65698d7c2fb4caee684b075076dd5025f7e80aa7868f15d0062dd7a351b6",
+   "source_url": "https://www.usps.com/assets/images/international/ship_customsforms.jpg"
+  },
+  {
+   "path": "static/images/pages/ship_insurance.jpg",
+   "bytes": 166138,
+   "sha256": "c8b866deecedddb33e523c3312567bbb6ca050c732ef35f5bae370914eddfd63",
+   "source_url": "https://www.usps.com/assets/images/international/ship_insurance.jpg"
+  },
+  {
+   "path": "static/images/pages/shipping-for-biz.jpg",
+   "bytes": 66957,
+   "sha256": "eb8c2533d9eb35e57efe7778c17e53ead3fe560f3d52af9c66292c9337f993bb",
+   "source_url": "https://www.usps.com/assets/images/ship/ground-adv/shipping-for-biz.jpg"
+  },
+  {
+   "path": "static/images/pages/shipping-label.png",
+   "bytes": 226585,
+   "sha256": "7011dac5dabed8c6bf33095a2f2a624e0da8f99f2c22ed5cbff40c3c83aca3f2",
+   "source_url": "https://www.usps.com/assets/images/ship/online-shipping/shipping-label.png"
+  },
+  {
+   "path": "static/images/pages/shipping-restrictions-hero.jpg",
+   "bytes": 88868,
+   "sha256": "dbaa6b570cca5fc8e98ff7d3aa3c487122fb2df11b7331356beb1ea52d5796b9",
+   "source_url": "https://www.usps.com/assets/images/ship/shipping-restrictions-hero.jpg"
+  },
+  {
+   "path": "static/images/pages/size-option.jpg",
+   "bytes": 138868,
+   "sha256": "edce83ea2ee462d0c479e83535a41fb11d2bb02ece2927badacb5ddce0d2556a",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/size-option.jpg"
+  },
+  {
+   "path": "static/images/pages/step-1-env.jpg",
+   "bytes": 50938,
+   "sha256": "b1915cdb352bf8f75ffa245ab47928cf2c0eed4b72cb42156272199d9fd9fad0",
+   "source_url": "https://www.usps.com/assets/images/ship/step-1-env.jpg"
+  },
+  {
+   "path": "static/images/pages/usps-kiosk-label-broker-scan-qr-code-for-label.jpg",
+   "bytes": 102307,
+   "sha256": "13d78bdce6e0343ca33988142f8d01aeeae8b9c3453fbb691ce09fc7a59f1b6c",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/usps-kiosk-label-broker-scan-qr-code-for-label.jpg"
+  },
+  {
+   "path": "static/images/pages/usps-label-broker-id-qr-code.jpg",
+   "bytes": 142608,
+   "sha256": "fa463e975eefb2ae18cf9f276c2b9646307a5d79ddb6884511eae514d1a011fe",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/usps-label-broker-id-qr-code.jpg"
+  },
+  {
+   "path": "static/images/pages/usps-label-delivery-service-phone-laptop.jpg",
+   "bytes": 106472,
+   "sha256": "4938651def079d09a1ff0777f2393b75709d6518c6276f5b5b1322c6290908b9",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/usps-label-delivery-service-phone-laptop.jpg"
+  },
+  {
+   "path": "static/images/pages/usps-label-delivery-service.jpg",
+   "bytes": 90782,
+   "sha256": "48996268a15763480d972232395ad9b54657c3f71484fff97db303e78b6cc562",
+   "source_url": "https://www.usps.com/assets/images/ship/label-broker/usps-label-delivery-service.jpg"
+  },
+  {
+   "path": "static/images/pages/usps_mail_ship_pmx_box.jpg",
+   "bytes": 119042,
+   "sha256": "70945cd9b06d8e8775b2dd37b5c014b835fb8036978e3370f2f69848e1016b51",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/usps_mail_ship_pmx_box.jpg"
+  },
+  {
+   "path": "static/images/pages/usps_mailbox_requirements_illustration.jpg",
+   "bytes": 67135,
+   "sha256": "e09d4b1283a758a3044b66bc9b91f8ab410d3de66aa34ed8a66f6b525adc0214",
+   "source_url": "https://www.usps.com/assets/images/manage/usps_mailbox_requirements_illustration.jpg"
+  },
+  {
+   "path": "static/images/pages/usps_mili_mail_video_635x358.jpg",
+   "bytes": 389629,
+   "sha256": "4a4146be3230d8fbdde89faee4f76ed22118b28d8b63f6462e391f00001eac72",
+   "source_url": "https://www.usps.com/assets/images/ship/mail-ship/usps_mili_mail_video_635x358.jpg"
+  },
+  {
+   "path": "static/images/pages/usps_request_refund.png",
+   "bytes": 98711,
+   "sha256": "98cd7b3b3524afd94b87c76fbd1d5214a1b19348cd532f74874191ffdeab6a9e",
+   "source_url": "https://www.usps.com/assets/images/help/usps_request_refund.png"
+  },
+  {
+   "path": "static/images/pages/xl_empty_expanded.jpg",
+   "bytes": 69650,
+   "sha256": "e987c587124254c988c0cce86896c889c2da4b8741d2b2f2959bebfdae298db7",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xl_empty_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/xl_staged_expanded.jpg",
+   "bytes": 87256,
+   "sha256": "eab22af881aaf4b4a68cb76aa7b93a3ed1863fffb7cf90ce2455c5f958aeea76",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xl_staged_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/xl_staged_landing.jpg",
+   "bytes": 36788,
+   "sha256": "18b28c28a792683c035a06d982b8a39e27d72577d7794409650cfe0c42943c79",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xl_staged_landing.jpg"
+  },
+  {
+   "path": "static/images/pages/xs_empty_expanded.jpg",
+   "bytes": 76461,
+   "sha256": "1aa371f4929cfc92a3b44d0a49d0a4fe08293f0ee88885c6224891333093e107",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xs_empty_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/xs_staged_expanded.jpg",
+   "bytes": 89818,
+   "sha256": "386adf516c64f0bf810a1ef63ca3a859de9465c44e7ad36fb58b062d06acb9d9",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xs_staged_expanded.jpg"
+  },
+  {
+   "path": "static/images/pages/xs_staged_landing.jpg",
+   "bytes": 37946,
+   "sha256": "a8fb92b54d32d4d707bf9a904a00e7bb936ea45bfd2cf0346831a0c611371b8b",
+   "source_url": "https://www.usps.com/assets/images/manage/po-boxes/xs_staged_landing.jpg"
+  },
+  {
+   "path": "static/images/store/012007-00_360x360.jpg",
+   "bytes": 43463,
+   "sha256": "6b18f6c1dea8aa06f202f475001e3532b5437c5e4bc0bde7255a4fa93efc4453",
+   "source_url": "https://www.usps.com/ecp/asset/images/012007-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/012007-S0.jpg",
+   "bytes": 13490,
+   "sha256": "f03af5e68f5ce089cd614101efcc144ceb243d56069a89b287edef65361dc5c5",
+   "source_url": "https://www.usps.com/ecp/asset/images/012007-S0.jpg"
+  },
+  {
+   "path": "static/images/store/0_SHOEBOX-S0.jpg",
+   "bytes": 6660,
+   "sha256": "241b4655409f806616706ac3d513ec62148b38af310cf46909d87213a560b9fe",
+   "source_url": "https://www.usps.com/ecp/asset/images/0_SHOEBOX-S0.jpg"
+  },
+  {
+   "path": "static/images/store/122904-S0.jpg",
+   "bytes": 10176,
+   "sha256": "e715bef10180fb5af7a14d1b96158334e23c4ed6a683221a1e8097368978caea",
+   "source_url": "https://www.usps.com/ecp/asset/images/122904-S0.jpg"
+  },
+  {
+   "path": "static/images/store/124104-S0.jpg",
+   "bytes": 7931,
+   "sha256": "23b9e272cb3dd5689155464f1d936aa60d1a8583b91db34c8d3c609aed2fafe9",
+   "source_url": "https://www.usps.com/ecp/asset/images/124104-S0.jpg"
+  },
+  {
+   "path": "static/images/store/124204-S0.jpg",
+   "bytes": 12214,
+   "sha256": "cee4e38946c46bdb69965ef0b574151c506bd7e79f863f472ca2ecd1eae4a9e1",
+   "source_url": "https://www.usps.com/ecp/asset/images/124204-S0.jpg"
+  },
+  {
+   "path": "static/images/store/129504-S0.jpg",
+   "bytes": 8243,
+   "sha256": "9fc49773d9eec94305889bcd8b47e9fb0ffefa16693e8a3d7fb35ca889da8869",
+   "source_url": "https://www.usps.com/ecp/asset/images/129504-S0.jpg"
+  },
+  {
+   "path": "static/images/store/130104-00_360x360.jpg",
+   "bytes": 46099,
+   "sha256": "3c5574260fb40e9904cc2ad0da2f6699402871be9b72f84d46c2423b617a6e36",
+   "source_url": "https://www.usps.com/ecp/asset/images/130104-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/130104-S0.jpg",
+   "bytes": 13011,
+   "sha256": "d10b85b7524075a0eb8f3d753a9d8cf1313352427e48b9c6ed58c08cdafd7967",
+   "source_url": "https://www.usps.com/ecp/asset/images/130104-S0.jpg"
+  },
+  {
+   "path": "static/images/store/130121-S0.jpg",
+   "bytes": 3495,
+   "sha256": "c639608249fadf3f881e0f6f927f7d32f7bcf23d900372c59354347b5e685ade",
+   "source_url": "https://www.usps.com/ecp/asset/images/130121-S0.jpg"
+  },
+  {
+   "path": "static/images/store/130204-00_360x360.jpg",
+   "bytes": 47969,
+   "sha256": "39b340663cec7c9cb04106ef8ac35485bf50a7df5029f3faad02209ea4d668d5",
+   "source_url": "https://www.usps.com/ecp/asset/images/130204-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/130204-S0.jpg",
+   "bytes": 9434,
+   "sha256": "323f98e0503e62f7b07b30aed4d8efa676658cc4f515a053abd8ac376fca5c77",
+   "source_url": "https://www.usps.com/ecp/asset/images/130204-S0.jpg"
+  },
+  {
+   "path": "static/images/store/130216-S0.jpg",
+   "bytes": 3642,
+   "sha256": "b28345a1c69bd08d63bb32d0ddcb1e8e78b8ae726595bfcb97a9c4f4479b1770",
+   "source_url": "https://www.usps.com/ecp/asset/images/130216-S0.jpg"
+  },
+  {
+   "path": "static/images/store/130221-S0.jpg",
+   "bytes": 4464,
+   "sha256": "047f001f3094e6e344fa835dba9718f60df5da2631b51b82da34286a5b418f19",
+   "source_url": "https://www.usps.com/ecp/asset/images/130221-S0.jpg"
+  },
+  {
+   "path": "static/images/store/281905-00_360x360.jpg",
+   "bytes": 8721,
+   "sha256": "94dcdaa1f5616cd7891668e0f17c5ad990745e47e03a6e4ff8f94c56a661776f",
+   "source_url": "https://www.usps.com/ecp/asset/images/281905-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/281905-S0.jpg",
+   "bytes": 2993,
+   "sha256": "83a27fe45bb474905d6c36b64c1dff047ebef651bfee39491d7e5348daffa428",
+   "source_url": "https://www.usps.com/ecp/asset/images/281905-S0.jpg"
+  },
+  {
+   "path": "static/images/store/292705-00_360x360.jpg",
+   "bytes": 9299,
+   "sha256": "56cf31dd9a21533fcb87ecf3a168291ba2bf5c483058e088e3dd88c49e4ec12e",
+   "source_url": "https://www.usps.com/ecp/asset/images/292705-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/292705-S0.jpg",
+   "bytes": 3129,
+   "sha256": "fa14d8c93f4d81a51b6280374b108e2f7c7da71aa2827e19cf485fc9df0212be",
+   "source_url": "https://www.usps.com/ecp/asset/images/292705-S0.jpg"
+  },
+  {
+   "path": "static/images/store/292805-00_360x360.jpg",
+   "bytes": 9886,
+   "sha256": "c8cd7d2574509ad2dbeeec193aaf679369c500964423e1d1b16d62df1577595c",
+   "source_url": "https://www.usps.com/ecp/asset/images/292805-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/292805-S0.jpg",
+   "bytes": 3422,
+   "sha256": "598aee8188eb2e4cfb3ffc87b3bf7803b67e9417763da8a884af887f52443331",
+   "source_url": "https://www.usps.com/ecp/asset/images/292805-S0.jpg"
+  },
+  {
+   "path": "static/images/store/292905-00_360x360.jpg",
+   "bytes": 9299,
+   "sha256": "56cf31dd9a21533fcb87ecf3a168291ba2bf5c483058e088e3dd88c49e4ec12e",
+   "source_url": "https://www.usps.com/ecp/asset/images/292905-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/292905-S0.jpg",
+   "bytes": 3129,
+   "sha256": "fa14d8c93f4d81a51b6280374b108e2f7c7da71aa2827e19cf485fc9df0212be",
+   "source_url": "https://www.usps.com/ecp/asset/images/292905-S0.jpg"
+  },
+  {
+   "path": "static/images/store/293105-S0.jpg",
+   "bytes": 3197,
+   "sha256": "3985dfe2f312609c147a241f1c709def8c37bce3cfa3843d2b7119e9008e4fe3",
+   "source_url": "https://www.usps.com/ecp/asset/images/293105-S0.jpg"
+  },
+  {
+   "path": "static/images/store/293205-S0.jpg",
+   "bytes": 3461,
+   "sha256": "4938a41491539bb12618774b601ed7c73f71231818dc7f923c9dec04bb844952",
+   "source_url": "https://www.usps.com/ecp/asset/images/293205-S0.jpg"
+  },
+  {
+   "path": "static/images/store/293905-00_360x360.jpg",
+   "bytes": 8884,
+   "sha256": "d2e78fc57a526466d66abd8dd855555958f15568ec4896427749edd1a7439edd",
+   "source_url": "https://www.usps.com/ecp/asset/images/293905-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/293905-S0.jpg",
+   "bytes": 3197,
+   "sha256": "3985dfe2f312609c147a241f1c709def8c37bce3cfa3843d2b7119e9008e4fe3",
+   "source_url": "https://www.usps.com/ecp/asset/images/293905-S0.jpg"
+  },
+  {
+   "path": "static/images/store/293916-S0.jpg",
+   "bytes": 6052,
+   "sha256": "8ce0d3a059fc033bb0036f742c0ede3491383553107eb473220e84a6b17ea02e",
+   "source_url": "https://www.usps.com/ecp/asset/images/293916-S0.jpg"
+  },
+  {
+   "path": "static/images/store/294005-S0.jpg",
+   "bytes": 3461,
+   "sha256": "4938a41491539bb12618774b601ed7c73f71231818dc7f923c9dec04bb844952",
+   "source_url": "https://www.usps.com/ecp/asset/images/294005-S0.jpg"
+  },
+  {
+   "path": "static/images/store/485404-S0.jpg",
+   "bytes": 13391,
+   "sha256": "11370699d9bc2877761f34809ea8508218270cbdc2ec684ac0533dbc5e9e376e",
+   "source_url": "https://www.usps.com/ecp/asset/images/485404-S0.jpg"
+  },
+  {
+   "path": "static/images/store/485704-S0.jpg",
+   "bytes": 11880,
+   "sha256": "a1bff71514872befaa2b7280b3af41ec50dc4a5c94e0c10d7389e5f10b38338b",
+   "source_url": "https://www.usps.com/ecp/asset/images/485704-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487325-S0.jpg",
+   "bytes": 9522,
+   "sha256": "e6d65d7152e98cbb144cec6e473de158242e16dcbbfdc1f1455a5f725b0bddec",
+   "source_url": "https://www.usps.com/ecp/asset/images/487325-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487350-S0.jpg",
+   "bytes": 6209,
+   "sha256": "498180119e0ed771a6efd3b64b1bfe905bdcb80cc2213d297c27f4515e6adaee",
+   "source_url": "https://www.usps.com/ecp/asset/images/487350-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487390-S0.jpg",
+   "bytes": 8797,
+   "sha256": "1dcc1fe8baa1061db41c456cd1560c9e2714f6ccf5b8701a8a6fd056f885517e",
+   "source_url": "https://www.usps.com/ecp/asset/images/487390-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487604-S0.jpg",
+   "bytes": 8252,
+   "sha256": "7d9affe64d345b75ddbaf6a29f92a5033f28ae1d413d2461a9cfe4b28bc6bf76",
+   "source_url": "https://www.usps.com/ecp/asset/images/487604-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487626-S0.jpg",
+   "bytes": 9152,
+   "sha256": "8e5a6b3ac68bdd77c430af6822bf61f671fb0dc563c46bc33239acaf9aba80b1",
+   "source_url": "https://www.usps.com/ecp/asset/images/487626-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487704-S0.jpg",
+   "bytes": 10066,
+   "sha256": "5184020d9126bb79f47cbe543701f70d1771b4e504dbd49e31200235f76861a3",
+   "source_url": "https://www.usps.com/ecp/asset/images/487704-S0.jpg"
+  },
+  {
+   "path": "static/images/store/487804-S0.jpg",
+   "bytes": 11049,
+   "sha256": "a5ad113097d3cf4071f3752356dbf7e160e2e316ab4335ec5eba181fd7c73304",
+   "source_url": "https://www.usps.com/ecp/asset/images/487804-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488304-S0.jpg",
+   "bytes": 8390,
+   "sha256": "5ec1a29dc0b5b29dbe8929e8236b750611f3fde947ef06683cc5cfccee981b5a",
+   "source_url": "https://www.usps.com/ecp/asset/images/488304-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488604-S0.jpg",
+   "bytes": 10995,
+   "sha256": "06a59eb6dedf5cb6200957f98c5c92babbe02f933e5fb5826a9b17ee953018c9",
+   "source_url": "https://www.usps.com/ecp/asset/images/488604-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488704-00_360x360.jpg",
+   "bytes": 46533,
+   "sha256": "0e732fb98a28fb3db59f8989fcb81685b73cf435c2a3806993d5ca454a6882df",
+   "source_url": "https://www.usps.com/ecp/asset/images/488704-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/488704-S0.jpg",
+   "bytes": 7408,
+   "sha256": "8109203e6fc7890f3720e6d0baa326d512206fb4d6a6fe30cbde459e4d52a0d4",
+   "source_url": "https://www.usps.com/ecp/asset/images/488704-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488716-S0.jpg",
+   "bytes": 3361,
+   "sha256": "43c8134b36f5bdda6d27e46aa917ddff821d963248ff2de94939b5f43c87c81b",
+   "source_url": "https://www.usps.com/ecp/asset/images/488716-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488760-S0.jpg",
+   "bytes": 3379,
+   "sha256": "55a0a7d2d799debbe12c2924ed452333d890ec9da94192d7b141f7726b4ab58b",
+   "source_url": "https://www.usps.com/ecp/asset/images/488760-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488799-S0.jpg",
+   "bytes": 6558,
+   "sha256": "080d763794b7f2c417e9f67a64e7c080e57aec90bb1acc2ea249b4e8e5bd6c73",
+   "source_url": "https://www.usps.com/ecp/asset/images/488799-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488904-00_360x360.jpg",
+   "bytes": 52921,
+   "sha256": "e0509a1e73678f52dcfc813cb976a9a0642ee9027c2514a7f8f463ee9ccaf588",
+   "source_url": "https://www.usps.com/ecp/asset/images/488904-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/488904-S0.jpg",
+   "bytes": 6577,
+   "sha256": "a4810195c2cc025d5de3f326428d15ba4d4a1e7750d10b24b6940fe7e11c8bf1",
+   "source_url": "https://www.usps.com/ecp/asset/images/488904-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488916-S0.jpg",
+   "bytes": 3346,
+   "sha256": "82fc3ac87492401b8e22f010853c52decf149472714ef9b89b6610a85328f854",
+   "source_url": "https://www.usps.com/ecp/asset/images/488916-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488921-S0.jpg",
+   "bytes": 3973,
+   "sha256": "6170beec1236d50447a76b0d85fb727d6f759c05d286315a6b1ce86e8eb75c51",
+   "source_url": "https://www.usps.com/ecp/asset/images/488921-S0.jpg"
+  },
+  {
+   "path": "static/images/store/488946-S0.jpg",
+   "bytes": 6111,
+   "sha256": "0fb1eb21d726c1489a2e5e62744e17e50d77109450e00d19bbccc29172324fa3",
+   "source_url": "https://www.usps.com/ecp/asset/images/488946-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489004-00_360x360.jpg",
+   "bytes": 45508,
+   "sha256": "b29f5b377f47d1de314d016923f0284bd495ce70680438baf35ca94ef9199825",
+   "source_url": "https://www.usps.com/ecp/asset/images/489004-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/489004-S0.jpg",
+   "bytes": 9975,
+   "sha256": "4ced90dcf536b05645ac691212812a62544df9e284ebc3cc40b0cff2066686f5",
+   "source_url": "https://www.usps.com/ecp/asset/images/489004-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489016-S0.jpg",
+   "bytes": 3417,
+   "sha256": "f9132fd8050eb64b13986d2330ed44104ebce9c859d5359130b0335d088d1e96",
+   "source_url": "https://www.usps.com/ecp/asset/images/489016-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489026-S0.jpg",
+   "bytes": 10441,
+   "sha256": "ad7958b4a8068708d89bd08f54892c0376976823f121e14e9a06824b1aa4311b",
+   "source_url": "https://www.usps.com/ecp/asset/images/489026-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489104-00_360x360.jpg",
+   "bytes": 55917,
+   "sha256": "83f0a14157cc640d4c2b2b6f0f09ff7d0eb09efaecf1eb60e55b608f5d2d49f4",
+   "source_url": "https://www.usps.com/ecp/asset/images/489104-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/489104-S0.jpg",
+   "bytes": 10301,
+   "sha256": "0f3f0e634a7591ec9ef90834d5d309c1af0bec779f2522af13af6305362e3683",
+   "source_url": "https://www.usps.com/ecp/asset/images/489104-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489116-S0.jpg",
+   "bytes": 3302,
+   "sha256": "ff77617678414f57858ea2fbb81d99e28b394dedb9e802534cda5f18f7b26da7",
+   "source_url": "https://www.usps.com/ecp/asset/images/489116-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489121-S0.jpg",
+   "bytes": 4100,
+   "sha256": "4358b5fe0b70542d9daf4afc5fd0d87c1089bf9a8deca61643f80234ed2be14f",
+   "source_url": "https://www.usps.com/ecp/asset/images/489121-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489204-00_360x360.jpg",
+   "bytes": 62811,
+   "sha256": "b790c0ddec0c6b41a4c27f2344015cc9aaf206ad0f79f4fad87938b3cbcd0de7",
+   "source_url": "https://www.usps.com/ecp/asset/images/489204-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/489204-S0.jpg",
+   "bytes": 6673,
+   "sha256": "a393ccd8fa46d51e9eca3ed561b8859346e78eee069d417900846bb99d64b96a",
+   "source_url": "https://www.usps.com/ecp/asset/images/489204-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489216-S0.jpg",
+   "bytes": 5755,
+   "sha256": "aa48a5ae7373031cfc36ba5db83be90745cd50797cb99418d920e4cb5f47caba",
+   "source_url": "https://www.usps.com/ecp/asset/images/489216-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489221-S0.jpg",
+   "bytes": 5962,
+   "sha256": "c093c5ece3b7d81489e3cae46b371a40b5bfbb509303a66a6d6736b7e82f7df5",
+   "source_url": "https://www.usps.com/ecp/asset/images/489221-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489260-S0.jpg",
+   "bytes": 5003,
+   "sha256": "01dd7b297edfb622cd15df2365e44166f90568b8e800f94d13fe7f0df5679df5",
+   "source_url": "https://www.usps.com/ecp/asset/images/489260-S0.jpg"
+  },
+  {
+   "path": "static/images/store/489299-00_360x360.jpg",
+   "bytes": 34475,
+   "sha256": "addfd84dde6c52760c9938c6b3088629cc6c990c2f370e41803eec665ea5c833",
+   "source_url": "https://www.usps.com/ecp/asset/images/489299-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/489299-S0.jpg",
+   "bytes": 9781,
+   "sha256": "7b88202cbb8f2648b61b4496f29cea8cbe90799b048a126b67798a71aa8fd0ac",
+   "source_url": "https://www.usps.com/ecp/asset/images/489299-S0.jpg"
+  },
+  {
+   "path": "static/images/store/555304-00_360x360.jpg",
+   "bytes": 46826,
+   "sha256": "ed8fa9551bc760e44fceae489c37bda29c940e972dfa17fd5700abe26420d4fe",
+   "source_url": "https://www.usps.com/ecp/asset/images/555304-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/572104-S0.jpg",
+   "bytes": 11190,
+   "sha256": "408ec2582e238e53a35c965e10024811038b99ad64973cf4ea5d7ee6dd175db5",
+   "source_url": "https://www.usps.com/ecp/asset/images/572104-S0.jpg"
+  },
+  {
+   "path": "static/images/store/572904-S0.jpg",
+   "bytes": 11794,
+   "sha256": "7bdb8e997d837ea839816fc2bdde5f0652381bc135485b1445667f2b4502cba9",
+   "source_url": "https://www.usps.com/ecp/asset/images/572904-S0.jpg"
+  },
+  {
+   "path": "static/images/store/576674-S0.jpg",
+   "bytes": 17514,
+   "sha256": "f040cb75ca866539d31bdc0c45baf4b08d9092322cd5087ab0ab0b52cb7606c6",
+   "source_url": "https://www.usps.com/ecp/asset/images/576674-S0.jpg"
+  },
+  {
+   "path": "static/images/store/581504-S0.jpg",
+   "bytes": 13069,
+   "sha256": "61cf6d1c4b81ae70d39d1477ccf45a7ac5b910d4088033837c0da9aeda0c23b6",
+   "source_url": "https://www.usps.com/ecp/asset/images/581504-S0.jpg"
+  },
+  {
+   "path": "static/images/store/581604-S0.jpg",
+   "bytes": 14211,
+   "sha256": "2886900b2d1b9ec804afecb04ee92e04352c27eba165eced417559dc2f4f242d",
+   "source_url": "https://www.usps.com/ecp/asset/images/581604-S0.jpg"
+  },
+  {
+   "path": "static/images/store/581904-00_360x360.jpg",
+   "bytes": 55742,
+   "sha256": "a6916a597053999429a649501cb83e47f2626dee78dc248308d32b20650df69c",
+   "source_url": "https://www.usps.com/ecp/asset/images/581904-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/581904-S0.jpg",
+   "bytes": 10865,
+   "sha256": "7b1a2385557558341b0cdd338c63f2348a8fe681656f2ebcf33a2a09bfbf2ed6",
+   "source_url": "https://www.usps.com/ecp/asset/images/581904-S0.jpg"
+  },
+  {
+   "path": "static/images/store/581916-00_360x360.jpg",
+   "bytes": 14226,
+   "sha256": "5216f4a3eb4c06b0ace7d149edf0c2ded4afde6faf176c8d406f4285df0b0401",
+   "source_url": "https://www.usps.com/ecp/asset/images/581916-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/581916-S0.jpg",
+   "bytes": 4559,
+   "sha256": "a8596ee198fd7d713f6b649f49320bd9fa8d5870401575aef655304db7eff4ef",
+   "source_url": "https://www.usps.com/ecp/asset/images/581916-S0.jpg"
+  },
+  {
+   "path": "static/images/store/581921-00_360x360.jpg",
+   "bytes": 14945,
+   "sha256": "f1145e6fcd2f92abded48d26685bae6dfb85732d79a0e9f898bdcec37ae98b70",
+   "source_url": "https://www.usps.com/ecp/asset/images/581921-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/581921-S0.jpg",
+   "bytes": 4635,
+   "sha256": "72ae8fc6bbf4708990c828d300b7a3feed8e6098dfa30cb58ce1db4df38eab6d",
+   "source_url": "https://www.usps.com/ecp/asset/images/581921-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582304-00_360x360.jpg",
+   "bytes": 48423,
+   "sha256": "9d393ec9fa45b0307241b9f7ee8d03ef7febfee49d14a72ad4396db2a666bc14",
+   "source_url": "https://www.usps.com/ecp/asset/images/582304-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582304-S0.jpg",
+   "bytes": 7387,
+   "sha256": "9e931a212373785918bd9c090b93b47c1fbff1d0ca0a5314f9990b6d8303a978",
+   "source_url": "https://www.usps.com/ecp/asset/images/582304-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582316-S0.jpg",
+   "bytes": 4840,
+   "sha256": "3f90a42b0471bd176509d60cc8dcd52f37cf4abc3418067b94c20b3dc355ff9a",
+   "source_url": "https://www.usps.com/ecp/asset/images/582316-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582321-S0.jpg",
+   "bytes": 4937,
+   "sha256": "6dc77245a11f0ee71bd5226c987063bba012da24f3931c225bfcf9f36c71d28a",
+   "source_url": "https://www.usps.com/ecp/asset/images/582321-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582325-S0.jpg",
+   "bytes": 15725,
+   "sha256": "d013a74b2085e01c81c41a42456765b551c4fcf06a16765a257919625154e0a6",
+   "source_url": "https://www.usps.com/ecp/asset/images/582325-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582404-00_360x360.jpg",
+   "bytes": 42381,
+   "sha256": "f282018550b98ac08bac84a62bd67a5f61160370ac502c44ab60a33812dc2b03",
+   "source_url": "https://www.usps.com/ecp/asset/images/582404-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582404-S0.jpg",
+   "bytes": 11528,
+   "sha256": "9174ed712eab84d49ea8035ff14b3537849a151a75787b71034a60d61afb9013",
+   "source_url": "https://www.usps.com/ecp/asset/images/582404-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582416-S0.jpg",
+   "bytes": 8804,
+   "sha256": "9a4dec29553ff443977b042fa89d278ac14d3228aa562046649e91a3d31e479e",
+   "source_url": "https://www.usps.com/ecp/asset/images/582416-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582433-S0.jpg",
+   "bytes": 12358,
+   "sha256": "f6afe286c2ebfa0457b310381c8ef86e1c567e87ae2dce65fc2c64c6ce16a7e1",
+   "source_url": "https://www.usps.com/ecp/asset/images/582433-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582446-S0.jpg",
+   "bytes": 10025,
+   "sha256": "2e350375891312b7effed3f2e910e9a398e7405a8197b22f7575c14e374ab613",
+   "source_url": "https://www.usps.com/ecp/asset/images/582446-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582466-00_360x360.jpg",
+   "bytes": 52659,
+   "sha256": "788550b62929c1c85b71eb611185b6be2d157e6142d1aa2f0b7405b0de8ed773",
+   "source_url": "https://www.usps.com/ecp/asset/images/582466-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582466-S0.jpg",
+   "bytes": 14675,
+   "sha256": "f1cd5819edb3510bc28a35f2c59a443c7409297d934b9fc197dc69d3be2f791c",
+   "source_url": "https://www.usps.com/ecp/asset/images/582466-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582504-00_360x360.jpg",
+   "bytes": 46408,
+   "sha256": "d1cfc847838efa7f9bc9e2ed22c0ff9f3d736b237bdb9948f82d34c6bf0acf6c",
+   "source_url": "https://www.usps.com/ecp/asset/images/582504-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582504-S0.jpg",
+   "bytes": 6952,
+   "sha256": "9e1d2302929369f74c1b922931f156a85571086bd50751edbbbfb40dcceede04",
+   "source_url": "https://www.usps.com/ecp/asset/images/582504-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582516-S0.jpg",
+   "bytes": 7517,
+   "sha256": "bb5f9a59cf98193bdffbbeae6423d5070ded1dbf4b322a8ebea333838e728be9",
+   "source_url": "https://www.usps.com/ecp/asset/images/582516-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582521-S0.jpg",
+   "bytes": 7706,
+   "sha256": "9e313de2b5f4fd137ab795c96ec5f2f2f6a18931db6a6ee86fbf162688b22ec9",
+   "source_url": "https://www.usps.com/ecp/asset/images/582521-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582604-00_360x360.jpg",
+   "bytes": 47518,
+   "sha256": "0904b3296a312ad9e59d5b975eab76f412745e969ff0b4aa227e0ef27e4c08dd",
+   "source_url": "https://www.usps.com/ecp/asset/images/582604-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582604-S0.jpg",
+   "bytes": 11761,
+   "sha256": "beeab5fb9d42685c5ab51301a7a926d29ac26c54a003e482a4341a2148caa12f",
+   "source_url": "https://www.usps.com/ecp/asset/images/582604-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582616-S0.jpg",
+   "bytes": 3171,
+   "sha256": "a1443c19eaa5bd17277505eb93d637cf4f9a76022b2b87d5ef9127efef9883fa",
+   "source_url": "https://www.usps.com/ecp/asset/images/582616-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582621-S0.jpg",
+   "bytes": 3973,
+   "sha256": "ce3f91d049a5170f37771b4bcb6366c7e36e623ae58d4722421b52ce20a7f665",
+   "source_url": "https://www.usps.com/ecp/asset/images/582621-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582704-00_360x360.jpg",
+   "bytes": 62581,
+   "sha256": "673d61f4495c5cb7762dc17dbd827aacb38d7ab9f522cb50afb51dd6d2bf47d5",
+   "source_url": "https://www.usps.com/ecp/asset/images/582704-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582704-S0.jpg",
+   "bytes": 11624,
+   "sha256": "985ec19b5af0b521a7895e094bc890bd92f508337f0331b5ab86e43b9ce73d62",
+   "source_url": "https://www.usps.com/ecp/asset/images/582704-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582716-S0.jpg",
+   "bytes": 3348,
+   "sha256": "e15bdc734daaa477dc3a591ec625434506704ee437bbd58a5ca7b6f7fdd00eed",
+   "source_url": "https://www.usps.com/ecp/asset/images/582716-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582721-S0.jpg",
+   "bytes": 3817,
+   "sha256": "05c55e1cc6fe2ef57625027c9c751eb1aac14f3e1e07f14b723125a5faae1060",
+   "source_url": "https://www.usps.com/ecp/asset/images/582721-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582766-00_360x360.jpg",
+   "bytes": 46554,
+   "sha256": "7d8c499bd3abe71ec9b1bc11ccb1deaa73b75df50a951e8e3d9d8adb9dbf9449",
+   "source_url": "https://www.usps.com/ecp/asset/images/582766-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582766-S0.jpg",
+   "bytes": 13706,
+   "sha256": "421225854dc7b001196f258a9a96cccd6d6bf76c042e5bfb228e7cd7f13f3d7a",
+   "source_url": "https://www.usps.com/ecp/asset/images/582766-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582804-00_360x360.jpg",
+   "bytes": 49794,
+   "sha256": "9ff4307c773d4bf42cb22461a16b82ba8d7caa5ddf2dde8952696419972dbbe6",
+   "source_url": "https://www.usps.com/ecp/asset/images/582804-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582804-S0.jpg",
+   "bytes": 11556,
+   "sha256": "591cac9010a05c8af0b7359fbdd4e7907712f159f31f5853a920d056b10d58f6",
+   "source_url": "https://www.usps.com/ecp/asset/images/582804-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582816-S0.jpg",
+   "bytes": 3243,
+   "sha256": "00353c7c4ef8400748deb2536c19c596887ddb36c334d63d2c23bd8c0739a5b6",
+   "source_url": "https://www.usps.com/ecp/asset/images/582816-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582821-S0.jpg",
+   "bytes": 4139,
+   "sha256": "f0884a5221647f984131bf1fdaded3334104489a46462cd924b6cac690ff943d",
+   "source_url": "https://www.usps.com/ecp/asset/images/582821-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582866-00_360x360.jpg",
+   "bytes": 45777,
+   "sha256": "7a06e6c9a76b88cc11560c5900e76dfb6f7ec914a8720973fa1e559cb1d17a3c",
+   "source_url": "https://www.usps.com/ecp/asset/images/582866-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582866-S0.jpg",
+   "bytes": 13067,
+   "sha256": "206a0c779cbce0dd83bb7a103c1780c83e52dbf4a1b285a31f54cbd095f90fe7",
+   "source_url": "https://www.usps.com/ecp/asset/images/582866-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582904-00_360x360.jpg",
+   "bytes": 58177,
+   "sha256": "221295259df600fa893d715ce68fbbe2d8fa0770bef12adab70aae337579239b",
+   "source_url": "https://www.usps.com/ecp/asset/images/582904-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582904-S0.jpg",
+   "bytes": 17315,
+   "sha256": "8b8d1c4354586f3fd7dbe236b5210389bdb595e46c12bd099b3f02e444055ca9",
+   "source_url": "https://www.usps.com/ecp/asset/images/582904-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582916-00_360x360.jpg",
+   "bytes": 13819,
+   "sha256": "14e8f1e653b5a4688fb0e153ea93937d7a26ddabfefc4ce4a32748264ce29459",
+   "source_url": "https://www.usps.com/ecp/asset/images/582916-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582916-S0.jpg",
+   "bytes": 3938,
+   "sha256": "f633c3f64ac80ec8443f6220c50a1b64149d1c33aaef37fca610f3236ce0d10d",
+   "source_url": "https://www.usps.com/ecp/asset/images/582916-S0.jpg"
+  },
+  {
+   "path": "static/images/store/582921-00_360x360.jpg",
+   "bytes": 13653,
+   "sha256": "0831bc7441c743616e2e009f64fb713c33f5bd0650cd45217fde84cfcc40340e",
+   "source_url": "https://www.usps.com/ecp/asset/images/582921-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/582921-S0.jpg",
+   "bytes": 4208,
+   "sha256": "205c15853d620629a1f67bbb12536a7d1e8f6d5fa490a067f758b97cfec86393",
+   "source_url": "https://www.usps.com/ecp/asset/images/582921-S0.jpg"
+  },
+  {
+   "path": "static/images/store/588804-S0.jpg",
+   "bytes": 13112,
+   "sha256": "ab34095d2c507fd5783b648ad6c3db16a8e9895bed79ece750b38ad2c4d7d959",
+   "source_url": "https://www.usps.com/ecp/asset/images/588804-S0.jpg"
+  },
+  {
+   "path": "static/images/store/685004-S0.jpg",
+   "bytes": 12421,
+   "sha256": "3032808cd0a6be9ac87d2aadc2e8f840546fff1d99f5a9ff6e7d5875ae9a50f0",
+   "source_url": "https://www.usps.com/ecp/asset/images/685004-S0.jpg"
+  },
+  {
+   "path": "static/images/store/685204-S0.jpg",
+   "bytes": 10533,
+   "sha256": "b4e8011489da2c569409d40fe2eaa3a0ba9b2986f024befb653ac3f59de2199f",
+   "source_url": "https://www.usps.com/ecp/asset/images/685204-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686016-S0.jpg",
+   "bytes": 3329,
+   "sha256": "c14a7142462c3d54045f65810e8876332821e553486ef849f7245cc17ee311be",
+   "source_url": "https://www.usps.com/ecp/asset/images/686016-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686104-00_360x360.jpg",
+   "bytes": 74019,
+   "sha256": "4a8e8da96bdd8f540b760d7a4602fb3928fb62b1f72b71b15b30e59689dab374",
+   "source_url": "https://www.usps.com/ecp/asset/images/686104-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686104-S0.jpg",
+   "bytes": 8171,
+   "sha256": "f4cac14269796d1c9c5ca555c8fefa2d619ab6ffd48f19d319f9f789c3ea68f3",
+   "source_url": "https://www.usps.com/ecp/asset/images/686104-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686116-S0.jpg",
+   "bytes": 4582,
+   "sha256": "43e55b14370bf597decb177d8f9ef71e902d4f03c91a548a40d14115c1dc8964",
+   "source_url": "https://www.usps.com/ecp/asset/images/686116-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686121-S0.jpg",
+   "bytes": 5064,
+   "sha256": "88ec4ed1690f2e57cd38129ab5e098a8eb9e01d079617bb85a565a8e357ecfe8",
+   "source_url": "https://www.usps.com/ecp/asset/images/686121-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686166-00_360x360.jpg",
+   "bytes": 56575,
+   "sha256": "204938abcc99ecedb30d697578bb2d26e51b1b8d6e9e5f56aca65d5dcc518295",
+   "source_url": "https://www.usps.com/ecp/asset/images/686166-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686166-S0.jpg",
+   "bytes": 16174,
+   "sha256": "698fb8ad32e7f09b81419a903d65c4762ed42a18184fd75b8feab08e093441c6",
+   "source_url": "https://www.usps.com/ecp/asset/images/686166-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686192-S0.jpg",
+   "bytes": 20600,
+   "sha256": "706bd610d4a44017439ed646900bf5b570d73287baeecd0f698e273cb8b8cec7",
+   "source_url": "https://www.usps.com/ecp/asset/images/686192-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686204-00_360x360.jpg",
+   "bytes": 47583,
+   "sha256": "7ad1fcbfc5ef3f79e07d93d2c83cd0d8c29bed0d81820130064af59329183060",
+   "source_url": "https://www.usps.com/ecp/asset/images/686204-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686204-S0.jpg",
+   "bytes": 11519,
+   "sha256": "88946138a7aca1ffbae458b118a9003380356b2cc2cc657dcef385154c68029c",
+   "source_url": "https://www.usps.com/ecp/asset/images/686204-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686216-S0.jpg",
+   "bytes": 4034,
+   "sha256": "915079a6770a525bc2acd34d351583de3eee57de74e7130fce7831f0119b44cd",
+   "source_url": "https://www.usps.com/ecp/asset/images/686216-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686221-S0.jpg",
+   "bytes": 4804,
+   "sha256": "35fc10d1cd9cb677937030719b710d0b444b3b982da6588308cffd6f2223f08f",
+   "source_url": "https://www.usps.com/ecp/asset/images/686221-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686266-00_360x360.jpg",
+   "bytes": 42945,
+   "sha256": "3fbd1ba81ec95cfb9cfaa4eb2749a473e1b77ce282abc446813dbc7d658faaa1",
+   "source_url": "https://www.usps.com/ecp/asset/images/686266-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686266-S0.jpg",
+   "bytes": 12298,
+   "sha256": "705320f8702cfae8d8eff47f956e3867133cd457d0e610c9b58584c1a04109ce",
+   "source_url": "https://www.usps.com/ecp/asset/images/686266-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686304-00_360x360.jpg",
+   "bytes": 60106,
+   "sha256": "8bde422fd45dbf4d4a7066c78cee59ba05412c8c500ec479e8141ad9d2d7bedc",
+   "source_url": "https://www.usps.com/ecp/asset/images/686304-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686304-S0.jpg",
+   "bytes": 6154,
+   "sha256": "3ae2f81f85f4569b1692a286e3ba3b0c129ba9edb5f7b716839ee445087faeef",
+   "source_url": "https://www.usps.com/ecp/asset/images/686304-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686316-S0.jpg",
+   "bytes": 4475,
+   "sha256": "7d4b9263512bd516786bcb208e959a2f5da32baa82d16154b4007415fc9a7634",
+   "source_url": "https://www.usps.com/ecp/asset/images/686316-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686321-S0.jpg",
+   "bytes": 5075,
+   "sha256": "ad52a416571dd545c100ac4150b2e4633f6f5cfbf4f9f373bb71d713f9435c4d",
+   "source_url": "https://www.usps.com/ecp/asset/images/686321-S0.jpg"
+  },
+  {
+   "path": "static/images/store/686366-00_360x360.jpg",
+   "bytes": 47605,
+   "sha256": "df4bb2e530ec93fc0f165448bedd3290897729a8a0639754d833f25e70e8c9d6",
+   "source_url": "https://www.usps.com/ecp/asset/images/686366-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/686366-S0.jpg",
+   "bytes": 14107,
+   "sha256": "62b7769ac6add7fa523f2fc17e2fb8e09e5dada863313cc3573f245c33f6159f",
+   "source_url": "https://www.usps.com/ecp/asset/images/686366-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843031-S0.jpg",
+   "bytes": 7022,
+   "sha256": "1912e2c91ed49247ee3f11c79e1945f7b151bf6713c897108ceec9f288cfa985",
+   "source_url": "https://www.usps.com/ecp/asset/images/843031-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843067-S0.jpg",
+   "bytes": 5488,
+   "sha256": "4178ca9890c7ae4085beb88020dfbb1520b5b423f35ad69789ca2a5d02a31f5a",
+   "source_url": "https://www.usps.com/ecp/asset/images/843067-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843072-S0.jpg",
+   "bytes": 7164,
+   "sha256": "571545cde48652e9158c801781928eb896e5be357648b3aa3a549abb4f5fd988",
+   "source_url": "https://www.usps.com/ecp/asset/images/843072-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843519-S0.jpg",
+   "bytes": 7150,
+   "sha256": "f4e9da88c7de293afa3ce4f31e15c2e480fe9f6f9255765ea3058f6a68ee3468",
+   "source_url": "https://www.usps.com/ecp/asset/images/843519-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843598-S0.jpg",
+   "bytes": 6900,
+   "sha256": "5cc219163596410e0b086d87642d9ef68579b1a623c94b394a6db382522c411f",
+   "source_url": "https://www.usps.com/ecp/asset/images/843598-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843612-S0.jpg",
+   "bytes": 7047,
+   "sha256": "a95395bb303aad09c577a9427d2eeb5c52ba43d7421659774ea2de17c3c93dd6",
+   "source_url": "https://www.usps.com/ecp/asset/images/843612-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843644-S0.jpg",
+   "bytes": 12902,
+   "sha256": "7c79f83c22ed37c46b0e9fef2c8d84698060430b57ca40e1530c8fd71f0b50e6",
+   "source_url": "https://www.usps.com/ecp/asset/images/843644-S0.jpg"
+  },
+  {
+   "path": "static/images/store/843645-S0.jpg",
+   "bytes": 14542,
+   "sha256": "bb5dd475cbe7ef1a503bed40224361ae60523d9bb8a6f86c032c846d7c772cc3",
+   "source_url": "https://www.usps.com/ecp/asset/images/843645-S0.jpg"
+  },
+  {
+   "path": "static/images/store/894704-S0.jpg",
+   "bytes": 6909,
+   "sha256": "f0990a55a9190cf339e3bde170c51eafab2786ba5e07e15d2ca31a4a7e735bc8",
+   "source_url": "https://www.usps.com/ecp/asset/images/894704-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992504-S0.jpg",
+   "bytes": 18353,
+   "sha256": "c67f2a5abebcbeada1d074659bbf07977d229daacb7bd696ed9f557381b5b67f",
+   "source_url": "https://www.usps.com/ecp/asset/images/992504-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992506-S0.jpg",
+   "bytes": 8948,
+   "sha256": "f3789e8fca5786023529be99cdde38c9d0767267c5fb359b765a221d034c8fb9",
+   "source_url": "https://www.usps.com/ecp/asset/images/992506-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992520-S0.jpg",
+   "bytes": 15802,
+   "sha256": "4512c2305788832c99f70862f555ebe767b8c97f8768df92f39ef97ce61d0529",
+   "source_url": "https://www.usps.com/ecp/asset/images/992520-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992521-S0.jpg",
+   "bytes": 10049,
+   "sha256": "e5111dd8f61f7d8ae02ae57eb5e8656facfc1f85cbe73697ff729b5641b71f4f",
+   "source_url": "https://www.usps.com/ecp/asset/images/992521-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992604-00_360x360.jpg",
+   "bytes": 56895,
+   "sha256": "97e16ae55da90be87e7c81483ec800c25eaecaefe32b64bbd14040eca2f15391",
+   "source_url": "https://www.usps.com/ecp/asset/images/992604-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/992604-S0.jpg",
+   "bytes": 16766,
+   "sha256": "bea0270b47732cd34d1d6657c79a4ed8f51e9fa61f5d8b8353cae0f99dbf8d67",
+   "source_url": "https://www.usps.com/ecp/asset/images/992604-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992606-00_360x360.jpg",
+   "bytes": 43356,
+   "sha256": "a3015a87cfe6374aef116e86145c8bf2780067c5d1c6583eca281d3e721af01c",
+   "source_url": "https://www.usps.com/ecp/asset/images/992606-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/992606-S0.jpg",
+   "bytes": 12185,
+   "sha256": "292c0f5bfc948a72db2e7aba34e1828cf0265979172566310856e5b90003f5f6",
+   "source_url": "https://www.usps.com/ecp/asset/images/992606-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992608-00_360x360.jpg",
+   "bytes": 62852,
+   "sha256": "69b0022a499f93da34478ecd97f6f77fca739cabb1181c4511a1d0b7fc9bcda8",
+   "source_url": "https://www.usps.com/ecp/asset/images/992608-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/992608-S0.jpg",
+   "bytes": 17772,
+   "sha256": "ed6f20140e95a69de682dcdfc2dc008cb820a24a9c92633ae83f9a9a3030595e",
+   "source_url": "https://www.usps.com/ecp/asset/images/992608-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992620-00_360x360.jpg",
+   "bytes": 48627,
+   "sha256": "e5ddacc2d7bde6afb8ac103fe729a296fb4f1695cb62cd282bd2a65ff674fac1",
+   "source_url": "https://www.usps.com/ecp/asset/images/992620-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/992620-S0.jpg",
+   "bytes": 14688,
+   "sha256": "4fdf3caf57454049bf9ccb3209ff354c8384249d1aa65d260196fd4409b9cb99",
+   "source_url": "https://www.usps.com/ecp/asset/images/992620-S0.jpg"
+  },
+  {
+   "path": "static/images/store/992621-00_360x360.jpg",
+   "bytes": 35871,
+   "sha256": "15a39e65f17bfb294d1b9de0dba6fd2a687882ec2b3df4c4ccfad32ca0dbe810",
+   "source_url": "https://www.usps.com/ecp/asset/images/992621-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/992621-S0.jpg",
+   "bytes": 11501,
+   "sha256": "3cb39f1d7ccba6987d1701f966db5ba94a2d67a21cd262051483d985ef8eb945",
+   "source_url": "https://www.usps.com/ecp/asset/images/992621-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EMBOX1-S0.jpg",
+   "bytes": 5678,
+   "sha256": "a30ebef831af7cee06f037a245488f161d34d2425c647a22ab2cd22a02ad9f2e",
+   "source_url": "https://www.usps.com/ecp/asset/images/EMBOX1-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP13PE-S0.jpg",
+   "bytes": 6386,
+   "sha256": "d0ce68683ec7afa9164977daa9701f1aad2a0ecd1dd6d4dddefe5007d76ae8e2",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP13PE-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP14L-00_360x360.jpg",
+   "bytes": 22335,
+   "sha256": "e054f9eeb15c04cda6e14e0d937d7ed3223df8073e67c8590c26320b0ff07b0c",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP14L-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/EP14L-S0.jpg",
+   "bytes": 6068,
+   "sha256": "9c888f175484964df3560ac667100495e32cd5e345ebde67cf475700139dcfd1",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP14L-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP14PE-00_360x360.jpg",
+   "bytes": 23666,
+   "sha256": "5940fef590015d9375d11ab6d088245a2f45c9c2abf1d568dcea64aa0fc2048a",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP14PE-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/EP14PE-S0.jpg",
+   "bytes": 6186,
+   "sha256": "9f377261bfc5e481ff9f623b4badd2384e3f789f60e8091af24f4bb1ccd3e509",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP14PE-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_13-S0.jpg",
+   "bytes": 3066,
+   "sha256": "7f029a45229e9bec80be8b1d29c5a86a957284ba76b93c043caff2a6a47c5cd3",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_13-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_13_C-S0.jpg",
+   "bytes": 6790,
+   "sha256": "04e6e28d0cc6faf41cae0007c99d502cbc18f1b503a666fea6e3f37086157a82",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_13_C-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14-00_360x360.jpg",
+   "bytes": 21373,
+   "sha256": "0fc05adb8c5cc36e7624b09c6028cb0b18b3494712ace4e647e8134913ee7c9d",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14-S0.jpg",
+   "bytes": 6603,
+   "sha256": "8fb44dcfea86c478180562b2acb133449c5a65a17348c850eabf7f7042528f23",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14_B-00_360x360.jpg",
+   "bytes": 19221,
+   "sha256": "98e6ac56f79624656abf63c85e51c8e9ece11ed6e019ec11093668edc44789c5",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14_B-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14_B-S0.jpg",
+   "bytes": 4988,
+   "sha256": "b7c240cd060eec654102a986a794f9963f84fbe964b95eac17b9e432b6872978",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14_B-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14_F-00_360x360.jpg",
+   "bytes": 23943,
+   "sha256": "519e20e0c4ed7ce87bfdb3a146860bdde48990cb9d2e7ccc05abcca1a7436502",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14_F-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14_F-S0.jpg",
+   "bytes": 6408,
+   "sha256": "a709fc71e562046580f75030d5821ea58baf8b5ca52928d5edd9241dc857e4f6",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14_F-S0.jpg"
+  },
+  {
+   "path": "static/images/store/EP_14_H-S0.jpg",
+   "bytes": 3821,
+   "sha256": "fbb8b30c843f04ef63131ae68de71dfee16879209511105bf9278b52cf82203e",
+   "source_url": "https://www.usps.com/ecp/asset/images/EP_14_H-S0.jpg"
+  },
+  {
+   "path": "static/images/store/FORM3800N-S0.jpg",
+   "bytes": 7961,
+   "sha256": "c0bbe8df351da5107b57a0113943ac29f9595d4c032d10ffe8ebd015044ffd41",
+   "source_url": "https://www.usps.com/ecp/asset/images/FORM3800N-S0.jpg"
+  },
+  {
+   "path": "static/images/store/FORM_3800-S0.jpg",
+   "bytes": 7834,
+   "sha256": "888b32635d915482326f8a47cc1421238a618f0ac23588251b3c32b03e3bbc5d",
+   "source_url": "https://www.usps.com/ecp/asset/images/FORM_3800-S0.jpg"
+  },
+  {
+   "path": "static/images/store/FORM_3811-S0.jpg",
+   "bytes": 9096,
+   "sha256": "155bf961071a8b99cf678ec3ed26d676064679b957c04794ff637a59dcf1274a",
+   "source_url": "https://www.usps.com/ecp/asset/images/FORM_3811-S0.jpg"
+  },
+  {
+   "path": "static/images/store/FORM_3816-00_360x360.jpg",
+   "bytes": 33648,
+   "sha256": "4fa87bd932b9d665cc2eb7bc4d996ce8ee14bdda3b91646f6c3ace2e0735b06d",
+   "source_url": "https://www.usps.com/ecp/asset/images/FORM_3816-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/FORM_3816-S0.jpg",
+   "bytes": 8515,
+   "sha256": "f18f786561e89d585ec3f98a0b7c5bd005c353d79d83538aa9279bf4a42436be",
+   "source_url": "https://www.usps.com/ecp/asset/images/FORM_3816-S0.jpg"
+  },
+  {
+   "path": "static/images/store/LABEL200N-S0.jpg",
+   "bytes": 8598,
+   "sha256": "ac3991fa19074c35a3c0be6042f07d7dc84fc40851273480cd8fa4fa725c9854",
+   "source_url": "https://www.usps.com/ecp/asset/images/LABEL200N-S0.jpg"
+  },
+  {
+   "path": "static/images/store/LABEL_127_R-S0.jpg",
+   "bytes": 11798,
+   "sha256": "90a86fe8d7b848baf89584a5bfe7d10dfd4795cdc3b3800c1d0d037f631589ec",
+   "source_url": "https://www.usps.com/ecp/asset/images/LABEL_127_R-S0.jpg"
+  },
+  {
+   "path": "static/images/store/LABEL_228-S0.jpg",
+   "bytes": 4632,
+   "sha256": "9534c31f6df5331da77aabdef05379d2003d1e8fd460de642581e44e495b8038",
+   "source_url": "https://www.usps.com/ecp/asset/images/LABEL_228-S0.jpg"
+  },
+  {
+   "path": "static/images/store/LARGE_FRB-00_360x360.jpg",
+   "bytes": 26279,
+   "sha256": "0d96fbed9ce5e67d4ca84f793298f3e021410f4508315aa81a9f6736c06fbdb2",
+   "source_url": "https://www.usps.com/ecp/asset/images/LARGE_FRB-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/LARGE_FRB-S0.jpg",
+   "bytes": 5682,
+   "sha256": "4779609b043fa430d770fb8d131e41884e099a9da05d93e21526e5687090641c",
+   "source_url": "https://www.usps.com/ecp/asset/images/LARGE_FRB-S0.jpg"
+  },
+  {
+   "path": "static/images/store/MILI_FRB-S0.jpg",
+   "bytes": 5904,
+   "sha256": "749d793e04c97b60361346199d5a2e9435800671a44b013fbfb2036caed741ce",
+   "source_url": "https://www.usps.com/ecp/asset/images/MILI_FRB-S0.jpg"
+  },
+  {
+   "path": "static/images/store/MILI_PAC-S0.jpg",
+   "bytes": 6638,
+   "sha256": "cfb43ca4af1c66d2890de90177761cafaa98781c794bf7cb86c0d8c4503a0a88",
+   "source_url": "https://www.usps.com/ecp/asset/images/MILI_PAC-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_1092-S0.jpg",
+   "bytes": 7213,
+   "sha256": "4a8f207367440c2325580635c5368246270a235b815b2858db6354e66e838a56",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_1092-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_1095-S0.jpg",
+   "bytes": 6872,
+   "sha256": "1f71c99ce8a42ceb530b7bd84b12d3560bdc3d05a0ce4dfbc6fc516cb0977218",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_1095-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_1096L-00_360x360.jpg",
+   "bytes": 27259,
+   "sha256": "2e475a9e9f9c123293e0c6c1f273ec5b9038089ba6de548abd2ece817fb1bf16",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_1096L-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/O_1096L-S0.jpg",
+   "bytes": 7742,
+   "sha256": "22c3ad9ad2cc4e971504b426f6b7db76feea4fc6bb15891fa7a0078876408508",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_1096L-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_1098S-S0.jpg",
+   "bytes": 6665,
+   "sha256": "d4006a57fba97b16c0df67ba4e2d2f8b82fea5c99b03e652c44bfcf9ffa71d25",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_1098S-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_BOX4-00_360x360.jpg",
+   "bytes": 26209,
+   "sha256": "cac927806674246dbe822d4ca5bab1ef489ec3ede08e55dd87af7f37d1230a2c",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_BOX4-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/O_BOX4-S0.jpg",
+   "bytes": 5653,
+   "sha256": "dfeff11fc256bd64a35d4e256fe4e50a547761d19b939771d9645611521b8149",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_BOX4-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_BOX7-S0.jpg",
+   "bytes": 6056,
+   "sha256": "046f8e4c352d7040f2da4d053710a724785337b85c99c62a995b335900ee6978",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_BOX7-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_FRB1-00_360x360.jpg",
+   "bytes": 26181,
+   "sha256": "4a35e82cccbc9322ce15c58e48f8e353db233a171c47d46490767723827eee82",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_FRB1-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/O_FRB1-S0.jpg",
+   "bytes": 6113,
+   "sha256": "1275306e8152a142724c3f1d46e830c8a972e249700c494f2f2ca0b82fa6dfa3",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_FRB1-S0.jpg"
+  },
+  {
+   "path": "static/images/store/O_FRB2-00_360x360.jpg",
+   "bytes": 26696,
+   "sha256": "59595d8973f04d7425b266e78c4ebbb95303d13495dfe19214d197656bdfefbb",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_FRB2-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/O_FRB2-S0.jpg",
+   "bytes": 7215,
+   "sha256": "eff8eb7b5087f80ecffe38cb7b032cef8918cfc0be1f7295888c7c4f80480d1f",
+   "source_url": "https://www.usps.com/ecp/asset/images/O_FRB2-S0.jpg"
+  },
+  {
+   "path": "static/images/store/PPEP14PE-S0.jpg",
+   "bytes": 7270,
+   "sha256": "39443d1b88777f7810f27ec1d8f37c3b44034acbb4b82ed693756e36a5f904a8",
+   "source_url": "https://www.usps.com/ecp/asset/images/PPEP14PE-S0.jpg"
+  },
+  {
+   "path": "static/images/store/PPFRB1-S0.jpg",
+   "bytes": 7658,
+   "sha256": "711bec26e5fa5014e7a91aa5dae347fd3099e49e135b39753b7c7637e67056aa",
+   "source_url": "https://www.usps.com/ecp/asset/images/PPFRB1-S0.jpg"
+  },
+  {
+   "path": "static/images/store/PPFRB2-S0.jpg",
+   "bytes": 8183,
+   "sha256": "01703a35252e6d1b46ec67ae844413e4ce3ee64fab8fd87d19c2ab5df28ef849",
+   "source_url": "https://www.usps.com/ecp/asset/images/PPFRB2-S0.jpg"
+  },
+  {
+   "path": "static/images/store/PPLFRB-S0.jpg",
+   "bytes": 7201,
+   "sha256": "e9b7a1b1a48682e4e929777a1dc3769b3b105f5c4e8bfeca81992e995ff5a956",
+   "source_url": "https://www.usps.com/ecp/asset/images/PPLFRB-S0.jpg"
+  },
+  {
+   "path": "static/images/store/PPSFRB-S0.jpg",
+   "bytes": 6446,
+   "sha256": "4f1a4cc46a3acee871b2567e6e3f39b6512d6a6da9e59c8dd23997e4a852c40f",
+   "source_url": "https://www.usps.com/ecp/asset/images/PPSFRB-S0.jpg"
+  },
+  {
+   "path": "static/images/store/SMALL_FRB-00_360x360.jpg",
+   "bytes": 19086,
+   "sha256": "7e1f98ae3529d4376966994c18149b8597fb421c99c4d8c2bdecf84bad57dd73",
+   "source_url": "https://www.usps.com/ecp/asset/images/SMALL_FRB-00_360x360.jpg"
+  },
+  {
+   "path": "static/images/store/SMALL_FRB-S0.jpg",
+   "bytes": 4354,
+   "sha256": "f630a28d97c1df7cb0634a8a7b9b2d646ea83bb5cc73940f4bb7be6700066bb6",
+   "source_url": "https://www.usps.com/ecp/asset/images/SMALL_FRB-S0.jpg"
+  }
+ ]
+}

@@ -1,26 +1,3 @@
-# Hugging Face dataset holding WebHarbor's heavy static assets.
-# Pin an immutable merged commit SHA, never a moving branch or refs/pr/<n>.
-#
-# Consolidated HF main after merging original asset PRs #8 (Recreation.gov),
-# #15 (CarMax), #25 (BoardGameGeek), #66 (AccuWeather), then CarMax supplement #95.
-# https://huggingface.co/datasets/ChilleD/WebHarbor/discussions/95
-#
-# All 36 archives from the previous global pin
-# 2aaf9d598f3e71cddd17a4efcdfee7dd7c073337 are byte-for-byte unchanged.
-# Recreation.gov, BoardGameGeek and AccuWeather retain their previously reviewed
-# archive bytes. CarMax adds 11 source-backed stock photos; every original file,
-# including its seed, is unchanged. Provenance: sites/carmax/recovered_assets.json.
-# CarMax archive SHA-256:
-# 274ac06abebf353ebb6561ab0647fed5c8a048916dd8867b9dfa951963a8d81d
-#
-# This merged revision contains archives for all 38 registered sites. The two
-# additional archives (bandcamp and drugs_com) are ignored by fetch_assets.sh.
-# Tracked seed migrations/build-generation remain part of the build contract.
+# Required asset PRs are merged, including ESPN HF PR #9.
 repo: ChilleD/WebHarbor
-revision: 9d67d0088a7535e455a331a823b67e3a7d666161
-
-# BabyCenter: immutable merged HF PR #78 revision, preserving all prior assets.
-# https://huggingface.co/datasets/ChilleD/WebHarbor/discussions/78
-# Archive SHA-256: 8b83000a1fad3969968290ae537af0bbf0e0a179284f915827cffadb0fe103f3
-# The tracked migration corrects the shipped seed during fetch/build.
-site.babycenter: 8f3437ffa3b80c606687c49a5c5bbdf158f1c9ce
+revision: fef6c9846d0063b5e9f5b1d1757ce55b96217003

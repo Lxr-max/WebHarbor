@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Register</span></li>
+{% endblock %}
+{% block content %}
+<section class="container login-page">
+  <h1 class="page-heading">Create an Account</h1>
+  <div class="login-row">
+    <form class="login-form" method="post" action="{{ url_for('login', action='create_account') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="name">Your Name:</label>
+        <input class="form-input" name="name" id="name" type="text">
+      </div>
+      <div class="form-field">
+        <label for="email">Email Address:</label>
+        <input class="form-input" name="email" id="email" type="email" required>
+      </div>
+      <div class="form-field">
+        <label for="password">Password (8+ characters):</label>
+        <input class="form-input" name="password" id="password" type="password" autocomplete="off" required>
+      </div>
+      <div class="form-actions">
+        <input type="submit" class="button button--primary" value="Create Account">
+      </div>
+    </form>
+    <div class="new-customer">
+      <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

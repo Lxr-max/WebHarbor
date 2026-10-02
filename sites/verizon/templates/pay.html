@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Pay bill — My Verizon{% endblock %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Make a one-time payment</h1>
+  {% if bill %}
+  <p>Bill for {{ bill.period }} — total ${{ bill.total }}, due {{ bill.due_date }} ({{ bill.status }}).</p>
+  {% else %}
+  <p>You have no outstanding bills right now.</p>
+  {% endif %}
+  {% if bill %}<p>Outstanding balance: ${{ remaining }}</p>
+  <form method="post" action="{{ url_for('account_pay') }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Amount ($)
+      <input type="text" name="amount" value="{{ remaining }}" required>
+    </label>
+    <label>Payment method
+      <select name="method">
+        <option value="Card ending 4242">Debit/Credit card ending 4242</option>
+        <option value="Bank account (ACH ending 8891)">Bank account (ACH ending 8891)</option>
+        <option value="Verizon Visa Card ending 0057">Verizon Visa Card ending 0057</option>
+      </select>
+    </label>
+    <button type="submit" class="btn btn-primary">Submit payment</button>
+  </form>{% endif %}
+</section>
+{% endblock %}

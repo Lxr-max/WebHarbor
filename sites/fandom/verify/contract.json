@@ -1,0 +1,888 @@
+{
+  "Fandom--0": {
+    "task": "Build a short timeline of the MCU heroes Tony Stark, Steve Rogers, and Bruce Banner. Report each first film appearance and check their articles for full birth dates. Identify the earliest dated birth, and explain whether the pages provide enough birth-date information to rank all three.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Tony_Stark(?:/|\\?|$)",
+      "^/wiki/mcu/Steve_Rogers(?:/|\\?|$)",
+      "^/wiki/mcu/Bruce_Banner(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "tony stark",
+          "iron man.*2008",
+          "may 29.*1970"
+        ],
+        "scope": "tony stark",
+        "entity": "tony stark"
+      },
+      {
+        "label": "2",
+        "all": [
+          "steve rogers",
+          "first avenger.*2011",
+          "july 4.*1918"
+        ],
+        "scope": "steve rogers",
+        "entity": "steve rogers"
+      },
+      {
+        "label": "3",
+        "all": [
+          "bruce banner",
+          "incredible hulk.*2008",
+          "no full birth date"
+        ],
+        "scope": null,
+        "entity": "bruce banner"
+      },
+      {
+        "label": "4",
+        "all": [
+          "steve rogers",
+          "earliest"
+        ],
+        "scope": "steve rogers"
+      },
+      {
+        "label": "5",
+        "all": [
+          "missing",
+          "bruce banner",
+          "prevents ranking"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--1": {
+    "task": "I am checking how the MCU wiki distinguishes Thanos from Gamora. Compare their species, current status, and first appearances, explaining the variant distinction shown for Gamora.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Thanos(?:/|\\?|$)",
+      "^/wiki/mcu/Gamora(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "thanos",
+          "titan",
+          "eternal.deviant",
+          "deceased",
+          "avengers.*2012"
+        ],
+        "scope": "thanos",
+        "entity": "thanos"
+      },
+      {
+        "label": "2",
+        "all": [
+          "gamora",
+          "zen.whoberis",
+          "cybernetic",
+          "variant alive",
+          "guardians.*2014"
+        ],
+        "scope": "gamora",
+        "entity": "gamora"
+      },
+      {
+        "label": "3",
+        "all": [
+          "prime gamora died",
+          "2018",
+          "living gamora",
+          "2014 variant"
+        ],
+        "scope": "prime gamora died"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--2": {
+    "task": "Compare Zhongli, Venti, and Raiden Shogun as playable archons in the Genshin Impact wiki. Report each character's element, weapon, constellation, and release version, then identify which was released first.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/genshin/Zhongli(?:/|\\?|$)",
+      "^/wiki/genshin/Venti(?:/|\\?|$)",
+      "^/wiki/genshin/Raiden_Shogun(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "zhongli",
+          "geo",
+          "polearm",
+          "lapis dei",
+          "1\\.1"
+        ],
+        "scope": "zhongli",
+        "entity": "zhongli"
+      },
+      {
+        "label": "2",
+        "all": [
+          "venti",
+          "anemo",
+          "bow",
+          "carmen dei",
+          "1\\.0"
+        ],
+        "scope": "venti",
+        "entity": "venti"
+      },
+      {
+        "label": "3",
+        "all": [
+          "raiden shogun",
+          "electro",
+          "polearm",
+          "imperatrix umbrosa",
+          "2\\.1"
+        ],
+        "scope": "raiden shogun",
+        "entity": "raiden shogun"
+      },
+      {
+        "label": "4",
+        "all": [
+          "venti",
+          "released first"
+        ],
+        "scope": "venti"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--3": {
+    "task": "Help me compare the fighting styles of Mace Windu, Yoda, and Obi-Wan Kenobi on Wookieepedia. Report each lightsaber color and the lightsaber form described in the article.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/starwars/Mace_Windu(?:/|\\?|$)",
+      "^/wiki/starwars/Yoda(?:/|\\?|$)",
+      "^/wiki/starwars/Obi\\-Wan_Kenobi(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mace windu",
+          "purple",
+          "vii",
+          "vaapad"
+        ],
+        "scope": "mace windu",
+        "entity": "mace windu"
+      },
+      {
+        "label": "2",
+        "all": [
+          "yoda",
+          "green",
+          "iv",
+          "ataru"
+        ],
+        "scope": "yoda",
+        "entity": "yoda"
+      },
+      {
+        "label": "3",
+        "all": [
+          "obi.wan kenobi",
+          "blue",
+          "iii",
+          "soresu"
+        ],
+        "scope": "obi.wan kenobi",
+        "entity": "obi.wan kenobi"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--4": {
+    "task": "Use the MCU Guardians of the Galaxy category to prepare a roster of its character articles. Read the listed profiles and report each member's species and status, distinguishing any living variant from the original character.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Special:Categories(?:/|\\?|$)",
+      "^/wiki/mcu/Category:Guardians_of_the_Galaxy(?:/|\\?|$)",
+      "^/wiki/mcu/Gamora(?:/|\\?|$)",
+      "^/wiki/mcu/Groot(?:/|\\?|$)",
+      "^/wiki/mcu/Peter_Quill(?:/|\\?|$)",
+      "^/wiki/mcu/Rocket_Raccoon(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "gamora",
+          "zen.whoberis",
+          "variant alive",
+          "prime",
+          "2018",
+          "2014"
+        ],
+        "scope": "gamora",
+        "entity": "gamora"
+      },
+      {
+        "label": "2",
+        "all": [
+          "groot",
+          "flora colossus",
+          "alive"
+        ],
+        "scope": "groot",
+        "entity": "groot"
+      },
+      {
+        "label": "3",
+        "all": [
+          "peter quill",
+          "human/celestial",
+          "alive"
+        ],
+        "scope": "peter quill",
+        "entity": "peter quill"
+      },
+      {
+        "label": "4",
+        "all": [
+          "rocket raccoon",
+          "cybernetic",
+          "raccoon",
+          "alive"
+        ],
+        "scope": "rocket raccoon",
+        "entity": "rocket raccoon"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--5": {
+    "task": "I am choosing between the five-star Pyro polearm characters Arlecchino and Hu Tao. Find them through the Genshin Five-Star Characters category and compare their regions, constellations, and release versions.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/genshin/Special:Categories(?:/|\\?|$)",
+      "^/wiki/genshin/Category:Five\\-Star_Characters(?:/|\\?|$)",
+      "^/wiki/genshin/Arlecchino(?:/|\\?|$)",
+      "^/wiki/genshin/Hu_Tao(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "arlecchino",
+          "snezhnaya",
+          "ignis purgatorius",
+          "4\\.6"
+        ],
+        "scope": "arlecchino",
+        "entity": "arlecchino"
+      },
+      {
+        "label": "2",
+        "all": [
+          "hu tao",
+          "liyue",
+          "papilio charontis",
+          "1\\.3"
+        ],
+        "scope": "hu tao",
+        "entity": "hu tao"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--6": {
+    "task": "Review the newest non-bot edit on Wookieepedia. Hide bot edits in Recent Changes, report how many revision rows remain, then inspect the newest listed edit's article history and comparison with its predecessor. Report the article, editor, edit summary, and actual byte change.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/starwars/Special:RecentChanges(?:/|\\?|$)",
+      "^/wiki/starwars/Mon_Mothma(?:/|\\?|$)",
+      "^/wiki/starwars/Mon_Mothma/history(?:/|\\?|$)",
+      "^/wiki/starwars/Mon_Mothma/diff/413/414(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "200",
+          "revision rows"
+        ],
+        "scope": "200"
+      },
+      {
+        "label": "2",
+        "all": [
+          "mon mothma",
+          "starkfan42",
+          "reverted vandalism"
+        ],
+        "scope": "mon mothma"
+      },
+      {
+        "label": "3",
+        "all": [
+          "0 bytes",
+          "717 bytes"
+        ],
+        "scope": "0 bytes"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--7": {
+    "task": "Audit Tony Stark's MCU article history. Report the revision count and compare the oldest and newest revisions, describing the byte difference and one section added or expanded.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Tony_Stark(?:/|\\?|$)",
+      "^/wiki/mcu/Tony_Stark/history(?:/|\\?|$)",
+      "^/wiki/mcu/Tony_Stark/diff/1/3(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "tony stark",
+          "3 revisions"
+        ],
+        "scope": "tony stark"
+      },
+      {
+        "label": "2",
+        "all": [
+          "oldest",
+          "982 bytes",
+          "newest",
+          "2025 bytes",
+          "1043 bytes"
+        ],
+        "scope": "oldest"
+      },
+      {
+        "label": "3",
+        "all": [
+          "legacy",
+          "absent from the oldest"
+        ],
+        "scope": "legacy"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--8": {
+    "task": "Compare the two newest revisions of Hu Tao and Tony Stark in their respective wikis. Report the actual byte change for each comparison and explain which one changes the article text.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/genshin/Hu_Tao(?:/|\\?|$)",
+      "^/wiki/genshin/Hu_Tao/history(?:/|\\?|$)",
+      "^/wiki/genshin/Hu_Tao/diff/611/612(?:/|\\?|$)",
+      "^/wiki/mcu/Tony_Stark(?:/|\\?|$)",
+      "^/wiki/mcu/Tony_Stark/history(?:/|\\?|$)",
+      "^/wiki/mcu/Tony_Stark/diff/2/3(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "hu tao",
+          "0 bytes",
+          "unchanged"
+        ],
+        "scope": "hu tao"
+      },
+      {
+        "label": "2",
+        "all": [
+          "tony stark",
+          "404 bytes",
+          "changes the article text"
+        ],
+        "scope": "tony stark"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--9": {
+    "task": "Compare Tatooine, Naboo, and Coruscant as Star Wars settings. Report their regions and any climate information their articles provide, noting any missing climate entry. Include Tatooine\u2019s moon count and primary terrain.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/starwars/Tatooine(?:/|\\?|$)",
+      "^/wiki/starwars/Naboo(?:/|\\?|$)",
+      "^/wiki/starwars/Coruscant(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "tatooine",
+          "outer rim",
+          "hot",
+          "arid",
+          "3 moons",
+          "desert"
+        ],
+        "scope": "tatooine",
+        "entity": "tatooine"
+      },
+      {
+        "label": "2",
+        "all": [
+          "naboo",
+          "mid rim",
+          "temperate"
+        ],
+        "scope": "naboo",
+        "entity": "naboo"
+      },
+      {
+        "label": "3",
+        "all": [
+          "coruscant",
+          "core worlds",
+          "no climate entry"
+        ],
+        "scope": null,
+        "entity": "coruscant"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--10": {
+    "task": "Create a Fandom account as TestEditor99 with email testeditor99@example.com and password EditPass!42 so I can follow MCU coverage. Add Tony Stark to my watchlist and confirm it appears there with the new account signed in.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": 86,
+            "email": "testeditor99@example.com",
+            "username": "TestEditor99",
+            "password_hash": {
+              "nonempty": 20
+            },
+            "bio": "",
+            "avatar_color": {
+              "regex": "#[0-9a-f]{6}"
+            },
+            "groups": "autoconfirmed",
+            "joined": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "home_wiki": ""
+          }
+        ],
+        "updated": {}
+      },
+      "watch_items": {
+        "added": [
+          {
+            "user_id": 86,
+            "article_id": 1,
+            "since": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/wiki/mcu/Tony_Stark(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "created testeditor99",
+          "tony stark",
+          "watchlist"
+        ],
+        "scope": "created testeditor99"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ],
+    "password": "EditPass!42"
+  },
+  "Fandom--11": {
+    "task": "Sign in as AliceJ using password MCU_Fan_Alice2024, open Thanos on the MCU wiki, add it to the watchlist, and confirm it appears on the MCU watchlist.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "user_id": 1,
+            "article_id": 18,
+            "since": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/wiki/mcu/Thanos(?:/|\\?|$)",
+      "^/wiki/mcu/Special:Watchlist(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "alicej",
+          "thanos",
+          "watchlist"
+        ],
+        "scope": "alicej"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--12": {
+    "task": "Sign in as BobK using password StarWars_Bob_42. Append a new section named Apocrypha with the sentence 'Unverified rumors persist about Luke's role in the High Republic era.' to Luke Skywalker, save it with summary 'Add Apocrypha note', confirm the section on the article, and confirm the summary in article history.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {
+      "articles": {
+        "added": [],
+        "updated": {
+          "[72]": {
+            "content": "'''Luke Skywalker''' was a [[Jedi]] Master, son of [[Anakin Skywalker]], and the hero who redeemed his father and ended the [[Galactic Empire]].\n\n== Biography ==\n\nLuke Skywalker was born in 19 BBY on [[Polis Massa]] and raised by his uncle and aunt on [[Tatooine]]. He destroyed the first [[Death Star]] at the [[Battle of Yavin]] in 0 BBY, trained briefly under [[Yoda]] on [[Dagobah]], and turned [[Darth Vader]] back to the light in 4 ABY. He later trained [[Rey]] and projected himself across the galaxy to face [[Kylo Ren]] on [[Crait]] in 34 ABY.\n\n== Abilities ==\n\n* Master of the [[Force]] \u2014 telekinesis, mind influence, projection\n* Master lightsaber duelist (Form V \u2014 Djem So)\n* Skilled pilot of T-65B X-wing starfighter\n* Mechanically gifted; built his own green-bladed lightsaber\n\n== Relationships ==\n\n* [[Anakin Skywalker]] &mdash; father\n* [[Padm\u00e9 Amidala]] &mdash; mother\n* [[Leia Organa]] &mdash; twin sister\n* [[Han Solo]] &mdash; brother-in-law\n* [[Rey]] &mdash; padawan\n* [[Yoda]] &mdash; master\n\n== Appearances ==\n\n* ''[[A New Hope]]''\n* ''[[The Empire Strikes Back]]''\n* ''[[Return of the Jedi]]''\n* ''[[The Force Awakens]]''\n* ''[[The Last Jedi]]''\n* ''[[The Rise of Skywalker]]''\n* ''[[The Mandalorian]]''\n* ''[[The Book of Boba Fett]]''\n\n== Notable quote ==\n\n''\"No. I am a Jedi, like my father before me.\"''\n\n\n== Apocrypha ==\nUnverified rumors persist about Luke's role in the High Republic era.",
+            "updated_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        }
+      },
+      "revisions": {
+        "added": [
+          {
+            "id": 818,
+            "article_id": 72,
+            "user_id": 2,
+            "author_label": "BobK",
+            "summary": "Add Apocrypha note",
+            "content": "'''Luke Skywalker''' was a [[Jedi]] Master, son of [[Anakin Skywalker]], and the hero who redeemed his father and ended the [[Galactic Empire]].\n\n== Biography ==\n\nLuke Skywalker was born in 19 BBY on [[Polis Massa]] and raised by his uncle and aunt on [[Tatooine]]. He destroyed the first [[Death Star]] at the [[Battle of Yavin]] in 0 BBY, trained briefly under [[Yoda]] on [[Dagobah]], and turned [[Darth Vader]] back to the light in 4 ABY. He later trained [[Rey]] and projected himself across the galaxy to face [[Kylo Ren]] on [[Crait]] in 34 ABY.\n\n== Abilities ==\n\n* Master of the [[Force]] \u2014 telekinesis, mind influence, projection\n* Master lightsaber duelist (Form V \u2014 Djem So)\n* Skilled pilot of T-65B X-wing starfighter\n* Mechanically gifted; built his own green-bladed lightsaber\n\n== Relationships ==\n\n* [[Anakin Skywalker]] &mdash; father\n* [[Padm\u00e9 Amidala]] &mdash; mother\n* [[Leia Organa]] &mdash; twin sister\n* [[Han Solo]] &mdash; brother-in-law\n* [[Rey]] &mdash; padawan\n* [[Yoda]] &mdash; master\n\n== Appearances ==\n\n* ''[[A New Hope]]''\n* ''[[The Empire Strikes Back]]''\n* ''[[Return of the Jedi]]''\n* ''[[The Force Awakens]]''\n* ''[[The Last Jedi]]''\n* ''[[The Rise of Skywalker]]''\n* ''[[The Mandalorian]]''\n* ''[[The Book of Boba Fett]]''\n\n== Notable quote ==\n\n''\"No. I am a Jedi, like my father before me.\"''\n\n\n== Apocrypha ==\nUnverified rumors persist about Luke's role in the High Republic era.",
+            "minor": 0,
+            "bot": 0,
+            "bytes_size": 1423,
+            "bytes_delta": 87,
+            "timestamp": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/wiki/starwars/Luke_Skywalker(?:/|\\?|$)",
+      "^/wiki/starwars/Luke_Skywalker/history(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "saved",
+          "apocrypha",
+          "luke skywalker",
+          "bobk"
+        ],
+        "scope": "saved"
+      },
+      {
+        "label": "2",
+        "all": [
+          "history",
+          "add apocrypha note"
+        ],
+        "scope": null
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--13": {
+    "task": "Sign in as CarolS using password Genshin_Carol_AR60, vote for Liyue in the Genshin Impact community poll, and report the vote count displayed for Liyue after voting.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {
+      "poll_votes": {
+        "added": [
+          {
+            "id": 1224,
+            "poll_id": 3,
+            "user_id": 3,
+            "choice_idx": 1,
+            "timestamp": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "liyue",
+          "vote count",
+          "72"
+        ],
+        "scope": "liyue"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--14": {
+    "task": "Trace how the MCU wiki connects other articles to Tony Stark. From What links here, inspect the first three listed source articles and report their titles and a sentence from each that links or refers to Tony Stark.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Tony_Stark(?:/|\\?|$)",
+      "^/wiki/mcu/Special:WhatLinksHere/Tony_Stark(?:/|\\?|$)",
+      "^/wiki/mcu/Thanos(?:/|\\?|$)",
+      "^/wiki/mcu/Peter_Parker(?:/|\\?|$)",
+      "^/wiki/mcu/Steve_Rogers(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "thanos",
+          "tony stark",
+          "2023"
+        ],
+        "scope": "thanos"
+      },
+      {
+        "label": "2",
+        "all": [
+          "peter parker",
+          "recruited by tony stark"
+        ],
+        "scope": "peter parker"
+      },
+      {
+        "label": "3",
+        "all": [
+          "steve rogers",
+          "opposed tony stark",
+          "sokovia accords"
+        ],
+        "scope": "steve rogers"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--15": {
+    "task": "Sign in as AliceJ using password MCU_Fan_Alice2024. On MCU Discussions, read the pinned thread What is your favorite MCU phase? and join the discussion with a reply saying Phase Three is your favorite because of its Infinity Saga conclusion. Confirm the reply appears under AliceJ and report the updated reply count.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {
+      "forum_posts": {
+        "added": [
+          {
+            "id": 784,
+            "thread_id": 1,
+            "user_id": 1,
+            "author_label": "AliceJ",
+            "body": {
+              "contains": [
+                "phase three|phase 3",
+                "favorite",
+                "infinity saga",
+                "conclusion"
+              ]
+            },
+            "timestamp": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            },
+            "likes": 0
+          }
+        ],
+        "updated": {}
+      },
+      "forum_threads": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "updated_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d.*"
+            }
+          }
+        }
+      }
+    },
+    "paths": [
+      "^/wiki/mcu/Forum(?:/|\\?|$)",
+      "^/wiki/mcu/Forum/Thread/1(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "alicej",
+          "phase three",
+          "infinity saga"
+        ],
+        "scope": "alicej"
+      },
+      {
+        "label": "2",
+        "all": [
+          "reply count",
+          "6"
+        ],
+        "scope": "reply count"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--16": {
+    "task": "Open the community poll list for each supported wiki and report the question text of every active poll.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/mcu/Special:Polls(?:/|\\?|$)",
+      "^/wiki/starwars/Special:Polls(?:/|\\?|$)",
+      "^/wiki/genshin/Special:Polls(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mcu",
+          "who is your favorite avenger"
+        ],
+        "scope": "mcu"
+      },
+      {
+        "label": "2",
+        "all": [
+          "wookieepedia",
+          "greatest jedi of all time"
+        ],
+        "scope": "wookieepedia"
+      },
+      {
+        "label": "3",
+        "all": [
+          "genshin impact",
+          "which region has the best music"
+        ],
+        "scope": "genshin impact"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  },
+  "Fandom--17": {
+    "task": "I am choosing an illustration for a Mondstadt article. Search the Genshin Impact Files page for Mondstadt and compare Mondstadt Cathedral with Mondstadt Concept Painting. Report each uploader, dimensions, and listed usage license; identify whether either is wider.",
+    "initial_digest": "ce51a638af0e4e1c30a73c08c36e8bcfc8c9a9814e1758c80d2b3e2de0978b8d",
+    "state": {},
+    "paths": [
+      "^/wiki/genshin/Special:ListFiles(?:/|\\?|$)",
+      "^/wiki/genshin/File:genshin_file_mondstadt_concept_painting\\.jpg(?:/|\\?|$)",
+      "^/wiki/genshin/File:genshin_file_mondstadt_cathedral\\.jpg(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "1",
+        "all": [
+          "mondstadt cathedral",
+          "infinityscribe",
+          "800.*450",
+          "fair use"
+        ],
+        "scope": "mondstadt cathedral",
+        "entity": "mondstadt cathedral"
+      },
+      {
+        "label": "2",
+        "all": [
+          "mondstadt concept painting",
+          "bobk",
+          "800.*400",
+          "fair use"
+        ],
+        "scope": "mondstadt concept painting",
+        "entity": "mondstadt concept painting"
+      },
+      {
+        "label": "3",
+        "all": [
+          "neither is wider|same width|both.*width 800"
+        ],
+        "scope": "neither is wider|same width|both.*width 800"
+      }
+    ],
+    "view_tables": [
+      "articles",
+      "forum_threads"
+    ]
+  }
+}

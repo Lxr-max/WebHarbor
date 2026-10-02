@@ -1,0 +1,1858 @@
+{
+  "Steam--0": {
+    "task": "Alice wants an inexpensive RPG for her wishlist. Among discounted RPGs under $20, find the cheapest, check its minimum Windows requirements and user-review summary, and save it to her wishlist. Report the game, sale price, release date and review count. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "game_id": 48,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/582660/black\\-desert/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Black Desert price amount 0",
+        "black\\s+desert.{0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Black Desert price amount 1",
+        "black\\s+desert.{0,160}?0\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Black Desert discount",
+        "black\\s+desert.{0,160}?90\\s*percent"
+      ],
+      [
+        "Black Desert release",
+        "black\\s+desert.{0,180}?may\\s+24,\\s+2017"
+      ],
+      [
+        "Black Desert reviews",
+        "black\\s+desert.{0,220}?mostly\\s+positive"
+      ],
+      [
+        "Black Desert reviews percent",
+        "black\\s+desert.{0,350}?71\\s*percent"
+      ],
+      [
+        "Black Desert system requirements MEMORY",
+        "black\\s+desert.{0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Black Desert reviews count",
+        "black\\s+desert.{0,400}?51519\\s+(?:user\\s+)?reviews"
+      ],
+      [
+        "Black Desert minimum OS",
+        "black\\s+desert.{0,4500}?windows\\s+10\\s+\\(64\\-bit\\)"
+      ],
+      [
+        "Black Desert minimum PROCESSOR",
+        "black\\s+desert.{0,4500}?intel\\s+core\\s+i3\\s+\\(4th\\s+generation\\)"
+      ],
+      [
+        "Black Desert minimum MEMORY",
+        "black\\s+desert.{0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Black Desert minimum STORAGE",
+        "black\\s+desert.{0,4500}?80\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Black Desert minimum GRAPHICS",
+        "black\\s+desert.{0,4500}?geforce\\s+gtx\\s+970,\\s+radeon\\s+rx\\s+480"
+      ]
+    ]
+  },
+  "Steam--1": {
+    "task": "Bob wants a discounted Linux game. Find the highest-priced game matching those constraints, check its Linux requirements and user-review summary, and add it to his wishlist. Report its name, regular and sale prices, discount and Linux memory requirement. Use bob.s@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "game_id": 31,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/281990/stellaris/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Stellaris price amount 0",
+        "stellaris.{0,160}?49\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Stellaris price amount 1",
+        "stellaris.{0,160}?14\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Stellaris discount",
+        "stellaris.{0,160}?70\\s*percent"
+      ],
+      [
+        "Stellaris reviews",
+        "stellaris.{0,220}?very\\s+positive"
+      ],
+      [
+        "Stellaris reviews percent",
+        "stellaris.{0,350}?86\\s*percent"
+      ],
+      [
+        "Stellaris system requirements MEMORY",
+        "stellaris.{0,4000}?4\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Stellaris minimum OS",
+        "stellaris.{0,4500}?ubuntu\\s+22\\.04\\s+x64"
+      ],
+      [
+        "Stellaris minimum PROCESSOR",
+        "stellaris.{0,4500}?intel\\s+icore\\s+i3\\-530\\s+or\\s+amd\\s+fx\\-6350"
+      ],
+      [
+        "Stellaris minimum MEMORY",
+        "stellaris.{0,4500}?4\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Stellaris minimum STORAGE",
+        "stellaris.{0,4500}?12\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Stellaris minimum GRAPHICS",
+        "stellaris.{0,4500}?nvidia\\s+geforce\\s+gtx\\s+460\\s+or\\s+amd\\s+ati\\s+radeon\\s+hd\\s+5870\\s+\\(1gb\\s+vram\\),\\s+or\\s+amd\\s+radeon\\s+rx\\s+vega\\s+11\\s+or\\s+intel\\s+hd\\s+graphics\\s+4600"
+      ]
+    ]
+  },
+  "Steam--2": {
+    "task": "Bob is comparing Counter-Strike 2 and Dota 2 for his PC. Report both games' minimum Windows RAM, supported systems and review summaries, and which needs more RAM. Read Dota 2's newest positive review and report its author and playtime, then add both games to Bob's wishlist. Use bob.s@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "game_id": 18,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "game_id": 16,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/730/counter\\-strike\\-2/(?:\\?|$)",
+      "/app/570/dota\\-2/(?:\\?|$)",
+      "/app/570/reviews/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Counter-Strike 2 release",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,180}?aug\\s+21,\\s+2012"
+      ],
+      [
+        "Counter-Strike 2 reviews",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Counter-Strike 2 reviews percent",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,350}?86\\s*percent"
+      ],
+      [
+        "Counter-Strike 2 system requirements MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Dota 2 release",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,180}?jul\\s+9,\\s+2013"
+      ],
+      [
+        "Dota 2 reviews",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Dota 2 reviews percent",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,350}?88\\s*percent"
+      ],
+      [
+        "Dota 2 system requirements MEMORY",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4000}?4\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Dota 2 newest positive review author",
+        "real\\s+zakhar"
+      ],
+      [
+        "Dota 2 newest positive review playtime",
+        "276\\.4\\s*hours\\s+on\\s+record"
+      ],
+      [
+        "RAM comparison counter-strike",
+        "\\bcounter\\-strike\\b"
+      ],
+      [
+        "RAM comparison requires",
+        "\\brequires\\b"
+      ],
+      [
+        "RAM comparison windows",
+        "\\bwindows\\b"
+      ],
+      [
+        "Counter-Strike 2 platforms win",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Counter-Strike 2 platforms linux",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2)\\b).){0,60}?\\blinux\\b"
+      ],
+      [
+        "Counter-Strike 2 minimum MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Dota 2 platforms win",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Dota 2 platforms mac",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,60}?\\bmac(?:os)?\\b"
+      ],
+      [
+        "Dota 2 platforms linux",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,60}?\\blinux\\b"
+      ],
+      [
+        "Dota 2 minimum MEMORY",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4500}?4\\s+gigabytes\\s+memory"
+      ]
+    ]
+  },
+  "Steam--3": {
+    "task": "Carol wants to replace Terraria on her wishlist with Hades II. Check Hades II's price, discount, release date and minimum Windows requirements, remove Terraria while keeping the other saved games, and add Hades II. Report the final wishlist. Use carol.m@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "game_id": 65,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[6]"
+        ]
+      }
+    },
+    "paths": [
+      "/app/1145350/hades\\-ii/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Hades II price amount 0",
+        "hades\\s+ii.{0,160}?29\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades II price amount 1",
+        "hades\\s+ii.{0,160}?20\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades II discount",
+        "hades\\s+ii.{0,160}?30\\s*percent"
+      ],
+      [
+        "Hades II release",
+        "hades\\s+ii.{0,180}?sep\\s+25,\\s+2025"
+      ],
+      [
+        "Hades II system requirements MEMORY",
+        "hades\\s+ii.{0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Hades II minimum OS",
+        "hades\\s+ii.{0,4500}?windows\\s+10\\s+64\\-bit"
+      ],
+      [
+        "Hades II minimum PROCESSOR",
+        "hades\\s+ii.{0,4500}?dual\\s+core\\s+2\\.4\\s+ghz"
+      ],
+      [
+        "Hades II minimum MEMORY",
+        "hades\\s+ii.{0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Hades II minimum STORAGE",
+        "hades\\s+ii.{0,4500}?11\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Hades II minimum GRAPHICS",
+        "hades\\s+ii.{0,4500}?geforce\\s+gtx\\s+950,\\s+radeon\\s+r7\\s+360,\\s+or\\s+intel\\s+hd\\s+graphics\\s+630"
+      ]
+    ]
+  },
+  "Steam--4": {
+    "task": "Buy Bob one copy of ELDEN RING and the Portal Bundle in the mirror checkout. Confirm the bundle's games and price before placing the order, using 7 Coast Road, Austin, TX 78701 and Mastercard. Report the order number, purchased items and total. Use bob.s@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "order_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "game",
+            "game_id": 72,
+            "bundle_id": null,
+            "title": "ELDEN RING",
+            "unit_price": 5999,
+            "qty": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "bundle",
+            "game_id": null,
+            "bundle_id": 2,
+            "title": "Portal Bundle",
+            "unit_price": 1498,
+            "qty": 1
+          }
+        ]
+      },
+      "orders": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_no": {
+              "regex": "ST-\\d+"
+            },
+            "user_id": 2,
+            "email": "bob.s@test.com",
+            "full_name": "Bob Smith",
+            "address1": "7 Coast Road",
+            "city": "Austin",
+            "state": "TX",
+            "zipcode": "78701",
+            "payment_method": "Mastercard",
+            "subtotal": 7497,
+            "tax": 0,
+            "total": 7497,
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1245620/elden\\-ring/(?:\\?|$)",
+      "/app/620/portal\\-2/(?:\\?|$)",
+      "/bundle/234/(?:\\?|$)",
+      "/order/ST\\-1004/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "ELDEN RING price amount 0",
+        "elden\\s+ring(?:(?!\\b(?:portal\\s+2)\\b).){0,160}?59\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Portal 2 price amount 0",
+        "portal\\s+2(?:(?!\\b(?:elden\\s+ring)\\b).){0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Portal Bundle bundle bundle",
+        "\\bbundle\\b"
+      ],
+      [
+        "Portal Bundle bundle every",
+        "\\bevery\\b"
+      ],
+      [
+        "Portal Bundle bundle price",
+        "\\bprice\\b"
+      ],
+      [
+        "Portal Bundle bundle amount 0",
+        "19\\.98"
+      ],
+      [
+        "Portal Bundle bundle amount 1",
+        "14\\.98"
+      ],
+      [
+        "Portal Bundle bundle amount 2",
+        "5\\.00"
+      ],
+      [
+        "Portal Bundle bundle amount 3",
+        "9\\.99"
+      ],
+      [
+        "order confirmation",
+        "\\bst-\\d+\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "order_no"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Steam--5": {
+    "task": "Carol wants the cheaper of the two games with the biggest percentage discounts on Specials. Compare their regular prices, sale prices and dollar savings, then check the cheaper game's review summary and minimum Windows requirements before adding it to her wishlist. Report the chosen game and comparison. Use carol.m@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "game_id": 48,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/582660/black\\-desert/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Black Desert dollar savings",
+        "black\\s+desert.{0,200}?savings.{0,35}?9\\.00(?!\\d|\\.\\d)"
+      ],
+      [
+        "Tom Clancy\u2019s The Division\u00ae 2 dollar savings",
+        "tom\\s+clancy's\\s+the\\s+division\\s+2.{0,200}?savings.{0,35}?27\\.00(?!\\d|\\.\\d)"
+      ],
+      [
+        "Black Desert price amount 0",
+        "black\\s+desert.{0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Black Desert price amount 1",
+        "black\\s+desert.{0,160}?0\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Black Desert discount",
+        "black\\s+desert.{0,160}?90\\s*percent"
+      ],
+      [
+        "Black Desert reviews",
+        "black\\s+desert.{0,220}?mostly\\s+positive"
+      ],
+      [
+        "Black Desert reviews percent",
+        "black\\s+desert.{0,350}?71\\s*percent"
+      ],
+      [
+        "Black Desert system requirements MEMORY",
+        "black\\s+desert.{0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Black Desert minimum OS",
+        "black\\s+desert.{0,4500}?windows\\s+10\\s+\\(64\\-bit\\)"
+      ],
+      [
+        "Black Desert minimum PROCESSOR",
+        "black\\s+desert.{0,4500}?intel\\s+core\\s+i3\\s+\\(4th\\s+generation\\)"
+      ],
+      [
+        "Black Desert minimum MEMORY",
+        "black\\s+desert.{0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Black Desert minimum STORAGE",
+        "black\\s+desert.{0,4500}?80\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Black Desert minimum GRAPHICS",
+        "black\\s+desert.{0,4500}?geforce\\s+gtx\\s+970,\\s+radeon\\s+rx\\s+480"
+      ]
+    ]
+  },
+  "Steam--6": {
+    "task": "Help me assess complaints about Stellaris before buying it. Review its overall rating and the negative-review subset, comparing the newest negative review with the most helpful negative review. Report the two authors, their playtimes and main complaints, and the game's current price and discount.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {},
+    "paths": [
+      "/app/281990/stellaris/(?:\\?|$)",
+      "/app/281990/reviews/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Stellaris price amount 0",
+        "stellaris.{0,160}?49\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Stellaris price amount 1",
+        "stellaris.{0,160}?14\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Stellaris discount",
+        "stellaris.{0,160}?70\\s*percent"
+      ],
+      [
+        "Stellaris release",
+        "stellaris.{0,180}?may\\s+9,\\s+2016"
+      ],
+      [
+        "Stellaris reviews",
+        "stellaris.{0,220}?very\\s+positive"
+      ],
+      [
+        "Stellaris reviews percent",
+        "stellaris.{0,350}?86\\s*percent"
+      ],
+      [
+        "Newest negative review author",
+        "cobble\\s+k\\s+stone"
+      ],
+      [
+        "Newest negative review playtime",
+        "28\\.3\\s*hours\\s+on\\s+record"
+      ],
+      [
+        "review complaint",
+        "(?:generative\\s+ai|ai[- ]generated)"
+      ]
+    ]
+  },
+  "Steam--7": {
+    "task": "Dana wants to explore Valve's premium catalog. From Counter-Strike 2, find Valve's developer roster, identify its most expensive game, and check that game's release date, review summary and minimum Windows requirements. Add that game to Dana's wishlist and report its name and price. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 44,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/730/counter\\-strike\\-2/(?:\\?|$)",
+      "/developer/valve/(?:\\?|$)",
+      "/app/546560/half\\-life\\-alyx/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Counter-Strike 2 price",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,90}?free"
+      ],
+      [
+        "Counter-Strike 2 release",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,180}?aug\\s+21,\\s+2012"
+      ],
+      [
+        "Counter-Strike 2 reviews",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Counter-Strike 2 reviews percent",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,350}?86\\s*percent"
+      ],
+      [
+        "Counter-Strike 2 system requirements MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Half-Life: Alyx price amount 0",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,160}?59\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Half-Life: Alyx release",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,180}?mar\\s+23,\\s+2020"
+      ],
+      [
+        "Half-Life: Alyx reviews",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,220}?overwhelmingly\\s+positive"
+      ],
+      [
+        "Half-Life: Alyx reviews percent",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,350}?98\\s*percent"
+      ],
+      [
+        "Half-Life: Alyx system requirements MEMORY",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4000}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Counter-Strike 2 minimum OS",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4500}?windows\\s+10"
+      ],
+      [
+        "Counter-Strike 2 minimum PROCESSOR",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4500}?4\\s+hardware\\s+cpu\\s+threads\\s+intel\\s+core\\s+i5\\s+750\\s+or\\s+higher"
+      ],
+      [
+        "Counter-Strike 2 minimum MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Counter-Strike 2 minimum STORAGE",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4500}?85\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Counter-Strike 2 minimum GRAPHICS",
+        "counter\\-strike\\s+2(?:(?!\\b(?:half\\-life\\s+alyx)\\b).){0,4500}?video\\s+card\\s+must\\s+be\\s+1\\s+gigabytes\\s+or\\s+more\\s+and\\s+should\\s+be\\s+a\\s+directx\\s+11\\-compatible\\s+with\\s+support\\s+for\\s+shader\\s+model\\s+5\\.0"
+      ],
+      [
+        "Half-Life: Alyx minimum OS",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4500}?windows\\s+10"
+      ],
+      [
+        "Half-Life: Alyx minimum PROCESSOR",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4500}?core\\s+i5\\-7500\\s+/\\s+ryzen\\s+5\\s+1600"
+      ],
+      [
+        "Half-Life: Alyx minimum MEMORY",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4500}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Half-Life: Alyx minimum GRAPHICS",
+        "half\\-life\\s+alyx(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,4500}?gtx\\s+1060\\s+/\\s+rx\\s+580\\s+6gb\\s+vram"
+      ]
+    ]
+  },
+  "Steam--8": {
+    "task": "Compare the latest updates for Counter-Strike 2 and Dota 2. Open each game's newest news post and report its title, feed, publication time and main change, then state which post is more recent. Use the captured store news, without changing any account state.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {},
+    "paths": [
+      "/app/730/counter\\-strike\\-2/(?:\\?|$)",
+      "/news/730/(?:\\?|$)",
+      "/news/item/1845383656379136/(?:\\?|$)",
+      "/app/570/dota\\-2/(?:\\?|$)",
+      "/news/570/(?:\\?|$)",
+      "/news/item/1843481262705400/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Counter-Strike 2 release",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,180}?aug\\s+21,\\s+2012"
+      ],
+      [
+        "Counter-Strike 2 latest news title",
+        "counter\\-strike\\s+2\\s+update"
+      ],
+      [
+        "Counter-Strike 2 latest news timestamp",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2)\\b).){0,500}?september\\s+30,\\s+2026\\s+at\\s+22:46\\s+utc"
+      ],
+      [
+        "Dota 2 release",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,180}?jul\\s+9,\\s+2013"
+      ],
+      [
+        "Dota 2 latest news title",
+        "7\\.41f\\s+gameplay\\s+patch"
+      ],
+      [
+        "Dota 2 latest news timestamp",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2)\\b).){0,500}?september\\s+15,\\s+2026\\s+at\\s+18:44\\s+utc"
+      ],
+      [
+        "More recent update counter-strike",
+        "\\bcounter\\-strike\\b"
+      ],
+      [
+        "Counter Strike change",
+        "clipping.{0,30}?rush|crosshair.{0,80}?(?:color|colour|quadrant|inaccuracy)"
+      ],
+      [
+        "Dota gameplay patch",
+        "7\\.41f"
+      ],
+      [
+        "more recent CS2",
+        "(?:more recent|newer|newest).{0,65}?counter-strike\\s+2|counter-strike\\s+2.{0,65}?(?:more recent|newer|newest)"
+      ]
+    ]
+  },
+  "Steam--9": {
+    "task": "Alice wants both Portal games. Compare the Portal Bundle's price with buying its listed items separately and report the savings, then buy the bundle through the mirror checkout using 42 Pipeline Way, Bellevue, WA 98004 and Visa. Report the order number and total and confirm the bundle appears on the order. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "order_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "bundle",
+            "game_id": null,
+            "bundle_id": 2,
+            "title": "Portal Bundle",
+            "unit_price": 1498,
+            "qty": 1
+          }
+        ]
+      },
+      "orders": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_no": {
+              "regex": "ST-\\d+"
+            },
+            "user_id": 1,
+            "email": "alice.j@test.com",
+            "full_name": "Alice Johnson",
+            "address1": "42 Pipeline Way",
+            "city": "Bellevue",
+            "state": "WA",
+            "zipcode": "98004",
+            "payment_method": "Visa",
+            "subtotal": 1498,
+            "tax": 0,
+            "total": 1498,
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/620/portal\\-2/(?:\\?|$)",
+      "/bundle/234/(?:\\?|$)",
+      "/order/ST\\-1004/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Portal 2 price amount 0",
+        "portal\\s+2.{0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Portal Bundle bundle bundle",
+        "\\bbundle\\b"
+      ],
+      [
+        "Portal Bundle bundle every",
+        "\\bevery\\b"
+      ],
+      [
+        "Portal Bundle bundle price",
+        "\\bprice\\b"
+      ],
+      [
+        "Portal Bundle bundle amount 0",
+        "19\\.98"
+      ],
+      [
+        "Portal Bundle bundle amount 1",
+        "14\\.98"
+      ],
+      [
+        "Portal Bundle bundle amount 2",
+        "5\\.00"
+      ],
+      [
+        "Portal Bundle bundle amount 3",
+        "9\\.99"
+      ],
+      [
+        "order confirmation",
+        "\\bst-\\d+\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "order_no"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Steam--10": {
+    "task": "Create Frank Nova's account with frank.n@test.com and password Ocean2026!. Find the first free Action game when sorted by price, check its minimum Windows requirements, review summary and review count, and add it to Frank's wishlist. Sign out and back in to confirm the saved game persists.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Frank Nova",
+            "email": "frank.n@test.com",
+            "pw_hash": {
+              "bcrypt_password": "Ocean2026!"
+            }
+          }
+        ]
+      },
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "game_id": 13,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/440/team\\-fortress\\-2/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Team Fortress 2 price",
+        "team\\s+fortress\\s+2.{0,90}?free"
+      ],
+      [
+        "Team Fortress 2 reviews",
+        "team\\s+fortress\\s+2.{0,220}?very\\s+positive"
+      ],
+      [
+        "Team Fortress 2 reviews percent",
+        "team\\s+fortress\\s+2.{0,350}?90\\s*percent"
+      ],
+      [
+        "Team Fortress 2 system requirements MEMORY",
+        "team\\s+fortress\\s+2.{0,4000}?512\\s+megabytes\\s+memory"
+      ],
+      [
+        "Team Fortress 2 reviews count",
+        "team\\s+fortress\\s+2.{0,400}?743012\\s+(?:user\\s+)?reviews"
+      ],
+      [
+        "Team Fortress 2 minimum OS",
+        "team\\s+fortress\\s+2.{0,4500}?windows\\s+7\\s+\\(32/64\\-bit\\)/vista/xp"
+      ],
+      [
+        "Team Fortress 2 minimum PROCESSOR",
+        "team\\s+fortress\\s+2.{0,4500}?1\\.7\\s+ghz\\s+processor\\s+or\\s+better"
+      ],
+      [
+        "Team Fortress 2 minimum MEMORY",
+        "team\\s+fortress\\s+2.{0,4500}?512\\s+megabytes\\s+memory"
+      ],
+      [
+        "Team Fortress 2 minimum STORAGE",
+        "team\\s+fortress\\s+2.{0,4500}?15\\s+gigabytes\\s+available\\s+space"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "wishlist_items",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "Steam--11": {
+    "task": "Dana is looking for a recent Indie game. Identify the newest release in the Indie section, check its price, discount status, review summary and minimum Windows requirements, and read its newest user review for the author's playtime and verdict. Add the game to Dana's wishlist. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 86,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1867240/wardogs/(?:\\?|$)",
+      "/app/1867240/reviews/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "WARDOGS price amount 0",
+        "wardogs.{0,160}?39\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "WARDOGS release",
+        "wardogs.{0,180}?sep\\s+10,\\s+2026"
+      ],
+      [
+        "WARDOGS reviews",
+        "wardogs.{0,220}?very\\s+positive"
+      ],
+      [
+        "WARDOGS reviews percent",
+        "wardogs.{0,350}?80\\s*percent"
+      ],
+      [
+        "WARDOGS system requirements MEMORY",
+        "wardogs.{0,4000}?16\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Newest review author",
+        "takhaos"
+      ],
+      [
+        "Newest review playtime",
+        "12\\.5\\s*hours\\s+on\\s+record"
+      ],
+      [
+        "WARDOGS minimum OS",
+        "wardogs.{0,4500}?windows\\s+10"
+      ],
+      [
+        "WARDOGS minimum PROCESSOR",
+        "wardogs.{0,4500}?intel\\s+core\\s+i5\\s+8600,\\s+amd\\s+ryzen\\s+5\\s+3500"
+      ],
+      [
+        "WARDOGS minimum MEMORY",
+        "wardogs.{0,4500}?16\\s+gigabytes\\s+memory"
+      ],
+      [
+        "WARDOGS minimum STORAGE",
+        "wardogs.{0,4500}?50\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "WARDOGS minimum GRAPHICS",
+        "wardogs.{0,4500}?nvidia\\s+gtx\\s+1660,\\s+radeon\\s+rx\\s+590"
+      ]
+    ]
+  },
+  "Steam--12": {
+    "task": "Alice wants to buy Left 4 Dead 2. Check its supported operating systems and minimum Windows requirements, then purchase it through the mirror checkout using 42 Pipeline Way, Bellevue, WA 98004 and Visa. Confirm the new purchase appears alongside her existing order history and report its order number and total. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "order_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "game",
+            "game_id": 15,
+            "bundle_id": null,
+            "title": "Left 4 Dead 2",
+            "unit_price": 999,
+            "qty": 1
+          }
+        ]
+      },
+      "orders": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_no": {
+              "regex": "ST-\\d+"
+            },
+            "user_id": 1,
+            "email": "alice.j@test.com",
+            "full_name": "Alice Johnson",
+            "address1": "42 Pipeline Way",
+            "city": "Bellevue",
+            "state": "WA",
+            "zipcode": "98004",
+            "payment_method": "Visa",
+            "subtotal": 999,
+            "tax": 0,
+            "total": 999,
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/550/left\\-4\\-dead\\-2/(?:\\?|$)",
+      "/order/ST\\-1004/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Left 4 Dead 2 price amount 0",
+        "left\\s+4\\s+dead\\s+2.{0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Left 4 Dead 2 system requirements MEMORY",
+        "left\\s+4\\s+dead\\s+2.{0,4000}?2\\s+gigabytes\\s+memory"
+      ],
+      [
+        "order confirmation",
+        "\\bst-\\d+\\b"
+      ],
+      [
+        "Left 4 Dead 2 platforms win",
+        "left\\s+4\\s+dead\\s+2.{0,200}?(?:platforms|systems|supports?).{0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Left 4 Dead 2 platforms linux",
+        "left\\s+4\\s+dead\\s+2.{0,200}?(?:platforms|systems|supports?).{0,60}?\\blinux\\b"
+      ],
+      [
+        "Left 4 Dead 2 minimum OS",
+        "left\\s+4\\s+dead\\s+2.{0,4500}?windows\\s+7\\s+32/64\\-bit\\s+/\\s+vista\\s+32/64\\s+/\\s+xp"
+      ],
+      [
+        "Left 4 Dead 2 minimum PROCESSOR",
+        "left\\s+4\\s+dead\\s+2.{0,4500}?pentium\\s+4\\s+3\\.0ghz"
+      ],
+      [
+        "Left 4 Dead 2 minimum MEMORY",
+        "left\\s+4\\s+dead\\s+2.{0,4500}?2\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Left 4 Dead 2 minimum STORAGE",
+        "left\\s+4\\s+dead\\s+2.{0,4500}?13\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Left 4 Dead 2 minimum GRAPHICS",
+        "left\\s+4\\s+dead\\s+2.{0,4500}?video\\s+card\\s+with\\s+128\\s+megabytes,\\s+shader\\s+model\\s+2\\.0\\.\\s+ati\\s+x800,\\s+nvidia\\s+6600\\s+or\\s+better"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "order_no"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Steam--13": {
+    "task": "Alice is comparing Action games with Mixed reviews. Sort those matches by price and compare the two cheapest games' minimum Windows processor and RAM requirements and review percentages. Save the cheaper one to her wishlist and report both game names, prices and the chosen game's requirements. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "game_id": 90,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1912410/minecraft\\-dungeons\\-ii/(?:\\?|$)",
+      "/app/2246340/monster\\-hunter\\-wilds/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Minecraft Dungeons II price amount 0",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,160}?29\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Minecraft Dungeons II reviews",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,220}?mixed"
+      ],
+      [
+        "Minecraft Dungeons II reviews percent",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,350}?61\\s*percent"
+      ],
+      [
+        "Minecraft Dungeons II system requirements MEMORY",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Monster Hunter Wilds price amount 0",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,160}?39\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Monster Hunter Wilds reviews",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,220}?mixed"
+      ],
+      [
+        "Monster Hunter Wilds reviews percent",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,350}?68\\s*percent"
+      ],
+      [
+        "Monster Hunter Wilds system requirements MEMORY",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4000}?16\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Minecraft Dungeons II minimum OS",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,4500}?windows\\s+10\\s+64\\-bit\\s+\\(1703\\s+or\\s+newer\\)"
+      ],
+      [
+        "Minecraft Dungeons II minimum PROCESSOR",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,4500}?intel\\s+core\\s+i3\\-8100,\\s+amd\\s+ryzen\\s+3\\s+2200g\\s+or\\s+equivalent"
+      ],
+      [
+        "Minecraft Dungeons II minimum MEMORY",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Minecraft Dungeons II minimum GRAPHICS",
+        "minecraft\\s+dungeons\\s+ii(?:(?!\\b(?:monster\\s+hunter\\s+wilds)\\b).){0,4500}?nvidia\\s+geforce\\s+gtx\\s+1050,\\s+amd\\s+radeon\\s+rx\\s+560\\s+or\\s+equivalent\\s+dedicated\\s+graphics\\s+card\\s+with\\s+at\\s+least\\s+2\\s+gigabytes\\s+vram"
+      ],
+      [
+        "Monster Hunter Wilds minimum OS",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4500}?windows10\\s+\\(64\\-bit\\s+required\\)/windows11\\s+\\(64\\-bit\\s+required\\)"
+      ],
+      [
+        "Monster Hunter Wilds minimum PROCESSOR",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4500}?intel\\s+core\\s+i5\\-10400\\s+or\\s+intel\\s+core\\s+i3\\-12100\\s+or\\s+amd\\s+ryzen\\s+5\\s+3600"
+      ],
+      [
+        "Monster Hunter Wilds minimum MEMORY",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4500}?16\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Monster Hunter Wilds minimum STORAGE",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4500}?75\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Monster Hunter Wilds minimum GRAPHICS",
+        "monster\\s+hunter\\s+wilds(?:(?!\\b(?:minecraft\\s+dungeons\\s+ii)\\b).){0,4500}?nvidia\\s+geforce\\s+gtx\\s+1660\\(vram\\s+6gb\\)\\s+or\\s+amd\\s+radeon\\s+rx\\s+5500\\s+xt\\(vram\\s+8gb\\)"
+      ]
+    ]
+  },
+  "Steam--14": {
+    "task": "Dana wants to compare Valve's three free-to-play games, Dota 2, Counter-Strike 2 and Team Fortress 2. Review each store page for supported systems, minimum Windows RAM, review summary, positive percentage and total review count; identify the highest positive percentage and save all three games to her wishlist. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 16,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 18,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 13,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/570/dota\\-2/(?:\\?|$)",
+      "/app/730/counter\\-strike\\-2/(?:\\?|$)",
+      "/app/440/team\\-fortress\\-2/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Dota 2 price",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,90}?free"
+      ],
+      [
+        "Dota 2 reviews",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Dota 2 reviews percent",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,350}?88\\s*percent"
+      ],
+      [
+        "Dota 2 system requirements MEMORY",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,4000}?4\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Counter-Strike 2 price",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,90}?free"
+      ],
+      [
+        "Counter-Strike 2 reviews",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Counter-Strike 2 reviews percent",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,350}?86\\s*percent"
+      ],
+      [
+        "Counter-Strike 2 system requirements MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Team Fortress 2 price",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,90}?free"
+      ],
+      [
+        "Team Fortress 2 reviews",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Team Fortress 2 reviews percent",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,350}?90\\s*percent"
+      ],
+      [
+        "Team Fortress 2 system requirements MEMORY",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,4000}?512\\s+megabytes\\s+memory"
+      ],
+      [
+        "Highest positive-review percentage fortress",
+        "\\bfortress\\b"
+      ],
+      [
+        "Dota 2 reviews count",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,400}?840128\\s+(?:user\\s+)?reviews"
+      ],
+      [
+        "Dota 2 platforms win",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Dota 2 platforms mac",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,60}?\\bmac(?:os)?\\b"
+      ],
+      [
+        "Dota 2 platforms linux",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,60}?\\blinux\\b"
+      ],
+      [
+        "Dota 2 minimum MEMORY",
+        "dota\\s+2(?:(?!\\b(?:counter\\-strike\\s+2|team\\s+fortress\\s+2)\\b).){0,4500}?4\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Counter-Strike 2 reviews count",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,400}?2624184\\s+(?:user\\s+)?reviews"
+      ],
+      [
+        "Counter-Strike 2 platforms win",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Counter-Strike 2 platforms linux",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,60}?\\blinux\\b"
+      ],
+      [
+        "Counter-Strike 2 minimum MEMORY",
+        "counter\\-strike\\s+2(?:(?!\\b(?:dota\\s+2|team\\s+fortress\\s+2)\\b).){0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Team Fortress 2 reviews count",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,400}?743012\\s+(?:user\\s+)?reviews"
+      ],
+      [
+        "Team Fortress 2 platforms win",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Team Fortress 2 platforms linux",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,60}?\\blinux\\b"
+      ],
+      [
+        "Team Fortress 2 minimum MEMORY",
+        "team\\s+fortress\\s+2(?:(?!\\b(?:dota\\s+2|counter\\-strike\\s+2)\\b).){0,4500}?512\\s+megabytes\\s+memory"
+      ]
+    ]
+  },
+  "Steam--15": {
+    "task": "Help me compare ways to buy Dead Cells content. Check the base game's price and its first listed DLC, including that DLC's price and release date. Compare the two bundles linked from Dead Cells, reporting their names, contents, prices and savings, then place the cheaper bundle in the cart without checking out.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": {
+              "regex": "[0-9a-f]{32}"
+            },
+            "kind": "bundle",
+            "game_id": null,
+            "bundle_id": 3,
+            "qty": 1
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/588650/dead\\-cells/(?:\\?|$)",
+      "/app/1204130/dead\\-cells\\-the\\-bad\\-seed/(?:\\?|$)",
+      "/bundle/30317/(?:\\?|$)",
+      "/bundle/46406/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Dead Cells price amount 0",
+        "dead\\s+cells.{0,160}?24\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Dead Cells release",
+        "dead\\s+cells.{0,180}?aug\\s+6,\\s+2018"
+      ],
+      [
+        "Dead Cells: The Bad Seed price amount 0",
+        "dead\\s+cells\\s+the\\s+bad\\s+seed.{0,160}?4\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Dead Cells: The Bad Seed release",
+        "dead\\s+cells\\s+the\\s+bad\\s+seed.{0,180}?feb\\s+11,\\s+2020"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle bundle",
+        "\\bbundle\\b"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle every",
+        "\\bevery\\b"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle price",
+        "\\bprice\\b"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 0",
+        "49\\.95"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 1",
+        "39\\.95"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 2",
+        "10\\.00"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 3",
+        "24\\.99"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 4",
+        "4\\.99"
+      ],
+      [
+        "Dead Cells: Medley of Pain Bundle bundle amount 5",
+        "9\\.99"
+      ],
+      [
+        "Windblown + Dead Cells bundle amount 0",
+        "49\\.98"
+      ],
+      [
+        "Windblown + Dead Cells bundle amount 1",
+        "44\\.98"
+      ],
+      [
+        "Windblown + Dead Cells bundle amount 2",
+        "5\\.00"
+      ]
+    ]
+  },
+  "Steam--16": {
+    "task": "Carol wants the newest Resident Evil Action game in the captured catalog. Compare matching games' release dates and prices, check the newest game's review summary and minimum Windows requirements, then read its latest news post for the title and main update. Add that game to Carol's wishlist. Use carol.m@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "game_id": 92,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/2050650/resident\\-evil\\-4/(?:\\?|$)",
+      "/news/2050650/(?:\\?|$)",
+      "/news/item/1844751498226922/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Resident Evil 4 price amount 0",
+        "resident\\s+evil\\s+4.{0,160}?39\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Resident Evil 4 release",
+        "resident\\s+evil\\s+4.{0,180}?mar\\s+23,\\s+2023"
+      ],
+      [
+        "Resident Evil 4 reviews",
+        "resident\\s+evil\\s+4.{0,220}?overwhelmingly\\s+positive"
+      ],
+      [
+        "Resident Evil 4 reviews percent",
+        "resident\\s+evil\\s+4.{0,350}?96\\s*percent"
+      ],
+      [
+        "Resident Evil 4 system requirements MEMORY",
+        "resident\\s+evil\\s+4.{0,4000}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Resident Evil 4 latest news title",
+        "\u0441\u0440\u0430\u0437\u0443\\s+\u0448\u0435\u0441\u0442\u044c\\s+\u0438\u0433\u0440\\s+\u0441\u0435\u0440\u0438\u0438\\s+resident\\s+evil\\s+\u043f\u0440\u0435\u043e\u0434\u043e\u043b\u0435\u043b\u0438\\s+\u043e\u0442\u043c\u0435\u0442\u043a\u0443\\s+\u0432\\s+3\\s+\u043c\u0438\u043b\u043b\u0438\u043e\u043d\u0430\\s+\u043f\u0440\u043e\u0434\u0430\u043d\u043d\u044b\u0445\\s+\u043a\u043e\u043f\u0438\u0439\\s+\u0437\u0430\\s+\u0433\u043e\u0434"
+      ],
+      [
+        "Resident Evil 4 latest news timestamp",
+        "resident\\s+evil\\s+4.{0,500}?september\\s+26,\\s+2026\\s+at\\s+10:07\\s+utc"
+      ],
+      [
+        "Resident Evil 4 minimum OS",
+        "resident\\s+evil\\s+4.{0,4500}?windows\\s+10\\s+\\(64\\s+bit\\)"
+      ],
+      [
+        "Resident Evil 4 minimum PROCESSOR",
+        "resident\\s+evil\\s+4.{0,4500}?amd\\s+ryzen\\s+3\\s+1200\\s+/\\s+intel\\s+core\\s+i5\\-7500"
+      ],
+      [
+        "Resident Evil 4 minimum MEMORY",
+        "resident\\s+evil\\s+4.{0,4500}?8\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Resident Evil 4 minimum GRAPHICS",
+        "resident\\s+evil\\s+4.{0,4500}?amd\\s+radeon\\s+rx\\s+560\\s+with\\s+4gb\\s+vram\\s+/\\s+nvidia\\s+geforce\\s+gtx\\s+1050\\s+ti\\s+with\\s+4gb\\s+vram"
+      ]
+    ]
+  },
+  "Steam--17": {
+    "task": "Alice is comparing Hades and Hades II for a Mac. Check each game's price, discount, release date, review summary and macOS support, then read Hades II's newest positive user review for its author and playtime. Add Hades II to her wishlist and report the comparison. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "game_id": 65,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1145360/hades/(?:\\?|$)",
+      "/app/1145350/hades\\-ii/(?:\\?|$)",
+      "/app/1145350/reviews/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Hades price amount 0",
+        "hades.{0,160}?24\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades price amount 1",
+        "hades.{0,160}?6\\.24(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades discount",
+        "hades.{0,160}?75\\s*percent"
+      ],
+      [
+        "Hades release",
+        "hades.{0,180}?sep\\s+17,\\s+2020"
+      ],
+      [
+        "Hades reviews",
+        "hades.{0,220}?overwhelmingly\\s+positive"
+      ],
+      [
+        "Hades reviews percent",
+        "hades.{0,350}?98\\s*percent"
+      ],
+      [
+        "Hades II price amount 0",
+        "hades\\s+ii.{0,160}?29\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades II price amount 1",
+        "hades\\s+ii.{0,160}?20\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades II discount",
+        "hades\\s+ii.{0,160}?30\\s*percent"
+      ],
+      [
+        "Hades II release",
+        "hades\\s+ii.{0,180}?sep\\s+25,\\s+2025"
+      ],
+      [
+        "Hades II reviews",
+        "hades\\s+ii.{0,220}?overwhelmingly\\s+positive"
+      ],
+      [
+        "Hades II reviews percent",
+        "hades\\s+ii.{0,350}?97\\s*percent"
+      ],
+      [
+        "Hades II newest positive review author",
+        "anttolin"
+      ],
+      [
+        "Hades II newest positive review playtime",
+        "11\\.4\\s*hours\\s+on\\s+record"
+      ],
+      [
+        "Hades platforms win",
+        "hades.{0,200}?(?:platforms|systems|supports?).{0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Hades platforms mac",
+        "hades.{0,200}?(?:platforms|systems|supports?).{0,60}?\\bmac(?:os)?\\b"
+      ],
+      [
+        "Hades II platforms win",
+        "hades\\s+ii.{0,200}?(?:platforms|systems|supports?).{0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Hades II platforms mac",
+        "hades\\s+ii.{0,200}?(?:platforms|systems|supports?).{0,60}?\\bmac(?:os)?\\b"
+      ]
+    ]
+  },
+  "Steam--18": {
+    "task": "Dana wants FINAL FANTASY VII REMAKE INTERGRADE and Hades while they are on sale. Check each title's regular price, discount, sale price and dollar savings, then buy one of each through the mirror checkout using 88 Neon Street, Seattle, WA 98101 and PayPal. Report the order number, both line items and total. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "order_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "game",
+            "game_id": 77,
+            "bundle_id": null,
+            "title": "FINAL FANTASY VII REMAKE INTERGRADE",
+            "unit_price": 999,
+            "qty": 1
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "kind": "game",
+            "game_id": 66,
+            "bundle_id": null,
+            "title": "Hades",
+            "unit_price": 624,
+            "qty": 1
+          }
+        ]
+      },
+      "orders": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_no": {
+              "regex": "ST-\\d+"
+            },
+            "user_id": 4,
+            "email": "dana.k@test.com",
+            "full_name": "Dana Kim",
+            "address1": "88 Neon Street",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "payment_method": "PayPal",
+            "subtotal": 1623,
+            "tax": 0,
+            "total": 1623,
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1462040/final\\-fantasy\\-vii\\-remake\\-intergrade/(?:\\?|$)",
+      "/app/1145360/hades/(?:\\?|$)",
+      "/order/ST\\-1004/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "FINAL FANTASY VII REMAKE INTERGRADE price amount 0",
+        "final\\s+fantasy\\s+vii\\s+remake\\s+intergrade(?:(?!\\b(?:hades)\\b).){0,160}?39\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "FINAL FANTASY VII REMAKE INTERGRADE price amount 1",
+        "final\\s+fantasy\\s+vii\\s+remake\\s+intergrade(?:(?!\\b(?:hades)\\b).){0,160}?9\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "FINAL FANTASY VII REMAKE INTERGRADE discount",
+        "final\\s+fantasy\\s+vii\\s+remake\\s+intergrade(?:(?!\\b(?:hades)\\b).){0,160}?75\\s*percent"
+      ],
+      [
+        "Hades price amount 0",
+        "hades(?:(?!\\b(?:final\\s+fantasy\\s+vii\\s+remake\\s+intergrade)\\b).){0,160}?24\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades price amount 1",
+        "hades(?:(?!\\b(?:final\\s+fantasy\\s+vii\\s+remake\\s+intergrade)\\b).){0,160}?6\\.24(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades discount",
+        "hades(?:(?!\\b(?:final\\s+fantasy\\s+vii\\s+remake\\s+intergrade)\\b).){0,160}?75\\s*percent"
+      ],
+      [
+        "FINAL FANTASY VII REMAKE INTERGRADE dollar savings",
+        "final\\s+fantasy\\s+vii\\s+remake\\s+intergrade(?:(?!\\b(?:hades)\\b).){0,200}?savings(?:(?!\\b(?:hades)\\b).){0,35}?30\\.00(?!\\d|\\.\\d)"
+      ],
+      [
+        "Hades dollar savings",
+        "hades(?:(?!\\b(?:final\\s+fantasy\\s+vii\\s+remake\\s+intergrade)\\b).){0,200}?savings(?:(?!\\b(?:final\\s+fantasy\\s+vii\\s+remake\\s+intergrade)\\b).){0,35}?18\\.75(?!\\d|\\.\\d)"
+      ],
+      [
+        "order confirmation",
+        "\\bst-\\d+\\b"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "order_no"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Steam--19": {
+    "task": "Dana is comparing Cyberpunk 2077 and ELDEN RING for her computer. Report each game's minimum and recommended RAM, minimum graphics requirement, storage and macOS support, and identify which needs more storage. Check ELDEN RING's current price and review summary, then add it to Dana's wishlist. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7b21221b82be7ccb25112c1763f5e822787705ce29022618c9c13b396cd5bdef",
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "game_id": 72,
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/app/1091500/cyberpunk\\-2077/(?:\\?|$)",
+      "/app/1245620/elden\\-ring/(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Cyberpunk 2077 price amount 0",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,160}?59\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "Cyberpunk 2077 reviews",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "Cyberpunk 2077 reviews percent",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,350}?89\\s*percent"
+      ],
+      [
+        "Cyberpunk 2077 system requirements MEMORY",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4000}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Cyberpunk 2077 system requirements STORAGE",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4000}?70\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Cyberpunk 2077 system requirements GRAPHICS",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4000}?geforce\\s+gtx\\s+1060\\s+6gb\\s+or\\s+radeon\\s+rx\\s+580\\s+8gb\\s+or\\s+arc\\s+a380"
+      ],
+      [
+        "ELDEN RING price amount 0",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,160}?59\\.99(?!\\d|\\.\\d)"
+      ],
+      [
+        "ELDEN RING reviews",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,220}?very\\s+positive"
+      ],
+      [
+        "ELDEN RING reviews percent",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,350}?94\\s*percent"
+      ],
+      [
+        "ELDEN RING system requirements MEMORY",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4000}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "ELDEN RING system requirements STORAGE",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4000}?60\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "ELDEN RING system requirements GRAPHICS",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4000}?nvidia\\s+geforce\\s+gtx\\s+1060\\s+3\\s+gigabytes\\s+or\\s+amd\\s+radeon\\s+rx\\s+580\\s+4\\s+gigabytes"
+      ],
+      [
+        "Storage comparison cyberpunk",
+        "\\bcyberpunk\\b"
+      ],
+      [
+        "Storage comparison needs",
+        "\\bneeds\\b"
+      ],
+      [
+        "Storage comparison storage",
+        "\\bstorage\\b"
+      ],
+      [
+        "Cyberpunk 2077 platforms win",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:elden\\s+ring)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "Cyberpunk 2077 platforms mac",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:elden\\s+ring)\\b).){0,60}?\\bmac(?:os)?\\b"
+      ],
+      [
+        "Cyberpunk 2077 minimum MEMORY",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4500}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "Cyberpunk 2077 minimum STORAGE",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4500}?70\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "Cyberpunk 2077 minimum GRAPHICS",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,4500}?geforce\\s+gtx\\s+1060\\s+6gb\\s+or\\s+radeon\\s+rx\\s+580\\s+8gb\\s+or\\s+arc\\s+a380"
+      ],
+      [
+        "Cyberpunk 2077 recommended RAM",
+        "cyberpunk\\s+2077(?:(?!\\b(?:elden\\s+ring)\\b).){0,3500}?recommended(?:(?!\\b(?:elden\\s+ring)\\b).){0,220}?16\\s+gigabytes\\s+memory"
+      ],
+      [
+        "ELDEN RING platforms win",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,200}?(?:platforms|systems|supports?)(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,60}?\\b(?:win|windows)\\b"
+      ],
+      [
+        "ELDEN RING minimum MEMORY",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4500}?12\\s+gigabytes\\s+memory"
+      ],
+      [
+        "ELDEN RING minimum STORAGE",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4500}?60\\s+gigabytes\\s+available\\s+space"
+      ],
+      [
+        "ELDEN RING minimum GRAPHICS",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,4500}?nvidia\\s+geforce\\s+gtx\\s+1060\\s+3\\s+gigabytes\\s+or\\s+amd\\s+radeon\\s+rx\\s+580\\s+4\\s+gigabytes"
+      ],
+      [
+        "ELDEN RING recommended RAM",
+        "elden\\s+ring(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,3500}?recommended(?:(?!\\b(?:cyberpunk\\s+2077)\\b).){0,220}?16\\s+gigabytes\\s+memory"
+      ]
+    ]
+  }
+}

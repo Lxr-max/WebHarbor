@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Subscribe{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Subscribe</h1>
+  <p class="rich">Hear From Us &mdash; To get the latest dish on Trader Joe&rsquo;s products, recipes, and the always entertaining Fearless Flyer, subscribe! Fill out the details below, and we&rsquo;ll start sending you the goods. (Note: We safeguard your personally identifiable information and honor your requests for privacy.)</p>
+</div>
+
+<div class="form-card">
+  <h2>Join The Adventure</h2>
+  <form method="post" action="{{ url_for('subscribe_post') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" value="{{ email }}" required>
+    <button class="btn" type="submit">SUBSCRIBE</button>
+  </form>
+  {% if done %}
+  <p class="form-ok">Welcome aboard! {{ email }} is now subscribed to the Trader Joe&rsquo;s eNewsletter &mdash; the next Fearless Flyer is on its way to your inbox.</p>
+  {% endif %}
+  {% if removed %}
+  <p class="form-ok">You&rsquo;ve been unsubscribed. {{ email }} has been removed from the Trader Joe&rsquo;s eNewsletter list &mdash; we&rsquo;re sorry to see you go.</p>
+  {% endif %}
+  {% if error %}
+  <p class="form-error">{{ error }}</p>
+  {% endif %}
+</div>
+
+<div class="page">
+  <p class="rich"><b>Our E-Newsletter</b> &mdash; Our Electronic Newsletter is like a personal butler&mdash;a virtual chamberlain, if you will&mdash;who arrives at your digital doorstep bearing the latest news of new products, seasonal favorites and recipes, plus the always entertaining Fearless Flyer.</p>
+  <p class="rich">Changed your mind? <a href="{{ url_for('unsubscribe') }}">I&rsquo;ve decided to Unsubscribe</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ art.title }} - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="cols">
+  <div class="card">
+    <p class="crumb"><a href="/news">News</a>{% if art.topics != '[]' %} › <a href="/news?topic={{ art.topics|trim('[]')|replace('"','') }}">{{ art.topics|trim('[]')|replace('"','') }}</a>{% endif %}</p>
+    <h1 style="font-size: 24px; margin: 4px 0 8px;">{{ art.title }}</h1>
+    <div class="news-meta" style="margin-bottom: 14px;">
+      <span>{% if art.author %}{{ art.author }} · {% endif %}{{ art.provider }}</span>
+      <span>Published {{ art.pub_time }}</span>
+      {% if art.live_blog %}<span class="pill other">Live blog</span>{% endif %}
+    </div>
+    {% if art.thumb_name %}
+    <img class="article-hero" src="{{ url_for('static', filename=art.thumb_name) }}" alt="">
+    {% endif %}
+    {% if art.summary %}<p class="news-summary" style="margin-top: 12px;">{{ art.summary }}</p>{% endif %}
+
+    <div class="article-body" style="margin-top: 14px;">
+      {% if art.body != '[]' %}
+        {% for para in art.body|from_json %}
+          <p>{{ para }}</p>
+        {% endfor %}
+      {% else %}
+        <p class="muted">This story is hosted by {{ art.provider }} on Yahoo Finance’s partner network. The full text is available at the publisher.</p>
+      {% endif %}
+    </div>
+
+    {% if not art.hosted %}
+    <p><a href="{{ art.upstream_url }}" rel="nofollow">Continue reading at {{ art.provider }}</a></p>
+    {% endif %}
+
+    {% if tickers %}
+    <p class="muted">Related tickers:
+      {% for t in tickers %}{% if t in quote_symbols %}<a href="/quote/{{ t|urlencode }}">{{ t }}</a>{% else %}{{ t }}{% endif %}{{ ',' if not loop.last }}{% endfor %}
+    </p>
+    {% endif %}
+  </div>
+  <div>
+    {% if related %}
+    <div class="card">
+      <h2>Related stories</h2>
+      <ul class="news-list">
+        {% for r in related %}
+        <li class="news-item" style="grid-template-columns: 1fr;">
+          <div>
+            <h3><a href="{{ r.url_path }}">{{ r.title }}</a></h3>
+            <div class="news-meta"><span>{{ r.provider }}</span><span>{{ rel_time(r.pub_time) }}</span></div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="card">
+      <h2>More from Yahoo Finance</h2>
+      <p><a href="/news">All news</a></p>
+      <p><a href="/calendar/earnings">Earnings calendar</a></p>
+      <p><a href="/screener">Stock screener</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

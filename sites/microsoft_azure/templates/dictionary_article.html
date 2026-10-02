@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} — {{ brand }}{% endblock %}
+{% block content %}
+<article class="shell">
+  <nav class="crumbs"><a href="{{ url_for('dictionary') }}">Cloud computing dictionary</a> / <span>{{ article.title }}</span></nav>
+  <h1>{{ article.title }}</h1>
+  <p class="lead">{{ article.description }}</p>
+  {% if article.image %}<img class="story-hero" src="{{ img(article.image) }}" alt="">{% endif %}
+
+  {% for section in article.section_list %}
+  <section class="band">
+    <h2>{{ section.title }}</h2>
+    {% if section.text %}<p>{{ section.text }}</p>{% endif %}
+  </section>
+  {% endfor %}
+
+  <section class="band band-alt">
+    <h2>Deepen your understanding of cloud computing</h2>
+    <div class="card-grid">
+      {% for a in others %}
+      <a class="card" href="{{ url_for('dictionary_article', slug=a.slug) }}">
+        <h3>{{ a.title }}</h3>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</article>
+{% endblock %}

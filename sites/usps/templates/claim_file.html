@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}File a Domestic Claim | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="/help/claims.htm">File a Claim</a> &rsaquo; New Claim</p>
+<h1>File a Domestic Claim</h1>
+{% if result and not result.errors %}
+  <div class="panel">
+    <h3>Claim Submitted — {{ result.claim_number }}</h3>
+    <p><strong>Tracking number:</strong> {{ result.tracking }}</p>
+    <p><strong>Claim amount:</strong> {{ result.amount | usd }}</p>
+    <p>Your claim was received. Check progress any time at <a href="{{ url_for('claim_status') }}">Claim Status</a>.</p>
+  </div>
+{% else %}
+  {% if result and result.errors %}
+    <div class="error-box">{% for e in result.errors %}<p>{{ e }}</p>{% endfor %}</div>
+  {% endif %}
+  {% if shipments %}
+  <div class="panel">
+    <form class="flow" action="{{ url_for('claim_file') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Insured shipment
+        <select name="tracking" required>
+          {% for s in shipments %}
+            <option value="{{ s.tracking_number }}">{{ s.tracking_number }} — {{ s.recipient_name }} ({{ s.service_code | upper }}, {{ s.insured_value | usd }} insured)</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Claim type
+        <select name="kind">
+          <option value="damage">Damaged item</option>
+          <option value="loss">Lost item</option>
+        </select>
+      </label>
+      <label>Article claimed <input type="text" name="article" placeholder="e.g. Vintage glass lamp" required></label>
+      <label>Describe the damage or loss <textarea name="note" rows="4" required></textarea></label>
+      <label>Supporting documents you will provide</label>
+      <div class="checkbox-row"><label><input type="checkbox" name="docs" value="Proof of insurance (Click-N-Ship receipt)"> Proof of insurance (Click-N-Ship receipt)</label></div>
+      <div class="checkbox-row"><label><input type="checkbox" name="docs" value="Photos of damaged packaging and item"> Photos of damaged packaging and item</label></div>
+      <div class="checkbox-row"><label><input type="checkbox" name="docs" value="Purchase receipt"> Purchase receipt (evidence of value)</label></div>
+      <button class="btn" type="submit">Submit Claim</button>
+    </form>
+  </div>
+  {% else %}
+  <div class="error-box">You have no insured shipments on file. Only mailpieces sent with purchased insurance can be claimed.</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

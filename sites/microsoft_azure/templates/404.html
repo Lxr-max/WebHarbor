@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Page not found — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell narrow">
+  <h1>We are sorry, the page cannot be found</h1>
+  <p>The page you requested does not exist on this mirror. Try the <a href="{{ url_for('search') }}">site search</a> or head back <a href="{{ url_for('home') }}">home</a>.</p>
+  <h2>Quick links</h2>
+  <ul class="plain-list">
+    <li><a href="{{ url_for('products') }}">Azure products</a></li>
+    <li><a href="{{ url_for('pricing') }}">Azure pricing</a></li>
+    <li><a href="{{ url_for('calculator') }}">Pricing calculator</a></li>
+    <li><a href="{{ url_for('customer_stories') }}">Customer stories</a></li>
+    <li><a href="{{ url_for('dictionary') }}">Cloud computing dictionary</a></li>
+  </ul>
+</div>
+{% endblock %}

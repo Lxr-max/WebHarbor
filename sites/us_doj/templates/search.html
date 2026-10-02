@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import date_label, pagination with context %}
+{% block title %}Search{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li><li>Search</li></ol></nav>{% endblock %}
+{% block content %}
+<div class="container search-page single-page-layout"><h1 class="page-title">Search Justice.gov</h1>
+  <form class="site-search-form" role="search" action="/search" method="get"><label for="site-query">Search</label><div class="inline-search"><input type="search" id="site-query" name="query" value="{{ q }}" placeholder="Enter keywords" required><button class="button" type="submit">Search</button></div></form>
+  <p class="result-count">{{ total }} results{% if q %} for “{{ q }}”{% endif %}</p>
+  <div class="search-results">{% for result in items %}<article class="search-result"><h2><a href="{{ result.path }}">{{ result.title }}</a></h2><p class="result-path">Justice.gov{{ result.path }}</p>{% if result.summary %}<p>{{ result.summary }}</p>{% endif %}{% if result.date %}<time datetime="{{ result.date }}">{{ date_label(result.date) }}</time>{% endif %}</article>{% else %}<div class="empty-state"><h2>{% if q %}No results found{% else %}Search the Department of Justice{% endif %}</h2><p>{% if q %}Check your spelling or try a broader keyword.{% else %}Find news, offices, legal careers, and information from the Department.{% endif %}</p></div>{% endfor %}</div>
+  {{ pagination(page,pages) }}
+</div>
+{% endblock %}

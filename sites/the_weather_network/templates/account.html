@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Your Account - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / Account</div>
+<h1 class="page-title">Your account</h1>
+<p class="muted">Signed in as <b style="color:#121212">{{ user.display_name }}</b> ({{ user.email }}) · units: {{ '°C / metric' if user.unit == 'metric' else '°F / imperial' }}</p>
+
+<div class="account-grid">
+  <div class="account-panel">
+    <h2>Saved locations</h2>
+    {% if rows %}
+      {% for row in rows %}
+      <div class="saved-row">
+        <div>
+          <a href="{{ row.loc.url() }}" style="color:#121212"><span class="sv-name">{{ row.loc.name }}</span></a>
+          <div class="sv-sub">{{ row.loc.display_sub }}{% if row.obs %} · {{ row.obs.text }} · {{ row.obs.temp|temp(unit) }}{% endif %}</div>
+        </div>
+        <form method="post" action="/en/account/saved/{{ row.saved.id }}/remove">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="/en/account">
+          <button class="remove-btn" type="submit">Remove</button>
+        </form>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty-note">No saved locations yet. Open any forecast page and use “Save location”, or search for a city.</p>
+    {% endif %}
+    <div style="margin-top:14px">
+      <form method="get" action="/en/search" style="display:flex;gap:8px">
+        <input class="search-input" style="width:220px" type="text" name="q" placeholder="Find a location to save">
+        <button class="btn" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="account-panel">
+    <h2>Preferences</h2>
+    <p class="muted small">Units apply across every forecast page.</p>
+    <div class="unit-toggle" style="display:inline-flex;margin:8px 0 18px">
+      <a href="/en/account/preferences?unit=metric&next=/en/account" class="{% if unit == 'metric' %}on{% endif %}">°C</a>
+      <a href="/en/account/preferences?unit=imperial&next=/en/account" class="{% if unit == 'imperial' %}on{% endif %}">°F</a>
+    </div>
+    <h2>Sign out</h2>
+    <form method="post" action="/en/account/sign-out">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn secondary" type="submit">Sign out</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

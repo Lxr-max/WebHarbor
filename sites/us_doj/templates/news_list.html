@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import date_label, kind_label, pagination, share, news_sidebar, facet with context %}
+{% set listing_title = title|default('Press Releases' if base_path|default('/news') == '/news/press-releases' else 'All News', true) %}
+{% block title %}{{ listing_title }}{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li><li>News</li></ol></nav>{% endblock %}
+{% block content %}
+<div class="container page-layout">
+  <aside class="sidebar">
+    {{ news_sidebar(base_path|default('/news')) }}
+    <section class="filters" aria-labelledby="filter-heading"><h2 id="filter-heading">Filters</h2>
+      {{ facet('Filter by Component','component',facets.components,component,'news-search') }}
+      {{ facet('Filter by Topic','topic',facets.topics,topic,'news-search') }}
+      {{ facet('Filter by Year','year',facets.years,year,'news-search') }}
+      <button class="button filter-apply" type="submit" form="news-search">Apply Filters</button>
+    </section>
+    {% if has_path is defined and has_path('/opa/contact-office') %}<section class="sidebar-extra"><h2>For the Press</h2><a href="/opa/contact-office">Media Contacts</a>{% if has_path('/opa/information-journalists') %}<a href="/opa/information-journalists">Information for Journalists</a>{% endif %}</section>{% endif %}
+  </aside>
+  <div class="page-main">
+    <h1 class="page-title">{{ listing_title }}</h1>{{ share() }}
+    <form method="get" action="{{ base_path|default('/news') }}" id="news-search" class="news-search-form" role="search">
+      <div class="search-form-grid"><div class="field keyword-field"><label for="news-keyword">Keyword Search</label><input id="news-keyword" name="search_api_fulltext" type="search" value="{{ q|default('') }}"></div><div class="field"><label for="start-date">Start Date</label><input type="date" name="start_date" id="start-date" value="{{ start_date|default('') }}"></div><div class="field"><label for="end-date">End Date</label><input type="date" name="end_date" id="end-date" value="{{ end_date|default('') }}"></div></div>
+      <div class="form-actions"><button class="button" type="submit">Apply Search</button><a class="button button-outline" href="{{ base_path|default('/news') }}">Reset Search</a></div>
+    </form>
+    <div class="results-toolbar"><p class="result-count" aria-live="polite">{{ total }} Results</p><div class="sort-field"><label for="sort-by">Sort by:</label><select id="sort-by" name="sort_by" form="news-search" data-submit-change><option value="search_api_relevance"{% if sort_by not in ['date','field_date','created'] %} selected{% endif %}>Relevance</option><option value="field_date"{% if sort_by in ['date','field_date','created'] %} selected{% endif %}>Date</option></select><noscript><button form="news-search" type="submit">Sort</button></noscript></div></div>
+    {% if q or topic or component or year or start_date or end_date %}<div class="active-filters" aria-label="Active filters">{% if q %}<span>Keyword: {{ q }}</span>{% endif %}{% if topic %}<span>Topic: {{ topic }}</span>{% endif %}{% if component %}<span>Component: {{ component }}</span>{% endif %}{% if year %}<span>Year: {{ year }}</span>{% endif %}{% if start_date %}<span>From: {{ start_date }}</span>{% endif %}{% if end_date %}<span>To: {{ end_date }}</span>{% endif %}<a href="{{ base_path|default('/news') }}">Clear all</a></div>{% endif %}
+    <div class="news-results">
+      {% for article in items %}<article class="news-result"><span class="eyebrow">{{ kind_label(article.kind) }}</span><h2><a href="{{ article.path }}">{{ article.title }}</a></h2><time datetime="{{ article.date }}">{{ date_label(article.date) }}</time></article>{% else %}<div class="empty-state"><h2>No news items found</h2><p>Try another keyword or remove a filter to broaden your search.</p><a href="{{ base_path|default('/news') }}">Reset Search</a></div>{% endfor %}
+    </div>
+    {{ pagination(page,pages) }}
+  </div>
+</div>
+{% endblock %}

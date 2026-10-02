@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Hold Mail | USPS{% endblock %}
+{% block meta %}Pause your mail delivery with USPS Hold Mail — hold from 3 to 30 days.{% endblock %}
+{% block content %}
+<h1>USPS Hold Mail Service</h1>
+{% if page and page.lead %}<p>{{ page.lead | safe }}</p>{% endif %}
+<div class="panel">
+  <h3>Hold your mail in 4 steps</h3>
+  <ol>
+    <li>Sign in to your USPS.com account.</li>
+    <li>Enter your hold start and end dates (3 to 30 days).</li>
+    <li>Choose how mail is delivered after the hold.</li>
+    <li>Confirm — your confirmation number is displayed immediately.</li>
+  </ol>
+  {% if current_user.is_authenticated %}
+    <a class="btn" href="{{ url_for('hold_mail_request') }}">Submit a Hold Mail Request</a>
+  {% else %}
+    <a class="btn" href="{{ url_for('login', next=url_for('hold_mail_request')) }}">Sign In to Hold Mail</a>
+  {% endif %}
+</div>
+{% if page %}
+  {% for sec in (page.body | from_json) %}
+    <h2>{{ sec.heading | safe }}</h2>
+    {% for p in sec.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  {% endfor %}
+{% endif %}
+{% endblock %}

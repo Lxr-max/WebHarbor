@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Profile settings | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('account') }}">Manage my account</a> ›
+    <span>Profile settings</span>
+  </nav>
+  <h1>Profile settings</h1>
+
+  <div class="auth-card">
+    <h2>Update your profile</h2>
+    <form method="post" action="{{ url_for('account_profile') }}">
+      <p><label for="display_name">Display name</label>
+         <input id="display_name" name="display_name" value="{{ current_user.display_name }}" required></p>
+      <p><label for="email">Email</label>
+         <input id="email" name="email" type="email" value="{{ current_user.email }}" required></p>
+      <p class="muted">Username: {{ current_user.username }}</p>
+      <button class="btn btn-primary" type="submit">Save changes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

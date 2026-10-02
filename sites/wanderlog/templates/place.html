@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}{{ place.name }} — Wanderlog place{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="trip-grid">
+    <div>
+      <div class="guide-hero">
+        {% if place.image %}<img src="{{ place.image }}" alt="{{ place.name }}">{% endif %}
+        <div class="overlay">
+          <h1>{{ place.name }}</h1>
+          <p>
+            {% if place.rating %}<span class="stat">★ {{ place.rating }}</span>{% endif %}
+            {% if place.address %}<span class="muted">📍 {{ place.address }}</span>{% endif %}
+          </p>
+        </div>
+      </div>
+
+      {% if place.description or place.generated_description %}
+        <div class="card" style="margin-bottom:16px">
+          <h2>About this place</h2>
+          {% if place.description %}<p style="margin:0 0 8px">{{ place.description }}</p>{% endif %}
+          {% if place.generated_description %}<p class="muted" style="margin:0">{{ place.generated_description }}</p>{% endif %}
+        </div>
+      {% endif %}
+
+      {% set tips = place.tips | from_json %}
+      {% if tips %}
+        <div class="card" style="margin-bottom:16px">
+          <h2>Tips from travelers</h2>
+          <ul>{% for t in tips %}<li>{{ t }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
+
+      {% set reasons = place.reasons | from_json %}
+      {% if reasons %}
+        <div class="card" style="margin-bottom:16px">
+          <h2>Why visit</h2>
+          <ul>{% for r in reasons %}<li>{{ r }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
+
+      {% if place.reviews_summary %}
+        <div class="card" style="margin-bottom:16px">
+          <h2>What travelers say</h2>
+          <p style="margin:0">{{ place.reviews_summary }}</p>
+        </div>
+      {% endif %}
+
+      {% if lists %}
+        <div class="card">
+          <h2>Appears in Wanderlog rankings</h2>
+          {% for cl, entry in lists %}
+            <p style="margin:6px 0">
+              <a href="{{ url_for('category_list', cid=cl.id, slug=cl.slug) }}">{{ cl.title }}</a>
+              <span class="small muted">· ranked #{{ entry.rank }}</span>
+            </p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>Details</h3>
+        {% set cats = place.categories | from_json %}
+        {% if cats %}
+          <p style="margin:4px 0">{% for c in cats[:6] %}<span class="chip static">{{ c }}</span>{% endfor %}</p>
+        {% endif %}
+        {% set admission = place.admission | from_json %}
+        {% if admission %}
+          <p class="small muted">Captured ticket listings are not current price or eligibility quotes. Check the venue for admission conditions.</p>
+          {% for a in admission if a.title and a.title != 'Free admission' %}
+            <p class="small" style="margin:4px 0">🎟 {{ a.title }}{% if a.source %} — {{ a.source }}{% endif %}</p>
+          {% endfor %}
+        {% endif %}
+        {% if place.phone %}<p class="small" style="margin:4px 0">☎ {{ place.phone }}</p>{% endif %}
+        {% if place.website %}<p class="small" style="margin:4px 0">🌐 {{ place.website }}</p>{% endif %}
+        {% if place.price_level %}<p class="small" style="margin:4px 0">Price level: {% for i in range(place.price_level) %}${% endfor %}</p>{% endif %}
+        {% if place.latitude %}
+          <p class="small muted" style="margin:4px 0">Coordinates: {{ '%.4f'|format(place.latitude) }}, {{ '%.4f'|format(place.longitude) }}</p>
+        {% endif %}
+        {% set hours = place.weekday_text | from_json %}
+        {% if hours %}
+          <h3 style="margin-top:10px">Opening hours</h3>
+          <div class="hours">{% for line in hours %}{{ line }}
+{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      {% set near_a = place.nearby_attractions | from_json | reject('none') | list %}
+      {% set near_r = place.nearby_restaurants | from_json | reject('none') | list %}
+      {% if near_a or near_r %}
+        <div class="card">
+          <h3>Nearby</h3>
+          {% if near_a %}
+            <p class="small muted" style="margin:4px 0">Attractions:</p>
+            <p class="small" style="margin:2px 0">{{ near_a | join(', ') }}</p>
+          {% endif %}
+          {% if near_r %}
+            <p class="small muted" style="margin:6px 0 4px">Restaurants:</p>
+            <p class="small" style="margin:2px 0">{{ near_r | join(', ') }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

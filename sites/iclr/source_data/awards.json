@@ -1,0 +1,87 @@
+[
+ {
+  "award": "Outstanding Paper Awards",
+  "conference": "ICLR 2026",
+  "committee": [
+   "Gautam Kamath",
+   "Yoav Artzi",
+   "Emma Brunskill",
+   "Murat Erdogdu",
+   "Pang Wei Koh",
+   "Yong Jae Lee",
+   "Subhransu Maji",
+   "Doina Precup",
+   "Ohad Shamir",
+   "Guy Van den Broeck",
+   "Kilian Weinberger",
+   "Luke Zettlemoyer"
+  ],
+  "entries": [
+   {
+    "title": "Transformers are Inherently Succinct",
+    "authors": [
+     "Pascal Bergstr\u00e4\u00dfer",
+     "Ryan Cotterell",
+     "Anthony Widjaja Lin"
+    ],
+    "kind": "Outstanding Paper",
+    "citation": "This theoretical work proposes a new perspective to explain the power of the Transformer architecture: namely, how succinctly it can encode some concepts compared to alternative models such as RNNs. Notwithstanding critiques, the paper\u2019s strong conceptual message was intriguing to the committee and other experts. This work may stimulate additional theoretical and empirical investigation into succinctness of concept representation by transformers and other architectures."
+   },
+   {
+    "title": "LLMs Get Lost In Multi-Turn Conversation",
+    "authors": [
+     "Philippe Laban",
+     "Hiroaki Hayashi",
+     "Yingbo Zhou",
+     "Jennifer Neville"
+    ],
+    "kind": "Outstanding Paper",
+    "citation": "There is a dissonant gap between most of the data used for LLM training and how they are deployed: the data is largely text completion or single turn, but the deployment is inherently in multi-turn settings. Robustly evaluating and training multi-turn capabilities remains a complex challenge. This paper designs a scalable method to evaluate multi-turn capabilities, and measures a marked decrease in LLM aptitude and reliability in the all too common case where interactions are multi-turn and involve underspecified instructions. The work demonstrates exceptional experimental design and methodology, and the findings are fresh and interesting, particularly for an important setting that more closely reflects real-world usage. Although concerns were discussed around the use of dated models, the committee considers the conclusions and method to remain relevant to state-of-the-art models. This work serves to highlight a problem which state-of-the-art models are optimized to solve, and provides a viable and scalable diagnosis."
+   },
+   {
+    "title": "The Polar Express: Optimal Matrix Sign Methods and their Application to the Muon Algorithm",
+    "authors": [
+     "Noah Amsel",
+     "David Persson",
+     "Christopher Musco",
+     "Robert M. Gower"
+    ],
+    "kind": "Honorable Mention",
+    "citation": "In this work, the authors use approximation theory to design optimal polynomial approximations for the polar decomposition, employed in the popular Muon optimizer. A particular focus is placed on approximation for modern deep learning settings, where computation is performed on GPUs and potentially with low-precision arithmetic. While empirical improvements were at times modest, the principled approach to (and general methodology for) improving one of the most popular optimizers was appreciated."
+   }
+  ],
+  "source_url": "https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/"
+ },
+ {
+  "award": "Test of Time Awards",
+  "conference": "ICLR 2026",
+  "entries": [
+   {
+    "title": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+    "authors": [
+     "Alec Radford",
+     "Luke Metz",
+     "Soumith Chintala"
+    ],
+    "kind": "Test of Time",
+    "citation": "This paper, colloquially called DCGAN, was one of the first successful demonstrations that learning-based generative models could synthesize diverse, realistic, and complex images. The results kickstarted the subfield of image generation, which is one of the most active areas of machine learning research today and has led to many highly successful applications in industry. While the techniques have changed (from GANs to diffusion models), DCGAN stands the test of time as a key step in the establishment of this important field."
+   },
+   {
+    "title": "Continuous control with deep reinforcement learning",
+    "authors": [
+     "Timothy P. Lillicrap",
+     "Jonathan J. Hunt",
+     "Alexander Pritzel",
+     "Nicolas Heess",
+     "Tom Erez",
+     "Yuval Tassa",
+     "David Silver",
+     "Daan Wierstra"
+    ],
+    "kind": "Test of Time",
+    "citation": "The Test of Time award recognizes works that fundamentally alter the trajectory of their field, and Continuous Control with Deep Reinforcement Learning did exactly that. Before this paper introduced the Deep Deterministic Policy Gradient (DDPG) algorithm, applying reinforcement learning to physical systems was highly bottlenecked. Engineers were trapped manually hand-crafting state features or battling the curse of dimensionality caused by discretizing complex motor controls. DDPG was the first algorithm to successfully address both limitations. By ingeniously combining a deterministic Actor-Critic architecture with the stabilizing techniques of DQN, the algorithm allowed neural networks to translate raw sensor data directly into precise, continuous physical actions. Ultimately, DDPG showed it was possible for deep RL to venture into continuous control, changing the course of the field and sparking an RL revolution."
+   }
+  ],
+  "source_url": "https://blog.iclr.cc/2026/04/22/announcing-the-test-of-time-awards-from-iclr-2016/"
+ }
+]

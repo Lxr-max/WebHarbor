@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Ask {{ blog.display_title() }} — Tumblr{% endblock %}
+{% block content %}
+<div class="narrow-wrap">
+  <div class="page-head">
+    <h1>{{ blog.ask_page_title or 'Ask me anything' }}</h1>
+    <p class="page-sub">Your question goes to <a href="{{ url_for('blog_page', name=blog.name) }}">{{ blog.name }}</a>{% if blog.ask_anon %}. You can ask anonymously.{% endif %}</p>
+  </div>
+  <form class="ask-form" method="post">
+    <textarea name="body" rows="5" placeholder="Type your question…" required></textarea>
+    {% if blog.ask_anon %}
+      <label class="check-row"><input type="checkbox" name="anon" value="1"> Ask anonymously</label>
+    {% endif %}
+    <button class="btn btn-primary wide" type="submit">Send ask</button>
+  </form>
+</div>
+{% endblock %}

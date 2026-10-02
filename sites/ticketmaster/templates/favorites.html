@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}My Favorites | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a href="/member">Your Account</a>
+      <a href="/member/profile">Edit Profile</a>
+      <a href="/member/payment">Payment Options</a>
+      <a href="/member">Orders</a>
+      <a class="active" href="/member/favorites">My Favorites</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <h1>My Favorites</h1>
+
+      {% if artists %}
+      <h3 style="margin:12px 0 10px">Artists, Teams &amp; Shows</h3>
+      <ul>
+        {% for a in artists %}
+        <li class="event-row">
+          <div class="er-main">
+            <div class="er-name"><a href="/artist/{{ a.id }}">{{ a.name }}</a></div>
+            <div class="er-sub">{{ a.events|length }} upcoming event{{ '' if a.events|length == 1 else 's' }}</div>
+          </div>
+          <form method="post" action="/favorites/toggle">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="kind" value="artist">
+            <input type="hidden" name="ref" value="{{ a.id }}">
+            <input type="hidden" name="next" value="/member/favorites">
+            <button class="btn btn-light" type="submit">Remove</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if events %}
+      <h3 style="margin:22px 0 10px">Events</h3>
+      <ul>
+        {% for e in events %}
+        <li class="event-row">
+          <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+          <div class="er-main">
+            <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+            <div class="er-sub">{{ e.city_state }} — {{ e.venue.name }}</div>
+          </div>
+          <form method="post" action="/favorites/toggle">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="kind" value="event">
+            <input type="hidden" name="ref" value="{{ e.id }}">
+            <input type="hidden" name="next" value="/member/favorites">
+            <button class="btn btn-light" type="submit">Remove</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if not artists and not events %}
+      <div class="empty-state">
+        <h3>No favorites yet</h3>
+        <p>Save artists and events to track them here.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

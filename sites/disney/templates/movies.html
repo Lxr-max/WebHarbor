@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}All Movies | Disney Movies{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">All Movies</h1>
+  <p class="page-sub">Every Disney, Pixar, Marvel and Lucasfilm movie in the catalog.</p>
+
+  <form class="filters" method="get" action="{{ url_for('movies') }}">
+    <label for="q">Search</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="Search by title">
+    <label for="status">Status</label>
+    <select id="status" name="status">
+      <option value="">All</option>
+      {% for value, label in status_map.items() %}
+      <option value="{{ value }}" {% if status == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <label for="genre">Genre</label>
+    <select id="genre" name="genre">
+      <option value="">All</option>
+      {% for g in genres %}
+      <option value="{{ g }}" {% if genre == g %}selected{% endif %}>{{ g }}</option>
+      {% endfor %}
+    </select>
+    <label for="sort">Sort</label>
+    <select id="sort" name="sort">
+      <option value="release" {% if sort == 'release' %}selected{% endif %}>Release date</option>
+      <option value="title" {% if sort == 'title' %}selected{% endif %}>Title A-Z</option>
+      <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Rating</option>
+    </select>
+    <button class="btn" type="submit">Apply</button>
+    <span class="count">{{ total }} movie{{ 's' if total != 1 }}</span>
+  </form>
+
+  <div class="grid cols-5">
+    {% for m in rows %}
+    <a class="card" href="{{ url_for('movie_detail', slug=m.slug) }}">
+      <div class="card-img card-poster">
+        {% if img(m.poster) %}<img src="{{ img(m.poster) }}" alt="{{ m.title }}">{% endif %}
+      </div>
+      <div class="card-body">
+        {% set st = movie_status(m) %}
+        {% if st %}<span class="badge {{ 'gold' if st == 'coming_soon' else 'blue' }}">{{ status_map[st] }}</span>{% endif %}
+        <p class="card-title">{{ m.title }}</p>
+        <p class="card-meta">{{ m.rating or '' }}{% if m.runtime %} &middot; {{ m.runtime }}{% endif %}</p>
+      </div>
+    </a>
+    {% else %}
+    <p class="empty">No movies match those filters.</p>
+    {% endfor %}
+  </div>
+
+  {% if pages > 1 %}
+  <nav class="pagination">
+    {% for p in range(1, pages + 1) %}
+      {% if p == page %}<span class="current">{{ p }}</span>
+      {% else %}<a href="{{ url_for('movies', q=q, status=status, genre=genre, sort=sort, page=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

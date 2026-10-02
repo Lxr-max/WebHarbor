@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmation | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="confirm-hero">
+    <div class="tick">&#10003;</div>
+    <h1 style="font-size:30px">Your order is confirmed</h1>
+    <p style="color:var(--tm-gray); margin-top:6px">We've emailed your confirmation and your tickets will be delivered to your account.</p>
+    <div class="order-no-box">Order Number<br><b>{{ order.order_no }}</b></div>
+  </div>
+  <div style="max-width:760px; margin:0 auto 70px">
+    <table class="table">
+      <tr><th>Event</th><td><a href="/event/{{ order.event.id }}">{{ order.event.name }}</a></td></tr>
+      <tr><th>Date</th><td>{{ order.event.date_pretty }}{% if order.event.time %}, {{ order.event.time }}{% endif %}</td></tr>
+      <tr><th>Venue</th><td>{{ order.event.venue.name }}, {{ order.event.city_state }}</td></tr>
+      <tr><th>Seats</th><td>Sec {{ order.section }} • Row {{ order.row }} ({{ order.section_desc }})</td></tr>
+      <tr><th>Quantity</th><td>{{ order.qty }} Ticket{{ '' if order.qty == 1 else 's' }}</td></tr>
+      <tr><th>Delivery</th><td>{{ 'Mobile Transfer' if order.delivery == 'mobile' else 'Mobile Entry - E-Ticket' }}</td></tr>
+      <tr><th>Payment</th><td>{{ order.card_brand }} •••• {{ order.card_last4 }}</td></tr>
+      <tr><th>Face Value</th><td>${{ '%.2f'|format(order.face_total) }}</td></tr>
+      <tr><th>Service Fee</th><td>${{ '%.2f'|format(order.fee_total) }}</td></tr>
+      <tr><th>Total</th><td><b>${{ '%.2f'|format(order.total) }}</b></td></tr>
+    </table>
+    <p style="margin-top:18px"><a class="btn btn-outline" href="/">Back to Home</a>
+      {% if current_user.is_authenticated %}<a class="btn btn-primary" href="/member">View My Orders</a>{% endif %}</p>
+  </div>
+</div>
+{% endblock %}

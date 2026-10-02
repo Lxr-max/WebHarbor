@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Azure products — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  {% if hero_image %}<img class="story-hero" src="{{ img(hero_image) }}" alt="">{% endif %}
+  <h1>Azure products</h1>
+  <p class="lead">Browse {{ items|length }} Azure products across {{ cats|length }} categories — compute, databases, AI, networking and more.</p>
+
+  <form class="filter-bar" method="get" action="{{ url_for('products') }}">
+    <select name="category" aria-label="Filter by category">
+      <option value="">All categories</option>
+      {% for c in cats %}
+      <option value="{{ c }}" {% if c == active_category %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+    <input type="search" name="q" placeholder="Search products" value="{{ q }}" aria-label="Search products">
+    <button class="btn btn-primary" type="submit">Filter</button>
+    {% if active_category or q %}
+    <a class="btn btn-ghost" href="{{ url_for('products') }}">Clear filters</a>
+    {% endif %}
+  </form>
+
+  <p class="result-count">{{ items|length }} product{{ '' if items|length == 1 else 's' }}{% if active_category %} in {{ active_category }}{% endif %}{% if q %} matching “{{ q }}”{% endif %}</p>
+
+  <div class="product-grid">
+    {% for prod in items %}
+    <div class="card product-card">
+      <h3><a href="{{ url_for('product_detail', slug=prod.slug) }}">{{ prod.name }}</a></h3>
+      <p>{{ prod.desc }}</p>
+      <p class="card-meta">
+        {% for c in prod.category_list %}<span class="chip">{{ c }}</span>{% endfor %}
+      </p>
+      <p class="card-actions">
+        <a href="{{ url_for('product_detail', slug=prod.slug) }}">Product →</a>
+        {# The captured catalog rows carry upstream pricing URLs
+           (/en-us/pricing/details/<slug>/); only the four captured details
+           pages exist on the mirror (plus the virtual-machines alias), so map
+           the segment like product_detail.html does and fall back to the
+           pricing hub for everything else (raw upstream paths 404). #}
+        {% if prod.pricing_url %}
+        {% set pseg = prod.pricing_url.rstrip('/').split('/')[-1] %}
+        {% set ppage = {'virtual-machines': 'virtual-machines-linux'}.get(pseg, pseg) %}
+        <a href="{{ url_for('pricing_details', page=ppage) if ppage in ['kubernetes-service','virtual-machines-linux','cosmos-db','managed-disks'] else url_for('pricing') }}">Pricing →</a>
+        {% endif %}
+      </p>
+    </div>
+    {% else %}
+    <p>No products match your filters.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

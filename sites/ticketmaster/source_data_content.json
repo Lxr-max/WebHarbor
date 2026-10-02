@@ -1,0 +1,408 @@
+{
+ "mirror_today": "2026-09-27",
+ "brand": {
+  "name": "Ticketmaster",
+  "tagline": "Buy Verified Tickets for Concerts, Sports, Theater and Events",
+  "header_bg": "#024DDF",
+  "footer_bg": "#121212",
+  "font_stack": "Averta, Helvetica, Arial, sans-serif"
+ },
+ "nav": {
+  "top_links": [
+   {
+    "label": "Hotels",
+    "url": "/travel"
+   },
+   {
+    "label": "Sell",
+    "url": "/sell"
+   },
+   {
+    "label": "Gift Cards",
+    "url": "/giftcards"
+   },
+   {
+    "label": "Help",
+    "url": "/help"
+   },
+   {
+    "label": "VIP",
+    "url": "/vip"
+   }
+  ],
+  "genres": [
+   {
+    "label": "Concerts",
+    "url": "/discover/concerts"
+   },
+   {
+    "label": "Sports",
+    "url": "/discover/sports"
+   },
+   {
+    "label": "Arts, Theater & Comedy",
+    "url": "/discover/arts-theater"
+   },
+   {
+    "label": "Family",
+    "url": "/discover/family"
+   },
+   {
+    "label": "Cities",
+    "url": "/discover/cities"
+   }
+  ],
+  "search_placeholder": "Search Artist, Team, or Venue"
+ },
+ "mega_menu": {
+  "Music": {
+   "top_categories": [
+    "Alternative Rock",
+    "Comedy",
+    "Country and Folk",
+    "More Concerts",
+    "Rock and Pop"
+   ],
+   "all_label": "All Music Tickets",
+   "popular": [
+    "Eric Church",
+    "Weezer",
+    "James Taylor",
+    "New Kids On the Block",
+    "Drake",
+    "Disturbed",
+    "Elton John",
+    "Britney Spears",
+    "Marc Anthony",
+    "Tedeschi Trucks Band"
+   ]
+  },
+  "Sports": {
+   "top_categories": [
+    "Basketball",
+    "Football",
+    "Hockey",
+    "More Sports",
+    "Motorsports"
+   ],
+   "all_label": "All Sports Tickets",
+   "popular": [
+    "Monster Jam",
+    "Atlanta Hawks",
+    "Monster Jam Triple Threat Series",
+    "Atlanta United FC",
+    "New York Knicks",
+    "Boston Bruins",
+    "New York Jets",
+    "Golden State Warriors",
+    "Tampa Bay Buccaneers",
+    "Dallas Mavericks"
+   ]
+  },
+  "Arts & Theater": {
+   "top_categories": [
+    "Ballet and Dance",
+    "Comedy",
+    "More Arts and Theater",
+    "Musicals",
+    "Plays"
+   ],
+   "all_label": "All Arts & Theater Tickets",
+   "popular": [
+    "Harry Potter and the Cursed Child (NY)",
+    "Trevor Noah",
+    "Amy Schumer",
+    "Iliza",
+    "Hamilton (Chicago)",
+    "Steve Martin & Martin Short",
+    "The Book of Mormon (Touring)",
+    "Wicked (NY)",
+    "The Lion King (New York, NY)",
+    "Bert Kreischer"
+   ]
+  },
+  "Family": {
+   "top_categories": [
+    "Children's Music and Theater",
+    "Circus",
+    "Family Attractions",
+    "Ice Shows",
+    "More Family"
+   ],
+   "all_label": "All Family Tickets",
+   "popular": [
+    "Disney On Ice celebrates 100 Years of Magic",
+    "Disney On Ice presents Mickey's Search Party",
+    "Marvel Universe LIVE! Age of Heroes",
+    "PAW Patrol Live!: Race to the Rescue",
+    "Disney On Ice presents Worlds of Enchantment",
+    "PJ Masks",
+    "Sesame Street Live! Let's Party!",
+    "The Wild Kratts Live!",
+    "Cirque Musica",
+    "Daniel Tiger's Neighborhood"
+   ]
+  }
+ },
+ "trending_searches": [
+  {
+   "label": "Harry Styles",
+   "artist_id": "2366444"
+  },
+  {
+   "label": "Karol G",
+   "artist_id": "2412593"
+  },
+  {
+   "label": "WWE",
+   "artist_id": "807358"
+  },
+  {
+   "label": "Doja Cat",
+   "artist_id": "2062205"
+  },
+  {
+   "label": "Weezer",
+   "artist_id": "766591"
+  },
+  {
+   "label": "Gorillaz",
+   "artist_id": "807314"
+  },
+  {
+   "label": "Teddy Swims",
+   "artist_id": "2712573"
+  },
+  {
+   "label": "Jingle Ball",
+   "artist_id": "1513145"
+  },
+  {
+   "label": "Hans Zimmer",
+   "artist_id": "1508961"
+  },
+  {
+   "label": "Jo Koy",
+   "artist_id": "1179917"
+  }
+ ],
+ "cities": [
+  {
+   "slug": "new-york-city",
+   "name": "New York City",
+   "image": "static/images/cities/city_new-york-city.jpg"
+  },
+  {
+   "slug": "los-angeles",
+   "name": "Los Angeles",
+   "image": "static/images/cities/city_los-angeles.jpg"
+  },
+  {
+   "slug": "las-vegas",
+   "name": "Las Vegas",
+   "image": "static/images/cities/city_las-vegas.jpg"
+  },
+  {
+   "slug": "chicago",
+   "name": "Chicago",
+   "image": "static/images/cities/city_chicago.jpg"
+  },
+  {
+   "slug": "atlanta",
+   "name": "Atlanta",
+   "image": "static/images/cities/city_atlanta.jpg"
+  },
+  {
+   "slug": "nashville",
+   "name": "Nashville",
+   "image": "static/images/cities/city_nashville.jpg"
+  },
+  {
+   "slug": "denver",
+   "name": "Denver",
+   "image": "static/images/cities/city_denver.jpg"
+  },
+  {
+   "slug": "miami",
+   "name": "Miami",
+   "image": "static/images/cities/city_miami.jpg"
+  }
+ ],
+ "footer": {
+  "columns": [
+   {
+    "title": "Help",
+    "links": [
+     {
+      "label": "Help/FAQ",
+      "url": "/help"
+     },
+     {
+      "label": "Contact Us",
+      "url": "/help/contact"
+     },
+     {
+      "label": "Sell",
+      "url": "/sell"
+     },
+     {
+      "label": "My Account",
+      "url": "/member"
+     },
+     {
+      "label": "Gift Cards",
+      "url": "/giftcards"
+     }
+    ]
+   },
+   {
+    "title": "Our Network",
+    "links": [
+     {
+      "label": "Live Nation",
+      "url": "https://www.livenation.com/"
+     },
+     {
+      "label": "House of Blues",
+      "url": "https://www.houseofblues.com/"
+     },
+     {
+      "label": "Front Gate Tickets",
+      "url": "https://www.frontgatetickets.com/"
+     },
+     {
+      "label": "TicketWeb",
+      "url": "https://www.ticketweb.com/"
+     },
+     {
+      "label": "NFL Ticket Exchange",
+      "url": "https://www.nfl.com/tickets/"
+     }
+    ]
+   }
+  ],
+  "legal": [
+   {
+    "label": "terms of use",
+    "url": "/legal/terms"
+   },
+   {
+    "label": "privacy statement",
+    "url": "/legal/privacy"
+   },
+   {
+    "label": "Do Not Sell or Share My Personal Information",
+    "url": "/legal/dnsmpi"
+   }
+  ],
+  "copyright": "\u00a9 1999-2026 Ticketmaster. All rights reserved."
+ },
+ "gift_cards": {
+  "title": "Give the Gift of Live",
+  "blurb": "Experiences are meant to be shared \u2014 let friends, family and fellow fans choose from millions of events. Available in any amount from $25 to $1000.",
+  "body": "From theatre, comedy and family attractions to top gigs, festivals and sporting events, Ticketmaster has it all. New events are added daily, so there's always a fresh and exciting reason to keep coming back. Whether you're looking for your own spine-tingling encore or an unforgettable gift for a loved one, a Ticketmaster Gift Card is your ticket to memories that will last a lifetime.",
+  "types": [
+   "E-Gift Card",
+   "Physical Card"
+  ],
+  "denominations": [
+   25,
+   50,
+   75,
+   100,
+   150,
+   200,
+   250,
+   500,
+   1000
+  ],
+  "phone": "1-800-745-3000"
+ },
+ "help_topics": [
+  {
+   "slug": "presale",
+   "title": "Presale",
+   "body": "A presale is a chance to buy tickets before the general public. Some of the presales available include artist fan club presales, venue presales, and sponsor presales such as the Citi\u00ae Cardmember Presale. To access a presale you need a presale code, which is sent to eligible fans or published by the sponsor. During the presale window, enter the code on the event page to unlock tickets. Presale tickets are limited and not guaranteed."
+  },
+  {
+   "slug": "accessible-tickets",
+   "title": "Accessible Tickets",
+   "body": "Accessible tickets are available for fans with disabilities and their companions. To purchase accessible seating, use the Accessible filter on the event page or contact the venue's accessibility services. Venues may request that all special seating accommodations be solicited only through their representatives."
+  },
+  {
+   "slug": "vip-packages",
+   "title": "VIP Packages",
+   "body": "VIP Packages include a ticket plus exclusive perks such as premium seating, merchandise, or a dedicated entrance. To purchase, look for the gold star on the seat map or the VIP Packages listed at the top of the ticket options on the event page."
+  },
+  {
+   "slug": "mobile-tickets",
+   "title": "Accessing your mobile tickets",
+   "body": "Mobile tickets let you enter your event with just your phone. After purchase, tickets appear in your account under Orders. Mobile transfer is the most common delivery method: your tickets are usually transferred to your phone within 24-72 hours of the event. Make sure to download your tickets to your device before arriving at the venue."
+  },
+  {
+   "slug": "transfer-tickets",
+   "title": "Transferring tickets",
+   "body": "You can transfer mobile tickets to friends from your account. Open the order, select the tickets to transfer, and enter the recipient's email address. The recipient receives an email and accepts the tickets into their own account. Once accepted, the original barcode is invalidated."
+  },
+  {
+   "slug": "sell-tickets",
+   "title": "Selling tickets",
+   "body": "If you can't make it, you can list your verified tickets for resale from My Account. Set your price, and when your tickets sell, you get paid. You can edit or remove your listing anytime before the tickets sell."
+  },
+  {
+   "slug": "refund-policy",
+   "title": "Refunds and exchanges",
+   "body": "If an event is cancelled, you will receive a full refund of the ticket price including fees, credited to the original method of payment. If an event is rescheduled, your tickets are valid for the new date; if you can't attend the new date, refund options depend on the event's policy."
+  },
+  {
+   "slug": "ticket-limits",
+   "title": "Ticket limits",
+   "body": "Most events set a per-order ticket limit. Persons who exceed the ticket limit may have any or all of their orders and tickets cancelled without notice, including orders associated with the same name, e-mail address, billing address, or credit card number."
+  },
+  {
+   "slug": "delayed-delivery",
+   "title": "Delayed delivery",
+   "body": "Tickets for some events are on a delayed delivery, which means they are not transferred to your account until closer to the event date. This is a standard practice for high-demand events. Your order is still confirmed \u2014 the tickets will arrive before the event."
+  },
+  {
+   "slug": "order-status",
+   "title": "Tracking your order",
+   "body": "You can check the status of any order from My Account. Each order shows the event, the seats, the delivery method, and the total charged. Pending transfers show the recipient's email address."
+  },
+  {
+   "slug": "payment-options",
+   "title": "Payment options",
+   "body": "Ticketmaster accepts major credit and debit cards, PayPal, and Buy Now Pay Later options such as Pay In 4. Prices shown include fees before taxes. Card payments are processed when your order is placed."
+  },
+  {
+   "slug": "contact-us",
+   "title": "Contact Us",
+   "body": "To order tickets by phone, call Ticketmaster National Sales at 1-800-745-3000. For help with an existing order, sign in and open the order from My Account, or visit the Help Center for answers to common questions."
+  }
+ ],
+ "checkout": {
+  "delivery_methods": [
+   {
+    "id": "mobile",
+    "label": "Mobile Transfer",
+    "note": "Tickets are transferred to your phone, usually within 24-72 hours of the event."
+   },
+   {
+    "id": "eticket",
+    "label": "Mobile Entry - E-Ticket",
+    "note": "Tickets are available in your account immediately after purchase."
+   }
+  ],
+  "payment_note": "Prices include fees (before taxes).",
+  "bnpl": "Buy Now, Pay Later \u2014 Pay Now or Pay In 4 available.",
+  "ticket_limit_note": "Event ticket limit: {limit}"
+ },
+ "sale_timeline": {
+  "happening_now": "Happening Now",
+  "general_sale": "General Sale",
+  "past_sales": "Past Sales",
+  "starts": "Starts",
+  "ends": "Ends",
+  "presale_note": "For events with prior presales, availability may be limited."
+ }
+}

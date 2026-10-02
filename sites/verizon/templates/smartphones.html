@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Cell Phones: Shop the Best Smartphones Online{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Smartphones</h1>
+  <p>{{ devices|length }} of {{ device_count }} smartphones shown{% if brand %} for brand {{ brand }}{% endif %}.</p>
+  <form method="get" action="{{ url_for('smartphones') }}" class="filter-bar">
+    <label for="brand">Brand</label>
+    <select id="brand" name="brand">
+      <option value="">All brands</option>
+      {% for b in brands %}
+      <option value="{{ b }}" {{ 'selected' if brand == b }}>{{ b }}</option>
+      {% endfor %}
+    </select>
+    <label for="sort">Sort</label>
+    <select id="sort" name="sort">
+      <option value="featured" {{ 'selected' if sort == 'featured' }}>Featured</option>
+      <option value="price-asc" {{ 'selected' if sort == 'price-asc' }}>Price: low to high</option>
+      <option value="price-desc" {{ 'selected' if sort == 'price-desc' }}>Price: high to low</option>
+    </select>
+    <button type="submit" class="btn btn-secondary">Apply</button>
+  </form>
+  <div class="grid grid-4">
+    {% for d in devices %}
+    <a class="tile" href="{{ url_for('device_detail', slug=d.slug) }}">
+      {% set imgs = d.hero_images() %}
+      {% if imgs %}<img src="/{{ imgs[0] }}" alt="{{ d.name }}">{% endif %}
+      <h3>{{ d.name }}</h3>
+      {% set m = d.terms_map().get('36') %}
+      {% if m %}<p class="tile-price">Starts at ${{ m }}/mo</p><p class="muted">for 36 months, 0% APR</p>{% endif %}
+      {% if d.full_price %}<p class="tile-retail">Retail price: ${{ d.full_price }}</p>{% endif %}
+      {% if d.promo_list() %}<p class="tile-promo">{{ d.promo_list()[0] }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}{% if event %}{{ event.title }} Parking ({{ event.starts[:10] }}) | SpotHero{% elif airport %}{{ airport.title }} ({{ airport.code }}) Parking | SpotHero{% else %}Parking Search | SpotHero{% endif %}{% endblock %}
+{% block content %}
+<div class="container" style="padding-top:8px">
+  <div class="crumbs">
+    <a href="{{ url_for('home') }}">SpotHero</a> ›
+    {% if kind == 'event' %}<span>Event Parking</span>{% elif kind == 'airport' %}<a href="{{ url_for('airports_index') }}">Airport Parking</a> › <span>{{ airport.title }}</span>{% elif kind == 'monthly' %}<a href="{{ url_for('monthly_landing') }}">Monthly Parking</a>{% else %}<span>Parking near {{ search_string }}</span>{% endif %}
+  </div>
+
+  {% if event %}
+  <div class="event-banner">
+    <h2>{{ event.venue_title }} Events — {{ event.title }}</h2>
+    <div class="muted">{{ event.venue_city }} · Parking window below includes 1 hour before the event and time after.</div>
+    <div class="window">
+      <span>Start time: {{ fmt_short_dt(event.window_starts) }}</span>
+      <span>End time: {{ fmt_short_dt(event.window_ends) }}</span>
+    </div>
+    <p class="small" style="color:rgba(255,255,255,.7);margin:10px 0 0">We added 1 hour before the event and 1 hour after. Event parking times are fixed to the event window.</p>
+  </div>
+  {% elif airport %}
+  <h1 style="font-size:26px;margin-bottom:4px">{{ airport.info_title or (airport.title ~ ' (' ~ airport.code ~ ') Parking') }}</h1>
+  <p class="muted" style="margin-bottom:6px">{{ airport.street }}, {{ airport.city }}, {{ airport.state }} {{ airport.postal }}</p>
+  <p class="muted small">Showing airport parking for {{ fmt_display_date(start) }} {{ fmt_display_time(start) }} → {{ fmt_display_date(end) }} {{ fmt_display_time(end) }}</p>
+  {% elif kind == 'monthly' %}
+  <h1 style="font-size:26px;margin-bottom:4px">Monthly parking{% if search_string %} in {{ search_string }}{% endif %}</h1>
+  <p class="muted">Monthly parking start date: {{ fmt_display_date(start) }}</p>
+  {% else %}
+  <h1 style="font-size:26px;margin-bottom:4px">Parking near {{ search_string }}</h1>
+  <p class="muted">{{ fmt_display_date(start) }} {{ fmt_display_time(start) }} → {{ fmt_display_date(end) }} {{ fmt_display_time(end) }}</p>
+  {% endif %}
+
+  <form method="get" action="{{ url_for('search') }}" class="search-toolbar">
+    <input type="hidden" name="kind" value="{{ kind }}">
+    {% if kind == 'event' %}<input type="hidden" name="id" value="{{ event.id }}">{% endif %}
+    {% if airport %}<input type="hidden" name="airport" value="{{ airport.code }}">{% endif %}
+    {% if kind == 'address' %}
+    {% if request.args.get('latitude') %}
+    <input type="hidden" name="latitude" value="{{ request.args.get('latitude') }}">
+    <input type="hidden" name="longitude" value="{{ request.args.get('longitude') }}">
+    {% endif %}
+    <input type="hidden" name="search_string" value="{{ request.args.get('search_string', '') }}">
+    {% endif %}
+    {% if kind == 'monthly' %}
+    <input type="hidden" name="search_string" value="{{ request.args.get('search_string', '') }}">
+    {% endif %}
+    {% if kind != 'monthly' and not event %}
+    <div class="field" style="margin:0">
+      <div class="control">
+        <input type="datetime-local" name="starts" value="{{ '%s' % start.strftime('%Y-%m-%dT%H:%M') }}" aria-label="Start time" style="padding-left:12px">
+      </div>
+    </div>
+    <div class="field" style="margin:0">
+      <div class="control">
+        <input type="datetime-local" name="ends" value="{{ '%s' % end.strftime('%Y-%m-%dT%H:%M') }}" aria-label="End time" style="padding-left:12px">
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" type="submit">Update</button>
+    {% endif %}
+    {% if kind == 'monthly' %}
+    <div class="field" style="margin:0">
+      <div class="control"><input type="date" name="monthly_start" value="{{ start.strftime('%Y-%m-%d') }}" aria-label="Monthly parking start date" style="padding-left:12px"></div>
+    </div>
+    <button class="btn btn-primary btn-sm" type="submit">Update</button>
+    {% endif %}
+
+    <span style="width:12px"></span>
+    <a class="chip {% if filters.self_park %}active{% endif %}" href="{{ modify_query('self_park', None if filters.self_park else '1') }}">Self Park</a>
+    <a class="chip {% if filters.covered %}active{% endif %}" href="{{ modify_query('covered', None if filters.covered else '1') }}">Garage - Covered</a>
+    <a class="chip {% if filters.valet %}active{% endif %}" href="{{ modify_query('valet', None if filters.valet else '1') }}">Valet</a>
+    <a class="chip {% if filters.ev %}active{% endif %}" href="{{ modify_query('ev', None if filters.ev else '1') }}">EV Charging</a>
+    <a class="chip {% if filters.in_out %}active{% endif %}" href="{{ modify_query('in_out', None if filters.in_out else '1') }}">In &amp; Out Allowed</a>
+    <label class="switch">
+      <input type="checkbox" {% if with_fees %}checked{% endif %} onchange="window.location='{{ modify_query('fees', None if with_fees else '1') }}'">
+      Show total price with fees
+    </label>
+    <div class="sorter">
+      <label for="sort">Sort by</label>
+      <select id="sort" onchange="window.location='{{ modify_query('sort', '__SORT__') }}'.replace('__SORT__', this.value)">
+        <option value="relevance" {% if sort == 'relevance' %}selected{% endif %}>Relevance</option>
+        <option value="distance" {% if sort == 'distance' %}selected{% endif %}>Distance</option>
+        <option value="price" {% if sort == 'price' %}selected{% endif %}>Price</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="spot-list">
+    {% for card in cards %}
+    <div class="spot-card" data-spot="{{ card.facility.id }}">
+      <a href="{{ url_for('facility_page', facility_id=card.facility.id, slug=card.facility.slug or 'x') }}?starts={{ start.strftime('%Y-%m-%dT%H:%M') }}{% if end %}&ends={{ end.strftime('%Y-%m-%dT%H:%M') }}{% endif %}{% if kind == 'monthly' %}&kind=monthly{% endif %}{% if kind == 'event' and event %}&event={{ event.id }}{% endif %}">
+        {% if card.facility.image_list %}
+        <img class="spot-img" src="{{ url_for('static', filename='images/' ~ card.facility.image_list[0]) }}" alt="Photo of {{ card.facility.title }}" loading="lazy">
+        {% else %}
+        <div class="spot-img"></div>
+        {% endif %}
+      </a>
+      <div>
+        <div class="spot-tags">
+          {% for tag in card.tags %}<span class="spot-tag {% if 'Official' in tag %}official{% endif %}">{{ tag }}</span>{% endfor %}
+        </div>
+        <a class="spot-title" href="{{ url_for('facility_page', facility_id=card.facility.id, slug=card.facility.slug or 'x') }}?starts={{ start.strftime('%Y-%m-%dT%H:%M') }}{% if end %}&ends={{ end.strftime('%Y-%m-%dT%H:%M') }}{% endif %}{% if kind == 'monthly' %}&kind=monthly{% endif %}{% if kind == 'event' and event %}&event={{ event.id }}{% endif %}">{{ card.facility.title }}</a>
+        <div class="spot-meta">
+          {% if card.walk %}
+          <span>🚶 {{ card.walk }} {{ card.walk_dist }}</span>
+          {% elif card.facility.airport_distance_m %}
+          <span>✈️ {{ '%.1f' % (card.facility.airport_distance_m / 1609.34) }} mi from terminal</span>
+          {% endif %}
+          {% if card.facility.rating_avg %}
+          <span class="stars">★</span>
+          <span class="rating">{{ '%.1f' % card.facility.rating_avg }}</span>
+          <span>({{ review_count_display(card.facility.rating_count) }})</span>
+          {% endif %}
+          {% if card.facility.airport_code and card.facility.airport_shuttle %}
+          <span class="spot-tag" style="background:rgba(18,113,235,.1);color:var(--primary)">Airport Shuttle</span>
+          {% endif %}
+          {% for a in card.facility.amenity_list[:3] if not (card.facility.airport_code and a == 'Airport Shuttle') %}
+          <span class="spot-tag">{{ a }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="spot-price">
+        <div class="amount">${{ '%.2f' % card.price }}{% if kind == 'monthly' %}+{% endif %}</div>
+        <div class="note">{{ card.price_note }}</div>
+        <div class="spot-actions">
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('facility_page', facility_id=card.facility.id, slug=card.facility.slug or 'x') }}?starts={{ start.strftime('%Y-%m-%dT%H:%M') }}{% if end %}&ends={{ end.strftime('%Y-%m-%dT%H:%M') }}{% endif %}{% if kind == 'monthly' %}&kind=monthly{% endif %}{% if kind == 'event' and event %}&event={{ event.id }}{% endif %}">Details</a>
+          <a class="btn btn-primary btn-sm" href="{{ url_for('purchase_hourly', facility=card.facility.id, starts=start.strftime('%Y-%m-%dT%H:%M'), ends=end.strftime('%Y-%m-%dT%H:%M') if end else None, kind=('monthly' if kind == 'monthly' else ('event' if kind == 'event' else ('airport' if card.facility.airport_code else 'hourly'))), event=event.id if kind == 'event' else None) }}">Book Now</a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <h3>No spots match your filters</h3>
+      <p>Try widening your dates or removing a filter.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

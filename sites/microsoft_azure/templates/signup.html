@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create your Azure account — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell narrow">
+  <h1>Create your Azure account</h1>
+  <p class="lead">Create a free account to save pricing estimates and favorite products.</p>
+  <form method="post" class="stack-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Full name <input type="text" name="name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Password (at least 8 characters) <input type="password" name="password" minlength="8" required></label>
+    <button class="btn btn-primary" type="submit">Create account</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.</p>
+</div>
+{% endblock %}
