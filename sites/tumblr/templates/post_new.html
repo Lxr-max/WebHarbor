@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}New post — Tumblr{% endblock %}
+{% block content %}
+<div class="narrow-wrap">
+  <div class="page-head">
+    <h1>Create a new post</h1>
+    <p class="page-sub">Posting to <a href="{{ url_for('blog_page', name=blog.name) }}">{{ blog.name }}</a></p>
+  </div>
+
+  <nav class="composer-tabs">
+    <a class="tab {{ 'active' if post_type == 'text' }}" href="{{ url_for('new_post', type='text') }}">Text</a>
+    <a class="tab {{ 'active' if post_type == 'photo' }}" href="{{ url_for('new_post', type='photo') }}">Photo</a>
+    <a class="tab {{ 'active' if post_type == 'quote' }}" href="{{ url_for('new_post', type='quote') }}">Quote</a>
+    <a class="tab {{ 'active' if post_type == 'link' }}" href="{{ url_for('new_post', type='link') }}">Link</a>
+  </nav>
+
+  <form class="composer" method="post"
+        enctype="multipart/form-data"
+        action="{{ url_for('new_post', type=post_type) }}">
+    {% if post_type == 'text' %}
+      <input class="composer-title" type="text" name="title" placeholder="Title">
+      <textarea name="body" rows="8" placeholder="Your text goes here…"></textarea>
+    {% elif post_type == 'photo' %}
+      <label class="upload-row">
+        <input type="file" name="image" accept="image/*">
+        <span class="upload-hint">Choose an image to upload</span>
+      </label>
+      <textarea name="body" rows="4" placeholder="Add a caption (optional)"></textarea>
+    {% elif post_type == 'quote' %}
+      <textarea name="quote" rows="4" placeholder="“Quote”"></textarea>
+      <input class="composer-title" type="text" name="source" placeholder="Source">
+    {% else %}
+      <input class="composer-title" type="text" name="link" placeholder="https://…">
+      <input class="composer-title" type="text" name="title" placeholder="Title (optional)">
+      <textarea name="body" rows="4" placeholder="Description (optional)"></textarea>
+    {% endif %}
+    <input class="composer-title" type="text" name="tags" placeholder="#tags, comma separated">
+    <button class="btn btn-primary wide" type="submit">Post</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ a.question }} | Carvana Help{% endblock %}
+{% block body %}
+<div class="content-page">
+  <p class="crumb"><a href="/faq">Help &amp; Support</a> › {{ a.category }}</p>
+  <h1>{{ a.question }}</h1>
+  <section class="content-section">
+    <p>{{ a.answer }}</p>
+  </section>
+  {% if related %}
+  <section class="content-section">
+    <h2>Related articles</h2>
+    <ul>
+      {% for r in related %}
+      <li><a href="{{ r.url() }}">{{ r.question }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

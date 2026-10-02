@@ -1,0 +1,1405 @@
+[
+ {
+  "page": "kubernetes-service",
+  "index": 0,
+  "header": [
+   "Azure Kubernetes Service"
+  ],
+  "rows": [
+   [
+    "",
+    "Automatic",
+    "Standard"
+   ],
+   [
+    "Use cases",
+    "Production workloads",
+    "Production workloads Workloads requiring 2 years of support"
+   ],
+   [
+    "Node management",
+    "Nodes are managed for you",
+    "You create and manage nodes in node pools"
+   ],
+   [
+    "Cluster node limit",
+    "Up to 5,000",
+    "Up to 5,000*"
+   ],
+   [
+    "Service Level Agreement (SLA) options",
+    "Financially backed API server uptime SLA and pod readiness SLA",
+    "No SLA (Free tier) Financially backed API server uptime SLA (Standard tier)"
+   ],
+   [
+    "Kubernetes versioning support",
+    "Standard support, aligned with the Kubernetes community support window",
+    "Standard support, aligned with the Kubernetes community support windowLong-term support, bug fixes and security updates extended for one-year beyond Kubernetes community support window"
+   ],
+   [
+    "Control plane pricing",
+    "Automatic Hosted Component: $-",
+    "No SLA (Free tier): Free (only pay for underlying resources) SLA (Standard tier): $- SLA and LTS (Premium tier): $-"
+   ],
+   [
+    "Compute pricing",
+    "Compute charges are based on the duration and type of virtual machines launched and managed by AKS in addition to: $- $- $- $- $- $- $-",
+    "Compute charges are based on the duration and type of virtual machines launched and managed by AKS."
+   ]
+  ]
+ },
+ {
+  "page": "kubernetes-service",
+  "index": 1,
+  "header": [
+   "Instance",
+   "Timing",
+   "Price"
+  ],
+  "rows": [
+   [
+    "AKS Edge Essentials",
+    "Billed Monthly",
+    "$-/device/month"
+   ]
+  ]
+ },
+ {
+  "page": "virtual-machines-linux",
+  "index": 0,
+  "header": [
+   "State",
+   "Billed",
+   "Details"
+  ],
+  "rows": [
+   [
+    "Starting",
+    "Yes",
+    "The initial starting state of virtual machines as they’re going through the boot cycle. This period is billed as the virtual machines are running."
+   ],
+   [
+    "Running (Started)",
+    "Yes",
+    "The running state of the virtual machine."
+   ],
+   [
+    "Stopped",
+    "Yes",
+    "You are billed for allocated cores, but not software license.Note—To put a virtual machine in “Stopped” status, use the power option within the virtual machine, not from the Microsoft Azure classic portal."
+   ],
+   [
+    "Deleted (Deallocated)",
+    "No",
+    "Cores are no longer allocated to the virtual machine, and are no longer billed.Note—The only way to stop all virtual machines in a cloud service is to delete both the staging and production deployments."
+   ]
+  ]
+ },
+ {
+  "page": "virtual-machines-linux",
+  "index": 1,
+  "header": [
+   "Deployment size",
+   "Usage emitted as multiple of A1 through January 10, 2016",
+   "Usage emitted on dedicated meter as of January 11, 2016"
+  ],
+  "rows": [
+   [
+    "A0",
+    "0.25 of A1 hour",
+    "1 of A0 hour"
+   ],
+   [
+    "A2",
+    "2 of A1 hour",
+    "1 of A2 hour"
+   ],
+   [
+    "A3",
+    "4 of A1 hour",
+    "1 of A3 hour"
+   ],
+   [
+    "A4",
+    "8 of A1 hour",
+    "1 of A4 hour"
+   ]
+  ]
+ },
+ {
+  "page": "virtual-machines-linux",
+  "index": 2,
+  "header": [
+   "AUD Australia – Dollar ($) AUD",
+   "JPY Japan – Yen (¥) JPY"
+  ],
+  "rows": [
+   [
+    "TWD Taiwan – Dollar (NT$) TWD",
+    "KRW Korea – Won (₩) KRW"
+   ],
+   [
+    "GBP United Kingdom – Pound (£) GBP",
+    "NZD New Zealand – Dollar ($) NZD"
+   ],
+   [
+    "CAD Canada – Dollar ($) CAD",
+    "NOK Norway – Krone (kr) NOK"
+   ],
+   [
+    "CNY China – Yuan (CN¥) CNY",
+    "RUB Russia – Ruble (руб) RUB"
+   ],
+   [
+    "DKK Denmark – Krone (kr) DKK",
+    "SEK Sweden – Krona (kr) SEK"
+   ],
+   [
+    "EUR Euro Zone – Euro (€) EUR",
+    "CHF Switzerland – Franc (chf) CHF"
+   ],
+   [
+    "INR India – Rupee (₹) INR",
+    ""
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 0,
+  "header": [
+   "Autoscale provisioned throughput",
+   "Total RU/s per hour",
+   "Price per 100 RU/s",
+   "Final Price"
+  ],
+  "rows": [
+   [
+    "General Purpose account",
+    "100 RU/s x 1.5 x 1 region",
+    "$-",
+    "$-"
+   ],
+   [
+    "General Purpose account with data distributed across multiple regions (with or without availability zones*)",
+    "100 RU/s x 1.5 x N regions",
+    "$-",
+    "$-"
+   ],
+   [
+    "Business Critical account ( formerly multi-write region accounts) distributed across multiple regions**",
+    "100 RU/s x N regions",
+    "$-",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 1,
+  "header": [
+   "",
+   "One Year Term Discount",
+   "Three Year Term Discount"
+  ],
+  "rows": [
+   [
+    "Reserved Capacity request units per second (RU/s)",
+    "20%",
+    "30%"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 2,
+  "header": [
+   "",
+   "One Year Discount",
+   "Three Year Discount"
+  ],
+  "rows": [
+   [
+    "Savings on request units per second (RU/s)",
+    "12%",
+    "12%"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 3,
+  "header": [
+   "Consumed Storage",
+   "Total GB",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Transactional storage (row-oriented)",
+    "1 GB x N regions",
+    "$-/month"
+   ],
+   [
+    "Analytical storage (column-oriented)",
+    "1 GB x N regions",
+    "$-/month"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 4,
+  "header": [
+   "Periodic backup storage",
+   "Total GB",
+   "Price per GB"
+  ],
+  "rows": [
+   [
+    "Stored periodic backup data (2 copies)",
+    "GBs per copy",
+    "Free/month"
+   ],
+   [
+    "Stored periodic backup data (>2 copies)",
+    "GBs per copy",
+    "$-/month"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 5,
+  "header": [
+   "Continuous backup storage",
+   "Total GB",
+   "Price per GB"
+  ],
+  "rows": [
+   [
+    "Continuous backup data – 7-day retention",
+    "GBs x N regions",
+    "Free/month"
+   ],
+   [
+    "Continuous backup data – 30-day retention",
+    "GBs x N regions",
+    "$-/month"
+   ],
+   [
+    "Point-in-time restore",
+    "GBs",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 6,
+  "header": [
+   "Transactions",
+   "Operations",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Write Operations - analytical storage",
+    "10,000",
+    "$-"
+   ],
+   [
+    "Read Operations - analytical storage",
+    "10,000",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 7,
+  "header": [
+   "Feature",
+   "Pricing"
+  ],
+  "rows": [
+   [
+    "Semantic Reranker",
+    "$- per 1,000 requests."
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 8,
+  "header": [
+   "Name",
+   "vCPU",
+   "Memory",
+   "Cost (per instance, varies by region)"
+  ],
+  "rows": [
+   [
+    "Dedicated - Gateway Purpose - D4",
+    "4",
+    "16 GB",
+    "$- per hour"
+   ],
+   [
+    "Dedicated - Gateway Purpose - D8",
+    "8",
+    "32 GB",
+    "$- per hour"
+   ],
+   [
+    "Dedicated - Gateway Purpose - D16",
+    "16",
+    "64 GB",
+    "$- per hour"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 9,
+  "header": [
+   "",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Data transfer into any region",
+    "Free"
+   ],
+   [
+    "Data transfer within any region",
+    "Free"
+   ],
+   [
+    "Data transfer within an availability zone or between availability zones within any region",
+    "Free"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 10,
+  "header": [
+   "",
+   "First 5 GB/Month",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Data transfer from any region in Europe or North America to any other regions or any destination on the internet",
+    "Free",
+    "$0.05 per GB"
+   ],
+   [
+    "Data transfer from any region in Asia or Oceania or Middle East and Africa to any other region or any destination on the internet (excluding China)",
+    "Free",
+    "$0.08 per GB"
+   ],
+   [
+    "Data transfer from any region in South America to any other region within the same continent or across continents or any destination on the internet",
+    "Free",
+    "$0.16 per GB"
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 11,
+  "header": [
+   "30 days free. Run a non-production Azure Cosmos DB database for a limited time.",
+   "Get Started: Enjoy a time-limited Azure Cosmos DB experience free of charge and without an Azure subscription. You can renew any number of times."
+  ],
+  "rows": [
+   [
+    "Azure Cosmos DB free tier. Develop and test applications, or run small production workloads, free within the Azure environment.",
+    "Get Started: Enable free tier on a new account to receive 1,000 RU/s provisioned throughput and 25 GBs storage free each month for the life of one Azure Cosmos DB account per Azure subscription."
+   ],
+   [
+    "Azure free account. New to Azure? Develop and test a pre-production application with Azure Cosmos DB and other Azure services.",
+    "Get Started: Try Azure Cosmos DB and other Azure services as a part of a 12-month Azure free account. Get $200 credit for 30 days and enjoy 400 RU/s of provisioned throughput and 25 GBs of storage per month free. New Azure free accounts can also enable the Azure Cosmos DB free tier to gain additional free provisioned throughput and storage."
+   ],
+   [
+    "Azure Cosmos DB local emulator. Test applications from your local machine without creating an Azure subscription or incurring any cost.",
+    "Get Started: Download the free Azure Cosmos DB emulator from your local Windows or Linux machine. Once you’re satisfied with your database, you can deploy it by pointing to an Azure Cosmos DB instance in the cloud."
+   ]
+  ]
+ },
+ {
+  "page": "cosmos-db",
+  "index": 12,
+  "header": [
+   "Item",
+   "Usage (Month)",
+   "Rate",
+   "Monthly Cost"
+  ],
+  "rows": [
+   [
+    "Throughput bill for container in West US",
+    "10K RU/s * 24 * 31",
+    "$- per 100 RU/s per hour",
+    "$-"
+   ],
+   [
+    "Throughput bill for 3 additional regions - East US, North Europe, and East Asia",
+    "3 * 10K RU/s * 24 * 31",
+    "$- per 100 RU/s per hour",
+    "$-"
+   ],
+   [
+    "Storage bill for container in West US",
+    "1 TB",
+    "$-/GB",
+    "$-"
+   ],
+   [
+    "Storage bill for 3 additional regions - East US, North Europe, and East Asia",
+    "3 * 1 TB",
+    "$-/GB",
+    "$-"
+   ],
+   [
+    "Total",
+    "",
+    "",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 0,
+  "header": [
+   "Ultra Disk Configuration",
+   "Unit",
+   "Hourly Price",
+   "Monthly Price**"
+  ],
+  "rows": [
+   [
+    "Disk Capacity (GiB)",
+    "GiB",
+    "$-",
+    "$-"
+   ],
+   [
+    "Provisioned IOPS",
+    "IOPS",
+    "$-",
+    "$-"
+   ],
+   [
+    "Provisioned Throughput (MB/s)",
+    "MBps",
+    "$-",
+    "$-"
+   ],
+   [
+    "Provisioned vcpu reservation charge*",
+    "vCPU",
+    "$-",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 1,
+  "header": [
+   "Instant Access Charges",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Storage Charge",
+    "$- per GiB per hour"
+   ],
+   [
+    "Restore Operation Charge",
+    "$- per provisioned TB per disk restore"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 2,
+  "header": [
+   "Disk Size",
+   "Max IOPS",
+   "Max throughput (MB/s)"
+  ],
+  "rows": [
+   [
+    "1 GiB-64 TiBs",
+    "3,000-80,000 (Increases by 500 IOPS per GiB)",
+    "125-1,200 (Increases by 0.25 MB/s per set IOPS)"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 3,
+  "header": [
+   "Instant Access Charges",
+   "Price"
+  ],
+  "rows": [
+   [
+    "Storage Charge",
+    "$- per GiB per hour"
+   ],
+   [
+    "Restore Operation Charge",
+    "$- per provisioned TiB per disk restore"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 4,
+  "header": [
+   "Premium SSD v2 Configuration",
+   "Unit",
+   "Monthly Price",
+   "Hourly Price"
+  ],
+  "rows": [
+   [
+    "Disk Capacity",
+    "GiBs",
+    "$-/GiB",
+    "$-"
+   ],
+   [
+    "Provisioned IOPS",
+    "IOPS",
+    "Up to 3,000 IOPS at no additional cost $-/provisioned IOPS over 3,000 IOPS",
+    "Up to 3,000 IOPS at no additional cost $-/provisioned IOPS over 3,000 IOPS"
+   ],
+   [
+    "Provisioned Throughput",
+    "MB/s",
+    "Up to 125 MB/s at no additional cost $-/provisioned MB/s over 125 MB/s",
+    "Up to 125 MB/s at no additional cost $-/provisioned MB/s over 125 MB/s"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 5,
+  "header": [
+   "Not available",
+   "Redundancy",
+   "Price per GiB per Month"
+  ],
+  "rows": [
+   [
+    "Premium SSD Managed Disks",
+    "LRS",
+    "$-"
+   ],
+   [
+    "Premium SSD Managed Disks",
+    "ZRS",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 6,
+  "header": [
+   "Not available",
+   "Disk Size",
+   "Price per month",
+   "1-Year ReservedPrice Per Month",
+   "Max IOPS (Max IOPS w/ bursting)",
+   "Max throughput (Max throughput w/ bursting)",
+   "Price per mount per month (Shared Disk)"
+  ],
+  "rows": [
+   [
+    "P1",
+    "4 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P2",
+    "8 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P3",
+    "16 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P4",
+    "32 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P6",
+    "64 GiB",
+    "$-",
+    "N/A",
+    "240 (3,500)",
+    "50 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P10",
+    "128 GiB",
+    "$-",
+    "N/A",
+    "500 (3,500)",
+    "100 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P15",
+    "256 GiB",
+    "$-",
+    "N/A",
+    "1,100 (3,500)",
+    "125 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P20",
+    "512 GiB",
+    "$-",
+    "N/A",
+    "2,300 (3,500)",
+    "150 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P30",
+    "1 TiB",
+    "$-",
+    "$-",
+    "5,000 (30,000)",
+    "200 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P40",
+    "2 TiB",
+    "$-",
+    "$-",
+    "7,500 (30,000)",
+    "250 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P50",
+    "4 TiB",
+    "$-",
+    "$-",
+    "7,500 (30,000)",
+    "250 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P60",
+    "8 TiB",
+    "$-",
+    "$-",
+    "16,000 (30,000)",
+    "500 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P70",
+    "16 TiB",
+    "$-",
+    "$-",
+    "18,000 (30,000)",
+    "750 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P80",
+    "32 TiB (32,767 GiB)",
+    "$-",
+    "$-",
+    "20,000 (30,000)",
+    "900 MB/second (1,000 MB/second)",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 7,
+  "header": [
+   "Not available",
+   "Disk Size",
+   "Price per month",
+   "1-Year ReservedPrice Per Month",
+   "Max IOPS (Max IOPS w/ bursting)",
+   "Max throughput (Max throughput w/ bursting)",
+   "Price per mount per month (Shared Disk)"
+  ],
+  "rows": [
+   [
+    "P1",
+    "4 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P2",
+    "8 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P3",
+    "16 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P4",
+    "32 GiB",
+    "$-",
+    "N/A",
+    "120 (3,500)",
+    "25 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P6",
+    "64 GiB",
+    "$-",
+    "N/A",
+    "240 (3,500)",
+    "50 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P10",
+    "128 GiB",
+    "$-",
+    "N/A",
+    "500 (3,500)",
+    "100 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P15",
+    "256 GiB",
+    "$-",
+    "N/A",
+    "1,100 (3,500)",
+    "125 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P20",
+    "512 GiB",
+    "$-",
+    "N/A",
+    "2,300 (3,500)",
+    "150 MB/second (170 MB/second)",
+    "$-"
+   ],
+   [
+    "P30",
+    "1 TiB",
+    "$-",
+    "N/A",
+    "5,000 (30,000)",
+    "200 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P40",
+    "2 TiB",
+    "$-",
+    "N/A",
+    "7,500 (30,000)",
+    "250 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P50",
+    "4 TiB",
+    "$-",
+    "N/A",
+    "7,500 (30,000)",
+    "250 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P60",
+    "8 TiB",
+    "$-",
+    "N/A",
+    "16,000 (30,000)",
+    "500 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P70",
+    "16 TiB",
+    "$-",
+    "N/A",
+    "18,000 (30,000)",
+    "750 MB/second (1,000 MB/second)",
+    "$-"
+   ],
+   [
+    "P80",
+    "32 TiB (32,767 GiB)",
+    "$-",
+    "N/A",
+    "20,000 (30,000)",
+    "900 MB/second (1,000 MB/second)",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 8,
+  "header": [
+   "Not available",
+   "Redundancy",
+   "Price per GiB per Month"
+  ],
+  "rows": [
+   [
+    "Standard SSD Managed Disks",
+    "LRS",
+    "$-"
+   ],
+   [
+    "Standard SSD Managed Disks",
+    "ZRS",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 9,
+  "header": [
+   "Not available",
+   "Disk Size",
+   "Price per month",
+   "Max paid transactions per hour",
+   "Max transaction price per month",
+   "Max total price per month",
+   "Max IOPS (Max IOPS w/ bursting)",
+   "Max throughput (Max throughput w/ bursting)",
+   "Price per mount per month (Shared Disk)"
+  ],
+  "rows": [
+   [
+    "E1",
+    "4 GiB",
+    "$-",
+    "6,800",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E2",
+    "8 GiB",
+    "$-",
+    "13,400",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E3",
+    "16 GiB",
+    "$-",
+    "26,600",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E4",
+    "32 GiB",
+    "$-",
+    "43,400",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E6",
+    "64 GiB",
+    "$-",
+    "81,200",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E10",
+    "128 GiB",
+    "$-",
+    "147,200",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E15",
+    "256 GiB",
+    "$-",
+    "274,000",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E20",
+    "512 GiB",
+    "$-",
+    "502,000",
+    "$-",
+    "$-",
+    "500 (600)",
+    "100 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E30",
+    "1 TiB",
+    "$-",
+    "829,200",
+    "$-",
+    "$-",
+    "500 (1,000)",
+    "100 MB/second (250 MB/second)",
+    "$-"
+   ],
+   [
+    "E40",
+    "2 TiB",
+    "$-",
+    "893,000",
+    "$-",
+    "$-",
+    "500",
+    "100 MB/second",
+    "$-"
+   ],
+   [
+    "E50",
+    "4 TiB",
+    "$-",
+    "1,578,400",
+    "$-",
+    "$-",
+    "500",
+    "100 MB/second",
+    "$-"
+   ],
+   [
+    "E60",
+    "8 TiB",
+    "$-",
+    "2,777,500",
+    "$-",
+    "$-",
+    "2,000",
+    "400 MB/second",
+    "$-"
+   ],
+   [
+    "E70",
+    "16 TiB",
+    "$-",
+    "4,379,300",
+    "$-",
+    "$-",
+    "4,000",
+    "600 MB/second",
+    "$-"
+   ],
+   [
+    "E80",
+    "32 TiB (32,767 GiB)",
+    "$-",
+    "9,478,400",
+    "$-",
+    "$-",
+    "6,000",
+    "750 MB/second",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 10,
+  "header": [
+   "Not available",
+   "Disk Size",
+   "Price per month",
+   "Max paid transactions per hour",
+   "Max transaction price per month",
+   "Max total price per month",
+   "Max IOPS (Max IOPS w/ bursting)",
+   "Max throughput (Max throughput w/ bursting)",
+   "Price per mount per month (Shared Disk)"
+  ],
+  "rows": [
+   [
+    "E1",
+    "4 GiB",
+    "$-",
+    "7,800",
+    "$-",
+    "$-",
+    "120 (600)",
+    "25 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E2",
+    "8 GiB",
+    "$-",
+    "15,400",
+    "$-",
+    "$-",
+    "120 (600)",
+    "25 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E3",
+    "16 GiB",
+    "$-",
+    "30,600",
+    "$-",
+    "$-",
+    "120 (600)",
+    "25 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E4",
+    "32 GiB",
+    "$-",
+    "61,000",
+    "$-",
+    "$-",
+    "120 (600)",
+    "25 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E6",
+    "64 GiB",
+    "$-",
+    "114,400",
+    "$-",
+    "$-",
+    "240 (600)",
+    "50 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E10",
+    "128 GiB",
+    "$-",
+    "214,000",
+    "$-",
+    "$-",
+    "500 (600)",
+    "60 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E15",
+    "256 GiB",
+    "$-",
+    "398,400",
+    "$-",
+    "$-",
+    "500 (600)",
+    "60 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E20",
+    "512 GiB",
+    "$-",
+    "737,600",
+    "$-",
+    "$-",
+    "500 (600)",
+    "60 MB/second (150 MB/second)",
+    "$-"
+   ],
+   [
+    "E30",
+    "1 TiB",
+    "$-",
+    "1,238,800",
+    "$-",
+    "$-",
+    "500 (1,000)",
+    "60 MB/second (250 MB/second)",
+    "$-"
+   ],
+   [
+    "E40",
+    "2 TiB",
+    "$-",
+    "1,344,700",
+    "$-",
+    "$-",
+    "500",
+    "60 MB/second",
+    "$-"
+   ],
+   [
+    "E50",
+    "4 TiB",
+    "$-",
+    "2,405,600",
+    "$-",
+    "$-",
+    "500",
+    "60 MB/second",
+    "$-"
+   ],
+   [
+    "E60",
+    "8 TiB",
+    "$-",
+    "4,243,900",
+    "$-",
+    "$-",
+    "2,000",
+    "400 MB/second",
+    "$-"
+   ],
+   [
+    "E70",
+    "16 TiB",
+    "$-",
+    "7,353,100",
+    "$-",
+    "$-",
+    "4,000",
+    "600 MB/second",
+    "$-"
+   ],
+   [
+    "E80",
+    "32 TiB (32,767 GiB)",
+    "$-",
+    "14,706,200",
+    "$-",
+    "$-",
+    "6,000",
+    "750 MB/second",
+    "$-"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 11,
+  "header": [
+   "Not available",
+   "Disk Size",
+   "Price per month",
+   "Max paid transactions per hour",
+   "Max transaction price per month",
+   "Max total price per month",
+   "IOPS per disk",
+   "Throughput per disk"
+  ],
+  "rows": [
+   [
+    "S4",
+    "32 GiB",
+    "$-",
+    "450,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S6",
+    "64 GiB",
+    "$-",
+    "858,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S10",
+    "128 GiB",
+    "$-",
+    "1,600,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S15",
+    "256 GiB",
+    "$-",
+    "3,000,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S20",
+    "512 GiB",
+    "$-",
+    "5,700,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S30",
+    "1 TiB",
+    "$-",
+    "10,100,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S40",
+    "2 TiB",
+    "$-",
+    "14,200,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S50",
+    "4 TiB",
+    "$-",
+    "26,800,000",
+    "$-",
+    "$-",
+    "Up to 500",
+    "Up to 60 MB/second"
+   ],
+   [
+    "S60",
+    "8 TiB",
+    "$-",
+    "51,000,000",
+    "$-",
+    "$-",
+    "Up to 1,300",
+    "Up to 300 MB/second"
+   ],
+   [
+    "S70",
+    "16 TiB",
+    "$-",
+    "93,000,000",
+    "$-",
+    "$-",
+    "Up to 2,000",
+    "Up to 500 MB/second"
+   ],
+   [
+    "S80",
+    "32 TiB (32,767 GiB)",
+    "$-",
+    "110,000,000",
+    "$-",
+    "$-",
+    "Up to 2,000",
+    "Up to 500 MB/second"
+   ]
+  ]
+ },
+ {
+  "page": "managed-disks",
+  "index": 12,
+  "header": [
+   "Not available",
+   "Redundancy",
+   "Price per GiB per Month"
+  ],
+  "rows": [
+   [
+    "Standard HDD Managed Disks",
+    "LRS",
+    "$-"
+   ],
+   [
+    "Standard HDD Managed Disks",
+    "ZRS",
+    "$-"
+   ]
+  ]
+ }
+]

@@ -1,0 +1,77 @@
+{% macro date_label(value) -%}
+  {%- if value -%}
+    {%- set text = value|string -%}
+    {%- if text|length >= 10 and text[4] == '-' and text[7] == '-' -%}
+      {%- set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] -%}
+      {{ months[(text[5:7]|int)-1] }} {{ text[8:10]|int }}, {{ text[:4] }}
+    {%- else -%}{{ value }}{%- endif -%}
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro kind_label(value) -%}
+  {{- {'news':'Press Release','press_release':'Press Release','press-release':'Press Release','job':'Vacancy','page':'Department of Justice'}.get(value, value|replace('_',' ')) -}}
+{%- endmacro %}
+
+{% macro link(path, label, class='') -%}
+  {%- if has_path is not defined or has_path(path) -%}
+    <a href="{{ path }}"{% if class %} class="{{ class }}"{% endif %}>{{ label }}</a>
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro pagination(page, pages) -%}
+{% if pages > 1 %}
+<nav class="pagination" aria-label="Pagination">
+  {% if page > 0 %}<a href="{{ page_url(page - 1) }}" class="page-step" aria-label="Previous page">‹ Previous</a>{% endif %}
+  {% for n in range(pages) %}
+    {% if n == 0 or n == pages-1 or (n >= page-2 and n <= page+2) %}
+      <a href="{{ page_url(n) }}"{% if n == page %} class="current" aria-current="page"{% endif %} aria-label="Page {{ n + 1 }}">{{ n + 1 }}</a>
+    {% elif n == page-3 or n == page+3 %}<span class="page-ellipsis" aria-hidden="true">…</span>{% endif %}
+  {% endfor %}
+  {% if page < pages-1 %}<a href="{{ page_url(page + 1) }}" class="page-step" aria-label="Next page">Next ›</a>{% endif %}
+</nav>
+{% endif %}
+{%- endmacro %}
+
+{% macro share() -%}
+<details class="share-control">
+  <summary>Share <span aria-hidden="true">›</span></summary>
+  <div class="share-options">
+    <button type="button" data-copy-link>Copy link</button>
+    <button type="button" data-print>Print page</button>
+    <span class="share-status" role="status"></span>
+  </div>
+</details>
+{%- endmacro %}
+
+{% macro news_sidebar(active='') -%}
+<nav class="section-nav" aria-label="News">
+  <h2>News</h2>
+  {% for path,label in [('/news','All News'),('/news/blogs','Blogs'),('/news/photo-galleries','Photo Galleries'),('/news/podcasts','Podcasts'),('/news/press-releases','Press Releases'),('/news/speeches','Speeches'),('/news/videos','Videos')] %}
+  {% if has_path is not defined or has_path(path) %}<a href="{{ path }}"{% if active == path %} class="active" aria-current="page"{% endif %}>{{ label }}</a>{% endif %}
+  {% endfor %}
+</nav>
+{%- endmacro %}
+
+{% macro career_sidebar(active='') -%}
+<nav class="section-nav" aria-label="Legal Careers">
+  <h2><a href="/legal-careers">Legal Careers Home</a></h2>
+  {% for path,label in [('/legal-careers/why-justice','Why Justice?'),('/legal-careers/vacancies','Search Attorney Vacancies & Volunteer Legal Internships'),('/legal-careers/law-students','Law Students'),('/legal-careers/entry-level-attorneys','Entry-Level Attorneys'),('/legal-careers/opportunities-experienced-attorneys','Experienced Attorneys')] %}
+  {% if has_path is not defined or has_path(path) %}<a href="{{ path }}"{% if active == path %} class="active" aria-current="page"{% endif %}>{{ label }}</a>{% endif %}
+  {% endfor %}
+</nav>
+{%- endmacro %}
+
+{% macro facet(title, name, choices, selected, form_id) -%}
+<details class="facet"{% if selected %} open{% endif %}>
+  <summary>{{ title }}</summary>
+  <div class="facet-options">
+    <label class="facet-choice"><input type="radio" name="{{ name }}" value="" form="{{ form_id }}"{% if not selected %} checked{% endif %}> <span>All</span></label>
+    {% for choice in choices if choice %}
+      <label class="facet-choice">
+        <input type="radio" name="{{ name }}" value="{{ choice }}" form="{{ form_id }}"{% if selected|string == choice|string %} checked{% endif %}>
+        <span>{{ choice }}{% if choices is mapping %} <small>({{ choices[choice] }})</small>{% endif %}</span>
+      </label>
+    {% endfor %}
+  </div>
+</details>
+{%- endmacro %}

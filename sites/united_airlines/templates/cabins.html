@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Cabin experience — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>United cabin experience</h1>
+  <p>Pick the cabin that fits your trip — every fare earns miles, and every
+    cabin includes a personal item and free standard seat selection (except
+    Basic Economy).</p>
+  <div class="ua-card-grid">
+    {% for cabin in cabins %}
+    <a class="ua-card" href="{{ url_for('cabin_detail', slug=cabin.slug) }}">
+      {% if cabin.image %}<img class="ua-card-img" src="{{ url_for('static', filename=cabin.image.replace('static/', '')) }}" alt="{{ cabin.name }}">{% endif %}
+      <span class="ua-card-title">{{ cabin.name }}</span>
+      <span class="ua-card-cat">{{ cabin.tagline }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

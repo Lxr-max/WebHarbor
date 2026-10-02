@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Create Account' if mode == 'register' else 'Sign In' }} | Backcountry.com{% endblock %}
+{% block body %}
+<div class="auth-page">
+  <h1>{{ 'Create Account' if mode == 'register' else 'Sign In' }}</h1>
+  {% if error %}<p class="form-err" role="alert">{{ error }}</p>{% endif %}
+
+  {% if mode == 'register' %}
+  <form method="post" action="/register" class="auth-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Full Name <span class="req">*</span>
+      <input type="text" name="name" required value="{{ request.form.get('name','') }}"></label>
+    <label>Email Address <span class="req">*</span>
+      <input type="email" name="email" required value="{{ request.form.get('email','') }}"></label>
+    <label>Password <span class="req">*</span>
+      <input type="password" name="password" required minlength="8">
+      <small>At least 8 characters.</small></label>
+    <button class="btn btn-primary" type="submit">Create Account</button>
+  </form>
+  <p class="auth-alt">Already have an account? <a href="/login">Sign In</a></p>
+  {% else %}
+  <form method="post" action="{{ '/login?next=' + (request.args.get('next') or '/account') if request.args.get('next') else '/login' }}" class="auth-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="mode" value="login">
+    <label>Email Address <span class="req">*</span>
+      <input type="email" name="email" required autocomplete="email"></label>
+    <label>Password <span class="req">*</span>
+      <input type="password" name="password" required autocomplete="current-password"></label>
+    <button class="btn btn-primary" type="submit">Sign In</button>
+  </form>
+  <p class="auth-alt">New to Backcountry? <a href="/register">Create an account</a></p>
+  {% endif %}
+</div>
+{% endblock %}

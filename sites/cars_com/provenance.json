@@ -1,0 +1,35 @@
+{
+ "site": "cars_com",
+ "upstream": "https://www.cars.com/",
+ "captured_at": "2026-09-29",
+ "capture_method": "cars.com serves its functional pages (shopping SERPs, vehicle details, dealer pages, research/compare, the sell wizard) behind a Cloudflare managed challenge: plain HTTP clients receive a 403 interstitial. All captures were made with a real headful Chromium (Playwright under Xvfb, persistent warm profiles, retry-until-rendered harness in scraped_data/capture.py) driving the exact public site; every page recorded is the fully-rendered DOM plus the page's own embedded API responses (the .apis.json sidecars). The Instant Cash Offer wizard runs in an accu-trade frame and was driven in-frame (scraped_data/capture_offers.py): the year/make/model/trim taxonomy and eight full valuation flows (initial estimate plus the post-details offer) are the wizard's own real outputs. Nothing is synthesized: each tracked field traces to a capture file in scraped_data/captures/ (page + .meta.json sidecar with URL/status/timestamp).",
+ "sources": {
+  "www.cars.com/": {
+   "role": "primary site: home; 44 shopping SERPs across stock types, 16 model families, 6 sort orders, price/mileage/feature and for-sale-by-owner slices (with their filter panels and result totals); 28 used/new/certified browse pages; 158 vehicle-detail pages with price breakdowns, deal badges with good-deal ranges, price histories, features, seller's notes, CPO program terms, history summaries, payment estimates and consumer reviews; the dealer directory (36 dealers over 4 rating-sorted pages); 30 dealership pages (dealer, reviews, inventory); 22 research model pages (2025 model-year pages plus the compare columns' 2026/2027 years); 11 side-by-side comparisons; the car payment calculator reference math"
+  },
+  "cashoffer.accu-trade.com/": {
+   "role": "Instant Cash Offer wizard frame: the year/make/model/trim taxonomy for 34 makes and eight full valuation flows (2018 Civic EX, 2019 RAV4 XLE, 2016 F-150 XLT, 2020 BMW 330i, 2017 Equinox LT, 2015 Camry SE, 2021 Tesla Model 3 LR AWD, 2014 Outback 2.5i) with their initial estimates, options lists, standard features and post-details offer ranges",
+   "flows_captured": 8
+  },
+  "platform.cstatic-images.com/": {
+   "role": "the cars.com image CDN: every managed vehicle/model/comparison photo fetched from its exact upstream URL the captured pages rendered",
+   "images_fetched": "see asset_inventory.json"
+  }
+ },
+ "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/captures/. The tracked source_data/ snapshots trim as follows: the vehicle corpus keeps every unique listing the captured SERPs carried (736 rows; SERP captures are authoritative for card-level fields, the 158 captured detail pages fill prices breakdowns, histories, features, notes, CPO terms and reviews); the dealer table keeps the captured directory rows plus seller-side facts derived from the corpus (card ratings, review counts, hours and addresses from the detail pages' Seller's-info blocks), with makes-carried derived from the captured listings; the research corpus keeps the captured model pages' trims, expert takes, good/bad sections and consumer reviews, and the compare corpus keeps the spec tables verbatim; the valuation corpus keeps the wizard's own taxonomy and flow outputs verbatim. Upstream SERP totals are preserved per captured query and shown as the live counts computed over the frozen corpus.",
+ "fixtures": {
+  "benchmark_users": [
+   {"email": "alice.j@test.com", "display": "Alice Johnson",
+    "fixture": "2 saved Honda Civics + 1 saved RAV4, one daily 'Used Honda Civics under $25k' saved search"},
+   {"email": "bob.c@test.com", "display": "Bob Chen",
+    "fixture": "2 saved Ford F-150s + 1 saved Tesla Model 3, one weekly 'New Toyota RAV4 near Seattle' saved search"},
+   {"email": "carol.d@test.com", "display": "Carol Davis",
+    "fixture": "1 cheap used car + 1 SUV saved, one daily 'Cheap used cars under $15k' saved search"},
+   {"email": "dana.k@test.com", "display": "Dana Kim",
+    "fixture": "2 saved SUVs, two saved searches: 'Great Deal SUVs' (daily) and 'Electric cars in stock' (weekly)"}
+  ],
+  "password": "TestPass123! (bcrypt hash frozen in app.py so the seed DB is byte-reproducible)"
+ },
+ "mirror_date": "2026-09-29",
+ "geo_context": "Seattle metro (ZIP 98101) — the frozen geo context every captured page carried"
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>My Account</span></li>
+{% endblock %}
+{% block content %}
+<section class="container account-page">
+  <h1 class="page-heading">My Account</h1>
+  <div class="account-layout">
+    <aside class="account-nav">
+      <h2>Hello {{ user.name }}</h2>
+      <p class="account-email">{{ user.email }}</p>
+      <ul>
+        <li class="is-active"><a href="{{ url_for('account') }}">Orders</a></li>
+        <li><a href="{{ url_for('order_tracking') }}">Track Your Order</a></li>
+        <li><a href="{{ url_for('logout') }}">Sign out</a></li>
+      </ul>
+    </aside>
+    <div class="account-main">
+      <h2>Order History</h2>
+      {% if orders %}
+      <ul class="account-list">
+        {% for order in orders %}
+        <li class="account-order">
+          <div class="account-order-head">
+            <a class="account-order-number" href="{{ url_for('account_order', order_id=order.id) }}">Order #{{ order.number }}</a>
+            <span class="account-order-status status-{{ order.status | lower | replace(' ', '-') }}">{{ order.status }}</span>
+          </div>
+          <p class="account-order-meta">Placed {{ order.placed_on | dmy }} &middot;
+            {{ order.shipping_method }} &middot; Total {{ money(order.total) }}</p>
+          <p class="account-order-items">
+            {% for item in order.items %}{{ item.qty }} &times; {{ item.name }}{% if not loop.last %}; {% endif %}{% endfor %}
+          </p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>You have no orders yet. <a href="{{ url_for('home') }}">Start shopping</a>.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Calculate International Prices | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('postcalc_home') }}">Calculate a Price</a> &rsaquo; International</p>
+<h1>International Package Prices</h1>
+
+<p class="note">Also see: <a href="{{ url_for('postcalc_letters') }}">Letters</a> &middot;
+  <a href="{{ url_for('postcalc_packages') }}">Packages</a> &middot;
+  <a href="{{ url_for('postcalc_intl') }}">International</a> &middot;
+  <a href="{{ url_for('postcalc_extras') }}">Extra Services</a></p>
+<p>Compare retail international services: <strong>Priority Mail Express International</strong> (3-5 days), <strong>Priority Mail International</strong> (6-10 days) and <strong>First-Class Package International Service</strong> (packages up to 4 lbs). Prices use each country's official price group from the Notice 123 country price group directory.</p>
+<div class="panel">
+  <form class="flow" action="{{ url_for('postcalc_intl') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Destination country
+      <select name="country">
+        {% for c in countries %}
+          <option value="{{ c.name }}" {{ 'selected' if form.get('country') == c.name }}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Weight (lbs) <input type="number" step="0.1" min="0.5" max="70" name="weight" value="{{ form.get('weight', '1') }}"></label>
+    <button class="btn" type="submit">Calculate Prices</button>
+  </form>
+</div>
+{% if result %}
+  {% if result.error %}
+    <div class="error-box">{{ result.error }}</div>
+  {% else %}
+    <h2>Prices for {{ result.weight }} lb to {{ result.country.name }}</h2>
+    <table class="data">
+      <tr><th>Service</th><th>Retail Price</th></tr>
+      {% for label, price in result.rows %}
+        <tr><td>{{ label }}</td><td class="totals">{{ price | usd }}</td></tr>
+      {% endfor %}
+    </table>
+    <p>See the <a href="{{ url_for('country_detail', slug=result.country.slug) }}">{{ result.country.name }} country listing</a> for prohibitions, restrictions and required customs forms.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}

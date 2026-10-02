@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Discover{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Discover</h1>
+  <p class="rich">Guides, stories, entertaining ideas and podcasts &mdash; everything we love about Trader Joe&rsquo;s, all in one place.</p>
+</div>
+<section class="home-section">
+  <h2>Guides <a class="see-all" href="{{ url_for('guides') }}">see all guides</a></h2>
+  <div class="recipe-grid">
+    {% for row in guides %}
+    <article class="recipe-card">
+      <a href="{{ url_for('guide_detail', slug=row.slug) }}">
+        {% if dam_url(row.hero) %}<img src="{{ dam_url(row.hero) }}" alt="{{ row.title }}">{% endif %}
+      </a>
+      <div class="body">
+        <h3><a href="{{ url_for('guide_detail', slug=row.slug) }}">{{ row.title }}</a></h3>
+        <div class="recipe-cats">{{ row.publish_date }}</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+<section class="home-section">
+  <h2>Stories <a class="see-all" href="{{ url_for('stories') }}">see all stories</a></h2>
+  <div class="recipe-grid">
+    {% for row in stories %}
+    <article class="recipe-card">
+      <a href="{{ url_for('story_detail', slug=row.slug) }}">
+        {% if dam_url(row.hero) %}<img src="{{ dam_url(row.hero) }}" alt="{{ row.title }}">{% endif %}
+      </a>
+      <div class="body">
+        <h3><a href="{{ url_for('story_detail', slug=row.slug) }}">{{ row.title }}</a></h3>
+        <div class="recipe-cats">{{ row.publish_date }}</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

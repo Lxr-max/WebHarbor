@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}My bag | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>MY BAG</h1></div>
+{% if items %}
+<div class="bag">
+  <section>
+    {% for it in items %}
+      <div class="bag-item">
+        {% set g = it.color.gallery_list %}
+        <a href="{{ it.product.pdp_path }}">
+          {% if g %}<img src="{{ img(g[0]) }}" alt="{{ it.product.name }}">
+          {% elif it.color.thumb %}<img src="{{ img(it.color.thumb) }}" alt="{{ it.product.name }}">{% endif %}
+        </a>
+        <div class="meta">
+          <p class="pname" style="margin:0"><a href="{{ it.product.pdp_path }}">{{ it.product.name }}</a></p>
+          <p>REF. {{ it.product.display_reference or it.product.reference }}</p>
+          <p>{% if it.color.name %}{{ it.color.name }} · {% endif %}SIZE {{ it.size.name }}</p>
+          <p>{{ money(it.unit_price) }}</p>
+          <form class="qty-form" method="post" action="/us/en/shop/update">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="item" value="{{ it.id }}">
+            <label>QTY</label>
+            <select name="quantity" onchange="this.form.submit()">
+              {% for n in [1,2,3,4,5,6,7,8,9,10] %}
+                <option value="{{ n }}" {{ 'selected' if it.quantity == n else '' }}>{{ n }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" name="action" value="update" class="fbtn">UPDATE</button>
+            <button type="submit" name="action" value="remove" class="rm">REMOVE</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+  <aside class="summary">
+    <h3>SUMMARY</h3>
+    <div class="rowline"><span>SUBTOTAL</span><span>{{ money(subtotal) }}</span></div>
+    <div class="rowline"><span>SHIPPING</span><span>{{ money(shipping) }}</span></div>
+    <div class="rowline total"><span>TOTAL</span><span>{{ money(subtotal + shipping) }}</span></div>
+    <p class="form-note">Standard delivery in 3-5 business days.</p>
+    <a class="btn dark wide" style="margin-top: 14px" href="/us/en/shop/checkout">CHECKOUT</a>
+  </aside>
+</div>
+{% else %}
+<p class="center-note">Your bag is empty</p>
+<div class="grid" style="padding: 10px 28px 60px">
+  {% for section, entries in categories_nav() %}
+    {% for cat, count in entries %}
+    <a class="product-card" href="{{ cat.path }}">
+      <div class="pname">{{ cat.section }} — {{ cat.name }}</div>
+      <div class="pprice">{{ cat.upstream_grid_count }} upstream products</div>
+    </a>
+    {% endfor %}
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

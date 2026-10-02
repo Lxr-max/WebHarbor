@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ city }} {{ state_name }} Verizon Store Locations{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('stores_home') }}">Stores</a> / <a href="{{ url_for('stores_state', state=state) }}">{{ state_name }}</a> / <span>{{ city }}</span></nav>
+  <h1>{{ city }} {{ state_name }} Verizon store locations</h1>
+  {% if stores %}
+  <ol class="store-list">
+    {% for s in stores %}
+    <li class="store-item card">
+      <div>
+        <h3>{{ s.display_type() }} — {{ s.name }}</h3>
+        <p>{{ s.street }}{% if s.street2 %}, {{ s.street2 }}{% endif %}, {{ s.city }}, {{ s.state }} {{ s.zip }}</p>
+        {% if s.phone %}<p>Phone: {{ s.phone[:3] }}-{{ s.phone[3:6] }}-{{ s.phone[6:] }}</p>{% endif %}
+        {% if s.hours_map().Mon %}<p>Hours (Mon): {{ s.hours_map().Mon }}</p>{% endif %}
+        <p class="muted">Services: {{ s.services_list()|join(' · ') or 'In-store shopping' }}</p>
+        {% if s.image_outside %}<img class="store-photo" src="/{{ s.image_outside }}" alt="{{ s.name }} store exterior">{% endif %}
+      </div>
+      <div class="store-actions">
+        <a class="btn btn-secondary" href="{{ url_for('store_detail', code=s.code) }}">View store details</a>
+        {% if s.appointments %}<a class="btn btn-primary" href="{{ url_for('store_appointment', code=s.code) }}">Schedule an appointment</a>{% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>No Verizon stores found in {{ city }}. <a href="{{ url_for('stores_state', state=state) }}">Browse other cities in {{ state_name }}</a>.</p>
+  {% endif %}
+</section>
+{% endblock %}

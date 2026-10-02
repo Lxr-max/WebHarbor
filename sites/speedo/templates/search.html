@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="page-width">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> &rsaquo; <span>Search</span>
+  </nav>
+  <h1 class="collection-title">Search</h1>
+  <div class="collection-head">
+    <div class="product-count">{% if q %}{{ total }} result{{ 's' if total != 1 }} for &ldquo;{{ q }}&rdquo;{% else %}Type a query to search the store{% endif %}</div>
+    <form method="get" class="sort-form" action="/search">
+      <input type="hidden" name="q" value="{{ q }}">
+      <label for="sort_by">Sort by</label>
+      <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+        {% for key, label in sort_options %}
+        <option value="{{ key }}" {% if sort == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+  {% if cards %}
+  <div class="product-grid">
+    {% for c in cards %}{{ card(c) }}{% endfor %}
+  </div>
+  {% elif q %}
+  <div class="empty-state">
+    <h2>No results found</h2>
+    <p>Check your spelling or try a different search term.</p>
+    <a class="btn btn-secondary" href="/">Continue shopping</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

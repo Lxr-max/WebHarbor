@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{ l.name.title() }} | UPS Location | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('locations') }}">Find a UPS Location</a> &rsaquo; Location</div>
+  <div class="ups-card ups-locdetail">
+    <p class="ups-loctype">{{ l.type }}</p>
+    <h1>{{ l.name.title() }}</h1>
+    <p class="ups-locaddr">{{ l.addr1.title() }}<br>{{ l.city }}, {{ l.state }} {{ l.zip }}</p>
+    {% if l.phone %}<p class="ups-locaddr">Tel: {{ l.phone }}</p>{% endif %}
+    {% if l.comments %}<p class="ups-hint">{{ l.comments }}</p>{% endif %}
+
+    {% if l.hours_rows %}
+    <h2>Hours of Operation</h2>
+    <table class="ups-hourstable">
+      <tbody>
+      {% for h in l.hours_rows %}
+        <tr><td>{{ h.day }}</td><td>{{ h.open|hhmm }} &ndash; {{ h.close|hhmm }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <h2>Latest Drop-Off Times</h2>
+    <p><strong>Air:</strong> {{ l.latest_air_dropoff or 'No air drop-off available' }}</p>
+    <p><strong>Ground:</strong> {{ l.latest_ground_dropoff or 'No ground drop-off available' }}</p>
+
+    {% if l.offerings %}
+    <h2>Service Offerings</h2>
+    <ul class="ups-offerings">
+      {% for o in l.offerings if o.desc %}
+      <li>{{ o.desc }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('ship') }}">Ship from this Location</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('ctc') }}">Calculate Cost</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Product Recalls and Safety Alerts{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Product Recalls and Safety Alerts</span></li>
+{% endblock %}
+{% block content %}
+<section class="container text-page">
+<h1 class="page-heading">Product Recalls and Safety Alerts</h1>
+
+
+    <div data-content-region="page_builder_content"></div>
+
+    <div class="page-content page-content--full">
+            <p><p>See important product recall and safety information for the products below. Click the links for specific actions you should take if you have any of the items listed</p>
+<p><a href="http://www.gasovenburnerrecall.com" target="_blank" rel="noopener">Electrolux gas range recall of oven gas burner - March 2026</a></p>
+<p><a href="https://www.samsung.com/us/support/tlw-sw-update/" target="_blank" rel="noopener"> Samsung recall of certain Top-Load Washers - Dec 22, 2022</a></p>
+<p><a href="https://www.icemakerrecall.com/" target="_blank" rel="noopener"> Electrolux recalls certain icemakers due to possible safety issue - June 2, 2022</a></p></p>
+    </div>
+</section>
+{% endblock %}

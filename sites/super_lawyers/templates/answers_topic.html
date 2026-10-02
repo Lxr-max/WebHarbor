@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set label = practice.name if practice else (state.name if state else topic_slug|replace('-', ' ')|title) %}
+{% block title %}{{ label }} legal questions | Super Lawyers Answers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('answers_home') }}">Ask a Lawyer</a> ›
+    <span>{{ label }}</span>
+  </nav>
+  <h1>{{ label }} legal questions &amp; answers</h1>
+  <p class="lead">Browse legal questions answered by Super Lawyers selectees{% if state %} in {{ state.name }}{% endif %}.</p>
+
+  <div class="answer-cards">
+    {% for answer in answers %}
+      <a class="answer-card" href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">
+        <h3>{{ answer.question }}</h3>
+        <p class="answer-meta">Answered by {{ answer.answerer_name }}{% if answer.answerer_city %} · {{ answer.answerer_city }}{% endif %}
+          · {{ answer.answer_count }} answer{{ 's' if answer.answer_count != 1 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+  {% if not answers %}
+  <p>No answered questions in this topic yet. <a href="{{ url_for('ask_question') }}">Ask a question</a> - it's free!</p>
+  {% endif %}
+</div>
+{% endblock %}

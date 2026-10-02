@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}USCIS Processing Times{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">USCIS Processing Times</h1>
+  <p class="alert-box">These are archived published estimates. Check the publication date; these records do not represent current processing times.</p>
+  <p>Select your form and the USCIS office processing your case to see how long similar cases have taken. Processing times are shown in months.</p>
+
+  <form class="usa-form pt-form" method="get" action="{{ url_for('processing_times') }}">
+    <div class="form-group">
+      <label class="form-label" for="form"><span class="form-label__title">Select Form</span></label>
+      <div class="select-wrapper">
+        <select id="form" name="form" onchange="this.form.submit()">
+          <option value="">Select a form</option>
+          {% for f in forms %}
+          <option value="{{ f }}" {% if f == sel_form %}selected{% endif %}>{{ f }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    {% if sel_form %}
+    <div class="form-group">
+      <label class="form-label" for="office"><span class="form-label__title">Select Office</span></label>
+      <div class="select-wrapper">
+        <select id="office" name="office" onchange="this.form.submit()">
+          <option value="">Select an office</option>
+          {% for code, name in offices %}
+          <option value="{{ code }}" {% if code == sel_office %}selected{% endif %}>{{ code }} &mdash; {{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    {% endif %}
+    <noscript><button class="btn btn--primary" type="submit">Search</button></noscript>
+  </form>
+
+  {% if record %}
+  <section class="pt-result">
+    <h2>{{ record.form_name }} &mdash; {{ record.office_name }}</h2>
+    <p>{{ record.form_info }}</p>
+    {% if record.range_display() %}
+    <div class="pt-range">
+      <span class="pt-range__label">Processing Time Range:</span>
+      <span class="pt-range__value">{{ record.range_display() }}</span>
+    </div>
+    {% endif %}
+    <dl class="pt-meta">
+      <dt>Publication Date:</dt><dd>{{ record.publication_date }}</dd>
+      <dt>Service Request Date:</dt><dd>{{ record.service_request_date }}</dd>
+    </dl>
+    {% if record.subtypes_json != '[]' %}
+    <h3>By Case Category</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Category</th><th>Time Range</th><th>Publication Date</th></tr></thead>
+        <tbody>
+        {% for st in record.subtypes_list() %}
+        <tr>
+          <td>{{ st.form_type }}</td>
+          <td>{{ st.range_display }}</td>
+          <td>{{ st.publication_date }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+    <div class="alert-box alert-box--info">
+      <p>If your receipt date is before the service request date shown, your case is outside of our normal processing times and you may submit an inquiry about your case online.</p>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="tool-grid">
+      <a class="tool-tile" href="/administrative-appeals/aao-processing-times"><h3>AAO Processing Times</h3><p>See how long the Administrative Appeals Office takes to complete appeals and motions.</p></a>
+      <a class="tool-tile" href="/casestatus"><h3>Case Status Online</h3><p>Check the current status of your case.</p></a>
+    </div>
+  </section>
+</div>
+{% endblock %}

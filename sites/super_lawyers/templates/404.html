@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}404 not found | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section narrow">
+  <h1>404 not found</h1>
+  <p class="lead">The page you are looking for could not be found.</p>
+  <p>Try browsing the <a href="{{ url_for('attorneys_home') }}">attorney directory</a>,
+  reading <a href="{{ url_for('resources_hub') }}">legal articles</a>, or
+  <a href="{{ url_for('answers_home') }}">asking a lawyer</a> your question.</p>
+</div>
+{% endblock %}

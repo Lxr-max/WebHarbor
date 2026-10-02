@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Official Site{{ '' }}{% endblock %}
+{% block content %}
+<section class="hero-strip">
+  {% for hero in heroes %}
+  <div class="hero-slide">
+    <img src="{{ url_for('static', filename='images/' ~ hero.image) }}" alt="{{ hero.title }}">
+    <div class="hero-copy">
+      {% if loop.index0 != 0 and hero.title %}<h1>{{ hero.title }}</h1>{% endif %}
+      <p>{{ hero.subtitle }}</p>
+      {% if hero.cta_url %}
+      <a class="btn btn-outline" href="{{ hero.cta_url }}">{{ hero.cta_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="band">
+  <h2>Shop by category</h2>
+  <div class="tile-grid">
+    {% for cat in categories %}
+    <a class="tile" href="/{{ cat.slug }}/">
+      <span class="tile-label">{{ cat.label }}</span>
+      <span class="tile-count">{{ products_in(cat.slug) }} products</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="band">
+  <h2>Featured products</h2>
+  <div class="product-grid">
+    {% for p in featured %}
+    <a class="product-card" href="/{{ p.category_slug }}/{{ p.slug }}/">
+      <div class="product-img">{% if p.image %}<img src="{{ url_for('static', filename='images/' ~ p.image) }}" alt="{{ p.name }}" loading="lazy">{% else %}<div class="img-fallback" role="img" aria-label="{{ p.name }}"><span>Image not available</span></div>{% endif %}</div>
+      <div class="product-body">
+        <p class="product-series">{{ p.family or p.series }}</p>
+        <p class="product-name">{{ p.name }}</p>
+        <p class="product-price">{% if p.price is not none %}{{ p.price|money }}{% else %}See details{% endif %}</p>
+        <p class="product-rating">{% if p.rating %}{{ p.rating|stars }} &starf; ({{ p.reviews }} reviews){% endif %}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="band band-alt">
+  <h2>Galaxy compare</h2>
+  <p>Compare the specification tables of the current Galaxy lineup side by side.</p>
+  <a class="btn" href="{{ url_for('compare') }}">Open Galaxy Compare</a>
+</section>
+{% endblock %}

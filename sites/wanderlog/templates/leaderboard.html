@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Traveler leaderboard — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <h1>Traveler leaderboard</h1>
+  <p class="muted">The Wanderlog travelers who have visited the most destinations and countries.</p>
+  <div class="trip-grid">
+    <div class="card">
+      <h2>Most destinations visited</h2>
+      {% for u in lb.visitGeosLeaders %}
+        <div class="author-row" style="border-top:1px dashed var(--line);padding:8px 0">
+          {% set du = User_by_username.get(u.username) %}
+          {% if du and du.avatar %}<img class="avatar-sm" src="{{ du.avatar }}" alt="">{% else %}<div class="avatar-sm"></div>{% endif %}
+          <div>
+            <div class="stat">
+              {% if du %}<a href="{{ url_for('user_profile', username=u.username) }}">{{ u.name }}</a>
+              {% else %}{{ u.name }}{% endif %} · {{ u.username }}
+            </div>
+            <div class="small muted">{{ u.visitGeosCount }} geos · {{ u.countriesCount }} countries</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="card">
+      <h2>Most countries visited</h2>
+      {% for u in lb.countriesLeaders %}
+        <div class="author-row" style="border-top:1px dashed var(--line);padding:8px 0">
+          {% set du = User_by_username.get(u.username) %}
+          {% if du and du.avatar %}<img class="avatar-sm" src="{{ du.avatar }}" alt="">{% else %}<div class="avatar-sm"></div>{% endif %}
+          <div>
+            <div class="stat">
+              {% if du %}<a href="{{ url_for('user_profile', username=u.username) }}">{{ u.name }}</a>
+              {% else %}{{ u.name }}{% endif %} · {{ u.username }}
+            </div>
+            <div class="small muted">{{ u.countriesCount }} countries · {{ u.visitGeosCount }} geos</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

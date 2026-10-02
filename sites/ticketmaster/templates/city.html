@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ city }} Events | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › <a href="/discover/cities">Cities</a> › {{ city }}</div>
+  <div class="avp-hero">
+    {% if tile and tile.image %}<img src="{{ url_for('static', filename=tile.image.replace('static/','')) }}" alt="{{ city }}">{% endif %}
+    <div>
+      <h1 class="avp-title">{{ city }} Tickets</h1>
+      <p style="color:var(--tm-gray); margin-top:6px">{{ total }} upcoming event{{ '' if total == 1 else 's' }} across concerts, sports, arts &amp; theater and family shows.</p>
+      <p style="margin-top:6px"><a class="find-tickets" href="/search?q={{ city|urlenc }}">Search events in {{ city }} &#9662;</a></p>
+    </div>
+  </div>
+
+  <div class="avp-tabs"><span class="active">Events &amp; Add-Ons</span></div>
+
+  {% if events %}
+  <div class="section-head"><h2>All Events in {{ city }}</h2></div>
+  <p class="results-note">{{ total }} Results</p>
+  {% for cat, evs in cats.items() %}
+  <section>
+    <div class="section-head"><h3 style="font-size:17px">{{ cat }}</h3></div>
+    <ul>
+      {% for e in evs %}
+      <li class="event-row">
+        <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+        <div class="er-main">
+          <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+          <div class="er-sub">{{ e.city_state }} — <a href="/venue/{{ e.venue.id }}">{{ e.venue.name }}</a></div>
+          <div class="er-time">{{ e.time_line }}</div>
+          <div class="price-tag">{{ price_band(e) }}</div>
+        </div>
+        <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  {% else %}
+  <div class="empty-state"><h3>No upcoming events in {{ city }}</h3><p><a class="find-tickets" href="/">Browse all events</a></p></div>
+  {% endif %}
+
+  <div class="section-head"><h2>Other Cities</h2></div>
+  <div class="city-grid">
+    {% for t in tiles %}
+    <a class="city-tile" href="/discover/cities/{{ t.slug }}">
+      <img src="{{ url_for('static', filename=t.image.replace('static/','')) }}" alt="{{ t.name }}">
+      <span>{{ t.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Apply — {{ program.name }}</h1>
+<p>Application fee: <strong>${{ '%.2f'|format(program.fee) }} USD</strong> · Membership: {{ program.years }} years.</p>
+<form class="stack" method="post" style="max-width:560px">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="family_name">Family Name</label>
+  <input id="family_name" name="family_name" required>
+  <label for="first_name">First (Given) Name</label>
+  <input id="first_name" name="first_name" required>
+  <label for="birth_date">Date of Birth</label>
+  <input id="birth_date" name="birth_date" type="date" required>
+  <label for="citizenship">Country of Citizenship</label>
+  <input id="citizenship" name="citizenship" required>
+  <label for="email">Email Address</label>
+  <input id="email" name="email" type="email" required>
+  <label for="phone">Phone Number</label>
+  <input id="phone" name="phone" required>
+  <label for="passport_number">Passport Number</label>
+  <input id="passport_number" name="passport_number" required>
+  <button class="btn" type="submit" style="margin-top:1.2rem;">Submit Application</button>
+</form>
+<p class="note">Applications are reviewed by U.S. Customs and Border Protection. You will receive an application number to track your status.</p>
+{% endblock %}

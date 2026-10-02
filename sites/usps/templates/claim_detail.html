@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Claim {{ claim.claim_number }} | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('claim_status') }}">Claim Status</a> &rsaquo; {{ claim.claim_number }}</p>
+<h1>Claim {{ claim.claim_number }}</h1>
+<div class="panel">
+  <p><strong>Status:</strong> <span class="badge">{{ claim.status }}</span></p>
+  <p><strong>Tracking number:</strong> {{ claim.tracking_number }}</p>
+  <p><strong>Article:</strong> {{ claim.article }}</p>
+  <p><strong>Amount claimed:</strong> {{ claim.amount | usd }}</p>
+  <p><strong>Filed:</strong> {{ claim.filed_at | longdate }} &middot; <strong>Type:</strong> {{ claim.kind | title }}</p>
+  {% if claim.note %}<p><strong>Description:</strong> {{ claim.note }}</p>{% endif %}
+</div>
+<h2>Supporting Documents</h2>
+<ul class="bullets">{% for d in docs %}<li>{{ d }}</li>{% endfor %}</ul>
+<h2>Claim History</h2>
+<table class="data">
+  <tr><th>Date</th><th>Note</th></tr>
+  {% for e in events %}<tr><td>{{ e.date | longdate }}</td><td>{{ e.note }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

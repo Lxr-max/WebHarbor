@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}About ICLR{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>About ICLR</h1>
+</div>
+<div class="card">
+  {% for para in a.paras %}
+    <p>{{ para }}</p>
+  {% endfor %}
+</div>
+<div class="card">
+  <h2>Past editions</h2>
+  <p class="muted">Proceedings for all editions live at OpenReview
+    (openreview.net/group?id=ICLR.cc).</p>
+  <div class="chips">
+    {% for ed in a.editions %}
+      <span class="chip small">{{ ed }}</span>
+    {% endfor %}
+  </div>
+</div>
+<div class="card">
+  <h2>{{ conf.full_name }}</h2>
+  <p>{{ conf.city }}, {{ conf.country }} &middot; {{ conf.dates }} —
+    {{ conf.papers }} accepted papers, {{ conf.workshops }} workshops,
+    {{ conf.invited_talks }} invited talks.</p>
+</div>
+{% endblock %}

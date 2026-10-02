@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Checkout | StubHub{% endblock %}
+{% block content %}
+<div class="checkout-page">
+  <div class="checkout-steps"><span class="step active">Review</span><span class="step">Payment</span><span class="step">Confirm</span></div>
+  <div class="checkout-cols">
+    <div class="checkout-main">
+      <h1>Review your order</h1>
+      <section class="checkout-event">
+        <h2>{{ evt.name }}</h2>
+        <p>{{ evt.date_full }} • {{ 'TBA' if evt.is_time_tbd else evt.local_starts_at.strftime('%-I:%M %p') }}</p>
+        <p>{{ evt.venue.name }}, {{ evt.venue.city }}, {{ evt.venue.state or evt.venue.country }}</p>
+      </section>
+
+      <section class="checkout-seats">
+        <h2>Seats</h2>
+        <div class="seat-line">
+          <div><strong>{{ listing.section }}</strong><p>Row {{ listing.row or '—' }}{% if listing.seats %} · Seats {{ listing.seats }}{% endif %}</p></div>
+          <div><strong>{{ quantity }} ticket{{ 's' if quantity > 1 }}</strong><p>Seats together</p></div>
+          <div><strong>${{ '{:,}'.format(listing.price) }}</strong><p>per ticket, incl. fees</p></div>
+        </div>
+      </section>
+
+      <section class="checkout-delivery">
+        <h2>Delivery</h2>
+        <form method="post" class="delivery-form">
+          {% for key, label, note in [
+            ('instant', 'Instant download', 'Ready in minutes — download straight to your phone'),
+            ('mobile', 'Mobile transfer', "Transfer straight to your phone once the seller releases the tickets"),
+            ('ups', 'UPS delivery', 'Physical tickets shipped to your address ($14.95)')] %}
+          <label class="delivery-option">
+            <input type="radio" name="delivery" value="{{ key }}" {{ 'checked' if delivery == key else '' }}>
+            <div><strong>{{ label }}</strong><p>{{ note }}</p></div>
+          </label>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Continue to payment</button>
+        </form>
+      </section>
+    </div>
+
+    <aside class="checkout-aside">
+      <h2>Order summary</h2>
+      <div class="summary-rows">
+        <div class="row"><span>Tickets ({{ quantity }} × ${{ '{:,}'.format(listing.price) }})</span><span>${{ '{:,.0f}'.format(fees.subtotal) }}</span></div>
+        <div class="row muted"><span>Delivery</span><span>{{ 'Free' if not fees.delivery_fee else '${:,.2f}'.format(fees.delivery_fee) }}</span></div>
+        <div class="row muted"><span>Order processing fee</span><span>${{ '{:,.2f}'.format(fees.processing_fee) }}</span></div>
+        <div class="row total"><span>Total</span><span>${{ '{:,.2f}'.format(fees.total) }}</span></div>
+      </div>
+      <p class="muted small">Ticket prices include all applicable fees.</p>
+      <div class="fanprotect-box">
+        <img src="{{ url_for('static', filename='icons/fanprotect.svg') }}" alt="" width="20" height="20">
+        <div><strong>StubHub FanProtect</strong><p>Every order is 100% guaranteed. Valid tickets, on time, or we'll make it right.</p></div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

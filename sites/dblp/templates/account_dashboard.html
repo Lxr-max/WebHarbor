@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}My dblp{% endblock %}
+{% block main %}
+<header id="headline"><h1>My dblp</h1></header>
+<nav class="account-nav">
+  <ul>
+    <li><a href="{{ url_for('account') }}">dashboard</a></li>
+    <li><a href="{{ url_for('watchlist') }}">watchlist</a></li>
+    <li><a href="{{ url_for('saved_searches') }}">saved searches</a></li>
+    <li><a href="{{ url_for('saved_papers') }}">saved papers</a></li>
+    <li><a href="{{ url_for('search_history') }}">search history</a></li>
+    <li><a href="{{ url_for('account_profile') }}">profile</a></li>
+    <li>
+      <form method="post" action="{{ url_for('authn_logout') }}" class="inline-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="link-btn">log out</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+<section class="section" id="dashboard">
+  <div class="section-body">
+    <p>Welcome, <b>{{ current_user.display_name }}</b>{% if current_user.affiliation %}
+      ({{ current_user.affiliation }}){% endif %}.</p>
+    <ul class="dashboard-summary">
+      <li><a href="{{ url_for('watchlist') }}">{{ watched_authors }} watched authors,
+        {{ watched_venues }} watched venues</a></li>
+      <li><a href="{{ url_for('saved_searches') }}">{{ searches }} saved searches</a></li>
+      <li><a href="{{ url_for('saved_papers') }}">{{ saved }} saved papers</a></li>
+    </ul>
+    <h2>Recent searches</h2>
+    <ul class="history-list">
+      {% for h in history %}
+      <li><a href="{{ url_for('search_publ', q=h.query_text) }}">{{ h.query_text }}</a>
+        <small>{{ h.hits }} hits &middot; {{ h.ran_at }}</small></li>
+      {% else %}
+      <li class="no-matches">no searches yet</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

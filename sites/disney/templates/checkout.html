@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | Disney Store{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Checkout</h1>
+  <table class="table">
+    <thead><tr><th>Product</th><th>Qty</th><th>Line total</th></tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr><td>{{ r.product.name }}</td><td>{{ r.row.qty }}</td><td>${{ '%.2f'|format(r.line) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p style="font-size:18px;font-weight:800">Order total: ${{ '%.2f'|format(total) }}</p>
+
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form method="post" action="{{ url_for('checkout') }}" style="max-width:520px;margin-top:20px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-row">
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" value="{{ request.form.get('name','') }}">
+    </div>
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{ request.form.get('email','') }}">
+    </div>
+    <div class="form-row">
+      <label for="address">Shipping address</label>
+      <input type="text" id="address" name="address" value="{{ request.form.get('address','') }}">
+    </div>
+    <button class="btn" type="submit">Place Order</button>
+  </form>
+</div>
+{% endblock %}

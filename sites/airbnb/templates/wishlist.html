@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Wishlists | Airbnb{% endblock %}
+{% block content %}
+<div style="margin-top:24px;">
+  <h1>Wishlists</h1>
+  <div class="form-card" style="max-width:420px;">
+    <h2 style="font-size:18px;margin-top:0;">Create a new wishlist</h2>
+    <form method="post" action="{{ url_for('wishlist_create') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Weekend trips" required>
+      <br><button class="btn btn-rausch" type="submit">Create wishlist</button>
+    </form>
+  </div>
+
+  {% for wl, rows in wishlists %}
+  <div class="wl-card">
+    <h2 style="margin:0 0 6px;">{{ wl.name }}{% if wl.is_default %} <span class="badge badge-muted">Default</span>{% endif %}</h2>
+    <p class="muted small">{{ rows|length }} saved</p>
+    {% if rows %}
+    <div class="wl-items">
+      {% for item in rows %}
+      {% set lst = item_listing.get(item.id) %}
+      {% set exp = item_exp.get(item.id) %}
+      <div class="item">
+        {% if lst and lst.photo_list() %}
+        <a href="{{ url_for('listing_detail', lid=lst.id) }}"><img src="{{ lst.photo_list()[0].uri }}" alt="{{ lst.name }}"></a>
+        <p class="small"><strong>{{ lst.name }}</strong><br><span class="muted">{{ lst.title }}</span>{% if item_market.get(item.id) %} &middot; <span class="muted">{{ item_market.get(item.id) }}</span>{% endif %}</p>
+        {% elif exp and exp.photo_list() %}
+        <a href="{{ url_for('experience_detail', eid=exp.id) }}"><img src="{{ exp.photo_list()[0] }}" alt="{{ exp.name }}"></a>
+        <p class="small"><strong>{{ exp.name }}</strong><br><span class="muted">{{ exp.theme or 'Experience' }}</span></p>
+        {% else %}
+        <p class="small muted">Removed item</p>
+        {% endif %}
+        <form method="post" action="{{ url_for('wishlist_remove', item_id=item.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-ghost btn-sm" type="submit">Remove</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted small">Nothing saved here yet. Use the Save button on any listing or experience.</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="padding-top:8px">
+  <div class="crumbs">
+    <a href="{{ url_for('home') }}">SpotHero</a> ›
+    <a href="{{ url_for('city_page', slug=facility.city_slug) }}">{{ facility.city }}</a> ›
+    <span>{{ facility.title }}</span>
+  </div>
+
+  <div class="facility-head">
+    <div>
+      <h1>{{ facility.title }}</h1>
+      <div class="facility-address">{{ facility.street }}, {{ facility.city }}, {{ facility.state }} {{ facility.postal }}</div>
+      <div class="amenity-badges">
+        {% if facility.airport_code %}<span class="amenity-badge">✈️ {{ facility.airport_code }} Airport Parking</span>{% endif %}
+        {% for a in facility.amenity_list %}<span class="amenity-badge">{{ a }}</span>{% endfor %}
+      </div>
+      <div class="spot-meta" style="margin-top:4px">
+        <span class="stars">★</span>
+        <span class="rating">{{ '%.1f' % facility.rating_avg }}</span>
+        <span>({{ review_count_display(facility.rating_count) }})</span>
+        {% if facility.clearance_inches %}
+        <span>·</span><span class="clearance-note">Height Restriction: {{ facility.clearance_inches // 12 }}' {{ facility.clearance_inches % 12 }}"</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="facility-hero">
+    {% if facility.image_list %}
+    <img class="main-img" src="{{ url_for('static', filename='images/' ~ facility.image_list[0]) }}" alt="Photo of {{ facility.title }}">
+    <div class="thumbs">
+      {% for img in facility.image_list[:6] %}
+      <img src="{{ url_for('static', filename='images/' ~ img) }}" data-full="{{ url_for('static', filename='images/' ~ img) }}" alt="Photo {{ loop.index }} of {{ facility.title }}">
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="main-img"></div>
+    {% endif %}
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">Things You Should Know</button>
+          <div class="accordion-panel">
+            <ul>
+              {% for r in facility.json_field('restrictions') %}
+              <li>{{ r|striptags }}</li>
+              {% endfor %}
+              {% if facility.always_open %}<li>This facility is open 24/7.</li>
+              {% else %}
+                {% for t in facility.json_field('hours_text') %}<li>{{ t }}</li>{% endfor %}
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">Amenities</button>
+          <div class="accordion-panel">
+            <div class="amenity-badges">
+              {% for a in facility.amenity_list %}<span class="amenity-badge">{{ a }}</span>{% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">Access Hours</button>
+          <div class="accordion-panel">
+            {% if facility.always_open %}<p>This facility is open 24/7.</p>
+            {% else %}
+              {% for t in facility.json_field('hours_text') %}<p>{{ t }}</p>{% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">How to Redeem</button>
+          <div class="accordion-panel">
+            <div class="redeem-steps">
+              {% for step in facility.json_field('redemption') %}
+              <div class="redeem-step">
+                {% if step.illustration %}
+                <img src="{{ url_for('static', filename='images/' ~ step.illustration) }}" alt="{{ (step.text|striptags)[:40] }}">
+                {% endif %}
+                <div>{{ step.text|striptags }}</div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">Reviews</button>
+          <div class="accordion-panel">
+            <div class="spot-meta" style="margin-bottom:10px">
+              <span class="stars">★</span>
+              <span class="rating">{{ '%.1f' % facility.rating_avg }}</span>
+              <span>| {{ review_count_display(facility.rating_count) }} ratings</span>
+            </div>
+            <div class="rating-bars">
+              {% set dist = facility.json_field('rating_dist') %}
+              {% set dist_total = (dist[0] + dist[1] + dist[2] + dist[3] + dist[4]) or 1 %}
+              {% for label, count in [('5', dist[4]), ('4', dist[3]), ('3', dist[2]), ('2', dist[1]), ('1', dist[0])] %}
+              <div class="rating-bar">
+                <span>{{ label }}</span>
+                <div class="track"><div class="fill" style="width: {{ (count * 100 / dist_total) | round(0) }}%"></div></div>
+                <span>{{ ((count * 100 / dist_total) | round(0)) }}%</span>
+              </div>
+              {% endfor %}
+            </div>
+            <h6 style="margin:16px 0 6px">What Drivers Like</h6>
+            <div class="driver-tags">
+              {% for p in facility.json_field('prompt_counts') %}
+              <span class="driver-tag">{{ p.emoji }} {{ p.name }} <span class="count">{{ p.count }}</span></span>
+              {% endfor %}
+            </div>
+            <div class="review-list" style="margin-top:16px">
+              {% for r in reviews[:6] %}
+              <div class="review-card">
+                <div class="rhead"><span>{{ r.rating }}/5</span><span class="muted small">{{ r.review_date }}</span></div>
+                <div>{{ r.duration }} · {{ r.vehicle }}</div>
+                {% for t in r.tags[:2] %}<div class="muted small">{{ t }}</div>{% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="true">Getting There</button>
+          <div class="accordion-panel">
+            <p style="white-space:pre-line">{{ facility.getting_there }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="book-box" data-quote-widget data-facility="{{ facility.id }}">
+        <h2>Reserve parking at {{ facility.title }}</h2>
+        <form method="get" action="{{ url_for('purchase_hourly', facility=facility.id) }}" data-quote-form>
+          <input type="hidden" name="facility" value="{{ facility.id }}">
+          {% if event %}
+          <input type="hidden" name="event" value="{{ event.id }}">
+          <input type="hidden" name="kind" value="event">
+          <div class="field">
+            <label>Event parking window</label>
+            <div class="control"><input type="text" value="{{ fmt_display_date(start) }} {{ fmt_display_time(start) }} → {{ fmt_display_time(end) }} — {{ event.title }}" disabled style="padding-left:12px;background:var(--gray-50)"></div>
+          </div>
+          <p class="small muted" style="margin-top:6px">Event parking times are fixed to the event window.</p>
+          {% elif not facility.airport_code %}
+          <div class="datetime-row">
+            <div class="field">
+              <label for="starts">Start time</label>
+              <div class="control"><input id="starts" name="starts" type="datetime-local" value="{{ start.strftime('%Y-%m-%dT%H:%M') }}"></div>
+            </div>
+            <div class="field">
+              <label for="ends">End time</label>
+              <div class="control"><input id="ends" name="ends" type="datetime-local" value="{{ end.strftime('%Y-%m-%dT%H:%M') }}"></div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="kind">Reservation type</label>
+            <div class="control">
+              <select id="kind" name="kind" style="padding-left:12px">
+                <option value="hourly" {% if kind != 'monthly' %}selected{% endif %}>Hourly / Daily</option>
+                {% if facility.monthly_ok %}<option value="monthly" {% if kind == 'monthly' %}selected{% endif %}>Monthly</option>{% endif %}
+              </select>
+            </div>
+          </div>
+          {% else %}
+          <div class="datetime-row">
+            <div class="field">
+              <label for="starts">Drop off</label>
+              <div class="control"><input id="starts" name="starts" type="datetime-local" value="{{ start.strftime('%Y-%m-%dT%H:%M') }}"></div>
+            </div>
+            <div class="field">
+              <label for="ends">Pick up</label>
+              <div class="control"><input id="ends" name="ends" type="datetime-local" value="{{ end.strftime('%Y-%m-%dT%H:%M') }}"></div>
+            </div>
+          </div>
+          {% endif %}
+          <div class="price-breakdown">
+            <div class="line"><span>Duration</span><span id="duration-label">{{ ((end - start).total_seconds() / 3600) | round(1) }} hours</span></div>
+            <div class="line"><span>Subtotal</span><span data-quote="subtotal">${{ '%.2f' % subtotal }}</span></div>
+            {% if facility.airport_code %}
+            <div class="line"><span>Facility Fee</span><span data-quote="facfee">${{ '%.2f' % fac_fee }}</span></div>
+            {% endif %}
+            <div class="line"><span>Service Fee</span><span data-quote="fee">${{ '%.2f' % fee }}</span></div>
+            <div class="line total"><span>Total</span><span data-quote="total">${{ '%.2f' % total }}</span></div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Checkout</button>
+          <div class="guarantees">
+            <div>✓ Guaranteed parking by SpotHero — <a href="{{ url_for('static_page', page_slug='about/parking-guarantee') }}">Learn more</a></div>
+            <div>✓ Free cancellations before your booking</div>
+          </div>
+        </form>
+        {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('favorites') }}" style="margin-top:12px">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="facility_id" value="{{ facility.id }}">
+          <input type="hidden" name="next" value="{{ request.full_path }}">
+          <button class="btn btn-secondary btn-sm" type="submit">♡ Save this spot</button>
+        </form>
+        {% endif %}
+      </div>
+
+      <div class="panel">
+        <h3>365-Day Customer Support</h3>
+        <p class="muted small">SpotHero has your back. If you have any issues with parking, get in touch with our Customer Heroes immediately. We're here 365 days a year, 6am - 11pm CDT.</p>
+        <p class="small"><strong>Parking help and support:</strong> (844) 324-7768</p>
+        <p class="small"><strong>Non-urgent issues:</strong> support@spothero.com — we'll get back to you within 24 hours.</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section-tight">
+    <h2>Reserve a Parking Spot Nearby</h2>
+    <div class="spot-list">
+      {% for f, dist in nearby[:6] %}
+      <div class="spot-card">
+        {% if f.image_list %}
+        <a href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x') }}"><img class="spot-img" src="{{ url_for('static', filename='images/' ~ f.image_list[0]) }}" alt="Photo of {{ f.title }}" loading="lazy"></a>
+        {% else %}<div class="spot-img"></div>{% endif %}
+        <div>
+          <a class="spot-title" href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x') }}">{{ f.title }}</a>
+          <div class="spot-meta">
+            <span>🚶 {{ walk_display(dist / 1.4, dist)[0] }} {{ walk_display(dist / 1.4, dist)[1] }}</span>
+            <span class="stars">★</span><span class="rating">{{ '%.1f' % f.rating_avg }}</span>
+            <span>({{ review_count_display(f.rating_count) }})</span>
+            {% for a in f.amenity_list[:2] %}<span class="spot-tag">{{ a }}</span>{% endfor %}
+          </div>
+        </div>
+        <div class="spot-price">
+          <div class="amount">${{ '%.2f' % f.daily_rate }}</div>
+          <div class="note">Starting at</div>
+          <div class="spot-actions">
+            <a class="btn btn-primary btn-sm" href="{{ url_for('purchase_hourly', facility=f.id, starts=start.strftime('%Y-%m-%dT%H:%M'), ends=end.strftime('%Y-%m-%dT%H:%M'), kind=kind) }}">Book Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

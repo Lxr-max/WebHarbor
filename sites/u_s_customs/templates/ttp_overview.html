@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Travel › Trusted Traveler Programs</div>
+<h1 class="page-title">{{ page.title }}</h1>
+<div class="content-lines">
+  {% for line in page.lines %}<p>{{ line }}</p>{% endfor %}
+</div>
+<h2>Compare Programs</h2>
+<table class="data">
+  <tr><th>Program</th><th>Fee</th><th>Membership</th><th>Who it's for</th><th>Includes</th><th></th></tr>
+  {% for p in programs %}
+  <tr>
+    <td><a href="{{ url_for('ttp_program', slug=p.slug) }}">{{ p.name }}</a></td>
+    <td>${{ '%.2f'|format(p.fee) }}</td>
+    <td>{{ p.years }} years</td>
+    <td>{{ p.audience }}</td>
+    <td>{% for inc in p.includes %}{{ inc }}{% if not loop.last %} · {% endif %}{% endfor %}</td>
+    <td><a class="btn" href="{{ url_for('ttp_apply', slug=p.slug) }}">Apply</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

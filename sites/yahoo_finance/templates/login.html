@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Sign in - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card error-panel" style="margin: 30px auto;">
+  <h2>Sign in to Yahoo Finance</h2>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="form-grid" method="post" action="/login">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ next }}">
+    <div>
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@test.com">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Your password">
+    </div>
+    <button class="btn primary" type="submit">Sign in</button>
+    <p class="form-note">New here? <a href="/signup">Create an account</a></p>
+  </form>
+</div>
+{% endblock %}

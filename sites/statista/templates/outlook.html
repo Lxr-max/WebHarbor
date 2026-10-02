@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Market Insights | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><span>Market Insights</span>
+</nav>
+<h1>Market Intelligence</h1>
+<p class="section__sub">Enterprise Market Intelligence. Delivered.</p>
+<p>Discover our market insights and get valuable data for over 190+ countries, territories, and regions.</p>
+<section class="section">
+  <div class="section__head"><h2>Market Insights topics at a glance</h2></div>
+  <div class="cardGrid">
+    {% for seg in segments %}
+    <a class="card" href="/outlook/{{ seg.slug }}/">
+      <div class="card__body">
+        <span class="card__img" style="aspect-ratio:auto;height:120px;"><img src="/static/images/outlook_hero_{{ seg.slug }}.svg" alt="{{ seg.name }}" style="object-fit:contain;padding:12px;"></span>
+        <span class="card__title" style="font-size:16px;">{{ seg.name }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+<section class="section">
+  <div class="section__head"><h2>How to use our data</h2></div>
+  <div class="cardGrid">
+    <div class="card"><div class="card__body">
+      <span class="card__title">Find the right data for your analysis</span>
+      <span class="card__snippet">Revenue and growth data for each market are easily accessible and show a forecast horizon of five years.</span>
+    </div></div>
+    <div class="card"><div class="card__body">
+      <span class="card__title">Understand how volume &amp; prices affect the revenues</span>
+      <span class="card__snippet">Get a better understanding of the market and its products by analyzing the relation between volume and prices.</span>
+    </div></div>
+    <div class="card"><div class="card__body">
+      <span class="card__title">Compare the key players &amp; analyze the market density</span>
+      <span class="card__snippet">A rough estimation of the competitive landscape in the market can be seen when comparing key players.</span>
+    </div></div>
+  </div>
+</section>
+{% endblock %}

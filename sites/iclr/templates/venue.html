@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Conference Site{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>Conference Site</h1>
+  <span class="muted">{{ v.conference }} — {{ v.site }}, {{ v.city }}, {{ v.country }} &middot; {{ v.dates }}</span>
+</div>
+
+<div class="card">
+  <h2>{{ v.site }}</h2>
+  {% for note in v.site_notes %}
+    <p>{{ note }}</p>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>Looking ahead — ICLR 2027</h2>
+  <p><b>{{ v.next.full_name }}</b> — {{ v.next.location }}, {{ v.next.dates }}.</p>
+  <p class="muted">{{ v.next.note }}</p>
+</div>
+{% endblock %}

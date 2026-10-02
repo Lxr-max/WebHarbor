@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.name }} | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a>
+  <span class="sep"></span><a href="/recent/topics/">Topics</a>
+  <span class="sep"></span><span>{{ topic.name }}</span>
+</nav>
+
+<h1>{{ topic.name }}</h1>
+<div class="statMeta">
+  <span>Choose a region: <b>Worldwide</b></span>
+</div>
+
+{% if topic.description %}
+<div class="statDesc" style="max-width:860px;">{{ topic.description|striptags }}
+  <p>Published by {{ topic.published_by }}, {{ topic.published_date }}</p>
+</div>
+{% endif %}
+
+{% if picks %}
+<section class="section">
+  <div class="section__head">
+    <div><h2>Editor’s Picks <span style="font-weight:400;color:var(--muted);">Current statistics on this topic</span></h2></div>
+  </div>
+  <div class="cardGrid">
+    {% for s in picks %}
+    <a class="card" href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+      {% if s.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>{% endif %}
+      <div class="card__body">
+        <span class="card__meta">{{ s.breadcrumb[0] if s.breadcrumb else '' }}</span>
+        <span class="card__title">{{ s.title|truncate(84) }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if recs %}
+<section class="section">
+  <div class="section__head"><h2>Recommended statistics</h2></div>
+  <ul class="outlineList">
+    {% for s in recs %}
+    <li><a href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">{{ s.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<div class="statLayout" style="margin-top:30px;">
+  <div>
+    {% if topic.key_insights %}
+    <section class="section">
+      <h2>Key insights</h2>
+      <dl class="kv">
+        {% for item in topic.key_insights %}
+          {% if loop.index is odd %}<dt>{{ item }}</dt>
+          {% else %}<dd>{{ item }}</dd>{% endif %}
+        {% endfor %}
+      </dl>
+    </section>
+    {% endif %}
+    {% if topic.key_figures %}
+    <section class="section">
+      <h2>Key figures</h2>
+      <dl class="kv">
+        {% for item in topic.key_figures %}
+          {% if loop.index is odd %}<dt>{{ item }}</dt>
+          {% else %}<dd>{{ item }}</dd>{% endif %}
+        {% endfor %}
+      </dl>
+    </section>
+    {% endif %}
+  </div>
+  <aside>
+    {% if report %}
+    <div class="sideBox">
+      <h3>Report on the topic</h3>
+      <ul><li><a href="/study/{{ report.id }}/{{ report.slug }}/">{{ report.title }}</a></li></ul>
+      <a class="btn btn--primary" href="/study/{{ report.id }}/{{ report.slug }}/" style="width:100%;text-align:center;margin-top:10px;">Explore this report</a>
+    </div>
+    {% endif %}
+    {% if related_topics %}
+    <div class="sideBox">
+      <h3>Related topics</h3>
+      <ul>
+        {% for t in related_topics %}
+        <li><a href="/topics/{{ t.id }}/{{ t.slug }}/">{{ t.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="sideBox">
+      <h3>Further reports</h3>
+      <ul>
+        {% for r in header_reports[:4] %}
+        <li><a href="/study/{{ r.id }}/{{ r.slug }}/">{{ r.title|truncate(60) }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
+</div>
+{% endblock %}

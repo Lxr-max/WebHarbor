@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}{{ channel_label }}{% if channel == "campground" %}: Camping{% elif channel == "school" %}: School Day{% else %}: {{ channel_label }}{% endif %}: Index - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / {{ channel_label }}</div>
+<div class="channel-hero">
+  <h1>{% if channel == 'campground' %}Camping{% elif channel == 'city' %}Weather{% else %}{{ channel_label }}{% endif %}</h1>
+  <div class="channel-search">
+    <form method="get" action="/en/search" style="display:flex;max-width:560px;margin:14px 0">
+      <input class="search-input" type="text" name="q" style="flex:1"
+             placeholder="{{ {
+               'golf': 'Search for your golf location to get your weather forecast',
+               'ski': 'Search for Ski hills to help plan your day on the slopes.',
+               'school': 'Search for your school and get your forecast',
+               'airport': 'Search for your airport to get your forecast',
+               'beach': 'Search for your beach to get your forecast',
+               'campground': 'Search for your campground to get your forecast',
+               'cottage': 'Search for your cottage area to get your forecast',
+               'marine': 'Search for your marina to get your forecast',
+               'attraction': 'Search for your attraction to get your forecast',
+               'park': 'Search for your park to get your forecast',
+               'vacation': 'Search for your vacation destination',
+             }.get(channel, 'Search for a location') }}">
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+
+  {% if channel == 'vacation' %}
+    <p>Planning a trip? Pick a location — we can help you travel to your dream getaway destination with weather forecasting information you can trust.</p>
+  {% elif channel == 'golf' %}
+    <p>Find your golf forecast</p>
+  {% elif channel == 'ski' %}
+    <p>Find your ski forecast</p>
+  {% elif channel == 'airport' %}
+    <p>Get your Airport forecast</p>
+  {% elif channel == 'school' %}
+    <p>Find forecasts for Schools in Canada</p>
+  {% elif channel == 'beach' %}
+    <p>Find your beach forecast</p>
+  {% elif channel == 'campground' %}
+    <p>Find your camping forecast</p>
+  {% elif channel == 'cottage' %}
+    <p>Find your cottage forecast</p>
+  {% elif channel == 'marine' %}
+    <p>Find your marine forecast</p>
+  {% elif channel == 'attraction' %}
+    <p>Find your attraction forecast</p>
+  {% elif channel == 'park' %}
+    <p>Find your park forecast</p>
+  {% else %}
+    <p>Find forecasts for {{ channel_label }} in Canada</p>
+  {% endif %}
+</div>
+
+{% if channel == 'vacation' and vacation_copy %}
+<div class="card" style="padding:18px 22px;margin:14px 0;white-space:pre-line;font-size:15px;color:#4c5353">{{ vacation_copy }}</div>
+{% endif %}
+
+{% if channel == 'vacation' and vacation_countries %}
+<section class="section">
+  <div class="section-head"><h2>{% if country_page %}Destinations in {{ country_page }}{% else %}Pick a destination country{% endif %}</h2></div>
+  <div class="city-chips">
+    {% if country_page %}<a href="/en/vacation" class="on">All destinations</a>{% endif %}
+    {% for cc, cname in vacation_countries %}
+    <a href="/en/vacation/{{ cc }}">{{ cname }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="section-head"><h2>Popular locations</h2></div>
+  <div class="loc-cards">
+    {% for e in entries[:8] %}
+    <a class="loc-card" href="{{ e.loc.url() }}">
+      <div>
+        <div class="lc-name">{{ e.loc.name }}</div>
+        <div class="lc-sub">{{ e.loc.display_sub }}</div>
+      </div>
+      <div class="lc-right">
+        {% if e.obs %}
+        <img src="{{ e.obs.icon|wxicon }}" alt="{{ e.obs.text }}" style="width:40px;height:40px">
+        <span class="lc-temp">{{ e.obs.temp|temp(unit) }}</span>
+        {% else %}<span class="lc-temp">--</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Weather for more locations</h2></div>
+  <div class="city-chips">
+    {% for ch in chrome.channels %}
+    <a href="{{ ch.href }}">{{ ch.name }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if entries|length > 8 %}
+<section class="section">
+  <div class="section-head"><h2>Weather for more locations</h2></div>
+  <div class="loc-cards">
+    {% for e in entries[8:] %}
+    <a class="loc-card" href="{{ e.loc.url() }}">
+      <div>
+        <div class="lc-name">{{ e.loc.name }}</div>
+        <div class="lc-sub">{{ e.loc.display_sub }}</div>
+      </div>
+      <div class="lc-right">
+        {% if e.obs %}
+        <img src="{{ e.obs.icon|wxicon }}" alt="{{ e.obs.text }}" style="width:40px;height:40px">
+        <span class="lc-temp">{{ e.obs.temp|temp(unit) }}</span>
+        {% else %}<span class="lc-temp">--</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

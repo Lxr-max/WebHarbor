@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Contact - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <h1>Contact us</h1>
+  <div class="two-col">
+    <div class="panel">
+      <h2>24/7 Customer Support</h2>
+      <p style="color:var(--text-2);">Our team of experienced adventure specialists have travelled to hundreds of countries around the globe and have decades of first-hand travel experience to share.</p>
+      <table class="table-simple">
+        <tr><th>Phone (US)</th><td>+1 866 901 5919</td></tr>
+        <tr><th>Live chat</th><td>Available 24/7 on every page</td></tr>
+        <tr><th>Q&amp;As</th><td><a href="/search?q=faq">View Q&amp;As</a></td></tr>
+        <tr><th>Email</th><td>support@tourradar.com</td></tr>
+      </table>
+      <form method="post" action="/newsletter" class="form-grid" style="grid-template-columns:1fr; margin-top:14px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="/contact">
+        <div class="field"><label>Message topic</label>
+          <select><option>Booking question</option><option>Payment</option><option>Operator inquiry</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Your email</label><input type="email" name="email" required></div>
+        <div class="field"><label>How can we help?</label><textarea rows="4" style="width:100%; border:1px solid var(--border); border-radius:6px; padding:9px 10px; font:inherit;"></textarea></div>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Before you contact us</h2>
+      <ul style="color:var(--text-2);">
+        <li>Check your <a href="/account">Tour Management</a> section for booking details.</li>
+        <li>Most date and traveler changes can be made from your booking page.</li>
+        <li>Operator-specific questions (itinerary, accommodation) are answered fastest through the tour page Q&amp;A.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

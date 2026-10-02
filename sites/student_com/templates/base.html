@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Student Accommodation Made Easy | Student.com{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Student.com helps students find and compare student housing near campuses across the US.{% endblock %}">
+  <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<div class="announce" id="announce">
+  <div class="slide active">
+    <span>🚀 <a href="/jobs">Find your dream internship today</a></span>
+  </div>
+  <div class="slide">
+    <span>💰 <a href="/budget-calculator">Plan your target rent budget</a></span>
+  </div>
+  <div class="dots" aria-hidden="true">
+    <button class="active" data-testid="announcement-banner-dot-0" aria-label="Slide 1"></button>
+    <button data-testid="announcement-banner-dot-1" aria-label="Slide 2"></button>
+  </div>
+</div>
+
+<nav class="navbar" data-testid="navbar">
+  <div class="container inner">
+    <a class="logo" href="/" data-testid="navbar-logo-link" aria-label="Student.com Home">
+      <img src="{{ url_for('static', filename='icons/logo.svg') }}" alt="student.com" style="height:26px;width:auto">
+    </a>
+    <div class="nav-search">
+      <input type="search" name="searchBar-navbar" id="navbar-search"
+             placeholder="Search by city, college or property"
+             data-testid="inputField-searchBar-navbar" autocomplete="off" aria-label="Search by city, college or property">
+      <div class="search-drop" id="search-drop"></div>
+    </div>
+    <div class="nav-links">
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <div class="rv-wrap">
+        <button class="nav-btn" id="rv-button" data-testid="navbar-recently-viewed-properties-button">Recently Viewed</button>
+        <div class="rv-drop" id="rv-drop">
+          <div class="head">Recently viewed properties</div>
+          {% if recently_viewed_props %}
+            {% for prop, viewed in recently_viewed_props %}
+            <a class="item" href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}/p/{{ prop.slug }}">
+              {% if prop.primary_image %}<img src="{{ prop.primary_image }}" alt="Photo of {{ prop.name }}">{% endif %}
+              <div><div class="t">{{ prop.name }}</div>
+                <div class="s">{{ prop.city_slug.replace('-', ' ').title() }}</div></div>
+            </a>
+            {% endfor %}
+          {% else %}
+            <div class="item"><div class="s">Start exploring and your recently viewed properties will appear here.</div></div>
+          {% endif %}
+        </div>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="rv-wrap" style="position:relative">
+        <button class="nav-btn dark" id="user-menu-btn" data-testid="open-user-menu">
+          <span class="user-chip" style="display:flex">
+            <span class="avatar">{{ current_user.first_name[:1] }}</span>
+            Hi, {{ current_user.first_name }}
+          </span>
+        </button>
+        <div class="user-menu" id="user-menu">
+          <a href="/profile/bookmarks">🔖 Saved properties</a>
+          <a href="/profile/history">🕘 Recently viewed properties</a>
+          <a href="/profile/inquiries">✉️ My inquiries</a>
+          <button id="signout-btn">↩︎ Sign out</button>
+        </div>
+      </div>
+      {% else %}
+      <button class="nav-btn dark" id="auth-open" data-testid="open-auth-modal-trigger">Sign in</button>
+      {% endif %}
+      <button class="lang-btn" id="lang-btn"><span>🇺🇸</span> English</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="footer" data-testid="footer">
+  <div class="container">
+    <div class="cols">
+      <div class="col">
+        <a class="logo" href="/" data-testid="footer-logo-link" style="color:#262626">
+          <img src="{{ url_for('static', filename='icons/logo.svg') }}" alt="student.com" style="height:26px;width:auto">
+        </a>
+        <p id="footer-description" data-testid="footer-description" style="font-size:14px;max-width:320px">
+          Student.com has been a global force in student housing since 2011 and we're just getting started. 2026 marks the start of our new era!</p>
+        <div class="social">
+          <a href="https://www.instagram.com/student/" data-testid="footer-social-link-instagram" aria-label="Instagram">IG</a>
+          <a href="https://www.facebook.com/studentcom/" data-testid="footer-social-link-facebook" aria-label="Facebook">FB</a>
+          <a href="https://www.linkedin.com/company/student-com/" data-testid="footer-social-link-linkedin" aria-label="LinkedIn">IN</a>
+          <a href="https://www.tiktok.com/@studentdotcom" data-testid="footer-social-link-tiktok" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+      <div class="col">
+        <h4>Company</h4>
+        <a href="/about">About us</a>
+        <a href="/how-it-works">How it works</a>
+        <a href="/contact">Contact us</a>
+      </div>
+      <div class="col">
+        <h4>Support</h4>
+        <a href="/help">Help center</a>
+        <a href="/guides/avoid-scams-and-fraud">Avoid scams &amp; fraud</a>
+        <a href="/contact">Contact us</a>
+      </div>
+      <div class="col">
+        <h4>Services</h4>
+        <a href="/list-your-property">List your property</a>
+        <a href="/scholarships">Scholarships</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/terms">Terms</a>
+        <a href="/terms/privacy">Privacy</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="disrupt" data-testid="footer-disrupting-text">We're disrupting student living.</div>
+    <div class="fine">© 2026 Student.com — mirrored for offline benchmarking. Not affiliated with Student.com Global Group.</div>
+  </div>
+</footer>
+
+<!-- auth modal -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="close" data-close="auth-modal" aria-label="Close">✕</button>
+    <h3>Sign up or log in</h3>
+    <p class="muted" style="font-size:14px;margin-top:2px">Sign up or log in to your free Student.com account to get started.</p>
+    <button class="sso-btn" data-testid="google-auth-login-button">
+      <img src="{{ url_for('static', filename='icons/google.svg') }}" alt="Google logo"> Continue with Google
+    </button>
+    <button class="sso-btn" data-testid="apple-auth-login-button">
+      <img src="{{ url_for('static', filename='icons/apple.svg') }}" alt="Apple logo"> Sign in with Apple
+    </button>
+    <div class="divider">or continue with email</div>
+    <form id="login-form" novalidate>
+      <div class="field" id="login-email-field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" name="email" placeholder="you@example.com" required>
+        <div class="err" id="login-email-err">Invalid email address</div>
+      </div>
+      <div class="field" id="login-pass-field">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" name="password" placeholder="Your password" required>
+        <div class="err" id="login-pass-err">Invalid email or password</div>
+      </div>
+      <button class="btn primary full" type="submit" id="login-submit">Log in</button>
+    </form>
+    <p class="small muted" style="margin-top:14px">New to Student.com?
+      <a href="#" id="show-register" style="text-decoration:underline">Create an account</a></p>
+    <p class="small muted">By signing in, you accept our <a href="/terms">Terms of Use</a> and
+      <a href="/terms/privacy">Privacy Policy</a>.</p>
+  </div>
+</div>
+
+<!-- register modal -->
+<div class="modal-overlay" id="register-modal">
+  <div class="modal">
+    <button class="close" data-close="register-modal" aria-label="Close">✕</button>
+    <h3>Create your account</h3>
+    <p class="muted" style="font-size:14px">Join Student.com to save properties and send inquiries.</p>
+    <form id="register-form">
+      <div class="field" id="reg-first-field">
+        <label for="reg-first">First name</label>
+        <input type="text" id="reg-first" name="first_name" required>
+        <div class="err">First name is required</div>
+      </div>
+      <div class="field" id="reg-last-field">
+        <label for="reg-last">Last name</label>
+        <input type="text" id="reg-last" name="last_name" required>
+        <div class="err">Last name is required</div>
+      </div>
+      <div class="field" id="reg-email-field">
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" name="email" required>
+        <div class="err">Invalid email address</div>
+      </div>
+      <div class="field" id="reg-pass-field">
+        <label for="reg-pass">Password (8+ characters)</label>
+        <input type="password" id="reg-pass" name="password" required>
+        <div class="err">Password must be at least 8 characters</div>
+      </div>
+      <button class="btn primary full" type="submit" id="register-submit">Sign up</button>
+    </form>
+    <p class="small muted" style="margin-top:14px">Already have an account?
+      <a href="#" id="show-login" style="text-decoration:underline">Log in</a></p>
+  </div>
+</div>
+
+<script>
+  window.CSRF_TOKEN = "{{ csrf_token() }}";
+  window.AUTHENTICATED = {{ 'true' if current_user.is_authenticated else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='js/site.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

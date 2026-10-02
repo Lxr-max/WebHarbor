@@ -1,0 +1,1267 @@
+{
+  "YahooFinance--0": {
+    "task": "Alice wants to monitor Apple for an iPhone-cycle breakout. Review Apple's sector, 52-week range, profit margin and one-year target, add AAPL to her watchlist, and set an alert above $350 with the note iPhone cycle. Report the resulting watchlist and alert status. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "AAPL",
+            "direction": "above",
+            "threshold": 350.0,
+            "note": "iPhone cycle",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "AAPL",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/AAPL(?:\\?|$)",
+      "/quote/AAPL/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote AAPL",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,65}price.{0,20}333\\.02"
+      ],
+      [
+        "AAPL Profit Margin",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,160}?(?:profit\\s+margin|margin).{0,35}?27\\.62\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "AAPL 52 Week Range",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range).{0,35}?243\\.42\\s+345\\.34(?!\\d|\\.\\d)"
+      ],
+      [
+        "AAPL 1y Target Estimate",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,160}?1y\\s+target\\s+estimate.{0,35}?328\\.22(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--1": {
+    "task": "Create Jordan Vale's account at jordan.vale@test.com with a password of at least eight characters. Build a Technology shortlist using trailing P/E between 12 and 40, sorted from lowest P/E upward. Check the first candidate's industry, profit margin and 52-week range, add it to the new watchlist, and report its symbol and P/E.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "email": "jordan.vale@test.com",
+            "name": "Jordan Vale",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "symbol": "SMCI",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/screener(?:\\?|$)",
+      "/quote/SMCI(?:\\?|$)",
+      "/quote/SMCI/statistics(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Screened candidates super",
+        "\\bsuper\\b"
+      ],
+      [
+        "Screened candidates micro",
+        "\\bmicro\\b"
+      ],
+      [
+        "Screened candidates technology",
+        "\\btechnology\\b"
+      ],
+      [
+        "SMCI Trailing P/E",
+        "smci.{0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?).{0,35}?12\\.60(?!\\d|\\.\\d)"
+      ],
+      [
+        "SMCI Profit Margin",
+        "smci.{0,160}?(?:profit\\s+margin|margin).{0,35}?5\\.71\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "SMCI 52 Week Range",
+        "smci.{0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range).{0,35}?19\\.48\\s+58\\.78(?!\\d|\\.\\d)"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "watch_items",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "YahooFinance--2": {
+    "task": "Dana is preparing to monitor Costco after its captured September earnings report. Find COST in the previous week's earnings calendar, report its call time, estimated and reported EPS and surprise, and check its current quote. Set an alert above $1,000 with note Earnings prep and report its status. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "COST",
+            "direction": "above",
+            "threshold": 1000.0,
+            "note": "Earnings prep",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/calendar/earnings(?:\\?|$)",
+      "/quote/COST(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "COST earnings EPS",
+        "(?:cost|costco(?:\\s+wholesale)?).{0,400}?september\\s+25,\\s+2026.{0,70}?tas.{0,70}?6\\.53.{0,70}?6\\.75.{0,70}?3\\.41"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ],
+      [
+        "COST current price",
+        "(?:cost|costco(?:\\s+wholesale)?).{0,700}?(?:current\\s+price|quote|price).{0,25}?910\\.34"
+      ]
+    ]
+  },
+  "YahooFinance--3": {
+    "task": "Carol wants exposure to the sector with the largest captured aggregate market capitalization. Identify that sector and its largest company, check the company's trailing P/E, dividend yield and 50-day average, then add it to her watchlist and set an alert below $200 with note Dip buy. Report the selected sector, company and alert status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "NVDA",
+            "direction": "below",
+            "threshold": 200.0,
+            "note": "Dip buy",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "NVDA",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/sectors/technology(?:\\?|$)",
+      "/quote/NVDA(?:\\?|$)",
+      "/quote/NVDA/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Largest sector technology",
+        "\\btechnology\\b"
+      ],
+      [
+        "NVDA Forward Dividend & Yield",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,160}?forward\\s+dividend\\s+and\\s+yield.{0,35}?1\\s+\\(0\\.44\\s+percent\\)(?!\\d|\\.\\d)"
+      ],
+      [
+        "NVDA Trailing P/E",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?).{0,35}?28\\.87(?!\\d|\\.\\d)"
+      ],
+      [
+        "NVDA 50-Day Average",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,160}?(?:50[ -]day(?:\\s+moving)?\\s+average|50[ -]day\\s+ma).{0,35}?216\\.98(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--4": {
+    "task": "Dana wants to track Nvidia after reading the newest news search result for Nvidia. Summarize that article's title, publisher, author and main development, check NVDA's current price and 52-week range, and create an alert below $200 with note AI pullback. Report the alert status. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "NVDA",
+            "direction": "below",
+            "threshold": 200.0,
+            "note": "AI pullback",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/technology/ai/articles/ai\\-driven\\-edge\\-security\\-integration\\-012337957\\.html(?:\\?|$)",
+      "/quote/NVDA(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote NVDA",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,65}price.{0,20}228\\.38"
+      ],
+      [
+        "NVDA 52 Week Range",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range).{0,35}?164\\.27\\s+236\\.54(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ],
+      [
+        "article title",
+        "is\\s+ai\\-driven\\s+edge\\s+security\\s+integration\\s+with\\s+nvidia's\\s+stack\\s+altering\\s+the\\s+investment\\s+case\\s+for\\s+palo\\s+alto\\s+networks\\s+\\(panw\\)\\?"
+      ],
+      [
+        "article attribution",
+        "sasha\\s+jovanovic"
+      ],
+      [
+        "article attribution",
+        "simply\\s+wall\\s+st\\."
+      ],
+      [
+        "secure edge integration",
+        "(?:semtech|airlink).{0,220}?palo\\s+alto|palo\\s+alto.{0,220}?(?:semtech|airlink)"
+      ]
+    ]
+  },
+  "YahooFinance--5": {
+    "task": "Carol wants to follow the leading trending ticker. Identify the number-one symbol, review its market cap, trailing P/E, 52-week range and 50-day average, then add it to her watchlist and set an alert above $1,200 with note Memory cycle. Report the ticker and alert status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "MU",
+            "direction": "above",
+            "threshold": 1200.0,
+            "note": "Memory cycle",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "MU",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/MU(?:\\?|$)",
+      "/quote/MU/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Leading trending ticker micron",
+        "\\bmicron\\b"
+      ],
+      [
+        "Leading trending ticker technology",
+        "\\btechnology\\b"
+      ],
+      [
+        "MU Trailing P/E",
+        "(?:mu|micron(?:\\s+technology)?).{0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?).{0,35}?24\\.10(?!\\d|\\.\\d)"
+      ],
+      [
+        "MU 52 Week Range",
+        "(?:mu|micron(?:\\s+technology)?).{0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range).{0,35}?179\\.61\\s+1255\\.00(?!\\d|\\.\\d)"
+      ],
+      [
+        "MU 50-Day Average",
+        "(?:mu|micron(?:\\s+technology)?).{0,160}?(?:50[ -]day(?:\\s+moving)?\\s+average|50[ -]day\\s+ma).{0,35}?949\\.71(?!\\d|\\.\\d)"
+      ],
+      [
+        "MU Market Cap (intraday)",
+        "(?:mu|micron(?:\\s+technology)?).{0,160}?market\\s+cap\\s+\\(intraday\\).{0,35}?1\\.2t(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--6": {
+    "task": "Bob is comparing AMD and Nvidia as semiconductor investments. Check each company's trailing P/E and profit margin, add the lower-P/E company to his watchlist and create an alert above $700. Report both comparisons, the chosen symbol and the alert status. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "NVDA",
+            "direction": "above",
+            "threshold": 700.0,
+            "note": null,
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "NVDA",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/AMD(?:\\?|$)",
+      "/quote/AMD/statistics(?:\\?|$)",
+      "/quote/NVDA(?:\\?|$)",
+      "/quote/NVDA/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote AMD",
+        "(?:amd|advanced\\s+micro\\s+devices)(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,65}price(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,20}611\\.76"
+      ],
+      [
+        "AMD Trailing P/E",
+        "(?:amd|advanced\\s+micro\\s+devices)(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,35}?154\\.88(?!\\d|\\.\\d)"
+      ],
+      [
+        "AMD Profit Margin",
+        "(?:amd|advanced\\s+micro\\s+devices)(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:nvda|nvidia(?:\\s+corporation)?))\\b).){0,35}?15\\.58\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "Quote NVDA",
+        "(?:nvda|nvidia(?:\\s+corporation)?)(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,65}price(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,20}228\\.38"
+      ],
+      [
+        "NVDA Trailing P/E",
+        "(?:nvda|nvidia(?:\\s+corporation)?)(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,35}?28\\.87(?!\\d|\\.\\d)"
+      ],
+      [
+        "NVDA Profit Margin",
+        "(?:nvda|nvidia(?:\\s+corporation)?)(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:amd|advanced\\s+micro\\s+devices))\\b).){0,35}?63\\.66\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--7": {
+    "task": "Dana wants to follow the most-traded stock in the Most Actives screener. Review its volume and daily change, its earliest and latest captured closing prices, and its 50-day average. Add it to her watchlist and set an alert above $20 with note LatAm growth, then report the symbol and alert status. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "NU",
+            "direction": "above",
+            "threshold": 20.0,
+            "note": "LatAm growth",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "NU",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/screener(?:\\?|$)",
+      "/quote/NU(?:\\?|$)",
+      "/quote/NU/history(?:\\?|$)",
+      "/quote/NU/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Most active stock holdings",
+        "\\bholdings\\b"
+      ],
+      [
+        "Most active stock financial",
+        "\\bfinancial\\b"
+      ],
+      [
+        "Most active stock services",
+        "\\bservices\\b"
+      ],
+      [
+        "NU latest close",
+        "nu.{0,110}?september\\s+30,\\s+2026.{0,30}?12\\.66"
+      ],
+      [
+        "NU earliest close",
+        "nu.{0,110}?september\\s+1,\\s+2026.{0,30}?14\\.46"
+      ],
+      [
+        "NU 50-Day Average",
+        "nu.{0,160}?(?:50[ -]day(?:\\s+moving)?\\s+average|50[ -]day\\s+ma).{0,35}?14\\.33(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--8": {
+    "task": "Dana is researching Nvidia's buyback news before adding it to her watchlist. Find the newest news result for buyback, report its title, publisher and author, and explain the buyback development with Nvidia's closing price, daily change and volume stated in that article. Add NVDA to Dana's watchlist and confirm the saved symbol. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "NVDA",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/markets/stocks/articles/stock\\-market\\-today\\-sept\\-30\\-214001304\\.html(?:\\?|$)",
+      "/quote/NVDA(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote NVDA",
+        "(?:nvda|nvidia(?:\\s+corporation)?).{0,65}price.{0,20}228\\.38"
+      ],
+      [
+        "article title",
+        "stock\\s+market\\s+today,\\s+sept\\.\\s+30\\s+nvidia\\s+authorizes\\s+150b\\s+buyback,\\s+lifting\\s+total\\s+to\\s+235b"
+      ],
+      [
+        "article attribution",
+        "will\\s+healy,\\s+the\\s+motley\\s+fool"
+      ],
+      [
+        "article attribution",
+        "motley\\s+fool"
+      ],
+      [
+        "authorized buyback",
+        "(?:150\\s*b(?:illion)?|150000000000).{0,60}?buyback|buyback.{0,60}?(?:150\\s*b(?:illion)?|150000000000)"
+      ],
+      [
+        "article close",
+        "(?:closed|closing|close).{0,20}?228\\.38"
+      ],
+      [
+        "article change",
+        "(?:up|change).{0,20}?0\\.51\\s+percent"
+      ],
+      [
+        "article volume",
+        "volume.{0,40}?117\\.7\\s*m(?:illion)?"
+      ]
+    ]
+  },
+  "YahooFinance--9": {
+    "task": "Create Priya Nair's account at priya.nair@test.com with a password of at least eight characters and start an Apple investment watchlist. Review Apple's latest annual financials, reporting fiscal year end, revenue and net income, and its PEG ratio, beta and employee count. Save AAPL and confirm the new watchlist contains it.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "email": "priya.nair@test.com",
+            "name": "Priya Nair",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "joined": "2026-09-30"
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "symbol": "AAPL",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/AAPL(?:\\?|$)",
+      "/quote/AAPL/financials(?:\\?|$)",
+      "/quote/AAPL/statistics(?:\\?|$)",
+      "/quote/AAPL/profile(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote AAPL",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,65}price.{0,20}333\\.02"
+      ],
+      [
+        "Apple fiscal year and revenue",
+        "aapl.{0,450}?2022\\-09\\-30.{0,30}?394\\.33b"
+      ],
+      [
+        "Apple net income",
+        "aapl.{0,550}?99\\.8b"
+      ],
+      [
+        "AAPL PEG Ratio (5Y expected)",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,160}?peg\\s+ratio\\s+\\(5y\\s+expected\\).{0,35}?2\\.64(?!\\d|\\.\\d)"
+      ],
+      [
+        "AAPL Beta (5Y Monthly)",
+        "(?:aapl|apple(?:\\s+inc\\.?)?).{0,160}?beta\\s+\\(5y\\s+monthly\\).{0,35}?1\\.08(?!\\d|\\.\\d)"
+      ],
+      [
+        "AAPL employees",
+        "(?:employees|staff).{0,30}150000"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "watch_items",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "YahooFinance--10": {
+    "task": "Bob is comparing Coca-Cola and PepsiCo for a dividend investment. Report each company's forward dividend rate and yield, profit margin and trailing P/E. Set a PepsiCo alert above $100 with note Cola wars and report its status. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "PEP",
+            "direction": "above",
+            "threshold": 100.0,
+            "note": "Cola wars",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/KO(?:\\?|$)",
+      "/quote/KO/statistics(?:\\?|$)",
+      "/quote/PEP(?:\\?|$)",
+      "/quote/PEP/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote KO",
+        "(?:ko|coca-cola)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,65}price(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,20}86\\.08"
+      ],
+      [
+        "KO Forward Dividend & Yield",
+        "(?:ko|coca-cola)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,160}?forward\\s+dividend\\s+and\\s+yield(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,35}?2\\.12\\s+\\(2\\.46\\s+percent\\)(?!\\d|\\.\\d)"
+      ],
+      [
+        "KO Trailing P/E",
+        "(?:ko|coca-cola)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,35}?26\\.08(?!\\d|\\.\\d)"
+      ],
+      [
+        "KO Profit Margin",
+        "(?:ko|coca-cola)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:pep|pepsico))\\b).){0,35}?28\\.56\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "Quote PEP",
+        "(?:pep|pepsico)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,65}price(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,20}126\\.72"
+      ],
+      [
+        "PEP Forward Dividend & Yield",
+        "(?:pep|pepsico)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,160}?forward\\s+dividend\\s+and\\s+yield(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,35}?5\\.92\\s+\\(4\\.67\\s+percent\\)(?!\\d|\\.\\d)"
+      ],
+      [
+        "PEP Trailing P/E",
+        "(?:pep|pepsico)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,35}?16\\.61(?!\\d|\\.\\d)"
+      ],
+      [
+        "PEP Profit Margin",
+        "(?:pep|pepsico)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:ko|coca-cola))\\b).){0,35}?10\\.79\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--11": {
+    "task": "Compare Costco and Micron's reported earnings in the captured calendar. Find their reports in the weeks of September 20 and September 27, 2026, give each call time, estimated EPS, reported EPS and surprise percentage, and check each company's current stock price and one-year target. Identify which had the larger positive EPS surprise.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {},
+    "paths": [
+      "/calendar/earnings(?:\\?|$)",
+      "/quote/COST(?:\\?|$)",
+      "/quote/MU(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "COST earnings EPS",
+        "(?:cost|costco(?:\\s+wholesale)?)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,400}?september\\s+25,\\s+2026(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,70}?tas(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,70}?6\\.53(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,70}?6\\.75(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,70}?3\\.41"
+      ],
+      [
+        "COST 1y Target Est",
+        "(?:cost|costco(?:\\s+wholesale)?)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,160}?1y\\s+target\\s+est(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,35}?1057\\.94(?!\\d|\\.\\d)"
+      ],
+      [
+        "MU earnings EPS",
+        "(?:mu|micron(?:\\s+technology)?)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,400}?october\\s+1,\\s+2026(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,70}?tas(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,70}?31\\.82(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,70}?33\\.42(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,70}?5\\.03"
+      ],
+      [
+        "MU 1y Target Est",
+        "(?:mu|micron(?:\\s+technology)?)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,160}?1y\\s+target\\s+est(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,35}?1520\\.76(?!\\d|\\.\\d)"
+      ],
+      [
+        "larger positive surprise",
+        "(?:larger|higher|largest).{0,80}?(?:mu|micron)|(?:mu|micron).{0,80}?(?:larger|higher|largest)"
+      ],
+      [
+        "COST current price",
+        "(?:cost|costco(?:\\s+wholesale)?)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,700}?(?:current\\s+price|quote|price)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,25}?910\\.34"
+      ],
+      [
+        "COST 1y Target Est",
+        "(?:cost|costco(?:\\s+wholesale)?)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,700}?(?:1y\\s+target\\s+est|1[- ]year\\s+target|one-year\\s+target)(?:(?!\\b(?:mu\\s+current|(?:mu|micron(?:\\s+technology)?))\\b).){0,25}?1057\\.94"
+      ],
+      [
+        "MU current price",
+        "(?:mu|micron(?:\\s+technology)?)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,700}?(?:current\\s+price|quote|price)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,25}?1065\\.11"
+      ],
+      [
+        "MU 1y Target Est",
+        "(?:mu|micron(?:\\s+technology)?)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,700}?(?:1y\\s+target\\s+est|1[- ]year\\s+target|one-year\\s+target)(?:(?!\\b(?:(?:cost|costco(?:\\s+wholesale)?)|cost\\s+current)\\b).){0,25}?1520\\.76"
+      ]
+    ]
+  },
+  "YahooFinance--12": {
+    "task": "Carol wants to rotate her healthcare watchlist from UnitedHealth to Merck. Remove UNH, review Merck's trailing P/E and 52-week range, add MRK while preserving her other symbols, and set a Merck alert above $160 with note Pharma rotation. Report the final watchlist and alert status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "MRK",
+            "direction": "above",
+            "threshold": 160.0,
+            "note": "Pharma rotation",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "MRK",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[9]"
+        ]
+      }
+    },
+    "paths": [
+      "/watchlist(?:\\?|$)",
+      "/quote/MRK(?:\\?|$)",
+      "/quote/MRK/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote MRK",
+        "(?:mrk|merck).{0,65}price.{0,20}145\\.31"
+      ],
+      [
+        "MRK Trailing P/E",
+        "(?:mrk|merck).{0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?).{0,35}?116\\.25(?!\\d|\\.\\d)"
+      ],
+      [
+        "MRK 52 Week Range",
+        "(?:mrk|merck).{0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range).{0,35}?82\\.01\\s+156\\.92(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--13": {
+    "task": "Alice wants to replace her existing Tesla alert with an upside-breakout alert. Review the old alert and Tesla's current price and 50-day average, delete only that Tesla alert, then create a new TSLA alert above $900 with note Upside breakout. Report the new status and Alice's final alerts. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "TSLA",
+            "direction": "above",
+            "threshold": 900.0,
+            "note": "Upside breakout",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[2]"
+        ]
+      }
+    },
+    "paths": [
+      "/alerts(?:\\?|$)",
+      "/quote/TSLA(?:\\?|$)",
+      "/quote/TSLA/statistics(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote TSLA",
+        "tsla.{0,65}price.{0,20}354\\.81"
+      ],
+      [
+        "TSLA 50-Day Average",
+        "tsla.{0,160}?(?:50[ -]day(?:\\s+moving)?\\s+average|50[ -]day\\s+ma).{0,35}?347\\.45(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--14": {
+    "task": "Bob wants a shortlist of larger companies in the sector of today's leading Day Gainer. Identify that sector, screen it for market caps from $10 billion to $200 billion, and sort by daily percentage change descending. Report the first three symbols and changes, check the leader's 52-week change, and add that leader to Bob's watchlist. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "UTHR",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/screener(?:\\?|$)",
+      "/quote/UTHR(?:\\?|$)",
+      "/quote/UTHR/statistics(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Day gainer leader united",
+        "\\bunited\\b"
+      ],
+      [
+        "Day gainer leader therapeutics",
+        "\\btherapeutics\\b"
+      ],
+      [
+        "Day gainer leader corporation",
+        "\\bcorporation\\b"
+      ],
+      [
+        "UTHR 52-Week Change",
+        "uthr.{0,160}?52\\-week\\s+change.{0,35}?\\+8\\.58\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate UTHR",
+        "uthr.{0,180}?12\\.55(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate IBRX",
+        "ibrx.{0,180}?6\\.91(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate PFE",
+        "pfe.{0,180}?\\-0\\.70(?!\\d|\\.\\d)"
+      ]
+    ]
+  },
+  "YahooFinance--15": {
+    "task": "Dana wants to compare Bitcoin USD with Ethereum USD before tracking the larger cryptocurrency. Report each quote's price, market cap and 52-week range. Add the one with the larger market cap to her watchlist and set an alert above $90,000 with note ETF bid. Report the selected symbol and status. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "BTC-USD",
+            "direction": "above",
+            "threshold": 90000.0,
+            "note": "ETF bid",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "BTC-USD",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/BTC\\-USD(?:\\?|$)",
+      "/quote/ETH\\-USD(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote BTC-USD",
+        "(?:btc\\-usd|bitcoin(?:\\s+usd)?)(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,65}price(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,20}83452\\.08"
+      ],
+      [
+        "BTC-USD Market Cap",
+        "(?:btc\\-usd|bitcoin(?:\\s+usd)?)(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,160}?market\\s+cap(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,35}?1\\.68t(?!\\d|\\.\\d)"
+      ],
+      [
+        "BTC-USD 52 Week Range",
+        "(?:btc\\-usd|bitcoin(?:\\s+usd)?)(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range)(?:(?!\\b(?:(?:eth\\-usd|ethereum(?:\\s+usd)?))\\b).){0,35}?57747\\.77\\s+126198\\.07(?!\\d|\\.\\d)"
+      ],
+      [
+        "Quote ETH-USD",
+        "(?:eth\\-usd|ethereum(?:\\s+usd)?)(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,65}price(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,20}2685\\.89"
+      ],
+      [
+        "ETH-USD Market Cap",
+        "(?:eth\\-usd|ethereum(?:\\s+usd)?)(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,160}?market\\s+cap(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,35}?327\\.68b(?!\\d|\\.\\d)"
+      ],
+      [
+        "ETH-USD 52 Week Range",
+        "(?:eth\\-usd|ethereum(?:\\s+usd)?)(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,160}?(?:52[ -]?week(?:\\s+price)?\\s+range|yearly\\s+range)(?:(?!\\b(?:(?:btc\\-usd|bitcoin(?:\\s+usd)?))\\b).){0,35}?1506\\.51\\s+4755\\.22(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--16": {
+    "task": "Bob is comparing the two largest companies in the captured Healthcare sector. Report each company's trailing P/E and profit margin, then add the second-largest company to his watchlist and set an alert above $300 with note Dividend value. Identify both companies and report the alert status. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "JNJ",
+            "direction": "above",
+            "threshold": 300.0,
+            "note": "Dividend value",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "symbol": "JNJ",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/sectors/healthcare(?:\\?|$)",
+      "/quote/LLY(?:\\?|$)",
+      "/quote/LLY/statistics(?:\\?|$)",
+      "/quote/JNJ(?:\\?|$)",
+      "/quote/JNJ/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "LLY Trailing P/E",
+        "(?:lly|eli\\s+lilly)(?:(?!\\b(?:(?:jnj|johnson\\s+and\\s+johnson))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:jnj|johnson\\s+and\\s+johnson))\\b).){0,35}?38\\.92(?!\\d|\\.\\d)"
+      ],
+      [
+        "LLY Profit Margin",
+        "(?:lly|eli\\s+lilly)(?:(?!\\b(?:(?:jnj|johnson\\s+and\\s+johnson))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:jnj|johnson\\s+and\\s+johnson))\\b).){0,35}?33\\.53\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "JNJ Trailing P/E",
+        "(?:jnj|johnson\\s+and\\s+johnson)(?:(?!\\b(?:(?:lly|eli\\s+lilly))\\b).){0,160}?(?:trailing\\s+p/e|p/e(?:\\s+ratio)?)(?:(?!\\b(?:(?:lly|eli\\s+lilly))\\b).){0,35}?30\\.71(?!\\d|\\.\\d)"
+      ],
+      [
+        "JNJ Profit Margin",
+        "(?:jnj|johnson\\s+and\\s+johnson)(?:(?!\\b(?:(?:lly|eli\\s+lilly))\\b).){0,160}?(?:profit\\s+margin|margin)(?:(?!\\b(?:(?:lly|eli\\s+lilly))\\b).){0,35}?21\\.48\\s+percent(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--17": {
+    "task": "Alice wants a Microsoft price alert informed by its recent trend. Report Microsoft's earliest and latest captured daily closes and its 50-day and 200-day averages, then create an MSFT alert above $600 with note Azure wave. Report the alert status and preserve her existing alerts. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "symbol": "MSFT",
+            "direction": "above",
+            "threshold": 600.0,
+            "note": "Azure wave",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/quote/MSFT(?:\\?|$)",
+      "/quote/MSFT/history(?:\\?|$)",
+      "/quote/MSFT/statistics(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote MSFT",
+        "(?:msft|microsoft(?:\\s+corporation)?).{0,65}price.{0,20}512\\.90"
+      ],
+      [
+        "MSFT latest close",
+        "(?:msft|microsoft(?:\\s+corporation)?).{0,110}?september\\s+30,\\s+2026.{0,30}?512\\.90"
+      ],
+      [
+        "MSFT earliest close",
+        "(?:msft|microsoft(?:\\s+corporation)?).{0,110}?september\\s+1,\\s+2026.{0,30}?501\\.02"
+      ],
+      [
+        "MSFT 50-Day Average",
+        "(?:msft|microsoft(?:\\s+corporation)?).{0,160}?(?:50[ -]day(?:\\s+moving)?\\s+average|50[ -]day\\s+ma).{0,35}?480\\.25(?!\\d|\\.\\d)"
+      ],
+      [
+        "MSFT 200-Day Average",
+        "(?:msft|microsoft(?:\\s+corporation)?).{0,160}?(?:200[ -]day(?:\\s+moving)?\\s+average|200[ -]day\\s+ma).{0,35}?432\\.30(?!\\d|\\.\\d)"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ]
+    ]
+  },
+  "YahooFinance--18": {
+    "task": "Carol is researching gold as an inflation hedge. Read the newest news search result for inflation and summarize its title, publisher, author and main development; check Gold futures' price and daily percentage change, add the quote to her watchlist and set an alert above $4,300 with note Rally hedge. Report its status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "price_alerts": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "GC=F",
+            "direction": "above",
+            "threshold": 4300.0,
+            "note": "Rally hedge",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "symbol": "GC=F",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/economy/policy/articles/feds\\-kashkari\\-says\\-central\\-bank\\-225628725\\.html(?:\\?|$)",
+      "/quote/GC=F(?:\\?|$)",
+      "/alerts(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Quote GC%3DF",
+        "(?:gc%3df|gc=f|gold(?:\\s+futures)?).{0,65}price.{0,20}4183\\.20"
+      ],
+      [
+        "alert status",
+        "\\b(?:active|triggered)\\b"
+      ],
+      [
+        "article title",
+        "fed's\\s+kashkari\\s+says\\s+central\\s+bank\\s+must\\s+lower\\s+inflation\\s+pressures"
+      ],
+      [
+        "article attribution",
+        "michael\\s+s\\.\\s+derby"
+      ],
+      [
+        "article attribution",
+        "reuters"
+      ],
+      [
+        "inflation response",
+        "(?:raise|hike|increase).{0,30}?(?:interest\\s+)?rates|rate\\s+(?:hike|increase)s?"
+      ]
+    ]
+  },
+  "YahooFinance--19": {
+    "task": "Dana wants to shortlist high-yield Utilities stocks. Screen for dividend yields of at least 4%, sorted highest first, and report the first three symbols and yields. Review the third candidate's market cap, next earnings date and dividend rate before adding it to her watchlist. Confirm the saved symbol. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "3afca055333d13e874659c2b7bf8938f9c401270fdb0bcb2c566110e735d1e94",
+    "state": {
+      "watch_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "symbol": "D",
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/screener(?:\\?|$)",
+      "/quote/D(?:\\?|$)",
+      "/watchlist(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Screened candidates duk-pa",
+        "\\bduk\\-pa\\b"
+      ],
+      [
+        "Screened candidates energy",
+        "\\benergy\\b"
+      ],
+      [
+        "Screened candidates corporation",
+        "\\bcorporation\\b"
+      ],
+      [
+        "D Market Cap",
+        "d.{0,160}?market\\s+cap.{0,35}?53\\.23b(?!\\d|\\.\\d)"
+      ],
+      [
+        "D Earnings Date",
+        "d.{0,160}?earnings\\s+date.{0,35}?october\\s+30,\\s+2026(?!\\d|\\.\\d)"
+      ],
+      [
+        "D Forward Dividend & Yield",
+        "d.{0,160}?forward\\s+dividend\\s+and\\s+yield.{0,35}?2\\.67\\s+\\(4\\.40\\s+percent\\)(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate DUK-PA",
+        "duk\\-pa.{0,180}?6\\.59(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate KEN",
+        "ken.{0,180}?6\\.40(?!\\d|\\.\\d)"
+      ],
+      [
+        "candidate D",
+        "d.{0,180}?4\\.40(?!\\d|\\.\\d)"
+      ]
+    ]
+  }
+}

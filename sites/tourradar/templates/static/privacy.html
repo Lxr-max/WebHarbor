@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Privacy Policy - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; Privacy Policy</div>
+  <h1>Privacy Policy</h1>
+  {% for h, b in [["Data we collect", "Account details, booking information and traveler details needed to complete your booking."], ["How we use it", "To process bookings, send confirmations and provide support. We never sell your data."], ["Your rights", "You may request a copy or deletion of your personal data at any time."], ["Cookies", "We use cookies to keep you signed in and remember your searches."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

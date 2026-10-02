@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block title %}UPS Shipping{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Create a Shipment</div>
+  <h1>Create a Shipment</h1>
+  <ol class="ups-steps">
+    <li class="{{ 'is-active' if step == 'where' }}">1. Where is this shipment going?</li>
+    <li class="{{ 'is-active' if step == 'package' }}">2. Package Details</li>
+    <li class="{{ 'is-active' if step == 'service' }}">3. Service and Options</li>
+    <li class="{{ 'is-active' if step == 'review' }}">4. Review and Confirm</li>
+  </ol>
+
+  {% if errors %}<div class="ups-card ups-errors"><p>Please complete the highlighted fields:</p><ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}
+
+  <form method="post" action="{{ url_for('ship') }}?step={{ step }}" class="ups-card ups-shipform">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if step == 'where' %}
+      <input type="hidden" name="step" value="where">
+      <div class="ups-ctc-cols">
+        <div class="ups-ctc-col">
+          <h2 class="ups-stephead">Ship From</h2>
+          <label>Company or Name <span class="ups-req">*</span></label>
+          <input name="from_name" value="{{ data.get('from_name','') }}">
+          <label>Street Address <span class="ups-req">*</span></label>
+          <input name="from_street" value="{{ data.get('from_street','') }}">
+          <label>City <span class="ups-req">*</span></label>
+          <input name="from_city" value="{{ data.get('from_city','') }}">
+          <label>State <span class="ups-req">*</span></label>
+          <input name="from_state" value="{{ data.get('from_state','') }}" maxlength="2">
+          <label>ZIP Code <span class="ups-req">*</span></label>
+          <input name="from_zip" value="{{ data.get('from_zip','') }}" maxlength="5">
+        </div>
+        <div class="ups-ctc-col">
+          <h2 class="ups-stephead">Ship To</h2>
+          <label>Company or Name <span class="ups-req">*</span></label>
+          <input name="to_name" value="{{ data.get('to_name','') }}">
+          <label>Street Address <span class="ups-req">*</span></label>
+          <input name="to_street" value="{{ data.get('to_street','') }}">
+          <label>City <span class="ups-req">*</span></label>
+          <input name="to_city" value="{{ data.get('to_city','') }}">
+          <label>State <span class="ups-req">*</span></label>
+          <input name="to_state" value="{{ data.get('to_state','') }}" maxlength="2">
+          <label>ZIP Code <span class="ups-req">*</span></label>
+          <input name="to_zip" value="{{ data.get('to_zip','') }}" maxlength="5">
+          <label class="ups-check"><input type="checkbox" name="residential" {{ 'checked' if data.get('residential') }}> This is a residential address</label>
+        </div>
+      </div>
+      <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+    {% elif step == 'package' %}
+      <input type="hidden" name="step" value="package">
+      <h2 class="ups-stephead">Package Details</h2>
+      <label>Packaging</label>
+      <select name="packaging">
+        <option value="My Packaging" {{ 'selected' if data.get('packaging') == 'My Packaging' }}>My Packaging</option>
+        <option value="UPS Letter" {{ 'selected' if data.get('packaging') == 'UPS Letter' }}>UPS Letter</option>
+        <option value="UPS Express Box - Small" {{ 'selected' if data.get('packaging') == 'UPS Express Box - Small' }}>UPS Express Box - Small</option>
+        <option value="UPS Express Box - Medium" {{ 'selected' if data.get('packaging') == 'UPS Express Box - Medium' }}>UPS Express Box - Medium</option>
+        <option value="UPS Express Box - Large" {{ 'selected' if data.get('packaging') == 'UPS Express Box - Large' }}>UPS Express Box - Large</option>
+        <option value="UPS Tube" {{ 'selected' if data.get('packaging') == 'UPS Tube' }}>UPS Tube</option>
+        <option value="UPS Pak" {{ 'selected' if data.get('packaging') == 'UPS Pak' }}>UPS Pak</option>
+      </select>
+      <label>Weight (lbs) <span class="ups-req">*</span></label>
+      <input name="weight" value="{{ data.get('weight','') }}">
+      <div class="ups-dims">
+        <label>Length (in) <span class="ups-req">*</span></label><input name="length" value="{{ data.get('length','') }}">
+        <label>Width (in) <span class="ups-req">*</span></label><input name="width" value="{{ data.get('width','') }}">
+        <label>Height (in) <span class="ups-req">*</span></label><input name="height" value="{{ data.get('height','') }}">
+      </div>
+      <label>Declared Value (USD)</label>
+      <input name="declared_value" value="{{ data.get('declared_value','') }}" placeholder="Optional">
+      <p class="ups-hint">UPS&rsquo;s liability for loss or damage is limited to $100.00 per domestic package unless you declare a higher value.
+        Declarations from $100.01 to $300.00 cost $5.10; over $300.00, $1.70 per $100.00 of declared value.</p>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('ship') }}?step=where">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+      </div>
+    {% elif step == 'service' %}
+      <input type="hidden" name="step" value="service">
+      <h2 class="ups-stephead">Available Services</h2>
+      {% if options %}
+        <table class="ups-quotetable">
+          <thead><tr><th></th><th>Service</th><th>Time</th><th>Cost</th></tr></thead>
+          <tbody>
+          {% for r in options %}
+            <tr>
+              <td><input type="radio" name="service_code" value="{{ r.service_code }}" required></td>
+              <td>
+                <p class="ups-qsvc">{{ r.service_name }}</p>
+                <p class="ups-hint">{{ r.latest_pickup }}</p>
+              </td>
+              <td>
+                <p><strong>{{ r.days_in_transit }} day{{ 's' if r.days_in_transit != 1 }}</strong></p>
+                <p>{{ r.delivered_by }}</p>
+                {% if r.guaranteed %}<p class="ups-guarantee">Guaranteed</p>{% endif %}
+              </td>
+              <td><p class="ups-qprice">${{ '%.2f'|format(r.price_usd) }}</p></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No service options could be shown for that origin/destination pair in this mirror. Go back and try one of the supported markets (for example New York 10001, Chicago 60601, Atlanta 30301, San Francisco 94105, Seattle 98101, Miami 33101, Austin 73301, Denver 80202, Boston 02110, Philadelphia 19103, Cincinnati 45202).</p>
+      {% endif %}
+      <h3>Delivery Confirmation</h3>
+      <label>Signature options</label>
+      <select name="signature">
+        <option value="">No signature required</option>
+        <option value="Signature Required" {{ 'selected' if data.get('signature') == 'Signature Required' }}>Signature Required ($7.70 per package)</option>
+        <option value="Adult Signature Required" {{ 'selected' if data.get('signature') == 'Adult Signature Required' }}>Adult Signature Required ($9.35 per package)</option>
+      </select>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('ship') }}?step=package">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+      </div>
+    {% elif step == 'review' %}
+      <input type="hidden" name="step" value="review">
+      <h2 class="ups-stephead">Review and Confirm</h2>
+      <div class="ups-review-grid">
+        <div>
+          <p class="ups-factlabel">Ship From</p>
+          <p>{{ data.get('from_name') }}<br>{{ data.get('from_street') }}<br>{{ data.get('from_city') }}, {{ data.get('from_state') }} {{ data.get('from_zip') }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Ship To</p>
+          <p>{{ data.get('to_name') }}<br>{{ data.get('to_street') }}<br>{{ data.get('to_city') }}, {{ data.get('to_state') }} {{ data.get('to_zip') }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Package</p>
+          <p>{{ data.get('packaging') }} &middot; {{ data.get('weight') }} lbs<br>
+             {{ data.get('length') }} x {{ data.get('width') }} x {{ data.get('height') }} in<br>
+             {% if data.get('declared_value_num') %}Declared Value: ${{ '%.2f'|format(data.get('declared_value_num')) }} &middot; Declared Value Charge: ${{ '%.2f'|format(declared_value_charge(data.get('declared_value_num'))) }}{% endif %}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Service</p>
+          <p>{{ options[0].service_name if options and options[0].service_code == data.get('service_code') else data.get('service_code') }}
+            {% if data.get('signature') %}<br>{{ data.get('signature') }}{% endif %}</p>
+        </div>
+      </div>
+      <p class="ups-hint">Confirm to create your shipment and receive a UPS tracking number. Nothing is mailed automatically &mdash; take your package to any UPS location or schedule a pickup.</p>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('ship') }}?step=service">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Confirm Shipment</button>
+      </div>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}

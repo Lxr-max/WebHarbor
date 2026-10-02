@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Attractions &amp; Entertainment | Walt Disney World{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Attractions &amp; Entertainment</h1>
+  <p class="page-sub">Filter the official Walt Disney World finder by park, type, interest, age and height requirement.</p>
+
+  <form class="filters" method="get" action="{{ url_for('attractions') }}">
+    <label for="q">Search</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="Search by name">
+    <label for="park">Park</label>
+    <select id="park" name="park">
+      <option value="">All Parks</option>
+      {% for slug, name in park_names.items() %}
+      <option value="{{ slug }}" {% if park == slug %}selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select>
+    <label for="type">Type</label>
+    <select id="type" name="type">
+      <option value="">All</option>
+      <option value="Attraction" {% if type == 'Attraction' %}selected{% endif %}>Attractions</option>
+      <option value="Entertainment" {% if type == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+    </select>
+    <label for="interest">Interests</label>
+    <select id="interest" name="interest">
+      <option value="">All</option>
+      {% for i in interests %}
+      <option value="{{ i }}" {% if interest == i %}selected{% endif %}>{{ i }}</option>
+      {% endfor %}
+    </select>
+    <label for="age">Age</label>
+    <select id="age" name="age">
+      <option value="">All</option>
+      {% for a in ages %}
+      <option value="{{ a }}" {% if age == a %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+    <label for="height">Height</label>
+    <select id="height" name="height">
+      <option value="">Any height</option>
+      <option value="32" {% if height == '32' %}selected{% endif %}>32" or taller</option>
+      <option value="38" {% if height == '38' %}selected{% endif %}>38" or taller</option>
+      <option value="40" {% if height == '40' %}selected{% endif %}>40" or taller</option>
+      <option value="44" {% if height == '44' %}selected{% endif %}>44" or taller</option>
+      <option value="48" {% if height == '48' %}selected{% endif %}>48" or taller</option>
+    </select>
+    <label for="sort">Sort</label>
+    <select id="sort" name="sort">
+      <option value="name" {% if sort == 'name' %}selected{% endif %}>Name A-Z</option>
+      <option value="park" {% if sort == 'park' %}selected{% endif %}>Park</option>
+      <option value="height" {% if sort == 'height' %}selected{% endif %}>Height requirement</option>
+    </select>
+    <button class="btn" type="submit">Apply</button>
+    <span class="count">{{ total }} result{{ 's' if total != 1 }}</span>
+  </form>
+
+  <div class="grid cols-4">
+    {% for e in rows %}
+    <a class="card" href="{{ url_for('attraction_detail', park=e.park_slug, slug=e.slug) }}">
+      <div class="card-img">
+        {% if img(e.image) %}<img src="{{ img(e.image) }}" alt="{{ e.alt or e.name }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <span class="badge {{ 'blue' if e.entity_type == 'Attraction' else 'gray' }}">{{ e.entity_type }}</span>
+        <p class="card-title">{{ e.name }}</p>
+        <p class="card-meta">{{ e.park }}</p>
+        <p class="card-meta">
+          {% if e.height %}{{ e.height }}" or taller &middot; {% endif %}
+          {{ e.age_list()|join(', ') }}
+        </p>
+      </div>
+    </a>
+    {% else %}
+    <p class="empty">No attractions match those filters.</p>
+    {% endfor %}
+  </div>
+
+  {% if pages > 1 %}
+  <nav class="pagination">
+    {% for p in range(1, pages + 1) %}
+      {% if p == page %}<span class="current">{{ p }}</span>
+      {% else %}<a href="{{ url_for('attractions', q=q, park=park, type=type, interest=interest, age=age, height=height, sort=sort, page=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

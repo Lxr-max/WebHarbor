@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Thank You — University of Michigan Admissions{% endblock %}
+{% block content %}
+<h1>Thank you, {{ name }}!</h1>
+<p class="page-sub">Your information request has been received.</p>
+<p>The Office of Undergraduate Admissions will reach out to the email you provided. In the meantime, explore what Michigan has to offer:</p>
+<ul>
+  <li><a href="{{ url_for('programs') }}">Browse Majors &amp; Degrees</a></li>
+  <li><a href="{{ url_for('admissions_costs') }}">See estimated costs</a></li>
+  <li><a href="{{ url_for('admissions_apply') }}">Application plans and deadlines</a></li>
+</ul>
+{% endblock %}

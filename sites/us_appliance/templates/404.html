@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container notfound">
+  <h1 class="page-heading">Page Not Found</h1>
+  <p>The page you were looking for has moved or no longer exists.</p>
+  <p><a class="button button--primary" href="{{ url_for('home') }}">Back to the homepage</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Individual Country Listings | USPS{% endblock %}
+{% block meta %}USPS Individual Country Listings — prohibitions, restrictions, customs forms and price groups by country.{% endblock %}
+{% block content %}
+<h1>Individual Country Listings</h1>
+<p>Country conditions for mailing from the International Mail Manual: prohibitions, restrictions, observations, price groups and required customs forms.</p>
+<div class="panel">
+  <form action="{{ url_for('countries_index') }}" method="get" class="flow">
+    <label>Search a country <input type="text" name="q" value="{{ q }}" placeholder="e.g. Japan"></label>
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+{% if countries %}
+<table class="data">
+  <tr><th>Country</th><th>PMEI Group</th><th>PMI Group</th><th>FCMI Group</th><th>FCPIS Group</th></tr>
+  {% for c in countries %}
+    <tr>
+      <td><a href="{{ url_for('country_detail', slug=c.slug) }}">{{ c.name }}</a></td>
+      <td>{{ c.pmei_group or 'n/a' }}</td>
+      <td>{{ c.pmi_group or 'n/a' }}</td>
+      <td>{{ c.fcmi_group or 'n/a' }}</td>
+      <td>{{ c.fcpis_group or 'n/a' }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No countries matched your search.</p>
+{% endif %}
+{% endblock %}

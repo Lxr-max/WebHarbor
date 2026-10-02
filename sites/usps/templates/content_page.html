@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }} | USPS{% endblock %}
+{% block meta %}{{ page.meta_description or '' }}{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('home') }}">Home</a> &rsaquo; {{ page.section.title() }} &rsaquo; {{ page.title }}</p>
+<h1>{{ page.headline or page.title }}</h1>
+{% if page.hero_image %}
+  <div class="hero-banner"><img src="{{ url_for('static', filename=page.hero_image) }}" alt="{{ page.title }}"></div>
+{% endif %}
+{% if page.lead %}<p class="lead">{{ page.lead | safe }}</p>{% endif %}
+
+{% for sec in sections %}
+  <h2>{{ sec.heading | safe }}</h2>
+  {% for p in sec.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  {% if sec.bullets %}
+    <ul class="bullets">
+      {% for b in sec.bullets %}<li>{{ b | safe }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+  {% for table in sec.tables %}
+    <table class="data">
+      {% for row in table %}
+        {% set header_row = loop.index == 1 %}
+        <tr>
+          {% for cell in row %}
+            {% if header_row %}<th>{{ cell | safe }}</th>{% else %}<td>{{ cell | safe }}</td>{% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  {% endfor %}
+{% endfor %}
+{% endblock %}

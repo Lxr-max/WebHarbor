@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Sign in | Speedo{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Sign In</h1>
+  <p style="margin-bottom:18px;color:#666;font-size:14px;">Sign in or create an account</p>
+  <form method="post" action="/login{% if request.args.get('next') %}?next={{ request.args.get('next') }}{% endif %}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label for="email">Email</label>
+      <input type="email" id="email" name="email" required></div>
+    <div class="field"><label for="password">Password</label>
+      <input type="password" id="password" name="password" required></div>
+    <button type="submit" class="btn btn-primary" style="width:100%;">Submit</button>
+  </form>
+  <p style="margin-top:16px;font-size:13.5px;">New to Speedo? <a href="/register" style="text-decoration:underline;">Create an account</a></p>
+</div>
+{% endblock %}
+

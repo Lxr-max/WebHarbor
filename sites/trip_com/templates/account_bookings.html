@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; My account &gt; <b>My bookings</b></div>
+<div class="acct-layout">
+  <div class="acct-nav">
+    <a href="{{ url_for('account') }}">Overview</a>
+    <a class="active" href="{{ url_for('account_bookings') }}">My bookings</a>
+    <a href="{{ url_for('account_wishlist') }}">Wishlist</a>
+    <a href="{{ url_for('account_coupons') }}">Coupons</a>
+  </div>
+  <div>
+    <h1 style="margin-bottom:12px">My bookings</h1>
+
+    {% for b in hotel_bookings %}
+    <div class="booking-card">
+      <div class="bc-main">
+        <div class="bc-ref">{{ b.ref }} &middot; Hotel stay</div>
+        <div class="bc-title"><a href="{{ url_for('hotel_detail', hotel_id=b.hotel_id) }}" style="color:var(--brand-blue)">{{ db_get('hotel', b.hotel_id) }}</a></div>
+        <div class="bc-meta">{{ b.checkin|dmy }} &#8594; {{ b.checkout|dmy }} &middot; {{ b.guest_first }} {{ b.guest_last }}</div>
+        <div class="bc-meta">{{ db_get('room', b.room_id) }} &middot; {{ b.coins }} Trip Coins earned</div>
+      </div>
+      <div class="bc-right">
+        <div class="bc-price">${{ '%.2f'|format(b.total) }}</div>
+        <span class="status-pill status-{{ b.status }}">{{ b.status }}</span>
+        {% if b.status == 'confirmed' %}
+        <form method="post" action="{{ url_for('booking_cancel', kind='hotel', ref=b.ref) }}" style="margin-top:6px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-quiet" type="submit">Cancel booking</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% for b in flight_bookings %}
+    <div class="booking-card">
+      <div class="bc-main">
+        <div class="bc-ref">{{ b.ref }} &middot; Flight{{ ' (round-trip)' if b.trip_type == 'rt' else ' (one-way)' }}</div>
+        <div class="bc-title">{{ b.route_label }} &middot; {{ b.passenger_first }} {{ b.passenger_last }}</div>
+        <div class="bc-meta">Outbound {% if b.departure_date %}{{ b.departure_date|dmy }} {% endif %}{{ b.outbound.dep_time }} on {{ b.outbound.airline }}{% if b.inbound %} &middot; Return {% if b.return_date %}{{ b.return_date|dmy }} {% endif %}{{ b.inbound.dep_time }} on {{ b.inbound.airline }}{% endif %}</div>
+        <div class="bc-meta">{{ b.cabin }} cabin &middot; booked {{ b.created_at|dmy }}</div>
+      </div>
+      <div class="bc-right">
+        <div class="bc-price">${{ '%.2f'|format(b.total) }}</div>
+        <span class="status-pill status-{{ b.status }}">{{ b.status }}</span>
+        {% if b.status == 'confirmed' %}
+        <form method="post" action="{{ url_for('booking_cancel', kind='flight', ref=b.ref) }}" style="margin-top:6px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-quiet" type="submit">Cancel booking</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% for b in attraction_bookings %}
+    <div class="booking-card">
+      <div class="bc-main">
+        <div class="bc-ref">{{ b.ref }} &middot; Activity</div>
+        <div class="bc-title">{{ db_get('attraction', b.attraction_id) }}</div>
+        <div class="bc-meta">{{ b.visit_date|dmy }} &middot; {{ b.guests }} guests &middot; {{ b.lead_first }} {{ b.lead_last }}</div>
+      </div>
+      <div class="bc-right">
+        <div class="bc-price">${{ '%.2f'|format(b.total) }}</div>
+        <span class="status-pill status-{{ b.status }}">{{ b.status }}</span>
+        {% if b.status == 'confirmed' %}
+        <form method="post" action="{{ url_for('booking_cancel', kind='attraction', ref=b.ref) }}" style="margin-top:6px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-quiet" type="submit">Cancel booking</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% if not hotel_bookings and not flight_bookings and not attraction_bookings %}
+    <div class="empty-note">You have no bookings yet. Search <a href="{{ url_for('hotels_home') }}" style="color:var(--brand-blue)">hotels</a>,
+    <a href="{{ url_for('flights_home') }}" style="color:var(--brand-blue)">flights</a> or
+    <a href="{{ url_for('things_to_do_home') }}" style="color:var(--brand-blue)">things to do</a>.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

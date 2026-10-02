@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Page not found | Trip.com{% endblock %}
+{% block content %}
+<div class="empty-note" style="margin-top:40px">
+  <h1>Page not found</h1>
+  <p style="margin:10px 0">The page you're looking for doesn't exist or has moved.</p>
+  <a class="btn" href="{{ url_for('index') }}">Back to Trip.com</a>
+</div>
+{% endblock %}

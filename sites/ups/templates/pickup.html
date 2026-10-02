@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block title %}Schedule Pickup | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Schedule a Pickup</div>
+  <h1>Schedule a Pickup</h1>
+  <p class="ups-lede">Request an on-demand pickup for your UPS ground, air, and international shipments.</p>
+  <ol class="ups-steps">
+    <li class="{{ 'is-active' if step == 'location' }}">1. Pickup Address</li>
+    <li class="{{ 'is-active' if step == 'packages' }}">2. Package Details</li>
+    <li class="{{ 'is-active' if step == 'datetime' }}">3. Date &amp; Time</li>
+    <li class="{{ 'is-active' if step == 'review' }}">4. Review</li>
+  </ol>
+
+  {% if errors %}<div class="ups-card ups-errors"><p>Please complete the highlighted fields:</p><ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}
+
+  <form method="post" action="{{ url_for('pickup') }}?step={{ step }}" class="ups-card ups-shipform">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if step == 'location' %}
+      <input type="hidden" name="step" value="location">
+      <h2 class="ups-stephead">What is your pickup address?</h2>
+      <label>Company or Name <span class="ups-req">*</span></label>
+      <input name="company" value="{{ data.get('company','') }}">
+      <label>Street Address <span class="ups-req">*</span></label>
+      <input name="street" value="{{ data.get('street','') }}">
+      <div class="ups-ctc-cols">
+        <div class="ups-ctc-col">
+          <label>City <span class="ups-req">*</span></label>
+          <input name="city" value="{{ data.get('city','') }}">
+          <label>State <span class="ups-req">*</span></label>
+          <input name="state" value="{{ data.get('state','') }}" maxlength="2">
+        </div>
+        <div class="ups-ctc-col">
+          <label>ZIP Code <span class="ups-req">*</span></label>
+          <input name="zip" value="{{ data.get('zip','') }}" maxlength="5">
+          <label>Phone Number <span class="ups-req">*</span></label>
+          <input name="phone" value="{{ data.get('phone','') }}">
+        </div>
+      </div>
+      <label>Email</label>
+      <input name="email" value="{{ data.get('email','') }}">
+      <label class="ups-check"><input type="checkbox" name="residential" {{ 'checked' if data.get('residential') }}> Residential Address</label>
+      <p class="ups-hint">Email me updates for this pickup.</p>
+      <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+    {% elif step == 'packages' %}
+      <input type="hidden" name="step" value="packages">
+      <h2 class="ups-stephead">How many packages are we picking up?</h2>
+      <label>Package(s) in your pickup <span class="ups-req">*</span></label>
+      <input name="packages" value="{{ data.get('packages','') }}">
+      <label>Total Weight of Your Pickup (lbs) <span class="ups-req">*</span></label>
+      <input name="weight" value="{{ data.get('weight','') }}">
+      <label class="ups-check"><input type="checkbox" name="over70" {{ 'checked' if data.get('over70') }}> I have a package that weighs more than 70 lbs/32Kg.</label>
+      <label>Select the UPS Service(s) indicated by your UPS Shipping Label(s) <span class="ups-req">*</span></label>
+      <select name="service">
+        <option value="">Select Pickup Service</option>
+        {% for s in services %}
+        <option value="{{ s.name }}" {{ 'selected' if data.get('service') == s.name }}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
+      <p class="ups-hint">Select the service to get the available time and date for collection.</p>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('pickup') }}?step=location">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+      </div>
+    {% elif step == 'datetime' %}
+      <input type="hidden" name="step" value="datetime">
+      <h2 class="ups-stephead">Select Date &amp; Time</h2>
+      <p class="ups-hint">UPS On-Call Pickup&reg; charges: Same-day pickup ({{ MIRROR_DATE }}): ${{ '%.2f'|format(fee_same) }} &middot;
+        Future-day pickup: ${{ '%.2f'|format(fee_future) }} &middot; Saturday stop charge: ${{ '%.2f'|format(fee_saturday) }} (in addition to the On-Call Pickup charge).</p>
+      <label>Pickup Date <span class="ups-req">*</span></label>
+      <select name="pickup_date" required>
+        <option value="">Select a date</option>
+        <option value="2026-09-28" {{ 'selected' if data.get('pickup_date') == '2026-09-28' }}>Monday, September 28, 2026 (same-day)</option>
+        <option value="2026-09-29" {{ 'selected' if data.get('pickup_date') == '2026-09-29' }}>Tuesday, September 29, 2026</option>
+        <option value="2026-09-30" {{ 'selected' if data.get('pickup_date') == '2026-09-30' }}>Wednesday, September 30, 2026</option>
+        <option value="2026-10-01" {{ 'selected' if data.get('pickup_date') == '2026-10-01' }}>Thursday, October 1, 2026</option>
+        <option value="2026-10-02" {{ 'selected' if data.get('pickup_date') == '2026-10-02' }}>Friday, October 2, 2026</option>
+        <option value="2026-10-03" {{ 'selected' if data.get('pickup_date') == '2026-10-03' }}>Saturday, October 3, 2026</option>
+      </select>
+      <div class="ups-ctc-cols">
+        <div class="ups-ctc-col">
+          <label>Earliest Ready Time <span class="ups-req">*</span></label>
+          <select name="earliest" required>
+            <option value="">Select</option>
+            {% for t in ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'] %}
+            <option {{ 'selected' if data.get('earliest') == t }}>{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="ups-ctc-col">
+          <label>Latest Available Time <span class="ups-req">*</span></label>
+          <select name="latest" required>
+            <option value="">Select</option>
+            {% for t in ['12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM','8:00 PM'] %}
+            <option {{ 'selected' if data.get('latest') == t }}>{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <p class="ups-hint">Pickups typically occur after 2:00 p.m. for scheduled services; On-Call Pickup drivers arrive within the window you choose.</p>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('pickup') }}?step=packages">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Continue <i class="ups-chev">&#8250;</i></button>
+      </div>
+    {% elif step == 'review' %}
+      <input type="hidden" name="step" value="review">
+      <h2 class="ups-stephead">Review your pickup request</h2>
+      <div class="ups-review-grid">
+        <div>
+          <p class="ups-factlabel">Pickup Address</p>
+          <p>{{ data.get('company') }}<br>{{ data.get('street') }}<br>{{ data.get('city') }}, {{ data.get('state') }} {{ data.get('zip') }}<br>{{ data.get('phone') }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Packages</p>
+          <p>{{ data.get('packages') }} package(s), {{ data.get('weight') }} lbs<br>Service: {{ data.get('service') }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Date &amp; Time</p>
+          <p>{{ data.get('pickup_date') }}<br>Between {{ data.get('earliest') }} and {{ data.get('latest') }}</p>
+        </div>
+        <div>
+          <p class="ups-factlabel">Pickup Fee</p>
+          {% set saturday = data.get('pickup_date') in ('2026-10-03',) %}
+          {% if saturday %}
+          <p>${{ '%.2f'|format(9.65 + 6.95) }} ($9.65 On-Call Pickup + $6.95 Saturday Stop Charge)</p>
+          {% elif data.get('pickup_date') == MIRROR_DATE %}
+          <p>${{ '%.2f'|format(15.75) }} (Same-Day UPS On-Call Pickup)</p>
+          {% else %}
+          <p>${{ '%.2f'|format(9.65) }} (Future-Day UPS On-Call Pickup)</p>
+          {% endif %}
+        </div>
+      </div>
+      <label>Payment</label>
+      <select name="payment">
+        <option value="Pay driver at pickup">Pay driver at pickup (card)</option>
+        <option value="Bill to UPS account">Bill to my UPS account</option>
+      </select>
+      <div class="ups-form-actions">
+        <a class="ups-btn ups-btn-tertiary" href="{{ url_for('pickup') }}?step=datetime">Back</a>
+        <button class="ups-btn ups-btn-primary" type="submit">Schedule Pickup</button>
+      </div>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}

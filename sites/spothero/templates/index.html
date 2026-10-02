@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Parking made easy, wherever you go.</h1>
+    <div class="hero-grid">
+      <div>
+        <form class="search-widget search-form" method="get" action="{{ url_for('search') }}">
+          <input type="hidden" name="kind" value="address">
+          <div class="toggle-group" role="group" aria-label="Parking type">
+            <button type="button" class="active" data-toggle="address" aria-label="Switch to hourly/daily parking search">Hourly/Daily</button>
+            <button type="button" data-toggle="monthly" aria-label="Switch to monthly parking search">Monthly</button>
+          </div>
+          <input type="hidden" name="search_kind" value="address">
+          <div class="field">
+            <label for="input-autocomplete">Where are you going?</label>
+            <div class="control">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.172 17.987a7.95 7.95 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396a7.95 7.95 0 0 0 1.689-4.898c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.589 8 8 8m0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.69-6-6 2.69-6 6-6"/></svg>
+              <input id="input-autocomplete" name="search_string" type="search" placeholder="Enter your destination" autocomplete="off" data-autocomplete aria-label="Enter your destination">
+            </div>
+          </div>
+          <div class="field" id="monthly-field" style="display:none">
+            <label for="monthly_start">Monthly parking starts</label>
+            <div class="control">
+              <input id="monthly_start" name="monthly_start" type="date" value="2026-10-01">
+            </div>
+          </div>
+          <div class="datetime-row" id="window-fields">
+            <div class="field">
+              <label for="starts">Start time</label>
+              <div class="control">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 11H9v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm4-7h-3V2h-2v2H8V2H6v2H3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1m-1 16H4V8h16z"/></svg>
+                <input id="starts" name="starts" type="datetime-local" value="2026-09-26T12:00">
+              </div>
+            </div>
+            <div class="field">
+              <label for="ends">End time</label>
+              <div class="control">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 11H9v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm4-7h-3V2h-2v2H8V2H6v2H3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1m-1 16H4V8h16z"/></svg>
+                <input id="ends" name="ends" type="datetime-local" value="2026-09-26T15:00">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block find-parking-spots-button" type="submit">Find Parking Spots</button>
+          <p class="small muted" style="margin:10px 0 0">Powered by Google <img src="{{ url_for('static', filename='images/site/powered-by-google.png') }}" alt="Powered by Google" style="display:inline;height:14px;vertical-align:middle"></p>
+        </form>
+      </div>
+      <div class="hero-photo">
+        <img src="{{ url_for('static', filename='images/site/woman-driving-car.jpg') }}" alt="A woman in a parking garage holding her SpotHero reservation up to the scanner">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="container">
+    <h2 class="center">Skip the circling and park with ease</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afo8O8BOoF08xpJh_parked-car.png') }}" alt="A parked car in a garage" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Park easy</h3>
+        <p class="muted">Find convenient garages, lots, and valets near your destination.</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afo8PMBOoF08xpJi_parking-moon.jpg') }}" alt="A car parked under the moon" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Park for every plan</h3>
+        <p class="muted">Book hourly, daily, monthly, airport, and event parking.</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afpD1cBOoF08xpLn_crown-icon.jpg') }}" alt="A crown icon" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Park your way</h3>
+        <p class="muted">Compare prices, amenities, and walking distance before you book.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <img src="{{ url_for('static', filename='images/site/ajwLRFbRV8_Qf1bQ_trusted-v2.jpg') }}" alt="Drivers who parked with SpotHero" style="border-radius:8px">
+    </div>
+    <div>
+      <h2>Trusted by millions of drivers.</h2>
+      <div class="stat-row" style="margin:18px 0">
+        <div class="stat"><h3>100M+</h3><p>Cars Parked</p></div>
+        <div class="stat"><h3>300K+</h3><p>Reviews</p></div>
+        <div class="stat"><h3>400+</h3><p>Cities</p></div>
+      </div>
+      <p class="muted">SpotHero is the #1 rated parking reservation app. Join millions of drivers who park smarter every day.</p>
+      <a class="btn btn-secondary" href="{{ url_for('static_page', page_slug='about') }}">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="container">
+    <h2 class="center">Parking's handled wherever you go.</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVuaYofJOwHQWu_stadium.png') }}" alt="Stadium parking">
+        <h3>Events &amp; Games</h3>
+        <p>Game day, concert night, or festival weekend — reserve ahead and skip the cash lanes.</p>
+        <a class="btn btn-primary" href="{{ url_for('search', kind='event', id=1240368) }}">Find Parking</a>
+      </div>
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVsqYofJOwHQWp_airport.png') }}" alt="Airport parking">
+        <h3>Airports</h3>
+        <p>Compare shuttle lots and covered garages near every major airport.</p>
+        <a class="btn btn-primary" href="{{ url_for('airports_index') }}">Find Parking</a>
+      </div>
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVtaYofJOwHQWr_hotels.png') }}" alt="Hotel parking">
+        <h3>Travel &amp; Hotels</h3>
+        <p>Park once and explore — overnight options near the places you're staying.</p>
+        <a class="btn btn-primary" href="{{ url_for('search', kind='address', search_string='Downtown, Denver, CO, USA', starts='2026-09-26T12:00', ends='2026-09-27T12:00') }}">Find Parking</a>
+      </div>
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVuKYofJOwHQWt_nights.png') }}" alt="Nightlife parking">
+        <h3>Nights &amp; Weekends</h3>
+        <p>Dinner, shows, and late nights out — with in-and-out options when you need them.</p>
+        <a class="btn btn-primary" href="{{ url_for('search', kind='address', search_string='Times Square, New York, NY, USA', starts='2026-09-26T18:00', ends='2026-09-27T01:00') }}">Find Parking</a>
+      </div>
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVtKYofJOwHQWq_commute.png') }}" alt="Commuter parking">
+        <h3>Daily &amp; Commuting</h3>
+        <p>Rebook your commute spot in seconds and save money all month long.</p>
+        <a class="btn btn-primary" href="{{ url_for('search', kind='address', search_string='Millennium Park, Chicago, IL, USA', starts='2026-09-28T08:00', ends='2026-09-28T18:00') }}">Find Parking</a>
+      </div>
+      <div class="category-card">
+        <img src="{{ url_for('static', filename='images/site/agYVt6YofJOwHQWs_monthly.png') }}" alt="Monthly parking">
+        <h3>Monthly</h3>
+        <p>Long-term parking near work or home, billed on a simple monthly cycle.</p>
+        <a class="btn btn-primary" href="{{ url_for('monthly_landing') }}">Find Parking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="center">From search to booked in seconds.</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afpG0sBOoF08xpMJ_app-search.png') }}" alt="Search your destination" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Search your destination</h3>
+        <p class="muted">Enter an address, city, airport, or event.</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afpG1MBOoF08xpML_map_pins.png') }}" alt="Compare your options" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Compare your options</h3>
+        <p class="muted">Sort by price, distance, and amenities.</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afpG1cBOoF08xpMM_reservation-confirmed.png') }}" alt="Book instantly" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Book instantly</h3>
+        <p class="muted">Pay once and your spot is guaranteed.</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='images/site/afpG08BOoF08xpMK_gate_up_icon.png') }}" alt="Park with ease" style="height:96px;object-fit:contain;margin:0 auto 12px">
+        <h3>Park with ease</h3>
+        <p class="muted">Scan your pass at the gate and go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="container two-col">
+    <div>
+      <h2>You're covered.</h2>
+      <div class="feat-card" style="margin-bottom:12px">
+        <h3>Park with confidence</h3>
+        <p class="muted">Your parking reservation is 100% guaranteed — a spot to park at the price you paid or your money back.</p>
+      </div>
+      <div class="feat-card" style="margin-bottom:12px">
+        <h3>We're here to help</h3>
+        <p class="muted">Our Customer Heroes are available seven days a week, 365 days a year, 6am - 11pm CDT.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Flexible by design</h3>
+        <p class="muted">Cancel up to the minute your reservation starts for a full refund.</p>
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('static_page', page_slug='about/parking-guarantee') }}">Learn More</a>
+    </div>
+    <div>
+      <img src="{{ url_for('static', filename='images/site/afpIF8BOoF08xpMx_youre_covered.jpg') }}" alt="A SpotHero customer on the phone with support" style="border-radius:8px">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <h2>Find your spot faster with the app.</h2>
+      <p class="muted">Save spots, rebook past reservations, and extend your stay from your phone.</p>
+      <ul style="margin:14px 0 18px">
+        <li style="margin-bottom:8px">✓ Save your favorite facilities</li>
+        <li style="margin-bottom:8px">✓ Rebook in one tap</li>
+        <li style="margin-bottom:8px">✓ Extend active reservations</li>
+        <li style="margin-bottom:8px">✓ Get 10% off your first reservation with code FIRSTSPOT10</li>
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <img src="{{ url_for('static', filename='images/site/app-store-badge.png') }}" alt="Download on the App Store" style="height:44px;max-width:100%">
+        <img src="{{ url_for('static', filename='images/site/google-play-badge.png') }}" alt="Get it on Google Play" style="height:44px;max-width:100%">
+      </div>
+    </div>
+    <div>
+      <img src="{{ url_for('static', filename='images/site/afpHzsBOoF08xpMr_download_the_app.jpg') }}" alt="A hand holding a phone with the SpotHero app" style="border-radius:8px">
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="container">
+    <h2 class="center">You're parked at the biggest venues.</h2>
+    <div class="three-col" style="margin-top:20px">
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/aiB81geQX7-eWrAr_partner_logos_united_center_v2.jpg') }}" alt="United Center"></div>
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/agSqZaYofJOwHOVK_partner_logos_cement_chasecenter.jpg') }}" alt="Chase Center"></div>
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/agSqZKYofJOwHOVJ_partner_logos_cement_allegiantstadium.jpg') }}" alt="Allegiant Stadium"></div>
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/agSqZqYofJOwHOVL_partner_logos_cement_lumenfield.jpg') }}" alt="Lumen Field"></div>
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/agSqZ6YofJOwHOVM_partner_logos_cement_oraclepark.jpg') }}" alt="Oracle Park"></div>
+      <div class="feat-card"><img src="{{ url_for('static', filename='images/site/agSqaKYofJOwHOVN_partner_logos_cement_tdgarden.jpg') }}" alt="TD Garden"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
