@@ -180,7 +180,7 @@
     }
     order.forEach(function (sq) {
       var el = document.createElement("div");
-      var isLight = (FILES.indexOf(sq[0]) + parseInt(sq[1], 10)) % 2 === 1;
+      var isLight = (FILES.indexOf(sq[0]) + parseInt(sq[1], 10)) % 2 === 0;
       el.className = "sq " + (isLight ? "light" : "dark");
       el.dataset.sq = sq;
       el.addEventListener("click", function () { self.onSquare(sq); });
