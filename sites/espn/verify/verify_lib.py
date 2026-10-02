@@ -224,6 +224,168 @@ def num_in(final, number):
     return bool(re.search(rf"(?<![\d.]){re.escape(str(number))}(?![\d])", f))
 
 
+# A stat counts for a team or player only when that subject is the nearest
+# label to the number (and the number is that label's nearest value). Listing
+# Embiid and 34.7 anywhere in the answer is not the same as Embiid's 34.7.
+_BIND_WINDOW = 240
+_RECORD_RE = re.compile(r"(?<![\d.])(\d{1,3})\s*-\s*(\d{1,3})(?![\d])")
+_ORDINAL_RE = re.compile(r"(?<![\d.])\d+\s*(?:st|nd|rd|th)\b")
+_NUMBER_RE = re.compile(r"(?<![a-z0-9.])(\d+(?:\.\d+)?|\.\d+)(?![a-z0-9])")
+_CLAUSE_SPLIT = re.compile(r",|;|\band\b")
+_MONTH_BEFORE_RE = re.compile(
+    r"(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
+    r"jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|"
+    r"dec(?:ember)?)\s*$"
+)
+
+
+def _num_eq(a, b):
+    try:
+        return abs(float(a) - float(b)) < 1e-6
+    except (TypeError, ValueError):
+        return False
+
+
+def _gap(a, b):
+    if a[1] <= b[0]:
+        return b[0] - a[1]
+    if b[1] <= a[0]:
+        return a[0] - b[1]
+    return 0
+
+
+def _overlaps(start, end, spans):
+    return any(not (end <= s or e <= start) for s, e in spans)
+
+
+def _clause_ranges(text):
+    ranges = []
+    last = 0
+    for match in _CLAUSE_SPLIT.finditer(text or ""):
+        if match.group() == ",":
+            before = text[match.start() - 1] if match.start() else ""
+            after = text[match.end()] if match.end() < len(text) else ""
+            if before.isdigit() and after.isdigit():
+                continue
+        ranges.append((last, match.start()))
+        last = match.end()
+    ranges.append((last, len(text or "")))
+    return ranges or [(0, 0)]
+
+
+def _clause_index(pos, ranges):
+    for index, (start, end) in enumerate(ranges):
+        if start <= pos < end:
+            return index
+    return max(0, len(ranges) - 1)
+
+
+def _nearest(span, others, window, clauses):
+    origin = _clause_index(span[0], clauses)
+    in_clause = []
+    outside = []
+    for other in others:
+        if other[0] == span[0] and other[1] == span[1]:
+            continue
+        gap = _gap(span, other)
+        if gap > window:
+            continue
+        follows = 0 if other[0] >= span[1] else 1
+        item = ((gap, follows, other[0]), other)
+        if _clause_index(other[0], clauses) == origin:
+            in_clause.append(item)
+        else:
+            outside.append(item)
+    pool = in_clause if in_clause else outside
+    if not pool:
+        return None
+    return min(pool, key=lambda item: item[0])[1]
+
+
+def _value_eq(a, b):
+    if isinstance(a, tuple) or isinstance(b, tuple):
+        return a == b
+    return _num_eq(a, b)
+
+
+def _binds(label, value, value_spans, labels, clauses):
+    nearest = _nearest(label, value_spans, _BIND_WINDOW, clauses)
+    if nearest is None or not _value_eq(nearest[2], value):
+        return False
+    back = _nearest(nearest, labels, _BIND_WINDOW, clauses)
+    return back is not None and back[0] == label[0] and back[1] == label[1]
+
+
+def _label_spans(text, groups):
+    """groups: [(tag, [aliases])]. Longer aliases win overlaps. Stems such as
+    'pacer' match 'pacers'."""
+    entries = []
+    for tag, aliases in groups:
+        for alias in aliases:
+            alias = norm(alias)
+            if alias:
+                entries.append((alias, tag))
+    entries.sort(key=lambda item: len(item[0]), reverse=True)
+    spans = []
+    for alias, tag in entries:
+        for match in re.finditer(r"(?<![a-z0-9])" + re.escape(alias), text):
+            if _overlaps(match.start(), match.end(), [(s, e) for s, e, _ in spans]):
+                continue
+            spans.append((match.start(), match.end(), tag))
+    return spans
+
+
+def _record_spans(text):
+    return [(m.start(), m.end(), (int(m.group(1)), int(m.group(2))))
+            for m in _RECORD_RE.finditer(text)]
+
+
+def _number_spans(text):
+    occupied = [(s, e) for s, e, _ in _record_spans(text)]
+    occupied += [(m.start(), m.end()) for m in _ORDINAL_RE.finditer(text)]
+    spans = []
+    for match in _NUMBER_RE.finditer(text):
+        start, end = match.start(1), match.end(1)
+        if _overlaps(start, end, occupied):
+            continue
+        if end < len(text) and text[end] == ":":
+            continue
+        if _MONTH_BEFORE_RE.search(text[max(0, start - 14):start]):
+            continue
+        raw = match.group(1)
+        if re.fullmatch(r"\d{4}", raw) and 1900 <= int(raw) <= 2100:
+            continue
+        try:
+            value = float(raw)
+        except ValueError:
+            continue
+        spans.append((start, end, value))
+    return spans
+
+
+def _bound_value(final, aliases, value, competitor_groups, value_spans):
+    text = norm(final)
+    groups = [("target", list(aliases))]
+    for index, group in enumerate(competitor_groups or []):
+        groups.append((f"c{index}", list(group)))
+    labels = _label_spans(text, groups)
+    clauses = _clause_ranges(text)
+    targets = [span for span in labels if span[2] == "target"]
+    return any(_binds(label, value, value_spans(text), labels, clauses)
+               for label in targets)
+
+
+def number_bound_to(final, aliases, number, competitor_groups=()):
+    """`number` is mutually nearest to one of `aliases`, not to a competitor."""
+    return _bound_value(final, aliases, number, competitor_groups, _number_spans)
+
+
+def record_bound_to(final, aliases, wins, losses, competitor_groups=()):
+    """The record 'wins-losses' is mutually nearest to this team."""
+    return _bound_value(final, aliases, (int(wins), int(losses)),
+                        competitor_groups, _record_spans)
+
+
 def word_num_in(final, number, word=None):
     """num_in or the spelled-out word ('twelve', 'eight', 'one', ...). The
     spelled form defaults to the standard English word for `number`."""
