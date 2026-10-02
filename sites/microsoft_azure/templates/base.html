@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{{ brand }} | Cloud Computing{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="shell header-row">
+    <a class="brand" href="{{ url_for('home') }}">
+      <img src="{{ img('home/microsoft-logo.png') }}" alt="Microsoft" width="90" height="19"> <strong class="brand-word">Azure</strong>
+    </a>
+    <nav class="main-nav">
+      <a href="{{ url_for('products') }}">Products</a>
+      <a href="{{ url_for('pricing') }}">Pricing</a>
+      <a href="{{ url_for('calculator') }}">Pricing calculator</a>
+      <a href="{{ url_for('free_services') }}">Free services</a>
+      <a href="{{ url_for('geographies') }}">Global infrastructure</a>
+      <a href="{{ url_for('customer_stories') }}">Customer stories</a>
+      <a href="{{ url_for('blog') }}">Blog</a>
+      <a href="{{ url_for('dictionary') }}">Documentation</a>
+      <a href="{{ url_for('support') }}">Support</a>
+    </nav>
+    <div class="header-actions">
+      <form class="header-search" action="{{ url_for('search') }}" method="get">
+        <input type="search" name="q" placeholder="Search Azure" aria-label="Search Azure" value="{{ request.args.get('q','') }}">
+        <button type="submit">Search</button>
+      </form>
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-outline" href="{{ url_for('account') }}">My account</a>
+      {% else %}
+        <a class="btn btn-outline" href="{{ url_for('login') }}">Sign in</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="shell flashes">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-cols">
+      <div>
+        <h4>Explore</h4>
+        <a href="{{ url_for('products') }}">Products</a>
+        <a href="{{ url_for('pricing') }}">Pricing</a>
+        <a href="{{ url_for('free_services') }}">Free services</a>
+        <a href="{{ url_for('calculator') }}">Pricing calculator</a>
+      </div>
+      <div>
+        <h4>Global infrastructure</h4>
+        <a href="{{ url_for('geographies') }}">Azure geographies</a>
+        <a href="{{ url_for('products_by_region') }}">Products by region</a>
+      </div>
+      <div>
+        <h4>Learn</h4>
+        <a href="{{ url_for('customer_stories') }}">Customer stories</a>
+        <a href="{{ url_for('blog') }}">Azure blog</a>
+        <a href="{{ url_for('dictionary') }}">Cloud computing dictionary</a>
+        <a href="{{ url_for('support') }}">Support</a>
+      </div>
+      <div>
+        <h4>Account</h4>
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('account') }}">My account</a>
+          <a href="{{ url_for('logout') }}">Sign out</a>
+        {% else %}
+          <a href="{{ url_for('signup') }}">Create an account</a>
+          <a href="{{ url_for('login') }}">Sign in</a>
+        {% endif %}
+      </div>
+    </div>
+    <p class="footer-note">WebHarbor research mirror of {{ upstream }} — captured {{ mirror_ts }}. Not affiliated with Microsoft.</p>
+  </div>
+</footer>
+</body>
+</html>

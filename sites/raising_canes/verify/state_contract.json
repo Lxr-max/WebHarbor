@@ -1,0 +1,1020 @@
+{
+  "seed_sha": "1fd93ec20b0aea32ade0d6c2bd179d9425bda1b0c3b43c24d6fda24610c09dba",
+  "tasks": {
+    "0": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 1,
+            "quantity_label": "25",
+            "selections": "[\"No Slaw (NSL)\", \"Large Sweet Tea\"]",
+            "line_total": 304.0
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 848,
+            "pickup_mode": "Curbside",
+            "pickup_date": "2026-09-25",
+            "pickup_time": "5:15 PM",
+            "contact_name": "Maya Torres",
+            "contact_phone": "713-555-0184",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 304.0,
+            "discount": 0.0,
+            "tax": 25.08,
+            "total": 329.08,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 329
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "1": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 9,
+            "quantity_label": "1",
+            "selections": "[\"Family-Style, Large Sauce To Share\"]",
+            "line_total": 142.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 887,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "5:00 PM",
+            "contact_name": "Marcus",
+            "contact_phone": "555-0100",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 142.99,
+            "discount": 0.0,
+            "tax": 11.8,
+            "total": 154.79,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 154
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "2": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 1,
+            "quantity_label": "1",
+            "selections": "[\"Regular\", \"Regular Sweet Tea\"]",
+            "line_total": 11.89
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": 1,
+            "location_id": 405,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "12:15 PM",
+            "contact_name": "Alice Johnson",
+            "contact_phone": "(225) 555-0142",
+            "payment_method": "Visa ending 4242",
+            "gift_card_number": "",
+            "caniac_offer": "BDAY-BOX",
+            "subtotal": 11.89,
+            "discount": 11.89,
+            "tax": 0.0,
+            "total": 0.0,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 0
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "user_offers": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 1,
+              "user_id": 1,
+              "offer_id": 1,
+              "redeemed": 0,
+              "redeemed_order": ""
+            },
+            "after": {
+              "id": 1,
+              "user_id": 1,
+              "offer_id": 1,
+              "redeemed": 1,
+              "redeemed_order": "RC-100240"
+            }
+          }
+        ]
+      }
+    },
+    "3": {
+      "caniac_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 4,
+              "user_id": 4,
+              "card_number": "88233b5708533bdd",
+              "points": 92,
+              "member_since": "2024-03-01 00:00:00.000000"
+            },
+            "after": {
+              "id": 4,
+              "user_id": 4,
+              "card_number": "88233b5708533bdd",
+              "points": 137,
+              "member_since": "2024-03-01 00:00:00.000000"
+            }
+          }
+        ]
+      },
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 6,
+            "quantity_label": "1",
+            "selections": "[\"Individual Sauces\"]",
+            "line_total": 41.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": 4,
+            "location_id": 835,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "12:30 PM",
+            "contact_name": "David Kim",
+            "contact_phone": "(512) 555-0121",
+            "payment_method": "Gift Card",
+            "gift_card_number": "6049067bf99a74d2",
+            "caniac_offer": "",
+            "subtotal": 41.99,
+            "discount": 0.0,
+            "tax": 3.46,
+            "total": 45.45,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 45
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gift_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 6,
+              "card_number": "6049067bf99a74d2",
+              "pin": "2468",
+              "balance": 75.0,
+              "initial_balance": 75.0,
+              "owner_email": "david.k@test.com"
+            },
+            "after": {
+              "id": 6,
+              "card_number": "6049067bf99a74d2",
+              "pin": "2468",
+              "balance": 29.55,
+              "initial_balance": 75.0,
+              "owner_email": "david.k@test.com"
+            }
+          }
+        ]
+      }
+    },
+    "4": {
+      "caniac_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 2,
+              "user_id": 2,
+              "card_number": "88233c6ff5023602",
+              "points": 340,
+              "member_since": "2024-03-01 00:00:00.000000"
+            },
+            "after": {
+              "id": 2,
+              "user_id": 2,
+              "card_number": "88233c6ff5023602",
+              "points": 592,
+              "member_since": "2024-03-01 00:00:00.000000"
+            }
+          }
+        ]
+      },
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 2,
+            "quantity_label": "25",
+            "selections": "[\"Regular\", \"No Drink\"]",
+            "line_total": 227.25
+          },
+          {
+            "id": 12,
+            "order_id": 6,
+            "item_id": 18,
+            "quantity_label": "1",
+            "selections": "[]",
+            "line_total": 5.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": 2,
+            "location_id": 848,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-25",
+            "pickup_time": "12:30 PM",
+            "contact_name": "Bob Chen",
+            "contact_phone": "(281) 555-0177",
+            "payment_method": "Visa ending 1881",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 233.24,
+            "discount": 0.0,
+            "tax": 19.24,
+            "total": 252.48,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 252
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "5": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 5,
+            "quantity_label": "50",
+            "selections": "[\"Milk\"]",
+            "line_total": 339.5
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 113,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "3:00 PM",
+            "contact_name": "Ms. Rivera",
+            "contact_phone": "805-555-0123",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 339.5,
+            "discount": 0.0,
+            "tax": 28.01,
+            "total": 367.51,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 367
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "6": {
+      "caniac_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 1,
+              "user_id": 1,
+              "card_number": "882366a5bd152810",
+              "points": 1275,
+              "member_since": "2024-03-01 00:00:00.000000"
+            },
+            "after": {
+              "id": 1,
+              "user_id": 1,
+              "card_number": "882366a5bd152810",
+              "points": 1330,
+              "member_since": "2024-03-01 00:00:00.000000"
+            }
+          }
+        ]
+      },
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 3,
+            "quantity_label": "1",
+            "selections": "[\"No Slaw (NSL)\", \"Large Coke\\u00ae\"]",
+            "line_total": 16.89
+          },
+          {
+            "id": 12,
+            "order_id": 6,
+            "item_id": 13,
+            "quantity_label": "25",
+            "selections": "[]",
+            "line_total": 34.5
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": 1,
+            "location_id": 848,
+            "pickup_mode": "Curbside",
+            "pickup_date": "2026-09-25",
+            "pickup_time": "1:30 PM",
+            "contact_name": "Alice Johnson",
+            "contact_phone": "(225) 555-0142",
+            "payment_method": "Visa ending 4242",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 51.39,
+            "discount": 0.0,
+            "tax": 4.24,
+            "total": 55.63,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 55
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "7": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 7,
+            "quantity_label": "1",
+            "selections": "[\"Family-Style, Large Sauce To Share\"]",
+            "line_total": 79.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 401,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-26",
+            "pickup_time": "6:00 PM",
+            "contact_name": "Priya Patel",
+            "contact_phone": "225-555-0177",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 79.99,
+            "discount": 0.0,
+            "tax": 6.6,
+            "total": 86.59,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 86
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "8": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 1,
+            "quantity_label": "1",
+            "selections": "[\"Regular\", \"Regular Sweet Tea\"]",
+            "line_total": 11.89
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 848,
+            "pickup_mode": "Curbside",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "6:30 PM",
+            "contact_name": "Jordan Ellis",
+            "contact_phone": "832-555-0146",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 11.89,
+            "discount": 0.0,
+            "tax": 0.98,
+            "total": 12.87,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 12
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "9": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 8,
+            "quantity_label": "1",
+            "selections": "[\"Family-Style, Large Sauce To Share\"]",
+            "line_total": 118.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 793,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "5:00 PM",
+            "contact_name": "Renee Carter",
+            "contact_phone": "214-555-0119",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 118.99,
+            "discount": 0.0,
+            "tax": 9.82,
+            "total": 128.81,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 128
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "10": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 1,
+            "quantity_label": "1",
+            "selections": "[\"Regular\", \"Regular Sweet Tea\"]",
+            "line_total": 11.89
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 405,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "1:15 PM",
+            "contact_name": "Sam Whitfield",
+            "contact_phone": "225-555-0162",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 11.89,
+            "discount": 0.0,
+            "tax": 0.98,
+            "total": 12.87,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 12
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "11": {
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 15,
+            "quantity_label": "25",
+            "selections": "[]",
+            "line_total": 11.25
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": null,
+            "location_id": 402,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-24",
+            "pickup_time": "5:00 PM",
+            "contact_name": "Dana Lopez",
+            "contact_phone": "225-555-0131",
+            "payment_method": "Pay at Restaurant",
+            "gift_card_number": "",
+            "caniac_offer": "",
+            "subtotal": 11.25,
+            "discount": 0.0,
+            "tax": 0.93,
+            "total": 12.18,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 12
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "12": {
+      "gear_order_items": {
+        "added": [
+          {
+            "id": 6,
+            "order_id": 3,
+            "product_id": 23,
+            "variant_title": "M",
+            "qty": 1,
+            "price": 39.99
+          },
+          {
+            "id": 7,
+            "order_id": 3,
+            "product_id": 56,
+            "variant_title": "Default Title",
+            "qty": 1,
+            "price": 9.99
+          },
+          {
+            "id": 8,
+            "order_id": 3,
+            "product_id": 86,
+            "variant_title": "Large",
+            "qty": 1,
+            "price": 4.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gear_orders": {
+        "added": [
+          {
+            "id": 3,
+            "order_number": "GEAR-4504",
+            "user_id": 1,
+            "email": "alice.j@test.com",
+            "ship_name": "Alice Johnson",
+            "ship_line1": "4321 Highland Road",
+            "ship_city": "Baton Rouge",
+            "ship_state": "LA",
+            "ship_zip": "70808",
+            "payment_method": "Visa",
+            "subtotal": 54.97,
+            "shipping": 0.0,
+            "total": 54.97,
+            "placed_at": "2026-09-24 12:00:00"
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "13": {
+      "gear_order_items": {
+        "added": [
+          {
+            "id": 6,
+            "order_id": 3,
+            "product_id": 40,
+            "variant_title": "Default Title",
+            "qty": 1,
+            "price": 21.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gear_orders": {
+        "added": [
+          {
+            "id": 3,
+            "order_number": "GEAR-4504",
+            "user_id": 3,
+            "email": "carol.d@test.com",
+            "ship_name": "Carol Davis",
+            "ship_line1": "1902 North Central Expressway",
+            "ship_city": "McKinney",
+            "ship_state": "TX",
+            "ship_zip": "75069",
+            "payment_method": "Discover",
+            "subtotal": 21.99,
+            "shipping": 6.95,
+            "total": 28.94,
+            "placed_at": "2026-09-24 12:00:00"
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "14": {
+      "gear_order_items": {
+        "added": [
+          {
+            "id": 6,
+            "order_id": 3,
+            "product_id": 6,
+            "variant_title": "$25",
+            "qty": 1,
+            "price": 25.0
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gear_orders": {
+        "added": [
+          {
+            "id": 3,
+            "order_number": "GEAR-4504",
+            "user_id": 3,
+            "email": "carol.d@test.com",
+            "ship_name": "Carol Davis",
+            "ship_line1": "1902 North Central Expressway",
+            "ship_city": "McKinney",
+            "ship_state": "TX",
+            "ship_zip": "75069",
+            "payment_method": "Discover",
+            "subtotal": 25.0,
+            "shipping": 6.95,
+            "total": 31.95,
+            "placed_at": "2026-09-24 12:00:00"
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "15": {
+      "caniac_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 3,
+              "user_id": 3,
+              "card_number": "88230461aa044ae1",
+              "points": 560,
+              "member_since": "2024-03-01 00:00:00.000000"
+            },
+            "after": {
+              "id": 3,
+              "user_id": 3,
+              "card_number": "8823112233445566",
+              "points": 677,
+              "member_since": "2024-03-01 00:00:00.000000"
+            }
+          }
+        ]
+      },
+      "food_order_items": {
+        "added": [
+          {
+            "id": 11,
+            "order_id": 6,
+            "item_id": 8,
+            "quantity_label": "1",
+            "selections": "[\"Family-Style, Large Sauce To Share\"]",
+            "line_total": 118.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "food_orders": {
+        "added": [
+          {
+            "id": 6,
+            "order_number": "RC-100240",
+            "user_id": 3,
+            "location_id": 887,
+            "pickup_mode": "Pickup",
+            "pickup_date": "2026-09-25",
+            "pickup_time": "5:30 PM",
+            "contact_name": "Carol Davis",
+            "contact_phone": "(214) 555-0198",
+            "payment_method": "Discover ending 6011",
+            "gift_card_number": "",
+            "caniac_offer": "TAILGATE-10",
+            "subtotal": 118.99,
+            "discount": 10.0,
+            "tax": 8.99,
+            "total": 117.98,
+            "status": "Placed",
+            "placed_at": "2026-09-24 12:00:00",
+            "points_earned": 117
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "user_offers": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 4,
+              "user_id": 3,
+              "offer_id": 4,
+              "redeemed": 0,
+              "redeemed_order": ""
+            },
+            "after": {
+              "id": 4,
+              "user_id": 3,
+              "offer_id": 4,
+              "redeemed": 1,
+              "redeemed_order": "RC-100240"
+            }
+          }
+        ]
+      }
+    },
+    "16": {
+      "caniac_cards": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 1,
+              "user_id": 1,
+              "card_number": "882366a5bd152810",
+              "points": 1275,
+              "member_since": "2024-03-01 00:00:00.000000"
+            },
+            "after": {
+              "id": 1,
+              "user_id": 1,
+              "card_number": "882366a5bd152810",
+              "points": 1223,
+              "member_since": "2024-03-01 00:00:00.000000"
+            }
+          }
+        ]
+      },
+      "food_orders": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 2,
+              "order_number": "RC-100236",
+              "user_id": 1,
+              "location_id": 848,
+              "pickup_mode": "Curbside",
+              "pickup_date": "2026-09-20",
+              "pickup_time": "1:30 PM",
+              "contact_name": "Alice Johnson",
+              "contact_phone": "(225) 555-0142",
+              "payment_method": "Visa ending 4242",
+              "gift_card_number": "",
+              "caniac_offer": "FREE-TEA",
+              "subtotal": 51.39,
+              "discount": 2.7,
+              "tax": 4.02,
+              "total": 52.71,
+              "status": "Completed",
+              "placed_at": "2026-09-20 12:00:00.000000",
+              "points_earned": 52
+            },
+            "after": {
+              "id": 2,
+              "order_number": "RC-100236",
+              "user_id": 1,
+              "location_id": 848,
+              "pickup_mode": "Curbside",
+              "pickup_date": "2026-09-20",
+              "pickup_time": "1:30 PM",
+              "contact_name": "Alice Johnson",
+              "contact_phone": "(225) 555-0142",
+              "payment_method": "Visa ending 4242",
+              "gift_card_number": "",
+              "caniac_offer": "FREE-TEA",
+              "subtotal": 51.39,
+              "discount": 2.7,
+              "tax": 4.02,
+              "total": 52.71,
+              "status": "Cancelled",
+              "placed_at": "2026-09-20 12:00:00.000000",
+              "points_earned": 52
+            }
+          }
+        ]
+      }
+    },
+    "17": {},
+    "18": {
+      "addresses": {
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "label": "NOLA",
+            "line1": "500 St. Louis St",
+            "city": "New Orleans",
+            "state": "LA",
+            "zip_code": "70130",
+            "is_default": 0
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gear_order_items": {
+        "added": [
+          {
+            "id": 6,
+            "order_id": 3,
+            "product_id": 26,
+            "variant_title": "Red",
+            "qty": 1,
+            "price": 29.99
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "gear_orders": {
+        "added": [
+          {
+            "id": 3,
+            "order_number": "GEAR-4504",
+            "user_id": 1,
+            "email": "alice.j@test.com",
+            "ship_name": "Alice Johnson",
+            "ship_line1": "500 St. Louis St",
+            "ship_city": "New Orleans",
+            "ship_state": "LA",
+            "ship_zip": "70130",
+            "payment_method": "Visa",
+            "subtotal": 29.99,
+            "shipping": 6.95,
+            "total": 36.94,
+            "placed_at": "2026-09-24 12:00:00"
+          }
+        ],
+        "removed": [],
+        "updated": []
+      },
+      "users": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "before": {
+              "id": 1,
+              "email": "alice.j@test.com",
+              "password_hash": "$2b$12$PnCFwwnEYeF8Mgt0KFGSiOwDPEmD0ARKnfll0oLGJn8myyYD6oBIm",
+              "name": "Alice Johnson",
+              "phone": "(225) 555-0142",
+              "created_at": "2026-01-15 00:00:00.000000"
+            },
+            "after": {
+              "id": 1,
+              "email": "alice.j@test.com",
+              "password_hash": "$2b$12$PnCFwwnEYeF8Mgt0KFGSiOwDPEmD0ARKnfll0oLGJn8myyYD6oBIm",
+              "name": "Alice Johnson",
+              "phone": "504-555-0187",
+              "created_at": "2026-01-15 00:00:00.000000"
+            }
+          }
+        ]
+      }
+    },
+    "19": {}
+  }
+}

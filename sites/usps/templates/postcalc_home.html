@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Calculate a Price | USPS{% endblock %}
+{% block meta %}Use the USPS Retail Postage Price Calculator to compare domestic and international mailing services, prices and fees.{% endblock %}
+{% block content %}
+<h1>Calculate a Price</h1>
+<p>Use the Retail Postage Price Calculator to compare mailing services and prices, based on the official Notice 123 price list.</p>
+<div class="grid">
+  <div class="card"><h3><a href="{{ url_for('postcalc_letters') }}">Letters &amp; Postcards</a></h3>
+    <p>Price First-Class Mail letters, large envelopes (flats) and postcards by weight.</p></div>
+  <div class="card"><h3><a href="{{ url_for('postcalc_packages') }}">Domestic Packages</a></h3>
+    <p>Compare Priority Mail Express, Priority Mail, Ground Advantage, Media Mail and Flat Rate by weight and zone.</p></div>
+  <div class="card"><h3><a href="{{ url_for('postcalc_intl') }}">International Prices</a></h3>
+    <p>Price Priority Mail International, Priority Mail Express International and First-Class Package International Service by country.</p></div>
+  <div class="card"><h3><a href="{{ url_for('postcalc_extras') }}">Extra Services</a></h3>
+    <p>Certified Mail, insurance, Registered Mail, COD, Return Receipt and Signature Confirmation fees.</p></div>
+</div>
+{% endblock %}

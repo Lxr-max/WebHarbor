@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Likes — Tumblr{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Likes</h1>
+  <p class="page-sub"><strong>{{ '{:,}'.format(pagination.total) }} liked posts</strong> in total — everything {{ user.username }} has hearted, newest first.</p>
+  <nav class="dash-tabs">
+    <a class="tab" href="{{ url_for('dashboard') }}">Following feed</a>
+    <a class="tab active" href="{{ url_for('likes') }}">Likes</a>
+    <a class="tab" href="{{ url_for('following') }}">Following</a>
+  </nav>
+</div>
+<div class="layout-two-col">
+  <section class="feed-col">
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% else %}
+      <div class="empty-state">Nothing liked yet. Tap the heart on any post.</div>
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>{{ '{:,}'.format(pagination.total) }} liked posts</h3>
+      <p class="side-copy">Likes are private to your account on this mirror.</p>
+    </div>
+  </aside>
+</div>
+{% endblock %}

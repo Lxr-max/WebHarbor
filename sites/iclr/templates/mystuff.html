@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}My Stuff{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>My Stuff</h1>
+  <span class="muted">Signed in as {{ current_user.name }} ({{ current_user.email }})</span>
+</div>
+
+<div class="card">
+  <h2>Bookmarked papers ({{ bookmarks | length }})</h2>
+  {% for b in bookmarks %}
+    {% set p = papers[b.paper_id] %}
+    {% if p %}
+      <div class="paper-row">
+        <span class="no">#{{ p.id }}</span>
+        <div class="body">
+          <h3><a href="{{ url_for('paper_detail', pid=p.id) }}">{{ p.title }}</a></h3>
+          <div class="meta">{{ p.author_names() | join(' ⋅ ') }}</div>
+          <div class="meta"><span class="badge {{ 'oral' if p.decision == 'Accept (Oral)' else 'poster' }}">{{ p.badge() }}</span>
+            {% if p.session %} &middot; {{ p.session }}{% endif %}</div>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <p class="muted">No bookmarks yet — open a paper and press “Bookmark this paper”.</p>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>My schedule ({{ saves | length }})</h2>
+  {% for s in saves %}
+    {% set e = events[s.event_id] %}
+    {% if e %}
+      <div class="sched-event sched-{{ e.kind }}">
+        <div class="time">{{ fmt_date(e.date) }}<br>{{ fmt_time(e.start) }}–{{ fmt_time(e.end) }}</div>
+        <div class="body">
+          <h3><a href="{{ url_for('event_detail', eid=e.id) }}">{{ e.title }}</a></h3>
+          <div class="meta"><span class="badge kind">{{ e.kind_label() }}</span></div>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <p class="muted">Nothing saved yet — open an event and press “Add to My Schedule”.</p>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>Registration history ({{ regs | length }})</h2>
+  {% for r in regs %}
+    <p><b class="mono">{{ r.reg_code }}</b> — {{ r.name }} ({{ r.affiliation }}),
+      {{ r.item_list() | join(', ') }},
+      {{ r.banquet_tickets }} banquet ticket(s), total ${{ r.total_usd }} USD
+      <span class="muted small">(registered {{ r.created }})</span></p>
+  {% else %}
+    <p class="muted">No registrations yet — <a href="{{ url_for('register') }}">register for ICLR 2026</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}

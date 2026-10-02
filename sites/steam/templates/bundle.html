@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import price_block %}
+{% block title %}{{ bundle.name }}{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo; Bundles &rsaquo; {{ bundle.name }}</div>
+
+<div class="page-header">
+  <h1>{{ bundle.name }}</h1>
+  <span class="count">Steam Bundle</span>
+</div>
+
+<div class="two-col">
+  <div>
+    <div class="game-area">
+      <h2>About this bundle</h2>
+      <p>Buy this bundle to get every item at the bundle price. Buying the items
+      separately costs {{ subtotal|money }}; the bundle costs
+      {{ bundle.final_price_cents|money }} &mdash; you save
+      {{ savings|money }} ({{ bundle.base_discount }}).</p>
+    </div>
+
+    <div class="game-area">
+      <h2>Items in this bundle</h2>
+      {% for entry in items %}
+        {% if entry.game %}
+        <div class="bundle-card">
+          <span class="n"><a href="{{ entry.game.url }}">{{ entry.game.name }}</a></span>
+          <span class="price-final">{{ entry.item.individual_price_cents|money }}</span>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+    <div class="side-block">
+      <h3>Buy the bundle</h3>
+      <p>
+        <span class="discount-badge">{{ bundle.base_discount }}</span>
+        <span class="price-old">{{ subtotal|money }}</span>
+        <span class="price-final">{{ bundle.final_price_cents|money }}</span>
+      </p>
+      <p style="color:#8f98a0;">Total if bought separately: {{ subtotal|money }}<br>
+         Your savings: {{ savings|money }}</p>
+      <form method="post" action="{{ url_for('cart_add') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="kind" value="bundle">
+        <input type="hidden" name="bundle_id" value="{{ bundle.bundle_id }}">
+        <input type="hidden" name="qty" value="1">
+        <button class="btn" type="submit">Add bundle to Cart</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

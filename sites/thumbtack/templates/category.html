@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}{{ cat.h1 }} - Thumbtack{% endblock %}
+{% block description %}Hire the best {{ cat.plural }} near you. Compare quotes, reviews, and hire with confidence.{% endblock %}
+{% block content %}
+<div class="listing-wrap">
+  <aside class="filters">
+    <h3>Filters</h3>
+    <form method="get" action="{{ cat.url() }}">
+      <input type="hidden" name="sort" value="{{ sort }}">
+      {% for q in questions %}
+      {% set qi = loop.index %}
+      <div class="filter-q">{{ q.q }}</div>
+      {% for opt in q.opts %}
+      <label class="filter-opt">
+        <input type="radio" name="f{{ qi - 1 }}" value="{{ opt }}"
+               {% if active['f' ~ (qi - 1)] == opt %}checked{% endif %}
+               onchange="this.form.submit()">
+        {{ opt }}
+      </label>
+      {% endfor %}
+      {% endfor %}
+      <button class="btn btn-outline btn-sm" type="submit" style="margin-top:14px;">Apply filters</button>
+      <a class="reset" href="{{ cat.url() }}">Reset filters</a>
+    </form>
+  </aside>
+  <div>
+    <h1>{{ cat.h1 }}</h1>
+    <p class="muted">{{ cat.description }}</p>
+    <div class="sort-tabs">
+      {% for key, label in [('recommended', 'Recommended'), ('highest_rated', 'Highest rated'), ('most_hires', 'Most hires'), ('fastest_response', 'Fastest response')] %}
+      <a class="sort-tab {% if sort == key %}active{% endif %}"
+         href="{{ cat.url() }}?sort={{ key }}{% for k, v in active.items() %}{% if v %}&{{ k }}={{ v|urlencode }}{% endif %}{% endfor %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="rail-card" style="border-color: var(--navy);">
+      <h3>Get quotes from your top 3 matches</h3>
+      <p class="muted">These pros match your project, are highly-rated, and respond quickly.</p>
+      <a class="btn btn-accent" href="/projects/new?category={{ cat.slug }}">Get 3 quotes</a>
+    </div>
+
+    <h2>Matching {{ cat.plural }}</h2>
+    {% if not pros %}
+      <p class="muted">No pros match those filters yet. <a href="{{ cat.url() }}">Reset filters</a> to see everyone.</p>
+    {% endif %}
+    {% for p in pros %}
+    <div class="pro-card">
+      <a href="{{ p.url() }}"><img class="av" src="{{ url_for('static', filename='images/avatars/' + p.avatar) }}" alt="{{ p.name }}"></a>
+      <div>
+        <a class="pro-name" href="{{ p.url() }}">{{ p.name }}</a>
+        <div>
+          {% if p.top_pro %}<span class="badge badge-toppro">Top Pro</span>{% endif %}
+          {% if p.in_high_demand %}<span class="badge badge-demand">In high demand</span>{% endif %}
+          {% if p.great_value %}<span class="badge badge-value">Great value</span>{% endif %}
+          {% if p.online_now %}<span class="badge badge-online">Online Now - responds {{ p.responds_label }}</span>{% endif %}
+        </div>
+        <div class="rating-line"><b>{{ p.rating_word }} {{ '%.1f'|format(p.rating) }}</b> <span class="muted">({{ p.review_count }})</span>
+          {% if not p.online_now %}<span class="muted">· Responds {{ p.responds_label }}</span>{% endif %}</div>
+        <div class="muted">{{ p.hires }} hires on Thumbtack · {{ p.similar_jobs }} similar jobs done near you · {{ p.city }}, {{ p.state }}</div>
+        {% if p.card_quote %}<div class="quote-snippet">{{ p.card_quote_author }} says, "{{ p.card_quote }}"</div>{% endif %}
+        <div class="card-actions">
+          <a class="btn btn-outline btn-sm" href="{{ p.url() }}">View profile</a>
+          <form method="post" action="/account/saved/toggle/{{ p.id }}" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="next" value="{{ request.full_path }}">
+            <button class="btn btn-outline btn-sm" type="submit">Save pro</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Financial Aid — Stanford University{% endblock %}
+{% block content %}
+<div class="detail-head">
+  <h1>How Aid Works</h1>
+  <div class="meta">A Stanford education is affordable</div>
+</div>
+<div class="detail-body">
+  <img src="{{ url_for('static', filename='images/upstream/admissions/adm_afford_banner.jpg') }}" alt="Stanford financial aid" style="width:100%;border-radius:10px;margin-bottom:18px;">
+  <p>Almost half of all Stanford undergraduates receive need-based financial aid.
+  Stanford offers comprehensive, need-based financial aid that makes it possible for
+  all admitted undergraduate students to attend — and we do not expect students to
+  borrow to meet their need.</p>
+  <h2>Key facts</h2>
+  <ul>
+    {% for f in data.aid_facts %}<li>{{ f }}</li>{% endfor %}
+  </ul>
+  <h2>Types of financial aid</h2>
+  <p>Stanford provides financial aid in the form of scholarships, which do not need to
+  be repaid. Federal and state grants, outside scholarships, and student employment
+  are additional sources of funding. We do not expect you to take out student loans
+  to cover your college costs.</p>
+  <h2>Estimate your cost</h2>
+  <p>The average need-based scholarship in the current freshman class is more than
+  $70,000. These published thresholds assume assets typical of the income level; individual awards require a full assessment.</p>
+  <h2>Published aid thresholds</h2>
+  <p>Check your household income against
+  Stanford's published aid thresholds. Household size is recorded for context; this simplified comparison does not calculate an individual award. For a full award estimate use the
+  official Stanford net price calculator.</p>
+  <form method="get" action="{{ url_for('admission_aid') }}" class="filters" style="max-width:560px">
+    <input type="text" name="income" placeholder="Annual household income (e.g. 120000)" aria-label="Annual household income" required>
+    <input type="text" name="family" placeholder="Family members in household (1-10)" aria-label="Family members">
+    <button class="btn solid" type="submit">Check thresholds</button>
+  </form>
+  {% if estimate %}
+  <div class="facts">
+    <div class="fact"><div class="k">Household income</div><div class="v">${{ '{:,}'.format(estimate.income) }} ({{ estimate.family }} family members)</div></div>
+    <div class="fact"><div class="k">Tuition responsibility</div><div class="v">{{ estimate.tuition }}</div></div>
+    <div class="fact"><div class="k">Room and board</div><div class="v">{{ estimate.room }}</div></div>
+  </div>
+  <p>{{ estimate.note }}</p>
+  {% endif %}
+  <p><a class="btn" href="{{ url_for('admission') }}">Admission requirements and deadlines</a></p>
+</div>
+{% endblock %}

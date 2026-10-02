@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <article class="resource-article">
+    {% for block in page.blocks %}
+      {% if block.tag == "h1" %}<h1>{{ block.text }}</h1>
+      {% elif block.tag == "h2" %}<h2>{{ block.text }}</h2>
+      {% elif block.tag == "h3" %}<h3>{{ block.text }}</h3>
+      {% elif block.tag == "h4" %}<h4>{{ block.text }}</h4>
+      {% elif block.tag == "li" %}<li>{{ block.text }}</li>
+      {% else %}<p>{{ block.text }}</p>{% endif %}
+    {% endfor %}
+  </article>
+</div>
+{% endblock %}

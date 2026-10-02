@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Sector &amp; Industry Performance - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Sectors &amp; Industries</h2>
+  <p class="muted">Market-cap weighted day change across the captured universe (close of September 30, 2026). Click a sector for its industries and constituents.</p>
+  <div class="table-scroll">
+  <table class="yf sector-table">
+    <thead>
+      <tr>
+        <th>Sector</th><th class="num">Day % Chg</th><th class="num">Aggregate Market Cap</th>
+        <th class="num">Companies</th><th class="num">Industries</th>
+        <th>Top Gainer</th><th>Top Loser</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td><a href="/sectors/{{ r.slug }}">{{ r.sector }}</a></td>
+        <td class="num chg-badge {{ 'up' if r.day_chg >= 0 else 'down' }}">{{ fmt_pct(r.day_chg, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_big(r.mcap) }}</td>
+        <td class="num">{{ r.count }}</td>
+        <td class="num">{{ r.industries|length }}</td>
+        <td><a href="/quote/{{ r.top_gainer.symbol|urlencode }}">{{ r.top_gainer.symbol }}</a>
+            <span class="{{ 'up' if (r.top_gainer.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(r.top_gainer.change_pct, 2, sign=True) }}</span></td>
+        <td><a href="/quote/{{ r.top_loser.symbol|urlencode }}">{{ r.top_loser.symbol }}</a>
+            <span class="{{ 'up' if (r.top_loser.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(r.top_loser.change_pct, 2, sign=True) }}</span></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

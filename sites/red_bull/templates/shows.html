@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull TV Shows — series from Red Bull{% endblock %}
+{% block content %}
+<h1 class="page-title">Shows</h1>
+<p class="page-sub">Original Red Bull TV series — go backstage with the world's best athletes, race teams and creators.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('shows') }}">
+  <div>
+    <label for="discipline">Discipline</label>
+    <select id="discipline" name="discipline">
+      <option value="">All disciplines</option>
+      {% for d in disciplines %}
+      <option value="{{ d }}" {{ 'selected' if active_discipline == d }}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('shows') }}">Reset</a>
+  </div>
+</form>
+
+<div class="grid cols-4">
+  {% for s in shows %}
+  <a class="card" href="{{ url_for('show_detail', slug=s.slug) }}">
+    <div class="thumb"><img src="{{ s.image }}" alt="{{ s.title }}"></div>
+    <div class="body">
+      <span class="tag">{{ s.discipline }}</span>
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.subheading }}</p>
+      <p class="meta">{{ s.nr_seasons }} Season{{ 's' if s.nr_seasons != 1 }} · {{ s.nr_episodes }} episode{{ 's' if s.nr_episodes != 1 }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('shows', page=page-1, discipline=active_discipline) }}">‹ Prev</a>
+  {% endif %}
+  <span class="current">{{ page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('shows', page=page+1, discipline=active_discipline) }}">Next ›</a>
+  {% endif %}
+  <span class="meta">{{ total }} shows</span>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found | Disney{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">We can't find that page.</h1>
+  <p class="page-sub">The page you are looking for may have been moved, or the address is incorrect.</p>
+  <p><a class="btn" href="{{ url_for('home') }}">Back to Disney.com</a></p>
+</div>
+{% endblock %}

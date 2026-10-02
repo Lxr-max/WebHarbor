@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}dblp: computer science bibliography{% endblock %}
+{% block main %}
+<section id="welcome-section" class="section">
+  <header class="h1"><h1>Welcome to dblp</h1></header>
+  <div class="section-body">
+    <p>The <b>dblp computer science bibliography</b> provides open bibliographic
+      information on major computer science journals and proceedings. Originally
+      created at the University of Trier in 1993, dblp is now operated and further
+      developed by Schloss Dagstuhl.</p>
+    <p>Currently dblp lists the following statistics:</p>
+    <ul id="stats-section" class="stats-list">
+      <li># of publications : {{ stats.publications }}</li>
+      <li># of authors : {{ stats.authors }}</li>
+      <li># of institutions : {{ stats.institutions }}</li>
+      <li># of conferences : {{ stats.conferences }}</li>
+      <li># of journals : {{ stats.journals }}</li>
+    </ul>
+    <p class="mirror-note">This WebHarbor mirror snapshot was captured from
+      dblp.org on {{ mirror_date }}; the counts above are the upstream totals
+      captured at that date, while search and browse results inside this mirror
+      are served from the captured corpus declared in provenance.json.</p>
+  </div>
+</section>
+
+<section id="search-hint" class="section">
+  <header class="h1"><h1>Search dblp</h1></header>
+  <div class="section-body">
+    <ul class="search-help">
+      <li><em>case-insensitive prefix search:</em> default<br>
+        e.g., <a href="{{ url_for('search_publ', q='sig') }}">sig</a> matches
+        &quot;SIGIR&quot; as well as &quot;signal&quot;</li>
+      <li><em>exact word search:</em> append dollar sign ($) to word<br>
+        e.g., <a href="{{ url_for('search_publ', q='graph$') }}">graph$</a> matches
+        &quot;graph&quot;, but not &quot;graphics&quot;</li>
+      <li><em>boolean and:</em> separate words by space<br>
+        e.g., <a href="{{ url_for('search_publ', q='codd model') }}">codd model</a></li>
+      <li><em>boolean or:</em> connect words by pipe symbol (|)<br>
+        e.g., <a href="{{ url_for('search_publ', q='graph|network') }}">graph|network</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="news-section" class="section hideable">
+  <header class="hide-head h2"><h2>dblp blog</h2></header>
+  <div class="hide-body">
+    <dl class="news">
+      {% for n in news %}
+      <dt id="news-{{ loop.index }}">
+        <span>{{ n.date }}: </span>{{ n.title }}
+        {% for t in n.tags %}<small>[{{ t }}]</small>{% endfor %}
+      </dt>
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section id="browse-section" class="section">
+  <header class="h1"><h1>browse dblp</h1></header>
+  <div class="section-body">
+    <ul class="browse-list">
+      <li><a href="/db/conf/">browse conferences &amp; workshops</a></li>
+      <li><a href="/db/journals/">browse journals</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="about-section" class="section">
+  <header class="h1"><h1>About dblp</h1></header>
+  <div class="section-body">
+    <p>For more information check out our <a href="https://dblp.org/faq/">F.A.Q.</a></p>
+  </div>
+</section>
+{% endblock %}

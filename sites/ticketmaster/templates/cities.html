@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Cities | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Explore Events by City</h1>
+  <p class="page-sub">Find verified tickets for concerts, sports, arts &amp; theater and family events in cities across the United States.</p>
+
+  <div class="section-head"><h2>Popular Cities</h2></div>
+  <div class="city-grid">
+    {% for c in tiles %}
+    <a class="city-tile" href="/discover/cities/{{ c.slug }}">
+      <img src="{{ url_for('static', filename=c.image.replace('static/','')) }}" alt="{{ c.name }}">
+      <span>{{ c.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="section-head"><h2>All Cities</h2></div>
+  <ul>
+    {% for city, count in cities %}
+    <li class="event-row" style="padding:10px 4px">
+      <div class="er-main">
+        <div class="er-name"><a href="/discover/cities/{{ city|slugify }}">{{ city }}</a></div>
+        <div class="er-sub">{{ count }} upcoming event{{ '' if count == 1 else 's' }}</div>
+      </div>
+      <a class="find-tickets" href="/discover/cities/{{ city|slugify }}">Find Tickets &#9662;</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}FOX Sports | News, Scores, Schedules, Odds, Shows &amp; Videos{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="FOX Sports">
+      <span class="brand-mark">FOX</span><span class="brand-suffix">Sports</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="{{ url_for('scores_hub') }}" class="nav-link">Scores</a>
+      <a href="{{ url_for('watch') }}" class="nav-link">Watch</a>
+      <a href="{{ url_for('betting_hub') }}" class="nav-link">Betting</a>
+      <a href="{{ url_for('stories_hub') }}" class="nav-link">Stories</a>
+      <a href="{{ url_for('shows_hub') }}" class="nav-link">Shows</a>
+      <a href="{{ url_for('personalities_hub') }}" class="nav-link">Personalities</a>
+    </nav>
+    <nav class="league-nav" aria-label="Leagues">
+      {% for slug, name in LEAGUES %}
+        <a href="/{{ slug }}" class="nav-link league-link">{{ name }}</a>
+      {% endfor %}
+    </nav>
+    <form class="header-search" action="{{ url_for('search') }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Search FOX Sports" value="{{ request.args.get('q','') }}" aria-label="Search FOX Sports">
+      <button type="submit" aria-label="Search"><span class="search-glyph">&#9906;</span></button>
+    </form>
+    <div class="header-account">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('favorites') }}" class="nav-link">My Favs</a>
+        <a href="{{ url_for('logout') }}" class="nav-link">Sign Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="nav-link">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Top Leagues</h4>
+        {% for slug, name in LEAGUES %}
+          <a href="/{{ slug }}">{{ name }}</a>
+        {% endfor %}
+      </div>
+      <div class="footer-col">
+        <h4>Top Shows</h4>
+        <a href="{{ url_for('shows_hub') }}">All Shows</a>
+        <a href="{{ url_for('watch') }}">Watch</a>
+        <a href="{{ url_for('personalities_hub') }}">Personalities</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="{{ url_for('scores_hub') }}">Scores</a>
+        <a href="{{ url_for('betting_hub') }}">Betting</a>
+        <a href="{{ url_for('stories_hub') }}">Stories</a>
+        <a href="/fox-super-6">FOX Super 6</a>
+      </div>
+    </div>
+    <p class="footer-note">FOX Sports mirror for offline agent evaluation &mdash; not affiliated with, endorsed by, or connected to Fox Media LLC. FOX SPORTS is a trademark of Fox Media LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

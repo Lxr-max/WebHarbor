@@ -1,0 +1,92 @@
+{
+  "site": "fox_sports",
+  "upstream": "https://www.foxsports.com/",
+  "upstream_note": "the declared upstream 'fox_sports.com' does not resolve (underscores are invalid in DNS hostnames); the mirror targets the real FOX Sports service at www.foxsports.com, the same normalization precedent as the dblp mirror (declared parked domain -> real dblp.org)",
+  "captured_at": "2026-09-30",
+  "capture_window_utc": [
+    "2026-09-30T08:04:53Z",
+    "2026-09-30T08:53:05Z"
+  ],
+  "capture_method": "direct HTTP (requests/urllib, Chrome UA) against the live Nuxt-SSR pages of www.foxsports.com; no WAF, bot check or login wall was encountered; every captured page returned HTTP 200 and was stored as raw HTML in scraped_data/captures/ with per-page .meta.json sidecars (url, status, bytes, UTC timestamp)",
+  "pages_captured": 1185,
+  "capture_breakdown": {
+    "home/league/betting/stories/scores hubs": 138,
+    "nfl (team pages, rosters, schedules, standings, stat leaders, news, boxscores)": 331,
+    "college-football (poll, team pages, schedules, boxscores)": 453,
+    "mlb (standings, wild-card series boxscores, schedules, news)": 136,
+    "stories (article pages with full bodies)": 120,
+    "shows (episode pages)": 17,
+    "personalities (video hub pages)": 109,
+    "nascar": 1
+  },
+  "sources": {
+    "www.foxsports.com": {
+      "role": "primary site: home, league hubs, standings, schedules, boxscores, rosters, stat leaders, player news, stories, shows, personalities, FOX Super 6, betting hub, NASCAR Cup standings, UFC results",
+      "pages_captured": 1185,
+      "http_status": {
+        "200": 1185
+      }
+    }
+  },
+  "images": {
+    "role": "team/league logos, story/show/personality artwork and headshots resolved from the captured pages' img and og:image URLs",
+    "files": 828,
+    "source_hosts": [
+      "a57.foxsports.com",
+      "b.fssta.com"
+    ],
+    "inventory": "asset_inventory.json",
+    "note": "every file was fetched from its upstream URL; no placeholders, duplicates or rescaled copies are used"
+  },
+  "source_data": {
+    "teams.json": "214 teams (32 NFL, 30 MLB, 152 CFB from standings, poll and team-page links)",
+    "standings.json": "NFL division tables, MLB division tables, CFB AP Top 25 poll",
+    "games.json": "315 games (finals with scores, schedules with odds) from boxscore pages and the scores/schedule hubs",
+    "game_details.json": "per-game payloads: team stats, team leaders, starting QBs, key players, FOX facts, odds notes, probable pitchers, key plays, recent games, player news",
+    "players.json": "3425 roster players with position/height/weight/college",
+    "player_stats.json": "league stat-leader boards (passing/rushing/receiving/sacks etc.)",
+    "team_info.json": "per-team next-game lines, records, ranks, logos",
+    "player_news.json": "1433 player news items with impact blurbs",
+    "stories.json": "120 stories with bodies, authors, leagues, published timestamps; hub-card time-ago and source matched by title",
+    "shows.json": "17 shows with 155 episodes",
+    "personalities.json": "109 personalities with 838 videos",
+    "home.json": "home hero/story/moment/live tiles",
+    "nascar.json": "NASCAR Cup standings, playoff grid, race schedule",
+    "ufc.json": "UFC results and upcoming events",
+    "super6.json": "the Week 3 NFL Pick 6 card (six real final matchups) from the FOX Super 6 hub"
+  },
+  "deterministic_fixtures": {
+    "benchmark_users": [
+      "alice.j@test.com",
+      "bob.c@test.com",
+      "carol.d@test.com",
+      "dana.k@test.com"
+    ],
+    "password": "TestPass123!",
+    "mirror_clock": "2026-09-30",
+    "timezone": "UTC",
+    "super6_fixtures": "Offline practice contest using six captured regular-season Week 3 final games. Locally authored deadline 2026-09-24 12:00PM and seeded user picks; immediate grading, no prizes. Original upstream reported no active games.",
+    "favorites_fixtures": "23 favorited teams/players/shows/personalities spread across the four benchmark users",
+    "reproducibility": "seed_data.py with PYTHONHASHSEED=0 rebuilds a byte-identical instance_seed/fox_sports.db from source_data/ (SQLite output is deterministic under the pinned toolchain)"
+  },
+  "not_captured": [
+    "live-score polling endpoints and video streams (the mirror freezes the captured snapshot instead)",
+    "FOX Sports account system (replaced by the mirror's own deterministic accounts)",
+    "Bally Live / FOX One app-only surfaces"
+  ],
+  "review_enrichment": {
+    "driver_pages": "Individual driver summaries use the existing captured NASCAR standings rows; no invented statistics. Following uses the local benchmark favorites system.",
+    "workflow_reference": "https://www.foxsports.com/nascar/denny-hamlin-driver",
+    "checked_at": "2026-09-30",
+    "http_status": 200,
+    "ravens_cowboys_event": {
+      "url": "https://www.foxsports.com/nfl/week-3-baltimore-ravens-vs-dallas-cowboys-sep-27-2026-game-boxscore-11137",
+      "fields": {
+        "venue": "Maracan\u00e3 Stadium",
+        "venue_city": "Rio de Janeiro, BRA",
+        "attendance": 72792
+      },
+      "source_html_sha256": "04d4ebb63fbab60dd45f0ae19e3e8846cd2d79887761aaa1cc220fa59ce9aa48"
+    }
+  }
+}

@@ -88,9 +88,9 @@ def test_tasks_and_verifiers_are_complete_and_use_site_24():
 def test_assets_pin_is_immutable_merged_revision():
     text = (ROOT / ".assets-revision").read_text()
     revision = re.search(r"^revision:\s*([0-9a-f]+)$", text, re.M).group(1)
-    # Merged HF PR #83 produces the immutable dataset-main revision with all
-    # 45 registered-site archives plus the unused Bandcamp archive.
-    assert revision == "eedc1a7f85118ab835eac38e04678fa85d141973"
+    # Merged HF PR #86 produces the immutable dataset-main revision with all
+    # 46 registered-site archives plus the unused Bandcamp archive.
+    assert revision == "df9a1b44a8c5639decc450706a20ac838e21716b"
     assert (SITE / ".build-generated-seed").is_file()
     assert (SITE / ".requires-images").is_file()
     assert (SITE / "asset_inventory.json").is_file()

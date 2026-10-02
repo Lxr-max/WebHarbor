@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('ports_landing') }}">Locate a Port of Entry</a> › {{ state_name }}</div>
+<h1 class="page-title">Ports of Entry — {{ state_name }}</h1>
+<table class="data">
+  <tr><th>Port Name</th><th>Location Address</th><th>Field Operation Office</th></tr>
+  {% for p in ports %}
+  <tr>
+    <td><a href="{{ url_for('port_detail', slug=p.slug) }}">{{ p.name }}</a></td>
+    <td>{{ p.address }}</td>
+    <td>{{ p.field_office }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

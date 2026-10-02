@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ building.name }} - Campus Map{% endblock %}
+{% block content %}
+<h1>{{ building.name }}</h1>
+<p class="page-sub">Official Building Name &middot; {{ building.category }}</p>
+
+<h2>Information</h2>
+<table class="list plain">
+  <tr><th>Official Building Name</th><td>{{ building.name }}</td></tr>
+  <tr><th>Address</th><td>{{ building.address }}<br>{{ building.city }}, {{ building.zip }}</td></tr>
+  <tr><th>Building Category</th><td>{{ building.category }}</td></tr>
+  {% if building.acronym %}<tr><th>Acronym</th><td>{{ building.acronym }}</td></tr>{% endif %}
+  <tr><th>Accessibility</th>
+      <td>
+        {% if building.ramp %}Ramp access available{% elif building.elevator %}Elevator access available{% else %}No accessibility notes recorded{% endif %}
+      </td></tr>
+  {% if building.website %}<tr><th>Website</th><td><a href="{{ building.website }}">{{ building.website }}</a></td></tr>{% endif %}
+  <tr><th>Coordinates</th><td>{{ building.lat }}, {{ building.lng }}</td></tr>
+</table>
+
+<p><a class="btn small" href="{{ url_for('campus_map', category=building.category) }}">&laquo; More {{ building.category }} buildings</a></p>
+{% endblock %}

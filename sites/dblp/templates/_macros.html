@@ -1,0 +1,29 @@
+{% macro cite_line(p, show_venue=True) -%}
+<cite class="data tts-content">
+  {%- for pa in p.authors() -%}
+    {%- if not loop.first %}, {% endif %}{% if loop.last and not loop.first %} and {% endif -%}
+    <a href="/pid/{{ pa.author_pid }}.html">{{ pa.name }}</a>
+  {%- endfor -%}
+  {%- if p.authors() %}:<br> {% endif -%}
+  <span class="title">{{ p.title }}</span>
+  {%- if show_venue %} <a href="/db/{{ p.stream }}/index.html">{{ p.booktitle or p.journal }}</a>
+  {%- if p.volume %} {{ p.volume }}{% if p.number %}({{ p.number }}){% endif %}{% endif -%}
+  {%- if p.pages %}: {{ p.pages }}{% endif -%}
+  {%- endif %} ({{ p.year }})
+</cite>
+{%- endmacro %}
+
+{% macro publ_nav(p) -%}
+<nav class="publ">
+  <ul>
+    {% if p.ee_list() %}
+    <li class="ee"><a href="{{ p.ee_list()[0] }}" rel="nofollow">
+      <img alt="" src="{{ img('paper.dark.16x16') or '' }}" class="icon">electronic edition via DOI</a></li>
+    {% endif %}
+    <li class="details"><a href="/rec/{{ p.rec_key }}.html">
+      <img alt="" src="{{ img('info.dark.16x16') or '' }}" class="icon">details &amp; citations</a></li>
+    <li class="bibtex"><a href="/rec/{{ p.rec_key }}.bib">
+      <img alt="" src="{{ img('bibtex.dark.16x16') or '' }}" class="icon">BibTeX</a></li>
+  </ul>
+</nav>
+{%- endmacro %}

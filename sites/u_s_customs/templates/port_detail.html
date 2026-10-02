@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('ports_landing') }}">Locate a Port of Entry</a> › <a href="{{ url_for('ports_state', state=port.state) }}">{{ port.state }}</a> › {{ port.name }}</div>
+<h1 class="page-title">{{ port.name }}</h1>
+{% if port.code %}<p class="note">Port Code {{ port.code }}</p>{% endif %}
+{% if user.is_authenticated %}
+<form method="post" action="{{ url_for('save_port', port_id=port.id) }}" style="margin-bottom:1rem;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn btn-ghost" type="submit">Save this port to My Account</button>
+</form>
+{% endif %}
+<table class="data">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Location Address</td><td>{{ port.address }}</td></tr>
+  {% if port.phone %}<tr><td>Phone</td><td>{{ port.phone }}</td></tr>{% endif %}
+  {% if port.fax %}<tr><td>Fax</td><td>{{ port.fax }}</td></tr>{% endif %}
+  {% if port.director %}<tr><td>Port Director</td><td>{{ port.director }}</td></tr>{% endif %}
+  <tr><td>Field Operation Office</td><td>{{ port.field_office }}</td></tr>
+  {% if port.hours %}<tr><td>Office Hours</td><td>{{ port.hours }}</td></tr>{% endif %}
+  {% if port.directions %}<tr><td>Directions to Port Office</td><td>{{ port.directions }}</td></tr>{% endif %}
+  {% if port.facilities %}<tr><td>Facilities and Crossings</td><td>{{ port.facilities }}</td></tr>{% endif %}
+  {% if port.last_modified %}<tr><td>Last Modified</td><td>{{ port.last_modified }}</td></tr>{% endif %}
+</table>
+{% if related %}
+<section>
+  <h2>Other ports in the {{ port.field_office }} Field Office</h2>
+  <ul>
+    {% for p in related %}<li><a href="{{ url_for('port_detail', slug=p.slug) }}">{{ p.name }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

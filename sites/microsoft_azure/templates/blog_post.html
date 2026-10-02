@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} — {{ brand }}{% endblock %}
+{% block content %}
+<article class="shell">
+  <nav class="crumbs"><a href="{{ url_for('blog') }}">Azure Blog</a> / <span>{{ post.title|truncate(50) }}</span></nav>
+  <h1>{{ post.title }}</h1>
+  <p class="card-meta">{{ post.content_type|replace('-', ' ')|title }} · {{ post.date }} · {{ post.read_time }}</p>
+  <img class="story-hero" src="{{ img(post.image) }}" alt="">
+  <p class="lead">{{ post.excerpt }}</p>
+</article>
+{% endblock %}

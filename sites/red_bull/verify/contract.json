@@ -1,0 +1,1330 @@
+{
+  "Red Bull--0": {
+    "task": "I ride soft-boards and want to enter the Red Bull Foam Wreckers stop at Virginia Beach this October. Check the board requirement, spectator admission and check-in schedule so I can plan the day with a friend. Register me as Casey Rider, casey.rider@example.com, and report the venue, event date, check-in window, entry fee and my confirmation code.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "event_registrations": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "registration_code": {
+              "regex": "RB[A-F0-9]{8}"
+            },
+            "user_id": null,
+            "event_id": 3,
+            "ticket_type": "Red Bull Foam Wreckers - Northeast Region",
+            "first_name": "Casey",
+            "last_name": "Rider",
+            "email": "casey.rider@example.com",
+            "price": 20.0,
+            "currency": "USD",
+            "status": "confirmed",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/red\\-bull\\-foam\\-wreckers\\-virginia\\-beach(?:$|\\?)",
+      "/events/red\\-bull\\-foam\\-wreckers\\-virginia\\-beach/faqs(?:$|\\?)",
+      "/events/red\\-bull\\-foam\\-wreckers\\-virginia\\-beach/register/confirmation/RB(?:-\\d{6}|[A-F0-9]{8})(?:$|\\?)",
+      "/events/red\\-bull\\-foam\\-wreckers\\-virginia\\-beach/schedule(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Foam Wreckers - Virginia Beach, VA date",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+3,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Virginia Beach, VA venue",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*virginia\\s+beach\\s+oceanfront(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Virginia Beach, VA fee",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*\\$20\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Virginia Beach, VA code",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*rb[a-f0-9]{8}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Participation board",
+        "participation(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?board\\s*(?:is|was|are|were|of|at|=)?\\s*soft\\s*-\\s*top\\s+foam\\s+board\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "Participation spectators",
+        "participation(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?spectators\\s*(?:is|was|are|were|of|at|=)?\\s*free\\s+admission(?!\\w|\\.\\d)"
+      ],
+      [
+        "Participation check in",
+        "participation(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?check\\s+in\\s*(?:is|was|are|were|of|at|=)?\\s*9\\s+am\\s+to\\s+10\\s+am(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "event_registrations",
+        "registration_code"
+      ]
+    ]
+  },
+  "Red Bull--1": {
+    "task": "Find every upcoming US event on the calendar whose card shows open registrations. Compare their entry fees and register me for the cheapest event that charges a fee as Sam Porter, sam.porter@example.com. Tell me which eligible events are free or paid, the chosen event's venue and date, and my registration code.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "event_registrations": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "registration_code": {
+              "regex": "RB[A-F0-9]{8}"
+            },
+            "user_id": null,
+            "event_id": 39,
+            "ticket_type": "Red Bull Foam Wreckers - Carolina Beach",
+            "first_name": "Sam",
+            "last_name": "Porter",
+            "email": "sam.porter@example.com",
+            "price": 10.0,
+            "currency": "USD",
+            "status": "confirmed",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events(?:$|\\?)",
+      "/events/foam\\-wreckers\\-carolina\\-beach(?:$|\\?)",
+      "/events/foam\\-wreckers\\-carolina\\-beach/register/confirmation/RB(?:-\\d{6}|[A-F0-9]{8})(?:$|\\?)",
+      "/events/red\\-bull\\-foam\\-wreckers\\-virginia\\-beach(?:$|\\?)",
+      "/events/red\\-bull\\-rapid\\-release(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Foam Wreckers - Carolina Beach date",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|red\\s+bull\\s+rapid\\s+release|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+24,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Carolina Beach venue",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|red\\s+bull\\s+rapid\\s+release|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*carolina\\s+beach\\s+boardwalk,\\s+carolina\\s+beach,\\s+united\\s+states(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Carolina Beach fee",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|red\\s+bull\\s+rapid\\s+release|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*\\$10\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Carolina Beach code",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|red\\s+bull\\s+rapid\\s+release|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*rb[a-f0-9]{8}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Foam Wreckers - Virginia Beach, VA fee",
+        "red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach|red\\s+bull\\s+rapid\\s+release|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*\\$20\\s+\\$(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Rapid Release fee",
+        "red\\s+bull\\s+rapid\\s+release(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach|red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|selection)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*free(?!\\w|\\.\\d)"
+      ],
+      [
+        "Selection reason",
+        "selection(?:(?!(?:red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+carolina\\s+beach|red\\s+bull\\s+foam\\s+wreckers\\s+\\s*-\\s*\\s+virginia\\s+beach,\\s+va|red\\s+bull\\s+rapid\\s+release)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?reason\\s*(?:is|was|are|were|of|at|=)?\\s*carolina\\s+beach\\s+is\\s+the\\s+cheapest\\s+paid\\s+option\\s+at\\s+\\$10(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "event_registrations",
+        "registration_code"
+      ]
+    ]
+  },
+  "Red Bull--2": {
+    "task": "Compare the German DTM rounds at the N\u00fcrburgring, Hockenheimring and Sachsenring for a motorsport itinerary. For each round, check the full date range, venue and status, and summarize its detail-page description. Put the rounds in chronological order and calculate the gaps from the end of one round to the start of the next so I can compare the travel windows.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/events/dtm\\-hockenheimring(?:$|\\?)",
+      "/events/dtm\\-nuerburgring(?:$|\\?)",
+      "/events/dtm\\-sachsenring(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "DTM \u2013 N\u00fcrburgring date",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*august\\s+15\\s+\\s*-\\s*\\s+16,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 N\u00fcrburgring venue",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*n\u00fcrburgring(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 N\u00fcrburgring status",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?status\\s*(?:is|was|are|were|of|at|=)?\\s*past(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 N\u00fcrburgring description",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?description\\s*(?:is|was|are|were|of|at|=)?\\s*sixth\\s+stop\\s+of\\s+the\\s+2026\\s+dtm\\s+season(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring date",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+12\\s+\\s*-\\s*\\s+13,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring venue",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*sachsenring(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring status",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?status\\s*(?:is|was|are|were|of|at|=)?\\s*past(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring description",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+hockenheimring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?description\\s*(?:is|was|are|were|of|at|=)?\\s*seventh\\s+stop\\s+of\\s+the\\s+2026\\s+dtm\\s+season(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Hockenheimring date",
+        "dtm\\s+\\s*-\\s*\\s+hockenheimring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+10\\s+\\s*-\\s*\\s+11,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Hockenheimring venue",
+        "dtm\\s+\\s*-\\s*\\s+hockenheimring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*hockenheimring(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Hockenheimring status",
+        "dtm\\s+\\s*-\\s*\\s+hockenheimring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?status\\s*(?:is|was|are|were|of|at|=)?\\s*upcoming(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Hockenheimring description",
+        "dtm\\s+\\s*-\\s*\\s+hockenheimring(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|itinerary)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?description\\s*(?:is|was|are|were|of|at|=)?\\s*eighth\\s+and\\s+final\\s+stop\\s+of\\s+the\\s+2026\\s+dtm\\s+season(?!\\w|\\.\\d)"
+      ],
+      [
+        "Itinerary order",
+        "itinerary(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?order\\s*(?:is|was|are|were|of|at|=)?\\s*n\u00fcrburgring,\\s+sachsenring,\\s+hockenheimring(?!\\w|\\.\\d)"
+      ],
+      [
+        "Itinerary first gap",
+        "itinerary(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+gap\\s*(?:is|was|are|were|of|at|=)?\\s*27\\s+days(?!\\w|\\.\\d)"
+      ],
+      [
+        "Itinerary second gap",
+        "itinerary(?:(?!(?:dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+hockenheimring)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?second\\s+gap\\s*(?:is|was|are|were|of|at|=)?\\s*27\\s+days(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--3": {
+    "task": "I'm Carol (carol.d@test.com, TestPass123!), considering the Polignano a Mare cliff-diving stop. Check its venue and dates and use the linked world-series page to place it within the tour. Report the tour description and its stops with countries, then save the Polignano event to my favorites and confirm it appears there.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "kind": "event",
+            "item_slug": "red-bull-cliff-diving-world-series-polignano-a-mare-italy"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/event\\-series/red\\-bull\\-cliff\\-diving(?:$|\\?)",
+      "/events/red\\-bull\\-cliff\\-diving\\-world\\-series\\-polignano\\-a\\-mare\\-italy(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Cliff Diving World Series - Polignano a Mare date",
+        "red\\s+bull\\s+cliff\\s+diving\\s+world\\s+series\\s+\\s*-\\s*\\s+polignano\\s+a\\s+mare(?:(?!(?:world\\s+series)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+25\\s+\\s*-\\s*\\s+27,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Cliff Diving World Series - Polignano a Mare venue",
+        "red\\s+bull\\s+cliff\\s+diving\\s+world\\s+series\\s+\\s*-\\s*\\s+polignano\\s+a\\s+mare(?:(?!(?:world\\s+series)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*polignano\\s+a\\s+mare(?!\\w|\\.\\d)"
+      ],
+      [
+        "World series description",
+        "world\\s+series(?:(?!(?:red\\s+bull\\s+cliff\\s+diving\\s+world\\s+series\\s+\\s*-\\s*\\s+polignano\\s+a\\s+mare)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?description\\s*(?:is|was|are|were|of|at|=)?\\s*12\\s+men\\s+and\\s+12\\s+women\\s+compete\\s+in\\s+acrobatic\\s+dives\\s+from\\s+27\\s+and\\s+21\\s+metres\\s+respectively(?!\\w|\\.\\d)"
+      ],
+      [
+        "World series stops",
+        "world\\s+series(?:(?!(?:red\\s+bull\\s+cliff\\s+diving\\s+world\\s+series\\s+\\s*-\\s*\\s+polignano\\s+a\\s+mare)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?stops\\s*(?:is|was|are|were|of|at|=)?\\s*mostar,\\s+bosnia\\s+and\\s+herzegovina;\\s+polignano\\s+a\\s+mare,\\s+italy(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--4": {
+    "task": "Register Dana Kim, dana.k@example.com, for the October basketball free-throw event at the Burbank Restaurant in Baton Rouge. Before entering, check the FAQ's team-capacity limit and the participant check-in schedule. Report the venue, date, entry fee, check-in opening time, team limit and successful registration code.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "event_registrations": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "registration_code": {
+              "regex": "RB[A-F0-9]{8}"
+            },
+            "user_id": null,
+            "event_id": 13,
+            "ticket_type": "Red Bull Rapid Release",
+            "first_name": "Dana",
+            "last_name": "Kim",
+            "email": "dana.k@example.com",
+            "price": null,
+            "currency": null,
+            "status": "confirmed",
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/red\\-bull\\-rapid\\-release(?:$|\\?)",
+      "/events/red\\-bull\\-rapid\\-release/faqs(?:$|\\?)",
+      "/events/red\\-bull\\-rapid\\-release/register/confirmation/RB(?:-\\d{6}|[A-F0-9]{8})(?:$|\\?)",
+      "/events/red\\-bull\\-rapid\\-release/schedule(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Rapid Release date",
+        "red\\s+bull\\s+rapid\\s+release(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+8,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Rapid Release venue",
+        "red\\s+bull\\s+rapid\\s+release(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*walk\\s*-\\s*on's\\s+sports\\s+bistreaux\\s+\\s*-\\s*\\s+burbank\\s+restaurant,\\s+baton\\s+rouge,\\s+united\\s+states(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Rapid Release fee",
+        "red\\s+bull\\s+rapid\\s+release(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*free(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Rapid Release code",
+        "red\\s+bull\\s+rapid\\s+release(?:(?!(?:participation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*rb[a-f0-9]{8}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Participation check in",
+        "participation(?:(?!(?:red\\s+bull\\s+rapid\\s+release)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?check\\s+in\\s*(?:is|was|are|were|of|at|=)?\\s*6\\s+pm(?!\\w|\\.\\d)"
+      ],
+      [
+        "Participation capacity",
+        "participation(?:(?!(?:red\\s+bull\\s+rapid\\s+release)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?capacity\\s*(?:is|was|are|were|of|at|=)?\\s*50\\s+teams\\s+of\\s+2(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "event_registrations",
+        "registration_code"
+      ]
+    ]
+  },
+  "Red Bull--5": {
+    "task": "Help me choose between the Original, Summer Edition and Summer Edition Sugarfree drinks. Compare their flavors, caffeine and sugar per 8.4 fl oz can, and available sizes. Recommend the option that keeps the Summer flavor without sugar, explaining whether that changes the caffeine amount.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/energydrink/red\\-bull\\-energy\\-drink(?:$|\\?)",
+      "/energydrink/red\\-bull\\-summer\\-edition(?:$|\\?)",
+      "/energydrink/red\\-bull\\-summer\\-edition\\-sugarfree(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "The Original Red Bull flavor",
+        "the\\s+original\\s+red\\s+bull(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*original(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Original Red Bull caffeine",
+        "the\\s+original\\s+red\\s+bull(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Original Red Bull sugar",
+        "the\\s+original\\s+red\\s+bull(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*27\\s+g(?!\\w|\\.\\d)"
+      ],
+      [
+        "The Original Red Bull sizes",
+        "the\\s+original\\s+red\\s+bull(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz,\\s+16\\s+fl\\s+oz,\\s+20\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition flavor",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*sudachi\\s+lime(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition caffeine",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition sugar",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*26\\s+g(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition sizes",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree flavor",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*sudachi\\s+lime(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree caffeine",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree sugar",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*sugarfree;\\s+exact\\s+quantity\\s+not\\s+listed(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree sizes",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Recommendation choice",
+        "recommendation(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?choice\\s*(?:is|was|are|were|of|at|=)?\\s*summer\\s+edition\\s+sugarfree(?!\\w|\\.\\d)"
+      ],
+      [
+        "Recommendation reason",
+        "recommendation(?:(?!(?:the\\s+original\\s+red\\s+bull|red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?reason\\s*(?:is|was|are|were|of|at|=)?\\s*same\\s+sudachi\\s+lime\\s+flavor\\s+and\\s+80\\s+mg\\s+caffeine,\\s+sugarfree\\s+instead\\s+of\\s+26\\s+g\\s+sugar(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--6": {
+    "task": "I'm compiling a short introduction to Red Bull's United Kingdom athletes. Find every UK athlete and consult each profile for their discipline, career start year and one biographical detail. Present the athletes in career-start order, making it clear if a profile does not provide a year.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/athletes/gee\\-atherton(?:$|\\?)",
+      "/athletes/rachel\\-atherton(?:$|\\?)",
+      "/athletes/sky\\-brown(?:$|\\?)",
+      "/athletes/zoe\\-backstedt(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Gee Atherton discipline",
+        "gee\\s+atherton(?:(?!(?:rachel\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?discipline\\s*(?:is|was|are|were|of|at|=)?\\s*mountainbike\\s+downhill(?!\\w|\\.\\d)"
+      ],
+      [
+        "Gee Atherton career start",
+        "gee\\s+atherton(?:(?!(?:rachel\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?career\\s+start\\s*(?:is|was|are|were|of|at|=)?\\s*2001(?!\\w|\\.\\d)"
+      ],
+      [
+        "Gee Atherton biography",
+        "gee\\s+atherton(?:(?!(?:rachel\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?biography\\s*(?:is|was|are|were|of|at|=)?\\s*multiple\\s+world\\s+champion(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rachel Atherton discipline",
+        "rachel\\s+atherton(?:(?!(?:gee\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?discipline\\s*(?:is|was|are|were|of|at|=)?\\s*mountainbike\\s+downhill(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rachel Atherton career start",
+        "rachel\\s+atherton(?:(?!(?:gee\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?career\\s+start\\s*(?:is|was|are|were|of|at|=)?\\s*2007(?!\\w|\\.\\d)"
+      ],
+      [
+        "Rachel Atherton biography",
+        "rachel\\s+atherton(?:(?!(?:gee\\s+atherton|sky\\s+brown|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?biography\\s*(?:is|was|are|were|of|at|=)?\\s*only\\s+perfect\\s+season\\s+in\\s+mtb\\s+history(?!\\w|\\.\\d)"
+      ],
+      [
+        "Sky Brown discipline",
+        "sky\\s+brown(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?discipline\\s*(?:is|was|are|were|of|at|=)?\\s*surfing\\s+competition\\s+/\\s+skateboard\\s+park(?!\\w|\\.\\d)"
+      ],
+      [
+        "Sky Brown career start",
+        "sky\\s+brown(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?career\\s+start\\s*(?:is|was|are|were|of|at|=)?\\s*2018(?!\\w|\\.\\d)"
+      ],
+      [
+        "Sky Brown biography",
+        "sky\\s+brown(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|zoe\\s+backstedt|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?biography\\s*(?:is|was|are|were|of|at|=)?\\s*2\\s*-\\s*time\\s+olympic\\s+medallist(?!\\w|\\.\\d)"
+      ],
+      [
+        "Zoe Backstedt discipline",
+        "zoe\\s+backstedt(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|sky\\s+brown|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?discipline\\s*(?:is|was|are|were|of|at|=)?\\s*road\\s+cycling(?!\\w|\\.\\d)"
+      ],
+      [
+        "Zoe Backstedt career start",
+        "zoe\\s+backstedt(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|sky\\s+brown|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?career\\s+start\\s*(?:is|was|are|were|of|at|=)?\\s*not\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "Zoe Backstedt biography",
+        "zoe\\s+backstedt(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|sky\\s+brown|career\\s+chronology)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?biography\\s*(?:is|was|are|were|of|at|=)?\\s*junior\\s+road\\s+world\\s+champion(?!\\w|\\.\\d)"
+      ],
+      [
+        "Career chronology order",
+        "career\\s+chronology(?:(?!(?:gee\\s+atherton|rachel\\s+atherton|sky\\s+brown|zoe\\s+backstedt)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?order\\s*(?:is|was|are|were|of|at|=)?\\s*gee\\s+atherton\\s+2001,\\s+rachel\\s+atherton\\s+2007,\\s+sky\\s+brown\\s+2018;\\s+zoe\\s+backstedt\\s+year\\s+unavailable(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--7": {
+    "task": "I'm choosing a film for a board-sports evening. Compare the first two Snowboarding films with the first Surfing film in the catalog. Give each title, runtime and synopsis, then identify the shortest option and explain which sport it covers.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/films/9191(?:$|\\?)",
+      "/films/chrysalis\\-an\\-izzi\\-gomez\\-surf\\-film(?:$|\\?)",
+      "/films/volare\\-valentino\\-guseli(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "9191 runtime",
+        "9191(?:(?!(?:volare\\s+valentino\\s+guseli|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?runtime\\s*(?:is|was|are|were|of|at|=)?\\s*23\\s+min(?!\\w|\\.\\d)"
+      ],
+      [
+        "9191 synopsis",
+        "9191(?:(?!(?:volare\\s+valentino\\s+guseli|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?synopsis\\s*(?:is|was|are|were|of|at|=)?\\s*gigi\\s+r\u00fcf\\s+stars\\s+in\\s+an\\s+introspective\\s+dreamscape\\s+documenting\\s+1\\s+season\\s+in\\s+a\\s+life\\s+of\\s+snowboarding\\s+exploration\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Volare: Valentino Guseli runtime",
+        "volare\\s+valentino\\s+guseli(?:(?!(?:9191|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?runtime\\s*(?:is|was|are|were|of|at|=)?\\s*44\\s+min(?!\\w|\\.\\d)"
+      ],
+      [
+        "Volare: Valentino Guseli synopsis",
+        "volare\\s+valentino\\s+guseli(?:(?!(?:9191|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?synopsis\\s*(?:is|was|are|were|of|at|=)?\\s*valentino\\s+guseli\\s+shares\\s+his\\s+journey\\s+mastering\\s+3\\s+snowboard\\s+disciplines\\s+big\\s+air,\\s+slopestyle\\s+and\\s+halfpipe\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Chrysalis: An Izzi Gomez Surf Film runtime",
+        "chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film(?:(?!(?:9191|volare\\s+valentino\\s+guseli|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?runtime\\s*(?:is|was|are|were|of|at|=)?\\s*17\\s+min(?!\\w|\\.\\d)"
+      ],
+      [
+        "Chrysalis: An Izzi Gomez Surf Film synopsis",
+        "chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film(?:(?!(?:9191|volare\\s+valentino\\s+guseli|shortest\\s+choice)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?synopsis\\s*(?:is|was|are|were|of|at|=)?\\s*izzi\\s+gomez\\s+returns\\s+to\\s+the\\s+place\\s+she\\s+feels\\s+most\\s+at\\s+home\\s+the\\s+biggest\\s+waves\\s+the\\s+surf\\s+world\\s+has\\s+to\\s+offer\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Shortest choice title",
+        "shortest\\s+choice(?:(?!(?:9191|volare\\s+valentino\\s+guseli|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?title\\s*(?:is|was|are|were|of|at|=)?\\s*chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film(?!\\w|\\.\\d)"
+      ],
+      [
+        "Shortest choice sport",
+        "shortest\\s+choice(?:(?!(?:9191|volare\\s+valentino\\s+guseli|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sport\\s*(?:is|was|are|were|of|at|=)?\\s*surfing(?!\\w|\\.\\d)"
+      ],
+      [
+        "Shortest choice runtime",
+        "shortest\\s+choice(?:(?!(?:9191|volare\\s+valentino\\s+guseli|chrysalis\\s+an\\s+izzi\\s+gomez\\s+surf\\s+film)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?runtime\\s*(?:is|was|are|were|of|at|=)?\\s*17\\s+min(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--8": {
+    "task": "I'm choosing a snowboarding show to follow. Compare every show returned by the Snowboarding filter, giving each show's premise, season and episode counts and first episode title when available. Recommend the show with fewer episodes for a shorter commitment and explain your choice.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/shows/all\\-day\\-sj\\-show(?:$|\\?)",
+      "/shows/brothers\\-mcmorris\\-show(?:$|\\?)",
+      "/shows/dual\\-focus(?:$|\\?)",
+      "/shows/glimpse(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Glimpse/ seasons",
+        "glimpse/(?:(?!(?:all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?seasons\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Glimpse/ episodes",
+        "glimpse/(?:(?!(?:all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?episodes\\s*(?:is|was|are|were|of|at|=)?\\s*10(?!\\w|\\.\\d)"
+      ],
+      [
+        "Glimpse/ premise",
+        "glimpse/(?:(?!(?:all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?premise\\s*(?:is|was|are|were|of|at|=)?\\s*scotty\\s+james\\s+invites\\s+us\\s+behind\\s+the\\s+scenes\\s+as\\s+he\\s+prepares\\s+for\\s+a\\s+winter\\s+that\\s+promises\\s+to\\s+be\\s+unique\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Glimpse/ first episode",
+        "glimpse/(?:(?!(?:all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+episode\\s*(?:is|was|are|were|of|at|=)?\\s*not\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "All Day SJ seasons",
+        "all\\s+day\\s+sj(?:(?!(?:glimpse/|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?seasons\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "All Day SJ episodes",
+        "all\\s+day\\s+sj(?:(?!(?:glimpse/|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?episodes\\s*(?:is|was|are|were|of|at|=)?\\s*7(?!\\w|\\.\\d)"
+      ],
+      [
+        "All Day SJ premise",
+        "all\\s+day\\s+sj(?:(?!(?:glimpse/|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?premise\\s*(?:is|was|are|were|of|at|=)?\\s*join\\s+scotty\\s+james\\s+on\\s+his\\s+journey\\s+as\\s+he\\s+navigates\\s+through\\s+the\\s+action\\s+sports\\s+industry\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "All Day SJ first episode",
+        "all\\s+day\\s+sj(?:(?!(?:glimpse/|brothers\\s+mcmorris|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+episode\\s*(?:is|was|are|were|of|at|=)?\\s*not\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brothers McMorris seasons",
+        "brothers\\s+mcmorris(?:(?!(?:glimpse/|all\\s+day\\s+sj|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?seasons\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brothers McMorris episodes",
+        "brothers\\s+mcmorris(?:(?!(?:glimpse/|all\\s+day\\s+sj|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?episodes\\s*(?:is|was|are|were|of|at|=)?\\s*3(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brothers McMorris premise",
+        "brothers\\s+mcmorris(?:(?!(?:glimpse/|all\\s+day\\s+sj|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?premise\\s*(?:is|was|are|were|of|at|=)?\\s*mark\\s+and\\s+craig\\s+mcmorris\\s+explore\\s+3\\s+distinct\\s+disciplines\\s+of\\s+snowboarding\\s+with\\s+some\\s+of\\s+their\\s+heroes\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Brothers McMorris first episode",
+        "brothers\\s+mcmorris(?:(?!(?:glimpse/|all\\s+day\\s+sj|dual\\s+focus|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+episode\\s*(?:is|was|are|were|of|at|=)?\\s*not\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "Dual Focus seasons",
+        "dual\\s+focus(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?seasons\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Dual Focus episodes",
+        "dual\\s+focus(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?episodes\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Dual Focus premise",
+        "dual\\s+focus(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?premise\\s*(?:is|was|are|were|of|at|=)?\\s*discover\\s+how\\s+6\\s+of\\s+the\\s+world's\\s+best\\s+winter\\s+sports\\s+athletes\\s+spend\\s+their\\s+time\\s+when\\s+they're\\s+off\\s+the\\s+snow\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Dual Focus first episode",
+        "dual\\s+focus(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|recommendation)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?first\\s+episode\\s*(?:is|was|are|were|of|at|=)?\\s*not\\s+provided(?!\\w|\\.\\d)"
+      ],
+      [
+        "Recommendation show",
+        "recommendation(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?show\\s*(?:is|was|are|were|of|at|=)?\\s*dual\\s+focus(?!\\w|\\.\\d)"
+      ],
+      [
+        "Recommendation reason",
+        "recommendation(?:(?!(?:glimpse/|all\\s+day\\s+sj|brothers\\s+mcmorris|dual\\s+focus)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?reason\\s*(?:is|was|are|were|of|at|=)?\\s*1\\s+episode,\\s+fewer\\s+than\\s+the\\s+other\\s+shows(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--9": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), researching the 2026 Red Bull Dance Your Style USA final. Find the winner's story and cross-check it against the linked national-final event. Tell me the winner's name, age and home state, the final's venue and date, then save the story to my favorites for later reading.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 1,
+            "kind": "story",
+            "item_slug": "jreamz-wins-2026-red-bull-dance-your-style-national-final"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/red\\-bull\\-dance\\-your\\-style\\-national\\-final\\-usa(?:$|\\?)",
+      "/stories/jreamz\\-wins\\-2026\\-red\\-bull\\-dance\\-your\\-style\\-national\\-final(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Dance Your Style National Final USA date",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa(?:(?!(?:usa\\s+winner)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+19,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Dance Your Style National Final USA venue",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa(?:(?!(?:usa\\s+winner)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*tampa,\\s+fl(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner name",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?name\\s*(?:is|was|are|were|of|at|=)?\\s*jreamz(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner age",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?age\\s*(?:is|was|are|were|of|at|=)?\\s*18(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner home state",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?home\\s+state\\s*(?:is|was|are|were|of|at|=)?\\s*arizona(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--10": {
+    "task": "I'm Alice Johnson (alice.j@test.com, TestPass123!), buying two affordable Oracle Red Bull Racing hats. Find the cheapest headwear item from that brand and order two in any available size. Ship them to Alice Johnson, alice.j@test.com, 1 Main St, Seattle, 98101. Report the chosen item, size, unit price, order number and total.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "shop_order_lines": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "order_id": {
+              "regex": "\\d+"
+            },
+            "variant_id": 161,
+            "product_title": "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap",
+            "variant_title": "One size / Gray",
+            "sku": "M-RBR26264001",
+            "unit_price": 33.95,
+            "quantity": 2
+          }
+        ],
+        "updated": {}
+      },
+      "shop_orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "order_number": {
+              "regex": "RB-\\d{6}"
+            },
+            "user_id": 1,
+            "status": "confirmed",
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            },
+            "total": 67.9,
+            "ship_name": "Alice Johnson",
+            "ship_email": "alice.j@test.com",
+            "ship_address": "1 Main St",
+            "ship_city": "Seattle",
+            "ship_zip": "98101"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/cart(?:$|\\?)",
+      "/shop/oracle\\-red\\-bull\\-racing\\-monobranded\\-9forty\\-orbr\\-cap(?:$|\\?)",
+      "/shop/orders/RB(?:-\\d{6}|[A-F0-9]{8})(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap size",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:order)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?size\\s*(?:is|was|are|were|of|at|=)?\\s*1\\s+size\\s+/\\s+gray(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap unit price",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:order)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?unit\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$33\\.95(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap quantity",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:order)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?quantity\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order number",
+        "order(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?number\\s*(?:is|was|are|were|of|at|=)?\\s*rb-\\d{6}(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:total|cost|charged)\\s*(?:is|was|are|were|of|at|=)?\\s*\\$67\\.90(?!\\w|\\.\\d)"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "shop_orders",
+        "right": "shop_order_lines",
+        "foreign_key": "order_id"
+      }
+    ],
+    "answer_state": [
+      [
+        "shop_orders",
+        "order_number"
+      ]
+    ]
+  },
+  "Red Bull--11": {
+    "task": "I want an Oracle Red Bull Racing hoodie and hat. Check the Classic Hoodie's material, category and XS price, then pair it with the brand's cheapest headwear item in any available size. Add one hoodie in any available size and one hat to the cart without checking out, and report the selected sizes, each price and combined subtotal.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "variant_id": {
+              "one_of": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            },
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          },
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "variant_id": 161,
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/cart(?:$|\\?)",
+      "/shop/oracle\\-red\\-bull\\-racing\\-classic\\-longsleeve\\-polo\\-copy(?:$|\\?)",
+      "/shop/oracle\\-red\\-bull\\-racing\\-monobranded\\-9forty\\-orbr\\-cap(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Oracle Red Bull Racing Classic Hoodie size",
+        "oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?size\\s*(?:is|was|are|were|of|at|=)?\\s*(?:s|m|l|xl|xxl|3xl)\\s*/\\s*brown/other(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Classic Hoodie unit price",
+        "oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?unit\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$114\\.95(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Classic Hoodie quantity",
+        "oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?quantity\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap size",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?size\\s*(?:is|was|are|were|of|at|=)?\\s*1\\s+size\\s+/\\s+gray(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap unit price",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?unit\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$33\\.95(?!\\w|\\.\\d)"
+      ],
+      [
+        "Oracle Red Bull Racing Monobranded 9Forty ORBR Cap quantity",
+        "oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|cart|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?quantity\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|hoodie\\s+details)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?subtotal\\s*(?:is|was|are|were|of|at|=)?\\s*\\$148\\.90(?!\\w|\\.\\d)"
+      ],
+      [
+        "Hoodie details material",
+        "hoodie\\s+details(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?material\\s*(?:is|was|are|were|of|at|=)?\\s*65%\\s+cotton,\\s+35%\\s+polyester(?!\\w|\\.\\d)"
+      ],
+      [
+        "Hoodie details category",
+        "hoodie\\s+details(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?category\\s*(?:is|was|are|were|of|at|=)?\\s*sweatshirt(?!\\w|\\.\\d)"
+      ],
+      [
+        "Hoodie details XS price",
+        "hoodie\\s+details(?:(?!(?:oracle\\s+red\\s+bull\\s+racing\\s+classic\\s+hoodie|oracle\\s+red\\s+bull\\s+racing\\s+monobranded\\s+9forty\\s+orbr\\s+cap|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?xs\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$114\\.95(?!\\w|\\.\\d)"
+      ]
+    ],
+    "same_cart_token": true,
+    "cart_answers": true
+  },
+  "Red Bull--12": {
+    "task": "Build me an FC Red Bull Salzburg gift bundle using the two cheapest products in the shop. Put one of the cheapest and two of the second-cheapest product in my cart, in any available sizes. Tell me the brand's product count, both chosen titles, sizes and unit prices, and the final quantities and subtotal. Leave the bundle ready for checkout.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "variant_id": 229,
+            "quantity": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          },
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "variant_id": {
+              "one_of": [
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            },
+            "quantity": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/cart(?:$|\\?)",
+      "/shop/fc\\-red\\-bull\\-salzburg\\-trazom\\-t\\-shirt\\-ii(?:$|\\?)",
+      "/shop/fc\\-red\\-bull\\-salzburg\\-trazom\\-tote\\-bag(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "FC Red Bull Salzburg Trazom Tote Bag size",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?size\\s*(?:is|was|are|were|of|at|=)?\\s*1\\s+size\\s+/\\s+black(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg Trazom Tote Bag unit price",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?unit\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$14\\.95(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg Trazom Tote Bag quantity",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?quantity\\s*(?:is|was|are|were|of|at|=)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg Trazom T-Shirt II size",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?size\\s*(?:is|was|are|were|of|at|=)?\\s*(?:s|m|l|xl|xxl)\\s*/\\s*black(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg Trazom T-Shirt II unit price",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?unit\\s+price\\s*(?:is|was|are|were|of|at|=)?\\s*\\$29\\.95(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg Trazom T-Shirt II quantity",
+        "fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|cart|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?quantity\\s*(?:is|was|are|were|of|at|=)?\\s*2(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|fc\\s+red\\s+bull\\s+salzburg)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?subtotal\\s*(?:is|was|are|were|of|at|=)?\\s*\\$74\\.85(?!\\w|\\.\\d)"
+      ],
+      [
+        "FC Red Bull Salzburg products",
+        "fc\\s+red\\s+bull\\s+salzburg(?!\\s+trazom\\s+tote\\s+bag|\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii)(?:(?!(?:fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+tote\\s+bag|fc\\s+red\\s+bull\\s+salzburg\\s+trazom\\s+t\\s*-\\s*shirt\\s+ii|cart)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?products\\s*(?:is|was|are|were|of|at|=)?\\s*10(?!\\w|\\.\\d)"
+      ]
+    ],
+    "same_cart_token": true,
+    "cart_answers": true
+  },
+  "Red Bull--13": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!), preparing for the Iowa motocross event already in my registrations. Review that booking and the event page to confirm the date, venue, ticket type and code, and explain which era of bikes it celebrates. Save the event to my favorites so I can get back to its information easily, keeping my existing favorites.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "kind": "event",
+            "item_slug": "red-bull-barn-find-open"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account(?:$|\\?)",
+      "/events/red\\-bull\\-barn\\-find\\-open(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Barn Find Open date",
+        "red\\s+bull\\s+barn\\s+find\\s+open(?:(?!(?!)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+17,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Barn Find Open venue",
+        "red\\s+bull\\s+barn\\s+find\\s+open(?:(?!(?!)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*oak\\s+ridge\\s+mx\\s+track,\\s+garwin,\\s+ia(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Barn Find Open ticket",
+        "red\\s+bull\\s+barn\\s+find\\s+open(?:(?!(?!)).){0,1800}?ticket\\s*(?:is|was|are|were|of|at|=)?\\s*registration(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Barn Find Open code",
+        "red\\s+bull\\s+barn\\s+find\\s+open(?:(?!(?!)).){0,1800}?code\\s*(?:is|was|are|were|of|at|=)?\\s*rb2b8e90(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Barn Find Open era",
+        "red\\s+bull\\s+barn\\s+find\\s+open(?:(?!(?!)).){0,1800}?era\\s*(?:is|was|are|were|of|at|=)?\\s*bikes\\s+from\\s+the\\s+1990s\\s+and\\s+early\\s+2000s(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--14": {
+    "task": "I'm Carol (carol.d@test.com, TestPass123!), adding to my saved snowboard films. Check my existing film favorite, then find the Snowboarding film about an Australian prodigy. Save it alongside my existing favorites and report its title, runtime and synopsis, confirming which films are now saved.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 3,
+            "kind": "film",
+            "item_slug": "volare-valentino-guseli"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account(?:$|\\?)",
+      "/films/9191(?:$|\\?)",
+      "/films/volare\\-valentino\\-guseli(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Volare: Valentino Guseli runtime",
+        "volare\\s+valentino\\s+guseli(?:(?!(?:saved\\s+films)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?runtime\\s*(?:is|was|are|were|of|at|=)?\\s*44\\s+min(?!\\w|\\.\\d)"
+      ],
+      [
+        "Volare: Valentino Guseli synopsis",
+        "volare\\s+valentino\\s+guseli(?:(?!(?:saved\\s+films)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?synopsis\\s*(?:is|was|are|were|of|at|=)?\\s*valentino\\s+guseli\\s+shares\\s+his\\s+journey\\s+mastering\\s+3\\s+snowboard\\s+disciplines\\s+big\\s+air,\\s+slopestyle\\s+and\\s+halfpipe\\.(?!\\w|\\.\\d)"
+      ],
+      [
+        "Saved films titles",
+        "saved\\s+films(?:(?!(?:volare\\s+valentino\\s+guseli)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?titles\\s*(?:is|was|are|were|of|at|=)?\\s*9191\\s+and\\s+volare\\s+valentino\\s+guseli(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--15": {
+    "task": "I'm writing a retrospective of this season's German Red Bull events. Find all events marked finished in Germany and list their venues and dates. For the urban downhill race, explain the riding challenge described on its detail page and identify its host city. Keep the retrospective separate from upcoming events.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/events(?:$|\\?)",
+      "/events/red\\-bull\\-stuttgart\\-cerro\\-abajo(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "ADAC MX Masters \u2013 F\u00fcrstlich Drehna date",
+        "adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+26\\s+\\s*-\\s*\\s+27,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "ADAC MX Masters \u2013 F\u00fcrstlich Drehna venue",
+        "adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna(?:(?!(?:dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*f\u00fcrstlich\\s+drehna,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring date",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+12\\s+\\s*-\\s*\\s+13,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Sachsenring venue",
+        "dtm\\s+\\s*-\\s*\\s+sachsenring(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*sachsenring,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Stuttgart Cerro Abajo date",
+        "red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+6,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Stuttgart Cerro Abajo venue",
+        "red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*stuttgart,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 N\u00fcrburgring date",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*august\\s+15\\s+\\s*-\\s*\\s+16,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 N\u00fcrburgring venue",
+        "dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*n\u00fcrburgring,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "Drift Masters \u2013 Germany date",
+        "drift\\s+masters\\s+\\s*-\\s*\\s+germany(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*august\\s+13\\s+\\s*-\\s*\\s+15,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Drift Masters \u2013 Germany venue",
+        "drift\\s+masters\\s+\\s*-\\s*\\s+germany(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*ferropolis\\s+\\s*-\\s*\\s+city\\s+of\\s+iron,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "ADAC MX Masters \u2013 Gaildorf date",
+        "adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*august\\s+8\\s+\\s*-\\s*\\s+9,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "ADAC MX Masters \u2013 Gaildorf venue",
+        "adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*gaildorf,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Motorsport Arena Oschersleben date",
+        "dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*july\\s+25\\s+\\s*-\\s*\\s+26,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "DTM \u2013 Motorsport Arena Oschersleben venue",
+        "dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|urban\\s+downhill)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*motorsport\\s+arena\\s+oschersleben,\\s+germany(?!\\w|\\.\\d)"
+      ],
+      [
+        "Urban downhill city",
+        "urban\\s+downhill(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?city\\s*(?:is|was|are|were|of|at|=)?\\s*stuttgart(?!\\w|\\.\\d)"
+      ],
+      [
+        "Urban downhill challenge",
+        "urban\\s+downhill(?:(?!(?:adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+f\u00fcrstlich\\s+drehna|dtm\\s+\\s*-\\s*\\s+sachsenring|red\\s+bull\\s+stuttgart\\s+cerro\\s+abajo|dtm\\s+\\s*-\\s*\\s+n\u00fcrburgring|drift\\s+masters\\s+\\s*-\\s*\\s+germany|adac\\s+mx\\s+masters\\s+\\s*-\\s*\\s+gaildorf|dtm\\s+\\s*-\\s*\\s+motorsport\\s+arena\\s+oschersleben)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?challenge\\s*(?:is|was|are|were|of|at|=)?\\s*steep\\s+staircases,\\s+narrow\\s+streets,\\s+parks,\\s+monuments\\s+and\\s+obstacles(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--16": {
+    "task": "I'm Alice (alice.j@test.com, TestPass123!), a 20-year-old US university student considering Red Bull Wings Cup. Check the US event and its FAQs to compare the Open and University leagues: eligibility, game modes, hardware requirements, entry fee and what happens if I qualify for both. Tell me the qualifier and final timeline, then save the US event to my favorites so I can return when I decide which league to enter.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 1,
+            "kind": "event",
+            "item_slug": "red-bull-wings-cup-united-states-2026"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/events/red\\-bull\\-wings\\-cup\\-united\\-states\\-2026(?:$|\\?)",
+      "/events/red\\-bull\\-wings\\-cup\\-united\\-states\\-2026/faqs(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Eligibility minimum age",
+        "eligibility(?:(?!(?:open\\s+league|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?minimum\\s+age\\s*(?:is|was|are|were|of|at|=)?\\s*18(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eligibility residency",
+        "eligibility(?:(?!(?:open\\s+league|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?residency\\s*(?:is|was|are|were|of|at|=)?\\s*participating\\s+country(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eligibility student",
+        "eligibility(?:(?!(?:open\\s+league|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?student\\s*(?:is|was|are|were|of|at|=)?\\s*may\\s+enter\\s+both\\s+leagues(?!\\w|\\.\\d)"
+      ],
+      [
+        "Open League mode",
+        "open\\s+league(?:(?!(?:eligibility|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?mode\\s*(?:is|was|are|were|of|at|=)?\\s*ea\\s+sports\\s+fc\\s+27\\s+ultimate\\s+team\\s+on\\s+playstation\\s+tournaments(?!\\w|\\.\\d)"
+      ],
+      [
+        "Open League hardware",
+        "open\\s+league(?:(?!(?:eligibility|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?hardware\\s*(?:is|was|are|were|of|at|=)?\\s*own\\s+hardware\\s+and\\s+software(?!\\w|\\.\\d)"
+      ],
+      [
+        "Open League fee",
+        "open\\s+league(?:(?!(?:eligibility|university\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*free(?!\\w|\\.\\d)"
+      ],
+      [
+        "University League mode",
+        "university\\s+league(?:(?!(?:eligibility|open\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?mode\\s*(?:is|was|are|were|of|at|=)?\\s*rush(?!\\w|\\.\\d)"
+      ],
+      [
+        "University League hardware",
+        "university\\s+league(?:(?!(?:eligibility|open\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?hardware\\s*(?:is|was|are|were|of|at|=)?\\s*provided\\s+hardware\\s+and\\s+software(?!\\w|\\.\\d)"
+      ],
+      [
+        "University League fee",
+        "university\\s+league(?:(?!(?:eligibility|open\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?fee\\s*(?:is|was|are|were|of|at|=)?\\s*free(?!\\w|\\.\\d)"
+      ],
+      [
+        "University League dual qualification",
+        "university\\s+league(?:(?!(?:eligibility|open\\s+league|timeline)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?dual\\s+qualification\\s*(?:is|was|are|were|of|at|=)?\\s*university\\s+place\\s+retained\\s+and\\s+open\\s+place\\s+forfeited(?!\\w|\\.\\d)"
+      ],
+      [
+        "Timeline registration",
+        "timeline(?:(?!(?:eligibility|open\\s+league|university\\s+league)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?registration\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+27,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Timeline qualifiers",
+        "timeline(?:(?!(?:eligibility|open\\s+league|university\\s+league)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?qualifiers\\s*(?:is|was|are|were|of|at|=)?\\s*start\\s+september\\s+28,\\s+2026\\s+and\\s+close\\s+no\\s+later\\s+than\\s+november\\s+15,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Timeline national finals",
+        "timeline(?:(?!(?:eligibility|open\\s+league|university\\s+league)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?national\\s+finals\\s*(?:is|was|are|were|of|at|=)?\\s*november\\s+and\\s+december\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Timeline world final",
+        "timeline(?:(?!(?:eligibility|open\\s+league|university\\s+league)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?world\\s+final\\s*(?:is|was|are|were|of|at|=)?\\s*expected\\s+january\\s+2027\\s+in\\s+miami(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--17": {
+    "task": "I'm comparing flavored drinks before switching to sugarfree. Compare the regular and sugarfree versions of both the Summer and Iced Editions: give each flavor, caffeine and sugars per 8.4 fl oz can and available sizes. Explain what changes and what stays the same within each pair.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/energydrink/red\\-bull\\-iced\\-edition(?:$|\\?)",
+      "/energydrink/red\\-bull\\-iced\\-edition\\-sugarfree(?:$|\\?)",
+      "/energydrink/red\\-bull\\-summer\\-edition(?:$|\\?)",
+      "/energydrink/red\\-bull\\-summer\\-edition\\-sugarfree(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Summer Edition flavor",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*sudachi\\s+lime(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition caffeine",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition sugar",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*26\\s+g(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition sizes",
+        "red\\s+bull\\s+summer\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree flavor",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*sudachi\\s+lime(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree caffeine",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree sugar",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*sugarfree;\\s+exact\\s+quantity\\s+not\\s+listed(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Summer Edition Sugarfree sizes",
+        "red\\s+bull\\s+summer\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition flavor",
+        "red\\s+bull\\s+iced\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*iced\\s+vanilla\\s+berry(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition caffeine",
+        "red\\s+bull\\s+iced\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition sugar",
+        "red\\s+bull\\s+iced\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*26\\s+g(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition sizes",
+        "red\\s+bull\\s+iced\\s+edition(?!\\s+sugarfree)(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition\\s+sugarfree|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition Sugarfree flavor",
+        "red\\s+bull\\s+iced\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?flavor\\s*(?:is|was|are|were|of|at|=)?\\s*iced\\s+vanilla\\s+berry(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition Sugarfree caffeine",
+        "red\\s+bull\\s+iced\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?caffeine\\s*(?:is|was|are|were|of|at|=)?\\s*80\\s+mg(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition Sugarfree sugar",
+        "red\\s+bull\\s+iced\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sugar\\s*(?:is|was|are|were|of|at|=)?\\s*sugarfree;\\s+exact\\s+quantity\\s+not\\s+listed(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Iced Edition Sugarfree sizes",
+        "red\\s+bull\\s+iced\\s+edition\\s+sugarfree(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?sizes\\s*(?:is|was|are|were|of|at|=)?\\s*8\\.4\\s+fl\\s+oz,\\s+12\\s+fl\\s+oz(?!\\w|\\.\\d)"
+      ],
+      [
+        "Comparison result",
+        "comparison(?:(?!(?:red\\s+bull\\s+summer\\s+edition|red\\s+bull\\s+summer\\s+edition\\s+sugarfree|red\\s+bull\\s+iced\\s+edition|red\\s+bull\\s+iced\\s+edition\\s+sugarfree)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?(?:result|status)\\s*(?:is|was|are|were|of|at|=)?\\s*each\\s+pair\\s+keeps\\s+its\\s+flavor,\\s+sizes\\s+and\\s+80\\s+mg\\s+caffeine;\\s+sugarfree\\s+replaces\\s+the\\s+regular\\s+26\\s+g\\s+sugar,\\s+exact\\s+sugarfree\\s+quantity\\s+is\\s+not\\s+listed(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--18": {
+    "task": "Help me follow the 2026 Dance Your Style championship from the USA final to the world final. Check the national-final event and its winner's story, then the world-final event. Report who won the USA final, her age, where and when that final happened, and where and when the world final takes place.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {},
+    "paths": [
+      "/events/red\\-bull\\-dance\\-your\\-style\\-national\\-final\\-usa(?:$|\\?)",
+      "/events/red\\-bull\\-dance\\-your\\-style\\-world\\-final\\-2026\\-zurich(?:$|\\?)",
+      "/stories/jreamz\\-wins\\-2026\\-red\\-bull\\-dance\\-your\\-style\\-national\\-final(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Red Bull Dance Your Style National Final USA date",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa(?:(?!(?:usa\\s+winner|red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*september\\s+19,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Dance Your Style National Final USA venue",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa(?:(?!(?:usa\\s+winner|red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*tampa,\\s+fl(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner name",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa|red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?name\\s*(?:is|was|are|were|of|at|=)?\\s*jreamz(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner age",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa|red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?age\\s*(?:is|was|are|were|of|at|=)?\\s*18(?!\\w|\\.\\d)"
+      ],
+      [
+        "USA winner home state",
+        "usa\\s+winner(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa|red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?home\\s+state\\s*(?:is|was|are|were|of|at|=)?\\s*arizona(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Dance Your Style World Final 2026 date",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa|usa\\s+winner)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?date\\s*(?:is|was|are|were|of|at|=)?\\s*october\\s+24,\\s+2026(?!\\w|\\.\\d)"
+      ],
+      [
+        "Red Bull Dance Your Style World Final 2026 venue",
+        "red\\s+bull\\s+dance\\s+your\\s+style\\s+world\\s+final\\s+2026(?:(?!(?:red\\s+bull\\s+dance\\s+your\\s+style\\s+national\\s+final\\s+usa|usa\\s+winner)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?venue\\s*(?:is|was|are|were|of|at|=)?\\s*hallenstadion,\\s+z\u00fcrich(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Red Bull--19": {
+    "task": "I'm Bob (bob.c@test.com, TestPass123!), new to supercross and interested in following Eli Tomac. Find his athlete profile and the story explaining supercross versus motocross. Tell me his nationality, birth date and where he grew up racing, and summarize one difference between the sports. Save his athlete profile to my favorites.",
+    "initial_digest": "9b450b31a0bfab2a51317cfe7459094af1442a5227a7134c303e1a876feaa9b0",
+    "state": {
+      "favorites": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "\\d+"
+            },
+            "user_id": 2,
+            "kind": "athlete",
+            "item_slug": "eli-tomac"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/athletes/eli\\-tomac(?:$|\\?)",
+      "/stories/what\\-is\\-supercross(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Eli Tomac nationality",
+        "eli\\s+tomac(?:(?!(?:sports\\s+comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?nationality\\s*(?:is|was|are|were|of|at|=)?\\s*united\\s+states(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eli Tomac birth date",
+        "eli\\s+tomac(?:(?!(?:sports\\s+comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?birth\\s+date\\s*(?:is|was|are|were|of|at|=)?\\s*november\\s+14,\\s+1992(?!\\w|\\.\\d)"
+      ],
+      [
+        "Eli Tomac grew up",
+        "eli\\s+tomac(?:(?!(?:sports\\s+comparison)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?grew\\s+up\\s*(?:is|was|are|were|of|at|=)?\\s*cortez,\\s+colorado(?!\\w|\\.\\d)"
+      ],
+      [
+        "Sports comparison motocross",
+        "sports\\s+comparison(?:(?!(?:eli\\s+tomac)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?motocross\\s*(?:is|was|are|were|of|at|=)?\\s*natural\\s*-\\s*terrain\\s+courses(?!\\w|\\.\\d)"
+      ],
+      [
+        "Sports comparison supercross",
+        "sports\\s+comparison(?:(?!(?:eli\\s+tomac)\\s+(?:-|records|affiliation|venue|runtime|date|flavor|seasons)).){0,1800}?supercross\\s*(?:is|was|are|were|of|at|=)?\\s*sports\\s+stadiums(?!\\w|\\.\\d)"
+      ]
+    ]
+  }
+}

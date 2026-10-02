@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Payment — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Payment</h1>
+  <div class="ua-booking-summary">
+    {% for key, flight, cabin, day in flights %}
+      <div class="ua-leg">
+        <strong>{{ flight.origin_code }} → {{ flight.dest_code }}</strong>
+        UA {{ flight.flight_number }} · {{ day }} · {{ flight.departure }}–{{ flight.arrival }}
+        · {{ dict(fare_cabins)[cabin] }}
+      </div>
+    {% endfor %}
+    <div class="ua-price-line ua-price-total">Total for {{ travelers|length }} traveler{{ '' if travelers|length == 1 else 's' }} (fares, taxes and fees): ${{ '%.2f'|format(price) }}</div>
+    <p class="ua-price-note">Miles redemption covers the full fare value — {{ '{:,}'.format(miles_needed) }} award miles for this trip.</p>
+  </div>
+
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset class="ua-fieldset">
+      <legend>Card details</legend>
+      <label class="ua-field">Card number
+        <input type="text" name="card_number" inputmode="numeric" autocomplete="off" placeholder="4242 4242 4242 4242">
+      </label>
+      <label class="ua-field ua-inline">Name on card
+        <input type="text" name="card_name" autocomplete="off">
+      </label>
+      <label class="ua-field ua-inline ua-small">Expiration (MM/YY)
+        <input type="text" name="card_expiry" placeholder="12/29" maxlength="5">
+      </label>
+      <label class="ua-field ua-inline ua-small">Security code
+        <input type="text" name="card_cvv" inputmode="numeric" maxlength="4" placeholder="123">
+      </label>
+    </fieldset>
+    <button class="ua-btn ua-btn-primary" type="submit" name="method" value="card">
+      Pay ${{ '%.2f'|format(price) }}
+    </button>
+
+    {% if can_miles %}
+    <div class="ua-award-pay">
+      <p>{{ '{:,}'.format(user.award_miles) }} award miles available — this trip needs {{ '{:,}'.format(miles_needed) }}.</p>
+      <button class="ua-btn ua-btn-ghost" type="submit" name="method" value="miles">
+        Redeem {{ '{:,}'.format(miles_needed) }} miles instead
+      </button>
+    </div>
+    {% elif user %}
+    <p class="ua-price-note">You have {{ '{:,}'.format(user.award_miles) }} award miles — this trip needs {{ '{:,}'.format(miles_needed) }}.</p>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}

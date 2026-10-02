@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{{ guide.title }} - Thumbtack{% endblock %}
+{% block description %}{{ guide.intro[:150] }}{% endblock %}
+{% block content %}
+<div class="page">
+  <p class="muted"><a href="/prices">Cost guides</a> · {{ guide.group_name }}</p>
+  <h1>{{ guide.title }}</h1>
+  <h2 style="font-size:24px;">{{ guide.title|replace('How much do ', '')|replace('How much ', '')|replace('?', '') }} costs</h2>
+  <div class="rail-card" style="display:flex; gap:24px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+    <div>
+      <div class="price-pill">${% if guide.range_low %}{{ '{:,}'.format(guide.range_low) }} - ${{ '{:,}'.format(guide.range_high) }}{% endif %}</div>
+      <div class="muted">National average fixed price</div>
+      {% if guide.low_end %}<div class="muted">Most common low price: {{ guide.low_end }}</div>{% endif %}
+      {% if guide.high_end %}<div class="muted">Most common high price: {{ guide.high_end }}</div>{% endif %}
+      {% if guide.avg_price %}<div class="muted">National average cost: ${{ '{:,}'.format(guide.avg_price) }}</div>{% endif %}
+    </div>
+    <div>
+      {% if cat %}
+      <a class="btn btn-accent" href="{{ cat.url() }}">Get a free estimate</a>
+      {% else %}
+      <a class="btn btn-accent" href="/near-me">Get a free estimate</a>
+      {% endif %}
+    </div>
+  </div>
+  <p style="margin-top:20px;"><b>How much does {{ guide.title|lower|replace('how much ', '')|replace('?', '')|trim }} cost?</b></p>
+  <p class="muted" style="font-size:14px;">By Thumbtack Staff · Last updated {{ guide.updated_str }}</p>
+  <p>{{ guide.intro }}</p>
+
+  {% for table in guide.tables_list %}
+  <h2 style="margin-top:28px; font-size:24px;">{{ table.title }}</h2>
+  <table class="cost-table">
+    {% for row in table.rows %}
+    <tr><td>{{ row[0] }}</td><td style="text-align:right; font-weight:600;">{{ row[1] }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+
+  <h2 style="margin-top:28px; font-size:24px;">Common questions</h2>
+  {% for q, a in guide.faqs_list %}
+  <div class="faq"><b>{{ q }}</b><span class="muted">{{ a }}</span></div>
+  {% endfor %}
+
+  {% if pros %}
+  <h2 style="margin-top:28px; font-size:24px;">Compare prices from {{ cat.plural }} near you.</h2>
+  {% for p in pros %}
+  <div class="pro-card" style="grid-template-columns:64px 1fr;">
+    <a href="{{ p.url() }}"><img class="av" style="width:64px;height:64px;" src="{{ url_for('static', filename='images/avatars/' + p.avatar) }}" alt="{{ p.name }}"></a>
+    <div>
+      <a class="pro-name" href="{{ p.url() }}">{{ p.name }}</a>
+      <div class="rating-line"><b>{{ p.rating_word }} {{ '%.1f'|format(p.rating) }}</b> <span class="muted">({{ p.review_count }}) · {{ p.hires }} hires</span></div>
+    </div>
+  </div>
+  {% endfor %}
+  <a class="btn btn-primary" href="{{ cat.url() }}">Get estimates</a>
+  {% endif %}
+</div>
+{% endblock %}

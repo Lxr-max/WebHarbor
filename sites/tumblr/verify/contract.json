@@ -1,0 +1,1105 @@
+{
+  "Tumblr--0": {
+    "task": "Help me explore the most-followed tag in the home page's Popular tags panel. Summarize its editorial description and follower and new-post counts, then inspect the newest post and its author's blog. Report the author, note count, first post tag, and blog post count so I can judge whether to follow this topic. Compare its new-post count with the first related tag to see which community is more active.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/tagged/photography",
+      "/tagged/photographer",
+      "/blog/arainthepara/829013305812205568",
+      "/blog/arainthepara$"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "photography.{0,20}43 (?:million|m) followers"
+      ],
+      [
+        "claim 2",
+        "2400 new posts"
+      ],
+      [
+        "claim 3",
+        "showing over telling|show rather than tell|precedence over words"
+      ],
+      [
+        "claim 4",
+        "arainthepara.{0,15}0 notes"
+      ],
+      [
+        "claim 5",
+        "photography.{0,15}first tag"
+      ],
+      [
+        "claim 6",
+        "ara in the para.{0,15}1 post"
+      ],
+      [
+        "claim 7",
+        "photographer.{0,15}61 new"
+      ],
+      [
+        "claim 8",
+        "photography.{0,15}more active"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--1": {
+    "task": "Explore today's trending posts. Report the blog name and note count of the first trending post on the Explore page, then open that post and report its like count and reblog count. Return to Explore, go to page 2, and report the blog name, note count, and opening words of the first post there, plus its first two tags. Then open that blog and report its exact title, total post count, and when it was last updated.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/explore",
+      "/blog/meolog/817505727903137792",
+      "/explore\\?page=2",
+      "/blog/sparth/828074392064032769",
+      "/blog/sparth$"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "meolog.{0,35}3404 notes|meolog.{0,35}3\\.4k notes"
+      ],
+      [
+        "claim 2",
+        "2217 likes"
+      ],
+      [
+        "claim 3",
+        "1172 reblogs"
+      ],
+      [
+        "claim 4",
+        "sparth.{0,15}2921 notes|sparth.{0,15}2\\.9k notes"
+      ],
+      [
+        "claim 5",
+        "spaceships in red and white paper"
+      ],
+      [
+        "claim 6",
+        "concept art and art"
+      ],
+      [
+        "claim 7",
+        "sparth.{0,15}713 posts"
+      ],
+      [
+        "claim 8",
+        "7 days ago"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--2": {
+    "task": "Search for 'pixel art'. Report how many results the Top tab shows, and the names of the first two blogs in the Blogs matching sidebar. Open the first matching blog and report its exact title, its post count, and one phrase from its description. Then switch to the Recent tab and report the blog name of the newest post and its note count. Open that post and report its first two tags and its like count.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/search/pixel art",
+      "/blog/8pxl",
+      "/search/pixel art.*tab=recent",
+      "/blog/wqonart/829013306919501824"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "13 results"
+      ],
+      [
+        "claim 2",
+        "8pxl and perplexi"
+      ],
+      [
+        "claim 3",
+        "pixel art by @softwaring.{0,15}2155 posts"
+      ],
+      [
+        "claim 4",
+        "jubilee|mtg artist"
+      ],
+      [
+        "claim 5",
+        "wqonart.{0,15}0 notes"
+      ],
+      [
+        "claim 6",
+        "septembit and septembit2026"
+      ],
+      [
+        "claim 7",
+        "0 likes"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--3": {
+    "task": "Search for 'NASA' and open NASA's own blog from the results. Report its exact title and total post count, plus when it was last updated. Open its archive and report which month has the most posts, how many posts that month contains, and how many posts the newest month contains. Then open any post from the newest month and report its note count and summary. Come back to the blog page, open the second post in its feed, and report its note count and first tag.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/nasa/archive",
+      "/blog/nasa/828(?:471464226406400|110959105245184|037)",
+      "/blog/nasa/828110959105245184"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "nasa.{0,40}1759 posts"
+      ],
+      [
+        "claim 2",
+        "5 days ago"
+      ],
+      [
+        "claim 3",
+        "april 2026.{0,40}13 posts"
+      ],
+      [
+        "claim 4",
+        "september 2026.{0,15}3"
+      ],
+      [
+        "claim 5",
+        "fall.equinox.{0,200}5594 notes"
+      ],
+      [
+        "claim 6",
+        "(?:second|moon night).{0,85}1157 notes"
+      ],
+      [
+        "claim 7",
+        "nasa.{0,15}first tag"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--4": {
+    "task": "Find Tumblr Staff's announcement that reblogs in a chain now get their own notes. Summarize its opening line and report the note, like, and reblog counts. Inspect the notes to identify the two most recent likers and first reblogger, then verify the posting blog's title and last-updated date.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/staff/811288138350821376",
+      "/blog/staff$"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "reblog chain.{0,50}tumblr unlike anywhere else"
+      ],
+      [
+        "claim 2",
+        "319748 notes"
+      ],
+      [
+        "claim 3",
+        "101183 likes"
+      ],
+      [
+        "claim 4",
+        "168847 reblogs"
+      ],
+      [
+        "claim 5",
+        "suipearlgloss and orlissegrapeangel"
+      ],
+      [
+        "claim 6",
+        "(?:first reblogger|reblogged).{0,10}sooopap"
+      ],
+      [
+        "claim 7",
+        "tumblr staff.{0,15}10 days ago"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--5": {
+    "task": "Find the answered ask where someone tells the Paokai blog their art is gorgeous (search for the blog name plus 'gorgeous'). Open it and report the asker's username, the question, the first line of the answer, the post's note count, and its tags. Then open the posting blog and report its title, its post count, the newest month shown in its archive, and how many posts that month has.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/paokai/750605550915567616",
+      "/blog/paokai/archive"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "obi-bae-kenobi"
+      ],
+      [
+        "claim 2",
+        "gorgeous art|art is gorgeous"
+      ],
+      [
+        "claim 3",
+        "(?:drawing|draw) wings"
+      ],
+      [
+        "claim 4",
+        "hello! thank you"
+      ],
+      [
+        "claim 5",
+        "206 notes"
+      ],
+      [
+        "claim 6",
+        "refs.{0,10}birds.{0,10}wings"
+      ],
+      [
+        "claim 7",
+        "paokai.{0,15}148 posts"
+      ],
+      [
+        "claim 8",
+        "september 2026.{0,15}4 posts"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--6": {
+    "task": "Search for 'flight test like a NASA engineer' and open the result titled 'Flight Test Like a NASA Engineer!'. Report the video provider shown under the player on that post, the post's tags, and its note count, like count, and reblog count. Then open the posting blog and report its title, total post count, when it was last updated, and the newest month shown in its archive with its number of posts.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/nasa/793768130342273024",
+      "/blog/nasa/archive"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "provider.{0,15}tumblr|tumblr.{0,15}provider"
+      ],
+      [
+        "claim 2",
+        "582 notes"
+      ],
+      [
+        "claim 3",
+        "459 likes"
+      ],
+      [
+        "claim 4",
+        "117 reblogs"
+      ],
+      [
+        "claim 5",
+        "nasa.{0,10}space.{0,10}science.{0,10}technology.{0,10}stem.{0,10}engineering.{0,10}spaceflight.{0,10}student challenge"
+      ],
+      [
+        "claim 6",
+        "nasa.{0,20}1759 posts"
+      ],
+      [
+        "claim 7",
+        "5 days ago"
+      ],
+      [
+        "claim 8",
+        "september 2026.{0,15}3 posts"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--7": {
+    "task": "Search for 'operating CCTV cameras' and open the top result, the post about somebody's first time operating CCTV cameras. Report the full chain of blog usernames in its reblog trail in order, the post's summary text, its total note count, like count, and reblog count, its tags, and the opening words of the original post in the trail. Then open the original blog in the trail and report its title, total post count, and when it was last updated.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/nullenvk/828957539611869184",
+      "/blog/teaboot"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "teaboot.{0,6}teaboot.{0,6}teaboot"
+      ],
+      [
+        "claim 2",
+        "nullenvk"
+      ],
+      [
+        "claim 3",
+        "my first time operating cctv cameras"
+      ],
+      [
+        "claim 4",
+        "mercedes 190e"
+      ],
+      [
+        "claim 5",
+        "76622 notes"
+      ],
+      [
+        "claim 6",
+        "44121 likes"
+      ],
+      [
+        "claim 7",
+        "32259 reblogs"
+      ],
+      [
+        "claim 8",
+        "what.{0,10}just cyborg things.{0,10}cyberpunk.{0,10}idk"
+      ],
+      [
+        "claim 9",
+        "i like yellow now.{0,25}42149 posts"
+      ],
+      [
+        "claim 10",
+        "14 hours ago"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--8": {
+    "task": "I am Alice (alice.j@test.com / TestPass123!). Help me catch up on my dashboard by comparing the two newest posts. For each, report its author, summary, note count, first tag, and the like/reblog breakdown from its permalink. Also tell me how many posts and which blogs appear on the first dashboard page.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/dashboard",
+      "/blog/meolog/828475230982930432",
+      "/blog/nasa/828471464226406400"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "8 posts"
+      ],
+      [
+        "claim 2",
+        "meolog.{0,5}nasa.{0,5}staff and waneella"
+      ],
+      [
+        "claim 3",
+        "meolog.{0,25}kodak ektar 100.{0,10}556 notes"
+      ],
+      [
+        "claim 4",
+        "first tag photographers on tumblr"
+      ],
+      [
+        "claim 5",
+        "397 likes and 155 reblogs"
+      ],
+      [
+        "claim 6",
+        "nasa.{0,130}5594 notes.{0,20}first tag nasa.{0,10}4044 likes and 1533 reblogs"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--9": {
+    "task": "Sign in as Alice (alice.j@test.com / TestPass123!) and open your Likes page. Report how many posts you have liked in total and, for the most recent one, the posting blog, its summary, and its note count. Then open that post and report its first tag, like count, reblog count, and total note count.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/likes",
+      "/blog/staff/822057428507049984"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "11 liked posts"
+      ],
+      [
+        "claim 2",
+        "staff"
+      ],
+      [
+        "claim 3",
+        "deleted accounts.{0,30}recover.{0,20}30 days"
+      ],
+      [
+        "claim 4",
+        "12381 notes"
+      ],
+      [
+        "claim 5",
+        "first tag.{0,10}tumblr"
+      ],
+      [
+        "claim 6",
+        "9447 likes and 2092 reblogs"
+      ]
+    ],
+    "state": {}
+  },
+  "Tumblr--10": {
+    "task": "I am Alice (alice.j@test.com / TestPass123!) and want to stop following the cabin-themed blog because I no longer want it in my feed. Identify it from Following, inspect its title and description to confirm it is the right blog, and unfollow it. Confirm the updated follow count and list the blogs that remain.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/following",
+      "/blog/cabinporn"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "cabinporn"
+      ],
+      [
+        "claim 2",
+        "cabin porn"
+      ],
+      [
+        "claim 3",
+        "inspiration for your quiet place"
+      ],
+      [
+        "claim 4",
+        "5 blogs"
+      ],
+      [
+        "claim 5",
+        "writingprompts"
+      ],
+      [
+        "claim 6",
+        "nasa"
+      ],
+      [
+        "claim 7",
+        "meolog"
+      ],
+      [
+        "claim 8",
+        "waneella"
+      ],
+      [
+        "claim 9",
+        "staff"
+      ]
+    ],
+    "state": {
+      "follows": {
+        "added": [],
+        "removed": [
+          "[6]"
+        ],
+        "updated": {}
+      }
+    }
+  },
+  "Tumblr--11": {
+    "task": "Sign in as Bob (bob.c@test.com / TestPass123!). From Explore, open the first trending post, note its current note count, and like it. Report the count shown after liking. Then open your Likes page and confirm the post appears at the top, reporting its summary and posting blog.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/explore",
+      "/blog/meolog/817505727903137792",
+      "/likes"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "meolog.{0,15}rhododendron"
+      ],
+      [
+        "claim 2",
+        "3404 to 3405"
+      ],
+      [
+        "claim 3",
+        "(?:first|top).{0,15}likes"
+      ]
+    ],
+    "state": {
+      "likes": {
+        "added": [
+          {
+            "id": 37,
+            "user_id": 2,
+            "post_id": "817505727903137792",
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "Tumblr--12": {
+    "task": "Sign in as Carol (carol.d@test.com / TestPass123!). From your Following page, open the pixel-art blog you follow, then open its newest post and reblog it with the exact comment 'someday.'. Finally visit your own blog page and report: the original post's blog, the comment shown on your reblog, and the tags carried over.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/following",
+      "/blog/waneella/827616468115079168",
+      "/blog/carol-d"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "waneella"
+      ],
+      [
+        "claim 2",
+        "someday\\."
+      ],
+      [
+        "claim 3",
+        "(?:no tags|none.{0,20}carried)"
+      ]
+    ],
+    "state": {
+      "blogs": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[511]": {
+            "posts_count": 4
+          }
+        }
+      },
+      "posts": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d{10,16}"
+            },
+            "blog_id": 511,
+            "type": "text",
+            "original_type": "regular",
+            "is_blocks_post_format": 1,
+            "content": "[{\"type\": \"text\", \"text\": \"someday.\"}]",
+            "layout": "[]",
+            "trail": "[{\"blog_name\": \"waneella\", \"blog_title\": \"WANEELLA pixel art\", \"blog_avatar\": \"/static/images/avatars/waneella.gif\", \"content\": [{\"type\": \"image\", \"colors\": {\"c0\": \"1d0e05\", \"c1\": \"292a1b\", \"c2\": \"948110\", \"c3\": \"b59a09\", \"c4\": \"552101\"}, \"media\": {\"url\": \"/static/images/media/eaa6613580d96b9b.jpg\", \"width\": 1056, \"height\": 1494}}, {\"type\": \"text\", \"text\": \"Shimmer \", \"subtype\": \"heading2\", \"formatting\": [{\"type\": \"bold\", \"start\": 0, \"end\": 7}]}, {\"type\": \"text\", \"text\": \"New artwork for Harugo No Mayu print collection!\", \"formatting\": [{\"type\": \"bold\", \"start\": 16, \"end\": 30}, {\"type\": \"link\", \"start\": 16, \"end\": 30, \"url\": \"https://www.harugonomayu.com/\"}]}, {\"type\": \"text\", \"text\": \"The light seethes and shimmers, reflecting in the sunlit room. Everything seems simultaneously familiar and alien. There's a vague feeling that if this is a dream, it is better to try to stay in it for as long as possible.\", \"formatting\": [{\"type\": \"italic\", \"start\": 0, \"end\": 222}]}, {\"type\": \"text\", \"text\": \"Washi paper prints available here: \", \"formatting\": [{\"type\": \"bold\", \"start\": 12, \"end\": 33}]}, {\"type\": \"text\", \"text\": \"\\ud83d\\udd17 https://www.harugonomayu.com/shop/p/shimmer \", \"formatting\": [{\"type\": \"link\", \"start\": 2, \"end\": 46, \"url\": \"https://www.harugonomayu.com/shop/p/shimmer\"}]}, {\"type\": \"image\", \"colors\": {\"c0\": \"ffd9be\", \"c1\": \"e6cdd8\", \"c2\": \"240f07\", \"c3\": \"e3824f\", \"c4\": \"c55305\"}, \"exif\": {\"Time\": 1784315681, \"FocalLength\": 258, \"FocalLength35mmEquiv\": 558, \"Aperture\": 258.9882360187238, \"ExposureTime\": 258.9882360187238, \"ISO\": 100, \"Lens\": \"258mm\", \"SensorWidthMM\": 16}, \"media\": {\"url\": \"/static/images/media/15e6cd11e6159d23.jpg\", \"width\": 1280, \"height\": 960}}, {\"type\": \"image\", \"colors\": {\"c0\": \"4a190b\", \"c1\": \"813412\", \"c2\": \"e25f10\", \"c3\": \"993f13\", \"c4\": \"fed25f\"}, \"exif\": {\"Time\": 1784317170, \"FocalLength\": 120, \"FocalLength35mmEquiv\": 128, \"Aperture\": 6.8, \"ExposureTime\": 8, \"ISO\": 100, \"CameraMake\": \"Hasselblad\", \"CameraModel\": \"H4D\", \"Lens\": \"120mm\", \"SensorWidthMM\": 32}, \"media\": {\"url\": \"/static/images/media/ca45e77178d874d0.jpg\", \"width\": 1280, \"height\": 960}}, {\"type\": \"image\", \"colors\": {\"c0\": \"d35d23\", \"c1\": \"12100e\", \"c2\": \"b69a93\", \"c3\": \"301008\", \"c4\": \"a93e11\"}, \"exif\": {\"Time\": 1784317217, \"FocalLength\": 258, \"FocalLength35mmEquiv\": 558, \"Aperture\": 258.9882360187238, \"ExposureTime\": 258.9882360187238, \"ISO\": 100, \"Lens\": \"258mm\", \"SensorWidthMM\": 16}, \"media\": {\"url\": \"/static/images/media/340780a59a563583.jpg\", \"width\": 1280, \"height\": 960}}, {\"type\": \"image\", \"colors\": {\"c0\": \"200b05\", \"c1\": \"d8b9ac\", \"c2\": \"daa17b\", \"c3\": \"6b1d05\", \"c4\": \"aa650c\"}, \"exif\": {\"Time\": 1784316501, \"FocalLength\": 258, \"FocalLength35mmEquiv\": 558, \"Aperture\": 258.9882360187238, \"ExposureTime\": 258.9882360187238, \"ISO\": 100, \"Lens\": \"258mm\", \"SensorWidthMM\": 16}, \"media\": {\"url\": \"/static/images/media/bbff8c7b1510a0dc.jpg\", \"width\": 1280, \"height\": 960}}, {\"type\": \"text\", \"text\": \"\"}, {\"type\": \"video\", \"provider\": \"tumblr\", \"url\": \"https://64.media.tumblr.com/05630b23fd7a1966ce15316b33e77194/2e42d2717d3bcaf6-37/1b5853e497055e8959056ef80641cd608c4346eb.mov\", \"filmstrip\": {\"url\": \"https://44.media.tumblr.com/05630b23fd7a1966ce15316b33e77194/2e42d2717d3bcaf6-37/s2000x113_filmstrip/cd65121e07a00895af7b79346a1aa5f166d09183.jpg\", \"type\": \"image/jpeg\", \"width\": 2000, \"height\": 113}, \"duration\": 14, \"poster\": {\"url\": \"/static/images/media/f387b8b41d7deba5.jpg\", \"width\": 1920, \"height\": 1080}, \"media\": null}, {\"type\": \"text\", \"text\": \"\"}, {\"type\": \"text\", \"text\": \"patreon / youtube /\\u00a0twitter\\u00a0/\\u00a0instagram\\u00a0/\\u00a0website\", \"formatting\": [{\"type\": \"link\", \"start\": 0, \"end\": 7, \"url\": \"https://href.li/?https://www.patreon.com/waneella\"}, {\"type\": \"small\", \"start\": 0, \"end\": 7}, {\"type\": \"small\", \"start\": 7, \"end\": 10}, {\"type\": \"link\", \"start\": 10, \"end\": 17, \"url\": \"https://href.li/?https://www.youtube.com/c/waneella\"}, {\"type\": \"small\", \"start\": 10, \"end\": 17}, {\"type\": \"small\", \"start\": 17, \"end\": 20}, {\"type\": \"link\", \"start\": 20, \"end\": 27, \"url\": \"https://href.li/?https://twitter.com/waneella_\"}, {\"type\": \"small\", \"start\": 20, \"end\": 27}, {\"type\": \"small\", \"start\": 27, \"end\": 30}, {\"type\": \"link\", \"start\": 30, \"end\": 39, \"url\": \"https://href.li/?https://www.instagram.com/waneella/\"}, {\"type\": \"small\", \"start\": 30, \"end\": 39}, {\"type\": \"small\", \"start\": 39, \"end\": 49}, {\"type\": \"link\", \"start\": 42, \"end\": 49, \"url\": \"https://www.waneella.com/\"}]}]}]",
+            "tags": "[]",
+            "timestamp": 1790596800,
+            "date_str": "2026-09-28 12:00:00 GMT",
+            "post_url": "https://carol-d.tumblr.com/",
+            "slug": "",
+            "summary": "someday.",
+            "note_count": 0,
+            "like_count": 0,
+            "reblog_count": 0,
+            "reply_count": 0,
+            "state": "published",
+            "asking_name": null,
+            "asking_url": null,
+            "asking_avatar": null,
+            "reblog_of_id": "827616468115079168",
+            "user_created": 1,
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {
+          "[\"827616468115079168\"]": {
+            "reblog_count": 513
+          }
+        }
+      },
+      "reblogs": {
+        "added": [
+          {
+            "id": 4,
+            "user_id": 3,
+            "source_post_id": "827616468115079168",
+            "new_post_id": {
+              "regex": "\\d{10,16}"
+            },
+            "comment": "someday.",
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "reblog"
+      }
+    ]
+  },
+  "Tumblr--13": {
+    "task": "Sign in as David (david.k@test.com / TestPass123!). Search for 'cyberpunk' and open the last blog suggested in the sidebar. Report its title and description. Follow it, then confirm it appears on your Following page and that its posts show up on your dashboard, and report the summary of its newest post on the dashboard.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/search/cyberpunk",
+      "/blog/scipunk",
+      "/following",
+      "/dashboard"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "scipunk"
+      ],
+      [
+        "claim 2",
+        "cyberpunk aesthetic"
+      ],
+      [
+        "claim 3",
+        "neon lights"
+      ],
+      [
+        "claim 4",
+        "movies"
+      ],
+      [
+        "claim 5",
+        "megacities"
+      ],
+      [
+        "claim 6",
+        "alien \\(1979\\)"
+      ]
+    ],
+    "state": {
+      "follows": {
+        "added": [
+          {
+            "id": 27,
+            "user_id": 4,
+            "blog_id": 391,
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "Tumblr--14": {
+    "task": "I am Alice (alice.j@test.com / TestPass123!) and want to follow up with Tumblr Staff. Read their latest message in my inbox and reply with a relevant question about the feature they mention. Confirm the reply appears in the thread and report both their message and my reply, then check that the Staff conversation is no longer marked unread.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/inbox/staff",
+      "/inbox$"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "tag pages.{0,15}fresh coat of paint"
+      ],
+      [
+        "claim 2",
+        "tag pages.{0,50}(?:newest|recent)|(?:sort|filter).{0,30}tag pages"
+      ],
+      [
+        "claim 3",
+        "(?:not marked unread|no longer.{0,15}unread|marked read)"
+      ]
+    ],
+    "state": {
+      "conversations": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[1]": {
+            "updated_at": 1790596800
+          }
+        }
+      },
+      "messages": {
+        "added": [
+          {
+            "id": 16,
+            "conversation_id": 1,
+            "from_user": 1,
+            "sender_name": "alice-j",
+            "body": {
+              "regex": "[\\s\\S]*"
+            },
+            "created_at": 1790596800,
+            "read": 0
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "message",
+        "pattern": "(?is)(?=.*\\btag\\s+pages?\\b)(?=.*(?:\\?|can|how|why|does|what)).+"
+      }
+    ]
+  },
+  "Tumblr--15": {
+    "task": "Sign in as Bob (bob.c@test.com / TestPass123!) and send an ask to Alice's blog asking which museum she visits most. Confirm the ask was sent. Then log out, sign in as Alice (alice.j@test.com / TestPass123!), open your inbox, and report the exact text of the question that arrived.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/blog/alice-j/ask",
+      "/inbox/bob-c"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "which museum do you visit most\\?|what museum.{0,30}(?:most|often)"
+      ]
+    ],
+    "state": {
+      "messages": {
+        "added": [
+          {
+            "id": 16,
+            "conversation_id": 2,
+            "from_user": 0,
+            "sender_name": "bob-c",
+            "body": {
+              "regex": "[\\s\\S]*"
+            },
+            "created_at": 1790596800,
+            "read": 1
+          }
+        ],
+        "removed": [],
+        "updated": {
+          "[13]": {
+            "read": 1
+          }
+        }
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "message",
+        "pattern": "(?is)(?=.*museum)(?=.*(?:most|often|frequent)).+"
+      }
+    ],
+    "answer_state": [
+      [
+        "messages",
+        "body"
+      ]
+    ]
+  },
+  "Tumblr--16": {
+    "task": "I am Alice (alice.j@test.com / TestPass123!) and want to catch up on Activity. Review all notifications, reporting who acted and what they did, and how long ago the newest one occurred. Inspect that actor's blog and report its title and post count, then return to Activity and confirm the unread badge has cleared.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/activity",
+      "/blog/bob-c"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "bob-c liked.{0,10}hello tumblr"
+      ],
+      [
+        "claim 2",
+        "carol-d reblogged.{0,10}hello tumblr"
+      ],
+      [
+        "claim 3",
+        "david-k.{0,20}following"
+      ],
+      [
+        "claim 4",
+        "bob-c sent a message"
+      ],
+      [
+        "claim 5",
+        "2 days ago"
+      ],
+      [
+        "claim 6",
+        "bob.s sketchbook.{0,15}3 posts"
+      ],
+      [
+        "claim 7",
+        "badge cleared|no unread"
+      ]
+    ],
+    "state": {
+      "notifications": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[1]": {
+            "is_new": 0
+          },
+          "[2]": {
+            "is_new": 0
+          },
+          "[3]": {
+            "is_new": 0
+          },
+          "[4]": {
+            "is_new": 0
+          }
+        }
+      }
+    }
+  },
+  "Tumblr--17": {
+    "task": "Sign in as Carol (carol.d@test.com / TestPass123!) and create a text post titled 'Cabin Wishlist, Part Two' with at least one sentence about a wood stove and the tags cottagecore and wishlist. Publish it, then open your blog page and report the post's title, its tags, and confirm the first tag links to a tag page with posts on it.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/new/post",
+      "/blog/carol-d",
+      "/tagged/(?:cottagecore|wishlist)"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "cabin wishlist.{0,8}part 2"
+      ],
+      [
+        "claim 2",
+        "cottagecore and wishlist"
+      ],
+      [
+        "claim 3",
+        "cottagecore.{0,15}(?:feed|page).{0,15}\\d+ posts"
+      ]
+    ],
+    "state": {
+      "blogs": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[511]": {
+            "posts_count": 4
+          }
+        }
+      },
+      "posts": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d{10,16}"
+            },
+            "blog_id": 511,
+            "type": "text",
+            "original_type": "text",
+            "is_blocks_post_format": 1,
+            "content": {
+              "regex": "[\\s\\S]*"
+            },
+            "layout": "[]",
+            "trail": "[]",
+            "tags": {
+              "json_set": [
+                "cottagecore",
+                "wishlist"
+              ]
+            },
+            "timestamp": 1790596800,
+            "date_str": "2026-09-28 12:00:00 GMT",
+            "post_url": "https://carol-d.tumblr.com/",
+            "slug": "",
+            "summary": "Cabin Wishlist, Part Two",
+            "note_count": 0,
+            "like_count": 0,
+            "reblog_count": 0,
+            "reply_count": 0,
+            "state": "published",
+            "asking_name": null,
+            "asking_url": null,
+            "asking_avatar": null,
+            "reblog_of_id": null,
+            "user_created": 1,
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    },
+    "state_checks": [
+      {
+        "kind": "post",
+        "pattern": "\\bwood[ -]?stove\\b"
+      }
+    ]
+  },
+  "Tumblr--18": {
+    "task": "Sign in as Alice (alice.j@test.com / TestPass123!) and create a quote post quoting 'Art is the only way to run away without leaving home.' attributed to Twyla Tharp, with the tag quotes. Publish it, then open your blog page and report the quote, its source, and the tag shown on the post.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/new/post",
+      "/blog/alice-j"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "art is the only way to run away without leaving home"
+      ],
+      [
+        "claim 2",
+        "twyla tharp"
+      ],
+      [
+        "claim 3",
+        "tag quotes"
+      ]
+    ],
+    "state": {
+      "blogs": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[509]": {
+            "posts_count": 5
+          }
+        }
+      },
+      "posts": {
+        "added": [
+          {
+            "id": {
+              "regex": "\\d{10,16}"
+            },
+            "blog_id": 509,
+            "type": "quote",
+            "original_type": "quote",
+            "is_blocks_post_format": 1,
+            "content": "[{\"type\": \"quote\", \"text\": \"Art is the only way to run away without leaving home.\", \"source\": \"Twyla Tharp\"}]",
+            "layout": "[]",
+            "trail": "[]",
+            "tags": "[\"quotes\"]",
+            "timestamp": 1790596800,
+            "date_str": "2026-09-28 12:00:00 GMT",
+            "post_url": "https://alice-j.tumblr.com/",
+            "slug": "",
+            "summary": "Art is the only way to run away without leaving home.",
+            "note_count": 0,
+            "like_count": 0,
+            "reblog_count": 0,
+            "reply_count": 0,
+            "state": "published",
+            "asking_name": null,
+            "asking_url": null,
+            "asking_avatar": null,
+            "reblog_of_id": null,
+            "user_created": 1,
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  },
+  "Tumblr--19": {
+    "task": "I am Bob (bob.c@test.com / TestPass123!) and want my blog to be called 'bob's art lab'. Save that title in settings and inspect my public blog to confirm it. Report the displayed title, username, post count, and summary of the newest post so I can verify I updated the right blog.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/settings",
+      "/blog/bob-c"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "bob.s art lab"
+      ],
+      [
+        "claim 2",
+        "bob-c"
+      ],
+      [
+        "claim 3",
+        "post count.{0,10}3|3 posts"
+      ],
+      [
+        "claim 4",
+        "shapes shapes shapes"
+      ]
+    ],
+    "state": {
+      "blogs": {
+        "added": [],
+        "removed": [],
+        "updated": {
+          "[510]": {
+            "title": "bob's art lab"
+          }
+        }
+      }
+    }
+  },
+  "Tumblr--20": {
+    "task": "Register a new Tumblr account with your own email, the username harbor-tester, and a password of at least 8 characters. Confirm you land on an empty dashboard and report the message shown. Then follow NASA's blog from Explore and report the first post that appears on your dashboard, including its summary and note count.",
+    "initial_digest": "c310d3b152ca668ac77c602b9d00a96bbf8d27f566acd2da1b8ac13811139bdd",
+    "paths": [
+      "/register",
+      "/blog/nasa",
+      "/dashboard"
+    ],
+    "claims": [
+      [
+        "claim 1",
+        "harbor-tester"
+      ],
+      [
+        "claim 2",
+        "follow some blogs from explore.{0,10}fill your dashboard"
+      ],
+      [
+        "claim 3",
+        "nasa"
+      ],
+      [
+        "claim 4",
+        "autumn is a second spring when every leaf is a flower"
+      ],
+      [
+        "claim 5",
+        "5\\.6k notes|5594 notes"
+      ]
+    ],
+    "state": {
+      "blogs": {
+        "added": [
+          {
+            "id": 513,
+            "name": "harbor-tester",
+            "title": "harbor-tester",
+            "description": "",
+            "url": "",
+            "uuid": "",
+            "updated": 0,
+            "primary": 0,
+            "posts_count": 0,
+            "total_posts_upstream": null,
+            "avatar": "",
+            "avatar_shape": "circle",
+            "header_image": "",
+            "background_color": "#001935",
+            "title_color": "#ffffff",
+            "body_font": "Helvetica Neue",
+            "link_color": "#00b8ff",
+            "can_message": 1,
+            "is_nsfw": 0,
+            "is_adult": 0,
+            "can_be_followed": 1,
+            "ask": 1,
+            "ask_anon": 1,
+            "ask_page_title": "Ask me anything",
+            "share_likes": 0,
+            "share_following": 0,
+            "owner_user_id": 5
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "follows": {
+        "added": [
+          {
+            "id": 27,
+            "user_id": 5,
+            "blog_id": 295,
+            "created_at": 1790596800
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "email": {
+              "regex": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+"
+            },
+            "password_hash": {
+              "regex": "[a-f0-9]{64}"
+            },
+            "username": "harbor-tester",
+            "display_name": "harbor-tester",
+            "blog_id": 513
+          }
+        ],
+        "removed": [],
+        "updated": {}
+      }
+    }
+  }
+}

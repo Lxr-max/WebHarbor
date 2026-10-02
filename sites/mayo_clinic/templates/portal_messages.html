@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}My Messages{% endblock %}
+{% block content %}
+{# WV-MAYO-PORTAL-MESSAGES-UNIFIED-2026-06-04: inbox sidebar now shows outbound twins (direction=to_provider). #}
+<section class="container">
+  <h1>Patient Portal Messages</h1>
+
+  <div class="two-col">
+    <div>
+      <h2>Send a new message</h2>
+      <form method="post" class="form-grid">
+        <div class="span-2">
+          <label>Recipient (doctor)</label>
+          <select name="doctor_slug" required>
+            <option value="">Choose a provider...</option>
+            {% for d in doctors %}<option value="{{ d.slug }}">{{ d.name }} &mdash; {{ d.specialty }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="span-2"><label>Subject</label><input type="text" name="subject" required></div>
+        <div class="span-2"><label>Message</label><textarea name="body" rows="6" required></textarea></div>
+        <div class="span-2"><button class="btn-primary" type="submit">Send message</button></div>
+      </form>
+
+      <h2 style="margin-top: 40px;">Sent messages</h2>
+      {% if sent %}
+        {% for m in sent %}
+          <div class="sidebar-card">
+            <p><strong>{{ m.subject }}</strong></p>
+            <p class="muted">To {{ m.doctor_slug }} &middot; Confirmation: {{ m.confirmation_code }}</p>
+            <p>{{ m.body[:240] }}</p>
+          </div>
+        {% endfor %}
+      {% else %}<p>No sent messages.</p>{% endif %}
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>Inbox &amp; thread</h4>
+        {% if inbox %}
+          {% for m in inbox %}
+            <div data-message-direction="{{ m.direction or 'to_patient' }}" style="border-left:3px solid {% if m.direction == 'to_provider' %}#00396b{% else %}#9ab{% endif %};padding-left:8px;margin:6px 0;">
+              <strong>{{ m.subject }}</strong>
+              {% if m.direction == 'to_provider' %}<span style="font-size:11px;color:#00396b;"> (you → {{ m.provider_name }})</span>{% endif %}<br>
+              <small class="muted">{{ m.provider_name }}</small>
+              <p style="font-size:13px;">{{ m.body[:120] }}</p>
+            </div>
+          {% endfor %}
+        {% else %}<p class="muted">No messages.</p>{% endif %}
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

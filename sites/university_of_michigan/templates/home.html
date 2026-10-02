@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}University of Michigan{% endblock %}
+{% block content %}
+<div class="hero">
+  <div>
+    <img class="hero-photo" src="/static/images/core/burton-tower-fall.jpg" alt="Burton Memorial Tower above the Diag in fall colors">
+    <h1>University of Michigan</h1>
+    <p class="page-sub">Leaders &amp; Best. A place with deep traditions focused on creating brighter futures.</p>
+    {% for s in stories %}
+    <div class="hero-story">
+      <h3>{{ s['title'] }}</h3>
+      <p>{{ s['blurb'][:220] }}{% if s['blurb']|length > 220 %}&hellip;{% endif %}</p>
+      {% if s.get('article_slug') %}
+      <p><a href="{{ url_for('news_article', slug=s['article_slug']) }}">Learn more about this story</a></p>
+      {% elif s['link'] and s['link'].startswith('https://news.umich.edu/') %}
+      <p><a href="{{ s['link'] }}">Learn more about this story</a></p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div>
+    <h2>Upcoming Events</h2>
+    {% for e in upcoming %}
+    <div class="card">
+      {% if e.image %}<img class="card-img" src="{{ e.image }}" alt="{{ e.name }}">{% endif %}
+      <h3><a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.name }}</a></h3>
+      <span class="meta">{{ e.when() }} &middot; {{ e.type or 'Event' }}</span>
+      <span class="meta">{{ e.location_name }}</span>
+    </div>
+    {% endfor %}
+    <p><a class="btn small" href="{{ url_for('events') }}">All events</a></p>
+    <h2>Michigan News</h2>
+    <ul>
+      {% for a in news %}
+      <li><a href="{{ url_for('news_article', slug=a.slug) }}">{{ a.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <p><a class="btn small" href="{{ url_for('news') }}">Visit Michigan News</a></p>
+  </div>
+</div>
+
+<div class="stat-strip">
+  {% for f in quick_facts %}
+  <div class="stat-box">
+    <div class="num">{{ f['stat'] }}</div>
+    <div class="lbl">{{ f['label'] }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Explore Michigan</h2>
+<div class="grid">
+  <div class="card">
+    <h3><a href="{{ url_for('schools') }}">Schools &amp; Colleges</a></h3>
+    <span class="blurb">Students discover their passions and map out their futures in our 19 nationally recognized schools and colleges.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('programs') }}">Majors &amp; Degrees</a></h3>
+    <span class="blurb">Put your grand imagination to work — browse more than 275 degree programs.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('courses') }}">Course Catalog</a></h3>
+    <span class="blurb">Browse the Fall 2026 class search: subjects, sections, instructors and seats.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('library') }}">Library Catalog</a></h3>
+    <span class="blurb">Search the U-M Library catalog: books, theses, articles and datasets in Deep Blue.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('calendars') }}">Academic Calendars</a></h3>
+    <span class="blurb">Term dates, study days, examinations and registration deadlines from the Registrar.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('admissions') }}">Admissions &amp; Aid</a></h3>
+    <span class="blurb">Costs, financial aid, application plans and deadlines for first-year applicants.</span>
+  </div>
+</div>
+
+<h2>Our Mission</h2>
+<p>{{ mission }}</p>
+{% endblock %}

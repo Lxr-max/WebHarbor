@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Airport Parking Rates | Book Now | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>Airport Parking</h1>
+    <p>Find and reserve airport parking with shuttles, covered garages, and valet service.</p>
+  </div>
+  <section class="section-tight">
+    <h2>Use SpotHero at the Airport</h2>
+    <p class="muted">Skip the terminal lots. Compare off-site parking near your airport with free shuttles, then book in advance and save up to 50%.</p>
+    <div class="link-columns">
+      {% for a in airports %}
+      <a href="{{ url_for('airport_by_code', code=a.code) }}">{{ a.title }} ({{ a.code }})</a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

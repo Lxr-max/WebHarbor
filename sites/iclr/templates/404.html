@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Not found{% endblock %}
+{% block content %}
+<div class="pagehead"><h1>Page not found</h1></div>
+<div class="card" style="max-width:560px">
+  <p>The page you requested does not exist on this mirror.</p>
+  <p><a class="btn" href="{{ url_for('home') }}">Back to the conference home</a></p>
+</div>
+{% endblock %}

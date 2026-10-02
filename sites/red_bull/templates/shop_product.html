@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }} | Red Bull Shop{% endblock %}
+{% block content %}
+<div class="detail-layout" style="grid-template-columns: 420px minmax(0,1fr)">
+  <div class="can-shot">
+    <img src="{{ product.image }}" alt="{{ product.title }}">
+  </div>
+  <div>
+    <span class="kicker">{{ product.vendor or product.category | capitalize }}</span>
+    <h1 class="page-title">{{ product.title }}</h1>
+    {% set low, high = product.price_range() %}
+    {% if low is not none %}
+    <p class="price-tag">${{ '%.2f' | format(low) }}{% if high and high != low %} – ${{ '%.2f' | format(high) }}{% endif %}</p>
+    {% endif %}
+    <p class="page-sub">{{ product.product_type }}</p>
+
+    {% if product.description %}
+    <div class="prose"><p>{{ product.description }}</p></div>
+    {% endif %}
+
+    <h2 class="section-title">Choose an option</h2>
+    <form method="post" action="{{ url_for('cart_add') }}" class="form-card" style="max-width:480px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="variant_id">Size / style</label>
+      <select id="variant_id" name="variant_id" required>
+        {% for v in product.variants %}
+        <option value="{{ v.id }}" {{ 'disabled' if not v.available }}>
+          {{ v.title }} — ${{ '%.2f' | format(v.price) }}{% if not v.available %} (sold out){% endif %}
+        </option>
+        {% endfor %}
+      </select>
+      <label for="quantity">Quantity</label>
+      <input id="quantity" name="quantity" type="number" min="1" value="1">
+      <p style="margin-top:16px"><button type="submit" class="btn btn-red">Add to cart</button></p>
+    </form>
+
+    <h2 class="section-title">Variants</h2>
+    <table class="variant-table">
+      <tr><th>Option</th><th>SKU</th><th>Price</th><th>Availability</th></tr>
+      {% for v in product.variants %}
+      <tr>
+        <td>{{ v.title }}</td>
+        <td>{{ v.sku or '—' }}</td>
+        <td>${{ '%.2f' | format(v.price) if v.price is not none else '—' }}</td>
+        <td>{% if v.available %}In stock{% else %}<span class="soldout">Sold out</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% if related %}
+<h2 class="section-title">Related products</h2>
+<div class="grid cols-4">
+  {% for r in related %}
+  <a class="card" href="{{ url_for('shop_product', handle=r.handle) }}">
+    <div class="thumb"><img src="{{ r.image }}" alt="{{ r.title }}"></div>
+    <div class="body"><span class="tag">{{ r.category | capitalize }}</span><h3>{{ r.title }}</h3></div>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

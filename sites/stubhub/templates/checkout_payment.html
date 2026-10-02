@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Payment | StubHub{% endblock %}
+{% block content %}
+<div class="checkout-page">
+  <div class="checkout-steps"><span class="step done">Review</span><span class="step active">Payment</span><span class="step">Confirm</span></div>
+  <div class="checkout-cols">
+    <div class="checkout-main">
+      <h1>Payment method</h1>
+      <form method="post" class="payment-form">
+        {% for card in cards %}
+        <label class="delivery-option card-option">
+          <input type="radio" name="card_id" value="{{ card.id }}" {{ 'checked' if loop.first else '' }}>
+          <div>
+            <strong>{{ card.brand }} ••••{{ card.last4 }}</strong>
+            <p>{{ card.holder }} · expires {{ '%02d'|format(card.exp_month) }}/{{ card.exp_year }}</p>
+            {% if card.is_default %}<span class="badge badge-info">Default</span>{% endif %}
+          </div>
+        </label>
+        {% endfor %}
+
+        <details class="new-card">
+          <summary>Use a new card</summary>
+          <div class="card-fields">
+            <label>Card number
+              <input type="text" name="number" inputmode="numeric" placeholder="Card number" autocomplete="off">
+            </label>
+            <label>Name on card
+              <input type="text" name="holder" placeholder="Name on card">
+            </label>
+            <div class="exp-row">
+              <label>Expiry month
+                <input type="text" name="exp_month" inputmode="numeric" placeholder="MM">
+              </label>
+              <label>Expiry year
+                <input type="text" name="exp_year" inputmode="numeric" placeholder="YYYY">
+              </label>
+              <label>Security code
+                <input type="text" name="cvv" inputmode="numeric" placeholder="CVV">
+              </label>
+            </div>
+            <label>Brand
+              <select name="brand">
+                <option>Visa</option><option>Mastercard</option><option>Amex</option>
+                <option>Discover</option><option>Card</option>
+              </select>
+            </label>
+            <p class="muted small">This card is used for this order. Manage saved cards on the Payments page.</p>
+          </div>
+        </details>
+        <button type="submit" class="btn btn-primary">Continue to review</button>
+      </form>
+    </div>
+
+    <aside class="checkout-aside">
+      <h2>Order summary</h2>
+      <div class="summary-rows">
+        <div class="row"><span>{{ evt.name }}</span><span></span></div>
+        <div class="row muted"><span>{{ listing.section }} · Row {{ listing.row or '—' }}</span><span>{{ quantity }} ticket{{ 's' if quantity > 1 }}</span></div>
+        <div class="row"><span>Tickets ({{ quantity }} × ${{ '{:,}'.format(listing.price) }})</span><span>${{ '{:,.0f}'.format(fees.subtotal) }}</span></div>
+        <div class="row muted"><span>Delivery</span><span>{{ 'Free' if not fees.delivery_fee else '${:,.2f}'.format(fees.delivery_fee) }}</span></div>
+        <div class="row muted"><span>Order processing fee</span><span>${{ '{:,.2f}'.format(fees.processing_fee) }}</span></div>
+        <div class="row total"><span>Total</span><span>${{ '{:,.2f}'.format(fees.total) }}</span></div>
+      </div>
+    </aside>
+  </div>
+</div>
+<script>
+  /* Expanding "Use a new card" deselects the saved-card radios (and picking
+     a saved card collapses the new-card form), so the submitted choice is
+     always the one the buyer sees. The route independently prefers a filled
+     new-card form. */
+  (function () {
+    var details = document.querySelector('details.new-card');
+    if (!details) { return; }
+    var radios = Array.prototype.slice.call(
+      document.querySelectorAll('input[name="card_id"]'));
+    details.addEventListener('toggle', function () {
+      if (details.open) {
+        radios.forEach(function (r) { r.checked = false; });
+      }
+    });
+    radios.forEach(function (r) {
+      r.addEventListener('change', function () { details.open = false; });
+    });
+  })();
+</script>
+{% endblock %}

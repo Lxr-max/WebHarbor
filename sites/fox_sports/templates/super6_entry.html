@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ contest.title }} - My Entry | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/fox-super-6">FOX SUPER 6</a> &gt;
+  <a href="{{ url_for('super6_leaderboard', slug=contest.slug) }}">{{ contest.title|upper }}</a> &gt;
+  <span>MY ENTRY</span>
+</div>
+<div class="page-head"><h1>{{ contest.title }} &ndash; Entry</h1></div>
+<p class="lead">Your entry scored <strong>{{ entry.score or 0 }} of 6</strong>.</p>
+<table class="data-table">
+  <thead><tr><th>#</th><th>Matchup</th><th>Your Pick</th><th>Result</th></tr></thead>
+  <tbody>
+    {% for q in questions %}
+    {% set pick = picks[loop.index0] %}
+    {% set at = teams.get(q.away_team) %}
+    {% set ht = teams.get(q.home_team) %}
+    <tr>
+      <td>{{ q.order }}</td>
+      <td class="cell-team">
+        <a href="/nfl/{{ q.game_slug }}">{{ at.full_name if at else q.away_team }} at {{ ht.full_name if ht else q.home_team }}</a>
+      </td>
+      <td class="cell-strong">{{ teams.get(pick).full_name if teams.get(pick) else pick|replace('-',' ')|title }}</td>
+      <td>
+        {% if pick == q.correct_pick %}<span class="pill pill-final">Correct</span>
+        {% else %}<span class="pill pill-miss">Missed</span>{% endif %}
+        <span class="muted">{{ teams.get(q.correct_pick).short if teams.get(q.correct_pick) else '' }} won</span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="btn-row">
+  <a class="btn btn-secondary" href="{{ url_for('super6_leaderboard', slug=contest.slug) }}">View Leaderboard</a>
+</div>
+{% endblock %}

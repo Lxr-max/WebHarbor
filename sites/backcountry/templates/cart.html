@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart | Backcountry.com{% endblock %}
+{% block body %}
+<h1 class="page-title">Cart <span class="cart-count">({{ items|length }})</span></h1>
+
+{% if items %}
+<div class="cart-layout">
+  <section class="cart-lines">
+    {% for it in items %}
+    <article class="cart-line">
+      {% set thumb = it.sku.image.replace('/medium/', '/large/') if it.sku.image else none %}
+      {% if thumb %}
+      <a class="line-media" href="/{{ it.sku.product.slug }}"><img src="{{ img(thumb) }}" alt="{{ it.sku.product.title }}"></a>
+      {% endif %}
+      <div class="line-info">
+        <p class="line-brand">{{ it.sku.product.brand.name }}</p>
+        <h2 class="line-title"><a href="/{{ it.sku.product.slug }}">{{ it.sku.product.title }}</a></h2>
+        <p class="line-variant">Color: {{ it.sku.color }} &middot; Size: {{ it.sku.size }}</p>
+        <p class="line-sku">Item #{{ it.sku.product.item_number }} &middot; SKU: {{ it.sku.id }}</p>
+        <p class="line-price">
+          {% if it.sku.on_sale %}
+          <span class="sale">{{ money(it.unit_price) }}</span>
+          <s class="list">{{ money(it.unit_list) }}</s>
+          <span class="pct">{{ it.sku.discount }}% off</span>
+          {% else %}
+          <span class="sale">{{ money(it.unit_price) }}</span>
+          {% endif %}
+        </p>
+      </div>
+      <div class="line-actions">
+        <form class="qty-form" method="post" action="/cart/update">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="item" value="{{ it.id }}">
+          <label for="qty-{{ it.id }}">Qty</label>
+          <input id="qty-{{ it.id }}" class="qty-input" type="number" name="quantity"
+                 value="{{ it.quantity }}" min="1" max="10">
+          <button class="btn btn-small" type="submit">Update</button>
+        </form>
+        <form class="remove-form" method="post" action="/cart/update">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="item" value="{{ it.id }}">
+          <input type="hidden" name="action" value="remove">
+          <button class="link-btn" type="submit">Remove</button>
+        </form>
+      </div>
+      <p class="line-total">{{ money(it.line_total) }}</p>
+    </article>
+    {% endfor %}
+  </section>
+
+  <aside class="cart-summary">
+    <h2>Order Summary</h2>
+    <dl class="summary-rows">
+      <div><dt>Subtotal</dt><dd>{{ money(subtotal) }}</dd></div>
+      {% if savings %}<div><dt>Item Savings</dt><dd class="savings">-{{ money(savings) }}</dd></div>{% endif %}
+      <div><dt>Shipping</dt><dd>{% if shipping == 0 %}FREE!{% else %}{{ money(shipping) }}{% endif %}</dd></div>
+      <div class="summary-total"><dt>Total</dt><dd>{{ money(subtotal + shipping) }}</dd></div>
+    </dl>
+    {% if subtotal < threshold %}
+    <p class="ship-progress">Add {{ money(threshold - subtotal) }} more for free shipping.</p>
+    {% else %}
+    <p class="ship-progress ok">Your order qualifies for free shipping.</p>
+    {% endif %}
+    <a class="btn btn-primary btn-block" href="/checkout">Proceed to Checkout</a>
+    <a class="continue-link" href="/">Continue Shopping</a>
+    <p class="cart-note">Free Shipping on orders over $69* &middot; 90 Day Risk-Free Returns</p>
+  </aside>
+</div>
+{% else %}
+<div class="empty-state">
+  <h2>Your cart is currently empty.</h2>
+  <p>Do you have saved items? <a href="/login">Sign in</a> to purchase and manage items
+     that you have saved in your cart or wish list.</p>
+  <p>Want to shop? <a href="/">Continue Shopping</a> — this is the perfect opportunity
+     to shop for the gear you've been wanting.</p>
+</div>
+{% endif %}
+{% endblock %}

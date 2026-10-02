@@ -10,12 +10,23 @@ export WEBSYN_CONTROL_TOKEN="$(python3 -c 'import secrets; print(secrets.token_u
 
 Pass it with `docker run -e WEBSYN_CONTROL_TOKEN`. Site browsing does not require this token; it is removed from site-process environments. Build from this checkout: previously published images may use an older registry/authentication contract.
 
+Derive port ranges from this checkout before the Docker examples; new sites append
+to the registry, so the range must not be copied from an older review:
+
+```bash
+read -r WH_LAST_PORT WH_TEST_LAST_PORT < <(python3 - <<'PYPORT'
+from scripts.check_site_registry import ROOT, BASE_PORT, parse_start_sites
+count = len(parse_start_sites(ROOT / "websyn_start.sh"))
+print(BASE_PORT + count - 1, 41000 + count - 1)
+PYPORT
+)
+```
 
 A coding agent (Claude Code, Cursor, Aider, Codex, ...) is reading this. Read once, then act.
 
 ## What it is
 
-45 Flask mirror websites (Amazon, GitHub, BBC News, ...) packaged into one Docker image, plus a control plane on `:8101` for resetting per-site state. Used as a deterministic offline environment for web-agent benchmarks. ~3 GB image.
+Flask mirror websites (Amazon, GitHub, BBC News, ...) packaged into one Docker image, plus a control plane on `:8101` for resetting per-site state. Used as a deterministic offline environment for web-agent benchmarks. ~3 GB image.
 
 Two repos:
 - **code** (this one) — Flask apps, control plane, scripts.
@@ -53,23 +64,73 @@ scripts/new_site.py
 
 Inside the image, sites live at `/opt/WebSyn/<site>/`. The path predates the rename to webharbor and is kept stable.
 
+## Per-site directory structure
+
+`sites/<site>/` holds code, data, and contract files only:
+
+```
+sites/<site>/
+├── app.py                       routes + SQLAlchemy models
+├── _health.py                   /_health probe
+├── seed_data.py                 tracked build-time seed (or migrate_seed.py / seed_*.py)
+├── requirements.txt             optional site-specific pins
+├── tasks.jsonl                  one row per task: web_name, id, ques, web, upstream_url
+│                                (+ reviewer-added verifier_path and judge_rubric; never an answer key)
+├── templates/  static/          Jinja + css/js/icons; heavy images via the HF archive
+├── instance_seed/<site>.db      seed DB (HF-managed, or build-generated per .build-generated-seed)
+├── verify/                      one deterministic verifier per task + test_verifiers.py
+│                                + shared helpers (verify_lib.py, ground_truth.py)
+│                                + README.md (the per-site verifier contract doc)
+├── tests/                       optional site regression tests
+└── NOTICE.md                    required when the site redistributes third-party media or fonts
+```
+
+Also allowed: data files the app or seed code reads, asset-contract markers
+(`.requires-images`, `.requires-external-cache`, `.build-generated-seed`), asset manifests
+(`asset_inventory.json`, `provenance.json`, ...), and tool scripts the Docker build,
+`scripts/`, the app, the seed chain, or a test actually invokes.
+
+Never commit, anywhere under `sites/<site>/`:
+
+- `README.md`, `CLAUDE.md`, or any other documentation file (the one exception:
+  `verify/README.md`, the per-site verifier contract referenced by the verifiers)
+- integration/review/work reports (`INTEGRATION_REPORT.md`, `PHASE_1_SUMMARY.md`, `TASK_REVIEW.md`, `FIX_REPORT.md`, ...)
+- one-off harvest or generation scripts that nothing in the build, runtime, or tests invokes, and the intermediate files they produced
+- backup or duplicate files
+
+A script that is not imported or executed by the `Dockerfile`, `scripts/`, the app, the
+seed chain, or a test is a work artifact. The only documentation files allowed under
+`sites/<site>/` are `NOTICE.md` (legally required attribution and removal information for
+redistributed third-party material) and `verify/README.md` (the verifier contract).
+
+## Documentation and language rules
+
+- The public root `README.md` changes in exactly one place: the `### Websites` table
+  (website + default port, in registration order). Adding a site appends one row; a port
+  change edits that row. Do not add registry prose, status notes, asset-pin reports, or
+  any other development content to the README, and leave every other section untouched.
+- Per-site operational and provenance detail lives in code, manifests, and `NOTICE.md`;
+  a site directory never carries prose documentation (see "Per-site directory structure").
+- All repository documentation, README content, commit messages, and PR descriptions are
+  written in English.
+
 ## Bring it up
 
 ```bash
 # fresh clone
 ./scripts/fetch_assets.sh                     # pulls assets from HF
 ./scripts/build.sh                            # docker build -t webharbor:dev .
-docker run -e WEBSYN_CONTROL_TOKEN -d -p 8101:8101 -p 40000-40044:40000-40044 webharbor:dev
+docker run -e WEBSYN_CONTROL_TOKEN -d -p 8101:8101 -p "40000-$WH_LAST_PORT:40000-$WH_LAST_PORT" webharbor:dev
 ```
 
 Or use the published image directly:
 
 ```bash
-docker run -e WEBSYN_CONTROL_TOKEN -d -p 8101:8101 -p 40000-40044:40000-40044 \
+docker run -e WEBSYN_CONTROL_TOKEN -d -p 8101:8101 -p "40000-$WH_LAST_PORT:40000-$WH_LAST_PORT" \
   battalion7244/webharbor:latest
 ```
 
-Sites are on `40000`-`40044` in the order declared by `SITES=( ... )` in `websyn_start.sh`. Control plane:
+Sites start at `40000` and end at the derived `WH_LAST_PORT` in the order declared by `SITES=( ... )` in `websyn_start.sh`. Control plane:
 
 | Method | Path                | Purpose                                   |
 |--------|---------------------|-------------------------------------------|
@@ -132,39 +193,43 @@ uv run python eval_judge.py --run_dir runs/gs0 --verifier True
 uv run python eval_judge.py --run_dir runs/gs0
 ```
 
-The verifier prints JSON `{task_id, pass, reason, evidence[]}` and exits 0/1; the LLM judge writes `eval.json` with `success` / `confidence` / `rationale` / `evidence` (+ `rubric_checkpoints` if a rubric was provided). See `agent_demo/README.md`, `sites/merriam_webster/verify/README.md`, and CONTRIBUTING.md "Reviewer role" for the full grading contract. Grading is driven through `agent_demo/eval_judge.py`, which has two modes: the default LLM-as-judge, and `--verifier True` to run a task's deterministic verifier (the script at its `verifier_path`).
+The verifier prints JSON `{task_id, pass, reason, evidence[]}` and exits 0/1; the LLM judge writes `eval.json` with `success` / `confidence` / `rationale` / `evidence` (+ `rubric_checkpoints` if a rubric was provided). See `agent_demo/README.md` and CONTRIBUTING.md "Reviewer role" for the full grading contract. Grading is driven through `agent_demo/eval_judge.py`, which has two modes: the default LLM-as-judge, and `--verifier True` to run a task's deterministic verifier (the script at its `verifier_path`).
 
 ## Pre-PR checks
 
 Run all of these before opening a PR.
 
 ```bash
-# 1. syntax
+# 1. registry consistency (no Docker required)
+python3 scripts/check_site_registry.py
+python3 scripts/audit_site_registry.py --strict
+
+# 2. syntax
 python3 -m py_compile sites/<site>/app.py
 
-# 2. build
+# 3. build
 ./scripts/build.sh webharbor:dev
 
-# 3. run on alt ports (don't collide with anything you already have running)
+# 4. run on alt ports (don't collide with anything you already have running)
 docker run -e WEBSYN_CONTROL_TOKEN -d --rm --name wh-test \
-  -p 8201:8101 -p 41000-41044:40000-40044 webharbor:dev
+  -p 8201:8101 -p "41000-$WH_TEST_LAST_PORT:40000-$WH_LAST_PORT" webharbor:dev
 
-# 4. control plane healthy, all sites alive
+# 5. control plane healthy, all sites alive
 curl -s -H "Authorization: Bearer $WEBSYN_CONTROL_TOKEN" http://localhost:8201/health | python3 -m json.tool | head
 
-# 5. every site renders 200
-for p in $(seq 41000 41044); do
+# 6. every site renders 200
+for p in $(seq 41000 "$WH_TEST_LAST_PORT"); do
   curl -so /dev/null -w "$p:%{http_code}\n" http://localhost:$p/
 done
 
-# 6. byte-identical reset (the strict invariant)
+# 7. byte-identical reset (the strict invariant)
 curl -H "Authorization: Bearer $WEBSYN_CONTROL_TOKEN" -X POST http://localhost:8201/reset/<your_site>
 docker exec wh-test md5sum \
   /opt/WebSyn/<your_site>/instance/<your_site>.db \
   /opt/WebSyn/<your_site>/instance_seed/<your_site>.db
 # the two md5s MUST match — if not, see "Idempotent seeding"
 
-# 7. teardown
+# 8. teardown
 docker stop wh-test
 ```
 

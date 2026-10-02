@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('career_paths') }}">Career Paths</a> › {{ path.title }}</div>
+<h1 class="page-title">{{ path.title }}</h1>
+<p>{{ path.description }}</p>
+<h2>Featured Jobs</h2>
+{% if jobs %}
+<table class="data">
+  <tr><th>Job</th><th>Organization</th><th>Salary</th><th>Closing</th><th></th></tr>
+  {% for j in jobs %}
+  <tr>
+    <td><a href="{{ url_for('job_detail', control=j.control) }}">{{ j.careers_title }}</a></td>
+    <td>{{ j.org }}</td>
+    <td>{{ j.salary }}</td>
+    <td>{{ j.closing }}</td>
+    <td><a class="btn" href="{{ url_for('job_detail', control=j.control) }}">View</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}<p>No featured jobs on this page right now.</p>{% endif %}
+<h2>Events</h2>
+{% if events %}
+<ul>
+  {% for e in events %}<li>{{ e.date }} — {{ e.event }}{% if e.location %} ({{ e.location }}){% endif %} <span class="tag">{{ e.type }}</span></li>{% endfor %}
+</ul>
+{% else %}<p>No upcoming events listed.</p>{% endif %}
+{% endblock %}

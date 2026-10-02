@@ -1,0 +1,1198 @@
+{
+  "Stanford University--0": {
+    "task": "I'm adding graduate machine learning to Alice's study plan. Find the Computer Science course titled Machine Learning, check its units, grading basis and offered terms, and add it without disturbing her existing courses. Report the final planner contents and unit range. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "course_code": "CS229",
+            "position": 4,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/courses/CS229(?:\\?|$)",
+      "/planner(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "CS229 \u2014 Machine Learning identity",
+        "cs229\\s+machine\\s+learning"
+      ],
+      [
+        "CS229 \u2014 Machine Learning details UNITS",
+        "(?:cs229\\s+machine\\s+learning|cs229).{0,260}?(?:units|unit\\s+range).{0,35}?3\\-4(?!\\d|\\.\\d)"
+      ],
+      [
+        "CS229 \u2014 Machine Learning details GRADING BASIS",
+        "(?:cs229\\s+machine\\s+learning|cs229).{0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "CS229 \u2014 Machine Learning details TERMS OFFERED",
+        "(?:cs229\\s+machine\\s+learning|cs229).{0,650}?autumn,\\s+spring,\\s+summer,\\s+winter"
+      ]
+    ]
+  },
+  "Stanford University--1": {
+    "task": "Help me compare the Aeronautics and Astronautics bachelor's and master's degrees. Find their program pages through the degree directory and summarize each program's minimum units and requirement groups, the unit difference, and the department that offers them.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/programs/AA\\-BS(?:\\?|$)",
+      "/programs/AA\\-MS(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Aeronautics & Astro (BS) identity",
+        "aeronautics\\s+and\\s+astro\\s+\\(bs\\)"
+      ],
+      [
+        "Aeronautics & Astro (BS) details MINIMUM UNITS",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,35}?100(?!\\d|\\.\\d)"
+      ],
+      [
+        "Aeronautics & Astro (BS) School Requirements",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?school\\s+requirements"
+      ],
+      [
+        "Aeronautics & Astro (BS) Core Program Requirements",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?core\\s+program\\s+requirements"
+      ],
+      [
+        "Aeronautics & Astro (BS) Electives",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?electives"
+      ],
+      [
+        "Aeronautics & Astro (BS) Writing in the Major (WIM)",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?writing\\s+in\\s+the\\s+major\\s+\\(wim\\)"
+      ],
+      [
+        "Aeronautics & Astro (BS) Capstone",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?capstone"
+      ],
+      [
+        "Aeronautics & Astro (BS) Honors",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,3000}?honors"
+      ],
+      [
+        "Aeronautics & Astro (MS) identity",
+        "aeronautics\\s+and\\s+astro\\s+\\(ms\\)"
+      ],
+      [
+        "Aeronautics & Astro (MS) details MINIMUM UNITS",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs))\\b).){0,35}?45(?!\\d|\\.\\d)"
+      ],
+      [
+        "Aeronautics & Astro (MS) Program Requirements",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs))\\b).){0,3000}?program\\s+requirements"
+      ],
+      [
+        "Aeronautics & Astro (BS) vs Aeronautics & Astro (MS) unit difference",
+        "(?:aeronautics\\s+and\\s+astro\\s+\\(bs\\)|aa\\-bs)(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,1800}?unit\\s+difference(?:(?!\\b(?:(?:aeronautics\\s+and\\s+astro\\s+\\(ms\\)|aa\\-ms))\\b).){0,35}?55\\s+units(?!\\d|\\.\\d)"
+      ]
+    ]
+  },
+  "Stanford University--2": {
+    "task": "I need a Winter graduate Electrical Engineering course. Filter the catalog to those constraints and compare the first two courses by code: report their titles, units, grading bases and prerequisites, along with how many courses meet the filters.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/courses/EE214B(?:\\?|$)",
+      "/courses/EE218(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design identity",
+        "ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design"
+      ],
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design details UNITS",
+        "(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b)(?:(?!\\b(?:(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218))\\b).){0,35}?3(?!\\d|\\.\\d)"
+      ],
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design details GRADING BASIS",
+        "(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b)(?:(?!\\b(?:(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218))\\b).){0,650}?rlt\\s+letter\\s+\\(abcd/np\\)"
+      ],
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design details TERMS OFFERED",
+        "(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b)(?:(?!\\b(?:(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218))\\b).){0,650}?winter"
+      ],
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design prerequisites recommended",
+        "\\brecommended\\b"
+      ],
+      [
+        "EE214B \u2014 Advanced Integrated Circuit Design prerequisites prerequisite",
+        "\\bprerequisite\\b"
+      ],
+      [
+        "EE218 \u2014 Power Semiconductor Devices and Technology identity",
+        "ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology"
+      ],
+      [
+        "EE218 \u2014 Power Semiconductor Devices and Technology details UNITS",
+        "(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218)(?:(?!\\b(?:(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b))\\b).){0,35}?3(?!\\d|\\.\\d)"
+      ],
+      [
+        "EE218 \u2014 Power Semiconductor Devices and Technology details GRADING BASIS",
+        "(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218)(?:(?!\\b(?:(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b))\\b).){0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "EE218 \u2014 Power Semiconductor Devices and Technology details TERMS OFFERED",
+        "(?:ee218\\s+power\\s+semiconductor\\s+devices\\s+and\\s+technology|ee218)(?:(?!\\b(?:(?:ee214b\\s+advanced\\s+integrated\\s+circuit\\s+design|ee214b))\\b).){0,650}?winter"
+      ],
+      [
+        "Matching Winter graduate EE courses",
+        "(?:matches|courses|stories|collection).{0,65}?\\b6\\b|\\b6\\s+(?:matches|courses|stories)"
+      ]
+    ]
+  },
+  "Stanford University--3": {
+    "task": "I'm looking for Stanford collaborators in computer vision and aerospace design. Find Fei-Fei Li and the professor who leads the Aerospace Design Laboratory, and summarize each person's title, department and research focus from their profiles so I can distinguish their expertise.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/faculty/15052(?:\\?|$)",
+      "/faculty/19258(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Fei-Fei Li identity",
+        "fei\\-fei\\s+li"
+      ],
+      [
+        "Fei-Fei Li research machine",
+        "\\bmachine\\b"
+      ],
+      [
+        "Fei-Fei Li research learning",
+        "\\blearning\\b"
+      ],
+      [
+        "Fei-Fei Li research vision",
+        "\\bvision\\b"
+      ],
+      [
+        "Fei-Fei Li department",
+        "computer\\s+science\\s+330\\s+publications"
+      ],
+      [
+        "Juan Alonso identity",
+        "juan\\s+alonso"
+      ],
+      [
+        "Juan Alonso department",
+        "aeronautics\\s+and\\s+astronautics\\s+79\\s+publications"
+      ],
+      [
+        "Fei-Fei Li identity title",
+        "fei\\-fei\\s+li(?:(?!\\b(?:juan\\s+alonso)\\b).){0,450}?sequoia\\s+capital\\s+professor,\\s+senior\\s+fellow\\s+at\\s+hai\\s+and\\s+professor,\\s+by\\s+courtesy,\\s+of\\s+operations,\\s+information\\s+and\\s+technology\\s+at\\s+the\\s+graduate\\s+school\\s+of\\s+business"
+      ],
+      [
+        "Juan Alonso identity title",
+        "juan\\s+alonso(?:(?!\\b(?:fei\\-fei\\s+li)\\b).){0,450}?vance\\s+d\\.\\s+and\\s+arlene\\s+c\\.\\s+coffman\\s+professor\\s+and\\s+the\\s+james\\s+and\\s+anna\\s+marie\\s+spilker\\s+chair\\s+of\\s+the\\s+department\\s+of\\s+aeronautics\\s+and\\s+astronautics"
+      ],
+      [
+        "Li computer vision",
+        "fei\\-fei\\s+li(?:(?!\\b(?:juan\\s+alonso)\\b).){0,2500}?(?:computer\\s+vision|visual\\s+recognition)"
+      ],
+      [
+        "Alonso aerospace design",
+        "juan\\s+alonso(?:(?!\\b(?:fei\\-fei\\s+li)\\b).){0,1500}?(?:aerospace|aircraft)(?:(?!\\b(?:fei\\-fei\\s+li)\\b).){0,70}?design"
+      ]
+    ]
+  },
+  "Stanford University--4": {
+    "task": "I'm comparing Economics degree options. Find the Bachelor of Arts and Master of Arts programs and summarize their minimum units, requirement groups and program descriptions, making clear which department offers them and how their unit requirements differ.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/programs/ECON\\-BA(?:\\?|$)",
+      "/programs/ECON\\-MA(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Economics (BA) identity",
+        "economics\\s+\\(ba\\)"
+      ],
+      [
+        "Economics (BA) details MINIMUM UNITS",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,35}?80(?!\\d|\\.\\d)"
+      ],
+      [
+        "Economics (BA) Core Program Requirements",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,3000}?core\\s+program\\s+requirements"
+      ],
+      [
+        "Economics (BA) Electives",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,3000}?electives"
+      ],
+      [
+        "Economics (BA) Writing in Major (WIM)",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,3000}?writing\\s+in\\s+major\\s+\\(wim\\)"
+      ],
+      [
+        "Economics (BA) Capstone",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,3000}?capstone"
+      ],
+      [
+        "Economics (BA) Honors",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,3000}?honors"
+      ],
+      [
+        "Economics (MA) identity",
+        "economics\\s+\\(ma\\)"
+      ],
+      [
+        "Economics (MA) details MINIMUM UNITS",
+        "(?:economics\\s+\\(ma\\)|econ\\-ma)(?:(?!\\b(?:(?:economics\\s+\\(ba\\)|econ\\-ba))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:economics\\s+\\(ba\\)|econ\\-ba))\\b).){0,35}?45(?!\\d|\\.\\d)"
+      ],
+      [
+        "Economics (MA) Program Requirements",
+        "(?:economics\\s+\\(ma\\)|econ\\-ma)(?:(?!\\b(?:(?:economics\\s+\\(ba\\)|econ\\-ba))\\b).){0,3000}?program\\s+requirements"
+      ],
+      [
+        "Economics (BA) vs Economics (MA) unit difference",
+        "(?:economics\\s+\\(ba\\)|econ\\-ba)(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,1800}?unit\\s+difference(?:(?!\\b(?:(?:economics\\s+\\(ma\\)|econ\\-ma))\\b).){0,35}?35\\s+units(?!\\d|\\.\\d)"
+      ]
+    ]
+  },
+  "Stanford University--5": {
+    "task": "Help me understand the progression from a Computer Science BS to an MS and a PhD. Compare all three program pages, reporting minimum units and requirement groups for each, and the differences in minimum units between successive degrees.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/programs/CS\\-BS(?:\\?|$)",
+      "/programs/CS\\-MS(?:\\?|$)",
+      "/programs/CS\\-PHD(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Computer Science (BS) identity",
+        "computer\\s+science\\s+\\(bs\\)"
+      ],
+      [
+        "Computer Science (BS) details MINIMUM UNITS",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,35}?93(?!\\d|\\.\\d)"
+      ],
+      [
+        "Computer Science (BS) School Requirements",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?school\\s+requirements"
+      ],
+      [
+        "Computer Science (BS) Core Program Requirements",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?core\\s+program\\s+requirements"
+      ],
+      [
+        "Computer Science (BS) Electives",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?electives"
+      ],
+      [
+        "Computer Science (BS) Writing in the Major (WIM)",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?writing\\s+in\\s+the\\s+major\\s+\\(wim\\)"
+      ],
+      [
+        "Computer Science (BS) Capstone",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?capstone"
+      ],
+      [
+        "Computer Science (BS) Honors",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?honors"
+      ],
+      [
+        "Computer Science (BS) Artificial Intelligence Subplan",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?artificial\\s+intelligence\\s+subplan"
+      ],
+      [
+        "Computer Science (BS) Computational Biology Subplan",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,3000}?computational\\s+biology\\s+subplan"
+      ],
+      [
+        "Computer Science (MS) identity",
+        "computer\\s+science\\s+\\(ms\\)"
+      ],
+      [
+        "Computer Science (MS) details MINIMUM UNITS",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,35}?45(?!\\d|\\.\\d)"
+      ],
+      [
+        "Computer Science (MS) Program Requirements",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?program\\s+requirements"
+      ],
+      [
+        "Computer Science (MS) Breadth in Discipline",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?breadth\\s+in\\s+discipline"
+      ],
+      [
+        "Computer Science (MS) Teaching Requirement",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?teaching\\s+requirement"
+      ],
+      [
+        "Computer Science (MS) Research Requirement",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?research\\s+requirement"
+      ],
+      [
+        "Computer Science (MS) Artificial Intelligence Subplan",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?artificial\\s+intelligence\\s+subplan"
+      ],
+      [
+        "Computer Science (MS) Computational Biology Subplan",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?computational\\s+biology\\s+subplan"
+      ],
+      [
+        "Computer Science (MS) Computer and Network Security Subplan",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?computer\\s+and\\s+network\\s+security\\s+subplan"
+      ],
+      [
+        "Computer Science (MS) Human-Computer Interaction Subplan",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?human\\-computer\\s+interaction\\s+subplan"
+      ],
+      [
+        "Computer Science (PhD) identity",
+        "computer\\s+science\\s+\\(phd\\)"
+      ],
+      [
+        "Computer Science (PhD) details MINIMUM UNITS",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,35}?135(?!\\d|\\.\\d)"
+      ],
+      [
+        "Computer Science (PhD) Program Requirements",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?program\\s+requirements"
+      ],
+      [
+        "Computer Science (PhD) Teaching Requirement",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?teaching\\s+requirement"
+      ],
+      [
+        "Computer Science (PhD) Advancement to Candidacy",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?advancement\\s+to\\s+candidacy"
+      ],
+      [
+        "Computer Science (PhD) Oral Exam",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?oral\\s+exam"
+      ],
+      [
+        "Computer Science (PhD) Dissertation",
+        "(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,3000}?dissertation"
+      ],
+      [
+        "Computer Science (BS) vs Computer Science (MS) unit difference",
+        "(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,1800}?unit\\s+difference(?:(?!\\b(?:(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)|(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd))\\b).){0,35}?48\\s+units(?!\\d|\\.\\d)"
+      ],
+      [
+        "Computer Science (MS) vs Computer Science (PhD) unit difference",
+        "(?:computer\\s+science\\s+\\(ms\\)|cs\\-ms)(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,1800}?unit\\s+difference(?:(?!\\b(?:(?:computer\\s+science\\s+\\(phd\\)|cs\\-phd)|(?:computer\\s+science\\s+\\(bs\\)|cs\\-bs))\\b).){0,35}?90\\s+units(?!\\d|\\.\\d)"
+      ]
+    ]
+  },
+  "Stanford University--6": {
+    "task": "Prepare a short background brief on the Stanford chemist who received the MacArthur Fellowship. Use Stanford Report for the fellow's name, department, award amount and payment schedule, publication date and writer; then consult the faculty profile for the fellow's title and research focus.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/news/song\\-lin\\-macarthur\\-fellowship(?:\\?|$)",
+      "/faculty/352581(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Stanford chemist Song Lin receives MacArthur Fellowship identity",
+        "stanford\\s+chemist\\s+song\\s+lin\\s+receives\\s+macarthur\\s+fellowship"
+      ],
+      [
+        "Stanford chemist Song Lin receives MacArthur Fellowship identity metadata september",
+        "\\bseptember\\b"
+      ],
+      [
+        "Stanford chemist Song Lin receives MacArthur Fellowship identity metadata hadhazy",
+        "\\bhadhazy\\b"
+      ],
+      [
+        "Stanford chemist Song Lin receives MacArthur Fellowship identity metadata school",
+        "\\bschool\\b"
+      ],
+      [
+        "Song Lin identity",
+        "song\\s+lin"
+      ],
+      [
+        "Song Lin identity metadata professor",
+        "\\bprofessor\\b"
+      ],
+      [
+        "Song Lin identity metadata chemistry",
+        "\\bchemistry\\b"
+      ],
+      [
+        "Song Lin department",
+        "chemistry\\s+88\\s+publications"
+      ],
+      [
+        "MacArthur amount",
+        "(?:800000|800\\s*(?:k|thousand))"
+      ],
+      [
+        "MacArthur payment period",
+        "5\\s+years"
+      ],
+      [
+        "Stanford chemist Song Lin receives MacArthur Fellowship identity title",
+        "stanford\\s+chemist\\s+song\\s+lin\\s+receives\\s+macarthur\\s+fellowship.{0,450}?september\\s+29,\\s+2026\\s+\u00b7\\s+by\\s+adam\\s+hadhazy\\s+\u00b7\\s+stanford\\s+school\\s+of\\s+humanities\\s+and\\s+sciences"
+      ],
+      [
+        "Song Lin identity title",
+        "song\\s+lin.{0,450}?professor\\s+of\\s+chemistry"
+      ],
+      [
+        "electrochemical drug research",
+        "(?:electrochem\\w+|electricity).{0,300}?(?:drug|molecul)|(?:drug|molecul).{0,300}?(?:electrochem\\w+|electricity)"
+      ]
+    ]
+  },
+  "Stanford University--7": {
+    "task": "I'm preparing a health research news briefing. Find the newest Stanford Report story classified as both Research & Scholarship and Health & Medicine, then compare it with the next story under those same filters. Give each title, date, writer and a central finding, and report the size of that filtered collection.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/news/california\\-school\\-menus\\-ultra\\-processed\\-foods(?:\\?|$)",
+      "/news/brain\\-disorder\\-research\\-paul\\-nuyujukian(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Why changing California\u2019s school menus may be difficult identity",
+        "why\\s+changing\\s+california's\\s+school\\s+menus\\s+may\\s+be\\s+difficult"
+      ],
+      [
+        "Why changing California\u2019s school menus may be difficult identity metadata september",
+        "\\bseptember\\b"
+      ],
+      [
+        "Why changing California\u2019s school menus may be difficult identity metadata digitale",
+        "\\bdigitale\\b"
+      ],
+      [
+        "Why changing California\u2019s school menus may be difficult identity metadata school",
+        "\\bschool\\b"
+      ],
+      [
+        "Bridging disciplines to decode the brain identity",
+        "bridging\\s+disciplines\\s+to\\s+decode\\s+the\\s+brain"
+      ],
+      [
+        "Bridging disciplines to decode the brain identity metadata nathan",
+        "\\bnathan\\b"
+      ],
+      [
+        "Bridging disciplines to decode the brain identity metadata collins",
+        "\\bcollins\\b"
+      ],
+      [
+        "Health research collection",
+        "(?:matches|courses|stories|collection).{0,65}?\\b20\\b|\\b20\\s+(?:matches|courses|stories)"
+      ],
+      [
+        "School food barriers",
+        "(?:budget|staffing|procurement).{0,100}?(?:staff|budget|kitchen|procurement)"
+      ],
+      [
+        "Brain interfaces",
+        "brain[- ]computer\\s+interfaces|neural\\s+circuits.{0,50}movement"
+      ]
+    ]
+  },
+  "Stanford University--8": {
+    "task": "I'm choosing a campus concert. Search the events calendar for concert and compare the first two results in calendar order, reporting their dates, locations, street addresses and admission costs so I can plan the visit.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/events/54048769031258(?:\\?|$)",
+      "/events/54116867547734(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Stanford Medicine Orchestra with violinist Stella Chen. identity",
+        "stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\."
+      ],
+      [
+        "Stanford Medicine Orchestra with violinist Stella Chen. details DATE",
+        "stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.(?:(?!\\b(?:undergraduate\\s+composers\\s+reading\\s+concert)\\b).){0,650}?2026\\-10\\-02"
+      ],
+      [
+        "Stanford Medicine Orchestra with violinist Stella Chen. details LOCATION",
+        "stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.(?:(?!\\b(?:undergraduate\\s+composers\\s+reading\\s+concert)\\b).){0,650}?dinkelspiel\\s+auditorium"
+      ],
+      [
+        "Stanford Medicine Orchestra with violinist Stella Chen. details ADDRESS",
+        "stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.(?:(?!\\b(?:undergraduate\\s+composers\\s+reading\\s+concert)\\b).){0,650}?471\\s+lagunita\\s+drive,\\s+stanford,\\s+ca\\s+94305"
+      ],
+      [
+        "Stanford Medicine Orchestra with violinist Stella Chen. details COST",
+        "stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.(?:(?!\\b(?:undergraduate\\s+composers\\s+reading\\s+concert)\\b).){0,650}?25"
+      ],
+      [
+        "Undergraduate Composers Reading Concert identity",
+        "undergraduate\\s+composers\\s+reading\\s+concert"
+      ],
+      [
+        "Undergraduate Composers Reading Concert details DATE",
+        "undergraduate\\s+composers\\s+reading\\s+concert(?:(?!\\b(?:stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.)\\b).){0,650}?2026\\-10\\-03"
+      ],
+      [
+        "Undergraduate Composers Reading Concert details LOCATION",
+        "undergraduate\\s+composers\\s+reading\\s+concert(?:(?!\\b(?:stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.)\\b).){0,650}?braun\\s+music\\s+center\\s+campbell\\s+recital\\s+hall"
+      ],
+      [
+        "Undergraduate Composers Reading Concert details ADDRESS",
+        "undergraduate\\s+composers\\s+reading\\s+concert(?:(?!\\b(?:stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.)\\b).){0,650}?541\\s+lasuen\\s+mall,\\s+stanford,\\s+ca\\s+94305"
+      ],
+      [
+        "Undergraduate Composers Reading Concert details COST",
+        "undergraduate\\s+composers\\s+reading\\s+concert(?:(?!\\b(?:stanford\\s+medicine\\s+orchestra\\s+with\\s+violinist\\s+stella\\s+chen\\.)\\b).){0,650}?free"
+      ]
+    ]
+  },
+  "Stanford University--9": {
+    "task": "Update Bob's saved-event plans: replace his saved research conference with the first event in the December 2026 calendar, leaving his other saved events alone. Report the replacement's date, location and cost, and the final saved-event list. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "event_eid": 53728866418041,
+            "position": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[2]"
+        ]
+      }
+    },
+    "paths": [
+      "/saved\\-events(?:\\?|$)",
+      "/events/53728866418041(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Salvatierra Lecture identity",
+        "salvatierra\\s+lecture"
+      ],
+      [
+        "Salvatierra Lecture details DATE",
+        "salvatierra\\s+lecture.{0,650}?2026\\-12\\-01"
+      ],
+      [
+        "Salvatierra Lecture details LOCATION",
+        "salvatierra\\s+lecture.{0,650}?li\\s+ka\\s+shing\\s+center\\s+lk130"
+      ],
+      [
+        "Salvatierra Lecture details ADDRESS",
+        "salvatierra\\s+lecture.{0,650}?291\\s+campus\\s+drive,\\s+stanford,\\s+ca\\s+94305"
+      ],
+      [
+        "Salvatierra Lecture details COST",
+        "salvatierra\\s+lecture.{0,650}?admission\\s+cost\\s+not\\s+listed"
+      ]
+    ]
+  },
+  "Stanford University--10": {
+    "task": "Dana is revising her Autumn study plan toward mathematics. Replace Introduction to Neuroscience with Linear Algebra, Multivariable Calculus, preserving other courses. Confirm the replacement's offered terms and grading basis, report the final planned units, and check the Autumn instruction start and preliminary study-list deadline including its late fee. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "updated": {
+          "[6]": {
+            "course_code": "MATH51"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/planner(?:\\?|$)",
+      "/courses/MATH51(?:\\?|$)",
+      "/academic\\-calendar(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications identity",
+        "math51\\s+linear\\s+algebra,\\s+multivariable\\s+calculus,\\s+and\\s+modern\\s+applications"
+      ],
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications details UNITS",
+        "(?:math51\\s+linear\\s+algebra,\\s+multivariable\\s+calculus,\\s+and\\s+modern\\s+applications|math51).{0,260}?(?:units|unit\\s+range).{0,35}?5(?!\\d|\\.\\d)"
+      ],
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications details GRADING BASIS",
+        "(?:math51\\s+linear\\s+algebra,\\s+multivariable\\s+calculus,\\s+and\\s+modern\\s+applications|math51).{0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications details TERMS OFFERED",
+        "(?:math51\\s+linear\\s+algebra,\\s+multivariable\\s+calculus,\\s+and\\s+modern\\s+applications|math51).{0,650}?autumn,\\s+winter,\\s+spring"
+      ],
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications prerequisites enrollment",
+        "\\benrollment\\b"
+      ],
+      [
+        "MATH51 \u2014 Linear Algebra, Multivariable Calculus, and Modern Applications prerequisites prerequisite",
+        "\\bprerequisite\\b"
+      ]
+    ]
+  },
+  "Stanford University--11": {
+    "task": "Help me plan a study visit using the captured library-hours week. Compare the Robin Li and Melissa Ma Science Library with Cecil H. Green Library: give their locations, contact numbers and main circulation-desk hours on Friday and Sunday, and say which stays open later on each day.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/libraries(?:\\?|$)",
+      "/libraries/robin\\-li\\-and\\-melissa\\-ma\\-science\\-library(?:\\?|$)",
+      "/libraries/cecil\\-h\\-green\\-library(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Robin Li and Melissa Ma Science Library identity",
+        "robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library"
+      ],
+      [
+        "Robin Li and Melissa Ma Science Library location",
+        "376\\s+lomita\\s+drive\\s+stanford\\s+,\\s+ca\\s+94305"
+      ],
+      [
+        "Robin Li and Melissa Ma Science Library Friday opening",
+        "robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library(?:(?!\\b(?:cecil\\s+h\\.\\s+green\\s+library)\\b).){0,500}?09:00"
+      ],
+      [
+        "Robin Li and Melissa Ma Science Library Friday closing",
+        "robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library(?:(?!\\b(?:cecil\\s+h\\.\\s+green\\s+library)\\b).){0,500}?17:00"
+      ],
+      [
+        "Robin Li and Melissa Ma Science Library Sunday closed",
+        "robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library(?:(?!\\b(?:cecil\\s+h\\.\\s+green\\s+library)\\b).){0,300}?(?:closed|not\\s+open)"
+      ],
+      [
+        "Cecil H. Green Library identity",
+        "cecil\\s+h\\.\\s+green\\s+library"
+      ],
+      [
+        "Cecil H. Green Library location",
+        "green\\s+library\\s+557\\s+escondido\\s+mall\\s+stanford\\s+,\\s+ca\\s+94305\\-6063"
+      ],
+      [
+        "Cecil H. Green Library Friday opening",
+        "cecil\\s+h\\.\\s+green\\s+library(?:(?!\\b(?:robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library)\\b).){0,500}?08:00"
+      ],
+      [
+        "Cecil H. Green Library Friday closing",
+        "cecil\\s+h\\.\\s+green\\s+library(?:(?!\\b(?:robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library)\\b).){0,500}?19:00"
+      ],
+      [
+        "Cecil H. Green Library Sunday opening",
+        "cecil\\s+h\\.\\s+green\\s+library(?:(?!\\b(?:robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library)\\b).){0,500}?12:00"
+      ],
+      [
+        "Cecil H. Green Library Sunday closing",
+        "cecil\\s+h\\.\\s+green\\s+library(?:(?!\\b(?:robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library)\\b).){0,500}?00:00"
+      ],
+      [
+        "Green later",
+        "green\\s+library.{0,40}?(?:stays\\s+open\\s+later|closes\\s+later|is\\s+open\\s+later)"
+      ],
+      [
+        "Robin Li and Melissa Ma Science Library identity phone",
+        "robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library(?:(?!\\b(?:cecil\\s+h\\.\\s+green\\s+library)\\b).){0,700}?\\(650\\)\\s+723\\-1528"
+      ],
+      [
+        "Cecil H. Green Library identity phone",
+        "cecil\\s+h\\.\\s+green\\s+library(?:(?!\\b(?:robin\\s+li\\s+and\\s+melissa\\s+ma\\s+science\\s+library)\\b).){0,700}?\\(650\\)\\s+723\\-1493"
+      ]
+    ]
+  },
+  "Stanford University--12": {
+    "task": "Our household of two is budgeting for a Stanford undergraduate application. Compare what the published aid thresholds say at annual incomes of $90,000 and $120,000, including the typical-assets condition and whether tuition and room and board are covered. Also report the application fee and the standard Restrictive Early Action and Regular Decision deadlines. Treat this as threshold guidance, not an individual aid award.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/admission/aid(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "90000 tuition and board",
+        "90000.{0,250}no\\s+tuition\\s+or\\s+room\\s+and\\s+board"
+      ],
+      [
+        "120000 tuition",
+        "120000.{0,150}no\\s+tuition"
+      ],
+      [
+        "120000 board limitation",
+        "120000.{0,260}room\\s+and\\s+board\\s+responsibility\\s+applies"
+      ],
+      [
+        "assets condition",
+        "assets\\s+typical"
+      ],
+      [
+        "REA deadline",
+        "november\\s+1"
+      ],
+      [
+        "RD deadline",
+        "january\\s+5"
+      ],
+      [
+        "application fee",
+        "(?:fee|application).{0,60}\\b100\\b"
+      ]
+    ]
+  },
+  "Stanford University--13": {
+    "task": "Bob wants a science-focused study plan. Replace Introduction to Psychology and Principles of Economics with Introduction to Neuroscience and Mechanics, keeping any other planned courses. Check the new courses' units and offered terms and report the final course list and total unit range. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "course_code": "BIO102",
+            "position": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "course_code": "PHYSICS41",
+            "position": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[4]",
+          "[5]"
+        ]
+      }
+    },
+    "paths": [
+      "/planner(?:\\?|$)",
+      "/courses/BIO102(?:\\?|$)",
+      "/courses/PHYSICS41(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "BIO102 \u2014 Introduction to Neuroscience identity",
+        "bio102\\s+introduction\\s+to\\s+neuroscience"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details UNITS",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:physics41\\s+mechanics|physics41))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:physics41\\s+mechanics|physics41))\\b).){0,35}?4(?!\\d|\\.\\d)"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details GRADING BASIS",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:physics41\\s+mechanics|physics41))\\b).){0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details TERMS OFFERED",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:physics41\\s+mechanics|physics41))\\b).){0,650}?winter"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics identity",
+        "physics41\\s+mechanics"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics details UNITS",
+        "(?:physics41\\s+mechanics|physics41)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,35}?4(?!\\d|\\.\\d)"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics details GRADING BASIS",
+        "(?:physics41\\s+mechanics|physics41)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,650}?rsn\\s+satisfactory/no\\s+credit"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics details TERMS OFFERED",
+        "(?:physics41\\s+mechanics|physics41)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,650}?autumn,\\s+winter"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics prerequisites enrollment",
+        "\\benrollment\\b"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics prerequisites prerequisite",
+        "\\bprerequisite\\b"
+      ],
+      [
+        "PHYSICS41 \u2014 Mechanics prerequisites corequisite",
+        "\\bcorequisite\\b"
+      ]
+    ]
+  },
+  "Stanford University--14": {
+    "task": "Create Jordan Vale's account at jordan.vale@test.com with a password of at least eight characters and start a study plan on biological and economic approaches to behavior. Add Introduction to Neuroscience and Principles of Economics after checking their units, grading bases and offered terms. Report the final planned courses and total units.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "course_code": "BIO102",
+            "position": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          },
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "course_code": "ECON1",
+            "position": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      },
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Jordan Vale",
+            "email": "jordan.vale@test.com",
+            "password_hash": {
+              "regex": "\\$2[aby]\\$\\d\\d\\$[./A-Za-z0-9]{53}"
+            },
+            "created_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/planner(?:\\?|$)",
+      "/courses/BIO102(?:\\?|$)",
+      "/courses/ECON1(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "BIO102 \u2014 Introduction to Neuroscience identity",
+        "bio102\\s+introduction\\s+to\\s+neuroscience"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details UNITS",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:econ1\\s+principles\\s+of\\s+economics|econ1))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:econ1\\s+principles\\s+of\\s+economics|econ1))\\b).){0,35}?4(?!\\d|\\.\\d)"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details GRADING BASIS",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:econ1\\s+principles\\s+of\\s+economics|econ1))\\b).){0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "BIO102 \u2014 Introduction to Neuroscience details TERMS OFFERED",
+        "(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102)(?:(?!\\b(?:(?:econ1\\s+principles\\s+of\\s+economics|econ1))\\b).){0,650}?winter"
+      ],
+      [
+        "ECON1 \u2014 Principles of Economics identity",
+        "econ1\\s+principles\\s+of\\s+economics"
+      ],
+      [
+        "ECON1 \u2014 Principles of Economics details UNITS",
+        "(?:econ1\\s+principles\\s+of\\s+economics|econ1)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,35}?5(?!\\d|\\.\\d)"
+      ],
+      [
+        "ECON1 \u2014 Principles of Economics details GRADING BASIS",
+        "(?:econ1\\s+principles\\s+of\\s+economics|econ1)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "ECON1 \u2014 Principles of Economics details TERMS OFFERED",
+        "(?:econ1\\s+principles\\s+of\\s+economics|econ1)(?:(?!\\b(?:(?:bio102\\s+introduction\\s+to\\s+neuroscience|bio102))\\b).){0,650}?winter,\\s+autumn,\\s+spring"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "users",
+        "right": "planned_courses",
+        "foreign_key": "user_id"
+      }
+    ]
+  },
+  "Stanford University--15": {
+    "task": "I'm exploring graduate chemistry study at Stanford. Find the Chemistry course about machine learning and check its units, career level, grading basis and prerequisites. Compare that preparation with the Chemistry PhD program's minimum units and requirement groups, and identify the department offering both.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {},
+    "paths": [
+      "/courses/CHEM263(?:\\?|$)",
+      "/programs/CHEM\\-PHD(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "CHEM263 \u2014 Machine Learning for Chemical and Dynamical Data identity",
+        "chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data"
+      ],
+      [
+        "CHEM263 \u2014 Machine Learning for Chemical and Dynamical Data details UNITS",
+        "(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263)(?:(?!\\b(?:chemistry\\s+\\(phd\\))\\b).){0,260}?(?:units|unit\\s+range)(?:(?!\\b(?:chemistry\\s+\\(phd\\))\\b).){0,35}?3(?!\\d|\\.\\d)"
+      ],
+      [
+        "CHEM263 \u2014 Machine Learning for Chemical and Dynamical Data details GRADING BASIS",
+        "(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263)(?:(?!\\b(?:chemistry\\s+\\(phd\\))\\b).){0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "CHEM263 \u2014 Machine Learning for Chemical and Dynamical Data details TERMS OFFERED",
+        "(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263)(?:(?!\\b(?:chemistry\\s+\\(phd\\))\\b).){0,650}?autumn"
+      ],
+      [
+        "Chemistry (PhD) identity",
+        "chemistry\\s+\\(phd\\)"
+      ],
+      [
+        "Chemistry (PhD) details MINIMUM UNITS",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,260}?(?:minimum\\s+units|unit\\s+minimum|at\\s+least|requires)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,35}?135(?!\\d|\\.\\d)"
+      ],
+      [
+        "Chemistry (PhD) Program Requirements",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?program\\s+requirements"
+      ],
+      [
+        "Chemistry (PhD) Teaching Requirement",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?teaching\\s+requirement"
+      ],
+      [
+        "Chemistry (PhD) Research Requirement",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?research\\s+requirement"
+      ],
+      [
+        "Chemistry (PhD) Advancement to Candidacy",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?advancement\\s+to\\s+candidacy"
+      ],
+      [
+        "Chemistry (PhD) Oral Exam",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?oral\\s+exam"
+      ],
+      [
+        "Chemistry (PhD) Dissertation",
+        "chemistry\\s+\\(phd\\)(?:(?!\\b(?:(?:chem263\\s+machine\\s+learning\\s+for\\s+chemical\\s+and\\s+dynamical\\s+data|chem263))\\b).){0,3000}?dissertation"
+      ]
+    ]
+  },
+  "Stanford University--16": {
+    "task": "Dana wants to attend the earliest event marked upcoming in the captured campus calendar. Check its captured date range, location and admission information, noting any missing time or price details, save it without changing her existing saved events, and report her resulting list. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "event_eid": 47490479889681,
+            "position": 2,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/events/47490479889681(?:\\?|$)",
+      "/saved\\-events(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Climber Coffee identity",
+        "climber\\s+coffee"
+      ],
+      [
+        "Climber Coffee details DATE",
+        "climber\\s+coffee.{0,650}?2026\\-10\\-01"
+      ],
+      [
+        "Climber Coffee details LOCATION",
+        "climber\\s+coffee.{0,650}?arrillaga\\s+outdoor\\s+education\\s+and\\s+recreation\\s+center"
+      ],
+      [
+        "Climber Coffee details ADDRESS",
+        "climber\\s+coffee.{0,650}?285\\s+santa\\s+teresa\\s+st,\\s+stanford,\\s+ca\\s+94305"
+      ],
+      [
+        "Climber Coffee details COST",
+        "climber\\s+coffee.{0,650}?admission\\s+cost\\s+not\\s+listed"
+      ],
+      [
+        "captured date range",
+        "2026-10-01.{0,30}?2026-12-03"
+      ],
+      [
+        "time unavailable",
+        "time\\s+(?:not\\s+listed|unavailable|unspecified)"
+      ]
+    ]
+  },
+  "Stanford University--17": {
+    "task": "Carol needs a Winter Computer Science course that fulfills Formal Reasoning. Find the matching course with the lowest course number, check its units, grading basis and prerequisites, and add it to her planner without removing existing courses. Report the number of matching courses and her final planned units. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "course_code": "CS103",
+            "position": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/courses/CS103(?:\\?|$)",
+      "/planner(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "CS103 \u2014 Mathematical Foundations of Computing identity",
+        "cs103\\s+mathematical\\s+foundations\\s+of\\s+computing"
+      ],
+      [
+        "CS103 \u2014 Mathematical Foundations of Computing details UNITS",
+        "(?:cs103\\s+mathematical\\s+foundations\\s+of\\s+computing|cs103).{0,260}?(?:units|unit\\s+range).{0,35}?3\\-5(?!\\d|\\.\\d)"
+      ],
+      [
+        "CS103 \u2014 Mathematical Foundations of Computing details GRADING BASIS",
+        "(?:cs103\\s+mathematical\\s+foundations\\s+of\\s+computing|cs103).{0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "CS103 \u2014 Mathematical Foundations of Computing details TERMS OFFERED",
+        "(?:cs103\\s+mathematical\\s+foundations\\s+of\\s+computing|cs103).{0,650}?autumn,\\s+spring,\\s+winter"
+      ],
+      [
+        "Winter CS Formal Reasoning matches",
+        "(?:matches|courses|stories|collection).{0,65}?\\b8\\b|\\b8\\s+(?:matches|courses|stories)"
+      ]
+    ]
+  },
+  "Stanford University--18": {
+    "task": "Carol would rather attend the Multifaith Dinner than her saved curator talk. Check the dinner's date, location and admission cost, replace the talk in her saved events, and confirm the final list contains the dinner. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "saved_events": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "event_eid": 53969575639155,
+            "position": 1,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ],
+        "removed": [
+          "[3]"
+        ]
+      }
+    },
+    "paths": [
+      "/saved\\-events(?:\\?|$)",
+      "/events/53969575639155(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "Multifaith Dinner identity",
+        "multifaith\\s+dinner"
+      ],
+      [
+        "Multifaith Dinner details DATE",
+        "multifaith\\s+dinner.{0,650}?2026\\-11\\-02"
+      ],
+      [
+        "Multifaith Dinner details LOCATION",
+        "multifaith\\s+dinner.{0,650}?old\\s+union\\s+circle\\s+common\\s+room\\s+\\(3rd\\s+floor,\\s+room\\s+302\\)"
+      ],
+      [
+        "Multifaith Dinner details ADDRESS",
+        "multifaith\\s+dinner.{0,650}?520\\s+lasuen\\s+mall,\\s+stanford,\\s+ca\\s+94305"
+      ],
+      [
+        "Multifaith Dinner details COST",
+        "multifaith\\s+dinner.{0,650}?admission\\s+cost\\s+not\\s+listed"
+      ]
+    ]
+  },
+  "Stanford University--19": {
+    "task": "Alice wants to add Design and Analysis of Algorithms to her study plan. Review its prerequisites, unit range, grading basis and offered terms, then add it while preserving her current courses. Report the complete planner and its total unit range. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "bd555e8b74deea134b94780fc75f60c587e83b9e93997f697431e3f0b15f8829",
+    "state": {
+      "planned_courses": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "course_code": "CS161",
+            "position": 4,
+            "added_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d(?:[ T].*)?"
+            }
+          }
+        ]
+      }
+    },
+    "paths": [
+      "/courses/CS161(?:\\?|$)",
+      "/planner(?:\\?|$)"
+    ],
+    "claims": [
+      [
+        "CS161 \u2014 Design and Analysis of Algorithms identity",
+        "cs161\\s+design\\s+and\\s+analysis\\s+of\\s+algorithms"
+      ],
+      [
+        "CS161 \u2014 Design and Analysis of Algorithms details UNITS",
+        "(?:cs161\\s+design\\s+and\\s+analysis\\s+of\\s+algorithms|cs161).{0,260}?(?:units|unit\\s+range).{0,35}?3\\-5(?!\\d|\\.\\d)"
+      ],
+      [
+        "CS161 \u2014 Design and Analysis of Algorithms details GRADING BASIS",
+        "(?:cs161\\s+design\\s+and\\s+analysis\\s+of\\s+algorithms|cs161).{0,650}?rop\\s+letter\\s+or\\s+credit/no\\s+credit"
+      ],
+      [
+        "CS161 \u2014 Design and Analysis of Algorithms details TERMS OFFERED",
+        "(?:cs161\\s+design\\s+and\\s+analysis\\s+of\\s+algorithms|cs161).{0,650}?autumn,\\s+winter"
+      ]
+    ]
+  }
+}

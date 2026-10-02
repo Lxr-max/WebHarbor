@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Get quotes - {{ cat.name }} - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Get quotes for {{ cat.name|lower }}</h1>
+  <p class="muted">Answer a few questions so we can match you with the right pros.</p>
+  <div class="auth-card" style="max-width:640px;">
+    <form method="post" action="/projects/new">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="category" value="{{ cat.slug }}">
+      {% if pro_pk %}<input type="hidden" name="pro" value="{{ pro_pk }}">{% endif %}
+      <div class="form-row">
+        <label>Zip code</label>
+        <input type="text" name="zip" value="{{ zip }}" required>
+      </div>
+      <div class="form-row">
+        <label>When do you want to start?</label>
+        <div class="radio-list">
+          {% for opt in ['Within 48 hours', 'Within a week', 'Flexible on timeline', 'Specific date(s)'] %}
+          <label><input type="radio" name="timeline" value="{{ opt }}" {% if loop.first %}checked{% endif %}> {{ opt }}</label>
+          {% endfor %}
+        </div>
+      </div>
+      {% for q in questions %}
+      {% set qi = loop.index0 %}
+      {% if q.q != 'When do you want to start?' %}
+      <div class="form-row">
+        <label>{{ q.q }}</label>
+        <div class="radio-list">
+          {% for opt in q.opts %}
+          <label><input type="radio" name="f{{ qi }}" value="{{ opt }}"> {{ opt }}</label>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <div class="form-row">
+        <label>Project details</label>
+        <textarea name="details" rows="4" placeholder="Describe your project in your own words — be as detailed as you'd like!"></textarea>
+      </div>
+      {% if not current_user.is_authenticated %}
+      <div class="form-row">
+        <label>Your name</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label>Password (8+ characters)</label>
+        <input type="password" name="password" minlength="8" required>
+      </div>
+      {% endif %}
+      <button class="btn btn-accent btn-block" type="submit">Get quotes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

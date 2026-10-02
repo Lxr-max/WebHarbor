@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{ contest.title }} - Make Your Picks | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/fox-super-6">FOX SUPER 6</a> &gt;
+  <span>{{ contest.title|upper }}</span>
+</div>
+<div class="page-head"><h1>{{ contest.title }}</h1></div>
+<p class="lead">{{ contest.description }}</p>
+<p class="muted">Deadline: {{ contest.deadline }} &middot; Status: {{ contest.status }}</p>
+{% if existing %}
+<p class="notice">You already have an entry in this contest (score {{ existing.score or 0 }}/6). Submitting again replaces your picks.</p>
+{% endif %}
+<form method="post" action="{{ url_for('super6_submit', slug=contest.slug) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% for q in questions %}
+  <fieldset class="pick-fieldset">
+    <legend>Question {{ q.order }} of 6</legend>
+    <div class="pick-row">
+      <label class="pick-option">
+        <input type="radio" name="pick-{{ q.order }}" value="{{ q.away_team }}" required>
+        <span class="pick-team">
+          {% set at = teams.get(q.away_team) %}
+          {% if at and at.logo and image(at.logo) %}<img src="{{ image(at.logo) }}" alt="{{ at.full_name }}">{% endif %}
+          {{ at.full_name if at else q.away_team|replace('-',' ')|title }}
+        </span>
+      </label>
+      <span class="pick-vs">vs</span>
+      <label class="pick-option">
+        <input type="radio" name="pick-{{ q.order }}" value="{{ q.home_team }}" required>
+        <span class="pick-team">
+          {% set ht = teams.get(q.home_team) %}
+          {% if ht and ht.logo and image(ht.logo) %}<img src="{{ image(ht.logo) }}" alt="{{ ht.full_name }}">{% endif %}
+          {{ ht.full_name if ht else q.home_team|replace('-',' ')|title }}
+        </span>
+      </label>
+    </div>
+    <a class="muted pick-game-link" href="/{{ 'nfl' }}/{{ q.game_slug }}">Scouting report</a>
+  </fieldset>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">Submit Entry</button>
+</form>
+{% endblock %}

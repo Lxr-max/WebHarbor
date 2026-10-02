@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}ZARA United States | New Collection Online{% endblock %}</title>
+<link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-top">
+    <form class="header-search" action="/us/en/search" method="get">
+      <input type="search" name="searchTerm" value="{{ request.args.get('searchTerm','') }}"
+             placeholder="SEARCH" aria-label="Search">
+      <button type="submit" aria-label="Run search">SEARCH</button>
+    </form>
+    <a class="logo" href="/" aria-label="Go to homepage">
+      <span style="font-family: Georgia, serif; font-size: 42px; letter-spacing: -5px">ZARA</span>
+    </a>
+    <nav class="header-links">
+      {% if current_user.is_authenticated %}
+        <a href="/us/en/account">HI, {{ current_user.display_name.split(' ')[0]|upper }}</a>
+      {% else %}
+        <a href="/us/en/logon">LOG IN</a>
+      {% endif %}
+      <a href="/us/en/wishlist">WISHLIST</a>
+      <a href="/us/en/shop">BAG ({{ cart_count }})</a>
+    </nav>
+  </div>
+  <nav class="site-nav" aria-label="Sections">
+    <a href="/" {% if request.path == '/' %}class="active"{% endif %}>NEW</a>
+    {% for sec, items in categories_nav() %}
+      <a href="/#{{ sec|lower }}">{{ sec }}</a>
+    {% endfor %}
+    <a href="/us/en/z-stores-st1404.html">STORES</a>
+  </nav>
+</header>
+
+<main>
+{% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <h4>HELP</h4>
+      <a href="/us/en/shop">MY BAG</a>
+      <a href="/us/en/account/orders">MY ORDERS</a>
+      <a href="/us/en/z-stores-st1404.html">STORE LOCATOR</a>
+      <a href="/us/en/logon">LOG IN</a>
+    </div>
+    <div>
+      <h4>COMPANY</h4>
+      <span>OFFICES</span>
+      <span>SUSTAINABILITY</span>
+      <span>PRESS</span>
+    </div>
+    <div>
+      <h4>FOLLOW US</h4>
+      <span>NEWSLETTER</span>
+      <form class="newsletter" action="/newsletter" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="back" value="{{ request.path }}">
+        <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
+        <button type="submit">JOIN</button>
+      </form>
+    </div>
+  </div>
+  <p class="copyright">© ALL RIGHTS RESERVED — ZARA MIRROR SNAPSHOT {{ MIRROR_TS }}</p>
+</footer>
+</body>
+</html>

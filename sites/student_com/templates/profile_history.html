@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Recently Viewed Properties | Student.com{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:44px 0 64px;max-width:1100px">
+  <nav class="breadcrumb" style="padding:0 0 10px"><a href="/">Home</a> › <span>Recently Viewed Properties</span></nav>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+    <h1>Recently Viewed Properties</h1>
+    <span class="muted">{{ props|length }} {{ 'property' if props|length == 1 else 'properties' }}</span>
+  </div>
+
+  {% if props %}
+  <div class="grid cols-3" style="margin-top:24px">
+    {% for prop, viewed in props %}
+    <a class="prop-card" href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}/p/{{ prop.slug }}">
+      <div class="img">{% if prop.primary_image %}<img src="{{ prop.primary_image }}" alt="Photo of {{ prop.name }}">{% endif %}</div>
+      <div class="body">
+        <div class="name">{{ prop.name }}</div>
+        <div class="muted small" style="margin-top:4px">Viewed on {{ viewed.strftime('%B %d, %Y') if viewed.strftime else '' }}</div>
+        <div class="dist">{% if prop.min_price %}From ${{ '{:,}'.format(prop.min_price) }}/mo{% endif %}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p style="font-weight:600">You don't have any viewed properties yet</p>
+    <p class="muted small">Start exploring and your recently viewed properties will appear here!</p>
+    <a class="btn primary" href="/" style="margin-top:16px">Find your student home</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

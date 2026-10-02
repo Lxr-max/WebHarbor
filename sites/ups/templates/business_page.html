@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }} | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('business') }}">Business Solutions</a> &rsaquo; {{ page.title }}</div>
+  <div class="ups-card ups-contentpage">
+    {% if hero %}<img class="ups-heroimg" src="/static/images/{{ hero }}" alt="">{% endif %}
+    <h1>{{ page.title }}</h1>
+    <div class="ups-contentbody">{{ page.body }}</div>
+    {% if pickup_fees %}
+    <h2>Pickup Options and Fees</h2>
+    <table class="ups-feetable">
+      <thead><tr><th>Available Option</th><th>Description</th><th>Fee</th></tr></thead>
+      <tbody>
+      {% for f in pickup_fees %}
+        <tr><td><strong>{{ f.name }}</strong></td><td>{{ f.description }}</td>
+            <td>{{ f.fee }}{% if f.per %} {{ f.per }}{% endif %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    {% if saturday_fees %}
+    <h2>Weekend Services</h2>
+    <table class="ups-feetable">
+      <thead><tr><th>Option</th><th>Description</th><th>Fee</th></tr></thead>
+      <tbody>
+      {% for f in saturday_fees %}
+        <tr><td><strong>{{ f.name }}</strong></td><td>{{ f.description }}</td>
+            <td>{{ f.fee }}{% if f.per %} {{ f.per }}{% endif %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('pickup') }}">Schedule a One-Time Pickup</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('locations') }}">Find a UPS Location</a>
+    </div>
+    <p class="ups-hint">Source: {{ page.upstream_url }}</p>
+  </div>
+</section>
+{% endblock %}

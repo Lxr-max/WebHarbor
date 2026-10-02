@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{% if term %}SEARCH “{{ term }}”{% else %}SEARCH{% endif %} | ZARA United States{% endblock %}
+{% block body %}
+<div class="page-head">
+  <h1>{% if term %}SEARCH RESULTS FOR “{{ term|upper }}”{% else %}SEARCH{% endif %}</h1>
+</div>
+{% if term %}
+  <p class="cat-count" style="padding: 0 28px">
+    {{ total }} results upstream — {{ results|length }} in this snapshot (computed over the catalog)
+  </p>
+  {% if facets %}
+  <div class="facets">
+    {% for f in facets %}
+      <div class="facet">
+        <h4>{{ f.key.replace('_',' ') }}</h4>
+        {% for v in f["values"][:14] %}
+          <div class="frow">
+            {% if v.hex %}<span class="sw" style="background: {{ v.hex }}"></span>{% endif %}
+            <span>{{ v.value }}</span><span class="cnt">{{ v.count }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    {% if price_range %}
+      <div class="facet">
+        <h4>PRICE RANGE</h4>
+        <div class="frow"><span>USD {{ '%.2f'|format(price_range.min / 100) }} – {{ '%.2f'|format(price_range.max / 100) }}</span></div>
+      </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if results %}
+  <div class="grid" style="padding: 8px 28px 50px">
+    {% for p in results %}
+      {% set c = p.main_color %}
+      <a class="product-card" href="{{ p.pdp_path }}">
+        <div class="pimg">
+          {% if c and c.gallery_list %}<img src="{{ img(c.gallery_list[0]) }}" alt="{{ p.name }}">
+          {% elif c and c.thumb %}<img src="{{ img(c.thumb) }}" alt="{{ p.name }}">{% endif %}
+        </div>
+        {% if c and c.tags_list %}<span class="ptag">{{ c.tags_list[0] }}</span>{% endif %}
+        <div class="pname">{{ p.name }}</div>
+        <div class="pprice">{{ money(p.price) }}</div>
+        <div class="color-dots">
+          {% for col in p.colors %}
+            <span class="color-dot" title="{{ col.name }}" style="background: {{ col.hex or '#fff' }}"></span>
+          {% endfor %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="center-note">No products found for “{{ term }}”</p>
+  <div class="grid" style="padding: 10px 28px 60px">
+    {% for cat in categories[:4] %}
+      <a class="product-card" href="{{ cat.path }}">
+        <div class="pname">{{ cat.section }} — {{ cat.name }}</div>
+        <div class="pprice">{{ cat.upstream_grid_count }} upstream products</div>
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% else %}
+  <p class="center-note">Type a search term in the header search box</p>
+  <div class="grid" style="padding: 10px 28px 60px">
+    {% for cat in categories %}
+      <a class="product-card" href="{{ cat.path }}">
+        <div class="pname">{{ cat.section }} — {{ cat.name }}</div>
+        <div class="pprice">{{ cat.upstream_grid_count }} upstream products</div>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

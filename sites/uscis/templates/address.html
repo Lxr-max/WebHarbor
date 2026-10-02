@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Change of Address{% endblock %}
+{% block content %}
+<div class="container container--narrow">
+  <h1 class="page-title">Change of Address</h1>
+  <p>Report your change of address online so that USCIS can contact you about your case and send your documents to the correct mailing address. All aliens in the United States must report a change of address to USCIS within 10 days of moving (except A and G visa holders and visa waiver visitors).</p>
+  {% if saved %}
+  <div class="alert-box alert-box--success">
+    <p><strong>Your address has been updated.</strong> We have recorded your change of address for your USCIS online account {{ current_user.account_number }}.</p>
+  </div>
+  {% endif %}
+  <form class="usa-form" method="post" action="{{ url_for('account_address') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="form-label" for="street"><span class="form-label__title">Street address</span></label>
+    <input id="street" name="street" type="text" required value="{{ current_user.street or '' }}">
+    <label class="form-label" for="city"><span class="form-label__title">City</span></label>
+    <input id="city" name="city" type="text" required value="{{ current_user.city or '' }}">
+    <label class="form-label" for="state"><span class="form-label__title">State</span></label>
+    <input id="state" name="state" type="text" required value="{{ current_user.state or '' }}">
+    <label class="form-label" for="zip"><span class="form-label__title">ZIP code</span></label>
+    <input id="zip" name="zip" type="text" maxlength="10" required value="{{ current_user.zip or '' }}">
+    <button class="btn btn--primary" type="submit">Submit change of address</button>
+  </form>
+  <p>For more details, read the <a href="/ar-11">Form AR-11, Alien’s Change of Address Card</a> page.</p>
+</div>
+{% endblock %}

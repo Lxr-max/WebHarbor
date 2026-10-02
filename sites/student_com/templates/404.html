@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}404 - Not Found | Student.com{% endblock %}
+
+{% block content %}
+<div class="error-page container" data-testid="not-found-page">
+  <div class="code">404</div>
+  <h1 data-testid="not-found-title">404 - Not Found</h1>
+  <h3>Oops! This Page Took a Study Break</h3>
+  <p class="muted" data-testid="not-found-description">Sorry we've led you astray, now let's get you back on course.</p>
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:22px">
+    <button class="btn" id="go-back" data-testid="go-back-button">Go Back</button>
+    <a class="btn primary" href="/" id="go-home" data-testid="go-home-button">Go to Homepage</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("go-back").addEventListener("click", function () { history.back(); });
+</script>
+{% endblock %}

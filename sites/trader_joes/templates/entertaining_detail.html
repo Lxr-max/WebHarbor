@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ row.title }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &rsaquo;
+    <a href="{{ url_for('discover') }}">Discover</a> &rsaquo;
+    <a href="{{ url_for('entertaining') }}">Entertaining</a> &rsaquo;
+    {{ row.title }}
+  </div>
+  <span class="chip">{{ row.category }} &middot; {{ row.publish_date }}</span>
+  <h1 class="page-title">{{ row.title }}</h1>
+</div>
+
+<div class="cms-page">
+  <div class="rich">{{ row.description | rich | safe }}</div>
+</div>
+{% endblock %}

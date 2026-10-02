@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Bill {{ bill.period }} — My Verizon{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Bill for {{ bill.period }}</h1>
+  <div class="card">
+    <p>Account {{ current_user.account_number }} — {{ current_user.account_kind }}</p>
+    <p>Total: <strong>${{ bill.total }}</strong> — Due: {{ bill.due_date }} — Status: {{ bill.status }}</p>
+    <h2>Charges breakdown</h2>
+    <table class="data-table">
+      <thead><tr><th>Charge</th><th>Category</th><th>Amount</th></tr></thead>
+      <tbody>
+        {% for c in bill.charges_list() %}
+        <tr><td>{{ c.label }}</td><td>{{ c.category }}</td><td>${{ c.amount }}</td></tr>
+        {% endfor %}
+        <tr><td><strong>Total</strong></td><td></td><td><strong>${{ bill.total }}</strong></td></tr>
+      </tbody>
+    </table>
+    {% if payments %}
+    <h2>Payments applied</h2>
+    <ul>
+      {% for p in payments %}
+      <li>{{ p.paid_at }} — ${{ p.amount }} via {{ p.method }} — confirmation {{ p.confirmation }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <a class="btn btn-primary" href="{{ url_for('account_pay') }}">Pay this bill</a>
+    <a class="btn btn-secondary" href="{{ url_for('account_bills') }}">Back to bills</a>
+  </div>
+</section>
+{% endblock %}

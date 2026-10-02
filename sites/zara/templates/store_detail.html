@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ store.name }} | ZARA Stores{% endblock %}
+{% block body %}
+<div class="breadcrumb"><a href="/">HOME</a> / <a href="/us/en/z-stores-st1404.html">STORES</a> / {{ store.name }}</div>
+<div class="page-head">
+  <h1>{{ store.name }}</h1>
+  <p class="cat-count">{{ store.commercial_name or store.name }} · STORE #{{ store.id }}</p>
+</div>
+<div class="store-detail">
+  <div>
+    <p class="meta" style="font-size: 14px; line-height: 1.9">
+      {{ store.address }}<br>
+      {{ store.city }}, {{ store.province }} {{ store.zip }}<br>
+      TEL. {{ store.phone }}<br>
+      TYPE: {{ store.type }} · STATUS: {{ store.status }}<br>
+      TIME ZONE: {{ store.timezone }}
+    </p>
+    <p style="margin-top: 18px; font-size: 12px;">
+      TODAY ({{ MIRROR_TS.split(' ')[0] }}): <strong>{{ fmt_hours(store.hours_today()) }}</strong>
+    </p>
+    <p style="margin-top: 18px; font-size: 12px;">
+      <a href="/us/en/z-stores-st1404.html?state={{ store.province }}">
+        More stores in {{ store.province }}</a>
+    </p>
+  </div>
+  <div>
+    <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px">
+      OPENING HOURS</h3>
+    <table class="hours-table">
+      {% for day in [1,2,3,4,5,6,7] %}
+        <tr><td>{{ weekdays[day] }}</td><td>{{ fmt_hours(store.hours_for(day)) }}</td></tr>
+      {% endfor %}
+    </table>
+    <div class="upcoming">
+      <h4>UPCOMING SCHEDULE</h4>
+      <table class="upcoming-table">
+        {% for u in store.upcoming_list %}
+          <tr>
+            <td>{{ u.date }} ({{ weekdays[u.week_day] }})</td>
+            <td>
+              {% if u.open %}
+                {% for iv in u.intervals %}{{ iv.open }} - {{ iv.close }}{% if not loop.last %} / {% endif %}{% endfor %}
+              {% else %}CLOSED{% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

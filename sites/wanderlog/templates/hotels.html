@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Hotel search — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="hero">
+    <h1>{{ landing.hotels_copy.title }}</h1>
+    <p>{{ landing.hotels_copy.sub }}</p>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <form method="get" action="{{ url_for('hotels') }}">
+      <label for="geo">Search hotels by destination</label>
+      <select id="geo" name="geo" style="max-width:340px">
+        {% for g in geos %}<option value="{{ g.id }}">{{ g.name }}{% if g.country_name %}, {{ g.country_name }}{% endif %}</option>{% endfor %}
+      </select>
+      <p style="margin-top:8px"><button class="btn btn-primary" type="submit">Search hotels</button></p>
+    </form>
+  </div>
+
+  <div class="grid cols-3">
+    {% for b in landing.hotels_copy.blocks %}
+      <div class="card">
+        <h3>{{ b.title }}</h3>
+        <p class="small muted" style="margin:0">{{ b.text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

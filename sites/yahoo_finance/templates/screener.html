@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block title %}Stock Screener - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Stock Screener</h2>
+  <div class="topic-tabs">
+    {% for pid, title in presets %}
+      <a class="topic-tab {{ 'active' if preset and preset.preset_id == pid }}" href="/screener?preset={{ pid }}">{{ title }}</a>
+    {% endfor %}
+    <a class="topic-tab {{ 'active' if not preset }}" href="/screener?preset=&custom=1">Custom Filter</a>
+  </div>
+
+  {% if preset %}
+  <h3>{{ preset.title }}</h3>
+  <p class="muted">{{ preset.description }} ({{ preset.total }} matches on the capture date)</p>
+  <div class="table-scroll">
+  <table class="yf preset-table">
+    <thead>
+      <tr>
+        <th>Symbol</th><th>Name</th><th class="num">Last</th><th class="num">Chg</th><th class="num">% Chg</th>
+        <th class="num">Volume</th><th class="num">Market Cap</th><th class="num">P/E</th><th>Rating</th><th>Sector</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for r in preset.rows %}
+      <tr>
+        <td><a href="/quote/{{ r.symbol|urlencode }}"><strong>{{ r.symbol }}</strong></a></td>
+        <td>{{ r.name }}</td>
+        <td class="num">{{ fmt_price(r.price) }}</td>
+        <td class="num {{ 'up' if (r.change or 0) >= 0 else 'down' }}">{{ fmt_signed(r.change) }}</td>
+        <td class="num {{ 'up' if (r.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(r.change_pct, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_int(r.volume) }}</td>
+        <td class="num">{{ fmt_big(r.mcap) }}</td>
+        <td class="num">{{ fmt_num(r.pe) }}</td>
+        <td>{{ r.avg_rating or '—' }}</td>
+        <td>{{ r.sector or '—' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+
+  <h3 style="margin-top: 22px;">Custom Screener Filter</h3>
+  <form class="filter-form" action="/screener" method="get">
+    <input type="hidden" name="custom" value="1">
+    <div class="field">
+      <label for="sector">Sector</label>
+      <select id="sector" name="sector">
+        <option value="">Any sector</option>
+        {% for s in sectors %}
+        <option value="{{ s }}" {{ 'selected' if flt.sector == s }}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="industry">Industry</label>
+      <select id="industry" name="industry">
+        <option value="">Any industry</option>
+        {% for i in industries %}
+        <option value="{{ i }}" {{ 'selected' if flt.industry == i }}>{{ i }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="mcap_min">Market cap min (USD)</label>
+      <input type="number" id="mcap_min" name="mcap_min" step="any" min="0" value="{{ flt.mcap_min if flt.mcap_min is not none else '' }}" placeholder="e.g. 10000000000">
+    </div>
+    <div class="field">
+      <label for="mcap_max">Market cap max (USD)</label>
+      <input type="number" id="mcap_max" name="mcap_max" step="any" min="0" value="{{ flt.mcap_max if flt.mcap_max is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="pe_min">P/E min</label>
+      <input type="number" id="pe_min" name="pe_min" step="any" value="{{ flt.pe_min if flt.pe_min is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="pe_max">P/E max</label>
+      <input type="number" id="pe_max" name="pe_max" step="any" value="{{ flt.pe_max if flt.pe_max is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="price_min">Price min</label>
+      <input type="number" id="price_min" name="price_min" step="any" value="{{ flt.price_min if flt.price_min is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="price_max">Price max</label>
+      <input type="number" id="price_max" name="price_max" step="any" value="{{ flt.price_max if flt.price_max is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="yield_min">Dividend yield min (%)</label>
+      <input type="number" id="yield_min" name="yield_min" step="any" value="{{ flt.yield_min if flt.yield_min is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="change_min">Day change min (%)</label>
+      <input type="number" id="change_min" name="change_min" step="any" value="{{ flt.change_min if flt.change_min is not none else '' }}">
+    </div>
+    <div class="field">
+      <label for="sort">Sort by</label>
+      <select id="sort" name="sort">
+        {% for k, (col, label) in sort_columns.items() %}
+        <option value="{{ k }}" {{ 'selected' if sort_key == k }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="dir">Direction</label>
+      <select id="dir" name="dir">
+        <option value="desc" {{ 'selected' if sort_dir == 'desc' }}>Descending</option>
+        <option value="asc" {{ 'selected' if sort_dir == 'asc' }}>Ascending</option>
+      </select>
+    </div>
+    <button class="btn primary" type="submit">Apply filters</button>
+    <a class="btn" href="/screener?custom=1">Reset</a>
+  </form>
+
+  <h3 style="margin-top: 18px;">Filtered Results <span class="badge-count">{{ matches }} match{{ '' if matches == 1 else 'es' }}{% if matches > 50 %} (showing first 50){% endif %}</span></h3>
+  <div class="table-scroll">
+  <table class="yf results-table">
+    <thead>
+      <tr>
+        <th>Symbol</th><th>Name</th><th>Sector</th><th>Industry</th>
+        <th class="num">Last</th><th class="num">% Chg</th><th class="num">Market Cap</th>
+        <th class="num">P/E (TTM)</th><th class="num">Div Yield %</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for q in rows %}
+      <tr>
+        <td><a href="/quote/{{ q.symbol|urlencode }}"><strong>{{ q.symbol }}</strong></a></td>
+        <td>{{ q.short_name or q.long_name }}</td>
+        <td>{{ q.sector or '—' }}</td>
+        <td>{{ q.industry or '—' }}</td>
+        <td class="num">{{ fmt_price(q.price) }}</td>
+        <td class="num {{ 'up' if (q.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(q.change_pct, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_big(q.market_cap) }}</td>
+        <td class="num">{{ fmt_num(q.pe_ttm) }}</td>
+        <td class="num">{{ fmt_num(q.div_yield) }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="9" class="muted">No symbols match the current filters.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

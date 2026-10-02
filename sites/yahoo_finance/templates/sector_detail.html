@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ sector }} Sector - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <p class="crumb"><a href="/sectors">Sectors</a> › {{ sector }}</p>
+  <h2>{{ sector }} Sector</h2>
+  <p class="muted">{{ quotes|length }} captured companies, ordered by market cap (close of September 30, 2026).</p>
+
+  <div class="table-scroll">
+  <table class="yf">
+    <thead>
+      <tr>
+        <th>Symbol</th><th>Name</th><th>Industry</th>
+        <th class="num">Last</th><th class="num">% Chg</th><th class="num">Market Cap</th>
+        <th class="num">P/E (TTM)</th><th class="num">Div Yield %</th><th class="num">52W Range</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for q in quotes %}
+      <tr>
+        <td><a href="/quote/{{ q.symbol|urlencode }}"><strong>{{ q.symbol }}</strong></a></td>
+        <td>{{ q.short_name }}</td>
+        <td>{{ q.industry or '—' }}</td>
+        <td class="num">{{ fmt_price(q.price) }}</td>
+        <td class="num {{ 'up' if (q.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(q.change_pct, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_big(q.market_cap) }}</td>
+        <td class="num">{{ fmt_num(q.pe_ttm) }}</td>
+        <td class="num">{{ fmt_num(q.div_yield) }}</td>
+        <td class="num">{{ fmt_price(q.wk52_low) }} – {{ fmt_price(q.wk52_high) }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Industries in {{ sector }}</h2>
+  {% for ind in industries %}
+  <div class="industry-block">
+    <h3>{{ ind.name }} <span class="badge-count">({{ ind.members|length }} companies{% if ind.avg_chg is not none %}, avg day change {{ fmt_pct(ind.avg_chg, 2, sign=True) }}{% endif %})</span></h3>
+    <p class="muted">
+      {% for q in ind.members[:12] %}
+        <a href="/quote/{{ q.symbol|urlencode }}">{{ q.symbol }}</a>{{ ', ' if not loop.last }}
+      {% endfor %}
+      {% if ind.members|length > 12 %} + {{ ind.members|length - 12 }} more{% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

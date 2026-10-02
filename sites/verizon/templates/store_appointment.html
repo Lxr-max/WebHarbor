@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Schedule an appointment — {{ store.name }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('store_detail', code=store.code) }}">{{ store.name }}</a> / <span>Schedule an appointment</span></nav>
+  <h1>Schedule an appointment at {{ store.name }}</h1>
+  <p>{{ store.street }}, {{ store.city }}, {{ store.state }} {{ store.zip }}</p>
+  <form method="post" action="{{ url_for('store_appointment', code=store.code) }}" class="card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Your name <input type="text" name="name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Phone <input type="tel" name="phone" required></label>
+    <label>What do you need help with?
+      <select name="topic" required>
+        {% for t in topics %}
+        <option value="{{ t }}">{{ t }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Preferred date <input type="date" name="date" required></label>
+    <label>Preferred time
+      <select name="time" required>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="01:00 PM">01:00 PM</option>
+        <option value="02:00 PM">02:00 PM</option>
+        <option value="03:00 PM">03:00 PM</option>
+      </select>
+    </label>
+    <button type="submit" class="btn btn-primary">Book appointment</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Warranty{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Warranty Center</h1></div>
+
+<section class="band">
+  <h2>Check coverage</h2>
+  {% if not chosen_cat %}
+  <h3>Select a product category</h3>
+  <div class="tile-grid">
+    {% for cat in cats %}
+    <a class="tile" href="{{ url_for('warranty', category=cat.slug) }}">
+      <img class="tile-icon" src="{{ cat.icon }}" alt="" onerror="this.style.display='none'">
+      <span class="tile-label">{{ cat.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+  {% elif not chosen_product %}
+  <h3>{{ chosen_cat.name }} &mdash; select your model</h3>
+  <form method="get" action="{{ url_for('warranty') }}" class="warranty-model-form">
+    <input type="hidden" name="category" value="{{ chosen_cat.slug }}">
+    <label for="model">Model</label>
+    <select id="model" name="model" onchange="this.form.submit()">
+      <option value="">Choose a model&hellip;</option>
+      {% for m in models %}
+      <option value="{{ m.model_code }}">{{ m.name }} ({{ m.model_code }})</option>
+      {% endfor %}
+    </select>
+    <noscript><button type="submit" class="btn">Check</button></noscript>
+  </form>
+  <p><a href="{{ url_for('warranty') }}">&larr; Back to categories</a></p>
+  {% else %}
+  <div class="coverage-card">
+    <h3>{{ chosen_product.name }}</h3>
+    <p class="muted">Model code: {{ chosen_product.model_code }} &middot; Category: {{ chosen_cat.name }}</p>
+    <p><strong>Standard limited warranty information</strong></p>
+    <p>{{ coverage }}</p>
+    <p>Individual device coverage is not verified here. A purchase date and proof of purchase are required to establish whether your device is still covered.</p>
+    <p class="muted">Source: <a href="{{ chosen_cat.legal_url }}">{{ chosen_cat.legal_url }}</a></p>
+    <p><a href="{{ url_for('warranty') }}">Check another product</a></p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="band">
+  <h2>Warranty FAQ</h2>
+  <div class="faq-list">
+    {% for faq in faqs %}
+    <details class="faq-item">
+      <summary>{{ faq.question }}</summary>
+      <p>{{ faq.answer|plain_entities }}</p>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
