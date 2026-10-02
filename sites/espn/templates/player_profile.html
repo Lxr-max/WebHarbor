@@ -51,6 +51,7 @@
   {% if season_stats %}
   <section class="section-block">
     <h2 class="section-heading">2023-24 Stats</h2>
+    <div class="table-scroll" role="region" aria-label="2023–24 stats" tabindex="0">
     <table class="data-table stats-table">
       <thead>
         <tr><th>GP</th><th>PPG</th><th>RPG</th><th>APG</th><th>SPG</th><th>BPG</th><th>FG%</th><th>3P%</th><th>FT%</th><th>MIN</th></tr>
@@ -70,6 +71,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
   {% endif %}
 
@@ -77,6 +79,7 @@
   {% if career_stats %}
   <section class="section-block">
     <h2 class="section-heading">Career Stats</h2>
+    <div class="table-scroll" role="region" aria-label="Career stats" tabindex="0">
     <table class="data-table stats-table">
       <thead>
         <tr><th>GP</th><th>PTS</th><th>REB</th><th>AST</th></tr>
@@ -90,6 +93,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
   {% endif %}
 
@@ -111,6 +115,7 @@
   {% if recent_games_stats %}
   <section class="section-block">
     <h2 class="section-heading">Recent Games</h2>
+    <div class="table-scroll" role="region" aria-label="Recent games" tabindex="0">
     <table class="data-table">
       <thead>
         <tr><th>Game</th><th>MIN</th><th>PTS</th><th>REB</th><th>AST</th><th>STL</th><th>BLK</th></tr>
@@ -129,6 +134,7 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   </section>
   {% endif %}
 </div>

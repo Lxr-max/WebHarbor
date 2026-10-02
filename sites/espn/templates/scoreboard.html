@@ -69,6 +69,7 @@
   {% if upcoming %}
   <section class="section-block">
     <h2 class="section-heading">Upcoming Games</h2>
+    <div class="table-scroll" role="region" aria-label="Upcoming games" tabindex="0">
     <table class="data-table">
       <thead>
         <tr>
@@ -93,6 +94,7 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   </section>
   {% endif %}
 </div>

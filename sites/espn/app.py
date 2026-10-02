@@ -393,25 +393,17 @@ def load_user(user_id):
 
 
 # ─── Static icon fallbacks ────────────────────────────────────────────────────
-# League/team PNGs live in the Hugging Face asset bundle under
-# static/images/espn/. The current published pin ships nba/nfl/mlb/nhl league
-# icons but not soccer/ncaaf/ncaam/ncaaw/tennis/golf/fantasy (or soccer team
-# marks). Templates must not emit those missing paths — onerror still 404s.
-# When a named file exists (including after an asset-bundle update) it is used.
+# Resolve image paths before rendering so an absent optional asset does not
+# generate a broken request. Named league and team artwork ships in the HF
+# bundle; unknown identifiers use the neutral placeholder, never another league.
 
 _SPORT_PLACEHOLDER = 'icons/sport-placeholder.svg'
 
-# Closest shipped league icons for college sports; other missing slugs use
-# the committed placeholder. Checked after the real file so a future HF
-# upload of ncaaf.png etc. is picked up automatically.
+# These are alternate route names for the same sport, not branding substitutes.
 _LEAGUE_ICON_ALIASES = {
-    'ncaaf': 'nfl',
-    'college-football': 'nfl',
-    'ncaam': 'nba',
-    'mens-college-basketball': 'nba',
-    'ncaaw': 'nba',
-    'womens-college-basketball': 'nba',
-    'ncaa': 'nba',
+    'college-football': 'ncaaf',
+    'mens-college-basketball': 'ncaam',
+    'womens-college-basketball': 'ncaaw',
 }
 
 
