@@ -126,3 +126,10 @@ def test_seed_rebuild_is_byte_reproducible(tmp_path):
                    check=True, env=env2, capture_output=True, cwd=str(scratch2))
     assert hashlib.sha256((scratch2 / "instance_seed" / "porsche.db").read_bytes()).hexdigest() == rebuilt, "two deterministic rebuilds differ"
     assert content_hashes(scratch / "instance_seed" / "porsche.db") == content_hashes(SEED), "rebuilt seed content differs from the shipped seed"
+
+
+def test_georgia_dealers_share_one_state_code():
+    dealers = json.loads((SOURCE / "dealers.json").read_text())
+    georgia = [dealer for dealer in dealers if dealer.get("state", "").upper() == "GA"]
+    assert len(georgia) == 6
+    assert all(dealer["state"] == "GA" for dealer in georgia)

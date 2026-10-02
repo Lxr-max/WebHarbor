@@ -423,3 +423,10 @@ def test_clear_cdp_state_fails_closed_without_cdp():
          "--cdp_url", "http://127.0.0.1:59999"],
         capture_output=True, text=True, timeout=60)
     assert proc.returncode == 2, proc.stdout + proc.stderr
+
+
+def test_task40_two_cities_with_multiple_fares_insufficient(tmp_root):
+    answer = "London from $420 or London from $421; Tokyo from $363 or Tokyo from $621."
+    run_dir = make_run(tmp_root, "neg-40-two-cities-multiple-fares", NAV[40], answer)
+    rc, verdict = run_verifier(40, run_dir)
+    assert rc == 1 and not verdict["pass"], verdict
