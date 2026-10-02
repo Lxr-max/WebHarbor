@@ -1,17 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--15.
-
-Which Porsche Center has the most vehicles currently in stock according to
-the dealer directory, and how many vehicles does it list? Report that center's
-partner number, its city, and its Sunday opening hours exactly as published.
-Then open its in-stock inventory and report the full name, price, VIN, mileage,
-and exterior color of the most expensive vehicle it currently lists.
-
-Frozen ground truth (seed DB): Porsche Bellevue leads the directory with 236
-in-stock vehicles (partner no. 4501966, Bellevue, Sunday 10:00 - 18:00). Its
-most expensive listing is the 2026 Porsche 911 GT3 at $359,992 (VIN
-WP0AC2A92TS290061, 1,824 miles, Paint To Sample: Violametallic).
-"""
+"""Deterministic verifier for porsche task 15; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_ref,
                         contains_vin, final_answer, navigated_dealer_search, navigated_finder,

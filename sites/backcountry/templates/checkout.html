@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | Backcountry.com{% endblock %}
+{% block body %}
+<h1 class="page-title">Checkout</h1>
+
+{% if error %}<p class="form-err" role="alert">{{ error }}</p>{% endif %}
+
+<div class="checkout-layout">
+  <form class="checkout-form" method="post" action="/checkout">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    {% if not current_user.is_authenticated %}
+    <fieldset class="checkout-section">
+      <legend>Contact</legend>
+      <p class="guest-note">Checking out as a guest. You can track your order with the
+         confirmation number we show after placing it.</p>
+      <label>Email Address <span class="req">*</span>
+        <input type="email" name="email"
+               value="{{ request.form.get('email','') }}"
+               placeholder="you@example.com"></label>
+    </fieldset>
+    {% endif %}
+
+    <fieldset class="checkout-section">
+      <legend>Shipping Address</legend>
+      {% if addresses %}
+      <div class="saved-addresses">
+        {% for a in addresses %}
+        <label class="address-choice">
+          <input type="radio" name="address_id" value="{{ a.id }}"
+                 {% if (request.method == 'GET' and a.is_default) or request.form.get('address_id') == a.id|string %}checked{% endif %}>
+          <span>
+            <strong>{{ a.full_name }}</strong>
+            {% if a.is_default %}<em class="default-tag">Default</em>{% endif %}<br>
+            {{ a.line1 }}{% if a.line2 %}, {{ a.line2 }}{% endif %}<br>
+            {{ a.city }}, {{ a.state }} {{ a.zip }}
+          </span>
+        </label>
+        {% endfor %}
+        <label class="address-choice">
+          <input type="radio" name="address_id" value="" {% if request.method == 'POST' and not request.form.get('address_id') %}checked{% endif %}>
+          <span><strong>Ship to a new address</strong></span>
+        </label>
+      </div>
+      {% endif %}
+      <div class="address-fields">
+        <label>Full Name <span class="req">*</span>
+          <input type="text" name="full_name"  autocomplete="name"
+                 value="{{ request.form.get('full_name','') }}"></label>
+        <label>Street Address <span class="req">*</span>
+          <input type="text" name="line1"  autocomplete="address-line1"
+                 value="{{ request.form.get('line1','') }}"></label>
+        <label>Apt / Suite (optional)
+          <input type="text" name="line2" autocomplete="address-line2"
+                 value="{{ request.form.get('line2','') }}"></label>
+        <div class="field-row">
+          <label>City <span class="req">*</span>
+            <input type="text" name="city"  autocomplete="address-level2"
+                   value="{{ request.form.get('city','') }}"></label>
+          <label>State <span class="req">*</span>
+            <select name="state" autocomplete="address-level1">
+              <option value="">Choose…</option>
+              {% for s in states %}
+              <option value="{{ s }}"{% if request.form.get('state') == s %} selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select></label>
+          <label>ZIP Code <span class="req">*</span>
+            <input type="text" name="zip"  autocomplete="postal-code"
+                   inputmode="numeric" placeholder="84101"
+                   value="{{ request.form.get('zip','') }}"></label>
+        </div>
+        <label>Phone <span class="req">*</span>
+          <input type="tel" name="phone"  autocomplete="tel"
+                 value="{{ request.form.get('phone','') }}"></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="checkout-section">
+      <legend>Shipping Method</legend>
+      <label class="method-choice">
+        <input type="radio" name="shipping_method" value="standard"
+               {% if method != 'express' %}checked{% endif %}>
+        <span><strong>Standard Shipping</strong> —
+          {% if subtotal >= 6900 %}FREE!{% else %}{{ money(695) }}{% endif %}
+          <small>3–5 business days after shipment</small></span>
+      </label>
+      <label class="method-choice">
+        <input type="radio" name="shipping_method" value="express"
+               {% if method == 'express' %}checked{% endif %}>
+        <span><strong>Express Shipping</strong> — {{ money(2500) }}
+          <small>Estimated delivery depends on destination</small></span>
+      </label>
+    </fieldset>
+
+    <fieldset class="checkout-section">
+      <legend>Payment</legend>
+      <label>Name on Card <span class="req">*</span>
+        <input type="text" name="card_name" 
+               value="{{ request.form.get('card_name','') }}"></label>
+      <label>Card Number <span class="req">*</span>
+        <input type="text" name="card"  inputmode="numeric"
+               placeholder="1234 5678 9012 3456" maxlength="19"
+               value="{{ request.form.get('card','') }}"></label>
+      <div class="field-row">
+        <label>Expiry (MM/YY) <span class="req">*</span>
+          <input type="text" name="expiry"  placeholder="01/28"
+                 value="{{ request.form.get('expiry','') }}"></label>
+        <label>Security Code <span class="req">*</span>
+          <input type="text" name="cvc"  inputmode="numeric"
+                 placeholder="123" maxlength="4"
+                 value="{{ request.form.get('cvc','') }}"></label>
+      </div>
+      <p class="payment-note">This is a benchmark mirror: no real charge happens, and the
+         card number is only validated for shape (16 digits).</p>
+    </fieldset>
+
+    <button class="btn btn-primary btn-block" type="submit">Place Order</button>
+  </form>
+
+  <aside class="cart-summary">
+    <h2>Order Summary</h2>
+    <ul class="summary-items">
+      {% for it in items %}
+      <li>
+        <span class="sum-name">{{ it.sku.product.title }}
+          <em>{{ it.sku.color }} / {{ it.sku.size }} × {{ it.quantity }}</em></span>
+        <span class="sum-price">{{ money(it.line_total) }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <dl class="summary-rows">
+      <div><dt>Subtotal</dt><dd>{{ money(subtotal) }}</dd></div>
+      {% if savings %}<div><dt>Item Savings</dt><dd class="savings">-{{ money(savings) }}</dd></div>{% endif %}
+      <div><dt>Shipping</dt><dd>{% if shipping == 0 %}FREE!{% else %}{{ money(shipping) }}{% endif %}</dd></div>
+      <div class="summary-total"><dt>Total</dt><dd>{{ money(subtotal + shipping) }}</dd></div>
+    </dl>
+  </aside>
+</div>
+{% endblock %}

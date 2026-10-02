@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Job Search: Millions of US Jobs (HIRING NOW) Near You - ZipRecruiter{% endblock %}</title>
+<link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+<header class="top-notice">
+  <p>We’re updating our Privacy Policy. <a href="/privacy-policy">Learn More</a></p>
+</header>
+<header class="site-header">
+  <div class="header-bar">
+    <a class="logo" href="/" aria-label="ZipRecruiter Homepage" title="ZipRecruiter">
+      <img src="{{ logo_url }}" alt="ZipRecruiter" width="124" height="28">
+    </a>
+    <form class="header-search" action="/jobs-search" method="get" role="search">
+      <div class="field what">
+        <label for="q-what">Search for job title or keyword</label>
+        <input id="q-what" type="search" name="search" value="{{ request.args.get('search','') }}"
+               placeholder="Search for job title or keyword" autocomplete="off">
+      </div>
+      <div class="field where">
+        <label for="q-where">Where?</label>
+        <input id="q-where" type="search" name="location" value="{{ request.args.get('location','') }}"
+               placeholder="Enter city, state or ZIP" autocomplete="off">
+      </div>
+      <button type="submit" aria-label="Search jobs">Search</button>
+    </form>
+    <nav class="header-links" aria-label="Account">
+      {% if current_user.is_authenticated %}
+        <a href="/jobseeker/profile">Hi, {{ current_user.display_name.split(' ')[0] }}</a>
+        <a href="/jobseeker/saved-jobs">Jobs <span class="count">{{ saved_count }}</span></a>
+      {% else %}
+        <a href="/authn/login?realm=candidates">Log In</a>
+        <a class="btn-green" href="/authn/register?realm=candidates">Sign Up</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<main>
+{% block body %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <h4>Job Seekers</h4>
+      <a href="/jobs-search">Search Jobs</a>
+      <a href="/browse">Browse Jobs</a>
+      <a href="/browse/salaries">Search Salaries</a>
+      <a href="/blog/">Who is Phil?</a>
+      <a href="/authn/register?realm=candidates">Create Free Account</a>
+      <a href="/blog/">Job Seeker Support</a>
+      <a href="/blog/">Trust and Safety</a>
+    </div>
+    <div>
+      <h4>Small &amp; Medium Businesses</h4>
+      <span>Search Resumes</span>
+      <span>How it Works</span>
+      <span>Job Sites</span>
+      <span>ZipRecruiter Reviews</span>
+      <span>Plans</span>
+      <span>New Account Help</span>
+      <span>Employer Support</span>
+    </div>
+    <div>
+      <h4>Enterprise Businesses</h4>
+      <span>Enterprise Overview</span>
+      <span>Resume Database</span>
+      <span>Customer Stories</span>
+      <span>FAQs</span>
+      <span>Request a Consultation</span>
+    </div>
+    <div>
+      <h4>Partner with Us</h4>
+      <span>Job Board Software</span>
+      <span>ATS Integrations</span>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="/blog/">Blog</a>
+      <span>About Us</span>
+      <span>Careers</span>
+      <span>Investors</span>
+      <span>Press</span>
+      <span>Engineering</span>
+      <span>ZipRecruiter.org</span>
+      <span>ZipRecruiter UK</span>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>ZipRecruiter, Inc. © 2026 All Rights Reserved Worldwide</p>
+    <p><span>Your Privacy Choices</span> · <span>Privacy Policy</span> ·
+       <span>Terms of Use</span> · <span>Cookie Policy</span> ·
+       <span>Job Posting Rules</span> · <span>Attribution Notices</span> ·
+       <span>Corporate Responsibility</span></p>
+  </div>
+</footer>
+</body>
+</html>

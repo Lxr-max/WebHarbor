@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Order confirmation{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Thank you — your order is confirmed</h1>
+  <div class="card">
+    <h2>Order {{ order.confirmation }}</h2>
+    <p>Status: <strong>{{ order.status }}</strong></p>
+    <p>Placed: {{ order.placed_at }}</p>
+    <p>{{ order.delivery_by }}</p>
+    {% if order.name %}
+    <p>Shipping to: {{ order.name }}, {{ order.street }}, {{ order.city }}, {{ order.state }} {{ order.zip }}</p>
+    {% endif %}
+    <h3>Items</h3>
+    <table class="data-table">
+      <thead><tr><th>Device</th><th>Color</th><th>Storage</th><th>Term</th><th>Protection</th><th>Plan</th><th>Monthly</th></tr></thead>
+      <tbody>
+        {% for item in order.items_list() %}
+        <tr>
+          <td>{{ item.device }}</td><td>{{ item.color }}</td><td>{{ item.storage }}</td>
+          <td>{% if item.term == 'full' %}Paid in full{% else %}{{ item.term }} mos{% endif %}</td>
+          <td>{{ item.protection or '—' }}{% if item.protection %} (${{ item.protection_monthly }}/mo){% endif %}</td>
+          <td>{{ item.plan or '—' }}{% if item.plan and item.plan_monthly is defined %} (${{ item.plan_monthly }}/mo){% endif %}</td>
+          <td>${{ item.monthly }}/mo</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p>Monthly total: <strong>${{ order.total_monthly }}/mo</strong></p>
+    <p>Due today: <strong>${{ order.total_today }}</strong></p>
+  </div>
+  {% if my_verizon %}
+  <a class="btn btn-secondary" href="{{ url_for('account_orders') }}">Back to my orders</a>
+  {% else %}
+  <a class="btn btn-secondary" href="{{ url_for('home') }}">Back to home</a>
+  {% endif %}
+</section>
+{% endblock %}

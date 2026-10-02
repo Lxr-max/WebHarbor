@@ -1,19 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--11.
-
-Identify the most expensive vehicle currently listed in the Porsche Finder,
-open its detail page, and read its price details. Report the vehicle price
-before fees, the documentation fee, and the total price, along with the
-vehicle's full name, VIN, exterior color, and mileage. Also report the name
-and price of the second most expensive listing, and the partner number of the
-Porsche Center selling the most expensive one.
-
-Frozen ground truth (seed DB): the most expensive listing is the 2024 Porsche
-911 S/T at $610,099 (VIN WP0AF2A9XRS274223, White, 4,052 miles, Porsche
-Tacoma). Its price details: Vehicle Price $609,899.00, Doc Fee $200.00, total
-$610,099.00. The second most expensive listing is the 2026 Porsche 911 GT3 at
-$359,992. Porsche Tacoma's partner number is 4501962.
-"""
+"""Deterministic verifier for porsche task 11; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_ref,
                         contains_vin, final_answer, navigated_dealer_search,

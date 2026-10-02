@@ -1,0 +1,1197 @@
+{
+  "Backcountry--0": {
+    "task": "Buy two Big Agnes Copper Spur UL2 tents in Tangelo for our camping weekend. Use guest checkout with email weekend.camper@example.com, Casey Reyes, 222 Boulder Creek Rd, Boulder, Colorado 80302, phone 303-555-0148, standard shipping, and demo card 4111 1111 1111 1111, expiry 01/28, CVC 123. Tell me the unit price, order number and total.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "BAGZ2GN",
+            "product_name": "Copper Spur UL2 Tent: 2-Person 3-Season",
+            "brand_name": "Big Agnes",
+            "color_name": "Tangelo",
+            "size_name": "One Size",
+            "unit_price": 59995,
+            "unit_list": 59995,
+            "quantity": 2
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "guest_email": "weekend.camper@example.com",
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Standard",
+            "shipping_cents": 0,
+            "subtotal_cents": 119990,
+            "savings_cents": 0,
+            "total_cents": 119990,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Casey Reyes",
+                "line1": "222 Boulder Creek Rd",
+                "line2": "",
+                "city": "Boulder",
+                "state": "Colorado",
+                "zip": "80302",
+                "phone": "303-555-0148"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/big\\-agnes\\-copper\\-spur\\-ul2\\-tent\\-2\\-person\\-3\\-season(?:$|\\?)",
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Copper Spur UL2 Tent: 2-Person 3-Season price",
+        "copper\\s+spur\\s+ul2\\s+tent\\s+2\\-person\\s+3\\-season(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*599\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order number",
+        "order(?:(?!copper\\s+spur\\s+ul2\\s+tent\\s+2\\-person\\s+3\\-season).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!copper\\s+spur\\s+ul2\\s+tent\\s+2\\-person\\s+3\\-season).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*1199\\.90*(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--1": {
+    "task": "Help Alice stock up on affordable black ski layers. From the Ski catalog, find the lowest-priced product available in solid Black, check its exact price in the first available size, and add three to Alice's cart. Sign in with alice.j@test.com / TestPass123!. Tell me the selected product, size, unit price and final cart subtotal.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "guest_token": null,
+            "sku_id": "SWLZ8BY-BLA-XS",
+            "quantity": 3,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/smartwool\\-merino\\-250\\-baselayer\\-crew\\-womens(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Classic Thermal Merino Crew Baselayer - Women's price",
+        "classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's(?:(?!cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*125(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Classic Thermal Merino Crew Baselayer - Women's size",
+        "classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's(?:(?!cart).){0,1600}?(?:size|selected size)\\s*(?:is|was|:|=|of|at)?\\s*xs(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*1004(?:\\.0+)?(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Backcountry--2": {
+    "task": "Bob wants a highly rated Fjallraven men's layer to consider later. Find the highest-rated product in that brand's Men's Clothing selection and save it to his wish list using bob.c@test.com / TestPass123!. Tell me its title, rating, review count and starting price, and confirm it is saved.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "user_id": 2,
+            "product_id": "FJRZ13E",
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/fjallraven\\-vardag\\-g\\-1000\\-pile\\-jacket\\-mens(?:$|\\?)",
+      "/wish\\-list(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Vardag G-1000 Pile Jacket - Men's price",
+        "vardag\\s+g\\-1000\\s+pile\\s+jacket\\s+\\-\\s+men's(?:(?!(?!)).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*294\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Vardag G-1000 Pile Jacket - Men's rating",
+        "vardag\\s+g\\-1000\\s+pile\\s+jacket\\s+\\-\\s+men's(?:(?!(?!)).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*5(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Vardag G-1000 Pile Jacket - Men's reviews",
+        "vardag\\s+g\\-1000\\s+pile\\s+jacket\\s+\\-\\s+men's(?:(?!(?!)).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*1(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|added).{0,40}(?:wish ?list)"
+      ]
+    ]
+  },
+  "Backcountry--3": {
+    "task": "I'm comparing the Black Diamond Cosmo 350 and Cosmo 350-R for a wet camping trip. Check each one's price and water-resistance specification. For the Cosmo 350, read the existing Q&A and ask 'Does it float in water?' using bob.c@test.com / TestPass123!. Report the comparison and whether the question was posted.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "questions": {
+        "removed": [],
+        "added": [
+          {
+            "id": 100,
+            "upstream_id": null,
+            "product_id": "BLDZ9ID",
+            "author": "Bob Chen",
+            "text": "Does it float in water?",
+            "created": "2026-09-30T12:00:00.000+00:00"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/black\\-diamond\\-cosmo\\-350\\-r\\-headlamp(?:$|\\?)",
+      "/black\\-diamond\\-cosmo\\-350\\-headlamp(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cosmo 350-R Headlamp price",
+        "cosmo\\s+350\\-r\\s+headlamp(?:(?!cosmo\\s+350\\s+headlamp).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*38\\.970*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cosmo 350-R Headlamp water resistance",
+        "cosmo\\s+350\\-r\\s+headlamp(?:(?!cosmo\\s+350\\s+headlamp).){0,1600}?(?:water resistance|waterproof(?: rating)?)\\s*(?:is|was|:|=|of|at)?\\s*ip67\\s+\\(1m\\s+for\\s+30min\\)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cosmo 350 Headlamp price",
+        "cosmo\\s+350\\s+headlamp(?:(?!cosmo\\s+350\\-r\\s+headlamp).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*25\\.970*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cosmo 350 Headlamp water resistance",
+        "cosmo\\s+350\\s+headlamp(?:(?!cosmo\\s+350\\-r\\s+headlamp).){0,1600}?(?:water resistance|waterproof(?: rating)?)\\s*(?:is|was|:|=|of|at)?\\s*\\(rating\\)\\s+ipx8(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:question.{0,100}(?:posted|submitted)|posted.{0,100}question)"
+      ]
+    ]
+  },
+  "Backcountry--4": {
+    "task": "Carol has been using the La Sportiva Solution Comp climbing shoe and wants to share her experience. Sign in with carol.d@test.com / TestPass123! and post a 4-star review titled 'Edges like a dream', text 'Stuck to overhangs all session and never once slipped.', familiarity \"I've used it several times\". Confirm the review appears with the correct rating and report the updated review count.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "reviews": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1678,
+            "upstream_id": null,
+            "product_id": "LSPZ2OS",
+            "user_id": 3,
+            "author": "Carol Davis",
+            "title": "Edges like a dream",
+            "text": "Stuck to overhangs all session and never once slipped.",
+            "rating": 4,
+            "created": "2026-09-30T12:00:00.000+00:00",
+            "familiarity": "I've used it several times",
+            "fit": null,
+            "size_purchased": null,
+            "photos": "[]",
+            "syndicated": 0,
+            "syndication_source": null,
+            "author_gearhead": 0,
+            "is_seed": 0
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/la\\-sportiva\\-solution\\-comp\\-climbing\\-shoe(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Solution Comp Climbing Shoe reviews",
+        "solution\\s+comp\\s+climbing\\s+shoe(?:(?!(?!)).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*23(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:posted|published).{0,50}edges like a dream"
+      ],
+      [
+        "outcome 1",
+        "(?:rated|rating)\\s*4\\s*stars?"
+      ]
+    ]
+  },
+  "Backcountry--5": {
+    "task": "Dana only needs goggles from her current cart for this ski trip, with two pairs rather than one; remove the binding. Sign in with dana.k@test.com / TestPass123!, make those changes, and place the order using her saved default address, standard shipping and demo card 4242 4242 4242 4242, expiry 02/29, CVC 456. Tell me the order number and total and confirm the order appears in her history.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [
+          "[4]",
+          "[5]"
+        ],
+        "added": [],
+        "updated": {}
+      },
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "SMIZ9HR",
+            "product_name": "I/O MAG XL ChromaPop Goggles",
+            "brand_name": "Smith",
+            "color_name": "Black/ChromaPop Everyday Blue Mirror",
+            "size_name": "One Size",
+            "unit_price": 29500,
+            "unit_list": 29500,
+            "quantity": 2
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": 4,
+            "guest_email": null,
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Standard",
+            "shipping_cents": 0,
+            "subtotal_cents": 59000,
+            "savings_cents": 0,
+            "total_cents": 59000,
+            "payment_last4": "4242",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Dana Kim",
+                "line1": "915 Fremont Ave N",
+                "line2": "",
+                "city": "Seattle",
+                "state": "Washington",
+                "zip": "98103",
+                "phone": "206-555-0187"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)",
+      "/account(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Order number",
+        "order(?:(?!(?!)).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!(?!)).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*590(?:\\.0+)?(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--6": {
+    "task": "Find The North Face's highest-rated product for Alice's jacket shortlist and save it using alice.j@test.com / TestPass123!. Check the product's available colors and starting price, and tell me its title, rating, review count and color options so she can decide later.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "wishlist_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "user_id": 1,
+            "product_id": "TNF060C",
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/the\\-north\\-face\\-1996\\-retro\\-nuptse\\-jacket\\-womens(?:$|\\?)",
+      "/wish\\-list(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "1996 Retro Nuptse Jacket - Women's price",
+        "1996\\s+retro\\s+nuptse\\s+jacket\\s+\\-\\s+women's(?:(?!(?!)).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*198(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "1996 Retro Nuptse Jacket - Women's rating",
+        "1996\\s+retro\\s+nuptse\\s+jacket\\s+\\-\\s+women's(?:(?!(?!)).){0,1600}?(?:rating|rated)\\s*(?:is|was|:|=|of|at)?\\s*5(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "1996 Retro Nuptse Jacket - Women's reviews",
+        "1996\\s+retro\\s+nuptse\\s+jacket\\s+\\-\\s+women's(?:(?!(?!)).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*1797(?!\\w|\\.\\d)"
+      ],
+      [
+        "1996 Retro Nuptse Jacket - Women's colors",
+        "1996\\s+retro\\s+nuptse\\s+jacket\\s+\\-\\s+women's(?:(?!(?!)).){0,1600}?colors\\s*(?:is|was|:|=|of|at)?\\s*burgundy\\s+crush/tnf\\s+black,\\s+dark\\s+chestnut,\\s+grounded\\s+plum/tnf\\s+black,\\s+new\\s+taupe\\s+green,\\s+summit\\s+navy/tnf\\s+black/recycled\\s+down,\\s+tnf\\s+black/recycled\\s+down,\\s+white\\s+dune/tnf\\s+black/recycled\\s+down,\\s+khaki\\s+stone/recycled\\s+down,\\s+metal\\s+pink/tnf\\s+black,\\s+recycled\\s+tnf\\s+black(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:saved|added).{0,40}wish ?list"
+      ]
+    ]
+  },
+  "Backcountry--7": {
+    "task": "Compare the Beal Zenith 9.5mm and Karma 9.8mm ropes for our climbing group. Check their captured technical specifications and the exact prices of their 70m options. Put two of the cheaper 70m rope in the guest cart. Tell me which rope you chose, both unit prices, and the final subtotal and shipping cost.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": null,
+            "guest_token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "sku_id": "BEA000V-YL-S70M",
+            "quantity": 2,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/beal\\-zenith\\-climbing\\-rope\\-9\\.5mm(?:$|\\?)",
+      "/beal\\-karma\\-climbing\\-rope\\-9\\.8mm(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Zenith Climbing Rope - 9.5mm price",
+        "zenith\\s+climbing\\s+rope\\s+\\-\\s+9\\.5mm(?:(?!karma\\s+climbing\\s+rope\\s+\\-\\s+9\\.8mm|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*207\\.440*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Karma Climbing Rope - 9.8mm price",
+        "karma\\s+climbing\\s+rope\\s+\\-\\s+9\\.8mm(?:(?!zenith\\s+climbing\\s+rope\\s+\\-\\s+9\\.5mm|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*197\\.620*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!zenith\\s+climbing\\s+rope\\s+\\-\\s+9\\.5mm|karma\\s+climbing\\s+rope\\s+\\-\\s+9\\.8mm).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*395\\.240*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart standard shipping",
+        "cart(?:(?!zenith\\s+climbing\\s+rope\\s+\\-\\s+9\\.5mm|karma\\s+climbing\\s+rope\\s+\\-\\s+9\\.8mm).){0,1600}?standard\\s+shipping\\s*(?:is|was|:|=|of|at)?\\s*(?:free|\\$0(?:\\.0+)?)(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:selected|chose|chosen).{0,35}karma"
+      ]
+    ]
+  },
+  "Backcountry--8": {
+    "task": "Alice needs two of the cheapest item in the Hike & Camp catalog's $100\u2013$199.99 range that has two available in the same size. Find that item, check its first size with enough stock and exact price, and add two to her cart using alice.j@test.com / TestPass123!. Tell me the item, size, unit price and final cart subtotal including whether standard shipping is free.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 1,
+            "guest_token": null,
+            "sku_id": "CRVL0R6-DARSAPWIL-S",
+            "quantity": 2,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/carve\\-designs\\-cora\\-fleece\\-jacket\\-womens(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cora Fleece Jacket - Women's price",
+        "cora\\s+fleece\\s+jacket\\s+\\-\\s+women's(?:(?!cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*129\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cora Fleece Jacket - Women's size",
+        "cora\\s+fleece\\s+jacket\\s+\\-\\s+women's(?:(?!cart).){0,1600}?(?:size|selected size)\\s*(?:is|was|:|=|of|at)?\\s*s(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!cora\\s+fleece\\s+jacket\\s+\\-\\s+women's).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*888\\.90*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart standard shipping",
+        "cart(?:(?!cora\\s+fleece\\s+jacket\\s+\\-\\s+women's).){0,1600}?standard\\s+shipping\\s*(?:is|was|:|=|of|at)?\\s*(?:free|\\$0(?:\\.0+)?)(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Backcountry--9": {
+    "task": "Build Bob a cold-weather cycling outfit with one GOREWEAR SPINSHIFT GORE-TEX jacket in Lab Graphite, size US L/EU XL, and two SWIFTRIDE Thermo Bib Tights+ in size L. Sign in with bob.c@test.com / TestPass123!, check the selected variants' sale prices and add them to his cart. Report the two unit prices, final subtotal and item savings.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 2,
+            "guest_token": null,
+            "sku_id": "GWRG09O-LABGRA-USLEUXL",
+            "quantity": 1,
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": 7,
+            "user_id": 2,
+            "guest_token": null,
+            "sku_id": "GWRG0BX-BLA-L",
+            "quantity": 2,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/gorewear\\-spinshift\\-gore\\-tex\\-jacket\\-mens(?:$|\\?)",
+      "/gorewear\\-swiftride\\-thermo\\-bib\\-tights\\-mens(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "SPINSHIFT GORE-TEX Jacket - Men's price",
+        "spinshift\\s+gore\\-tex\\s+jacket\\s+\\-\\s+men's(?:(?!swiftride\\s+thermo\\s+bib\\s+tights\\+\\s+\\-\\s+men's|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*162(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "SWIFTRIDE Thermo Bib Tights+ - Men's price",
+        "swiftride\\s+thermo\\s+bib\\s+tights\\+\\s+\\-\\s+men's(?:(?!spinshift\\s+gore\\-tex\\s+jacket\\s+\\-\\s+men's|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*78(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!spinshift\\s+gore\\-tex\\s+jacket\\s+\\-\\s+men's|swiftride\\s+thermo\\s+bib\\s+tights\\+\\s+\\-\\s+men's).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*318(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart item savings",
+        "cart(?:(?!spinshift\\s+gore\\-tex\\s+jacket\\s+\\-\\s+men's|swiftride\\s+thermo\\s+bib\\s+tights\\+\\s+\\-\\s+men's).){0,1600}?item\\s+savings\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*212(?:\\.0+)?(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Backcountry--10": {
+    "task": "Create an account for Trail Tester, fresh.trail@example.com, password Hike2026ok, so I can review the Cotopaxi Fuego Hooded Down Jacket for men. Post a 4-star review titled 'Warmth for days' with text 'Below freezing at camp and I stayed toasty all night.' and familiarity \"I've used it once or twice\". Confirm it appears and tell me the updated review count.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "reviews": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1678,
+            "upstream_id": null,
+            "product_id": "CTX000V",
+            "user_id": 5,
+            "author": "Trail Tester",
+            "title": "Warmth for days",
+            "text": "Below freezing at camp and I stayed toasty all night.",
+            "rating": 4,
+            "created": "2026-09-30T12:00:00.000+00:00",
+            "familiarity": "I've used it once or twice",
+            "fit": null,
+            "size_purchased": null,
+            "photos": "[]",
+            "syndicated": 0,
+            "syndication_source": null,
+            "author_gearhead": 0,
+            "is_seed": 0
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "email": "fresh.trail@example.com",
+            "display_name": "Trail Tester",
+            "password_hash": {
+              "bcrypt_password": "Hike2026ok"
+            },
+            "is_benchmark": 0,
+            "created_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/cotopaxi\\-fuego\\-hooded\\-down\\-jacket\\-mens(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Fuego Hooded Down Jacket - Men's reviews",
+        "fuego\\s+hooded\\s+down\\s+jacket\\s+\\-\\s+men's(?:(?!(?!)).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*1024(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:posted|published).{0,50}warmth for days"
+      ],
+      [
+        "outcome 1",
+        "(?:rated|rating)\\s*4\\s*stars?"
+      ]
+    ]
+  },
+  "Backcountry--11": {
+    "task": "Alice is moving her future gear deliveries to a trailhead address. Using alice.j@test.com / TestPass123!, add a saved address labeled Trailhead for Riley Quinn, 500 Ridge Ct, Jackson, Wyoming 83001, phone 307-555-0121, and make it her default. Confirm the full address and default status after reopening the address book, keeping her existing addresses.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "addresses": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "user_id": 1,
+            "label": "Trailhead",
+            "full_name": "Riley Quinn",
+            "line1": "500 Ridge Ct",
+            "line2": "",
+            "city": "Jackson",
+            "state": "Wyoming",
+            "zip": "83001",
+            "phone": "307-555-0121",
+            "is_default": 1
+          }
+        ],
+        "updated": {
+          "[1]": {
+            "is_default": 0
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/addresses(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "outcome 0",
+        "trailhead.{0,20}(?:is the )?default"
+      ],
+      [
+        "outcome 1",
+        "riley quinn.{0,30}500 ridge ct.{0,30}jackson.{0,20}wyoming\\s+83001"
+      ],
+      [
+        "outcome 2",
+        "307-555-0121"
+      ]
+    ]
+  },
+  "Backcountry--12": {
+    "task": "Buy one of the first sleeping bags in the site's sleeping-bag search as a guest. Use cold.night@example.com, Sam Frost, 88 Pine Hollow, Bend, Oregon 97701, phone 541-555-0190, standard shipping, and demo card 5555 5555 5555 5555, expiry 01/28, CVC 123. Report the selected bag, unit price, order number and total.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "KELO0CO",
+            "product_name": "Cosmic 20 Sleeping Bag: 20F Down",
+            "brand_name": "Kelty",
+            "color_name": "Dark Blue/Pageant Blue/Olive Oil",
+            "size_name": "Short/Right Zip",
+            "unit_price": 17995,
+            "unit_list": 17995,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "guest_email": "cold.night@example.com",
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Standard",
+            "shipping_cents": 0,
+            "subtotal_cents": 17995,
+            "savings_cents": 0,
+            "total_cents": 17995,
+            "payment_last4": "5555",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Sam Frost",
+                "line1": "88 Pine Hollow",
+                "line2": "",
+                "city": "Bend",
+                "state": "Oregon",
+                "zip": "97701",
+                "phone": "541-555-0190"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/kelty\\-cosmic\\-20\\-sleeping\\-bag\\-20f\\-down(?:$|\\?)",
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cosmic 20 Sleeping Bag: 20F Down price",
+        "cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*179\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order number",
+        "order(?:(?!cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*179\\.950*(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--13": {
+    "task": "Before Dana commits to her Smith I/O MAG XL ChromaPop goggles, inspect the lowest-rated review and the Q&A about included lenses. Using dana.k@test.com / TestPass123!, set her existing Blue Mirror goggles to quantity two, leaving the binding alone. Tell me the lowest review's title and rating, whether two lenses are included, and the final cart subtotal.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[4]": {
+            "quantity": 2
+          }
+        }
+      }
+    },
+    "paths": [
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cart subtotal",
+        "cart(?:(?!(?!)).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*799\\.990*(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:lowest.{0,35}review.{0,15}|review.{0,15})[\u201c\"\\s]*disappointed"
+      ],
+      [
+        "outcome 1",
+        "(?:rated|rating)\\s*2\\s*stars?"
+      ],
+      [
+        "outcome 2",
+        "(?:include|come with|contain).{0,15}2 lenses"
+      ]
+    ]
+  },
+  "Backcountry--14": {
+    "task": "Buy the first product in Salomon's brand catalog, in its first in-stock size, as a guest. Use gravel.runner@example.com, Jordan Vale, 412 Summit Ave, Bend, Oregon 97701, phone 541-555-0121, standard shipping, and demo card 4111 1111 1111 1111, expiry 03/29, CVC 321. Report its title, selected size, unit price, order number and total.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "SALZBK8",
+            "product_name": "Aero Glide 4 Grvl Running Shoe - Men's",
+            "brand_name": "Salomon",
+            "color_name": "Stormy Weather/Lichen/Vanilla Ice",
+            "size_name": "US 8.5/UK 8.0",
+            "unit_price": 15995,
+            "unit_list": 15995,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "guest_email": "gravel.runner@example.com",
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Standard",
+            "shipping_cents": 0,
+            "subtotal_cents": 15995,
+            "savings_cents": 0,
+            "total_cents": 15995,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Jordan Vale",
+                "line1": "412 Summit Ave",
+                "line2": "",
+                "city": "Bend",
+                "state": "Oregon",
+                "zip": "97701",
+                "phone": "541-555-0121"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/salomon\\-aero\\-glide\\-4\\-grvl\\-running\\-shoe\\-mens(?:$|\\?)",
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Aero Glide 4 Grvl Running Shoe - Men's price",
+        "aero\\s+glide\\s+4\\s+grvl\\s+running\\s+shoe\\s+\\-\\s+men's(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*159\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Aero Glide 4 Grvl Running Shoe - Men's size",
+        "aero\\s+glide\\s+4\\s+grvl\\s+running\\s+shoe\\s+\\-\\s+men's(?:(?!order).){0,1600}?(?:size|selected size)\\s*(?:is|was|:|=|of|at)?\\s*us\\s+8\\.50*/uk\\s+8(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order number",
+        "order(?:(?!aero\\s+glide\\s+4\\s+grvl\\s+running\\s+shoe\\s+\\-\\s+men's).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!aero\\s+glide\\s+4\\s+grvl\\s+running\\s+shoe\\s+\\-\\s+men's).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*159\\.950*(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--15": {
+    "task": "Prepare Carol's camping cart with two Big Agnes Copper Spur UL2 tents in Tangelo and one Black Diamond Cosmo 350 headlamp in Graphite. Sign in with carol.d@test.com / TestPass123! and preserve anything already in her cart. Tell me the final item quantities and subtotal so she can review before paying.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": 3,
+            "guest_token": null,
+            "sku_id": "BAGZ2GN-TAN-ONESIZ",
+            "quantity": 2,
+            "added_at": "2026-09-30"
+          },
+          {
+            "id": 7,
+            "user_id": 3,
+            "guest_token": null,
+            "sku_id": "BLDZ9ID-GRA-ONESIZ",
+            "quantity": 1,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/big\\-agnes\\-copper\\-spur\\-ul2\\-tent\\-2\\-person\\-3\\-season(?:$|\\?)",
+      "/black\\-diamond\\-cosmo\\-350\\-headlamp(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cart subtotal",
+        "cart(?:(?!(?!)).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*1299\\.830*(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "copper spur.{0,35}[-:\u2014]\\s*2"
+      ],
+      [
+        "outcome 1",
+        "cosmo 350.{0,25}[-:\u2014]\\s*1"
+      ],
+      [
+        "outcome 2",
+        "momentum climbing shoe.{0,10}[-:\u2014]\\s*1"
+      ]
+    ]
+  },
+  "Backcountry--16": {
+    "task": "Order a sleeping bag for Maya's trip and explain when standard delivery should arrive under the site's shipping policy. Choose the first sleeping-bag search result in its first available size, and check out as a guest with warm.night@example.com, Maya Snow, 15 Juniper Ln, Ketchum, Idaho 83340, phone 208-555-0143; standard shipping; demo card 4111 1111 1111 1111, expiry 06/28, CVC 111. Report the bag, order number, total, same-day order cutoff and standard delivery window.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "KELO0CO",
+            "product_name": "Cosmic 20 Sleeping Bag: 20F Down",
+            "brand_name": "Kelty",
+            "color_name": "Dark Blue/Pageant Blue/Olive Oil",
+            "size_name": "Short/Right Zip",
+            "unit_price": 17995,
+            "unit_list": 17995,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "guest_email": "warm.night@example.com",
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Standard",
+            "shipping_cents": 0,
+            "subtotal_cents": 17995,
+            "savings_cents": 0,
+            "total_cents": 17995,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Maya Snow",
+                "line1": "15 Juniper Ln",
+                "line2": "",
+                "city": "Ketchum",
+                "state": "Idaho",
+                "zip": "83340",
+                "phone": "208-555-0143"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/info/shipping\\-policy(?:$|\\?)",
+      "/kelty\\-cosmic\\-20\\-sleeping\\-bag\\-20f\\-down(?:$|\\?)",
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Cosmic 20 Sleeping Bag: 20F Down price",
+        "cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down(?:(?!order).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*179\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order number",
+        "order(?:(?!cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!cosmic\\s+20\\s+sleeping\\s+bag\\s+20f\\s+down).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*179\\.950*(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:cutoff|before).{0,12}3\\s*(?:pm|p\\.m\\.)\\s*mst"
+      ],
+      [
+        "outcome 1",
+        "(?:standard.{0,50}|typically takes\\s*)3[-\u2013]5\\s*business days"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--17": {
+    "task": "Compare the Patagonia Capilene Thermal Weight Bottom and Smartwool Classic Thermal Merino Crew women's baselayers in solid Black for a ski trip. Check each product's first in-stock size and exact price. Add two of the more expensive choice to the guest cart, and tell me both product names and prices, the chosen size, subtotal and standard shipping cost.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "cart_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 6,
+            "user_id": null,
+            "guest_token": {
+              "regex": "[a-f0-9]{32}"
+            },
+            "sku_id": "SWLZ8BY-BLA-XS",
+            "quantity": 2,
+            "added_at": "2026-09-30"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/patagonia\\-capilene\\-thermal\\-weight\\-bottom\\-womens(?:$|\\?)",
+      "/smartwool\\-merino\\-250\\-baselayer\\-crew\\-womens(?:$|\\?)",
+      "/cart(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Capilene Thermal Weight Bottom - Women's price",
+        "capilene\\s+thermal\\s+weight\\s+bottom\\s+\\-\\s+women's(?:(?!classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*109(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Classic Thermal Merino Crew Baselayer - Women's price",
+        "classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's(?:(?!capilene\\s+thermal\\s+weight\\s+bottom\\s+\\-\\s+women's|cart).){0,1600}?(?:(?:unit|starting|sale) )?(?:price|cost|costs)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*125(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Classic Thermal Merino Crew Baselayer - Women's size",
+        "classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's(?:(?!capilene\\s+thermal\\s+weight\\s+bottom\\s+\\-\\s+women's|cart).){0,1600}?(?:size|selected size)\\s*(?:is|was|:|=|of|at)?\\s*xs(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart subtotal",
+        "cart(?:(?!capilene\\s+thermal\\s+weight\\s+bottom\\s+\\-\\s+women's|classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's).){0,1600}?(?:subtotal|cart subtotal)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*250(?:\\.0+)?(?!\\w|\\.\\d)"
+      ],
+      [
+        "Cart standard shipping",
+        "cart(?:(?!capilene\\s+thermal\\s+weight\\s+bottom\\s+\\-\\s+women's|classic\\s+thermal\\s+merino\\s+crew\\s+baselayer\\s+\\-\\s+women's).){0,1600}?standard\\s+shipping\\s*(?:is|was|:|=|of|at)?\\s*(?:free|\\$0(?:\\.0+)?)(?!\\w|\\.\\d)"
+      ]
+    ]
+  },
+  "Backcountry--18": {
+    "task": "Order one 60m Beal Zenith 9.5mm climbing rope with Express delivery for Eli's trip. Use guest email crag.day@example.com, Eli Stone, 9 Granite Way, Estes Park, Colorado 80517, phone 970-555-0177, demo card 4111 1111 1111 1111, expiry 04/29, CVC 222. Before paying, compare standard and Express shipping charges. Report both charges, the order number and total.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "order_items": {
+        "removed": [],
+        "added": [
+          {
+            "id": 7,
+            "order_id": 5,
+            "product_id": "BEA000U",
+            "product_name": "Zenith Climbing Rope - 9.5mm",
+            "brand_name": "Beal",
+            "color_name": "Blue",
+            "size_name": "60m",
+            "unit_price": 17796,
+            "unit_list": 17796,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      },
+      "orders": {
+        "removed": [],
+        "added": [
+          {
+            "id": 5,
+            "user_id": null,
+            "guest_email": "crag.day@example.com",
+            "number": "9000000685",
+            "status": "placed",
+            "placed_at": "2026-09-30",
+            "shipping_method": "Express",
+            "shipping_cents": 2500,
+            "subtotal_cents": 17796,
+            "savings_cents": 0,
+            "total_cents": 20296,
+            "payment_last4": "1111",
+            "address_snapshot": {
+              "json_value": {
+                "full_name": "Eli Stone",
+                "line1": "9 Granite Way",
+                "line2": "",
+                "city": "Estes Park",
+                "state": "Colorado",
+                "zip": "80517",
+                "phone": "970-555-0177"
+              }
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/beal\\-zenith\\-climbing\\-rope\\-9\\.5mm(?:$|\\?)",
+      "/cart(?:$|\\?)",
+      "/order\\-confirmation/9000000685(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Order number",
+        "order(?:(?!shipping).){0,1600}?(?:number|order number)\\s*(?:is|was|:|=|of|at)?\\s*9000000685(?!\\w|\\.\\d)"
+      ],
+      [
+        "Order total",
+        "order(?:(?!shipping).){0,1600}?(?:total|total price|order total|bag total)\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*202\\.960*(?!\\w|\\.\\d)"
+      ],
+      [
+        "Shipping standard",
+        "shipping(?:(?!order).){0,1600}?standard\\s*(?:is|was|:|=|of|at)?\\s*(?:free|\\$0(?:\\.0+)?)(?!\\w|\\.\\d)"
+      ],
+      [
+        "Shipping express",
+        "shipping(?:(?!order).){0,1600}?express\\s*(?:is|was|:|=|of|at)?\\s*\\$\\s*25(?:\\.0+)?(?!\\w|\\.\\d)"
+      ]
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "number"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "orders",
+        "right": "order_items",
+        "foreign_key": "order_id"
+      }
+    ]
+  },
+  "Backcountry--19": {
+    "task": "Alice wants to review the Black Diamond Momentum climbing shoe saved in her wish list. Using alice.j@test.com / TestPass123!, post a 5-star review titled 'Sticks like glue', text 'Edging on tiny granite nubs felt solid from day one.', familiarity \"I've used it several times\". Confirm the posted review and updated review count, leaving her wish list intact.",
+    "initial_digest": "6afc02862741b4ba66159ad12fe1782302e6e33aa8eca0faf89e130b547ccc36",
+    "state": {
+      "reviews": {
+        "removed": [],
+        "added": [
+          {
+            "id": 1678,
+            "upstream_id": null,
+            "product_id": "BLD00QS",
+            "user_id": 1,
+            "author": "Alice Johnson",
+            "title": "Sticks like glue",
+            "text": "Edging on tiny granite nubs felt solid from day one.",
+            "rating": 5,
+            "created": "2026-09-30T12:00:00.000+00:00",
+            "familiarity": "I've used it several times",
+            "fit": null,
+            "size_purchased": null,
+            "photos": "[]",
+            "syndicated": 0,
+            "syndication_source": null,
+            "author_gearhead": 0,
+            "is_seed": 0
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/black\\-diamond\\-momentum\\-climbing\\-shoe\\-mens(?:$|\\?)"
+    ],
+    "claims": [
+      [
+        "Momentum Climbing Shoe - Men's reviews",
+        "momentum\\s+climbing\\s+shoe\\s+\\-\\s+men's(?:(?!(?!)).){0,1600}?(?:reviews|review count|ratings)\\s*(?:is|was|:|=|of|at)?\\s*245(?!\\w|\\.\\d)"
+      ],
+      [
+        "outcome 0",
+        "(?:posted|published).{0,50}sticks like glue"
+      ],
+      [
+        "outcome 1",
+        "(?:rated|rating)\\s*5\\s*stars?"
+      ]
+    ]
+  }
+}

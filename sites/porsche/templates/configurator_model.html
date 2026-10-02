@@ -12,7 +12,7 @@
       <div class="grid">
         {% for o in options %}
         <label class="option-row">
-          <input type="checkbox" name="opt" value="{{ o.option_id }}"
+          <input type="checkbox" data-paint="{{ 1 if o.swatch else 0 }}" name="opt" value="{{ o.option_id }}"
                  {% if o.option_id in selected_ids %}checked{% endif %}>
           {% if o.swatch %}<img class="option-swatch" src="{{ o.swatch }}" alt="{{ o.name }}">{% endif %}
           <span class="option-name">{{ o.name }}</span>
@@ -45,4 +45,9 @@
     </aside>
   </div>
 </section>
+<script>
+document.querySelectorAll('[data-paint="1"]').forEach(input => input.addEventListener('change', () => {
+  if (input.checked) document.querySelectorAll('[data-paint="1"]').forEach(other => { if (other !== input) other.checked = false; });
+}));
+</script>
 {% endblock %}

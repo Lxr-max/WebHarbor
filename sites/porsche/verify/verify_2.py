@@ -1,20 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--2.
-
-List every purely electric model variant currently offered in the lineup with
-each one's maximum power output and starting price. Two variants share the
-highest power figure — name both and state the shared output. Then open the
-model page of the most expensive electric variant and report its 0-60 mph time
-and top track speed.
-
-Frozen ground truth (seed DB): 19 electric variants (fuel_type='Electric').
-The two 1,139 hp variants are the Cayenne Turbo Electric (From $163,000) and
-the Cayenne Turbo Coupe Electric (From $168,000) — shared output 1,139 hp.
-The most expensive electric variant is the Taycan Turbo GT with Weissach
-Package, From $243,700 (the r2 fix pins the page by name — the site's price
-tie with the plain Taycan Turbo GT is resolved by the task wording): its
-model page reports 0-60 2.1 s / top track speed 190 mph.
-"""
+"""Deterministic verifier for porsche task 2; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase,
                         final_answer, navigated_model_detail,
@@ -43,6 +27,15 @@ def run_checks(judge, traj, initial_db, after_db):
     judge.check("visited_most_expensive_electric_page",
                 navigated_model_detail(traj, "taycan-turbo-gt-wp"),
                 "required: Taycan Turbo GT with Weissach Package model page")
+    import json, re
+    from pathlib import Path
+    from verify_lib import entity_passages
+    specs = json.loads(Path(__file__).with_name('electric_specs.json').read_text())
+    passages = entity_passages(answer, specs)
+    for name, expected in specs.items():
+        judge.check(name+' price', contains_amount(passages[name], expected['price']))
+        hp = f"{expected['hp']:,}".replace(',', ',?')
+        judge.check(name+' power', bool(re.search(r'(?<![\d.])'+hp+r'\s*(?:hp|horsepower)\b', passages[name], re.I)))
     # answer gates: every electric variant must be listed
     missing = [v for v in ELECTRIC_VARIANTS if v.lower() not in answer.lower()]
     judge.check("answer_lists_all_19_electric_variants", not missing,

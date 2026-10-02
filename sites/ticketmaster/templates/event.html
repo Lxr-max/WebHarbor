@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}{{ event.name }} Tickets {{ event.date_pretty }} {{ event.city_state }} | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs">
+    <a href="/">Home</a> ›
+    <a href="/discover/{{ {'Music':'concerts','Sports':'sports','Arts & Theater':'arts-theater','Family':'family'}[event.category] }}">{{ event.category }}</a> ›
+    {{ event.name }}
+  </div>
+
+  <div class="edp-hero">
+    {% if event.image %}<img src="{{ url_for('static', filename=event.image.replace('static/','')) }}" alt="{{ event.name }}">{% endif %}
+    <div>
+      <h1 class="edp-title">{{ event.name }}</h1>
+      <div class="edp-meta">
+        <div class="m"><b>Date</b>{{ event.date_pretty }}{% if event.time %}, {{ event.time }}{% endif %}</div>
+        <div class="m"><b>Venue</b><a href="/venue/{{ event.venue.id }}">{{ event.venue.name }}</a>, {{ event.city_state }}</div>
+        <div class="m"><b>Category</b>{{ event.category }} › {{ event.subcategory }}</div>
+      </div>
+      <div class="allin-note">We're All In: Prices include fees (before taxes).</div>
+      {% if event.important_info %}
+      <p style="font-size:13px; color:var(--tm-gray); margin-top:6px"><b>Important Info:</b> {{ event.important_info }}</p>
+      {% endif %}
+      {% if event.status == 'cancelled' %}
+      <p style="color:#C0392B; font-weight:700; margin-top:10px">This event has been cancelled. Refunds are credited to the original payment method.</p>
+      {% elif event.status == 'soldout' %}
+      <p style="color:#C0392B; font-weight:700; margin-top:10px">Tickets for this event are currently sold out.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if event.presales %}
+  <section>
+    <div class="section-head"><h2>On Sale Info</h2></div>
+    {% for p in event.presales %}
+    <div class="sale-strip">
+      <div class="ss-title">{{ p.title }}</div>
+      <div class="ss-dates">Starts {{ p.start|pretty_dt }} – Ends {{ p.end|pretty_dt }}</div>
+      {% if p.description %}<div class="ss-desc">{{ p.description }}</div>{% endif %}
+    </div>
+    {% endfor %}
+    <div class="sale-strip">
+      <div class="ss-title">General Sale</div>
+      <div class="ss-dates">Ticket availability varies by event. For events with prior presales, availability may be limited.</div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if related %}
+  <section>
+    <div class="section-head"><h2>More Dates For {{ event.artist_name }}</h2></div>
+    <ul>
+      {% for e in related %}
+      <li class="event-row">
+        <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+        <div class="er-main">
+          <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+          <div class="er-sub">{{ e.city_state }} — {{ e.venue.name }}</div>
+        </div>
+        <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <div class="section-head"><h2>Tickets</h2>
+    <form method="get" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+      <select name="qty" aria-label="Open quantity filters">
+        <option value="">2 Tickets</option>
+        {% for n in [1,2,3,4,5,6,8] %}
+        <option value="{{ n }}" {{ 'selected' if qty == n }}>{{ n }} Ticket{{ '' if n == 1 else 's' }}</option>
+        {% endfor %}
+      </select>
+      <input type="number" name="price_max" placeholder="Max $" min="0" step="10" value="{{ price_max or '' }}" style="width:90px; padding:8px; border:1px solid var(--tm-line); border-radius:4px">
+      <select name="type" aria-label="Ticket Types">
+        <option value="">Ticket Types</option>
+        {% for t in types %}
+        <option value="{{ t }}" {{ 'selected' if ltype == t }}>{{ t }}</option>
+        {% endfor %}
+      </select>
+      <label class="filter-label"><input type="checkbox" name="accessible" value="1" {{ 'checked' if accessible }} style="margin-right:5px">Accessible</label>
+      <select name="sort" aria-label="Sort list by">
+        <option value="lowest" {{ 'selected' if sort == 'lowest' }}>Lowest Price</option>
+        <option value="best" {{ 'selected' if sort == 'best' }}>Best Seats</option>
+        <option value="high" {{ 'selected' if sort == 'high' }}>Highest Price</option>
+      </select>
+      <button class="btn btn-primary" type="submit" style="padding: 8px 16px">Apply</button>
+      {% if qty or price_max or ltype or accessible or sort != 'lowest' %}
+      <a class="filter-label" href="/event/{{ event.id }}">Clear All</a>
+      {% endif %}
+    </form>
+  </div>
+
+  <div class="tickets-layout">
+    <aside class="seat-map">
+      <h4>Seat Map Sections</h4>
+      <div class="sm-sections">
+        {% for sec, desc in sections %}
+        <span class="sm-section" title="{{ desc }}">{{ sec }}</span>
+        {% endfor %}
+      </div>
+      <p class="sm-note">Ticket availability varies by section. Select an option to see seat details.</p>
+      <p class="sm-note">Event ticket limit: {{ event.ticket_limit }}.</p>
+    </aside>
+    <div>
+      <p class="listing-count">List updated, showing {{ listings|length }} results</p>
+      {% for l in listings %}
+      <div class="listing">
+        <div class="l-loc">
+          <div class="l-sec">Sec {{ l.section }} • Row {{ l.row }}</div>
+          <div class="l-row">{{ l.section_desc }}</div>
+        </div>
+        <div>
+          <div class="l-type {{ 'vip' if l.ticket_type == 'VIP Package' else ('ada' if l.accessible else '') }}">{{ l.ticket_type }}</div>
+          <div class="l-price">${{ '%.2f'|format(l.price) }} <small>incl. fees</small></div>
+        </div>
+        <a class="btn btn-primary" href="/event/{{ event.id }}/tickets?listing={{ l.id }}&qty=2">Select {{ l.ticket_type }}</a>
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <h3>No tickets match these filters</h3>
+        <p>Try clearing the quantity, price or ticket-type filters.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

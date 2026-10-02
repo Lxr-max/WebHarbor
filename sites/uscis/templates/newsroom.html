@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Newsroom{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Newsroom</h1>
+  {% for alert in data.alerts %}
+  <div class="alert-box alert-box--{{ alert.type or 'info' }}">
+    <p><strong>{{ alert.type|capitalize if alert.type else 'Alert' }}:</strong> {{ alert.text }}</p>
+  </div>
+  {% endfor %}
+  <div class="section section--split">
+    <div>
+      <h2 class="section__title">Latest Alerts</h2>
+      {% for item in alerts %}
+      <article class="news-teaser">
+        <span class="news-teaser__kind news-teaser__kind--alert">Alert</span>
+        <h3><a href="{{ url_for('news_detail', kind='alerts', slug=item.slug) }}">{{ item.title }}</a></h3>
+        <p class="news-teaser__date">{{ item.release_date }}</p>
+      </article>
+      {% endfor %}
+      <p><a href="{{ url_for('news_list', kind='alerts') }}">All alerts</a> &middot; <a href="{{ url_for('news_list', kind='news-releases') }}">All news releases</a> &middot; <a href="{{ url_for('news_list', kind='all-news') }}">All news</a></p>
+    </div>
+    <div>
+      <h2 class="section__title">Latest News Releases</h2>
+      {% for item in releases %}
+      <article class="news-teaser">
+        <span class="news-teaser__kind">News Release</span>
+        <h3><a href="{{ url_for('news_detail', kind='news-releases', slug=item.slug) }}">{{ item.title }}</a></h3>
+        <p class="news-teaser__date">{{ item.release_date }}</p>
+      </article>
+      {% endfor %}
+      <p><a href="{{ url_for('news_list', kind='news-releases') }}">All news releases</a> &middot; <a href="{{ url_for('news_list', kind='all-news') }}">All news</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}My Account | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; My Account</div>
+  <h1>Welcome back, {{ current_user.name }}</h1>
+  {% if current_user.is_business %}
+  <p class="ups-lede">{{ current_user.account_plan }} account {% if current_user.account_number %}{{ current_user.account_number }}{% endif %} &middot; {{ current_user.address_line1 }}, {{ current_user.city }}, {{ current_user.state }} {{ current_user.zip }}</p>
+  {% else %}
+  <p class="ups-lede">{{ current_user.address_line1 }}, {{ current_user.city }}, {{ current_user.state }} {{ current_user.zip }}</p>
+  {% endif %}
+
+  <div class="ups-card">
+    <h2>Shipments</h2>
+    {% if shipments %}
+    <table class="ups-accountable">
+      <thead><tr><th>Tracking Number</th><th>Service</th><th>Status</th><th>Scheduled Delivery</th><th>From / To</th><th></th></tr></thead>
+      <tbody>
+      {% for s in shipments %}
+        <tr>
+          <td class="ups-tracknum">{{ s.tracking_number }}</td>
+          <td>{{ s.service_name }}</td>
+          <td>{{ s.status }}</td>
+          <td>{{ s.scheduled_delivery if s.status != 'Delivered' else s.delivered_on }}</td>
+          <td>{{ s.from_city }} &rarr; {{ s.to_city }}</td>
+          <td><a class="ups-btn ups-btn-secondary" href="{{ url_for('track_detail', tracking_number=s.tracking_number) }}">View</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p>No shipments yet. <a href="{{ url_for('ship') }}">Create a shipment</a>.</p>{% endif %}
+  </div>
+
+  <div class="ups-card">
+    <h2>Pickups</h2>
+    {% if pickups %}
+    <table class="ups-accountable">
+      <thead><tr><th>Confirmation</th><th>Date</th><th>Window</th><th>Packages</th><th>Fee</th></tr></thead>
+      <tbody>
+      {% for p in pickups %}
+        <tr><td>{{ p.confirmation_number }}</td><td>{{ p.pickup_date }}</td>
+            <td>{{ p.earliest_time }}&ndash;{{ p.latest_time }}</td>
+            <td>{{ p.packages }} ({{ p.weight_lb }} lbs)</td><td>${{ '%.2f'|format(p.fee_usd or 0) }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p>No pickups yet. <a href="{{ url_for('pickup') }}">Schedule a pickup</a>.</p>{% endif %}
+  </div>
+
+  <div class="ups-card">
+    <h2>Claims</h2>
+    {% if claims %}
+    <table class="ups-accountable">
+      <thead><tr><th>Claim</th><th>Tracking Number</th><th>Type</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+      {% for c in claims %}
+        <tr><td>{{ c.claim_id }}</td><td class="ups-tracknum">{{ c.tracking_number }}</td>
+            <td>{{ 'Lost' if c.problem_type == 'lost' else 'Damaged' }}</td>
+            <td>{{ c.status }}</td>
+            <td><a class="ups-btn ups-btn-secondary" href="{{ url_for('claim_status', claim_id=c.claim_id) }}">View</a></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p>No claims. <a href="{{ url_for('claim_new') }}">Start a claim</a>.</p>{% endif %}
+  </div>
+</section>
+{% endblock %}

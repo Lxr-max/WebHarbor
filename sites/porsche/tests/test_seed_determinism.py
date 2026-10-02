@@ -124,5 +124,5 @@ def test_seed_rebuild_is_byte_reproducible(tmp_path):
     env2 = dict(env, WEBHARBOR_MIRROR_DB=str(scratch2 / "instance" / "porsche.db"))
     subprocess.run([sys.executable, str(scratch2 / "seed_data.py")],
                    check=True, env=env2, capture_output=True, cwd=str(scratch2))
-    assert hashlib.sha256((scratch2 / "instance_seed" / "porsche.db").read_bytes()).hexdigest() == rebuilt,         "two deterministic rebuilds differ"
-    assert content_hashes(scratch / "instance_seed" / "porsche.db") == content_hashes(SEED),         "rebuilt seed content differs from the shipped seed"
+    assert hashlib.sha256((scratch2 / "instance_seed" / "porsche.db").read_bytes()).hexdigest() == rebuilt, "two deterministic rebuilds differ"
+    assert content_hashes(scratch / "instance_seed" / "porsche.db") == content_hashes(SEED), "rebuilt seed content differs from the shipped seed"

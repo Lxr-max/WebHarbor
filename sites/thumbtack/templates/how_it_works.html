@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}How Thumbtack works{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>How Thumbtack works</h1>
+  <p class="muted">Hiring a local pro takes three steps.</p>
+  {% for s in steps %}
+  <div class="faq"><b>{{ loop.index }}. {{ s[0] }}</b><span class="muted">{{ s[1] }}</span></div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ person.name }} — Faculty{% endblock %}
+{% block content %}
+<h1>{{ person.name }}</h1>
+<p class="page-sub">Instructor of record, {{ person.school }} &middot; Subjects: {{ person.subject_list()|join(', ') }}</p>
+
+<h2>Fall 2026 Class Schedule <span class="count-pill">{{ sections|length }} sections</span></h2>
+<table class="list">
+  <tr><th>Class Nbr</th><th>Course</th><th>Section</th><th>Units</th><th>Mode</th><th>Status</th></tr>
+  {% for s in sections %}
+  {% set c = courses.get(s.course_id) %}
+  <tr>
+    <td><a href="{{ url_for('class_detail', nbr=s.class_nbr) }}">{{ s.class_nbr }}</a></td>
+    <td>{% if c %}<a href="{{ url_for('course_subject', code=c.subject) }}">{{ c.code() }} — {{ c.title }}</a>{% endif %}</td>
+    <td>{{ s.label() }}</td>
+    <td>{{ s.units }}</td>
+    <td>{{ s.mode or '' }}</td>
+    <td><span class="badge {{ 'open' if 'Open' in (s.status or '') else ('wait' if 'Wait' in (s.status or '') else 'closed') }}">{{ s.status or '—' }}</span></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

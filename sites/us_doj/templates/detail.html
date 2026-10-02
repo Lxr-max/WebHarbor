@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import date_label, kind_label, share, news_sidebar, career_sidebar with context %}
+{% set is_news = item.path.startswith('/opa/pr/') or item.kind in ['press_release','press-release','Press Release','speech','blog','video','news'] %}
+{% set is_career = item.path.startswith('/legal-careers') %}
+{% set has_section_navigation = item.navigation is defined and item.navigation %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li>{% if is_news %}<li><a href="/news">News</a></li>{% elif is_career and item.path != '/legal-careers' %}<li><a href="/legal-careers">Legal Careers</a></li>{% endif %}<li>{{ item.title }}</li></ol></nav>{% endblock %}
+{% block content %}
+<div class="container {% if is_news or is_career or has_section_navigation %}page-layout{% else %}single-page-layout{% endif %}">
+  {% if is_news %}<aside class="sidebar">{{ news_sidebar('/news/press-releases') }}</aside>{% elif is_career %}<aside class="sidebar">{{ career_sidebar(item.path) }}</aside>{% elif has_section_navigation %}
+  <aside class="sidebar"><nav class="section-nav" aria-label="Section navigation">
+    {% for entry in item.navigation %}<a href="{{ entry.path }}"{% if entry.path == item.path %} class="active" aria-current="page"{% endif %}>{{ entry.label }}</a>{% endfor %}
+  </nav></aside>
+  {% endif %}
+  <article class="page-main article-page {% if is_news %}news-detail{% endif %}" data-content-path="{{ item.path }}">
+    {% if is_news %}<span class="eyebrow">{{ kind_label(item.kind) }}</span>{% endif %}
+    <h1 class="page-title">{{ item.title }}</h1>
+    <div class="article-heading-tools"><div>{% if is_news and item.date %}<p class="published-date"><time datetime="{{ item.date }}">{{ date_label(item.date) }}</time></p>{% endif %}{{ share() }}</div>{% if is_news %}<div class="release-contact"><strong>For Immediate Release</strong><p>Office of Public Affairs</p></div>{% endif %}</div>
+    <div class="rich-content">{{ item.body_html|safe }}</div>
+    {% if item.updated_date %}<p class="updated-date">Updated {{ date_label(item.updated_date) }}</p>{% endif %}
+    {% if is_news and (item.topics or item.components) %}<div class="article-taxonomy">{% if item.topics %}<h2>Topics</h2><ul>{% for label in item.topics %}<li><a href="/news?topic={{ label|urlencode }}">{{ label }}</a></li>{% endfor %}</ul>{% endif %}{% if item.components %}<h2>Components</h2><ul>{% for label in item.components %}<li><a href="/news?component={{ label|urlencode }}">{{ label }}</a></li>{% endfor %}</ul>{% endif %}</div>{% endif %}
+    {% if is_news and item.release_number %}<p class="release-number">Press Release Number: {{ item.release_number }}</p>{% endif %}
+  </article>
+</div>
+{% endblock %}

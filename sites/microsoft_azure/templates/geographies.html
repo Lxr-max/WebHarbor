@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Azure geographies — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <h1>Azure geographies</h1>
+  <p class="lead">{{ description }}</p>
+  <div class="geo-images">
+    {% for im in images %}<img src="{{ img(im) }}" alt="" loading="lazy">{% endfor %}
+  </div>
+
+  <div class="geo-grid">
+    {% for g in geos %}
+    <a class="card geo-card" href="{{ url_for('geography_detail', slug=g.slug) }}">
+      <h3>{{ g.display_name }}</h3>
+      <p>{{ regions_by_geo[g.slug]|length }} region{{ '' if regions_by_geo[g.slug]|length == 1 else 's' }}</p>
+      <span class="card-link">View regions →</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <h2>Compare service availability by region</h2>
+  <p>Use <a href="{{ url_for('products_by_region') }}">products by region</a> to see where Virtual Machines, Kubernetes Service, Storage and Cosmos DB are available and what they cost.</p>
+</div>
+{% endblock %}

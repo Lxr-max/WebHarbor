@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Page not found - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card error-panel" style="margin: 40px auto; text-align: center;">
+  <h2>We couldn’t find that page</h2>
+  <p class="muted">The link may be broken, or the page may have moved.</p>
+  <p>
+    <a class="btn primary" href="/">Back to Yahoo Finance home</a>
+    <a class="btn" href="/news">Browse news</a>
+    <a class="btn" href="/screener">Open the screener</a>
+  </p>
+</div>
+{% endblock %}

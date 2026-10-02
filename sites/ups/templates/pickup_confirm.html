@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Pickup Confirmed | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Schedule a Pickup</div>
+  <div class="ups-card ups-confirm">
+    <h1>Your pickup is scheduled</h1>
+    <p class="ups-h2">Keep this confirmation number for your records.</p>
+    <div class="ups-confirm-num">
+      <p class="ups-factlabel">Pickup Confirmation Number</p>
+      <p class="ups-tracknum-big">{{ p.confirmation_number }}</p>
+    </div>
+    <div class="ups-review-grid">
+      <div>
+        <p class="ups-factlabel">Pickup Address</p>
+        <p>{{ p.contact_name }}<br>{{ p.address_line1 }}<br>{{ p.city }}, {{ p.state }} {{ p.zip }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Packages</p>
+        <p>{{ p.packages }} package(s), {{ p.weight_lb }} lbs<br>{{ p.service }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Date &amp; Time</p>
+        <p>{{ p.pickup_date }}<br>Between {{ p.earliest_time }} and {{ p.latest_time }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Fee</p>
+        <p>${{ '%.2f'|format(p.fee_usd or 0) }} &middot; {{ p.payment }}</p>
+      </div>
+    </div>
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('account') }}" style="display:none">View in Account</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('support') }}">Pickup FAQ</a>
+      <a class="ups-btn ups-btn-tertiary" href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

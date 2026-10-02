@@ -1,17 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--5.
-
-Compare the option catalogs of the Cayenne (model code 9YAAI1), the Cayenne S
-Electric (X1ABB1) and the Macan (95BAU1): how many options each offers, each
-model's base price, which catalog is the largest, the single most expensive
-option across all three catalogs, which model it belongs to and what it costs.
-
-Frozen ground truth (seed DB): Cayenne (9YAAI1) base $89,900, 47 options;
-Cayenne S Electric (X1ABB1) base $126,300, 36 options; Macan (95BAU1) base
-$65,400, 44 options. Largest catalog: the Cayenne (47). Most expensive option
-across all three: Club Leather Interior in Black/Barrique with Cross-Stitching,
-$6,220, in the Cayenne catalog.
-"""
+"""Deterministic verifier for porsche task 5; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase,
                         final_answer, navigated_configurator, run_verifier)

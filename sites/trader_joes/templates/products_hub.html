@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Products</h1>
+  <div class="note">
+    <span class="note-title">Note:</span>
+    <span>{{ note }}</span>
+  </div>
+</div>
+
+<section class="home-section">
+  <h2>{{ marketing.title }}</h2>
+  <p class="rich">{{ marketing.text }}</p>
+  <a class="btn" href="{{ url_for('category', slug='products', cat_id=2) }}?filters=%7B%22areNewProducts%22%3Atrue%7D">SHOP WHAT'S NEW</a>
+</section>
+
+<section class="home-section">
+  <h2>Shop by Category</h2>
+  <div class="recipe-grid">
+    {% for top, children in nav_categories() %}
+    <article class="recipe-card">
+      <a href="{{ category_link(top) }}">
+        <img src="{{ url_for('static', filename='images/upstream/pictures/product-categories/' ~ CATEGORY_TILE[top.url_key]) }}" alt="{{ top.name }}">
+      </a>
+      <div class="body">
+        <h3><a href="{{ category_link(top) }}">{{ top.name }}</a></h3>
+        <div class="recipe-cats">{{ top.product_count }} products</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

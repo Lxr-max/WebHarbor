@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('ttp_overview') }}">Trusted Traveler Programs</a> › {{ page.title }}</div>
+<h1 class="page-title">{{ page.title }}</h1>
+{% if program %}
+<div class="callout">
+  <p>The application fee is <strong>${{ '%.2f'|format(program.fee) }}</strong>, and membership lasts for <strong>{{ program.years }} years</strong>. {% if program.includes %}Includes: {{ program.includes|join(', ') }}.{% endif %}</p>
+  <p><a class="btn" href="{{ url_for('ttp_apply', slug=program.slug) }}">Apply for {{ program.name }}</a>
+     <a class="btn btn-ghost" href="{{ url_for('ttp_status_form') }}">Check Application Status</a></p>
+</div>
+{% endif %}
+<div class="content-lines">
+  {% for line in page.lines %}<p>{{ line }}</p>{% endfor %}
+</div>
+{% endblock %}

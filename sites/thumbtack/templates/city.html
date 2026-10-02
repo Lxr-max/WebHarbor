@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ city }}, {{ state }} Service Professionals - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Pros in {{ city }}, {{ state }}</h1>
+  <p class="muted">{{ pros|length }} local professionals serve {{ city }} across {{ cats|length }} services.</p>
+  <div class="chip-row" style="margin:16px 0;">
+    {% for c in cats %}
+    <a class="chip" href="{{ c.url() }}">{{ c.name }}</a>
+    {% endfor %}
+  </div>
+  <h2 style="font-size:22px;">Top pros in {{ city }}</h2>
+  {% for p in (pros|sort(attribute='rating', reverse=True))[:10] %}
+  <div class="pro-card">
+    <a href="{{ p.url() }}"><img class="av" src="{{ url_for('static', filename='images/avatars/' + p.avatar) }}" alt="{{ p.name }}"></a>
+    <div>
+      <a class="pro-name" href="{{ p.url() }}">{{ p.name }}</a>
+      {% if p.top_pro %}<span class="badge badge-toppro">Top Pro</span>{% endif %}
+      <div class="rating-line"><b>{{ p.rating_word }} {{ '%.1f'|format(p.rating) }}</b> <span class="muted">({{ p.review_count }})</span></div>
+      <div class="muted">{{ p.category.name }} · {{ p.hires }} hires on Thumbtack</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

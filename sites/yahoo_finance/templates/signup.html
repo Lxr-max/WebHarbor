@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Sign up - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card error-panel" style="margin: 30px auto;">
+  <h2>Create your account</h2>
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  <form class="form-grid" method="post" action="/signup">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div>
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" required placeholder="Jordan Vale">
+    </div>
+    <div>
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" required placeholder="jordan.vale@test.com">
+    </div>
+    <div>
+      <label for="password">Password (8+ characters)</label>
+      <input type="password" id="password" name="password" required minlength="8" placeholder="At least 8 characters">
+    </div>
+    <button class="btn primary" type="submit">Sign up</button>
+    <p class="form-note">Already have an account? <a href="/login">Sign in</a></p>
+  </form>
+</div>
+{% endblock %}

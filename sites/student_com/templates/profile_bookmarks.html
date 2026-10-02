@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Saved Properties | Student.com{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:44px 0 64px;max-width:1100px">
+  <nav class="breadcrumb" style="padding:0 0 10px"><a href="/">Home</a> › <span>Saved Properties</span></nav>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+    <h1>Saved Properties</h1>
+    <span class="muted" id="bookmark-count">{{ props|length }} {{ 'property' if props|length == 1 else 'properties' }}</span>
+  </div>
+
+  {% if props %}
+  <div class="grid cols-3" style="margin-top:24px">
+    {% for prop in props %}
+      {% with distance = None, heart_id = 'bm-heart-' + loop.index|string %}{% include "_property_card.html" %}{% endwith %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p style="font-weight:600">You don't have any saved properties yet</p>
+    <p class="muted small">Start exploring and save your favorites to easily find them later!</p>
+    <a class="btn primary" href="/" style="margin-top:16px">Find your student home</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

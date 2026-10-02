@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('forms_catalog') }}">CBP Forms</a> › CBP Form {{ form.form_number }}</div>
+<h1 class="page-title">CBP Form {{ form.form_number }} — {{ form.name }}</h1>
+<table class="data">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Form Number</td><td>{{ form.form_number }}</td></tr>
+  <tr><td>Title</td><td>{{ form.title }}</td></tr>
+  <tr><td>Listed Date</td><td>{{ form.listed_date }}</td></tr>
+  <tr><td>PDF</td><td>{{ (form.bytes / 1024)|round(0)|int }} KB · sha256 {{ form.sha256[:16] }}…</td></tr>
+  <tr><td>Upstream URL</td><td>{{ form.pdf_url }}</td></tr>
+</table>
+<p>
+  <a class="btn" href="{{ url_for('form_download', catalog_key=form.catalog_key) }}" download>Download CBP Form {{ form.form_number }} (PDF)</a>
+  {% if user.is_authenticated %}
+  <form method="post" action="{{ url_for('save_form', form_id=form.id) }}" style="display:inline;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="btn btn-ghost" type="submit">Save to My Account</button>
+  </form>
+  {% endif %}
+</p>
+{% if form.raw %}<p class="note">{{ form.raw }}</p>{% endif %}
+{% endblock %}

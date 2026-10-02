@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Terms & Conditions - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; Terms & Conditions</div>
+  <h1>Terms & Conditions</h1>
+  {% for h, b in [["Bookings", "TourRadar acts as an authorized agent of each tour operator. Your booking contract is with the operator whose payment, cancellation and refund conditions apply."], ["Payments", "Card payments are processed securely. Deposit bookings collect 10% today and the balance before departure; installment plans split the balance interest-free."], ["Traveler details", "Traveler names must match passport information. Changes may incur operator fees."], ["Liability", "TourRadar facilitates the booking; the operator is responsible for delivering the tour."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

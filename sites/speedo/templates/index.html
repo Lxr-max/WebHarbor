@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% from '_product_card.html' import card %}
+{% block content %}
+<section class="hero">
+  <img src="{{ url_for('static', filename='images/banners/hero-sale-desktop.jpg') }}" alt="25% off (almost) everything">
+  <div class="hero-content">
+    <h2>25% off (almost) everything</h2>
+    <p>All the kit. Less of the cost.</p>
+    <a class="btn" href="/collections/women-sale">Shop Sale</a>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-head">
+    <h2>Fastskin</h2>
+    <a href="/collections/women-fastskin">New Arrivals</a>
+  </div>
+  <div class="product-grid">
+    {% for c in fastskin_new %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-head">
+    <h2>New</h2>
+    <a href="/collections/women-new-arrivals">Bestsellers</a>
+  </div>
+  <div class="product-grid">
+    {% for c in new_arrivals %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-head">
+    <h2>Bestsellers</h2>
+    <a href="/collections/women-bestsellers">Shop all</a>
+  </div>
+  <div class="product-grid">
+    {% for c in bestsellers %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-head">
+    <h2>Essentials</h2>
+    <a href="/collections/women-essentials">Shop all</a>
+  </div>
+  <div class="product-grid">
+    {% for c in essentials %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="category-banners">
+    <div class="cat-banner">
+      <img src="{{ url_for('static', filename='images/banners/iq-banner.jpg') }}" alt="Speedo iQ">
+      <div class="cat-banner-overlay">
+        <h3>THIS IS SWIM INTELLIGENCE</h3>
+        <p>Smart technology, built into the Vanquisher 3.0 goggle.</p>
+        <a class="btn" href="/pages/speedo-iq">Shop Now</a>
+      </div>
+    </div>
+    <div class="cat-banner">
+      <img src="{{ url_for('static', filename='images/banners/biofuse-banner.jpg') }}" alt="Biofuse 2.0 goggles">
+      <div class="cat-banner-overlay">
+        <h3>BIOFUSE 2.0 GOGGLES</h3>
+        <p>A deeper focus. So you can face the water, fully immersed.</p>
+        <a class="btn" href="/pages/biofuse">Shop Now</a>
+      </div>
+    </div>
+    <div class="cat-banner">
+      <img src="{{ url_for('static', filename='images/banners/bags-banner.jpg') }}" alt="Gear up">
+      <div class="cat-banner-overlay">
+        <h3>GEAR UP</h3>
+        <p>The ultimate training accessory. Bags for all types of swim.</p>
+        <a class="btn" href="/collections/accessories-bags">Shop Now</a>
+      </div>
+    </div>
+    <div class="cat-banner">
+      <img src="{{ url_for('static', filename='images/banners/dmc-banner.jpg') }}" alt="Speedo DMC">
+      <div class="cat-banner-overlay">
+        <h3>SPEEDO DMC</h3>
+        <p>Fins that deliver strength, speed, and precision.</p>
+        <a class="btn" href="/collections/speedo-dmc-all">Shop Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="athlete-quote">
+  <blockquote>&ldquo;I&rsquo;ve grown up with Speedo. It&rsquo;s been with me every step of my journey&rdquo;</blockquote>
+  <cite>L&eacute;on Marchand, Olympian</cite><br>
+  <a href="/pages/team-speedo">View Athletes</a>
+</section>
+
+<section class="home-section">
+  <div class="section-head">
+    <h2>Outlet</h2>
+    <a href="/collections/women-sale">Shop Sale</a>
+  </div>
+  <div class="product-grid">
+    {% for c in sale %}{{ card(c) }}{% endfor %}
+  </div>
+</section>
+{% endblock %}

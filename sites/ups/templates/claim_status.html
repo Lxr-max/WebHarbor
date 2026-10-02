@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Claim {{ c.claim_id }} | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; <a href="{{ url_for('claims') }}">File a Claim</a> &rsaquo; Claim Status</div>
+  <div class="ups-card ups-confirm">
+    <h1>Claim {{ c.claim_id }}</h1>
+    <p class="ups-h2">{{ 'Package is lost' if c.problem_type == 'lost' else 'Package is damaged' }} &mdash; Claim Review in Progress</p>
+    <div class="ups-review-grid">
+      <div><p class="ups-factlabel">Tracking Number</p><p><a href="{{ url_for('track_detail', tracking_number=c.tracking_number) }}">{{ c.tracking_number }}</a></p></div>
+      <div><p class="ups-factlabel">Merchandise</p><p>{{ c.merchandise }}<br>{{ c.item_count }} item(s) &middot; ${{ '%.2f'|format(c.item_value or 0) }}</p></div>
+      <div><p class="ups-factlabel">Role</p><p>{{ c.role|title }}</p></div>
+      <div><p class="ups-factlabel">Filed</p><p>{{ c.filed_day }}</p></div>
+    </div>
+    <h2>Claim Progress</h2>
+    <ol class="ups-claimtimeline">
+      {% for e in c.event_rows %}
+      <li class="{{ 'done' if e.done }}">
+        <span class="ups-stepnum">{{ loop.index }}</span>
+        <div><p class="ups-tl-status">{{ e.label }}</p>{% if e.day %}<p class="ups-tl-when">{{ e.day }}</p>{% endif %}</div>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="ups-hint">{{ c.resolution_note }}</p>
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('support_article', key='file-a-claim') }}">Claims FAQ</a>
+      <a class="ups-btn ups-btn-tertiary" href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

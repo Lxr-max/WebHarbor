@@ -50,16 +50,12 @@ features: the live site requires OneID/SSO logins that a benchmark mirror
 cannot reproduce, so registration/sign-in use the standard WebHarbor
 benchmark accounts pattern instead. The two demo accounts
 (casey.taylor@test.com / jordan.morgan@test.com, password TestPass123!)
-are benchmark fixtures. Order numbers are generated deterministically at
-checkout time. All catalog content (models, options, vehicles, dealers,
+are benchmark fixtures. Order numbers are generated uniquely at checkout time. All catalog content (models, options, vehicles, dealers,
 products, prices) is captured from the live site, not synthesized.
 
-## How to refresh
+## Rebuild the captured catalog
 
-`scripts_dev/extract_model_cards.py`, `extract_dealers.py`,
-`extract_shop_products.py`, `extract_finder_rsc.py` re-parse the cached
-page captures under `scraped_data/` (offline); `scripts_dev/
-download_images.py` re-fetches the imagery; `scripts_dev/
-build_source_data.py` reassembles `source_data/`. After a refresh,
-regenerate the seed with `PYTHONHASHSEED=0 python3 seed_data.py` (or via
-the image build).
+The contributor's captured snapshots are retained under `source_data/`;
+`asset_inventory.json` records the source URLs and hashes for imagery.
+Regenerate the seed with `PYTHONHASHSEED=0 python3 seed_data.py` or the
+image build. Development-only harvesting scripts are not shipped.

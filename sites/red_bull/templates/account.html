@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}My account | Red Bull{% endblock %}
+{% block content %}
+<h1 class="page-title">My account</h1>
+<p class="page-sub">{{ current_user.display_name }} · {{ current_user.email }}</p>
+
+<h2 class="section-title">My orders</h2>
+{% if orders %}
+<table class="list-table">
+  <tr><th>Order</th><th>Placed</th><th>Status</th><th>Total</th></tr>
+  {% for o in orders %}
+  <tr>
+    <td><a href="{{ url_for('shop_order_confirmation', order_number=o.order_number) }}"><strong>{{ o.order_number }}</strong></a></td>
+    <td>{{ o.placed_at[:10] }}</td>
+    <td>{{ o.status | capitalize }}</td>
+    <td>${{ '%.2f' | format(o.total) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="form-note">No orders yet. <a href="{{ url_for('shop') }}">Visit the shop</a>.</p>
+{% endif %}
+
+<h2 class="section-title">My event registrations</h2>
+{% if registrations %}
+<table class="list-table">
+  <tr><th>Code</th><th>Event</th><th>Date</th><th>Ticket</th><th>Fee</th><th>Status</th></tr>
+  {% for r in registrations %}
+  <tr>
+    <td><strong>{{ r.registration_code }}</strong></td>
+    <td><a href="{{ url_for('event_detail', slug=r.event.slug) }}">{{ r.event.title }}</a></td>
+    <td>{{ r.event.date_range_text() }}</td>
+    <td>{{ r.ticket_type }}</td>
+    <td>{% if r.price %}${{ '%.0f' | format(r.price) if r.price == (r.price | int) else '%.2f' | format(r.price) }}{% else %}Free{% endif %}</td>
+    <td>{{ r.status | capitalize }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="form-note">No registrations yet. <a href="{{ url_for('events') }}">Browse events</a>.</p>
+{% endif %}
+
+<h2 class="section-title">My favorites</h2>
+<div class="grid cols-3">
+  {% for slug in fav_events %}
+  {% set e = namespace() %}
+  <a class="card" href="{{ url_for('event_detail', slug=slug) }}"><div class="body"><span class="tag">Event</span><h3>{{ slug | replace('-', ' ') | title }}</h3></div></a>
+  {% endfor %}
+  {% for slug in fav_films %}
+  <a class="card" href="{{ url_for('film_detail', slug=slug) }}"><div class="body"><span class="tag">Film</span><h3>{{ slug | replace('-', ' ') | title }}</h3></div></a>
+  {% endfor %}
+  {% for slug in fav_shows %}
+  <a class="card" href="{{ url_for('show_detail', slug=slug) }}"><div class="body"><span class="tag">Show</span><h3>{{ slug | replace('-', ' ') | title }}</h3></div></a>
+  {% endfor %}
+  {% for slug in fav_stories %}
+  <a class="card" href="{{ url_for('story_detail', slug=slug) }}"><div class="body"><span class="tag">Story</span><h3>{{ slug | replace('-', ' ') | title }}</h3></div></a>
+  {% endfor %}
+  {% for slug in fav_athletes %}
+  <a class="card" href="{{ url_for('athlete_detail', slug=slug) }}"><div class="body"><span class="tag">Athlete</span><h3>{{ slug | replace('-', ' ') | title }}</h3></div></a>
+  {% endfor %}
+  {% if not (fav_events or fav_films or fav_shows or fav_stories or fav_athletes) %}
+  <p class="form-note">No favorites yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

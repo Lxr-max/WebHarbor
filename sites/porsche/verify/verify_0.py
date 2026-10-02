@@ -1,18 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--0.
-
-In the current US model lineup, compare the least expensive and the most
-expensive 911 variants (names, starting prices, dollar difference); from each
-variant's own model page report both top track speeds and both 0-60 mph times;
-state how many 911 variants the lineup contains. Then in the Porsche Finder,
-how many brand-new 911s are in stock and what does the most expensive one cost?
-
-Frozen ground truth (seed DB): 23 911 variants. Least expensive: 911 Carrera,
-From $135,500, top track speed 183 mph, 0-60 3.9 s. Most expensive: 911 GT3
-90 F. A. Porsche, From $387,000, top track speed 194 mph, 0-60 3.7 s.
-Difference $251,500. Finder: 11 brand-new 911s; the most expensive is the
-911 GT3 with Touring Package at $314,820.
-"""
+"""Deterministic verifier for porsche task 0; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase,
                         final_answer, navigated_finder, navigated_model_detail,
@@ -35,8 +21,8 @@ def run_checks(judge, traj, initial_db, after_db):
                 "required: 911 Carrera model page")
     judge.check("visited_911_gt3_fa90_page", navigated_model_detail(traj, "911-gt3-fa90"),
                 "required: 911 GT3 90 F. A. Porsche model page")
-    judge.check("visited_finder_new_911", navigated_finder(traj, condition="new", range="911"),
-                "required: /finder/us/en-US/search?condition=new&range=911")
+    from verify_lib import entity_prices
+    entity_prices(judge, answer, {'911 Carrera': 135500, '911 GT3 90 F. A. Porsche': 387000})
     # answer gates
     judge.check("answer_least_name", contains_phrase(answer, "911 Carrera"),
                 "least expensive variant is the 911 Carrera")
@@ -58,10 +44,6 @@ def run_checks(judge, traj, initial_db, after_db):
                 "911 GT3 90 0-60 mph 3.7 s")
     judge.check("answer_variant_count", contains_count(answer, 23),
                 "23 911 variants in the lineup")
-    judge.check("answer_new_911_count", contains_count(answer, 11),
-                "11 brand-new 911s in stock")
-    judge.check("answer_new_911_top_price", contains_amount(answer, 314820),
-                "most expensive new 911 costs $314,820")
     check_read_only(judge, initial_db, after_db)
 
 

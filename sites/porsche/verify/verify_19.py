@@ -1,22 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--19 (stateful).
-
-Create a new My Porsche account with the email alex.rivera@test.com, password
-FastDriver9!, and the name Alex Rivera. Then find the least expensive
-pre-owned 911 currently in stock, save it to your new account, and report the
-vehicle's name, price, VIN, exterior color, and its selling Porsche Center as
-shown in your saved vehicles. Finally, how many pre-owned 911s are in stock in
-total?
-
-Frozen ground truth (seed DB, r2 re-anchor): 32 pre-owned 911s are in stock
-(the old single-listing 718 anchor was degenerate and is retired). The least
-expensive pre-owned 911 is a 2014 Porsche 911 Carrera 4S Coupe at $99,999
-(VIN WP0AB2A99ES121144, Black, Porsche Seattle North); the next cheapest is
-$125,990, so the minimum is not tied. The users table must gain exactly one
-row (alex.rivera@test.com, Alex Rivera) and the saved_vehicles table exactly
-one row under that new user pointing at the 911 Carrera 4S Coupe listing;
-nothing else changes.
-"""
+"""Deterministic verifier for porsche task 19; see tasks.jsonl and verify/README.md."""
 from verify_lib import (added_rows, check_only_tables_changed, check_seed_contract,
                         check_trajectory_identity, contains_amount, contains_count,
                         contains_phrase, contains_vin, entered_identity, final_answer,
@@ -53,6 +35,8 @@ def run_checks(judge, traj, initial_db, after_db):
     judge.check("new_user_name",
                 (user.get("first_name") or "") == "Alex" and (user.get("last_name") or "") == "Rivera",
                 f"new user name {user.get('first_name')!r} {user.get('last_name')!r}")
+    import bcrypt
+    judge.check("new_user_password", bcrypt.checkpw(b"FastDriver9!", user.get("password_hash", "").encode()))
     saved = added_rows(after_db, initial_db, "saved_vehicles", "id")
     judge.check("exactly_one_saved_vehicle", len(saved) == 1,
                 f"saved_vehicles delta = {len(saved)}")

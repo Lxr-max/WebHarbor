@@ -598,7 +598,14 @@ def configurator_save(code):
     model = ModelVariant.query.filter_by(model_type=code).first()
     options = ConfiguratorOption.query.filter_by(model_code=code).all()
     by_id = {o.option_id: o for o in options}
-    picked = request.form.getlist("opt")
+    if not model or not options:
+        abort(404)
+    picked = list(dict.fromkeys(request.form.getlist("opt")))
+    if any(pid not in by_id for pid in picked):
+        abort(400)
+    if sum(bool(by_id[pid].swatch) for pid in picked) > 1:
+        flash("Choose one exterior paint color.")
+        return redirect(url_for("configurator_model", code=code))
     chosen = []
     for pid in picked:
         o = by_id.get(pid)
@@ -936,9 +943,8 @@ def shop_checkout():
             return render_template("shop_checkout.html", items=items,
                                    subtotal=subtotal, shipping=shipping,
                                    total=total, form=request.form)
-        digest = hashlib.sha256(
-            f"{email}:{datetime.utcnow().strftime('%Y%m%d%H%M%S')}".encode()
-        ).hexdigest()
+        import secrets
+        digest = secrets.token_hex(16)
         alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
         order_number = "PS" + "".join(alphabet[int(c, 16) % 32] for c in digest[:10])
         order = ShopOrder(

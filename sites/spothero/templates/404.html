@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Whoops, our bad | SpotHero{% endblock %}
+{% block content %}
+<div class="container section center">
+  <h1>Whoops, our bad</h1>
+  <p class="muted">We couldn't find that page. It may have moved or no longer exists.</p>
+  <a class="btn btn-primary" href="{{ url_for('home') }}">Back to home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Personalities | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>FOX Sports Personalities</h1></div>
+<div class="people-grid">
+  {% for person in people %}
+  <a class="person-card" href="/personalities/{{ person.slug }}">
+    {% if person.art and image(person.art) %}<img src="{{ image(person.art) }}" alt="{{ person.name }}">{% endif %}
+    <h3>{{ person.name }}</h3>
+    {% if person.role %}<span class="muted">{{ person.role }}</span>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

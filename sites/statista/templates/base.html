@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Statista - The Statistics Portal for Market Data, Market Research and Market Studies{% endblock %}</title>
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body id="product31" class="body--responsive">
+<div class="skipLink"><a href="#main">Skip to main content</a></div>
+
+<header class="pageHeader">
+  <div class="pageHeader__inner">
+    <a class="pageHeader__logo" href="/" aria-label="Statista">
+      {% include '_logo.svg' %}
+    </a>
+
+    <nav class="pageHeader__nav" aria-label="Main">
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Products</button>
+        <div class="mega">
+          <div class="mega__group">
+            <p class="mega__head">Statista Data</p>
+            <a href="/recent/statistics/">Statistics <span>Explore 170+ industries</span></a>
+            <a href="/recent/topics/">Topics <span>Browse curated content by subject</span></a>
+            <a href="/recent/reports/">Reports <span>Download in-depth research studies</span></a>
+            <a href="/outlook/">Market Insights <span>Size markets &amp; forecast trends</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Industries</button>
+        <div class="mega mega--wide">
+          <div class="mega__group">
+            {% for ind in header_industries %}
+            <a href="/markets/{{ ind.id }}/{{ ind.slug }}/">{{ ind.name }}</a>
+            {% endfor %}
+            <a href="/markets/" class="mega__all">View all industries</a>
+          </div>
+        </div>
+      </div>
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Statistics</button>
+        <div class="mega">
+          <div class="mega__group">
+            {% for s in header_popular_stats %}
+            <a href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">{{ s.title|truncate(52) }}</a>
+            {% endfor %}
+            <a href="/recent/statistics/" class="mega__all">Browse recent statistics</a>
+          </div>
+        </div>
+      </div>
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Topics</button>
+        <div class="mega">
+          <div class="mega__group">
+            {% for t in header_topics %}
+            <a href="/topics/{{ t.id }}/{{ t.slug }}/">{{ t.name }}</a>
+            {% endfor %}
+            <a href="/recent/topics/" class="mega__all">Browse recent topics</a>
+          </div>
+        </div>
+      </div>
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Reports</button>
+        <div class="mega">
+          <div class="mega__group">
+            {% for r in header_reports %}
+            <a href="/study/{{ r.id }}/{{ r.slug }}/">{{ r.title|truncate(46) }}</a>
+            {% endfor %}
+            <a href="/recent/reports/" class="mega__all">Browse recent reports</a>
+          </div>
+        </div>
+      </div>
+      <div class="navItem hasMega">
+        <button type="button" class="navItem__btn">Market Insights</button>
+        <div class="mega">
+          <div class="mega__group">
+            {% for seg in header_segments %}
+            <a href="/outlook/{{ seg.slug }}/">{{ seg.name }}</a>
+            {% endfor %}
+            <a href="/outlook/" class="mega__all">Explore Market Insights</a>
+          </div>
+        </div>
+      </div>
+      <a class="navItem navItem--link" href="/pricing/">Pricing</a>
+    </nav>
+
+    <form class="pageHeader__search" action="/serp" method="get" role="search">
+      <input type="search" name="q" placeholder="Search statistics, reports…" aria-label="Search statistics, reports" value="{{ request.args.get('q', '') }}">
+      <button type="submit" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+    </form>
+
+    <div class="pageHeader__actions">
+      {% if current_user.is_authenticated %}
+      <a class="btn btn--ghost" href="/account">Hi, {{ current_user.display_name.split(' ')[0] }}</a>
+      <a class="btn btn--ghost" href="/logout">Log out</a>
+      {% else %}
+      <a class="btn btn--primary" href="/login">Log in</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<main id="main" class="pageMain">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashes">
+      {% for cat, msg in messages %}
+      <div class="flash flash--{{ cat }}">{{ msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="pageFooter">
+  <div class="pageFooter__inner">
+    <div class="pageFooter__brand">
+      {% include '_logo.svg' %}
+      <p>Empowering people with data</p>
+    </div>
+    <div class="pageFooter__cols">
+      <div class="pageFooter__col">
+        <h4>Company</h4>
+        <a href="/">Home</a>
+        <a href="/contact/">Contact</a>
+        <a href="/pricing/">Pricing</a>
+      </div>
+      <div class="pageFooter__col">
+        <h4>Platform</h4>
+        <a href="/recent/statistics/">Statistics Database</a>
+        <a href="/recent/topics/">Topic Overview</a>
+        <a href="/serp?q=all">Search</a>
+      </div>
+      <div class="pageFooter__col">
+        <h4>Products</h4>
+        <a href="/markets/">Industries &amp; Categories</a>
+        <a href="/outlook/">Market Insights</a>
+        <a href="/recent/reports/">Reports</a>
+      </div>
+      <div class="pageFooter__col">
+        <h4>Account</h4>
+        {% if current_user.is_authenticated %}
+        <a href="/account">My Statista</a>
+        <a href="/account/favorites">Favorites</a>
+        <a href="/account/downloads">Download history</a>
+        <a href="/logout">Log out</a>
+        {% else %}
+        <a href="/login">Log in</a>
+        <a href="/register">Register now</a>
+        {% endif %}
+      </div>
+    </div>
+    <p class="pageFooter__legal">© Statista 2026 — mirror for offline benchmarking. All data captured from the public statista.com surfaces listed in provenance.json.</p>
+  </div>
+</footer>
+</body>
+</html>

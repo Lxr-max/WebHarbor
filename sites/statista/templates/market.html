@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ industry.name }} | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/markets/">Industries</a>
+  <span class="sep"></span><span>{{ industry.name }}</span>
+</nav>
+<h1>{{ industry.name }}</h1>
+<p class="section__sub">{{ industry.definition }}</p>
+
+<section class="section">
+  <div class="section__head"><h2>Explore the key industries</h2></div>
+  <div class="pillList">
+    {% for sub in industry.subs %}
+    <span class="pill">{{ sub.name }}</span>
+    {% endfor %}
+  </div>
+</section>
+
+{% if trending %}
+<section class="section">
+  <div class="section__head">
+    <h2>Trending Facts &amp; Insights</h2>
+    <a class="section__more" href="/serp?q={{ industry.name|urlencode }}">Search this industry</a>
+  </div>
+  <div class="cardGrid">
+    {% for s in trending %}
+    <a class="card" href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+      {% if s.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>{% endif %}
+      <div class="card__body">
+            <span class="card__meta">{{ s.region }}</span>
+        <span class="card__title">{{ s.title|truncate(84) }}</span>
+        {% if s.summary %}<span class="card__snippet">{{ s.summary|striptags|snippetize(140, "…") }}</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if in_industry %}
+<section class="section">
+  <div class="section__head"><h2>More interesting statistics from the industry “{{ industry.name }}”</h2></div>
+  <ul class="outlineList">
+    {% for s in in_industry %}
+    <li><a href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">{{ s.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

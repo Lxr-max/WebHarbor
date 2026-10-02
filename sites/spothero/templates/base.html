@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SpotHero | Get Everywhere Easier | Reserve Parking and Save{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <meta name="description" content="{% block meta_description %}Find, book, and save on parking with convenient garages, lots, and valets near you.{% endblock %}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container inner">
+    <a class="logo" href="{{ url_for('home') }}" aria-label="Home" data-testid="Header-logo">
+      <img class="logo-mark" src="{{ url_for('static', filename='icons/spothero-logo.svg') }}" width="32" height="32" alt="">
+      <span>SpotHero</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="hide-mobile" style="position:relative">
+        <a href="{{ url_for('faq_page') }}">How it Works</a>
+        <a href="{{ url_for('static_page', page_slug='about') }}">About SpotHero</a>
+        <a href="{{ url_for('static_page', page_slug='about/parking-guarantee') }}">Parking Guarantee</a>
+        <a href="{{ url_for('static_page', page_slug='contact') }}">Contact Us</a>
+        <a href="{{ url_for('static_page', page_slug='business') }}" class="hide-mobile">SpotHero for Business</a>
+      </div>
+      <a href="{{ url_for('static_page', page_slug='get-spothero-app') }}" class="hide-mobile">Get the App</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('account') }}">My Reservations</a>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="nav-login">Log In or Sign Up</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="container" style="padding-top:14px">
+      {% for m in messages %}<div class="form-success" role="status">{{ m }}</div>{% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="{{ url_for('home') }}" style="color:#fff">
+          <svg viewBox="0 0 1024 1024" fill="#fff" style="width:30px;height:30px" aria-hidden="true"><path d="m239.3 256.8-9.6-3.2c-6.4-3.2-19.1-6.4-19.1-12.8 0-9.6 9.6-16 19.1-16 9.6 0 19.1 6.4 25.5 12.8l16-31.9c-12.8-9.6-31.9-12.8-47.9-12.8-31.9 0-54.2 19.1-54.2 51 0 25.5 16 35.1 41.5 44.7 9.6 3.2 25.5 6.4 25.5 19.1 0 9.6-12.8 16-22.3 16-12.8-3.2-22.3-9.6-31.9-19.1l-16 31.9c16 9.6 35.1 19.1 54.2 19.1 16 0 31.9-3.2 44.7-16 12.8-9.6 16-25.5 16-41.5-3.3-19-19.2-34.9-41.5-41.3"></path></svg>
+          <span>SpotHero</span>
+        </a>
+        <p style="color:rgba(255,255,255,.7);margin-top:10px">100M+ Cars Parked</p>
+        <p style="color:rgba(255,255,255,.7)">4.9 /5 App Store Rating</p>
+        <p style="color:rgba(255,255,255,.7)">15 Years in Business</p>
+      </div>
+      <div>
+        <h4>Book Parking</h4>
+        <a href="{{ url_for('city_page', slug='chicago-parking') }}">Chicago Parking</a>
+        <a href="{{ url_for('city_page', slug='nyc-parking') }}">New York City Parking</a>
+        <a href="{{ url_for('city_page', slug='san-francisco-parking') }}">San Francisco Parking</a>
+        <a href="{{ url_for('cities_index') }}">All Locations</a>
+        <a href="{{ url_for('airports_index') }}">Airport Parking</a>
+        <a href="{{ url_for('monthly_landing') }}">Monthly Parking</a>
+        <a href="{{ url_for('stadium_list') }}">Stadium Parking</a>
+        <a href="{{ url_for('static_page', page_slug='about/promo-code') }}">New Parker Promo Code</a>
+        <a href="{{ url_for('static_page', page_slug='solutions/commuter-benefits') }}">Commuter Benefits</a>
+      </div>
+      <div>
+        <h4>Sell Parking</h4>
+        <a href="{{ url_for('static_page', page_slug='sell-parking/operators') }}">Operators</a>
+        <a href="{{ url_for('static_page', page_slug='sell-parking/airport-parking') }}">Airport Operators</a>
+        <a href="{{ url_for('static_page', page_slug='sell-parking/event-parking-partnerships') }}">Event Partnerships</a>
+        <a href="{{ url_for('static_page', page_slug='sell-parking/property-managers') }}">Property Managers</a>
+        <a href="{{ url_for('static_page', page_slug='sell-parking/independent-sellers') }}">Rent My Parking Space</a>
+      </div>
+      <div>
+        <h4>Company/Legal</h4>
+        <a href="{{ url_for('static_page', page_slug='about') }}">About Us</a>
+        <a href="{{ url_for('static_page', page_slug='careers') }}">Careers</a>
+        <a href="{{ url_for('faq_page') }}">FAQs</a>
+        <a href="{{ url_for('static_page', page_slug='press') }}">Press</a>
+        <a href="https://blog.spothero.com/">Blog</a>
+        <a href="{{ url_for('static_page', page_slug='about/parking-guarantee') }}">Parking Guarantee</a>
+        <a href="{{ url_for('static_page', page_slug='legal/terms-of-use') }}">Terms &amp; Conditions</a>
+        <a href="{{ url_for('static_page', page_slug='legal/privacy-policy') }}">Privacy Policy</a>
+        <a href="{{ url_for('static_page', page_slug='contact') }}">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>SpotHero © 2026. All Rights Reserved.</span>
+      <span>Cookie Preference Center</span>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/site.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

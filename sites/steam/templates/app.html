@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import price_block, review_line, os_line %}
+{% block title %}{{ game.name }} on Steam{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a>
+  {% for g in game.genre_list[:1] %} &rsaquo; <a href="{{ url_for('genre_page', slug=g|slugify) }}">{{ g }}</a>{% endfor %}
+  &rsaquo; {{ game.name }}</div>
+
+<div class="app-page-header">
+  <div class="capsule">
+    <img src="{{ _img(game.header_img) }}" alt="{{ game.name }}">
+  </div>
+  <div>
+    <h1>{{ game.name }}</h1>
+    <div class="meta">
+      {% if game.developer_list %}
+        <div class="dev">
+          Developer:
+          {% for dev in game.developer_list %}
+            <a href="{{ url_for('developer_page', slug=dev|slugify) }}">{{ dev }}</a>{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if game.publisher_list %}
+        <div>
+          Publisher:
+          {% for pub in game.publisher_list %}
+            <a href="{{ url_for('publisher_page', slug=pub|slugify) }}">{{ pub }}</a>{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div>Release Date: {{ game.release_date }}</div>
+      <div>
+        Genres:
+        {% for g in game.genre_list %}
+          <a href="{{ url_for('genre_page', slug=g|slugify) }}">{{ g }}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </div>
+      <div>Languages: {{ game.supported_languages }}</div>
+      {% if game.required_age %}<div>Mature Content: {{ game.required_age }}+</div>{% endif %}
+    </div>
+
+    <div class="purchase-box">
+      <div class="price-area">
+        {% if game.discount_pct and game.discount_pct > 0 %}
+          <span class="discount-badge">-{{ game.discount_pct }}%</span>
+          <span class="price-old">{{ game.initial_cents|money }}</span>
+          <span class="price-final">{{ game.price_cents|money }}</span>
+        {% elif game.is_free or game.price_cents == 0 %}
+          <span class="price-final free">Free To Play</span>
+        {% else %}
+          <span class="price-final">{{ game.price_cents|money }}</span>
+        {% endif %}
+      </div>
+      <form method="post" action="{{ url_for('cart_add') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="kind" value="game">
+        <input type="hidden" name="appid" value="{{ game.appid }}">
+        <input type="hidden" name="qty" value="1">
+        <button class="btn" type="submit">Add to Cart</button>
+      </form>
+      <form method="post" action="{{ url_for('wishlist_toggle') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="appid" value="{{ game.appid }}">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        {% if in_wishlist %}
+          <button class="btn gray" type="submit">Remove from Wishlist</button>
+        {% else %}
+          <button class="btn gray" type="submit">Add to Wishlist</button>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div>
+    <div class="game-area">
+      <h2>About This Game</h2>
+      <p>{{ game.about or game.short_desc }}</p>
+    </div>
+
+    {% if shots %}
+    <div class="game-area">
+      <h2>Screenshots</h2>
+      <div class="screenshot-strip">
+        {% for shot in shots %}
+          <img src="{{ _img(shot.path_full) }}" alt="{{ game.name }} screenshot {{ loop.index }}">
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if reqs %}
+    <div class="game-area">
+      <h2>System Requirements</h2>
+      {% for req in reqs %}
+        <h3 style="text-transform:capitalize; color:#66c0f4;">{{ req.os }} &mdash; {{ req.level }}</h3>
+        <table class="spec-table">
+          {% for key, value in req.spec_map.items() %}
+            {% if key != 'Notes' %}
+            <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+            {% endif %}
+          {% endfor %}
+        </table>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if bundles %}
+    <div class="game-area">
+      <h2>Bundles that include this game</h2>
+      {% for bundle in bundles %}
+        <div class="bundle-card">
+          <span class="n"><a href="{{ url_for('bundle_page', bundle_id=bundle.bundle_id) }}">{{ bundle.name }}</a></span>
+          <span class="discount-badge">{{ bundle.base_discount }}</span>
+          <span class="price-final">{{ bundle.final_price_cents|money }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if dlcs %}
+    <div class="game-area">
+      <h2>Downloadable Content</h2>
+      {% for dlc in dlcs %}
+        <div class="bundle-card">
+          <span class="n"><a href="{{ dlc.url }}">{{ dlc.name }}</a></span>
+          <span class="price-final">{{ dlc.final_price|money }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div>
+    <div class="side-block">
+      <h3>All Reviews</h3>
+      <div class="review-summary {{ 'positive' if 'positive' in game.review_score_desc.lower() else ('mixed' if 'mixed' in game.review_score_desc.lower() else 'negative') }}">
+        {{ game.review_score_desc or 'No reviews yet' }}
+      </div>
+      {% if game.review_pct %}
+        <div>{{ game.review_pct }}% of the {{ "{:,}".format(game.total_reviews) }} user reviews are positive.</div>
+      {% endif %}
+      {% if game.total_positive or game.total_negative %}
+        <div style="margin-top:6px;">{{ "{:,}".format(game.total_positive) }} positive, {{ "{:,}".format(game.total_negative) }} negative</div>
+      {% endif %}
+      <div style="margin-top:8px;"><a href="{{ url_for('app_reviews', appid=game.appid) }}">Read reviews &raquo;</a></div>
+    </div>
+
+    <div class="side-block">
+      <h3>Latest News</h3>
+      {% if news %}
+        {% for item in news %}
+          <div style="margin-bottom:8px;">
+            <div class="feed" style="color:#8f98a0;font-size:11px;">{{ item.feedlabel }}</div>
+            <div><a href="{{ url_for('news_item', gid=item.gid) }}">{{ item.title }}</a></div>
+            <div class="d" style="color:#8f98a0;font-size:12px;">{{ item.date|datefmt }}</div>
+          </div>
+        {% endfor %}
+        <a href="{{ url_for('news_game', appid=game.appid) }}">All news for this game &raquo;</a>
+      {% else %}
+        <div>No news posts yet.</div>
+      {% endif %}
+    </div>
+
+    <div class="side-block">
+      <h3>Details</h3>
+      <ul>
+        {% if game.achievements_total %}<li>{{ "{:,}".format(game.achievements_total) }} achievements</li>{% endif %}
+        <li>Platforms: {{ os_line(game) }}</li>
+        {% for cat in game.category_list[:8] %}
+          <li>{{ cat }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

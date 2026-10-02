@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.code() }} {{ section.label() }} — Class Detail{% endblock %}
+{% block content %}
+<h1>{{ course.code() }} — {{ course.title }}</h1>
+<p class="page-sub">Class {{ section.class_nbr }} &middot; Section {{ section.label() }} &middot; University of Michigan | Fall 2026</p>
+
+{% if section.topic %}
+<div class="card" style="margin-bottom:16px">
+  <h3 style="margin:0">Topic: {{ section.topic }}</h3>
+</div>
+{% endif %}
+
+<h2>Class Details</h2>
+<table class="list plain">
+  <tr><th>Status</th><td><span class="badge {{ 'open' if 'Open' in (section.status or '') else ('wait' if 'Wait' in (section.status or '') else 'closed') }}">{{ section.status or '—' }}</span></td></tr>
+  <tr><th>Class Number</th><td>{{ section.class_nbr }}</td></tr>
+  <tr><th>Session</th><td>{{ section.session or 'Regular Academic Session' }}</td></tr>
+  <tr><th>Units</th><td>{{ section.units }} unit{{ '' if section.units == '1' else 's' }}</td></tr>
+  <tr><th>Instruction Mode</th><td>{{ section.mode or '' }}</td></tr>
+  <tr><th>Class Components</th><td>{{ section.component }} Required</td></tr>
+  <tr><th>Academic Career</th><td>{{ course.career or '' }}</td></tr>
+  <tr><th>Dates</th><td>{{ section.dates or '' }}</td></tr>
+  <tr><th>Instructor</th><td>
+    {% if instructor %}<a href="{{ url_for('faculty_detail', fid=instructor.id) }}">{{ section.instructor }}</a>
+    {% elif section.instructor %}<a href="{{ url_for('faculty', q=section.instructor) }}">{{ section.instructor }}</a>
+    {% else %}Staff{% endif %}
+  </td></tr>
+  <tr><th>Available Seats</th><td>{{ section.avail or '—' }}</td></tr>
+  <tr><th>Wait List Total</th><td>{{ section.waitlist or '0' }}</td></tr>
+  {% if section.combined %}<tr><th>Combined Section</th><td>This is a combined section class.</td></tr>{% endif %}
+</table>
+
+{% if course.description %}
+<h2>Description</h2>
+<p>{{ course.description }}</p>
+{% endif %}
+
+{% if course.attribute_list() %}
+<h2>Class Attributes</h2>
+<p>{% for a in course.attribute_list() %}<span class="badge type" style="margin:2px">{{ a }}</span>{% endfor %}</p>
+{% endif %}
+
+<h2>Other Sections of {{ course.code() }}</h2>
+<table class="list">
+  <tr><th>Class Nbr</th><th>Section</th><th>Instructor</th><th>Status</th></tr>
+  {% for s in course.sections if s.id != section.id %}
+  <tr>
+    <td><a href="{{ url_for('class_detail', nbr=s.class_nbr) }}">{{ s.class_nbr }}</a></td>
+    <td>{{ s.label() }}</td>
+    <td>{{ s.instructor or 'Staff' }}</td>
+    <td><span class="badge {{ 'open' if 'Open' in (s.status or '') else ('wait' if 'Wait' in (s.status or '') else 'closed') }}">{{ s.status or '—' }}</span></td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Backpack</h2>
+{% if current_user.is_authenticated %}
+{% if in_backpack %}
+<p>This class is in your <a href="{{ url_for('myumich') }}">Backpack</a>.</p>
+<form method="post" action="{{ url_for('backpack_toggle', section_id=section.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn danger" type="submit">Remove from Backpack</button>
+</form>
+{% else %}
+<form method="post" action="{{ url_for('backpack_toggle', section_id=section.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn maize" type="submit">Add this class to my Backpack</button>
+</form>
+{% endif %}
+{% else %}
+<p><a href="{{ url_for('login', next=url_for('class_detail', nbr=section.class_nbr)) }}">Log in</a> to add this class to your Backpack — students backpack classes before registration opens.</p>
+{% endif %}
+{% endblock %}

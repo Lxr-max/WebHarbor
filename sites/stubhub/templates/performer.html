@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ performer.name }} Tickets &amp; {{ MIRROR_NOW.year }} Tour Dates | StubHub{% endblock %}
+{% block content %}
+<div class="performer-hero{{ ' no-media' if not (performer.hero_file or performer.image_file) }}">
+  {% if performer.hero_file %}
+  <div class="performer-hero-media"><img src="{{ performer.hero_file }}" alt="{{ performer.name }}"></div>
+  {% elif performer.image_file %}
+  <div class="performer-hero-media"><img src="{{ performer.image_file }}" alt="{{ performer.name }}"></div>
+  {% endif %}
+  <div class="performer-hero-body">
+    <h1>{{ performer.name }} Tickets</h1>
+    <div class="follow-row">
+      <form method="post" action="/favorite/performer/{{ performer.upstream_id }}">
+        <input type="hidden" name="next" value="/{{ performer.slug }}-tickets/performer/{{ performer.upstream_id }}">
+        <button type="submit" class="btn btn-pill {{ 'btn-following' if is_fav else 'btn-follow' }}">
+          {{ 'Following' if is_fav else 'Follow' }}
+        </button>
+      </form>
+      <span class="follower-count">{{ '{:,}'.format(performer.followers) }}</span>
+    </div>
+    <p class="hourly-views">{{ '{:,}'.format(performer.hourly_views) }} people viewed {{ performer.name }} events in the past hour</p>
+  </div>
+</div>
+
+<div class="grid-toolbar sticky">
+  <span class="location-chip">{{ default_metro.name if default_metro else 'Redmond' }}</span>
+  <span class="toolbar-chip">All dates</span>
+  <span class="toolbar-chip">Price</span>
+  <span class="grid-count">{{ total }} events</span>
+</div>
+
+{% if total == 0 %}
+<div class="empty-state">
+  <p>No events near you</p>
+</div>
+{% else %}
+<div class="event-grid list">
+  {% for evt in events %}
+  {% set card = event_card(evt) %}
+  <a class="event-card row" href="{{ card.url }}" title="{{ evt.name }}">
+    <time class="event-date-box" datetime="{{ evt.local_starts_at.isoformat() }}">
+      <span class="month">{{ evt.local_starts_at.strftime('%b') }}</span>
+      <span class="day">{{ evt.local_starts_at.day }}</span>
+      <span class="dow">{{ evt.local_starts_at.strftime('%a') }}</span>
+    </time>
+    <div class="event-card-body">
+      <h3>{{ evt.name }}</h3>
+      <p class="event-card-when">{{ card.time }}</p>
+      <p class="event-card-venue">{{ card.venue }}</p>
+      <p class="event-card-city">{{ card.city }}</p>
+      {% if card.badge %}<span class="event-badge">{{ card.badge }}</span>{% endif %}
+      {% if evt.min_price %}<span class="from-price">From {{ '${:,}'.format(evt.min_price) }}</span>{% endif %}
+    </div>
+    <span class="see-tickets">See tickets</span>
+  </a>
+  {% endfor %}
+</div>
+
+{% if total > 20 %}
+<div class="pagination">
+  {% if page > 1 %}<a href="?page={{ page - 1 }}">Prev</a>{% endif %}
+  {% for p in range(1, ((total // 20) + 2)) %}
+    {% if p == page %}<span class="page-current">{{ p }}</span>
+    {% elif p <= 9 or p == ((total // 20) + 1) %}<a href="?page={{ p }}">{{ p }}</a>
+    {% elif p == 10 %}<span class="page-dots">...</span>{% endif %}
+  {% endfor %}
+  {% if page * 20 < total %}<a href="?page={{ page + 1 }}">Next</a>{% endif %}
+  <a href="?page=1" class="see-all">See all {{ performer.name }} events</a>
+</div>
+{% endif %}
+{% endif %}
+
+{% if performer.bio %}
+<section class="performer-bio">
+  <h2>About {{ performer.name }}</h2>
+  <p>{{ performer.bio }}</p>
+</section>
+{% endif %}
+
+{% if similar %}
+<section class="similar-strip">
+  <h2>Similar to {{ performer.name }}</h2>
+  <div class="card-row">
+    {% for p in similar %}
+    <a class="pop-card" href="/{{ p.slug }}-tickets/performer/{{ p.upstream_id }}">
+      <div class="pop-media">{% if p.image_file %}<img src="{{ p.image_file }}" alt="{{ p.name }}" loading="lazy">{% endif %}</div>
+      <div class="pop-meta"><h2 class="pop-name">{{ p.name }}</h2><p>{{ p.next_range }}</p></div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Appointment Confirmed{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Appointments</nav>
+  <div class="receipt">
+    <h1>Your appointment is confirmed</h1>
+    <p class="ref">Confirmation {{ appt.confirmation }}</p>
+    <dl class="kv">
+      <dt>Service</dt><dd>{{ appt.service }}</dd>
+      <dt>Office</dt><dd>{{ office.name }} — {{ office.address }}</dd>
+      <dt>Date</dt><dd>{{ appt.appt_date }}</dd>
+      <dt>Time</dt><dd>{{ appt.appt_time }}</dd>
+      <dt>Name</dt><dd>{{ appt.name }}</dd>
+      <dt>Email</dt><dd>{{ appt.email }}</dd>
+    </dl>
+    <p>Bring your confirmation number with you. If you need to cancel, use
+    <a href="{{ url_for('appointment_lookup') }}">View/Cancel Appointments</a>.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Find top lawyers with confidence</h1>
+    <h2>Easily search for a top rated lawyer near you</h2>
+    <form class="hero-search" method="get" action="/attorneys/search/">
+      <div class="hero-search-fields">
+        <label for="hero-q">Search legal issue</label>
+        <input id="hero-q" type="search" name="q" placeholder="Personal injury, divorce, DUI…" autocomplete="off">
+        <label for="hero-where">Location</label>
+        <input id="hero-where" type="search" name="where" placeholder="City, state or ZIP code" autocomplete="off">
+        <button class="btn btn-primary btn-lg" type="submit">Find lawyers</button>
+      </div>
+      <p class="hero-common">Common searches:
+        <a href="/attorneys/search/?q=personal+injury">Personal Injury</a>,
+        <a href="/attorneys/search/?q=business+litigation">Business Litigation</a>,
+        <a href="/attorneys/search/?q=divorce">Divorce</a>,
+        <a href="/attorneys/search/?q=car+accidents">Car Accidents</a>,
+        <a href="/attorneys/search/?q=drunk+driving">Drunk Driving</a>,
+        <a href="/attorneys/search/?q=immigration">Immigration</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<section class="why-sl">
+  <div class="container why-sl-grid">
+    <img src="{{ url_for('static', filename='images/why_superlawyers.png') }}" alt="Why Super Lawyers" width="154" height="142">
+    <div>
+      <h2>Why Super Lawyers</h2>
+      <p>Super Lawyers is a rating service of outstanding lawyers who have attained a
+      high degree of peer recognition and professional achievement. The selection
+      process is peer influenced and research driven — a combination of peer
+      nominations, independent research evaluations and peer evaluations by
+      practice area.</p>
+      <h3>Patented selection process</h3>
+      <p>The objective of Super Lawyers' patented multiphase selection process
+      (U.S. Pat. No. 8,412,564) is to create a credible, comprehensive and diverse
+      listing of outstanding attorneys that can be used as a resource when
+      searching for legal counsel.</p>
+      <a class="btn btn-outline" href="/about/selection-process/">See our selection process page for more detail</a>
+    </div>
+  </div>
+</section>
+
+<section class="legal-issues">
+  <div class="container">
+    <h2>What is your legal issue?</h2>
+    <p class="section-intro">Choose a common legal issue below to find top attorneys with relevant experience in your area.</p>
+    <div class="issue-cards">
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_motor_vehicle_accidents.jpg') }}" alt="" width="408" height="130">
+        <h3>Accidents &amp; Injuries</h3>
+        <ul>
+          <li><a href="/attorneys/motor-vehicle-accidents/">Car Accidents</a></li>
+          <li><a href="/attorneys/personal-injury-plaintiff/">Personal Injury</a></li>
+          <li><a href="/attorneys/medical-malpractice/">Medical Malpractice</a></li>
+          <li><a href="/attorneys/products-liability/">Product Liability</a></li>
+        </ul>
+      </div>
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_family_law.jpg') }}" alt="" width="408" height="130">
+        <h3>Divorce &amp; Family</h3>
+        <ul>
+          <li><a href="/attorneys/custody-and-visitation/">Child Custody</a></li>
+          <li><a href="/attorneys/divorce/">Divorce</a></li>
+          <li><a href="/attorneys/child-support/">Child Support</a></li>
+          <li><a href="/attorneys/family-law/">Family</a></li>
+        </ul>
+      </div>
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_criminal_defense.jpg') }}" alt="" width="408" height="130">
+        <h3>Criminal</h3>
+        <ul>
+          <li><a href="/attorneys/criminal-defense/">Criminal Defense</a></li>
+          <li><a href="/attorneys/sex-offenses/">Sex Offenses</a></li>
+          <li><a href="/attorneys/dui-dwi/">DUI / DWI</a></li>
+          <li><a href="/attorneys/white-collar-crimes/">White Collar Crimes</a></li>
+        </ul>
+      </div>
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_employment_and_labor.jpg') }}" alt="" width="408" height="130">
+        <h3>Employment</h3>
+        <ul>
+          <li><a href="/attorneys/employment-and-labor/">Employment &amp; Labor</a></li>
+          <li><a href="/attorneys/employment-law-employee/">Employment - Employee</a></li>
+          <li><a href="/attorneys/sexual-harassment/">Sexual Harassment</a></li>
+          <li><a href="/attorneys/workers-compensation/">Workers' Compensation</a></li>
+        </ul>
+      </div>
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_estate_planning_and_probate.jpg') }}" alt="" width="408" height="130">
+        <h3>Estate Planning &amp; Probate</h3>
+        <ul>
+          <li><a href="/attorneys/estate-planning-and-probate/">Estate Planning &amp; Probate</a></li>
+          <li><a href="/attorneys/trusts/">Trusts</a></li>
+          <li><a href="/attorneys/estate-and-trust-litigation/">Estate &amp; Trust Litigation</a></li>
+          <li><a href="/attorneys/wills/">Wills</a></li>
+        </ul>
+      </div>
+      <div class="issue-card">
+        <img src="{{ url_for('static', filename='images/card_key_legal_needs.jpg') }}" alt="" width="408" height="130">
+        <h3>Key legal needs</h3>
+        <ul>
+          <li><a href="/attorneys/business-litigation/">Business Litigation</a></li>
+          <li><a href="/attorneys/immigration/">Immigration</a></li>
+          <li><a href="/attorneys/civil-rights/">Civil Rights</a></li>
+          <li><a href="/attorneys/real-estate/">Real Estate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-cta"><a class="btn btn-outline-dark" href="{{ url_for('attorneys_home') }}">View all legal issues</a></div>
+  </div>
+</section>
+
+<section class="explore-resources">
+  <div class="container">
+    <h2>Explore our legal article resources</h2>
+    <p class="section-intro">Learn more about your issue by reading helpful articles on a variety of legal topics.</p>
+    <div class="topic-cards">
+      <a class="topic-card" href="/resources/family-law/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_family_law.png') }}" alt="" width="55" height="55">
+        <span class="h3">Family Law</span>
+      </a>
+      <a class="topic-card" href="/resources/personal-injury-plaintiff/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_personal_injury.png') }}" alt="" width="55" height="55">
+        <span class="h3">Personal Injury</span>
+      </a>
+      <a class="topic-card" href="/resources/criminal-defense/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_criminal_defense.png') }}" alt="" width="55" height="55">
+        <span class="h3">Criminal Defense</span>
+      </a>
+      <a class="topic-card" href="/resources/estate-planning-and-probate/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_estate_planning.png') }}" alt="" width="55" height="55">
+        <span class="h3">Estate Planning &amp; Probate</span>
+      </a>
+      <a class="topic-card" href="/resources/employment-and-labor/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_employment.png') }}" alt="" width="55" height="55">
+        <span class="h3">Employment &amp; Labor</span>
+      </a>
+      <a class="topic-card" href="/resources/business-and-corporate/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_business.png') }}" alt="" width="55" height="55">
+        <span class="h3">Business &amp; Corporate</span>
+      </a>
+      <a class="topic-card" href="/resources/elder-law/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_elder_law.png') }}" alt="" width="55" height="55">
+        <span class="h3">Elder Law</span>
+      </a>
+      <a class="topic-card" href="/resources/real-estate/">
+        <img src="{{ url_for('static', filename='images/icon_legal_issue_real_estate.png') }}" alt="" width="55" height="55">
+        <span class="h3">Real Estate</span>
+      </a>
+    </div>
+    <div class="section-cta"><a class="btn btn-outline-dark" href="{{ url_for('resources_hub') }}">View all legal topics</a></div>
+  </div>
+</section>
+
+<section class="home-answers">
+  <div class="container">
+    <h2>Ask a Lawyer</h2>
+    <p class="section-intro">Have a question about your legal issue? Top lawyers selected to the Super Lawyers lists are ready to answer.</p>
+    <div class="answer-cards">
+      {% for answer in spotlight %}
+        <div class="answer-card">
+          <div class="answer-card-inner">
+            {% if answer.answerer_photo_path %}
+            <img src="{{ url_for('static', filename=answer.answerer_photo_path) }}" alt="{{ answer.answerer_name }}" width="135" height="170">
+            {% endif %}
+            <div class="answer-card-body">
+              <a class="answer-card-title" href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">{{ answer.question }}</a>
+              {% if answer.body %}<p class="answer-snippet">{{ answer.body[0][:110] }} …</p>{% endif %}
+              <p class="answer-sponsored">Sponsored answer by: <a href="/answers/{{ answer.topic_slug }}/{{ answer.state_slug }}/{{ answer.slug }}/{{ answer.uuid }}.html">{{ answer.answerer_name }}</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="section-cta"><a class="btn btn-outline-dark" href="{{ url_for('answers_home') }}">Ask a Lawyer</a></div>
+  </div>
+</section>
+
+<section class="for-lawyers-band">
+  <div class="container">
+    <span class="band-label">For lawyers</span>
+    <h3>Helpful information and law practice<br>resources for lawyers and law firms</h3>
+    <div class="band-links">
+      <div class="band-link">
+        <img src="{{ url_for('static', filename='images/icon_law_practice_resources.png') }}" alt="" width="70" height="55">
+        <a class="h3" href="/for-lawyers/">Law practice resources</a>
+      </div>
+      <div class="band-link">
+        <img src="{{ url_for('static', filename='images/icon_marketing_opportunities.png') }}" alt="" width="70" height="55">
+        <a class="h3" href="/marketing-solutions/">Marketing opportunities</a>
+      </div>
+      <div class="band-link">
+        <img src="{{ url_for('static', filename='images/icon_get_involved.png') }}" alt="" width="70" height="55">
+        <a class="h3" href="/about/attorney-faq/">Get involved with Super Lawyers</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

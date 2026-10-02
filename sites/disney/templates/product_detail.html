@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}{{ p.name }} | Disney Store{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="breadcrumb"><a href="{{ url_for('shop') }}">Shop</a> / {{ p.subcategory or '' }} / {{ p.name }}</p>
+  <div class="detail" style="grid-template-columns: 420px 1fr">
+    <div>
+      {% for im in p.image_list() %}{% if img(im) %}<img style="border-radius:8px;margin-bottom:12px" src="{{ img(im) }}" alt="{{ p.name }}">{% endif %}{% endfor %}
+    </div>
+    <div>
+      <h1>{{ p.name }}</h1>
+      <p class="card-meta">{{ p.category }}{% if p.character %} &middot; {{ p.character }}{% endif %}{% if p.target_age %} &middot; {{ p.target_age }}{% endif %}</p>
+      <p style="margin:12px 0">
+        <span class="price">${{ '%.2f'|format(p.price or 0) }}</span>
+        {% if p.original_price and p.original_price > p.price %}
+        <span class="strike">${{ '%.2f'|format(p.original_price) }}</span>
+        <span class="badge gold">Sale</span>
+        {% endif %}
+      </p>
+      {% if p.rating %}
+      <p><span class="stars">&#9733; {{ '%.1f'|format(p.rating) }} out of 5</span>
+      {% if p.reviews %}<span class="reviews-count">Read {{ p.reviews }} Reviews</span>{% endif %}</p>
+      {% endif %}
+
+      <form method="post" action="{{ url_for('bag_add') }}" class="qty-row">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="pid" value="{{ p.pid }}">
+        <label for="qty" style="font-size:12px;font-weight:700;color:var(--muted)">Qty</label>
+        <input type="number" id="qty" name="qty" value="1" min="1" max="10">
+        <button class="btn" type="submit">Add to Bag</button>
+      </form>
+
+      {% if p.description %}
+      <h2 class="h2">Product Details</h2>
+      <p class="synopsis">{{ p.description }}</p>
+      {% endif %}
+      {% if p.magic_list() %}
+      <h2 class="h2">Magic in the details</h2>
+      <ul>{% for li in p.magic_list() %}<li>{{ li }}</li>{% endfor %}</ul>
+      {% endif %}
+      {% if p.bare_list() %}
+      <h2 class="h2">The bare necessities</h2>
+      <ul>{% for li in p.bare_list() %}<li>{{ li }}</li>{% endfor %}</ul>
+      {% endif %}
+      <p class="card-meta" style="margin-top:14px">Item No. {{ p.pid }}</p>
+
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin:18px 0">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="key" value="{{ p.pid }}">
+        <input type="hidden" name="back" value="{{ url_for('product_detail', pid=p.pid) }}">
+        <button class="btn" type="submit">{{ 'Remove from Favorites' if is_favorite('product', p.pid) else 'Add to Favorites' }}</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if related %}
+  <div class="section-head"><h2>More {{ p.category or 'Products' }}</h2></div>
+  <div class="grid cols-4">
+    {% for r in related %}
+    <a class="card" href="{{ url_for('product_detail', pid=r.pid) }}">
+      <div class="card-img">
+        {% if r.image_list() %}<img src="{{ img(r.image_list()[0]) }}" alt="{{ r.name }}">{% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ r.name }}</p>
+        <p class="card-meta price">${{ '%.2f'|format(r.price or 0) }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

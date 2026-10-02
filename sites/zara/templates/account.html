@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}My account | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>HI, {{ current_user.display_name|upper }}</h1>
+  <p class="cat-count">Member since {{ current_user.created_at }} · {{ current_user.email }}</p>
+</div>
+<div class="account-grid">
+  <a class="account-tile" href="/us/en/account/orders">
+    <h3>ORDERS</h3>
+    <p>{{ orders }} order{{ '' if orders == 1 else 's' }}</p>
+    <span class="fbtn">VIEW</span>
+  </a>
+  <a class="account-tile" href="/us/en/wishlist">
+    <h3>WISHLIST</h3>
+    <p>{{ wishlist }} saved item{{ '' if wishlist == 1 else 's' }}</p>
+    <span class="fbtn">VIEW</span>
+  </a>
+  <a class="account-tile" href="/us/en/account/addresses">
+    <h3>ADDRESSES</h3>
+    <p>{{ addresses }} saved address{{ '' if addresses == 1 else 'es' }}</p>
+    <span class="fbtn">VIEW</span>
+  </a>
+</div>
+<p style="padding: 0 28px"><a href="/us/en/logon/logout" class="fbtn">LOG OUT</a></p>
+{% endblock %}

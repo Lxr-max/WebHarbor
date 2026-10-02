@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Check-in seats — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Check in: {{ booking.confirmation }}</h1>
+  <p class="ua-quiet">UA {{ flight.flight_number }} {{ flight.origin_code }} → {{ flight.dest_code }}
+    on {{ leg.travel_date }} · {{ flight.departure }} · {{ aircraft.name }}.
+    Confirm your seat to get your boarding pass. Economy Plus rows have extra
+    legroom; standard seats are free.</p>
+
+  <form method="post" class="ua-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% for pax in booking.passengers %}
+    <fieldset class="ua-fieldset">
+      <legend>{{ pax.first_name }} {{ pax.last_name }}</legend>
+      <label class="ua-field">Seat
+        <input type="text" name="seat_{{ pax.id }}" maxlength="4" value="{{ pax.seat }}" placeholder="e.g. 21C">
+      </label>
+      <p class="ua-quiet">Leave empty and we'll assign the first free standard seat.</p>
+    </fieldset>
+    {% endfor %}
+    <button class="ua-btn ua-btn-primary" type="submit">Complete check-in</button>
+  </form>
+
+  <div class="ua-seatmap" aria-label="Seat map">
+    {% for band in bands %}
+    <div class="ua-seat-cabin">
+      <div class="ua-seat-cabin-name">{{ band.name }}
+        {% if band.eplus %}(Economy Plus){% endif %} — rows {{ band.start }}–{{ band.end }}</div>
+    </div>
+    {% endfor %}
+    <div class="ua-seat-grid">
+      {% for row in range(1, aircraft.seat_rows + 1) %}
+        <div class="ua-seat-row">
+          <span class="ua-row-num">{{ row }}</span>
+          {% for letter in aircraft.seat_letters %}
+            {% set seat = row ~ letter %}
+            {% if seat in occupied %}
+              <span class="ua-seat ua-seat-taken" title="Occupied">{{ seat }}</span>
+            {% elif seat == (booking.passengers[0].seat if booking.passengers else '') %}
+              <span class="ua-seat ua-seat-mine" title="Your seat">{{ seat }}</span>
+            {% else %}
+              <span class="ua-seat">{{ seat }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

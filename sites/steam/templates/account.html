@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import price_block %}
+{% block title %}My Account{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>My Account</h1>
+  <span class="count">{{ current_user.email }}</span>
+</div>
+
+<div class="home-section">
+  <h2>Order history</h2>
+  {% if orders %}
+    {% for order in orders %}
+      <div class="order-box">
+        <div class="order-no"><a href="{{ url_for('order_page', order_no=order.order_no) }}">{{ order.order_no }}</a></div>
+        <div style="color:#8f98a0;font-size:12px;">Placed {{ order.placed_at }} &middot; {{ order.payment_method }} &middot; {{ order.items|length }} item{{ '' if order.items|length == 1 else 's' }}</div>
+        <div style="margin-top:6px;">Total: <span class="price-final">{{ order.total|money }}</span></div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state"><p>You have not placed any orders yet.</p></div>
+  {% endif %}
+</div>
+
+<div class="home-section">
+  <h2>Shortcuts</h2>
+  <p>
+    <a href="{{ url_for('wishlist') }}">Your wishlist</a> &middot;
+    <a href="{{ url_for('cart') }}">Your cart</a> &middot;
+    <a href="{{ url_for('search') }}">Browse the store</a>
+  </p>
+</div>
+
+{% endblock %}

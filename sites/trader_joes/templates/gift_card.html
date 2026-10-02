@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Gift Card Balance Inquiry{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Gift Card Balance Inquiry</h1>
+  <p class="rich"><b>Have a TJ&rsquo;s Gift Card?</b></p>
+  <p class="rich">If your Trader Joe&rsquo;s Gift Card has a peel or scratch-off PIN on the back, you can check your balance below. Please note that gift cards without a peel or scratch-off PIN can&rsquo;t be checked online &mdash; call 1-888-556-6619 for assistance with those cards.</p>
+</div>
+
+<div class="form-card">
+  <h2>Check Balance</h2>
+  <form method="post" action="{{ url_for('gift_card_post') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="card_number">Gift card number</label>
+    <input type="text" id="card_number" name="card_number" placeholder="Enter the number on the back of your card" required>
+    <button class="btn" type="submit">CHECK BALANCE</button>
+  </form>
+  {% if card %}
+  <p class="form-ok">Gift card ending in {{ card.card_number[-4:] }} &mdash; current balance: <b>${{ '%.2f' | format(card.balance) }}</b></p>
+  {% endif %}
+  {% if error %}
+  <p class="form-error">{{ error }}</p>
+  {% endif %}
+</div>
+{% endblock %}

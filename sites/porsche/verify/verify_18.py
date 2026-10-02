@@ -1,22 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--18 (stateful).
-
-Order the Porsche Charge-o-mat Pro from the Porsche Shop: add one to your bag
-and complete checkout using the demo account (casey.taylor@test.com /
-TestPass123!) with shipping to Casey Taylor, 4500 9th Ave NE, Seattle, WA
-98105. Report the order number, the order total, the shipping charge, and the
-product's unit price as shown on the confirmation page.
-
-Frozen ground truth (seed DB): Porsche Charge-o-mat Pro $245 (SKU 95804490171).
-Shipping is free over $150, so the order total is $245.00 and the shipping
-charge $0.00. The shop_orders table must gain exactly one row (email
-casey.taylor@test.com, street 4500 9th Ave NE, city Seattle, state WA, zip
-98105, subtotal 24500, shipping 0, total 24500, linked to casey's user) with
-one shop_order_items row (Charge-o-mat Pro, quantity 1, unit price 24500);
-nothing else changes. The order number is generated at checkout time, so the
-verifier matches the answer's order number against the DB row instead of a
-hardcoded value.
-"""
+"""Deterministic verifier for porsche task 18; see tasks.jsonl and verify/README.md."""
 import re
 
 from verify_lib import (added_rows, check_only_tables_changed, check_seed_contract,
@@ -51,10 +33,12 @@ def run_checks(judge, traj, initial_db, after_db):
     orders = added_rows(after_db, initial_db, "shop_orders", "id")
     judge.check("exactly_one_order", len(orders) == 1, f"shop_orders delta = {len(orders)}")
     order = orders[0] if orders else {}
+    judge.check("order_confirmed", order.get("status") == "confirmed")
     judge.check("order_email", (order.get("email") or "").lower() == "casey.taylor@test.com",
                 f"order email {order.get('email')!r}")
     judge.check("order_user", order.get("user_id") == (casey or {}).get("id"),
                 f"order linked to casey.taylor (user_id={order.get('user_id')})")
+    judge.check("recipient_name", order.get("first_name") == "Casey" and order.get("last_name") == "Taylor")
     judge.check("order_address",
                 (order.get("street") or "") == "4500 9th Ave NE"
                 and (order.get("city") or "") == "Seattle"
@@ -76,6 +60,7 @@ def run_checks(judge, traj, initial_db, after_db):
         judge.check("item_is_chargeomat",
                     product is not None and product["name"] == "Porsche Charge-o-mat Pro",
                     f"ordered product {product['name'] if product else None}")
+        judge.check("item_order", it.get("order_id") == order.get("id"))
         judge.check("item_qty_unit",
                     it.get("quantity") == 1 and it.get("unit_price_cents") == 24500,
                     f"qty={it.get('quantity')} unit={it.get('unit_price_cents')}")

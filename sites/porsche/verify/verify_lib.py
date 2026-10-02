@@ -288,6 +288,7 @@ def normalize_text(s):
     s = unicodedata.normalize("NFKD", str(s or ""))
     s = (s.replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')
          .replace("–", "-").replace("—", "-").replace("−", "-"))
+    s = re.sub(r'(\d+)\s*(?:"|-?inch(?:es)?\b)', r"\1 inch", s, flags=re.I)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
@@ -297,7 +298,17 @@ def _answer_tokens(answer):
 
 
 def contains_phrase(answer, phrase):
-    return normalize_text(phrase) in _answer_tokens(answer)
+    text = _answer_tokens(answer)
+    needle = normalize_text(phrase)
+    for match in re.finditer(r"(?<!\w)"+re.escape(needle)+(r"s?(?!\w)" if needle[-1:].isalpha() else r"(?!\w)"), text):
+        prefix = text[max(0, match.start()-60):match.start()]
+        suffix = text[match.end():match.end()+30]
+        if re.search(r"\b(?:not|wrong|incorrect|isn't|rather than)\s*$", prefix):
+            continue
+        if re.match(r"\s+(?:is|was)\s+(?:not|incorrect|wrong)\b", suffix):
+            continue
+        return True
+    return False
 
 
 def contains_any_phrase(answer, phrases):
@@ -305,18 +316,14 @@ def contains_any_phrase(answer, phrases):
 
 
 def contains_amount(answer, amount, tolerance=0.011):
-    """$181,000 / 181,000 / $181,000.00 — optional $ and thousands separators."""
-    text = _answer_tokens(answer)
-    wanted = float(amount)
-    for m in re.finditer(r"\$?\s*(\d{1,3}(?:,\d{3})*|\d+)(?:\.(\d{1,2}))?", text):
-        whole = m.group(1).replace(",", "")
-        frac = m.group(2) or ""
-        try:
-            value = float(whole + ("." + frac if frac else ""))
-        except ValueError:
-            continue
-        if abs(value - wanted) <= tolerance:
-            return True
+    """Require a monetary amount, rejecting negated claims and incidental IDs."""
+    for clause in re.split(r"[;\n]|\.(?:\s+|$)", normalize_text(answer)):
+        for m in re.finditer(r"(?:\$\s*|\bUSD\s*)([0-9][0-9,]*(?:\.[0-9]+)?)|([0-9][0-9,]*(?:\.[0-9]+)?)\s*(?:dollars?|USD)\b", clause, re.I):
+            prefix = clause[:m.start()]
+            if re.search(r"\b(?:not|wrong|incorrect|reference|ref|id)\s*(?:price|amount)?\s*[:=]?\s*$", prefix):
+                continue
+            if abs(float((m[1] or m[2]).replace(',', ''))-float(amount)) <= tolerance:
+                return True
     return False
 
 
@@ -326,7 +333,7 @@ def contains_count(answer, n):
     wanted = str(n)
     comma = f"{int(n):,}"
     for form in (wanted, comma):
-        if re.search(rf"(?<!\d){re.escape(form)}(?!\d)", text):
+        if re.search(rf"(?<![\d.,]){re.escape(form)}(?!\d|[.,]\d)", text):
             return True
     return False
 
@@ -424,6 +431,7 @@ def check_seed_contract(judge, db_path, label="initial_db"):
 
 def check_read_only(judge, initial_db, after_db):
     """After-state must be row-identical to the initial state."""
+    judge.check("after_schema", schema_sha(after_db) == schema_sha(initial_db), "schema changed")
     judge.check("read_only_counts", table_counts(after_db) == table_counts(initial_db),
                 f"counts differ: {table_counts(after_db)} vs {table_counts(initial_db)}")
     judge.check("read_only_rows", all_rows_sha(after_db) == all_rows_sha(initial_db),
@@ -454,6 +462,13 @@ def user_by_email(db_path, email):
 
 def check_only_tables_changed(judge, initial_db, after_db, allowed):
     """No table outside ``allowed`` may change (counts then rows)."""
+    judge.check("after_schema", schema_sha(after_db) == schema_sha(initial_db), "schema must stay unchanged")
+    # These tasks only add records. Existing rows in an allowed table must survive intact.
+    for table in allowed:
+        before = {r["id"]: r for r in rows_of(initial_db, table)}
+        after = {r["id"]: r for r in rows_of(after_db, table)}
+        judge.check(f"{table}_existing_rows", all(after.get(k) == v for k, v in before.items()),
+                    "existing rows must not change or disappear")
     ci, ca = table_counts(initial_db), table_counts(after_db)
     changed = {t for t in ci if ci[t] != ca.get(t)}
     unexpected = changed - set(allowed)
@@ -485,10 +500,14 @@ class Judge:
 
 def _png_ok(path):
     try:
-        head = Path(path).read_bytes()[:8]
-    except OSError:
+        from PIL import Image
+        with Image.open(path) as image:
+            if image.format != "PNG":
+                return False
+            image.load()
+        return True
+    except (OSError, ValueError):
         return False
-    return head == b"\x89PNG\r\n\x1a\n"
 
 
 def check_trajectory_identity(judge, traj, task_id):
@@ -516,7 +535,11 @@ def check_trajectory_identity(judge, traj, task_id):
         judge.check("same_origin_urls", not bad, f"off-origin urls: {bad[:3]}")
     shots = traj.get("_shots") or {}
     judge.check("screenshots_present", len(shots) >= 1, f"shots={len(shots)}")
-    bad_shots = [n for n, p in list(shots.items())[:50] if not _png_ok(p)]
+    bad_shots = [n for n, p in shots.items() if not _png_ok(p)]
+    for step in traj.get("steps", []):
+        for key in ("screenshot", "screenshot_before", "screenshot_after"):
+            if step.get(key) and Path(str(step[key])).name not in shots:
+                bad_shots.append(str(step[key]))
     judge.check("screenshots_decode_png", not bad_shots, f"bad: {bad_shots[:3]}")
 
 
@@ -555,3 +578,21 @@ def run_verifier(task_id, run_checks):
                "evidence": judge.evidence}
     print(json.dumps(verdict))
     sys.exit(0 if judge.passed else 1)
+
+
+def entity_passages(answer, names):
+    text = normalize_text(answer)
+    lookup = {normalize_text(name): name for name in names}
+    pattern = r"(?<!\w)(?:" + '|'.join(re.escape(n) for n in sorted(lookup, key=len, reverse=True)) + r")(?!\w)"
+    matches = list(re.finditer(pattern, text))
+    out = {name: [] for name in names}
+    for i, match in enumerate(matches):
+        stop = matches[i+1].start() if i+1 < len(matches) else len(text)
+        out[lookup[match[0]]].append(text[match.start():stop])
+    return {name: ' '.join(parts) for name,parts in out.items()}
+
+
+def entity_prices(judge, answer, prices):
+    passages = entity_passages(answer, prices)
+    for name, price in prices.items():
+        judge.check(name + ' price', contains_amount(passages[name], price))

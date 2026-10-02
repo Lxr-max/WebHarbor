@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Sign in | Trip.com{% endblock %}
+{% block content %}
+<div class="two-col" style="grid-template-columns:minmax(0,1fr)">
+  <div class="panel" style="max-width:480px;margin:20px auto">
+    <h1 style="margin-bottom:6px">Sign in</h1>
+    <p style="color:var(--ink-3);font-size:13px;margin-bottom:14px">Sign in to access member rates, Trip Coins and saved trips.</p>
+    <form method="post" autocomplete="off">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-grid" style="grid-template-columns:1fr">
+        <div class="form-field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" value="{{ form.get('email', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required>
+        </div>
+      </div>
+      <button class="btn btn-lg" style="margin-top:14px;width:100%" type="submit">Sign in</button>
+    </form>
+    <p style="margin-top:14px;font-size:13px;color:var(--ink-3)">
+      New to Trip.com? <a href="{{ url_for('register') }}" style="color:var(--brand-blue);font-weight:700">Create an account</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

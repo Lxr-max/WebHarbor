@@ -1,20 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--8.
-
-In the Porsche Finder, locate the least expensive purely electric Taycan
-currently in stock. Report its full name, price, VIN, mileage, number of
-previous owners, interior color, drivetrain, model year, and the Porsche
-Center selling it. Also report how many electric Taycans are in stock in
-total.
-
-Frozen ground truth (seed DB): the least expensive electric Taycan in stock is
-a 2022 Porsche Taycan 4S at $81,999 (VIN WP0AB2Y17NSA43577, 15,431 miles,
-2 previous owners, Standard Interior in Black/Limestone Beige,
-All-wheel-drive, model year 2022, Porsche Seattle North). The r2 fix
-normalizes the fuel/drivetrain facets to the upstream clean labels, so the
-finder's fuel facet carries a single 'Electric' value: all 39 in-stock
-Taycans are electric — 39 is the single anchored stock total.
-"""
+"""Deterministic verifier for porsche task 8; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_vin,
                         final_answer, navigated_finder, navigated_vehicle_detail,

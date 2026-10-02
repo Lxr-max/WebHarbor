@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% from '_quote_macros.html' import quote_tabs, quote_header with context %}
+{% block title %}{{ q.symbol }} Financials - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  {{ quote_header() }}
+  {{ quote_tabs('financials') }}
+  <h2 class="section-title">Income Statement (Annual)</h2>
+  {% if income %}
+  <div class="table-scroll">
+  <table class="yf">
+    <thead>
+      <tr>
+        <th>Period Ending</th>
+        <th class="num">Total Revenue</th>
+        <th class="num">Cost of Revenue</th>
+        <th class="num">Gross Profit</th>
+        <th class="num">Operating Income</th>
+        <th class="num">Net Income</th>
+        <th class="num">EBITDA</th>
+        <th class="num">Diluted EPS</th>
+        <th class="num">Research &amp; Dev</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for r in income %}
+      <tr>
+        <td>{{ r.year_end }}</td>
+        <td class="num">{{ fmt_big(r.revenue) }}</td>
+        <td class="num">{{ fmt_big(r.cost_revenue) }}</td>
+        <td class="num">{{ fmt_big(r.gross_profit) }}</td>
+        <td class="num">{{ fmt_big(r.operating_income) }}</td>
+        <td class="num">{{ fmt_big(r.net_income) }}</td>
+        <td class="num">{{ fmt_big(r.ebitda) }}</td>
+        <td class="num">{{ fmt_num(r.diluted_eps) }}</td>
+        <td class="num">{{ fmt_big(r.rd_expense) }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="muted">Figures in {{ q.currency or 'USD' }}, as reported in the annual statements.</p>
+  {% else %}
+  <p class="muted">No annual income statement available for {{ q.symbol }}.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,22 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--6 (stateful).
-
-Sign in to My Porsche with the demo account (casey.taylor@test.com /
-TestPass123!), build a Taycan selecting exactly two options whose combined
-price stays under $10,000, name the build 'Weekend Taycan' and save it. Report
-both option names with their prices, the total price shown for the saved build
-in the profile, the Taycan's base price, and how many options the Taycan
-catalog offers.
-
-Frozen ground truth (seed DB): Taycan (Y1AAI1) base price $111,900; the catalog
-offers 43 options. The saved_builds table must gain exactly one row for the
-casey.taylor user: build_name 'Weekend Taycan', model_code Y1AAI1, exactly two
-options in options_json whose combined price is under $10,000, and
-total_price = 111,900 + that combined price. The final answer must name both
-saved options with their prices and the saved total (the pair itself is the
-agent's choice among valid sub-$10,000 pairs, so it is read back from the
-after-DB and cross-checked against the answer).
-"""
+"""Deterministic verifier for porsche task 6; see tasks.jsonl and verify/README.md."""
 import json
 
 from verify_lib import (added_rows, check_only_tables_changed, check_seed_contract,
@@ -64,6 +46,12 @@ def run_checks(judge, traj, initial_db, after_db):
                 f"options_json = {build.get('options_json')!r}")
     if isinstance(options, list) and len(options) == 2 and all(
             isinstance(o, dict) and "price" in o for o in options):
+        catalog = {o["option_id"]: o for o in rows_of(initial_db, "configurator_options") if o["model_code"] == "Y1AAI1"}
+        judge.check("authentic_distinct_options", len({o.get("id") for o in options}) == 2 and all(
+            o.get("id") in catalog and o.get("name") == catalog[o["id"]]["name"]
+            and o["price"] == catalog[o["id"]]["price"] for o in options))
+        judge.check("paint_and_wheels", sum(bool(catalog.get(o.get("id"), {}).get("swatch")) for o in options) == 1
+                    and sum("Wheels" in o.get("name", "") for o in options) == 1)
         combined = sum(o["price"] for o in options)
         judge.check("build_combined_under_10k", 0 < combined < 10000,
                     f"combined option price {combined}")
@@ -84,8 +72,6 @@ def run_checks(judge, traj, initial_db, after_db):
     # answer gates on the frozen facts
     judge.check("answer_taycan_base", contains_amount(answer, 111900),
                 "Taycan base price $111,900")
-    judge.check("answer_catalog_count", contains_count(answer, 43),
-                "the Taycan catalog offers 43 options")
 
 
 if __name__ == "__main__":

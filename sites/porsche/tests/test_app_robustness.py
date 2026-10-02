@@ -178,7 +178,7 @@ def test_configurator_save_flow(client, app):
     client.post("/my-porsche/sign-in", data={
         "email": "jordan.morgan@test.com", "password": "TestPass123!"})
     r = client.post("/configurator/en-US/mode/model/992142/save",
-                    data={"opt": ["0Q", "2T"], "build_name": "Test build"},
+                    data={"opt": ["2T"], "build_name": "Test build"},
                     follow_redirects=True)
     assert r.status_code == 200
     assert b"Test build" in r.data
@@ -328,3 +328,29 @@ def test_csrf_enforced_on_all_post_routes(client, app):
                      "/shop/checkout"):
             r = raw.post(path, data={"email": "x@y.zz", "password": "password1"})
             assert r.status_code == 400, f"{path} accepted a missing CSRF token"
+
+
+def test_configurator_rejects_conflicting_paints(client, app):
+    client.post('/my-porsche/sign-in', data={'email':'jordan.morgan@test.com','password':'TestPass123!'})
+    response = client.post('/configurator/en-US/mode/model/992142/save', data={'opt':['0Q','2T'],'build_name':'Conflicting paints'}, follow_redirects=True)
+    assert b'Choose one exterior paint color' in response.data
+    assert b'Conflicting paints' not in client.get('/my-porsche/saved-builds').data
+
+
+def test_two_orders_in_same_second_have_distinct_numbers(client, app, monkeypatch):
+    import app as module
+    from datetime import datetime
+    class FrozenTime(datetime):
+        @classmethod
+        def utcnow(cls):
+            return cls(2026, 9, 28, 12, 0, 0)
+    monkeypatch.setattr(module, 'datetime', FrozenTime)
+    numbers = []
+    for _ in range(2):
+        with app.app_context():
+            product = module.ShopProduct.query.filter_by(slug='95804490171-B').first().id
+        client.post('/shop/cart/add', data={'product_id':product, 'quantity':1})
+        r = client.post('/shop/checkout', data={'email':'repeat@example.com','first_name':'Same','last_name':'Buyer','street':'1 Main St','city':'Seattle','state':'WA','zip':'98105'}, follow_redirects=True)
+        assert r.status_code == 200
+        numbers.append(re.search(rb'Order number <strong>(PS[A-Z0-9]+)</strong>', r.data)[1])
+    assert numbers[0] != numbers[1]

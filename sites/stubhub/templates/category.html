@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ node.name }} Tickets{% endblock %}
+{% block content %}
+<div class="category-hero">
+  <div class="category-hero-inner">
+    <h1>{{ node.name }} Tickets</h1>
+    {% if top_performers %}
+    <h2>Top Performers</h2>
+    <div class="chip-row">
+      {% for p in top_performers %}
+      <a class="perf-chip" href="/{{ p.slug }}-tickets/performer/{{ p.upstream_id }}">
+        {% if p.image_file %}<img src="{{ p.image_file }}" alt="{{ p.name }}" loading="lazy">{% endif %}
+        <span>{{ p.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <a href="{{ request.path }}" class="btn btn-outline">Explore {{ node.name }} Tickets</a>
+  </div>
+</div>
+
+<div class="grid-toolbar sticky">
+  <span class="location-chip">{{ default_metro.name if default_metro else 'Redmond' }}</span>
+  <span class="toolbar-chip">All dates</span>
+  <span class="toolbar-chip">Parking</span>
+  <span class="toolbar-chip">Price</span>
+  <span class="grid-count">{{ total }} events near you</span>
+</div>
+
+<div class="event-grid list">
+  {% for evt in events %}
+  {% set card = event_card(evt) %}
+  <a class="event-card row" href="{{ card.url }}" title="{{ evt.name }}">
+    <time class="event-date-box" datetime="{{ evt.local_starts_at.isoformat() }}">
+      <span class="month">{{ evt.local_starts_at.strftime('%b') }}</span>
+      <span class="day">{{ evt.local_starts_at.day }}</span>
+      <span class="dow">{{ evt.local_starts_at.strftime('%a') }}</span>
+    </time>
+    <div class="event-card-body">
+      <h3>{{ evt.name }}</h3>
+      <p class="event-card-when">{{ card.time }}</p>
+      <p class="event-card-venue">{{ card.venue }}</p>
+      <p class="event-card-city">{{ card.city }}</p>
+      {% if card.badge %}<span class="event-badge">{{ card.badge }}</span>{% endif %}
+    </div>
+    <span class="see-tickets">See tickets</span>
+  </a>
+  {% endfor %}
+</div>
+
+{% if total > 20 %}
+<div class="pagination">
+  {% if page > 1 %}<a href="?page={{ page - 1 }}">Prev</a>{% endif %}
+  {% for p in range(1, ((total // 20) + 2)) %}
+    {% if p == page %}<span class="page-current">{{ p }}</span>
+    {% elif p <= 9 or p == ((total // 20) + 1) %}<a href="?page={{ p }}">{{ p }}</a>
+    {% elif p == 10 %}<span class="page-dots">...</span>{% endif %}
+  {% endfor %}
+  {% if page * 20 < total %}<a href="?page={{ page + 1 }}">Next</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

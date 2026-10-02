@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('news_list') }}">News</a> › {{ article.title }}</nav>
+  <div class="page-title"><h1>{{ article.title }}</h1>
+  {% if article.published %}<p class="hint">{{ article.published[:10] }}</p>{% endif %}</div>
+  {% if article.image_path() %}<img src="{{ article.image_path() }}" alt="" style="max-width:480px;height:auto;">{% endif %}
+  {% for p in article.paras() %}<p>{{ p }}</p>{% endfor %}
+  <p><a href="{{ url_for('news_list') }}">Back to all news</a></p>
+</div>
+{% endblock %}

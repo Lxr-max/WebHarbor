@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Sign In | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h1>Sign In</h1>
+      <p class="sub">Sign in to buy tickets, manage your orders and access presales.</p>
+      <form method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" type="email" name="email" required placeholder="Email address">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" required placeholder="Password">
+        </div>
+        <button class="btn btn-primary btn-wide" type="submit">Sign In</button>
+      </form>
+      <p class="auth-alt">New to Ticketmaster? <a href="/register">Create an account</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -26,7 +26,7 @@ from typing import Any
 
 VERIFY_DIR = Path(__file__).resolve().parents[1]
 SITE_DIR = VERIFY_DIR.parent
-BASE = "http://localhost:40099"
+BASE = "http://localhost:40100"
 PASSWORD = "TestPass123!"
 CONTAINER = "wh-porsche-review"
 CACHE = Path(tempfile.gettempdir()) / "porsche_verify_tests_seed.db"
@@ -37,15 +37,10 @@ SEED_DB = Path(os.environ.get("PORSCHE_TEST_SEED_DB") or "")
 def _acquire_seed() -> Path:
     if SEED_DB.is_file():
         return SEED_DB
-    if CACHE.is_file():
-        return CACHE
-    CACHE.parent.mkdir(parents=True, exist_ok=True)
-    r = subprocess.run(["docker", "cp", f"{CONTAINER}:/opt/WebSyn/porsche/"
-                       f"instance_seed/porsche.db", str(CACHE)],
-                       capture_output=True, text=True)
-    if r.returncode != 0:
-        raise RuntimeError(f"cannot acquire the seed DB (docker cp failed): {r.stderr[:200]}")
-    return CACHE
+    seed = SITE_DIR / "instance_seed/porsche.db"
+    if not seed.is_file():
+        raise RuntimeError("Build the site seed with seed_data.py first")
+    return seed
 
 
 def copy_db(target: Path) -> Path:

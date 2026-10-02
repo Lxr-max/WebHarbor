@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} Schedule | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ league_name }} Schedule</h1>
+  <nav class="league-tabs">
+    <a href="/{{ league }}">Home</a>
+    <a href="/scores/{{ league }}">Scores</a>
+    <a class="active" href="/{{ league }}/schedule" aria-current="page">Schedule</a>
+    <a href="/{{ league }}/standings">Standings</a>
+    <a href="/{{ league }}/teams">Teams</a>
+    <a href="/{{ league }}/players">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+<table class="data-table">
+  <thead><tr><th>Date</th><th>Matchup</th><th>Status</th><th>Location</th><th>Odds</th></tr></thead>
+  <tbody>
+    {% for game in games %}
+    <tr>
+      <td>{{ game.date_iso }}</td>
+      <td class="cell-team">
+        <a href="/{{ league }}/{{ game.slug }}">
+          {{ (teams.get(game.away_team).short or teams.get(game.away_team).full_name) if teams.get(game.away_team) else game.away_team|replace('-',' ')|title }}
+          @
+          {{ (teams.get(game.home_team).short or teams.get(game.home_team).full_name) if teams.get(game.home_team) else game.home_team|replace('-',' ')|title }}
+        </a>
+        {% if game.week %}<span class="muted">WK {{ game.week }}{% if game.phase == 'preseason' %} (Preseason){% endif %}</span>{% endif %}
+        {% if game.series %}<span class="muted">{{ game.series }}{% if game.series_game %} GM {{ game.series_game }}{% endif %}</span>{% endif %}
+      </td>
+      <td>
+        {% if game.status == 'final' %}<span class="pill pill-final">FINAL {{ game.away_score }}-{{ game.home_score }}</span>
+        {% else %}{{ game.time or 'Scheduled' }}{% if game.broadcaster %} on {{ game.broadcaster }}{% endif %}{% endif %}
+      </td>
+      <td>{% if game.venue %}{{ game.venue }}, {{ game.venue_city }}{% endif %}</td>
+      <td>{% if game.odds_line %}{{ game.odds_line }}{% elif game.favorite_line() %}{{ game.favorite_line() }}{% if game.total %} O/U {{ game.total }}{% endif %}{% else %}-{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

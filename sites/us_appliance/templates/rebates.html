@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Appliance Rebates | Save Money on Appliances{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Appliance Rebates</span></li>
+{% endblock %}
+{% block content %}
+<section class="container rebates-page">
+  <h1 class="page-heading">Appliance Rebates</h1>
+  <p class="category-blurb">Save hundreds of dollars on your next brand name appliance purchase at US Appliance. We've got a huge selection of appliance rebate offers from all of the leading names such as GE, LG, Maytag, Electrolux, Whirlpool and many more. Also look for massive savings on premium brands like Viking, Monogram, KitchenAid, Bertazzoni and others. Check back often as our manufacturer and factory rebate offers for major appliances are constantly changing.</p>
+
+  <div class="filter-bar">
+    <span class="filter-label">All Brands</span>
+  </div>
+
+  {% for brand, offers in by_brand %}
+  <details class="brand-section" {% if loop.first %}open{% endif %}>
+    <summary class="brand-header">
+      <span class="brand-header-name">{{ brand }} <span class="rebate-count">({{ offers | length }} offers)</span></span>
+      <span class="brand-chevron">&#9662;</span>
+    </summary>
+    <div class="rebate-list">
+      {% for offer in offers %}
+      <a class="rebate-item" href="{{ offer.pdf }}" target="_blank">
+        <span class="rebate-dot"></span>
+        <span class="rebate-info">
+          <span class="rebate-title">{{ offer.title }}</span>
+          <span class="rebate-expires">Expires {{ offer.expires }}</span>
+        </span>
+        <span class="rebate-pdf">View PDF</span>
+      </a>
+      {% endfor %}
+    </div>
+  </details>
+  {% endfor %}
+
+  <div class="disclaimer">
+    <strong>Rebate Note:</strong> Rebate offers are provided by manufacturers and are subject to change without notice. Check back weekly for new offers. All offers valid while supplies last and subject to manufacturer terms and conditions.
+  </div>
+  <div class="disclaimer">
+    <strong>REBATE NOTE</strong><br>
+    We are not responsible for rebates denied because of late claim, improper submission, or for any reason a rebate was not redeemed or not redeemable.
+  </div>
+</section>
+{% endblock %}

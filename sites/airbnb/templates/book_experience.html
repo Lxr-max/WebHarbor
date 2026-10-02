@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Book {{ exp.name }} | Airbnb{% endblock %}
+{% block content %}
+<div class="form-card" style="max-width:760px;">
+  <h1>Confirm and pay</h1>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <div class="trip-card">
+    {% if exp.photo_list() %}<img src="{{ exp.photo_list()[0] }}" alt="{{ exp.name }}">{% endif %}
+    <div>
+      <p class="muted small">Experience &middot; {{ exp.theme or '' }}</p>
+      <p><strong>{{ exp.name }}</strong></p>
+      <p class="muted small">{{ exp.location_city or '' }} &middot; hosted by {{ exp.host_name or 'the host' }}</p>
+      {% if exp.rating %}<p class="small">&#9733; {{ '%.2f'|format(exp.rating) }} &middot; {{ exp.rating_count }} ratings</p>{% endif %}
+    </div>
+  </div>
+
+  <h2 style="font-size:18px;">Your booking</h2>
+  <form method="post" action="{{ url_for('book_experience', eid=exp.id, date=when, guests=guests) }}">
+    <!-- the action carries the chosen date/guests in the query (like the stay
+         confirm form) so the mid-booking login round trip (relative `next`)
+         returns to a confirm page that still holds the guest selection —
+         review M1's data-loss fix applied to the experience flow too. -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <table class="table">
+      <tr><th>Date</th><td>
+        <select name="date" id="date">
+          {% for o in offerings %}
+          <option value="{{ o.iso }}" {{ 'selected' if when == o.iso }}>{{ o.day }} &middot; {{ o.start_time }}</option>
+          {% endfor %}
+        </select>
+      </td></tr>
+      <tr><th>Guests</th><td>
+        <select name="guests" id="guests">
+          {% for n in [1, 2, 3, 4, 5, 6] %}
+          <option value="{{ n }}" {{ 'selected' if guests|string == n|string }}>{{ n }} guest{{ 's' if n > 1 }}</option>
+          {% endfor %}
+        </select>
+      </td></tr>
+      <tr><th>Price</th><td>{{ money(exp.price_per_guest) }} / guest</td></tr>
+    </table>
+    <button class="btn btn-rausch btn-lg" type="submit">Confirm and book</button>
+  </form>
+  {% if not current_user.is_authenticated %}
+  <p class="muted small">You'll need to log in with a demo account to complete the booking.</p>
+  {% endif %}
+</div>
+{% endblock %}

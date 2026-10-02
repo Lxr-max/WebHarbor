@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}My Watchlist{% endblock %}
+{% block content %}
+<div class="wrap">
+  <p class="crumbs"><a href="{{ url_for('home') }}">NYSE</a> / My Watchlist</p>
+  <h1 class="page-title">My Watchlist</h1>
+  <p class="page-sub">The listings you are following, with the captured snapshot prices. Add symbols from any quote page.</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Symbol</th><th>Name</th><th>Exchange</th><th class="num">Last</th><th class="num">Change</th><th class="num">Change (%)</th><th class="num">Volume</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td><a href="{{ item.href }}">{{ item.quote.symbol }}</a></td>
+            <td>{{ item.quote.name }}</td>
+            <td class="muted">{{ item.quote.exchg }}</td>
+            <td class="num">{{ fmt_price(item.quote.last) }}</td>
+            <td class="num">{{ fmt_price(item.quote.change) }}</td>
+            <td class="num">{{ fmt_pct(item.quote.pctchg) }}</td>
+            <td class="num">{{ fmt_volume(item.quote.volume) }}</td>
+            <td>
+              <form method="post" action="{{ url_for('watchlist_toggle') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="symbol" value="{{ item.quote.symbol }}">
+                <input type="hidden" name="back" value="{{ url_for('watchlist') }}">
+                <button class="btn small ghost" type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="8">Your watchlist is empty. Open any quote page and use &ldquo;Add to Watchlist&rdquo;.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

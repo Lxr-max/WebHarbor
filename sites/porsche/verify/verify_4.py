@@ -1,23 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--4.
-
-Configure a 911 Carrera (model code 9921B2): select Jet Black Metallic paint
-plus the single most expensive option available for this model, and update the
-running total. Report the names of both selected items, their individual
-prices, and the total configuration price including the base price. Also state
-how many options this model's catalog offers. Finally check the Porsche Finder
-for the least expensive brand-new 911 Carrera in stock and report its price
-and VIN.
-
-Frozen ground truth (seed DB): Jet Black Metallic $880; the most expensive
-option in the 9921B2 catalog is 20"/21" Carrera Exclusive Design Wheels with
-Carbon Fiber Blades at $8,190; base price $135,500; total $144,570; the
-catalog offers 44 options. Finder: the least expensive brand-new 911 Carrera
-(the exact model named '911 Carrera', not the Cabriolet — the r2 fix pins
-the scope) is the 911 Carrera at $181,575 (VIN WP0AA2A99TS207294); the
-cheaper 911 Carrera Cabriolet at $180,810 (VIN WP0CA2A97TS234082) is
-explicitly out of scope.
-"""
+"""Deterministic verifier for porsche task 4; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_vin,
                         final_answer, navigated_configurator, navigated_finder,

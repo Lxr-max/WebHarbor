@@ -1,17 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--9.
-
-Search the Porsche Finder for a pre-owned Panamera priced under $130,000 with
-fewer than 30,000 miles on the odometer. Of the matches, report the full name,
-price, mileage, VIN, exterior color and transmission of the cheapest one, and
-the Porsche Center selling it. Also state how many pre-owned Panameras are in
-stock in total.
-
-Frozen ground truth (seed DB): 2 matching listings; the cheapest is a 2025
-Porsche Panamera 4 E-Hybrid at $123,795 (7,822 miles, VIN WP0AE2YA3SL047104,
-Madeira Gold Metallic, PDK (Automatic), Porsche Bellevue). 6 pre-owned
-Panameras are in stock in total.
-"""
+"""Deterministic verifier for porsche task 9; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_vin,
                         final_answer, navigated_finder, navigated_vehicle_detail,

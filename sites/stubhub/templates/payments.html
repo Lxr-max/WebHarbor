@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Payments | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount">My Tickets</a>
+    <a href="/secure/myaccount/purchases">Orders</a>
+    <a href="/secure/myaccount/listings">My Listings</a>
+    <a href="/secure/myaccount/sales">My Sales</a>
+    <a href="/secure/myaccount/payments" class="active">Payments</a>
+  </nav>
+  <h1>Payments</h1>
+  <h2>Cards on file</h2>
+  {% for card in cards %}
+  <div class="order-row">
+    <div>
+      <strong>{{ card.brand }} ••••{{ card.last4 }}</strong>
+      <p>{{ card.holder }} · expires {{ '%02d'|format(card.exp_month) }}/{{ card.exp_year }}</p>
+    </div>
+    <div class="order-side">
+      {% if card.is_default %}<span class="badge badge-info">Default</span>{% endif %}
+      {% if not card.is_default %}
+      <form method="post" action="/secure/myaccount/payments/{{ card.id }}/default" class="inline-form">
+        <button type="submit" class="btn btn-small">Make default</button>
+      </form>
+      {% endif %}
+      <form method="post" action="/secure/myaccount/payments/{{ card.id }}/remove" class="inline-form">
+        <button type="submit" class="btn btn-small btn-ghost">Remove</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">No cards on file.</p>
+  {% endfor %}
+
+  <section class="account-section">
+    <h2>Add a card</h2>
+    <form method="post" class="card-fields add-card">
+      <label>Card number
+        <input type="text" name="number" inputmode="numeric" placeholder="Card number" required>
+      </label>
+      <label>Name on card
+        <input type="text" name="holder" placeholder="Name on card" required>
+      </label>
+      <div class="exp-row">
+        <label>Expiry month<input type="text" name="exp_month" inputmode="numeric" placeholder="MM" required></label>
+        <label>Expiry year<input type="text" name="exp_year" inputmode="numeric" placeholder="YYYY" required></label>
+        <label>Security code<input type="text" name="cvv" inputmode="numeric" placeholder="CVV" required></label>
+      </div>
+      <label>Brand
+        <select name="brand">
+          <option>Visa</option><option>Mastercard</option><option>Amex</option>
+          <option>Discover</option><option>Card</option>
+        </select>
+      </label>
+      <button type="submit" class="btn btn-primary">Add card</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

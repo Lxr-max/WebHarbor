@@ -1,21 +1,4 @@
-#!/usr/bin/env python3
-"""Verify Porsche--10.
-
-Find the least expensive brand-new Macan currently in stock and open its
-listing. Report the exact monthly payment estimate shown on its detail page,
-quoted word for word, together with the vehicle's price, VIN, exterior color,
-transmission, and the delivery, processing and handling fee from its price
-details. Also state how many brand-new Macans are in stock in total.
-
-Frozen ground truth (seed DB): 116 brand-new Macans; the least expensive is a
-2026 Porsche Macan at $77,100 (VIN WP1AA2A54TLB20053, Carrara White Metallic,
-PDK (Automatic)); its detail page shows the payment estimate "1,114.44 per
-month (for a 39 month lease) with $7,710.00 down. No security deposit
-required.". The r2 re-anchor points the fee sub-question at the
-always-present price-details line: Base MSRP $65,400.00 + Price for Equipment
-$9,350.00 + Delivery, Processing and Handling Fee $2,350.00 = Total MSRP
-$77,100.00.
-"""
+"""Deterministic verifier for porsche task 10; see tasks.jsonl and verify/README.md."""
 from verify_lib import (check_read_only, check_seed_contract, check_trajectory_identity,
                         contains_amount, contains_count, contains_phrase, contains_vin,
                         final_answer, navigated_finder, navigated_vehicle_detail,
@@ -43,16 +26,12 @@ def run_checks(judge, traj, initial_db, after_db):
                 "exterior color Carrara White Metallic")
     judge.check("answer_transmission", contains_phrase(answer, "PDK"),
                 "transmission PDK (Automatic)")
-    judge.check("answer_payment_estimate",
-                contains_phrase(answer, "1,114.44 per month")
-                and contains_phrase(answer, "39 month lease")
-                and contains_phrase(answer, "$7,710.00 down"),
-                "payment estimate quoted word for word")
-    # delivery, processing and handling fee sub-question (r2 re-anchor)
-    judge.check("answer_delivery_fee",
-                contains_phrase(answer, "Delivery, Processing and Handling Fee")
-                and contains_amount(answer, 2350),
-                "price details carry 'Delivery, Processing and Handling Fee' $2,350.00")
+    import re
+    judge.check("monthly_payment", bool(re.search(r"1,?114\.44\s*(?:per|a|/)\s*month", answer, re.I)))
+    judge.check("lease_term", bool(re.search(r"39[- ]months?", answer, re.I)))
+    judge.check("down_payment", bool(re.search(r"(?:\$?7,?710(?:\.00)?\s*(?:down|deposit)|down.{0,20}\$?7,?710)", answer, re.I)))
+    judge.check("no_security_deposit", bool(re.search(r"(?:no|without) (?:a )?security deposit|security deposit (?:is )?(?:not required|not needed|waived)", answer, re.I)))
+    judge.check("delivery_fee", contains_amount(answer, 2350))
     judge.check("answer_new_macan_total", contains_count(answer, 116),
                 "116 brand-new Macans in stock")
     check_read_only(judge, initial_db, after_db)

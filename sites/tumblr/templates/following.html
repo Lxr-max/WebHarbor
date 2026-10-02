@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Following — Tumblr{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Blogs you follow</h1>
+  <p class="page-sub">{{ blogs|length }} blogs on {{ user.username }}'s dashboard.</p>
+  <nav class="dash-tabs">
+    <a class="tab" href="{{ url_for('dashboard') }}">Following feed</a>
+    <a class="tab" href="{{ url_for('likes') }}">Likes</a>
+    <a class="tab active" href="{{ url_for('following') }}">Following</a>
+  </nav>
+</div>
+<section class="follow-grid">
+  {% for blog in blogs %}
+    <div class="follow-card">
+      <a href="{{ url_for('blog_page', name=blog.name) }}">
+        {% if blog.header_image %}<img class="follow-header" src="{{ blog.header_image }}" alt="">{% else %}<div class="follow-header plain"></div>{% endif %}
+      </a>
+      <div class="follow-body">
+        {% if blog.avatar %}
+          <img class="avatar a48 {{ blog.avatar_shape }}" src="{{ blog.avatar }}" alt="">
+        {% else %}
+          <span class="avatar a48 avatar-fallback">{{ blog.display_title()[:1] }}</span>
+        {% endif %}
+        <a class="follow-name" href="{{ url_for('blog_page', name=blog.name) }}">{{ blog.display_title() }}</a>
+        <span class="follow-handle">{{ blog.name }} · {{ blog.post_count_label() }}</span>
+        {% if user %}
+        <button class="action-btn follow-btn {{ 'active' if True }}" data-blog-name="{{ blog.name }}"
+                data-follow-url="{{ url_for('toggle_follow', name=blog.name) }}">
+          <span class="follow-label">Following</span>
+        </button>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="empty-state">Not following anyone yet — find blogs in Explore.</div>
+  {% endfor %}
+</section>
+{% endblock %}

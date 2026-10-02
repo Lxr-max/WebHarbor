@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}{{ label }}{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li><li>Referenced resource</li></ol></nav>{% endblock %}
+{% block content %}<div class="container single-page-layout search-page"><h1 class="page-title">{{ label }}</h1><div class="empty-state"><h2>This resource is outside the offline collection</h2><p>The original page links to a resource at <strong>{{ hostname }}</strong>.</p><p class="reference-address">{{ target }}</p></div><p><a href="/search?query={{ label|urlencode }}">Search for related information</a> or <a href="/">return to the homepage</a>.</p></div>{% endblock %}

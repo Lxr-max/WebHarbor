@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}About Us • Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px"><a href="/">Home</a> › <span>About</span></nav>
+  <h1>About Student.com</h1>
+  <p class="muted" style="margin-top:10px;max-width:720px">Student.com is the world's leading marketplace for student housing. Since 2011, we've helped millions of students find their perfect home during their higher education studies, anywhere in the world.</p>
+  <p class="muted" style="max-width:720px">That's how we help students find the best room to suit their needs. It's why we created Student.com.</p>
+  <button class="btn primary" id="about-signup" style="margin-top:16px">Sign up now</button>
+</div>
+
+<section class="section container">
+  <div class="section-head"><h2>Featured In</h2></div>
+  <div class="press">
+    <img src="/static/images/brand/bloomberg.png" alt="Bloomberg logo">
+    <img src="/static/images/brand/financial-times.png" alt="Financial Times logo">
+    <img src="/static/images/brand/forbes.png" alt="Forbes logo">
+    <img src="/static/images/brand/techcrunch.png" alt="TechCrunch logo">
+    <img src="/static/images/brand/venturebeat.png" alt="VentureBeat logo">
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="grid cols-2" style="grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <div>
+      <h2>We understand, because we've lived it</h2>
+      <p class="muted" style="margin-top:12px">Our team has been students in more countries than we can count. We know the stress of finding a home in a city you've never visited — that's why every listing on Student.com is verified, described honestly and priced clearly.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="card" style="padding:26px;text-align:center">
+        <div style="font-family:ClashDisplay;font-size:34px;color:var(--orange)">10 Years+</div>
+        <div class="small muted">in business</div>
+      </div>
+      <div class="card" style="padding:26px;text-align:center">
+        <div style="font-family:ClashDisplay;font-size:34px;color:var(--orange)">2 Million+</div>
+        <div class="small muted">Happy Students</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head"><h2>Why choose us?</h2></div>
+  <div class="grid cols-3">
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:17px">Price match promise</h3>
+      <p class="muted small" style="margin-top:8px">If you find your choice of housing available at a lower price, we will match that price at your time of booking.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:17px">Perfect home guarantee</h3>
+      <p class="muted small" style="margin-top:8px">We work with only trusted partners to give you peace of mind during your stay at your home away from home.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:17px">Expert booking team</h3>
+      <p class="muted small" style="margin-top:8px">Get advice and service around the clock from our multi-lingual team who have your best interests at heart.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="section-head"><h2>Booking Process</h2></div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3 style="font-size:15px">Explore your city</h3>
+      <p class="small muted">Discover the housing options different cities have to offer as you plan for life at college.</p></div>
+    <div class="step"><div class="n">2</div><h3 style="font-size:15px">Submit an application</h3>
+      <p class="small muted">Apply for any properties that meet your needs. We'll be there every step of the way to guide you through any paperwork required.</p></div>
+    <div class="step"><div class="n">3</div><h3 style="font-size:15px">Confirm your booking</h3>
+      <p class="small muted">Lease signed and any pre-payments made, you're ready to embark on an exciting phase of life!</p></div>
+    <div class="step"><div class="n">→</div><h3 style="font-size:15px">Move in</h3>
+      <p class="small muted">Get the keys, meet your new community and start your student era.</p></div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  var b = document.getElementById("about-signup");
+  if (b) b.addEventListener("click", function () {
+    document.getElementById("auth-modal").classList.add("open");
+  });
+</script>
+{% endblock %}

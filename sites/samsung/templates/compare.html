@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Galaxy Compare{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Galaxy Compare</h1>
+  <p class="muted">Compare up to three Galaxy models side by side using the specification tables captured from the Samsung spec-compare API.</p>
+</div>
+
+<section class="band">
+  <h2>Choose models</h2>
+  <form method="get" action="{{ url_for('compare') }}" class="compare-picker">
+    {% for fam in families %}
+    <label class="compare-option">
+      <input type="checkbox" name="models" value="{{ fam.model_name }}"
+             {{ 'checked' if fam.model_name in picked }}
+             {{ 'disabled' if fam.model_name not in picked and picked|length >= 3 }}>
+      <span class="compare-name">{{ fam.name }}</span>
+      <span class="compare-series">{{ fam.series }}</span>
+    </label>
+    {% endfor %}
+    <div class="compare-actions">
+      <button type="submit" class="btn">Compare Selected</button>
+      {% if picked %}<a class="btn btn-ghost" href="{{ url_for('compare') }}">Clear</a>{% endif %}
+    </div>
+  </form>
+</section>
+
+{% if columns %}
+<section class="band">
+  <h2>Specification comparison</h2>
+  <div class="spec-table-wrap">
+  <table class="spec-table compare-table">
+    <thead>
+      <tr>
+        <th class="compare-corner">Specification</th>
+        {% for col in columns %}
+        <th>{{ col.family }}<br><span class="muted">{{ col.model_name }}</span></th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table %}
+      {% if row.group %}
+      <tr class="spec-group"><th colspan="{{ columns|length + 1 }}">{{ row.group }}</th></tr>
+      {% else %}
+      <tr>
+        <th>{{ row.label }}</th>
+        {% for value in row['values'] %}
+        <td>{{ value }}</td>
+        {% endfor %}
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

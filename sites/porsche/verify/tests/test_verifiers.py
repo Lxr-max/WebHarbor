@@ -28,7 +28,7 @@ from _support import (BASE, PASSWORD, RunBuilder, _acquire_seed,  # noqa: E402
                        build_run, copy_db, db_one, mutate_db, noop_run,
                        run_verifier)
 
-STATEFUL = {6, 12, 18, 19}
+STATEFUL = {6, 12, 17, 18, 19}
 READ_ONLY = sorted(set(range(20)) - STATEFUL)
 
 FINDER = "/finder/us/en-US/search"
@@ -221,8 +221,36 @@ WRONG_ANSWERS = {
 }
 
 
+
+for n in range(20):
+    answer = HONEST_ANSWERS[n]
+    if n == 6:
+        answer = 'Weekend Taycan: Jet Black Metallic $840; 20-inch Taycan Turbo Aero Wheels $2,510. Total $115,250; base $111,900.'
+    elif n == 7:
+        answer += ' Cheapest VIN WP0AA2A9XSS209182; 2,448 miles; Gentian Blue Metallic; Porsche Bellevue.'
+    elif n == 13:
+        answer = 'Porsche Bellevue has 236 vehicles, opens at 09:00, at 11910 N.E. 8th Street; +1 425-633-1583. Cheapest cars: 2014 Porsche Cayenne $7,795 and 2017 Porsche Macan $18,000.'
+    elif n == 14:
+        es = json.loads((Path(__file__).resolve().parents[1] / 'dealer_comparison.json').read_text())
+        answer = '\n'.join(f"{e['dealer']}: {e['name']}, ${e['price']}, VIN {e['vin']}, Sunday {e['hours']}" for e in es)
+    elif n == 16:
+        answer += ' Accessories SKU 9J0813601A. Clothing SKU 4056487100289.'
+    elif n == 17:
+        answer = 'PSFIXTURE01: two Classic Leather Jackets at $1,990 each and one Trench Coat at $1,350. Total $5,330, free shipping $0.00.'
+
+    HONEST_ANSWERS[n] = answer
+
 # ---------------------------------------------------------------- honest step maps
 def honest_steps(n, run):
+    if n == 14:
+        run.step('/usa/dealersearch/?state=WA')
+        for e in json.loads((Path(__file__).resolve().parents[1] / 'dealer_comparison.json').read_text()):
+            run.step('/finder/us/en-US/details/'+e['slug'])
+        return
+    if n == 17:
+        honest_steps(18, run)
+        run.step('/shop/us/en-US/p/classic-leather-jacket-P-P1140-590')
+        return
     if n == 0:
         run.step("/", action="goto")
         run.step(f"{MODELS}/?range=911")
@@ -266,6 +294,7 @@ def honest_steps(n, run):
         run.step("/configurator/en-US/mode/model/Y1AAI1/save", action="click")
         run.step("/my-porsche/saved-builds")
     elif n == 7:
+        run.step("/finder/us/en-US/details/porsche-911-carrera-t-preowned-RNR59L")
         run.step("/", action="goto")
         run.step(f"{FINDER}?transmission=Manual&range=911")
         run.step("/finder/us/en-US/details/porsche-911-st-preowned-9P2V7O")
@@ -369,18 +398,39 @@ def apply_honest_delta(n, seed: Path, after: Path) -> str:
     shutil.copyfile(seed, after)
     answer = HONEST_ANSWERS[n]
     if n == 6:
+        answer = 'Weekend Taycan: Jet Black Metallic $840; 20-inch Taycan Turbo Aero Wheels $2,510. Total $115,250; base $111,900.'
+    elif n == 7:
+        answer += ' Cheapest VIN WP0AA2A9XSS209182; 2,448 miles; Gentian Blue Metallic; Porsche Bellevue.'
+    elif n == 13:
+        answer = 'Porsche Bellevue has 236 vehicles, opens at 09:00, at 11910 N.E. 8th Street; +1 425-633-1583. Cheapest cars: 2014 Porsche Cayenne $7,795 and 2017 Porsche Macan $18,000.'
+    elif n == 14:
+        es = json.loads((Path(__file__).resolve().parents[1] / 'dealer_comparison.json').read_text())
+        answer = '\n'.join(f"{e['dealer']}: {e['name']}, ${e['price']}, VIN {e['vin']}, Sunday {e['hours']}" for e in es)
+    elif n == 16:
+        answer += ' Accessories SKU 9J0813601A. Clothing SKU 4056487100289.'
+    elif n == 17:
+        answer = 'PSFIXTURE01: two Classic Leather Jackets at $1,990 each and one Trench Coat at $1,350. Total $5,330, free shipping $0.00.'
+
+    if n == 6:
         mutate_db(after, [
             "INSERT INTO saved_builds (user_id, build_name, model_code, model_name, "
             "options_json, total_price, created_on) VALUES ("
             f"{CASEY_ID}, 'Weekend Taycan', 'Y1AAI1', 'Taycan', "
             "'[{\"id\": \"2T\", \"name\": \"Jet Black Metallic\", \"price\": 840}, "
-            "{\"id\": \"1A\", \"name\": \"Gentian Blue Metallic\", \"price\": 1500}]', "
-            "114240, '2026-09-24')",
+            "{\"id\": \"47I\", \"name\": \"20\\\" Taycan Turbo Aero Wheels\", \"price\": 2510}]', "
+            "115250, '2026-09-24')",
         ])
     elif n == 12:
         mutate_db(after, [
             "INSERT INTO saved_vehicles (user_id, vehicle_id, saved_on) VALUES ("
             f"{JORDAN_ID}, {PANAMERA4_VEHICLE_ID}, '2026-09-24')",
+        ])
+    elif n == 17:
+        apply_honest_delta(18, seed, after)
+        mutate_db(after, [
+            "UPDATE shop_orders SET subtotal_cents=533000,total_cents=533000 WHERE order_number='PSFIXTURE01'",
+            "UPDATE shop_order_items SET product_id=(SELECT id FROM shop_products WHERE name='Classic Leather Jacket'),quantity=2,unit_price_cents=199000 WHERE order_id=(SELECT id FROM shop_orders WHERE order_number='PSFIXTURE01')",
+            "INSERT INTO shop_order_items (order_id,product_id,quantity,unit_price_cents) VALUES ((SELECT id FROM shop_orders WHERE order_number='PSFIXTURE01'),(SELECT id FROM shop_products WHERE name='Trench Coat'),1,135000)",
         ])
     elif n == 18:
         mutate_db(after, [
@@ -400,7 +450,7 @@ def apply_honest_delta(n, seed: Path, after: Path) -> str:
         nine11 = _cheapest_preowned_911_id(seed)
         mutate_db(after, [
             "INSERT INTO users (email, password_hash, first_name, last_name, created_at) "
-            "VALUES ('alex.rivera@test.com', '$2b$12$fixture-hash-not-checked', "
+            "VALUES ('alex.rivera@test.com', '$2b$04$3Cyt2OSCoofGyJ5LitSph.R.mlVgY8fPCQ8ePd146Xt6h5vvKvDGS', "
             "'Alex', 'Rivera', '2026-09-24')",
             "INSERT INTO saved_vehicles (user_id, vehicle_id, saved_on) VALUES ("
             "(SELECT id FROM users WHERE email='alex.rivera@test.com'), "
@@ -579,3 +629,23 @@ def test_empty_answer(seed, workdir):
                     lambda r: honest_steps(0, r), "")
     code, payload = run_verifier(0, run, seed, seed)
     assert code == 1, "empty final answer must FAIL"
+
+@pytest.mark.parametrize('n,sql', [
+    (18, "UPDATE shop_orders SET first_name='Other' WHERE order_number='PSFIXTURE01'"),
+    (18, "UPDATE shop_order_items SET order_id=999 WHERE order_id=(SELECT id FROM shop_orders WHERE order_number='PSFIXTURE01')"),
+    (19, "UPDATE users SET first_name='Other' WHERE email='casey.taylor@test.com'"),
+])
+def test_precise_state_deltas(n, sql, seed, workdir):
+    after = workdir / 'after.db'
+    answer = apply_honest_delta(n, seed, after)
+    run = build_run(workdir/'run', f'Porsche--{n}', lambda r: honest_steps(n,r), answer)
+    assert run_verifier(n,run,seed,after)[0] == 0
+    mutate_db(after,[sql])
+    assert run_verifier(n,run,seed,after)[0] == 1
+
+@pytest.mark.parametrize('n,old,new', [(0,'$135,500','$1'), (2,'$163,000','$1')])
+def test_each_model_price_is_checked(n, old, new, seed, workdir):
+    after = workdir/'after.db'
+    answer = apply_honest_delta(n, seed, after)
+    run = build_run(workdir/'run',f'Porsche--{n}',lambda r: honest_steps(n,r),answer.replace(old,new))
+    assert run_verifier(n,run,seed,after)[0] == 1

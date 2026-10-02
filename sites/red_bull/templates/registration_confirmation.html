@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Registration confirmed — {{ event.title }}{% endblock %}
+{% block content %}
+<h1 class="page-title">You're in!</h1>
+<div class="form-card" style="max-width:640px">
+  <p>Your registration for <strong>{{ event.title }}</strong> is confirmed.</p>
+  <div class="fact-row"><span class="k">Registration code</span><span class="v">{{ reg.registration_code }}</span></div>
+  <div class="fact-row"><span class="k">Name</span><span class="v">{{ reg.first_name }} {{ reg.last_name }}</span></div>
+  <div class="fact-row"><span class="k">Email</span><span class="v">{{ reg.email }}</span></div>
+  <div class="fact-row"><span class="k">Ticket type</span><span class="v">{{ reg.ticket_type }}</span></div>
+  {% if reg.price %}<div class="fact-row"><span class="k">Entry fee</span><span class="v">${{ '%.0f' | format(reg.price) if reg.price == (reg.price | int) else '%.2f' | format(reg.price) }} {{ reg.currency or '' }}</span></div>{% else %}<div class="fact-row"><span class="k">Entry fee</span><span class="v">Free</span></div>{% endif %}
+  <div class="fact-row"><span class="k">Event date</span><span class="v">{{ event.date_range_text() }}</span></div>
+  <div class="fact-row"><span class="k">Venue</span><span class="v">{{ event.location_text() }}</span></div>
+  <p style="margin-top:16px"><a class="btn btn-red" href="{{ url_for('event_detail', slug=event.slug) }}">Back to the event page</a></p>
+</div>
+{% endblock %}

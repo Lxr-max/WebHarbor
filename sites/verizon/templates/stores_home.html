@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Find & Locate Verizon Stores in Your Area{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Find a Verizon store</h1>
+  <p>Book an appointment, explore local promotions and plan your visit to a store near you.</p>
+  <div class="grid grid-3">
+    <div class="tile"><h3>Appointments</h3><p>Schedule an appointment. Get the help you need without the wait.</p></div>
+    <div class="tile"><h3>Express Pickup</h3><p>Order online and pick up today, or use an Express Pickup Locker.</p></div>
+    <div class="tile"><h3>Pro on the Go</h3><p>Need us to come to you? We'll be there. Free 2-day shipping on all online orders.</p></div>
+  </div>
+  <h2>Search for stores by state</h2>
+  <ul class="state-list">
+    {% for slug, name in states.items() %}
+    <li><a href="{{ url_for('stores_state', state=slug) }}">{{ name }}</a>
+        ({{ by_state[slug]|length }} cities)</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

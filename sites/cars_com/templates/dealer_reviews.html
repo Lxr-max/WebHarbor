@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ d.name }} — Reviews | Cars.com{% endblock %}
+{% block breadcrumb %}
+<nav class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> &rsaquo; <a href="{{ url_for('dealers_index') }}">Find a dealer</a> &rsaquo;
+  <a href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">{{ d.name }}</a> &rsaquo; <span>Reviews</span></nav>
+{% endblock %}
+{% block content %}
+<div class="dealer-reviews-page">
+  <h1>{{ d.name }} reviews</h1>
+  <p class="muted">{% if d.rating %}★ {{ d.rating }} &middot; {{ d.review_count | mileagefmt }} reviews{% endif %}</p>
+  {% if d.review_list() %}
+  <div class="review-list">
+    {% for r in d.review_list() %}
+    <div class="review">
+      <p class="review-head">By {{ r.author }}{% if r.visit_type %} &middot; {{ r.visit_type }}{% endif %}{% if r.rating %} &middot; ★ {{ r.rating }}{% endif %} &middot; {{ r.date }}</p>
+      {% if r.categories %}<p class="review-cats muted">{{ r.categories }}</p>{% endif %}
+      <p class="review-body">{{ r.text }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No reviews yet.</p>
+  {% endif %}
+  <a class="btn btn-outline" href="{{ url_for('dealer_page', dealer_id=d.id, slug=d.slug) }}">Back to dealership page</a>
+</div>
+{% endblock %}

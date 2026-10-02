@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Budget — {{ trip.title }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card plan-head">
+    <div>
+      <h1 style="margin:0">{{ trip.title }} — budget</h1>
+      <p class="small muted" style="margin:4px 0 0">Track shared expenses and settle up — Wanderlog splits the bill across members.</p>
+    </div>
+    <span class="spacer"></span>
+    <nav class="plan-nav">
+      <a href="{{ url_for('plan', edit_key=trip.edit_key) }}">Itinerary</a>
+      <a href="{{ url_for('plan_map', edit_key=trip.edit_key) }}">Map</a>
+      <a class="on" href="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">Budget</a>
+      <a href="{{ url_for('plan_checklist', edit_key=trip.edit_key) }}">Checklist</a>
+    </nav>
+  </div>
+
+  <div class="trip-grid">
+    <div>
+      <h2>Expenses</h2>
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="money-table">
+          <tr><th>Date</th><th>Expense</th><th>Category</th><th>Paid by</th><th class="num">Amount</th><th></th></tr>
+          {% for e in expenses %}
+            <tr>
+              <td class="small">{{ e.date or '—' }}</td>
+              <td>{{ e.description }}</td>
+              <td><span class="chip static">{{ e.category }}</span></td>
+              <td class="small">{% set payer = e | expense_payer %}{{ payer.display_name if payer else '?' }}</td>
+              <td class="num">{{ fmt_money(e.amount_cents) }}</td>
+              <td>
+                <form class="inline" method="post" action="{{ url_for('expense_delete', eid=e.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="btn btn-ghost btn-sm" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="6" class="muted">No expenses yet.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <h2 style="margin-top:22px">Add an expense</h2>
+      <div class="card">
+        <form method="post" action="{{ url_for('plan_budget', edit_key=trip.edit_key) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <label for="description">Description</label>
+          <input type="text" id="description" name="description" required placeholder="e.g. Dinner, museum tickets…">
+          <label for="amount">Amount (USD)</label>
+          <input type="text" id="amount" name="amount" required placeholder="42.50" style="max-width:160px">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            {% for c in categories %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+          </select>
+          <label for="paid_by">Paid by</label>
+          <select id="paid_by" name="paid_by">
+            {% for m in members %}<option value="{{ m.id }}">{{ m.display_name }}</option>{% endfor %}
+          </select>
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" style="max-width:200px">
+          <label>Split between</label>
+          <div class="checks">
+            {% for m in members %}
+              <label><input type="checkbox" name="split_among" value="{{ m.id }}" checked> {{ m.display_name }}</label>
+            {% endfor %}
+          </div>
+          <p style="margin-top:12px"><button class="btn btn-primary" type="submit">Record expense</button></p>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>Trip total</h3>
+        <p style="margin:4px 0"><span class="stat" style="font-size:1.5rem">{{ fmt_money(bal.total) }}</span></p>
+        <table class="money-table">
+          {% for m in bal.members %}
+            <tr>
+              <th>{{ m.display_name }}</th>
+              <td class="num">{{ fmt_money(bal.paid[m.id]) }} paid</td>
+              <td class="num">{{ bal.net_display[m.id] }} net</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>By category</h3>
+        <table class="money-table">
+          {% for cat, total in by_cat | dict_sorted %}
+            <tr><th>{{ cat }}</th><td class="num">{{ fmt_money(total) }}</td></tr>
+          {% else %}
+            <tr><td class="muted">Nothing recorded yet.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Settle up</h3>
+        {% for debtor, creditor, amount in bal.settlements %}
+          <p class="small" style="margin:6px 0">
+            <span class="stat">{{ debtor.display_name }}</span> owes
+            <span class="stat">{{ creditor.display_name }}</span>
+            <span class="stat">{{ amount }}</span>
+          </p>
+        {% else %}
+          <p class="small muted" style="margin:0">Everyone is square — nothing to settle.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
