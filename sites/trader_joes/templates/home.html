@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+  {% if hero_guide and dam_url(hero_guide.hero) %}<img class="hero-image" src="{{ dam_url(hero_guide.hero) }}" alt="{{ hero.title }}">{% endif %}
+  <h1>{{ hero.title }}</h1>
+  {% if hero_link %}<a class="cta" href="{{ hero_link }}">Explore the guide</a>{% endif %}
+</section>
+
+<section class="home-section">
+  <h2>Welcome to Trader Joe's!</h2>
+</section>
+
+<section class="home-section">
+  <h2>What's New? <a class="see-all" href="{{ url_for('category', slug='products', cat_id=2) }}?filters=%7B%22areNewProducts%22%3Atrue%7D">see all new products</a></h2>
+  <div class="grid">
+    {% for p in whats_new %}
+    <article class="card">
+      {% if p.product_label %}<span class="label-chip{% if p.product_label == 'SEASONAL' %} seasonal{% endif %}">{{ p.product_label }}</span>{% endif %}
+      <a class="card-img" href="{{ product_link(p) }}">
+        {% if dam_url(p.primary_image) %}<img src="{{ dam_url(p.primary_image) }}" alt="{{ p.item_title }}">{% endif %}
+      </a>
+      <div class="card-title"><a href="{{ product_link(p) }}">{{ p.item_title }}</a></div>
+      <div class="card-sub">{{ p.sales_uom_description }}</div>
+      <div class="card-price">{{ p.price_text() }}</div>
+      <form method="post" action="{{ url_for('shopping_list_add', sku=p.sku) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ url_for('home') }}">
+        <button class="add-btn" type="submit">ADD TO LIST</button>
+      </form>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Believe-Eat-Or-Not Recipes <a class="see-all" href="{{ url_for('recipes') }}">see more recipes</a></h2>
+  <div class="recipe-grid">
+    {% for entry in recipe_cards[:3] %}
+    <article class="recipe-card">
+      <a href="{{ url_for('recipe_detail', slug=entry.recipe.slug) }}">
+        {% if dam_url(entry.recipe.image_src) %}<img src="{{ dam_url(entry.recipe.image_src) }}" alt="{{ entry.recipe.title }}">{% endif %}
+      </a>
+      <div class="body">
+        <h3><a href="{{ url_for('recipe_detail', slug=entry.recipe.slug) }}">{{ entry.recipe.title }}</a></h3>
+        <div class="recipe-cats">{{ entry.card.description | plain | truncate(120) }}</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Podcast <a class="see-all" href="{{ url_for('podcast') }}">past &rsquo;casts</a></h2>
+  <div class="editorial-row">
+    {% if episodes is defined and episodes %}
+    {% else %}
+    <div>
+      <h3><a href="{{ url_for('podcast') }}">Inside Trader Joe's: our podcast</a></h3>
+      <p class="rich">Hear the stories behind your favorite products, straight from the Crew Members who know them best. New episodes every other Monday.</p>
+      <a class="btn" href="{{ url_for('podcast') }}">LISTEN</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>And There's More... <a class="see-all" href="{{ url_for('discover') }}">discover more</a></h2>
+  <div class="recipe-grid">
+    {% for row in editorial %}
+    <article class="recipe-card">
+      <a href="{{ url_for('story_detail', slug=row.slug) if row.kind == 'story' else url_for('guide_detail', slug=row.slug) }}">
+        {% if dam_url(row.hero) %}<img src="{{ dam_url(row.hero) }}" alt="{{ row.title }}">{% endif %}
+      </a>
+      <div class="body">
+        <h3><a href="{{ url_for('story_detail', slug=row.slug) if row.kind == 'story' else url_for('guide_detail', slug=row.slug) }}">{{ row.title }}</a></h3>
+        <div class="recipe-cats">{{ 'Story' if row.kind == 'story' else 'Guide' }} &middot; {{ row.publish_date }}</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>In Case You Missed It!</h2>
+  <div class="ann-list">
+    {% for a in announcements %}
+    <a href="{{ url_for('announcements') }}">{{ a.title }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>So, What Else is New?</h2>
+  <div class="grid">
+    {% for p in featured %}
+    <article class="card">
+      {% if p.product_label %}<span class="label-chip{% if p.product_label == 'SEASONAL' %} seasonal{% endif %}">{{ p.product_label }}</span>{% endif %}
+      <a class="card-img" href="{{ product_link(p) }}">
+        {% if dam_url(p.primary_image) %}<img src="{{ dam_url(p.primary_image) }}" alt="{{ p.item_title }}">{% endif %}
+      </a>
+      <div class="card-title"><a href="{{ product_link(p) }}">{{ p.item_title }}</a></div>
+      <div class="card-price">{{ p.price_text() }}</div>
+      <form method="post" action="{{ url_for('shopping_list_add', sku=p.sku) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ url_for('home') }}">
+        <button class="add-btn" type="submit">ADD TO LIST</button>
+      </form>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

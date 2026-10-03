@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ team.full_name }} Roster | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/{{ team.league }}">{{ LEAGUE_NAMES.get(team.league, team.league) }}</a> &gt;
+  <a href="/{{ team.league }}/{{ team.slug }}-team">{{ team.full_name|upper }}</a> &gt;
+  <span>ROSTER</span>
+</div>
+<section class="team-head">
+  {% if team.logo and image(team.logo) %}<img class="team-logo" src="{{ image(team.logo) }}" alt="{{ team.full_name }}">{% endif %}
+  <div>
+    <h1>{{ team.full_name|upper }} ROSTER</h1>
+    <p class="team-record">{{ team.record or '' }}{% if team.note %} &middot; {{ team.note }}{% endif %}</p>
+  </div>
+  <nav class="team-tabs">
+    <a href="/{{ team.league }}/{{ team.slug }}-team">News</a>
+    <a href="/{{ team.league }}/{{ team.slug }}-team-schedule">Schedule</a>
+    <a class="active" href="/{{ team.league }}/{{ team.slug }}-team-roster" aria-current="page">Roster</a>
+  </nav>
+</section>
+{% for group, players in groups.items() %}
+<section class="section">
+  <div class="section-head"><h2>{{ group }}</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Name</th><th>POS</th><th>AGE</th><th>HT</th><th>WT</th><th>{% if team.league == 'mlb' %}SCHOOL{% else %}COLLEGE{% endif %}</th></tr></thead>
+    <tbody>
+      {% for p in players %}
+      <tr>
+        <td class="cell-team"><a href="/{{ team.league }}/{{ p.slug }}-player">{{ p.name }}</a> #{{ p.number }}</td>
+        <td>{{ p.pos }}</td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.height }}</td>
+        <td>{{ p.weight }}</td>
+        <td>{{ p.college }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endfor %}
+{% endblock %}

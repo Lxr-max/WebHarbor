@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Our fleet — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>United's fleet</h1>
+  <p>Every aircraft type in the fleet, with the seat map, cabin count and
+    onboard amenities frozen from the upstream aircraft pages.</p>
+  <div class="ua-card-grid">
+    {% for a in aircraft %}
+    <a class="ua-card" href="{{ url_for('fleet_detail', key=a.key) }}">
+      <span class="ua-card-title">{{ a.name }}</span>
+      <span class="ua-card-cat">{{ a.first_rows }} premium rows · {{ a.economy_plus_rows }} Economy Plus rows ·
+        {{ a.seat_rows }} total rows{% if a.wifi %} · Wi-Fi: {{ a.wifi }}{% endif %}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

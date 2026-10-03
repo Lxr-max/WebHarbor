@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('advisories_wait_times') }}">Advisories and Wait Times</a> › {{ crossing.full_name }}</div>
+<h1 class="page-title">{{ crossing.full_name }}</h1>
+<p>Border: {{ crossing.border|title }} · Port status: <span class="chip {{ ('ok' if crossing.port_status == 'Open' else 'closed') }}">{{ crossing.port_status }}</span> · Hours: {{ crossing.hours }} · Snapshot: {{ crossing.snapshot_date }} {{ crossing.snapshot_time }}</p>
+{% if crossing.construction_notice %}<div class="callout"><strong>Construction notice:</strong> {{ crossing.construction_notice }}</div>{% endif %}
+
+{% if user.is_authenticated %}
+<form method="post" action="{{ url_for('save_crossing', crossing_id=crossing.id) }}" style="margin-bottom:1rem;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn btn-ghost" type="submit">Save this crossing to My Account</button>
+</form>
+{% endif %}
+
+{% for mode, rows in lane_rows.items() %}
+{% if rows %}
+<section>
+  <h2>{{ {'commercial': 'Commercial Vehicle Lanes', 'passenger': 'Passenger Vehicle Lanes', 'pedestrian': 'Pedestrian Lanes'}[mode] }}</h2>
+  <table class="data">
+    <tr><th>Lane</th><th>Status</th><th>Current Delay</th><th>Lanes Open</th><th>Updated</th></tr>
+    {% for lane in rows %}
+    <tr>
+      <td>{{ lane.name }}</td>
+      <td><span class="chip {{ ('ok' if 'no delay' in lane.status|lower else ('closed' if 'closed' in lane.status|lower else 'delay')) }}">{{ lane.status }}</span></td>
+      <td>{% if lane.delay is not none %}{{ lane.delay }} minutes{% else %}—{% endif %}</td>
+      <td>{{ lane.open if lane.open is not none else '—' }}</td>
+      <td>{{ lane.updated or '—' }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endif %}
+{% endfor %}
+
+{% if max_delay %}
+<p class="note">Longest current delay at this crossing: {{ max_delay[0] }} minutes ({{ max_delay[1]|replace('commercial','Commercial Vehicle')|replace('passenger','Passenger Vehicle')|replace('pedestrian','Pedestrian') }}, {{ max_delay[2] }}).</p>
+{% endif %}
+{% endblock %}

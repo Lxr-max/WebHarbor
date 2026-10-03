@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Appliance Buying Guides{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Appliance Buying Guides</span></li>
+{% endblock %}
+{% block content %}
+<section class="container guides-page">
+  <h1 class="page-heading">Appliance Buying Guides</h1>
+  <div class="guide-tiles">
+    {% for g in guides %}
+    <a class="guide-tile" href="{{ url_for('buying_guide', slug=g.slug) }}">
+      <h3>{{ g.title }}</h3>
+      <p>{{ g.body[:110] }}&hellip;</p>
+    </a>
+    {% endfor %}
+  </div>
+  <p class="category-blurb">{{ intro }}</p>
+  <p>If you still have appliance questions or need help, get expert appliance advice and personalized recommendations for your needs. Our team of certified appliance experts are here to provide knowledgeable answers and help you make the best choice. Call us today Monday through Friday 8am-6pm (EST) Toll-free 877-628-9913 or <a href="{{ url_for('contact') }}">contact us</a>.</p>
+</section>
+{% endblock %}

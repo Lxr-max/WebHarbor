@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Reservation {{ reservation.code }} | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="crumbs"><a href="{{ url_for('account') }}">My Reservations</a> › <span>{{ reservation.code }}</span></div>
+
+  {% if reservation.status == 'cancelled' %}
+  <div class="form-error">This reservation was canceled. Refunds are issued to the original payment method within 5-10 business days.</div>
+  {% elif reservation.status == 'past' %}
+  <div class="form-success">This reservation has been completed. Thanks for parking with SpotHero!</div>
+  {% endif %}
+
+  <div class="checkout-grid">
+    <div>
+      <h1 style="font-size:24px">Reservation {{ reservation.code }}</h1>
+      <p class="muted">{{ reservation.facility.title }} — {{ reservation.facility.street }}, {{ reservation.facility.city }}, {{ reservation.facility.state }}</p>
+
+      <div class="panel">
+        <div class="pass-rows">
+          <div><span class="k">Reservation #</span><span class="v">{{ reservation.code }}</span></div>
+          <div><span class="k">Type</span><span class="v">{{ reservation.kind | capitalize }}{% if reservation.facility.airport_code %} ({{ reservation.facility.airport_code }}){% endif %}</span></div>
+          <div><span class="k">Start</span><span class="v">{{ fmt_display_date(reservation.start_dt) }} {{ fmt_display_time(reservation.start_dt) }}</span></div>
+          <div><span class="k">End</span><span class="v">{{ fmt_display_date(reservation.end_dt) }} {{ fmt_display_time(reservation.end_dt) }}</span></div>
+          <div><span class="k">Subtotal</span><span class="v">${{ '%.2f' % reservation.subtotal }}</span></div>
+          {% if reservation.facility_fee %}<div><span class="k">Facility Fee</span><span class="v">${{ '%.2f' % reservation.facility_fee }}</span></div>{% endif %}
+          <div><span class="k">Service Fee</span><span class="v">${{ '%.2f' % reservation.service_fee }}</span></div>
+          {% if reservation.promo_code %}<div><span class="k">Promo applied</span><span class="v">{{ reservation.promo_code }}</span></div>{% endif %}
+          <div><span class="k">Total paid</span><span class="v">${{ '%.2f' % reservation.total }}</span></div>
+          <div><span class="k">Parking pass</span><span class="v">{{ reservation.parking_pass }}</span></div>
+          {% if reservation.license_plate %}<div><span class="k">License plate</span><span class="v">{{ reservation.license_plate }}</span></div>{% endif %}
+          {% if reservation.vehicle %}<div><span class="k">Vehicle</span><span class="v">{{ reservation.vehicle }}</span></div>{% endif %}
+        </div>
+      </div>
+
+      {% if reservation.status in ('upcoming', 'active') %}
+      <div class="panel">
+        <h2>Manage this reservation</h2>
+        <p class="small muted">You can cancel up until the minute your reservation begins for a full refund. You can extend most active reservations pending availability.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <form method="post" action="{{ url_for('reservation_cancel', code=reservation.code) }}" onsubmit="return confirm('Cancel this reservation? You will receive a full refund.')">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-tertiary" type="submit">Cancel reservation</button>
+          </form>
+          <form method="post" action="{{ url_for('reservation_extend', code=reservation.code) }}" style="display:flex;gap:8px;align-items:center">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <select name="hours" class="chip" style="padding:8px 10px">
+              <option value="1">+1 hour</option>
+              <option value="2">+2 hours</option>
+              <option value="3">+3 hours</option>
+            </select>
+            <button class="btn btn-secondary" type="submit">Extend reservation</button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h2>Your Parking Pass</h2>
+        <div class="qr" style="margin:10px auto;width:200px;height:200px;padding:8px;border:1px solid var(--gray-200);border-radius:4px">
+          <img src="{{ url_for('reservation_qr', code=reservation.code) }}" alt="QR code for {{ reservation.code }}" style="width:100%;height:100%">
+        </div>
+        <p class="small muted center">Scan this code at the gate to enter and exit.</p>
+      </div>
+      <div class="panel">
+        <h3>How to Redeem</h3>
+        {% for step in reservation.facility.json_field('redemption') %}
+        <div class="redeem-step" style="text-align:left;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start">
+          {% if step.illustration %}
+          <img src="{{ url_for('static', filename='images/' ~ step.illustration) }}" alt="" style="width:44px;height:44px;flex:none">
+          {% endif %}
+          <div class="small">{{ step.text|striptags }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

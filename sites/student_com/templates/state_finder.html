@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Choose your College - {{ state_name }} Student Housing | Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px">
+    <a href="/">Home</a> › <span>{{ state_name }} College Finder</span>
+  </nav>
+  <h1>Find your perfect student home in {{ state_name }} today</h1>
+  <p class="muted" style="margin-top:10px;max-width:640px">Search for your college and see homes near campus. We're currently starting with {{ state_name }} colleges, but please keep an eye out for more locations soon.</p>
+  <div class="nav-search" style="max-width:520px;margin-top:20px">
+    <form method="get" action="/us/{{ state }}/u">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search for your college"
+             aria-label="Search for your college" style="width:100%">
+    </form>
+  </div>
+</div>
+
+<section class="container" style="padding-bottom:56px">
+  {% if popular %}
+  <div class="section-head">
+    <h2>Popular Colleges in {{ state_name }}</h2>
+  </div>
+  <div class="grid cols-4">
+    {% for uni in popular %}
+    <a class="card" style="padding:20px;display:block" href="/us/{{ uni.state }}/{{ uni.city_slug }}/u/{{ uni.slug }}">
+      <h3 style="font-size:15px">{{ uni.name }}</h3>
+      <div class="muted small" style="margin-top:4px">{{ uni.city_slug.replace('-', ' ').title() }}</div>
+      <div class="small" style="margin-top:8px;color:var(--orange);font-weight:600">{{ uni.total_properties }} homes nearby</div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="section-head" style="margin-top:36px">
+    <h2>All {{ state_name }} colleges</h2>
+    <span class="muted small">{{ unis|length }} colleges</span>
+  </div>
+  <div class="grid cols-3">
+    {% for uni in unis %}
+    <a class="card" style="padding:16px;display:block" href="/us/{{ uni.state }}/{{ uni.city_slug }}/u/{{ uni.slug }}">
+      <div style="font-weight:600;font-size:14px">{{ uni.name }}</div>
+      <div class="muted small" style="margin-top:2px">{{ uni.city_slug.replace('-', ' ').title() }}{% if not uni.has_properties %} · homes coming soon{% endif %}</div>
+    </a>
+    {% endfor %}
+  </div>
+  {% if q and not unis %}
+  <div class="empty-state">
+    <h3>Can't find your university?</h3>
+    <p class="muted small">We're currently starting with {{ state_name }} colleges, but please keep an eye out for more locations soon.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

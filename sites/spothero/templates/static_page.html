@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight" style="max-width:860px">
+  {% for s in sections %}
+    {% if s.tag == 'h1' %}<h1 style="font-size:30px;margin-top:12px">{{ s.text }}</h1>
+    {% elif s.tag == 'h2' %}<h2 style="font-size:22px;margin-top:26px">{{ s.text }}</h2>
+    {% elif s.tag == 'h3' %}<h3 style="font-size:17px;margin-top:18px">{{ s.text }}</h3>
+    {% elif s.tag == 'h4' %}<h4 style="margin-top:14px">{{ s.text }}</h4>
+    {% elif s.tag == 'li' %}<p class="muted" style="padding-left:16px;position:relative"><span style="position:absolute;left:0">•</span>{{ s.text }}</p>
+    {% else %}<p class="muted">{{ s.text }}</p>{% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

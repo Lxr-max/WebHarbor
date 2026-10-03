@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Check Trusted Traveler Application Status</h1>
+<form class="stack" method="get" style="max-width:520px">
+  <label for="application_number">Application Number <span class="hint">(e.g. GE-12345678)</span></label>
+  <input id="application_number" name="application_number" value="{{ number }}">
+  <button class="btn" type="submit" style="margin-top:1rem;">Check Status</button>
+</form>
+{% if record %}
+<p>Found application <a href="{{ url_for('ttp_status', application_number=record.application_number) }}">{{ record.application_number }}</a>.</p>
+{% elif not_found %}
+<div class="flash">No application found for that number.</div>
+{% endif %}
+{% endblock %}

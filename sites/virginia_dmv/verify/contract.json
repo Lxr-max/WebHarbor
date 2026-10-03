@@ -1,0 +1,1553 @@
+{
+  "Virginia DMV--0": {
+    "task": "Sign in as carol.d@test.com with password TestPass123!. Renew my driver's license for the standard eight-year term, keeping its existing REAL ID status. Check the renewal price against the fee chart before paying. Confirm the license number, amount paid, receipt number and new expiration date, and reopen the receipt from my account to verify the charge and explain when the new card should arrive.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 3,
+            "kind": "Driver's License Renewal",
+            "summary": "D license renewed for 8 years",
+            "total": "$32.00",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "Driver's license renewal (8 years @ $4.00 per year)",
+                    "$32.00"
+                  ]
+                ]
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "user_licenses": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[3]": {
+            "expires": "2035-08-02"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/license/renew",
+      "/vehicles/taxes-fees",
+      "/account/receipt/LIC"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "d5540917"
+      ],
+      [
+        "checkpoint 2",
+        "8 years.{0,25}\\$32"
+      ],
+      [
+        "checkpoint 3",
+        "(?:non.real.id|not real.id)"
+      ],
+      [
+        "checkpoint 4",
+        "august 2.{0,8}2035|2035-08-02"
+      ],
+      [
+        "checkpoint 5",
+        "5 business days"
+      ]
+    ],
+    "answer_state": [
+      [
+        "transactions",
+        "receipt"
+      ]
+    ]
+  },
+  "Virginia DMV--1": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Renew my 2019 Toyota Camry registration online for two years. Compare the one-, two- and three-year previews so I can understand the multi-year saving, then pay for two years. Confirm the fee breakdown, amount charged, receipt number and new expiration date, and verify the receipt in my transaction history.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "kind": "Registration Renewal",
+            "summary": "2019 Toyota Camry \u2014 2-year online renewal",
+            "total": "$56.50",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "2019 Toyota Camry \u2014 Passenger vehicle - 4,000 lbs or less registration (2 years)",
+                    "$61.50"
+                  ],
+                  [
+                    "Internet renewal discount (per year)",
+                    "-$2.00"
+                  ],
+                  [
+                    "2-year renewal discount",
+                    "-$3.00"
+                  ]
+                ],
+                "vehicle": "2019 Toyota Camry",
+                "plate": "UPL-2214",
+                "years": 2
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "vehicles": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[1]": {
+            "registration_expires": "2028-10-15",
+            "registration_years": 2
+          }
+        }
+      }
+    },
+    "paths": [
+      "/account/vehicles/1/renew",
+      "/account/receipt/REG"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "1 year \\$29\\.75"
+      ],
+      [
+        "checkpoint 2",
+        "2 years \\$56\\.50"
+      ],
+      [
+        "checkpoint 3",
+        "3 years \\$85\\.25"
+      ],
+      [
+        "checkpoint 4",
+        "\\$61\\.50"
+      ],
+      [
+        "checkpoint 5",
+        "\\$2 internet"
+      ],
+      [
+        "checkpoint 6",
+        "\\$3 multi.year"
+      ],
+      [
+        "checkpoint 7",
+        "october 15.{0,8}2028|2028-10-15"
+      ]
+    ],
+    "answer_state": [
+      [
+        "transactions",
+        "receipt"
+      ]
+    ]
+  },
+  "Virginia DMV--2": {
+    "task": "Sign in as dana.k@test.com with password TestPass123!. I need to budget for renewing my 2017 Chevrolet Bolt EV. Compare the one-, two- and three-year online registration previews, including the highway use fee and discounts. Use the highway use fee guidance to explain why an electric car is charged and identify the cheaper annualized option. Report the quoted totals and leave my registration unchanged.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {},
+    "paths": [
+      "/account/vehicles/5/renew",
+      "/vehicles/taxes-fees/highway-use"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "1 year.{0,100}\\$165\\.38"
+      ],
+      [
+        "checkpoint 2",
+        "2 years.{0,100}\\$327\\.76"
+      ],
+      [
+        "checkpoint 3",
+        "3 years.{0,100}\\$492\\.14"
+      ],
+      [
+        "checkpoint 4",
+        "\\$135\\.63 highway use"
+      ],
+      [
+        "checkpoint 5",
+        "\\$163\\.88/year"
+      ],
+      [
+        "checkpoint 6",
+        "\\$164\\.05/year"
+      ],
+      [
+        "checkpoint 7",
+        "2 years.{0,40}lowest annualized"
+      ],
+      [
+        "checkpoint 8",
+        "fuel.tax"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Virginia DMV--3": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. Buy the Go Hokies college plate for my Toyota RAV4 with the personalization HOKIE4. Check its personalization rules, annual plate charge and additional personalization charge before purchasing. Confirm availability, the total, the receipt number and the design saved on my vehicle, and explain the plate's revenue-sharing threshold and transfer amount.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "kind": "Plate Purchase",
+            "summary": "Virginia Tech - Go Hokies plate for 2021 Toyota RAV4 \u2014 message HOKIE4",
+            "total": "$35.00",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "Virginia Tech - Go Hokies plate fee (annually, in addition to registration)",
+                    "$25.00"
+                  ],
+                  [
+                    "Personalized plate fee (annually)",
+                    "$10.00"
+                  ]
+                ]
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "vehicles": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[2]": {
+            "plate": "HOKIE4",
+            "plate_design": "virginia-tech-go-hokies"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/vehicles/license-plates/search/virginia-tech-go-hokies",
+      "/account/receipt/PLT"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "hokie4.{0,20}available"
+      ],
+      [
+        "checkpoint 2",
+        "6 characters"
+      ],
+      [
+        "checkpoint 3",
+        "design fee.{0,10}\\$25"
+      ],
+      [
+        "checkpoint 4",
+        "\\$10 annual personalization"
+      ],
+      [
+        "checkpoint 5",
+        "total \\$35"
+      ],
+      [
+        "checkpoint 6",
+        "rav4"
+      ],
+      [
+        "checkpoint 7",
+        "1000 qualifying"
+      ],
+      [
+        "checkpoint 8",
+        "\\$15.{0,20}\\$25.{0,50}virginia tech"
+      ]
+    ],
+    "answer_state": [
+      [
+        "transactions",
+        "receipt"
+      ]
+    ]
+  },
+  "Virginia DMV--4": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I am considering the 173rd Airborne plate for my Camry. Check its eligibility documentation, annual fee, character limit and disabled-symbol availability, then test AIRBRN and HOOAH as personalized messages. Report which messages are available and what documentation I would need before ordering. Leave the vehicle and transaction history unchanged.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {},
+    "paths": [
+      "/vehicles/license-plates/search/173rd-airborne",
+      "/account/plates/173rd-airborne"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "airborne.{0,20}\\$10"
+      ],
+      [
+        "checkpoint 2",
+        "\\$10 if personalized"
+      ],
+      [
+        "checkpoint 3",
+        "6.character"
+      ],
+      [
+        "checkpoint 4",
+        "no disabled symbol"
+      ],
+      [
+        "checkpoint 5",
+        "airbrn is available"
+      ],
+      [
+        "checkpoint 6",
+        "hooah is unavailable"
+      ],
+      [
+        "checkpoint 7",
+        "dd214"
+      ],
+      [
+        "checkpoint 8",
+        "commanding officer"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Virginia DMV--5": {
+    "task": "I need an office near Alexandria that can handle a motorcycle road skills test. Compare Alexandria and its nearby Franconia office for that service, weekday and Saturday hours, street address and phone number. Recommend the suitable office and explain why the other is unsuitable; use the location finder and the office detail pages to verify the choice.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {},
+    "paths": [
+      "/all-locations",
+      "/locations/alexandria",
+      "/locations/franconia"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "franconia.{0,60}offers motorcycle"
+      ],
+      [
+        "checkpoint 2",
+        "6306 grovedale"
+      ],
+      [
+        "checkpoint 3",
+        "alexandria.{0,180}does not offer motorcycle"
+      ],
+      [
+        "checkpoint 4",
+        "2681 mill road"
+      ],
+      [
+        "checkpoint 5",
+        "804.497.7100"
+      ],
+      [
+        "checkpoint 6",
+        "monday.{0,10}friday 8 am.{0,4}5 pm"
+      ],
+      [
+        "checkpoint 7",
+        "saturday 8 am.{0,4}noon"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Virginia DMV--6": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. Arrange a Driver's License Renewal appointment at Richmond Central on October 8, 2026 in the morning, using my account details. Confirm the office address, booking number, date, time and email, then look it up again to verify that the reservation remains booked.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 2,
+            "name": "Bob Chen",
+            "email": "bob.c@test.com",
+            "office_slug": "richmond-central",
+            "service": "Driver's License Renewal",
+            "appt_date": "2026-10-08",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/appointments/new",
+      "/appointments/lookup"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "license renewal"
+      ],
+      [
+        "checkpoint 2",
+        "richmond central"
+      ],
+      [
+        "checkpoint 3",
+        "2300 west broad"
+      ],
+      [
+        "checkpoint 4",
+        "october 8.{0,8}2026"
+      ],
+      [
+        "checkpoint 5",
+        "bob.c@test.com"
+      ],
+      [
+        "checkpoint 6",
+        "looked.{0,50}confirmed"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "Virginia DMV--7": {
+    "task": "My appointment was booked with alice.j@test.com and confirmation VADM9620114A. Look it up without signing in and prepare a visit note with the service, status, date and time. Verify the booked office's street address, phone and opening hours on its location page, and identify a nearby office as a fallback with its address. Do not cancel the booking.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {},
+    "paths": [
+      "/appointments/lookup",
+      "/locations/richmond-central",
+      "/locations/east-henrico"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "vadm9620114a"
+      ],
+      [
+        "checkpoint 2",
+        "confirmed"
+      ],
+      [
+        "checkpoint 3",
+        "october 7.{0,8}2026.{0,15}10:20 am"
+      ],
+      [
+        "checkpoint 4",
+        "2300 west broad"
+      ],
+      [
+        "checkpoint 5",
+        "804.497.7100"
+      ],
+      [
+        "checkpoint 6",
+        "monday.{0,10}friday 8 am.{0,4}5 pm"
+      ],
+      [
+        "checkpoint 7",
+        "saturday 8 am.{0,4}noon"
+      ],
+      [
+        "checkpoint 8",
+        "east henrico.{0,25}5517 south laburnum"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Virginia DMV--8": {
+    "task": "Help me prepare for the signals and signs portion of Virginia's knowledge exam. Read the manual's Traffic Signals guidance and explain how a steady red differs from a flashing yellow. Take every question in the Signals, Signs and Pavement Markings practice exam, using the manual to resolve uncertainty. Report the score, percentage, pass result and an example of the feedback.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "quiz_attempts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "section": 2,
+            "answers": {
+              "regex": "[\\s\\S]+"
+            },
+            "correct_count": {
+              "regex": "[\\s\\S]+"
+            },
+            "total": 10,
+            "percent": {
+              "regex": "[\\s\\S]+"
+            },
+            "passed": {
+              "regex": "[\\s\\S]+"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/drivers-manual/2/1",
+      "/practice-exam/2/grade"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "steady red.{0,35}complete stop"
+      ],
+      [
+        "checkpoint 2",
+        "flashing yellow.{0,25}slow down.{0,25}cautio"
+      ],
+      [
+        "checkpoint 3",
+        "follow.{0,25}police officer"
+      ]
+    ],
+    "answer_state": [],
+    "quiz_section": 2
+  },
+  "Virginia DMV--9": {
+    "task": "I am 17 and failed my knowledge exam yesterday. Find the retake waiting period and passing requirements in the driver's manual so I know when I can try again. Prepare by completing the Safe Driving practice exam. Report the retake rule, both parts' passing requirements and my practice score, percentage and result, with guidance on any mistakes.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "quiz_attempts": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "section": 3,
+            "answers": {
+              "regex": "[\\s\\S]+"
+            },
+            "correct_count": {
+              "regex": "[\\s\\S]+"
+            },
+            "total": 8,
+            "percent": {
+              "regex": "[\\s\\S]+"
+            },
+            "passed": {
+              "regex": "[\\s\\S]+"
+            }
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/drivers-manual/1/1",
+      "/practice-exam/3/grade"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "15 days"
+      ],
+      [
+        "checkpoint 2",
+        "part 1.{0,50}(?:all 10|10.{0,15}correct)"
+      ],
+      [
+        "checkpoint 3",
+        "part 2.{0,30}80%"
+      ],
+      [
+        "checkpoint 4",
+        "(?:feedback|mistakes|guidance)"
+      ]
+    ],
+    "answer_state": [],
+    "quiz_section": 3
+  },
+  "Virginia DMV--10": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I am planning my next DMV expenses. Compare the one-, two- and three-year online renewal quotes for my Camry and the standard eight-year license renewal quote. Cross-check the car's annual fee and multi-year discounts against the fee guidance, then report the combined cost of a two-year car renewal and eight-year license renewal. Do not pay or change either record.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {},
+    "paths": [
+      "/account/vehicles/1/renew",
+      "/account/license/renew",
+      "/vehicles/taxes-fees"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\$30\\.75 per year"
+      ],
+      [
+        "checkpoint 2",
+        "\\$29\\.75 for 1 year"
+      ],
+      [
+        "checkpoint 3",
+        "\\$56\\.50 for 2"
+      ],
+      [
+        "checkpoint 4",
+        "\\$85\\.25 for 3"
+      ],
+      [
+        "checkpoint 5",
+        "8.year license renewal.{0,15}\\$32"
+      ],
+      [
+        "checkpoint 6",
+        "totals? \\$88\\.50"
+      ]
+    ],
+    "answer_state": []
+  },
+  "Virginia DMV--11": {
+    "task": "I am considering buying a used car privately and want its history before agreeing. Find the prospective purchaser's vehicle information request form and explain what the inquiry provides, its fee, the available request methods and mailed wait. Book a Driver Record / Vehicle Record appointment at Alexandria on October 6, 2026 in the morning for Sam Taylor, sam.taylor@example.com. Confirm the form number and title, appointment number and time.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": null,
+            "name": "Sam Taylor",
+            "email": "sam.taylor@example.com",
+            "office_slug": "alexandria",
+            "service": "Driver Record / Vehicle Record",
+            "appt_date": "2026-10-06",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/forms",
+      "/records/ppi",
+      "/vehicles/taxes-fees",
+      "/appointments/new"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "crd.?01"
+      ],
+      [
+        "checkpoint 2",
+        "request for vehicle information by a prospective purchaser"
+      ],
+      [
+        "checkpoint 3",
+        "\\$12"
+      ],
+      [
+        "checkpoint 4",
+        "vehicle.{0,120}(?:history|damage)"
+      ],
+      [
+        "checkpoint 5",
+        "online.{0,80}mail.{0,100}customer service center"
+      ],
+      [
+        "checkpoint 6",
+        "15 days"
+      ],
+      [
+        "checkpoint 7",
+        "alexandria"
+      ],
+      [
+        "checkpoint 8",
+        "october 6.{0,8}2026"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "Virginia DMV--12": {
+    "task": "Sign in as bob.c@test.com with password TestPass123!. I have moved to 4020 University Drive, Fairfax, VA 22030. Check how soon DMV must be notified and which address types it holds, then update my mailing address. Verify the saved address on my account and reopen the address-change receipt. Confirm its number and charge, and explain the voter-registration guidance for this move.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 2,
+            "kind": "Address Change",
+            "summary": "New address on file: 4020 University Drive, Fairfax, VA 22030",
+            "total": "$0.00",
+            "details": {
+              "json_value": {
+                "service": "Change Address"
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "removed": [],
+        "added": [],
+        "updated": {
+          "[2]": {
+            "street": "4020 University Drive"
+          }
+        }
+      }
+    },
+    "paths": [
+      "/online-services/address-change",
+      "/account/address-change",
+      "/account/receipt/ADR"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "30 days"
+      ],
+      [
+        "checkpoint 2",
+        "residence.{0,40}mailing.{0,30}vehicle.registration"
+      ],
+      [
+        "checkpoint 3",
+        "4020 university drive.{0,20}fairfax.{0,15}22030"
+      ],
+      [
+        "checkpoint 4",
+        "charged \\$0"
+      ],
+      [
+        "checkpoint 5",
+        "(?:updating|update|register).{0,25}vot"
+      ]
+    ],
+    "answer_state": [
+      [
+        "transactions",
+        "receipt"
+      ]
+    ]
+  },
+  "Virginia DMV--13": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I need a certified copy of my driving record for an application. Compare the online and mailed base fees, order the certified copy online, and verify the receipt in my account history. Report the base fee, certification fee, total, receipt number and how long I can view the record without another charge.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "record_requests": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "record_type": "driver",
+            "certified": 1,
+            "delivery": "online",
+            "vehicle_id": null,
+            "status": "Processing",
+            "total": "$13.00",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "kind": "Record Request",
+            "summary": "Driving record (certified copy) \u2014 view online",
+            "total": "$13.00",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "Driving record",
+                    "$8.00"
+                  ],
+                  [
+                    "Additional fee for certified record",
+                    "$5.00"
+                  ]
+                ]
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicles/taxes-fees",
+      "/account/receipt/REC"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\$8 online.{0,20}\\$9 by mail"
+      ],
+      [
+        "checkpoint 2",
+        "\\$5 certification"
+      ],
+      [
+        "checkpoint 3",
+        "\\$13"
+      ],
+      [
+        "checkpoint 4",
+        "5 days"
+      ]
+    ],
+    "answer_state": [
+      [
+        "record_requests",
+        "receipt"
+      ],
+      [
+        "transactions",
+        "receipt"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "transactions",
+        "right": "record_requests",
+        "foreign_key": "receipt",
+        "key": "receipt"
+      }
+    ]
+  },
+  "Virginia DMV--14": {
+    "task": "Sign in as carol.d@test.com with password TestPass123!. My driver's license was lost or stolen. Check the guidance on replacing versus renewing and the restrictions on online replacement, then order a replacement for that reason. Confirm the credential and class, fee, receipt number and expected arrival, and verify that the replacement receipt is in my history while the license's expiration remains unchanged.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 3,
+            "kind": "Driver's License Replacement",
+            "summary": "Replacement card \u2014 Lost or stolen",
+            "total": "$20.00",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "Replacement driver's license card",
+                    "$20.00"
+                  ]
+                ]
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/licenses-ids/license/replace",
+      "/account/receipt/REP"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "class d"
+      ],
+      [
+        "checkpoint 2",
+        "d5540917"
+      ],
+      [
+        "checkpoint 3",
+        "lost or stolen"
+      ],
+      [
+        "checkpoint 4",
+        "\\$20"
+      ],
+      [
+        "checkpoint 5",
+        "5 business days"
+      ],
+      [
+        "checkpoint 6",
+        "august 2.{0,8}2027|2027-08-02"
+      ],
+      [
+        "checkpoint 7",
+        "renewal.{0,70}under 1 year"
+      ],
+      [
+        "checkpoint 8",
+        "under.18"
+      ],
+      [
+        "checkpoint 9",
+        "expired"
+      ],
+      [
+        "checkpoint 10",
+        "name correction"
+      ],
+      [
+        "checkpoint 11",
+        "new photo"
+      ],
+      [
+        "checkpoint 12",
+        "legal.presence"
+      ],
+      [
+        "checkpoint 13",
+        "real id"
+      ]
+    ],
+    "answer_state": [
+      [
+        "transactions",
+        "receipt"
+      ]
+    ]
+  },
+  "Virginia DMV--15": {
+    "task": "I have moved to Virginia from another state with a passenger car. Use the new-resident guidance to put the license, insurance, inspection and titling steps in the right order, with the license and titling deadlines. Reserve a Vehicle Registration / Title appointment at Richmond Central on October 5, 2026 in the morning for Alex Morgan, alex.morgan@example.com. Confirm the office address, booking number, date and time.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": null,
+            "name": "Alex Morgan",
+            "email": "alex.morgan@example.com",
+            "office_slug": "richmond-central",
+            "service": "Vehicle Registration / Title",
+            "appt_date": "2026-10-05",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/moving/new-virginia",
+      "/appointments/new"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "license within 60 days"
+      ],
+      [
+        "checkpoint 2",
+        "inspection before operating"
+      ],
+      [
+        "checkpoint 3",
+        "title within 30 days"
+      ],
+      [
+        "checkpoint 4",
+        "insurance before registration"
+      ],
+      [
+        "checkpoint 5",
+        "registration.{0,25}within 30 days"
+      ],
+      [
+        "checkpoint 6",
+        "richmond central"
+      ],
+      [
+        "checkpoint 7",
+        "2300 west broad"
+      ],
+      [
+        "checkpoint 8",
+        "october 5.{0,8}2026"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "Virginia DMV--16": {
+    "task": "Sign in as alice.j@test.com with password TestPass123!. I am selling my Camry and want a certified vehicle record for the buyer. Verify the Camry's VIN and title number, order the certified record online, and reopen the receipt to confirm its fees. Explain the seller's notification and license-plate obligations using the buying-and-selling guidance, and report the receipt number and total charged.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "record_requests": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "record_type": "vehicle",
+            "certified": 1,
+            "delivery": "online",
+            "vehicle_id": 1,
+            "status": "Processing",
+            "total": "$13.00",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      },
+      "transactions": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "receipt": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": 1,
+            "kind": "Record Request",
+            "summary": "Vehicle record (certified copy) \u2014 view online",
+            "total": "$13.00",
+            "details": {
+              "json_value": {
+                "lines": [
+                  [
+                    "Vehicle record (2019 Toyota Camry)",
+                    "$8.00"
+                  ],
+                  [
+                    "Additional fee for certified record",
+                    "$5.00"
+                  ]
+                ]
+              }
+            },
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/account/receipt/REC",
+      "/vehicles/buy-sell"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "1hgcf1a23xa448119"
+      ],
+      [
+        "checkpoint 2",
+        "t8842.1195"
+      ],
+      [
+        "checkpoint 3",
+        "\\$8 base.{0,10}\\$5 certification.{0,10}\\$13"
+      ],
+      [
+        "checkpoint 4",
+        "remove plates"
+      ],
+      [
+        "checkpoint 5",
+        "notify dmv"
+      ],
+      [
+        "checkpoint 6",
+        "(?:surrender|inactivate).{0,40}before cancelling insurance"
+      ]
+    ],
+    "answer_state": [
+      [
+        "record_requests",
+        "receipt"
+      ],
+      [
+        "transactions",
+        "receipt"
+      ]
+    ],
+    "state_checks": [
+      {
+        "left": "transactions",
+        "right": "record_requests",
+        "foreign_key": "receipt",
+        "key": "receipt"
+      }
+    ]
+  },
+  "Virginia DMV--17": {
+    "task": "I am registering a car in Roanoke and need to understand Virginia's insurance requirements before visiting DMV. Find the required liability coverage limits, the information DMV asks for and what to do if coverage lapses. Reserve a Vehicle Registration / Title appointment at a Roanoke customer service center for October 8, 2026 in the morning under Morgan Lee, morgan.lee@example.com. Confirm the office address, booking number and time.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": null,
+            "name": "Morgan Lee",
+            "email": "morgan.lee@example.com",
+            "office_slug": "roanoke",
+            "service": "Vehicle Registration / Title",
+            "appt_date": "2026-10-08",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/vehicles/insurance-requirements",
+      "/vehicles/insurance-coverage",
+      "/appointments/new"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\$50000.{0,35}1 person"
+      ],
+      [
+        "checkpoint 2",
+        "\\$100000.{0,20}2 or more"
+      ],
+      [
+        "checkpoint 3",
+        "\\$25000 property"
+      ],
+      [
+        "checkpoint 4",
+        "policy information"
+      ],
+      [
+        "checkpoint 5",
+        "reinsure.{0,30}(?:deactivate|surrender)"
+      ],
+      [
+        "checkpoint 6",
+        "\\$600"
+      ],
+      [
+        "checkpoint 7",
+        "sr.22.{0,15}3 years"
+      ],
+      [
+        "checkpoint 8",
+        "5220 valleypark"
+      ],
+      [
+        "checkpoint 9",
+        "october 8.{0,8}2026"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "Virginia DMV--18": {
+    "task": "I need my first REAL ID for domestic flights. Check the application steps and acceptable-document guidance, identify the document guide and brochure, and explain the one-time fee and minimum transaction cost. Reserve a REAL ID appointment at Arlington for October 6, 2026 in the morning under Jordan Lee, jordan.lee@example.com. Confirm the booking number, office address and time, and summarize what I should bring.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": null,
+            "name": "Jordan Lee",
+            "email": "jordan.lee@example.com",
+            "office_slug": "arlington",
+            "service": "REAL ID",
+            "appt_date": "2026-10-06",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/licenses-ids/real-id",
+      "/forms",
+      "/vehicles/taxes-fees",
+      "/appointments/new"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "in.person"
+      ],
+      [
+        "checkpoint 2",
+        "1 identity"
+      ],
+      [
+        "checkpoint 3",
+        "2 virginia residency"
+      ],
+      [
+        "checkpoint 4",
+        "legal.presence"
+      ],
+      [
+        "checkpoint 5",
+        "ssn"
+      ],
+      [
+        "checkpoint 6",
+        "name.change"
+      ],
+      [
+        "checkpoint 7",
+        "originals"
+      ],
+      [
+        "checkpoint 8",
+        "dmv.?141"
+      ],
+      [
+        "checkpoint 9",
+        "dmv.?300"
+      ],
+      [
+        "checkpoint 10",
+        "1.time \\$10"
+      ],
+      [
+        "checkpoint 11",
+        "\\$20 minimum"
+      ],
+      [
+        "checkpoint 12",
+        "4150 south 4 mile run"
+      ],
+      [
+        "checkpoint 13",
+        "october 6.{0,8}2026"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  },
+  "Virginia DMV--19": {
+    "task": "I am preparing to apply for a CDL with a hazardous-materials endorsement. Compare the standard background-check fee with the TWIC-related reduced fee and explain eligibility, minimum age and the knowledge exam requirement. Find the CDL and background-check application form numbers, then book a CDL Services appointment at Alexandria for October 9, 2026 in the morning under Taylor Reed, taylor.reed@example.com. Report the form numbers, fees, appointment number and time.",
+    "initial_digest": "a646e73f53aa9d7b5fa8ef2d6cd375a17f1c074c5225bb0435eabd1eb2fe9696",
+    "state": {
+      "appointments": {
+        "removed": [],
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "confirmation": {
+              "regex": "[A-Z0-9-]{6,30}"
+            },
+            "user_id": null,
+            "name": "Taylor Reed",
+            "email": "taylor.reed@example.com",
+            "office_slug": "alexandria",
+            "service": "CDL Services",
+            "appt_date": "2026-10-09",
+            "appt_time": {
+              "one_of": [
+                "8:00 AM",
+                "8:20 AM",
+                "8:40 AM",
+                "9:00 AM",
+                "9:20 AM",
+                "9:40 AM",
+                "10:00 AM",
+                "10:20 AM",
+                "10:40 AM",
+                "11:00 AM",
+                "11:20 AM",
+                "11:40 AM"
+              ]
+            },
+            "status": "Confirmed",
+            "created_at": "2026-09-29"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "/licenses-ids/cdl",
+      "/licenses-ids/cdl/hazmat",
+      "/forms",
+      "/appointments/new"
+    ],
+    "claims": [
+      [
+        "checkpoint 1",
+        "\\$83"
+      ],
+      [
+        "checkpoint 2",
+        "\\$41.{0,40}twic"
+      ],
+      [
+        "checkpoint 3",
+        "1 year and 5 days"
+      ],
+      [
+        "checkpoint 4",
+        "age is 18"
+      ],
+      [
+        "checkpoint 5",
+        "hazardous.materials.{0,35}21"
+      ],
+      [
+        "checkpoint 6",
+        "pass.{0,25}hazmat knowledge"
+      ],
+      [
+        "checkpoint 7",
+        "entry level driver training"
+      ],
+      [
+        "checkpoint 8",
+        "dl.?2p"
+      ],
+      [
+        "checkpoint 9",
+        "dl.?70"
+      ],
+      [
+        "checkpoint 10",
+        "alexandria"
+      ],
+      [
+        "checkpoint 11",
+        "october 9.{0,8}2026"
+      ]
+    ],
+    "answer_state": [
+      [
+        "appointments",
+        "confirmation"
+      ],
+      [
+        "appointments",
+        "appt_time"
+      ]
+    ]
+  }
+}

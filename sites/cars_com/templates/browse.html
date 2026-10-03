@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | Cars.com{% endblock %}
+{% block content %}
+<div class="browse-page">
+  <h1>{{ title }}</h1>
+  <p class="muted">Cars near {{ city }} &middot; snapshot {{ MIRROR_TS }}</p>
+  {% if preset == 'cheap' %}
+  <p>Browse used cars priced under $15,000.</p>
+  {% elif preset == 'fso' %}
+  <p>Vehicles listed for sale by their private owners.</p>
+  {% elif preset == 'electric' %}
+  <p>Fully electric vehicles for sale.</p>
+  {% elif preset == 'hybrid' %}
+  <p>Hybrid vehicles for sale.</p>
+  {% else %}
+  <p>Browse every matching vehicle, then refine with the filters on the results page.</p>
+  {% endif %}
+  <div class="browse-actions">
+    <a class="btn btn-primary" href="{{ url_for('shopping_results', stock_type=stock) }}">Shop {{ title | replace('Shop All ', '') | replace(' for Sale', '') }}</a>
+    {% if preset == 'fso' %}
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', stock_type='used', seller_type='private_seller') }}">Private-seller listings</a>
+    {% elif preset == 'cheap' %}
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', stock_type='used', list_price_max='15000') }}">Under $15,000</a>
+    {% elif preset == 'electric' %}
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', fuel_slugs='electric') }}">Electric listings</a>
+    {% elif preset == 'hybrid' %}
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', fuel_slugs='hybrid') }}">Hybrid listings</a>
+    {% else %}
+    <a class="btn btn-outline" href="{{ url_for('shopping_results', stock_type=stock, sort='list_price_asc') }}">Sort by lowest price</a>
+    {% endif %}
+    <a class="btn btn-outline" href="{{ url_for('dealers_index') }}">Find a dealership</a>
+  </div>
+</div>
+{% endblock %}

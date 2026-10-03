@@ -1,0 +1,68 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-28",
+ "upstream": "https://www.tumblr.com/",
+ "capture_method": "Anonymous requests against the official www.tumblr.com web API (the public web-client bearer token embedded in every tumblr.com page) plus the legacy per-blog JSON API; all responses stored verbatim under scraped_data/ and normalized into the frozen source_data/ JSON snapshots. Images were downloaded directly from the tumblr media CDNs (64.media.tumblr.com, 44.media.tumblr.com, va.media.tumblr.com, static.tumblr.com) with aspect-preserving recompression. Review-fix additions (2026-09-28, same snapshot day): tag-hub editorial descriptions scraped verbatim from the tagged page HTML into scraped_data/tagged_editorial/, and the teaboot blog (info + newest posts) scraped verbatim into scraped_data/blogs/teaboot/; both merged into source_data by scripts_dev/scrape_tag_editorials.py and scripts_dev/scrape_teaboot.py, adding no new managed assets.",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the tumblr.com mirror: logged-out home with the trending feed, Explore with topic hub cards, tag hub pages (follower counts, new-post counts, editorial descriptions, related tags), search with Top/Recent tabs plus blog/tag/community suggestions, blog pages with header/avatar/theme colors and post grids, per-blog archives grouped by month, post permalinks with like/reblog note rails, and — for the four benchmark users — dashboard, likes, following, activity notifications, inbox conversations with message sending, ask submission, reblogging with comments, like/follow toggles, a text/photo/quote/link post composer, settings, and registration."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. Materializes the frozen source_data/ snapshots into SQLite (blogs, posts with content blocks and reblog trails, tag hubs, tag membership, saved searches, like/reblog/reply notes, trending feed) and builds the mirror-native benchmark fixtures: Alice/Bob/Carol/David with their own blogs, follows, likes, reblogs, inbox conversations, and activity notifications. Whole-function idempotence gates keep /reset byte-identical; PYTHONHASHSEED=0 keeps builds reproducible."
+  },
+  {
+   "path": "source_data/blogs.json",
+   "classification": "captured-upstream-content",
+   "scope": "508 blogs as served by www.tumblr.com on 2026-09-28: names, titles, descriptions, avatars, header images, theme colors, updated timestamps, post counts (16 primary blogs pulled with 3 pages of posts each), ask/messaging flags. Includes the teaboot blog — the original blog in the reblog trail of the high-note CCTV post — captured from the same per-blog info endpoint on 2026-09-28 during the review fix (avatar reuses the already-mirrored file; no new managed assets)."
+  },
+  {
+   "path": "source_data/posts.json",
+   "classification": "captured-upstream-content",
+   "scope": "1,479 unique posts with their upstream ids, content blocks (text, image, link, quote, audio, video, poll), reblog trails, tags, timestamps, note/like/reblog counts and answer-post asker metadata, normalized to local media paths. Includes teaboot's three newest text-only posts, captured from the per-blog posts endpoint on 2026-09-28 during the review fix (no media blocks, so no new managed assets)."
+  },
+  {
+   "path": "source_data/tags.json",
+   "classification": "captured-upstream-content",
+   "scope": "12 tag hub pages (art, photography, space, cats, nature, travel, food, fashion, architecture, books, vintage, gif) with the real follower counts, new-post counts, hub header images, editorial descriptions, related-tag rows and the ordered tagged feed captured from www.tumblr.com/tagged/<tag>. Editorial descriptions come from the tagged page HTML (___INITIAL_STATE___.queries editorialDescription/editorialDescriptionText, captured 2026-09-28 during the review fix): six hubs show one upstream (art, photography, travel, food, books, fashion) and the other six serve none, exactly as mirrored."
+  },
+  {
+   "path": "source_data/searches.json",
+   "classification": "captured-upstream-content",
+   "scope": "8 saved searches (pixel art, space, cats, coffee, mountains, poetry, cyberpunk, ocean) with top/recent post ordering, matching blogs, tag suggestions, communities and typeahead results from the upstream search timelines."
+  },
+  {
+   "path": "source_data/explore.json",
+   "classification": "captured-upstream-content",
+   "scope": "The Explore trending feed: the 40 posts tumblr.com's explore endpoint served on 2026-09-28, in upstream order."
+  },
+  {
+   "path": "source_data/notes.json",
+   "classification": "captured-upstream-content",
+   "scope": "6,985 like/reblog/reply notes across the 150 highest-note posts, exactly as served by the upstream notes endpoint: note type, timestamp, blog name/title and avatar for each liker/reblogger, plus total counts per post."
+  },
+  {
+   "path": "source_data/feed_index.json",
+   "classification": "derived-index",
+   "scope": "Feed membership index recording which scraped endpoint each post appeared in (blog feeds, tag feeds, search timelines, explore), for provenance and debugging."
+  },
+  {
+   "path": "static/images/",
+   "classification": "captured-upstream-media",
+   "scope": "9,207 files (458 MB) downloaded from tumblr media CDNs: post images and GIFs (keyed by upstream media_key so reblogs share one file), audio/video posters, 7 playable tumblr-hosted mp4 videos, blog avatars, note-writer avatars, blog headers, tag hub headers and related-tag thumbnails. Every file's upstream URL, byte size and sha256 is recorded in asset_inventory.json; asset_inventory passes scripts/check_asset_inventory.py."
+  },
+  {
+   "path": "asset_inventory.json",
+   "classification": "asset-manifest",
+   "scope": "schema_version 1 inventory of every managed static asset with bytes, sha256 and the upstream source URL it was fetched from."
+  },
+  {
+   "path": "scraped_data/",
+   "classification": "build-time-only",
+   "scope": "Verbatim API responses and the image download manifest used to build source_data/; gitignored and dockerignored, never shipped in the image."
+  }
+ ]
+}

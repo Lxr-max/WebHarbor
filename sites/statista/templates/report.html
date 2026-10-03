@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}{{ report.title }} | Statista{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/recent/reports/">Reports</a>
+  <span class="sep"></span><span>{{ report.title }}</span>
+</nav>
+
+<div class="statLayout">
+  <div>
+    <h1>{{ report.title }}</h1>
+    {% if report.description %}
+      <p class="statDesc">{{ report.description|striptags }}</p>
+    {% endif %}
+
+    <section class="section">
+      <div class="section__head"><h2>Report Details</h2></div>
+      <dl class="kv">
+        <dt>Pages</dt><dd>{{ report.details.get('Pages', '—') }}</dd>
+        <dt>Format</dt><dd>{{ report.details.get('Format', '—') }}</dd>
+        <dt>Language</dt><dd>{{ report.details.get('Language', '—') }}</dd>
+        <dt>Released</dt><dd>{{ report.details.get('Released', '—') }}</dd>
+        <dt>Access</dt><dd>{{ report.details.get('Access', '—') }}</dd>
+        <dt>Price</dt><dd>{{ report.price }}</dd>
+      </dl>
+      <div class="statActions">
+        <form method="post" action="/download/report/{{ report.id }}">
+          <button type="submit" class="btn btn--primary">Download your Report</button>
+        </form>
+        <form method="post" action="/favorite/report/{{ report.id }}">
+          <input type="hidden" name="back" value="/study/{{ report.id }}/{{ report.slug }}/">
+          <button type="submit" class="favBtn {% if is_fav %}on{% endif %}">
+            {% if is_fav %}★ Saved to favorites{% else %}☆ Save to favorites{% endif %}
+          </button>
+        </form>
+      </div>
+    </section>
+
+    {% if report.toc %}
+    <section class="section">
+      <div class="section__head"><h2>Table of contents</h2></div>
+      <ul class="outlineList">
+        {% for chapter in report.toc %}
+        <li>{{ chapter }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if stats %}
+    <section class="section">
+      <div class="section__head"><h2>Recommended statistics</h2></div>
+      <div class="cardGrid">
+        {% for s in stats %}
+        <a class="card" href="/{{ s.url_kind }}/{{ s.id }}/{{ s.slug }}/">
+          {% if s.has_thumb %}<span class="card__img"><img src="/static/images/stat_{{ s.id }}_thumb.png" alt="{{ s.title }}" loading="lazy"></span>{% endif %}
+          <div class="card__body">
+            <span class="card__meta">{{ s.last_update }} | {{ s.region }}</span>
+            <span class="card__title">{{ s.title|truncate(84) }}</span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+
+  <aside>
+    {% if report.has_cover %}
+    <div class="sideBox" style="padding:0;overflow:hidden;">
+      <img src="/static/images/report_{{ report.id }}_cover.png" alt="Report cover: {{ report.title }}" style="width:100%;display:block;">
+    </div>
+    {% endif %}
+    <div class="sideBox">
+      <h3>What you get</h3>
+      <ul>
+        <li style="font-weight:400;">Editorial overview of a specific trend (topic)</li>
+        <li style="font-weight:400;">Graphics and background information</li>
+        <li style="font-weight:400;">Curated by our industry experts</li>
+      </ul>
+    </div>
+    <div class="sideBox">
+      <h3>Recommended and recent reports</h3>
+      <ul>
+        {% for r in related_reports %}
+        <li><a href="/study/{{ r.id }}/{{ r.slug }}/">{{ r.title|truncate(60) }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
+</div>
+{% endblock %}

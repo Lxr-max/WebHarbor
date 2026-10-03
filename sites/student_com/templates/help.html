@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Help Centre and FAQs • Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px"><a href="/">Home</a> › <span>Help centre</span></nav>
+  <h1>How can we help you today?</h1>
+  <p class="muted" style="margin-top:10px;max-width:720px">We're here to help at Student.com. Please browse the topics below to quickly find answers to your questions, and contact us if you need more help.</p>
+</div>
+
+<section class="section container">
+  <div class="section-head"><h2>Popular topics</h2></div>
+  <div class="grid cols-3">
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Top FAQ's</h3>
+      <p class="small muted" style="margin-top:8px">Get fast answers to our most commonly asked questions.</p>
+      <a class="see-all" href="#faqs" style="font-size:13px">Learn more</a>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Booking with Student.com</h3>
+      <p class="small muted" style="margin-top:8px">Learn about the booking process at Student.com.</p>
+      <a class="see-all" href="/how-it-works" style="font-size:13px">Learn more</a>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Fees and Payments</h3>
+      <p class="small muted" style="margin-top:8px">Information on rental fees and how to manage payments.</p>
+      <a class="see-all" href="#faqs" style="font-size:13px">Learn more</a>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Availability and Pricing</h3>
+      <p class="small muted" style="margin-top:8px">Get answers about our availability and pricing plans.</p>
+      <a class="see-all" href="#faqs" style="font-size:13px">Learn more</a>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Security and Privacy</h3>
+      <p class="small muted" style="margin-top:8px">Learn about our privacy policies and how we protect information.</p>
+      <a class="see-all" href="/terms/privacy" style="font-size:13px">Learn more</a>
+    </div>
+    <div class="card" style="padding:26px">
+      <h3 style="font-size:16px">Cancellation Policy</h3>
+      <p class="small muted" style="margin-top:8px">Learn about our cancellation policies and procedures.</p>
+      <a class="see-all" href="#faqs" style="font-size:13px">Learn more</a>
+    </div>
+  </div>
+
+  <div id="faqs" style="margin-top:40px">
+    <div class="section-head"><h2>Top FAQ's</h2></div>
+    {% set faqs = [
+      ('How do I find student housing on Student.com?',
+       'Search by city, college or property using the search bar at the top of every page. Pick your college to see homes near campus, then compare price, rating and commute distance. Save the ones you like and send an inquiry to the property — they reply directly.'),
+      ('How much does it cost to use Student.com?',
+       'Using Student.com is completely free for students. You compare homes, save favourites and send inquiries at no cost. Rent and any lease terms are always agreed directly with the property.'),
+      ('How do I contact a property?',
+       'Open any property page and use the "Email property" button. Fill in your name, phone, email and a short message — the property gets back to you, usually within a day. You can also call the property directly using the number on the page.'),
+      ('What does "From $X/month" mean?',
+       'The "From" price is the cheapest room type currently available at that property. Bigger rooms, studios and one-beds cost more — the property page shows the full price range.'),
+      ('Is my payment secure?',
+       'We never handle the cash or facilitate the transaction — you always pay the property directly through their secure channels. See our Avoid Scams and Fraud guide for how to spot red flags.'),
+      ('Can I cancel an inquiry?',
+       'Inquiries are free and non-binding. If you change your mind, simply tell the property in your reply thread, or ignore their response — no cancellation is needed.'),
+      ('When should I start looking for housing?',
+       'Most students start 3–6 months before move-in. The homes closest to campus are usually the first to go, so saving favourites and inquiring early gives you the best choice.'),
+      ('Do you list properties outside the US?',
+       "We're currently taking inquiries for US & Canada only. More destinations coming soon — 2026 marks the start of our new era!"),
+    ] %}
+    {% for q, a in faqs %}
+    <div class="faq-item">
+      <button type="button">{{ q }} <span>+</span></button>
+      <div class="ans">{{ a }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="card" style="padding:30px;margin-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div>
+      <h2 style="font-size:22px">Connect with our team</h2>
+      <p class="small muted" style="margin-top:6px">If you have any questions please don't hesitate to contact us by WhatsApp, live chat, phone or email - we're always happy to help!</p>
+    </div>
+    <a class="btn primary" href="/contact">Contact us</a>
+  </div>
+</section>
+{% endblock %}

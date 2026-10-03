@@ -1,0 +1,129 @@
+{
+ "users": [
+  {
+   "email": "alice.j@test.com",
+   "display_name": "Alice Johnson",
+   "created_at": "2026-08-18",
+   "addresses": [
+    {"label": "Home", "full_name": "Alice Johnson", "line1": "12 Sun Valley Rd", "city": "Boulder", "state": "Colorado", "zip": "80302", "phone": "303-555-0148", "is_default": true},
+    {"label": "Cabin", "full_name": "Alice Johnson", "line1": "8890 Alpine Loop", "city": "Ouray", "state": "Colorado", "zip": "81427", "phone": "970-555-0113", "is_default": false}
+   ],
+   "cart": [
+    {"product": "stio-hometown-down-hooded-jacket-mens", "color": "Abyss", "size": "L", "quantity": 1, "added_at": "2026-09-29"},
+    {"product": "smartwool-merino-250-baselayer-crew-womens", "color": "Chalk Violet Heather", "size": "S", "quantity": 2, "added_at": "2026-09-29"}
+   ],
+   "wishlist": [
+    {"product": "big-agnes-copper-spur-ul2-tent-2-person-3-season", "added_at": "2026-09-21"},
+    {"product": "black-diamond-momentum-climbing-shoe-mens", "added_at": "2026-09-24"},
+    {"product": "patagonia-textured-fleece-pullover-womens", "added_at": "2026-09-27"}
+   ],
+   "reviews": [
+    {"product": "big-agnes-copper-spur-ul2-tent-2-person-3-season", "author": "Alice Johnson", "title": "Roomy and light for two", "text": "Took the Copper Spur UL2 through three nights in the Wind Rivers. Sets up in minutes, vestibules swallow boots and packs, and the trail weight is honestly as advertised.", "rating": 5, "created": "2026-09-26T10:00:00.000+00:00", "familiarity": "I've used it several times", "fit": null, "size_purchased": null}
+   ]
+  },
+  {
+   "email": "bob.c@test.com",
+   "display_name": "Bob Chen",
+   "created_at": "2026-08-22",
+   "addresses": [
+    {"label": "Home", "full_name": "Bob Chen", "line1": "740 Lakeshore Plaza Apt 12", "city": "Chicago", "state": "Illinois", "zip": "60601", "phone": "312-555-0176", "is_default": true}
+   ],
+   "cart": [],
+   "wishlist": [
+    {"product": "rapha-pro-team-jersey-mens-rfad056", "added_at": "2026-09-28"}
+   ],
+   "reviews": [
+    {"product": "backcountry-slickrock-pant-mens", "author": "Bob Chen", "title": "Great trail pants", "text": "Rode the Palos trails twice a week all summer in these. Stretchy enough to pedal in, burly enough for overgrowth, and the pockets actually hold a phone.", "rating": 4, "created": "2026-09-19T09:00:00.000+00:00", "familiarity": "I've used it several times", "fit": "True to Size", "size_purchased": "L"}
+   ]
+  },
+  {
+   "email": "carol.d@test.com",
+   "display_name": "Carol Davis",
+   "created_at": "2026-09-02",
+   "addresses": [
+    {"label": "Home", "full_name": "Carol Davis", "line1": "311 Pacific Coast Hwy", "city": "Santa Monica", "state": "California", "zip": "90401", "phone": "310-555-0132", "is_default": true}
+   ],
+   "cart": [
+    {"product": "black-diamond-momentum-climbing-shoe-mens", "color": "White/Black", "size": "Men's 10.0/Women's 11.0", "quantity": 1, "added_at": "2026-09-30"}
+   ],
+   "wishlist": [
+    {"product": "la-sportiva-solution-comp-climbing-shoe-womens", "added_at": "2026-09-25"},
+    {"product": "metolius-magnum-crash-pad", "added_at": "2026-09-28"}
+   ],
+   "reviews": []
+  },
+  {
+   "email": "dana.k@test.com",
+   "display_name": "Dana Kim",
+   "created_at": "2026-08-30",
+   "addresses": [
+    {"label": "Home", "full_name": "Dana Kim", "line1": "2045 Kapiolani Blvd", "city": "Honolulu", "state": "Hawaii", "zip": "96815", "phone": "808-555-0165", "is_default": false},
+    {"label": "Sister's", "full_name": "Dana Kim", "line1": "915 Fremont Ave N", "city": "Seattle", "state": "Washington", "zip": "98103", "phone": "206-555-0187", "is_default": true}
+   ],
+   "cart": [
+    {"product": "smith-i-o-mag-xl-chromapop-goggles", "color": "Black/ChromaPop Everyday Blue Mirror", "size": "One Size", "quantity": 1, "added_at": "2026-09-30"},
+    {"product": "marker-griffon-13-id-ski-binding", "color": "Black", "size": "110mm", "quantity": 1, "added_at": "2026-09-30"}
+   ],
+   "wishlist": [],
+   "reviews": [
+    {"product": "helly-hansen-alpha-4.0-jacket-mens", "author": "Dana Kim", "title": "Bombproof storm shell", "text": "Wore the Alpha 4.0 through a week of wet PNW storm skiing. Fully sealed, no wetting out, and the fit layers perfectly over a puffy.", "rating": 5, "created": "2026-09-12T11:00:00.000+00:00", "familiarity": "I've used it several times", "fit": "True to Size", "size_purchased": "M"}
+   ]
+  }
+ ],
+ "orders": [
+  {
+   "user": "alice.j@test.com",
+   "number": "8004128041",
+   "status": "delivered",
+   "placed_at": "2026-09-12",
+   "shipping_method": "Standard",
+   "shipping_cents": 0,
+   "payment_last4": "4242",
+   "address": {"full_name": "Alice Johnson", "line1": "12 Sun Valley Rd", "city": "Boulder", "state": "Colorado", "zip": "80302", "phone": "303-555-0148"},
+   "items": [
+    {"product": "big-agnes-copper-spur-ul2-tent-2-person-3-season", "name": "Copper Spur UL2 Tent: 2-Person 3-Season", "brand": "Big Agnes", "color": "One Color", "size": "One Size", "unit_price": 54995, "unit_list": 54995, "quantity": 1},
+    {"product": "kelty-cosmic-20-sleeping-bag-20f-down", "name": "Cosmic 20 Sleeping Bag: 20F Down", "brand": "Kelty", "color": "One Color", "size": "One Size", "unit_price": 17995, "unit_list": 21995, "quantity": 1}
+   ]
+  },
+  {
+   "user": "alice.j@test.com",
+   "number": "8004193147",
+   "status": "shipped",
+   "placed_at": "2026-09-24",
+   "shipping_method": "Standard",
+   "shipping_cents": 0,
+   "payment_last4": "4242",
+   "address": {"full_name": "Alice Johnson", "line1": "12 Sun Valley Rd", "city": "Boulder", "state": "Colorado", "zip": "80302", "phone": "303-555-0148"},
+   "items": [
+    {"product": "smartwool-merino-250-baselayer-crew-womens", "name": "Classic Thermal Merino Crew Baselayer - Women's", "brand": "Smartwool", "color": "Black", "size": "S", "unit_price": 5750, "unit_list": 11500, "quantity": 2}
+   ]
+  },
+  {
+   "user": "bob.c@test.com",
+   "number": "8004277560",
+   "status": "shipped",
+   "placed_at": "2026-09-26",
+   "shipping_method": "Standard",
+   "shipping_cents": 695,
+   "payment_last4": "1881",
+   "address": {"full_name": "Bob Chen", "line1": "740 Lakeshore Plaza Apt 12", "city": "Chicago", "state": "Illinois", "zip": "60601", "phone": "312-555-0176"},
+   "items": [
+    {"product": "backcountry-slickrock-pant-mens", "name": "BGA Slickrock Pant - Men's", "brand": "Backcountry", "color": "Midnight Blue", "size": "L", "unit_price": 6450, "unit_list": 12900, "quantity": 1}
+   ]
+  },
+  {
+   "user": "dana.k@test.com",
+   "number": "8004384012",
+   "status": "returned",
+   "placed_at": "2026-09-08",
+   "shipping_method": "Express",
+   "shipping_cents": 2500,
+   "payment_last4": "9029",
+   "address": {"full_name": "Dana Kim", "line1": "915 Fremont Ave N", "city": "Seattle", "state": "Washington", "zip": "98103", "phone": "206-555-0187"},
+   "items": [
+    {"product": "mammut-crag-classic-rope-9.5mm", "name": "Crag Classic Rope - 9.5mm", "brand": "Mammut", "color": "Blue/White", "size": "60m", "unit_price": 18500, "unit_list": 18500, "quantity": 1},
+    {"product": "petzl-volta-dry-climbing-rope-9.2mm", "name": "Volta Dry Climbing Rope - 9.2mm", "brand": "Petzl", "color": "One Color", "size": "60m", "unit_price": 19995, "unit_list": 19995, "quantity": 1}
+   ]
+  }
+ ]
+}

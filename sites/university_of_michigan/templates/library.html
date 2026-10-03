@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Library Search — U-M Library Catalog{% endblock %}
+{% block content %}
+<h1>Library Catalog</h1>
+<p class="page-sub">Catalog: results from everything in our physical collection (books, audio, video, maps, musical scores, archival materials, and more), as well as materials available online such as electronic books, streaming audio and video, and online journals. {{ total }} records match.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('library') }}">
+    <div>
+      <label for="q">Search by keyword</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder='e.g. climate change, "Great Lakes"'>
+    </div>
+    <div>
+      <label for="type">Type</label>
+      <select id="type" name="type">
+        <option value="">All types</option>
+        {% for t in types %}
+        <option value="{{ t }}" {% if t == itype %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="year">Year</label>
+      <select id="year" name="year">
+        <option value="">Any year</option>
+        {% for y in years %}
+        <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} records</span>
+</div>
+
+<table class="list">
+  <tr><th>Title</th><th>Author(s)</th><th>Year</th><th>Type</th></tr>
+  {% for i in items %}
+  <tr>
+    <td><a href="{{ url_for('library_item', uuid=i.uuid) }}">{{ i.title[:110] }}</a></td>
+    <td>{{ i.author_list()[:3]|join('; ') }}{% if i.author_list()|length > 3 %} et al.{% endif %}</td>
+    <td>{{ i.date_issued }}</td>
+    <td>{{ i.type }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if total > per_page %}
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('library', q=q, type=itype, year=year, page=page-1) }}">&laquo; Previous</a>
+  {% endif %}
+  <span class="cur">Page {{ page }} of {{ (total + per_page - 1) // per_page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('library', q=q, type=itype, year=year, page=page+1) }}">Next &raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

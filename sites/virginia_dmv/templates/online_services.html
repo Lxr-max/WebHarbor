@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Online Services{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Online Services</nav>
+  <div class="page-title"><h1>Online Services</h1></div>
+  {% for sec in data.sections %}
+    {% if sec.heading %}<h2>{{ sec.heading }}</h2>{% endif %}
+    {% for p in sec.paragraphs %}<p>{{ p }}</p>{% endfor %}
+    {% for list in sec.lists %}
+      <ul class="flow">{% for item in list %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% endfor %}
+  {% endfor %}
+  <div class="card-grid">
+    <a class="card card--flat" href="{{ url_for('online_services_all') }}"><h3>See All Online Services</h3></a>
+    <a class="card card--flat" href="{{ url_for('plates_search') }}"><h3>View Plates</h3></a>
+  </div>
+</div>
+{% endblock %}

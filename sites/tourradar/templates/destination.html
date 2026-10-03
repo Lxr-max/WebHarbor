@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}{{ dest.name }} Tours &amp; Trips - TourRadar{% endblock %}
+{% block content %}
+<div class="hero" style="background-image: url('/static/images/{{ dest.hero or "site/serp_hero.webp" }}'); min-height:340px;">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner container">
+    <h1>{{ dest.name }} Tours &amp; Trips</h1>
+    {% if dest.description %}
+    <p class="sub" style="max-width:820px; margin-left:auto; margin-right:auto;">{{ dest.description[:260] }}{% if dest.description|length > 260 %}...{% endif %}</p>
+    {% endif %}
+    <form class="search-widget" data-search-form method="get" action="/search">
+      <div class="field">
+        <label>Where to?</label>
+        <input class="value" name="q" data-suggest type="text" value="{{ dest.name }}" autocomplete="off">
+        <div class="suggest-box"></div>
+      </div>
+      <div class="field">
+        <label>Select Date</label>
+        <input class="value" name="when" type="text" value="Anytime" readonly>
+      </div>
+      <div class="field">
+        <label>Travelers</label>
+        <input class="value" name="travellers" type="text" value="2 Adults" readonly>
+      </div>
+      <a class="btn btn-lg" href="{{ dest.srp_path }}" style="align-self:center; padding:12px 28px;">View Tours</a>
+    </form>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:50px;">
+  <div class="section-head" style="margin-top:26px;">
+    <h2>The best {{ dest.name }} tour packages</h2>
+    <a class="more" href="{{ dest.srp_path }}">See all {{ total }} tours</a>
+  </div>
+  {% for t in tours %}
+  <div class="tour-card">
+    {% if t.discount_pct %}<span class="discount-chip">-{{ t.discount_pct }}% Off</span>{% endif %}
+    <a href="/t/{{ t.id }}"><img class="thumb" src="{{ t.hero_url }}" alt="{{ t.name }}"></a>
+    <div class="body">
+      <div class="style-tag">{{ t.style }}</div>
+      <h3><a href="/t/{{ t.id }}">{{ t.name }}</a></h3>
+      <div class="rating-line"><span class="rating-badge">{{ '%.1f'|format(t.rating) }}</span> <span>({{ t.review_count }} reviews)</span></div>
+      {% if t.summary %}<div class="quote">&ldquo;{{ t.summary[:130] }}&rdquo;</div>{% endif %}
+      <div class="meta-rows">
+        <div><b>Duration</b>{{ t.duration_label }}</div>
+        <div><b>Destinations</b>{{ t.cities_list[:4]|join(', ') }}</div>
+        <div><b>Age Range</b>{{ t.age_label }}</div>
+        <div><b>Operator</b>{{ t.operator_name }}</div>
+      </div>
+      <a class="btn btn-outline btn-sm" href="/t/{{ t.id }}">View tour</a>
+    </div>
+    <div class="price-block">
+      {% if t.price_from != t.current_price %}<span class="price-was">{{ money(t.price_from) }}</span>{% endif %}
+      <span class="price-now">{{ money(t.current_price) }}</span>
+      <span class="price-note">per person</span>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% set sections = dest.sections_dict if dest.sections_dict is defined else {} %}
+  {% if sections %}
+  <div class="panel" style="margin-top:28px;">
+    {% for h, b in sections.items() %}
+    <h3>{{ h }}</h3>
+    <p style="color:var(--text-2);">{{ b }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="panel">
+    <h3>Contact our {{ dest.name }} travel experts</h3>
+    <p style="color:var(--text-2);">Questions about {{ dest.name }}? Our adventure specialists have travelled the world and are ready to help you plan.</p>
+    <a class="btn" href="/contact">Contact us</a>
+  </div>
+</div>
+{% endblock %}

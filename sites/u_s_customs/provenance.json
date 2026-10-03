@@ -1,0 +1,74 @@
+{
+ "site": "u_s_customs",
+ "upstream": "https://www.cbp.gov/",
+ "captured_at": "2026-09-28",
+ "capture_method": "headless Chromium (Playwright) against the live pages; public JSON APIs fetched directly where available",
+ "sources": {
+  "www.cbp.gov": {
+   "role": "primary site: travel/entry pages, trusted traveler program copy, port-of-entry directory, newsroom, forms catalog (with PDFs), trade guidance",
+   "pages_captured": 41,
+   "port_detail_pages": 239,
+   "release_pages": 45
+  },
+  "bwt.cbp.gov": {
+   "role": "Border Wait Times app JSON APIs (crossing directory + frozen wait-time snapshot)",
+   "endpoints": [
+    "https://bwt.cbp.gov/api/bwtmodern/crossingslist",
+    "https://bwt.cbp.gov/api/bwtpublicmod"
+   ],
+   "records": 85
+  },
+  "careers.cbp.gov": {
+   "role": "CBP careers pages: career paths, events, featured jobs",
+   "pages_captured": 13
+  },
+  "www.usajobs.gov": {
+   "role": "CBP job postings featured on careers.cbp.gov",
+   "pages_captured": 49
+  },
+  "esta.cbp.dhs.gov": {
+   "role": "official ESTA application site: application wizard steps, fee, Visa Waiver Program country list"
+  }
+ },
+ "media": {
+  "images": {
+   "count": 154,
+   "inventory": "asset_inventory.json",
+   "policy": "every file fetched from the upstream URL it renders at; no placeholders, no duplicates, no stretching"
+  },
+  "form_pdfs": {
+   "count": 97,
+   "policy": "the actual CBP form PDFs served by www.cbp.gov, sha256-pinned per form in the catalog"
+  }
+ },
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "approved ESTA (Germany), I-94 record, saved Blaine crossing"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "conditionally approved Global Entry application, saved San Ysidro crossing + port, I-94 record"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "pending ESTA application, saved CBP Form 7501, I-94 record"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "scheduled Global Entry interview at LAX, saved Otay Mesa crossing, saved Border Patrol Agent job, I-94 record"
+   }
+  ],
+  "note": "traveler records (ESTA/I-94/TTP) are deterministic benchmark fixtures keyed to the benchmark users; all catalog/directory/news content is upstream-sourced"
+ },
+ "determinism": {
+  "seed": "PYTHONHASHSEED=0 python3 seed_data.py at image build time",
+  "password": "frozen bcrypt hash (TestPass123!)",
+  "verified": "byte-identical instance/ vs instance_seed/ after rebuild"
+ }
+}

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="ua-hero" style="background-image: linear-gradient(rgba(0,34,68,.82), rgba(10,61,107,.55)), url('{{ url_for('static', filename='images/home/0562_100daySummer_HP_Takeover_Desktop_img_1366x768-2x.jpg') }}'); background-size: cover; background-position: center;">
+  <div class="ua-hero-inner">
+    <h1>Where do you want to go?</h1>
+    <p class="ua-hero-sub">Search flights and find the fare that fits — Basic Economy,
+      United Economy®, Economy Plus®, Premium Plus® and Polaris® business.</p>
+  </div>
+</section>
+
+<section class="ua-booking-widget" aria-label="Book a trip">
+  <div class="ua-widget-tabs" role="tablist">
+    <a class="ua-tab active" href="{{ url_for('home') }}#book">Book</a>
+    <a class="ua-tab" href="{{ url_for('flight_status') }}">Flight status</a>
+    <a class="ua-tab" href="{{ url_for('checkin') }}">Check-in</a>
+    <a class="ua-tab" href="{{ url_for('mytrips') }}">My trips</a>
+  </div>
+  <form method="get" action="{{ url_for('flight_search') }}" class="ua-widget" id="book">
+    <div class="ua-widget-row">
+      <label class="ua-field">
+        <span>From</span>
+        <select name="origin" required>
+          <option value="">Select an origin</option>
+          {% for a in airports %}
+            <option value="{{ a.code }}" {% if a.code == params.origin %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ua-field">
+        <span>To</span>
+        <select name="destination" required>
+          <option value="">Select a destination</option>
+          {% for a in airports %}
+            <option value="{{ a.code }}" {% if a.code == params.destination %}selected{% endif %}>{{ a.city }} ({{ a.code }})</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ua-field ua-field-date">
+        <span>Depart</span>
+        <input type="date" name="depart" min="{{ today }}" required>
+      </label>
+      <label class="ua-field ua-field-date">
+        <span>Return <em class="ua-optional">(optional)</em></span>
+        <input type="date" name="return" min="{{ today }}">
+      </label>
+    </div>
+    <div class="ua-widget-row">
+      <label class="ua-field">
+        <span>Travelers — adults</span>
+        <select name="adults">
+          {% for n in range(1, 5) %}
+            <option value="{{ n }}">{{ n }} adult{{ '' if n == 1 else 's' }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ua-field">
+        <span>Children</span>
+        <select name="children">
+          {% for n in range(0, 4) %}
+            <option value="{{ n }}">{{ n }} children</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ua-field">
+        <span>Cabin</span>
+        <select name="cabin">
+          {% for key, label in fare_cabins %}
+            <option value="{{ key }}" {% if key == 'ECO' %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <button class="ua-btn ua-btn-primary" type="submit">Find flights</button>
+    </div>
+  </form>
+</section>
+
+<section class="ua-section">
+  <div class="ua-section-head">
+    <h2>Today's best deals</h2>
+    <a class="ua-link" href="{{ url_for('deals') }}">See all deals</a>
+  </div>
+  <div class="ua-card-grid">
+    {% for deal in deals %}
+      <a class="ua-card" href="{{ url_for('deal_detail', slug=deal.slug) }}">
+        <span class="ua-card-route">{{ deal.origin.city }} ({{ deal.origin_code }}) → {{ deal.dest.city }} ({{ deal.dest_code }})</span>
+        <span class="ua-card-title">{{ deal.title }}</span>
+        <span class="ua-card-price">from ${{ '%d'|format(deal.fare_from) }} one way</span>
+        <span class="ua-card-cat">{{ deal.category }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="ua-section ua-hubs">
+  <div class="ua-section-head">
+    <h2>United hub airports</h2>
+    <a class="ua-link" href="{{ url_for('airports_page') }}">All airport guides</a>
+  </div>
+  <div class="ua-card-grid">
+    {% for hub in hubs %}
+      <a class="ua-card ua-card-hub" href="{{ url_for('airport_detail', code=hub.code) }}">
+        <span class="ua-card-title">{{ hub.city }} — {{ hub.name }}</span>
+        <span class="ua-card-cat">Hub</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="ua-section ua-mp-promo">
+  <div class="ua-mp-promo-inner">
+    <div>
+      <h2>United MileagePlus®</h2>
+      <p>Earn 5–11 award miles per dollar on every flight, redeem for award
+        travel, and reach Premier® status with PQF and PQP. Premier members
+        get free checked bags, priority boarding and Economy Plus access.</p>
+      <div class="ua-mp-actions">
+        {% if not current_user.is_authenticated %}
+          <a class="ua-btn ua-btn-primary" href="{{ url_for('mp_join') }}">Join MileagePlus</a>
+          <a class="ua-btn ua-btn-ghost" href="{{ url_for('mp_signin') }}">Sign in</a>
+        {% else %}
+          <a class="ua-btn ua-btn-primary" href="{{ url_for('account') }}">Go to my account</a>
+        {% endif %}
+        <a class="ua-btn ua-btn-ghost" href="{{ url_for('mileageplus') }}">Program details</a>
+      </div>
+    </div>
+    <div class="ua-mp-facts">
+      <div><strong>5×</strong><span>miles per $1 for members</span></div>
+      <div><strong>11×</strong><span>miles per $1 for Premier 1K®</span></div>
+      <div><strong>3</strong><span>free checked bags for Premier Platinum &amp; 1K</span></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

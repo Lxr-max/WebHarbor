@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{{ story.title }} — {{ brand }}{% endblock %}
+{% block content %}
+<article class="shell">
+  <nav class="crumbs"><a href="{{ url_for('customer_stories') }}">Customer stories</a> / <span>{{ story.title|truncate(60) }}</span></nav>
+  <h1>{{ story.title }}</h1>
+  <p class="card-meta"><span class="chip">{{ story.industry_list|join(', ') }}</span></p>
+  {% if story.header_image %}<img class="story-hero" src="{{ img(story.header_image) }}" alt="">{% endif %}
+
+  {% if story.quote_text %}
+  <blockquote class="story-quote">
+    <p>{{ story.quote_text }}</p>
+    <footer>— {{ story.quote_person }}, {{ story.quote_role }}, {{ story.quote_company }}</footer>
+  </blockquote>
+  {% endif %}
+
+  {% if page %}
+    {% for section in page.section_list %}
+    <section class="band">
+      <h2>{{ section.title }}</h2>
+      <p>{{ section.text }}</p>
+    </section>
+    {% endfor %}
+  {% endif %}
+
+  <section class="band band-alt">
+    <h2>Products used</h2>
+    <p class="story-products">{{ story.product_list|join(' · ') }}</p>
+  </section>
+
+  {% if related %}
+  <section class="band">
+    <h2>Explore related stories</h2>
+    <div class="story-grid">
+      {% for s in related %}
+      <a class="story-card" href="{{ url_for('customer_story', slug=s.slug) }}">
+        {% if s.header_image %}<img src="{{ img(s.header_image) }}" alt="" loading="lazy">{% endif %}
+        <div class="story-card-body">
+          <h3>{{ s.title }}</h3>
+          <p class="card-meta">{{ s.industry_list|join(', ') }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

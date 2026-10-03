@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}After your booking - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; After your booking</div>
+  <h1>After your booking</h1>
+  {% for h, b in [["Tour Management", "Manage payments, travelers and documents from your account any time."], ["Balance payments", "Pay your remaining balance in one go or in installments before departure."], ["Date changes", "Request date changes from your booking page; most operators allow one free change."], ["Documents", "Vouchers and information arrive by email after the operator confirms."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

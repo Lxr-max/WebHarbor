@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Land your dream {{ city.name }} Internship | Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <div style="background:linear-gradient(109deg,#bfb9f6 1.41%,#ff9a48 149.7%);border-radius:16px;padding:40px">
+    <span class="type-chip" style="background:#fff">🔥 Top rated jobs added daily</span>
+    <h1 style="margin-top:12px">Land your dream {{ city.name }} Internship</h1>
+    <p style="max-width:600px;font-size:15px">Thousands of internships, co-ops and early-career roles - all in one place, built for students.</p>
+  </div>
+</div>
+
+<section class="container" style="padding-bottom:64px">
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:18px 0">
+    <a class="btn {{ 'primary' if not jtype }}" href="/us/{{ city.state }}/{{ city.slug }}/internships">All</a>
+    {% for label, count in type_counts|dictsort %}
+    <a class="btn {{ 'primary' if jtype == label else '' }}" href="/us/{{ city.state }}/{{ city.slug }}/internships?type={{ label|lower }}">
+      {{ label }} <span class="muted small">{{ count }}</span>
+    </a>
+    {% endfor %}
+    <span class="muted small" style="margin-left:auto">Newest first</span>
+  </div>
+
+  {% if jobs %}
+  {% for j in jobs %}
+  <div class="job-card">
+    <div>
+      <strong>{{ j.title }}</strong>
+      <div class="co">{{ j.company }}</div>
+      <div class="loc">{{ j.location }}</div>
+      <div class="small muted">Posted {{ j.posted_at }}</div>
+    </div>
+    <span class="type-chip">{{ j.type or j.raw_type }}</span>
+    <a class="btn" href="{{ j.url }}" target="_blank" rel="noopener">View Job</a>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="empty-state">
+    <p style="font-weight:600">No results</p>
+    <p class="muted small">No roles found. Try adjusting your filters.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

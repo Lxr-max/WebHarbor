@@ -1,0 +1,94 @@
+{
+ "site": "red_bull",
+ "upstream": "https://www.redbull.com/",
+ "upstream_note": "The assigned registry name 'red_bull' maps to the Red Bull consumer site at https://www.redbull.com/ (us-en). The literal hostname red_bull.com does not resolve in DNS (underscore hostnames are not valid); www.redbull.com is the real upstream this mirror captures.",
+ "captured_at": "2026-09-30",
+ "capture_method": "direct HTTP fetches with a coherent Safari header set against the server-rendered pages (the upstream is behind Akamai bot management; plain default-header requests are refused) plus the public redbull.com JSON content API (/v3/api/graphql/v1/v3/...) for the client-rendered surfaces (event pages, feeds), headless Chromium (Playwright) to discover the exact API endpoints the live pages call, and the public Shopify products.json endpoint for the shop catalog",
+ "sources": {
+  "www.redbull.com": {
+   "role": "primary site: home, energy-drink catalog and product pages, events calendar, event Info/Schedule/FAQs pages, event-series hubs, athletes hub and profiles, stories, films & shows catalog, site chrome (nav, logo, favicon)",
+   "pages_captured": 168,
+   "pages_detail": "18 product pages, 100 event detail records (57 with Schedule/FAQs tab content), 5 event-series pages, 60 athlete profiles, 40 story pages",
+   "content_api": "/v3/api/graphql/v1/v3/feed and /v3/query endpoints (events, athletes, films, shows, episode-videos, stories, countries aggregates)"
+  },
+  "participate.redbull.com": {
+   "role": "Red Bull participation/ticketing API: registration records for the events with open registrations (entry fees, ticket type names, free vs paid)",
+   "records": 5
+  },
+  "img.redbull.com": {
+   "role": "Red Bull image CDN (cloudinary): event, athlete, film, show, story, series and product imagery at the URLs the live pages render",
+   "images": 400
+  },
+  "www.redbullshopus.com": {
+   "role": "Red Bull Shop US (Shopify), linked from the redbull.com footer: product catalog via the public products.json endpoint (titles, vendors, product types, tags, variants with sizes/SKUs/prices, descriptions)",
+   "products_captured": 400,
+   "products_shipped": 200
+  },
+  "cdn.shopify.com": {
+   "role": "Shopify CDN: shop product images at the URLs the product records reference (fetched at width=800)",
+   "images": 199
+  }
+ },
+ "media": {
+  "images": {
+   "count": 627,
+   "bytes": 187036574,
+   "inventory": "asset_inventory.json",
+   "policy": "every file fetched from the upstream URL it renders at; no placeholders, no duplicates, no stretching. Events that share one upstream image (e.g. the two Red Bull Wings Cup stops) reuse the same file exactly like the upstream renders the same asset; per-file sha256 and source URL in asset_inventory.json",
+   "by_category": {
+    "shop": 199,
+    "films": 100,
+    "shows": 100,
+    "events": 97,
+    "athletes": 60,
+    "stories": 38,
+    "products": 26,
+    "series": 5,
+    "site": 2
+   }
+  }
+ },
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "one shipped shop order (FC Red Bull Salzburg Embossed Hoodie), two confirmed event registrations (Foam Wreckers Virginia Beach RB7F3A21, Rapid Release RB9C04D7), three favorites (event, film, athlete)"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "one confirmed registration (Barn Find Open RB2B8E90), three favorites (story, show, event)"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Davis",
+    "fixture": "two favorites (event, film)"
+   },
+   {
+    "email": "dana.k@test.com",
+    "display": "Dana Kim",
+    "fixture": "clean account (no orders, registrations or favorites) for fresh flows"
+   }
+  ],
+  "benchmark_state": "shop orders, event registration codes, and favorites are deterministic benchmark fixtures keyed to the benchmark users; all catalog, event, athlete, film, show, story and shop data is upstream-sourced",
+  "deterministic_seed": "the SQLite seed is materialized at image build time with PYTHONHASHSEED=0 and a frozen bcrypt benchmark password; three fresh builds produce a byte-identical database and re-running the seed against a populated database is a no-op",
+  "mirror_date": "2026-09-30 — the frozen snapshot date the site's upcoming/past logic is anchored to"
+ },
+ "task_surface": {
+  "tasks": 20,
+  "functional_domains": [
+    "event calendar browsing with discipline/country/time filters and pagination",
+    "event detail tabs (Info / Schedule / FAQs)",
+    "event-series hubs with tour stops",
+    "event registration with validation, real upstream entry fees and confirmation codes",
+    "energy-drink catalog with product-line filters, ingredient/nutrition facts and can sizes",
+    "athlete directory with nationality/discipline/A-Z filters and profile facts",
+    "films and shows catalogs with discipline filters, pagination, season/episode tables",
+    "story listing with topic filters and full article bodies",
+    "shop catalog with category/brand/price filters, size variants, SKUs, cart, checkout and orders",
+    "account surface: login, orders, registrations, favorites management"
+  ],
+  "honest_steps": "two independent Playwright audits (visible-element interaction only, reads excluded, no padding): 332 atomic actions total, min 15 per task, max 23, identical between runs"
+ }
+}

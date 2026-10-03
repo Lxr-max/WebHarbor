@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Configure {{ device.name }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('smartphones') }}">Smartphones</a> / <a href="{{ url_for('device_detail', slug=device.slug) }}">{{ device.name }}</a> / <span>Customize</span></nav>
+  <h1>Customize your {{ device.name }}</h1>
+  {% set imgs = device.hero_images() %}
+  {% if imgs %}<img class="configure-img" src="/{{ imgs[0] }}" alt="{{ device.name }}">{% endif %}
+
+  <form method="post" action="{{ url_for('device_configure', slug=device.slug) }}" class="card configure-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if colors %}
+    <fieldset>
+      <legend>Color</legend>
+      {% for c in colors %}
+      <label class="choice"><input type="radio" name="color" value="{{ c }}" {{ 'checked' if loop.first }}> {{ c }}</label>
+      {% endfor %}
+    </fieldset>
+    {% endif %}
+    <fieldset>
+      <legend>Storage</legend>
+      {% for s in storage %}
+      <label class="choice"><input type="radio" name="storage" value="{{ s }}" {{ 'checked' if loop.first }}> {{ s }}</label>
+      {% endfor %}
+    </fieldset>
+    <fieldset>
+      <legend>Choose how you want to pay</legend>
+      {% for term, price in terms.items()|sort %}
+      <label class="choice"><input type="radio" name="term" value="{{ term }}" {{ 'checked' if term == '36' }}> {{ term }} mos — ${{ price }}/mo</label>
+      {% endfor %}
+      {% if device.full_price %}
+      <label class="choice"><input type="radio" name="term" value="full"> Pay in full today — ${{ device.full_price }}</label>
+      {% endif %}
+    </fieldset>
+    <fieldset>
+      <legend>Protection plan</legend>
+      <label class="choice"><input type="radio" name="protection" value="" checked> No protection plan</label>
+      {% for p in protections %}
+      <label class="choice"><input type="radio" name="protection" value="{{ p.name }}"> {{ p.name }} — ${{ p.monthly }}/mo <span class="muted">{{ p.blurb }}</span></label>
+      {% endfor %}
+    </fieldset>
+    <fieldset>
+      <legend>Service plan</legend>
+      {% for p in plans %}
+      <label class="choice"><input type="radio" name="plan" value="{{ p.id }}" {{ 'checked' if loop.first }}> {{ p.name }} — ${{ p.monthly }}/mo</label>
+      {% endfor %}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Add to cart</button>
+  </form>
+</section>
+{% endblock %}

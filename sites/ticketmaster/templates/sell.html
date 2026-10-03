@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sell Tickets | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Sell your tickets</h1>
+  <p class="page-sub">Can't make it? List your verified tickets for resale and get paid when they sell. It's free to list, and you keep control of your price.</p>
+  <div class="topic-list">
+    <div class="topic-card">
+      <h3>1. List</h3>
+      <p>Sign in, open the order in My Account, and select the tickets you want to sell. Set your asking price per ticket.</p>
+    </div>
+    <div class="topic-card">
+      <h3>2. Sell</h3>
+      <p>Your listing appears to buyers browsing the event. You can edit your price or remove the listing anytime before the tickets sell.</p>
+    </div>
+    <div class="topic-card">
+      <h3>3. Get paid</h3>
+      <p>When your tickets sell, we transfer the tickets to the buyer and deposit your payout to your bank account.</p>
+    </div>
+  </div>
+  <p style="padding-bottom:50px"><a class="btn btn-primary" href="/signin">Sign In to Sell</a></p>
+</div>
+{% endblock %}

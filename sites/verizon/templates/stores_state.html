@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ state_name }} Verizon Store Locations{% endblock %}
+{% block content %}
+<section class="container section">
+  <nav class="breadcrumb"><a href="{{ url_for('stores_home') }}">Stores</a> / <span>{{ state_name }}</span></nav>
+  <h1>{{ state_name }} Verizon store locations</h1>
+  <p>Select the city you want to browse.</p>
+  <p class="muted">{{ stores|length }} stores on record in {{ state_name }} across the cities listed below.</p>
+  <ul class="city-list">
+    {% for city in cities %}
+    <li><a href="{{ url_for('stores_city', state=state, city=city) }}">{{ city.replace('-', ' ').title() }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

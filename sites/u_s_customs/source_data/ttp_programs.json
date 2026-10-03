@@ -1,0 +1,50 @@
+[
+ {
+  "slug": "global-entry",
+  "name": "Global Entry",
+  "fee": 120,
+  "years": 5,
+  "audience": "Frequent international travelers (air arrivals)",
+  "includes": [
+   "TSA PreCheck"
+  ]
+ },
+ {
+  "slug": "nexus",
+  "name": "NEXUS",
+  "fee": 50,
+  "years": 5,
+  "audience": "Travelers crossing the U.S.-Canada border",
+  "includes": [
+   "Global Entry benefits",
+   "TSA PreCheck"
+  ]
+ },
+ {
+  "slug": "sentri",
+  "name": "SENTRI",
+  "fee": 122.25,
+  "years": 5,
+  "audience": "Travelers crossing the U.S.-Mexico border",
+  "includes": [
+   "Global Entry benefits",
+   "TSA PreCheck"
+  ]
+ },
+ {
+  "slug": "fast",
+  "name": "FAST",
+  "fee": 50,
+  "years": 5,
+  "audience": "Commercial truck drivers (Canada and Mexico)",
+  "includes": []
+ },
+ {
+  "slug": "tsa-precheck",
+  "name": "TSA PreCheck",
+  "fee": 78,
+  "years": 5,
+  "audience": "Domestic air travelers",
+  "includes": []
+ }
+]

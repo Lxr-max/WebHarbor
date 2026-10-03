@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Saved cars | Carvana{% endblock %}
+{% block body %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/account/favorites" class="active">Saved cars</a>
+    <a href="/account/orders">Orders</a>
+    <a href="/account/profile">Profile</a>
+  </nav>
+  <h1>Saved cars</h1>
+  {% if favorites %}
+  <div class="car-grid">
+    {% for f in favorites %}
+    <div class="car-card">
+      <a href="{{ f.vehicle.url() }}">
+        {% if f.vehicle.card_image_url() %}<img src="{{ f.vehicle.card_image_url() }}" alt="{{ f.vehicle.title() }}">{% endif %}
+        <div class="car-card-body">
+          <h3>{{ f.vehicle.title() }}</h3>
+          <p class="car-meta">{{ f.vehicle.mileage|mileage }} · {{ f.vehicle.body_style }}</p>
+          <p class="car-price">{{ f.vehicle.price|money }}</p>
+        </div>
+      </a>
+      <form method="post" action="{{ url_for('favorite_remove', vehicle_id=f.vehicle.vehicle_id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn-outline small">Remove</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty">You haven&rsquo;t saved any cars yet. <a href="/cars">Browse cars</a> and tap &ldquo;Save this car&rdquo;.</p>
+  {% endif %}
+</div>
+{% endblock %}

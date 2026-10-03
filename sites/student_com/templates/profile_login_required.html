@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{% if page == 'Saved Properties' %}Saved Properties | Student.com{% elif page == 'Recently Viewed Properties' %}Recently Viewed Properties | Student.com{% else %}My Inquiries | Student.com{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:44px 0 64px;max-width:1000px">
+  <nav class="breadcrumb" style="padding:0 0 10px"><a href="/">Home</a> › <span>{{ page }}</span></nav>
+  <h1>{{ page }}</h1>
+  <p class="muted" style="margin-top:8px">Sign up or log in to your free Student.com account to get started.</p>
+  <div class="card" style="padding:40px;text-align:center;margin-top:22px">
+    <p style="font-weight:600">You don't have any {{ page|lower }} yet</p>
+    <p class="muted small">Start exploring and {{ 'save your favorites to easily find them later!' if 'Saved' in page else 'your activity will appear here!' }}</p>
+    <button class="btn primary" id="login-open" style="margin-top:16px">Log in</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  var btn = document.getElementById("login-open");
+  if (btn) btn.addEventListener("click", function () {
+    document.getElementById("auth-modal").classList.add("open");
+  });
+</script>
+{% endblock %}

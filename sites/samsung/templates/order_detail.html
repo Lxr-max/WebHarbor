@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Order {{ order.order_no }}{{ '' }}{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('orders') }}">Orders</a> &rsaquo; <span>{{ order.order_no }}</span></div>
+<div class="page-head">
+  <h1>Order {{ order.order_no }}</h1>
+  <p class="muted">Placed {{ order.placed_ts }} &middot; Status: <strong>{{ order.status }}</strong></p>
+</div>
+<div class="order-layout">
+  <section>
+    <h2>Items</h2>
+    <div class="table-wrap">
+<table class="cart-table">
+      <thead><tr><th>Item</th><th class="num">Unit price</th><th class="num">Qty</th><th class="num">Total</th></tr></thead>
+      <tbody>
+        {% for item in order.items %}
+        <tr>
+          <td class="cart-title">
+            {% if item.image %}<img class="cart-thumb" src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="">{% endif %}
+            {{ item.title }}
+          </td>
+          <td class="num">{{ item.unit_price|money }}</td>
+          <td class="num">{{ item.qty }}</td>
+          <td class="num">{{ (item.unit_price * item.qty)|money }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+  </section>
+  <aside class="cart-summary">
+    <h2>Summary</h2>
+    <p>Subtotal: {{ order.subtotal|money }}</p>
+    <p>Shipping: {{ order.shipping|money }}</p>
+    <p>Tax: {{ order.tax|money }}</p>
+    <p>Total: <strong>{{ order.total|money }}</strong></p>
+    <h2>Delivery</h2>
+    <p>{{ order.full_name }}<br>{{ order.address1 }}<br>{{ order.city }}, {{ order.state }} {{ order.zipcode }}</p>
+    <p>Payment: {{ order.payment_method }}</p>
+  </aside>
+</div>
+{% endblock %}

@@ -12,37 +12,28 @@ Run from the repository root:  python3 scripts/check_site_registry.py
 """
 from __future__ import annotations
 
-import ast
 import json
-import re
 import sys
 from pathlib import Path
+
+try:
+    from .site_registry import parse_site_array, parse_docker_ports
+    from .validate_tasks import validate_local_web
+except ImportError:
+    from site_registry import parse_site_array, parse_docker_ports
+    from validate_tasks import validate_local_web
+
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE_PORT = 40000
 
 
 def parse_start_sites(path: Path) -> list[str]:
-    match = re.search(r"SITES=\((.*?)\)", path.read_text(encoding="utf-8"), re.S)
-    if not match:
-        raise ValueError(f"{path}: no SITES=( ... ) array found")
-    return match.group(1).split()
+    return parse_site_array(path.read_text(encoding="utf-8"), str(path))[0]
 
 
 def parse_control_sites(path: Path) -> list[str]:
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if isinstance(node, ast.Assign) and any(
-                isinstance(target, ast.Name) and target.id == "SITES" for target in node.targets):
-            return list(ast.literal_eval(node.value))
-    raise ValueError(f"{path}: no SITES list found")
-
-
-def parse_expose(path: Path) -> str:
-    match = re.search(r"^EXPOSE ([^\n]+)$", path.read_text(encoding="utf-8"), re.M)
-    if not match:
-        raise ValueError(f"{path}: no EXPOSE directive found")
-    return match.group(1).strip()
+    return parse_site_array(path.read_text(encoding="utf-8"), str(path))[0]
 
 
 def main() -> int:
@@ -50,7 +41,7 @@ def main() -> int:
     try:
         start_sites = parse_start_sites(ROOT / "websyn_start.sh")
         control_sites = parse_control_sites(ROOT / "control_server.py")
-    except ValueError as error:
+    except (OSError, ValueError) as error:
         print(f"[registry] {error}", file=sys.stderr)
         return 1
 
@@ -73,10 +64,18 @@ def main() -> int:
                 "control_server.py / Dockerfile EXPOSE")
 
     count = len(start_sites)
-    expected_expose = f"8101 {BASE_PORT}-{BASE_PORT + count - 1}"
-    expose = parse_expose(ROOT / "Dockerfile")
-    if expose != expected_expose:
-        problems.append(f"Dockerfile EXPOSE is {expose!r}, expected {expected_expose!r}")
+    expected_ports = {8101, *range(BASE_PORT, BASE_PORT + count)}
+    try:
+        expose = parse_docker_ports(ROOT / "Dockerfile")
+        problems.extend(expose["invalid_expose_tokens"])
+        if set(expose["exposed_ports"]) != expected_ports:
+            problems.append("Dockerfile TCP EXPOSE ports do not match the registry and control port")
+        for name in ("websyn_start.sh", "control_server.py"):
+            _, base = parse_site_array((ROOT / name).read_text(), name)
+            if base != BASE_PORT:
+                problems.append(f"{name} BASE_PORT must be {BASE_PORT}")
+    except (OSError, ValueError) as error:
+        problems.append(str(error))
 
     for index, site in enumerate(start_sites):
         site_dir = ROOT / "sites" / site
@@ -86,15 +85,17 @@ def main() -> int:
         tasks = site_dir / "tasks.jsonl"
         if not tasks.exists():
             continue
-        expected_url = f"http://localhost:{BASE_PORT + index}/"
         for lineno, line in enumerate(tasks.read_text(encoding="utf-8").splitlines(), 1):
             if not line.strip():
                 continue
             row = json.loads(line)
-            if row.get("web") != expected_url:
-                problems.append(
-                    f"sites/{site}/tasks.jsonl:{lineno} declares web={row.get('web')!r}, "
-                    f"expected {expected_url!r} (index {index})")
+            url = row.get("web")
+            if not isinstance(url, str) or not url:
+                problems.append(f"{tasks}:{lineno} missing web URL")
+            else:
+                findings = []
+                validate_local_web(url, site, BASE_PORT + index, tasks, lineno, ROOT, findings, {})
+                problems.extend(f"{tasks}:{lineno} {f.message}" for f in findings)
             verifier = row.get("verifier_path")
             if verifier and not (ROOT / verifier).exists():
                 problems.append(f"sites/{site}/tasks.jsonl:{lineno} verifier_path missing: {verifier}")
@@ -104,7 +105,7 @@ def main() -> int:
             print(f"[registry] {problem}", file=sys.stderr)
         return 1
     print(f"[registry] {count} sites consistent across websyn_start.sh, control_server.py, "
-          f"Dockerfile EXPOSE ({expose}), and per-site tasks.jsonl ports")
+          f"Dockerfile TCP EXPOSE, and per-site tasks.jsonl ports")
     return 0
 
 

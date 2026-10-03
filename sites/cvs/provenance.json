@@ -1,0 +1,950 @@
+{
+  "site": "cvs",
+  "upstream_url": "https://www.cvs.com/",
+  "captured_at": "2026-09-28",
+  "acquisition": "Rendered browser DOM and accessibility observations; observed image URLs downloaded directly without source API access.",
+  "counts": {
+    "listing_products": 40,
+    "complete_product_details": 23,
+    "stores": 25,
+    "policy_pages": 4,
+    "products_with_explicit_ratings": 18,
+    "local_images": 187
+  },
+  "excluded_images": {
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/506064067348_3.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/3077223454_10.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/3077223454_11.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/85006374449_7.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/3077223298_10.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/30041011168_10.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/30041011168_11.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/69702999622_8.jpg?im=Resize=(600,600),aspect=ignore": "Download batch interrupted to check existing inventory reuse per parent instruction; in-flight request incomplete and will not be retried.",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/5042814666_6.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404",
+    "https://www.cvs.com/bizcontent/merchandising/productimages/high_res/5042814675_5.jpg?im=Resize=(600,600),aspect=ignore": "Observed source URL returned HTTP 404"
+  },
+  "limitations": [
+    "Only the first 20 rendered products in each of 2 categories are included.",
+    "3 shampoo products expose price ranges without a captured variant-to-price mapping; these cannot be added to the demo cart.",
+    "Public prices, promotions and store hours are frozen source observations, not current offers or live stock.",
+    "25 stores are a captured Illinois subset, not a nationwide store directory.",
+    "Accounts, carts, favorites, addresses and orders are synthetic local benchmark fixtures. No messages, charges, prescriptions or appointments are sent.",
+    "23 of 40 products have complete captured detail cards; 17 retain listing-only facts. 18 products have an explicitly labeled source rating; missing ratings, SKU mappings and stock are not invented.",
+    "Normal source navigation returned Access Denied for product 723038 during r3. Its evidence is retained, its detail data is excluded, and no bypass was attempted."
+  ],
+  "sources": [
+    {
+      "kind": "product_listing",
+      "id": "452372",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/crest-3d-white-advanced-sensitivity-relief-toothpaste-soft-mint-3-3-oz-prodid-452372",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "unavailable"
+    },
+    {
+      "kind": "product_listing",
+      "id": "476215",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/ordo-kids-oscillating-brush-heads-white-2-ct-prodid-476215",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "captured"
+    },
+    {
+      "kind": "product_listing",
+      "id": "478253",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/crest-pro-health-breath-mist-clean-mint-0-44-oz-2-pk-prodid-478253",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "captured"
+    },
+    {
+      "kind": "product_listing",
+      "id": "851347",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/cvs-supreme-whitening-wraps-wintermint-10-treatments-prodid-851347",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "unavailable"
+    },
+    {
+      "kind": "product_listing",
+      "id": "456310",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/ordo-sonic-edge-rechargeable-toothbrush-peach-sunrise-prodid-456310",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "481219",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/ordo-sonic-kids-battery-toothbrush-squishmallows-daxxon-prodid-481219",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "481078",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/listerine-freshburst-pocketpaks-breath-strips-24-ct-prodid-481078",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "514695",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/lumuniex-whitening-strips-7-treatments-prodid-514695",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "455627",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/oral-b-pulsar-advanced-all-in-one-toothbrush-soft-prodid-455627",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "428704",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/crest-pro-health-sensitivity-relief-toothpaste-minty-fresh-scope-5-1-oz-prodid-428704",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "496783",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/gengigel-hyaluronic-acid-mouthrinse-5-07-oz-prodid-496783",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "459335",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/pronamel-intensive-enamel-repair-whitening-toothpaste-arctic-breeze-3-pk-prodid-459335",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "447099",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/cocolab-cocoshine-nano-hydroxyapatite-whitening-toothpaste-lychee-breeze-4-oz-prodid-447099",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "455078",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/crest-3d-white-stain-eraser-toothpaste-icy-clean-mint-3-8-oz-prodid-455078",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "478894",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/therabreath-healthy-gums-toothpaste-clean-mint-4-oz-prodid-478894",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "476375",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/act-kids-anticavity-fluoride-rinse-simple-strawberry-16-9-oz-prodid-476375",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "452370",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/crest-3d-white-stain-eraser-toothpaste-polishing-mint-3-8-oz-prodid-452370",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "478948",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/therabreath-whitening-fresh-breath-mouthwash-dazzling-mint-33-8-oz-prodid-478948",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "851367",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/cvs-clinical-plus-white-toothpaste-fresh-mint-3-4-oz-prodid-851367",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "476691",
+      "url": "https://www.cvs.com/shop/personal-care/oral-care?icid=shop-pc-category-featured-oral-care",
+      "record_url": "https://www.cvs.com/shop/sleepright-snore-aid-custom-fit-anti-snore-mouth-guard-ultra-thin-prodid-476691",
+      "captured_at": "2026-09-28T16:45:44.261Z",
+      "evidence_sha256": "f378c07b000a37e176719c32e53b4afa55bdb806b3d454bfab51bd457f5cf75f",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "949346",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/carol-s-daughter-lisa-s-kitchen-scalp-detox-cleansing-nectar-8-oz-prodid-949346",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "814313",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/aussie-instant-refresh-dry-shampoo-mint-waterlily-4-9-oz-prodid-814313",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "792429",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/old-spice-the-spice-alchemist-shampoo-cardamom-and-amber-wood-21-9-oz-prodid-792429",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "723038",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/dove-men-care-2-in-1-shampoo-conditioner-i-believe-in-believe-18-oz-prodid-723038",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "240604",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-fructis-grow-strong-shampoo-12-5-oz-prodid-240604",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "383392",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/l-oreal-paris-elvive-glycolic-gloss-shine-boosting-shampoo-12-6-oz-prodid-383392",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "1260121",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-fructis-pure-clean-purifying-shampoo-12-5-oz-prodid-1260121",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "7201029",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-fructis-triple-nutrition-shampoo-prodid-7201029",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "241429",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-fructis-color-shield-shampoo-12-5-oz-prodid-241429",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "7200475",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-whole-blends-honey-treasures-repairing-shampoo-prodid-7200475",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "7200293",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/l-oreal-paris-elvive-hyaluron-plump-hydrating-shampoo-prodid-7200293",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "615300",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/l-oreal-paris-elvive-hyaluron-pure-72h-purifying-shampoo-for-oily-hair-12-6-oz-prodid-615300",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "847596",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/dove-bond-strength-damage-therapy-shampoo-12-oz-prodid-847596",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "448127",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/ogx-progrowth-peptide-shampoo-13-oz-prodid-448127",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "615464",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/garnier-whole-blends-honey-water-moisture-restoring-shampoo-12-5-oz-prodid-615464",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "906547",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/l-oreal-paris-elvive-color-vibrancy-protecting-shampoo-12-6-oz-prodid-906547",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "1014874",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/l-oreal-paris-elvive-total-repair-extreme-renewing-shampoo-12-6-oz-prodid-1014874",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "582191",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/ogx-rosemary-mint-shampoo-13-oz-prodid-582191",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "1015021",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/ogx-renewing-argan-oil-of-morocco-shampoo-13-oz-prodid-1015021",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_listing",
+      "id": "360759",
+      "url": "https://www.cvs.com/shop/beauty/hair-care/shampoo-conditioner/shampoo?icid=shop-haircare-shampoo-conditioner-cat-link1-shampoo",
+      "record_url": "https://www.cvs.com/shop/dove-lavender-volume-damage-therapy-shampoo-12-oz-prodid-360759",
+      "captured_at": "2026-09-28T16:47:47.383Z",
+      "evidence_sha256": "4a3008c64ee2c5dad2329363694ce56efe1b0aad339579688a7955e1d09e236c",
+      "detail_status": "listing_only"
+    },
+    {
+      "kind": "product_detail",
+      "id": "476215",
+      "url": "https://www.cvs.com/shop/ordo-kids-oscillating-brush-heads-white-2-ct-prodid-476215",
+      "captured_at": "2026-09-28T16:50:11.297Z",
+      "evidence_sha256": "3a133bfecee2a151303542efcaa3ce9451c8fa5cac7db893fc2e1eeafbd8d0ce"
+    },
+    {
+      "kind": "product_detail",
+      "id": "478253",
+      "url": "https://www.cvs.com/shop/crest-pro-health-breath-mist-clean-mint-0-44-oz-2-pk-prodid-478253",
+      "captured_at": "2026-09-28T16:50:32.798Z",
+      "evidence_sha256": "5f7e2a57cdf8bce84eb3885f3e8ef32cebf1c076e3f02538e69fe60d68670444"
+    },
+    {
+      "kind": "store",
+      "id": "1493",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/5205-n-broadway-st-chicago-il-60640/storeid=1493",
+      "captured_at": "2026-09-28T16:47:23.940Z",
+      "evidence_sha256": "3895db552737c5d5215ff5060f8567fcf6f1c5fa5b497a0b66421b2bd1e0aa20"
+    },
+    {
+      "kind": "store",
+      "id": "16362",
+      "url": "https://www.cvs.com/store-locator/champaign-il-pharmacies/2102-n-prospect-ave-champaign-il-61822/storeid=16362",
+      "captured_at": "2026-09-28T16:46:06.062Z",
+      "evidence_sha256": "8780fd521146c9421bbe66680d4205da6f3d5ba034585058731d011940141f34"
+    },
+    {
+      "kind": "store",
+      "id": "18078",
+      "url": "https://www.cvs.com/store-locator/champaign-il-pharmacies/109-n-mattis-ave-champaign-il-61821/storeid=18078",
+      "captured_at": "2026-09-28T16:45:56.353Z",
+      "evidence_sha256": "5b9376037c35187306d73e2e2efa0c658b733d4f42620de774c83c9a41a6c108"
+    },
+    {
+      "kind": "store",
+      "id": "18083",
+      "url": "https://www.cvs.com/store-locator/urbana-il-pharmacies/200-n-vine-st-urbana-il-61802/storeid=18083",
+      "captured_at": "2026-09-28T16:46:02.207Z",
+      "evidence_sha256": "552d14b190b1dc8c78fc7d4a08f5e2058972ae20e0f40773c1567224849ef61e"
+    },
+    {
+      "kind": "store",
+      "id": "18089",
+      "url": "https://www.cvs.com/store-locator/savoy-il-pharmacies/1301-savoy-plaza-ln-savoy-il-61874/storeid=18089",
+      "captured_at": "2026-09-28T16:46:50.048Z",
+      "evidence_sha256": "e0538b39b23f9e6c3960d6a0945b39ec80074e10c045ea403a69b5d81dda0357"
+    },
+    {
+      "kind": "store",
+      "id": "2845",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/1930-w-103rd-st-chicago-il-60643/storeid=2845",
+      "captured_at": "2026-09-28T16:47:31.549Z",
+      "evidence_sha256": "7088ea23b28c5ee4dc875acfd19be7dbc84014c99e10387cd025e94718913dc8"
+    },
+    {
+      "kind": "store",
+      "id": "2935",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/8712-south-stony-island-ave-chicago-il-60617/storeid=2935",
+      "captured_at": "2026-09-28T16:47:48.465Z",
+      "evidence_sha256": "1f23b92fc982566e39c3ee981574b454fbc33a15242192c2ea565d2d92ad62c4"
+    },
+    {
+      "kind": "store",
+      "id": "2981",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/1201-n-state-st-chicago-il-60610/storeid=2981",
+      "captured_at": "2026-09-28T16:47:26.288Z",
+      "evidence_sha256": "37bf2b003bfef63441ec7021464330f5ceb358d1065c5965b922bc79ccfa5ba8"
+    },
+    {
+      "kind": "store",
+      "id": "3170",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/6417-w-higgins-ave-chicago-il-60656/storeid=3170",
+      "captured_at": "2026-09-28T16:47:34.496Z",
+      "evidence_sha256": "1cd83c90c6015c14e0af9b67d1d422885f4f8d05cfb0aebaf418443cefad212c"
+    },
+    {
+      "kind": "store",
+      "id": "3690",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/1714-n-sheffield-ave-chicago-il-60614/storeid=3690",
+      "captured_at": "2026-09-28T16:49:24.779Z",
+      "evidence_sha256": "eb076b08b29b0f2d614688bcff3894cccd67590f65543916a7f91ef115a48f68"
+    },
+    {
+      "kind": "store",
+      "id": "3742",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/121-w-kinzie-st-chicago-il-60654/storeid=3742",
+      "captured_at": "2026-09-28T16:47:28.963Z",
+      "evidence_sha256": "d4b167e8d5798332e2935e5fe48e76d1d57bc60fb1d90be0fc7a87c5dc8afba6"
+    },
+    {
+      "kind": "store",
+      "id": "4061",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/520-s-state-street-chicago-il-60605/storeid=4061",
+      "captured_at": "2026-09-28T16:49:37.659Z",
+      "evidence_sha256": "bea65d65f02a1a26d04412c8468fbd83e2f6abbcffc4e6766a6af920a6524dc7"
+    },
+    {
+      "kind": "store",
+      "id": "4781",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/205-n-michigan-ave-chicago-il-60601/storeid=4781",
+      "captured_at": "2026-09-28T16:49:28.060Z",
+      "evidence_sha256": "0b04b700f622335912d0e74d726eb203806fe44881b0de6f72fa5914358ceee5"
+    },
+    {
+      "kind": "store",
+      "id": "4793",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/1211-w-roosevelt-rd-chicago-il-60608/storeid=4793",
+      "captured_at": "2026-09-28T16:49:45.393Z",
+      "evidence_sha256": "7661634bc7558bc1a753d4197fda2ecee585a91432db947d0aa3e84bc32abbe2"
+    },
+    {
+      "kind": "store",
+      "id": "4979",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/7855-s-western-ave-chicago-il-60620/storeid=4979",
+      "captured_at": "2026-09-28T16:48:07.649Z",
+      "evidence_sha256": "297d98fa90913826668540a43bed433448e979172c159137f06d58c0850e9a75"
+    },
+    {
+      "kind": "store",
+      "id": "5482",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/3615-n-central-ave-chicago-il-60634/storeid=5482",
+      "captured_at": "2026-09-28T16:47:44.032Z",
+      "evidence_sha256": "2f281d39ac3eabce48181eb47e50e3b56aeef67fb2a03a087bff067ed645804f"
+    },
+    {
+      "kind": "store",
+      "id": "5836",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/1228-e-53rd-st-chicago-il-60615/storeid=5836",
+      "captured_at": "2026-09-28T16:49:57.967Z",
+      "evidence_sha256": "b85cffa7b8d6beb4bd994155ed7b0b15e643483deef037ea9352bea12f2b98e0"
+    },
+    {
+      "kind": "store",
+      "id": "5887",
+      "url": "https://www.cvs.com/store-locator/savoy-il-pharmacies/1111-n-dunlap-st-savoy-il-61874/storeid=5887",
+      "captured_at": "2026-09-28T16:46:46.345Z",
+      "evidence_sha256": "0a0ab7868762a2eb19b23adb3e157dc1dee03021d765647fd81195220734eb66"
+    },
+    {
+      "kind": "store",
+      "id": "5987",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/4800-north-damen-chicago-il-60625/storeid=5987",
+      "captured_at": "2026-09-28T16:49:49.170Z",
+      "evidence_sha256": "c2120f3b36f0f50ca58b2398ddde737bba40d58cb37d7aaa8743583b2a395efa"
+    },
+    {
+      "kind": "store",
+      "id": "6935",
+      "url": "https://www.cvs.com/store-locator/mahomet-il-pharmacies/804-b-eastwood-dr-mahomet-il-61853/storeid=6935",
+      "captured_at": "2026-09-28T16:46:42.828Z",
+      "evidence_sha256": "5141c8ff87efed364838a1a20caeecf2db4c0cbcd62bfdd46ae244f1d6259ef9"
+    },
+    {
+      "kind": "store",
+      "id": "788",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/344-west-hubbard-chicago-il-60654/storeid=788",
+      "captured_at": "2026-09-28T16:47:21.219Z",
+      "evidence_sha256": "c56676e2295e9c2b6841c5e6a5b9a7974f4d4fd436cf8fecc5c4307b11c80fbc"
+    },
+    {
+      "kind": "store",
+      "id": "8502",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/6315-south-pulaski-rd-suite-1-chicago-il-60629/storeid=8502",
+      "captured_at": "2026-09-28T16:50:00.882Z",
+      "evidence_sha256": "b0c4ed1d7d8828db406e7d96474e8584cb9c67602964e0427335743e253b6baa"
+    },
+    {
+      "kind": "store",
+      "id": "8683",
+      "url": "https://www.cvs.com/store-locator/champaign-il-pharmacies/107-w-green-st-champaign-il-61820/storeid=8683",
+      "captured_at": "2026-09-28T16:45:43.010Z",
+      "evidence_sha256": "127087b5ff11205208705562588eacee5d04e144ca0bb3eb4d5af42505eceea0"
+    },
+    {
+      "kind": "store",
+      "id": "8738",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/741-w-31st-chicago-il-60616/storeid=8738",
+      "captured_at": "2026-09-28T16:49:40.576Z",
+      "evidence_sha256": "7111eb523e07a18e19b65924ce72d2375bfbf68f00f23fd7023f6acfeb5831d9"
+    },
+    {
+      "kind": "store",
+      "id": "8980",
+      "url": "https://www.cvs.com/store-locator/chicago-il-pharmacies/6510-north-sheridan-rd-chicago-il-60626/storeid=8980",
+      "captured_at": "2026-09-28T16:50:06.238Z",
+      "evidence_sha256": "45e4553027f6046e4a8b4fcd83ac9097fa19954c353b619b1e3e1e8e81b0c7ac"
+    },
+    {
+      "kind": "policy",
+      "url": "https://www.cvs.com/retail/help/help-subtopic-checkout#canceling_your_order",
+      "captured_at": "2026-09-28T16:48:52.093Z",
+      "evidence_sha256": "34ed1788d79869c4599fda0d50bf4c61572347c3695f4ac5f8b1801db8fb1329"
+    },
+    {
+      "kind": "policy",
+      "url": "https://www.cvs.com/retail/help/help_index",
+      "captured_at": "2026-09-28T16:49:09.641Z",
+      "evidence_sha256": "f55e9d3925cccee9378af2683e22a3cffa0630e335088262510cbdc30e6ac351"
+    },
+    {
+      "kind": "policy",
+      "url": "https://www.cvs.com/retail/help/return_policy",
+      "captured_at": "2026-09-28T16:48:43.036Z",
+      "evidence_sha256": "c5e0a3e7f39375a57631e44dbbdbe970f87e4565ae0e6725cb6b4552364304ed"
+    },
+    {
+      "kind": "policy",
+      "url": "https://www.cvs.com/retail/help/help-subtopic-shipping-information",
+      "captured_at": "2026-09-28T16:48:36.957Z",
+      "evidence_sha256": "2a75651c1347b7a509c8123e09784d43aedff878b2f768e7d7aef3a871c2763e"
+    },
+    {
+      "kind": "homepage",
+      "url": "https://www.cvs.com/",
+      "captured_at": "2026-09-28T16:45:38.302Z",
+      "evidence_sha256": "4d4aaa1ca28a34214f4b4a3cedf96a43b7bc34fe83370cac94dd7491f78e63a9",
+      "scope": "main#main-content"
+    },
+    {
+      "kind": "product_detail",
+      "id": "428704",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/crest-pro-health-sensitivity-relief-toothpaste-minty-fresh-scope-5-1-oz-prodid-428704",
+      "captured_at": "2026-09-28T18:50:08.036Z",
+      "raw_dom_file": "raw/product-428704.html",
+      "raw_dom_sha256": "520e8b45e8de5b6585b49adc0e9fe15a766a21c164c129893a2fc0a9a752f395",
+      "raw_ax_file": "raw/product-428704.ax.txt",
+      "raw_ax_sha256": "6178cae69a6c12d44d6181cd08b0ccd05a16e433356efb10a8baf7b948b27a7b",
+      "record_sha256": "97becb35b3ab45692a316bd0e15ae8d108a673cc2119037138d6fbcdb3b31d99"
+    },
+    {
+      "kind": "product_detail",
+      "id": "447099",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/cocolab-cocoshine-nano-hydroxyapatite-whitening-toothpaste-lychee-breeze-4-oz-prodid-447099",
+      "captured_at": "2026-09-28T18:50:25.595Z",
+      "raw_dom_file": "raw/product-447099.html",
+      "raw_dom_sha256": "9e3d7485b970016409e37c8163f05c54d20c5d996074711f4b3e023431f09a77",
+      "raw_ax_file": "raw/product-447099.ax.txt",
+      "raw_ax_sha256": "1f215ca6cc113d1899dc8fd2f27a44e3827e06250a27346d3c90bee99aa02ae1",
+      "record_sha256": "a8f04bd3c9265c3f52db8a31ae54696b808bace90a5a1bdc9b87c60c029d54c9"
+    },
+    {
+      "kind": "product_detail",
+      "id": "452370",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/crest-3d-white-stain-eraser-toothpaste-polishing-mint-3-8-oz-prodid-452370",
+      "captured_at": "2026-09-28T18:44:24.278Z",
+      "raw_dom_file": "raw/product-452370.html",
+      "raw_dom_sha256": "2acb05380ca8f0a17066eda8dc82df868d0bae7f5f642820ffd40ce14d367ef0",
+      "raw_ax_file": "raw/product-452370.ax.txt",
+      "raw_ax_sha256": "8a3a8037c10987cf02755ad5bca0dc0201e45abeaa9e8a8988bcaf829e04f841",
+      "record_sha256": "6082d27b8a284463270088a4ee1beefe03e2dec403fd923d2bf4572346cb5f75"
+    },
+    {
+      "kind": "product_detail",
+      "id": "452372",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/crest-3d-white-advanced-sensitivity-relief-toothpaste-soft-mint-3-3-oz-prodid-452372",
+      "captured_at": "2026-09-28T18:46:14.255Z",
+      "raw_dom_file": "raw/product-452372.html",
+      "raw_dom_sha256": "3f4a4e5e400452651c3ed9a37293a39d962918d6639c6cc87820d31d2e7eb905",
+      "raw_ax_file": "raw/product-452372.ax.txt",
+      "raw_ax_sha256": "b3b1035fbd0d5c2e57f327c4c43b7f429ebb81a5487b138893461a3a4e213f33",
+      "record_sha256": "701bc559d446801bd7b091f11b5da0d46cd49b82f2aef8886ce121f95fcb0d4b"
+    },
+    {
+      "kind": "product_detail",
+      "id": "455078",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/crest-3d-white-stain-eraser-toothpaste-icy-clean-mint-3-8-oz-prodid-455078",
+      "captured_at": "2026-09-28T18:50:40.650Z",
+      "raw_dom_file": "raw/product-455078.html",
+      "raw_dom_sha256": "13bdfd8f61a5005c24312ff5455defe7e68c136b204ff265de6ba2913449ac76",
+      "raw_ax_file": "raw/product-455078.ax.txt",
+      "raw_ax_sha256": "eac0092bf5f9c872b66579ee3241e2d7d739014109cb5d903adca401d0680ba6",
+      "record_sha256": "8e2531da1c75815779e4a5272dfb8b5554e9f7fadb8b0a5dd7fbd8c38640bfe1"
+    },
+    {
+      "kind": "product_detail",
+      "id": "455627",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/oral-b-pulsar-advanced-all-in-one-toothbrush-soft-prodid-455627",
+      "captured_at": "2026-09-28T18:49:55.852Z",
+      "raw_dom_file": "raw/product-455627.html",
+      "raw_dom_sha256": "5dfa5a55d0bbc1687abce7c5c6911ee12859dc09d229984f930dc10836dbb9ea",
+      "raw_ax_file": "raw/product-455627.ax.txt",
+      "raw_ax_sha256": "49a7fc2c93e98492cfb29d8591b1e3e897fc0ee75a491ca8e218287a562b85a2",
+      "record_sha256": "7d6e4997fbc0cb84cb00d0dfccb6370e46d3661383b1bfd3c3438ddd36dc9e33"
+    },
+    {
+      "kind": "product_detail",
+      "id": "456310",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/ordo-sonic-edge-rechargeable-toothbrush-peach-sunrise-prodid-456310",
+      "captured_at": "2026-09-28T18:49:37.927Z",
+      "raw_dom_file": "raw/product-456310.html",
+      "raw_dom_sha256": "f2a712818fa99f7faa723d6b2285dfbb56e72e52dc29809e1e0982e329f64fb6",
+      "raw_ax_file": "raw/product-456310.ax.txt",
+      "raw_ax_sha256": "8f0c24fab7755025ae0478471a6054e13c4ca37c41ec8d6b34ac8e9e4a0e50b2",
+      "record_sha256": "14de5c9bbf625f52113574d37eb696ff3d99f4fe3e3ec6890d5fd5ec7a53a59c"
+    },
+    {
+      "kind": "product_detail",
+      "id": "459335",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/pronamel-intensive-enamel-repair-whitening-toothpaste-arctic-breeze-3-pk-prodid-459335",
+      "captured_at": "2026-09-28T18:50:21.428Z",
+      "raw_dom_file": "raw/product-459335.html",
+      "raw_dom_sha256": "0a57d38fa1349947ba66a1304d65c4ff1c40d5dc1d4e7ec2cfa0fba0974eb57f",
+      "raw_ax_file": "raw/product-459335.ax.txt",
+      "raw_ax_sha256": "1795edb5140ccf02714570ded998fcb9a5d67fd6da3d3eeddbec699f5f74e8e1",
+      "record_sha256": "90d5b19182991b8309080d973bb8d96740a0bd0cbd3d92651d65e16df24e79f9"
+    },
+    {
+      "kind": "product_detail",
+      "id": "476215",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/ordo-kids-oscillating-brush-heads-white-2-ct-prodid-476215",
+      "captured_at": "2026-09-28T18:51:07.990Z",
+      "raw_dom_file": "raw/product-476215.html",
+      "raw_dom_sha256": "ca5bf622996ed3db81c7272f4b0b85aa098e1dad104f5ea069c64a84fbc64611",
+      "raw_ax_file": "raw/product-476215.ax.txt",
+      "raw_ax_sha256": "226490a315a26dcdaac482200cc11044c1214d200aebabc04ee7f8cc17a725a8",
+      "record_sha256": "a67e26ff24a0e44bb0e92a9e566b4404fb07798851ed48dcc86a9dbc58a9e533"
+    },
+    {
+      "kind": "product_detail",
+      "id": "476375",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/act-kids-anticavity-fluoride-rinse-simple-strawberry-16-9-oz-prodid-476375",
+      "captured_at": "2026-09-28T18:50:47.012Z",
+      "raw_dom_file": "raw/product-476375.html",
+      "raw_dom_sha256": "b078dd3b139483a136d1868f8632f9d9801fc793f21c049331088d30877f2c07",
+      "raw_ax_file": "raw/product-476375.ax.txt",
+      "raw_ax_sha256": "d395b39b8feffc3bb8c24c762b6cf70744218ac24f2cbd2655a5ac26d55a4e1d",
+      "record_sha256": "748e3260cadc6ad562dff7ca2fc578efaf2e5a5bfa6f2799e146aba2801026cd"
+    },
+    {
+      "kind": "product_detail",
+      "id": "476691",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/sleepright-snore-aid-custom-fit-anti-snore-mouth-guard-ultra-thin-prodid-476691",
+      "captured_at": "2026-09-28T18:51:06.225Z",
+      "raw_dom_file": "raw/product-476691.html",
+      "raw_dom_sha256": "f2f48834267f852f94fbb2bcb51d53a35b168ec1716b6883445adb49f14fa41e",
+      "raw_ax_file": "raw/product-476691.ax.txt",
+      "raw_ax_sha256": "6254652b44e86ba76b91a5c358d6022ae278c63dfca917d5388df0b7b901b76b",
+      "record_sha256": "f1ad28a504ccf0e5028a3792db3b1b9afd929e212e606ede78f5a9521261ab89"
+    },
+    {
+      "kind": "product_detail",
+      "id": "478253",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/crest-pro-health-breath-mist-clean-mint-0-44-oz-2-pk-prodid-478253",
+      "captured_at": "2026-09-28T18:51:09.377Z",
+      "raw_dom_file": "raw/product-478253.html",
+      "raw_dom_sha256": "6ce4ced4294d5271227079dda7c9f03817f0007b61de7d4ee52ee9845ca382fd",
+      "raw_ax_file": "raw/product-478253.ax.txt",
+      "raw_ax_sha256": "ace7644c20939fa8a96c28996012a8be43142c57d74664b634f2fedbf6511288",
+      "record_sha256": "61d3034d67353711b62dc9defc247d2ea897da65374f98033175bf6bdf2a76b5"
+    },
+    {
+      "kind": "product_detail",
+      "id": "478894",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/therabreath-healthy-gums-toothpaste-clean-mint-4-oz-prodid-478894",
+      "captured_at": "2026-09-28T18:50:43.929Z",
+      "raw_dom_file": "raw/product-478894.html",
+      "raw_dom_sha256": "d2a166dc3571cb0e2d7c4206f6fe29b086598b6000d66d8ecdfd755bdc8d98a0",
+      "raw_ax_file": "raw/product-478894.ax.txt",
+      "raw_ax_sha256": "f2b016fabd92797da9e3316a46a7a7e9c61f08e6e80aa6b65697587827fbab08",
+      "record_sha256": "3d89066967656e82ab0e8c6b52086f31ad1d31d0f368ce7dd437cfb8dbcf71a5"
+    },
+    {
+      "kind": "product_detail",
+      "id": "478948",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/therabreath-whitening-fresh-breath-mouthwash-dazzling-mint-33-8-oz-prodid-478948",
+      "captured_at": "2026-09-28T18:50:48.102Z",
+      "raw_dom_file": "raw/product-478948.html",
+      "raw_dom_sha256": "c09ff460589c3fca82ef3d2e87b3a72c61a79b1ffc03cfb6380281aa6c36a00e",
+      "raw_ax_file": "raw/product-478948.ax.txt",
+      "raw_ax_sha256": "d9c8db57fc870053714f745accbf8c01c958533eae71d70e1690c1daaf9810ad",
+      "record_sha256": "735c434be85e44df37be6d4209ec0ca0964f546583cf94d1cb2cc7faafee0e7c"
+    },
+    {
+      "kind": "product_detail",
+      "id": "481078",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/listerine-freshburst-pocketpaks-breath-strips-24-ct-prodid-481078",
+      "captured_at": "2026-09-28T18:46:08.724Z",
+      "raw_dom_file": "raw/product-481078.html",
+      "raw_dom_sha256": "30417f2fbb4ac42b1149adbd5cb52686231daf88a406495d6055576830957c47",
+      "raw_ax_file": "raw/product-481078.ax.txt",
+      "raw_ax_sha256": "943cf277cbddbe6d428320e3e85ef62c3c61c89c0885d94cc9a0e12c9b2f8f08",
+      "record_sha256": "b8bfe0e58ecc3648e4298fc57185103f9ccf2187878728d96724b1f4c1e4c946"
+    },
+    {
+      "kind": "product_detail",
+      "id": "481219",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/ordo-sonic-kids-battery-toothbrush-squishmallows-daxxon-prodid-481219",
+      "captured_at": "2026-09-28T18:49:49.943Z",
+      "raw_dom_file": "raw/product-481219.html",
+      "raw_dom_sha256": "b0eb4aafbaed1cb0d29582b7ea238554f5510432bd530e7e3e917c9e59152290",
+      "raw_ax_file": "raw/product-481219.ax.txt",
+      "raw_ax_sha256": "b7fd51991116b4314618c0fcb42413d4c7139acbb6c743a23740007e529bc5f0",
+      "record_sha256": "95630fe503ada9a721cffcaa8e4256df25c17c912f62d8fac807b140f12d431f"
+    },
+    {
+      "kind": "product_detail",
+      "id": "496783",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/gengigel-hyaluronic-acid-mouthrinse-5-07-oz-prodid-496783",
+      "captured_at": "2026-09-28T18:50:11.248Z",
+      "raw_dom_file": "raw/product-496783.html",
+      "raw_dom_sha256": "a9508e1a85f75bbe01423de417ad42ce5c5fb392f6cae63cb1861981c0242499",
+      "raw_ax_file": "raw/product-496783.ax.txt",
+      "raw_ax_sha256": "9f18cbea0d518adee56c1b027a1e54298a4835036fe68597f0ffd96cd64a0357",
+      "record_sha256": "58905e9a6f28cc7b4dc9a29db102fa0d8901243b6c4f712e23732302b7434902"
+    },
+    {
+      "kind": "product_detail",
+      "id": "514695",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/lumuniex-whitening-strips-7-treatments-prodid-514695",
+      "captured_at": "2026-09-28T18:49:53.075Z",
+      "raw_dom_file": "raw/product-514695.html",
+      "raw_dom_sha256": "b1f331c6b241a86b4b84d0e3a1a94dc004d13375639e99acffc1bb4cdc769057",
+      "raw_ax_file": "raw/product-514695.ax.txt",
+      "raw_ax_sha256": "ec9aade230164b027093915201fa5d7676abb99999c3d9f620701d4374778138",
+      "record_sha256": "45dffd253366193b39e92de9abbda8456c71242cec26be4c70635feb09ca5c03"
+    },
+    {
+      "kind": "product_detail_attempt",
+      "id": "723038",
+      "capture_round": "r3",
+      "status": "excluded",
+      "url": "https://www.cvs.com/shop/dove-men-care-2-in-1-shampoo-conditioner-i-believe-in-believe-18-oz-prodid-723038",
+      "captured_at": "2026-09-28T18:51:36.460Z",
+      "raw_dom_file": "raw/product-723038.html",
+      "raw_dom_sha256": "b21a3f5c31436c80b2d247b2ea3e45bc5135ecafc83fcc3c7989658c6d421aeb",
+      "raw_ax_file": "raw/product-723038.ax.txt",
+      "raw_ax_sha256": "28568d08b9abb1fe9287d55e22e80c1809bad60c470d6cf8e9253deea3ba95b4",
+      "record_sha256": "6b40aaa591ce6fbcd806b12d3ded873dc609645c2bb75b4e26a6ba92aa32656b",
+      "reason": "Access Denied on normal source navigation"
+    },
+    {
+      "kind": "product_detail",
+      "id": "792429",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/old-spice-the-spice-alchemist-shampoo-cardamom-and-amber-wood-21-9-oz-prodid-792429",
+      "captured_at": "2026-09-28T18:51:36.092Z",
+      "raw_dom_file": "raw/product-792429.html",
+      "raw_dom_sha256": "5b38a44b45424eb0918ff7c1f8c6e3e5f88e5ff6520e16611c770fe87dce9d85",
+      "raw_ax_file": "raw/product-792429.ax.txt",
+      "raw_ax_sha256": "19161b2a2e4a6814b07793f720a60e98ebe15c7ecd4847ebfb4f8e746ebff63e",
+      "record_sha256": "c6e1107f596fb4c226a86253bfb2cc40ea4d794c97254eeea76f7c765506b49c"
+    },
+    {
+      "kind": "product_detail",
+      "id": "814313",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/aussie-instant-refresh-dry-shampoo-mint-waterlily-4-9-oz-prodid-814313",
+      "captured_at": "2026-09-28T18:51:33.117Z",
+      "raw_dom_file": "raw/product-814313.html",
+      "raw_dom_sha256": "0b63d55c1c909680ba27e98a54646c2067c693bc70de490caf4b507cefbf4807",
+      "raw_ax_file": "raw/product-814313.ax.txt",
+      "raw_ax_sha256": "398f9a984d3a5a211ef7217f32068bde1aea1106550a0eb560aad1f116c1f8b5",
+      "record_sha256": "3c4577022500775bf9d92eba1f28eadf42f0ca815689fdd27d9a22f840c71c78"
+    },
+    {
+      "kind": "product_detail",
+      "id": "851347",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/cvs-supreme-whitening-wraps-wintermint-10-treatments-prodid-851347",
+      "captured_at": "2026-09-28T18:45:17.193Z",
+      "raw_dom_file": "raw/product-851347.html",
+      "raw_dom_sha256": "57bb8bef22edda03948624ed5a89fda4b19fad04fd76559bd7fa3230cd11495e",
+      "raw_ax_file": "raw/product-851347.ax.txt",
+      "raw_ax_sha256": "68b017bd8c33f3837eaab9888a474771e8ff5e63a3b19eecc219e06823cf4293",
+      "record_sha256": "8311008f5cb4ab10a75b2716be2fe3ce045e4eaeea18ea0c375e59897f8b790b"
+    },
+    {
+      "kind": "product_detail",
+      "id": "851367",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/cvs-clinical-plus-white-toothpaste-fresh-mint-3-4-oz-prodid-851367",
+      "captured_at": "2026-09-28T18:51:03.204Z",
+      "raw_dom_file": "raw/product-851367.html",
+      "raw_dom_sha256": "efe1b9be050ced704fdc1adbc1803540715a4efe88bead4d9054795b6672f968",
+      "raw_ax_file": "raw/product-851367.ax.txt",
+      "raw_ax_sha256": "f7e8aab06f87e2af40313555461ceb68a7a05c43ebfe21fe3d0d1a815621b1f1",
+      "record_sha256": "3c157d40708bd12f59673953a2da9f1960fcf8e6c9cf3aaed041f1868f3a212e"
+    },
+    {
+      "kind": "product_detail",
+      "id": "949346",
+      "capture_round": "r3",
+      "status": "accepted",
+      "url": "https://www.cvs.com/shop/carol-s-daughter-lisa-s-kitchen-scalp-detox-cleansing-nectar-8-oz-prodid-949346",
+      "captured_at": "2026-09-28T18:51:29.673Z",
+      "raw_dom_file": "raw/product-949346.html",
+      "raw_dom_sha256": "2278f2c315e7c17bf0debfc7271a3c6ae3db7b40377b809c4b8b0d26ba2cb7b1",
+      "raw_ax_file": "raw/product-949346.ax.txt",
+      "raw_ax_sha256": "e47c260acf1fe70ced65a0d7fb574958f95601766846067afbb341d254548579",
+      "record_sha256": "ad63fc53eec4f0cad0d05499d949668f21cf58d4308b29669f9df750dc733295"
+    }
+  ],
+  "historical_limitations": [
+    {
+      "round": "before-r3",
+      "statements": [
+        "Product 452372 detail returned Page Not Found; product 851347 and further navigation returned Access Denied. No access-control bypass was attempted.",
+        "36 products have listing-only facts; 2 have source-unavailable details. Missing descriptions, exact ratings, SKU variants and stock are not invented."
+      ]
+    }
+  ],
+  "gallery_capture": {
+    "round": "r3",
+    "product_count": 23,
+    "observed_urls": 148,
+    "verified_usable_images": 138,
+    "new_images": 133,
+    "reused_images": 5,
+    "excluded_images": 10,
+    "scope": "Exact observed main-gallery URLs and product-title alt labels; source order preserved. Thumbnails, sticky images, enlarged modal duplicates and other-product recommendations excluded.",
+    "image_plan_sha256": "4285a0d4ba702170c073cef55c1a0815acd8f59642fbd148138f453b6b140dbb"
+  }
+}

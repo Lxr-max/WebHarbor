@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Profile | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight" style="max-width:640px">
+  <nav class="search-toolbar" style="top:0;border-bottom:none;padding-left:0">
+    <a class="chip" href="{{ url_for('account') }}">Reservations</a>
+    <a class="chip" href="{{ url_for('payment_methods') }}">Payment Methods</a>
+    <a class="chip" href="{{ url_for('favorites') }}">Saved Spots</a>
+    <a class="chip active" href="{{ url_for('profile') }}">Profile</a>
+  </nav>
+  <h1 style="font-size:24px;margin-top:18px">Your profile</h1>
+  <div class="panel">
+    <form method="post" action="{{ url_for('profile') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="datetime-row">
+        <div class="field">
+          <label for="first_name">First name</label>
+          <div class="control"><input id="first_name" name="first_name" value="{{ current_user.first_name }}" style="padding-left:12px"></div>
+        </div>
+        <div class="field">
+          <label for="last_name">Last name</label>
+          <div class="control"><input id="last_name" name="last_name" value="{{ current_user.last_name }}" style="padding-left:12px"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="email_ro">Email</label>
+        <div class="control"><input id="email_ro" value="{{ current_user.email }}" disabled style="padding-left:12px;background:var(--gray-50)"></div>
+      </div>
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <div class="control"><input id="phone" name="phone" value="{{ current_user.phone }}" style="padding-left:12px"></div>
+      </div>
+      <div class="datetime-row">
+        <div class="field">
+          <label for="license_plate">License plate</label>
+          <div class="control"><input id="license_plate" name="license_plate" value="{{ current_user.license_plate }}" style="padding-left:12px"></div>
+        </div>
+        <div class="field">
+          <label for="vehicle">Vehicle</label>
+          <div class="control"><input id="vehicle" name="vehicle" value="{{ current_user.vehicle }}" style="padding-left:12px"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Save changes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

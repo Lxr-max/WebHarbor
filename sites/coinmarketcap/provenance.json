@@ -1,0 +1,58 @@
+{
+ "site": "coinmarketcap",
+ "upstream": "https://coinmarketcap.com/",
+ "captured_at": "2026-09-29/30 UTC",
+ "capture_method": "coinmarketcap.com serves its functional pages as a Next.js app whose data plane is the public api.coinmarketcap.com data-api the site itself calls. Plain HTTP captures everything: page HTML with its __NEXT_DATA__ payloads (home, rankings, view/<category>, gainers-losers, trending, most-viewed, upcoming, converter, glossary, faq, methodology, historical snapshots, coin and exchange pages) and the data-api JSON responses (listing with the upstream filter taxonomy, coin detail, detail/chart series, historical OHLCV, market-pairs, exchange listing/detail/market-pairs, global-metrics latest + historical, unified-trending, tools/price-conversion). No WAF challenge was observed on any captured route. The client-rendered islands (FAQ body, methodology body, login/signup modal, guest watchlist prompt) were captured with a real headless Chromium exactly as a browser renders them. Every capture is filed in scraped_data/captures/ with a .meta.json sidecar (url, status, timestamp). Nothing is synthesized.",
+ "sources": {
+  "coinmarketcap.com/": {
+   "role": "primary site pages: home (global metrics bar, trending sidebar, top-100 table), 13 category view pages with sector stats, gainers & losers, trending, most viewed, upcoming, converter, glossary index + 9 term pages, FAQ, methodology, historical snapshot index + 2026-09-27 snapshot, coin detail pages, exchange ranking pages (spot 236 / DEX 500 / derivatives 106), exchange detail pages",
+   "pages_captured": 44,
+   "browser_rendered": ["FAQ body", "methodology body", "login modal + wrong-password error", "signup modal + captcha requirement", "guest watchlist prompt"]
+  },
+  "api.coinmarketcap.com/data-api/v3/": {
+   "role": "the site's own data plane: cryptocurrency listing (top 100 by market cap + curated extras, coins/tokens splits, category listings, gainers/losers sorts, range-filtered listings), coin detail for all 119 corpus coins, detail/chart series (1D/7D/1M/3M/1Y/YTD/All), historical OHLCV (365d for 30 headline coins, 90d for the rest), market-pairs per coin, exchange listing/detail/market-pairs, global-metrics quotes latest + 90d historical, unified-trending, tools/price-conversion",
+   "coin_details": 119,
+   "chart_series": 299,
+   "ohlcv_captures": 119,
+   "coin_market_pair_sets": 119,
+   "exchange_details": 47,
+   "exchange_pair_sets": 18
+  },
+  "s2.coinmarketcap.com/": {
+   "role": "brand + icon CDN: coin logos (64x64 for all 119 coins, 200x200 for the 30 headline coins), exchange logos (47), 90 menu icons, site logo, favicon, apple-touch-icon, splash",
+   "images_fetched": 279
+  },
+  "s3.coinmarketcap.com/generated/sparklines/": {
+   "role": "the table's real 7-day sparkline SVGs, fetched per coin id with the site's Referer (the exact files coinmarketcap.com renders in its ranking table)",
+   "images_fetched": 119
+  }
+ },
+ "trim_policy": "The full untrimmed upstream snapshots live in the gitignored scraped_data/captures/. The tracked source_data/ snapshots trim as follows: the coin corpus is the upstream top-100 by market cap plus 19 curated coins that anchor the category and leaderboard pages (most-viewed leaders, category heads, trending rows) — every row is a real upstream row with its real CMC id and rank. Chart series keep every k-th point of the captured series (k chosen per range so ~140 points remain); every kept value is an actual upstream point (timestamp, price, volume, market cap) — no interpolation or synthesis. OHLCV keeps full daily rows for the captured windows. Upstream totals (category coin counts, total cryptos, total pairs) are preserved and rendered as context, never presented as the visible corpus size. The homepage 'Sentiment' column is omitted because the homepage data plane returns no sentiment data for its rows: every row of the captured aggr/v3/web/homepage response (the data plane the live homepage table renders from) has socialMetrics null and carries no sentiment/vote field, so upstream renders the column's default neutral state — captured verbatim and archived tracked at source_data/captures/aggr_web_homepage.json (with a .meta.json sidecar: url, status, timestamp).",
+ "fixtures": {
+  "benchmark_users": [
+   {
+    "email": "alice.j@test.com",
+    "display": "Alice Johnson",
+    "fixture": "watchlist: Bitcoin, Ethereum, Solana (added 2026-09-20/22/25) — all real captured coins"
+   },
+   {
+    "email": "bob.c@test.com",
+    "display": "Bob Chen",
+    "fixture": "watchlist: Dogecoin, XRP, Cardano (added 2026-09-18/21/24)"
+   },
+   {
+    "email": "carol.d@test.com",
+    "display": "Carol Diaz",
+    "fixture": "watchlist: Shiba Inu, Pepe, Bonk (added 2026-09-19/23/26)"
+   },
+   {
+    "email": "dana.l@test.com",
+    "display": "Dana Lee",
+    "fixture": "watchlist: Tether, USDC, Dai, Chainlink (added 2026-09-17/19/22/27)"
+   }
+  ],
+  "fixture_notes": "The upstream account area requires a live account behind a captcha-gated signup (captured upstream response: error 1017 'Need Captcha Verification again'). Following the u_s_customs/zara precedent, the four benchmark accounts and their watchlists are authored fixtures over real captured coins; the mirror's signup accepts email+password without the upstream captcha (declared deviation). Login error text, field labels and the guest watchlist prompt are the exact captured upstream strings."
+ },
+ "determinism": "Seed built with PYTHONHASHSEED=0 from the tracked source_data/*.json in a fixed order; all timestamps are frozen captured values; benchmark bcrypt hash is frozen. Two consecutive builds are byte-identical (see scripts_dev and the delivery receipt).",
+ "not_a_live_site": "The mirror is a frozen snapshot of 2026-09-29/30 UTC. Prices, volumes and percentages are the captured values and do not tick."
+}

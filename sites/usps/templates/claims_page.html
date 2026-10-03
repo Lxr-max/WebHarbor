@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}File a Claim | USPS{% endblock %}
+{% block meta %}File a domestic claim for lost or damaged insured mail.{% endblock %}
+{% block content %}
+<h1>File a Claim</h1>
+{% if page and page.lead %}<p>{{ page.lead | safe }}</p>{% endif %}
+<div class="panel">
+  <h3>How to file</h3>
+  <ol>
+    <li>Sign in to your USPS.com account.</li>
+    <li>Pick the insured shipment you are claiming.</li>
+    <li>Describe the damage or loss and the supporting documents you will provide.</li>
+    <li>Submit — your claim number appears immediately; you can check status online anytime.</li>
+  </ol>
+  {% if current_user.is_authenticated %}
+    <a class="btn" href="{{ url_for('claim_file') }}">File a Domestic Claim</a>
+  {% else %}
+    <a class="btn" href="{{ url_for('login', next=url_for('claim_file')) }}">Sign In to File a Claim</a>
+  {% endif %}
+  <p><a href="{{ url_for('claim_status') }}">Check an existing claim status</a></p>
+</div>
+<h2>Insurance fees (retail)</h2>
+<table class="data">
+  <tr><th>Declared Value</th><th>Fee</th></tr>
+  {% for row in fee_rows %}<tr><td>{{ row.label }}</td><td>{{ row.price | usd }}</td></tr>{% endfor %}
+</table>
+<h2>When to file</h2>
+<ul class="bullets">
+  <li>File claims for lost or damaged mail within 60 days of the mailing date.</li>
+  <li>Include proof of insurance, evidence of value (receipt or invoice), and photos for damage claims.</li>
+</ul>
+{% if page %}
+  {% for sec in (page.body | from_json) %}
+    <h2>{{ sec.heading | safe }}</h2>
+    {% for p in sec.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  {% endfor %}
+{% endif %}
+{% endblock %}

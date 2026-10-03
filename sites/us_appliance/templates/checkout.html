@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('cart') }}">Cart</a></li>
+<li aria-current="page"><span>Checkout</span></li>
+{% endblock %}
+{% block content %}
+<section class="container checkout-page">
+  <h1 class="page-heading">Checkout</h1>
+  <div class="checkout-layout">
+    <form method="post" class="checkout-form" id="checkout-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <h2>Shipping Address</h2>
+      <div class="form-field {% if errors.get('name') %}has-error{% endif %}">
+        <label for="name">Full Name</label>
+        <input class="form-input" id="name" name="name" value="{{ form['name'] }}" required>
+        {% if errors.get('name') %}<p class="form-error">{{ errors['name'] }}</p>{% endif %}
+      </div>
+      <div class="form-field {% if errors.get('address') %}has-error{% endif %}">
+        <label for="address">Street Address</label>
+        <input class="form-input" id="address" name="address" value="{{ form['address'] }}" required>
+        {% if errors.get('address') %}<p class="form-error">{{ errors['address'] }}</p>{% endif %}
+      </div>
+      <div class="form-row-half">
+        <div class="form-field {% if errors.get('city') %}has-error{% endif %}">
+          <label for="city">City</label>
+          <input class="form-input" id="city" name="city" value="{{ form['city'] }}" required>
+          {% if errors.get('city') %}<p class="form-error">{{ errors['city'] }}</p>{% endif %}
+        </div>
+        <div class="form-field {% if errors.get('state') %}has-error{% endif %}">
+          <label for="state">State (2-letter)</label>
+          <input class="form-input" id="state" name="state" value="{{ form['state'] }}" maxlength="2" required>
+          {% if errors.get('state') %}<p class="form-error">{{ errors['state'] }}</p>{% endif %}
+        </div>
+        <div class="form-field {% if errors.get('zip') %}has-error{% endif %}">
+          <label for="zip">ZIP Code</label>
+          <input class="form-input" id="zip" name="zip" value="{{ form['zip'] }}" required>
+          {% if errors.get('zip') %}<p class="form-error">{{ errors['zip'] }}</p>{% endif %}
+        </div>
+      </div>
+      <div class="form-field {% if errors.get('email') %}has-error{% endif %}">
+        <label for="email">Email (for order updates)</label>
+        <input class="form-input" type="email" id="email" name="email" value="{{ form['email'] }}" required>
+        {% if errors.get('email') %}<p class="form-error">{{ errors['email'] }}</p>{% endif %}
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone</label>
+        <input class="form-input" id="phone" name="phone" value="{{ form['phone'] }}">
+      </div>
+
+      <h2>Delivery Method</h2>
+      <div class="form-field shipping-methods">
+        <label class="ship-option">
+          <input type="radio" name="shipping_method" value="standard" checked>
+          <span><strong>Standard Delivery</strong> —
+            {% if summary['shipping'] == 0 %}FREE{% else %}${{ '%d' | format(summary['shipping']) }}{% endif %}
+            <small>Curbside / driveway drop-off. Carrier schedules a delivery window with you.</small>
+          </span>
+        </label>
+        <label class="ship-option">
+          <input type="radio" name="shipping_method" value="in_home">
+          <span><strong>In-Home Delivery</strong> — ${{ in_home }}/order
+            <small>Your appliances are brought inside and placed in an accessible room of your choice — up to one flight of stairs.</small>
+          </span>
+        </label>
+      </div>
+
+      <h2>Payment</h2>
+      <div class="form-field {% if errors.get('card_number') %}has-error{% endif %}">
+        <label for="card_number">Card Number</label>
+        <input class="form-input" id="card_number" name="card_number" inputmode="numeric"
+               placeholder="16 digits" value="{{ form['card_number'] }}" required>
+        {% if errors.get('card_number') %}<p class="form-error">{{ errors['card_number'] }}</p>{% endif %}
+      </div>
+      <div class="form-row-half">
+        <div class="form-field {% if errors.get('card_expiry') %}has-error{% endif %}">
+          <label for="card_expiry">Expiry (MM/YY)</label>
+          <input class="form-input" id="card_expiry" name="card_expiry" placeholder="MM/YY" value="{{ form['card_expiry'] }}" required>
+          {% if errors.get('card_expiry') %}<p class="form-error">{{ errors['card_expiry'] }}</p>{% endif %}
+        </div>
+        <div class="form-field {% if errors.get('card_cvv') %}has-error{% endif %}">
+          <label for="card_cvv">CVV</label>
+          <input class="form-input" id="card_cvv" name="card_cvv" placeholder="123" value="{{ form['card_cvv'] }}" required>
+          {% if errors.get('card_cvv') %}<p class="form-error">{{ errors['card_cvv'] }}</p>{% endif %}
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="financing">Financing Option</label>
+        <select class="form-select" id="financing" name="financing">
+          <option value="">Pay in full</option>
+          <option value="15 Months Special Financing">0% Interest If Paid In Full In 15 Months (qualifying brands)</option>
+          <option value="6 Months Storewide Financing">0% Interest If Paid In Full In 6 Months Storewide ($200+)</option>
+        </select>
+      </div>
+      <button class="button button--primary" type="submit">Place Order</button>
+    </form>
+
+    <aside class="checkout-summary">
+      <h2>Order Summary</h2>
+      <ul class="checkout-items">
+        {% for row in summary['items'] %}
+        <li>
+          <span class="checkout-item-name">{{ row.product.name }}</span>
+          <span class="checkout-item-qty">Qty {{ row.qty }}</span>
+          <span class="checkout-item-price">{{ money((row.product.price or 0) * row.qty) }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <dl>
+        <dt>Subtotal</dt><dd>{{ money(summary['subtotal']) }}</dd>
+        <dt>Standard Shipping</dt>
+        <dd>{% if summary['shipping'] == 0 %}FREE{% else %}{{ money(summary['shipping']) }}{% endif %}</dd>
+        <dt>Sales Tax</dt><dd>calculated at order placement</dd>
+      </dl>
+      <p class="cart-note">Orders can be canceled within 48 hours of placing the order without any fee as long as the order has not shipped.</p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

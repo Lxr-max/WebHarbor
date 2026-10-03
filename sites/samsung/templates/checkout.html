@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Checkout</h1></div>
+<div class="checkout-layout">
+  <section class="checkout-form">
+    <h2>Delivery details</h2>
+    <form method="post" action="{{ url_for('checkout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="full_name">Full name</label>
+      <input id="full_name" name="full_name" type="text" value="{{ current_user.name }}" required>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" value="{{ current_user.email }}" required>
+      <label for="address1">Street address</label>
+      <input id="address1" name="address1" type="text" required>
+      <label for="city">City</label>
+      <input id="city" name="city" type="text" required>
+      <label for="state">State</label>
+      <input id="state" name="state" type="text" required>
+      <label for="zipcode">ZIP code</label>
+      <input id="zipcode" name="zipcode" type="text" required>
+      <h2>Payment method</h2>
+      <label class="radio-line"><input type="radio" name="payment_method" value="Card" checked> Credit / Debit Card</label>
+      <label class="radio-line"><input type="radio" name="payment_method" value="Samsung Pay"> Samsung Pay</label>
+      <label class="radio-line"><input type="radio" name="payment_method" value="Financing"> Samsung Financing (36 months)</label>
+      <button type="submit" class="btn btn-large btn-block">Place Order</button>
+    </form>
+  </section>
+  <aside class="cart-summary">
+    <h2>Order Summary</h2>
+    {% for item in items %}
+    <p class="summary-line">{{ item.qty }} &times; {{ item.title }} <span>{{ (item.unit_price * item.qty)|money }}</span></p>
+    {% endfor %}
+    <p>Subtotal: <strong>{{ subtotal|money }}</strong></p>
+    <p>Estimated tax: <strong>{{ tax|money }}</strong></p>
+    <p>Total: <strong>{{ (subtotal + tax)|money }}</strong></p>
+  </aside>
+</div>
+{% endblock %}

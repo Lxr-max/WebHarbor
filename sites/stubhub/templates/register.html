@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Create an account | StubHub{% endblock %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Create your account</h1>
+    <form method="post" class="auth-form">
+      <label>Full name
+        <input type="text" name="display_name" placeholder="Full name" value="{{ request.form.get('display_name', '') }}">
+      </label>
+      <label>Email
+        <input type="email" name="email" placeholder="Email" required value="{{ request.form.get('email', '') }}">
+      </label>
+      <label>Password
+        <input type="password" name="password" placeholder="Password (8+ characters)" required>
+      </label>
+      <button type="submit" class="btn btn-primary btn-wide">Create account</button>
+    </form>
+    <p class="auth-note">By creating an account, you agree to our user agreement and acknowledge our privacy policy.</p>
+    <p class="auth-alt">Already have an account? <a href="/secure/login">Sign in</a></p>
+  </div>
+</div>
+{% endblock %}

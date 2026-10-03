@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ query }} — Search — Tumblr{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Search results for “{{ query }}”</h1>
+  <div class="search-tabs">
+    <a class="tab {{ 'active' if tab == 'top' }}" href="{{ url_for('search', query=query, tab='top') }}">Top</a>
+    <a class="tab {{ 'active' if tab == 'recent' }}" href="{{ url_for('search', query=query, tab='recent') }}">Recent</a>
+  </div>
+</div>
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    <div class="feed-header">
+      <h2>{{ 'Top posts' if tab == 'top' else 'Recent posts' }}</h2>
+      <span class="feed-count">{{ '{:,}'.format(pagination.total) }} results</span>
+    </div>
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% else %}
+      <div class="empty-state">Nothing found for “{{ query }}”. Try another search.</div>
+    {% endfor %}
+    {% include '_pagination.html' %}
+  </section>
+
+  <aside class="side-col">
+    {% if suggestions %}
+      {% if suggestions.blogs %}
+        <div class="side-card">
+          <h3>Blogs matching “{{ query }}”</h3>
+          {% for b in suggestions.blogs %}
+            <a class="blog-row" href="{{ url_for('blog_page', name=b.name) }}">
+              {% if b.avatar %}<img class="avatar a40" src="{{ b.avatar }}" alt="">{% else %}<span class="avatar a40 avatar-fallback">{{ (b.title or b.name)[:1] }}</span>{% endif %}
+              <span class="blog-row-text">
+                <span class="blog-row-title">{{ b.title or b.name }}</span>
+                <span class="blog-row-sub">{{ b.name }}</span>
+              </span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if suggestions.tags %}
+        <div class="side-card">
+          <h3>Tags you might like</h3>
+          <div class="tag-cloud">
+            {% for t in suggestions.tags %}
+              <a class="tag" href="{{ url_for('tagged', tag=t.tag) }}">#{{ t.tag }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      {% if suggestions.communities %}
+        <div class="side-card">
+          <h3>Communities</h3>
+          {% for c in suggestions.communities %}
+            <div class="community-row">
+              {% if c.avatar %}<img class="avatar a40 square" src="{{ c.avatar }}" alt="">{% endif %}
+              <span class="blog-row-text">
+                <span class="blog-row-title">{{ c.title or c.name }}</span>
+                <span class="blog-row-sub">{{ c.description }}</span>
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if suggestions.typeahead_tags %}
+        <div class="side-card">
+          <h3>Related searches</h3>
+          <div class="tag-cloud">
+            {% for t in suggestions.typeahead_tags %}
+              <a class="tag" href="{{ url_for('search', query=t) }}">{{ t }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="side-card">
+        <h3>Search tips</h3>
+        <p class="side-copy">Search covers post text, tags and summaries. Top results lean toward posts with the most notes; Recent shows the newest first.</p>
+      </div>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

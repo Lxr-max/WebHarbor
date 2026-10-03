@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class sandiego_chrome legacy_chrome l-allow-natural-width{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}{{ p.name }} / Wiki / {{ page.title }}{% endblock %}
+{% block head_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/wiki.css') }}">{% endblock %}
+{% block content %}
+<section id="page-body" class="neighborhood-Projects project-{{ p.shortname }} mountpoint-wiki">
+<div class="l-two-column-page">
+  <div class="l-side-column l-has-sidebar">
+    <div class="side-column-contents">
+      <div id="sidebar">
+        <form id="search" method="GET" action="/p/{{ p.shortname }}/wiki/search/">
+          <input name="q" type="text" title="Search Wiki" placeholder="Search Wiki">
+          <label><input type="submit" style="display:none"><b class="fa fa-search" title="Submit"></b></label>
+        </form>
+        <ul class="sidebarmenu">
+          <li><a href="/p/{{ p.shortname }}/wiki/" class="wiki_home"><span>Wiki Home</span></a></li>
+          <li><a href="/p/{{ p.shortname }}/wiki/browse_pages/"><span>Browse Pages</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="l-gutter"></div>
+  <div class="l-content-column">
+    <div class="grid-20 pad">
+      <h2 class="dark title"><span>{{ page.title }}</span></h2>
+      <div class="editbox">
+        <div class="grid-9 gravatar sm">
+          <label class="simple">Authors: </label>
+          {% for u, dn in p.developers %}{% set _u = user_href(u) %}{% if _u %}<a href="/u/{{ _u }}/profile/" class="user-mention">{{ dn }}</a>{% else %}{{ dn }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}
+        </div>
+        <div class="grid-9 gravatar sm">
+          <label class="simple">Page Last Modified: </label>
+          <span class="wiki-mod-date">{{ page.mod_date }}</span>
+        </div>
+      </div>
+      <div>
+        <div><div class="markdown_content">{{ page.body }}</div></div>
+      </div>
+      <hr>
+      <div id="discussion_holder"><h2>Discussion</h2></div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

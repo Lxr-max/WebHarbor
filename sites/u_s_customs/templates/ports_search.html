@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Port of Entry Search</h1>
+<form class="filters" method="get" action="{{ url_for('ports_search') }}">
+  <div class="field"><label for="q">Name, port code or city</label>
+    <input id="q" type="search" name="q" value="{{ q }}"></div>
+  <button class="btn" type="submit">Search</button>
+</form>
+{% if q %}
+  <p>{{ rows|length }} result{{ 's' if rows|length != 1 }} for <strong>{{ q }}</strong>.</p>
+  <table class="data">
+    <tr><th>Port Name</th><th>State</th><th>Port Code</th><th>Address</th><th>Field Office</th></tr>
+    {% for p in rows %}
+    <tr>
+      <td><a href="{{ url_for('port_detail', slug=p.slug) }}">{{ p.name }}</a></td>
+      <td>{{ p.state }}</td>
+      <td>{{ p.code or '—' }}</td>
+      <td>{{ p.address }}</td>
+      <td>{{ p.field_office }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+{% endblock %}

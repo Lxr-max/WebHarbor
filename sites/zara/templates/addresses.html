@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Addresses | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>ADDRESSES</h1></div>
+<div style="padding: 10px 28px 50px">
+  {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+  {% for a in addresses %}
+    <div class="addr-card">
+      {% if a.is_default %}<p class="def">DEFAULT</p>{% endif %}
+      <strong>{{ a.label }}</strong> — {{ a.full_name }}<br>
+      {{ a.line1 }}{% if a.line2 %}, {{ a.line2 }}{% endif %}<br>
+      {{ a.city }}, {{ a.state }} {{ a.zip }}<br>
+      {{ a.phone }}
+      <form method="post" action="/us/en/account/addresses/{{ a.id }}/default" style="display:inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="fbtn">MAKE DEFAULT</button>
+      </form>
+      <form method="post" action="/us/en/account/addresses/{{ a.id }}/delete" style="display:inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="fbtn">DELETE</button>
+      </form>
+    </div>
+  {% endfor %}
+  <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin: 26px 0 10px">
+    ADD A NEW ADDRESS</h3>
+  <form method="post" action="/us/en/account/addresses/add" style="max-width: 420px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label>LABEL</label><input type="text" name="label" placeholder="HOME"></div>
+    <div class="field"><label>FULL NAME</label><input type="text" name="full_name" required></div>
+    <div class="field"><label>ADDRESS</label><input type="text" name="line1" required></div>
+    <div class="field"><label>CITY</label><input type="text" name="city" required></div>
+    <div class="field"><label>STATE</label><input type="text" name="state" required></div>
+    <div class="field"><label>ZIP</label><input type="text" name="zip" required></div>
+    <div class="field"><label>PHONE</label><input type="text" name="phone" required></div>
+    <button type="submit" class="btn dark">SAVE ADDRESS</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="crumbs"><a href="{{ url_for('home') }}">SpotHero</a> › <span>Checkout</span></div>
+  <div class="checkout-grid">
+    <div>
+      <h1 style="font-size:24px">Finish booking your spot</h1>
+      <p class="muted">{{ facility.title }} — {{ facility.street }}, {{ facility.city }}, {{ facility.state }}</p>
+
+      {% if event %}
+      <div class="event-banner" style="margin-top:10px">
+        <h2 style="font-size:16px">{{ event.title }} — {{ event.venue_title }}</h2>
+        <div class="window"><span>{{ fmt_short_dt(event.window_starts) }}</span><span>→</span><span>{{ fmt_short_dt(event.window_ends) }}</span></div>
+      </div>
+      {% endif %}
+
+      {% for e in errors %}<div class="form-error">{{ e }}</div>{% endfor %}
+      {% if promo_error %}<div class="form-error">{{ promo_error }}</div>{% endif %}
+
+      <form method="post" action="{{ url_for('purchase_hourly') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="facility" value="{{ facility.id }}">
+        <input type="hidden" name="kind" value="{{ kind }}">
+        <input type="hidden" name="starts" value="{{ start.strftime('%Y-%m-%dT%H:%M') }}">
+        <input type="hidden" name="ends" value="{{ end.strftime('%Y-%m-%dT%H:%M') }}">
+        {% if event %}<input type="hidden" name="event" value="{{ event.id }}">{% endif %}
+        <input type="hidden" name="promo" value="{{ promo_code }}">
+
+        <div class="panel">
+          <h2>Contact information</h2>
+          {% if current_user.is_authenticated %}
+            <p class="muted small">Checking out as {{ current_user.full_name }} ({{ current_user.email }})</p>
+          {% else %}
+            <p class="muted small">Checking out as a guest — <a href="{{ url_for('login', next=request.full_path) }}">Log in</a> or <a href="{{ url_for('signup') }}">Sign up</a></p>
+          {% endif %}
+          <div class="field">
+            <label for="email">Email <span class="badge-required">*</span></label>
+            <div class="control"><input id="email" name="email" type="email" value="{{ email }}" required></div>
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <div class="control"><input id="phone" name="phone" type="tel" value="{{ phone }}"></div>
+          </div>
+          <div class="field">
+            <label for="license_plate">License plate number</label>
+            <div class="control"><input id="license_plate" name="license_plate" value="{{ plate }}" placeholder="e.g. IL-ABC123"></div>
+          </div>
+          <div class="field">
+            <label for="vehicle">Vehicle</label>
+            <div class="control"><input id="vehicle" name="vehicle" value="{{ vehicle }}" placeholder="e.g. Toyota Camry"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Payment method</h2>
+          <div class="card-brands">
+            <img src="{{ url_for('static', filename='images/site/pay-visa.35630977.svg') }}" alt="VISA">
+            <img src="{{ url_for('static', filename='images/site/pay-mastercard.c6951493.svg') }}" alt="Mastercard">
+            <img src="{{ url_for('static', filename='images/site/pay-apple-pay.b38bdce0.svg') }}" alt="Apple Pay">
+            <img src="{{ url_for('static', filename='images/site/pay-google-pay.a562ffbf.svg') }}" alt="Google Pay">
+            <img src="{{ url_for('static', filename='images/site/pay-paypal.f49cd0e4.svg') }}" alt="Paypal">
+            <span class="muted small">+ more</span>
+          </div>
+          <div class="radio-row">
+            <input id="pay-new" type="radio" name="payment" value="new" checked>
+            <div style="flex:1">
+              <label for="pay-new" style="font-weight:700">New credit or debit card</label>
+              <div class="field" style="margin:8px 0 0">
+                <label for="creditCardName">Name on card <span class="badge-required">*</span></label>
+                <div class="control"><input id="creditCardName" name="creditCardName" value="{{ card_name }}" placeholder="Full name on the card"></div>
+              </div>
+              <p class="small muted" style="margin-top:6px">Your card is charged when you press "Pay and Reserve".</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Pay and Reserve</button>
+        <p class="small muted center" style="margin-top:10px">By completing this reservation you agree to SpotHero's <a href="{{ url_for('static_page', page_slug='legal/terms-of-use') }}">Terms of Use</a>.</p>
+      </form>
+    </div>
+
+    <aside>
+      <form method="get" action="{{ url_for('purchase_hourly') }}" class="panel">
+        <h2>Price Breakdown</h2>
+        <input type="hidden" name="facility" value="{{ facility.id }}">
+        <input type="hidden" name="kind" value="{{ kind }}">
+        <input type="hidden" name="starts" value="{{ start.strftime('%Y-%m-%dT%H:%M') }}">
+        <input type="hidden" name="ends" value="{{ end.strftime('%Y-%m-%dT%H:%M') }}">
+        {% if event %}<input type="hidden" name="event" value="{{ event.id }}">{% endif %}
+        <div class="price-breakdown">
+          <div class="line"><span>Reservation</span><span>{{ fmt_display_date(start) }} {{ fmt_display_time(start) }} → {{ fmt_display_date(end) }} {{ fmt_display_time(end) }}</span></div>
+          <div class="line"><span>Subtotal</span><span>${{ '%.2f' % subtotal }}</span></div>
+          {% if facility.airport_code and fac_fee %}<div class="line"><span>Facility Fee</span><span>${{ '%.2f' % fac_fee }}</span></div>{% endif %}
+          <div class="line"><span>Service Fee</span><span>${{ '%.2f' % fee }}</span></div>
+          {% if discount %}<div class="line" style="color:var(--success)"><span>Promo {{ promo_code }}</span><span>-${{ '%.2f' % discount }}</span></div>{% endif %}
+          <div class="line total"><span>Total</span><span>${{ '%.2f' % total }}</span></div>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="promo">Promo code</label>
+          <div class="control" style="display:flex;gap:8px">
+            <input id="promo" name="promo" value="{{ promo_code }}" placeholder="Enter code" style="padding-left:12px">
+            <button class="btn btn-secondary" type="submit">Apply</button>
+          </div>
+        </div>
+        <p class="small muted">New to SpotHero? Get 10% off your first reservation with code FIRSTSPOT10 — see our <a href="{{ url_for('static_page', page_slug='about/promo-code') }}">promo page</a>.</p>
+      </form>
+      <div class="panel">
+        <p class="small">✓ <strong>Guaranteed parking</strong> — a spot at the price you paid or your money back.</p>
+        <p class="small">✓ <strong>Free cancellation</strong> up to the minute your reservation starts.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

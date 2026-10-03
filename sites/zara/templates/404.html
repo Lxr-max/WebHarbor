@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Not found | ZARA{% endblock %}
+{% block body %}
+<p class="center-note">We couldn't find the page you requested</p>
+<div class="grid" style="padding: 10px 28px 60px">
+  {% for cat, _ in categories_nav()[:4] %}
+    <a class="product-card" href="{{ cat.path }}">
+      <div class="pname">{{ cat.section }} — {{ cat.name }}</div>
+      <div class="pprice">{{ cat.upstream_grid_count }} upstream products</div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

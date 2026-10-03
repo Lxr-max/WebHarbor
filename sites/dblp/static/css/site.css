@@ -1,0 +1,233 @@
+/* dblp mirror — styling approximating the upstream dblp.org layout.
+   Written from scratch for this mirror; upstream serves its own CSS file. */
+
+* { box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  color: #222;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main { flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+a { color: #0044cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { border: 0; }
+img.icon { width: 16px; height: 16px; vertical-align: text-bottom; }
+small { color: #666; }
+
+/* ---------------------------------------------------------------- header */
+
+header#banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 1rem;
+  border-bottom: 2px solid #d0d0d0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+#logo img.logo { height: 64px; }
+.header-nav ul { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; flex-wrap: wrap; }
+.header-nav > ul > li { position: relative; }
+.header-nav > ul > li > .head > a { font-weight: bold; color: #0044cc; }
+.header-nav .drop-down .body {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+  z-index: 30;
+  min-width: 10rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.header-nav .drop-down:hover .body,
+.header-nav .drop-down:focus-within .body { display: block; }
+.header-nav .drop-down .body ul { list-style: none; margin: 0; padding: 0; }
+
+/* ------------------------------------------------------------- search box */
+
+#search-field-section {
+  max-width: 1200px;
+  margin: 0.8rem auto;
+  padding: 0 1rem;
+}
+#completesearch-form { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+#completesearch-form input[type="search"] {
+  flex: 1 1 320px;
+  max-width: 640px;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #999;
+  font-size: 1rem;
+}
+#completesearch-form button {
+  padding: 0.45rem 1rem;
+  border: 1px solid #0044cc;
+  background: #0044cc;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.search-kinds ul { list-style: none; display: flex; gap: 1rem; margin: 0.3rem 0 0; padding: 0; flex-wrap: wrap; font-size: 0.8rem; }
+
+/* ------------------------------------------------------------- sections */
+
+.section { margin: 1rem 0; }
+.section header h1, .section header h2, .section header h3 { margin: 0; }
+header#headline h1 { font-size: 1.5rem; margin: 1rem 0 0.3rem; }
+.hide-head, .section > header.h1, .section > header.h2 {
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+.hide-head h2, header.h2 h2 { font-size: 1.15rem; color: #0044cc; }
+header.h1 h1 { font-size: 1.3rem; }
+header.h3 h3 { font-size: 1rem; margin: 0.6rem 0 0.2rem; color: #333; }
+.hide-body { padding: 0.2rem 0 0.6rem; }
+.note-line { color: #555; font-style: italic; margin-top: 0.2rem; }
+
+/* ------------------------------------------------------------- home page */
+
+.stats-list { list-style: none; padding: 0; line-height: 1.7; }
+.search-help { list-style: none; padding: 0; line-height: 1.6; }
+.mirror-note { color: #555; font-size: 0.8rem; border-left: 3px solid #bbb; padding-left: 0.6rem; }
+dl.news dt { margin-top: 0.8rem; font-weight: bold; }
+dl.news dt small { font-weight: normal; margin-left: 0.3rem; }
+.browse-list { list-style: none; padding: 0; line-height: 1.8; }
+
+/* --------------------------------------------------------- search results */
+
+.result-count { font-weight: bold; }
+.result-list { list-style: none; padding: 0; margin: 0.4rem 0; }
+.result-list > li { padding: 0.35rem 0 0.35rem 0.6rem; border-bottom: 1px solid #eee; }
+.result-list > li.no-matches { color: #666; font-style: italic; }
+ul.publ-list > li.entry {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 0 0.6rem;
+  padding: 0.4rem 0 0.4rem 0.4rem;
+  border-bottom: 1px solid #eee;
+}
+ul.publ-list > li.entry .box { grid-column: 1; }
+ul.publ-list > li.entry nav.publ { grid-column: 2; margin-bottom: 0.15rem; }
+ul.publ-list > li.entry cite { grid-column: 2; font-style: normal; display: block; }
+nav.publ ul { list-style: none; display: flex; gap: 0.8rem; margin: 0; padding: 0; font-size: 0.78rem; flex-wrap: wrap; }
+cite .title { font-weight: bold; }
+.pager { margin: 0.6rem 0; display: flex; gap: 0.8rem; align-items: center; }
+.more-link { margin: 0.3rem 0; }
+.search-section { border: 1px solid #ddd; padding: 0.4rem 0.8rem; margin: 0.6rem 0; }
+
+/* refine facets */
+.refine { border: 1px solid #ddd; padding: 0.4rem 0.8rem; margin: 0.6rem 0; }
+.refine h3 { margin: 0.2rem 0; font-size: 1rem; color: #0044cc; }
+.refine-by { margin: 0.3rem 0; }
+.refine-by p { margin: 0.2rem 0; }
+.refine-by ul.options { list-style: none; display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 0.2rem 0; padding: 0; }
+
+/* ----------------------------------------------------------- author pages */
+
+.person-info-list, .homonym-list, .venue-info-list, .edition-meta-list,
+.coauthor-list, .watch-author-list, .watch-venue-list, .saved-search-list,
+.history-list, .dashboard-summary, .letter-group ul {
+  list-style: none; padding: 0; margin: 0.2rem 0;
+}
+.person-info-list li, .venue-info-list li, .edition-meta-list li { padding: 0.15rem 0; }
+.homonym-list li, .coauthor-list li, .watch-author-list li, .watch-venue-list li,
+.saved-search-list li, .history-list li, .letter-group ul li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.coauthor-list .count a { font-weight: bold; }
+.upstream-count { color: #555; font-size: 0.8rem; }
+.watch-controls { margin: 0.6rem 0; }
+.watch-btn, button {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #0044cc;
+  background: #fff;
+  color: #0044cc;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.watch-btn:hover, button:hover { background: #eef2ff; }
+.inline-form { display: inline; }
+.link-btn {
+  border: 0; background: none; color: #0044cc; text-decoration: underline;
+  padding: 0; font-size: 0.85rem; cursor: pointer;
+}
+
+/* stats bars — relative widths in a flex track so the widest bar always
+   fits the page (no fixed-pixel overflow at narrow viewports) */
+.stat-chart { display: block; margin: 0.4rem 0; max-width: 46rem; }
+.stat-bar-row { display: flex; align-items: center; gap: 0.4rem; margin: 0.12rem 0; }
+.stat-year { width: 3.4rem; flex: 0 0 auto; text-align: right; }
+.stat-bar-track { flex: 1 1 auto; min-width: 0; display: block; }
+.stat-bar { display: block; background: #4a76a8; height: 0.9rem; border-radius: 2px; max-width: 100%; }
+.stat-count { flex: 0 0 auto; font-size: 0.8rem; color: #333; }
+
+/* ------------------------------------------------------------- venue pages */
+
+.edition-list { list-style: none; padding: 0; }
+.edition-list li { padding: 0.35rem 0; border-bottom: 1px solid #eee; }
+.edition-list a { font-weight: bold; }
+.letter-index { margin: 0.4rem 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.letter-group h2 { font-size: 1.05rem; color: #333; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; }
+.letter-group ul li { padding: 0.2rem 0; }
+
+/* ------------------------------------------------------------ record page */
+
+dl.record-meta { display: grid; grid-template-columns: 8rem 1fr; gap: 0.2rem 1rem; margin: 0.4rem 0; }
+dl.record-meta dt { font-weight: bold; color: #444; }
+dl.record-meta dd { margin: 0; }
+pre.bibtex {
+  background: #f6f6f6; border: 1px solid #ddd; padding: 0.6rem;
+  font-size: 0.8rem; overflow-x: auto; white-space: pre;
+}
+.orcid { margin-left: 0.3rem; }
+
+/* ----------------------------------------------------------------- forms */
+
+form label { display: block; margin: 0.4rem 0; }
+form input[type="text"], form input[type="email"], form input[type="password"] {
+  display: block; margin-top: 0.15rem; padding: 0.35rem 0.5rem;
+  border: 1px solid #999; font-size: 0.9rem; min-width: 16rem;
+}
+form button { margin-top: 0.5rem; }
+.form-error { color: #b00; font-weight: bold; }
+.form-hint { margin-top: 0.8rem; }
+.save-search-form, .save-paper-form { margin: 0.6rem 0; }
+.save-paper-form input[type="text"] { min-width: 12rem; }
+.clear-form { margin-bottom: 0.6rem; }
+
+/* ---------------------------------------------------------------- account */
+
+.account-nav { border-bottom: 1px solid #bbb; margin: 0.6rem 0; }
+.account-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0; padding: 0.3rem 0; }
+.account-nav a { font-weight: bold; }
+
+/* ---------------------------------------------------------------- footer */
+
+footer#footer { margin-top: 2rem; border-top: 2px solid #d0d0d0; padding: 0.8rem 1rem; text-align: center; }
+.footer-logos img { margin: 0 0.5rem; vertical-align: middle; max-height: 48px; }
+.footer-meta { margin-top: 0.5rem; color: #555; font-size: 0.78rem; }
+
+/* ------------------------------------------------------------- responsive */
+
+@media (max-width: 720px) {
+  header#banner { flex-direction: column; align-items: flex-start; }
+  dl.record-meta { grid-template-columns: 1fr; }
+  ul.publ-list > li.entry { grid-template-columns: 20px 1fr; }
+  .stat-bar-row { flex-wrap: nowrap; }
+}
+
+/* Long electronic-edition URLs must wrap within the record at narrow widths. */
+dl.record-meta dd { min-width: 0; overflow-wrap: anywhere; }

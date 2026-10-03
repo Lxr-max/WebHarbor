@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order.number }} | ZARA{% endblock %}
+{% block body %}
+<div class="page-head">
+  <h1>THANK YOU — ORDER {{ order.number }}</h1>
+  <p class="cat-count">Placed {{ order.placed_at }} · Status: {{ order.status_label }}</p>
+</div>
+<div class="bag">
+  <section>
+    <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px">
+      ITEMS</h3>
+    {% for it in order.items %}
+      <div class="bag-item">
+        {% set g = it.product.main_color.gallery_list if it.product.main_color else [] %}
+        <a href="{{ it.product.pdp_path }}">
+          {% if g %}<img src="{{ img(g[0]) }}" alt="{{ it.product_name }}">{% endif %}
+        </a>
+        <div class="meta">
+          <p class="pname" style="margin:0"><a href="{{ it.product.pdp_path }}">{{ it.product_name }}</a></p>
+          <p>{% if it.color_name %}{{ it.color_name }} · {% endif %}SIZE {{ it.size_name }} × {{ it.quantity }}</p>
+          <p>{{ money(it.unit_price * it.quantity) }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+  <aside class="summary">
+    <h3>SUMMARY</h3>
+    <div class="rowline"><span>SUBTOTAL</span><span>{{ money(order.subtotal_cents) }}</span></div>
+    <div class="rowline"><span>SHIPPING</span><span>{{ money(order.shipping_cents) }}</span></div>
+    <div class="rowline total"><span>TOTAL</span><span>{{ money(order.total_cents) }}</span></div>
+    <p class="form-note">Payment card ending in {{ order.payment_last4 }}</p>
+    {% set addr = order.address_dict %}
+    <p class="form-note">DELIVERY ADDRESS: {{ addr.full_name }}, {{ addr.line1 }}, {{ addr.city }}, {{ addr.state }} {{ addr.zip }}</p>
+    <a class="btn wide" style="margin-top: 14px" href="/us/en/account/orders">VIEW MY ORDERS</a>
+  </aside>
+</div>
+{% endblock %}

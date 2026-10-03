@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}{{ dest.title }} Parking | Book With SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="crumbs">
+    <a href="{{ url_for('home') }}">SpotHero</a> ›
+    <a href="{{ url_for('city_page', slug=city_slug) }}">{{ dest.city }}</a> ›
+    <span>{{ dest.title }}</span>
+  </div>
+  <div class="hero-strip">
+    <h1>Find and reserve parking near {{ dest.title }}</h1>
+    <p>{{ dest.street }}, {{ dest.city }}, {{ dest.state }} {{ dest.postal }}</p>
+    <form method="get" action="{{ url_for('search') }}" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <input type="hidden" name="kind" value="address">
+      <input type="hidden" name="latitude" value="{{ dest.lat }}">
+      <input type="hidden" name="longitude" value="{{ dest.lng }}">
+      <input type="hidden" name="starts" value="2026-09-26T12:00">
+      <input type="hidden" name="ends" value="2026-09-26T20:00">
+      <input name="search_string" value="{{ dest.title }}, {{ dest.city }}, {{ dest.state }}, USA" style="flex:1;min-width:240px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:4px;padding:11px 14px">
+      <button class="btn btn-primary" type="submit">Find Parking Spots</button>
+    </form>
+  </div>
+
+  {% if featured %}
+  <section class="section-tight">
+    <h2>Reserve a Parking Spot Nearby</h2>
+    <div class="spot-list" style="padding-bottom:0">
+      {% for item in featured %}
+      {% set f = item.facility %}
+      {% set row = item.row %}
+      <div class="spot-card">
+        {% if f.image_list %}
+        <a href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x') }}"><img class="spot-img" src="{{ url_for('static', filename='images/' ~ f.image_list[0]) }}" alt="Photo of {{ f.title }}"></a>
+        {% else %}<div class="spot-img"></div>{% endif %}
+        <div>
+          <a class="spot-title" href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x') }}">{{ f.title }}</a>
+          <div class="spot-meta">
+            <span>🚶 {{ walk_display(row.walk_seconds, row.walk_meters)[0] }} {{ walk_display(row.walk_seconds, row.walk_meters)[1] }}</span>
+            <span class="stars">★</span><span class="rating">{{ '%.1f' % row.rating_avg }}</span>
+            <span>({{ review_count_display(row.rating_count) }})</span>
+            {% for a in f.amenity_list[:3] %}<span class="spot-tag">{{ a }}</span>{% endfor %}
+          </div>
+        </div>
+        <div class="spot-price">
+          <div class="amount">${{ row.starting_at }}</div>
+          <div class="note">starting at</div>
+          <div class="spot-actions">
+            <a class="btn btn-primary btn-sm" href="{{ url_for('facility_page', facility_id=f.id, slug=f.slug or 'x') }}">Book Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if dest.json_field('rates') %}
+  <section class="section-tight">
+    <h2>Parking Rates Near {{ dest.title }}</h2>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Parking Type</th><th>SpotHero Average Rental Price</th></tr></thead>
+      <tbody>
+        {% for r in dest.json_field('rates') %}
+        <tr><td>{{ r.label }}</td><td>${{ r.low }} - ${{ r.high }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if dest.partner_heading or dest.json_field('partner_paras') %}
+  <section class="section-tight">
+    <h2>{{ dest.partner_heading or 'Proud Partner' }}</h2>
+    {% for p in dest.json_field('partner_paras') %}<p class="muted">{{ p }}</p>{% endfor %}
+  </section>
+  {% endif %}
+
+  {% if events %}
+  <section class="section-tight">
+    <h2>Upcoming events at {{ dest.title }}</h2>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Event</th><th>Date</th><th>Parking window</th><th></th></tr></thead>
+      <tbody>
+        {% for e in events %}
+        <tr>
+          <td>{{ e.title }}</td>
+          <td>{{ fmt_short_dt(e.starts) }}</td>
+          <td>{{ fmt_short_dt(e.window_starts) }} → {{ fmt_short_dt(e.window_ends) }}</td>
+          <td><a class="btn btn-primary btn-sm" href="{{ url_for('search', kind='event', id=e.id) }}">Find Parking</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if dest.json_field('popular') %}
+  <section class="section-tight">
+    <h3>Popular Destinations | {{ dest.title }}</h3>
+    <div class="link-columns">
+      {% for d in dest.json_field('popular') %}
+      {% set parts = (d.href or '').strip('/').split('/') %}
+      <a href="{{ url_for('destination_page', city_slug=parts[1], slug=parts[2]) if parts and parts[0] == 'destination' and parts|length >= 3 and parts[2] in dest_slugs else ('https://spothero.com' ~ d.href if (d.href or '').startswith('/') else (d.href or '#')) }}">{{ d.title }}</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if dest.json_field('faqs') %}
+  <section class="section-tight">
+    <h2>Frequently Asked Questions</h2>
+    <div class="accordion">
+      {% for f in dest.json_field('faqs') %}
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">{{ f.q }}</button>
+        <div class="accordion-panel" style="display:none"><p>{{ f.a }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

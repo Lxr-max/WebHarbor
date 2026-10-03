@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('brands_index') }}">Shop By Brand</a></li>
+<li aria-current="page"><span>{{ brand.name }}</span></li>
+{% endblock %}
+{% block title %}{{ brand.name }} Appliances - US Appliance{% endblock %}
+{% block content %}
+<section class="container brand-page">
+  <h1 class="page-heading">{{ brand.name }} Appliances</h1>
+  <p class="category-blurb">{{ total }} {{ brand.name }} products available. US Appliance carries a huge selection of {{ brand.name }} major appliances at low prices.</p>
+  <div class="result-bar">
+    <form method="get"><label for="sort">Sort by</label><select id="sort" name="sort" onchange="this.form.submit()"><option value="featured">Featured</option><option value="priceasc" {% if sort == 'priceasc' %}selected{% endif %}>Price: Ascending</option></select></form>
+    <p class="result-count">{{ total }} products</p>
+  </div>
+  {% if products %}
+  <div class="prod-grid">
+    {% for p in products %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+  {% if pages > 1 %}<nav class="pagination" aria-label="Product pages">
+  {% if page > 1 %}<a href="?page={{ page - 1 }}&sort={{ sort }}">Previous</a>{% endif %}
+  <span>Page {{ page }} of {{ pages }}</span>
+  {% if page < pages %}<a href="?page={{ page + 1 }}&sort={{ sort }}">Next</a>{% endif %}
+  </nav>{% endif %}
+  {% else %}
+  <p class="empty-note">No {{ brand.name }} products are currently available.</p>
+  {% endif %}
+</section>
+{% endblock %}

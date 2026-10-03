@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('resources_hub') }}">Legal resources</a> ›
+    <span>{{ topic.title }}</span>
+  </nav>
+  <article class="resource-article">
+    {% for block in topic.blocks %}
+      {% if block.tag == "h1" %}<h1>{{ block.text }}</h1>
+      {% elif block.tag == "h2" %}<h2>{{ block.text }}</h2>
+      {% elif block.tag == "h3" %}<h3>{{ block.text }}</h3>
+      {% elif block.tag == "h4" %}<h4>{{ block.text }}</h4>
+      {% elif block.tag == "li" %}<li>{{ block.text }}</li>
+      {% else %}<p>{{ block.text }}</p>{% endif %}
+    {% endfor %}
+  </article>
+
+  <h2>Additional articles</h2>
+  <div class="link-grid">
+    {% for article in related %}
+      <a href="/resources/{{ article.path }}/">{{ article.title }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

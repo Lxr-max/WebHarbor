@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ story.title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ story.hero_image }}" alt="{{ story.title }}">
+  <div class="overlay">
+    <span class="kicker">{{ story.discipline or 'Story' }}</span>
+    <h1>{{ story.title }}</h1>
+    <p>{{ story.standfirst }}</p>
+  </div>
+</section>
+
+<div class="detail-layout">
+  <div class="detail-main">
+    <p class="standfirst">{{ story.standfirst }}</p>
+    <p class="meta form-note">{{ story.published[:10] if story.published else '' }}</p>
+    <div class="prose">
+      {% for para in story.body_list() %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+
+    {% if related %}
+    <h2 class="section-title">Read next</h2>
+    <div class="grid cols-4">
+      {% for r in related %}
+      <a class="card" href="{{ url_for('story_detail', slug=r.slug) }}">
+        <div class="thumb"><img src="{{ r.hero_image }}" alt="{{ r.title }}"></div>
+        <div class="body"><span class="tag">{{ r.discipline }}</span><h3>{{ r.title }}</h3></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <aside class="side-panel">
+    <h3>Story facts</h3>
+    <div class="fact-row"><span class="k">Topic</span><span class="v">{{ story.discipline or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Published</span><span class="v">{{ story.published[:10] if story.published else '—' }}</span></div>
+    {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin-top:14px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="kind" value="story">
+      <input type="hidden" name="slug" value="{{ story.slug }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button type="submit" class="btn btn-outline">{{ 'Remove from favorites' if is_favorite('story', story.slug) else 'Save to favorites' }}</button>
+    </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

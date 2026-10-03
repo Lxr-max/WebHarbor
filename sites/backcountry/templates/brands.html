@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Shop All Brands | Backcountry.com{% endblock %}
+{% block body %}
+<header class="listing-header">
+  <h1>Shop All Brands</h1>
+  <p class="listing-counts"><strong>{{ total_brands }}</strong> brands</p>
+  <p class="snapshot-note">The full upstream brand directory captured from backcountry.com ({{ MIRROR_TS }}).</p>
+</header>
+
+<div class="letter-index" aria-label="Brand index">
+  {% for letter in groups.keys() %}
+    <a href="#letter-{{ letter }}" class="letter-link">{{ letter }}</a>
+  {% endfor %}
+</div>
+
+{% if letter %}
+<section class="letter-section">
+  <h2>Brands starting with “{{ letter }}”</h2>
+  <ul class="brand-list">
+    {% for b in brands %}
+    <li>{% if b.servable %}<a href="/brand/{{ b.clean_slug }}">{% endif %}{{ b.name }}{% if b.servable %}</a>{% else %} <span class="muted">(no snapshot products)</span>{% endif %}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% for l, rows in groups.items() %}
+<section class="letter-section" id="letter-{{ l }}">
+  <h2>{{ l }}</h2>
+  <ul class="brand-list">
+    {% for b in rows %}
+    <li>{% if b.servable %}<a href="/brand/{{ b.clean_slug }}">{% endif %}{{ b.name }}{% if b.servable %}</a>{% else %} <span class="muted">(no snapshot products)</span>{% endif %}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}

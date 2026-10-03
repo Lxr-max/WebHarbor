@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Your projects - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Your projects</h1>
+  {% if not projects %}<p class="muted">No projects yet. <a href="/near-me">Find a pro</a> to start one.</p>{% endif %}
+  {% for pr in projects %}
+  <div class="match-card" style="grid-template-columns:minmax(0,1fr) auto;">
+    <div>
+      <a href="/projects/{{ pr.id }}"><b>{{ pr.category.name }}</b></a>
+      <span class="status-chip status-{{ pr.status }}">{{ pr.status|capitalize }}</span>
+      <div class="muted">Zip {{ pr.zip }} · {{ pr.matches|selectattr('responded')|list|length }} of {{ pr.matches|length }} pros responded · {{ pr.created_at.strftime('%b %d, %Y') }}</div>
+    </div>
+    <a class="btn btn-outline btn-sm" href="/projects/{{ pr.id }}">View</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

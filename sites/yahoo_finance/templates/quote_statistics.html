@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% from '_quote_macros.html' import quote_tabs, quote_header with context %}
+{% block title %}{{ q.symbol }} Statistics - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  {{ quote_header() }}
+  {{ quote_tabs('statistics') }}
+  <div class="cols">
+    <div>
+      <h2 class="section-title">Valuation Measures</h2>
+      <dl class="stat-rows">
+        <div class="stat-row"><dt>Market Cap (intraday)</dt><dd>{{ fmt_big(q.market_cap) }}</dd></div>
+        <div class="stat-row"><dt>Enterprise Value</dt><dd>{{ fmt_big((q.market_cap or 0) + (q.total_debt or 0) - (q.total_cash or 0)) if q.market_cap is not none else 'N/A' }}</dd></div>
+        <div class="stat-row"><dt>Trailing P/E</dt><dd>{{ fmt_num(q.pe_ttm) }}</dd></div>
+        <div class="stat-row"><dt>Forward P/E</dt><dd>{{ fmt_num(q.pe_forward) }}</dd></div>
+        <div class="stat-row"><dt>PEG Ratio (5Y expected)</dt><dd>{{ fmt_num(q.peg_ratio) }}</dd></div>
+        <div class="stat-row"><dt>Price/Sales (ttm)</dt><dd>{{ fmt_num((q.market_cap / q.revenue)) if q.market_cap and q.revenue else 'N/A' }}</dd></div>
+        <div class="stat-row"><dt>Price/Book (mrq)</dt><dd>{{ fmt_num(q.price_book) }}</dd></div>
+        <div class="stat-row"><dt>Book Value per Share (mrq)</dt><dd>{{ fmt_num(q.book_value) }}</dd></div>
+      </dl>
+
+      <h2 class="section-title" style="margin-top:20px;">Profitability &amp; Management Effectiveness</h2>
+      <dl class="stat-rows">
+        <div class="stat-row"><dt>Profit Margin</dt><dd>{{ fmt_pct(q.profit_margin) }}</dd></div>
+        <div class="stat-row"><dt>Operating Margin (ttm)</dt><dd>{{ fmt_pct(q.operating_margin) }}</dd></div>
+        <div class="stat-row"><dt>Return on Assets (ttm)</dt><dd>{{ fmt_pct(q.roa) }}</dd></div>
+        <div class="stat-row"><dt>Return on Equity (ttm)</dt><dd>{{ fmt_pct(q.roe) }}</dd></div>
+        <div class="stat-row"><dt>Revenue (ttm)</dt><dd>{{ fmt_big(q.revenue) }}</dd></div>
+        <div class="stat-row"><dt>Revenue Growth (yoy)</dt><dd>{{ fmt_pct(q.revenue_growth) }}</dd></div>
+        <div class="stat-row"><dt>Gross Profit (ttm)</dt><dd>{{ fmt_big(q.gross_profit) }}</dd></div>
+        <div class="stat-row"><dt>EBITDA (ttm)</dt><dd>{{ fmt_big(q.ebitda) }}</dd></div>
+      </dl>
+
+      <h2 class="section-title" style="margin-top:20px;">Balance Sheet &amp; Cash Flow</h2>
+      <dl class="stat-rows">
+        <div class="stat-row"><dt>Total Cash (mrq)</dt><dd>{{ fmt_big(q.total_cash) }}</dd></div>
+        <div class="stat-row"><dt>Total Debt (mrq)</dt><dd>{{ fmt_big(q.total_debt) }}</dd></div>
+        <div class="stat-row"><dt>Debt/Equity (mrq)</dt><dd>{{ fmt_num(q.debt_equity) }}</dd></div>
+        <div class="stat-row"><dt>Current Ratio (mrq)</dt><dd>{{ fmt_num(q.current_ratio) }}</dd></div>
+        <div class="stat-row"><dt>Shares Outstanding</dt><dd>{{ fmt_big(q.shares_outstanding) }}</dd></div>
+        <div class="stat-row"><dt>Held by Insiders</dt><dd>{{ fmt_pct(q.held_insiders) }}</dd></div>
+        <div class="stat-row"><dt>Held by Institutions</dt><dd>{{ fmt_pct(q.held_institutions) }}</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h2 class="section-title">Analyst Estimates</h2>
+      <dl class="stat-rows">
+        <div class="stat-row"><dt>1y Target Estimate</dt><dd>{{ fmt_price(q.target_mean) }}</dd></div>
+        <div class="stat-row"><dt>Recommendation</dt><dd>{{ (q.recommendation or 'N/A')|title }}</dd></div>
+        <div class="stat-row"><td></td><dd>Recommendation Mean: {{ fmt_num(q.rec_mean) }}</dd></div>
+        <div class="stat-row"><dt>Number of Analyst Opinions</dt><dd>{{ fmt_int(q.num_analysts) }}</dd></div>
+        <div class="stat-row"><dt>EPS (TTM)</dt><dd>{{ fmt_num(q.eps_ttm) }}</dd></div>
+        <div class="stat-row"><dt>EPS Forecast (fwd)</dt><dd>{{ fmt_num(q.eps_forward) }}</dd></div>
+      </dl>
+
+      <h2 class="section-title" style="margin-top:20px;">Trading Information</h2>
+      <dl class="stat-rows">
+        <div class="stat-row"><dt>Beta (5Y Monthly)</dt><dd>{{ fmt_num(q.beta) }}</dd></div>
+        <div class="stat-row"><dt>52 Week Range</dt><dd>{{ fmt_price(q.wk52_low) }} - {{ fmt_price(q.wk52_high) }}</dd></div>
+        <div class="stat-row"><dt>52-Week Change</dt><dd>{{ fmt_pct(q.wk52_change_pct, 2, sign=True) }}</dd></div>
+        <div class="stat-row"><dt>50-Day Average</dt><dd>{{ fmt_price(q.day50_avg) }}</dd></div>
+        <div class="stat-row"><dt>200-Day Average</dt><dd>{{ fmt_price(q.day200_avg) }}</dd></div>
+        <div class="stat-row"><dt>Volume</dt><dd>{{ fmt_int(q.volume) }}</dd></div>
+        <div class="stat-row"><dt>Avg. Volume (3M)</dt><dd>{{ fmt_int(q.avg_vol_3m) }}</dd></div>
+        <div class="stat-row"><dt>Payout Ratio</dt><dd>{{ fmt_pct(q.payout_ratio) }}</dd></div>
+        <div class="stat-row"><dt>Dividend Rate (fwd)</dt><dd>{{ fmt_num(q.div_rate) }}</dd></div>
+      </dl>
+    </div>
+  </div>
+</div>
+{% endblock %}

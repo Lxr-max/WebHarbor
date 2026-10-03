@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ firm.name }} in {{ firm.city_slug|replace('-', ' ')|title }}, {{ firm.state_slug|replace('-', ' ')|title }}{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('attorneys_home') }}">Browse attorneys</a> ›
+    <span>{{ firm.name }}</span>
+  </nav>
+  <h1>{{ firm.name }}</h1>
+  <h2>{{ firm.name }}</h2>
+
+  <h2>Attorney list</h2>
+  <div class="firm-attorneys">
+    {% for attorney in attorneys %}
+    <div class="firm-attorney">
+      <a href="/profiles/{{ attorney.state_slug }}/{{ attorney.city_slug }}/lawyer/{{ attorney.slug }}/{{ attorney.uuid }}.html">
+        <img src="{{ url_for('static', filename=attorney.photo('card')) }}" alt="{{ attorney.name }}" width="115" height="144" loading="lazy">
+        <span>{{ attorney.name }}</span>
+      </a>
+      {% if attorney.side_practice_areas %}<p class="muted">{{ attorney.side_practice_areas }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <h3>Office location for {{ firm.name }}</h3>
+  <p>{% for line in firm.office %}{{ line }}<br>{% endfor %}</p>
+  {% if firm.map_path %}
+  <img class="firm-map" src="{{ url_for('static', filename=firm.map_path) }}" alt="Map centered on {{ firm.name }}" width="770" height="536" loading="lazy">
+  {% endif %}
+
+  <h2>Firm resources for {{ firm.name }}</h2>
+  <p>Looking for a top rated attorney from {{ firm.name }}? The attorneys listed above
+  were selected to the Super Lawyers lists. Browse their profiles to learn about their
+  practice areas, credentials, and office locations.</p>
+
+  <section class="profile-section profile-promo">
+    <h2>Find top lawyers with confidence</h2>
+    <p>The Super Lawyers patented selection process is peer influenced and research
+    driven, selecting the top 5% of attorneys to the Super Lawyers lists each year.
+    We know lawyers and make it easy to connect with them.</p>
+  </section>
+</div>
+{% endblock %}

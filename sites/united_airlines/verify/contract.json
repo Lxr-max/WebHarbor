@@ -1,0 +1,1492 @@
+{
+  "United Airlines--0": {
+    "task": "I need to fly one way from Chicago O'Hare to Denver on October 15, 2026, one adult. Compare every United Economy (not Basic Economy) fare shown that day, then book the cheapest Economy option for guest traveler Jordan Hayes (jordan.hayes@example.com, +1 555 019 4433), paying with Visa 4242424242424242 expiring 11/28, security code 431. Report the confirmation number, the flight you picked, and the total charged.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 10,
+            "travel_date": "2026-10-15",
+            "cabin": "ECO",
+            "amount": 202.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": null,
+            "contact_email": "jordan.hayes@example.com",
+            "contact_phone": "+1 555 019 4433",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "4242",
+            "card_type": "Visa",
+            "total": 202.95,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Jordan",
+            "last_name": "Hayes",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "2803.{0,25}210\\.95"
+      ],
+      [
+        "fact 2",
+        "2790.{0,25}202\\.95"
+      ],
+      [
+        "fact 3",
+        "1974.{0,25}226\\.95"
+      ],
+      [
+        "fact 4",
+        "(?:charged|total).{0,30}202\\.95"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--1": {
+    "task": "Book a round trip between Hancock, MI (CMX) and Chicago O'Hare: out on October 14, 2026 and back on October 21, 2026, one adult in United Economy. Pick the cheapest outbound and the cheapest return, and pay as guest with Mastercard 5412751234567890 (exp 07/27, CVV 552) for traveler Dana Reyes (dana.reyes@example.com, +1 555 013 7788). Report the confirmation number, both flight numbers, and the total charged.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 3,
+            "travel_date": "2026-10-14",
+            "cabin": "ECO",
+            "amount": 138.95
+          },
+          {
+            "id": 6,
+            "booking_id": 5,
+            "flight_id": 28,
+            "travel_date": "2026-10-21",
+            "cabin": "ECO",
+            "amount": 134.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": null,
+            "contact_email": "dana.reyes@example.com",
+            "contact_phone": "+1 555 013 7788",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "7890",
+            "card_type": "Mastercard",
+            "total": 273.9,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Dana",
+            "last_name": "Reyes",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "outbound.{0,25}5131"
+      ],
+      [
+        "fact 2",
+        "return.{0,25}6067"
+      ],
+      [
+        "fact 3",
+        "(?:total|charged).{0,30}273\\.90"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$",
+      "^/flights/select\\-return$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--2": {
+    "task": "Sign in as alice.j@example.com (password TestPass123!). Book award travel one way San Francisco to Chicago O'Hare on October 5, 2026 in United Economy for Alice Johnson, redeeming miles for the fare. Report the confirmation number, the miles redeemed, and your award miles balance afterwards, exactly as shown on the account page.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "activities": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "date": "2026-09-28",
+            "description": "Award travel \u2014 SFO\u2013ORD",
+            "channel": "MileagePlus",
+            "miles": -42595,
+            "pqp": 0
+          }
+        ],
+        "updated": {}
+      },
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 45,
+            "travel_date": "2026-10-05",
+            "cabin": "ECO",
+            "amount": 421.69
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": 1,
+            "contact_email": "alice.j@example.com",
+            "contact_phone": "",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 1,
+            "miles_redeemed": 42595,
+            "card_last4": "",
+            "card_type": "",
+            "total": 0.0,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Alice",
+            "last_name": "Johnson",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "8511174410",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "award_miles": 25855
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:redeemed|redeem|used).{0,30}42595"
+      ],
+      [
+        "fact 2",
+        "(?:balance|remaining).{0,30}25855"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--3": {
+    "task": "Sign in as bob.m@example.com (password TestPass123!) and book Economy Plus one way from Washington-Dulles to Denver on October 8, 2026 for Robert Miller, making sure his MileagePlus number is on the traveler so the trip earns miles and PQP. Pay with Visa 4000123456789010 expiring 12/29, CVV 908. Report the confirmation number, the total charged, and the award miles this booking credits to the account.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "activities": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 2,
+            "date": "2026-09-28",
+            "description": "Flight credit \u2014 IAD\u2013DEN",
+            "channel": "United",
+            "miles": 2605,
+            "pqp": 326
+          }
+        ],
+        "updated": {}
+      },
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 14,
+            "travel_date": "2026-10-08",
+            "cabin": "EPU",
+            "amount": 325.61
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": 2,
+            "contact_email": "bob.m@example.com",
+            "contact_phone": "",
+            "cabin": "EPU",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "9010",
+            "card_type": "Visa",
+            "total": 325.61,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Robert",
+            "last_name": "Miller",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "5658356101",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "added": [],
+        "updated": {
+          "[2]": {
+            "award_miles": 145805,
+            "pqf": 32,
+            "pqp": 9506
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:total|charged).{0,30}325\\.61"
+      ],
+      [
+        "fact 2",
+        "(?:miles|credited).{0,30}2605"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--4": {
+    "task": "My colleague is meeting flight UA 2855 at O'Hare. Check its status by flight number for today, then look at the route status page for San Francisco to Chicago to see the day's schedule. Open the aircraft's fleet page for its seat map and onboard specs. Report the scheduled departure and arrival times, the aircraft type and its Wi-Fi provider, plus the number of United Polaris and Premium Plus rows it has.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "(?:depart|sfo).{0,25}15:30"
+      ],
+      [
+        "fact 2",
+        "(?:arriv|ord).{0,25}21:53"
+      ],
+      [
+        "fact 3",
+        "787-8"
+      ],
+      [
+        "fact 4",
+        "wi-?fi.{0,20}panasonic"
+      ],
+      [
+        "fact 5",
+        "(?:polaris|first).{0,35}rows.{0,8}7\\b"
+      ],
+      [
+        "fact 6",
+        "premium plus rows.{0,8}3\\b"
+      ]
+    ],
+    "paths": [
+      "^/flight\\-status/results$",
+      "^/travel\\-info/fleet/78H$"
+    ]
+  },
+  "United Airlines--5": {
+    "task": "I am choosing a premium flight from Rome to Denver on October 19, 2026. Compare the Basic Economy, United Economy, Economy Plus, Premium Plus and Business fares for the flights shown, and identify the cheapest Premium Plus choice. Before I decide, check its aircraft's fleet page for the Premium Plus seat count and Wi-Fi provider, and the Premium Plus cabin page for its baggage allowance. Report the fares and explain what the premium option includes.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "basic economy.{0,18}538\\.16"
+      ],
+      [
+        "fact 2",
+        "united economy.{0,18}689\\.95"
+      ],
+      [
+        "fact 3",
+        "economy plus.{0,18}855\\.54"
+      ],
+      [
+        "fact 4",
+        "premium plus.{0,18}1621\\.38"
+      ],
+      [
+        "fact 5",
+        "business.{0,18}2828\\.80"
+      ],
+      [
+        "fact 6",
+        "178.{0,50}cheapest|cheapest.{0,40}178"
+      ],
+      [
+        "fact 7",
+        "787-9"
+      ],
+      [
+        "fact 8",
+        "premium plus seats.{0,12}21\\b"
+      ],
+      [
+        "fact 9",
+        "wi-?fi.{0,20}panasonic"
+      ],
+      [
+        "fact 10",
+        "2 free checked bags.{0,45}50\\s*(?:lb|pound)"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$",
+      "^/travel\\-info/fleet/78P$",
+      "^/travel\\-info/cabins/premium\\-plus$"
+    ]
+  },
+  "United Airlines--6": {
+    "task": "Alice Johnson (Premier Silver) has trip KX42LM, San Francisco to Chicago on September 29. Look it up in My trips, add the next checked bag for her, and pick her a standard (non-Economy Plus) window or aisle seat on the seat map. Report the fee charged for the added bag, the seat you chose, and how many free bags her Premier status gives her on this trip.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "baggage_items": {
+        "added": [
+          {
+            "id": 3,
+            "booking_id": 1,
+            "passenger_id": 1,
+            "description": "Checked bag 2",
+            "weight_lb": 0,
+            "fee": 35.0
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [],
+        "updated": {
+          "[1]": {
+            "seat": {
+              "one_of": [
+                "15D",
+                "15F",
+                "15G",
+                "15J",
+                "16A",
+                "16C",
+                "16D",
+                "16F",
+                "16G",
+                "16J",
+                "17A",
+                "17D",
+                "17F",
+                "17G",
+                "17J",
+                "18A",
+                "18C",
+                "18D",
+                "18F",
+                "18G",
+                "18J",
+                "19C",
+                "19D",
+                "19G",
+                "19J",
+                "20A",
+                "20C",
+                "20D",
+                "20G",
+                "20J",
+                "21A",
+                "21C",
+                "21D",
+                "21F",
+                "21J",
+                "22A",
+                "22C",
+                "22D",
+                "22F",
+                "22G",
+                "22J",
+                "23C",
+                "23F",
+                "23G",
+                "23J",
+                "24A",
+                "24D",
+                "24F",
+                "24G",
+                "24J",
+                "25A",
+                "25C",
+                "25D",
+                "25F",
+                "25G",
+                "25J",
+                "26A",
+                "26C",
+                "26D",
+                "26F",
+                "26J",
+                "27A",
+                "27C",
+                "27F",
+                "27G",
+                "28A",
+                "28C",
+                "28D",
+                "28F",
+                "28G",
+                "28J",
+                "29A",
+                "29C",
+                "29D",
+                "29F",
+                "29G",
+                "29J",
+                "30A",
+                "30C",
+                "30D",
+                "30F",
+                "30G",
+                "30J",
+                "31A",
+                "31C",
+                "31D",
+                "31F",
+                "32A",
+                "32C",
+                "32D",
+                "32F",
+                "32G",
+                "32J"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:bag|cost|fee).{0,30}\\$35\\b"
+      ],
+      [
+        "fact 2",
+        "(?:allowance|free).{0,15}1\\b|1 free bag"
+      ]
+    ],
+    "paths": [
+      "^/mytrips/KX42LM/seats/1$"
+    ],
+    "seat_answer": true
+  },
+  "United Airlines--7": {
+    "task": "Sign in as dave.t@example.com (password TestPass123!) and check in for trip HD19RK, San Francisco to Chicago today. Confirm seat 12A for Dave Thomas and view the boarding pass. Report the boarding group, the gate, the boarding time, the seat, and the aircraft flying the route.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "passengers": {
+        "added": [],
+        "updated": {
+          "[4]": {
+            "seat": "12A",
+            "checked_in": 1,
+            "boarding_group": "Group 1"
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "group.{0,10}1\\b"
+      ],
+      [
+        "fact 2",
+        "gate.{0,10}c12"
+      ],
+      [
+        "fact 3",
+        "boarding time.{0,10}14:50"
+      ],
+      [
+        "fact 4",
+        "seat.{0,10}12a"
+      ],
+      [
+        "fact 5",
+        "787-8"
+      ]
+    ],
+    "paths": [
+      "^/checkin/HD19RK/boarding\\-pass$"
+    ]
+  },
+  "United Airlines--8": {
+    "task": "Bob Miller (Premier Gold) holds trip QT83NB, Chicago O'Hare to Denver today in Economy Plus. Look it up and open the trip details, then move him to the latest United flight from O'Hare to Denver later today and complete the change. Compare the itinerary before and after: report the original and new flight numbers with departure times, the fare difference charged (if any), and the change fee United applied.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [],
+        "updated": {
+          "[2]": {
+            "flight_id": 11,
+            "amount": 281.42
+          }
+        }
+      },
+      "bookings": {
+        "added": [],
+        "updated": {
+          "[2]": {
+            "total": 281.42
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "original.{0,30}2803.{0,25}14:33"
+      ],
+      [
+        "fact 2",
+        "new.{0,25}1974.{0,25}18:17"
+      ],
+      [
+        "fact 3",
+        "fare difference.{0,25}19\\.84"
+      ],
+      [
+        "fact 4",
+        "(?:change fee.{0,10}\\$?0\\b|no change fee)"
+      ]
+    ],
+    "paths": [
+      "^/mytrips/QT83NB/change/2$"
+    ]
+  },
+  "United Airlines--9": {
+    "task": "Book the cheapest United Economy flight from Denver to Salt Lake City on October 16, 2026 for guest traveler Casey Kim (casey.kim@example.com, +1 555 017 2200) with Visa 4242424242424242 (exp 10/27, CVV 113). Then cancel the trip from My trips. Report the confirmation number, the total you paid, the refund amount, and where the refund went.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 39,
+            "travel_date": "2026-10-16",
+            "cabin": "ECO",
+            "amount": 131.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": null,
+            "contact_email": "casey.kim@example.com",
+            "contact_phone": "+1 555 017 2200",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "4242",
+            "card_type": "Visa",
+            "total": 131.95,
+            "status": "canceled",
+            "canceled_at": "2026-09-28 12:00:00.000000",
+            "refund_amount": 131.95,
+            "refund_to": "card",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Casey",
+            "last_name": "Kim",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:cost|paid|charged).{0,20}131\\.95"
+      ],
+      [
+        "fact 2",
+        "refund.{0,15}131\\.95"
+      ],
+      [
+        "fact 3",
+        "original.{0,30}(?:card|payment)|visa card"
+      ]
+    ],
+    "paths": [
+      "^/flights/search$",
+      "^/mytrips/[A-Z0-9]{6}/cancel$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--10": {
+    "task": "Carol Williams holds Basic Economy trip ZW57PC, Houston to Los Angeles on October 12. She now needs a different date. Look up the trip, check whether changing the flight is available, and cancel it. Also read the flight-change policy page. Report whether Basic Economy tickets can be changed, what happened to the ticket value when you canceled, and the exact refund amount.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "bookings": {
+        "added": [],
+        "updated": {
+          "[3]": {
+            "status": "canceled",
+            "canceled_at": "2026-09-28 12:00:00.000000",
+            "refund_to": "travel credit"
+          }
+        }
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "basic economy.{0,30}(?:cannot|can.t|not).{0,15}chang"
+      ],
+      [
+        "fact 2",
+        "(?:future flight|travel) credit"
+      ],
+      [
+        "fact 3",
+        "(?:refund).{0,15}\\$?0\\b"
+      ]
+    ],
+    "paths": [
+      "^/travel\\-info/policies/flight\\-change$",
+      "^/mytrips/ZW57PC/cancel$"
+    ]
+  },
+  "United Airlines--11": {
+    "task": "Use the checked bag fee calculator to price bags for two travelers: (1) a Member in United Economy flying ORD to DEN with 2 bags, prepaid online versus paid at the airport, and (2) a Premier Gold member in United Business flying London Heathrow to Denver with 2 bags online. Report the per-bag and total fees the calculator shows for each scenario, and each traveler's weight limit per bag.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "online first bag.{0,12}35.{0,20}second bag.{0,12}45.{0,15}total.{0,8}80"
+      ],
+      [
+        "fact 2",
+        "airport first bag.{0,12}40.{0,20}second bag.{0,12}50.{0,15}total.{0,8}90"
+      ],
+      [
+        "fact 3",
+        "weight limit.{0,10}50\\s*lb"
+      ],
+      [
+        "fact 4",
+        "(?:gold|business).{0,40}first bag.{0,8}0.{0,25}second bag.{0,8}0.{0,20}total.{0,8}0"
+      ],
+      [
+        "fact 5",
+        "weight limit.{0,10}70\\s*lb"
+      ]
+    ],
+    "paths": [
+      "^/baggage/fee\\-calculator$"
+    ]
+  },
+  "United Airlines--12": {
+    "task": "I'm packing for an Economy trip with an oversized duffel. Research the baggage rules: the maximum size of a checked bag, the weight limit for United Economy versus Premier members, the fee for a 60-pound bag, and the exact size limits for a carry-on and a personal item. Also confirm whether a Basic Economy domestic fare includes a full-size carry-on. Then price three checked bags, prepaid online, for one United Economy traveler from Chicago O'Hare to Denver with the fee calculator and report the per-bag fees and total.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "(?:30\\s*[x\u00d7]\\s*20\\s*[x\u00d7]\\s*12|62 linear inches)"
+      ],
+      [
+        "fact 2",
+        "economy weight.{0,15}50"
+      ],
+      [
+        "fact 3",
+        "premier weight.{0,15}70"
+      ],
+      [
+        "fact 4",
+        "(?:60-pound|60 pound).{0,65}\\$100"
+      ],
+      [
+        "fact 5",
+        "carry-on.{0,20}9\\s*[x\u00d7]\\s*14\\s*[x\u00d7]\\s*22"
+      ],
+      [
+        "fact 6",
+        "personal item.{0,20}22\\s*[x\u00d7]\\s*25\\s*[x\u00d7]\\s*43"
+      ],
+      [
+        "fact 7",
+        "(?:not|no).{0,15}full-size carry-on"
+      ],
+      [
+        "fact 8",
+        "first.{0,8}35.{0,15}second.{0,8}45.{0,15}third.{0,8}150.{0,15}total.{0,8}230"
+      ]
+    ],
+    "paths": [
+      "^/baggage/checked\\-bags$",
+      "^/baggage/carry\\-on$",
+      "^/baggage/fee\\-calculator$"
+    ]
+  },
+  "United Airlines--13": {
+    "task": "Join MileagePlus as a new member (Frank Lee, frank.lee@example.com, password Welcome2026!), then book the cheapest United Economy flight San Francisco to Portland on October 9, 2026 for Frank Lee with his new MileagePlus number on the traveler, paying with Visa 4242424242424242 exp 09/28, CVV 222. Report the MileagePlus number, the confirmation number, and the award miles the flight credits.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "activities": {
+        "added": [
+          {
+            "id": 1,
+            "user_id": 5,
+            "date": "2026-09-28",
+            "description": "Flight credit \u2014 SFO\u2013PDX",
+            "channel": "United",
+            "miles": 865,
+            "pqp": 173
+          }
+        ],
+        "updated": {}
+      },
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 43,
+            "travel_date": "2026-10-09",
+            "cabin": "ECO",
+            "amount": 172.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": 5,
+            "contact_email": "frank.lee@example.com",
+            "contact_phone": "",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "4242",
+            "card_type": "Visa",
+            "total": 172.95,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Frank",
+            "last_name": "Lee",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "1759967178",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "email": "frank.lee@example.com",
+            "password_hash": {
+              "regex": ".+"
+            },
+            "first_name": "Frank",
+            "last_name": "Lee",
+            "mp_number": "1759967178",
+            "award_miles": 865,
+            "pqf": 1,
+            "pqp": 173,
+            "tier": "Member",
+            "plus_points": 0,
+            "phone": "",
+            "country": "United States",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "mileageplus.{0,20}1759967178"
+      ],
+      [
+        "fact 2",
+        "(?:miles|credited).{0,25}865\\b"
+      ]
+    ],
+    "paths": [
+      "^/mileageplus/join$",
+      "^/flights/search$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ],
+    "password": "Welcome2026!"
+  },
+  "United Airlines--14": {
+    "task": "Carol Williams wants to work toward Premier Silver. Sign in as carol.w@example.com with password TestPass123!, compare her qualification progress with the MileagePlus program's Silver requirements, and explain how many PQF and PQP she still needs. Report her current totals, both pages' thresholds and whether they agree, and the PQP-only alternative so she can compare the two qualification routes.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "(?:currently|current).{0,20}2 pqf.{0,15}640 pqp"
+      ],
+      [
+        "fact 2",
+        "silver.{0,25}12 pqf.{0,15}4000 pqp"
+      ],
+      [
+        "fact 3",
+        "(?:agree|match|same|consistent)"
+      ],
+      [
+        "fact 4",
+        "(?:needs|remaining).{0,15}10.{0,12}pqf.{0,15}3360.{0,12}pqp"
+      ],
+      [
+        "fact 5",
+        "pqp-only.{0,25}5000"
+      ]
+    ],
+    "paths": [
+      "^/mileageplus$"
+    ]
+  },
+  "United Airlines--15": {
+    "task": "Compare United's cabins before I book a long-haul flight: open the cabin experience pages for Basic Economy, Economy Plus, Premium Plus and United Polaris. Report (1) the two Basic Economy carry-on and change rules, (2) the Economy Plus price range per flight and who gets it free, (3) the Premium Plus baggage allowance, and (4) the Polaris seat pitch from the 787-9 fleet page.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "basic economy.{0,25}personal item"
+      ],
+      [
+        "fact 2",
+        "(?:international|canada).{0,110}(?:pacific|transpacific)"
+      ],
+      [
+        "fact 3",
+        "(?:changes are not permitted|no changes|cannot be changed)"
+      ],
+      [
+        "fact 4",
+        "economy plus.{0,25}\\$29"
+      ],
+      [
+        "fact 5",
+        "gold.{0,35}free at booking"
+      ],
+      [
+        "fact 6",
+        "silver.{0,20}check-in"
+      ],
+      [
+        "fact 7",
+        "premium plus.{0,25}2 free checked bags.{0,15}50 lb"
+      ],
+      [
+        "fact 8",
+        "(?:198 cm|6 feet 6 inches|6\\x276\")"
+      ]
+    ],
+    "paths": [
+      "^/travel\\-info/cabins/basic\\-economy$",
+      "^/travel\\-info/cabins/economy\\-plus$",
+      "^/travel\\-info/cabins/premium\\-plus$",
+      "^/travel\\-info/cabins/united\\-polaris$",
+      "^/travel\\-info/fleet/78P$"
+    ]
+  },
+  "United Airlines--16": {
+    "task": "Compare the Boeing 787-9 and the Boeing 777-300ER in United's fleet pages. Report each aircraft's total seat rows, how many rows are United Polaris versus Premium Plus versus Economy Plus, each cabin's seat count from the interior specifications, the Wi-Fi provider, and the wing or engine facts listed.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [],
+    "paths": [
+      "^/travel\\-info/fleet/78P$",
+      "^/travel\\-info/fleet/77X$"
+    ],
+    "scoped_claims": [
+      {
+        "entity": "787-9",
+        "patterns": [
+          "(?:total(?: seat)? rows\\D{0,12}37\\b|37 (?:total )?(?:seat )?rows)",
+          "(?:polaris\\D{0,15}rows\\D{0,8}12\\b|polaris\\D{0,8}12 rows|12 polaris rows)",
+          "(?:premium plus\\D{0,15}rows\\D{0,8}3\\b|premium plus\\D{0,8}3 rows|3 premium plus rows)",
+          "(?:economy plus\\D{0,15}rows\\D{0,8}5\\b|economy plus\\D{0,8}5 rows|5 economy plus rows)",
+          "(?:polaris(?: seats)?\\D{0,8}48\\b|48 polaris seats)",
+          "(?:premium plus(?: seats)?\\D{0,8}21\\b|21 premium plus seats)",
+          "(?:economy plus(?: seats)?\\D{0,8}39\\b|39 economy plus seats)",
+          "(?:economy(?: seats)?\\D{0,8}149\\b|149 economy seats)",
+          "wi-?fi.{0,15}panasonic",
+          "197\\ ft\\ 4\\ in",
+          "genx-1b76",
+          "76100\\s*lbf"
+        ]
+      },
+      {
+        "entity": "777-300er",
+        "patterns": [
+          "(?:total(?: seat)? rows\\D{0,12}46\\b|46 (?:total )?(?:seat )?rows)",
+          "(?:polaris\\D{0,15}rows\\D{0,8}15\\b|polaris\\D{0,8}15 rows|15 polaris rows)",
+          "(?:premium plus\\D{0,15}rows\\D{0,8}3\\b|premium plus\\D{0,8}3 rows|3 premium plus rows)",
+          "(?:economy plus\\D{0,15}rows\\D{0,8}7\\b|economy plus\\D{0,8}7 rows|7 economy plus rows)",
+          "(?:polaris(?: seats)?\\D{0,8}60\\b|60 polaris seats)",
+          "(?:premium plus(?: seats)?\\D{0,8}24\\b|24 premium plus seats)",
+          "(?:economy plus(?: seats)?\\D{0,8}62\\b|62 economy plus seats)",
+          "(?:economy(?: seats)?\\D{0,8}204\\b|204 economy seats)",
+          "wi-?fi.{0,15}panasonic",
+          "212\\ ft\\ 7\\ in",
+          "ge90-115b",
+          "115300\\s*lbf"
+        ]
+      }
+    ]
+  },
+  "United Airlines--17": {
+    "task": "I am preparing for a time-sensitive trip booked with miles and may need to take a different flight that day. Use the Help Center to explain my check-in window, the cost of a same-day change versus standby, and the consequences of canceling the award before departure versus simply not showing up. Identify the articles supporting your advice so I can decide how to handle a late change without losing track of the deadlines.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "check-in opens.{0,10}24 hours.{0,40}closes.{0,10}60 minutes"
+      ],
+      [
+        "fact 2",
+        "same-day change fee.{0,15}\\$75"
+      ],
+      [
+        "fact 3",
+        "free standby for premier"
+      ],
+      [
+        "fact 4",
+        "no redeposit fee"
+      ],
+      [
+        "fact 5",
+        "no-show.{0,40}\\$125"
+      ],
+      [
+        "fact 6",
+        "how early can i check in"
+      ],
+      [
+        "fact 7",
+        "what is the same-day change option"
+      ],
+      [
+        "fact 8",
+        "can i get my miles back"
+      ]
+    ],
+    "paths": [
+      "^/help/check\\-in\\-online$",
+      "^/help/same\\-day\\-change$",
+      "^/help/change\\-award$"
+    ]
+  },
+  "United Airlines--18": {
+    "task": "Check today's flight status by route from Newark to Denver and compare the three United flights listed. Report each flight's departure and arrival times and aircraft, which one arrives earliest, its duration, and its Wi-Fi provider from the fleet page. Then open the Denver airport guide and report whether Denver is a United hub.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {},
+    "claims": [
+      [
+        "fact 1",
+        "1197.{0,20}16:59.{0,20}19:34.{0,15}airbus a321neo"
+      ],
+      [
+        "fact 2",
+        "407.{0,20}18:49.{0,20}21:18.{0,15}airbus a321neo"
+      ],
+      [
+        "fact 3",
+        "1792.{0,20}20:59.{0,20}23:26.{0,15}boeing 737 max 9"
+      ],
+      [
+        "fact 4",
+        "earliest arrival.{0,15}1197"
+      ],
+      [
+        "fact 5",
+        "duration.{0,15}3h 0?1m"
+      ],
+      [
+        "fact 6",
+        "wi-fi.{0,20}viasat"
+      ],
+      [
+        "fact 7",
+        "denver is a united hub"
+      ]
+    ],
+    "paths": [
+      "^/flight\\-status/results$",
+      "^/travel\\-info/fleet/21N$",
+      "^/travel\\-info/airports/DEN$"
+    ]
+  },
+  "United Airlines--19": {
+    "task": "Find the deal for flights from San Francisco to Sydney, open it, and check the route's flight details. Then book the cheapest United Economy seat on that route departing October 26, 2026 for guest traveler Priya Nair (priya.nair@example.com, +1 555 015 9911), paying with Visa 4242424242424242 expiring 05/29, CVV 771. Report the confirmation number, the flight number, the deal's starting price, and the total charged.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 54,
+            "travel_date": "2026-10-26",
+            "cabin": "ECO",
+            "amount": 739.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": null,
+            "contact_email": "priya.nair@example.com",
+            "contact_phone": "+1 555 015 9911",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "4242",
+            "card_type": "Visa",
+            "total": 739.95,
+            "status": "confirmed",
+            "canceled_at": null,
+            "refund_amount": 0.0,
+            "refund_to": "",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Priya",
+            "last_name": "Nair",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "deal.{0,20}\\$799"
+      ],
+      [
+        "fact 2",
+        "863"
+      ],
+      [
+        "fact 3",
+        "(?:total|charged).{0,20}739\\.95"
+      ]
+    ],
+    "paths": [
+      "^/deals/sfo\\-to\\-syd$",
+      "^/flight\\-status$",
+      "^/flights/search$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  },
+  "United Airlines--20": {
+    "task": "Research United's change and cancellation rules, then apply them: (1) From the policy pages, report the change fee for standard United Economy tickets and the rule for Basic Economy. (2) Book the cheapest Economy flight Chicago O'Hare to Austin on October 21, 2026 for guest Sam Ortiz (sam.ortiz@example.com, +1 555 016 3344, Visa 4242424242424242 exp 02/29 CVV 515), then cancel it. Report the confirmation number, the total charged, and the refund amount and destination.",
+    "initial_digest": "0e225812d5cff0f5e7c983e42d9cb4bbdb0eb140ca0c05ed1d2cc2fd63783c45",
+    "state": {
+      "booking_legs": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "flight_id": 48,
+            "travel_date": "2026-10-21",
+            "cabin": "ECO",
+            "amount": 234.95
+          }
+        ],
+        "updated": {}
+      },
+      "bookings": {
+        "added": [
+          {
+            "id": 5,
+            "confirmation": {
+              "regex": "[2-9A-HJ-NP-Z]{6}"
+            },
+            "user_id": null,
+            "contact_email": "sam.ortiz@example.com",
+            "contact_phone": "+1 555 016 3344",
+            "cabin": "ECO",
+            "adults": 1,
+            "children": 0,
+            "award_booking": 0,
+            "miles_redeemed": 0,
+            "card_last4": "4242",
+            "card_type": "Visa",
+            "total": 234.95,
+            "status": "canceled",
+            "canceled_at": "2026-09-28 12:00:00.000000",
+            "refund_amount": 234.95,
+            "refund_to": "card",
+            "created_at": "2026-09-28 12:00:00.000000"
+          }
+        ],
+        "updated": {}
+      },
+      "passengers": {
+        "added": [
+          {
+            "id": 5,
+            "booking_id": 5,
+            "first_name": "Sam",
+            "last_name": "Ortiz",
+            "title": {
+              "one_of": [
+                "",
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr"
+              ]
+            },
+            "date_of_birth": "",
+            "gender": "",
+            "mp_number": "",
+            "seat": "",
+            "checked_in": 0,
+            "boarding_group": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "claims": [
+      [
+        "fact 1",
+        "(?:economy.{0,20}no change fee|no change fee.{0,30}economy)"
+      ],
+      [
+        "fact 2",
+        "basic economy.{0,20}cannot be changed"
+      ],
+      [
+        "fact 3",
+        "(?:cost|paid|charged).{0,20}234\\.95"
+      ],
+      [
+        "fact 4",
+        "refund.{0,15}234\\.95"
+      ],
+      [
+        "fact 5",
+        "original payment"
+      ]
+    ],
+    "paths": [
+      "^/travel\\-info/policies/flight\\-change$",
+      "^/flights/search$",
+      "^/mytrips/[A-Z0-9]{6}/cancel$"
+    ],
+    "answer_state": [
+      [
+        "bookings",
+        "confirmation"
+      ]
+    ]
+  }
+}

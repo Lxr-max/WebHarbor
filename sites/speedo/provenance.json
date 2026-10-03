@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "upstream": "https://speedo.com/",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the speedo.com mirror: the homepage with hero banners and curated rails, department/collection browsing with facet filters (activity, colour, size availability), price/featured sorting and pagination, product detail pages with per-variant sizes, sold-out states, colourway swatch siblings, spec tables, accordions and the size-guide modal, site search, the cart drawer and cart page with discount codes, guest or signed-in checkout with four delivery options, the account domain (register/login, order history with tracking, profile, addresses, payment cards, wishlist), the swimwear and goggles quizzes with conditional steps and recommendation logic, Team Speedo athlete pages, the blog, FAQs, size guides and content pages, the contact form with case references, and the newsletter signup that reveals the WELCOME15 welcome code."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time/boot-time seeder. All rows come from the tracked scraped_data catalogues (built by scripts_dev/build_source_data.py from the harvested JSON); the benchmark users alice/bob/carol/david @test.com with their carts, wishlists, addresses, cards and order history SP100001-SP100007 are fictional fixtures. The bcrypt digest for the shared benchmark password is frozen so the seed DB is byte-identical on every rebuild. Standalone execution publishes instance_seed/speedo.db."
+  },
+  {
+   "path": "scraped_data/collections.json",
+   "classification": "captured-upstream-content",
+   "scope": "The speedo.com Shopify product/collection JSON endpoints (collections/listing pages), captured 2026-09-26: 112 collections and 1280 unique products with titles, prices, compare-at prices, sale/new/bestseller/exclusive flags, media references and per-variant inventory state."
+  },
+  {
+   "path": "scraped_data/details.json",
+   "classification": "captured-upstream-content",
+   "scope": "Per-product detail harvest from all 1280 product pages on speedo.com, captured 2026-09-26: descriptions, delivery copy, SKUs, size lists with per-variant sold-out state, colour sibling links with swatches, gallery CDN urls, spec tables (Activity, Fabric, Lens type, Back shape, Collection line), breadcrumb collections and upstream canonical urls."
+  },
+  {
+   "path": "scraped_data/content_raw.json + scraped_data/content_html/",
+   "classification": "captured-upstream-content",
+   "scope": "Full-page text and HTML captures of 50 speedo.com content surfaces (2026-09-26): the 12 Team Speedo athlete pages, 10 blog articles, and the content pages (Our Story, size guides women/men/kids, FAQs, returns, delivery, contact, klarna, discounts, fastskin, biofuse, dmc, iq, back-to-pool and the quiz landing pages)."
+  },
+  {
+   "path": "scraped_data/faqs.json",
+   "classification": "captured-upstream-content",
+   "scope": "The 10 FAQ entries rendered by the speedo.com help centre, captured 2026-09-26."
+  },
+  {
+   "path": "scraped_data/product_image_urls.json + scraped_data/content_image_urls.json",
+   "classification": "captured-upstream-content",
+   "scope": "The CDN source-url lists for every image referenced by the harvested product and content pages (speedo.com/cdn/shop/...), used both to download the shipped assets and to build asset_inventory.json."
+  },
+  {
+   "path": "size_guide_data.json",
+   "classification": "captured-upstream-content",
+   "scope": "The real speedo.com size-guide tables for women, men and kids (chest/bust, waist, hips, age bands, UK dress sizes), transcribed from the upstream size-guides page."
+  },
+  {
+   "path": "quiz_data.json",
+   "classification": "captured-upstream-content",
+   "scope": "The swimwear quiz (4 steps with the Racing conditional branch) and goggles quiz (3 steps) question/option copy as served by speedo.com."
+  },
+  {
+   "path": "templates/ + static/css/speedo.css",
+   "classification": "mirror-code",
+   "scope": "29 Jinja templates and the stylesheet reproducing the upstream speedo.com layout: the red #EE3224 primary, dark #0B1A1E text, Athletics typography, mega-nav, cart drawer, product cards with sale badges, PDP accordions and the checkout stepper."
+  },
+  {
+   "path": "static/images/ (7482 files)",
+   "classification": "captured-upstream-media",
+   "scope": "Real speedo.com media downloaded from the CDN urls listed in asset_inventory.json: 7240 product/gallery shots, 157 page/hero/banner images, 72 athlete hero/portrait/profile images, 4 nav images, plus the logo svg. No placeholders or synthetic images."
+  },
+  {
+   "path": "tasks.jsonl",
+   "classification": "benchmark-tasks",
+   "scope": "21 benchmark tasks (5-key contributor form) covering quiz-driven purchase chains, colourway comparison and purchase, size-guide math, prescription-goggle lookup, cart/discount/free-shipping arithmetic, account management (wishlist curation, profile/address/card updates, order tracking lookups, contact case submission), guest checkout, newsletter code discovery and Team Speedo content research."
+  },
+  {
+   "path": "tests/",
+   "classification": "mirror-code",
+   "scope": "Pytest suite (conftest + test_site.py, 24 checks) running against a scratch copy of instance_seed/speedo.db: health, catalog rendering, facets/sort, PDP variants, quiz flows, cart/checkout/discount math, account domain, content pages, bad-input handling, tasks.jsonl contract and seed byte-stability."
+  },
+  {
+   "path": "scripts_dev/",
+   "classification": "mirror-code",
+   "scope": "Build pipeline: build_source_data.py (harvested JSON -> source_data.json), build_asset_inventory.py (asset manifests), plus the recon/harvest scripts used to capture the upstream pages."
+  }
+ ]
+}

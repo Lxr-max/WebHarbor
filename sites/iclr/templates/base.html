@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ICLR 2026{% endblock %} — International Conference on Learning Representations</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap bar-inner">
+    <a class="brand" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/logos/iclr-navbar-logo.svg') }}" alt="ICLR" height="34">
+    </a>
+    <nav class="mainnav" aria-label="Main navigation">
+      <a href="{{ url_for('papers') }}">Papers</a>
+      <a href="{{ url_for('schedule') }}">Schedule</a>
+      <a href="{{ url_for('workshops') }}">Workshops</a>
+      <a href="{{ url_for('invited_talks') }}">Invited Talks</a>
+      <a href="{{ url_for('sponsors') }}">Sponsors</a>
+      <a href="{{ url_for('organizers') }}">Organizers</a>
+      <a href="{{ url_for('awards') }}">Awards</a>
+      <a href="{{ url_for('news') }}">Blog</a>
+      <a href="{{ url_for('dates') }}">Dates</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    </nav>
+    <nav class="usernav" aria-label="Account">
+      <form class="search-mini" action="{{ url_for('search') }}" method="get">
+        <input type="search" name="q" placeholder="Search ICLR 2026" aria-label="Search">
+      </form>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('mystuff') }}">My Stuff</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Create Profile</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+  {% block content %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div>
+      <img src="{{ url_for('static', filename='images/logos/iclr-logo.svg') }}" alt="ICLR logo" height="46">
+      <p class="muted small">The International Conference on Learning
+        Representations — mirror of iclr.cc for offline benchmark use.
+        Not affiliated with ICLR.</p>
+    </div>
+    <nav class="footnav">
+      <a href="{{ url_for('about') }}">About ICLR</a>
+      <a href="{{ url_for('faq') }}">Help/FAQ</a>
+      <a href="{{ url_for('helpdesk') }}">Contact ICLR</a>
+      <a href="{{ url_for('venue') }}">Conference Site</a>
+      <a href="{{ url_for('dates') }}">Future Meetings</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

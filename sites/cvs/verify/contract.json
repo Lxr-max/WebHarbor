@@ -1,0 +1,1080 @@
+{
+  "CVS--0": {
+    "task": "I'm checking whether Ordo Kids Oscillating replacement heads would work with the captured Ordo Sonic Kids Squishmallows Daxxon toothbrush. Compare both product pages and explain what compatibility the snapshot actually establishes, the replacement interval and life stage, and how long the two-head pack normally lasts. Do not assume sonic and oscillating heads are interchangeable or make a purchase.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^(?:/shop/ordo\\-kids\\-oscillating\\-brush\\-heads\\-white\\-2\\-ct\\-prodid\\-476215|/shop/product/476215)(?:/|\\?|$)",
+      "^(?:/shop/ordo\\-sonic\\-kids\\-battery\\-toothbrush\\-squishmallows\\-daxxon\\-prodid\\-481219|/shop/product/481219)(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "oscillating kids battery",
+          "sonic",
+          "does not establish",
+          "compatibility is unconfirmed"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "child",
+          "three months|3 months",
+          "six months|6 months",
+          "worn|damaged"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--1": {
+    "task": "I'm choosing between Crest Pro-Health Clean Mint breath mist and Listerine Freshburst Pocketpaks for a small travel bag. Compare their pack sizes, prices and the captured use directions, including the breath mist's displayed weight and sugar-free description. Leave one of each in a guest cart and report the merchandise subtotal without placing an order.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "478253",
+            "variant_id": null,
+            "quantity": 1
+          },
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "481078",
+            "variant_id": null,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/crest\\-pro\\-health\\-breath\\-mist\\-clean\\-mint\\-0\\-44\\-oz\\-2\\-pk\\-prodid\\-478253|/shop/product/478253)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^(?:/shop/listerine\\-freshburst\\-pocketpaks\\-breath\\-strips\\-24\\-ct\\-prodid\\-481078|/shop/product/481078)(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "crest",
+          "0.44 oz",
+          "two.pack",
+          "\\$5\\.99",
+          "0.03 lbs",
+          "sugar.free",
+          "no separate directions"
+        ],
+        "entity": "crest pro.health"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "listerine",
+          "24 strips",
+          "\\$2\\.99",
+          "tongue",
+          "dissolve"
+        ],
+        "entity": "listerine freshburst"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "one of each",
+          "subtotal \\$8\\.98",
+          "no order"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--2": {
+    "task": "I'm choosing an OGX shampoo for a budget under $9 per bottle. Compare all three captured OGX products by price and displayed review count, explain which qualifies and has the most reviews. Leave two bottles of the chosen shampoo in a guest cart without checking out.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "1015021",
+            "variant_id": null,
+            "quantity": 2
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/rx/dotm/cart(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "progrowth",
+          "\\$9\\.99",
+          "3321"
+        ],
+        "entity": "ogx progrowth"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "rosemary mint",
+          "\\$8\\.29",
+          "375"
+        ],
+        "entity": "ogx rosemary mint"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "renewing argan",
+          "\\$8\\.29",
+          "7108"
+        ],
+        "entity": "ogx renewing argan"
+      },
+      {
+        "label": "Fact 4",
+        "all": [
+          "two bottles",
+          "\\$16\\.58",
+          "no checkout"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--3": {
+    "task": "I'm choosing between the two 12 OZ Dove shampoos, excluding Dove Men+Care. Compare their displayed prices, named varieties and review counts, explain the price difference, and leave one bottle of the Bond Strength option in a guest cart for damaged hair. Do not check out.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "847596",
+            "variant_id": null,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/dove\\-lavender\\-volume\\-damage\\-therapy\\-shampoo\\-12\\-oz\\-prodid\\-360759|/shop/product/360759)(?:/|\\?|$)",
+      "^(?:/shop/dove\\-bond\\-strength\\-damage\\-therapy\\-shampoo\\-12\\-oz\\-prodid\\-847596|/shop/product/847596)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "bond strength",
+          "12 oz",
+          "\\$5\\.79",
+          "369"
+        ],
+        "entity": "dove bond strength"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "lavender.*volume",
+          "12 oz",
+          "\\$5\\.79",
+          "506"
+        ],
+        "entity": "dove lavender"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "price difference",
+          "\\$0\\b"
+        ]
+      },
+      {
+        "label": "Fact 4",
+        "all": [
+          "one bottle",
+          "bond strength",
+          "cart"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--4": {
+    "task": "Find the TheraBreath Healthy Gums toothpaste and Whitening Fresh Breath mouthwash in Oral Care. Compare their captured package sizes and displayed prices. Calculate each price per ounce, rounded to the nearest cent, and identify which costs less per ounce.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^(?:/shop/therabreath\\-healthy\\-gums\\-toothpaste\\-clean\\-mint\\-4\\-oz\\-prodid\\-478894|/shop/product/478894)(?:/|\\?|$)",
+      "^(?:/shop/therabreath\\-whitening\\-fresh\\-breath\\-mouthwash\\-dazzling\\-mint\\-33\\-8\\-oz\\-prodid\\-478948|/shop/product/478948)(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "healthy gums",
+          "4 oz",
+          "(?:at|costs?|price[: ]*)\\s*\\$7\\.99",
+          "\\$2\\s*(?:\\.00\\s*)?per ounce"
+        ],
+        "entity": "therabreath healthy gums"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "whitening fresh breath mouthwash",
+          "33\\.8 oz",
+          "(?:at|costs?|price[: ]*)\\s*\\$17\\.99",
+          "\\$0\\.53\\s*per ounce"
+        ],
+        "entity": "therabreath whitening"
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--5": {
+    "task": "I'm comparing popular Oral Care items under $20 before buying. Find the product with the largest displayed review count in that price range, then compare its package size, flavor, price and captured directions with Crest 3D White Advanced Sensitivity Relief toothpaste. Explain which has more reviews and the price difference; don't make a purchase.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^(?:/shop/cocolab\\-cocoshine\\-nano\\-hydroxyapatite\\-whitening\\-toothpaste\\-lychee\\-breeze\\-4\\-oz\\-prodid\\-447099|/shop/product/447099)(?:/|\\?|$)",
+      "^(?:/shop/crest\\-3d\\-white\\-advanced\\-sensitivity\\-relief\\-toothpaste\\-soft\\-mint\\-3\\-3\\-oz\\-prodid\\-452372|/shop/product/452372)(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "cocolab",
+          "lychee breeze",
+          "4 oz",
+          "1160",
+          "\\$15\\.99",
+          "two minutes",
+          "twice"
+        ],
+        "entity": "cocolab cocoshine"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "crest",
+          "soft mint",
+          "3.3 oz",
+          "\\$5\\.59",
+          "211",
+          "12",
+          "one.inch",
+          "one minute",
+          "twice",
+          "do not swallow"
+        ],
+        "entity": "crest 3d white"
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "cocolab",
+          "more reviews",
+          "\\$10\\.4(?:0)? more"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--6": {
+    "task": "Use the store locator to compare the three captured Champaign pharmacies. For Monday, September 28, 2026, identify the pharmacy with the latest closing time. Report its store number, full address, phone number, pharmacy hours, and lunch closure.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^/store\\-locator/champaign\\-il\\-pharmacies/2102\\-n\\-prospect\\-ave\\-champaign\\-il\\-61822/storeid=16362(?:/|\\?|$)",
+      "^/store\\-locator/champaign\\-il\\-pharmacies/109\\-n\\-mattis\\-ave\\-champaign\\-il\\-61821/storeid=18078(?:/|\\?|$)",
+      "^/store\\-locator/champaign\\-il\\-pharmacies/107\\-w\\-green\\-st\\-champaign\\-il\\-61820/storeid=8683(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "8683",
+          "107 w green",
+          "champaign",
+          "61820",
+          "217\\D*355\\D*8123",
+          "8:00 am",
+          "8:00 pm",
+          "12:30 pm",
+          "1:00 pm"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "16362",
+          "6:00 pm",
+          "18078",
+          "7:00 pm"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--7": {
+    "task": "Find the captured Chicago stores labeled Store open 24 hours. Compare their pharmacy hours for Sunday, October 4, 2026, and select the one whose pharmacy closes later as your store. Report its address and Sunday pharmacy hours, and explain whether the pharmacy itself is open 24 hours.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^/store\\-locator/chicago\\-il\\-pharmacies/6417\\-w\\-higgins\\-ave\\-chicago\\-il\\-60656/storeid=3170(?:/|\\?|$)",
+      "^/store\\-locator/chicago\\-il\\-pharmacies/1228\\-e\\-53rd\\-st\\-chicago\\-il\\-60615/storeid=5836(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "selected",
+          "3170",
+          "6417 w.? higgins",
+          "chicago",
+          "60656",
+          "10:00 am",
+          "6:00 pm",
+          "5836",
+          "9:00 am",
+          "5:00 pm"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "pharmacies are not open 24 hours"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "selected_store": "3170"
+  },
+  "CVS--8": {
+    "task": "I need a Chicago CVS with WIC, UPS access point and drug disposal for a Sunday errand. Find a captured store offering all three services, check its pharmacy hours for October 4, 2026 and lunch closure, and select it as my store. Report the store number, full address and phone so I can plan around the pharmacy break.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^/store\\-locator/chicago\\-il\\-pharmacies/6315\\-south\\-pulaski\\-rd\\-suite\\-1\\-chicago\\-il\\-60629/storeid=8502(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "8502",
+          "6315 south pulaski",
+          "suite 1",
+          "chicago",
+          "60629",
+          "773\\D*284\\D*7070",
+          "wic",
+          "ups",
+          "drug disposal"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "sunday",
+          "9:00 am",
+          "6:00 pm",
+          "12:30 pm",
+          "1:00 pm"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "selected_store": "8502"
+  },
+  "CVS--9": {
+    "task": "Compare the Champaign CVS Pharmacy at Target on North Prospect Avenue with the Schnucks pharmacy on North Mattis Avenue. For Saturday, October 3, 2026, report each pharmacy's opening and closing times, identify which opens earlier and closes later, and give each lunch closure.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^/store\\-locator/champaign\\-il\\-pharmacies/2102\\-n\\-prospect\\-ave\\-champaign\\-il\\-61822/storeid=16362(?:/|\\?|$)",
+      "^/store\\-locator/champaign\\-il\\-pharmacies/109\\-n\\-mattis\\-ave\\-champaign\\-il\\-61821/storeid=18078(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "target",
+          "16362",
+          "11:00 am",
+          "5:00 pm",
+          "1:30 pm",
+          "2:00 pm"
+        ],
+        "entity": "target"
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "schnucks",
+          "18078",
+          "10:00 am",
+          "6:00 pm",
+          "1:30 pm",
+          "2:00 pm",
+          "one hour earlier",
+          "one hour later"
+        ],
+        "entity": "schnucks"
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--10": {
+    "task": "Find a captured Savoy store that offers both Photo and UPS access point. Select it as your store, then report its address, store number, and separate store and pharmacy hours for Sunday, October 4, 2026.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^/store\\-locator/savoy\\-il\\-pharmacies/1111\\-n\\-dunlap\\-st\\-savoy\\-il\\-61874/storeid=5887(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "selected",
+          "5887",
+          "1111 n.? dunlap",
+          "savoy",
+          "61874",
+          "photo",
+          "ups"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "store hours",
+          "7:00 am",
+          "10:00 pm",
+          "pharmacy hours",
+          "9:00 am",
+          "5:00 pm"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "selected_store": "5887"
+  },
+  "CVS--11": {
+    "task": "I'm planning a guest order of one TheraBreath Whitening Fresh Breath Mouthwash 33.8 OZ and two Healthy Gums Toothpastes 4 OZ. Put those items in a cart, then use Shipping Information to explain the standard shipping charge and whether this basket qualifies for free shipping, the CVS-fulfilled versus vendor-direct delivery estimates, and when tracking may appear. Preserve the processing-time qualification and leave the order unpurchased.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "478948",
+            "variant_id": null,
+            "quantity": 1
+          },
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "478894",
+            "variant_id": null,
+            "quantity": 2
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/therabreath\\-whitening\\-fresh\\-breath\\-mouthwash\\-dazzling\\-mint\\-33\\-8\\-oz\\-prodid\\-478948|/shop/product/478948)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^(?:/shop/therabreath\\-healthy\\-gums\\-toothpaste\\-clean\\-mint\\-4\\-oz\\-prodid\\-478894|/shop/product/478894)(?:/|\\?|$)",
+      "^/retail/help/help\\-subtopic\\-shipping\\-information(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "one therabreath",
+          "two healthy gums",
+          "subtotal \\$33\\.97",
+          "\\$35",
+          "shipping is \\$4\\.99",
+          "total is \\$38\\.96"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "cvs.fulfilled",
+          "1-4 business days after processing",
+          "vendor.direct",
+          "3-7 business days after processing",
+          "processing times vary",
+          "24-48 hours"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--12": {
+    "task": "I'm comparing return protections before buying CVS Clinical Plus White toothpaste and Crest Pro-Health Sensitivity Relief toothpaste. Check their captured sizes and prices, then use Return Policy to explain how an opened CVS-brand package differs from a new, unopened Crest purchase, including time limits, what to bring in store and the call required before a mail return. Don't purchase or initiate a return.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {},
+    "paths": [
+      "^(?:/shop/cvs\\-clinical\\-plus\\-white\\-toothpaste\\-fresh\\-mint\\-3\\-4\\-oz\\-prodid\\-851367|/shop/product/851367)(?:/|\\?|$)",
+      "^(?:/shop/crest\\-pro\\-health\\-sensitivity\\-relief\\-toothpaste\\-minty\\-fresh\\-scope\\-5\\-1\\-oz\\-prodid\\-428704|/shop/product/428704)(?:/|\\?|$)",
+      "^/retail/help/return_policy(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "cvs clinical",
+          "3.4 oz",
+          "\\$7\\.79",
+          "crest pro.health",
+          "5.1 oz",
+          "\\$6\\.29"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "cvs brands",
+          "opened and unopened",
+          "no time limit",
+          "exclusions",
+          "receipt or invoice",
+          "60.day"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "1-888-607-4287",
+          "before a mail return"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--13": {
+    "task": "I'm considering ordering the Crest Pro-Health Clean Mint breath-mist two-pack as a guest. Put one in a cart and inspect checkout without placing the order. Use Checkout help to explain guest eligibility, the two ExtraCare-card conditions for online rewards, and what to do if I change my mind after placing an order, including whether cancellation is possible.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "478253",
+            "variant_id": null,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/crest\\-pro\\-health\\-breath\\-mist\\-clean\\-mint\\-0\\-44\\-oz\\-2\\-pk\\-prodid\\-478253|/shop/product/478253)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^/checkout(?:/|\\?|$)",
+      "^/retail/help/help\\-subtopic\\-checkout(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "one crest",
+          "two.pack",
+          "\\$5\\.99",
+          "did not place"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "guests may",
+          "card must be active",
+          "scanned at least once in store",
+          "link"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "cannot be canceled",
+          "reject",
+          "shipment",
+          "carrier",
+          "return"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--14": {
+    "task": "I'm preparing my CVS demo account for deliveries to campus. Sign in as alice.j@test.com with password TestPass123! and save a new address labeled Campus for Alice Johnson at 123 Example Lane, Apartment 2, Urbana, IL 61801. Reopen the address book and confirm the complete saved address without changing my existing addresses or placing an order.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "address": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": 1,
+            "recipient": "Alice Johnson",
+            "line1": "123 Example Lane",
+            "line2": "Apartment 2",
+            "city": "Urbana",
+            "state": "IL",
+            "postal_code": "61801",
+            "label": "Campus"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/account/dashboard(?:/|\\?|$)",
+      "^/account/addresses(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "campus",
+          "alice johnson",
+          "alice.j@test.com",
+          "123 example lane",
+          "apartment 2",
+          "urbana",
+          "il 61801",
+          "saved"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "account_email": "alice.j@test.com"
+  },
+  "CVS--15": {
+    "task": "I want a shortlist of affordable OGX shampoos in my CVS demo account. Sign in as alice.j@test.com with password TestPass123!, compare all three captured OGX prices, and save only the shampoos costing less than $9 to Favorites. Reopen Favorites and report the two saved product names and prices, leaving existing favorites intact.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "favorite": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": 1,
+            "product_id": "582191"
+          },
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": 1,
+            "product_id": "1015021"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/account/dashboard(?:/|\\?|$)",
+      "^(?:/shop/ogx\\-rosemary\\-mint\\-shampoo\\-13\\-oz\\-prodid\\-582191|/shop/product/582191)(?:/|\\?|$)",
+      "^(?:/shop/ogx\\-renewing\\-argan\\-oil\\-of\\-morocco\\-shampoo\\-13\\-oz\\-prodid\\-1015021|/shop/product/1015021)(?:/|\\?|$)",
+      "^/account/favorites(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "favorites",
+          "renewing argan oil of morocco",
+          "13 oz",
+          "\\$8\\.29"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "rosemary mint",
+          "13 oz",
+          "\\$8\\.29"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "progrowth",
+          "\\$9\\.99",
+          "excluded"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "account_email": "alice.j@test.com"
+  },
+  "CVS--16": {
+    "task": "I want to save the Crest Pro-Health Clean Mint breath-mist two-pack for later but don't have a local account. Find the product and use Favorites to create an account for Casey Morgan, casey.cvs@example.test, with password TestPass123!. Confirm that the product was saved to the new account and report its exact name and price.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "favorite": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": 5,
+            "product_id": "478253"
+          }
+        ],
+        "updated": {}
+      },
+      "user": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "email": "casey.cvs@example.test",
+            "password_hash": {
+              "nonempty": 30
+            },
+            "first_name": "Casey",
+            "last_name": "Morgan",
+            "phone": ""
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/crest\\-pro\\-health\\-breath\\-mist\\-clean\\-mint\\-0\\-44\\-oz\\-2\\-pk\\-prodid\\-478253|/shop/product/478253)(?:/|\\?|$)",
+      "^/account/favorites(?:/|\\?|$)",
+      "^/account/dashboard(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "casey morgan",
+          "casey.cvs@example.test",
+          "crest pro.health breath mist",
+          "clean mint",
+          "0.44 oz",
+          "2 pk",
+          "\\$5\\.99",
+          "saved"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "account_email": "casey.cvs@example.test",
+    "password": "TestPass123!",
+    "user_table": "user"
+  },
+  "CVS--17": {
+    "task": "I'm assembling a guest cart for a trip: two Crest Pro-Health Clean Mint breath-mist two-packs and one Listerine Freshburst Pocketpaks 24 CT. Check the captured package sizes so the quantities are clear, then leave exactly those items unpurchased in the cart. Report the final quantities, merchandise subtotal, standard shipping charge and total.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "cart_item": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "478253",
+            "variant_id": null,
+            "quantity": 2
+          },
+          {
+            "id": {
+              "positive_int": true
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "product_id": "481078",
+            "variant_id": null,
+            "quantity": 1
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/crest\\-pro\\-health\\-breath\\-mist\\-clean\\-mint\\-0\\-44\\-oz\\-2\\-pk\\-prodid\\-478253|/shop/product/478253)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^(?:/shop/listerine\\-freshburst\\-pocketpaks\\-breath\\-strips\\-24\\-ct\\-prodid\\-481078|/shop/product/481078)(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "two crest",
+          "two.packs",
+          "0.44 oz",
+          "\\$5\\.99",
+          "one listerine",
+          "24 ct",
+          "\\$2\\.99"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "subtotal is \\$14\\.97",
+          "shipping \\$4\\.99",
+          "total \\$19\\.96"
+        ]
+      }
+    ],
+    "browser_session": true
+  },
+  "CVS--18": {
+    "task": "Sign in to the local demo account with email alice.j@test.com and password TestPass123!. Among the captured OGX shampoos priced below $9, choose the one with the most customer reviews and add two to the cart. Place a demo pickup order at the Champaign store on West Green Street using the account email. Then open Order History and report the new order number, product, quantity, pickup address, and total. Use the preset demo payment only.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "order": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "number": {
+              "regex": "CVS-DEMO-[A-F0-9]{10}"
+            },
+            "user_id": 1,
+            "guest_token": null,
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d \\d\\d:\\d\\d UTC"
+            },
+            "status": "Demo order placed",
+            "items": {
+              "json_items": [
+                {
+                  "product_id": "1015021",
+                  "name": "OGX Renewing Argan Oil of Morocco Shampoo, 13 OZ",
+                  "variant_label": "",
+                  "quantity": 2,
+                  "price_cents": 829,
+                  "line_cents": 1658
+                }
+              ]
+            },
+            "subtotal_cents": 1658,
+            "shipping_cents": 0,
+            "total_cents": 1658,
+            "fulfillment": "pickup",
+            "store_address": "107 W GREEN ST, CHAMPAIGN, IL 61820",
+            "address": "null",
+            "email": "alice.j@test.com"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^/account/dashboard(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^/order-confirmation/\\d+(?:/|\\?|$)",
+      "^/account/order/\\d+(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "two ogx renewing argan",
+          "13 oz",
+          "\\$8\\.29",
+          "7108"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "107 w green",
+          "champaign",
+          "61820",
+          "total are \\$16\\.58",
+          "shipping is free",
+          "alice.j@test.com"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "account_email": "alice.j@test.com",
+    "answer_state": [
+      [
+        "order",
+        "number"
+      ]
+    ]
+  },
+  "CVS--19": {
+    "task": "As a guest, add one TheraBreath Whitening Fresh Breath Mouthwash 33.8 OZ and two TheraBreath Healthy Gums Toothpaste 4 OZ to a local cart. Read the shipping policy, then add the smallest positive whole-number quantity of Listerine Freshburst Pocketpaks 24 CT needed to reach free standard shipping. Place a demo shipping order for Casey Morgan, 123 Example Lane, Urbana, IL 61801, email casey.guest@example.test, using the preset demo payment. Report the order number, quantities, subtotal, shipping charge, and total.",
+    "initial_digest": "0d580d58f44e07b970f19f840d3d4aff08372e01f90c41ff87686b80540e1524",
+    "state": {
+      "order": {
+        "added": [
+          {
+            "id": {
+              "positive_int": true
+            },
+            "number": {
+              "regex": "CVS-DEMO-[A-F0-9]{10}"
+            },
+            "user_id": null,
+            "guest_token": {
+              "regex": "[A-Za-z0-9_-]{30,100}"
+            },
+            "placed_at": {
+              "regex": "\\d{4}-\\d\\d-\\d\\d \\d\\d:\\d\\d UTC"
+            },
+            "status": "Demo order placed",
+            "items": {
+              "json_items": [
+                {
+                  "product_id": "478948",
+                  "name": "TheraBreath Whitening Fresh Breath Mouthwash, Dazzling Mint, 33.8 OZ",
+                  "variant_label": "",
+                  "quantity": 1,
+                  "price_cents": 1799,
+                  "line_cents": 1799
+                },
+                {
+                  "product_id": "478894",
+                  "name": "TheraBreath Healthy Gums Toothpaste, Clean Mint, 4 OZ",
+                  "variant_label": "",
+                  "quantity": 2,
+                  "price_cents": 799,
+                  "line_cents": 1598
+                },
+                {
+                  "product_id": "481078",
+                  "name": "Listerine Freshburst Pocketpaks Breath Strips, 24 CT",
+                  "variant_label": "",
+                  "quantity": 1,
+                  "price_cents": 299,
+                  "line_cents": 299
+                }
+              ]
+            },
+            "subtotal_cents": 3696,
+            "shipping_cents": 0,
+            "total_cents": 3696,
+            "fulfillment": "shipping",
+            "store_address": null,
+            "address": "{\"recipient\": \"Casey Morgan\", \"line1\": \"123 Example Lane\", \"line2\": \"\", \"city\": \"Urbana\", \"state\": \"IL\", \"postal_code\": \"61801\"}",
+            "email": "casey.guest@example.test"
+          }
+        ],
+        "updated": {}
+      }
+    },
+    "paths": [
+      "^(?:/shop/therabreath\\-whitening\\-fresh\\-breath\\-mouthwash\\-dazzling\\-mint\\-33\\-8\\-oz\\-prodid\\-478948|/shop/product/478948)(?:/|\\?|$)",
+      "^/rx/dotm/cart(?:/|\\?|$)",
+      "^(?:/shop/therabreath\\-healthy\\-gums\\-toothpaste\\-clean\\-mint\\-4\\-oz\\-prodid\\-478894|/shop/product/478894)(?:/|\\?|$)",
+      "^/retail/help/help\\-subtopic\\-shipping\\-information(?:/|\\?|$)",
+      "^(?:/shop/listerine\\-freshburst\\-pocketpaks\\-breath\\-strips\\-24\\-ct\\-prodid\\-481078|/shop/product/481078)(?:/|\\?|$)",
+      "^/order-confirmation/\\d+(?:/|\\?|$)"
+    ],
+    "claims": [
+      {
+        "label": "Fact 1",
+        "all": [
+          "one therabreath whitening",
+          "33.8 oz",
+          "two therabreath healthy gums",
+          "4 oz",
+          "one listerine",
+          "24 ct"
+        ]
+      },
+      {
+        "label": "Fact 2",
+        "all": [
+          "\\$33\\.97",
+          "\\$1\\.03",
+          "\\$35",
+          "one \\$2\\.99",
+          "smallest"
+        ]
+      },
+      {
+        "label": "Fact 3",
+        "all": [
+          "subtotal \\$36\\.96",
+          "shipping \\$0\\b",
+          "total \\$36\\.96"
+        ]
+      }
+    ],
+    "browser_session": true,
+    "answer_state": [
+      [
+        "order",
+        "number"
+      ]
+    ]
+  }
+}

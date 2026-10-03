@@ -1,0 +1,161 @@
+/* virginia_dmv mirror — Virginia DMV-inspired government styling */
+:root {
+  --dmv-blue: #101820;
+  --dmv-navy: #00365f;
+  --dmv-blue: #0f4d92;
+  --dmv-gold: #ffc72c;
+  --dmv-green: #2e8540;
+  --dmv-red: #b50909;
+  --gray-light: #f0f0f0;
+  --gray-mid: #d6d7d9;
+  --gray-dark: #5b616b;
+  --ink: #1b1b1b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  font-size: 16.5px;
+  line-height: 1.55;
+}
+.container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+a { color: var(--dmv-blue); }
+a:visited { color: #4a2a6e; }
+h1, h2, h3, h4 { line-height: 1.28; color: var(--dmv-navy); }
+h1 { font-size: 2.1rem; margin: 0.4em 0; }
+h2 { font-size: 1.45rem; }
+h3 { font-size: 1.15rem; }
+.sr-only { position: absolute; left: -9999px; height: 1px; width: 1px; overflow: hidden; }
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { position: fixed; top: 0; left: 0; background: #fff; padding: 8px 16px; z-index: 99; }
+
+/* header */
+.site-header { background: #fff; border-bottom: 3px solid var(--dmv-navy); }
+.header-upper { background: var(--dmv-navy); color: #fff; font-size: 0.85rem; }
+.header-upper .container { display: flex; justify-content: space-between; align-items: center; padding: 6px 20px; }
+.header-upper a { color: #fff; text-decoration: none; margin-left: 18px; font-weight: 600; }
+.header-upper a:hover { text-decoration: underline; }
+.header-main { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
+.brand { text-decoration: none; }
+.brand__seal { display: inline-flex; align-items: center; gap: 12px; }
+.brand__mark { width: 46px; height: 46px; border-radius: 50%; background: var(--dmv-navy); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem; }
+.brand__name { color: var(--dmv-navy); }
+.brand__name strong { display: block; font-size: 1.15rem; }
+.brand__name span { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-dark); }
+.site-nav { background: #10263f; }
+.site-nav ul { list-style: none; display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
+.site-nav a { display: block; color: #fff; text-decoration: none; padding: 11px 13px; font-weight: 600; font-size: 0.92rem; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--dmv-blue); }
+.header-search input, .header-search button { padding: 7px 10px; border: 2px solid var(--gray-dark); }
+.header-search button { background: var(--dmv-navy); color: #fff; cursor: pointer; }
+
+/* alert banner */
+.alert { background: #fdf3d1; border: 1px solid #e6b800; border-left: 6px solid #e6a700; padding: 12px 16px; margin: 14px 0; }
+.alert h2 { margin: 0 0 4px; font-size: 1.05rem; color: var(--ink); }
+
+/* main */
+main { min-height: 55vh; padding: 26px 0 56px; }
+.page-title { border-bottom: 2px solid var(--gray-mid); padding-bottom: 10px; margin-bottom: 18px; }
+.breadcrumb { font-size: 0.85rem; color: var(--gray-dark); margin-bottom: 6px; }
+.breadcrumb a { color: var(--dmv-blue); text-decoration: none; }
+.hero { background: linear-gradient(rgba(16,38,63,0.72), rgba(16,38,63,0.72)), var(--dmv-navy); color: #fff; padding: 46px 20px; margin-bottom: 26px; }
+.hero .container { max-width: 1160px; }
+.hero h1 { color: #fff; font-size: 2.3rem; margin: 0 0 8px; }
+.hero p { font-size: 1.12rem; max-width: 720px; }
+.hero .btn { margin-top: 14px; }
+
+/* buttons + cards */
+.btn { display: inline-block; background: var(--dmv-blue); color: #fff !important; text-decoration: none; padding: 10px 18px; font-weight: 700; border: 0; border-radius: 3px; cursor: pointer; font-size: 0.95rem; }
+.btn:hover { background: var(--dmv-navy); }
+.btn--secondary { background: #fff; color: var(--dmv-navy) !important; border: 2px solid var(--dmv-navy); }
+.btn--gold { background: var(--dmv-gold); color: var(--ink) !important; }
+.card { border: 1px solid var(--gray-mid); border-radius: 4px; background: #fff; padding: 18px 20px; margin: 14px 0; }
+.card h3 { margin-top: 0; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.card--flat { display: block; text-decoration: none; color: inherit; transition: box-shadow 0.15s; }
+.card--flat:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+.card--flat h3 { color: var(--dmv-blue); }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: var(--gray-dark); font-weight: 700; }
+.pill { display: inline-block; background: var(--gray-light); border: 1px solid var(--gray-mid); border-radius: 999px; padding: 2px 12px; font-size: 0.8rem; margin: 2px 4px 2px 0; }
+.plate-card { text-align: center; }
+.plate-card img { max-width: 100%; height: auto; border: 1px solid var(--gray-mid); }
+
+/* tables + lists */
+table.data { border-collapse: collapse; width: 100%; margin: 14px 0; }
+table.data th, table.data td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--gray-mid); }
+table.data th { background: var(--gray-light); font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em; }
+dl.kv { display: grid; grid-template-columns: 260px 1fr; row-gap: 8px; margin: 14px 0; }
+dl.kv dt { font-weight: 700; color: var(--dmv-navy); }
+dl.kv dd { margin: 0; }
+ul.flow { margin: 8px 0; padding-left: 22px; }
+ul.flow li { margin: 4px 0; }
+
+/* forms */
+form.flow .field { margin: 14px 0; }
+form.flow label { display: block; font-weight: 700; margin-bottom: 4px; color: var(--dmv-navy); }
+form.flow input[type="text"], form.flow input[type="email"], form.flow input[type="password"],
+form.flow input[type="date"], form.flow input[type="number"], form.flow select, form.flow input[type="tel"] {
+  padding: 9px 10px; border: 2px solid var(--gray-dark); border-radius: 2px; min-width: 260px; font-size: 1rem;
+}
+form.flow textarea { padding: 9px 10px; border: 2px solid var(--gray-dark); width: 100%; min-height: 90px; }
+fieldset.choice { border: 1px solid var(--gray-mid); padding: 12px 16px; margin: 10px 0; }
+fieldset.choice legend { font-weight: 700; color: var(--dmv-navy); padding: 0 8px; }
+.radio-row, .check-row { display: block; margin: 6px 0; }
+form.flow .hint { color: var(--gray-dark); font-size: 0.88rem; }
+.flashes .flash { background: #ecf3ec; border-left: 5px solid var(--dmv-green); padding: 10px 14px; margin: 10px 0; }
+.section-form { border-top: 1px solid var(--gray-mid); padding-top: 18px; margin-top: 22px; }
+
+/* receipt */
+.receipt { border: 2px solid var(--dmv-navy); padding: 22px 26px; max-width: 720px; }
+.receipt .ref { font-size: 1.3rem; font-weight: 800; color: var(--dmv-navy); letter-spacing: 0.04em; }
+
+/* quiz */
+.question { border: 1px solid var(--gray-mid); padding: 16px 18px; margin: 14px 0; }
+.question p.qtext { font-weight: 700; }
+.question .answers label { display: block; margin: 6px 0; }
+.question .answers input { margin-right: 8px; }
+.question-images img { max-width: 260px; max-height: 200px; border: 1px solid var(--gray-mid); margin: 6px 8px 6px 0; }
+.manual-body img { max-width: 320px; height: auto; border: 1px solid var(--gray-mid); margin: 6px 8px 6px 0; }
+.result-ok { color: var(--dmv-green); font-weight: 700; }
+.result-bad { color: var(--dmv-red); font-weight: 700; }
+.feedback { background: var(--gray-light); padding: 8px 12px; margin-top: 8px; font-size: 0.92rem; }
+
+/* pagination */
+.pager { margin: 18px 0; }
+.pager a, .pager span { display: inline-block; padding: 6px 12px; margin-right: 6px; border: 1px solid var(--gray-mid); text-decoration: none; }
+.pager .current { background: var(--dmv-navy); color: #fff; border-color: var(--dmv-navy); }
+
+/* footer */
+.site-footer { background: #10263f; color: #cfd8e3; margin-top: 40px; }
+.site-footer .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 22px; padding: 30px 20px; }
+.site-footer h4 { color: #fff; margin: 0 0 10px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer a { color: #cfd8e3; text-decoration: none; font-size: 0.9rem; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-bottom { border-top: 1px solid #2a3f58; padding: 12px 20px; font-size: 0.8rem; }
+.footer-bottom .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 760px) {
+  .header-main { flex-direction: column; gap: 10px; }
+  dl.kv { grid-template-columns: 1fr; }
+  /* Narrow viewports: page-level horizontal overflow fixes (audit F-1).
+     1. Template inline card-grids (login / office detail / plate detail) pin
+        two minmax(280-320px) columns, forcing ~600px of content into a
+        350px column — collapse every card grid to a single flexible track
+        (the !important is required to override the inline styles).
+     2. Wide content tables (manual subsections, insurance limits, fee
+        tables) have intrinsic widths beyond the viewport — make them
+        internally scrollable instead of stretching the page (same pattern
+        the upstream gov site uses on phones).
+     3. Form controls must never size themselves to their longest option
+        label (the appointment wizard's office select lists 134 long office
+        addresses, which made it 732px wide). */
+  .card-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  main table { display: block; max-width: 100%; overflow-x: auto; }
+  main img, .manual-body img { max-width: 100%; height: auto; }
+  select, input[type="text"], input[type="email"], input[type="password"],
+  input[type="search"], input[type="date"], input[type="url"],
+  input[type="tel"], input[type="number"] { max-width: 100%; }
+}

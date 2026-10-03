@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order.order_number }} | StubHub{% endblock %}
+{% block content %}
+<div class="account-page">
+  <nav class="account-nav">
+    <a href="/secure/myaccount">My Tickets</a>
+    <a href="/secure/myaccount/purchases" class="active">Orders</a>
+    <a href="/secure/myaccount/listings">My Listings</a>
+    <a href="/secure/myaccount/sales">My Sales</a>
+    <a href="/secure/myaccount/payments">Payments</a>
+  </nav>
+  <h1>Order {{ order.order_number }}</h1>
+  <p class="muted">Placed {{ order.placed_at.strftime('%B %-d, %Y') }} · {{ order.status }}</p>
+
+  <section class="account-section">
+    <h2>{{ order.event.name }}</h2>
+    <p>{{ order.event.date_full }} • {{ 'TBA' if order.event.is_time_tbd else order.event.local_starts_at.strftime('%-I:%M %p') }}</p>
+    <p>{{ order.event.venue.name }}, {{ order.event.venue.city }}, {{ order.event.venue.state or order.event.venue.country }}</p>
+  </section>
+
+  {% if order.listing %}
+  <section class="account-section">
+    <h2>Seats</h2>
+    <div class="seat-line">
+      <div><strong>{{ order.listing.section }}</strong><p>Row {{ order.listing.row or '—' }}{% if order.listing.seats %} · Seats {{ order.listing.seats }}{% endif %}</p></div>
+      <div><strong>{{ order.quantity }} ticket{{ 's' if order.quantity > 1 }}</strong><p>Seats together</p></div>
+      <div><strong>{{ {'instant': 'Instant download', 'mobile': 'Mobile transfer', 'ups': 'UPS delivery'}[order.delivery_method] }}</strong><p>{{ order.listing.seat_view_file and 'Seat view available' or 'Delivery method' }}</p></div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="account-section">
+    <h2>Payment</h2>
+    <div class="summary-rows">
+      <div class="row"><span>Tickets ({{ order.quantity }} × ${{ '{:,}'.format(order.unit_price) }})</span><span>${{ '{:,.0f}'.format(order.subtotal()) }}</span></div>
+      <div class="row muted"><span>Delivery</span><span>{{ 'Free' if not order.delivery_fee else '${:,.2f}'.format(order.delivery_fee) }}</span></div>
+      <div class="row muted"><span>Order processing fee</span><span>${{ '{:,.2f}'.format(order.processing_fee) }}</span></div>
+      <div class="row total"><span>Total paid</span><span>${{ '{:,.2f}'.format(order.total) }}</span></div>
+    </div>
+    <p class="muted small">Paid with {{ order.card_last4 }}</p>
+  </section>
+
+  <section class="account-section">
+    <h2>Delivery status</h2>
+    <p>{{ order.status }} — your tickets will be ready in your account before the event.</p>
+  </section>
+  <a href="/secure/myaccount/purchases" class="btn btn-outline">Back to orders</a>
+</div>
+{% endblock %}

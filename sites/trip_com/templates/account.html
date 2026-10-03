@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}My Account | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; <b>My account</b></div>
+<div class="acct-layout">
+  <div class="acct-nav">
+    <a class="active" href="{{ url_for('account') }}">Overview</a>
+    <a href="{{ url_for('account_bookings') }}">My bookings</a>
+    <a href="{{ url_for('account_wishlist') }}">Wishlist</a>
+    <a href="{{ url_for('account_coupons') }}">Coupons</a>
+    <a href="{{ url_for('deals') }}">Deals</a>
+  </div>
+  <div>
+    <div class="coins-balance">
+      <div style="font-size:12px;opacity:.85">Trip Coins balance</div>
+      <div class="big">{{ current_user.coins }} coins</div>
+      <div style="font-size:12px;opacity:.85">&#8776; ${{ '%.2f'|format(current_user.coins * 0.01) }} — earn coins on every booking, 1 coin per $1 spent</div>
+    </div>
+    <div class="panel">
+      <h2>Profile</h2>
+      <div class="sum-row"><span>Name</span><span class="val">{{ current_user.name }}</span></div>
+      <div class="sum-row"><span>Email</span><span class="val">{{ current_user.email }}</span></div>
+      <div class="sum-row"><span>Phone</span><span class="val">{{ current_user.phone or 'Not set' }}</span></div>
+      <div class="sum-row"><span>Member since</span><span class="val">{{ current_user.created_at|dmy }}</span></div>
+    </div>
+    <div class="panel">
+      <h2>Recent bookings</h2>
+      {% for b in hotel_bookings[:3] %}
+      <div class="sum-row"><span>{{ b.ref }} &middot; hotel</span><span class="val">${{ '%.2f'|format(b.total) }} &middot; {{ b.status }}</span></div>
+      {% endfor %}
+      {% for b in flight_bookings[:3] %}
+      <div class="sum-row"><span>{{ b.ref }} &middot; flight</span><span class="val">${{ '%.2f'|format(b.total) }} &middot; {{ b.status }}</span></div>
+      {% endfor %}
+      {% for b in attraction_bookings[:3] %}
+      <div class="sum-row"><span>{{ b.ref }} &middot; activity</span><span class="val">${{ '%.2f'|format(b.total) }} &middot; {{ b.status }}</span></div>
+      {% endfor %}
+      {% if not hotel_bookings and not flight_bookings and not attraction_bookings %}
+      <div class="empty-note">No bookings yet — search hotels or flights to get started.</div>
+      {% endif %}
+      <a class="btn btn-ghost" style="margin-top:10px" href="{{ url_for('account_bookings') }}">All bookings</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

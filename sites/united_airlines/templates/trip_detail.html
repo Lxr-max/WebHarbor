@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Trip {{ booking.confirmation }} — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <h1>Trip {{ booking.confirmation }}</h1>
+  <div class="ua-booking-summary">
+    <div class="ua-price-line">Status: <span class="ua-status-{{ booking.status }}">{{ booking.status|capitalize }}</span>
+      · {{ booking.contact_email }}</div>
+    {% for leg in booking.legs %}
+      <div class="ua-leg">
+        <strong>{{ leg.flight.origin_code }} → {{ leg.flight.dest_code }}</strong>
+        UA {{ leg.flight.flight_number }} · {{ leg.travel_date }} ·
+        {{ leg.flight.departure }}–{{ leg.flight.arrival }} · {{ leg.cabin }}
+      </div>
+    {% endfor %}
+    <div class="ua-price-line">Travelers:
+      {% for pax in booking.passengers %}
+        {{ pax.first_name }} {{ pax.last_name }}{% if pax.seat %} (seat {{ pax.seat }}){% endif %}{{ ', ' if not loop.last else '' }}
+      {% endfor %}
+    </div>
+    {% if booking.canceled_at %}
+      <div class="ua-price-line">Canceled on {{ booking.canceled_at.strftime('%B %-d, %Y') }} —
+        {% if booking.refund_amount %}refund of ${{ '%.2f'|format(booking.refund_amount) }} to {{ booking.refund_to }}{% else %}value saved as a future flight credit{% endif %}.</div>
+    {% endif %}
+  </div>
+
+  {% if booking.status == 'confirmed' %}
+  <div class="ua-action-grid">
+    <div class="ua-action">
+      <h3>Seats</h3>
+      <p>Pick or change seats for the first leg. Economy Plus seats have extra
+        legroom (from $29). Premier members get Economy Plus free.</p>
+      {% for leg in booking.legs %}
+        <a class="ua-btn ua-btn-ghost" href="{{ url_for('seat_selection', conf=booking.confirmation, leg_id=leg.id) }}">Choose seats ({{ leg.flight.origin_code }}–{{ leg.flight.dest_code }})</a>
+      {% endfor %}
+    </div>
+
+    {% if booking.cabin != 'BE' %}
+    <div class="ua-action">
+      <h3>Change flight</h3>
+      <p>Same-day changes on select United flights are offered at check-in for
+        $75. For other flights, change to another United flight on the same
+        route — you pay only the fare difference; there is no change fee on
+        standard United Economy and premium cabin tickets.</p>
+      {% for leg in booking.legs %}
+        <a class="ua-btn ua-btn-ghost" href="{{ url_for('change_flight', conf=booking.confirmation, leg_id=leg.id) }}">Change flight ({{ leg.flight.origin_code }}–{{ leg.flight.dest_code }})</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="ua-action">
+      <h3>Bags</h3>
+      <p>First checked bag ${{ '%d'|format(bag_table['first_online']) }} online
+        (${{ '%d'|format(bag_table['first_airport']) }} at the airport), second
+        ${{ '%d'|format(bag_table['second_online']) }} online
+        (${{ '%d'|format(bag_table['second_airport']) }} at the airport), extra bags
+        ${{ '%d'|format(bag_table['extra']) }}. Up to {{ free_bags }} free bag{{ '' if free_bags == 1 else 's' }}
+        with Premier status on this trip. Weight limit {{ weight_limit }} lb per bag.</p>
+      {% for pax in booking.passengers %}
+      <form method="post" class="ua-inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="add_bag">
+        <input type="hidden" name="passenger_id" value="{{ pax.id }}">
+        <input type="hidden" name="which" value="first">
+        <button class="ua-btn ua-btn-ghost" type="submit">Add a checked bag for {{ pax.first_name }}</button>
+      </form>
+      {% endfor %}
+      {% for pax in booking.passengers %}{% for bag in pax.bags %}
+        <div class="ua-bag-row">{{ pax.first_name }}: {{ bag.description }} — ${{ '%.0f'|format(bag.fee) }}</div>
+      {% endfor %}{% endfor %}
+    </div>
+
+    <div class="ua-action">
+      <h3>Change flight</h3>
+      <p>{% if booking.cabin == 'BE' %}Basic Economy tickets cannot be changed
+        — this is the lowest fare and is not changeable.{% else %}Change fees
+        are waived on this ticket: you only pay the fare difference.{% endif %}</p>
+      {% if booking.cabin != 'BE' %}
+      {% for leg in booking.legs %}
+      <form method="post" class="ua-inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="change_flight">
+        <input type="hidden" name="leg_id" value="{{ leg.id }}">
+        <button class="ua-btn ua-btn-ghost" type="submit">Change UA {{ leg.flight.flight_number }} ({{ leg.flight.origin_code }}–{{ leg.flight.dest_code }})</button>
+      </form>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="ua-action">
+      <h3>Cancel trip</h3>
+      <p>Standard Economy and premium tickets are refunded to the original
+        payment; Basic Economy keeps its value as a future flight credit.</p>
+      <a class="ua-btn ua-btn-danger" href="{{ url_for('cancel_booking', conf=booking.confirmation) }}">Cancel this trip</a>
+    </div>
+
+    <div class="ua-action">
+      <h3>Check in</h3>
+      <p>Online check-in opens 24 hours before departure.</p>
+      <a class="ua-btn ua-btn-primary" href="{{ url_for('checkin') }}">Check in for this trip</a>
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

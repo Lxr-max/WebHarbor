@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Flight Booking Confirmed | Trip.com{% endblock %}
+{% block content %}
+<div class="confirm-hero">
+  <div class="big">&#10003; Your flight booking is confirmed</div>
+  <p>Booking reference <b>{{ booking.ref }}</b> &middot; E-ticket sent to {{ booking.email }}</p>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h2>{{ route.origin_city }} &#8594; {{ route.dest_city }}{% if inbound %} &#8594; {{ route.origin_city }}{% endif %}</h2>
+    <div class="sum-row"><span>Passenger</span><span class="val">{{ booking.passenger_first }} {{ booking.passenger_last }}</span></div>
+    <div class="sum-row"><span>Cabin</span><span class="val">{{ booking.cabin }}</span></div>
+    <h3 style="margin-top:12px">Outbound · {{ booking.departure_date|dmy }}</h3>
+    <div class="sum-row"><span>{{ outbound.dep_time }} – {{ outbound.arr_time }}{% if outbound.plus1 %} (+1){% endif %}</span><span class="val">{{ outbound.airline }} {{ outbound.flight_no }}</span></div>
+    <div class="sum-row"><span>{{ route.origin_code }} &#8594; {{ route.dest_code }}</span><span class="val">{{ outbound.duration_label }}</span></div>
+    {% if inbound %}
+    <h3 style="margin-top:12px">Return · {{ booking.return_date|dmy }}</h3>
+    <div class="sum-row"><span>{{ inbound.dep_time }} – {{ inbound.arr_time }}{% if inbound.plus1 %} (+1){% endif %}</span><span class="val">{{ inbound.airline }} {{ inbound.flight_no }}</span></div>
+    <div class="sum-row"><span>{{ route.dest_code }} &#8594; {{ route.origin_code }}</span><span class="val">{{ inbound.duration_label }}</span></div>
+    {% endif %}
+    {% if booking.promo_code %}<div class="sum-row"><span>Promo code</span><span class="val">{{ booking.promo_code }}</span></div>{% endif %}
+    <div class="sum-row total"><span>Total paid</span><span class="val">${{ '%.2f'|format(booking.total) }}</span></div>
+  </div>
+  <div class="panel">
+    <h3>What happens next?</h3>
+    <p style="color:var(--ink-2);font-size:13px;margin-top:8px">
+      Your e-ticket and booking confirmation have been sent to {{ booking.email }}.
+      Check in online with your airline 24 hours before departure using reference
+      {{ booking.ref }}.
+    </p>
+    {% if current_user.is_authenticated %}
+    <a class="btn" href="{{ url_for('account_bookings') }}">View my bookings</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

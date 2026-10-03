@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Top Attorneys in {{ state.name }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('attorneys_home') }}">Browse attorneys</a> ›
+    <span>{{ state.name }}</span>
+  </nav>
+  <h1>Find Super Lawyers rated attorneys in {{ state.name }}</h1>
+
+  <h2>Cities in {{ state.name }}</h2>
+  <p>Select a city below to find Super Lawyers rated attorneys in your area.</p>
+  <div class="link-grid four-col">
+    {% for row in city_rows %}
+      <a href="/attorneys/{{ state.slug }}/{{ row.slug }}/">{{ row.name }}</a>
+    {% endfor %}
+  </div>
+
+  <h3>Looking for a top attorney in {{ state.name }}?</h3>
+  <p>Super Lawyers directory is a selected list of top attorneys who exhibit
+  excellence in the practice of law. You can browse attorney listings covering
+  the spectrum of legal practice, including personal injury, family law,
+  business litigation, and much more.</p>
+
+  <h3>Narrow your search easily</h3>
+  <p>Our attorney profiles supply the information you need to narrow your
+  search, including attorney biographies, education, training, websites, and
+  contact information. When you decide on attorneys to contact, simply use the
+  contact form on their profiles to connect with {{ state.name }} lawyers for
+  legal advice.</p>
+</div>
+{% endblock %}

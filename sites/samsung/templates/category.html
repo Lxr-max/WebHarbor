@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}{{ CATEGORY_LABELS[slug] if slug else 'Shop All' }}{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% if slug %}{{ CATEGORY_LABELS[slug] }}{% else %}Shop All Products{% endif %}</h1>
+  <p class="muted">{{ total }} product{{ 's' if total != 1 }} &middot; {{ products|length }} shown</p>
+</div>
+
+<div class="catalog-layout">
+  <aside class="facet-panel">
+    <h2>Filters</h2>
+    <form method="get" action="">
+      <input type="hidden" name="sort" value="{{ sort }}">
+      {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+      {% for key, label, values in facets %}
+      <fieldset class="facet-group">
+        <legend>{{ label }}</legend>
+        {% for value in values %}
+        <label class="facet-option">
+          <input type="checkbox" name="f_{{ key }}" value="{{ value }}" {{ 'checked' if active.get('f_' ~ key) == value }}>
+          <span>{{ value }}</span>
+        </label>
+        {% endfor %}
+      </fieldset>
+      {% endfor %}
+      <button type="submit" class="btn btn-small">Apply Filters</button>
+      <a class="btn btn-small btn-ghost" href="{{ request.path }}">Clear</a>
+    </form>
+  </aside>
+
+  <section class="catalog-main">
+    <div class="catalog-toolbar">
+      <form method="get" action="{{ request.path }}" class="catalog-search">
+        <input type="search" name="q" value="{{ q }}" placeholder="Search this catalog" aria-label="Search this catalog">
+        <button type="submit" class="btn btn-small">Search</button>
+      </form>
+      <form method="get" action="{{ request.path }}" class="catalog-sort">
+        {% for k, v in active.items() %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}">
+        {% endfor %}
+        {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+        <label for="sort">Sort by</label>
+        <select id="sort" name="sort" onchange="this.form.submit()">
+          <option value="recommended" {{ 'selected' if sort == 'recommended' }}>Recommended</option>
+          <option value="price-low" {{ 'selected' if sort == 'price-low' }}>Price: Low to High</option>
+          <option value="price-high" {{ 'selected' if sort == 'price-high' }}>Price: High to Low</option>
+          <option value="rating" {{ 'selected' if sort == 'rating' }}>Customer Rating</option>
+          <option value="name" {{ 'selected' if sort == 'name' }}>Name A-Z</option>
+        </select>
+        <noscript><button type="submit" class="btn btn-small">Sort</button></noscript>
+      </form>
+    </div>
+
+    {% if not products %}
+    <p class="empty">No products match your filters.</p>
+    {% endif %}
+    <div class="product-grid">
+      {% for p in products %}
+      <a class="product-card" href="/{{ p.category_slug }}/{{ p.slug }}/">
+        <div class="product-img">{% if p.image %}<img src="{{ url_for('static', filename='images/' ~ p.image) }}" alt="{{ p.name }}" loading="lazy">{% else %}<div class="img-fallback" role="img" aria-label="{{ p.name }}"><span>Image not available</span></div>{% endif %}</div>
+        <div class="product-body">
+          <p class="product-series">{{ p.family or p.series }}</p>
+          <p class="product-name">{{ p.name }}</p>
+          <ul class="product-keyfeatures">
+            {% for feature in p.feature_list[:3] %}
+            <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+          <p class="product-price">{% if p.price is not none %}{{ p.price|money }}{% if p.msrp and p.sale_price and p.msrp > p.sale_price %} <s>{{ p.msrp|money }}</s>{% endif %}{% else %}See details{% endif %}</p>
+          <p class="product-rating">{% if p.rating %}{{ p.rating|stars }} &starf; ({{ p.reviews }} reviews){% endif %}</p>
+          <p class="product-stock">{{ 'In stock' if p.in_stock else 'Out of stock' }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

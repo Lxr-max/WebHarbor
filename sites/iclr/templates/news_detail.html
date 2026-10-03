@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ n.title }}{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1 style="font-size:1.3rem">{{ n.title }}</h1>
+</div>
+<div class="card">
+  <p class="muted">{{ fmt_date(n.date) }}{% if n.author %} &middot; {{ n.author }}{% endif %}</p>
+  {% for para in n.body_list() %}
+    <p>{{ para }}</p>
+  {% endfor %}
+  <p class="small muted">Source: <a href="{{ n.upstream_url }}" rel="noopener">{{ n.upstream_url }}</a></p>
+</div>
+<p><a href="{{ url_for('news') }}">« All announcements</a></p>
+{% endblock %}

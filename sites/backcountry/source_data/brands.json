@@ -1,0 +1,7241 @@
+{
+ "brands": [
+  {
+   "slug": "patagonia",
+   "name": "Patagonia",
+   "title": "Patagonia - Jackets, Down Coats, Shoes, & More",
+   "description": "Shop Patagonia clothing, shoes, & outerwear at Backcountry. Find the latest gear for your next climbing, skiing, fly fishing, and running adventure.",
+   "upstream_total": 968,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 342,
+       "url": "/brand/patagonia/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 315,
+         "url": "/brand/patagonia/cat/hiking-clothing"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 26,
+         "url": "/brand/patagonia/cat/packs"
+        },
+        {
+         "name": "Hiking & Camping Essentials",
+         "value": "\"bc-hiking-camping-essentials\"",
+         "count": 1,
+         "url": "/brand/patagonia/cat/hiking-camping-essentials"
+        },
+        {
+         "name": "Hydration",
+         "value": "\"bc-hydration\"",
+         "count": 1,
+         "url": "/brand/patagonia/cat/hydration"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 151,
+       "url": "/brand/patagonia/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Clothing",
+         "value": "\"cat100214279\"",
+         "count": 133,
+         "url": "/brand/patagonia/cat/kids-clothing"
+        },
+        {
+         "name": "Boys' Clothing",
+         "value": "\"bc-boys-clothing\"",
+         "count": 56,
+         "url": "/brand/patagonia/cat/boys-clothing"
+        },
+        {
+         "name": "Infant Clothing",
+         "value": "\"bc-infant-clothing\"",
+         "count": 40,
+         "url": "/brand/patagonia/cat/infant-clothing"
+        },
+        {
+         "name": "Toddler Boys' Clothing",
+         "value": "\"bc-toddler-boys-clothing\"",
+         "count": 33,
+         "url": "/brand/patagonia/cat/toddler-boys-clothing"
+        },
+        {
+         "name": "Kids' Accessories",
+         "value": "\"bc-kids-accessories\"",
+         "count": 20,
+         "url": "/brand/patagonia/cat/kids-accessories"
+        },
+        {
+         "name": "Girls' Clothing",
+         "value": "\"bc-girls-clothing\"",
+         "count": 16,
+         "url": "/brand/patagonia/cat/girls-clothing"
+        },
+        {
+         "name": "Toddler Girls' Clothing",
+         "value": "\"bc-toddler-girls-clothing\"",
+         "count": 10,
+         "url": "/brand/patagonia/cat/toddler-girls-clothing"
+        },
+        {
+         "name": "Kids' Gear ",
+         "value": "\"bcCat202000001\"",
+         "count": 3,
+         "url": "/brand/patagonia/cat/kids-gear"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 131,
+       "url": "/brand/patagonia/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 122,
+         "url": "/brand/patagonia/cat/climbing-clothing-accessories"
+        },
+        {
+         "name": "Canyoneering",
+         "value": "\"bc-canyoneering\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/canyoneering"
+        },
+        {
+         "name": "Climbing Essentials",
+         "value": "\"bc-climbing-essentials\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/climbing-essentials"
+        },
+        {
+         "name": "Ice Climbing",
+         "value": "\"bc-ice-climbing\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/ice-climbing"
+        },
+        {
+         "name": "Mountaineering",
+         "value": "\"bc-mountaineering\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/mountaineering"
+        },
+        {
+         "name": "Sport Climbing",
+         "value": "\"bc-sport-climbing\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/sport-climbing"
+        },
+        {
+         "name": "Trad & Aid Climbing",
+         "value": "\"bc-trad-aid-climbing\"",
+         "count": 9,
+         "url": "/brand/patagonia/cat/trad-aid-climbing"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 313,
+       "url": "/brand/patagonia/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 115,
+         "url": "/brand/patagonia/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 65,
+         "url": "/brand/patagonia/cat/womens-tops"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 48,
+         "url": "/brand/patagonia/cat/womens-pants"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 46,
+         "url": "/brand/patagonia/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 21,
+         "url": "/brand/patagonia/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Baselayers",
+         "value": "\"bc-womens-baselayers\"",
+         "count": 19,
+         "url": "/brand/patagonia/cat/womens-baselayers"
+        },
+        {
+         "name": "Women's Swimwear",
+         "value": "\"bc-womens-swimwear\"",
+         "count": 17,
+         "url": "/brand/patagonia/cat/womens-swimwear"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 17,
+         "url": "/brand/patagonia/cat/womens-vests"
+        },
+        {
+         "name": "Women's Dresses & Skirts",
+         "value": "\"bc-womens-dresses-skirts\"",
+         "count": 11,
+         "url": "/brand/patagonia/cat/womens-dresses-skirts"
+        },
+        {
+         "name": "Women's Underwear & Sleepwear",
+         "value": "\"bc-womens-underwear-sleepwear\"",
+         "count": 5,
+         "url": "/brand/patagonia/cat/womens-underwear-sleepwear"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 111,
+       "url": "/brand/patagonia/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 109,
+         "url": "/brand/patagonia/cat/ski-clothing"
+        },
+        {
+         "name": "Alpine Touring",
+         "value": "\"bc-alpine-touring\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/alpine-touring"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/avalanche-safety"
+        },
+        {
+         "name": "Ski Essentials",
+         "value": "\"bc-ski-essentials\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/ski-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 337,
+       "url": "/brand/patagonia/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 102,
+         "url": "/brand/patagonia/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 89,
+         "url": "/brand/patagonia/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 44,
+         "url": "/brand/patagonia/cat/mens-pants"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 42,
+         "url": "/brand/patagonia/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 31,
+         "url": "/brand/patagonia/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 26,
+         "url": "/brand/patagonia/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Swimwear",
+         "value": "\"bc-mens-swimwear\"",
+         "count": 20,
+         "url": "/brand/patagonia/cat/mens-swimwear"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 16,
+         "url": "/brand/patagonia/cat/mens-vests"
+        },
+        {
+         "name": "Men's Baselayers",
+         "value": "\"bc-mens-baselayers\"",
+         "count": 14,
+         "url": "/brand/patagonia/cat/mens-baselayers"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 96,
+       "url": "/brand/patagonia/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 94,
+         "url": "/brand/patagonia/cat/snowboard-clothing"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/avalanche-safety"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 90,
+       "url": "/brand/patagonia/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 90,
+         "url": "/brand/patagonia/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 60,
+       "url": "/brand/patagonia/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 60,
+         "url": "/brand/patagonia/cat/running-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Surf",
+       "value": "\"bc-surf\"",
+       "count": 48,
+       "url": "/brand/patagonia/cat/surf",
+       "children": [
+        {
+         "name": "Swimwear",
+         "value": "\"bc-swimwear\"",
+         "count": 47,
+         "url": "/brand/patagonia/cat/swimwear"
+        },
+        {
+         "name": "Wetsuits",
+         "value": "\"bc-wetsuits\"",
+         "count": 20,
+         "url": "/brand/patagonia/cat/wetsuits"
+        }
+       ]
+      },
+      {
+       "name": "Fishing",
+       "value": "\"cat100216354\"",
+       "count": 32,
+       "url": "/brand/patagonia/cat/fishing",
+       "children": [
+        {
+         "name": "Fly Fishing",
+         "value": "\"bc-fly-fishing\"",
+         "count": 32,
+         "url": "/brand/patagonia/cat/fly-fishing"
+        },
+        {
+         "name": "Wading",
+         "value": "\"bc-wading\"",
+         "count": 15,
+         "url": "/brand/patagonia/cat/wading"
+        },
+        {
+         "name": "Fly Fishing Clothing & Accessories",
+         "value": "\"bc-flyfshngclthngccssrs\"",
+         "count": 14,
+         "url": "/brand/patagonia/cat/fly-fishing-clothing-accessories"
+        },
+        {
+         "name": "Fly Fishing Storage & Transport",
+         "value": "\"bc-fly-fishing-storage-transport\"",
+         "count": 12,
+         "url": "/brand/patagonia/cat/fly-fishing-storage-transport"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 84,
+       "url": "/brand/patagonia/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 28,
+         "url": "/brand/patagonia/cat/mens-hats"
+        },
+        {
+         "name": "Packs & Wallets",
+         "value": "\"bc-packs-wallets\"",
+         "count": 24,
+         "url": "/brand/patagonia/cat/packs-wallets"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 14,
+         "url": "/brand/patagonia/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 7,
+         "url": "/brand/patagonia/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 4,
+         "url": "/brand/patagonia/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Belts",
+         "value": "\"bc-mens-belts\"",
+         "count": 3,
+         "url": "/brand/patagonia/cat/mens-belts"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 76,
+       "url": "/brand/patagonia/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 28,
+         "url": "/brand/patagonia/cat/womens-hats"
+        },
+        {
+         "name": "Handbags, Packs & Wallets",
+         "value": "\"bc-handbags-packs-wallets\"",
+         "count": 19,
+         "url": "/brand/patagonia/cat/handbags-packs-wallets"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 13,
+         "url": "/brand/patagonia/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 6,
+         "url": "/brand/patagonia/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 4,
+         "url": "/brand/patagonia/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Headbands",
+         "value": "\"bc-womens-headbands\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/womens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Bike",
+       "value": "\"bc-bike\"",
+       "count": 26,
+       "url": "/brand/patagonia/cat/bike",
+       "children": [
+        {
+         "name": "Bike Apparel & Accessories",
+         "value": "\"bc-bike-apparel-accessories\"",
+         "count": 26,
+         "url": "/brand/patagonia/cat/bike-apparel-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Fly Fishing",
+       "value": "\"bc-fly-fishing\"",
+       "count": 32,
+       "url": "/brand/patagonia/cat/fly-fishing",
+       "children": [
+        {
+         "name": "Wading",
+         "value": "\"bc-wading\"",
+         "count": 15,
+         "url": "/brand/patagonia/cat/wading"
+        },
+        {
+         "name": "Fly Fishing Clothing & Accessories",
+         "value": "\"bc-flyfshngclthngccssrs\"",
+         "count": 14,
+         "url": "/brand/patagonia/cat/fly-fishing-clothing-accessories"
+        },
+        {
+         "name": "Fly Fishing Storage & Transport",
+         "value": "\"bc-fly-fishing-storage-transport\"",
+         "count": 12,
+         "url": "/brand/patagonia/cat/fly-fishing-storage-transport"
+        },
+        {
+         "name": "Fly Fishing Essentials",
+         "value": "\"bc-fly-fishing-essentials\"",
+         "count": 1,
+         "url": "/brand/patagonia/cat/fly-fishing-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Paddle",
+       "value": "\"bc-paddle\"",
+       "count": 14,
+       "url": "/brand/patagonia/cat/paddle",
+       "children": [
+        {
+         "name": "Paddling Clothing",
+         "value": "\"bc-paddling-clothing\"",
+         "count": 14,
+         "url": "/brand/patagonia/cat/paddling-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 26,
+       "url": "/brand/patagonia/cat/travel",
+       "children": [
+        {
+         "name": "Everyday Packs",
+         "value": "\"bc-everyday-packs\"",
+         "count": 11,
+         "url": "/brand/patagonia/cat/everyday-packs"
+        },
+        {
+         "name": "Carry-Ons",
+         "value": "\"bc-carry-ons\"",
+         "count": 4,
+         "url": "/brand/patagonia/cat/carry-ons"
+        },
+        {
+         "name": "Duffel Bags",
+         "value": "\"bc-duffel-bags\"",
+         "count": 4,
+         "url": "/brand/patagonia/cat/duffel-bags"
+        },
+        {
+         "name": "Travel Essentials",
+         "value": "\"bc-travel-essentials\"",
+         "count": 3,
+         "url": "/brand/patagonia/cat/travel-essentials"
+        },
+        {
+         "name": "Rolling Bags",
+         "value": "\"bc-rolling-bags\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/rolling-bags"
+        },
+        {
+         "name": "Travel Packs",
+         "value": "\"bc-travel-packs\"",
+         "count": 2,
+         "url": "/brand/patagonia/cat/travel-packs"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 10,
+       "url": "/brand/patagonia/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 10,
+         "url": "/brand/patagonia/cat/yoga-clothing"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 325,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 495,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 483,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 485,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 477,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 271,
+       "url": null
+      },
+      {
+       "name": "3XL",
+       "value": "\"3XL\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "0M",
+       "value": "\"0M\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "3M",
+       "value": "\"3M\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "6M",
+       "value": "\"6M\"",
+       "count": 38,
+       "url": null
+      },
+      {
+       "name": "12M",
+       "value": "\"12M\"",
+       "count": 37,
+       "url": null
+      },
+      {
+       "name": "18M",
+       "value": "\"18M\"",
+       "count": 33,
+       "url": null
+      },
+      {
+       "name": "24M",
+       "value": "\"24M\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "2T",
+       "value": "\"2T\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "3T",
+       "value": "\"3T\"",
+       "count": 35,
+       "url": null
+      },
+      {
+       "name": "4T",
+       "value": "\"4T\"",
+       "count": 32,
+       "url": null
+      },
+      {
+       "name": "5T",
+       "value": "\"5T\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "0",
+       "value": "\"0\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "2",
+       "value": "\"2\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "3",
+       "value": "\"3\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 89,
+       "url": null
+      },
+      {
+       "name": "4.0",
+       "value": "\"4.0\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "6.0",
+       "value": "\"6.0\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 63,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 89,
+       "url": null
+      },
+      {
+       "name": "10",
+       "value": "\"10\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "10.0",
+       "value": "\"10.0\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 57,
+       "url": null
+      },
+      {
+       "name": "12",
+       "value": "\"12\"",
+       "count": 26,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 74,
+       "url": null
+      },
+      {
+       "name": "15",
+       "value": "\"15\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "16",
+       "value": "\"16\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "18",
+       "value": "\"18\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "27",
+       "value": "\"27\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 56,
+       "url": null
+      },
+      {
+       "name": "29",
+       "value": "\"29\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "30",
+       "value": "\"30\"",
+       "count": 37,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 80,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 38,
+       "url": null
+      },
+      {
+       "name": "33",
+       "value": "\"33\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "34",
+       "value": "\"34\"",
+       "count": 32,
+       "url": null
+      },
+      {
+       "name": "35",
+       "value": "\"35\"",
+       "count": 27,
+       "url": null
+      },
+      {
+       "name": "36",
+       "value": "\"36\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "38",
+       "value": "\"38\"",
+       "count": 33,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 69,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 44,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 537,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 505,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 471,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 258,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 228,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 223,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 136,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 96,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 70,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 54,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 49,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 41,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 360,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 322,
+       "url": null
+      },
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 286,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 968,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 279,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 279,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 263,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 162,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 308,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 252,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 187,
+       "url": null
+      },
+      {
+       "name": "Zip Closure",
+       "value": "\"Zip Closure\"",
+       "count": 115,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 95,
+       "url": null
+      },
+      {
+       "name": "Anti Odor",
+       "value": "\"Anti Odor\"",
+       "count": 85,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 68,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 67,
+       "url": null
+      },
+      {
+       "name": "Dry Treated",
+       "value": "\"Dry Treated\"",
+       "count": 61,
+       "url": null
+      },
+      {
+       "name": "Insulated",
+       "value": "\"Insulated\"",
+       "count": 58,
+       "url": null
+      },
+      {
+       "name": "Sun Protection",
+       "value": "\"Sun Protection\"",
+       "count": 53,
+       "url": null
+      },
+      {
+       "name": "Stretch Fabric",
+       "value": "\"Stretch Fabric\"",
+       "count": 49,
+       "url": null
+      },
+      {
+       "name": "Recco",
+       "value": "\"Recco\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "Windproof",
+       "value": "\"Windproof\"",
+       "count": 33,
+       "url": null
+      },
+      {
+       "name": "Thumbholes",
+       "value": "\"Thumbholes\"",
+       "count": 31,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "PATZBD3",
+    "PATZBDL",
+    "PATZBCR",
+    "PATZBAV",
+    "PATZAPA",
+    "PATZBAZ",
+    "PATZBBU",
+    "PATZBCS",
+    "PATZBEW",
+    "PATZBD2"
+   ]
+  },
+  {
+   "slug": "the-north-face",
+   "name": "The North Face",
+   "title": "The North Face - Outdoor Apparel & Gear",
+   "description": "Shop the latest The North Face jackets, coats, clothing & gear at Backcountry.com. Check out popular lines such as the Osito, Denali, Venture, and more.",
+   "upstream_total": 1080,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 485,
+       "url": "/brand/the-north-face/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 355,
+         "url": "/brand/the-north-face/cat/hiking-clothing"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 57,
+         "url": "/brand/the-north-face/cat/packs"
+        },
+        {
+         "name": "Hiking Footwear",
+         "value": "\"bc-hiking-footwear\"",
+         "count": 28,
+         "url": "/brand/the-north-face/cat/hiking-footwear"
+        },
+        {
+         "name": "Sleeping",
+         "value": "\"bc-sleeping\"",
+         "count": 22,
+         "url": "/brand/the-north-face/cat/sleeping"
+        },
+        {
+         "name": "Tents & Shelters",
+         "value": "\"bc-tents-shelters\"",
+         "count": 22,
+         "url": "/brand/the-north-face/cat/tents-shelters"
+        },
+        {
+         "name": "Hydration",
+         "value": "\"bc-hydration\"",
+         "count": 3,
+         "url": "/brand/the-north-face/cat/hydration"
+        },
+        {
+         "name": "Camp Furniture",
+         "value": "\"bc-camp-furniture\"",
+         "count": 1,
+         "url": "/brand/the-north-face/cat/camp-furniture"
+        },
+        {
+         "name": "Camp Kitchen",
+         "value": "\"bc-camp-kitchen\"",
+         "count": 1,
+         "url": "/brand/the-north-face/cat/camp-kitchen"
+        },
+        {
+         "name": "Hiking & Camping Essentials",
+         "value": "\"bc-hiking-camping-essentials\"",
+         "count": 1,
+         "url": "/brand/the-north-face/cat/hiking-camping-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 134,
+       "url": "/brand/the-north-face/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 130,
+         "url": "/brand/the-north-face/cat/ski-clothing"
+        },
+        {
+         "name": "Ski Essentials",
+         "value": "\"bc-ski-essentials\"",
+         "count": 4,
+         "url": "/brand/the-north-face/cat/ski-essentials"
+        },
+        {
+         "name": "Alpine Touring",
+         "value": "\"bc-alpine-touring\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/alpine-touring"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/avalanche-safety"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 287,
+       "url": "/brand/the-north-face/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 128,
+         "url": "/brand/the-north-face/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 74,
+         "url": "/brand/the-north-face/cat/womens-tops"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 52,
+         "url": "/brand/the-north-face/cat/womens-pants"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 46,
+         "url": "/brand/the-north-face/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 12,
+         "url": "/brand/the-north-face/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 10,
+         "url": "/brand/the-north-face/cat/womens-vests"
+        },
+        {
+         "name": "Women's Baselayers",
+         "value": "\"bc-womens-baselayers\"",
+         "count": 5,
+         "url": "/brand/the-north-face/cat/womens-baselayers"
+        },
+        {
+         "name": "Women's Dresses & Skirts",
+         "value": "\"bc-womens-dresses-skirts\"",
+         "count": 5,
+         "url": "/brand/the-north-face/cat/womens-dresses-skirts"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 333,
+       "url": "/brand/the-north-face/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 127,
+         "url": "/brand/the-north-face/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 64,
+         "url": "/brand/the-north-face/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 59,
+         "url": "/brand/the-north-face/cat/mens-pants"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 45,
+         "url": "/brand/the-north-face/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 25,
+         "url": "/brand/the-north-face/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 17,
+         "url": "/brand/the-north-face/cat/mens-vests"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Baselayers",
+         "value": "\"bc-mens-baselayers\"",
+         "count": 10,
+         "url": "/brand/the-north-face/cat/mens-baselayers"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 155,
+       "url": "/brand/the-north-face/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Clothing",
+         "value": "\"cat100214279\"",
+         "count": 125,
+         "url": "/brand/the-north-face/cat/kids-clothing"
+        },
+        {
+         "name": "Boys' Clothing",
+         "value": "\"bc-boys-clothing\"",
+         "count": 54,
+         "url": "/brand/the-north-face/cat/boys-clothing"
+        },
+        {
+         "name": "Girls' Clothing",
+         "value": "\"bc-girls-clothing\"",
+         "count": 32,
+         "url": "/brand/the-north-face/cat/girls-clothing"
+        },
+        {
+         "name": "Infant Clothing",
+         "value": "\"bc-infant-clothing\"",
+         "count": 20,
+         "url": "/brand/the-north-face/cat/infant-clothing"
+        },
+        {
+         "name": "Toddler Boys' Clothing",
+         "value": "\"bc-toddler-boys-clothing\"",
+         "count": 19,
+         "url": "/brand/the-north-face/cat/toddler-boys-clothing"
+        },
+        {
+         "name": "Kids' Accessories",
+         "value": "\"bc-kids-accessories\"",
+         "count": 16,
+         "url": "/brand/the-north-face/cat/kids-accessories"
+        },
+        {
+         "name": "Kids' Footwear",
+         "value": "\"cat100214260\"",
+         "count": 14,
+         "url": "/brand/the-north-face/cat/kids-footwear"
+        },
+        {
+         "name": "Boys' Footwear",
+         "value": "\"bc-boys-footwear\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/boys-footwear"
+        },
+        {
+         "name": "Girls' Footwear",
+         "value": "\"bc-girls-footwear\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/girls-footwear"
+        },
+        {
+         "name": "Toddler Girls' Clothing",
+         "value": "\"bc-toddler-girls-clothing\"",
+         "count": 6,
+         "url": "/brand/the-north-face/cat/toddler-girls-clothing"
+        },
+        {
+         "name": "Kids' Gear ",
+         "value": "\"bcCat202000001\"",
+         "count": 4,
+         "url": "/brand/the-north-face/cat/kids-gear"
+        },
+        {
+         "name": "Toddler Girls' Footwear",
+         "value": "\"bc-toddler-girls-footwear\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/toddler-girls-footwear"
+        },
+        {
+         "name": "Toddler Boys' Footwear",
+         "value": "\"bc-toddler-boys-footwear\"",
+         "count": 1,
+         "url": "/brand/the-north-face/cat/toddler-boys-footwear"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 99,
+       "url": "/brand/the-north-face/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 96,
+         "url": "/brand/the-north-face/cat/snowboard-clothing"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/avalanche-safety"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 98,
+       "url": "/brand/the-north-face/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 78,
+         "url": "/brand/the-north-face/cat/running-clothing-accessories"
+        },
+        {
+         "name": "Running Shoes",
+         "value": "\"bc-running-shoes\"",
+         "count": 17,
+         "url": "/brand/the-north-face/cat/running-shoes"
+        },
+        {
+         "name": "Running Hydration",
+         "value": "\"bc-running-hydration\"",
+         "count": 3,
+         "url": "/brand/the-north-face/cat/running-hydration"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 71,
+       "url": "/brand/the-north-face/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 71,
+         "url": "/brand/the-north-face/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 84,
+       "url": "/brand/the-north-face/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 68,
+         "url": "/brand/the-north-face/cat/climbing-clothing-accessories"
+        },
+        {
+         "name": "Canyoneering",
+         "value": "\"bc-canyoneering\"",
+         "count": 16,
+         "url": "/brand/the-north-face/cat/canyoneering"
+        },
+        {
+         "name": "Sport Climbing",
+         "value": "\"bc-sport-climbing\"",
+         "count": 16,
+         "url": "/brand/the-north-face/cat/sport-climbing"
+        },
+        {
+         "name": "Trad & Aid Climbing",
+         "value": "\"bc-trad-aid-climbing\"",
+         "count": 16,
+         "url": "/brand/the-north-face/cat/trad-aid-climbing"
+        },
+        {
+         "name": "Ice Climbing",
+         "value": "\"bc-ice-climbing\"",
+         "count": 14,
+         "url": "/brand/the-north-face/cat/ice-climbing"
+        },
+        {
+         "name": "Climbing Essentials",
+         "value": "\"bc-climbing-essentials\"",
+         "count": 13,
+         "url": "/brand/the-north-face/cat/climbing-essentials"
+        },
+        {
+         "name": "Mountaineering",
+         "value": "\"bc-mountaineering\"",
+         "count": 13,
+         "url": "/brand/the-north-face/cat/mountaineering"
+        },
+        {
+         "name": "Bouldering",
+         "value": "\"bc-bouldering\"",
+         "count": 3,
+         "url": "/brand/the-north-face/cat/bouldering"
+        },
+        {
+         "name": "Climbing Footwear",
+         "value": "\"bc-climbing-footwear\"",
+         "count": 3,
+         "url": "/brand/the-north-face/cat/climbing-footwear"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 118,
+       "url": "/brand/the-north-face/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Handbags, Packs & Wallets",
+         "value": "\"bc-handbags-packs-wallets\"",
+         "count": 55,
+         "url": "/brand/the-north-face/cat/handbags-packs-wallets"
+        },
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 24,
+         "url": "/brand/the-north-face/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 21,
+         "url": "/brand/the-north-face/cat/womens-hats"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 4,
+         "url": "/brand/the-north-face/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Socks",
+         "value": "\"bc-womens-socks\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/womens-socks"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 103,
+       "url": "/brand/the-north-face/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Packs & Wallets",
+         "value": "\"bc-packs-wallets\"",
+         "count": 41,
+         "url": "/brand/the-north-face/cat/packs-wallets"
+        },
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 25,
+         "url": "/brand/the-north-face/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 21,
+         "url": "/brand/the-north-face/cat/mens-hats"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 9,
+         "url": "/brand/the-north-face/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 4,
+         "url": "/brand/the-north-face/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Socks",
+         "value": "\"bc-mens-socks\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/mens-socks"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 56,
+       "url": "/brand/the-north-face/cat/travel",
+       "children": [
+        {
+         "name": "Everyday Packs",
+         "value": "\"bc-everyday-packs\"",
+         "count": 30,
+         "url": "/brand/the-north-face/cat/everyday-packs"
+        },
+        {
+         "name": "Duffel Bags",
+         "value": "\"bc-duffel-bags\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/duffel-bags"
+        },
+        {
+         "name": "Rolling Bags",
+         "value": "\"bc-rolling-bags\"",
+         "count": 6,
+         "url": "/brand/the-north-face/cat/rolling-bags"
+        },
+        {
+         "name": "Travel Essentials",
+         "value": "\"bc-travel-essentials\"",
+         "count": 6,
+         "url": "/brand/the-north-face/cat/travel-essentials"
+        },
+        {
+         "name": "Carry-Ons",
+         "value": "\"bc-carry-ons\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/carry-ons"
+        },
+        {
+         "name": "Gear Transport",
+         "value": "\"bc-gear-transport\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/gear-transport"
+        }
+       ]
+      },
+      {
+       "name": "Overlanding",
+       "value": "\"cat100215550\"",
+       "count": 26,
+       "url": "/brand/the-north-face/cat/overlanding",
+       "children": [
+        {
+         "name": "Sleeping",
+         "value": "\"bc-sleeping\"",
+         "count": 22,
+         "url": "/brand/the-north-face/cat/sleeping"
+        },
+        {
+         "name": "Tarps, Shelters & Screen Rooms",
+         "value": "\"bc-tarps-shelters-screen-rooms\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/tarps-shelters-screen-rooms"
+        }
+       ]
+      },
+      {
+       "name": "Men's Footwear",
+       "value": "\"bc-mens-footwear\"",
+       "count": 53,
+       "url": "/brand/the-north-face/cat/mens-footwear",
+       "children": [
+        {
+         "name": "Men's Winter Boots & Shoes",
+         "value": "\"bc-mens-winter-boots-shoes\"",
+         "count": 17,
+         "url": "/brand/the-north-face/cat/mens-winter-boots-shoes"
+        },
+        {
+         "name": "Men's Hiking & Backpacking Boots & Shoes",
+         "value": "\"bc-mnshkngbckpckngbtsshs\"",
+         "count": 13,
+         "url": "/brand/the-north-face/cat/mens-hiking-backpacking-boots-shoes"
+        },
+        {
+         "name": "Men's Casual Boots & Shoes",
+         "value": "\"bc-mens-casual-boots-shoes\"",
+         "count": 9,
+         "url": "/brand/the-north-face/cat/mens-casual-boots-shoes"
+        },
+        {
+         "name": "Men's Running Shoes",
+         "value": "\"bc-mens-running-shoes\"",
+         "count": 9,
+         "url": "/brand/the-north-face/cat/mens-running-shoes"
+        },
+        {
+         "name": "Men's Approach Shoes",
+         "value": "\"bc-mens-approach-shoes\"",
+         "count": 3,
+         "url": "/brand/the-north-face/cat/mens-approach-shoes"
+        },
+        {
+         "name": "Men's Sandals",
+         "value": "\"bc-mens-sandals\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/mens-sandals"
+        }
+       ]
+      },
+      {
+       "name": "Women's Footwear",
+       "value": "\"bc-womens-footwear\"",
+       "count": 33,
+       "url": "/brand/the-north-face/cat/womens-footwear",
+       "children": [
+        {
+         "name": "Women's Winter Boots & Shoes",
+         "value": "\"bc-womens-winter-boots-shoes\"",
+         "count": 11,
+         "url": "/brand/the-north-face/cat/womens-winter-boots-shoes"
+        },
+        {
+         "name": "Women's Hiking & Backpacking Boots & Shoes",
+         "value": "\"bc-wmnshkngbckpckngbtsshs\"",
+         "count": 8,
+         "url": "/brand/the-north-face/cat/womens-hiking-backpacking-boots-shoes"
+        },
+        {
+         "name": "Women's Running Shoes",
+         "value": "\"bc-womens-running-shoes\"",
+         "count": 8,
+         "url": "/brand/the-north-face/cat/womens-running-shoes"
+        },
+        {
+         "name": "Women's Casual Boots & Shoes",
+         "value": "\"bc-womens-casual-boots-shoes\"",
+         "count": 4,
+         "url": "/brand/the-north-face/cat/womens-casual-boots-shoes"
+        },
+        {
+         "name": "Women's Sandals",
+         "value": "\"bc-womens-sandals\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/womens-sandals"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 7,
+       "url": "/brand/the-north-face/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 7,
+         "url": "/brand/the-north-face/cat/yoga-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Bike",
+       "value": "\"bc-bike\"",
+       "count": 2,
+       "url": "/brand/the-north-face/cat/bike",
+       "children": [
+        {
+         "name": "Bike Apparel & Accessories",
+         "value": "\"bc-bike-apparel-accessories\"",
+         "count": 2,
+         "url": "/brand/the-north-face/cat/bike-apparel-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Fly Fishing",
+       "value": "\"bc-fly-fishing\"",
+       "count": 1,
+       "url": "/brand/the-north-face/cat/fly-fishing",
+       "children": [
+        {
+         "name": "Fly Fishing Essentials",
+         "value": "\"bc-fly-fishing-essentials\"",
+         "count": 1,
+         "url": "/brand/the-north-face/cat/fly-fishing-essentials"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 281,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 487,
+       "url": null
+      },
+      {
+       "name": "S/M",
+       "value": "\"S/M\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 459,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 462,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 456,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 344,
+       "url": null
+      },
+      {
+       "name": "3XL",
+       "value": "\"3XL\"",
+       "count": 45,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "3M",
+       "value": "\"3M\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "6M",
+       "value": "\"6M\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "12M",
+       "value": "\"12M\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "18M",
+       "value": "\"18M\"",
+       "count": 14,
+       "url": null
+      },
+      {
+       "name": "24M",
+       "value": "\"24M\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "2T",
+       "value": "\"2T\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "3T",
+       "value": "\"3T\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "4T",
+       "value": "\"4T\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "5T",
+       "value": "\"5T\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "6T",
+       "value": "\"6T\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "7T",
+       "value": "\"7T\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "0",
+       "value": "\"0\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "2",
+       "value": "\"2\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "3",
+       "value": "\"3\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 49,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "9",
+       "value": "\"9\"",
+       "count": 40,
+       "url": null
+      },
+      {
+       "name": "10",
+       "value": "\"10\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 51,
+       "url": null
+      },
+      {
+       "name": "12",
+       "value": "\"12\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 53,
+       "url": null
+      },
+      {
+       "name": "15",
+       "value": "\"15\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "17",
+       "value": "\"17\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "20",
+       "value": "\"20\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "25",
+       "value": "\"25\"",
+       "count": 14,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "30",
+       "value": "\"30\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 62,
+       "url": null
+      },
+      {
+       "name": "33",
+       "value": "\"33\"",
+       "count": 21,
+       "url": null
+      },
+      {
+       "name": "34",
+       "value": "\"34\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "35",
+       "value": "\"35\"",
+       "count": 46,
+       "url": null
+      },
+      {
+       "name": "36",
+       "value": "\"36\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "37",
+       "value": "\"37\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "38",
+       "value": "\"38\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 51,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 49,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 754,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 314,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 267,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 263,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 179,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 153,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 107,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 105,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 90,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 84,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 34,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 398,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 381,
+       "url": null
+      },
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 301,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 1080,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 562,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 562,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 543,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 221,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 433,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 208,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 167,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 116,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 106,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 41,
+       "url": null
+      },
+      {
+       "name": "Ankle Gaiters",
+       "value": "\"Ankle Gaiters\"",
+       "count": 41,
+       "url": null
+      },
+      {
+       "name": "Sun Protection",
+       "value": "\"Sun Protection\"",
+       "count": 35,
+       "url": null
+      },
+      {
+       "name": "Palm Grip",
+       "value": "\"Palm Grip\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "Windproof",
+       "value": "\"Windproof\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "Thumbholes",
+       "value": "\"Thumbholes\"",
+       "count": 32,
+       "url": null
+      },
+      {
+       "name": "Laptop Sleeve",
+       "value": "\"Laptop Sleeve\"",
+       "count": 31,
+       "url": null
+      },
+      {
+       "name": "Anti Odor",
+       "value": "\"Anti Odor\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "Stretch Fabric",
+       "value": "\"Stretch Fabric\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "Powder Skirt",
+       "value": "\"Powder Skirt\"",
+       "count": 27,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "TNFZ9KK",
+    "TNFZD3C",
+    "TNFZEFF",
+    "TNFZEFG",
+    "TNFZDPC",
+    "TNFZE9C",
+    "TNF060C",
+    "TNFZBGX",
+    "TNF02YM",
+    "TNFZD3A"
+   ]
+  },
+  {
+   "slug": "outdoor-research",
+   "name": "Outdoor Research",
+   "title": "Outdoor Research - Jackets, Gloves, Pants",
+   "description": "Find a wide range of Outdoor Research clothing, including jackets, pants, shirts, tents and more at Backcountry.com",
+   "upstream_total": 542,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 242,
+       "url": "/brand/outdoor-research/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 235,
+         "url": "/brand/outdoor-research/cat/hiking-clothing"
+        },
+        {
+         "name": "Tents & Shelters",
+         "value": "\"bc-tents-shelters\"",
+         "count": 4,
+         "url": "/brand/outdoor-research/cat/tents-shelters"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/packs"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 144,
+       "url": "/brand/outdoor-research/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 144,
+         "url": "/brand/outdoor-research/cat/ski-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 120,
+       "url": "/brand/outdoor-research/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 120,
+         "url": "/brand/outdoor-research/cat/snowboard-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 83,
+       "url": "/brand/outdoor-research/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 83,
+         "url": "/brand/outdoor-research/cat/climbing-clothing-accessories"
+        },
+        {
+         "name": "Ice Climbing",
+         "value": "\"bc-ice-climbing\"",
+         "count": 5,
+         "url": "/brand/outdoor-research/cat/ice-climbing"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 176,
+       "url": "/brand/outdoor-research/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 70,
+         "url": "/brand/outdoor-research/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 41,
+         "url": "/brand/outdoor-research/cat/mens-hats"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 30,
+         "url": "/brand/outdoor-research/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Gaiters",
+         "value": "\"bc-mens-gaiters\"",
+         "count": 16,
+         "url": "/brand/outdoor-research/cat/mens-gaiters"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 13,
+         "url": "/brand/outdoor-research/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Headbands",
+         "value": "\"bc-mens-headbands\"",
+         "count": 4,
+         "url": "/brand/outdoor-research/cat/mens-headbands"
+        },
+        {
+         "name": "Packs & Wallets",
+         "value": "\"bc-packs-wallets\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/packs-wallets"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 153,
+       "url": "/brand/outdoor-research/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 70,
+         "url": "/brand/outdoor-research/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 38,
+         "url": "/brand/outdoor-research/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 37,
+         "url": "/brand/outdoor-research/cat/womens-pants"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 27,
+         "url": "/brand/outdoor-research/cat/womens-tops"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 13,
+         "url": "/brand/outdoor-research/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Baselayers",
+         "value": "\"bc-womens-baselayers\"",
+         "count": 4,
+         "url": "/brand/outdoor-research/cat/womens-baselayers"
+        },
+        {
+         "name": "Women's Dresses & Skirts",
+         "value": "\"bc-womens-dresses-skirts\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/womens-dresses-skirts"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/womens-vests"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 63,
+       "url": "/brand/outdoor-research/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 63,
+         "url": "/brand/outdoor-research/cat/running-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 170,
+       "url": "/brand/outdoor-research/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 61,
+         "url": "/brand/outdoor-research/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 44,
+         "url": "/brand/outdoor-research/cat/womens-hats"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 30,
+         "url": "/brand/outdoor-research/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Gaiters",
+         "value": "\"bc-womens-gaiters\"",
+         "count": 16,
+         "url": "/brand/outdoor-research/cat/womens-gaiters"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 13,
+         "url": "/brand/outdoor-research/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Headbands",
+         "value": "\"bc-womens-headbands\"",
+         "count": 4,
+         "url": "/brand/outdoor-research/cat/womens-headbands"
+        },
+        {
+         "name": "Handbags, Packs & Wallets",
+         "value": "\"bc-handbags-packs-wallets\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/handbags-packs-wallets"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 53,
+       "url": "/brand/outdoor-research/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 53,
+         "url": "/brand/outdoor-research/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 127,
+       "url": "/brand/outdoor-research/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 52,
+         "url": "/brand/outdoor-research/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 29,
+         "url": "/brand/outdoor-research/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 28,
+         "url": "/brand/outdoor-research/cat/mens-pants"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 12,
+         "url": "/brand/outdoor-research/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 8,
+         "url": "/brand/outdoor-research/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Baselayers",
+         "value": "\"bc-mens-baselayers\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/mens-baselayers"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/mens-vests"
+        },
+        {
+         "name": "Men's Swimwear",
+         "value": "\"bc-mens-swimwear\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/mens-swimwear"
+        },
+        {
+         "name": "Men's Underwear & Sleepwear",
+         "value": "\"bc-mens-underwear-sleepwear\"",
+         "count": 1,
+         "url": "/brand/outdoor-research/cat/mens-underwear-sleepwear"
+        }
+       ]
+      },
+      {
+       "name": "Bike",
+       "value": "\"bc-bike\"",
+       "count": 28,
+       "url": "/brand/outdoor-research/cat/bike",
+       "children": [
+        {
+         "name": "Bike Apparel & Accessories",
+         "value": "\"bc-bike-apparel-accessories\"",
+         "count": 28,
+         "url": "/brand/outdoor-research/cat/bike-apparel-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 9,
+       "url": "/brand/outdoor-research/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 9,
+         "url": "/brand/outdoor-research/cat/yoga-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 8,
+       "url": "/brand/outdoor-research/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Accessories",
+         "value": "\"bc-kids-accessories\"",
+         "count": 8,
+         "url": "/brand/outdoor-research/cat/kids-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Women's Footwear",
+       "value": "\"bc-womens-footwear\"",
+       "count": 4,
+       "url": "/brand/outdoor-research/cat/womens-footwear",
+       "children": [
+        {
+         "name": "Women's Winter Boots & Shoes",
+         "value": "\"bc-womens-winter-boots-shoes\"",
+         "count": 4,
+         "url": "/brand/outdoor-research/cat/womens-winter-boots-shoes"
+        }
+       ]
+      },
+      {
+       "name": "Men's Footwear",
+       "value": "\"bc-mens-footwear\"",
+       "count": 3,
+       "url": "/brand/outdoor-research/cat/mens-footwear",
+       "children": [
+        {
+         "name": "Men's Winter Boots & Shoes",
+         "value": "\"bc-mens-winter-boots-shoes\"",
+         "count": 3,
+         "url": "/brand/outdoor-research/cat/mens-winter-boots-shoes"
+        }
+       ]
+      },
+      {
+       "name": "Surf",
+       "value": "\"bc-surf\"",
+       "count": 2,
+       "url": "/brand/outdoor-research/cat/surf",
+       "children": [
+        {
+         "name": "Swimwear",
+         "value": "\"bc-swimwear\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/swimwear"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 2,
+       "url": "/brand/outdoor-research/cat/travel",
+       "children": [
+        {
+         "name": "Everyday Packs",
+         "value": "\"bc-everyday-packs\"",
+         "count": 2,
+         "url": "/brand/outdoor-research/cat/everyday-packs"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 111,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 281,
+       "url": null
+      },
+      {
+       "name": "S/M",
+       "value": "\"S/M\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 243,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 257,
+       "url": null
+      },
+      {
+       "name": "L/XL",
+       "value": "\"L/XL\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 210,
+       "url": null
+      },
+      {
+       "name": "1X",
+       "value": "\"1X\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 78,
+       "url": null
+      },
+      {
+       "name": "2X",
+       "value": "\"2X\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "3XL",
+       "value": "\"3XL\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "3X",
+       "value": "\"3X\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "4X",
+       "value": "\"4X\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "0",
+       "value": "\"0\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "2",
+       "value": "\"2\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "3",
+       "value": "\"3\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 37,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 32,
+       "url": null
+      },
+      {
+       "name": "9",
+       "value": "\"9\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "10",
+       "value": "\"10\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 31,
+       "url": null
+      },
+      {
+       "name": "12",
+       "value": "\"12\"",
+       "count": 12,
+       "url": null
+      },
+      {
+       "name": "13",
+       "value": "\"13\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 42,
+       "url": null
+      },
+      {
+       "name": "15",
+       "value": "\"15\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "16",
+       "value": "\"16\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "17",
+       "value": "\"17\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "18",
+       "value": "\"18\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "20",
+       "value": "\"20\"",
+       "count": 12,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 21,
+       "url": null
+      },
+      {
+       "name": "30",
+       "value": "\"30\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "33",
+       "value": "\"33\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "34",
+       "value": "\"34\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "35",
+       "value": "\"35\"",
+       "count": 21,
+       "url": null
+      },
+      {
+       "name": "36",
+       "value": "\"36\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "38",
+       "value": "\"38\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 27,
+       "url": null
+      },
+      {
+       "name": "44",
+       "value": "\"44\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "18W",
+       "value": "\"18W\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "20W",
+       "value": "\"20W\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "22W",
+       "value": "\"22W\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "24W",
+       "value": "\"24W\"",
+       "count": 3,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 378,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 245,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 145,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 143,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 143,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 51,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 48,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 12,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 197,
+       "url": null
+      },
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 178,
+       "url": null
+      },
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 167,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 542,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 284,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 284,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 278,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 179,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 182,
+       "url": null
+      },
+      {
+       "name": "Sun Protection",
+       "value": "\"Sun Protection\"",
+       "count": 141,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 135,
+       "url": null
+      },
+      {
+       "name": "Palm Grip",
+       "value": "\"Palm Grip\"",
+       "count": 79,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 65,
+       "url": null
+      },
+      {
+       "name": "Touchscreen Compatible",
+       "value": "\"Touchscreen Compatible\"",
+       "count": 62,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 60,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "Anti Odor",
+       "value": "\"Anti Odor\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "Thumbholes",
+       "value": "\"Thumbholes\"",
+       "count": 26,
+       "url": null
+      },
+      {
+       "name": "Reflective",
+       "value": "\"Reflective\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "Stretch Fabric",
+       "value": "\"Stretch Fabric\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "Windproof",
+       "value": "\"Windproof\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "Ankle Gaiters",
+       "value": "\"Ankle Gaiters\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 18,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "ODRZ8NY",
+    "ODRZ8Z4",
+    "ODRZ8Z5",
+    "ODRZ8MT",
+    "ODRZ91I",
+    "ODRZ8YD",
+    "ODRZ8D1",
+    "ODRZ8Z0",
+    "ODRZ8CX",
+    "ODRZ8NQ"
+   ]
+  },
+  {
+   "slug": "black-diamond",
+   "name": "Black Diamond",
+   "title": "Black Diamond Gear & Apparel",
+   "description": "Black Diamond continues to introduce cutting-edge climbing & skiing gear year after year. Shop skis, gloves, headlamps, climbing harnesses, & more on Backcountry.com.",
+   "upstream_total": 625,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 338,
+       "url": "/brand/black-diamond/cat/climb",
+       "children": [
+        {
+         "name": "Mountaineering",
+         "value": "\"bc-mountaineering\"",
+         "count": 147,
+         "url": "/brand/black-diamond/cat/mountaineering"
+        },
+        {
+         "name": "Trad & Aid Climbing",
+         "value": "\"bc-trad-aid-climbing\"",
+         "count": 131,
+         "url": "/brand/black-diamond/cat/trad-aid-climbing"
+        },
+        {
+         "name": "Ice Climbing",
+         "value": "\"bc-ice-climbing\"",
+         "count": 130,
+         "url": "/brand/black-diamond/cat/ice-climbing"
+        },
+        {
+         "name": "Sport Climbing",
+         "value": "\"bc-sport-climbing\"",
+         "count": 109,
+         "url": "/brand/black-diamond/cat/sport-climbing"
+        },
+        {
+         "name": "Canyoneering",
+         "value": "\"bc-canyoneering\"",
+         "count": 104,
+         "url": "/brand/black-diamond/cat/canyoneering"
+        },
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 86,
+         "url": "/brand/black-diamond/cat/climbing-clothing-accessories"
+        },
+        {
+         "name": "Climbing Essentials",
+         "value": "\"bc-climbing-essentials\"",
+         "count": 32,
+         "url": "/brand/black-diamond/cat/climbing-essentials"
+        },
+        {
+         "name": "Bouldering",
+         "value": "\"bc-bouldering\"",
+         "count": 25,
+         "url": "/brand/black-diamond/cat/bouldering"
+        },
+        {
+         "name": "Climbing Footwear",
+         "value": "\"bc-climbing-footwear\"",
+         "count": 17,
+         "url": "/brand/black-diamond/cat/climbing-footwear"
+        },
+        {
+         "name": "Climbing Training",
+         "value": "\"bc-climbing-training\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/climbing-training"
+        }
+       ]
+      },
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 222,
+       "url": "/brand/black-diamond/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 109,
+         "url": "/brand/black-diamond/cat/hiking-clothing"
+        },
+        {
+         "name": "Lighting",
+         "value": "\"bc-lighting\"",
+         "count": 36,
+         "url": "/brand/black-diamond/cat/lighting"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 33,
+         "url": "/brand/black-diamond/cat/packs"
+        },
+        {
+         "name": "Hiking & Camping Essentials",
+         "value": "\"bc-hiking-camping-essentials\"",
+         "count": 31,
+         "url": "/brand/black-diamond/cat/hiking-camping-essentials"
+        },
+        {
+         "name": "Tents & Shelters",
+         "value": "\"bc-tents-shelters\"",
+         "count": 12,
+         "url": "/brand/black-diamond/cat/tents-shelters"
+        },
+        {
+         "name": "Hiking Footwear",
+         "value": "\"bc-hiking-footwear\"",
+         "count": 4,
+         "url": "/brand/black-diamond/cat/hiking-footwear"
+        },
+        {
+         "name": "Hydration",
+         "value": "\"bc-hydration\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/hydration"
+        },
+        {
+         "name": "Survival",
+         "value": "\"bc-survival\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/survival"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 133,
+       "url": "/brand/black-diamond/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 73,
+         "url": "/brand/black-diamond/cat/ski-clothing"
+        },
+        {
+         "name": "Alpine Touring",
+         "value": "\"bc-alpine-touring\"",
+         "count": 35,
+         "url": "/brand/black-diamond/cat/alpine-touring"
+        },
+        {
+         "name": "Telemark Skiing",
+         "value": "\"bc-telemark-skiing\"",
+         "count": 27,
+         "url": "/brand/black-diamond/cat/telemark-skiing"
+        },
+        {
+         "name": "Alpine Skiing",
+         "value": "\"bc-alpine-skiing\"",
+         "count": 24,
+         "url": "/brand/black-diamond/cat/alpine-skiing"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 19,
+         "url": "/brand/black-diamond/cat/avalanche-safety"
+        },
+        {
+         "name": "Ski Essentials",
+         "value": "\"bc-ski-essentials\"",
+         "count": 7,
+         "url": "/brand/black-diamond/cat/ski-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 88,
+       "url": "/brand/black-diamond/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 51,
+         "url": "/brand/black-diamond/cat/snowboard-clothing"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 19,
+         "url": "/brand/black-diamond/cat/avalanche-safety"
+        },
+        {
+         "name": "Splitboarding",
+         "value": "\"bc-splitboarding\"",
+         "count": 17,
+         "url": "/brand/black-diamond/cat/splitboarding"
+        },
+        {
+         "name": "Snowboarding Essentials",
+         "value": "\"bc-snowboarding-essentials\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/snowboarding-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 99,
+       "url": "/brand/black-diamond/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 40,
+         "url": "/brand/black-diamond/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 24,
+         "url": "/brand/black-diamond/cat/mens-pants"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 18,
+         "url": "/brand/black-diamond/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 9,
+         "url": "/brand/black-diamond/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 7,
+         "url": "/brand/black-diamond/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 5,
+         "url": "/brand/black-diamond/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 4,
+         "url": "/brand/black-diamond/cat/mens-vests"
+        },
+        {
+         "name": "Men's Baselayers",
+         "value": "\"bc-mens-baselayers\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/mens-baselayers"
+        }
+       ]
+      },
+      {
+       "name": "Overlanding",
+       "value": "\"cat100215550\"",
+       "count": 38,
+       "url": "/brand/black-diamond/cat/overlanding",
+       "children": [
+        {
+         "name": "Lighting",
+         "value": "\"bc-lighting\"",
+         "count": 36,
+         "url": "/brand/black-diamond/cat/lighting"
+        },
+        {
+         "name": "Overlanding Electronics",
+         "value": "\"cat100215574\"",
+         "count": 4,
+         "url": "/brand/black-diamond/cat/overlanding-electronics"
+        },
+        {
+         "name": "Survival",
+         "value": "\"bc-survival\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/survival"
+        },
+        {
+         "name": "Water Storage",
+         "value": "\"cat100215567\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/water-storage"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 89,
+       "url": "/brand/black-diamond/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 33,
+         "url": "/brand/black-diamond/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Packs & Wallets",
+         "value": "\"bc-packs-wallets\"",
+         "count": 24,
+         "url": "/brand/black-diamond/cat/packs-wallets"
+        },
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 13,
+         "url": "/brand/black-diamond/cat/mens-hats"
+        },
+        {
+         "name": "Men's Gaiters",
+         "value": "\"bc-mens-gaiters\"",
+         "count": 6,
+         "url": "/brand/black-diamond/cat/mens-gaiters"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 5,
+         "url": "/brand/black-diamond/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Belts",
+         "value": "\"bc-mens-belts\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/mens-belts"
+        },
+        {
+         "name": "Men's Socks",
+         "value": "\"bc-mens-socks\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/mens-socks"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/mens-neckwear"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 63,
+       "url": "/brand/black-diamond/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 32,
+         "url": "/brand/black-diamond/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 13,
+         "url": "/brand/black-diamond/cat/womens-hats"
+        },
+        {
+         "name": "Women's Gaiters",
+         "value": "\"bc-womens-gaiters\"",
+         "count": 6,
+         "url": "/brand/black-diamond/cat/womens-gaiters"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 5,
+         "url": "/brand/black-diamond/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Socks",
+         "value": "\"bc-womens-socks\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/womens-socks"
+        },
+        {
+         "name": "Handbags, Packs & Wallets",
+         "value": "\"bc-handbags-packs-wallets\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/handbags-packs-wallets"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/womens-neckwear"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 34,
+       "url": "/brand/black-diamond/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 32,
+         "url": "/brand/black-diamond/cat/running-clothing-accessories"
+        },
+        {
+         "name": "Running Hydration",
+         "value": "\"bc-running-hydration\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/running-hydration"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 80,
+       "url": "/brand/black-diamond/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 28,
+         "url": "/brand/black-diamond/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 22,
+         "url": "/brand/black-diamond/cat/womens-pants"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 19,
+         "url": "/brand/black-diamond/cat/womens-tops"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 14,
+         "url": "/brand/black-diamond/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 9,
+         "url": "/brand/black-diamond/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/womens-vests"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 23,
+       "url": "/brand/black-diamond/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 23,
+         "url": "/brand/black-diamond/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Snowshoe",
+       "value": "\"bc-snowshoe\"",
+       "count": 17,
+       "url": "/brand/black-diamond/cat/snowshoe",
+       "children": [
+        {
+         "name": "Adjustable Poles",
+         "value": "\"bc-adjustable-poles\"",
+         "count": 17,
+         "url": "/brand/black-diamond/cat/adjustable-poles"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 7,
+       "url": "/brand/black-diamond/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Gear ",
+         "value": "\"bcCat202000001\"",
+         "count": 7,
+         "url": "/brand/black-diamond/cat/kids-gear"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 7,
+       "url": "/brand/black-diamond/cat/travel",
+       "children": [
+        {
+         "name": "Travel Electronics",
+         "value": "\"bc-travel-electronics\"",
+         "count": 4,
+         "url": "/brand/black-diamond/cat/travel-electronics"
+        },
+        {
+         "name": "Duffel Bags",
+         "value": "\"bc-duffel-bags\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/duffel-bags"
+        }
+       ]
+      },
+      {
+       "name": "Women's Footwear",
+       "value": "\"bc-womens-footwear\"",
+       "count": 6,
+       "url": "/brand/black-diamond/cat/womens-footwear",
+       "children": [
+        {
+         "name": "Women's Casual Boots & Shoes",
+         "value": "\"bc-womens-casual-boots-shoes\"",
+         "count": 3,
+         "url": "/brand/black-diamond/cat/womens-casual-boots-shoes"
+        },
+        {
+         "name": "Women's Approach Shoes",
+         "value": "\"bc-womens-approach-shoes\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/womens-approach-shoes"
+        },
+        {
+         "name": "Women's Footwear Accessories",
+         "value": "\"bc-womens-footwear-accessories\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/womens-footwear-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Men's Footwear",
+       "value": "\"bc-mens-footwear\"",
+       "count": 4,
+       "url": "/brand/black-diamond/cat/mens-footwear",
+       "children": [
+        {
+         "name": "Men's Approach Shoes",
+         "value": "\"bc-mens-approach-shoes\"",
+         "count": 2,
+         "url": "/brand/black-diamond/cat/mens-approach-shoes"
+        },
+        {
+         "name": "Men's Casual Boots & Shoes",
+         "value": "\"bc-mens-casual-boots-shoes\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/mens-casual-boots-shoes"
+        },
+        {
+         "name": "Men's Footwear Accessories",
+         "value": "\"bc-mens-footwear-accessories\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/mens-footwear-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 1,
+       "url": "/brand/black-diamond/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 1,
+         "url": "/brand/black-diamond/cat/yoga-clothing"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 56,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 147,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 150,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 143,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 126,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "0",
+       "value": "\"0\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "2",
+       "value": "\"2\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 27,
+       "url": null
+      },
+      {
+       "name": "10",
+       "value": "\"10\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "12",
+       "value": "\"12\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "24",
+       "value": "\"24\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "27",
+       "value": "\"27\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "30",
+       "value": "\"30\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "33",
+       "value": "\"33\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "34",
+       "value": "\"34\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "35",
+       "value": "\"35\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "36",
+       "value": "\"36\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "38",
+       "value": "\"38\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 1,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 317,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 205,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 141,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 125,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 70,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 58,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 51,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 41,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 31,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 31,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 20,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 397,
+       "url": null
+      },
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 120,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 108,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 625,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 165,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 164,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 141,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 68,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 148,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 72,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 70,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 42,
+       "url": null
+      },
+      {
+       "name": "Palm Grip",
+       "value": "\"Palm Grip\"",
+       "count": 29,
+       "url": null
+      },
+      {
+       "name": "Compression",
+       "value": "\"Compression\"",
+       "count": 24,
+       "url": null
+      },
+      {
+       "name": "Hydration Compatible",
+       "value": "\"Hydration Compatible\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "Trekking Pole Carry",
+       "value": "\"Trekking Pole Carry\"",
+       "count": 22,
+       "url": null
+      },
+      {
+       "name": "Gear Loops",
+       "value": "\"Gear Loops\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "Ice Axe Carry",
+       "value": "\"Ice Axe Carry\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "Collapsible",
+       "value": "\"Collapsible\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "Ankle Gaiters",
+       "value": "\"Ankle Gaiters\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "Rechargable Battery",
+       "value": "\"Rechargable Battery\"",
+       "count": 16,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "BLD00XJ",
+    "BLDZ9T8",
+    "BLD00WR",
+    "BLDZ9TN",
+    "BLDZ97J",
+    "BLDZ9WV",
+    "BLDZA9I",
+    "BLDZA9Y",
+    "BLDZA85",
+    "BLDZACN"
+   ]
+  },
+  {
+   "slug": "salomon",
+   "name": "Salomon",
+   "title": "Salomon - Shoes, Boots, Skis & Snowboards",
+   "description": "Shop a huge selection of Salomon shoes, clothing & equipment at Backcountry.com, featuring great prices and a large selection of Salomon outdoor gear.",
+   "upstream_total": 405,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 78,
+       "url": "/brand/salomon/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboarding",
+         "value": "\"bc-snowboarding\"",
+         "count": 63,
+         "url": "/brand/salomon/cat/snowboarding"
+        },
+        {
+         "name": "Snowboard Helmets & Goggles",
+         "value": "\"bc-snowboard-helmets-goggles\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/snowboard-helmets-goggles"
+        },
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 7,
+         "url": "/brand/salomon/cat/snowboard-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 138,
+       "url": "/brand/salomon/cat/ski",
+       "children": [
+        {
+         "name": "Alpine Skiing",
+         "value": "\"bc-alpine-skiing\"",
+         "count": 56,
+         "url": "/brand/salomon/cat/alpine-skiing"
+        },
+        {
+         "name": "Cross-Country Skiing",
+         "value": "\"bc-cross-country-skiing\"",
+         "count": 31,
+         "url": "/brand/salomon/cat/cross-country-skiing"
+        },
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 23,
+         "url": "/brand/salomon/cat/ski-clothing"
+        },
+        {
+         "name": "Alpine Touring",
+         "value": "\"bc-alpine-touring\"",
+         "count": 22,
+         "url": "/brand/salomon/cat/alpine-touring"
+        },
+        {
+         "name": "Ski Helmets & Goggles",
+         "value": "\"bc-ski-helmets-goggles\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/ski-helmets-goggles"
+        },
+        {
+         "name": "Telemark Skiing",
+         "value": "\"bc-telemark-skiing\"",
+         "count": 3,
+         "url": "/brand/salomon/cat/telemark-skiing"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 133,
+       "url": "/brand/salomon/cat/run",
+       "children": [
+        {
+         "name": "Running Shoes",
+         "value": "\"bc-running-shoes\"",
+         "count": 53,
+         "url": "/brand/salomon/cat/running-shoes"
+        },
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 50,
+         "url": "/brand/salomon/cat/running-clothing-accessories"
+        },
+        {
+         "name": "Running Hydration",
+         "value": "\"bc-running-hydration\"",
+         "count": 30,
+         "url": "/brand/salomon/cat/running-hydration"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 39,
+       "url": "/brand/salomon/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 39,
+         "url": "/brand/salomon/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Men's Footwear",
+       "value": "\"bc-mens-footwear\"",
+       "count": 57,
+       "url": "/brand/salomon/cat/mens-footwear",
+       "children": [
+        {
+         "name": "Men's Running Shoes",
+         "value": "\"bc-mens-running-shoes\"",
+         "count": 35,
+         "url": "/brand/salomon/cat/mens-running-shoes"
+        },
+        {
+         "name": "Men's Hiking & Backpacking Boots & Shoes",
+         "value": "\"bc-mnshkngbckpckngbtsshs\"",
+         "count": 16,
+         "url": "/brand/salomon/cat/mens-hiking-backpacking-boots-shoes"
+        },
+        {
+         "name": "Men's Winter Boots & Shoes",
+         "value": "\"bc-mens-winter-boots-shoes\"",
+         "count": 5,
+         "url": "/brand/salomon/cat/mens-winter-boots-shoes"
+        },
+        {
+         "name": "Men's Water Shoes",
+         "value": "\"bc-mens-water-shoes\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/mens-water-shoes"
+        }
+       ]
+      },
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 91,
+       "url": "/brand/salomon/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Footwear",
+         "value": "\"bc-hiking-footwear\"",
+         "count": 34,
+         "url": "/brand/salomon/cat/hiking-footwear"
+        },
+        {
+         "name": "Hydration",
+         "value": "\"bc-hydration\"",
+         "count": 32,
+         "url": "/brand/salomon/cat/hydration"
+        },
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 25,
+         "url": "/brand/salomon/cat/hiking-clothing"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 23,
+         "url": "/brand/salomon/cat/packs"
+        },
+        {
+         "name": "Hiking & Camping Essentials",
+         "value": "\"bc-hiking-camping-essentials\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/hiking-camping-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 42,
+       "url": "/brand/salomon/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 23,
+         "url": "/brand/salomon/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 14,
+         "url": "/brand/salomon/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 11,
+         "url": "/brand/salomon/cat/womens-pants"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/womens-tops"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 7,
+         "url": "/brand/salomon/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Underwear & Sleepwear",
+         "value": "\"bc-womens-underwear-sleepwear\"",
+         "count": 2,
+         "url": "/brand/salomon/cat/womens-underwear-sleepwear"
+        }
+       ]
+      },
+      {
+       "name": "Women's Footwear",
+       "value": "\"bc-womens-footwear\"",
+       "count": 37,
+       "url": "/brand/salomon/cat/womens-footwear",
+       "children": [
+        {
+         "name": "Women's Running Shoes",
+         "value": "\"bc-womens-running-shoes\"",
+         "count": 20,
+         "url": "/brand/salomon/cat/womens-running-shoes"
+        },
+        {
+         "name": "Women's Hiking & Backpacking Boots & Shoes",
+         "value": "\"bc-wmnshkngbckpckngbtsshs\"",
+         "count": 11,
+         "url": "/brand/salomon/cat/womens-hiking-backpacking-boots-shoes"
+        },
+        {
+         "name": "Women's Winter Boots & Shoes",
+         "value": "\"bc-womens-winter-boots-shoes\"",
+         "count": 5,
+         "url": "/brand/salomon/cat/womens-winter-boots-shoes"
+        },
+        {
+         "name": "Women's Water Shoes",
+         "value": "\"bc-womens-water-shoes\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/womens-water-shoes"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 20,
+       "url": "/brand/salomon/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 20,
+         "url": "/brand/salomon/cat/yoga-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 26,
+       "url": "/brand/salomon/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Gear ",
+         "value": "\"bcCat202000001\"",
+         "count": 19,
+         "url": "/brand/salomon/cat/kids-gear"
+        },
+        {
+         "name": "Boys' Footwear",
+         "value": "\"bc-boys-footwear\"",
+         "count": 7,
+         "url": "/brand/salomon/cat/boys-footwear"
+        },
+        {
+         "name": "Girls' Footwear",
+         "value": "\"bc-girls-footwear\"",
+         "count": 7,
+         "url": "/brand/salomon/cat/girls-footwear"
+        },
+        {
+         "name": "Kids' Footwear",
+         "value": "\"cat100214260\"",
+         "count": 7,
+         "url": "/brand/salomon/cat/kids-footwear"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 39,
+       "url": "/brand/salomon/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 18,
+         "url": "/brand/salomon/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 16,
+         "url": "/brand/salomon/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 6,
+         "url": "/brand/salomon/cat/mens-pants"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 6,
+         "url": "/brand/salomon/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/mens-hoodies-sweaters"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 8,
+       "url": "/brand/salomon/cat/travel",
+       "children": [
+        {
+         "name": "Travel Essentials",
+         "value": "\"bc-travel-essentials\"",
+         "count": 8,
+         "url": "/brand/salomon/cat/travel-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 9,
+       "url": "/brand/salomon/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 4,
+         "url": "/brand/salomon/cat/mens-hats"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 2,
+         "url": "/brand/salomon/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Men's Headbands",
+         "value": "\"bc-mens-headbands\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/mens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 9,
+       "url": "/brand/salomon/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 4,
+         "url": "/brand/salomon/cat/womens-hats"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 2,
+         "url": "/brand/salomon/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Headbands",
+         "value": "\"bc-womens-headbands\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/womens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Bike",
+       "value": "\"bc-bike\"",
+       "count": 2,
+       "url": "/brand/salomon/cat/bike",
+       "children": [
+        {
+         "name": "Bike Essentials",
+         "value": "\"bc-bike-essentials\"",
+         "count": 2,
+         "url": "/brand/salomon/cat/bike-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 1,
+       "url": "/brand/salomon/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/climbing-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Overlanding",
+       "value": "\"cat100215550\"",
+       "count": 1,
+       "url": "/brand/salomon/cat/overlanding",
+       "children": [
+        {
+         "name": "Water Storage",
+         "value": "\"cat100215567\"",
+         "count": 1,
+         "url": "/brand/salomon/cat/water-storage"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 14,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "S/M",
+       "value": "\"S/M\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 35,
+       "url": null
+      },
+      {
+       "name": "L/XL",
+       "value": "\"L/XL\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 38,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "3",
+       "value": "\"3\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "9",
+       "value": "\"9\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 12,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "35",
+       "value": "\"35\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 2,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 228,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 64,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 55,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 45,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 44,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 35,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 29,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 12,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 4,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 181,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 112,
+       "url": null
+      },
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 112,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 405,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 111,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 102,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 88,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 20,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 148,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 62,
+       "url": null
+      },
+      {
+       "name": "BOA Fit System",
+       "value": "\"BOA Fit System\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "Thermo moldable Liner",
+       "value": "\"Thermo moldable Liner\"",
+       "count": 40,
+       "url": null
+      },
+      {
+       "name": "Rubber Sole",
+       "value": "\"Rubber Sole\"",
+       "count": 31,
+       "url": null
+      },
+      {
+       "name": "Metal Buckles",
+       "value": "\"Metal Buckles\"",
+       "count": 30,
+       "url": null
+      },
+      {
+       "name": "Gore tex Membrane",
+       "value": "\"Gore tex Membrane\"",
+       "count": 26,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 24,
+       "url": null
+      },
+      {
+       "name": "Hydration Compatible",
+       "value": "\"Hydration Compatible\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "Internal Harness",
+       "value": "\"Internal Harness\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "Impact absorbing Midsole",
+       "value": "\"Impact absorbing Midsole\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "Wood Core",
+       "value": "\"Wood Core\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "Sintered Base",
+       "value": "\"Sintered Base\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "Vertical Sidewalls",
+       "value": "\"Vertical Sidewalls\"",
+       "count": 12,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "SALZBK8",
+    "SALZBK9",
+    "SALZBKA",
+    "SALZBKB",
+    "SALZC7L",
+    "SALZB10",
+    "SALZBZ0",
+    "SALZBV8",
+    "SALZBWF",
+    "SALZBV7"
+   ]
+  },
+  {
+   "slug": "smartwool",
+   "name": "Smartwool",
+   "title": "Smartwool - Socks, Gloves, Tights & Slippers",
+   "description": "Find a huge selection of Smartwool socks plus Smartwool tights and slippers at Backcountry.com. Nothing but top-notch comfort for a top notch athlete.",
+   "upstream_total": 399,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 212,
+       "url": "/brand/smartwool/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Women's Socks",
+         "value": "\"bc-womens-socks\"",
+         "count": 177,
+         "url": "/brand/smartwool/cat/womens-socks"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 14,
+         "url": "/brand/smartwool/cat/womens-beanies"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 9,
+         "url": "/brand/smartwool/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Gloves & Mittens",
+         "value": "\"bc-womens-gloves-mittens\"",
+         "count": 8,
+         "url": "/brand/smartwool/cat/womens-gloves-mittens"
+        },
+        {
+         "name": "Women's Headbands",
+         "value": "\"bc-womens-headbands\"",
+         "count": 4,
+         "url": "/brand/smartwool/cat/womens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 129,
+       "url": "/brand/smartwool/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 129,
+         "url": "/brand/smartwool/cat/hiking-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 160,
+       "url": "/brand/smartwool/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Men's Socks",
+         "value": "\"bc-mens-socks\"",
+         "count": 126,
+         "url": "/brand/smartwool/cat/mens-socks"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 14,
+         "url": "/brand/smartwool/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 9,
+         "url": "/brand/smartwool/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Gloves & Mittens",
+         "value": "\"bc-mens-gloves-mittens\"",
+         "count": 7,
+         "url": "/brand/smartwool/cat/mens-gloves-mittens"
+        },
+        {
+         "name": "Men's Headbands",
+         "value": "\"bc-mens-headbands\"",
+         "count": 4,
+         "url": "/brand/smartwool/cat/mens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 118,
+       "url": "/brand/smartwool/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 118,
+         "url": "/brand/smartwool/cat/snowboard-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 115,
+       "url": "/brand/smartwool/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 115,
+         "url": "/brand/smartwool/cat/ski-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 75,
+       "url": "/brand/smartwool/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 75,
+         "url": "/brand/smartwool/cat/running-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 58,
+       "url": "/brand/smartwool/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 58,
+         "url": "/brand/smartwool/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 83,
+       "url": "/brand/smartwool/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 29,
+         "url": "/brand/smartwool/cat/mens-activewear"
+        },
+        {
+         "name": "Men's Baselayers",
+         "value": "\"bc-mens-baselayers\"",
+         "count": 21,
+         "url": "/brand/smartwool/cat/mens-baselayers"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 18,
+         "url": "/brand/smartwool/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Underwear & Sleepwear",
+         "value": "\"bc-mens-underwear-sleepwear\"",
+         "count": 8,
+         "url": "/brand/smartwool/cat/mens-underwear-sleepwear"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 7,
+         "url": "/brand/smartwool/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 4,
+         "url": "/brand/smartwool/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 3,
+         "url": "/brand/smartwool/cat/mens-pants"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 2,
+         "url": "/brand/smartwool/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 1,
+         "url": "/brand/smartwool/cat/mens-vests"
+        }
+       ]
+      },
+      {
+       "name": "Kids",
+       "value": "\"bc-kids\"",
+       "count": 26,
+       "url": "/brand/smartwool/cat/kids",
+       "children": [
+        {
+         "name": "Kids' Accessories",
+         "value": "\"bc-kids-accessories\"",
+         "count": 21,
+         "url": "/brand/smartwool/cat/kids-accessories"
+        },
+        {
+         "name": "Boys' Clothing",
+         "value": "\"bc-boys-clothing\"",
+         "count": 5,
+         "url": "/brand/smartwool/cat/boys-clothing"
+        },
+        {
+         "name": "Kids' Clothing",
+         "value": "\"cat100214279\"",
+         "count": 5,
+         "url": "/brand/smartwool/cat/kids-clothing"
+        },
+        {
+         "name": "Girls' Clothing",
+         "value": "\"bc-girls-clothing\"",
+         "count": 2,
+         "url": "/brand/smartwool/cat/girls-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 64,
+       "url": "/brand/smartwool/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Baselayers",
+         "value": "\"bc-womens-baselayers\"",
+         "count": 20,
+         "url": "/brand/smartwool/cat/womens-baselayers"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 20,
+         "url": "/brand/smartwool/cat/womens-tops"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 18,
+         "url": "/brand/smartwool/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Underwear & Sleepwear",
+         "value": "\"bc-womens-underwear-sleepwear\"",
+         "count": 9,
+         "url": "/brand/smartwool/cat/womens-underwear-sleepwear"
+        },
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 6,
+         "url": "/brand/smartwool/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 4,
+         "url": "/brand/smartwool/cat/womens-pants"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 3,
+         "url": "/brand/smartwool/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Dresses & Skirts",
+         "value": "\"bc-womens-dresses-skirts\"",
+         "count": 1,
+         "url": "/brand/smartwool/cat/womens-dresses-skirts"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 1,
+         "url": "/brand/smartwool/cat/womens-vests"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 17,
+       "url": "/brand/smartwool/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 17,
+         "url": "/brand/smartwool/cat/climbing-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Bike",
+       "value": "\"bc-bike\"",
+       "count": 13,
+       "url": "/brand/smartwool/cat/bike",
+       "children": [
+        {
+         "name": "Bike Apparel & Accessories",
+         "value": "\"bc-bike-apparel-accessories\"",
+         "count": 13,
+         "url": "/brand/smartwool/cat/bike-apparel-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 9,
+       "url": "/brand/smartwool/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 9,
+         "url": "/brand/smartwool/cat/yoga-clothing"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 59,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 195,
+       "url": null
+      },
+      {
+       "name": "S/M",
+       "value": "\"S/M\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 244,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 239,
+       "url": null
+      },
+      {
+       "name": "L/XL",
+       "value": "\"L/XL\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 185,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 67,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 26,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 10,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 7,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 219,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 214,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 142,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 84,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 82,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 78,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 41,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 36,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 34,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 24,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 11,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 188,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 131,
+       "url": null
+      },
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 80,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 399,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 122,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 121,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 120,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 57,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Anti Odor",
+       "value": "\"Anti Odor\"",
+       "count": 106,
+       "url": null
+      },
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "Thumbholes",
+       "value": "\"Thumbholes\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "Touchscreen Compatible",
+       "value": "\"Touchscreen Compatible\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "Reflective",
+       "value": "\"Reflective\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "Stretch Fabric",
+       "value": "\"Stretch Fabric\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "Sun Protection",
+       "value": "\"Sun Protection\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "Palm Grip",
+       "value": "\"Palm Grip\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "Thermal",
+       "value": "\"Thermal\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 1,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "SWLZ9EV",
+    "SWLZ9ES",
+    "SWLZ9NF",
+    "SWLZ9KW",
+    "SWLZ9KX",
+    "SWLZ9HT",
+    "SWLZ9EU",
+    "SWLZ9ET",
+    "SWLZ9JY",
+    "SWLZ9KL"
+   ]
+  },
+  {
+   "slug": "fjallraven",
+   "name": "Fjallraven",
+   "title": "Fjallraven - Outdoor Apparel & Rucksacks",
+   "description": "Like the name suggests, Fjallraven means Arctic Fox in Swedish. Shop outdoor clothing and bags by Fjallraven on Backcountry.com.",
+   "upstream_total": 346,
+   "facets": [
+    {
+     "name": "Categories",
+     "field": "u_categoryPathId",
+     "filters": [
+      {
+       "name": "Hike & Camp",
+       "value": "\"bc-hike-camp\"",
+       "count": 155,
+       "url": "/brand/fjallraven/cat/hike-camp",
+       "children": [
+        {
+         "name": "Hiking Clothing",
+         "value": "\"bc-hiking-clothing\"",
+         "count": 115,
+         "url": "/brand/fjallraven/cat/hiking-clothing"
+        },
+        {
+         "name": "Packs",
+         "value": "\"bc-packs\"",
+         "count": 37,
+         "url": "/brand/fjallraven/cat/packs"
+        },
+        {
+         "name": "Hiking & Camping Essentials",
+         "value": "\"bc-hiking-camping-essentials\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/hiking-camping-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Women's Accessories",
+       "value": "\"bc-womens-accessories\"",
+       "count": 88,
+       "url": "/brand/fjallraven/cat/womens-accessories",
+       "children": [
+        {
+         "name": "Handbags, Packs & Wallets",
+         "value": "\"bc-handbags-packs-wallets\"",
+         "count": 48,
+         "url": "/brand/fjallraven/cat/handbags-packs-wallets"
+        },
+        {
+         "name": "Women's Hats",
+         "value": "\"bc-womens-hats\"",
+         "count": 17,
+         "url": "/brand/fjallraven/cat/womens-hats"
+        },
+        {
+         "name": "Women's Beanies",
+         "value": "\"bc-womens-beanies\"",
+         "count": 15,
+         "url": "/brand/fjallraven/cat/womens-beanies"
+        },
+        {
+         "name": "Fabric Care",
+         "value": "\"bc-fabric-care\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/fabric-care"
+        },
+        {
+         "name": "Women's Neckwear",
+         "value": "\"bc-womens-neckwear\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/womens-neckwear"
+        },
+        {
+         "name": "Women's Belts",
+         "value": "\"bc-womens-belts\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/womens-belts"
+        },
+        {
+         "name": "Women's Headbands",
+         "value": "\"bc-womens-headbands\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/womens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Men's Clothing",
+       "value": "\"bc-mens-clothing\"",
+       "count": 128,
+       "url": "/brand/fjallraven/cat/mens-clothing",
+       "children": [
+        {
+         "name": "Men's Jackets",
+         "value": "\"bc-mens-jackets\"",
+         "count": 47,
+         "url": "/brand/fjallraven/cat/mens-jackets"
+        },
+        {
+         "name": "Men's Shirts",
+         "value": "\"bc-mens-shirts\"",
+         "count": 35,
+         "url": "/brand/fjallraven/cat/mens-shirts"
+        },
+        {
+         "name": "Men's Pants",
+         "value": "\"bc-mens-pants\"",
+         "count": 19,
+         "url": "/brand/fjallraven/cat/mens-pants"
+        },
+        {
+         "name": "Men's Hoodies & Sweaters",
+         "value": "\"bc-mens-hoodies-sweaters\"",
+         "count": 13,
+         "url": "/brand/fjallraven/cat/mens-hoodies-sweaters"
+        },
+        {
+         "name": "Men's Shorts",
+         "value": "\"bc-mens-shorts\"",
+         "count": 9,
+         "url": "/brand/fjallraven/cat/mens-shorts"
+        },
+        {
+         "name": "Men's Vests",
+         "value": "\"bc-mens-vests\"",
+         "count": 5,
+         "url": "/brand/fjallraven/cat/mens-vests"
+        },
+        {
+         "name": "Men's Activewear",
+         "value": "\"cat100214259\"",
+         "count": 4,
+         "url": "/brand/fjallraven/cat/mens-activewear"
+        }
+       ]
+      },
+      {
+       "name": "Men's Accessories",
+       "value": "\"bc-mens-accessories\"",
+       "count": 87,
+       "url": "/brand/fjallraven/cat/mens-accessories",
+       "children": [
+        {
+         "name": "Packs & Wallets",
+         "value": "\"bc-packs-wallets\"",
+         "count": 42,
+         "url": "/brand/fjallraven/cat/packs-wallets"
+        },
+        {
+         "name": "Men's Hats",
+         "value": "\"bc-mens-hats\"",
+         "count": 18,
+         "url": "/brand/fjallraven/cat/mens-hats"
+        },
+        {
+         "name": "Men's Beanies",
+         "value": "\"bc-mens-beanies\"",
+         "count": 15,
+         "url": "/brand/fjallraven/cat/mens-beanies"
+        },
+        {
+         "name": "Men's Belts",
+         "value": "\"bc-mens-belts\"",
+         "count": 5,
+         "url": "/brand/fjallraven/cat/mens-belts"
+        },
+        {
+         "name": "Fabric Care",
+         "value": "\"bc-fabric-care\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/fabric-care"
+        },
+        {
+         "name": "Men's Neckwear",
+         "value": "\"bc-mens-neckwear\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/mens-neckwear"
+        },
+        {
+         "name": "Men's Headbands",
+         "value": "\"bc-mens-headbands\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/mens-headbands"
+        }
+       ]
+      },
+      {
+       "name": "Women's Clothing",
+       "value": "\"bc-womens-clothing\"",
+       "count": 97,
+       "url": "/brand/fjallraven/cat/womens-clothing",
+       "children": [
+        {
+         "name": "Women's Jackets",
+         "value": "\"bc-womens-jackets\"",
+         "count": 36,
+         "url": "/brand/fjallraven/cat/womens-jackets"
+        },
+        {
+         "name": "Women's Tops",
+         "value": "\"bc-womens-tops\"",
+         "count": 29,
+         "url": "/brand/fjallraven/cat/womens-tops"
+        },
+        {
+         "name": "Women's Pants",
+         "value": "\"bc-womens-pants\"",
+         "count": 20,
+         "url": "/brand/fjallraven/cat/womens-pants"
+        },
+        {
+         "name": "Women's Activewear",
+         "value": "\"cat100212855\"",
+         "count": 7,
+         "url": "/brand/fjallraven/cat/womens-activewear"
+        },
+        {
+         "name": "Women's Dresses & Skirts",
+         "value": "\"bc-womens-dresses-skirts\"",
+         "count": 4,
+         "url": "/brand/fjallraven/cat/womens-dresses-skirts"
+        },
+        {
+         "name": "Women's Shorts",
+         "value": "\"bc-womens-shorts\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/womens-shorts"
+        },
+        {
+         "name": "Women's Vests",
+         "value": "\"bc-womens-vests\"",
+         "count": 3,
+         "url": "/brand/fjallraven/cat/womens-vests"
+        },
+        {
+         "name": "Women's Baselayers",
+         "value": "\"bc-womens-baselayers\"",
+         "count": 2,
+         "url": "/brand/fjallraven/cat/womens-baselayers"
+        }
+       ]
+      },
+      {
+       "name": "Ski",
+       "value": "\"bc-ski\"",
+       "count": 25,
+       "url": "/brand/fjallraven/cat/ski",
+       "children": [
+        {
+         "name": "Ski Clothing",
+         "value": "\"bc-ski-clothing\"",
+         "count": 24,
+         "url": "/brand/fjallraven/cat/ski-clothing"
+        },
+        {
+         "name": "Alpine Touring",
+         "value": "\"bc-alpine-touring\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/alpine-touring"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/avalanche-safety"
+        },
+        {
+         "name": "Ski Essentials",
+         "value": "\"bc-ski-essentials\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/ski-essentials"
+        }
+       ]
+      },
+      {
+       "name": "Travel",
+       "value": "\"bc-travel\"",
+       "count": 48,
+       "url": "/brand/fjallraven/cat/travel",
+       "children": [
+        {
+         "name": "Everyday Packs",
+         "value": "\"bc-everyday-packs\"",
+         "count": 24,
+         "url": "/brand/fjallraven/cat/everyday-packs"
+        },
+        {
+         "name": "Travel Essentials",
+         "value": "\"bc-travel-essentials\"",
+         "count": 16,
+         "url": "/brand/fjallraven/cat/travel-essentials"
+        },
+        {
+         "name": "Duffel Bags",
+         "value": "\"bc-duffel-bags\"",
+         "count": 5,
+         "url": "/brand/fjallraven/cat/duffel-bags"
+        },
+        {
+         "name": "Rolling Bags",
+         "value": "\"bc-rolling-bags\"",
+         "count": 2,
+         "url": "/brand/fjallraven/cat/rolling-bags"
+        },
+        {
+         "name": "Travel Packs",
+         "value": "\"bc-travel-packs\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/travel-packs"
+        }
+       ]
+      },
+      {
+       "name": "Snowboard",
+       "value": "\"bc-snowboard\"",
+       "count": 23,
+       "url": "/brand/fjallraven/cat/snowboard",
+       "children": [
+        {
+         "name": "Snowboard Clothing",
+         "value": "\"bc-snowboard-clothing\"",
+         "count": 22,
+         "url": "/brand/fjallraven/cat/snowboard-clothing"
+        },
+        {
+         "name": "Avalanche Safety",
+         "value": "\"bc-avalanche-safety\"",
+         "count": 1,
+         "url": "/brand/fjallraven/cat/avalanche-safety"
+        }
+       ]
+      },
+      {
+       "name": "Climb",
+       "value": "\"bc-climb\"",
+       "count": 26,
+       "url": "/brand/fjallraven/cat/climb",
+       "children": [
+        {
+         "name": "Climbing Clothing & Accessories",
+         "value": "\"bc-climbing-clothing-accessories\"",
+         "count": 20,
+         "url": "/brand/fjallraven/cat/climbing-clothing-accessories"
+        },
+        {
+         "name": "Canyoneering",
+         "value": "\"bc-canyoneering\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/canyoneering"
+        },
+        {
+         "name": "Climbing Essentials",
+         "value": "\"bc-climbing-essentials\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/climbing-essentials"
+        },
+        {
+         "name": "Ice Climbing",
+         "value": "\"bc-ice-climbing\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/ice-climbing"
+        },
+        {
+         "name": "Mountaineering",
+         "value": "\"bc-mountaineering\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/mountaineering"
+        },
+        {
+         "name": "Sport Climbing",
+         "value": "\"bc-sport-climbing\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/sport-climbing"
+        },
+        {
+         "name": "Trad & Aid Climbing",
+         "value": "\"bc-trad-aid-climbing\"",
+         "count": 6,
+         "url": "/brand/fjallraven/cat/trad-aid-climbing"
+        }
+       ]
+      },
+      {
+       "name": "Training",
+       "value": "\"bcCat202000010\"",
+       "count": 11,
+       "url": "/brand/fjallraven/cat/training",
+       "children": [
+        {
+         "name": "Performance Clothing",
+         "value": "\"bc-performance-clothing\"",
+         "count": 11,
+         "url": "/brand/fjallraven/cat/performance-clothing"
+        }
+       ]
+      },
+      {
+       "name": "Run",
+       "value": "\"bcCat202000008\"",
+       "count": 7,
+       "url": "/brand/fjallraven/cat/run",
+       "children": [
+        {
+         "name": "Running Clothing & Accessories",
+         "value": "\"bc-running-clothing-accessories\"",
+         "count": 7,
+         "url": "/brand/fjallraven/cat/running-clothing-accessories"
+        }
+       ]
+      },
+      {
+       "name": "Yoga",
+       "value": "\"bc-yoga\"",
+       "count": 4,
+       "url": "/brand/fjallraven/cat/yoga",
+       "children": [
+        {
+         "name": "Yoga Clothing",
+         "value": "\"bc-yoga-clothing\"",
+         "count": 4,
+         "url": "/brand/fjallraven/cat/yoga-clothing"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Clothing Size",
+     "field": "vClothingSize_uFilter",
+     "filters": [
+      {
+       "name": "XXS",
+       "value": "\"XXS\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "XS",
+       "value": "\"XS\"",
+       "count": 76,
+       "url": null
+      },
+      {
+       "name": "S",
+       "value": "\"S\"",
+       "count": 166,
+       "url": null
+      },
+      {
+       "name": "S/M",
+       "value": "\"S/M\"",
+       "count": 3,
+       "url": null
+      },
+      {
+       "name": "M",
+       "value": "\"M\"",
+       "count": 155,
+       "url": null
+      },
+      {
+       "name": "L",
+       "value": "\"L\"",
+       "count": 147,
+       "url": null
+      },
+      {
+       "name": "L/XL",
+       "value": "\"L/XL\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "XL",
+       "value": "\"XL\"",
+       "count": 138,
+       "url": null
+      },
+      {
+       "name": "XXL",
+       "value": "\"XXL\"",
+       "count": 65,
+       "url": null
+      },
+      {
+       "name": "One Size",
+       "value": "\"One Size\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "2",
+       "value": "\"2\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "4",
+       "value": "\"4\"",
+       "count": 12,
+       "url": null
+      },
+      {
+       "name": "5",
+       "value": "\"5\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "6",
+       "value": "\"6\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "7",
+       "value": "\"7\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "8",
+       "value": "\"8\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "10",
+       "value": "\"10\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "11",
+       "value": "\"11\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "14",
+       "value": "\"14\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "15",
+       "value": "\"15\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "16",
+       "value": "\"16\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "28",
+       "value": "\"28\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "29",
+       "value": "\"29\"",
+       "count": 11,
+       "url": null
+      },
+      {
+       "name": "30",
+       "value": "\"30\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "31",
+       "value": "\"31\"",
+       "count": 4,
+       "url": null
+      },
+      {
+       "name": "32",
+       "value": "\"32\"",
+       "count": 21,
+       "url": null
+      },
+      {
+       "name": "33",
+       "value": "\"33\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "34",
+       "value": "\"34\"",
+       "count": 16,
+       "url": null
+      },
+      {
+       "name": "36",
+       "value": "\"36\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "38",
+       "value": "\"38\"",
+       "count": 14,
+       "url": null
+      },
+      {
+       "name": "39",
+       "value": "\"39\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "40",
+       "value": "\"40\"",
+       "count": 19,
+       "url": null
+      },
+      {
+       "name": "41",
+       "value": "\"41\"",
+       "count": 1,
+       "url": null
+      },
+      {
+       "name": "42",
+       "value": "\"42\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "US 2/EU 34/Reg",
+       "value": "\"US 2/EU 34/Reg\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "US 4/EU 36/Reg",
+       "value": "\"US 4/EU 36/Reg\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "US 10/EU 42/Reg",
+       "value": "\"US 10/EU 42/Reg\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "US 6/EU 38/Reg",
+       "value": "\"US 6/EU 38/Reg\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "US 8/EU 40/Reg",
+       "value": "\"US 8/EU 40/Reg\"",
+       "count": 7,
+       "url": null
+      },
+      {
+       "name": "US 12/EU 44/Reg",
+       "value": "\"US 12/EU 44/Reg\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "US 14/EU 46/Reg",
+       "value": "\"US 14/EU 46/Reg\"",
+       "count": 6,
+       "url": null
+      },
+      {
+       "name": "US 16/EU 48/Reg",
+       "value": "\"US 16/EU 48/Reg\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "US 2/EU 34",
+       "value": "\"US 2/EU 34\"",
+       "count": 2,
+       "url": null
+      },
+      {
+       "name": "US 29/EU 44",
+       "value": "\"US 29/EU 44\"",
+       "count": 1,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Color",
+     "field": "vColorFamily_uFilter",
+     "filters": [
+      {
+       "name": "black",
+       "value": "\"black\"",
+       "count": 216,
+       "url": null
+      },
+      {
+       "name": "blue",
+       "value": "\"blue\"",
+       "count": 198,
+       "url": null
+      },
+      {
+       "name": "green",
+       "value": "\"green\"",
+       "count": 187,
+       "url": null
+      },
+      {
+       "name": "brown",
+       "value": "\"brown\"",
+       "count": 107,
+       "url": null
+      },
+      {
+       "name": "gray",
+       "value": "\"gray\"",
+       "count": 58,
+       "url": null
+      },
+      {
+       "name": "beige",
+       "value": "\"beige\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "orange",
+       "value": "\"orange\"",
+       "count": 39,
+       "url": null
+      },
+      {
+       "name": "red",
+       "value": "\"red\"",
+       "count": 28,
+       "url": null
+      },
+      {
+       "name": "purple",
+       "value": "\"purple\"",
+       "count": 25,
+       "url": null
+      },
+      {
+       "name": "yellow",
+       "value": "\"yellow\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "white",
+       "value": "\"white\"",
+       "count": 18,
+       "url": null
+      },
+      {
+       "name": "pink",
+       "value": "\"pink\"",
+       "count": 17,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Gender",
+     "field": "gender_uFilter",
+     "filters": [
+      {
+       "name": "male",
+       "value": "\"male\"",
+       "count": 138,
+       "url": null
+      },
+      {
+       "name": "female",
+       "value": "\"female\"",
+       "count": 104,
+       "url": null
+      },
+      {
+       "name": "unisex",
+       "value": "\"unisex\"",
+       "count": 104,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Sale",
+     "field": "maxDiscount",
+     "filters": [
+      {
+       "name": "10% and more",
+       "value": "[10 TO 100]",
+       "count": 346,
+       "url": null
+      },
+      {
+       "name": "20% and more",
+       "value": "[20 TO 100]",
+       "count": 24,
+       "url": null
+      },
+      {
+       "name": "30% and more",
+       "value": "[30 TO 100]",
+       "count": 24,
+       "url": null
+      },
+      {
+       "name": "40% and more",
+       "value": "[40 TO 100]",
+       "count": 23,
+       "url": null
+      },
+      {
+       "name": "50% and more",
+       "value": "[50 TO 100]",
+       "count": 14,
+       "url": null
+      }
+     ]
+    },
+    {
+     "name": "Features",
+     "field": "attrFeatures_uFilter",
+     "filters": [
+      {
+       "name": "Abrasion Resistant",
+       "value": "\"Abrasion Resistant\"",
+       "count": 91,
+       "url": null
+      },
+      {
+       "name": "Pockets",
+       "value": "\"Pockets\"",
+       "count": 43,
+       "url": null
+      },
+      {
+       "name": "Water Resistant",
+       "value": "\"Water Resistant\"",
+       "count": 42,
+       "url": null
+      },
+      {
+       "name": "Venting",
+       "value": "\"Venting\"",
+       "count": 20,
+       "url": null
+      },
+      {
+       "name": "Anti Odor",
+       "value": "\"Anti Odor\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "Cargo Pockets",
+       "value": "\"Cargo Pockets\"",
+       "count": 17,
+       "url": null
+      },
+      {
+       "name": "Laptop Sleeve",
+       "value": "\"Laptop Sleeve\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "Shoulder Strap",
+       "value": "\"Shoulder Strap\"",
+       "count": 15,
+       "url": null
+      },
+      {
+       "name": "Waterproof",
+       "value": "\"Waterproof\"",
+       "count": 13,
+       "url": null
+      },
+      {
+       "name": "Compression",
+       "value": "\"Compression\"",
+       "count": 9,
+       "url": null
+      },
+      {
+       "name": "Zip Closure",
+       "value": "\"Zip Closure\"",
+       "count": 8,
+       "url": null
+      },
+      {
+       "name": "Adjustable Waist",
+       "value": "\"Adjustable Waist\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "Backpack Carry",
+       "value": "\"Backpack Carry\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "Hydration Compatible",
+       "value": "\"Hydration Compatible\"",
+       "count": 5,
+       "url": null
+      },
+      {
+       "name": "Ice Axe Carry",
+       "value": "\"Ice Axe Carry\"",
+       "count": 5,
+       "url": null
+      }
+     ]
+    }
+   ],
+   "sort": [
+    {
+     "name": "Featured",
+     "value": "-relevance",
+     "selected": true
+    },
+    {
+     "name": "Highest Rated",
+     "value": "-rating",
+     "selected": false
+    },
+    {
+     "name": "New Arrivals",
+     "value": "newest",
+     "selected": false
+    },
+    {
+     "name": "Lowest Price",
+     "value": "price",
+     "selected": false
+    },
+    {
+     "name": "Highest Price",
+     "value": "-price",
+     "selected": false
+    },
+    {
+     "name": "Percent Off",
+     "value": "-discount",
+     "selected": false
+    }
+   ],
+   "products": [
+    "FJRZ139",
+    "FJRZ137",
+    "FJRZ131",
+    "FJRZ11H",
+    "FJRZ12Y",
+    "FJRZ130",
+    "FJRZ13A",
+    "FJRZ12Z",
+    "FJRZ11F",
+    "FJRZ13E"
+   ]
+  }
+ ]
+}

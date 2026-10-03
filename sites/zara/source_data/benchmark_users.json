@@ -1,0 +1,285 @@
+{
+ "note": "Authored benchmark fixtures modeling zara.com's account area (the upstream account requires live accounts). Every product referenced carries its real captured upstream data (name, price, color, size, sku) from source_data/products.json.",
+ "users": [
+  {
+   "email": "alice.j@test.com",
+   "display_name": "Alice Johnson",
+   "created_at": "2026-08-02",
+   "addresses": [
+    {
+     "label": "HOME",
+     "full_name": "Alice Johnson",
+     "line1": "350 W 39th St, Apt 12B",
+     "city": "New York",
+     "state": "NY",
+     "zip": "10018",
+     "phone": "212-555-0184",
+     "is_default": true
+    },
+    {
+     "label": "WORK",
+     "full_name": "Alice Johnson",
+     "line1": "425 W 14th St",
+     "city": "New York",
+     "state": "NY",
+     "zip": "10014",
+     "phone": "212-555-0184",
+     "is_default": false
+    }
+   ],
+   "cart": [
+    {
+     "product": "08100038",
+     "color": "Ecru",
+     "size": "XS",
+     "quantity": 1,
+     "added_at": "2026-09-27"
+    },
+    {
+     "product": "11003810",
+     "color": "Black",
+     "size": "7½",
+     "quantity": 2,
+     "added_at": "2026-09-28"
+    }
+   ],
+   "wishlist": [
+    {
+     "product": "03085901",
+     "color": "Brown",
+     "added_at": "2026-09-20"
+    },
+    {
+     "product": "05755900",
+     "color": "Turquoise",
+     "added_at": "2026-09-22"
+    },
+    {
+     "product": "16821710",
+     "color": "Two-tone",
+     "added_at": "2026-09-25"
+    }
+   ]
+  },
+  {
+   "email": "bob.c@test.com",
+   "display_name": "Bob Chen",
+   "created_at": "2026-08-19",
+   "addresses": [
+    {
+     "label": "HOME",
+     "full_name": "Bob Chen",
+     "line1": "1810 N Sedgwick St, Unit 3",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60614",
+     "phone": "773-555-0137",
+     "is_default": true
+    }
+   ],
+   "cart": [],
+   "wishlist": [
+    {
+     "product": "01591001",
+     "color": "Brown marl",
+     "added_at": "2026-09-24"
+    }
+   ]
+  },
+  {
+   "email": "carol.d@test.com",
+   "display_name": "Carol Davis",
+   "created_at": "2026-08-25",
+   "addresses": [
+    {
+     "label": "HOME",
+     "full_name": "Carol Davis",
+     "line1": "1104 Wilshire Blvd",
+     "city": "Santa Monica",
+     "state": "CA",
+     "zip": "90401",
+     "phone": "310-555-0166",
+     "is_default": true
+    }
+   ],
+   "cart": [
+    {
+     "product": "06096811",
+     "color": "Ecru / Blue",
+     "size": "8-9 years (51,6 INCHES)",
+     "quantity": 1,
+     "added_at": "2026-09-28"
+    }
+   ],
+   "wishlist": [
+    {
+     "product": "05598702",
+     "color": "Burgundy",
+     "added_at": "2026-09-18"
+    },
+    {
+     "product": "08574701",
+     "color": "Red",
+     "added_at": "2026-09-21"
+    }
+   ]
+  },
+  {
+   "email": "dana.k@test.com",
+   "display_name": "Dana Kim",
+   "created_at": "2026-09-03",
+   "addresses": [
+    {
+     "label": "HOME",
+     "full_name": "Dana Kim",
+     "line1": "2320 Kapiolani Blvd",
+     "city": "Honolulu",
+     "state": "HI",
+     "zip": "96815",
+     "phone": "808-555-0148",
+     "is_default": true
+    }
+   ],
+   "cart": [
+    {
+     "product": "20110961",
+     "color": "",
+     "size": "ONE SIZE ONLY",
+     "quantity": 1,
+     "added_at": "2026-09-28"
+    },
+    {
+     "product": "16821710",
+     "color": "Two-tone",
+     "size": "ONE SIZE ONLY",
+     "quantity": 1,
+     "added_at": "2026-09-28"
+    },
+    {
+     "product": "02893916",
+     "color": "Mid-gray",
+     "size": "M",
+     "quantity": 1,
+     "added_at": "2026-09-29"
+    }
+   ],
+   "wishlist": []
+  }
+ ],
+ "orders": [
+  {
+   "user": "alice.j@test.com",
+   "number": "8004128041",
+   "status": "delivered",
+   "placed_at": "2026-09-08",
+   "shipping_cents": 0,
+   "payment_last4": "4417",
+   "address": {
+    "full_name": "Alice Johnson",
+    "line1": "350 W 39th St, Apt 12B",
+    "city": "New York",
+    "state": "NY",
+    "zip": "10018",
+    "phone": "212-555-0184"
+   },
+   "items": [
+    {
+     "product": "05063815",
+     "color": "Black",
+     "size": "S",
+     "unit_price": 7990,
+     "quantity": 1
+    },
+    {
+     "product": "05479900",
+     "color": "Burgundy",
+     "size": "M",
+     "unit_price": 45900,
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "user": "alice.j@test.com",
+   "number": "8004193147",
+   "status": "shipped",
+   "placed_at": "2026-09-21",
+   "shipping_cents": 495,
+   "payment_last4": "4417",
+   "address": {
+    "full_name": "Alice Johnson",
+    "line1": "350 W 39th St, Apt 12B",
+    "city": "New York",
+    "state": "NY",
+    "zip": "10018",
+    "phone": "212-555-0184"
+   },
+   "items": [
+    {
+     "product": "00869900",
+     "color": "Printed",
+     "size": "S",
+     "unit_price": 21900,
+     "quantity": 1
+    }
+   ]
+  },
+  {
+   "user": "bob.c@test.com",
+   "number": "8004277560",
+   "status": "in_progress",
+   "placed_at": "2026-09-26",
+   "shipping_cents": 495,
+   "payment_last4": "8103",
+   "address": {
+    "full_name": "Bob Chen",
+    "line1": "1810 N Sedgwick St, Unit 3",
+    "city": "Chicago",
+    "state": "IL",
+    "zip": "60614",
+    "phone": "773-555-0137"
+   },
+   "items": [
+    {
+     "product": "04416001",
+     "color": "Gray",
+     "size": "M",
+     "unit_price": 45900,
+     "quantity": 1
+    },
+    {
+     "product": "03692001",
+     "color": "Blue / Indigo",
+     "size": "M",
+     "unit_price": 17900,
+     "quantity": 2
+    }
+   ]
+  },
+  {
+   "user": "dana.k@test.com",
+   "number": "8004384012",
+   "status": "returned",
+   "placed_at": "2026-09-12",
+   "shipping_cents": 0,
+   "payment_last4": "5296",
+   "address": {
+    "full_name": "Dana Kim",
+    "line1": "2320 Kapiolani Blvd",
+    "city": "Honolulu",
+    "state": "HI",
+    "zip": "96815",
+    "phone": "808-555-0148"
+   },
+   "items": [
+    {
+     "product": "01591001",
+     "color": "Brown marl",
+     "size": "L",
+     "unit_price": 33900,
+     "quantity": 1
+    }
+   ]
+  }
+ ]
+}
