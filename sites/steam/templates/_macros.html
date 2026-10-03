@@ -1,0 +1,85 @@
+{% macro price_block(game) -%}
+  <span class="p">
+    {% if game.discount_pct and game.discount_pct > 0 %}
+      <span class="discount-badge">-{{ game.discount_pct }}%</span>
+      <span class="price-old">{{ game.initial_cents|money }}</span>
+      <span class="price-final">{{ game.price_cents|money }}</span>
+    {% elif game.is_free or game.price_cents == 0 %}
+      <span class="price-final free">Free To Play</span>
+    {% else %}
+      <span class="price-final">{{ game.price_cents|money }}</span>
+    {% endif %}
+  </span>
+{%- endmacro %}
+
+{% macro review_line(game) -%}
+  {% if game.review_score_desc %}
+    <span class="review-summary {{ 'positive' if 'positive' in game.review_score_desc.lower() else ('mixed' if 'mixed' in game.review_score_desc.lower() else 'negative') }}">
+      {{ game.review_score_desc }}
+      {% if game.review_pct %}<span class="stars">({{ game.review_pct }}% of {{ "{:,}".format(game.total_reviews) }} reviews)</span>{% endif %}
+    </span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro os_line(game) -%}
+  <span class="os-icons">
+    {% if game.platform_map.get('windows') %}<span title="Windows">win</span>{% endif %}
+    {% if game.platform_map.get('mac') %}<span title="macOS">mac</span>{% endif %}
+    {% if game.platform_map.get('linux') %}<span title="Linux+SteamOS">linux</span>{% endif %}
+  </span>
+{%- endmacro %}
+
+{% macro game_card(game) -%}
+  <a class="game-card" href="{{ game.url }}">
+    <img src="{{ _img(game.capsule_img) }}" alt="{{ game.name }}">
+    <div class="body">
+      <div class="t">{{ game.name }}</div>
+      <div class="m">
+        {{ game.release_date }}
+        {% if game.topseller_rank %} &middot; Top Seller #{{ game.topseller_rank }}{% endif %}
+      </div>
+      <div class="m">{{ review_line(game) }}</div>
+      <div class="p">{{ price_block(game) }}</div>
+    </div>
+  </a>
+{%- endmacro %}
+
+{% macro search_row(game) -%}
+  <div class="row">
+    <a class="capsule" href="{{ game.url }}">
+      <img src="{{ _img(game.capsule_img) }}" alt="{{ game.name }}">
+    </a>
+    <div class="mid">
+      <a class="t" href="{{ game.url }}">{{ game.name }}</a>
+      <div class="released">{{ game.release_date }}</div>
+      {{ review_line(game) }}
+      <div class="m">{{ os_line(game) }}
+        {% for g in game.genre_list[:4] %}<span class="chip">{{ g }}</span>{% endfor %}
+      </div>
+    </div>
+    <div class="result-price">{{ price_block(game) }}</div>
+  </div>
+{%- endmacro %}
+
+{% macro pager(base_url, page, pages) -%}
+  <div class="pager">
+    {% set sep = '&' if '?' in base_url else '?' %}
+    {% if page > 1 %}
+      <a href="{{ base_url }}{{ sep }}page={{ page - 1 }}">&laquo; Previous</a>
+    {% else %}
+      <span class="disabled">&laquo; Previous</span>
+    {% endif %}
+    {% for p in range(1, pages + 1) %}
+      {% if p == page %}
+        <span class="cur">{{ p }}</span>
+      {% else %}
+        <a href="{{ base_url }}{{ sep }}page={{ p }}">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page < pages %}
+      <a href="{{ base_url }}{{ sep }}page={{ page + 1 }}">Next &raquo;</a>
+    {% else %}
+      <span class="disabled">Next &raquo;</span>
+    {% endif %}
+  </div>
+{%- endmacro %}

@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }} — CVS{% endblock %}
+{% block content %}<div class="container page-space policy-layout"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('help_index') }}">Help</a><span>{{ page.title }}</span></nav><header class="page-heading"><h1>{{ page.title }}</h1></header><article class="policy-body">{{ page.body_html|safe }}</article><p class="source-note">Public CVS content captured {{ site_reference_date }}. This offline copy does not process live customer service requests.</p><a class="continue-link" href="{{ url_for('help_index') }}">Back to customer support</a></div>{% endblock %}

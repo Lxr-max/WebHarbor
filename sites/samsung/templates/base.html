@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Samsung{{ '' }}{% endblock %} | Samsung US</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Samsung Home">
+      <span class="brand-mark">SAMSUNG</span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="{{ url_for('shop_all') }}" class="{{ 'active' if request.path == '/shop/all/' }}">Shop All</a>
+      {% for cat in NAV_CATEGORIES %}
+      <a href="/{{ cat }}/" class="{{ 'active' if request.path == '/' ~ cat ~ '/' }}">{{ CATEGORY_LABELS[cat] }}</a>
+      {% endfor %}
+      <a href="{{ url_for('compare') }}" class="{{ 'active' if request.path == '/compare/' }}">Compare</a>
+      <a href="{{ url_for('support_home') }}" class="{{ 'active' if request.path.startswith('/support/') }}">Support</a>
+    </nav>
+    <div class="header-actions">
+      <form class="header-search" action="{{ url_for('search') }}" method="get" role="search">
+        <input type="search" name="q" value="{{ request.args.get('q', '') }}" placeholder="Search Samsung" aria-label="Search Samsung">
+        <button type="submit" aria-label="Search"><span>Search</span></button>
+      </form>
+      <a class="icon-link" href="{{ url_for('cart') }}" aria-label="Cart">
+        Cart <span class="badge">{{ cart_count() }}</span>
+      </a>
+      {% if current_user.is_authenticated %}
+      <a class="icon-link" href="{{ url_for('account') }}">Account</a>
+      {% else %}
+      <a class="icon-link" href="{{ url_for('login') }}">Sign In</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flashes">
+    {% for category, message in messages %}
+    <div class="flash flash-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="/smartphones/">Smartphones</a>
+      <a href="/tablets/">Tablets</a>
+      <a href="/watches/">Watches</a>
+      <a href="/tvs/">TVs</a>
+      <a href="/refrigerators/">Refrigerators</a>
+      <a href="/laundry/">Laundry</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="{{ url_for('support_home') }}">Support Home</a>
+      <a href="{{ url_for('warranty') }}">Warranty</a>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <a href="{{ url_for('login') }}">Sign In</a>
+      <a href="{{ url_for('signup') }}">Create Account</a>
+      <a href="{{ url_for('orders') }}">Order History</a>
+    </div>
+    <div class="footer-col">
+      <h4>Compare</h4>
+      <a href="{{ url_for('compare') }}">Galaxy Compare</a>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>Samsung US mirror for the WebHarbor benchmark &middot; upstream {{ 'https://www.samsung.com/us/' }} &middot; captured 2026-09-30</p>
+  </div>
+</footer>
+</body>
+</html>

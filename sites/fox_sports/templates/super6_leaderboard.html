@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ contest.title }} - Leaderboard | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/fox-super-6">FOX SUPER 6</a> &gt;
+  <span>{{ contest.title|upper }} LEADERBOARD</span>
+</div>
+<div class="page-head"><h1>{{ contest.title }} Leaderboard</h1></div>
+<table class="data-table">
+  <thead><tr><th>Rank</th><th>Player</th><th>Score</th></tr></thead>
+  <tbody>
+    {% for entry in entries %}
+    {% set player = users.get(entry.user_id) %}
+    <tr>
+      <td class="cell-strong">{{ loop.index }}</td>
+      <td class="cell-team">{{ player.name if player else 'Player' }}</td>
+      <td class="cell-strong">{{ entry.score or 0 }} / 6</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="btn-row">
+  <a class="btn btn-secondary" href="/fox-super-6">Back to FOX Super 6</a>
+</div>
+{% endblock %}

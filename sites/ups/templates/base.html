@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}UPS - United States{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+  <link rel="stylesheet" href="/static/css/ups.css">
+</head>
+<body>
+<header class="ups-header">
+  <div class="ups-header-top">
+    <div class="ups-wrap ups-header-row">
+      <a class="ups-logo" href="{{ url_for('index') }}" aria-label="UPS Home">
+        <img src="/static/images/logo.svg" alt="UPS" width="42" height="50">
+      </a>
+      <nav class="ups-primarynav" aria-label="Primary">
+        <div class="ups-navgroup">
+          <button class="ups-navbtn" aria-expanded="false" data-menu="shipping">Shipping <i class="ups-chev">&#9662;</i></button>
+          <div class="ups-menu" id="menu-shipping">
+            <p class="ups-menu-head">SHIPPING TOOLS</p>
+            <a href="{{ url_for('ship') }}">Create a Shipment</a>
+            <a href="{{ url_for('ctc') }}">Calculate Shipping Cost</a>
+            <a href="{{ url_for('pickup') }}">Schedule a Pickup</a>
+            <a href="{{ url_for('alerts') }}">Service Alerts</a>
+            <a href="{{ url_for('shipping_guide', page_key='order-supplies') }}">Order Supplies</a>
+            <p class="ups-menu-head">SHIPPING GUIDES</p>
+            <a href="{{ url_for('shipping_guide', page_key='how-to-ship') }}">How To Ship a Package</a>
+            <a href="{{ url_for('shipping_guide', page_key='international') }}">International Shipping</a>
+            <a href="{{ url_for('support') }}">Shipping Guides and Resources</a>
+          </div>
+        </div>
+        <div class="ups-navgroup">
+          <button class="ups-navbtn" aria-expanded="false" data-menu="tracking">Tracking <i class="ups-chev">&#9662;</i></button>
+          <div class="ups-menu" id="menu-tracking">
+            <p class="ups-menu-head">TRACKING</p>
+            <a href="{{ url_for('track') }}">Track a Package</a>
+            <a href="{{ url_for('support_article', key='change-a-delivery') }}">Change a Delivery</a>
+            <a href="{{ url_for('support_article', key='where-is-my-package') }}">Where&rsquo;s My Package</a>
+            <a href="{{ url_for('support_article', key='understanding-tracking-status') }}">Understanding Tracking Status</a>
+          </div>
+        </div>
+        <div class="ups-navgroup">
+          <button class="ups-navbtn" aria-expanded="false" data-menu="services">Products &amp; Services <i class="ups-chev">&#9662;</i></button>
+          <div class="ups-menu" id="menu-services">
+            <p class="ups-menu-head">SERVICES</p>
+            <a href="{{ url_for('services') }}">Shipping Services</a>
+            <a href="{{ url_for('services_compare') }}">Compare Services</a>
+            <a href="{{ url_for('business') }}">Business Solutions</a>
+            <a href="{{ url_for('business_page', page_key='ups-access-point') }}">UPS Access Point&reg;</a>
+            <a href="{{ url_for('store') }}">The UPS Store</a>
+          </div>
+        </div>
+        <div class="ups-navgroup">
+          <button class="ups-navbtn" aria-expanded="false" data-menu="support">Support <i class="ups-chev">&#9662;</i></button>
+          <div class="ups-menu" id="menu-support">
+            <p class="ups-menu-head">SUPPORT</p>
+            <a href="{{ url_for('support') }}">Help and Support Center</a>
+            <a href="{{ url_for('claims') }}">File a Claim</a>
+            <a href="{{ url_for('support_article', key='ups-delivery-intercept') }}">UPS Delivery Intercept</a>
+            <a href="{{ url_for('support_article', key='ups-delivery-notice') }}">UPS Delivery Notice</a>
+          </div>
+        </div>
+      </nav>
+      <div class="ups-header-actions">
+        <a class="ups-btn ups-btn-ghost" href="{{ url_for('locations') }}">
+          <img src="/static/images/pin.svg" alt="" width="14"> Find Closest UPS Location</a>
+        <div class="ups-alerts-btn" data-alert-count="1">
+          <img src="/static/images/alert.svg" alt="" width="16"><a href="{{ url_for('alerts') }}">Service Alerts</a>
+        </div>
+        {% if current_user.is_authenticated %}
+          <a class="ups-btn ups-btn-ghost" href="{{ url_for('account') }}"><img src="/static/images/profile.svg" alt="" width="14"> Hi, {{ current_user.name.split(' ')[0] }}</a>
+          <a class="ups-btn ups-btn-primary" href="{{ url_for('logout') }}">Log Out</a>
+        {% else %}
+          <a class="ups-btn ups-btn-ghost" href="{{ url_for('login') }}">Log In</a>
+          <a class="ups-btn ups-btn-primary" href="{{ url_for('register') }}">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% with messages = get_flashed_messages() %}{% if messages %}
+  <div class="ups-wrap"><div class="ups-flash" role="status">
+    {% for m in messages %}<p>{{ m }}</p>{% endfor %}
+  </div></div>
+  {% endif %}{% endwith %}
+</header>
+<main id="main-content">
+{% block content %}{% endblock %}
+</main>
+<footer class="ups-footer">
+  <div class="ups-wrap">
+    <div class="ups-foot-cols">
+      <div>
+        <p class="ups-foot-head">Support</p>
+        <a href="{{ url_for('support') }}">Help and Support Center</a>
+        <a href="{{ url_for('support_article', key='where-is-my-package') }}">Where&rsquo;s My Package</a>
+        <a href="{{ url_for('support') }}">Tracking Support</a>
+        <a href="{{ url_for('support') }}">Shipping Guides and Resources</a>
+        <a href="{{ url_for('support') }}">International Shipping Guides</a>
+      </div>
+      <div>
+        <p class="ups-foot-head">UPS Sites</p>
+        <a href="{{ url_for('business') }}">About UPS</a>
+        <a href="{{ url_for('business') }}">UPS Jobs</a>
+        <a href="{{ url_for('business_page', page_key='ups-billing') }}">UPS Billing</a>
+        <a href="{{ url_for('store') }}">The UPS Store</a>
+        <a href="{{ url_for('services') }}">UPS Developer Portal</a>
+      </div>
+      <div>
+        <p class="ups-foot-head">UPS Companies</p>
+        <a href="{{ url_for('business_page', page_key='simplify-returns') }}">Happy Returns</a>
+        <a href="{{ url_for('business_page', page_key='my-choice-business') }}">UPS My Choice&reg; for Business</a>
+        <a href="{{ url_for('business_page', page_key='quantum-view') }}">Quantum View&reg;</a>
+        <a href="{{ url_for('business_page', page_key='customized-logistics') }}">UPS Supply Chain Solutions</a>
+      </div>
+      <div>
+        <p class="ups-foot-head">Connect with Us</p>
+        <p class="ups-social">
+          <img src="/static/images/facebook.svg" alt="Facebook" width="22">
+          <img src="/static/images/x.svg" alt="X" width="22">
+          <img src="/static/images/instagram.svg" alt="Instagram" width="22">
+          <img src="/static/images/linkedin.svg" alt="LinkedIn" width="22">
+          <img src="/static/images/youtube.svg" alt="YouTube" width="22">
+        </p>
+      </div>
+    </div>
+    <div class="ups-foot-legal">
+      <p>Copyright &copy;1994-2026 United Parcel Service of America, Inc. All rights reserved.</p>
+      <p>
+        <a href="{{ url_for('support') }}">Terms and Conditions</a>
+        <a href="{{ url_for('support') }}">Website Terms of Use</a>
+        <a href="{{ url_for('support') }}">Your California Privacy Rights</a>
+        <a href="{{ url_for('support') }}">Privacy Notice</a>
+        <a href="{{ url_for('support') }}">Cookie Settings</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script src="/static/js/ups.js"></script>
+</body>
+</html>

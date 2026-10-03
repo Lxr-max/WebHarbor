@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | The Postal Store | USPS{% endblock %}
+{% block content %}
+<h1>Checkout</h1>
+<p class="totals">Order total: {{ total | usd }}</p>
+<div class="panel">
+  <form class="flow" action="{{ url_for('store_checkout') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Email for order confirmation <input type="email" name="email" required></label>
+    <p class="note">Payment is simulated in this mirror for benchmark use; no card is charged.</p>
+    <button class="btn" type="submit">Place Order</button>
+  </form>
+</div>
+{% endblock %}

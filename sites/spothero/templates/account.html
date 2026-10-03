@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}My Reservations | SpotHero{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <h1 style="font-size:26px">Hi{{ ', ' + current_user.first_name if current_user.first_name }}! 👋</h1>
+  <p class="muted">Manage your parking reservations, payment methods, and saved spots.</p>
+
+  <nav class="search-toolbar" style="top:0;border-bottom:none;padding-left:0">
+    <a class="chip active" href="{{ url_for('account') }}">Reservations</a>
+    <a class="chip" href="{{ url_for('payment_methods') }}">Payment Methods</a>
+    <a class="chip" href="{{ url_for('favorites') }}">Saved Spots</a>
+    <a class="chip" href="{{ url_for('profile') }}">Profile</a>
+  </nav>
+
+  <h2 style="margin-top:20px">Upcoming reservations</h2>
+  {% if upcoming %}
+  <div class="spot-list" style="padding-bottom:0">
+    {% for r in upcoming %}
+    <div class="spot-card">
+      {% if r.facility.image_list %}
+      <a href="{{ url_for('reservation_detail', code=r.code) }}"><img class="spot-img" src="{{ url_for('static', filename='images/' ~ r.facility.image_list[0]) }}" alt="Photo of {{ r.facility.title }}"></a>
+      {% else %}<div class="spot-img"></div>{% endif %}
+      <div>
+        <a class="spot-title" href="{{ url_for('reservation_detail', code=r.code) }}">{{ r.facility.title }}</a>
+        <div class="spot-meta">
+          <span>{{ r.code }}</span>
+          <span>{{ r.kind | capitalize }}</span>
+          <span>{{ fmt_display_date(r.start_dt) }} {{ fmt_display_time(r.start_dt) }} → {{ fmt_display_time(r.end_dt) }}</span>
+          {% if r.status == 'active' %}<span class="spot-tag" style="background:rgba(0,133,71,.1);color:var(--success)">Active</span>{% endif %}
+        </div>
+      </div>
+      <div class="spot-price">
+        <div class="amount">${{ '%.2f' % r.total }}</div>
+        <div class="note">{{ r.status }}</div>
+        <div class="spot-actions">
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('reservation_detail', code=r.code) }}">Manage</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><p>No upcoming reservations. <a href="{{ url_for('home') }}">Find parking</a></p></div>
+  {% endif %}
+
+  <h2 style="margin-top:28px">Past reservations</h2>
+  {% if past %}
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Reservation</th><th>Facility</th><th>Dates</th><th>Total</th></tr></thead>
+    <tbody>
+      {% for r in past %}
+      <tr>
+        <td><a href="{{ url_for('reservation_detail', code=r.code) }}">{{ r.code }}</a></td>
+        <td>{{ r.facility.title }}</td>
+        <td>{{ fmt_display_date(r.start_dt) }} {{ fmt_display_time(r.start_dt) }} → {{ fmt_display_time(r.end_dt) }}</td>
+        <td>${{ '%.2f' % r.total }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="muted">No past reservations yet.</p>
+  {% endif %}
+
+  {% if cancelled %}
+  <h2 style="margin-top:28px">Canceled reservations</h2>
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Reservation</th><th>Facility</th><th>Dates</th><th>Total</th></tr></thead>
+    <tbody>
+      {% for r in cancelled %}
+      <tr>
+        <td><a href="{{ url_for('reservation_detail', code=r.code) }}">{{ r.code }}</a></td>
+        <td>{{ r.facility.title }}</td>
+        <td>{{ fmt_display_date(r.start_dt) }} {{ fmt_display_time(r.start_dt) }} → {{ fmt_display_time(r.end_dt) }}</td>
+        <td>${{ '%.2f' % r.total }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

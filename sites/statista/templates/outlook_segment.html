@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ segment_name }} | Statista Market Insights{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <a href="/">Statista</a><span class="sep"></span><a href="/outlook/">Market Insights</a>
+  <span class="sep"></span><span>{{ segment_name }}</span>
+</nav>
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+  <img src="/static/images/outlook_hero_{{ segment }}.svg" alt="{{ segment_name }}" style="width:170px;">
+  <div>
+    <h1 style="margin-bottom:4px;">{{ segment_name }}</h1>
+    <p class="section__sub" style="margin:0;">All markets in the {{ segment_name }} segment</p>
+  </div>
+</div>
+<section class="section">
+  <div class="cardGrid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+    {% for m in markets %}
+    <a class="card" href="{{ m.url }}">
+      <div class="card__body">
+        <span class="card__meta">Market Insights | {{ m.region }}</span>
+        <span class="card__title">{{ m.name }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,364 @@
+/* UPS mirror — visual language captured from www.ups.com (2026-09-28).
+   Brown header, gold CTA, UPS blue links, gray secondary text. */
+
+:root {
+  --ups-brown: #351c15;
+  --ups-brown-2: #64452e;
+  --ups-gold: #ffc400;
+  --ups-blue: #0662bb;
+  --ups-teal: #0a8080;
+  --ups-red: #df2901;
+  --ups-green: #218745;
+  --ups-ink: #121212;
+  --ups-gray: #5f5753;
+  --ups-line: #dfdbd7;
+  --ups-bg: #ffffff;
+  --ups-bg-soft: #f2f1ef;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "UPS Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ups-ink);
+  background: var(--ups-bg);
+  line-height: 1.5;
+}
+a { color: var(--ups-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1 { font-size: 2.1rem; font-weight: 500; margin: 0.4em 0; }
+h2 { font-size: 1.35rem; font-weight: 500; margin: 0.8em 0 0.5em; }
+h3 { font-size: 1.05rem; font-weight: 600; margin: 0.6em 0 0.3em; }
+p { margin: 0.35em 0; }
+.ups-wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- header ---------- */
+.ups-header-top { background: var(--ups-brown); color: #fff; }
+.ups-header-row { display: flex; align-items: center; gap: 18px; padding: 10px 20px; }
+.ups-logo img { display: block; }
+.ups-primarynav { display: flex; gap: 4px; flex: 1; }
+.ups-navbtn {
+  background: none; color: #fff; border: 0; font-size: 0.95rem;
+  padding: 10px 12px; cursor: pointer; font-family: inherit;
+}
+.ups-navbtn:hover, .ups-navbtn.is-open { background: var(--ups-brown-2); }
+.ups-navgroup { position: relative; }
+.ups-menu {
+  display: none; position: absolute; top: 100%; left: 0; z-index: 60;
+  background: var(--ups-brown-2); min-width: 300px; padding: 12px 18px 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+.ups-navgroup.is-open .ups-menu { display: block; }
+.ups-menu a { display: block; color: #fff; padding: 6px 0; font-size: 0.92rem; }
+.ups-menu a:hover { text-decoration: underline; }
+.ups-menu-head { color: var(--ups-gold); font-size: 0.72rem; letter-spacing: 1px; margin: 10px 0 4px; }
+.ups-header-actions { display: flex; align-items: center; gap: 10px; }
+.ups-header-actions .ups-btn-ghost { color: #fff; }
+.ups-alerts-btn { display: flex; gap: 6px; align-items: center; font-size: 0.85rem; position: relative; }
+.ups-alerts-btn a { color: #fff; }
+.ups-alerts-btn::after {
+  content: attr(data-alert-count); background: var(--ups-red); color: #fff;
+  border-radius: 50%; width: 15px; height: 15px; font-size: 0.65rem;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* ---------- buttons ---------- */
+.ups-btn {
+  display: inline-block; border-radius: 3px; padding: 10px 18px; font-size: 0.95rem;
+  border: 1px solid transparent; cursor: pointer; font-family: inherit;
+  text-align: center;
+}
+.ups-btn-primary { background: var(--ups-gold); color: var(--ups-ink); font-weight: 600; border-color: var(--ups-gold); }
+.ups-btn-primary:hover { background: #ffd23f; text-decoration: none; }
+.ups-btn-secondary { background: #fff; color: var(--ups-blue); border-color: var(--ups-blue); }
+.ups-btn-secondary:hover { background: #eaf3fb; text-decoration: none; }
+.ups-btn-tertiary { background: #fff; color: var(--ups-gray); border-color: var(--ups-line); }
+.ups-btn-ghost { background: none; border-color: #9d8f88; }
+.ups-chev { font-style: normal; }
+
+/* ---------- flash ---------- */
+.ups-flash { background: #e7f2f2; border: 1px solid var(--ups-teal); color: #073c3c;
+  padding: 10px 16px; margin: 10px 0; border-radius: 3px; }
+
+/* ---------- hero ---------- */
+.ups-hero { background: var(--ups-brown); color: #fff; }
+.ups-hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; padding: 36px 20px 30px; align-items: center; }
+.ups-hero h1 { color: #fff; margin: 0 0 6px; }
+.ups-hero p { color: #e8e2de; }
+.ups-hero-art img { width: 100%; border-radius: 6px; display: block; }
+.ups-quicktools { margin-top: 18px; }
+.ups-trackwidget {
+  background: #fff; color: var(--ups-ink); padding: 18px 20px; border-radius: 4px;
+  display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+.ups-trackwidget .ups-h2 { margin: 0; }
+.ups-trackwidget textarea {
+  flex: 1; min-width: 260px; min-height: 46px; padding: 10px 12px;
+  border: 1px solid var(--ups-gray); border-radius: 3px; font-family: inherit; resize: vertical;
+}
+.ups-quickgrid { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.ups-tool {
+  display: inline-flex; gap: 8px; align-items: center; color: #fff;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.25);
+  padding: 8px 14px; border-radius: 3px; font-size: 0.9rem;
+}
+.ups-tool img { filter: invert(1) brightness(1.6); }
+.ups-tool:hover { background: rgba(255,255,255,.16); text-decoration: none; }
+
+.ups-alertbar {
+  display: flex; gap: 10px; align-items: center; padding: 12px 18px;
+  background: var(--ups-bg-soft); border: 1px solid var(--ups-line); margin: 18px 0;
+}
+
+/* ---------- sections / cards ---------- */
+.ups-section { padding: 26px 0 8px; }
+.ups-sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.ups-sec-head h2 { margin: 0; }
+.ups-rule { flex: 1; height: 4px; background: var(--ups-gold); display: block; }
+.ups-cardgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.ups-card {
+  background: #fff; border: 1px solid var(--ups-line); border-radius: 4px;
+  padding: 18px; display: block; color: inherit;
+}
+.ups-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); text-decoration: none; }
+.ups-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; }
+/* Inline icons inside cards (e.g. the exception warning) keep their intended
+   small size instead of being hijacked by the card-banner rule above. */
+.ups-exception-note img, .ups-meaning img, .ups-hint img {
+  width: 16px; height: 16px; object-fit: contain; border-radius: 0;
+}
+.ups-cardlink { color: var(--ups-blue); font-weight: 600; display: inline-block; margin-top: 6px; }
+.ups-lede { color: var(--ups-gray); max-width: 60em; }
+.ups-page { padding: 22px 0 40px; }
+.ups-breadcrumb { color: var(--ups-gray); font-size: 0.85rem; margin-bottom: 6px; }
+.ups-hint { color: var(--ups-gray); font-size: 0.86rem; }
+.ups-h2 { font-size: 1.15rem; font-weight: 500; }
+.ups-req { color: var(--ups-red); }
+
+/* ---------- forms ---------- */
+.ups-shipform, .ups-ctc-form { display: block; }
+label { display: block; font-weight: 600; margin: 12px 0 4px; font-size: 0.92rem; }
+input, select, textarea {
+  font-family: inherit; font-size: 0.95rem; padding: 9px 12px;
+  border: 1px solid #9d9d9d; border-radius: 3px; width: 100%; max-width: 420px;
+  background: #fff;
+}
+textarea { max-width: 640px; }
+.ups-check, .ups-radio { display: flex; gap: 8px; align-items: center; font-weight: 400; }
+.ups-check input, .ups-radio input { width: auto; }
+.ups-form-actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+.ups-errors { border-color: var(--ups-red); background: #fdf3f1; }
+.ups-errors ul { margin: 4px 0 4px 18px; }
+.ups-steps { display: flex; gap: 8px; list-style: none; padding: 0; margin: 12px 0 18px; flex-wrap: wrap; }
+.ups-steps li { padding: 6px 12px; border: 1px solid var(--ups-line); border-radius: 14px; color: var(--ups-gray); font-size: 0.85rem; }
+.ups-steps li.is-active { border-color: var(--ups-ink); color: var(--ups-ink); font-weight: 600; }
+.ups-ctc-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+.ups-dims { display: flex; gap: 12px; }
+.ups-dims label { margin-top: 12px; }
+.ups-dims input { max-width: 110px; }
+.ups-stephead { display: flex; align-items: center; gap: 10px; }
+.ups-stepnum {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%; background: var(--ups-ink); color: #fff;
+  font-size: 0.8rem;
+}
+
+/* ---------- tracking ---------- */
+.ups-track-results { margin-top: 22px; display: grid; gap: 12px; }
+.ups-trackcard { display: flex; align-items: center; gap: 18px; padding: 16px 18px; }
+.ups-trackcard.is-error { border-color: #e5c1b5; background: #fdf7f5; }
+.ups-trackcard-status { display: flex; gap: 12px; align-items: center; min-width: 240px; }
+.ups-tracknum { font-weight: 700; letter-spacing: 0.02em; margin: 0; }
+.ups-tracknum-big { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.03em; }
+.ups-statuslabel { font-weight: 600; color: var(--ups-teal); margin: 0; }
+.ups-statuslabel-big { font-weight: 600; color: var(--ups-teal); font-size: 1.05rem; }
+.ups-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ups-gray); display: inline-block; }
+.ups-dot.delivered, .ups-dot.ap { background: var(--ups-green); }
+.ups-dot.out { background: var(--ups-gold); }
+.ups-dot.transit { background: var(--ups-blue); }
+.ups-dot.label { background: #9d9d9d; }
+.ups-dot.exception, .ups-dot.error { background: var(--ups-red); }
+.ups-trackcard-meta { flex: 1; color: var(--ups-gray); }
+.ups-trackcard-meta p { margin: 2px 0; }
+.ups-trackcard .ups-btn { margin-left: auto; }
+
+.ups-detail-head { padding: 22px; }
+.ups-detail-numbers { display: flex; gap: 34px; flex-wrap: wrap; }
+.ups-factlabel { color: var(--ups-gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.6px; margin: 0; }
+.ups-progress { margin-top: 18px; }
+.ups-progress-track { display: flex; gap: 0; margin: 10px 0 4px; }
+.ups-progress-step { flex: 1; text-align: center; position: relative; }
+.ups-progress-step::before {
+  content: ""; position: absolute; top: 7px; left: -50%; width: 100%; height: 3px; background: var(--ups-line);
+}
+.ups-progress-step:first-child::before { display: none; }
+.ups-progress-step.done::before { background: var(--ups-green); }
+.ups-progress-dot {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--ups-line);
+  border: 3px solid #fff; box-shadow: 0 0 0 2px var(--ups-line);
+  display: inline-block; position: relative; z-index: 1;
+}
+.ups-progress-step.done .ups-progress-dot { background: var(--ups-green); box-shadow: 0 0 0 2px var(--ups-green); }
+.ups-progress-label { font-size: 0.78rem; color: var(--ups-gray); margin-top: 8px; display: block; }
+.ups-progress-step.done .ups-progress-label { color: var(--ups-ink); font-weight: 600; }
+.ups-exception-note { color: var(--ups-red); display: flex; gap: 8px; align-items: flex-start; }
+.ups-meaning { color: var(--ups-gray); background: var(--ups-bg-soft); padding: 10px 14px; border-radius: 3px; }
+.ups-detail-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.ups-detail-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; margin-top: 18px; }
+.ups-timeline { list-style: none; padding: 0 0 0 6px; margin: 0; }
+.ups-timeline li { border-left: 2px solid var(--ups-line); padding: 2px 0 18px 18px; position: relative; }
+.ups-timeline li::before {
+  content: ""; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px;
+  border-radius: 50%; background: #fff; border: 3px solid var(--ups-line);
+}
+.ups-timeline li.is-current::before { border-color: var(--ups-blue); }
+.ups-tl-status { font-weight: 600; margin: 0; }
+.ups-tl-when, .ups-tl-loc { color: var(--ups-gray); margin: 0; font-size: 0.9rem; }
+.ups-tl-desc { margin: 2px 0 0; }
+.ups-facts-list { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
+.ups-facts-list dt { color: var(--ups-gray); font-size: 0.85rem; }
+.ups-facts-list dd { margin: 0; }
+.ups-holdcard { border-left: 5px solid var(--ups-gold); }
+.ups-holdinfo { display: flex; gap: 30px; margin-top: 10px; flex-wrap: wrap; }
+.ups-pkg-h { color: var(--ups-gray); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; }
+.ups-changes { margin: 4px 0 0 18px; }
+
+/* ---------- quote table ---------- */
+.ups-quotetable { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.ups-quotetable th, .ups-quotetable td {
+  text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--ups-line);
+  vertical-align: top;
+}
+.ups-quotetable thead th { color: var(--ups-gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.6px; }
+.ups-qsvc { font-weight: 600; margin: 0; }
+.ups-qprice { font-size: 1.15rem; font-weight: 700; margin: 0; }
+.ups-currency { font-size: 0.8rem; color: var(--ups-gray); font-weight: 400; }
+.ups-guarantee { color: var(--ups-green); font-weight: 600; font-size: 0.85rem; }
+.ups-qbreak summary { cursor: pointer; color: var(--ups-blue); }
+.ups-qbreak p { margin: 4px 0; color: var(--ups-gray); font-size: 0.88rem; }
+
+/* ---------- review grids ---------- */
+.ups-review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin: 16px 0; }
+.ups-confirm { padding: 28px; }
+.ups-confirm-num { background: var(--ups-bg-soft); border: 1px dashed var(--ups-line); padding: 14px 18px; margin: 14px 0; display: inline-block; }
+
+/* ---------- change delivery ---------- */
+.ups-cd-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 14px; }
+.ups-cd-form { border: 1px solid var(--ups-line); padding: 16px; border-radius: 4px; }
+.ups-cd-aps { margin-top: 12px; }
+.ups-cd-aps legend { font-weight: 600; }
+.ups-cd-ap { display: flex; gap: 10px; padding: 8px; border: 1px solid var(--ups-line); border-radius: 3px; margin: 6px 0; font-weight: 400; }
+.ups-cd-ap input { width: auto; }
+
+/* ---------- locator ---------- */
+.ups-locatorbar { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding: 18px; }
+.ups-locatorform { display: flex; gap: 10px; flex: 1; min-width: 280px; }
+.ups-locatorform input { max-width: none; flex: 1; }
+.ups-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.ups-filterlbl { color: var(--ups-gray); font-size: 0.85rem; }
+.ups-chip {
+  border: 1px solid var(--ups-line); padding: 6px 12px; border-radius: 16px;
+  font-size: 0.85rem; color: var(--ups-ink);
+}
+.ups-chip.is-active { border-color: var(--ups-ink); background: var(--ups-ink); color: #fff; }
+.ups-chip:hover { text-decoration: none; }
+.ups-locgrid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 18px; }
+.ups-loccard { display: flex; gap: 16px; align-items: center; }
+.ups-loc-icon { width: 54px; height: 54px; border-radius: 50%; background: var(--ups-brown); flex: none; }
+.ups-loc-icon.ups-icon-the-ups-store { background: var(--ups-gold); }
+.ups-loc-icon.ups-icon-ups-access-point { background: var(--ups-brown-2); }
+.ups-loc-icon.ups-icon-ups-drop-box { background: var(--ups-gray); }
+.ups-loc-icon.ups-icon-ups-customer-center { background: var(--ups-teal); }
+.ups-loc-body { flex: 1; }
+.ups-loctype { color: var(--ups-gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.6px; margin: 0; }
+.ups-locname { font-weight: 700; font-size: 1.05rem; margin: 2px 0; }
+.ups-locdetail h1 { margin-top: 6px; }
+.ups-hourstable { width: auto; border-collapse: collapse; margin: 8px 0 16px; }
+.ups-hourstable td { padding: 4px 18px 4px 0; border-bottom: 1px solid var(--ups-line); }
+.ups-offerings { margin-left: 18px; }
+
+/* ---------- services ---------- */
+.ups-svcgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.ups-svcbucket { color: var(--ups-teal); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
+.ups-svctag { color: var(--ups-gray); }
+.ups-svcfacts { margin: 10px 0 0 16px; padding: 0; color: var(--ups-gray); font-size: 0.9rem; }
+.ups-commitment { background: var(--ups-bg-soft); padding: 12px 16px; border-radius: 3px; }
+.ups-svcgrid-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin: 16px 0; }
+.ups-svc-list { margin: 8px 0 0 18px; }
+.ups-comparewrap { overflow-x: auto; }
+.ups-comparetable { border-collapse: collapse; min-width: 900px; width: 100%; }
+.ups-comparetable th, .ups-comparetable td { border: 1px solid var(--ups-line); padding: 10px 12px; text-align: left; font-size: 0.9rem; }
+.ups-comparetable thead th { background: var(--ups-brown); color: #fff; }
+.ups-comparetable tbody th { background: var(--ups-bg-soft); }
+
+/* ---------- fees ---------- */
+.ups-feetable { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.ups-feetable th, .ups-feetable td { padding: 10px 12px; border-bottom: 1px solid var(--ups-line); text-align: left; vertical-align: top; font-size: 0.92rem; }
+.ups-feetable thead th { color: var(--ups-gray); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.6px; }
+
+/* ---------- claims ---------- */
+.ups-claimsteps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+.ups-claimstep { border: 1px solid var(--ups-line); border-radius: 4px; padding: 14px; }
+.ups-claimtimeline { list-style: none; padding: 0; margin: 14px 0; }
+.ups-claimtimeline li { display: flex; gap: 12px; padding: 8px 0; color: var(--ups-gray); }
+.ups-claimtimeline li.done { color: var(--ups-ink); }
+.ups-claimtimeline li.done .ups-stepnum { background: var(--ups-green); }
+.ups-claim-shipment { background: var(--ups-bg-soft); padding: 10px 14px; border-radius: 3px; margin-bottom: 10px; }
+
+/* ---------- account ---------- */
+.ups-accountable { width: 100%; border-collapse: collapse; }
+.ups-accountable th { text-align: left; color: var(--ups-gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; border-bottom: 2px solid var(--ups-line); }
+.ups-accountable td { padding: 10px; border-bottom: 1px solid var(--ups-line); font-size: 0.92rem; }
+
+/* ---------- auth ---------- */
+.ups-authcard { max-width: 430px; margin: 0 auto; padding: 26px; }
+.ups-authcard input { max-width: none; }
+
+/* ---------- content pages ---------- */
+.ups-contentpage { padding: 26px; }
+.ups-contentbody { white-space: pre-wrap; max-width: 62em; color: #222; }
+.ups-alertcard { display: flex; gap: 14px; align-items: flex-start; }
+.ups-red-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ups-red); margin-top: 8px; flex: none; }
+
+/* ---------- footer ---------- */
+.ups-footer { background: var(--ups-brown); color: #d9d2cd; margin-top: 40px; padding: 30px 0 20px; font-size: 0.88rem; }
+.ups-foot-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.ups-foot-head { color: #fff; font-weight: 600; margin: 0 0 10px; }
+.ups-foot-cols a { display: block; color: #d9d2cd; padding: 3px 0; }
+.ups-foot-cols a:hover { color: #fff; text-decoration: underline; }
+.ups-social img { margin-right: 10px; }
+.ups-foot-legal { border-top: 1px solid #4a3527; margin-top: 24px; padding-top: 14px; color: #a89d95; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.ups-foot-legal a { color: #a89d95; margin-right: 14px; }
+
+.ups-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media (max-width: 900px) {
+  .ups-cardgrid { grid-template-columns: repeat(2, 1fr); }
+  .ups-hero-grid { grid-template-columns: 1fr; }
+  .ups-detail-grid { grid-template-columns: 1fr; }
+  .ups-foot-cols { grid-template-columns: repeat(2, 1fr); }
+  .ups-claimsteps { grid-template-columns: 1fr; }
+  .ups-primarynav { display: none; }
+  /* Wide comparison/account tables scroll inside their own card instead of
+     pushing the document out of the viewport. */
+  .ups-comparewrap { overflow-x: auto; }
+  .ups-accountable { display: block; overflow-x: auto; max-width: 100%; }
+}
+
+/* Narrow viewports: the header actions strip and tracking result cards wrap
+   onto multiple rows so the page never scrolls horizontally (the desktop
+   layout above 740px is unchanged). */
+@media (max-width: 740px) {
+  .ups-header-row { flex-wrap: wrap; row-gap: 10px; }
+  .ups-header-actions { flex-wrap: wrap; row-gap: 8px; margin-left: auto; }
+  .ups-header-actions .ups-btn { padding: 8px 12px; font-size: 0.88rem; }
+  .ups-trackcard { flex-wrap: wrap; row-gap: 8px; }
+  .ups-trackcard-status { min-width: 0; }
+  .ups-trackcard .ups-btn { margin-left: 0; }
+  /* Long source URLs / token strings wrap instead of pushing the page out. */
+  .ups-contentbody, .ups-hint, .ups-locaddr { overflow-wrap: anywhere; }
+}
+
+.ups-heroimg { width: auto; max-width: 100%; max-height: 260px; object-fit: contain; border-radius: 4px; margin-bottom: 10px; }

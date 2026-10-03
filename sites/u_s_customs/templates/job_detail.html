@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('careers_search') }}">Search Jobs</a> › {{ job.title }}</div>
+<h1 class="page-title">{{ job.title }}</h1>
+<p class="note">{{ job.department }}</p>
+{% if user.is_authenticated %}
+<form method="post" action="{{ url_for('job_save', control=job.control) }}" style="margin-bottom:1rem;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn btn-ghost" type="submit">Save this job to My Account</button>
+</form>
+{% endif %}
+<table class="data">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Organization</td><td>{{ job.org or '—' }}</td></tr>
+  <tr><td>Series &amp; Grade</td><td>{{ job.series_grade or '—' }}</td></tr>
+  <tr><td>Salary</td><td>{{ job.salary or '—' }}</td></tr>
+  <tr><td>Location</td><td>{{ job.location or '—' }}</td></tr>
+  <tr><td>Closing Date</td><td>{{ job.closing or '—' }}</td></tr>
+  <tr><td>Announcement Number</td><td>{{ job.announcement_number or '—' }}</td></tr>
+  <tr><td>Promotion Potential</td><td>{{ job.promotion_potential or '—' }}</td></tr>
+  <tr><td>Appointment Type</td><td>{{ job.appointment_type or '—' }}</td></tr>
+  <tr><td>Work Schedule</td><td>{{ job.work_schedule or '—' }}</td></tr>
+  <tr><td>Telework Eligible</td><td>{{ job.telework or '—' }}</td></tr>
+  <tr><td>Drug Test Required</td><td>{{ job.drug_test or '—' }}</td></tr>
+  <tr><td>Control Number</td><td>{{ job.control }}</td></tr>
+</table>
+{% if job.summary %}<section><h2>Summary</h2><p>{{ job.summary }}</p></section>{% endif %}
+{% if job.duties %}<section><h2>Duties</h2><p>{{ job.duties }}</p></section>{% endif %}
+{% if job.requirements %}<section><h2>Requirements</h2><p>{{ job.requirements }}</p></section>{% endif %}
+{% if job.qualifications %}<section><h2>Qualifications</h2><p>{{ job.qualifications }}</p></section>{% endif %}
+<p><a class="btn" href="{{ job.url }}" rel="noopener">View on USAJOBS (upstream reference)</a></p>
+{% if similar %}
+<section><h2>Similar Jobs</h2>
+<ul>{% for j in similar %}<li><a href="{{ url_for('job_detail', control=j.control) }}">{{ j.title }}</a></li>{% endfor %}</ul></section>
+{% endif %}
+{% endblock %}

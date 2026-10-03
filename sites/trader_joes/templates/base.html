@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Home{% endblock %} | Trader Joe's</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts.css') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icons/favicon.svg') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="my-store" href="{{ url_for('store_search') }}">
+        <span class="my-store-label">My Store:</span>
+        <span class="my-store-name">{{ my_store.name if my_store else 'Find a Store' }}</span>
+      </a>
+      <nav class="topnav">
+        <a href="{{ url_for('store_search') }}">Stores</a>
+        <a href="{{ url_for('about_us') }}">About Us</a>
+        <a href="{{ url_for('careers') }}">Careers</a>
+        <a href="{{ url_for('announcements') }}">Announcements</a>
+      </nav>
+      <form class="searchform" action="{{ url_for('search') }}" method="get">
+        <input type="search" name="q" value="{{ request.args.get('q','') }}" placeholder="Search" aria-label="Search">
+        <button type="submit" class="searchbtn" aria-label="Search">Search</button>
+      </form>
+      <a class="shopping-list-link" href="{{ url_for('shopping_list') }}">
+        Shopping List
+        {% if shopping_list_count %}<span class="badge">{{ shopping_list_count }}</span>{% endif %}
+      </a>
+      {% if current_user.is_authenticated %}
+      <a class="shopping-list-link" href="{{ url_for('logout') }}">Log out ({{ current_user.name }})</a>
+      {% else %}
+      <a class="shopping-list-link" href="{{ url_for('login') }}">Log In</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="mainbar">
+    <div class="wrap mainbar-inner">
+      <a class="logo" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='icons/trader_joes_logo.svg') }}" alt="Trader Joe's">
+      </a>
+      <nav class="mainnav">
+        <div class="nav-item">
+          <a href="{{ url_for('products_hub') }}">Products</a>
+          <div class="nav-drop">
+            <a href="{{ url_for('category', slug='products', cat_id=2) }}?filters=%7B%22areNewProducts%22%3Atrue%7D">What's New</a>
+            {% for top, children in nav_categories() %}
+              {% if top.url_key == 'food' %}
+                {% for c in children %}
+                <a href="{{ category_link(c) }}">{{ c.name }}</a>
+                {% endfor %}
+              {% endif %}
+              <a href="{{ category_link(top) }}">{{ top.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('discover') }}">Discover</a>
+          <div class="nav-drop">
+            <a href="{{ url_for('entertaining') }}">Entertaining</a>
+            <a href="{{ url_for('guides') }}">Guides</a>
+            <a href="{{ url_for('stories') }}">Stories</a>
+            <a href="{{ url_for('subscribe') }}">Subscribe</a>
+          </div>
+        </div>
+        <a href="{{ url_for('recipes') }}">Recipes</a>
+        <a href="{{ url_for('podcast') }}">Listen</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <article class="footer-button">
+      <h2 class="footer-heading">The Fearless Flyer</h2>
+      <a class="cta" href="{{ url_for('subscribe') }}">GET IT</a>
+    </article>
+    <article class="footer-button">
+      <h2 class="footer-heading">The Podcast</h2>
+      <a class="cta" href="{{ url_for('podcast') }}">LISTEN</a>
+    </article>
+    <article class="footer-button">
+      <h2 class="footer-heading">Recipes</h2>
+      <a class="cta" href="{{ url_for('recipes') }}">TRY</a>
+    </article>
+    <div class="footer-col">
+      <h3>Products</h3>
+      <a href="{{ url_for('category', slug='products', cat_id=2) }}?filters=%7B%22areNewProducts%22%3Atrue%7D">What's New</a>
+      {% for top, children in nav_categories() %}
+        <a href="{{ category_link(top) }}">{{ top.name }}</a>
+      {% endfor %}
+    </div>
+    <div class="footer-col">
+      <h3>Discover</h3>
+      <a href="{{ url_for('stories') }}">Stories</a>
+      <a href="{{ url_for('entertaining') }}">Entertaining</a>
+      <a href="{{ url_for('guides') }}">Guides</a>
+      <a href="{{ url_for('subscribe') }}">Subscribe</a>
+    </div>
+    <div class="footer-col">
+      <h3>Recipes</h3>
+      {% for tag, label in [('appetizer','Appetizers &amp; Sides'),('beverages','Beverages'),('breakfast','Breakfast'),('lunch','Lunch'),('dinner','Dinner'),('desserts','Desserts')] %}
+        <a href="{{ url_for('recipes', categories=[tag], page=1) }}">{{ label }}</a>
+      {% endfor %}
+    </div>
+    <div class="footer-col">
+      <h3>Who We Are</h3>
+      <a href="{{ url_for('about_us') }}">About Us</a>
+      <a href="{{ url_for('neighborhood_shares') }}">Neighborhood Shares</a>
+      <a href="{{ url_for('store_search') }}">Find A Store</a>
+      <a href="{{ url_for('faq') }}">FAQs</a>
+      <a href="{{ url_for('gift_card') }}">Gift Card Balance Inquiry</a>
+      <a href="{{ url_for('contact_us') }}">Contact Us</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <div class="follow">
+      <span>Follow us</span>
+      <a href="https://www.youtube.com/traderjoes" aria-label="YouTube"><img src="{{ url_for('static', filename='icons/youtube.svg') }}" alt="YouTube"></a>
+      <a href="https://www.instagram.com/traderjoes/" aria-label="Instagram"><img src="{{ url_for('static', filename='icons/instagram.svg') }}" alt="Instagram"></a>
+      <a href="https://www.pinterest.com/traderjoes/_created/" aria-label="Pinterest"><img src="{{ url_for('static', filename='icons/pinterest.svg') }}" alt="Pinterest"></a>
+    </div>
+    <p>Copyright &copy; Trader Joe&rsquo;s 2026. All rights reserved.</p>
+    <nav class="legal">
+      <a href="{{ url_for('privacy_policy') }}">Terms of Use</a>
+      <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+      <a href="{{ url_for('privacy_policy') }}">Accessibility</a>
+      <a href="{{ url_for('privacy_policy') }}">Transparency in Supply Chains Act</a>
+      <a href="{{ url_for('contact_us') }}">Contact Us</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

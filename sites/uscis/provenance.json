@@ -1,0 +1,68 @@
+{
+  "site": "uscis",
+  "upstream": "https://www.uscis.gov/",
+  "captured_at": "2026-09-28",
+  "capture_method": "headless Chromium (Playwright) against the live pages; Drupal views/ajax and locator REST endpoints fetched through the same browser session with the page's own session cookies; archived upstream API records fetched from web.archive.org at the exact snapshot timestamps listed below",
+  "sources": {
+    "www.uscis.gov": {
+      "role": "primary site: topic pages (green card, citizenship, working in the U.S., humanitarian, family, adoption, military, visit the U.S., I-9 Central), tools and guidance pages, forms catalog and form detail pages, filing fees pages, fee calculator (views/ajax fee listing), civil surgeon locator (REST), glossary, field office directory with the 43,301-row field_office_by_zip CSV, newsroom (alerts, news releases, all news), AAO processing times, office closings, contact center, avoid scams, SAVE CaseCheck, FOIA, file online",
+      "pages_captured": 75,
+      "news_items_captured": 60,
+      "forms_catalog_rows": 105,
+      "fee_calculator_records": 132,
+      "form_pdfs": 34,
+      "images": 119,
+      "glossary_terms": 267,
+      "field_office_csv": "https://www.uscis.gov/sites/default/files/document/data/field_office_by_zip-08-28-2026.csv (40,961 active rows, 92 field offices)",
+      "civil_surgeon_locator": "search replayed through the page for 18 frozen ZIP queries; REST responses from https://www.uscis.gov/rest/locator/proximity/* captured verbatim (10 proximity-ordered doctors per ZIP; global count 6815); ZIP geocoding via the same geocode.arcgis.com findAddressCandidates endpoint the upstream tool calls",
+      "wizard_states": 39
+    },
+    "my.uscis.gov": {
+      "role": "myUSCIS appointment landing (real appointment service types: ADIT Stamp, Emergency Advance Parole, Immigration Judge Grant, Other; asylum/NACARA rules; international office guidance; quick links)",
+      "pages_captured": 1
+    },
+    "egov.uscis.gov": {
+      "role": "Case Status Online and the processing-times tool",
+      "access_note": "WAF-blocked from this build network: every attempt (headless Chromium, headed Chromium under Xvfb, curl with browser headers) returned HTTP 403 Cloudflare 'Attention Required!' on 2026-09-28; captured evidence stored in scraped_data/casestatus/egov_block_20260928.html",
+      "case_status_chrome": "the tool page structure, validation-error wording ('My Case Status does not recognize the receipt number entered... National Customer Service Center at 1-800-375-5283'), 'Enter Another Receipt Number' action and related-tools block captured from the Internet Archive snapshot of egov.uscis.gov/casestatus/mycasestatus.do at timestamp 20161118095553 (stored in scraped_data/casestatus/)",
+      "processing_times": "the real /processing-times/api/processingtime/{form}/{office} JSON records captured from the Internet Archive at the per-record snapshot timestamps (2018-2019 era; 70 records across 17 forms including I-485, N-400, I-130, I-765, I-131); each record's _snapshot/_snapshot_date and _original_url are preserved verbatim in scraped_data/processing_times/records.json and carried into the seed"
+    },
+    "web.archive.org": {
+      "role": "Internet Archive: source of the archived egov.uscis.gov records described above (CDX index snapshots listed in scraped_data/processing_times/cdx_index.txt and scraped_data/casestatus/)"
+    }
+  },
+  "media": {
+    "images": {
+      "count": 119,
+      "inventory": "asset_inventory.json",
+      "policy": "every file fetched from the upstream URL it renders at (www.uscis.gov sites/default/files derivative URLs or my.uscis.gov assets); no placeholders, no duplicates (deduped by sha256), no stretching"
+    },
+    "form_pdfs": {
+      "count": 34,
+      "policy": "the actual USCIS form and instruction PDFs served by www.uscis.gov /sites/default/files/document/forms/, sha256-pinned per file in asset_inventory.json"
+    }
+  },
+  "fixtures": {
+    "benchmark_users": "source_data/benchmark_users.json defines four myUSCIS accounts (alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com; password TestPass123! for all) with six seeded cases across I-485, I-765, N-400, I-130, I-90 and I-131 using standard USCIS receipt-number prefixes and case-status vocabulary, plus two seeded appointments; these are mirror-native benchmark fixtures, clearly not upstream records",
+    "appointment_slots": "appointment availability is a deterministic frozen two-week slot grid per field office (see _slots_for in app.py)",
+    "receipt_numbers": "mirror-native demo receipts in the real 13-character USCIS format (three-letter service-center prefix + 10 digits)"
+  },
+  "determinism": {
+    "seed": "built at image build time with PYTHONHASHSEED=0 (frozen bcrypt benchmark users; every other row from the tracked source_data/*.json snapshots in a fixed order). The byte-identical guarantee is scoped to the image/container environment: independent in-container builds reproduce the seed byte-for-byte (sha256 ca96743e172bb19c5dfc3441c96413eb17af46084a2bc6285bf08bc33f45237d, md5 e3b7b4f99717af8145217556ecf8fd44; re-verified after the task-depth fix commit), and the running container's instance matches instance_seed across repeated /reset/uscis calls. Seed bytes are not portable across SQLite build environments: a local-workspace build on the contributor host produced a different byte product (sha256 2b9c9188373a1600d2a06618fcbec021d77e77d3d23ba7c5e61bbed24e5bfe00, md5 d357b4ede2213422732b463a0f35e2be) - the repository's determinism contract is the in-image rebuild, not local-build byte portability",
+    "passwords": "frozen bcrypt hash of TestPass123! shared by the benchmark users",
+    "dates": "the mirror freezes the upstream 'Last Reviewed/Updated' dates exactly as captured"
+  },
+  "limits": [
+    "egov.uscis.gov live tools (Case Status Online, the current processing-times API, E-Request) are unreachable from this network (Cloudflare WAF 403); the case-status chrome is the archived real tool page and the processing-times data are real archived API responses, while the per-receipt case records and appointment bookings are mirror-native fixtures",
+    "the civil surgeon locator serves the frozen 10 proximity-ordered results captured per ZIP query (plus the real global count of 6815); the language and sex filters operate over those captured results",
+    "the processing-times tool serves the real archived records as captured; publication dates are the ones embedded in the archived API responses"
+  ],
+  "review_corrections": [
+    {
+      "source": "https://www.uscis.gov/forms/filing-fees/poverty-guidelines",
+      "retrieved": "2026-09-29",
+      "html_sha256": "1947e17aa94f61ab268101a0951b3710937361de82523a000ca524f30c67d514",
+      "change": "Render only the three named region accordion tables (400% reduced-fee column), rather than also exposing the orphan hidden 200% table. Bind each retained table to its region heading."
+    }
+  ]
+}

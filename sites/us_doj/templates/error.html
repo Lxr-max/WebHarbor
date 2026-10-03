@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Page not found' if code == 404 else 'Check your request' }}{% endblock %}
+{% block breadcrumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Justice.gov</a></li><li>{{ code }}</li></ol></nav>{% endblock %}
+{% block content %}<div class="container single-page-layout search-page"><h1 class="page-title">{{ 'Page not found' if code == 404 else 'Check your request' }}</h1><p>{{ message }}</p><form class="site-search-form" role="search" method="get" action="/search"><label for="error-query">Search Justice.gov</label><div class="inline-search"><input id="error-query" name="query" type="search" placeholder="Enter keywords" required><button class="button" type="submit">Search</button></div></form><p><a href="/">Return to the homepage</a> or <a href="/news">browse news</a>.</p></div>{% endblock %}

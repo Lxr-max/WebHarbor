@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Archive — {{ blog.display_title() }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Archive of {{ blog.display_title() }}</h1>
+  <p class="page-sub">{{ '{:,}'.format(archive_total) }} archived posts, newest first{% if blog.updated %} · updated {{ time_ago(blog.updated) }}{% endif %}</p>
+  <a class="btn btn-ghost" href="{{ url_for('blog_page', name=blog.name) }}">← Back to {{ blog.name }}</a>
+</div>
+
+{% for month, posts in months %}
+  <section class="archive-month">
+    <h2 class="archive-month-title">{{ month }} <span class="archive-count">({{ posts|length }})</span></h2>
+    <div class="archive-grid">
+      {% for post in posts %}
+        <a class="archive-tile" href="{{ url_for('permalink', name=blog.name, post_id=post.id) }}"
+           title="{{ post.summary or post.type }}">
+          {% set img = post.first_image() %}
+          {% if img %}
+            <img src="{{ img.url }}" alt="{{ post.summary or '' }}" loading="lazy">
+          {% else %}
+            <span class="archive-tile-text">{{ (post.summary or post.type)[:80] }}</span>
+          {% endif %}
+          <span class="archive-tile-notes">{{ compact(post.live_note_count()) }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+{% else %}
+  <div class="empty-state">No posts to archive yet.</div>
+{% endfor %}
+{% endblock %}

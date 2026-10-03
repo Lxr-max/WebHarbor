@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ show.title }} — Red Bull TV Show{% endblock %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ show.image }}" alt="{{ show.title }}">
+  <div class="overlay">
+    <span class="kicker">{{ show.discipline }} · Show</span>
+    <h1>{{ show.title }}</h1>
+    <p>{{ show.subheading }}</p>
+  </div>
+</section>
+
+<div class="detail-layout">
+  <div class="detail-main">
+    <p class="standfirst">{{ show.standfirst }}</p>
+    <h2 class="section-title">Episodes</h2>
+    {% if show.episodes %}
+    <table class="list-table">
+      <tr><th>Season</th><th>Episode</th><th>Title</th><th>Runtime</th></tr>
+      {% for ep in show.episodes %}
+      <tr>
+        <td>S{{ ep.season }}</td>
+        <td>E{{ ep.episode }}</td>
+        <td><strong>{{ ep.title }}</strong>{% if ep.standfirst %}<br><span class="form-note">{{ ep.standfirst }}</span>{% endif %}</td>
+        <td>{{ ep.duration_text() or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>{{ show.nr_seasons }} season{{ 's' if show.nr_seasons != 1 }} · {{ show.nr_episodes }} episode{{ 's' if show.nr_episodes != 1 }}. Watch on Red Bull TV.</p>
+    {% endif %}
+
+    {% if related %}
+    <h2 class="section-title">More shows</h2>
+    <div class="grid cols-4">
+      {% for r in related %}
+      <a class="card" href="{{ url_for('show_detail', slug=r.slug) }}">
+        <div class="thumb"><img src="{{ r.image }}" alt="{{ r.title }}"></div>
+        <div class="body"><span class="tag">{{ r.discipline }}</span><h3>{{ r.title }}</h3></div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <aside class="side-panel">
+    <h3>Show facts</h3>
+    <div class="fact-row"><span class="k">Discipline</span><span class="v">{{ show.discipline or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Seasons</span><span class="v">{{ show.nr_seasons or '—' }}</span></div>
+    <div class="fact-row"><span class="k">Episodes</span><span class="v">{{ show.nr_episodes or '—' }}</span></div>
+    {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('favorites_toggle') }}" style="margin-top:14px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="kind" value="show">
+      <input type="hidden" name="slug" value="{{ show.slug }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button type="submit" class="btn btn-outline">{{ 'Remove from favorites' if is_favorite('show', show.slug) else 'Save to favorites' }}</button>
+    </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

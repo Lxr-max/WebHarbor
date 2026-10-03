@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Sign in — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell narrow">
+  <h1>Sign in to Azure</h1>
+  <form method="post" class="stack-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Email <input type="email" name="email" required></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button class="btn btn-primary" type="submit">Sign in</button>
+  </form>
+  <p>New to Azure? <a href="{{ url_for('signup') }}">Create your free account</a>.</p>
+</div>
+{% endblock %}

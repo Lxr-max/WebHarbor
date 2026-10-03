@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Admissions — University of Michigan{% endblock %}
+{% block content %}
+<h1>Office of Undergraduate Admissions</h1>
+<p class="page-sub">At Michigan, you don't apply to the university – you apply to one of our 15 undergraduate schools and colleges, depending on whether you are a first-year or transfer student.</p>
+
+<div class="grid">
+  <div class="card">
+    <h3><a href="{{ url_for('programs') }}">Majors &amp; Degrees</a></h3>
+    <span class="blurb">Put your grand imagination to work — browse the full list of majors and degrees.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('admissions_costs') }}">Costs</a></h3>
+    <span class="blurb">2026-27 estimated tuition, fees, living expenses and total budgets for Michigan residents and nonresidents.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('admissions_aid') }}">Financial Aid</a></h3>
+    <span class="blurb">Scholarships, grants, loans and Work-Study, plus the FAFSA and CSS Profile deadlines.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('admissions_apply') }}">Apply</a></h3>
+    <span class="blurb">First-year application plans (Early Decision, Early Action, Regular Decision), requirements and important dates.</span>
+  </div>
+  <div class="card">
+    <h3><a href="{{ url_for('request_info') }}">Request Information</a></h3>
+    <span class="blurb">Get on the mailing list and ask the admissions office a question.</span>
+  </div>
+</div>
+
+<h2>Choosing a School or College</h2>
+<p>The majority of Michigan first-years are admitted to our liberal arts college, LSA. Each school or college makes its admission decision based on their unique requirements, needs and priorities, and decisions are communicated by the Office of Undergraduate Admissions.</p>
+
+<h2>Contact</h2>
+<p>Office of Undergraduate Admissions &middot; 1220 Student Activities Building &middot; 515 E. Jefferson St., Ann Arbor, MI 48109-1316 &middot; 734-764-7433</p>
+{% endblock %}

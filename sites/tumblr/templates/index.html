@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Tumblr — home{% endblock %}
+{% block content %}
+<div class="hero">
+  <h1 class="hero-title">Welcome to your corner of the internet.</h1>
+  <p class="hero-sub">Tumblr is where you can be yourself, share what you love, and find your people. Start with what's trending today.</p>
+  {% if not user %}
+    <div class="hero-cta">
+      <a class="btn btn-primary big" href="{{ url_for('register') }}">Get started</a>
+      <a class="btn btn-ghost big" href="{{ url_for('login') }}">Log in</a>
+    </div>
+  {% endif %}
+</div>
+
+<div class="layout-two-col">
+  <section class="feed-col">
+    <div class="feed-header">
+      <h2>Trending today</h2>
+      <a class="see-all" href="{{ url_for('explore') }}">Explore all →</a>
+    </div>
+    {% for ctx in post_list %}
+      {% with post=ctx.post, liked=ctx.liked, reblogged=ctx.reblogged, following=ctx.following %}
+        {% include '_post_card.html' %}
+      {% endwith %}
+    {% endfor %}
+    <div class="feed-more">
+      <a class="btn btn-ghost big" href="{{ url_for('explore') }}">More trending posts</a>
+    </div>
+  </section>
+
+  <aside class="side-col">
+    <div class="side-card">
+      <h3>Popular tags</h3>
+      <div class="hub-mini-grid">
+        {% for hub in tumblr_tag_hubs %}
+          <a class="hub-mini" href="{{ url_for('tagged', tag=hub.tag) }}">
+            {% if hub.header_image %}<img src="{{ hub.header_image }}" alt="{{ hub.tag }}">{% endif %}
+            <span class="hub-mini-name">#{{ hub.tag }}</span>
+            <span class="hub-mini-count">{{ hub.followers_count }} followers</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="side-card">
+      <h3>Blogs to watch</h3>
+      {% for blog in blogs %}
+        <a class="blog-row" href="{{ url_for('blog_page', name=blog.name) }}">
+          {% if blog.avatar %}<img class="avatar a40 {{ blog.avatar_shape }}" src="{{ blog.avatar }}" alt="">{% else %}<span class="avatar a40 avatar-fallback">{{ blog.display_title()[:1] }}</span>{% endif %}
+          <span class="blog-row-text">
+            <span class="blog-row-title">{{ blog.display_title() }}</span>
+            <span class="blog-row-sub">{{ blog.post_count_label() }}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+
+    <div class="side-card">
+      <h3>Made for you</h3>
+      <p class="side-copy">Log in to follow blogs, keep a dashboard of everything you love, and join 400+ million blogs on Tumblr.</p>
+      <a class="btn btn-primary wide" href="{{ url_for('login') }}">Log in</a>
+    </div>
+  </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ tour.name }} Reviews - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:900px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; <a href="/t/{{ tour.id }}">{{ tour.name }}</a> &nbsp;&#8805;&nbsp; Reviews</div>
+  <h1>{{ tour.name }} Reviews</h1>
+  <div class="rating-line" style="font-size:15px;">
+    <span class="rating-badge" style="font-size:16px;">{{ '%.1f'|format(tour.rating) }}</span>
+    <span>Overall rating based on {{ tour.review_count }} Reviews</span>
+  </div>
+  <div class="subratings">
+    {% for k, v in tour.subratings_dict.items() %}
+    <div class="subrating"><b>{{ v }}</b>{{ k }}</div>
+    {% endfor %}
+  </div>
+  <div class="tabs">
+    <a class="{{ 'active' if sort == 'recent' }}" href="?sort=recent">Most Recent</a>
+    <a class="{{ 'active' if sort == 'rating' }}" href="?sort=rating">Highest Rated</a>
+    <a class="{{ 'active' if sort == 'rating_asc' }}" href="?sort=rating_asc">Lowest Rated</a>
+  </div>
+  {% for r in reviews %}
+  <div class="panel">
+    <div class="review" style="border-top:none; padding-top:0;">
+      <div class="head">
+        {% if r.avatar %}<img class="avatar" src="/static/images/{{ r.avatar }}" alt="{{ r.author }}">
+        {% else %}<div class="avatar" style="background:var(--bg-blue); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-weight:700;">{{ r.initials or r.author[:1] }}</div>{% endif %}
+        <div><div class="name">{{ r.author }}</div><div class="when">{{ r.month }}{% if r.traveled_month %} &bull; Traveled in {{ r.traveled_month }}{% endif %}{% if r.guide_name %} &bull; Led by {{ r.guide_name }}{% endif %}</div></div>
+        <span class="score">{{ '%.1f'|format(r.rating) }}</span>
+      </div>
+      {% if r.title %}<b>{{ r.title }}</b>{% endif %}
+      <div class="body">{{ r.body }}</div>
+      {% if r.photos_list %}
+      <div class="photos">{% for p in r.photos_list[:4] %}<img src="/static/images/{{ p }}" alt="Traveler photo">{% endfor %}</div>
+      {% endif %}
+      {% if r.reply %}<div class="reply"><b>Reply from: {{ r.reply_by or tour.operator_name }}</b><br>{{ r.reply }}</div>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% set can_review = current_user.is_authenticated and booking_done %}
+  {% if can_review %}
+  <div class="panel">
+    <h2>Write a review</h2>
+    <p style="font-size:13px; color:var(--text-2);">You completed this tour — share your experience with other travelers.</p>
+    <form method="post" action="/t/{{ tour.id }}/review" class="form-grid" style="grid-template-columns:1fr;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field">
+        <label>Rating</label>
+        <select name="rating">
+          {% for r in [5, 4.5, 4, 3.5, 3, 2, 1] %}
+          <option value="{{ r }}" {% if r == 5 %}selected{% endif %}>{{ r }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label>Title</label>
+        <input name="title" placeholder="Sum up your trip">
+      </div>
+      <div class="field">
+        <label>Your review</label>
+        <textarea name="body" rows="4" required style="width:100%; border:1px solid var(--border); border-radius:6px; padding:9px 10px; font:inherit;"></textarea>
+      </div>
+      <div><button class="btn" type="submit">Publish review</button></div>
+    </form>
+  </div>
+  {% endif %}
+  <a class="btn btn-outline" href="/t/{{ tour.id }}">&laquo; Back to tour</a>
+</div>
+{% endblock %}

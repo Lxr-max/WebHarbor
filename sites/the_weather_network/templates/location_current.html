@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block title %}{{ loc.name }}, {{ loc.prov_code }} Current Weather - The Weather Network{% endblock %}
+{% from '_fx_header.html' import fx_header %}
+{% block content %}
+{% call fx_header(loc, obs, tab, updated) %}
+  {% if hero_summary %}<p class="hero-summary">{{ hero_summary }}</p>{% endif %}
+  <div class="current-block">
+    {% if obs %}
+    <div class="cb-icon"><img src="{{ obs.icon|wxicon }}" alt="{{ obs.text }}"></div>
+    <div>
+      <div class="current-temp">{{ obs.temp|temp(unit) }}{% if unit == 'metric' %}C{% else %}F{% endif %}</div>
+      <div class="current-cond">{{ obs.text }}</div>
+      <div class="current-feels">Feels {{ obs.feels|temp(unit) }}</div>
+      {% if today %}
+      <div class="current-hl">H: {{ today.day_temp|temp(unit) }}&nbsp;&nbsp;&nbsp;L: {{ today.night_temp|temp(unit) }}</div>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div style="margin-left:auto">
+      <form method="post" action="/en/account/saved/add">
+        <input type="hidden" name="code" value="{{ loc.code }}">
+        <input type="hidden" name="next" value="{{ loc.url('current') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="save-loc-btn {% if saved %}on{% endif %}" type="submit">
+          {% if saved %}★ Saved location{% else %}☆ Save location{% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:600">Hourly</h2>
+  <div class="hourly-strip">
+    {% for h in hourly %}
+    <div class="hourly-cell">
+      <div class="hc-time">{{ h.hour_label }}</div>
+      <div class="hc-icon"><img src="{{ h.icon|wxicon }}" alt="{{ h.text }}"></div>
+      <div class="hc-temp">{{ h.temp|temp(unit) }}</div>
+      <div class="hc-feels">Feels {{ h.feels|temp(unit) }}</div>
+      <div class="hc-pop">{{ h.pop }}%</div>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="fx-updated" style="margin:6px 0 0"><a href="{{ loc.url('hourly') }}" style="color:#ffea53">Full 72 hours</a></p>
+
+  {% if today %}
+  <h2 style="font-size:16px;font-weight:600;margin-top:18px">Today’s Conditions</h2>
+  <p class="fx-updated">{{ today.full_date_label }}</p>
+  <div class="fx-grid">
+    {% if obs %}
+    <div class="fx-tile">
+      <div class="ft-label">Wind</div>
+      <div class="ft-value">{{ obs.wind_speed|speed(unit) }} {{ obs.wind_dir }}</div>
+      <div class="ft-sub">Gust: {{ obs.wind_gust|speed(unit) }}</div>
+    </div>
+    <div class="fx-tile">
+      <div class="ft-label">Pressure</div>
+      <div class="ft-value">{{ obs.pressure }} {% if unit == 'metric' %}kPa{% else %}kPa{% endif %}</div>
+      <div class="ft-sub">{{ {'1':'Rising','2':'Falling','3':'Steady','4':'Rising','0':'Steady'}[obs.pressure_trend|string] or 'Steady' }}</div>
+    </div>
+    <div class="fx-tile">
+      <div class="ft-label">Humidity</div>
+      <div class="ft-value">{{ obs.rh }}%</div>
+    </div>
+    <div class="fx-tile">
+      <div class="ft-label">Visibility</div>
+      <div class="ft-value">{{ obs.visibility }} {% if unit == 'metric' %}km{% else %}km{% endif %}</div>
+      <div class="ft-sub">Ceiling {{ obs.ceiling }} m</div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <h2 style="font-size:16px;font-weight:600;margin-top:18px">7 Days</h2>
+  {% if periods %}
+  <div class="period-rows">
+    {% set p0 = periods[0] %}
+    {% for label, per in [('Overnight', p0.overnight), ('Morning', p0.morning), ('Afternoon', p0.afternoon), ('Evening', p0.evening)] %}
+    {% if per.temp is not none %}
+    <div class="period-row">
+      <div class="pr-label">{{ label }}</div>
+      <div class="pr-main">
+        <img src="{{ per.icon|wxicon }}" alt="{{ per.text }}">
+        <span class="pr-temp">{{ per.temp|temp(unit) }}</span>
+        <span class="small" style="opacity:.85">{{ per.text }} · Feels {{ per.feels|temp(unit) }}</span>
+      </div>
+      <div class="pr-meta">P.O.P. {{ per['pop'] }}%{% if per.rain or per.snow %} · {{ precip_label(per.rain, per.rain_range, per.snow, per.snow_range, unit) }}{% endif %}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  <p class="fx-updated" style="margin:6px 0 0"><a href="{{ loc.url('7-days') }}" style="color:#ffea53">All 7 days</a></p>
+
+  <h2 style="font-size:16px;font-weight:600;margin-top:18px">14 Days</h2>
+  <div class="day-strip">
+    {% for d in daily[:14] %}
+    <div class="day-cell">
+      <div class="dc-day">{{ d.day_name }}</div>
+      <div class="dc-date">{{ d.date_label }}</div>
+      <img src="{{ d.day_icon|wxicon }}" alt="{{ d.day_text }}">
+      <div class="dc-high">{{ d.day_temp|temp(unit) }}</div>
+      <div class="dc-night">Night {{ d.night_temp|temp(unit) }}</div>
+      <div class="dc-pop">{{ d.pop }}%{% if d.rain_range %} {{ d.rain_range }}mm{% endif %}</div>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="fx-updated" style="margin:6px 0 0"><a href="{{ loc.url('14-days') }}" style="color:#ffea53">All 14 days</a></p>
+{% endcall %}
+
+{% if loc.channel == 'city' %}
+<section class="section">
+  <div class="section-head"><h2>Radar Map</h2><a class="more-link" href="/en/maps/radar">See all maps</a></div>
+  <div class="radar-block" style="max-width:640px">
+    <img src="/static/images/maps/basemap_{{ radar_slug }}.webp" alt="Radar map for {{ loc.name }}">
+    <div class="radar-overlay"></div>
+  </div>
+</section>
+
+{% if wellbeing %}
+<section class="section">
+  <div class="section-head"><h2>Outdoor Wellbeing</h2></div>
+  <div class="wellbeing-row">
+    <div class="wb-tile"><div class="wb-kind">Air Quality</div><div class="wb-val">{{ wellbeing['airquality'].label if 'airquality' in wellbeing else '--' }}</div></div>
+    <div class="wb-tile"><div class="wb-kind">UV</div><div class="wb-val">{{ wellbeing['uv'].label if 'uv' in wellbeing else '--' }}</div></div>
+    <div class="wb-tile"><div class="wb-kind">Pollen</div><div class="wb-val">{{ wellbeing['pollen'].label if 'pollen' in wellbeing else '--' }}</div></div>
+    <div class="wb-tile"><div class="wb-kind">Health</div><div class="wb-val">{{ wellbeing['health'].label if 'health' in wellbeing else '--' }}</div></div>
+    <div class="wb-tile"><div class="wb-kind">Bugs</div><div class="wb-val">{{ wellbeing['bugs'].label if 'bugs' in wellbeing else '--' }}</div></div>
+  </div>
+</section>
+{% endif %}
+{% endif %}
+
+<section class="section">
+  <div class="section-head"><h2>News</h2><a class="more-link" href="/en/news">Read more news</a></div>
+  <div class="news-rail">
+    {% for art in related_news %}
+    <a class="news-card" href="{{ art.path }}">
+      <div class="nc-thumb">{% if art.thumb %}<img loading="lazy" src="/static/images/{{ art.thumb }}" alt="{{ art.headline }}">{% endif %}</div>
+      <div class="nc-title">{{ art.headline }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if popular %}
+<section class="section">
+  <div class="section-head"><h2>Popular</h2></div>
+  <div class="loc-cards">
+    {% for p in popular %}
+    <a class="loc-card" href="{{ p.loc.url() }}">
+      <div><div class="lc-name">{{ p.loc.name }}</div><div class="lc-sub">{{ p.loc.display_sub }}</div></div>
+      <div class="lc-right">{% if p.obs %}<span class="lc-temp">{{ p.obs.temp|temp(unit) }}</span>{% else %}<span class="lc-temp">--</span>{% endif %}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="section-head"><h2>Weather FAQ for {{ loc.name }}</h2></div>
+  <div class="card" style="padding:6px 18px">
+    <div class="faq-list">
+      {% for q, a in faq %}
+      <div class="faq-item"><div class="fq">{{ q }}</div><div class="fa">{{ a }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Weather for more locations</h2></div>
+  <div class="city-chips">
+    {% for ch in chrome.channels %}
+    <a href="{{ ch.href }}">{{ ch.name }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% if month_rows %}
+<section class="section">
+  <div class="section-head"><h2>Monthly</h2><a class="more-link" href="{{ loc.url('monthly') }}">Historical Avg.</a></div>
+  <div class="monthly-strip">
+    {% for r in month_rows[:14] %}
+    <div class="ms-cell">
+      <div class="ms-day">{{ r.day_num }}</div>
+      <div class="ms-tmax">{{ r.tmax|temp(unit) }}</div>
+      <div class="ms-tmin muted small">{{ r.tmin|temp(unit) }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="muted small" style="margin-top:8px">
+    <span style="display:inline-block;width:12px;height:9px;background:#f6da07;border-radius:2px"></span> Forecast
+    &nbsp; <span style="display:inline-block;width:12px;height:9px;background:#fff;border:1px solid #ccc;border-radius:2px"></span> Historical Avg.
+    &nbsp; Historical comparison: values are historical daily averages (°C).
+  </p>
+</section>
+{% endif %}
+
+{% if chrome.watch_live %}
+<section class="section">
+  <a href="/en/video" class="watch-live-tile" aria-label="{{ chrome.watch_live.title }}">
+    <img src="/static/images/{{ chrome.watch_live.image }}" alt="{{ chrome.watch_live.title }}">
+    <div class="wl-title">{{ chrome.watch_live.title }}</div>
+  </a>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="section-head"><h2>Featured Videos</h2></div>
+  <div class="video-grid">
+    {% for v in featured_vids %}
+    <a class="news-card" href="/en/video/{{ v.mediaid }}">
+      <div class="nc-thumb">
+        <img loading="lazy" src="/static/images/videos/{{ v.mediaid }}.jpg" alt="{{ v.title }}">
+        <span class="nc-dur">{{ v.duration_label }}</span>
+      </div>
+      <div class="nc-title">{{ v.title }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

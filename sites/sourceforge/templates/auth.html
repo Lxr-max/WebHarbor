@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class l-black-n-tan sandiego sandiego_chrome sandiego pg_login{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<section id="page-body" class="row">
+<section class="l-header-nav-top directory-header">
+  <div class="row"><h1>Log In</h1></div>
+</section>
+<div class="row main-content-wrapper">
+  <div id="loginform" class="column small-12 medium-9 large-6">
+    <h2 class="show-for-large">Log in with a SourceForge account</h2>
+    <form method="post" action="/auth/">
+      <label for="username">Username:</label>
+      <input id="username" name="username" placeholder="Username" type="text" autocomplete="username">
+      <label for="password">Password:</label>
+      <input id="password" name="password" placeholder="Password" type="password" autocomplete="current-password">
+      <input type="hidden" name="return_to" value="{{ request.args.get('next','') }}">
+      <input class="submit" type="submit" value="Login">
+    </form>
+    <div class="help-block">
+      <a href="/auth/">Forgot your username/password?</a>
+    </div>
+  </div>
+  <div class="column small-12 medium-9 large-6 cta-register">
+    <div><h2>Need an account on SourceForge.net?</h2></div>
+    <div><a class="button blue hollow btn-create" href="/user/registration/">Create Account</a></div>
+  </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Booking Confirmed - {{ booking.tour.name }} - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding:30px 16px 60px; max-width:900px;">
+  <div class="panel" style="text-align:center; padding:34px;">
+    <div style="font-size:44px;">&#10003;</div>
+    <h1 style="font-size:26px;">Booking Confirmed!</h1>
+    <p style="color:var(--text-2);">Your spaces on <b>{{ booking.tour.name }}</b> are secured.
+    A confirmation email is on its way to <b>{{ booking.lead_email }}</b>.</p>
+    <div class="chip-row" style="justify-content:center;">
+      <span class="chip active">Booking reference: <b>&nbsp;{{ booking.ref }}</b></span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Booking details</h2>
+    <table class="table-simple">
+      <tr><th>Tour</th><td><a href="/t/{{ booking.tour.id }}">{{ booking.tour.name }}</a></td></tr>
+      <tr><th>Operator</th><td>{{ booking.tour.operator_name }}</td></tr>
+      <tr><th>Departure</th><td>{{ booking.departure_label }} ({{ booking.tour.duration_days }} days)</td></tr>
+      <tr><th>Room type</th><td>{{ booking.room_type }}</td></tr>
+      <tr><th>Travelers</th><td>{% for t in booking.travelers_list %}{{ t.title }} {{ t.first }} {{ t.last }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
+      <tr><th>Insurance</th><td>{{ {'premium': 'Premium Protection', 'cancellation': 'Trip Cancellation Only', 'none': 'No Protection'}[booking.insurance] }}</td></tr>
+      {% if booking.promo_code %}<tr><th>Promo code</th><td>{{ booking.promo_code }}</td></tr>{% endif %}
+      <tr><th>Payment schedule</th><td>{{ {'deposit': 'Deposit Only (10%)', 'installments': '7 Installments', 'full': 'Pay in Full'}[booking.payment_schedule] }}</td></tr>
+      <tr><th>Total</th><td><b>{{ money2(booking.total) }}</b></td></tr>
+      <tr><th>Charged today</th><td>{{ money2(booking.due_today) }}</td></tr>
+      <tr><th>Status</th><td><span class="flag guaranteed">{{ booking.status|title }}</span></td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>What happens next?</h2>
+    <ul>
+      <li>Your booking is confirmed instantly &mdash; the operator has been notified.</li>
+      <li>Manage payments, travelers and documents any time in your <a href="/account">Tour Management</a> section.</li>
+      <li>The remaining balance is due before your departure, based on your payment schedule.</li>
+      <li>Our 24/7 support team is available any time at <a href="/contact">Contact us</a>.</li>
+    </ul>
+    {% if booking.status == 'confirmed' and current_user.is_authenticated and booking.user_id == current_user.id %}
+    <form method="post" action="/booking/{{ booking.ref }}/cancel" style="margin-top:14px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn btn-danger" type="submit">Request cancellation</button>
+    </form>
+    {% endif %}
+    <a class="btn btn-lg" href="/account">Go to Tour Management</a>
+    <a class="btn btn-outline btn-lg" href="/">Back to homepage</a>
+  </div>
+</div>
+{% endblock %}

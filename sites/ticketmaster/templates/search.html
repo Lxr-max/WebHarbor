@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Find tickets for '{{ query }}' at Ticketmaster.com{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="crumbs"><a href="/">Home</a> › Search</div>
+  <h1 class="page-title">{{ query or 'Search' }}</h1>
+  <p class="page-sub">United States</p>
+
+  <form class="filter-bar" method="get">
+    <span class="filter-label">Sort:</span>
+    <select name="sort" aria-label="Sort by" onchange="this.form.submit()">
+      <option value="relevance" {{ 'selected' if sort == 'relevance' }}>Relevance</option>
+      <option value="date" {{ 'selected' if sort == 'date' }}>Date</option>
+    </select>
+    <input type="hidden" name="q" value="{{ query }}">
+  </form>
+  <p class="results-note">{{ events|length }} Results</p>
+
+  {% if artists %}
+  <section>
+    <div class="section-head"><h2>Artists, Teams &amp; Shows</h2></div>
+    <div class="carousel">
+      {% for a in artists %}
+      <a class="card" href="/artist/{{ a.id }}">
+        {% if a.image %}<img class="card-img" src="{{ url_for('static', filename=a.image.replace('static/','')) }}" alt="{{ a.name }}">{% endif %}
+        <div class="card-body">
+          <div class="card-title">{{ a.name }}</div>
+          <div class="card-sub">{{ a.events|length }} upcoming event{{ '' if a.events|length == 1 else 's' }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if venues %}
+  <section>
+    <div class="section-head"><h2>Venues</h2></div>
+    <div class="carousel">
+      {% for v in venues %}
+      <a class="card" href="/venue/{{ v.id }}">
+        {% if v.image %}<img class="card-img" src="{{ url_for('static', filename=v.image.replace('static/','')) }}" alt="{{ v.name }}">{% endif %}
+        <div class="card-body">
+          <div class="card-title">{{ v.name }}</div>
+          <div class="card-sub">{{ v.city }}{{ ', ' + v.state if v.state }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section>
+    <div class="section-head"><h2>Events</h2></div>
+    {% if events %}
+    <ul>
+      {% for e in events %}
+      <li class="event-row">
+        <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+        <div class="er-main">
+          <div class="er-name">
+            <a href="/event/{{ e.id }}">{{ e.name }}</a>
+            {% if e.multi_date %}<span class="badge badge-multi">Multiple Dates</span>{% endif %}
+            {% if e.partner %}<span class="badge badge-partner">On partner site</span>{% endif %}
+          </div>
+          <div class="er-sub">{{ e.city_state }} — <a href="/venue/{{ e.venue.id }}">{{ e.venue.name }}</a></div>
+          <div class="er-time">{{ e.time_line }}</div>
+        </div>
+        <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty-state">
+      <h3>No results for "{{ query }}"</h3>
+      <p>Check the spelling or try a different search.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Log in - Thumbtack{% endblock %}
+{% block content %}
+<div class="page page-narrow">
+  <h1>Welcome back</h1>
+  <p class="muted">Log in to manage your projects, saved pros, and messages.</p>
+  <div class="auth-card">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" name="email" required placeholder="you@example.com">
+      </div>
+      <div class="form-row">
+        <label>Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Log in</button>
+    </form>
+    <p class="muted" style="margin-top:16px;">New to Thumbtack? <a href="/register">Sign up</a></p>
+  </div>
+</div>
+{% endblock %}

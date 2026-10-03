@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Reserve a PO Box — {{ po.name }} | USPS{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{{ url_for('po_boxes') }}">PO Boxes</a> &rsaquo; Reserve</p>
+<h1>Reserve a PO Box — {{ po.name }}</h1>
+<p>{{ po.address }}, {{ po.city }}, {{ po.state }} {{ po.zip5 }}</p>
+{% if result %}
+  {% if result.errors %}
+    <div class="error-box">{% for e in result.errors %}<p>{{ e }}</p>{% endfor %}</div>
+  {% else %}
+    <div class="panel">
+      <h3>PO Box Reserved</h3>
+      <p><strong>Box number:</strong> {{ result.box_number }}</p>
+      <p><strong>Size:</strong> {{ result.period }} reservation, fee paid: {{ result.fee | usd }}</p>
+      <p>Your box key will be available for pickup at this Post Office within 3 business days. Bring a photo ID.</p>
+    </div>
+  {% endif %}
+{% endif %}
+<div class="panel">
+  <form class="flow" action="{{ url_for('po_box_reserve', po_key=po.po_key) }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Box size
+      <select name="size">
+        {% for s in sizes %}<option value="{{ s }}">Size {{ s }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Pay period
+      <select name="period">
+        <option value="6 months">6 months</option>
+        <option value="3 months">3 months</option>
+      </select>
+    </label>
+    <button class="btn" type="submit">Pay Fee &amp; Reserve</button>
+  </form>
+</div>
+<p class="note">Fees follow the market-dominant schedule shown on the <a href="{{ url_for('po_boxes') }}">PO Box fee page</a>.</p>
+{% endblock %}

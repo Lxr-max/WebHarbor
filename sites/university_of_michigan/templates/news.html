@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Michigan News — University of Michigan{% endblock %}
+{% block content %}
+<h1>Michigan News</h1>
+<p class="page-sub">News and stories from the University of Michigan. {{ total }} stories.</p>
+
+<div class="filterbar">
+  <div>
+    {% for key, label in categories %}
+    <a class="badge {{ 'letter' if cat == key else 'type' }}" style="margin:2px"
+       href="{{ url_for('news', category=key) }}">{{ label }} ({{ counts[key] }})</a>
+    {% endfor %}
+    {% if cat %}<a class="btn small" href="{{ url_for('news') }}">Clear category</a>{% endif %}
+  </div>
+</div>
+
+<div class="grid">
+  {% for a in articles %}
+  <div class="card">
+    {% if a.image %}<img class="card-img" src="{{ a.image }}" alt="{{ a.title }}">{% endif %}
+    <h3><a href="{{ url_for('news_article', slug=a.slug) }}">{{ a.title }}</a></h3>
+    <span class="meta">{{ a.published }}</span>
+    <span class="blurb">{{ a.description[:200] }}{% if a.description|length > 200 %}&hellip;{% endif %}</span>
+    <span class="meta">
+      {% for c in a.category_list() %}
+      <a href="{{ url_for('news', category=c) }}">{{ c }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </span>
+  </div>
+  {% endfor %}
+</div>
+
+{% if total > per_page %}
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('news', category=cat, page=page-1) }}">&laquo; Previous</a>
+  {% endif %}
+  <span class="cur">Page {{ page }} of {{ (total + per_page - 1) // per_page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('news', category=cat, page=page+1) }}">Next &raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

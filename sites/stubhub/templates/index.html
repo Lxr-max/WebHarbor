@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="home-hero">
+  <div class="hero-inner">
+    <h1 class="visually-hidden">Buy sports, concert and theater tickets on StubHub!</h1>
+    <section class="popular-strip">
+      <h2>Popular events</h2>
+      <div class="card-row">
+        {% for performer in popular %}
+        <div class="pop-card">
+          <div class="pop-media">
+            {% if performer.image_file %}
+            <img src="{{ performer.image_file }}" alt="{{ performer.name }}" loading="lazy">
+            {% endif %}
+            <form method="post" action="/favorite/performer/{{ performer.upstream_id }}">
+              <input type="hidden" name="next" value="/">
+              <button type="submit" class="follow-btn" title="Follow {{ performer.name }}">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4.5a2 2 0 0 1 2-2h1.5a2 2 0 0 1 2 2v2.25c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25V4.5a2 2 0 0 1 2-2H12a2 2 0 0 1 2 2V7a1 1 0 0 1 1 1v1.982a1 1 0 0 1-1 1h-.5v1.768a.75.75 0 0 1-1.5 0V11h-1.5v1.75a.75.75 0 0 1-1.5 0V11H7v1.75a.75.75 0 0 1-1.5 0V11H4v1.75a.75.75 0 0 1-1.5 0v-1.768H2a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
+              </button>
+            </form>
+          </div>
+          <div class="pop-meta">
+            <h2 class="pop-name">{{ performer.name }}</h2>
+            <p>{{ performer.next_range }}</p>
+          </div>
+          <a class="pop-link" href="/{{ performer.slug }}-tickets/performer/{{ performer.upstream_id }}" aria-label="{{ performer.name }}"></a>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="home-grid-section">
+      <div class="grid-toolbar">
+        <span class="location-chip">{{ default_metro.name if default_metro else 'Redmond' }}</span>
+        <div class="toolbar-links">
+          <span class="toolbar-chip">All dates</span>
+          <span class="toolbar-chip">Sports</span>
+          <span class="toolbar-chip">Concerts</span>
+          <span class="toolbar-chip">Theater &amp; Comedy</span>
+        </div>
+      </div>
+      <div class="promo-banner">
+        <div>
+          <h3>Connect your Spotify account and sync your favorite artists</h3>
+          <p>Discover events from who you actually listen to</p>
+        </div>
+        <a href="/secure/login" class="btn btn-outline">Connect Spotify</a>
+      </div>
+      <h2>Recommended for you</h2>
+      <div class="event-grid">
+        {% for performer in recommended %}
+        <a class="event-card" href="/{{ performer.slug }}-tickets/performer/{{ performer.upstream_id }}">
+          {% if performer.image_file %}
+          <div class="event-card-media"><img src="{{ performer.image_file }}" alt="{{ performer.name }}" loading="lazy"></div>
+          {% endif %}
+          <div class="event-card-body">
+            <h3>{{ performer.name }}</h3>
+            <p class="event-card-when">{{ performer.next_label }}</p>
+            <p class="event-card-nearby">{{ performer.event_count }} events near you</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="app-banner">
+      <div class="app-banner-inner">
+        <div>
+          <h3>Download the StubHub app</h3>
+          <p>Discover your favourite events with ease</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

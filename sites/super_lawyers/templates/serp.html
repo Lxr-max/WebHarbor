@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Best {{ city.name }}, {{ state_abbr(state.slug) }} {{ practice.name }} Attorneys | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('attorneys_home') }}">Browse attorneys</a> ›
+    <a href="/attorneys/{{ practice.slug }}/">{{ practice.name }}</a> ›
+    <a href="/attorneys/{{ state.slug }}/{{ city.slug }}/">{{ city.name }}</a> ›
+    <span>{{ practice.name }} in {{ city.name }}</span>
+  </nav>
+  <h1>{{ meta.h1 if meta else "Top Rated " + practice.name + " Lawyers in " + city.name + ", " + state_abbr(state.slug) }}</h1>
+
+  <p class="serp-note"><span class="ribbon" aria-hidden="true"></span> = Sponsored super lawyers selectees</p>
+
+  <div class="serp-list">
+    {% for card in cards %}
+    <article class="serp-card">
+      <div class="serp-photo">
+        <a href="/profiles/{{ card.lawyer.state_slug }}/{{ card.lawyer.city_slug }}/lawyer/{{ card.lawyer.slug }}/{{ card.lawyer.uuid }}.html" aria-label="View profile of {{ card.lawyer.name }}">
+          <img src="{{ url_for('static', filename=card.lawyer.photo('card')) }}" alt="{{ card.lawyer.name }}" width="175" height="219" loading="lazy">
+        </a>
+      </div>
+      <div class="serp-body">
+        <h2 class="serp-name">
+          <a href="/profiles/{{ card.lawyer.state_slug }}/{{ card.lawyer.city_slug }}/lawyer/{{ card.lawyer.slug }}/{{ card.lawyer.uuid }}.html" aria-label="View profile of {{ card.entry.name or card.lawyer.name }}">{{ card.entry.name or card.lawyer.name }}{% if card.entry.sponsored %} <span class="ribbon" aria-label="Sponsored"></span>{% endif %}</a>
+        </h2>
+        {% if card.lawyer.firm %}
+          <a class="serp-firm" href="/profiles/{{ card.lawyer.firm.state_slug }}/{{ card.lawyer.firm.city_slug }}/lawfirm/{{ card.lawyer.firm.slug }}/{{ card.lawyer.firm.uuid }}.html">{{ card.lawyer.firm.name }}</a>
+        {% elif card.entry.firm_name %}
+          <span class="serp-firm">{{ card.entry.firm_name }}</span>
+        {% endif %}
+        {% if card.entry.phone %}
+          <a class="serp-phone" href="tel:{{ card.entry.phone|replace('-', '') }}">
+            <span class="phone-icon" aria-hidden="true"></span>{{ card.entry.phone }}
+          </a>
+        {% endif %}
+        <span class="serp-city">{{ card.entry.city_line }}</span>
+        {% if card.entry.tagline %}
+          <p class="serp-tagline">{{ card.entry.tagline }}</p>
+        {% endif %}
+        <div class="serp-actions">
+          <a class="btn btn-outline" href="/profiles/{{ card.lawyer.state_slug }}/{{ card.lawyer.city_slug }}/lawyer/{{ card.lawyer.slug }}/{{ card.lawyer.uuid }}.html">View profile</a>
+          <a class="btn btn-outline" href="/profiles/contact/lawyer/{{ card.lawyer.uuid }}.html">Contact me</a>
+          {% if current_user.is_authenticated %}
+          <form method="post" action="{{ url_for('toggle_favorite', uuid=card.lawyer.uuid) }}" class="inline-form">
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button class="btn btn-outline" type="submit">Save attorney</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if meta and meta.related %}
+  <h2>{{ city.name }}, {{ state.name }} lawyers in related practice areas</h2>
+  <div class="link-grid">
+    {% for rel in meta.related %}
+      {% set href = rel.href.rstrip('/') %}
+      {% if href.startswith('http') %}{% set href = href[href.find('/', 8):] %}{% endif %}
+      <a href="{{ href if href.startswith('/attorneys/') else '/attorneys' + href }}">{{ rel.name }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if meta and meta.nearby %}
+  <p class="nearby-label">Nearby cities:
+    {% for near in meta.nearby %}
+      {% set href = near.href.rstrip('/') %}
+      {% if href.startswith('http') %}{% set href = href[href.find('/', 8):] %}{% endif %}
+      <a href="{{ href if href.startswith('/attorneys/') else '/attorneys' + href }}">{{ near.name }}</a>{% if not loop.last %} {% endif %}
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  <h2>Are you searching for a top {{ practice.name|lower }} lawyer in {{ city.name }}, {{ state.name }}?</h2>
+  {% if meta %}
+    {% for para in meta.intro %}<p>{{ para }}</p>{% endfor %}
+  {% endif %}
+
+  {% if courts %}
+  <h2>Court locations in {{ city.name }}, {{ state.name }}</h2>
+  <div class="court-list">
+    {% for court in courts %}
+    <div class="court">
+      <p><strong>{{ court.name }}</strong><br>
+      {{ court.line1 }}{% if court.line2 %}<br>{{ court.line2 }}{% endif %}<br>
+      Phone: <a href="tel:{{ court.phone }}">{{ court.phone }}</a></p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h2>Find top lawyers with confidence</h2>
+  <h3>Our rating system</h3>
+  <p>Super Lawyers is a research-driven, peer-influenced rating service of outstanding
+  lawyers who have attained a high degree of professional achievement and peer recognition.
+  The patented selection process combines peer nominations, independent research evaluations
+  and peer evaluations by practice area. Each year, the top 5 percent of the attorneys in
+  the state are selected for the Super Lawyers list, and the top 2.5 percent for the Rising
+  Stars list. To be eligible for the Rising Stars list, a candidate must be either 40 years
+  old or younger, or in practice 10 years or less.</p>
+
+  {% if meta and meta.faq %}
+  <h2>{{ practice.name }}</h2>
+  <div class="accordion">
+    {% for item in meta.faq %}
+    <details>
+      <summary>{{ item.heading }}</summary>
+      <div class="accordion-body"><p>{{ item.text }}</p></div>
+    </details>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

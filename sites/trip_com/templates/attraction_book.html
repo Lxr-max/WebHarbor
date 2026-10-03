@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Book {{ attraction.name }} | Trip.com{% endblock %}
+{% block content %}
+<div class="two-col">
+  <div class="panel">
+    <h2>Book: {{ attraction.name }}</h2>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="first_name">Lead traveller first name *</label>
+          <input id="first_name" name="first_name" value="{{ form.get('first_name', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="last_name">Lead traveller last name *</label>
+          <input id="last_name" name="last_name" value="{{ form.get('last_name', '') }}" required>
+        </div>
+        <div class="form-field form-wide">
+          <label for="email">Email (voucher sent here) *</label>
+          <input id="email" name="email" type="email" value="{{ form.get('email', '') }}" required>
+        </div>
+        <div class="form-field">
+          <label for="date">Date of use</label>
+          <input id="date" name="date" type="date" value="{{ visit_date.isoformat() }}">
+        </div>
+        <div class="form-field">
+          <label for="guests">Guests</label>
+          <input id="guests" name="guests" type="number" min="1" max="12" value="{{ guests }}">
+        </div>
+      </div>
+      <button class="btn btn-lg" style="margin-top:14px" type="submit">Confirm booking — ${{ '%.2f'|format(total) }}</button>
+    </form>
+  </div>
+  <div class="summary-panel">
+    <div class="panel">
+      <h3>{{ package.name }}</h3>
+      <div class="sum-row"><span>Valid for</span><span class="val">{{ package.validity }}</span></div>
+      <div class="sum-row"><span>Unit price</span><span class="val">${{ '%.2f'|format(package.price) }}</span></div>
+      <div class="sum-row"><span>Guests</span><span class="val">{{ guests }}</span></div>
+      <div class="sum-row total"><span>Total</span><span class="val">${{ '%.2f'|format(total) }}</span></div>
+      <div class="rate-flags">{{ attraction.cancellation }}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

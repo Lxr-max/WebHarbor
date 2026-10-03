@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import price_block, review_line %}
+{% block title %}{{ kind|capitalize }}: {{ label }}{% endblock %}
+{% block content %}
+
+<div class="breadcrumbs"><a href="{{ url_for('home') }}">Store</a> &rsaquo; {{ kind|capitalize }}s &rsaquo; {{ label }}</div>
+
+<div class="page-header">
+  <h1>{{ kind|capitalize }}: {{ label }}</h1>
+  <span class="count">{{ games|length }} game{{ '' if games|length == 1 else 's' }} in the catalog</span>
+</div>
+
+{% if games %}
+<div class="search-results">
+  {% for game in games %}
+    <div class="row">
+      <a class="capsule" href="{{ game.url }}">
+        <img src="{{ _img(game.capsule_img) }}" alt="{{ game.name }}">
+      </a>
+      <div class="mid">
+        <a class="t" href="{{ game.url }}">{{ game.name }}</a>
+        <div class="released">{{ game.release_date }}</div>
+        {{ review_line(game) }}
+        <div class="m">
+          {% for g in game.genre_list[:4] %}<span class="chip">{{ g }}</span>{% endfor %}
+        </div>
+      </div>
+      <div class="result-price">{{ price_block(game) }}</div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><p>This {{ kind }} has no games in the catalog.</p></div>
+{% endif %}
+
+{% endblock %}

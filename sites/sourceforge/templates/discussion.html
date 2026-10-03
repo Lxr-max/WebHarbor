@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class sandiego_chrome legacy_chrome{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}{{ p.name }} / Discussion{% endblock %}
+{% block content %}
+<section id="page-body" class="neighborhood-Projects project-{{ p.shortname }} mountpoint-discussion">
+<div class="l-two-column-page">
+  <div class="l-gutter"></div>
+  <div class="l-content-column">
+    <div class="grid-20 pad">
+      <h2 class="dark title"><span>Discussion</span></h2>
+      <div>
+        <table id="discussion-forums">
+          <thead>
+            <tr><th>FORUM</th><th>LATEST POST</th><th># TOPICS</th></tr>
+          </thead>
+          <tbody>
+            {% for f in forums %}
+            <tr>
+              <td><strong><a href="/p/{{ p.shortname }}/discussion/{{ f.shortname }}/">{{ f.name }}</a></strong><br></td>
+              <td>
+                {% if f.threads %}
+                <a href="/p/{{ p.shortname }}/discussion/{{ f.shortname }}/thread/{{ f.threads[0].thread_id }}/">{{ f.threads[0].subject }}</a><br>
+                {% set _la, _ld = thread_last_post(f.shortname, f.threads[0].thread_id, f.threads[0].last_author, f.threads[0].last_date) %}
+                by {% set _u = user_href(_la) %}{% if _u %}<a href="/u/{{ _u }}/profile/" class="user-mention">{{ _la }}</a>{% else %}{{ _la }}{% endif %}
+                {% endif %}
+              </td>
+              <td class="count"><span class="forum-topic-count">{{ fmt_int(f.num_topics) }}</span></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

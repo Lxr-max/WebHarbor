@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="wrap">
+  <section class="hero">
+    <h1>{{ landing.hero_heading }}</h1>
+    <p>{{ landing.hero_sub }}</p>
+    <p>
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-hero" href="{{ url_for('plans') }}">Open my trips</a>
+        <a class="btn btn-hero" href="{{ url_for('plan_new') }}">Plan a trip</a>
+      {% else %}
+        <a class="btn btn-hero" href="{{ url_for('register') }}">Start planning</a>
+        <a class="btn btn-hero" href="{{ url_for('guides') }}">Browse travel guides</a>
+      {% endif %}
+    </p>
+  </section>
+
+  <h2>Features to replace all your other tools</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for f in landing.features %}
+      <div class="card">
+        <h3>{{ f.title }}</h3>
+        <p class="small muted" style="margin:0">{{ f.text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Explore destinations</h2>
+  <p class="muted">Live captured destination pages: top sights, ranked places, and the categories travelers search for.</p>
+  <div class="grid cols-4" style="margin-bottom:26px">
+    {% for g in geos[:8] %}
+      <a class="tile" href="{{ url_for('explore', gid=g.id) }}">
+        {% if g.image %}<img class="cover" src="{{ g.image }}" alt="{{ g.name }}">{% endif %}
+        <div class="pad">
+          <h3>{{ g.name }}</h3>
+          <span class="small muted">{{ g.country_name }}</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  <h2>What travelers are raving about</h2>
+  <div class="grid cols-3" style="margin-bottom:26px">
+    {% for t in landing.testimonials[:6] %}
+      <div class="pr-quote">
+        <p>“{{ t.text }}”</p>
+        <div class="author-row">
+          {% if t.avatar %}<img class="avatar-sm" src="{{ t.avatar|landing_avatar }}" alt="">{% endif %}
+          <div>
+            <div class="stat">{{ t.name or 'Wanderlog traveler' }}</div>
+            <div class="small muted">Wanderlog user</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Recommended travel guides</h2>
+  <div class="grid cols-3">
+    {% for g in guides %}
+      <a class="tile" href="{{ url_for('guide_view', key=g.key) }}">
+        {% if g.header_image %}<img class="cover" src="{{ g.header_image }}" alt="{{ g.title }}">{% endif %}
+        <div class="pad">
+          <h3>{{ g.title }}</h3>
+          <span class="small muted">{{ g.place_count }} places · {{ '{:,}'.format(g.view_count) }} views</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

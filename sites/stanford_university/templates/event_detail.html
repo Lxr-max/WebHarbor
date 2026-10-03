@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }} — Stanford Events{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('events') }}">Events</a> › {{ event.title }}</div>
+<div class="detail-head">
+  <h1>{{ event.title }}</h1>
+  <div class="meta">{{ event.first_date }}{% if event.last_date and event.last_date != event.first_date %} through {{ event.last_date }}{% endif %}</div>
+</div>
+<div class="detail-body">
+  {% if event.photo_url %}<img src="{{ event.photo_url }}" alt="{{ event.title }}" style="width:100%;border-radius:10px;margin-bottom:18px;">{% endif %}
+  <div class="facts">
+    <div class="fact"><div class="k">Date</div><div class="v">{{ event.first_date }}</div></div>
+    {% if event.location_name %}<div class="fact"><div class="k">Location</div><div class="v">{{ event.location_name }}{% if event.room_number %} {{ event.room_number }}{% endif %}</div></div>{% endif %}
+    {% if event.address %}<div class="fact"><div class="k">Address</div><div class="v">{{ event.address }}</div></div>{% endif %}
+    <div class="fact"><div class="k">Format</div><div class="v">{{ event.experience or '—' }}</div></div>
+    <div class="fact"><div class="k">Cost</div><div class="v">{% if event.free %}Free{% elif event.ticket_cost %}{{ event.ticket_cost }}{% else %}Admission cost not listed{% endif %}</div></div>
+  </div>
+  {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+  {% if event.tags %}<p>{% for t in event.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
+  {% if event.instances %}
+  <h2>Schedule</h2>
+  <table class="data">
+    <tr><th>Starts</th><th>Ends</th><th>Location</th></tr>
+    {% for i in event.instances %}
+      <tr><td>{{ i.start or 'Time not listed' }}</td><td>{{ i.end or '—' }}</td><td>{{ i.location or event.location_name or '—' }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+  <div class="form-actions">
+    {% if current_user.is_authenticated %}
+      {% if saved %}
+      <form class="inline-form" method="post" action="{{ url_for('event_unsave') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="eid" value="{{ event.eid }}">
+        <input type="hidden" name="next" value="{{ url_for('event_detail', eid=event.eid) }}">
+        <button class="btn" type="submit">Remove from saved events</button>
+      </form>
+      {% else %}
+      <form class="inline-form" method="post" action="{{ url_for('event_save') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="eid" value="{{ event.eid }}">
+        <input type="hidden" name="next" value="{{ url_for('event_detail', eid=event.eid) }}">
+        <button class="btn solid" type="submit">Save this event</button>
+      </form>
+      {% endif %}
+      <a class="btn" href="{{ url_for('saved_events') }}">View saved events</a>
+    {% else %}
+      <a class="btn solid" href="{{ url_for('login', next=url_for('event_detail', eid=event.eid)) }}">Log in to save this event</a>
+    {% endif %}
+  </div>
+  {% if related %}
+  <h2>More events</h2>
+  <div class="grid cols-3">
+    {% for e in related %}
+      <div class="card"><div class="pad">
+        <div class="meta">{{ e.first_date }}</div>
+        <h3><a href="{{ url_for('event_detail', eid=e.eid) }}">{{ e.title }}</a></h3>
+      </div></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

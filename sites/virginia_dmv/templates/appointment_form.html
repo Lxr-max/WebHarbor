@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Reserve Your Spot{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('appointments') }}">Appointments</a> › Reserve Your Spot</nav>
+  <div class="page-title"><h1>Reserve Your Spot</h1></div>
+  <p>Appointments are available Monday through Friday. E-Tickets are available during regular
+  office hours, and walk-ins are always welcome.</p>
+
+  {% if step == 1 %}
+  <form class="flow" method="post" action="{{ url_for('appointment_new') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="step" value="2">
+    <div class="field">
+      <label for="office">Choose a customer service center</label>
+      <select id="office" name="office" required>
+        {% for office in offices %}
+        <option value="{{ office.slug }}">{{ office.name }} — {{ office.address }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="service">Select the type of service you need</label>
+      <select id="service" name="service" required>
+        {% for s in services %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="date">Appointment date (Mon–Fri)</label>
+      <input id="date" type="date" name="date" required value="2026-10-07">
+    </div>
+    <button class="btn" type="submit">Find available times</button>
+  </form>
+
+  {% elif step == 2 %}
+  <div class="card">
+    <h2>{{ office.name }}</h2>
+    <address>{{ office.address }}</address>
+    <p>Service: {{ service }}</p>
+    <p>Date: {{ appt_date }}</p>
+  </div>
+  <form class="flow" method="post" action="{{ url_for('appointment_new') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="step" value="3">
+    <input type="hidden" name="office" value="{{ office.slug }}">
+    <input type="hidden" name="service" value="{{ service }}">
+    <input type="hidden" name="date" value="{{ appt_date }}">
+    <fieldset class="choice">
+      <legend>Available times</legend>
+      {% for slot in slots %}
+      <label class="radio-row"><input type="radio" name="time" value="{{ slot }}" {% if loop.first %}checked{% endif %}> {{ slot }}</label>
+      {% endfor %}
+    </fieldset>
+    <div class="field"><label for="name">Your full name</label>
+      <input id="name" type="text" name="name" required value="{{ current_user.display_name if current_user.is_authenticated else '' }}"></div>
+    <div class="field"><label for="email">Email address</label>
+      <input id="email" type="email" name="email" required value="{{ current_user.email if current_user.is_authenticated else '' }}"></div>
+    <button class="btn" type="submit">Reserve your spot</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

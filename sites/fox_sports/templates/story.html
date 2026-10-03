@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ story.title }} | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="{{ url_for('stories_hub') }}">STORIES</a> &gt;
+  <a href="/stories/{{ story.league }}">{{ story.league|upper }}</a> &gt;
+  <span>{{ story.title }}</span>
+</div>
+<article class="story-article">
+  <h1>{{ story.title }}</h1>
+  {% if story.dek %}<p class="story-dek">{{ story.dek }}</p>{% endif %}
+  {% if story.image and image(story.image) %}<img class="story-hero" src="{{ image(story.image) }}" alt="{{ story.title }}">{% endif %}
+  <p class="muted story-byline">
+    {% if story.author %}By {{ story.author }} &middot; {% endif %}
+    {{ story.time_ago or (story.published or '')[:10] }}
+    {% if story.source %} &middot; {{ story.source }}{% endif %}
+  </p>
+  <div class="story-body">
+    {% for para in (story.body or '').split('|') %}
+      <p>{{ para }}</p>
+    {% endfor %}
+  </div>
+</article>
+<section class="section">
+  <div class="section-head"><h2>More Stories</h2></div>
+  <div class="story-grid">
+    {% for s in related %}
+    <a class="story-card" href="/stories/{{ s.league }}/{{ s.slug }}">
+      {% if s.image and image(s.image) %}<img src="{{ image(s.image) }}" alt="{{ s.title }}" loading="lazy">{% endif %}
+      <h3>{{ s.title }}</h3>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

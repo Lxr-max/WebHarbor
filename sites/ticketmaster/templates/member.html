@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}My Account | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a class="active" href="/member">Your Account</a>
+      <a href="/member/profile">Edit Profile</a>
+      <a href="/member/payment">Payment Options</a>
+      <a href="/member/orders">Orders</a>
+      <a href="/member/favorites">My Favorites</a>
+      <a href="/member">Print My Tickets</a>
+      <a href="/member">Transfer Tickets</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <h1>Your Account</h1>
+      <p style="color:var(--tm-gray); margin-bottom:20px">Signed in as {{ current_user.email }}</p>
+
+      <h3 style="margin-bottom:10px">Recent Orders</h3>
+      {% if orders %}
+      <table class="table">
+        <tr><th>Order #</th><th>Event</th><th>Event Date</th><th>Seats</th><th>Qty</th><th>Total</th><th></th></tr>
+        {% for o in orders %}
+        <tr>
+          <td><a href="/member/orders/{{ o.order_no }}">{{ o.order_no }}</a></td>
+          <td>{{ o.event.name[:40] }}{% if o.event.name|length > 40 %}…{% endif %}</td>
+          <td>{{ o.event.date_pretty }}</td>
+          <td>Sec {{ o.section }} Row {{ o.row }}</td>
+          <td>{{ o.qty }}</td>
+          <td>${{ '%.2f'|format(o.total) }}</td>
+          <td><a href="/member/orders/{{ o.order_no }}">View</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p style="color:var(--tm-gray)">You have no orders yet. <a class="find-tickets" href="/">Find tickets</a></p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

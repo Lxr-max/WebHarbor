@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Weather Map: Radar - The Weather Network{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="/en">Weather</a> / Maps</div>
+<h1 class="page-title">Weather Map: Radar</h1>
+<p class="muted">Radar snapshots for major Canadian cities, captured from the live radar mosaic.</p>
+
+{% for m in maps %}
+<section class="section">
+  <div class="section-head">
+    <h2>{{ m.loc.name }}{% if m.loc.prov_code %}, {{ m.loc.prov_code }}{% endif %}</h2>
+    <a class="more-link" href="{{ m.loc.url('current') }}">Local forecast</a>
+  </div>
+  <div class="radar-block" style="max-width:720px">
+    <img src="/static/images/maps/basemap_{{ m.slug }}.webp" alt="Radar map for {{ m.loc.name }}">
+    <div class="radar-overlay" style="background-image:url(/static/images/maps/radar_{{ m.slug }}.png)"></div>
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

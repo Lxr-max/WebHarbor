@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Search | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Search</h1></div>
+<form class="search-big" action="{{ url_for('search') }}" method="get" role="search">
+  <input type="search" name="q" value="{{ query }}" placeholder="Search teams, players, shows, stories" aria-label="Search">
+  <button type="submit" class="btn">Search</button>
+</form>
+{% if query %}
+<p class="muted">{{ results|length }} result{{ 's' if results|length != 1 }} for &ldquo;{{ query }}&rdquo;</p>
+<ul class="search-results">
+  {% for score, kind, title, link, item in results %}
+  <li class="search-hit">
+    <a href="{{ link }}">
+      {% if kind == 'team' and item.logo and image(item.logo) %}<img class="row-logo" src="{{ image(item.logo) }}" alt="{{ title }}">{% endif %}
+      <span class="hit-title">{{ title }}</span>
+    </a>
+    <span class="pill">{{ kind|upper }}</span>
+    {% if kind == 'team' and item.record %}<span class="muted">{{ item.record }}{% if item.note %} &middot; {{ item.note }}{% endif %}</span>{% endif %}
+    {% if kind == 'player' %}<span class="muted">{{ item.pos }} &middot; #{{ item.number }}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

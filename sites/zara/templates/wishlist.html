@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Wishlist | ZARA{% endblock %}
+{% block body %}
+<div class="page-head"><h1>MY WISHLIST</h1></div>
+{% if items %}
+<div class="wish-grid">
+  {% for w in items %}
+    <a class="product-card" href="{{ w.product.pdp_path }}">
+      {% set c = w.product.main_color %}
+      <div class="pimg">
+        {% if c and c.gallery_list %}<img src="{{ img(c.gallery_list[0]) }}" alt="{{ w.product.name }}">{% endif %}
+      </div>
+      <div class="pname">{{ w.product.name }}</div>
+      <div class="pprice">{{ money(w.product.price) }}</div>
+      <div class="pprice" style="color: var(--muted)">ADDED {{ w.added_at }}</div>
+    </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="center-note">Your wishlist is empty</p>
+{% endif %}
+{% endblock %}

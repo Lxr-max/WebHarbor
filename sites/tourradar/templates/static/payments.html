@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Payments - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; Payments</div>
+  <h1>Payments</h1>
+  {% for h, b in [["Flexible options", "Pay in full, pay a 10% deposit, or split into 7 interest-free installments."], ["Split Tour Payment", "Book once and share the cost with your travel companions."], ["Secure processing", "All payments are SSL encrypted and processed by trusted payment providers."], ["Currencies", "Tours are priced in USD; local currency conversion may apply."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}ZipRecruiter - Employment Tips, Tricks, &amp; Trends{% endblock %}
+{% block body %}
+<section class="serp-head">
+  <h1>Career Advice from ZipRecruiter</h1>
+  <p class="snapshot">Guides, trends and tips for every step of your job search — captured from the ZipRecruiter blog.</p>
+</section>
+<section class="blog-home">
+  <div class="blog-cats">
+    <h2>Categories</h2>
+    <ul class="browse-list">
+      {% for cat in cats %}
+      <li><a href="/blog/category/{{ cat.slug }}/">{{ cat.name }}</a>
+        <ul>
+          {% for sub in cat.children.all() %}
+          <li><a href="/blog/category/{{ sub.slug }}/">{{ sub.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="blog-list">
+    <h2>Latest articles</h2>
+    {% for art in articles %}
+    <article class="blog-card">
+      {% if art.hero_url() %}<img src="{{ art.hero_url() }}" alt="" class="blog-hero">{% endif %}
+      <h3><a href="/blog/{{ art.slug }}/">{{ art.title }}</a></h3>
+      <p class="byline">By {{ art.author }} · {{ art.published[:10] }} ·
+        <a href="/blog/category/{{ art.category.slug }}/">{{ art.category.name }}</a></p>
+      {% if art.excerpt %}<p class="excerpt">{{ art.excerpt }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

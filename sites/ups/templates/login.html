@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Log In | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-card ups-authcard">
+    <h1>Log In</h1>
+    <form method="post" action="{{ url_for('login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Email <span class="ups-req">*</span></label>
+      <input name="email" type="email" required placeholder="user@email.com">
+      <label>Password <span class="ups-req">*</span></label>
+      <input name="password" type="password" required>
+      <button class="ups-btn ups-btn-primary" type="submit">Log In</button>
+    </form>
+    <p class="ups-hint">New to UPS? <a href="{{ url_for('register') }}">Sign Up</a></p>
+  </div>
+</section>
+{% endblock %}

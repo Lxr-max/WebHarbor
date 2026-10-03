@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('articles_hub') }}">Attorney feature articles</a> ›
+    <span>{{ article.title }}</span>
+  </nav>
+  <article class="resource-article">
+    {% for block in article.blocks %}
+      {% if block.tag == "h1" %}<h1>{{ block.text }}</h1>
+      {% elif block.tag == "h2" %}<h2>{{ block.text }}</h2>
+      {% elif block.tag == "h3" %}<h3>{{ block.text }}</h3>
+      {% elif block.tag == "h4" %}<h4>{{ block.text }}</h4>
+      {% elif block.tag == "li" %}<li>{{ block.text }}</li>
+      {% else %}<p>{{ block.text }}</p>{% endif %}
+    {% endfor %}
+  </article>
+
+  {% if article.featured_lawyers %}
+  <h2>Featured lawyers</h2>
+  <div class="toplist-grid">
+    {% for lw in article.featured_lawyers %}
+    {% set lw_row = lawyer_by_uuid(lw.uuid) %}
+    <div class="toplist-card">
+      {% if lw_row %}
+      <a href="/profiles/{{ lw.state }}/{{ lw.city }}/lawyer/{{ lw.slug }}/{{ lw.uuid }}.html">
+        <img src="{{ url_for('static', filename=lw_row.photo()) }}" alt="{{ lw.name }}" width="200" height="250" loading="lazy">
+        <span class="toplist-name">{{ lw.name }}</span>
+      </a>
+      {% else %}
+      <img src="{{ url_for('static', filename=lawyer_img(lw.uuid) or 'images/icon-headshot-circled.png') }}" alt="{{ lw.name }}" width="200" height="250" loading="lazy">
+      <span class="toplist-name">{{ lw.name }}</span>
+      {% endif %}
+      <span class="toplist-firm">{{ featured_city_line(lw.city, lw.state) }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if related %}
+  <h3>Other featured articles</h3>
+  <div class="link-grid">
+    {% for rel in related %}
+      <a href="/articles/{{ rel.state }}/{{ rel.slug }}/">{{ rel.title }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

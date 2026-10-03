@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container homepage">
+  {% if hero %}
+  <section class="featured-event" aria-labelledby="featured-title">
+    <a class="featured-art" href="/event/{{ hero.id }}" aria-label="{{ hero.name }} tickets">
+      <img src="{{ url_for('static', filename=hero.image.replace('static/','')) }}" alt="{{ hero.name }}" fetchpriority="high">
+    </a>
+    <div class="featured-copy">
+      <p class="featured-label">Featured Event · {{ hero.category }}</p>
+      <h1 id="featured-title">{{ hero.name }}</h1>
+      <p>{{ hero.venue.name if hero.venue }} · {{ hero.city_state }}</p>
+      <p>{{ hero.date_pretty }}{% if hero.time %} · {{ hero.time }}{% endif %}</p>
+      <a class="btn btn-primary" href="/event/{{ hero.id }}">Find Tickets</a>
+    </div>
+  </section>
+  {% endif %}
+  <section class="hero-section">
+    <div class="section-head">
+      <h2>Highlights</h2>
+    </div>
+    <div class="carousel">
+      {% for e in highlights %}
+      <a class="card" href="/event/{{ e.id }}">
+        {% if e.image %}<img class="card-img" src="{{ url_for('static', filename=e.image.replace('static/','')) }}" alt="{{ e.name }}">{% endif %}
+        <div class="card-body">
+          <div class="card-title">{{ e.name }}</div>
+          <div class="card-sub">{{ e.venue.name if e.venue }} — {{ e.city_state }}</div>
+          <div class="card-date">{{ e.date_pretty }}{% if e.time %} • {{ e.time }}{% endif %}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Trending Searches</h2></div>
+    <div class="chips">
+      {% for t in trending %}
+      <a class="chip" href="/artist/{{ t.artist.id }}">
+        {% if t.artist.image %}<img src="{{ url_for('static', filename=t.artist.image.replace('static/','')) }}" alt="">{% endif %}
+        {{ t.label }}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Happening This Weekend</h2></div>
+    {% if weekend %}
+    <div class="carousel">
+      {% for e in weekend %}
+      <a class="card" href="/event/{{ e.id }}">
+        {% if e.image %}<img class="card-img" src="{{ url_for('static', filename=e.image.replace('static/','')) }}" alt="{{ e.name }}">{% endif %}
+        <div class="card-body">
+          <div class="card-title">{{ e.name }}</div>
+          <div class="card-sub">{{ e.venue.name if e.venue }} — {{ e.city_state }}</div>
+          <div class="card-date">{{ e.date_pretty }}{% if e.time %} • {{ e.time }}{% endif %}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><h3>No events this weekend</h3><p>Browse all events below.</p></div>
+    {% endif %}
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Popular Near You</h2></div>
+    <div class="genre-tabs">
+      {% for key, label in [('concerts','Concerts'),('sports','Sports'),('arts-theater','Arts & Theater'),('family','Family')] %}
+      <a class="genre-tab {{ 'active' if loop.first }}" href="#popular-{{ key }}" onclick="
+        document.querySelectorAll('[data-pop]').forEach(el => el.style.display='none');
+        document.getElementById('popular-{{ key }}').style.display='';
+        document.querySelectorAll('.genre-tab').forEach(el => el.classList.remove('active'));
+        this.classList.add('active'); return false;">{{ label }}</a>
+      {% endfor %}
+    </div>
+    {% for key, label in [('concerts','Concerts'),('sports','Sports'),('arts-theater','Arts & Theater'),('family','Family')] %}
+    <div id="popular-{{ key }}" data-pop {% if not loop.first %}style="display:none"{% endif %}>
+      <ul>
+        {% for e in popular[key] %}
+        <li class="event-row">
+          {% if e.image %}<img class="popular-image" src="{{ url_for('static', filename=e.image.replace('static/','')) }}" alt="" loading="lazy" width="112" height="75">{% endif %}
+          <div class="date-block"><div class="mon">{{ e.month }}</div><div class="day">{{ e.day }}</div></div>
+          <div class="er-main">
+            <div class="er-name"><a href="/event/{{ e.id }}">{{ e.name }}</a></div>
+            <div class="er-sub">{{ e.city_state }} — <a href="/venue/{{ e.venue.id }}">{{ e.venue.name }}</a></div>
+            <div class="er-time">{{ e.time_line }}</div>
+          </div>
+          <a class="find-tickets" href="/event/{{ e.id }}">Find Tickets &#9662;</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Explore Cities</h2><a href="/discover/cities">See All Cities</a></div>
+    <div class="city-grid">
+      {% for c in cities %}
+      <a class="city-tile" href="/discover/cities/{{ c.slug }}">
+        <img src="{{ url_for('static', filename=c.image.replace('static/','')) }}" alt="{{ c.name }}">
+        <span>{{ c.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

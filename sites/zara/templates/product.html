@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | ZARA United States{% endblock %}
+{% block body %}
+<div class="breadcrumb">
+  <a href="/">HOME</a> /
+  {% if cat %}<a href="{{ cat.path }}">{{ cat.name }}</a> /{% endif %}
+  {{ product.name }}
+</div>
+<div class="pdp">
+  <div class="gallery">
+    {% for g in color.gallery_list %}
+      <img src="{{ img(g) }}" alt="{{ product.name }} {{ loop.index }}">
+    {% endfor %}
+  </div>
+  <div class="pdp-info">
+    <h1>{{ product.name }}</h1>
+    <p class="pdp-ref">REF. {{ product.display_reference or product.reference }} · {{ product.section }} · {{ product.family }}</p>
+    <p class="pdp-price">{{ money(color.price or product.price) }}
+      {% if product.is_on_sale and product.old_price %}<span class="pold">{{ money(product.old_price) }}</span>{% endif %}
+    </p>
+    {% if color.tags_list %}
+      <p class="ptag" style="position:static; display:inline-block; margin: 6px 0;">
+        {% for t in color.tags_list %}{{ t }}{% if not loop.last %} · {% endif %}{% endfor %}
+      </p>
+    {% endif %}
+    {% if product.colors|length > 1 %}
+      {% if color.name %}<p class="color-name">COLOR: {{ color.name }}</p>{% endif %}
+      <div class="pdp-colors">
+        {% for col in product.colors %}
+          {# audit fix F-3: some non-main color thumbnails are not part of the
+             frozen asset bundle; img() then returns None and the browser used
+             to request /us/en/None (404 + broken-image icon). Render the
+             tracked color dot instead when no managed asset exists. #}
+          {% set tsrc = img(col.thumb) if col.thumb else None %}
+          {% if not tsrc and col.gallery_list %}{% set tsrc = img(col.gallery_list[0]) %}{% endif %}
+          <a class="swatch {{ 'on' if col.id == color.id else '' }}"
+             href="{{ product.pdp_path }}?v1={{ col.upstream_id }}"
+             title="{{ col.name }}">
+            {% if tsrc %}<img src="{{ tsrc }}" alt="{{ col.name }}">
+            {% else %}<span class="swdot" style="background: {{ col.hex or '#f6f6f6' }}"></span>{% endif %}
+            <span class="swname">{{ col.name }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      {# audit fix F-2: single-variant products with an empty upstream color
+         name used to render a bare "COLOR:" line with a blank value. #}
+      {% if color.name %}<p class="color-name">COLOR: {{ color.name }}</p>{% endif %}
+    {% endif %}
+    <div class="size-head"><span>SELECT A SIZE</span></div>
+    <form method="post" action="/us/en/shop/add" class="sizes">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="product" value="{{ product.seo_id }}">
+      <input type="hidden" name="color" value="{{ color.id }}">
+      <div class="sizes">
+        {% for s in color.sizes %}
+          <label class="size-pill {{ '' if s.availability in ('in_stock', 'low_on_stock') else 'back' }}">
+            <input type="radio" name="size" value="{{ s.id }}" required
+                   {{ '' if s.availability in ('in_stock', 'low_on_stock') else 'disabled' }}>
+            {{ s.name }}
+          </label>
+        {% endfor %}
+      </div>
+      <div class="pdp-actions">
+        <button type="submit" class="btn dark wide">ADD TO BAG</button>
+      </div>
+    </form>
+    <form method="post" action="/us/en/wishlist/toggle" style="margin-top:10px">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="product" value="{{ product.seo_id }}">
+      <input type="hidden" name="color" value="{{ color.upstream_id }}">
+      <input type="hidden" name="back" value="{{ request.path }}">
+      <button type="submit" class="btn wide">
+        {% if wish %}REMOVE FROM WISHLIST{% else %}ADD TO WISHLIST{% endif %}
+      </button>
+    </form>
+    <div class="pdp-meta">
+      <h3>PRODUCT</h3>
+      <p>{{ color.description or product.name }}</p>
+      <h3>AVAILABILITY BY SIZE</h3>
+      <table class="sku-table">
+        <tr><th>SIZE</th><th>AVAILABILITY</th><th>PRICE</th><th>SKU</th></tr>
+        {% for s in color.sizes %}
+          <tr><td>{{ s.name }}</td>
+              <td>{{ s.availability.replace('_',' ')|upper }}</td>
+              <td>{{ money(s.price or color.price or product.price) }}</td>
+              <td>{{ s.sku }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

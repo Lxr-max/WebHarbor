@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "description": "25 additions to the preserved ESPN HF bundle; not a replacement inventory. 24 images fetched from ESPN CDN, one Fantasy image retained from the original HF contribution.",
+  "assets": [
+    {
+      "path": "static/images/espn/leagues/ncaaf.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-football-college.png",
+      "identity": "ncaaf",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 15569,
+      "sha256": "b012eb32b9dcea78fb32119341e0ad801b015b409e1dd874cbe0b92311c6982c",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/ncaam.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-basketball.png",
+      "identity": "ncaam",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 16780,
+      "sha256": "f30fe9f1e9861e721e223ef9f6c34ee7289b130c74e8c584e53c0d9ca98cedb3",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/ncaaw.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-basketball.png",
+      "identity": "ncaaw",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 16780,
+      "sha256": "f30fe9f1e9861e721e223ef9f6c34ee7289b130c74e8c584e53c0d9ca98cedb3",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/tennis.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-tennis.png",
+      "identity": "tennis",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 17962,
+      "sha256": "408ecb58011d0bb1d31a1fa639f1a60021c5433cddb9e59143d846a22ec47d58",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/golf.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-golf.png",
+      "identity": "golf",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 13183,
+      "sha256": "f69808c54a752304fef1aa7c798e0b9cc549d9ea069124b8169b77455ad13584",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/soccer.png",
+      "source_url": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-soccer.png",
+      "identity": "soccer",
+      "source_note": "ESPN CDN sport icon; college and tennis names confirmed by ESPN scoreboard API.",
+      "bytes": 16963,
+      "sha256": "11ed3c662d3fe2961ebf6a0ca89039bc6330ffd8ea57371c7f36ffa500c4842b",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/mia.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/20232.png",
+      "identity": "Inter Miami CF",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/teams?limit=1000",
+      "bytes": 52451,
+      "sha256": "a1ea4f53629ee3849d72d928d4c54dadb1c3e4e57dc842aba4dbba59c08d12f4",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/la.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/187.png",
+      "identity": "LA Galaxy",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/teams?limit=1000",
+      "bytes": 28066,
+      "sha256": "e0418f5d80a7c1f28d2ea234084d22006c8293131165d848869959b1be5f0d04",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/lafc.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/18966.png",
+      "identity": "LAFC",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/teams?limit=1000",
+      "bytes": 70496,
+      "sha256": "1433adb2ec11c30bbcd306fce3674f2d253372ae2fd4492e210b222d7d24439f",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/bar.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+      "identity": "Barcelona",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/teams?limit=1000",
+      "bytes": 25584,
+      "sha256": "9987e9acd8f542f74402f5a62ac2bcbb350c5ed2bf38831779d56a375ae76eb9",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/rma.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+      "identity": "Real Madrid",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/teams?limit=1000",
+      "bytes": 43601,
+      "sha256": "acdcaaf2c60c3cc65a270dac1bd59f3a2b52911b8c45510d4e7f86d47ed714ba",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/psg.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+      "identity": "Paris Saint-Germain",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/teams?limit=1000",
+      "bytes": 59170,
+      "sha256": "d3c4321f76c2475d10dd76757e623367ab7549a9a55cdee7ced09cf6327d4f5b",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/soccer/mci.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+      "identity": "Manchester City",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams?limit=1000",
+      "bytes": 130387,
+      "sha256": "70e005bdab0ada41a153760398b4a2ef99f956bf9e72954686caa70da8c30c0b",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/ver.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/261.png",
+      "identity": "Vermont Catamounts",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 96638,
+      "sha256": "b0799eec3b2a49ae92be57b962f8fb3d3353537d0782defc3b893fbd7b84294f",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/umb.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/2378.png",
+      "identity": "UMBC Retrievers",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 63798,
+      "sha256": "83dc24899e9ebb12b250fa399c09d67a1b0b21614758e7658df3690a4410c8ca",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/alb.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/399.png",
+      "identity": "UAlbany Great Danes",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 65425,
+      "sha256": "8f775693e211515deb77394a0e8ba895962a139dc3f04923956afa178fa08ff7",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/uma.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/2349.png",
+      "identity": "UMass Lowell River Hawks",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 50166,
+      "sha256": "56a83d99d9608b20776842be7ea2e26f0f8777d7889460d01ac703be492dce4d",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/mai.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/311.png",
+      "identity": "Maine Black Bears",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 71775,
+      "sha256": "7de3ab29e9a6a7cbeab35fa14383b643539c9f52b804785981ccec095e4cfeef",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/bin.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/2066.png",
+      "identity": "Binghamton Bearcats",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 51181,
+      "sha256": "a0da1cf1aa1f95984fb0f33b5a72a6241bd487903916869bc2b47223a1037417",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/new.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/160.png",
+      "identity": "New Hampshire Wildcats",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 77716,
+      "sha256": "c02c87cbe03eda2693fb900821178fa44f228c6d01ff4c5b92f2d3e34dbd816b",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/har.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/42.png",
+      "identity": "Hartford Hawks",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/42",
+      "bytes": 40162,
+      "sha256": "0c8b24ee3cb090b5d9771fac2bbc85d136a836f2f228273f53f3a9e5dea215c8",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaam/nji.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/2885.png",
+      "identity": "NJIT Highlanders",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 38321,
+      "sha256": "39025bd72efa13181a4f5b2b982384e6b6ac70304115113726f6d1aa0f5e7324",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaaf/mich.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
+      "identity": "Michigan Wolverines",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 20380,
+      "sha256": "910dbf467c9b442f1b493280bbc027ba5a1f91e2ce314fae099d637aade7d42b",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/teams/ncaaf/wash.png",
+      "source_url": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
+      "identity": "Washington Huskies",
+      "source_page": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=1000",
+      "bytes": 32900,
+      "sha256": "d1b99c2ea2a3336916b6906c38470338b07bd1e66c09c4433080b0d7017709b2",
+      "width": 500,
+      "height": 500,
+      "retrieved_on": "2026-10-01"
+    },
+    {
+      "path": "static/images/espn/leagues/fantasy.png",
+      "source_url": "https://huggingface.co/datasets/ChilleD/WebHarbor/discussions/9",
+      "identity": "ESPN Fantasy",
+      "source_note": "Existing contributor-supplied ESPN Fantasy artwork, visually reviewed. Original upstream image URL was not supplied; retained without claiming independent source verification.",
+      "bytes": 32142,
+      "sha256": "a6a6586156d84b021e86f5c4d904832b6650cddd4639c464ab43d8c014e23cac",
+      "width": 768,
+      "height": 432,
+      "retrieved_on": "2026-10-01"
+    }
+  ]
+}

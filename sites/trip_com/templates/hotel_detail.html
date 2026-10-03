@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}{{ hotel.name }} ({{ city.name }}) - 2026 Prices, Reviews &amp; Deals | Trip.com{% endblock %}
+{% block content %}
+<div class="crumbs">Trip.com &gt; Hotels &gt; Hotels in {{ city.name }} &gt; <b>{{ hotel.name }}</b></div>
+
+<div class="panel">
+  <div class="gallery">
+    <div class="g-main">
+      {% if photos %}<img src="{{ url_for('static', filename='images/' + photos[0].path) }}" alt="{{ hotel.name }}">
+      {% elif hotel.img %}<img src="{{ url_for('static', filename='images/' + hotel.img) }}" alt="{{ hotel.name }}">{% endif %}
+    </div>
+    <div class="g-side">
+      {% for p in photos[1:3] %}
+      <img src="{{ url_for('static', filename='images/' + p.path) }}" alt="{{ hotel.name }} photo {{ loop.index }}">
+      {% endfor %}
+    </div>
+  </div>
+
+  <h1>{{ hotel.name }} <span class="hr-stars">{% if hotel.stars %}{{ '★' * hotel.stars }}{% endif %}</span></h1>
+  <div class="hr-area">{{ hotel.address }}{% if hotel.district %} &middot; {{ hotel.district }}{% endif %}{% if hotel.near %} &middot; <span class="near">Near {{ hotel.near }}</span>{% endif %}</div>
+  <div class="hr-rating" style="margin-top:6px">
+    <span class="hr-score">{{ '%.1f'|format(hotel.rating) }}</span>
+    <span><span class="hr-label">{{ hotel.rating_label }}</span><br>
+    <span class="hr-reviews">{{ hotel.reviews_count }} reviews &middot; Last booked recently</span></span>
+    {% if in_wishlist %}<span class="hr-badge">Saved to wishlist</span>{% endif %}
+  </div>
+  {% if hotel.tag_list %}
+  <div class="hr-tags" style="margin-top:6px">
+    {% for t in hotel.tag_list %}<span class="hr-tag">{{ t }}</span>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="detail-layout">
+  <div>
+    <div class="panel">
+      <h2>Choose your room</h2>
+      <form class="widget-row" style="margin-bottom:14px" method="get" action="{{ url_for('hotel_detail', hotel_id=hotel.id) }}">
+        <div class="wfield">
+          <label for="checkin">Check-in</label>
+          <input id="checkin" name="checkin" type="date" value="{{ checkin.isoformat() }}">
+        </div>
+        <div class="wfield">
+          <label for="checkout">Check-out</label>
+          <input id="checkout" name="checkout" type="date" value="{{ checkout.isoformat() }}">
+        </div>
+        <div class="wfield">
+          <label for="adults">Guests</label>
+          <select id="adults" name="adults">
+            {% for n in [1,2,3,4] %}
+            <option value="{{ n }}" {% if n == adults %}selected{% endif %}>{{ n }} adult{{ 's' if n > 1 }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button class="btn" type="submit">Update dates</button>
+      </form>
+      {% if rooms %}
+      {% for r in rooms %}
+      <div class="room-card">
+        <div>
+          <div class="room-name">{{ r.name }}</div>
+          <div class="room-specs">{{ r.bed }}{% if r.view %} &middot; {{ r.view }}{% endif %}{% if r.size_sqft %} &middot; {{ r.size_sqft }} ft&sup2;{% endif %} &middot; {{ r.capacity }} adults &middot; Free Wi-Fi &middot; Air conditioning &middot; Private bathroom</div>
+          <div class="rate-flags">
+            {% if r.free_cancel %}&#10003; Free Cancellation before 11:59 PM, Oct 1{% endif %}
+            {% if r.breakfast %} &middot; &#10003; Includes {{ r.capacity }} great breakfast{{ 's' if r.capacity > 1 }}{% endif %}
+            &middot; Instant confirmation
+          </div>
+        </div>
+        <div class="room-rate">
+          <div>
+            <div class="rate-price">${{ '%d'|format(r.price) }}</div>
+            <div class="rate-total">${{ '%d'|format(r.total) }}/night incl. taxes &amp; fees</div>
+            <div class="hr-coins">Earn ${{ '%.2f'|format(r.total * nights * 0.01) }} in Trip Coins</div>
+          </div>
+          <a class="btn" href="{{ url_for('hotel_book', room_id=r.id, checkin=checkin.isoformat(), checkout=checkout.isoformat(), adults=adults, children=children) }}">Reserve</a>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="empty-note">No rooms are available for your dates. Try different dates or check back later.</div>
+      {% endif %}
+    </div>
+
+    <div class="panel">
+      <h2>Guest reviews</h2>
+      {% for rv in reviews %}
+      <div class="review-item">
+        <div class="review-head"><span>{{ rv.traveller }} traveller</span><span>{{ rv.review_date }}</span></div>
+        <div><span class="hr-score">{{ '%.1f'|format(rv.rating) }}</span> <span class="hr-label">{{ 'Loved it' if rv.rating >= 9 else ('Very good' if rv.rating >= 8 else 'Good') }}</span></div>
+        <p style="margin-top:4px;color:var(--ink-2)">{{ rv.text }}</p>
+      </div>
+      {% else %}
+      <div class="empty-note">No reviews yet for this property.</div>
+      {% endfor %}
+    </div>
+
+    <div class="panel">
+      <h2>Services &amp; amenities</h2>
+      <div class="amenity-list">
+        {% for a in hotel.amenity_list[:16] %}
+        <div class="amenity">{{ a }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-aside">
+    <div class="panel aside-book">
+      <div class="price-box">
+        <div class="hr-price" style="font-size:26px">${{ '%d'|format(hotel.price) }}</div>
+        <div class="hr-total">${{ '%d'|format(hotel.total) }}/night incl. taxes &amp; fees</div>
+      </div>
+      <div class="sum-row"><span>Check-in</span><span class="val">{{ hotel.checkin_from }} onwards</span></div>
+      <div class="sum-row"><span>Check-out</span><span class="val">Before {{ hotel.checkout_by }}</span></div>
+      {% if rooms %}
+      <a class="btn btn-lg" href="#top" onclick="document.querySelector('.room-card .btn').focus();return false">Select Rooms</a>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('wishlist_toggle', hotel_id=hotel.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-quiet" type="submit">{{ 'Remove from wishlist' if in_wishlist else 'Save to wishlist' }}</button>
+      </form>
+      {% else %}
+      <a class="btn btn-quiet" href="{{ url_for('sign_in') }}">Sign in to save</a>
+      {% endif %}
+      <div class="hr-badge">We Price Match</div>
+    </div>
+    <div class="panel">
+      <h3>Surroundings</h3>
+      <div class="surround-list">
+        {% for s in hotel.amenity_list[-4:] %}
+        <div>{{ s }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

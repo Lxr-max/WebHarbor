@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Message Sent{{ '' }}{% endblock %}
+{% block content %}
+<div class="auth-layout">
+  <section class="auth-card">
+    <h1>Thank you for contacting Samsung Support</h1>
+    {% if ticket %}
+    <p>Your ticket number is <strong>{{ ticket.ticket_no }}</strong>.</p>
+    <dl class="ticket-detail">
+      <dt>Category</dt><dd>{{ ticket.category }}</dd>
+      <dt>Topic</dt><dd>{{ ticket.topic }}</dd>
+      <dt>Subject</dt><dd>{{ ticket.subject }}</dd>
+      <dt>Status</dt><dd>{{ ticket.status }}</dd>
+    </dl>
+    {% else %}
+    <p>We received your message.</p>
+    {% endif %}
+    <a class="btn" href="{{ url_for('support_home') }}">Back to Support</a>
+  </section>
+</div>
+{% endblock %}

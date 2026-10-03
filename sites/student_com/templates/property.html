@@ -1,0 +1,394 @@
+{% extends "base.html" %}
+{% block title %}{{ prop.name }}, {{ prop.city_slug.replace('-', ' ').title() }} | Student.com{% endblock %}
+{% block meta_description %}{{ prop.name }} student housing in {{ prop.city_slug.replace('-', ' ').title() }}. {{ (prop.property_summary or '')[:140] }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" data-testid="property-breadcrumbs" aria-label="breadcrumb">
+    <a href="/">Home</a> ›
+    <a href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}">{{ prop.city_slug.replace('-', ' ').title() }} Student Housing</a> ›
+    <span>{{ prop.name }}</span>
+  </nav>
+
+  {% set images = prop.images or [] %}
+  {% if images %}
+  <div class="gallery" data-testid="property-page-gallery-desktop">
+    <div class="main" id="gallery-main" data-testid="primary-property-image">
+      <img src="{{ images[0].path }}" alt="Photo of {{ prop.name }}" id="gallery-main-img">
+    </div>
+    <div class="side">
+      {% for im in images[1:5] %}
+      <div class="cell" data-idx="{{ loop.index }}">
+        <img src="{{ im.path }}" alt="Photo of {{ prop.name }}" loading="lazy">
+      </div>
+      {% endfor %}
+      {% if images|length > 5 %}
+      <div class="cell" id="view-all-photos" data-testid="view-all-photos" role="button" tabindex="0">
+        <img src="{{ images[5].path }}" alt="Photo of {{ prop.name }}" loading="lazy">
+        <div class="more">Show all {{ images|length }} photos</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="lightbox" id="lightbox">
+    <button class="nav" id="lb-prev" aria-label="Previous photo">‹</button>
+    <img id="lightbox-img" src="{{ images[0].path }}" alt="Photo of {{ prop.name }}">
+    <button class="nav" id="lb-next" aria-label="Next photo">›</button>
+    <div class="strip" id="lightbox-strip">
+      {% for im in images %}
+      <img src="{{ im.path }}" data-idx="{{ loop.index0 }}" alt="Photo of {{ prop.name }} {{ loop.index }}">
+      {% endfor %}
+    </div>
+    <button class="nav" id="lb-close" aria-label="Close" style="position:absolute;top:22px;right:22px">✕</button>
+  </div>
+  {% endif %}
+
+  <div class="prop-head">
+    <div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <h1>{{ prop.name }}</h1>
+        {% if prop.rating %}
+        <span class="rating-chip"><span class="stars">★</span> {{ '%.1f' % prop.rating }}
+          <span class="muted small">Average</span></span>
+        {% endif %}
+      </div>
+      <div class="addr">
+        {{ prop.address }} —
+        {% if prop.google_maps_url %}<a href="{{ prop.google_maps_url }}" target="_blank" rel="noopener">Show on Google Maps</a>{% endif %}
+      </div>
+      <div class="small muted" style="margin-top:6px">
+        {{ prop.type_label }}{% if prop.wheelchair_accessible %} · Wheelchair accessible{% endif %}
+        {% if uni %} · near <a href="/us/{{ uni.state }}/{{ uni.city_slug }}/u/{{ uni.slug }}" style="text-decoration:underline">{{ uni.name }}</a>{% endif %}
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div class="price-pill">{% if prop.min_price %}From ${{ '{:,}'.format(prop.min_price) }} /month{% else %}N/A{% endif %}</div>
+      {% if prop.max_price and prop.max_price != prop.min_price %}
+        <div class="small muted">up to ${{ '{:,}'.format(prop.max_price) }}/mo</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="prop-layout">
+    <div>
+      {% if prop.property_summary %}
+      <div class="panel">
+        <h2>AI Property Summary</h2>
+        <p style="font-size:14px;color:#3a3b40">{{ prop.property_summary }}</p>
+      </div>
+      {% endif %}
+
+      <div class="panel">
+        <h2>About this property</h2>
+        <p style="font-size:14px;color:#3a3b40">
+          {{ prop.name }} is a {{ prop.type_label|lower }} in {{ prop.city_slug.replace('-', ' ').title() }}{% if prop.address %}, located at {{ prop.address.split(',')[0] }}{% endif %}.
+          {% if prop.room_types %}Rooms here include {{ prop.room_types|join(', ') }} options.{% endif %}
+          {% if prop.office_hours %}The office is open: {{ prop.office_hours|join(', ') }}.{% endif %}
+        </p>
+        <p class="small muted" style="margin-top:10px">Pro tip: properties marked 3+ stars are curated by the Student.com team — this one is rated
+          {% if prop.rating %}{{ '%.1f' % prop.rating }} from {{ prop.user_rating_count }} reviews.{% else %}by our curation team.{% endif %}</p>
+      </div>
+
+      {% if prop.amenities %}
+      <div class="panel">
+        <h2>Property amenities</h2>
+        {% for a in prop.amenities %}
+        <span class="amenity-chip">✓ {{ a }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if prop.vibe_labels() or prop.neighbourhood_labels() or near_unis %}
+      <div class="panel">
+        <h2>Explore your neighborhood</h2>
+        <p class="small muted" style="margin-top:-8px">Get a sense of the area and find the key highlights of where you'll be living</p>
+        {% if prop.vibe_labels() %}
+        <div class="vibe-grid">
+          {% for label, em in prop.vibe_labels() %}
+          <div class="vibe"><div class="em">{{ em }}</div><div class="small" style="font-weight:600;margin-top:6px">{{ label }}</div></div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if prop.neighbourhood_labels() %}
+        <h3 style="margin-top:20px;font-size:16px">Key things to know...</h3>
+        {% for label, sub in prop.neighbourhood_labels() %}
+        <div class="ktk"><div class="t">{{ label }}</div><div class="s">{{ sub }}</div></div>
+        {% endfor %}
+        {% endif %}
+        {% if near_unis %}
+        <h3 style="margin-top:20px;font-size:16px">Commute times</h3>
+        {% for item in near_unis %}
+        <div class="summary-row">
+          <span><a href="/us/{{ item.uni.state }}/{{ item.uni.city_slug }}/u/{{ item.uni.slug }}" style="text-decoration:underline">{{ item.uni.name }}</a></span>
+          <span>{{ '%.1f' % item.distance if item.distance < 10 else item.distance|round|int }} miles away</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% if prop.room_types %}
+      <div class="panel">
+        <h2>Rooms available</h2>
+        <p class="small muted" style="margin-top:-8px">Find out about all the rooms {{ prop.name }} has available.</p>
+        {% for rt in prop.room_types %}
+        {# Upstream room_details comes in two shapes: dicts with ensuite/kitchen
+           details, or plain per-room-type prices (int/float, e.g. {"4 Bed": 850});
+           a few records even carry a non-numeric placeholder string. Render the
+           detail line only for dict-shaped records and fall back to a per-room
+           price line otherwise (mirrors upstream's AvailableRooms section, which
+           never assumes detail dicts). #}
+        {% set room_detail = (prop.room_details or {}).get(rt) %}
+        <div class="room-row">
+          <div>
+            <div class="rname">{{ rt }}</div>
+            {% if room_detail is mapping %}
+            <div class="rmeta">
+              {{ 'Ensuite' if room_detail.get('ensuite') else 'Shared bathroom' }}
+              {% if room_detail.get('kitchen') %} · {{ room_detail.get('kitchen') }} kitchen{% endif %}
+              {% if room_detail.get('bathroom_ratio') %} · {{ room_detail.get('bathroom_ratio') }} bathrooms{% endif %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="muted small">{% if room_detail is number %}from ${{ '{:,.0f}'.format(room_detail) }}/mo{% elif prop.min_price %}from ${{ '{:,}'.format(prop.min_price) }}/mo{% endif %}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if prop.reviews %}
+      <div class="panel">
+        <h2>Reviews</h2>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span class="rating-chip"><span class="stars">★</span> {{ '%.1f' % prop.rating if prop.rating else '—' }}</span>
+          <span class="small muted">Based on {{ prop.user_rating_count }} Google reviews · Powered by Google</span>
+        </div>
+        {% if prop.reviews_summary %}
+        <h3 style="font-size:15px;margin-top:16px">AI Review Summary</h3>
+        <p class="small" style="color:#3a3b40">{{ prop.reviews_summary }}</p>
+        {% endif %}
+        <p class="small muted" style="margin-top:14px">These are the latest Google reviews for {{ prop.name }}. Reviews tend to skew toward strong opinions. They're a useful guide, but may not reflect the typical day-to-day experience.</p>
+        {% for r in prop.reviews[:5] %}
+        <div class="review">
+          <div class="top">
+            <strong>{{ r.author }}</strong>
+            <span>{{ r.date }} · <span class="stars">{{ '★' * (r.rating|int) }}</span> {{ r.rating }}/5</span>
+          </div>
+          <div class="small" style="color:#3a3b40">{{ r.content }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="contact-card">
+      <div class="panel">
+        <h2>Contact</h2>
+        <p class="small muted" style="margin-top:-8px">{{ prop.name }}<br>Call or email the property to learn more.</p>
+        {% if not prop.hide_contact %}
+        <button class="btn primary full" id="email-property" data-testid="submit-enquiry-modal-trigger" style="margin-top:8px">✉ Email property</button>
+        {% endif %}
+        {% if prop.phone_number %}
+        <div class="row">
+          <span class="ico">📞</span>
+          <div><div class="small" style="font-weight:600">Call property</div>
+            <div class="small muted"><a href="tel:{{ prop.phone_number }}">{{ prop.phone_number }}</a></div></div>
+        </div>
+        {% endif %}
+        {% if prop.contact_email and not prop.hide_contact %}
+        <div class="row">
+          <span class="ico">✉️</span>
+          <div><div class="small" style="font-weight:600">Email property</div>
+            <div class="small muted"><a href="mailto:{{ prop.contact_email }}">{{ prop.contact_email }}</a></div></div>
+        </div>
+        {% endif %}
+        {% if prop.website %}
+        <div class="row">
+          <span class="ico">🌐</span>
+          <div><div class="small" style="font-weight:600">Website</div>
+            <div class="small muted"><a href="{{ prop.website }}" target="_blank" rel="noopener" style="text-decoration:underline">Visit {{ prop.name }}'s website</a></div></div>
+        </div>
+        {% endif %}
+        <div class="ktk" style="margin-top:14px;background:var(--purple-soft);border:none">
+          <div class="t">Pro Tip!</div>
+          <div class="s">Let them know Student.com sent you.</div>
+        </div>
+        </div>
+      <button class="btn full" id="save-property-cta"
+              onclick="toggleBookmark('{{ prop.slug }}', this, 'prop-heart')">
+        {{ '♥ Remove from saved properties' if is_bookmarked(prop.slug) else '♡ Save this property' }}
+      </button>
+      <svg width="0" height="0"><path id="prop-heart" fill="{{ '#ff5a76' if is_bookmarked(prop.slug) else 'none' }}"/></svg>
+    </div>
+  </div>
+
+  {% if similar %}
+  <div class="section-head"><h2>Similar properties in {{ prop.city_slug.replace('-', ' ').title() }}</h2></div>
+  <div class="grid cols-4">
+    {% for sp in similar %}
+      {% with prop = sp, heart_id = None %}{% include "_property_card.html" %}{% endwith %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if jobs_count %}
+  <div class="panel" style="margin-top:26px">
+    <div class="section-head" style="margin-bottom:10px">
+      <h2 style="font-size:20px">Jobs near {{ prop.city_slug.replace('-', ' ').title() }}</h2>
+      <a class="see-all" href="/us/{{ prop.state_slug }}/{{ prop.city_slug }}/internships">See more jobs</a>
+    </div>
+    <div class="small muted">{{ jobs_count }} jobs</div>
+    {% for j in jobs %}
+    <div class="job-card" style="border:none;padding:12px 0;border-bottom:1px solid #f0efec">
+      <div><strong style="font-size:14px">{{ j.title }}</strong>
+        <div class="co">{{ j.company }}</div></div>
+      <div class="loc">{{ j.location }}</div>
+      <a class="btn" href="{{ j.url }}" target="_blank" rel="noopener">View Job</a>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- enquiry modal -->
+<div class="modal-overlay" id="enquiry-modal">
+  <div class="modal">
+    <button class="close" data-close="enquiry-modal" aria-label="Close">✕</button>
+    <h3>Contact {{ prop.name }}</h3>
+    <p class="muted small">The property will reply to your inquiry — usually within a day.</p>
+    <form id="enquiry-form" novalidate>
+      <div class="field" id="eq-first-field">
+        <label for="eq-first">First name</label>
+        <input type="text" id="eq-first" name="first_name" value="{{ current_user.first_name if current_user.is_authenticated else '' }}">
+        <div class="err">First name is required</div>
+      </div>
+      <div class="field" id="eq-last-field">
+        <label for="eq-last">Last name</label>
+        <input type="text" id="eq-last" name="last_name" value="{{ current_user.last_name if current_user.is_authenticated else '' }}">
+        <div class="err">Last name is required</div>
+      </div>
+      <div class="field" id="eq-phone-field">
+        <label for="eq-phone">Phone number</label>
+        <input type="tel" id="eq-phone" name="phone" placeholder="(xxx) xxx-xxxx"
+               value="{{ current_user.phone if current_user.is_authenticated else '' }}">
+        <div class="err">Phone number is required</div>
+      </div>
+      <div class="field" id="eq-email-field">
+        <label for="eq-email">Email</label>
+        <input type="email" id="eq-email" name="email" value="{{ current_user.email if current_user.is_authenticated else '' }}">
+        <div class="err">Invalid email address</div>
+      </div>
+      <div class="field">
+        <label for="eq-message">Your message (optional)</label>
+        <textarea id="eq-message" name="message" rows="3" maxlength="500"
+          placeholder="I'm looking to rent a studio with a private bathroom in {{ prop.city_slug.replace('-', ' ').title() }} from September 2026"></textarea>
+        <div class="small muted" id="eq-charcount">0/500 characters</div>
+      </div>
+      <label class="check" style="margin-bottom:14px">
+        <input type="checkbox" name="marketing_consent">
+        <span>I would like to hear about other properties available at Student.com</span>
+      </label>
+      <button class="btn primary full" type="submit" id="enquiry-submit">Send message</button>
+    </form>
+    <p class="small muted" style="margin-top:12px">By contacting this property, you accept our
+      <a href="/terms" style="text-decoration:underline">Terms of Use</a> and
+      <a href="/terms/privacy" style="text-decoration:underline">Privacy Policy</a>.</p>
+  </div>
+</div>
+
+<!-- success modal -->
+<div class="modal-overlay" id="enquiry-sent">
+  <div class="modal" style="text-align:center">
+    <div style="font-size:44px">✉️</div>
+    <h3>Inquiry Sent</h3>
+    <p class="muted small">Your inquiry has been received, an email with your inquiry details will follow shortly.
+      {{ prop.name }} will be in touch soon.</p>
+    <p class="small">Inquiry reference: <strong id="enquiry-ref"></strong></p>
+    <p class="small muted">Need to change your details or add more information to your inquiry?
+      <a href="/profile/inquiries" style="text-decoration:underline">See it in My Inquiries</a> or contact the property directly.</p>
+    <button class="btn primary full" data-close="enquiry-sent">Done</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function () {
+    /* gallery lightbox */
+    var images = {{ (prop.images or []) | map(attribute='path') | list | tojson }};
+    var lightbox = document.getElementById("lightbox");
+    var mainImg = document.getElementById("gallery-main-img");
+    var cur = 0;
+    function show(i) {
+      cur = (i + images.length) % images.length;
+      var lb = document.getElementById("lightbox-img");
+      if (lb) lb.src = images[cur];
+      var strip = document.querySelectorAll("#lightbox-strip img");
+      strip.forEach(function (t, k) { t.classList.toggle("active", k === cur); });
+      if (mainImg && !lightbox.classList.contains("open")) mainImg.src = images[cur];
+    }
+    var main = document.getElementById("gallery-main");
+    if (main) main.addEventListener("click", function () { show(0); lightbox.classList.add("open"); });
+    document.querySelectorAll(".gallery .side .cell").forEach(function (cell) {
+      cell.addEventListener("click", function () {
+        var idx = parseInt(cell.getAttribute("data-idx") || (images.length > 5 ? 5 : 0), 10);
+        show(isNaN(idx) ? 0 : idx); lightbox.classList.add("open");
+      });
+    });
+    document.querySelectorAll("#lightbox-strip img").forEach(function (t) {
+      t.addEventListener("click", function () { show(parseInt(t.getAttribute("data-idx"), 10)); });
+    });
+    ["lb-prev", "lb-next"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener("click", function () { show(cur + (id === "lb-next" ? 1 : -1)); });
+    });
+    var lbClose = document.getElementById("lb-close");
+    if (lbClose) lbClose.addEventListener("click", function () { lightbox.classList.remove("open"); });
+
+    /* enquiry modal */
+    var emailBtn = document.getElementById("email-property");
+    var modal = document.getElementById("enquiry-modal");
+    function openEnquiry() {
+      if (!window.AUTHENTICATED) {
+        var authModal = document.getElementById("auth-modal");
+        if (authModal) authModal.classList.add("open");
+        return;
+      }
+      modal.classList.add("open");
+    }
+    if (emailBtn) emailBtn.addEventListener("click", openEnquiry);
+    var msg = document.getElementById("eq-message");
+    if (msg) msg.addEventListener("input", function () {
+      document.getElementById("eq-charcount").textContent = msg.value.length + "/500 characters";
+    });
+    var form = document.getElementById("enquiry-form");
+    if (form) form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fields = { "eq-first-field": "eq-first", "eq-last-field": "eq-last",
+                     "eq-phone-field": "eq-phone", "eq-email-field": "eq-email" };
+      Object.keys(fields).forEach(function (fid) {
+        var el = document.getElementById(fields[fid]);
+        var bad = !el.value.trim() ||
+          (fid === "eq-email-field" && !/^[^@]+@[^@]+\.[^@]+$/.test(el.value)) ||
+          (fid === "eq-phone-field" && !/^[+()\d\s.-]{7,}$/.test(el.value));
+        document.getElementById(fid).classList.toggle("invalid", bad);
+      });
+      var btn = document.getElementById("enquiry-submit");
+      btn.disabled = true; btn.textContent = "Sending...";
+      fetch("/property/{{ prop.slug }}/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "X-CSRFToken": window.CSRF_TOKEN },
+        body: new URLSearchParams(new FormData(form)).toString(),
+        credentials: "same-origin",
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        btn.disabled = false; btn.textContent = "Send message";
+        if (res.ok) {
+          modal.classList.remove("open");
+          document.getElementById("enquiry-ref").textContent = res.reference;
+          document.getElementById("enquiry-sent").classList.add("open");
+        }
+      });
+    });
+  })();
+</script>
+{% endblock %}

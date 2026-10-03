@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Tracking | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Tracking</div>
+  <h1>Tracking</h1>
+  <div class="ups-card ups-trackwidget">
+    <label class="ups-h2" for="trackInput">Tracking Number</label>
+    <form action="{{ url_for('track') }}" method="get">
+      <textarea id="trackInput" name="tracknum" rows="1"
+        placeholder="Enter up to 25 tracking numbers, one per line.">{{ query }}</textarea>
+      <button class="ups-btn ups-btn-primary" type="submit">Track <i class="ups-chev">&#8250;</i></button>
+    </form>
+    <p class="ups-hint">Separate multiple tracking numbers with commas or new lines, up to 25 at a time.</p>
+    <p class="ups-hint-links">
+      <a href="{{ url_for('support_article', key='understanding-tracking-status') }}">Understanding Tracking Status</a> &middot;
+      <a href="{{ url_for('support_article', key='ups-delivery-notice') }}">UPS Delivery Notice</a> &middot;
+      <a href="{{ url_for('support_article', key='where-is-my-package') }}">Where&rsquo;s My Package?</a>
+    </p>
+  </div>
+
+  {% if results %}
+  <section class="ups-track-results">
+    {% for r in results %}
+      <div class="ups-card ups-trackcard {{ 'is-error' if not r.shipment }}">
+        {% if r.shipment %}
+          <div class="ups-trackcard-status">
+            <span class="ups-dot {{ r.shipment.milestone }}"></span>
+            <div>
+              <p class="ups-tracknum">{{ r.shipment.tracking_number }}</p>
+              <p class="ups-statuslabel">{{ r.shipment.status }}</p>
+            </div>
+          </div>
+          <div class="ups-trackcard-meta">
+            <p>{{ r.shipment.service_name }}</p>
+            {% if r.shipment.status == 'Delivered' %}
+              <p>Delivered on {{ r.shipment.delivered_on }} at {{ r.shipment.delivered_time }}
+                {% if r.shipment.signed_by %} &mdash; Signed for by: {{ r.shipment.signed_by }}{% endif %}
+                {% if r.shipment.left_at %} &mdash; Left at: {{ r.shipment.left_at }}{% endif %}</p>
+            {% elif r.shipment.status == 'Awaiting Customer Pickup' %}
+              <p>Ready for pickup &mdash; pick up by {{ r.shipment.hold_by }}</p>
+            {% else %}
+              <p>Scheduled Delivery: {{ r.shipment.scheduled_delivery }}</p>
+            {% endif %}
+            <p>{{ r.shipment.from_city }}, {{ r.shipment.from_state }} &rarr; {{ r.shipment.to_city }}, {{ r.shipment.to_state }}</p>
+          </div>
+          <a class="ups-btn ups-btn-secondary" href="{{ url_for('track_detail', tracking_number=r.shipment.tracking_number) }}">View Details</a>
+        {% else %}
+          <div class="ups-trackcard-status">
+            <span class="ups-dot error"></span>
+            <div>
+              <p class="ups-tracknum">{{ r.num }}</p>
+              <p class="ups-statuslabel">{{ 'Invalid Tracking Number' if 'not valid' in r.error else 'Tracking number not found' }}</p>
+            </div>
+          </div>
+          <div class="ups-trackcard-meta"><p>{{ r.error }}</p></div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+</section>
+{% endblock %}

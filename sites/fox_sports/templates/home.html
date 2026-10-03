@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}FOX Sports | News, Scores, Schedules, Odds, Shows &amp; Videos{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-grid">
+    {% for tile in featured %}
+      <a class="hero-card" href="{{ tile.link }}">
+        {% if tile.image and image(tile.image) %}
+          <img src="{{ image(tile.image) }}" alt="{{ tile.title }}" loading="lazy">
+        {% endif %}
+        <div class="hero-card-body">
+          <span class="eyebrow">{{ (tile.league or 'FOX SPORTS')|upper }}</span>
+          <h3>{{ tile.title }}</h3>
+          {% if tile.description %}<p>{{ tile.description }}</p>{% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Top Games</h2>
+    <a class="see-all" href="{{ url_for('scores_hub') }}">All Scores</a>
+  </div>
+  <div class="game-strip">
+    {% for game in top_games %}
+      {% set away = teams.get(game.away_team) %}
+      {% set home = teams.get(game.home_team) %}
+      <a class="strip-card" href="/{{ game.league }}/{{ game.slug }}">
+        <span class="strip-league">{{ LEAGUE_NAMES.get(game.league, game.league) }}</span>
+        <div class="strip-row">
+          <span class="strip-team">
+            {% if away and away.logo and image(away.logo) %}<img src="{{ image(away.logo) }}" alt="{{ away.full_name }}">{% endif %}
+            {{ away.short if away else game.away_team }}
+          </span>
+          {% if game.status == 'final' %}
+            <span class="strip-score">{{ game.away_score }}</span>
+          {% endif %}
+        </div>
+        <div class="strip-row">
+          <span class="strip-team">
+            {% if home and home.logo and image(home.logo) %}<img src="{{ image(home.logo) }}" alt="{{ home.full_name }}">{% endif %}
+            {{ home.short if home else game.home_team }}
+          </span>
+          {% if game.status == 'final' %}
+            <span class="strip-score">{{ game.home_score }}</span>
+          {% endif %}
+        </div>
+        <span class="strip-meta">
+          {% if game.status == 'final' %}FINAL{% elif game.time %}{{ game.time }}{% if game.broadcaster %} &middot; {{ game.broadcaster }}{% endif %}{% else %}{{ game.date_iso }}{% endif %}
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Live Now &amp; Recent Moments</h2>
+    <a class="see-all" href="{{ url_for('watch') }}">Watch</a>
+  </div>
+  <ul class="moment-list">
+    {% for tile in live + moments %}
+      <li class="moment-item">
+        {% if tile.link %}<a href="{{ tile.link }}">{% endif %}
+        <span class="moment-tag">{{ 'LIVE NOW' if tile.kind == 'live' else 'MOMENT' }}</span>
+        <span class="moment-title">{{ tile.title }}</span>
+        {% if tile.link %}</a>{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

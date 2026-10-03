@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Red Bull Stories — news and features{% endblock %}
+{% block content %}
+<h1 class="page-title">Stories</h1>
+<p class="page-sub">The latest Red Bull news and features — action sports, music, gaming, culture and more.</p>
+
+<form class="filter-bar" method="get" action="{{ url_for('stories') }}">
+  <div>
+    <label for="discipline">Topic</label>
+    <select id="discipline" name="discipline">
+      <option value="">All topics</option>
+      {% for d in disciplines %}
+      <option value="{{ d }}" {{ 'selected' if active_discipline == d }}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="submit" class="btn btn-dark">Filter</button>
+    <a class="btn btn-outline" href="{{ url_for('stories') }}">Reset</a>
+  </div>
+</form>
+
+<div class="grid cols-3">
+  {% for s in stories %}
+  <a class="card" href="{{ url_for('story_detail', slug=s.slug) }}">
+    <div class="thumb"><img src="{{ s.hero_image }}" alt="{{ s.title }}"></div>
+    <div class="body">
+      <span class="tag">{{ s.discipline or 'Story' }}</span>
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.standfirst[:120] }}…</p>
+      <p class="meta">{{ s.published[:10] if s.published else '' }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('stories', page=page-1, discipline=active_discipline) }}">‹ Prev</a>
+  {% endif %}
+  <span class="current">{{ page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('stories', page=page+1, discipline=active_discipline) }}">Next ›</a>
+  {% endif %}
+  <span class="meta">{{ total }} stories</span>
+</div>
+{% endblock %}

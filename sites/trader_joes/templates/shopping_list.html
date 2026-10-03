@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Shopping List{% endblock %}
+{% block content %}
+<div class="page">
+  <h1 class="page-title">Shopping List</h1>
+  {% if not rows %}
+  <p class="rich">You have not added any items to your Shopping list. The great news is you can start it now!</p>
+  <a class="btn" href="{{ url_for('products_hub') }}">GO TO PRODUCTS</a>
+  {% else %}
+  <div class="cat-head">
+    <span class="result-count">Total items: {{ total }}</span>
+    <form method="post" action="{{ url_for('shopping_list_clear') }}" style="margin-left:auto;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn btn-secondary" type="submit">Clear all</button>
+    </form>
+  </div>
+  <table class="table-plain">
+    <thead>
+      <tr><th>Product</th><th>Size</th><th>Price</th><th>Quantity</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for item, p in rows %}
+      <tr>
+        <td><a href="{{ product_link(p) }}">{{ p.item_title }}</a></td>
+        <td>{{ p.sales_size }} {{ p.sales_uom_description }}</td>
+        <td>{{ p.price_text() }}</td>
+        <td>
+          <form method="post" action="{{ url_for('shopping_list_update', item_id=item.id) }}" style="display:inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-secondary" type="submit" name="action" value="decrease" aria-label="Decrease">Decrease</button>
+          </form>
+          <b>{{ item.quantity }}</b>
+          <form method="post" action="{{ url_for('shopping_list_update', item_id=item.id) }}" style="display:inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-secondary" type="submit" name="action" value="increase" aria-label="Increase">Increase</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('shopping_list_update', item_id=item.id) }}" style="display:inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-secondary" type="submit" name="action" value="remove">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="result-count">Total items: {{ total }}</p>
+  <p class="estimated-total">Estimated product total: ${{ "%.2f"|format(estimated_cost) }}{% if not prices_complete %} (priced items only){% endif %}</p>
+  <p>Based on captured product prices, before tax. This list is not an order.</p>
+  {% endif %}
+</div>
+
+<section class="home-section">
+  <p class="rich"><b>This shopping list is just a list</b> &mdash; We do not sell any products online. We set up our stores with care, filling them with knowledgeable, welcoming Crew Members and a sense of adventure. Log in to keep your list between visits.</p>
+</section>
+{% endblock %}
