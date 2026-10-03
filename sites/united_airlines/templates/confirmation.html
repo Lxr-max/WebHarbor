@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Booking confirmed — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-booking-page">
+  <div class="ua-confirm-head">
+    <h1>Your trip is booked</h1>
+    <p>Itinerary contact: {{ booking.contact_email }}.</p>
+  </div>
+  <div class="ua-booking-summary">
+    <div class="ua-price-line">Confirmation number:
+      <strong class="ua-pnr">{{ booking.confirmation }}</strong></div>
+    {% for leg in booking.legs %}
+      <div class="ua-leg">
+        <strong>{{ leg.flight.origin_code }} → {{ leg.flight.dest_code }}</strong>
+        UA {{ leg.flight.flight_number }} · {{ leg.travel_date }} ·
+        {{ leg.flight.departure }}–{{ leg.flight.arrival }} ·
+        {{ dict(fare_cabins)[leg.cabin] if fare_cabins else leg.cabin }}
+      </div>
+    {% endfor %}
+    <div class="ua-price-line">Travelers:
+      {% for pax in booking.passengers %}{{ pax.first_name }} {{ pax.last_name }}{{ ', ' if not loop.last else '' }}{% endfor %}
+    </div>
+    {% if booking.award_booking %}
+      <div class="ua-price-line">Paid with {{ '{:,}'.format(booking.miles_redeemed) }} award miles</div>
+    {% else %}
+      <div class="ua-price-line ua-price-total">Total charged: ${{ '%.2f'|format(booking.total) }} ({{ booking.card_type }} ending {{ booking.card_last4 }})</div>
+    {% endif %}
+    {% if credited %}
+      <div class="ua-price-line">MileagePlus credit: {{ '{:,}'.format(credited[0]) }} award miles and {{ booking.total | round | int }} PQP
+        to the account of{% for pax in booking.passengers if pax.mp_number %} {{ pax.mp_number }} ({{ credited[1] }}){% endfor %}</div>
+    {% endif %}
+    <div class="ua-next-steps">
+      <a class="ua-btn ua-btn-primary" href="{{ url_for('trip_detail', conf=booking.confirmation) }}">Manage this trip</a>
+      <a class="ua-btn ua-btn-ghost" href="{{ url_for('checkin') }}">Check in</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

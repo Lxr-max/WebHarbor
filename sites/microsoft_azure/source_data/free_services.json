@@ -1,0 +1,784 @@
+{
+ "icons": [
+  "free-icons/659343-beyond-free-services-background-1600x1300.webp",
+  "free-icons/659343-free-service-type-icon-01-26x26-resmode-sharp2-op-usm-1-5-0-65-15-0-qlt-100.svg",
+  "free-icons/659343-free-service-type-icon-02-26x26-resmode-sharp2-op-usm-1-5-0-65-15-0-qlt-100.svg",
+  "free-icons/659343-hero-background-1600x588.webp",
+  "free-icons/659343-next-steps-01-656x470.webp",
+  "free-icons/659343-next-steps-02-416x178.webp",
+  "free-icons/659343-next-steps-03-416x178.webp",
+  "free-icons/659343-next-steps-04-416x178.webp",
+  "free-icons/acom-icons-instagram-black-white-24x24.webp",
+  "free-icons/acom-icons-linkedin-black-white-24x24.webp",
+  "free-icons/acom-icons-x-black-white-24x24.webp",
+  "free-icons/acom-icons-youtube-black-white-24x24.webp",
+  "free-icons/acom-social-icon-azure.svg"
+ ],
+ "items": [
+  {
+   "id": "batch",
+   "name": "Batch",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/products/batch/"
+  },
+  {
+   "id": "azure-blob-storage",
+   "name": "Azure Blob Storage",
+   "category": "storage",
+   "period": "12 months free",
+   "detail": "5 GB locally redundant storage (LRS) hot block with 20,000 read and 10,000 write operations",
+   "eyebrow": "Storage | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/storage/blobs/"
+  },
+  {
+   "id": "azure-advisor",
+   "name": "Azure Advisor",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Unlimited",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/advisor/"
+  },
+  {
+   "id": "api-management",
+   "name": "API Management",
+   "category": "integration",
+   "period": "Always free",
+   "detail": "1 million monthly calls free with Consumption tier",
+   "eyebrow": "Integration | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/api-management/"
+  },
+  {
+   "id": "azure-virtual-network",
+   "name": "Azure Virtual Network",
+   "category": "networking",
+   "period": "Always free",
+   "detail": "50 virtual networks",
+   "eyebrow": "Networking | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/virtual-network/"
+  },
+  {
+   "id": "azure-sql-managed-instance",
+   "name": "Azure SQL Managed Instance",
+   "category": "databases",
+   "period": "12 months free",
+   "detail": "720 vCore hours of 4-vCore or 8-vCore General Purpose instance – includes 64GB data storage and 64GB backup storage",
+   "eyebrow": "Databases | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-sql/managed-instance"
+  },
+  {
+   "id": "face",
+   "name": "Face",
+   "category": "azure vision in foundry tools",
+   "period": "12 months free",
+   "detail": "30,000 transactions S0 tier",
+   "eyebrow": "Azure Vision in Foundry Tools | 12 months free",
+   "href": "https://azure.microsoft.com/products/ai-services/"
+  },
+  {
+   "id": "azure-kubernetes-service--aks-",
+   "name": "Azure Kubernetes Service (AKS)",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "AKS cluster management is free; you’ll incur a charge for resources consumed by nodes",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/kubernetes-service/"
+  },
+  {
+   "id": "azure-devtest-labs",
+   "name": "Azure DevTest Labs",
+   "category": "developer tools",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Developer tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/devtest-lab/"
+  },
+  {
+   "id": "health-bot",
+   "name": "Health Bot",
+   "category": "foundry tools",
+   "period": "Always free",
+   "detail": "3,000 messages (up to 10 messages per second)",
+   "eyebrow": "Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/bot-services/health-bot/"
+  },
+  {
+   "id": "content-safety",
+   "name": "Content Safety",
+   "category": "foundry control plane",
+   "period": "Always free",
+   "detail": "AKS cluster management is free; you’ll incur a charge for resources consumed by nodes",
+   "eyebrow": "Foundry Control Plane | Always free",
+   "href": "https://azure.microsoft.com/products/ai-services/ai-content-safety/"
+  },
+  {
+   "id": "azure-vpn-gateway",
+   "name": "Azure VPN Gateway",
+   "category": "networking",
+   "period": "12 months free",
+   "detail": "750 hours VpnGw1 Gateway Type",
+   "eyebrow": "Networking | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/vpn-gateway"
+  },
+  {
+   "id": "azure-ai-search",
+   "name": "Azure AI Search",
+   "category": "foundry iq",
+   "period": "Always free",
+   "detail": "50 MB storage for 10,000 hosted documents and 3 indexes per service",
+   "eyebrow": "Foundry IQ | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-services/ai-search"
+  },
+  {
+   "id": "azure-managed-applications",
+   "name": "Azure Managed Applications",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free publishing",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/managed-applications"
+  },
+  {
+   "id": "azure-container-registry",
+   "name": "Azure Container Registry",
+   "category": "containers",
+   "period": "12 months free",
+   "detail": "1 Standard tier registry with 100 GB storage and 10 webhooks",
+   "eyebrow": "Containers | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/container-registry/"
+  },
+  {
+   "id": "face",
+   "name": "Face",
+   "category": "azure vision in foundry tools",
+   "period": "Always free",
+   "detail": "30,000 transactions of Free instance",
+   "eyebrow": "Azure Vision in Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/products/ai-services/"
+  },
+  {
+   "id": "speech-to-text",
+   "name": "Speech to Text",
+   "category": "azure speech in foundry tools",
+   "period": "Always free",
+   "detail": "5 audio hours per month for Realtime Speech to Text",
+   "eyebrow": "Azure Speech in Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/services/cognitive-services/speech-to-text/"
+  },
+  {
+   "id": "azure-container-storage",
+   "name": "Azure Container Storage",
+   "category": "containers",
+   "period": "Always free",
+   "detail": "This service will offer a free tier for deployments with storage pool capacity under 5 TiB",
+   "eyebrow": "Containers | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/container-storage/"
+  },
+  {
+   "id": "vision",
+   "name": "Vision",
+   "category": "azure vision in foundry tools",
+   "period": "12 months free",
+   "detail": "5,000 transactions for each S1, S2, and S3 tier",
+   "eyebrow": "Azure Vision in Foundry Tools | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-foundry/tools/vision"
+  },
+  {
+   "id": "azure-maps",
+   "name": "Azure Maps",
+   "category": "internet of things",
+   "period": "Always free",
+   "detail": "1,000 to 5,000 transactions for specific mapping and location insights features",
+   "eyebrow": "Internet of Things | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-maps"
+  },
+  {
+   "id": "speech-translation",
+   "name": "Speech Translation",
+   "category": "azure speech in foundry tools",
+   "period": "Always free",
+   "detail": "5 audio hours per month for Real-time Speech Translation (with Standard Voice)",
+   "eyebrow": "Azure Speech in Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/services/cognitive-services/speech-translation/"
+  },
+  {
+   "id": "archive-storage",
+   "name": "Archive Storage",
+   "category": "storage",
+   "period": "12 months free",
+   "detail": "10 GB LRS storage, 10 GB LRS or GRS write and retrieval, and 100 reads",
+   "eyebrow": "Storage | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/storage"
+  },
+  {
+   "id": "ai-bot-service",
+   "name": "AI Bot Service",
+   "category": "foundry tools",
+   "period": "Always free",
+   "detail": "10,000 premium channel messages and unlimited standard channel messages",
+   "eyebrow": "Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service/"
+  },
+  {
+   "id": "azure-signalr-service",
+   "name": "Azure SignalR Service",
+   "category": "web",
+   "period": "Always free",
+   "detail": "20 concurrent connections per unit and 20,000 messages",
+   "eyebrow": "Web | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/signalr-service"
+  },
+  {
+   "id": "update-management-center",
+   "name": "Update management center",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free for Azure resources (charged for Arc-enabled servers) – see pricing page for details.",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-update-management-center/"
+  },
+  {
+   "id": "ai-custom-vision",
+   "name": "AI Custom Vision",
+   "category": "foundry tools",
+   "period": "12 months free",
+   "detail": "10,000 predictions S0 tier, one training hour, two projects with 5,000 training images each",
+   "eyebrow": "Foundry Tools | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-services/ai-custom-vision/"
+  },
+  {
+   "id": "automation",
+   "name": "Automation",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "500 minutes of job runtime",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/automation/"
+  },
+  {
+   "id": "app-service",
+   "name": "App Service",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "Up to 10 web or API apps with 1 GB storage and 1 hour per day",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/app-service/"
+  },
+  {
+   "id": "azure-private-link",
+   "name": "Azure Private Link",
+   "category": "networking",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Networking | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/private-link"
+  },
+  {
+   "id": "bandwidth--data-transfer-",
+   "name": "Bandwidth (Data Transfer)",
+   "category": "networking",
+   "period": "Always free",
+   "detail": "100 GB outbound",
+   "eyebrow": "Networking | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/virtual-network/"
+  },
+  {
+   "id": "azure-database-migration-service",
+   "name": "Azure Database Migration Service",
+   "category": "databases",
+   "period": "Always free",
+   "detail": "Free Standard Compute",
+   "eyebrow": "Databases | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/database-migration/"
+  },
+  {
+   "id": "azure-cosmos-db",
+   "name": "Azure Cosmos DB",
+   "category": "databases",
+   "period": "12 months free",
+   "detail": "400 request units per-second provisioned throughput with 25 GB storage",
+   "eyebrow": "Databases | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/cosmos-db/"
+  },
+  {
+   "id": "azure-arc",
+   "name": "Azure Arc",
+   "category": "hybrid multicloud",
+   "period": "Always free",
+   "detail": "Free Azure control plane functionality for resources outside Azure, search and indexing for Azure Arc-enabled resources",
+   "eyebrow": "Hybrid + multicloud | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-arc/"
+  },
+  {
+   "id": "bandwidth--data-transfer-",
+   "name": "Bandwidth (Data Transfer)",
+   "category": "networking",
+   "period": "12 months free",
+   "detail": "15 GB outbound",
+   "eyebrow": "Networking | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/virtual-network/"
+  },
+  {
+   "id": "microsoft-cost-management",
+   "name": "Microsoft Cost Management",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/cost-management/"
+  },
+  {
+   "id": "notification-hubs",
+   "name": "Notification Hubs",
+   "category": "mobile",
+   "period": "Always free",
+   "detail": "1 million push notifications with free namespace",
+   "eyebrow": "Mobile | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/notification-hubs/"
+  },
+  {
+   "id": "translator",
+   "name": "Translator",
+   "category": "azure translator in foundry tools",
+   "period": "Always free",
+   "detail": "2 million characters of any combination of standard translation and custom translation training free per month",
+   "eyebrow": "Azure Translator in Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-foundry/tools/translator"
+  },
+  {
+   "id": "azure-devops",
+   "name": "Azure DevOps",
+   "category": "developer tools",
+   "period": "Always free",
+   "detail": "5 users with unlimited private Git repos",
+   "eyebrow": "Developer tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/devops/"
+  },
+  {
+   "id": "azure-policy",
+   "name": "Azure Policy",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free access to configuration and change tracking features",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-policy"
+  },
+  {
+   "id": "azure-migrate",
+   "name": "Azure Migrate",
+   "category": "migration",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Migration | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-migrate"
+  },
+  {
+   "id": "logic-apps",
+   "name": "Logic Apps",
+   "category": "integration",
+   "period": "Always free",
+   "detail": "4,000 built-in actions with the Consumption plan",
+   "eyebrow": "Integration | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/logic-apps/"
+  },
+  {
+   "id": "azure-vm-image-builder",
+   "name": "Azure VM Image Builder",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "VM Image Builder is a free service. You may incur a charge if your build transfers data or uses paid Azure services.",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/image-builder/"
+  },
+  {
+   "id": "ai-immersive-reader",
+   "name": "AI Immersive Reader",
+   "category": "foundry tools",
+   "period": "Always free",
+   "detail": "3 million characters",
+   "eyebrow": "Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-services/ai-immersive-reader/"
+  },
+  {
+   "id": "azure-database-for-mysql",
+   "name": "Azure Database for MySQL",
+   "category": "databases",
+   "period": "12 months free",
+   "detail": "750 hours of Flexible Server—Burstable B1MS Instance, 32 GB storage, and 32 GB backup storage",
+   "eyebrow": "Databases | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/mysql/"
+  },
+  {
+   "id": "azure-resource-mover",
+   "name": "Azure Resource Mover",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free (ingress and egress charges may apply)",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/resource-mover/"
+  },
+  {
+   "id": "app-configuration",
+   "name": "App Configuration",
+   "category": "developer tools",
+   "period": "Always free",
+   "detail": "1,000 requests per day with 10 MB storage",
+   "eyebrow": "Developer tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/app-configuration/"
+  },
+  {
+   "id": "azure-resource-manager",
+   "name": "Azure Resource Manager",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/get-started/azure-portal/resource-manager/"
+  },
+  {
+   "id": "azure-network-watcher",
+   "name": "Azure Network Watcher",
+   "category": "networking",
+   "period": "Always free",
+   "detail": "5 GB storage with 1,000 checks, 10 tests, and 10 connection metrics",
+   "eyebrow": "Networking | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/network-watcher"
+  },
+  {
+   "id": "azure-data-factory",
+   "name": "Azure Data Factory",
+   "category": "analytics",
+   "period": "Always free",
+   "detail": "5 low-frequency activities",
+   "eyebrow": "Analytics | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/data-factory/"
+  },
+  {
+   "id": "azure-lighthouse",
+   "name": "Azure Lighthouse",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-lighthouse/"
+  },
+  {
+   "id": "linux-virtual-machines",
+   "name": "Linux Virtual Machines",
+   "category": "compute",
+   "period": "12 months free",
+   "detail": "750 hours each ofB2pts v2 (Arm-based) and B2ats v2 (AMD-based) burstable VMs",
+   "eyebrow": "Compute | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/virtual-machines/linux/"
+  },
+  {
+   "id": "cloud-shell",
+   "name": "Cloud Shell",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "5 GB free storage in Azure Files for 12 months",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/get-started/azure-portal/cloud-shell/"
+  },
+  {
+   "id": "microsoft-entra-id--formerly-azure-ad-",
+   "name": "Microsoft Entra ID (formerly Azure AD)",
+   "category": "identity",
+   "period": "Always free",
+   "detail": "50,000 stored objects with single sign-on (SSO) to all cloud apps",
+   "eyebrow": "Identity | Always free",
+   "href": "https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id"
+  },
+  {
+   "id": "static-web-apps",
+   "name": "Static Web Apps",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "100 GB bandwidth per subscription, 2 custom domains and .5 GB storage per app",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/app-service/static/"
+  },
+  {
+   "id": "visual-studio-code",
+   "name": "Visual Studio Code",
+   "category": "developer tools",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Developer tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/visual-studio-code/"
+  },
+  {
+   "id": "azure-key-vault",
+   "name": "Azure Key Vault",
+   "category": "security",
+   "period": "12 months free",
+   "detail": "10,000 transactions RSA 2048-bit keys or secret operations, Standard tier",
+   "eyebrow": "Security | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/key-vault/"
+  },
+  {
+   "id": "azure-iot-edge",
+   "name": "Azure IoT Edge",
+   "category": "internet of things",
+   "period": "Always free",
+   "detail": "Free, open-source edge runtime",
+   "eyebrow": "Internet of Things | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/iot-edge/"
+  },
+  {
+   "id": "open-datasets",
+   "name": "Open Datasets",
+   "category": "ai machine learning",
+   "period": "Always free",
+   "detail": "Free (egress charges may apply)",
+   "eyebrow": "Azure Machine Learning | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/open-datasets/"
+  },
+  {
+   "id": "microsoft-defender-for-cloud",
+   "name": "Microsoft Defender for Cloud",
+   "category": "security",
+   "period": "Always free",
+   "detail": "Free policy assessment and recommendations",
+   "eyebrow": "Security | Always free",
+   "href": "https://www.microsoft.com/en-us/security/business/cloud-security/microsoft-defender-cloud/"
+  },
+  {
+   "id": "azure-files",
+   "name": "Azure Files",
+   "category": "storage",
+   "period": "12 months free",
+   "detail": "100 GB of LRS transaction optimized, hot, and cool files. 2 million read, list, and other file operations",
+   "eyebrow": "Storage | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/storage/files/"
+  },
+  {
+   "id": "service-fabric",
+   "name": "Service Fabric",
+   "category": "containers",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Containers | Always free",
+   "href": "https://learn.microsoft.com/en-us/azure/service-fabric/service-fabric-overview"
+  },
+  {
+   "id": "azure-active-directory-b2c",
+   "name": "Azure Active Directory B2C",
+   "category": "identity",
+   "period": "Always free",
+   "detail": "50,000 active users per month (MAU) with Azure Active Directory B2C",
+   "eyebrow": "Identity | Always free",
+   "href": "https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id"
+  },
+  {
+   "id": "azure-iot-hub",
+   "name": "Azure IoT Hub",
+   "category": "internet of things",
+   "period": "Always free",
+   "detail": "8,000 messages per day and .5 KB message meter size of Free edition",
+   "eyebrow": "Internet of Things | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/iot-hub/"
+  },
+  {
+   "id": "azure-functions",
+   "name": "Azure Functions",
+   "category": "compute",
+   "period": "Always free",
+   "detail": "1 million requests",
+   "eyebrow": "Compute | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/functions/"
+  },
+  {
+   "id": "data-catalog",
+   "name": "Data Catalog",
+   "category": "analytics",
+   "period": "Always free",
+   "detail": "Unlimited users",
+   "eyebrow": "Analytics | Always free",
+   "href": "https://azure.microsoft.com/products/data-catalog"
+  },
+  {
+   "id": "azure-health-data-services",
+   "name": "Azure Health Data Services",
+   "category": "integration",
+   "period": "Always free",
+   "detail": "1 GB structured and blob storage, 50,000 API requests, .5 GB transformation operations, 100,000 events",
+   "eyebrow": "Integration | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/health-data-services/"
+  },
+  {
+   "id": "azure-automanage",
+   "name": "Azure Automanage",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "There are no charges specifically for Automanage. Azure services that are onboarded through Automanage will be billed individually.",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-automanage/"
+  },
+  {
+   "id": "machine-learning",
+   "name": "Machine Learning",
+   "category": "ai machine learning",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Azure Machine Learning | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/machine-learning/"
+  },
+  {
+   "id": "microsoft-azure-attestation",
+   "name": "Microsoft Azure Attestation",
+   "category": "security",
+   "period": "Always free",
+   "detail": "Free",
+   "eyebrow": "Security | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-attestation/"
+  },
+  {
+   "id": "azure-disk-storage",
+   "name": "Azure Disk Storage",
+   "category": "storage",
+   "period": "12 months free",
+   "detail": "2 64 GB (P6) solid state drives SSD storage, plus 1 GB snapshot and 2 million I/O operations",
+   "eyebrow": "Storage | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/storage/disks/"
+  },
+  {
+   "id": "text-to-speech",
+   "name": "Text to Speech",
+   "category": "azure speech in foundry tools",
+   "period": "Always free",
+   "detail": "0.5 million characters per month for Standard Neural Voices.",
+   "eyebrow": "Azure Speech in Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/"
+  },
+  {
+   "id": "event-grid",
+   "name": "Event Grid",
+   "category": "integration",
+   "period": "Always free",
+   "detail": "100,000 operations per month",
+   "eyebrow": "Integration | Always free",
+   "href": "https://azure.microsoft.com/products/event-grid/"
+  },
+  {
+   "id": "azure-load-balancer",
+   "name": "Azure Load Balancer",
+   "category": "networking",
+   "period": "12 months free",
+   "detail": "750 hours, 15 GB of data processing, and up to five rules with Standard Load Balancer",
+   "eyebrow": "Networking | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/load-balancer/"
+  },
+  {
+   "id": "azure-monitor",
+   "name": "Azure Monitor",
+   "category": "management and governance",
+   "period": "Always free",
+   "detail": "See Azure Monitor pricing details for free amounts per feature",
+   "eyebrow": "Management and governance | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/monitor"
+  },
+  {
+   "id": "service-bus",
+   "name": "Service Bus",
+   "category": "integration",
+   "period": "12 months free",
+   "detail": "750 hours and 13 million operations Standard tier base unit",
+   "eyebrow": "Integration | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/service-bus/"
+  },
+  {
+   "id": "azure-language",
+   "name": "Azure Language",
+   "category": "foundry tools",
+   "period": "Always free",
+   "detail": "5,000 text records",
+   "eyebrow": "Foundry Tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-foundry/tools/language"
+  },
+  {
+   "id": "azure-deployment-environments",
+   "name": "Azure Deployment Environments",
+   "category": "developer tools",
+   "period": "Always free",
+   "detail": "Azure Deployment Environments is a free service today. However, you will be charged for other Azure resources like compute, storage, and networking that are created in environments deployed through the service.​",
+   "eyebrow": "Developer tools | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/deployment-environments/"
+  },
+  {
+   "id": "azure-sql-database",
+   "name": "Azure SQL Database",
+   "category": "databases",
+   "period": "Always free",
+   "detail": "Get up to 10 databases with 100,000 vCore seconds of serverless tier and 32 GB of storage each",
+   "eyebrow": "Databases | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/azure-sql/database"
+  },
+  {
+   "id": "windows-virtual-machines",
+   "name": "Windows Virtual Machines",
+   "category": "compute",
+   "period": "12 months free",
+   "detail": "750 hours each ofB2pts v2 (Arm-based) and B2ats v2 (AMD-based) burstable VMs",
+   "eyebrow": "Compute | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/virtual-machines/windows/"
+  },
+  {
+   "id": "azure-container-apps",
+   "name": "Azure Container Apps",
+   "category": "containers",
+   "period": "Always free",
+   "detail": "180,000 vCPU seconds, 360,000 GiB seconds, and 2 million requests",
+   "eyebrow": "Containers | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/container-apps/"
+  },
+  {
+   "id": "azure-document-intelligence",
+   "name": "Azure Document Intelligence",
+   "category": "foundry tools",
+   "period": "12 months free",
+   "detail": "500 pages S0 tier",
+   "eyebrow": "Foundry Tools | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/ai-foundry/tools/document-intelligence"
+  },
+  {
+   "id": "azure-database-for-postgresql",
+   "name": "Azure Database for PostgreSQL",
+   "category": "databases",
+   "period": "12 months free",
+   "detail": "750 hours of Flexible Server—Burstable B1MS Instance, 32 GB storage, and 32 GB backup storage",
+   "eyebrow": "Databases | 12 months free",
+   "href": "https://azure.microsoft.com/en-us/products/postgresql/"
+  },
+  {
+   "id": "azure-documentdb",
+   "name": "Azure DocumentDB",
+   "category": "databases",
+   "period": "Always free",
+   "detail": "A dedicated MongoDB cluster with 32 GB storage",
+   "eyebrow": "Databases | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/documentdb"
+  },
+  {
+   "id": "azure-cosmos-db",
+   "name": "Azure Cosmos DB",
+   "category": "databases",
+   "period": "Always free",
+   "detail": "1,000 request units per-second provisioned throughput with 25 GB storage",
+   "eyebrow": "Databases | Always free",
+   "href": "https://azure.microsoft.com/en-us/products/cosmos-db/"
+  },
+  {
+   "id": "azure-web-pubsub",
+   "name": "Azure Web PubSub",
+   "category": "web",
+   "period": "Always free",
+   "detail": "20,000 messages per unit per day and 20 concurrent connections per unit (1 unit max)",
+   "eyebrow": "Web | Always free",
+   "href": "https://azure.microsoft.com/products/web-pubsub/"
+  }
+ ]
+}

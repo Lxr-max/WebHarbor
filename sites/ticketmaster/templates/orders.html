@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Orders | Ticketmaster{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="member-layout">
+    <nav class="member-nav">
+      <a href="/member">Your Account</a>
+      <a href="/member/profile">Edit Profile</a>
+      <a href="/member/payment">Payment Options</a>
+      <a class="active" href="/member/orders">Orders</a>
+      <a href="/member/favorites">My Favorites</a>
+      <a href="/help">Help</a>
+      <a href="/logout">Sign Out</a>
+    </nav>
+    <div class="member-main">
+      <h1>Orders</h1>
+      {% if orders %}
+      <table class="table">
+        <tr><th>Order #</th><th>Event</th><th>Event Date</th><th>Seats</th><th>Qty</th><th>Total</th><th>Status</th></tr>
+        {% for o in orders %}
+        <tr>
+          <td><a href="/member/orders/{{ o.order_no }}">{{ o.order_no }}</a></td>
+          <td>{{ o.event.name[:40] }}{% if o.event.name|length > 40 %}…{% endif %}</td>
+          <td>{{ o.event.date_pretty }}</td>
+          <td>Sec {{ o.section }} Row {{ o.row }}</td>
+          <td>{{ o.qty }}</td>
+          <td>${{ '%.2f'|format(o.total) }}</td>
+          <td>{{ o.status }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <div class="empty-state"><h3>No orders yet</h3><p><a class="find-tickets" href="/">Find tickets</a></p></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "upstream": "https://www.stubhub.com/",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the www.stubhub.com mirror: the home curation (popular/recommended performer rails, category chips, metro lens), the taxonomy browser (top categories, genre categories, league groupings with team grids), performer pages (bio, followers, event schedules, similar artists), event pages with the full listing filter set (quantity, price window, seat features, zone, section, sort) plus venue seat maps and nearby-event rails, listing detail pages with seat-view photos and all-in price breakdowns, the search page and the getSuggestedSearches suggestion API, the four-step checkout (start, review with delivery fees, payment with card management, confirm) with order confirmation and purchase history, the sell flow (event search, listing creation, reprice/delete), favorites, gift cards, and the account domain (purchases, sales, listings, payments)."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time seeder. All rows come from the tracked source_data/ snapshots, the tracked static/images/ tree and the frozen benchmark password digest \u2014 no untracked harvest scratch directories are consulted \u2014 so the SQLite seed is byte-reproducible on every build (PYTHONHASHSEED=0, see the Dockerfile build step and .build-generated-seed). Performer imagery is resolved by probing static/images/performers/<slug>.* (harvest_images.py names every performer asset by slug) and performer taxonomy nodes are derived from the performer's own events' tracked `sources`. Real harvested listing sets are seeded for the deep-harvested events; catalog events without a harvested set get deterministic derived listings built from the venue's real seat-map sections and the real per-genre price/feature distributions (rng seeded per event id). Fixture orders/listings refresh the touched events' listing_count and min/max price so the cards agree with the event pages. Every seed function early-returns on a populated database, keeping /reset/stubhub byte-identical. Event start instants are stored as the upstream UTC epoch; app.py renders them in the venue's local timezone."
+  },
+  {
+   "path": "source_data/events.json",
+   "classification": "captured-upstream-content",
+   "scope": "1268 real events captured from the stubhub.com GetFilteredEvents grid API (80 category/genre pages, POST + csrf, headful Chromium against DataDome) on 2026-09-26: names, dates, venues, performers, price windows and listing counts, plus the 37 marquee events (Metallica at Sphere, Seahawks home games, Kraken season, Seattle Opera) re-captured from their event pages with JSON-LD venue identity."
+  },
+  {
+   "path": "source_data/performers.json",
+   "classification": "captured-upstream-content",
+   "scope": "699 real performers with upstream ids, slugs, images, bios and follower counts merged from the groupedsearch API (631 queries) and the performer pages (25 deep bios including Metallica's 2498-character bio and 114K followers)."
+  },
+  {
+   "path": "source_data/venues.json",
+   "classification": "captured-upstream-content",
+   "scope": "335 real venues with upstream ids, names, cities, states and section inventories, merged from the event grid, the marquee event JSON-LD (Sphere 150030906, Mohegan Sun 5905, Levi's 216052, Climate Pledge, Lumen Field) and the seat-map geometry."
+  },
+  {
+   "path": "source_data/categories.json",
+   "classification": "captured-upstream-content",
+   "scope": "The real taxonomy tree (top categories, genre categories, league groupings) captured from the stubhub.com category/grouping pages, including the Festivals/Music Festivals merge (both point at node 490277 upstream) and the subtitle-to-node mapping for sports, theater and dance."
+  },
+  {
+   "path": "source_data/listings/",
+   "classification": "captured-upstream-content",
+   "scope": "124 real listing-card sets (1344 listings) captured from the 100 deep-harvested event pages: section, row, seats, quantity, per-ticket price, features (Instant download, Clear view, Aisle seat, Club access, Parking included), badges, deal ratings and the seat-view photo URL for each card."
+  },
+  {
+   "path": "source_data/home_curation.json, image_urls.json",
+   "classification": "captured-upstream-content",
+   "scope": "Home-page popular/recommended curation rails and the full image URL index (performer photos, category fallbacks, seat-view photos) collected during the harvest, used to download and verify every managed asset."
+  },
+  {
+   "path": "static/images/ (performers/, seatviews/, seatmaps/)",
+   "classification": "captured-upstream-media",
+   "scope": "1221 real upstream assets: 602 performer photos from media.stubhubstatic.com, 577 seat-view photos from img.vggcdn.net, and 42 venue seat maps captured from the event-page payloads. Each asset's byte size, SHA-256 and source URL are recorded in asset_inventory.json and re-verified at image build time by scripts/check_asset_inventory.py."
+  },
+  {
+   "path": "static/css/, static/fonts/, static/icons/",
+   "classification": "captured-upstream-media",
+   "scope": "Captured design tokens: the StubHub brand purple palette (#5E29BA), the Inter variable font woff2, the StubHub logo SVG, the fanprotect icon and favicon, all captured from the upstream pages."
+  },
+  {
+   "path": "seed_data.py (benchmark users)",
+   "classification": "fixture-data",
+   "scope": "The four benchmark accounts (alice/bob/carol/david @test.com, password TestPass123!) and their orders, sales, listings, cards, favorites, gift cards and notifications are fictional fixtures. Their orders occupy real harvested listings so the inventory stays consistent; order numbers follow the upstream 8-9 digit style but are deterministic."
+  },
+  {
+   "path": "tasks.jsonl",
+   "classification": "benchmark-tasks",
+   "scope": "21 goal-style benchmark tasks (5-key rows, <=100 words, no answer key) spanning the schedule comparison, listing filters, checkout, selling, favorites, gift cards, search, taxonomy, account domain, payments management and registration flows."
+  },
+  {
+   "path": "scripts_dev/",
+   "classification": "mirror-code",
+   "scope": "The harvest pipeline: harvest_events.py (grid API), harvest_event_pages.py (deep event pages with listings + seat maps), harvest_search.py (groupedsearch), harvest_supplement.py + harvest_retry.py (marquee events, performer bios), harvest_venues.py (JSON-LD venue identity), harvest_images.py (asset download + inventory), process_data.py (source_data snapshot builder), Containerfile.test (minimal container boot-semantics test)."
+  },
+  {
+   "path": "NOTICE.md",
+   "classification": "legal-notice",
+   "scope": "Data & asset provenance notice for the mirror."
+  }
+ ]
+}

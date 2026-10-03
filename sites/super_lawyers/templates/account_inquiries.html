@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}My inquiries | Super Lawyers{% endblock %}
+{% block content %}
+<div class="container page-section">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('home') }}">Home</a> ›
+    <a href="{{ url_for('account') }}">Manage my account</a> ›
+    <span>My inquiries</span>
+  </nav>
+  <h1>My inquiries</h1>
+  <p class="lead">Contact inquiries you have sent to Super Lawyers rated attorneys.</p>
+
+  <div class="inquiry-list">
+    {% for row in rows %}
+    <div class="inquiry">
+      <h2>
+        <a href="/profiles/{{ row.lawyer.state_slug }}/{{ row.lawyer.city_slug }}/lawyer/{{ row.lawyer.slug }}/{{ row.lawyer.uuid }}.html">{{ row.lawyer.name }}</a>
+      </h2>
+      <p class="muted">Sent {{ row.inquiry.created_at.strftime('%B %d, %Y') }} from {{ row.inquiry.city }}, {{ row.inquiry.state }}</p>
+      <blockquote>{{ row.inquiry.message }}</blockquote>
+    </div>
+    {% endfor %}
+  </div>
+  {% if not rows %}
+  <p>No inquiries yet. Use the contact form on an attorney's profile to reach out.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}College Football AP Top 25 | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>2026 NCAA Football Associated Press Poll</h1>
+  <nav class="league-tabs">
+    <a href="/college-football">Home</a>
+    <a href="/scores/college-football">Scores</a>
+    <a href="/college-football/schedule">Schedule</a>
+    <a class="active" href="/college-football/standings" aria-current="page">Standings</a>
+    <a href="/college-football/teams">Teams</a>
+    <a href="/college-football/players">Stats</a>
+    <a href="/college-football/news">News</a>
+  </nav>
+</div>
+<section class="section">
+  <table class="data-table">
+    <thead><tr><th>RANKING</th><th></th><th>Team</th><th>PTS</th></tr></thead>
+    <tbody>
+      {% for t in poll %}
+      <tr>
+        <td class="cell-strong">{{ t.poll_rank }}</td>
+        <td>{% if t.poll_movement and t.poll_movement != '-' %}{{ t.poll_movement }}{% else %}-{% endif %}</td>
+        <td class="cell-team">
+          {% if t.logo and image(t.logo) %}<img class="row-logo" src="{{ image(t.logo) }}" alt="{{ t.full_name }}">{% endif %}
+          <a href="/college-football/{{ t.slug }}-team">{{ t.full_name }}</a>
+          <span class="muted">{{ t.poll_record }}{% if t.poll_votes %} &middot; {{ t.poll_votes }} first-place votes{% endif %}</span>
+        </td>
+        <td>{{ t.poll_points }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}StubHub - Buy &amp; Sell Concert, Sport &amp; Theatre Tickets{% endblock %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Sign in to StubHub</h1>
+    <form method="post" class="auth-form">
+      <label>Email
+        <input type="email" name="email" placeholder="Email" required value="{{ request.form.get('email', '') }}">
+      </label>
+      <label>Password
+        <input type="password" name="password" placeholder="Password" required>
+      </label>
+      <label class="check"><input type="checkbox" name="stay" checked> Stay logged in</label>
+      <button type="submit" class="btn btn-primary btn-wide">Continue</button>
+    </form>
+    <p class="auth-note">By signing in or creating an account, you agree to our user agreement and acknowledge our privacy policy. You may receive SMS notifications from us and can opt out at any time.</p>
+    <p class="auth-alt">New to StubHub? <a href="/secure/register">Create an account</a></p>
+  </div>
+</div>
+{% endblock %}

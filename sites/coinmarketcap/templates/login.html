@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Log In | CoinMarketCap{% endblock %}
+{% block body %}
+<div class="card auth-card">
+  <h1>Log In</h1>
+  <p class="muted">Log in to save your watchlist permanently.</p>
+  {% if error %}<div class="error-banner">{{ error }}</div>{% endif %}
+  <form method="post" action="/login">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address..." required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password..." required>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+  <p class="muted">OR</p>
+  <p>Need an account? <a href="/signup">Sign Up</a></p>
+</div>
+{% endblock %}

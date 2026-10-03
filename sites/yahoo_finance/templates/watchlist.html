@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}My Watchlist - Yahoo Finance{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>My Watchlist</h2>
+  <p class="muted">Signed in as {{ current_user.email }}. Prices are the September 30, 2026 close snapshot.</p>
+  {% if rows %}
+  <div class="table-scroll">
+  <table class="yf">
+    <thead>
+      <tr>
+        <th>Symbol</th><th>Name</th><th class="num">Last</th><th class="num">Chg</th><th class="num">% Chg</th>
+        <th class="num">Market Cap</th><th class="num">P/E (TTM)</th><th class="num">Div Yield %</th><th>Added</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item, q in rows %}
+      <tr>
+        <td><a href="/quote/{{ q.symbol|urlencode }}"><strong>{{ q.symbol }}</strong></a></td>
+        <td>{{ q.short_name or q.long_name }}</td>
+        <td class="num">{{ fmt_price(q.price) }}</td>
+        <td class="num {{ 'up' if (q.change or 0) >= 0 else 'down' }}">{{ fmt_signed(q.change) }}</td>
+        <td class="num {{ 'up' if (q.change_pct or 0) >= 0 else 'down' }}">{{ fmt_pct(q.change_pct, 2, sign=True) }}</td>
+        <td class="num">{{ fmt_big(q.market_cap) }}</td>
+        <td class="num">{{ fmt_num(q.pe_ttm) }}</td>
+        <td class="num">{{ fmt_num(q.div_yield) }}</td>
+        <td>{{ item.added_at }}</td>
+        <td>
+          <form method="post" action="/watchlist/toggle">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="symbol" value="{{ q.symbol }}">
+            <input type="hidden" name="back" value="/watchlist">
+            <button class="btn small danger" type="submit">Remove</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="muted">Your watchlist is empty. Open any quote page and use “Add to Watchlist”, or search for a company in the header.</p>
+  {% endif %}
+  <p style="margin-top:14px;"><a href="/alerts">Manage your price alerts</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ league_name }} Player Stats | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ league_name }} Player Stats</h1>
+  <nav class="league-tabs">
+    <a href="/{{ league }}">Home</a>
+    <a href="/scores/{{ league }}">Scores</a>
+    <a href="/{{ league }}/schedule">Schedule</a>
+    <a href="/{{ league }}/standings">Standings</a>
+    <a href="/{{ league }}/teams">Teams</a>
+    <a class="active" href="/{{ league }}/players" aria-current="page">Stats</a>
+    <a href="/{{ league }}/news">News</a>
+  </nav>
+</div>
+<section class="section">
+  <div class="section-head"><h2>Player Stats</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Category</th><th>Leader</th><th>Team</th><th>Value</th></tr></thead>
+    <tbody>
+      {% for stat, rows in grouped.items() %}
+      {% for row in rows %}
+      <tr>
+        <td class="cell-team">{{ row.label }} <span class="muted">({{ row.stat }})</span></td>
+        <td>{% set pslug = player_slugs.get(row.player) %}{% if pslug %}<a href="/{{ league }}/{{ pslug }}-player">{{ row.player }}</a>{% else %}{{ row.player }}{% endif %}</td>
+        <td>{{ row.team_abbr }}</td>
+        <td class="cell-strong">{{ row.value }}</td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% if team_rows %}
+<section class="section">
+  <div class="section-head"><h2>Team Stats</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Category</th><th>Team</th><th>Value</th></tr></thead>
+    <tbody>
+      {% for row in team_rows %}
+      <tr>
+        <td class="cell-team">{{ row.label }} <span class="muted">({{ row.stat }})</span></td>
+        <td>{% set pslug = player_slugs.get(row.player) %}{% if pslug %}<a href="/{{ league }}/{{ pslug }}-player">{{ row.player }}</a>{% else %}{{ row.player }}{% endif %}</td>
+        <td class="cell-strong">{{ row.value }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+{% endblock %}

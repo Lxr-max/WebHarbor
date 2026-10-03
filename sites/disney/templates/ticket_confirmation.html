@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Ticket Confirmation | Disney On Ice{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Your tickets are confirmed!</h1>
+  <div class="confirm-box">
+    <p style="margin:0 0 6px">Confirmation code: <span class="confirm-code">{{ order.confirmation }}</span></p>
+    <p class="card-meta" style="margin:0">E-tickets were sent to {{ order.email }}.</p>
+  </div>
+  <div class="meta-rows">
+    <div class="meta-item"><span class="k">Show</span><span class="v">{{ order.show_title }}</span></div>
+    <div class="meta-item"><span class="k">City</span><span class="v">{{ order.city }}</span></div>
+    <div class="meta-item"><span class="k">Venue</span><span class="v">{{ order.venue }}</span></div>
+    <div class="meta-item"><span class="k">Date</span><span class="v">{{ order.day }}</span></div>
+    <div class="meta-item"><span class="k">Show Time</span><span class="v">{{ order.time }}</span></div>
+    <div class="meta-item"><span class="k">Tickets</span><span class="v">{{ order.qty }}</span></div>
+    <div class="meta-item"><span class="k">Unit Price</span><span class="v">${{ '%.2f'|format(order.unit_price) }}</span></div>
+    <div class="meta-item"><span class="k">Total</span><span class="v">${{ '%.2f'|format(order.total) }}</span></div>
+  </div>
+</div>
+{% endblock %}

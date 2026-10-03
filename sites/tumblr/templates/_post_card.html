@@ -1,0 +1,101 @@
+{# ------------------------------------------------------------------ #}
+{# One tumblr post card: trail (reblog chain) + content blocks + tags  #}
+{# Usage: {% include '_post_card.html' %} with ctx = post_ctx(...)    #}
+{# ------------------------------------------------------------------ #}
+<article class="post-card" data-post-id="{{ post.id }}" id="post-{{ post.id }}">
+  <header class="post-head">
+    <a class="post-avatar" href="{{ url_for('blog_page', name=post.blog.name) }}">
+      {% if post.blog.avatar %}<img class="avatar a40 {{ post.blog.avatar_shape }}" src="{{ post.blog.avatar }}" alt="">{% else %}<span class="avatar a40 avatar-fallback {{ post.blog.avatar_shape }}">{{ post.blog.display_title()[:1] }}</span>{% endif %}
+    </a>
+    <div class="post-head-text">
+      <a class="post-blog-name" href="{{ url_for('blog_page', name=post.blog.name) }}">{{ post.blog.name }}</a>
+      {% if post.reblog_of_id %}<span class="reblog-marker">reblogged</span>{% endif %}
+      {% if post.blog.primary %}<span class="verified" title="Verified blog">✓</span>{% endif %}
+    </div>
+    <a class="post-permalink" href="{{ url_for('permalink', name=post.blog.name, post_id=post.id) }}" title="Permalink">
+      <svg viewBox="0 0 20 20" width="16" height="16"><path fill="currentColor" d="M7 4a3 3 0 0 1 3 3v6a1 1 0 1 1-2 0V7a1 1 0 1 0-2 0v7a3 3 0 0 0 6 0V6a1 1 0 1 1 2 0v8a5 5 0 0 1-10 0V7a3 3 0 0 1 3-3z"/></svg>
+    </a>
+  </header>
+
+  {% if post.type == 'answer' and post.asking_name %}
+    <div class="ask-block">
+      <div class="asker">
+        {% if post.asking_avatar %}<img class="avatar a24" src="{{ post.asking_avatar }}" alt="">{% endif %}
+        <span class="asker-name">{{ post.asking_name }} asked:</span>
+      </div>
+      <div class="ask-body">{{ post.blocks() | selectattr('type', 'equalto', 'text') | map(attribute='text') | first }}</div>
+    </div>
+    <div class="answer-block">
+      {% for block in post.blocks() %}
+        {% if not loop.first %}{% include '_post_blocks.html' %}{% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# reblog trail #}
+  {% for item in post.trail_items() %}
+    <div class="trail-item">
+      <div class="trail-head">
+        {% if item.blog_avatar %}<img class="avatar a24" src="{{ item.blog_avatar }}" alt="">{% endif %}
+        {% if item.blog_exists %}
+        <a class="trail-blog" href="{{ url_for('blog_page', name=item.blog_name) }}">{{ item.blog_name }}</a>
+        {% else %}
+        <span class="trail-blog" title="Blog not on this mirror">{{ item.blog_name }}</span>
+        {% endif %}
+      </div>
+      <div class="trail-content">
+        {% for block in item.content %}
+          {% include '_post_blocks.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+  {# own content blocks #}
+  <div class="post-content">
+    {% for block in post.blocks() %}
+      {% if not (post.type == 'answer' and post.asking_name and loop.first) %}
+        {% include '_post_blocks.html' %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if post.tag_list() %}
+    <div class="post-tags">
+      {% for tag in post.tag_list() %}
+        <a class="tag" href="{{ url_for('tagged', tag=tag) }}">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <footer class="post-foot">
+    <span class="note-count" data-note-count="{{ post.live_note_count() }}">
+      <a href="{{ url_for('permalink', name=post.blog.name, post_id=post.id) }}">{{ compact(post.live_note_count()) }} notes</a>
+    </span>
+    <div class="post-actions">
+      {% if user %}
+        <button class="action-btn like-btn {{ 'active' if liked }}" data-post-id="{{ post.id }}"
+                data-like-url="{{ url_for('toggle_like', post_id=post.id) }}" aria-label="Like">
+          <svg viewBox="0 0 20 20" width="20" height="20"><path fill="currentColor" d="M10 17s-7-4.35-7-9.5C3 4.57 5.24 3 7.5 3c1.35 0 2.06.62 2.5 1.17C10.44 3.62 11.15 3 12.5 3 14.76 3 17 4.57 17 7.5 17 12.65 10 17 10 17z"/></svg>
+        </button>
+        <a class="action-btn reblog-btn {{ 'active' if reblogged }}" href="{{ url_for('reblog', post_id=post.id) }}" aria-label="Reblog">
+          <svg viewBox="0 0 20 20" width="20" height="20"><path fill="currentColor" d="M14.5 4.5 18 8l-3.5 3.5v-2.4H8.8c-1.3 0-2.2.6-2.7 1.6-.5-1-.8-2.2-.8-3.2 0-2.5 1.6-4 4-4h5.2V4.5zM5.5 15.5 2 12l3.5-3.5V11h5.7c1.3 0 2.2-.6 2.7-1.6.5 1 .8 2.2.8 3.2 0 2.5-1.6 4-4 4H5.5v1.9z"/></svg>
+        </a>
+        {% if post.blog.name != user.username %}
+        <button class="action-btn follow-btn {{ 'active' if following }}" data-blog-name="{{ post.blog.name }}"
+                data-follow-url="{{ url_for('toggle_follow', name=post.blog.name) }}" aria-label="Follow">
+          <span class="follow-label">{{ 'Following' if following else 'Follow' }}</span>
+        </button>
+        {% endif %}
+      {% else %}
+        <a class="action-btn" href="{{ url_for('login') }}" aria-label="Like (log in)">
+          <svg viewBox="0 0 20 20" width="20" height="20"><path fill="currentColor" d="M10 17s-7-4.35-7-9.5C3 4.57 5.24 3 7.5 3c1.35 0 2.06.62 2.5 1.17C10.44 3.62 11.15 3 12.5 3 14.76 3 17 4.57 17 7.5 17 12.65 10 17 10 17z"/></svg>
+        </a>
+        <a class="action-btn" href="{{ url_for('login') }}" aria-label="Reblog (log in)">
+          <svg viewBox="0 0 20 20" width="20" height="20"><path fill="currentColor" d="M14.5 4.5 18 8l-3.5 3.5v-2.4H8.8c-1.3 0-2.2.6-2.7 1.6-.5-1-.8-2.2-.8-3.2 0-2.5 1.6-4 4-4h5.2V4.5zM5.5 15.5 2 12l3.5-3.5V11h5.7c1.3 0 2.2-.6 2.7-1.6.5 1 .8 2.2.8 3.2 0 2.5-1.6 4-4 4H5.5v1.9z"/></svg>
+        </a>
+        <a class="action-btn follow-btn" href="{{ url_for('login') }}"><span class="follow-label">Follow</span></a>
+      {% endif %}
+    </div>
+  </footer>
+</article>

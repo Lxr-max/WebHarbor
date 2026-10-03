@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Yahoo Finance{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='icons/yf_mark.svg') }}" type="image/svg+xml">
+</head>
+<body>
+<header class="yf-header">
+  <div class="yf-nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="Yahoo Finance home">
+        <img src="{{ url_for('static', filename='icons/yf_wordmark.svg') }}" alt="Yahoo Finance" class="wordmark">
+      </a>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/news" class="nav-link">News</a>
+        <a href="/sectors" class="nav-link">Markets</a>
+        <a href="/calendar/earnings" class="nav-link">Calendars</a>
+        <a href="/screener" class="nav-link">Screener</a>
+        <a href="/trending" class="nav-link">Trending</a>
+      </nav>
+      <form class="search-form" action="/lookup" method="get">
+        <input type="search" name="s" placeholder="Search quotes, news…" aria-label="Search" value="{{ request.args.get('s','') }}">
+        <button type="submit" aria-label="Search">Search</button>
+      </form>
+      <div class="nav-auth">
+        {% if current_user.is_authenticated %}
+          <a class="nav-link" href="/watchlist">My Watchlist</a>
+          <a class="nav-link" href="/alerts">Alerts</a>
+          <span class="nav-user">{{ current_user.name.split(' ')[0] }}</span>
+          <a class="nav-link" href="/logout">Sign out</a>
+        {% else %}
+          <a class="nav-link" href="/login?next={{ request.path|urlencode }}">Sign in</a>
+          <a class="nav-link" href="/signup">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="market-strip" role="region" aria-label="Market summary">
+    {% for s in strip %}
+      <a class="strip-item" href="/quote/{{ s.symbol|urlencode }}">
+        <span class="strip-name">{{ strip_labels.get(s.symbol, s.short_name) }}</span>
+        <span class="strip-val">{{ fmt_price(s.price) }}</span>
+        <span class="strip-chg {{ 'up' if (s.change_pct or 0) >= 0 else 'down' }}">
+          {{ fmt_signed(s.change) }} ({{ fmt_pct(s.change_pct, 2, sign=True) }})
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</header>
+<main class="yf-main">
+  {% block content %}{% endblock %}
+</main>
+<footer class="yf-footer">
+  <div class="foot-inner">
+    <span>Yahoo Finance (mirror)</span>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/news">News</a>
+      <a href="/calendar/earnings">Earnings Calendar</a>
+      <a href="/screener">Screener</a>
+      <a href="/sectors">Sectors</a>
+    </nav>
+    <span class="foot-note">Market data is a delayed snapshot captured {{ 'September 30, 2026' }} · for benchmark evaluation</span>
+  </div>
+</footer>
+</body>
+</html>

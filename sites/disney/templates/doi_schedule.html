@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Disney On Ice Schedule &amp; Tickets{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Disney On Ice &mdash; Schedule &amp; Tickets</h1>
+  <p class="page-sub">Upcoming tour stops captured from the official Disney On Ice schedule.</p>
+
+  <form class="filters" method="get" action="{{ url_for('doi_schedule') }}">
+    <label for="q">Search</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="City or venue">
+    <label for="show">By show</label>
+    <select id="show" name="show">
+      <option value="">All shows</option>
+      {% for s in shows %}
+      <option value="{{ s }}" {% if show == s %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <label for="sort">Sort</label>
+    <select id="sort" name="sort">
+      <option value="date" {% if sort == 'date' %}selected{% endif %}>Date</option>
+      <option value="city" {% if sort == 'city' %}selected{% endif %}>City</option>
+      <option value="show" {% if sort == 'show' %}selected{% endif %}>Show</option>
+    </select>
+    <button class="btn" type="submit">Apply</button>
+    <span class="count">{{ total }} event{{ 's' if total != 1 }}</span>
+  </form>
+
+  <table class="table">
+    <thead><tr><th>City</th><th>Venue</th><th>Dates</th><th>Show</th><th></th></tr></thead>
+    <tbody>
+      {% for e in rows %}
+      <tr>
+        <td>{{ e.city }}</td>
+        <td>{{ e.venue }}</td>
+        <td>{{ e.date_range }}</td>
+        <td>{{ e.show }}</td>
+        <td><a class="btn" href="{{ url_for('doi_event', event_id=e.event_id) }}">More Info</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="empty">No events match those filters.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if pages > 1 %}
+  <nav class="pagination">
+    {% for p in range(1, pages + 1) %}
+      {% if p == page %}<span class="current">{{ p }}</span>
+      {% else %}<a href="{{ url_for('doi_schedule', q=q, show=show, sort=sort, page=p) }}">{{ p }}</a>{% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

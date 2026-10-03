@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}SpotHero Cities | Get Everywhere Easier{% endblock %}
+{% block content %}
+<div class="container section-tight">
+  <div class="hero-strip">
+    <h1>All SpotHero cities</h1>
+    <p>Reserve parking in hundreds of cities across North America.</p>
+  </div>
+  <div class="link-columns">
+    {% for c in cities %}
+    <a href="{{ url_for('city_page', slug=c.slug) }}">{{ c.display_name }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,338 @@
+{
+ "note": "Benchmark accounts and their fixture trips. Every place referenced below is a real place captured from wanderlog.com (see geo_categories.json / guides.json / explore_sections.json); the trips, itineraries, checklists, budgets, collaborator states, likes and comments are authored fixtures modeling Wanderlog's trip-planner product on top of that real place data, and are declared as such in provenance.json.",
+ "users": [
+  {
+   "email": "alice.j@test.com",
+   "username": "alice.j",
+   "display_name": "Alice Johnson",
+   "bio": "Weekend explorer mapping out spring in Paris with friends.",
+   "home_country": "United States",
+   "visit_geos_count": 42,
+   "countries_count": 11,
+   "is_pro": false,
+   "created_at": "2025-03-14"
+  },
+  {
+   "email": "bob.c@test.com",
+   "username": "bob.c",
+   "display_name": "Bob Chen",
+   "bio": "Chasing waterfalls and ring roads.",
+   "home_country": "United States",
+   "visit_geos_count": 17,
+   "countries_count": 6,
+   "is_pro": true,
+   "created_at": "2025-06-02"
+  },
+  {
+   "email": "carol.d@test.com",
+   "username": "carol.d",
+   "display_name": "Carol Davis",
+   "bio": "Food-first trip planning.",
+   "home_country": "United States",
+   "visit_geos_count": 23,
+   "countries_count": 8,
+   "is_pro": false,
+   "created_at": "2025-01-20"
+  },
+  {
+   "email": "dana.k@test.com",
+   "username": "dana.k",
+   "display_name": "Dana Kim",
+   "bio": "Three days, one backpack, all of Rome.",
+   "home_country": "United States",
+   "visit_geos_count": 9,
+   "countries_count": 4,
+   "is_pro": false,
+   "created_at": "2025-08-11"
+  }
+ ],
+ "trips": [
+  {
+   "edit_key": "parisinspring",
+   "view_key": "parisinspringv",
+   "title": "Paris in the Spring",
+   "owner": "alice.j",
+   "geo_id": 9614,
+   "start_date": "2027-04-10",
+   "end_date": "2027-04-13",
+   "travelers": 2,
+   "currency": "USD",
+   "privacy": "link",
+   "created_at": "2026-09-12",
+   "days": [
+    {
+     "heading": "Day 1 · Apr 10",
+     "entries": [
+      {"place": "Musée d'Orsay", "start_time": "10:00", "duration_minutes": 120, "note": "Impressionists first — book the 10am slot."},
+      {"place": "Sainte-Chapelle", "start_time": "14:30", "duration_minutes": 60, "note": "Stained glass is best with afternoon light."},
+      {"place": "Eiffel Tower", "start_time": "17:30", "duration_minutes": 90}
+     ]
+    },
+    {
+     "heading": "Day 2 · Apr 11",
+     "entries": [
+      {"place": "Louvre Museum", "start_time": "09:30", "duration_minutes": 180, "note": "Enter via the Carrousel entrance to skip the pyramid line."},
+      {"place": "Septime", "start_time": "19:30", "duration_minutes": 120, "note": "Reserved — tasting menu."}
+     ]
+    },
+    {
+     "heading": "Day 3 · Apr 12",
+     "entries": [
+      {"place": "Arc de Triomphe", "start_time": "10:30", "duration_minutes": 60},
+      {"place": "Canal Saint-Martin", "start_time": "14:00", "duration_minutes": 90, "note": "Picnic supplies from the local bakeries."},
+      {"place": "Bistrot Paul Bert", "start_time": "20:00", "duration_minutes": 90}
+     ]
+    },
+    {
+     "heading": "Day 4 · Apr 13",
+     "entries": [
+      {"place": "Basilique du Sacré-Cœur de Montmartre", "start_time": "09:00", "duration_minutes": 90},
+      {"place": "Clamato", "start_time": "12:30", "duration_minutes": 75}
+     ]
+    }
+   ],
+   "checklist": [
+    {"text": "Passport valid for 6+ months", "list_type": "packing", "checked": true},
+    {"text": "European power adapter", "list_type": "packing", "checked": true},
+    {"text": "Rain jacket", "list_type": "packing", "checked": false},
+    {"text": "Comfortable walking shoes", "list_type": "packing", "checked": true},
+    {"text": "Museum passes printed", "list_type": "packing", "checked": false},
+    {"text": "Confirm Septime reservation", "list_type": "todo", "checked": true},
+    {"text": "Buy Navigo Découverte passes", "list_type": "todo", "checked": false},
+    {"text": "Check Sainte-Chapelle opening hours", "list_type": "todo", "checked": false}
+   ],
+   "expenses": [
+    {"description": "Hotel Le Meurice — 3 nights", "amount_cents": 156000, "category": "Lodging", "paid_by": "alice.j", "date": "2027-04-10", "split_among": ["alice.j", "bob.c"]},
+    {"description": "Louvre & Orsay tickets", "amount_cents": 8600, "category": "Activities", "paid_by": "alice.j", "date": "2027-04-10", "split_among": ["alice.j", "bob.c"]},
+    {"description": "Metro Navigo weekly passes", "amount_cents": 9050, "category": "Transport", "paid_by": "bob.c", "date": "2027-04-11", "split_among": ["alice.j", "bob.c"]},
+    {"description": "Dinner at Septime", "amount_cents": 14200, "category": "Food", "paid_by": "bob.c", "date": "2027-04-11", "split_among": ["alice.j", "bob.c"]},
+    {"description": "Eiffel Tower summit tickets", "amount_cents": 5820, "category": "Activities", "paid_by": "alice.j", "date": "2027-04-12", "split_among": ["alice.j", "bob.c"]}
+   ],
+   "collaborators": [
+    {"user": "bob.c", "role": "editor", "status": "accepted", "invited_at": "2026-09-14"}
+   ]
+  },
+  {
+   "edit_key": "tokyowkend",
+   "view_key": "tokyowkendv",
+   "title": "Tokyo Weekend",
+   "owner": "alice.j",
+   "geo_id": 1,
+   "start_date": "2026-10-17",
+   "end_date": "2026-10-18",
+   "travelers": 1,
+   "currency": "USD",
+   "privacy": "public",
+   "created_at": "2026-09-20",
+   "days": [
+    {
+     "heading": "Day 1 · Oct 17",
+     "entries": [
+      {"place": "Meiji Jingu", "start_time": "09:00", "duration_minutes": 90},
+      {"place": "Shibuya Crossing", "start_time": "11:30", "duration_minutes": 45},
+      {"place": "Narisawa", "start_time": "19:00", "duration_minutes": 150, "note": "Splurge dinner."}
+     ]
+    },
+    {
+     "heading": "Day 2 · Oct 18",
+     "entries": [
+      {"place": "Sensō-ji", "start_time": "08:30", "duration_minutes": 90},
+      {"place": "Tokyo Skytree", "start_time": "11:00", "duration_minutes": 120},
+      {"place": "Onibus Coffee", "start_time": "15:00", "duration_minutes": 45}
+     ]
+    }
+   ],
+   "checklist": [
+    {"text": "Suica card", "list_type": "packing", "checked": true},
+    {"text": "Pocket wifi charged", "list_type": "packing", "checked": true},
+    {"text": "Cash for ramen alleys", "list_type": "packing", "checked": false},
+    {"text": "Book Narisawa", "list_type": "todo", "checked": true}
+   ],
+   "expenses": [
+    {"description": "Narisawa tasting menu", "amount_cents": 27500, "category": "Food", "paid_by": "alice.j", "date": "2026-10-17", "split_among": ["alice.j"]},
+    {"description": "Tokyo Skytree tickets", "amount_cents": 2400, "category": "Activities", "paid_by": "alice.j", "date": "2026-10-18", "split_among": ["alice.j"]}
+   ],
+   "collaborators": []
+  },
+  {
+   "edit_key": "icelandring",
+   "view_key": "icelandringv",
+   "title": "Iceland Ring Road",
+   "owner": "bob.c",
+   "geo_id": 88419,
+   "start_date": "2026-11-05",
+   "end_date": "2026-11-09",
+   "travelers": 2,
+   "currency": "USD",
+   "privacy": "link",
+   "created_at": "2026-09-08",
+   "days": [
+    {
+     "heading": "Day 1 · Nov 5",
+     "entries": [
+      {"place": "Keflavík International Airport", "start_time": "07:00", "duration_minutes": 90, "note": "Land, grab the 4x4, head into Reykjavik."},
+      {"place": "Sky Lagoon", "start_time": "16:00", "duration_minutes": 120},
+      {"place": "Brauð & Co", "start_time": "18:30", "duration_minutes": 30, "note": "Cardamom buns for the road."}
+     ]
+    },
+    {
+     "heading": "Day 2 · Nov 6",
+     "entries": [
+      {"place": "Thingvellir National Park", "start_time": "09:00", "duration_minutes": 150},
+      {"place": "Hjálparfoss", "start_time": "14:00", "duration_minutes": 60}
+     ]
+    },
+    {
+     "heading": "Day 3 · Nov 7",
+     "entries": [
+      {"place": "Mossy Lava Fields", "start_time": "10:00", "duration_minutes": 60},
+      {"place": "Folaldafoss", "start_time": "15:00", "duration_minutes": 45}
+     ]
+    },
+    {
+     "heading": "Day 4 · Nov 8",
+     "entries": [
+      {"place": "Rjúkandi Waterfall", "start_time": "10:30", "duration_minutes": 45},
+      {"place": "Hilton Reykjavik Nordica", "start_time": "20:00", "duration_minutes": 60}
+     ]
+    },
+    {
+     "heading": "Day 5 · Nov 9",
+     "entries": [
+      {"place": "Ytri Tunga", "start_time": "10:00", "duration_minutes": 75, "note": "Seal colony at low tide."},
+      {"place": "Búðakirkja", "start_time": "13:30", "duration_minutes": 45}
+     ]
+    }
+   ],
+   "checklist": [
+    {"text": "Thermal layers and wool socks", "list_type": "packing", "checked": true},
+    {"text": "Waterproof hiking boots", "list_type": "packing", "checked": true},
+    {"text": "Swimsuit for Sky Lagoon", "list_type": "packing", "checked": true},
+    {"text": "Car insurance documents", "list_type": "packing", "checked": false},
+    {"text": "Check gravel-road coverage on rental", "list_type": "todo", "checked": false},
+    {"text": "Pre-book Sky Lagoon slots", "list_type": "todo", "checked": true}
+   ],
+   "expenses": [
+    {"description": "4x4 rental — 5 days", "amount_cents": 89000, "category": "Transport", "paid_by": "bob.c", "date": "2026-11-05", "split_among": ["bob.c", "dana.k"]},
+    {"description": "Sky Lagoon admission", "amount_cents": 11900, "category": "Activities", "paid_by": "dana.k", "date": "2026-11-05", "split_among": ["bob.c", "dana.k"]},
+    {"description": "Hilton Reykjavik Nordica — 4 nights", "amount_cents": 98000, "category": "Lodging", "paid_by": "dana.k", "date": "2026-11-08", "split_among": ["bob.c", "dana.k"]},
+    {"description": "Groceries and bakery runs", "amount_cents": 21550, "category": "Food", "paid_by": "bob.c", "date": "2026-11-09", "split_among": ["bob.c", "dana.k"]}
+   ],
+   "collaborators": [
+    {"user": "dana.k", "role": "editor", "status": "accepted", "invited_at": "2026-09-10"}
+   ]
+  },
+  {
+   "edit_key": "nycfoodcrawl",
+   "view_key": "nycfoodcrawlv",
+   "title": "New York City Food Crawl",
+   "owner": "carol.d",
+   "geo_id": 58144,
+   "start_date": "2026-12-04",
+   "end_date": "2026-12-06",
+   "travelers": 1,
+   "currency": "USD",
+   "privacy": "private",
+   "created_at": "2026-09-22",
+   "days": [
+    {
+     "heading": "Day 1 · Dec 4",
+     "entries": [
+      {"place": "Katz's Delicatessen", "start_time": "12:30", "duration_minutes": 60},
+      {"place": "Brooklyn Bridge", "start_time": "15:00", "duration_minutes": 75, "note": "Walk it off toward DUMBO."}
+     ]
+    },
+    {
+     "heading": "Day 2 · Dec 5",
+     "entries": [
+      {"place": "Grand Central Oyster Bar", "start_time": "12:00", "duration_minutes": 60},
+      {"place": "Eleven Madison Park", "start_time": "17:30", "duration_minutes": 150}
+     ]
+    },
+    {
+     "heading": "Day 3 · Dec 6",
+     "entries": [
+      {"place": "The High Line", "start_time": "10:00", "duration_minutes": 90},
+      {"place": "Rubirosa", "start_time": "12:30", "duration_minutes": 90, "note": "Tie-dye pizza."}
+     ]
+    }
+   ],
+   "checklist": [
+    {"text": "Metro card", "list_type": "packing", "checked": true},
+    {"text": "Restaurant reservations confirmed", "list_type": "todo", "checked": false}
+   ],
+   "expenses": [
+    {"description": "Eleven Madison Park", "amount_cents": 36500, "category": "Food", "paid_by": "carol.d", "date": "2026-12-05", "split_among": ["carol.d"]},
+    {"description": "Rubirosa lunch", "amount_cents": 7800, "category": "Food", "paid_by": "carol.d", "date": "2026-12-06", "split_among": ["carol.d"]}
+   ],
+   "collaborators": []
+  },
+  {
+   "edit_key": "romeessent",
+   "view_key": "romeessentv",
+   "title": "Rome Essentials",
+   "owner": "dana.k",
+   "geo_id": 9616,
+   "start_date": "2026-10-16",
+   "end_date": "2026-10-18",
+   "travelers": 2,
+   "currency": "USD",
+   "privacy": "public",
+   "created_at": "2026-09-25",
+   "days": [
+    {
+     "heading": "Day 1 · Oct 16",
+     "entries": [
+      {"place": "Pantheon", "start_time": "09:30", "duration_minutes": 60},
+      {"place": "Armando al Pantheon", "start_time": "12:30", "duration_minutes": 90},
+      {"place": "Trevi Fountain", "start_time": "16:00", "duration_minutes": 45}
+     ]
+    },
+    {
+     "heading": "Day 2 · Oct 17",
+     "entries": [
+      {"place": "Saint Peter’s Basilica", "start_time": "08:30", "duration_minutes": 120},
+      {"place": "Sistine Chapel", "start_time": "11:30", "duration_minutes": 90},
+      {"place": "Bonci Pizzarium", "start_time": "13:30", "duration_minutes": 45, "note": "Best pizza al taglio near the Vatican."}
+     ]
+    },
+    {
+     "heading": "Day 3 · Oct 18",
+     "entries": [
+      {"place": "Colosseum", "start_time": "09:00", "duration_minutes": 120},
+      {"place": "Roman Forum", "start_time": "11:30", "duration_minutes": 90},
+      {"place": "Roscioli Salumeria con Cucina", "start_time": "19:30", "duration_minutes": 120}
+     ]
+    }
+   ],
+   "checklist": [
+    {"text": "Colosseum timed-entry tickets", "list_type": "todo", "checked": true},
+    {"text": "Knees and shoulders covered for basilicas", "list_type": "packing", "checked": true},
+    {"text": "Refillable water bottle", "list_type": "packing", "checked": true},
+    {"text": "Call Roscioli to confirm table", "list_type": "todo", "checked": false}
+   ],
+   "expenses": [
+    {"description": "Hotel de Russie — 3 nights", "amount_cents": 141000, "category": "Lodging", "paid_by": "dana.k", "date": "2026-10-16", "split_among": ["dana.k", "alice.j"]},
+    {"description": "Colosseum + Forum tickets", "amount_cents": 5200, "category": "Activities", "paid_by": "dana.k", "date": "2026-10-18", "split_among": ["dana.k", "alice.j"]},
+    {"description": "Roscioli dinner", "amount_cents": 9400, "category": "Food", "paid_by": "alice.j", "date": "2026-10-18", "split_among": ["dana.k", "alice.j"]}
+   ],
+   "collaborators": [
+    {"user": "alice.j", "role": "editor", "status": "accepted", "invited_at": "2026-09-26"}
+   ]
+  }
+ ],
+ "likes": [
+  {"guide": "uzyvvtuwtc", "user": "alice.j"},
+  {"guide": "nlcviusycz", "user": "alice.j"},
+  {"guide": "nwhizniizm", "user": "bob.c"},
+  {"guide": "uzyvvtuwtc", "user": "carol.d"},
+  {"guide": "zlcocpeivp", "user": "dana.k"}
+ ],
+ "comments": [
+  {"guide": "uzyvvtuwtc", "user": "alice.j", "created_at": "2026-09-18", "body": "The General tips section saved us — the Navigo pass note is exactly what we needed for our own spring trip."},
+  {"guide": "uzyvvtuwtc", "user": "carol.d", "created_at": "2026-09-21", "body": "Worked the Bakery Tour section into a single morning and it was the best decision we made."},
+  {"guide": "nlcviusycz", "user": "bob.c", "created_at": "2026-09-15", "body": "Added the Shibuya retro game shops from this guide to my Tokyo weekend. Incredible list."},
+  {"guide": "zlcocpeivp", "user": "dana.k", "created_at": "2026-09-24", "body": "Pairing this with the Rome restaurant rankings made planning three days painless."},
+  {"guide": "nwhizniizm", "user": "dana.k", "created_at": "2026-09-19", "body": "The Sky Lagoon stop after the flight was the perfect call — keeping that for our ring road trip."}
+ ]
+}

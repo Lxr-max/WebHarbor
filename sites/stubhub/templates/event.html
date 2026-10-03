@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}{{ evt.name }} {{ evt.venue.city }} Tickets | {{ evt.local_starts_at.strftime('%B %-d, %Y') }} | StubHub{% endblock %}
+{% block content %}
+<div class="event-page">
+  <div class="event-header">
+    <div class="event-header-main">
+      <h1>{{ evt.name }}</h1>
+      <p class="event-header-when">{{ evt.date_full }}</p>
+      <p class="event-header-venue">
+        {{ evt.venue.name }}, {{ evt.venue.city }}, {{ evt.venue.state or evt.venue.country }}
+      </p>
+    </div>
+    <div class="event-header-side">
+      <form method="post" action="/favorite/event/{{ evt.upstream_id }}">
+        <input type="hidden" name="next" value="{{ evt.url_path }}">
+        <button type="submit" class="btn btn-pill {{ 'btn-following' if is_fav else 'btn-outline' }}">
+          {{ 'Following' if is_fav else 'Favorite' }}
+        </button>
+      </form>
+      <a href="/selltickets/event/{{ evt.upstream_id }}" class="btn btn-outline">Sell</a>
+    </div>
+  </div>
+
+  {% if evt.availability_note %}
+  <div class="availability-note">{{ evt.availability_note }}</div>
+  {% endif %}
+
+  <div class="event-layout">
+    <div class="seatmap-pane">
+      {% if seatmap %}
+      <div class="seatmap-wrap">{{ seatmap|safe }}</div>
+      {% else %}
+      <div class="seatmap-missing">
+        <p>Seat map isn't available for this venue.</p>
+        <p class="muted">Use the section filters to browse tickets.</p>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="listings-pane">
+      <form class="filters" method="get" action="{{ evt.url_path }}">
+        <h2>Filters</h2>
+        <div class="filter-group">
+          <label>Number of tickets</label>
+          <select name="quantity">
+            <option value="">Any</option>
+            {% for n in range(1, 9) %}
+            <option value="{{ n }}" {{ 'selected' if quantity == n }}>{{ n }} ticket{{ 's' if n > 1 }}</option>
+            {% endfor %}
+          </select>
+          <p class="filter-note">Seats are guaranteed to be next to each other.</p>
+        </div>
+        <div class="filter-group">
+          <label>Price per ticket</label>
+          <div class="price-inputs">
+            <input type="text" name="price_min" placeholder="$ Min" value="{{ '${:,}'.format(price_min) if price_min else '' }}">
+            <span>to</span>
+            <input type="text" name="price_max" placeholder="$ Max" value="{{ '${:,}'.format(price_max) if price_max else '' }}">
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Sort by</label>
+          <select name="sort">
+            {% for key, label in [('recommended', 'Recommended'), ('price', 'Price'), ('best_deal', 'Best deal'), ('best_view', 'Best view')] %}
+            <option value="{{ key }}" {{ 'selected' if sort == key }}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Features</label>
+          {% for f in feature_options %}
+          <label class="check">
+            <input type="checkbox" name="features" value="{{ f }}" {{ 'checked' if f in features }}> {{ f }}
+          </label>
+          {% endfor %}
+        </div>
+        {% if zones %}
+        <div class="filter-group">
+          <label>Zones</label>
+          {% for z in zones %}
+          <label class="check">
+            <input type="radio" name="zone" value="{{ z }}" {{ 'checked' if zone == z }}> {{ z }}
+          </label>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="filter-group">
+          <label>Perks</label>
+          <label class="check"><input type="checkbox" disabled> Instant download</label>
+        </div>
+        <div class="filter-actions">
+          <a href="{{ evt.url_path }}" class="btn btn-ghost">Reset filters</a>
+          <button type="submit" class="btn btn-primary">View {{ total_count }} Listings</button>
+        </div>
+      </form>
+
+      <div class="listing-count-row">
+        <span>{{ quantity ~ ' tickets' if quantity else 'Any tickets' }}</span>
+        <span class="muted">Showing {{ listings|length }} of {{ shown_count }}</span>
+      </div>
+
+      <div class="listing-stack">
+        {% for listing in listings %}
+        <a class="listing-card" href="{{ evt.url_path }}/listing/{{ listing.id }}" aria-label="{{ listing.section }}, Row {{ listing.row or '—' }}, {{ listing.price_display }}">
+          {% if listing.seat_view_file %}
+          <div class="listing-view"><img src="{{ listing.seat_view_file }}" alt="{{ evt.venue.name }} - Section {{ listing.section }}" loading="lazy"></div>
+          {% else %}
+          <div class="listing-view listing-view-blank"><span>{{ listing.section }}</span></div>
+          {% endif %}
+          <div class="listing-body">
+            <div class="listing-loc">
+              <h3>{{ listing.section }}</h3>
+              <p>{{ 'Row ' ~ listing.row if listing.row else '' }}{% if listing.seats %} · Seats {{ listing.seats }}{% endif %}</p>
+            </div>
+            <div class="listing-features">
+              {% for feat in listing.feature_list %}
+              <span class="feat">{{ feat }}</span>
+              {% endfor %}
+            </div>
+            <div class="listing-badges">
+              {% for badge in listing.badge_list %}
+              <span class="badge badge-{{ 'deal' if 'deal' in badge.lower() or 'price' in badge.lower() else 'info' }}">{{ badge }}</span>
+              {% endfor %}
+              {% if listing.is_sponsored %}<span class="badge badge-sponsored">Sponsored</span>{% endif %}
+            </div>
+          </div>
+          <div class="listing-price">
+            {% if listing.original_price and listing.original_price > listing.price %}
+            <span class="price-was">${{ '{:,}'.format(listing.original_price) }}</span>
+            {% endif %}
+            <span class="price-now">{{ listing.price_display }}</span>
+            <span class="price-fees">incl. fees</span>
+            {% if listing.deal_rating %}
+            <div class="deal-rating"><strong>{{ '%.1f'|format(listing.deal_rating) }}</strong>
+              <span>{{ 'Amazing' if listing.deal_rating >= 9 else 'Great' if listing.deal_rating >= 7.5 else 'Good' }}</span></div>
+            {% endif %}
+          </div>
+        </a>
+        {% else %}
+        <div class="empty-state">
+          <p>No listings match those filters.</p>
+          <a href="{{ evt.url_path }}" class="btn btn-outline">Reset filters</a>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if shown_count > listings|length %}
+      <div class="show-more-row">
+        <p>Showing {{ listings|length }} of {{ shown_count }}</p>
+      </div>
+      {% endif %}
+
+      {% if nearby %}
+      <section class="nearby-events">
+        <h2>More events nearby</h2>
+        <div class="nearby-row">
+          {% for n in nearby %}
+          <a class="nearby-card" href="{{ n.url_path }}">
+            <p class="nearby-date">{{ n.date_full }}</p>
+            <p class="nearby-name">{{ n.name }}</p>
+          </a>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </div>
+  </div>
+
+  <form class="qty-bar" method="get" action="{{ evt.url_path }}">
+    <h2>How many tickets?</h2>
+    <p>You'll be seated together</p>
+    <div class="qty-choices">
+      {% for n in [1, 2, 3, 4, 5] %}
+      <button type="submit" name="quantity" value="{{ n }}" class="qty-btn {{ 'active' if quantity == n }}">{{ n }}</button>
+      {% endfor %}
+      <button type="submit" name="quantity" value="6" class="qty-btn {{ 'active' if quantity == 6 }}">6+</button>
+    </div>
+    <button type="submit" class="btn btn-primary qty-continue">Continue</button>
+  </form>
+</div>
+{% endblock %}

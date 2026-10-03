@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-26",
+ "upstream": "https://www.student.com/",
+ "records": [
+  {
+   "path": "app.py",
+   "classification": "mirror-code",
+   "scope": "Flask application implementing the student.com new-era mirror: homepage with hero/state CTAs/carousels, state college finders, university SRPs with sort/filters/map/list toggle and infinite scroll, city pages, property pages with gallery, AI summaries, amenities, room types, reviews and the enquiry flow, the profile domain (saved properties, recently viewed, my inquiries), search autocomplete, budget calculator, per-city internship listings, contact form and content pages, with email auth alongside the upstream Google/Apple SSO buttons."
+  },
+  {
+   "path": "seed_data.py",
+   "classification": "mirror-code",
+   "scope": "Deterministic build-time/boot-time seeder. All rows come from the tracked source_data/ catalogues (built by scripts_dev/build_source_data.py from the harvested JSON); the benchmark users alice/bob/carol/david @test.com with saved properties, viewed history and inquiry history are fictional fixtures. The bcrypt digest for the shared benchmark password is frozen so the seed DB is byte-identical on every rebuild. Standalone execution publishes instance_seed/student_com.db."
+  },
+  {
+   "path": "source_data/properties.json",
+   "classification": "captured-upstream-content",
+   "scope": "414 real property records (name, slug, address, lat/lng, min/max price, property type, Google rating + review count, room types + room details, property amenities, neighbourhood vibes/tags, office hours, contact email/phone/website, AI property/review summaries, per-property Google reviews, gallery image references) captured 2026-09-26 from platform.student.com/discovery/search pagination over 18 flagship universities in TX/FL/GA/OH plus each property page's Next.js flight payload (https://www.student.com/us/<state>/<city>/p/<slug>)."
+  },
+  {
+   "path": "source_data/universities.json",
+   "classification": "captured-upstream-content",
+   "scope": "269 real university records for the four featured states, captured 2026-09-26 from the state college finder pages https://www.student.com/us/{tx,fl,ga,oh}/u (SSR flight data), including per-university property totals from the discovery API."
+  },
+  {
+   "path": "source_data/cities.json",
+   "classification": "captured-upstream-content",
+   "scope": "19 city records. Austin's editorial content, FAQ and section copy come from https://www.student.com/us/tx/austin (the upstream new-style city page); other cities' editorial sections (About/Explore/Living in/Where to study) come from the corresponding upstream old-style city pages https://www.student.com/us/<city> captured the same day; headlines/summaries/hero references come from the gateway.student.com GraphQL City(slug) query. City FAQ bodies follow the upstream Austin FAQ format with city-specific facts from the same sources."
+  },
+  {
+   "path": "source_data/jobs.json",
+   "classification": "captured-upstream-content",
+   "scope": "113 real job listings (title, company, location, type, posting date, application URL) captured 2026-09-26 from the per-city internship pages https://www.student.com/us/<state>/<city>/internships (SSR flight data). Cities whose upstream page currently lists no jobs (e.g. Atlanta, Columbus) are seeded with no jobs, matching upstream."
+  },
+  {
+   "path": "static/images/properties/**",
+   "classification": "captured-upstream-media",
+   "scope": "3,344 real property gallery photos from dbswqyg6sdujh.cloudfront.net/properties/<uuid>/<image-uuid>.jpg, resized to <=1280px and re-encoded JPEG q74-82. Source URLs recorded per file in asset_inventory.json."
+  },
+  {
+   "path": "static/images/cities/**",
+   "classification": "captured-upstream-media",
+   "scope": "16 city hero photos from image.student.com (gateway GraphQL heroImage.source), falling back to that city's first upstream property photo where upstream exposes no hero."
+  },
+  {
+   "path": "static/images/home/**",
+   "classification": "captured-upstream-media",
+   "scope": "Homepage heroes and section images from cdn.student.com (hero-banner-new.png, hero-banner-mobile-new.png, woman-with-computer.webp, woman-with-tablet.webp, trustpilot-image.webp, hp-hero-default@1x.jpg) and the four state illustrations extracted from the homepage's inline base64 PNGs (StateCTAs component)."
+  },
+  {
+   "path": "static/images/brand/**",
+   "classification": "captured-upstream-media",
+   "scope": "Press logos (Bloomberg, Financial Times, Forbes, TechCrunch, VentureBeat) from cdn.student.com/student-website/images/channels/."
+  },
+  {
+   "path": "static/fonts/**",
+   "classification": "captured-upstream-media",
+   "scope": "Poppins (300/400/500/600/700) and ClashDisplay woff2 files from cdn.student.com/student-website/."
+  },
+  {
+   "path": "static/icons/**",
+   "classification": "captured-upstream-media",
+   "scope": "student.com wordmark SVG (extracted from a rendered page), Google/Apple SSO button SVGs from www.student.com/assets/icons/social/ and the real favicon.ico."
+  },
+  {
+   "path": "static/css/site.css",
+   "classification": "mirror-code",
+   "scope": "Design system rebuilt from the upstream rendered pages: Poppins/ClashDisplay typography, #242529 ink, #BFB9F6 footer/CTA purple, #FF9A48/#FF8753 orange accents, 1px rgba(38,38,38,.2) button borders, 8/16px radii, 40px pill search inputs — measured via getComputedStyle on the live site."
+  },
+  {
+   "path": "templates/**",
+   "classification": "mirror-code",
+   "scope": "Jinja templates reproducing the upstream page structures: navbar with announcement banner/autocomplete/recently-viewed, hero, state CTAs, property cards ('From $X/mo', rating chip, 'N miles to campus'), SRP banner ('Homes near <uni>', 'Showing X out of Y results'), property page sections (AI Property Summary, About, Property amenities, Explore your neighborhood, Rooms available, Reviews, Contact), enquiry modal (First name/Last name/Phone/Email/message with character count/marketing consent), auth modal, profile pages, budget calculator 4-step wizard, jobs pages, content pages and the 404 page ('404 - Not Found', 'Oops! This Page Took a Study Break')."
+  }
+ ]
+}

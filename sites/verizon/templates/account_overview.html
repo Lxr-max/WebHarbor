@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Account overview — My Verizon{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1>Account overview</h1>
+  <p>Welcome back, {{ current_user.display_name }}. Account {{ current_user.account_number }} ({{ current_user.account_kind }}).</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>Lines on this account ({{ lines|length }})</h2>
+      <table class="data-table">
+        <thead><tr><th>Line</th><th>Number</th><th>Device</th><th>Plan</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          {% for l in lines %}
+          <tr>
+            <td>{{ l.nickname }}</td>
+            <td>{{ l.phone_number }}</td>
+            <td>{{ l.device.name if l.device else '—' }}</td>
+            <td>{{ l.plan.name }} (${{ l.plan.monthly }}/mo)</td>
+            <td>{{ l.status }}</td>
+            <td><a href="{{ url_for('change_plan', line_id=l.id) }}">Change plan</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn btn-secondary" href="{{ url_for('add_line') }}">Add a new line</a>
+    </div>
+    <div class="card">
+      <h2>Your latest bill</h2>
+      {% if bill %}
+      <p>Period: {{ bill.period }} — Total ${{ bill.total }}</p>
+      <p>Due date: {{ bill.due_date }}</p>
+      <p>Status: {{ bill.status }}</p>
+      <a class="btn btn-secondary" href="{{ url_for('bill_detail', bill_id=bill.id) }}">View bill detail</a>
+      <a class="btn btn-primary" href="{{ url_for('account_pay') }}">Pay bill</a>
+      {% else %}<p>No bills yet.</p>{% endif %}
+      <h3>Payment settings</h3>
+      <p>Auto Pay: {{ 'Enrolled' if autopay else 'Off' }} · Paper-free billing: {{ 'On' if current_user.paper_free else 'Off' }}</p>
+      <a class="btn btn-secondary" href="{{ url_for('account_autopay') }}">Manage Auto Pay & paper-free billing</a>
+    </div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>Data usage this cycle</h2>
+      <table class="data-table">
+        <thead><tr><th>Line</th><th>Data used</th><th>Hotspot used</th><th></th></tr></thead>
+        <tbody>
+          {% for l in lines %}
+          {% set u = usages.get(l.id) %}
+          <tr><td>{{ l.nickname }}</td><td>{{ u.data_gb }} GB</td><td>{{ u.hotspot_gb }} GB / {{ u.hotspot_cap_gb }} GB</td>
+          <td><a href="{{ url_for('account_usage') }}">Usage details</a></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Orders</h2>
+      {% if orders %}
+      <ul>
+        {% for o in orders %}
+        <li><a href="{{ url_for('account_order_detail', confirmation=o.confirmation) }}">{{ o.confirmation }}</a> — {{ o.status }} — {{ o.delivery_by }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}<p>No orders on this account.</p>{% endif %}
+      {% if payments %}
+      <h3>Recent payments</h3>
+      <ul>
+        {% for p in payments[:3] %}
+        <li>{{ p.paid_at }} — ${{ p.amount }} — {{ p.method }} — confirmation {{ p.confirmation }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <a class="btn btn-secondary" href="{{ url_for('account_orders') }}">All orders</a>
+      <a class="btn btn-secondary" href="{{ url_for('account_bills') }}">All bills</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

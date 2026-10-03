@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ geo.display_name }} — Azure geographies — {{ brand }}{% endblock %}
+{% block content %}
+<div class="shell">
+  <nav class="crumbs"><a href="{{ url_for('geographies') }}">Geographies</a> / <span>{{ geo.display_name }}</span></nav>
+  <h1>{{ geo.display_name }}</h1>
+  <p class="lead">{{ regions|length }} Azure region{{ '' if regions|length == 1 else 's' }} in this geography.</p>
+
+  <table class="data-table">
+    <thead><tr><th>Region</th><th>Virtual Machines</th><th>Kubernetes Service</th><th>Storage</th><th>Cosmos DB</th></tr></thead>
+    <tbody>
+      {% for r in regions %}
+      <tr>
+        <td>{{ r.display_name }}</td>
+        {% for svc in ['virtual-machines','kubernetes-service','storage','cosmos-db'] %}
+        <td>{% if r.service_map.get(svc) %}Available{% else %}Not available{% endif %}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

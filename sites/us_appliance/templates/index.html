@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <img class="hero-img" src="{{ url_for('static', filename='images/' + home.hero.img_local) }}" alt="{{ home.hero.heading }}">
+    <div class="hero-content">
+      <p class="hero-heading">{{ home.hero.heading }}</p>
+      <p class="hero-desc">{{ home.hero.description }}</p>
+      <p><a class="button button--primary" href="{{ home.hero.button_href }}">{{ home.hero.button_text }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="container home-section">
+  <h2 class="section-heading">Shop by Appliance Category</h2>
+  <div class="cat-tiles">
+    {% for tile in home.category_tiles %}
+    <a class="cat-tile" href="{{ tile.href }}">
+      <img src="{{ url_for('static', filename='images/' + tile.img_local) }}" alt="{{ tile.alt }}">
+      <h3>{{ tile.alt | replace('Shop ', '') }}</h3>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container home-section">
+  <h2 class="section-heading">Deals Today</h2>
+  <div class="prod-grid">
+    {% for p in deals %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+  <p class="center"><a class="button" href="{{ url_for('deals_page') }}">Shop All Price Cuts</a></p>
+</section>
+
+<section class="home-wide">
+  <div class="container">
+    <div class="order-confidence">
+      <h2>{{ home.order_confidence.heading }}</h2>
+      <p>{{ home.order_confidence.line }}</p>
+      <p><a class="button" href="{{ home.order_confidence.href }}">{{ home.order_confidence.button }}</a></p>
+      <img class="reviews-badge" src="{{ url_for('static', filename='images/home/reviews.png') }}" alt="Customer reviews">
+    </div>
+  </div>
+</section>
+
+<section class="container home-section">
+  <h2 class="section-heading">Shop Top Brands</h2>
+  <div class="logo-strip">
+    {% for logo in home.logo_strip %}
+    <a href="{{ url_for('brand_page', slug=logo.slug) }}">
+      <img src="{{ url_for('static', filename='images/home/logo_' ~ logo.label | lower | replace('-', '') ~ '.png') }}" alt="{{ logo.label }}">
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container home-section">
+  <h2 class="section-heading">QuickShip Items</h2>
+  <div class="prod-grid">
+    {% for p in quickship %}
+    {{ macros.prod_card(p) }}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container home-section promo-row">
+  {% for promo in home.promo_banners %}
+  <a class="promo-banner" href="{{ promo.href }}">
+    <img src="{{ url_for('static', filename='images/' + promo.img_local) }}" alt="{{ promo.alt }}">
+  </a>
+  {% endfor %}
+</section>
+{% endblock %}

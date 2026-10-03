@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Hotels in {{ geo.name }} — Wanderlog{% endblock %}
+{% block body %}
+<div class="wrap">
+  <h1>Best hotels in {{ geo.name }}</h1>
+  <p class="muted"><a href="{{ url_for('explore', gid=geo.id) }}">{{ geo.name }}</a> ·
+    {% if cl %}Wanderlog ranking of the top {{ cl.upstream_count }} places to stay{% else %}no hotel ranking captured for this destination{% endif %}</p>
+
+  {% if cl %}
+    <div class="card" style="padding:0;overflow:hidden">
+      {% for entry, place in rows %}
+        <div class="rank-row">
+          <div class="num">#{{ entry.rank }}</div>
+          {% if place.image %}<img class="cover" src="{{ place.image }}" alt="{{ place.name }}">{% else %}<div></div>{% endif %}
+          <div>
+            <h3>{% if place.wl_id %}<a href="{{ url_for('place_details', pid=place.wl_id) }}">{{ place.name }}</a>{% else %}{{ place.name }}{% endif %}</h3>
+            <p class="small muted" style="margin:2px 0">{% if place.description %}{{ place.description[:70] }}{% if place.description|length > 70 %}…{% endif %}{% endif %}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card"><p class="muted" style="margin:0">No Wanderlog hotel ranking was captured for {{ geo.name }}.</p></div>
+  {% endif %}
+</div>
+{% endblock %}

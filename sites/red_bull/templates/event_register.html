@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Register — {{ event.title }}{% endblock %}
+{% block content %}
+<h1 class="page-title">Register for {{ event.title }}</h1>
+<p class="page-sub">{{ event.date_range_text() }} · {{ event.location_text() }}</p>
+
+<div class="form-card">
+  {% if event.reg_price %}
+  <p class="price-tag">${{ '%.0f' | format(event.reg_price) if event.reg_price == (event.reg_price | int) else '%.2f' | format(event.reg_price) }}{% if event.reg_currency %} {{ event.reg_currency }}{% endif %}</p>
+  {% else %}
+  <p class="price-tag">Free</p>
+  {% endif %}
+  <p class="price-note">{{ event.reg_type_name or 'registration' }} — per participant. {{ event.reg_title or '' }}</p>
+
+  {% if errors %}
+  <div class="form-errors">
+    {% for e in errors %}<p>{{ e }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('event_register', slug=event.slug) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="first_name">First name</label>
+    <input id="first_name" name="first_name" value="{{ form.get('first_name','') }}">
+    <label for="last_name">Last name</label>
+    <input id="last_name" name="last_name" value="{{ form.get('last_name','') }}">
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="text" value="{{ form.get('email','') }}">
+    <label for="ticket_type">Ticket type</label>
+    <select id="ticket_type" name="ticket_type">
+      <option value="">Choose…</option>
+      <option value="{{ event.reg_type_name or 'registration' }}" {{ 'selected' if form.get('ticket_type') == (event.reg_type_name or 'registration') }}>{{ event.reg_type_name or 'registration' }}</option>
+    </select>
+    <p style="margin-top:18px"><button type="submit" class="btn btn-red">Complete registration</button></p>
+    <p class="form-note">You will receive a registration code on the confirmation page.</p>
+  </form>
+</div>
+{% endblock %}

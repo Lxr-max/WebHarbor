@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | Speedo{% endblock %}
+{% block content %}
+<div class="page-width checkout-layout">
+  <section class="checkout-main">
+    <h1>Speedo Checkout</h1>
+    <form method="post" action="/checkout">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <div class="checkout-section">
+        <h2>Contact</h2>
+        {% if not current_user.is_authenticated %}
+        <div class="field"><label for="email">Email</label>
+          <input type="email" id="email" name="email" required value="{{ form.get('email','') }}" placeholder="Used for your order confirmation"></div>
+        {% else %}
+        <div class="field"><label for="email">Email</label>
+          <input type="email" id="email" name="email" required value="{{ form.get('email', current_user.email) }}"></div>
+        {% endif %}
+      </div>
+
+      <div class="checkout-section">
+        <h2>Shipping Address</h2>
+        <div class="field"><label for="country">Country/Region</label>
+          <select id="country" name="country">
+            <option value="United Kingdom" {% if form.get('country','United Kingdom') == 'United Kingdom' %}selected{% endif %}>United Kingdom</option>
+            <option value="United States" {% if form.get('country') == 'United States' %}selected{% endif %}>United States</option>
+            <option value="Germany" {% if form.get('country') == 'Germany' %}selected{% endif %}>Germany</option>
+            <option value="France" {% if form.get('country') == 'France' %}selected{% endif %}>France</option>
+            <option value="Ireland" {% if form.get('country') == 'Ireland' %}selected{% endif %}>Ireland</option>
+            <option value="Australia" {% if form.get('country') == 'Australia' %}selected{% endif %}>Australia</option>
+          </select></div>
+        <div class="field-grid">
+          <div class="field"><label for="first_name">First name</label>
+            <input type="text" id="first_name" name="first_name" required value="{{ form.get('first_name','') }}"></div>
+          <div class="field"><label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="last_name" required value="{{ form.get('last_name','') }}"></div>
+        </div>
+        <div class="field"><label for="line1">Address</label>
+          <input type="text" id="line1" name="line1" required value="{{ form.get('line1','') }}"></div>
+        <div class="field"><label for="line2">Apartment, suite, etc. (optional)</label>
+          <input type="text" id="line2" name="line2" value="{{ form.get('line2','') }}"></div>
+        <div class="field-grid">
+          <div class="field"><label for="city">City</label>
+            <input type="text" id="city" name="city" required value="{{ form.get('city','') }}"></div>
+          <div class="field"><label for="postcode">Postcode</label>
+            <input type="text" id="postcode" name="postcode" required value="{{ form.get('postcode','') }}"></div>
+        </div>
+        <div class="field"><label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" value="{{ form.get('phone','') }}"></div>
+      </div>
+
+      <div class="checkout-section">
+        <h2>Shipping Method</h2>
+        {% for key, name, time, price, note in shipping_methods %}
+        <label class="ship-option">
+          <span><input type="radio" name="shipping_method" value="{{ key }}" {% if form.get('shipping_method','standard') == key %}checked{% endif %}>
+          <strong>{{ name }}</strong> &middot; {{ time }}<br>
+          <span class="ship-note">{{ note }}</span></span>
+          <span class="ship-price">£{{ '%.2f' % (0 if (key == 'standard' and summary.total >= 50) or (key == 'intl-standard' and summary.total >= 75) else price) }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      <div class="checkout-section">
+        <h2>Payment</h2>
+        <p class="ship-note" style="margin-bottom:12px;">All transactions are secure and encrypted.</p>
+        <div class="field"><label>Credit card</label>
+          <input type="text" name="card_number" inputmode="numeric" autocomplete="off" placeholder="Card number" value="{{ form.get('card_number','') }}"></div>
+        <div class="field-grid">
+          <div class="field"><label>Expiration date (MM / YY)</label>
+            <div style="display:flex;gap:8px;">
+              <input type="text" name="exp_month" placeholder="MM" maxlength="2" inputmode="numeric" value="{{ form.get('exp_month','') }}">
+              <input type="text" name="exp_year" placeholder="YY" maxlength="2" inputmode="numeric" value="{{ form.get('exp_year','') }}">
+            </div></div>
+          <div class="field"><label>Security code</label>
+            <input type="text" name="cvc" placeholder="CVC" maxlength="4" inputmode="numeric" value="{{ form.get('cvc','') }}"></div>
+        </div>
+        <div class="field"><label>Name on card</label>
+          <input type="text" name="card_name" value="{{ form.get('card_name','') }}"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+  </section>
+
+  <aside>
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      {% for row in summary.rows %}
+      <div class="review-item">
+        {% set imgs = row.product.image_list() %}
+        {% if imgs %}<img src="{{ url_for('static', filename='images/' + imgs[0]) }}" alt="{{ row.product.name }}">{% endif %}
+        <div class="ri-body">
+          <strong>{{ row.product.name }}</strong>
+          <div class="ship-note">{% if row.size %}Size: {{ row.size }} &middot; {% endif %}Qty: {{ row.qty }}</div>
+        </div>
+        <span>£{{ '%.2f' % (row.product.price * row.qty) }}</span>
+      </div>
+      {% endfor %}
+      <div class="sum-row"><span>Subtotal</span><span>£{{ '%.2f' % summary.subtotal }}</span></div>
+      {% if summary.discount %}
+      <div class="sum-row discount"><span>Discount {{ summary.code }}</span><span>&minus;£{{ '%.2f' % summary.discount }}</span></div>
+      {% endif %}
+      <div class="sum-row"><span>Delivery</span><span id="checkout-shipping"></span></div>
+      <div class="sum-row total"><span>Total</span><span id="checkout-total"></span></div>
+      <p class="cart-note">Shipping is calculated with your shipping method.</p>
+    </div>
+  </aside>
+</div>
+<script>
+(function () {
+  const subtotal = {{ summary.total|tojson }};
+  const rates = {standard: subtotal >= 50 ? 0 : 5.99, express: 8.99,
+    'intl-standard': subtotal >= 75 ? 0 : 12.99, 'intl-express': 24.99};
+  function quote() {
+    const selected = document.querySelector('input[name="shipping_method"]:checked');
+    const shipping = rates[selected.value];
+    document.getElementById('checkout-shipping').textContent = '£' + shipping.toFixed(2);
+    document.getElementById('checkout-total').textContent = '£' + (subtotal + shipping).toFixed(2);
+  }
+  document.querySelectorAll('input[name="shipping_method"]').forEach(input => input.addEventListener('change', quote));
+  quote();
+})();
+</script>
+{% endblock %}

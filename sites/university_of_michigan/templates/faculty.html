@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Faculty Directory — University of Michigan{% endblock %}
+{% block content %}
+<h1>Faculty Directory</h1>
+<p class="page-sub">Instructors of record for the Fall 2026 term, as published by the registrar's public class search. {{ total }} instructors.</p>
+
+<div class="filterbar">
+  <form method="get" action="{{ url_for('faculty') }}">
+    <div>
+      <label for="q">Name</label>
+      <input type="text" id="q" name="q" value="{{ q }}" placeholder="e.g. Keane">
+    </div>
+    <div>
+      <label for="school">School / College</label>
+      <select id="school" name="school">
+        <option value="">All schools &amp; colleges</option>
+        {% for s in schools %}
+        <option value="{{ s }}" {% if s == school %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="subject">Subject</label>
+      <select id="subject" name="subject">
+        <option value="">All subjects</option>
+        {% for s in subjects %}
+        <option value="{{ s }}" {% if s == subject %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <span class="count-pill">{{ total }} instructors match</span>
+</div>
+
+<table class="list">
+  <tr><th>Name</th><th>School / College</th><th>Subjects</th></tr>
+  {% for f in faculty %}
+  <tr>
+    <td><a href="{{ url_for('faculty_detail', fid=f.id) }}">{{ f.name }}</a></td>
+    <td>{{ f.school }}</td>
+    <td>{{ f.subject_list()|join(', ') }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if total > per_page %}
+<div class="pager">
+  {% if page > 1 %}
+  <a href="{{ url_for('faculty', q=q, school=school, subject=subject, page=page-1) }}">&laquo; Previous</a>
+  {% endif %}
+  <span class="cur">Page {{ page }} of {{ (total + per_page - 1) // per_page }}</span>
+  {% if page * per_page < total %}
+  <a href="{{ url_for('faculty', q=q, school=school, subject=subject, page=page+1) }}">Next &raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

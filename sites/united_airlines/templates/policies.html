@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Change & cancellation policies — United Airlines{% endblock %}
+{% block content %}
+<section class="ua-content-page">
+  <h1>Flight changes, cancellations and refunds</h1>
+  <p>United's flexible booking options in one place.</p>
+  <div class="ua-card-grid">
+    {% for article in articles %}
+    <a class="ua-card" href="{{ url_for('policy_detail', slug=article.slug) }}">
+      <span class="ua-card-title">{{ article.title }}</span>
+      <span class="ua-card-cat">{{ article.body|truncate(110) }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

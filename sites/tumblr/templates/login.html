@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Log in — Tumblr{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <h1>Log in to Tumblr</h1>
+  <form class="auth-form" method="post">
+    <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+    <label class="field">
+      <span class="field-label">Email</span>
+      <input class="composer-title" type="email" name="email" placeholder="you@example.com" required>
+    </label>
+    <label class="field">
+      <span class="field-label">Password</span>
+      <input class="composer-title" type="password" name="password" placeholder="Password" required>
+    </label>
+    <button class="btn btn-primary wide" type="submit">Log in</button>
+  </form>
+  <p class="auth-alt">New here? <a href="{{ url_for('register') }}">Sign up</a></p>
+</div>
+{% endblock %}

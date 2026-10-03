@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Practice Exam — Section {{ section.number }}{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('practice_exam_landing') }}">Online Practice Exams</a> › Section {{ section.number }}: {{ section.title }}</nav>
+  <div class="page-title"><h1>Practice Exam — Section {{ section.number }}: {{ section.title }}</h1></div>
+  <h2>Study material</h2>
+  <ul class="flow">
+    {% for sub in subsections %}
+    <li><a href="{{ url_for('manual_subsection', section=section.number, subsection=sub.subsection) }}">{{ sub.subsection }}.{{ sub.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <h2>Sample questions</h2>
+  <form class="flow" method="post" action="{{ url_for('practice_exam_grade', section=section.number) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% for q in questions %}
+    <div class="question">
+      <p class="qtext">{{ loop.index }}. {{ q.question }}</p>
+      {% if q_images.get(q.qid) %}
+      <div class="question-images">
+        {% for im in q_images[q.qid] %}<img src="{{ im }}" alt="Exam question illustration">{% endfor %}
+      </div>
+      {% endif %}
+      <div class="answers">
+        {% for a in q.answers_list() %}
+        <label><input type="radio" name="q_{{ q.id }}" value="{{ a.value }}" required> {{ a.text }}</label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <button class="btn" type="submit">Submit answers</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Cart{{ '' }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Your Cart</h1></div>
+{% if not items %}
+<p class="empty">Your cart is empty. <a href="{{ url_for('shop_all') }}">Continue shopping</a>.</p>
+{% else %}
+<div class="cart-layout">
+  <section class="cart-main">
+    <div class="table-wrap">
+<table class="cart-table">
+      <thead>
+        <tr><th>Item</th><th>Options</th><th class="num">Price</th><th class="num">Qty</th><th class="num">Total</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td class="cart-title">
+            {% if item.image %}<img class="cart-thumb" src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="">{% endif %}
+            {{ item.title }}
+          </td>
+          <td>{% for k, v in item.option_map.items() %}<span class="chip">{{ k }}: {{ v }}</span> {% endfor %}</td>
+          <td class="num">{{ item.unit_price|money }}</td>
+          <td class="num">
+            <form method="post" action="{{ url_for('cart_update') }}" class="qty-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <select name="qty" onchange="this.form.submit()" aria-label="Quantity">
+                {% for n in range(0, 6) %}
+                <option value="{{ n }}" {{ 'selected' if item.qty == n }}>{{ n }}</option>
+                {% endfor %}
+              </select>
+              <noscript><button type="submit" class="btn btn-small">Update</button></noscript>
+            </form>
+          </td>
+          <td class="num">{{ (item.unit_price * item.qty)|money }}</td>
+          <td>
+            <form method="post" action="{{ url_for('cart_remove') }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <button type="submit" class="btn btn-small btn-ghost">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+  </section>
+  <aside class="cart-summary">
+    <h2>Order Summary</h2>
+    <p>Subtotal: <strong>{{ subtotal|money }}</strong></p>
+    <p class="muted">Estimated tax is calculated at checkout.</p>
+    <a class="btn btn-large btn-block" href="{{ url_for('checkout') }}">Checkout</a>
+  </aside>
+</div>
+{% endif %}
+{% endblock %}

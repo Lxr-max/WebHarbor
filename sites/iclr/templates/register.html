@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>ICLR 2026 Registration</h1>
+</div>
+<div class="card" style="max-width:760px">
+  <p class="notice">Registration for ICLR 2026 (Rio de Janeiro, April 23–27) is
+    closed on the live upstream site. This form mirrors the captured 2026
+    registration structure for the benchmark: affiliation type, the
+    purchasable items with the upstream exclusivity rule, guest banquet
+    tickets at $50 USD each, and the dietary preference field.</p>
+  <p class="muted small">{{ exclusivity }}</p>
+
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+  <form method="post" class="stack" style="margin-top:14px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label for="name">Full name</label>
+    <input type="text" id="name" name="name" required value="{{ request.form.get('name', '') }}">
+
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" required value="{{ request.form.get('email', '') }}">
+
+    <label for="affiliation">Affiliation type</label>
+    <select id="affiliation" name="affiliation" required>
+      <option value="">Choose…</option>
+      {% for a in affiliations %}
+        <option value="{{ a }}" {% if request.form.get('affiliation') == a %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+
+    <div class="checks">
+      <label style="font-weight:700">Registration items</label>
+      {% for item, includes_virtual in items %}
+        <label>
+          <input type="checkbox" name="items" value="{{ item }}"
+                 {% if item in (request.form.getlist('items') or []) %}checked{% endif %}>
+          {{ item }}{% if includes_virtual %} <span class="muted small">(includes Virtual Access)</span>{% endif %}
+        </label>
+      {% endfor %}
+    </div>
+
+    <label for="banquet_tickets">Guest banquet tickets (${{ banquet_price }} USD each)</label>
+    <input type="number" id="banquet_tickets" name="banquet_tickets" min="0" max="5"
+           value="{{ request.form.get('banquet_tickets', '0') }}">
+
+    <label for="dietary">Dietary preference (optional)</label>
+    <input type="text" id="dietary" name="dietary" value="{{ request.form.get('dietary', '') }}">
+
+    <button class="btn" type="submit">Submit registration</button>
+  </form>
+</div>
+{% endblock %}

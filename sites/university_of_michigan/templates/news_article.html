@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} — Michigan News{% endblock %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+{% if article.image %}<img class="hero-photo" src="{{ article.image }}" alt="{{ article.title }}">{% endif %}
+<p class="page-sub">{{ article.published }}{% if article.author %} &middot; {{ article.author }}{% endif %}</p>
+
+{% if article.description %}
+<p><strong>{{ article.description }}</strong></p>
+{% endif %}
+
+{% for para in article.body_list() %}
+<p>{{ para }}</p>
+{% endfor %}
+
+<p>
+  {% for c in article.category_list() %}
+  <a class="badge type" style="margin:2px" href="{{ url_for('news', category=c) }}">{{ c }}</a>
+  {% endfor %}
+</p>
+<p><a class="btn small" href="{{ url_for('news') }}">&laquo; All stories</a></p>
+{% endblock %}

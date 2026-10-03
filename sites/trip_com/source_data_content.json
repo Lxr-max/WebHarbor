@@ -1,0 +1,74 @@
+{
+ "coupons": [
+  {
+   "code": "TRIPNEW20",
+   "kind": "percent",
+   "value": 20.0,
+   "scope": "hotels",
+   "min_spend": 100.0,
+   "description": "New user promo code — 20% off your first hotel booking over $100."
+  },
+  {
+   "code": "FLYTRIP10",
+   "kind": "percent",
+   "value": 10.0,
+   "scope": "flights",
+   "min_spend": 150.0,
+   "description": "10% off round-trip and one-way flights over $150."
+  },
+  {
+   "code": "ACTIVITY15",
+   "kind": "percent",
+   "value": 15.0,
+   "scope": "attractions",
+   "min_spend": 50.0,
+   "description": "15% off attractions and tours over $50."
+  },
+  {
+   "code": "SAVE25",
+   "kind": "amount",
+   "value": 25.0,
+   "scope": "all",
+   "min_spend": 200.0,
+   "description": "$25 off any booking over $200."
+  }
+ ],
+ "guides": [
+  {
+   "slug": "las-vegas-first-timer",
+   "title": "Las Vegas for first-timers: the Strip, downtown and beyond",
+   "city": "Las Vegas",
+   "body": "<p>Las Vegas runs on spectacle. First-time visitors should base themselves on the Strip — the 4.2-mile stretch of Tropicana to Sahara — where the mega-resorts sit side by side. Paris Las Vegas puts you mid-Strip with a direct view of the Bellagio fountains, while downtown's Fremont Street offers the vintage neon experience at a fraction of the price.</p><p>Expect resort fees of $30-45 per night at most Strip properties, plus a nightly accommodation tax. Booking with free cancellation gives you the flexibility to rebook if prices drop — Trip.com price-matches eligible claims.</p>"
+  },
+  {
+   "slug": "orlando-theme-park-planning",
+   "title": "Orlando theme-park planning: tickets, parks and pacing",
+   "city": "Orlando",
+   "body": "<p>Orlando is the theme-park capital of the world, and planning is everything. Universal Orlando Resort and Walt Disney World sit on opposite sides of Interstate 4, so pick a hotel near the park you'll visit most. City passes bundle multiple parks at a discount and skip-the-gate entry.</p><p>Most travellers need 2 days per major park. Buy tickets online in advance — gate prices are higher, and e-vouchers confirm instantly with free cancellation until 11 PM local time on your travel date.</p>"
+  },
+  {
+   "slug": "nyc-weekend-midrange",
+   "title": "A New York weekend without the midtown price tag",
+   "city": "New York",
+   "body": "<p>Manhattan hotel prices scare many travellers off, but the outer boroughs and Lower Manhattan offer real value. Hotels near the Financial Center put you steps from the Staten Island Ferry (free!) and a short subway hop from SoHo. Jersey City and Newark options trade a 15-minute PATH ride for 30-40% lower nightly rates.</p><p>Weekends are cheaper than weekdays in the Financial District — business travellers leave, and leisure rates drop. Book early for holiday weekends.</p>"
+  },
+  {
+   "slug": "trip-coins-explained",
+   "title": "Trip Coins explained: how rewards work on every booking",
+   "city": "",
+   "body": "<p>Trip Coins are Trip.com's rewards currency. You earn roughly 1 coin for every $1 spent on eligible bookings — about $1.27 in coins on a $127 stay. Coins post to your account after check-out and can be spent like cash on future bookings with no limits.</p><p>Sign in before booking to make sure coins post to your account. Guest bookings still earn coins if you register with the same email afterwards, but signing in first is the reliable path.</p>"
+  },
+  {
+   "slug": "free-cancellation-guide",
+   "title": "Free cancellation: what it covers and when the deadline hits",
+   "city": "",
+   "body": "<p>Free-cancellation rates let you cancel before a stated deadline — commonly 11:59 PM local hotel time, one to three days before check-in — for a full refund. After the deadline you'll be charged the first night or the full amount depending on the rate.</p><p>On Trip.com, filter hotel results by 'Free cancellation' to see only refundable rates, and check the exact deadline on the room card before you reserve.</p>"
+  },
+  {
+   "slug": "sf-bay-area-basics",
+   "title": "San Francisco basics: which neighborhood to book",
+   "city": "San Francisco",
+   "body": "<p>San Francisco is compact — 7 miles square — so location matters more than proximity to any single sight. SoMa suits convention-goers, Union Square is the classic tourist base, and the Marina offers bay walks. Airport hotels near SFO trade charm for easy early-departure logistics.</p><p>Muni and BART cover most trips; skip renting a car unless you're heading out of the city.</p>"
+  }
+ ]
+}

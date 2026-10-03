@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="pagehead">
+  <h1>Search ICLR 2026</h1>
+</div>
+<form class="filters" method="get" action="{{ url_for('search') }}">
+  <div class="field">
+    <label for="q">Query</label>
+    <input type="search" id="q" name="q" value="{{ q }}" placeholder="papers, events, sponsors, announcements, venue">
+  </div>
+  <button class="btn" type="submit">Search</button>
+</form>
+
+{% if q %}
+  <h2 class="muted" style="font-size:1.0rem">Papers{% if papers %} ({{ papers | length }}){% endif %}</h2>
+  {% for p in papers %}
+    <div class="paper-row">
+      <span class="no">#{{ p.id }}</span>
+      <div class="body">
+        <h3><a href="{{ url_for('paper_detail', pid=p.id) }}">{{ p.title }}</a></h3>
+        <div class="meta">{{ p.author_names() | join(' ⋅ ') }}</div>
+      </div>
+    </div>
+  {% else %}
+    <p class="muted">No papers match.</p>
+  {% endfor %}
+
+  <h2 class="muted" style="font-size:1.0rem">Schedule events{% if events %} ({{ events | length }}){% endif %}</h2>
+  {% for e in events %}
+    <div class="sched-event sched-{{ e.kind }}">
+      <div class="time">{{ e.date }}<br>{{ e.start }}–{{ e.end }}</div>
+      <div class="body">
+        <h3><a href="{{ url_for('event_detail', eid=e.id) }}">{{ e.title }}</a></h3>
+        <div class="meta"><span class="badge kind">{{ e.kind_label() }}</span></div>
+      </div>
+    </div>
+  {% else %}
+    <p class="muted">No events match.</p>
+  {% endfor %}
+
+  <h2 class="muted" style="font-size:1.0rem">Sponsors &amp; exhibitors{% if sponsors %} ({{ sponsors | length }}){% endif %}</h2>
+  {% for s in sponsors %}
+    <p><a href="{{ url_for('sponsors') }}">{{ s.name }}</a> <span class="muted small">— {{ s.tier }}</span></p>
+  {% else %}
+    <p class="muted">No sponsors match.</p>
+  {% endfor %}
+
+  <h2 class="muted" style="font-size:1.0rem">Conference site{% if venue_hits %} ({{ venue_hits | length }}){% endif %}</h2>
+  {% for heading, snippet in venue_hits %}
+    <p><a href="{{ url_for('venue') }}">{{ heading }}</a>
+      <span class="muted small">— {{ snippet }}</span></p>
+  {% else %}
+    <p class="muted">No conference-site notes match.</p>
+  {% endfor %}
+
+  <h2 class="muted" style="font-size:1.0rem">Announcements{% if news %} ({{ news | length }}){% endif %}</h2>
+  {% for n in news %}
+    <p><a href="{{ url_for('news_detail', slug=n.slug) }}">{{ n.title }}</a>
+      <span class="muted small">— {{ n.date }}</span></p>
+  {% else %}
+    <p class="muted">No announcements match.</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}

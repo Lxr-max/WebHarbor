@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Appliance Finance Offers{% endblock %}
+{% block crumbs %}
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li aria-current="page"><span>Appliance Finance Offers</span></li>
+{% endblock %}
+{% block content %}
+<section class="container finance-offers-page">
+  <h1 class="page-heading">Appliance Finance Offers</h1>
+  <p class="category-blurb">Get the appliances you want with payments that work for you</p>
+  <h2>Special Finance Offers</h2>
+  {% for offer in offers %}
+  <div class="offer-card" id="15months" {% if not loop.first %}style="margin-top:2rem"{% endif %}>
+    <h3 class="offer-name">{{ offer.name }}</h3>
+    <h2 class="offer-headline">{{ offer.headline }}</h2>
+    <p class="offer-terms">{{ offer.terms }}</p>
+    {% if offer.brands %}
+    <p>Eligible brands include: {{ offer.brands | join(', ') }}</p>
+    {% endif %}
+    <p class="offer-cta">APPLY NOW &middot; PREQUALIFY</p>
+  </div>
+  {% endfor %}
+
+  <h2>HOW IT WORKS - 3 EASY STEPS</h2>
+  <div class="how-grid">
+    {% for title, text in steps %}
+    <div class="how-step">
+      <h3>{{ title }}</h3>
+      <p>{{ text }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="offer-terms">Offer Details: Qualifying purchase amount must be on one receipt. Discounts may result in the qualifying purchase amount. Advertised payment amounts are estimates and may vary. Call 877-628-9913 to place your order — our expert staff will assist in selecting the best appliances for your needs.</p>
+</section>
+{% endblock %}

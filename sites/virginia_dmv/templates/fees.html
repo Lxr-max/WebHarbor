@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Taxes &amp; Fees{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › <a href="{{ url_for('vehicles') }}">Vehicles</a> › Taxes &amp; Fees</nav>
+  <div class="page-title"><h1>DMV Fees</h1></div>
+  <p>DMV fees are set by the Code of Virginia. The complete fee chart is available for download:
+  <a class="btn btn--secondary" href="{{ url_for('download_fee_chart') }}">Fee Chart (DMV 201, 08/10/2026, PDF)</a></p>
+  {% for group, rows in groups.items() %}
+  <h2>{{ group.replace('_', ' ').title() }}</h2>
+  <table class="data">
+    {% for row in rows %}
+    <tr><td>{{ row.label }}</td><td>{{ row.value }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+  <h2>Notes</h2>
+  {% for group, rows in groups.items() %}{% endfor %}
+  <ul class="flow">
+    <li>Additional $2.00 for emissions inspections if your vehicle is garaged in Arlington, Fairfax, Loudoun, Prince William or Stafford counties or cities of Alexandria, Fairfax, Falls Church, Manassas or Manassas Park.</li>
+    <li>Vehicles garaged in localities participating in DMV's Local Vehicle Registration Program may also be charged applicable local registration fees.</li>
+    <li>Highway Use Fee may be applied in addition to registration fee.</li>
+  </ul>
+</div>
+{% endblock %}

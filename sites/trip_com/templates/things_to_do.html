@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Attractions &amp; Tours - Things to Do | Trip.com{% endblock %}
+{% block content %}
+<div class="section">
+  <div class="section-head"><h2>Attractions &amp; Tours</h2></div>
+  <p style="color:var(--ink-3);margin-bottom:14px">Discover {{ attractions|length }}+ verified experiences — city passes, theme parks, tours and activities with free cancellation on most bookings.</p>
+  <div class="card-grid">
+    {% for a in attractions %}
+    <a class="attr-card" href="{{ url_for('attraction_detail', attraction_id=a.id) }}">
+      {% if a.img %}<img src="{{ url_for('static', filename='images/' + a.img) }}" alt="{{ a.name }}">{% endif %}
+      <div class="ac-body">
+        <div class="ac-name">{{ a.name }}</div>
+        <div class="ac-meta">{{ '%.1f'|format(a.rating) }}/5 &middot; {{ a.reviews_count }} reviews &middot; {{ a.category }}</div>
+        <div class="ac-price">From ${{ '%.2f'|format(a.price_from) }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="section">
+  <h2>Explore by city</h2>
+  <div class="card-grid">
+    {% for c in cities %}
+    <a class="city-card" href="{{ url_for('attraction_list', city_slug=c.slug) }}">
+      {% if c.image %}<img src="{{ url_for('static', filename='images/' + c.image) }}" alt="{{ c.name }}">{% endif %}
+      <div class="cc-body"><div class="cc-name">{{ c.name }}</div><div class="cc-sub">Things to do in {{ c.name }}</div></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

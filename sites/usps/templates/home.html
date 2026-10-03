@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Welcome | USPS{% endblock %}
+{% block meta %}Welcome to USPS.com. Find information on our most convenient and affordable shipping and mailing services.{% endblock %}
+{% block content %}
+<section class="hero-banner">
+  <img src="{{ url_for('static', filename=hero_slides[0]) }}" alt="USPS fall shipping and stamps">
+</section>
+
+<div class="grid">
+  {% for code, label, href, icon in [
+      ('track', 'Track a Package', url_for('tracking_home'), 'images/chrome/tracking.svg'),
+      ('calc', 'Calculate a Price', url_for('postcalc_home'), 'images/chrome/calculate_price.svg'),
+      ('loc', 'Find a Post Office', url_for('locations_home'), 'images/chrome/location.svg'),
+      ('cns', 'Click-N-Ship', url_for('clicknship_home'), 'images/chrome/featured_clicknship.svg'),
+      ('pickup', 'Schedule a Pickup', url_for('pickup_home'), 'images/chrome/schedule_pickup.svg'),
+      ('po', 'Rent a PO Box', url_for('po_boxes'), 'images/chrome/po_box.svg'),
+  ] %}
+    <a class="quick-tool" style="border:1px solid #d8d8e2; padding:16px; align-items:center;" href="{{ href }}">
+      <img src="{{ url_for('static', filename=icon) }}" alt="">
+      <span>{{ label }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<h2>Our Services</h2>
+<div class="grid">
+  {% for svc in services %}
+    <div class="card">
+      {% if svc.hero_image %}
+        <img src="{{ url_for('static', filename=svc.hero_image) }}" alt="{{ svc.name }}">
+      {% endif %}
+      <h3><a href="/{{ svc.page_path }}">{{ svc.name }}</a></h3>
+      <p>{{ svc.summary }}</p>
+      <a class="btn secondary" href="/{{ svc.page_path }}">Learn More</a>
+    </div>
+  {% endfor %}
+</div>
+
+<h2>Shop Stamps &amp; Shipping Supplies</h2>
+<div class="grid">
+  {% for p in stamps %}
+    <div class="card store-tile">
+      {% if p.image %}<a href="{{ url_for('store_product', slug=p.slug) }}"><img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}"></a>{% endif %}
+      <h3><a href="{{ url_for('store_product', slug=p.slug) }}">{{ p.name }}</a></h3>
+      <p class="price">{{ p.price | usd }}</p>
+      <a class="btn" href="{{ url_for('store_product', slug=p.slug) }}">View Product</a>
+    </div>
+  {% endfor %}
+</div>
+<p><a class="btn" href="{{ url_for('store_home') }}">Visit The Postal Store</a></p>
+
+<div class="grid">
+  <div class="card">
+    <h3>Latest News</h3>
+    <ul class="bullets">
+      {% for r in releases %}
+        <li><a href="{{ url_for('news_article', slug=r.slug) }}">{{ r.clean_title or r.title }}</a>
+            <span class="note">{{ r.date | longdate }}</span></li>
+      {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('newsroom') }}">All releases</a></p>
+  </div>
+  <div class="card alert">
+    <h3>Service Alerts</h3>
+    <ul class="bullets">
+      {% for a in alerts %}
+        <li><a href="{{ url_for('news_article', slug=a.slug) }}">{{ a.clean_title or a.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('service_alerts') }}">Current alerts</a></p>
+  </div>
+</div>
+{% endblock %}

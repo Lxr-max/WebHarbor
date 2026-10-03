@@ -1,0 +1,132 @@
+{
+ "schema_version": 1,
+ "snapshot_date": "2026-09-28",
+ "upstream_sources": [
+  "retail-rates-us-en.pdf — UPS Retail Rate and Service Guide (effective 2026-09-07), Value-Added Services and Other Charges"
+ ],
+ "pickup_options": [
+  {
+   "name": "UPS Smart Pickup®",
+   "fee": "$18.50",
+   "fee_usd": 18.5,
+   "per": "weekly",
+   "description": "Automatically arrange a pickup only when you have packages to ship. A UPS driver will attempt a pickup the same business day when a package is tendered before a predetermined cut-off time. Pickups typically occur after 1:30 p.m."
+  },
+  {
+   "name": "Daily Pickup",
+   "fee": "$39.00",
+   "fee_usd": 39.0,
+   "per": "weekly",
+   "description": "A UPS driver attempts a pickup at your location once each business day as scheduled, typically after 2:00 p.m."
+  },
+  {
+   "name": "Day-Specific Pickup",
+   "fee": "$8.00 (1 day) / $15.75 (2 days) / $23.25 (3 days) / $30.50 (4 days)",
+   "fee_usd": {
+    "1": 8.0,
+    "2": 15.75,
+    "3": 23.25,
+    "4": 30.5
+   },
+   "per": "weekly",
+   "description": "Select which days of the week, Monday through Friday, you would like UPS to attempt a Scheduled Pickup. UPS will only stop at your location those days as scheduled, typically after 2:00 p.m."
+  },
+  {
+   "name": "Daily On-Route Pickup",
+   "fee": "$11.25",
+   "fee_usd": 11.25,
+   "per": "weekly",
+   "description": "A UPS driver attempts a pickup at your location once each business day while making deliveries in your area. Pickups typically occur between 10:00 a.m. and 3:00 p.m."
+  },
+  {
+   "name": "UPS On-Call Pickup® (Future-Day)",
+   "fee": "$9.65",
+   "fee_usd": 9.65,
+   "per": "pickup request",
+   "description": "With one pickup request, UPS will pick up all of your packages at a location of your choosing. Fees are applied per pickup request regardless of the number of packages being picked up."
+  },
+  {
+   "name": "UPS On-Call Pickup® (Same-Day)",
+   "fee": "$15.75",
+   "fee_usd": 15.75,
+   "per": "pickup request",
+   "description": "Schedule a same-day pickup via ups.com or by calling 1-800-PICK-UPS (1-800-742-5877)."
+  }
+ ],
+ "saturday_options": [
+  {
+   "name": "Saturday Stop Charge (Scheduled Pickup)",
+   "fee": "$12.00",
+   "per": "stop",
+   "description": "Your Saturday pickup type must match your Monday through Friday pickup type; fee applies any time a Saturday pickup is requested, in addition to weekly Scheduled Pickup fees."
+  },
+  {
+   "name": "Saturday Pickup (UPS Smart Pickup®)",
+   "fee": "$8.00",
+   "per": "stop",
+   "description": "A UPS driver attempts a pickup at your location when you process a shipment on Saturday in an eligible shipping system before a predetermined cut-off time."
+  },
+  {
+   "name": "Saturday Pickup (UPS On-Call Pickup®)",
+   "fee": "$6.95",
+   "per": "stop",
+   "description": "A UPS driver attempts a pickup at your location when you schedule a one-time Saturday pickup via ups.com on or prior to Saturday. This Saturday Stop Charge applies in addition to the applicable UPS On-Call Pickup Charge."
+  }
+ ],
+ "delivery_options": [
+  {
+   "name": "Signature Required",
+   "fee": "$7.70",
+   "fee_usd": 7.7,
+   "per": "package",
+   "description": "UPS will obtain a signature upon delivery. UPS may obtain, at its discretion, an electronic authorization to release the package without a signature on delivery."
+  },
+  {
+   "name": "Adult Signature Required",
+   "fee": "$9.35",
+   "fee_usd": 9.35,
+   "per": "package",
+   "description": "UPS will obtain an adult recipient's signature upon delivery. Adult recipients must be at least 21 years old (government-issued photo ID required for delivery)."
+  },
+  {
+   "name": "Hold at Location",
+   "fee": "No charge",
+   "fee_usd": 0.0,
+   "per": "package",
+   "description": "The shipper may request that UPS hold a shipment at a UPS location for pickup."
+  },
+  {
+   "name": "Ship to a UPS Access Point® Location",
+   "fee": "No charge",
+   "fee_usd": 0.0,
+   "per": "package",
+   "description": "For the convenience of recipients, shippers can send packages directly to a UPS Access Point Location. Recipients will be notified by email when their packages arrive."
+  }
+ ],
+ "other_services": [
+  {
+   "name": "Declared Value for Carriage",
+   "fee": "$0.00-$100.00: no charge; $100.01-$300.00: $5.10; over $300.00: $1.70 per $100.00 of value (including the first $100.00)",
+   "description": "UPS's liability for loss or damage for each domestic package is limited to $100.00 without a declaration of value. Example from the Rate Guide: a declaration of $950.00 value incurs a charge of $17.00 (10 times $1.70)."
+  },
+  {
+   "name": "UPS Delivery Intercept® (Web/Electronic)",
+   "fee": "$18.00",
+   "fee_usd": 18.0,
+   "per": "request",
+   "description": "As the shipper, request that UPS return the package to you, reroute it to a new address, or reschedule its delivery to a future date."
+  },
+  {
+   "name": "UPS Delivery Intercept® (Phone)",
+   "fee": "$21.00",
+   "fee_usd": 21.0,
+   "per": "request",
+   "description": "A UPS Delivery Intercept request made by calling 1-800-PICK-UPS (1-800-742-5877)."
+  }
+ ],
+ "notes": [
+  "Fuel surcharges may apply to any or all domestic and international transportation charges and certain accessorial charges; for current fuel surcharges visit ups.com/fuelsurcharge.",
+  "Effective 2026-09-07, the UPS Rate and Service Guides were updated.",
+  "Effective 2026-09-27 through 2026-11-21, a Demand Surcharge of $8.75 per package applies to Additional Handling packages; $11.90 per package from 2026-11-22 through 2026-12-26 (demand-surcharges-us-en.pdf)."
+ ]
+}

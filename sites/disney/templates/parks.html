@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Walt Disney World Resort | Parks &amp; Travel{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1 class="page-title">Walt Disney World Resort</h1>
+  <p class="page-sub">Attractions, entertainment and character experiences across the resort, captured from the official parks finder.</p>
+  <div class="grid cols-4">
+    {% for p in parks %}
+    <a class="card" href="{{ url_for('attractions', park=p.slug) }}">
+      <div class="card-body">
+        <p class="card-title">{{ p.name }}</p>
+        <p class="card-meta">{{ p.attractions }} attractions &amp; entertainment</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p style="margin-top:22px"><a class="btn" href="{{ url_for('attractions') }}">Browse all attractions &amp; entertainment</a></p>
+</div>
+{% endblock %}

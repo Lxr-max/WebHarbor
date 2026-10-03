@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="page-title">Page not found</h1>
+<p>We're sorry, we can't find the page you're looking for. It might have been removed, changed its name, or is otherwise unavailable.</p>
+<p><a href="{{ url_for('home') }}">Visit homepage</a> or <a href="{{ url_for('site_search') }}">search the site</a>.</p>
+{% endblock %}

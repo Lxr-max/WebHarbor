@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}How It Works • Student.com{% endblock %}
+
+{% block content %}
+<div class="page-hero container">
+  <nav class="breadcrumb" style="padding:0 0 8px"><a href="/">Home</a> › <span>How it works</span></nav>
+  <h1>How to book on Student.com</h1>
+  <p class="muted" style="margin-top:10px;max-width:720px">We know that booking student accommodation can be stressful so we're here to help every step of the way! Here's our quick guide to the ways you can secure your next home.</p>
+</div>
+
+<section class="section container">
+  <div class="section-head"><h2>Our booking types</h2></div>
+  <p class="muted small" style="margin-top:-12px">We have three ways to book on Student.com. Here's a handy guide to the key differences.</p>
+
+  <div class="grid cols-3" style="margin-top:24px">
+    <div class="card" style="padding:26px">
+      <span class="type-chip" style="background:var(--purple-soft)">Enquire</span>
+      <div class="room-row" style="border:none"><span class="rmeta">Step</span><strong>1</strong></div>
+      <p class="small">Submit quick enquiries for the properties you're interested in.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>2</strong></div>
+      <p class="small">The properties will contact you to discuss details and answer any questions.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>3</strong></div>
+      <p class="small">Once you've decided which room is perfect for you, you can confirm your booking directly with the property.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <span class="type-chip" style="background:var(--purple-soft)">Apply</span>
+      <div class="room-row" style="border:none"><span class="rmeta">Step</span><strong>1</strong></div>
+      <p class="small">Submit a full application for the property you're interested in.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>2</strong></div>
+      <p class="small">The property will confirm your booking or contact you to discuss further.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>3</strong></div>
+      <p class="small">You'll receive payment instructions to confirm your booking, either paying through Student.com or directly to the property.</p>
+    </div>
+    <div class="card" style="padding:26px">
+      <span class="type-chip" style="background:var(--purple-soft)">Instant Book</span>
+      <div class="room-row" style="border:none"><span class="rmeta">Step</span><strong>1</strong></div>
+      <p class="small">Submit an online booking form for your chosen property, including preferred payment plan and personal details.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>2</strong></div>
+      <p class="small">Sign your contract online.</p>
+      <div class="room-row"><span class="rmeta">Step</span><strong>3</strong></div>
+      <p class="small">Your booking is confirmed! Get packed and ready to start on your next chapter of student life!</p>
+    </div>
+  </div>
+</section>
+
+<section class="section container" style="padding-top:0">
+  <div class="card" style="padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center">
+    <div>
+      <h2>Connect with our team</h2>
+      <p class="muted small" style="margin-top:8px">If you have any questions please don't hesitate to contact us by WhatsApp, live chat, phone or email - we're always happy to help!</p>
+      <a class="btn primary" href="/contact" style="margin-top:14px">Contact us</a>
+    </div>
+    <img src="/static/images/home/woman-with-tablet.webp" alt="Students using Student.com" style="border-radius:16px">
+  </div>
+</section>
+{% endblock %}

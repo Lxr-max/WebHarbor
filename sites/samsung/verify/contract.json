@@ -1,0 +1,956 @@
+{
+  "Samsung--0": {
+    "task": "I'm looking for Samsung's least expensive smartphone. Find it, check its price and customer rating, and save it to Alice's wishlist so I can revisit it. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/smartphones/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_slug": "galaxy-a17-5g",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "chosen phone price",
+        "pattern": "galaxy\\ a17(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?249\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "customer rating",
+        "pattern": "(?:rating|rated|249\\.99).{0,25}4\\.3",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--1": {
+    "task": "Find the highest-rated case in Mobile Accessories' Cases & Covers selection and save it to Bob's wishlist. Tell me which case you chose and its price. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/mobile-accessories/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "product_slug": "galaxy-s26-plus-clear-magnet-case-transparent-sku-ef-cs947ctegus",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "case price",
+        "pattern": "galaxy\\ s26\\+\\ clear\\ magnet\\ case(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?49\\.99\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--2": {
+    "task": "Help Carol shortlist a 75\u201384 inch Micro RGB TV: find the least expensive matching model, save it to her wishlist, and tell me its model name and price. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/tvs/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "product_slug": "75-inch-micro-rgb-4k-tv-r85h-sku-mrn75r85hafxza",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "Micro RGB TV price",
+        "pattern": "micro\\ rgb\\ r85h(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?1899\\.99\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--3": {
+    "task": "Dana wants a Family Hub refrigerator on a budget. Find the least expensive Family Hub model, save it to her wishlist, and tell me its name, model code and price. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/refrigerators/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "product_slug": "26-7-cu-ft-large-capacity-side-by-side-refrigerator-with-touch-screen-family-hub-in-stainless-steel-sku-rs27t5561sr-aa",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "Family Hub price",
+        "pattern": "family\\ hub(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?2099\\.00\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "refrigerator model",
+        "pattern": "rs27t5561sr/aa",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--4": {
+    "task": "I'm replacing the Galaxy Tab S11 on Alice's wishlist with the Galaxy S26 Ultra. Before saving the phone, check its display resolution and battery capacity; report those and its price. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/smartphones/galaxy-s26-ultra/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_slug": "galaxy-s26-ultra",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ],
+        "removed": [
+          "[3]"
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "phone price",
+        "pattern": "galaxy\\ s26\\ ultra(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?1499\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "resolution",
+        "pattern": "resolution(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?3120\\ x\\ 1440\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "battery capacity",
+        "pattern": "battery(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?5000\\s*mah",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--5": {
+    "task": "Prepare Alice's cart for two unlocked Galaxy S26 Ultra phones with 1TB storage in Cobalt Violet. Leave them ready for checkout and tell me the resolved model code and subtotal. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/galaxy-s26-ultra/buy/",
+      "/cart/"
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": "user:1",
+            "configurator": "smartphones_galaxy-s26-ultra",
+            "model_code": "SM-S948UZVFXAA",
+            "title": "Galaxy S26 Ultra 1TB (Unlocked)",
+            "options": {
+              "json": {
+                "Storage": "1TB",
+                "Color": "Cobalt Violet",
+                "Carrier": "Unlocked"
+              }
+            },
+            "unit_price": 1799.99,
+            "qty": 2,
+            "image": "us-galaxy-s26-ultra-s948-sm-s948uzvaatt-550993860.png"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "model code",
+        "pattern": "sm-s948uzvfxaa",
+        "forbidden": []
+      },
+      {
+        "label": "cart subtotal",
+        "pattern": "subtotal(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?3599\\.98\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--6": {
+    "task": "Bob needs three Galaxy Z Fold8 Ultra phones with 1TB storage in Violet Shadow. Configure them in his cart without ordering, and report the model code and subtotal. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/galaxy-z-fold8-ultra/buy/",
+      "/cart/"
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": "user:2",
+            "configurator": "smartphones_galaxy-z-fold8-ultra",
+            "model_code": "SM-F976UZVFXAA",
+            "title": "Galaxy Z Fold8 Ultra 1TB (Unlocked)",
+            "options": {
+              "json": {
+                "Storage": "1TB",
+                "Color": "Violet Shadow",
+                "Connectivity": "Unlocked"
+              }
+            },
+            "unit_price": 2399.99,
+            "qty": 3,
+            "image": "us-galaxy-z-fold8-ultra-f976-600251-sm-f976uzvaatt-553839031.png"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "model code",
+        "pattern": "sm-f976uzvfxaa",
+        "forbidden": []
+      },
+      {
+        "label": "cart subtotal",
+        "pattern": "subtotal(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?7199\\.97\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--7": {
+    "task": "Order one Galaxy Tab S11 in its default configuration for Alice, using Samsung Pay and any valid US test delivery address. Report the order number, tax and total. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/checkout/",
+      "/orders/SS-"
+    ],
+    "state": {
+      "order_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_id": 4,
+            "model_code": "SM-X730NZAAXAR",
+            "title": "Galaxy Tab S11 (11\")",
+            "options": {
+              "json": {
+                "Device": "Galaxy Tab S11",
+                "Storage": "128 GB",
+                "Screen Size": "11\"",
+                "Color": "Gray",
+                "Carrier": "Wi-fi"
+              }
+            },
+            "unit_price": 999.99,
+            "qty": 1,
+            "image": "us-galaxy-tab-s11-sm-x730-sm-x730nzaaxar-553558440.png"
+          }
+        ]
+      },
+      "orders": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "order_no": {
+              "regex": "S[ST]-[0-9]+"
+            },
+            "user_id": 1,
+            "email": "alice.j@test.com",
+            "full_name": {
+              "regex": ".+\\.?"
+            },
+            "address1": {
+              "regex": ".+\\.?"
+            },
+            "city": {
+              "regex": ".+\\.?"
+            },
+            "state": {
+              "regex": ".+\\.?"
+            },
+            "zipcode": {
+              "regex": "\\d{5}(?:-\\d{4})?"
+            },
+            "payment_method": "Samsung Pay",
+            "subtotal": 999.99,
+            "shipping": 0.0,
+            "tax": 66.25,
+            "total": 1066.24,
+            "status": "Processing",
+            "placed_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "order total",
+        "pattern": "total(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?1066\\.24\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "order tax",
+        "pattern": "tax(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?66\\.25\\s*",
+        "forbidden": []
+      }
+    ],
+    "answer_state": [
+      [
+        "orders",
+        "order_no"
+      ]
+    ]
+  },
+  "Samsung--8": {
+    "task": "Dana is choosing between the Galaxy S26 and S26 Ultra for battery life. Compare their battery capacities and weights, save the one with the larger battery to her wishlist, and explain the choice with those figures. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/compare/\\?.*SM-S942",
+      "/compare/\\?.*SM-S948",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "product_slug": "galaxy-s26-ultra",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "S26 battery",
+        "pattern": "(?:galaxy s26(?! ultra).{0,180}?4300\\s*mah|battery:.{0,20}4300\\s*mah.{0,10}5000\\s*mah)",
+        "forbidden": []
+      },
+      {
+        "label": "Ultra battery",
+        "pattern": "(?:s26 ultra.{0,180}?5000\\s*mah|battery:.{0,30}5000\\s*mah)",
+        "forbidden": []
+      },
+      {
+        "label": "weights",
+        "pattern": "(?:weight.{0,20}167.{0,10}214|s26.{0,25}167\\s*g.*ultra.{0,25}214\\s*g)",
+        "forbidden": []
+      },
+      {
+        "label": "battery choice",
+        "pattern": "(?:s26 ultra.{0,35}(?:larger|bigger|longer)|(?:larger|bigger).{0,30}s26 ultra)",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--9": {
+    "task": "Compare the unfolded dimensions and weights of the Galaxy Z Fold8 and Fold8 Ultra for Dana, who wants the lighter folding phone. Save the lighter model to her wishlist and report both models' dimensions and weights. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/compare/\\?.*SM-F971",
+      "/compare/\\?.*SM-F976",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "product_slug": "galaxy-z-fold8",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "dimensions fold",
+        "pattern": "123\\.9\\s*x\\s*161\\.4\\s*x\\s*4\\.5",
+        "forbidden": []
+      },
+      {
+        "label": "dimensions ultra",
+        "pattern": "158\\.4\\s*x\\s*143\\.2\\s*x\\s*4\\.1",
+        "forbidden": []
+      },
+      {
+        "label": "fold weights",
+        "pattern": "(?:weight.{0,20}201.{0,10}215|fold8.{0,25}201\\s*g.*ultra.{0,25}215\\s*g)",
+        "forbidden": []
+      },
+      {
+        "label": "lighter fold",
+        "pattern": "galaxy z fold8(?! ultra).{0,30}lighter",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--10": {
+    "task": "Carol's Galaxy S26 Ultra screen needs warranty help. Check the standard warranty information for the 512GB model and how to validate a warranty, then send a Warranty support request describing the screen problem. Report the standard period, whether this establishes her device's actual coverage, and the ticket number and status. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/support/warranty/",
+      "/support/contact/done/",
+      "/account/"
+    ],
+    "state": {
+      "support_tickets": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "ticket_no": {
+              "regex": "S[ST]-[0-9]+"
+            },
+            "user_id": 3,
+            "email": "carol.d@test.com",
+            "category": "Phones, Tablets & Wearables",
+            "topic": "Warranty",
+            "subject": {
+              "regex": "(?i)(?=.*(?:s26|screen)).+"
+            },
+            "message": {
+              "regex": "(?i)(?=.*screen).+"
+            },
+            "status": "Open",
+            "created_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "standard period",
+        "pattern": "(?:12\\s*months|(?:1|one)\\s*year)",
+        "forbidden": []
+      },
+      {
+        "label": "unverified device coverage",
+        "pattern": "(?:coverage.{0,25}(?:not verified|unverified|not established)|(?:cannot|does not|doesn\\x27t).{0,35}(?:verify|establish|confirm).{0,35}coverage)",
+        "forbidden": []
+      },
+      {
+        "label": "warranty validation",
+        "pattern": "(?:proof of purchase|purchase date|view product details)",
+        "forbidden": []
+      },
+      {
+        "label": "ticket status",
+        "pattern": "(?:status.{0,20}open|st-\\d+.{0,60}open)",
+        "forbidden": []
+      }
+    ],
+    "answer_state": [
+      [
+        "support_tickets",
+        "ticket_no"
+      ]
+    ],
+    "forbidden": [
+      "(?:coverage (?:status|is):? active|device is (?:definitely|currently) covered)"
+    ]
+  },
+  "Samsung--11": {
+    "task": "I'm considering warranty repair for a Galaxy Watch9 bought abroad. Check its standard warranty information and the FAQs about foreign-product repair and supported models. Explain the standard period, the international-service limitations, and whether the checker verifies coverage for my individual watch.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/support/warranty/\\?.*model="
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "period",
+        "pattern": "(?:12\\s*months|(?:1|one)\\s*year)",
+        "forbidden": []
+      },
+      {
+        "label": "international limitations",
+        "pattern": "(?:country.{0,45}(?:first|initial|original).{0,15}(?:sold|sale|purchase))",
+        "forbidden": []
+      },
+      {
+        "label": "parts limitation",
+        "pattern": "(?:parts.{0,60}(?:delay|longer|cost)|(?:delay|longer).{0,60}parts)",
+        "forbidden": []
+      },
+      {
+        "label": "not verified",
+        "pattern": "coverage.{0,25}(?:not verified|unverified|not established)",
+        "forbidden": []
+      }
+    ],
+    "forbidden": [
+      "(?:coverage (?:status|is):? active|device is (?:definitely|currently) covered)"
+    ]
+  },
+  "Samsung--12": {
+    "task": "Help Alice reconcile her two previous orders. For each order, report its order number, item, quantity, delivery city and total, so she can match each purchase to its shipment. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/orders/SS-100001/",
+      "/orders/SS-100002/"
+    ],
+    "state": {},
+    "claims": [
+      {
+        "label": "recent order",
+        "pattern": "ss-100002.{0,250}galaxy watch9.{0,400}810\\.33",
+        "forbidden": []
+      },
+      {
+        "label": "older order",
+        "pattern": "ss-100001.{0,250}galaxy s26 ultra.{0,400}1599\\.36",
+        "forbidden": []
+      },
+      {
+        "label": "delivery city",
+        "pattern": "ridgefield park",
+        "forbidden": []
+      },
+      {
+        "label": "ss-100002 quantity",
+        "scope": "ss-100002.*?(?=orders \u203a ss-|$)",
+        "pattern": "galaxy\\ watch9.{0,65}(?:\\$?379\\.99\\s+2\\s+\\$|(?:quantity|qty)\\s*(?:is|:)?\\s*2\\b)"
+      },
+      {
+        "label": "ss-100002 delivery",
+        "scope": "ss-100002.*?(?=orders \u203a ss-|$)",
+        "pattern": "ridgefield park"
+      },
+      {
+        "label": "ss-100001 quantity",
+        "scope": "ss-100001.*?(?=orders \u203a ss-|$)",
+        "pattern": "galaxy\\ s26\\ ultra.{0,65}(?:\\$?1499\\.99\\s+1\\s+\\$|(?:quantity|qty)\\s*(?:is|:)?\\s*1\\b)"
+      },
+      {
+        "label": "ss-100001 delivery",
+        "scope": "ss-100001.*?(?=orders \u203a ss-|$)",
+        "pattern": "ridgefield park"
+      }
+    ]
+  },
+  "Samsung--13": {
+    "task": "Dana's Galaxy Z Flip8 hinge is stiff and clicks. Review its standard warranty information and send a Repair support request describing the hinge problem. Confirm the ticket appears in her account and report its number and status, without assuming her device is still under warranty. Use dana.k@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/support/warranty/",
+      "/support/contact/done/",
+      "/account/"
+    ],
+    "state": {
+      "support_tickets": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "ticket_no": {
+              "regex": "S[ST]-[0-9]+"
+            },
+            "user_id": 4,
+            "email": "dana.k@test.com",
+            "category": "Phones, Tablets & Wearables",
+            "topic": "Repair",
+            "subject": {
+              "regex": "(?i)(?=.*(?:flip8|hinge)).+"
+            },
+            "message": {
+              "regex": "(?i)(?=.*hinge).+"
+            },
+            "status": "Open",
+            "created_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "repair ticket",
+        "pattern": "(?:topic.{0,15}repair|repair.{0,50}ticket)",
+        "forbidden": []
+      },
+      {
+        "label": "ticket status",
+        "pattern": "(?:status.{0,20}open|st-\\d+.{0,60}open)",
+        "forbidden": []
+      },
+      {
+        "label": "on account",
+        "pattern": "(?:account.{0,30}st-|appears.{0,30}account)",
+        "forbidden": []
+      }
+    ],
+    "answer_state": [
+      [
+        "support_tickets",
+        "ticket_no"
+      ]
+    ],
+    "forbidden": [
+      "(?:coverage (?:status|is):? active|device is (?:definitely|currently) covered)"
+    ]
+  },
+  "Samsung--14": {
+    "task": "Find the Galaxy Buds4 Pro through Samsung's search, check its price and customer rating, and save it to Bob's wishlist for a future audio purchase. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/search/\\?",
+      "/audio/galaxy-buds4-pro/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "product_slug": "galaxy-buds4-pro",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "buds price",
+        "pattern": "galaxy\\ buds4\\ pro(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?249\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "rating",
+        "pattern": "(?:rated|rating|249\\.99).{0,20}4\\.7",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--15": {
+    "task": "Create a Samsung account for Frank Nova with email frank.n@test.com and password TestPass123!, then save the Galaxy Watch9 to his wishlist for later. Tell me the watch's price and confirm it appears in the new account's wishlist.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/account/signup/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "users": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "name": "Frank Nova",
+            "email": "frank.n@test.com",
+            "pw_hash": {
+              "regex": "(?:b')?\\$2b\\$12\\$[./A-Za-z0-9]{53}'?"
+            }
+          }
+        ]
+      },
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "product_slug": "galaxy-watch9",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "watch price",
+        "pattern": "galaxy\\ watch9(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?379\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "new account name",
+        "pattern": "frank nova",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--16": {
+    "task": "Bob wants to buy a Galaxy Tab S11 with more storage than the default. Compare the default and 512GB prices in the configurator, then put one 512GB tablet in his cart and report the model code and price difference. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/galaxy-tab-s11/buy/",
+      "/cart/"
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": "user:2",
+            "configurator": "tablets_galaxy-tab-s11",
+            "model_code": "SM-X730NZAIXAR",
+            "title": "Galaxy Tab S11 (11\")",
+            "options": {
+              "json": {
+                "Device": "Galaxy Tab S11",
+                "Storage": "512 GB",
+                "Screen Size": "11\"",
+                "Color": "Gray",
+                "Carrier": "Wi-fi"
+              }
+            },
+            "unit_price": 1299.99,
+            "qty": 1,
+            "image": "us-galaxy-tab-s11-sm-x730-sm-x730nzaixar-550969743.png"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "tablet code",
+        "pattern": "sm-x730nzaixar",
+        "forbidden": []
+      },
+      {
+        "label": "upgrade difference",
+        "pattern": "difference(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?300(?:\\.00)?\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--17": {
+    "task": "Prepare Carol's cart for two Galaxy Watch9 watches in 44mm, LTE, Graphite. Check the estimated tax at checkout without ordering, and report the model code, subtotal and tax. Use carol.d@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/galaxy-watch9/buy/",
+      "/checkout/"
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": "user:3",
+            "configurator": "watches_galaxy-watch9",
+            "model_code": "SM-L355UZKAXAA",
+            "title": "Galaxy Watch9, 44mm, LTE, Graphite",
+            "options": {
+              "json": {
+                "Device": "Galaxy Watch9",
+                "Size": "44mm",
+                "Watch Connectivity": "LTE",
+                "Watch Carrier": "Wifi",
+                "Color": "Graphite",
+                "Band Type": "Sport",
+                "Band Color": "Black",
+                "Band Size": "Medium/Large"
+              }
+            },
+            "unit_price": 459.99,
+            "qty": 2,
+            "image": "us-galaxy-watch-sm-l350nzkaxaa-galaxy-watch-----mm--bluetooth--graphite-graphite-554056107.png"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "watch model",
+        "pattern": "sm-l355uzkaxaa",
+        "forbidden": []
+      },
+      {
+        "label": "subtotal",
+        "pattern": "subtotal(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?919\\.98\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "tax",
+        "pattern": "tax(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?60\\.95\\s*",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--18": {
+    "task": "Prepare Bob's cart for two Galaxy Z Flip8 phones with 512GB storage, leaving the other options at their defaults. Report the selected model code, options and subtotal without placing an order. Use bob.c@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/galaxy-z-flip8/buy/",
+      "/cart/"
+    ],
+    "state": {
+      "cart_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "cart_key": "user:2",
+            "configurator": "smartphones_galaxy-z-flip8",
+            "model_code": "SM-F776ULGEXAA",
+            "title": "Galaxy Z Flip8 512GB (Unlocked)",
+            "options": {
+              "json": {
+                "Storage": "512GB",
+                "Color": "Mint",
+                "Connectivity": "Unlocked"
+              }
+            },
+            "unit_price": 1249.99,
+            "qty": 2,
+            "image": "us-galaxy-zflip8-f776-sm-f776ulgaxaa-553842884.png"
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "flip model",
+        "pattern": "sm-f776ulgexaa",
+        "forbidden": []
+      },
+      {
+        "label": "subtotal",
+        "pattern": "subtotal(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?2499\\.98\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "storage",
+        "pattern": "(?:storage.{0,15}512\\s*gb|512\\s*gb.{0,15}storage)",
+        "forbidden": []
+      }
+    ]
+  },
+  "Samsung--19": {
+    "task": "Alice is considering a Galaxy S25 Ultra instead of the S26 Ultra. Compare their prices, weights and peak brightness, then save the S25 Ultra to her wishlist and explain its price and weight tradeoffs. Use alice.j@test.com / TestPass123!.",
+    "initial_digest": "7f9700432b0845c7abb02650da5ff7e08aa1f4cda1d7c4df4f80926c2c627091",
+    "paths": [
+      "/compare/",
+      "/galaxy-s25-ultra/",
+      "/galaxy-s26-ultra/",
+      "/account/wishlist/"
+    ],
+    "state": {
+      "wishlist_items": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_slug": "galaxy-s25-ultra",
+            "added_ts": {
+              "regex": "\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ"
+            }
+          }
+        ]
+      }
+    },
+    "claims": [
+      {
+        "label": "S25 price",
+        "pattern": "galaxy\\ s25\\ ultra(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?1299\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "S26 price",
+        "pattern": "galaxy\\ s26\\ ultra(?:(?!\\breference\\b|\\bref\\b|\\$\\s*\\d).){0,90}?\\$?1499\\.99\\s*",
+        "forbidden": []
+      },
+      {
+        "label": "brightness",
+        "pattern": "(?:peak brightness.{0,30}2600\\s*nits.{0,20}2600\\s*nits|both.{0,35}2600\\s*nits)",
+        "forbidden": []
+      },
+      {
+        "label": "weights",
+        "pattern": "(?:weight.{0,15}218.{0,10}214|s25 ultra.{0,35}218\\s*g.*s26 ultra.{0,35}214\\s*g)",
+        "forbidden": []
+      },
+      {
+        "label": "tradeoff",
+        "pattern": "cheaper.{0,25}heavier",
+        "forbidden": []
+      }
+    ]
+  }
+}

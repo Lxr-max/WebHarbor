@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Activity — Tumblr{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Activity</h1>
+  <p class="page-sub">Likes, reblogs, follows and messages for {{ user.username }}.</p>
+</div>
+<section class="activity-list">
+  {% for n in rows %}
+    <div class="activity-row {{ 'is-new' if n.is_new }}">
+      {% if n.actor_avatar %}
+        <img class="avatar a40" src="{{ n.actor_avatar }}" alt="">
+      {% else %}
+        <span class="avatar a40 avatar-fallback">{{ n.actor_blog[:1] }}</span>
+      {% endif %}
+      <div class="activity-body">
+        <p class="activity-text">
+          <a class="activity-actor" href="{{ url_for('blog_page', name=n.actor_blog) }}">{{ n.actor_blog }}</a>
+          {% if n.type == 'like' %} liked your post
+          {% elif n.type == 'reblog' %} reblogged your post
+          {% elif n.type == 'follow' %} started following your blog
+          {% elif n.type == 'message' %} sent you a message
+          {% endif %}
+          {% if n.post_id %}<a class="activity-post" href="{{ url_for('post_redirect', post_id=n.post_id) }}">“{{ n.post_summary }}”</a>{% endif %}
+        </p>
+        <span class="activity-when">{{ time_ago(n.created_at) }}</span>
+      </div>
+      <span class="activity-icon">
+        {% if n.type == 'like' %}♥{% elif n.type == 'reblog' %}⟳{% elif n.type == 'follow' %}+{% else %}✉{% endif %}
+      </span>
+    </div>
+  {% else %}
+    <div class="empty-state">No activity yet.</div>
+  {% endfor %}
+</section>
+{% endblock %}

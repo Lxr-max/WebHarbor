@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Services near me - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Thumbtack services near me</h1>
+  <p class="muted">Browse every service category available in your area.</p>
+  {% for group, cats in groups.items() %}
+  <h2 style="margin-top:24px; font-size:22px;">{{ group }} Services</h2>
+  <p class="muted">{% for c in cats %}<a href="{{ c.url() }}" style="margin-right:14px;">{{ c.name }}</a>{% endfor %}</p>
+  {% endfor %}
+  <h2 style="margin-top:24px; font-size:22px;">Popular services near me</h2>
+  <div class="chip-row" style="margin-top:12px;">
+    {% for name, slug in popular %}
+    <a class="chip" href="/k/{{ slug }}/near-me">{{ name }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

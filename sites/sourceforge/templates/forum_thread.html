@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block viewport %}width=1100{% endblock %}
+{% block body_id %}forge{% endblock %}
+{% block body_classes %}body_class sandiego_chrome legacy_chrome{% endblock %}
+{% block forge_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forge.css') }}">{% endblock %}
+{% block title %}{{ p.name }} / Discussion / {{ thread.subject }}{% endblock %}
+{% block content %}
+<section id="page-body" class="neighborhood-Projects project-{{ p.shortname }} mountpoint-discussion">
+<div class="l-two-column-page">
+  <div class="l-gutter"></div>
+  <div class="l-content-column">
+    <div class="grid-20 pad">
+      <h2 class="dark title"><span>{{ thread.subject }}</span></h2>
+      <div class="editbox">
+        <div class="grid-5"><label>Forum:</label> <a href="/p/{{ p.shortname }}/discussion/{{ forum.shortname }}/">{{ forum.name }}</a></div>
+        <div class="grid-5"><label>Creator:</label> {% set _u = user_href(thread.creator) %}{% if _u %}<a href="/u/{{ _u }}/profile/" class="user-mention">{{ thread.creator }}</a>{% else %}{{ thread.creator }}{% endif %}</div>
+        <div class="grid-4"><label>Created:</label> <span>{{ thread.created }}</span></div>
+      </div>
+      <div>
+        <div class="comment-row">
+          <div id="comment">
+            <ul>
+              {% for post in thread.visible_posts() %}
+              <li>
+                <div>
+                  <div id="{{ loop.index }}" class="discussion-post">
+                    <div class="comment-row">
+                      <div class="grid-2 tcenter gravatar">
+                        <p class="gravatar"><img src="{{ url_for('static', filename='images/ui/default-avatar.png') }}" alt="{{ post.author }}" title="{{ post.author }}" class="emboss x48"></p>
+                      </div>
+                      <div class="grid-16 post-content bubble">
+                        <div class="header">
+                          {% set _u = user_href(post.author) %}{% if _u %}<a href="/u/{{ _u }}/profile/" class="user-mention">{{ post.author }}</a>{% else %}{{ post.author }}{% endif %} - <i style="color: #777"><span title="{{ post.date }}">{{ post.date }}</span></i>
+                        </div>
+                        <div class="display_post">
+                          <div><div class="markdown_content"><p>{{ post.text }}</p></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p><a href="/auth/">Log in</a> to post a comment.</p>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

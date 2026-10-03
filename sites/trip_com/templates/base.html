@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Trip.com Official Site‎ | Travel Deals and Promotions{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='icons/favicon.png') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="{{ url_for('index') }}" aria-label="Trip.com">
+      <svg width="112" height="28" viewBox="0 0 224 56" role="img" aria-label="Trip.com">
+        <text x="2" y="42" class="logo-word">Trip<tspan class="logo-dotcom">.com</tspan></text>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a class="nav-item nav-active" href="{{ url_for('hotels_home') }}">Hotels &amp; Homes</a>
+      <a class="nav-item" href="{{ url_for('flights_home') }}">Flights</a>
+      <a class="nav-item" href="{{ url_for('things_to_do_home') }}">Attractions &amp; Tours</a>
+      <a class="nav-item" href="{{ url_for('deals') }}">Deals</a>
+      <a class="nav-item" href="{{ url_for('guide_index') }}">Travel Guides</a>
+    </nav>
+    <form class="header-search" action="{{ url_for('site_search') }}" method="get">
+      <input type="text" name="q" placeholder="Destination, attraction, hotel, etc" aria-label="Search Trip.com">
+      <button type="submit" aria-label="Search">Search</button>
+    </form>
+    <div class="header-right">
+      {% if current_user.is_authenticated %}
+        <a class="header-link" href="{{ url_for('account') }}">{{ current_user.first_name }}'s account</a>
+        <a class="header-link" href="{{ url_for('logout') }}">Sign out</a>
+      {% else %}
+        <a class="header-link" href="{{ url_for('sign_in') }}">Sign in</a>
+        <a class="header-link" href="{{ url_for('register') }}">or register</a>
+      {% endif %}
+      <span class="header-currency">USD</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-stack">
+        {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div>
+        <h4>Company</h4>
+        <a href="{{ url_for('guide_index') }}">About Trip.com</a>
+        <a href="#">News</a>
+        <a href="#">Careers</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Statement</a>
+      </div>
+      <div>
+        <h4>Customer support</h4>
+        <a href="{{ url_for('site_search', q='help') }}">Help centre</a>
+        <a href="{{ url_for('site_search', q='guarantee') }}">Service guarantee</a>
+        <a href="#">We price match</a>
+        <a href="#">Hotel booking guarantee</a>
+      </div>
+      <div>
+        <h4>Discover</h4>
+        <a href="{{ url_for('things_to_do_home') }}">Attractions &amp; Tours</a>
+        <a href="{{ url_for('deals') }}">Deals &amp; promo codes</a>
+        <a href="{{ url_for('guide_index') }}">Trip.com Guides</a>
+        <a href="{{ url_for('hotels_home') }}">All hotels</a>
+      </div>
+      <div>
+        <h4>Popular cities</h4>
+        {% for c in (cities_footer or []) %}
+          <a href="{{ url_for('hotel_list', city=c.name) }}">Hotels in {{ c.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="footer-note">Copyright © 2026 Trip.com Travel Singapore Pte. Ltd. All rights reserved<br>
+    Site Operator: Trip.com Travel Singapore Pte. Ltd.</div>
+  </div>
+</footer>
+</body>
+</html>

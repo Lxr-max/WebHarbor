@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Official Internet Receipt{% endblock %}
+{% block content %}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a> › Receipt</nav>
+  <div class="receipt">
+    <h1>{{ title }}</h1>
+    <p class="ref">Receipt {{ receipt }}</p>
+    <p>Date: {{ "2026-09-29" }}</p>
+    <table class="data">
+      {% for line, amount in lines %}<tr><td>{{ line }}</td><td>{{ amount }}</td></tr>{% endfor %}
+      <tr><th>Total paid</th><th>{{ total }}</th></tr>
+    </table>
+    <p>{{ note }}</p>
+  </div>
+  <p><a class="btn" href="{{ url_for('account_dashboard') }}">Back to My Account</a></p>
+</div>
+{% endblock %}

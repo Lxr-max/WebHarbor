@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Newsroom | USPS{% endblock %}
+{% block content %}
+<h1>Newsroom — National Releases</h1>
+<table class="data">
+  <tr><th>Date</th><th>Title</th><th>Type</th></tr>
+  {% for a in articles %}
+  <tr>
+    <td>{{ a.date | longdate }}</td>
+    <td><a href="{{ url_for('news_article', slug=a.slug) }}">{{ a.clean_title or a.title }}</a></td>
+    <td>{{ (a.release_type or 'News') | title }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

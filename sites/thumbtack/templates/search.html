@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Search results for "{{ q }}" - Thumbtack{% endblock %}
+{% block content %}
+<div class="page">
+  <h1>Results for "{{ q }}"</h1>
+  <p class="muted">{{ total }} matches across services, pros, and cost guides.</p>
+
+  {% if cats %}
+  <h2 style="font-size:22px;">Services</h2>
+  {% for c in cats %}
+  <div class="pro-card" style="grid-template-columns:56px 1fr;">
+    <a href="{{ c.url() }}"><img class="av" style="width:56px;height:56px;" src="{{ url_for('static', filename='images/icons/' + c.icon) }}" alt="{{ c.name }}"></a>
+    <div><a class="pro-name" href="{{ c.url() }}">{{ c.name }}</a>
+      <div class="muted">{{ c.description }}</div></div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if pros %}
+  <h2 style="font-size:22px;">Pros</h2>
+  {% for p in pros %}
+  <div class="pro-card">
+    <a href="{{ p.url() }}"><img class="av" src="{{ url_for('static', filename='images/avatars/' + p.avatar) }}" alt="{{ p.name }}"></a>
+    <div><a class="pro-name" href="{{ p.url() }}">{{ p.name }}</a>
+      <div class="rating-line"><b>{{ p.rating_word }} {{ '%.1f'|format(p.rating) }}</b> <span class="muted">({{ p.review_count }})</span></div>
+      <div class="muted">{{ p.category.name }} · {{ p.city }}, {{ p.state }}</div></div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if guides %}
+  <h2 style="font-size:22px;">Cost guides</h2>
+  {% for g in guides %}
+  <div class="faq"><a href="{{ g.url() }}"><b>{{ g.title }}</b></a>
+    <span class="muted">${% if g.range_low %}{{ '{:,}'.format(g.range_low) }} - ${{ '{:,}'.format(g.range_high) }}{% else %}{{ '{:,}'.format(g.avg_price) }} national average{% endif %}</span></div>
+  {% endfor %}
+  {% endif %}
+
+  {% if not total %}
+  <p class="muted">Nothing matched. Try different words, or browse <a href="/near-me">all services</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

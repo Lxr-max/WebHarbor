@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% block title %}{{ away.full_name if away else game.away_team }} vs. {{ home.full_name if home else game.home_team }} - {{ game.date }} | FOX Sports{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="/{{ game.league }}">{{ LEAGUE_NAMES.get(game.league, game.league) }}</a> &gt;
+  <a href="{{ url_for('scoreboard', league=game.league) }}">Scores</a> &gt;
+  <span>{{ away.short if away else game.away_team }} vs. {{ home.short if home else game.home_team }}: {{ game.date }}</span>
+</div>
+
+<section class="box-head">
+  <div class="box-team away">
+    {% if away and away.logo and image(away.logo) %}<img class="box-logo" src="{{ image(away.logo) }}" alt="{{ away.full_name }}">{% endif %}
+    <a href="/{{ game.league }}/{{ game.away_team }}-team"><h2>{{ away.full_name if away else game.away_team }}</h2></a>
+    {% if game.away_record %}<span>{{ game.away_record }}</span>{% endif %}
+  </div>
+  <div class="box-score">
+    {% if game.status == 'final' %}
+      <span class="box-score-away">{{ game.away_score }}</span>
+      <span class="box-status">FINAL</span>
+      <span class="box-score-home">{{ game.home_score }}</span>
+    {% else %}
+      <span class="box-status">{{ game.date }}<br>{{ game.time or 'Scheduled' }}{% if game.broadcaster %} on {{ game.broadcaster }}{% endif %}</span>
+    {% endif %}
+  </div>
+  <div class="box-team home">
+    {% if home and home.logo and image(home.logo) %}<img class="box-logo" src="{{ image(home.logo) }}" alt="{{ home.full_name }}">{% endif %}
+    <a href="/{{ game.league }}/{{ game.home_team }}-team"><h2>{{ home.full_name if home else game.home_team }}</h2></a>
+    {% if game.home_record %}<span>{{ game.home_record }}</span>{% endif %}
+  </div>
+</section>
+
+{% if game.series_note %}<p class="series-note">{{ game.series_note }}</p>{% endif %}
+{% if game.recap %}<p class="game-recap">{{ game.recap }}</p>{% endif %}
+
+{% if game.detail('innings') %}
+<section class="section">
+  <div class="section-head"><h2>Box Score</h2></div>
+  <table class="data-table">
+    <thead><tr><th></th>{% for i in range(1, 10) %}<th>{{ i }}</th>{% endfor %}<th>R</th><th>H</th><th>E</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="cell-team">{{ game.away_abbr }}</td>
+        {% for i in game.detail('innings')[game.away_abbr] %}<td>{{ i }}</td>{% endfor %}
+        <td class="cell-strong">{{ game.away_score }}</td>
+        <td class="cell-strong">{{ game.away_hits }}</td>
+        <td class="cell-strong">{{ game.away_errors }}</td>
+      </tr>
+      <tr>
+        <td class="cell-team">{{ game.home_abbr }}</td>
+        {% for i in game.detail('innings')[game.home_abbr] %}<td>{{ i }}</td>{% endfor %}
+        <td class="cell-strong">{{ game.home_score }}</td>
+        <td class="cell-strong">{{ game.home_hits }}</td>
+        <td class="cell-strong">{{ game.home_errors }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if game.detail('odds_notes') %}
+<section class="section">
+  <div class="section-head"><h2>Odds</h2></div>
+  <ul class="fact-list">
+    {% set preview = game.detail('odds_notes').get('PREVIEW') %}
+    {% if preview %}<p class="dek">{{ preview }}</p>{% endif %}
+    {% for label, text in game.detail('odds_notes').items() if label != 'PREVIEW' %}
+      <li><span class="pill pill-{{ loop.index0 % 3 }}">{{ label }}</span> {{ text }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if game.spread %}
+<section class="section">
+  <div class="section-head"><h2>Matchup Odds</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Team</th><th>Spread</th><th>To Win</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td class="cell-team">{{ away.full_name if away else game.away_team }}</td><td>{{ game.spread }}</td><td>{{ game.away_ml or '-' }}</td><td>O {{ game.total or '-' }}</td></tr>
+      <tr><td class="cell-team">{{ home.full_name if home else game.home_team }}</td><td>{% if game.spread and game.spread.startswith('+') %}-{{ game.spread[1:] }}{% elif game.spread %}+{{ game.spread[1:] }}{% endif %}</td><td>{{ game.home_ml or '-' }}</td><td>U {{ game.total or '-' }}</td></tr>
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if game.detail('team_stats') %}
+<section class="section">
+  <div class="section-head"><h2>Team Stats</h2></div>
+  <table class="data-table">
+    <thead><tr><th>{{ game.away_abbr or 'AWAY' }}</th><th></th><th>{{ game.home_abbr or 'HOME' }}</th></tr></thead>
+    <tbody>
+      {% for row in game.detail('team_stats') %}
+      <tr><td class="cell-strong">{{ row.away }}</td><td class="cell-label">{{ row.label }}</td><td class="cell-strong">{{ row.home }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if leaders %}
+<section class="section">
+  <div class="section-head"><h2>Team Leaders</h2></div>
+  <table class="data-table">
+    <thead><tr><th>{{ game.away_abbr or 'AWAY' }}</th><th></th><th>{{ game.home_abbr or 'HOME' }}</th></tr></thead>
+    <tbody>
+      {% for label, away_row, home_row in leaders %}
+      <tr>
+        <td>{% if away_row %}{{ away_row.player }} <strong>{{ away_row.value }}</strong>{% endif %}</td>
+        <td class="cell-label">{{ label }}</td>
+        <td>{% if home_row %}{{ home_row.player }} <strong>{{ home_row.value }}</strong>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if game.detail('key_players') %}
+<section class="section">
+  <div class="section-head"><h2>Key Players</h2></div>
+  <ul class="news-list">
+    {% for kp in game.detail('key_players') %}
+      <li>
+        <h4>{{ kp.player }}</h4>
+        <span class="muted">{{ kp.meta }}</span>
+        <p>{{ kp.line }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if game.detail('starting_qbs') %}
+<section class="section">
+  <div class="section-head"><h2>Starting Quarterbacks</h2></div>
+  <table class="data-table">
+    <thead><tr><th>QB</th><th>Passing Yds</th><th>Team</th></tr></thead>
+    <tbody>
+      {% for qb in game.detail('starting_qbs') %}
+      <tr><td class="cell-team">{{ qb.name }} #{{ qb.number }}</td><td>{{ qb.passing_yards }}</td><td>{{ qb.team_abbr }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if game.detail('probable_pitchers') %}
+<section class="section">
+  <div class="section-head"><h2>Probable Starting Pitchers</h2></div>
+  <table class="data-table">
+    <thead><tr><th>Pitcher</th><th>Throws</th><th>Record</th><th>ERA</th></tr></thead>
+    <tbody>
+      <tr><td class="cell-team">{{ game.detail('probable_pitchers').away.name }} #{{ game.detail('probable_pitchers').away.number }}</td><td>{{ game.detail('probable_pitchers').away.throws }}</td><td>{{ game.detail('probable_pitchers').away.record }}</td><td>{{ game.detail('probable_pitchers').away.era }}</td></tr>
+      <tr><td class="cell-team">{{ game.detail('probable_pitchers').home.name }} #{{ game.detail('probable_pitchers').home.number }}</td><td>{{ game.detail('probable_pitchers').home.throws }}</td><td>{{ game.detail('probable_pitchers').home.record }}</td><td>{{ game.detail('probable_pitchers').home.era }}</td></tr>
+    </tbody>
+  </table>
+</section>
+{% endif %}
+
+{% if game.detail('facts') %}
+<section class="section">
+  <div class="section-head"><h2>FOX FACTS</h2></div>
+  <ul class="fact-list">
+    {% for fact in game.detail('facts') %}
+      <li><span class="pill pill-{{ loop.index0 % 3 }}">{{ fact.kind }}</span> {{ fact.text }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if game.detail('key_plays') %}
+<section class="section">
+  <div class="section-head"><h2>Key Plays</h2></div>
+  <ul class="fact-list">
+    {% for play in game.detail('key_plays') %}
+      <li><span class="pill">{{ play.kind }}</span> <strong>{{ play.away }} &ndash; {{ play.home }}</strong> {{ play.text }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if game.detail('player_news') %}
+<section class="section">
+  <div class="section-head"><h2>Player News</h2></div>
+  <ul class="news-list">
+    {% for item in game.detail('player_news') %}
+      <li>
+        <h4>{{ item.player }}</h4>
+        <p>{{ item.body }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if game.detail('recent_games') %}
+<section class="section">
+  <div class="section-head"><h2>Recent Games</h2></div>
+  <div class="two-col">
+    {% for side in [game.detail('recent_games')[0].side, game.detail('recent_games')[-1].side if game.detail('recent_games')[-1].side != game.detail('recent_games')[0].side else none] %}
+      {% if side %}
+      <table class="data-table">
+        <thead><tr><th>{{ side }}</th><th>Date</th><th>Opp</th><th>Result</th><th>ATS</th><th>O/U</th></tr></thead>
+        <tbody>
+          {% for row in game.detail('recent_games') if row.side == side %}
+          <tr><td class="cell-team">{{ row.date }}</td><td>{{ row.opponent }}</td><td>{{ row.result }}</td><td>{{ row.ats }}</td><td>{{ row.ou }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if game.venue %}
+<section class="section">
+  <div class="section-head"><h2>Event Info</h2></div>
+  <p class="event-info">
+    {{ game.venue }} &middot; {{ game.venue_city }} &middot; {{ game.date }}
+    {% if game.attendance %} &middot; Attendance {{ game.attendance }}{% endif %}
+  </p>
+</section>
+{% endif %}
+{% endblock %}

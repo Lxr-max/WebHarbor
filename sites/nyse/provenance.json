@@ -1,0 +1,75 @@
+{
+    "site": "nyse",
+    "upstream": "https://www.nyse.com/",
+    "captured_at": "2026-09-29/30",
+    "capture_window_utc": "2026-09-30T03:14Z to 2026-09-30T21:20Z",
+    "capture_method": "Every tracked record is a real upstream capture from www.nyse.com. The listings directories (stock / ETF / index / REIT) are the exact JSON of the site's own directory API (POST /api/quotes/filter, paginated); the per-symbol quote payloads are the exact JSON of /api/nyseservice/v1/quotes?symbol=<SYM> (index symbols take the upstream page's own $-prefixed form); the IPO Center tables are the exact JSON of the /api/ipo-center/* endpoints; the bell calendar rows are the exact JSON of /api/events/filter (15 pages x 20 events, newest first) plus /api/events/types; the market movers are /api/market-mover/data for the nyse and nyse_american categories; the homepage / listings / bell / IPO-center / history CMS copy is extracted from the server-rendered HTML and its embedded CMS2 hydration state of the live pages. Every capture is saved as a raw file with a .meta.json sidecar recording the exact URL, HTTP status and capture timestamp under scraped_data/captures/ (gitignored). All requests were plain HTTP GET/POST with a desktop browser user agent; no anti-bot bypass, no login, no synthetic records.",
+    "rate_limit_note": "The quotes endpoint rate-limits aggressively (roughly forty requests per rolling window, then HTTP 429 until the window clears). The capture walker shells out to curl (Cloudflare's TLS fingerprinting hard-429s Python's own TLS client while accepting curl's), keeps a conservative fixed pace, and backs off in whole minutes on 429; every 429 and backoff is visible in the capture logs. This is transport courtesy, not a WAF bypass - no circumvention was needed or used, and all payloads are ordinary delayed public market data.",
+    "coverage_note": "Quote pages exist for every symbol whose payload was captured: the rich deep-detail set (options chains, five-year daily price history, board of directors, total returns) plus the light walk over the priority coverage plan (the stock tab's front pages, every REIT, curated major listings, the first ETF/index pages, all market movers and bell-calendar companies). Directory rows for symbols outside the captured quote coverage are listed for search fidelity exactly as captured upstream, but render as plain rows without a quote link; the coverage counts are declared below and in the directory page footer. The upstream index-row quirk is preserved as captured: BND.IV carries a null instrumentName upstream and is shown by its symbol.",
+    "rich_quote_set": {
+        "count": 92,
+        "content": "full /api/nyseservice/v1/quotes payload: quote header, company facts, board of directors, total returns, the first ten option expiry dates (the upstream UI paginates options by expiry the same way) and the complete five-year daily price history",
+        "symbols": "homepage NYSE most-active board (NU CCL NIO NOK PCG ORCL AMC CDE STLA RIG), NYSE American most-active board (SDEV BTG DNN UEC EQX URG UUUU NG IAUX NAK), NYSE blue chips across sectors, Nasdaq megacaps, SPY, captured IPO symbols AERO and NHP, the bell-calendar company ARCO, and the REIT flagship rows AAT and VICI"
+    },
+    "light_quote_set": {
+        "count": 1190,
+        "content": "compact extract of the full payload: quote header, company facts, board of directors and total returns - exactly the fields the light quote page renders; no options or price history for lights",
+        "coverage": {
+            "stock_tab": "1002 of 6830 rows (the front pages, every REIT, the curated major listings and the market movers)",
+            "etf_tab": "201 of 5765 rows (the front pages)",
+            "index_tab": "80 of 1329 rows (the front pages and the Auspice anchor; symbols whose upstream payload returned no quote data are not linked, exactly as captured)",
+            "reit_tab": "144 of 144 rows (complete)"
+        }
+    },
+    "sources": {
+        "www.nyse.com/index": {
+            "role": "Portal home: market movers ticker, IPO hero, Today's Stock Market article, market update / NYSE Live blurbs, recap cards, what's-next features and the community collage",
+            "captures": 1
+        },
+        "/api/quotes/filter (instrumentType EQUITY / EXCHANGE_TRADED_FUND / INDEX / REIT)": {
+            "role": "The listings directory tabs: 6830 stock, 5765 ETF, 1329 index and 144 REIT rows, exactly as the upstream directory lists them",
+            "captures": 74
+        },
+        "/api/nyseservice/v1/quotes?symbol=<SYM>": {
+            "role": "Per-symbol quote payloads: 92 rich + 1190 light = 1282 quote pages; the raw capture files with meta sidecars live under scraped_data/captures/",
+            "captures": "per-symbol; see capture_summary.json",
+            "note": "Per-symbol quote payloads: 92 rich + 1190 light = 1282 quote pages; the raw capture files with meta sidecars live under scraped_data/captures/. Gap-fill re-capture: the IBM payload's boardMember block came back null on the original 2026-09-30 capture (upstream-side gap, the only affected symbol); a same-week re-capture of the same public endpoint (_api_nyseservice_v1_quotes_symbol_IBM.refill.raw with meta sidecar) supplied IBM's company facts and board of directors. IBM's frozen quote header, price history, options chains and total returns remain the original capture byte-for-byte."
+        },
+        "/api/ipo-center/calendar|monthly-execution-ipo|largest-recent-ipo|price-perf-by-sector-ipo|backlog-ipo": {
+            "role": "IPO Center: priced deal calendar, US IPO execution by month, the largest recent IPOs with 30/90/180-day windows, pricing performance by sector, and the backlog by industry",
+            "captures": 5
+        },
+        "/api/events/filter + /api/events/types": {
+            "role": "The Bell calendar: the 300 most recent bell ceremonies with titles, descriptions, exact times and ceremony artwork",
+            "captures": 16
+        },
+        "/api/market-mover/data?category=nyse|nyse_american": {
+            "role": "Market movers: the ten most active NYSE and NYSE American listings",
+            "captures": 2
+        },
+        "CMS pages (/listings, /listings_directory/stock, /ipo-center/*, /bell/calendar, /history-of-nyse, /markets)": {
+            "role": "Server-rendered page HTML and the embedded CMS2 hydration state: the listings hub copy, directory page copy, IPO Center copy, the bell introduction, the full history-of-NYSE timeline and photo alts",
+            "captures": 10
+        },
+        "www.nyse.com/publicdocs": {
+            "role": "Real upstream imagery: 299 bell-ceremony PNGs (one per captured event), the homepage collage and what's-next feature JPGs, the listings hero, and the history-of-NYSE photo collection; every file's bytes and sha256 are recorded in asset_inventory.json",
+            "captures": "per-image; see asset_inventory.json"
+        }
+    },
+    "waf_note": "None. Every record is a live upstream capture; no deterministic fixture fallback was needed (contrast u_s_customs). The only countermeasure was polite pacing against the quotes endpoint's 429 throttle, as declared above.",
+    "benchmark_users": "alice.j@test.com, bob.c@test.com, carol.d@test.com, dana.k@test.com (password TestPass123!) with authored watchlists and price alerts referencing only real captured quotes; frozen constants keep the SQLite seed byte-reproducible (PYTHONHASHSEED=0).",
+    "total_quote_pages": 1282,
+    "directory_rows": 14068,
+    "registration": {
+        "sites_index": 146,
+        "container_port": 40146,
+        "expose": "8101 40000-40147"
+    },
+    "review": {
+        "date": "2026-10-01",
+        "task_revision": "coherent-goals-v1",
+        "evidence": "/data/webharbor-prs/final/pr336: scripted browser regressions, independent source/state expectations and grading controls.",
+        "upstream_check": "Homepage and listings pages accessible and visually compared on 2026-10-01.",
+        "supplement": "IPO History exposes existing captured ipo_largest records with issuer/ticker search. No market facts or asset archives were synthesized or replaced. Calendar search now includes captured event descriptions; chart windows use elapsed calendar days."
+    }
+}

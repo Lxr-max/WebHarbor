@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Reblog — Tumblr{% endblock %}
+{% block content %}
+<div class="narrow-wrap">
+  <div class="page-head">
+    <h1>Reblog to {{ user.username }}</h1>
+    <p class="page-sub">Reblogging <a href="{{ url_for('permalink', name=post.blog.name, post_id=post.id) }}">this post</a> from {{ post.blog.name }}.</p>
+  </div>
+
+  <div class="reblog-preview">
+    {% with preview_only=True %}
+      {% include '_post_card.html' %}
+    {% endwith %}
+  </div>
+
+  <form class="composer" method="post" action="{{ url_for('reblog', post_id=post.id) }}">
+    <textarea name="comment" rows="4" placeholder="Add a comment (optional)"></textarea>
+    <button class="btn btn-primary wide" type="submit">Reblog</button>
+    <a class="btn btn-ghost wide" href="{{ url_for('permalink', name=post.blog.name, post_id=post.id) }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

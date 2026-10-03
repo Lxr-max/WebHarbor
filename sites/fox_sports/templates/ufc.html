@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}UFC Events &amp; Results | FOX Sports{% endblock %}
+{% block content %}
+<div class="page-head"><h1>UFC Events &amp; Results</h1></div>
+<section class="section">
+  <table class="data-table">
+    <thead><tr><th>When</th><th>Event</th><th>Venue</th><th>City</th><th>Main Result</th></tr></thead>
+    <tbody>
+      {% for e in events %}
+      <tr>
+        <td>{{ e.when }}</td>
+        <td class="cell-team">{{ e.name }}</td>
+        <td>{{ e.venue }}</td>
+        <td>{{ e.city }}</td>
+        <td>
+          {{ e.fighter1 }} <span class="pill pill-final">{{ e.result1 }}</span>
+          vs
+          {{ e.fighter2 }} <span class="pill pill-final">{{ e.result2 }}</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

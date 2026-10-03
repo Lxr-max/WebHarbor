@@ -1,0 +1,975 @@
+{
+  "Microsoft Azure--0": {
+    "task": "I'm choosing how to host a containerized application on Azure. Compare App Service, Container Apps, Virtual Machines and Kubernetes Service using their product descriptions, and explain which option explicitly manages Kubernetes. Save that product to Bob's favorites so he can revisit the choice (bob.alvarez@test.com, password TestPass123!), and confirm which product was saved.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/products/app-service/",
+      "/products/container-apps/",
+      "/products/virtual-machines/",
+      "/products/kubernetes-service/",
+      "/products/kubernetes-service/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "app service[^;\\n]{0,100}?(paas|platform.as.a.service)"
+      ],
+      [
+        "fact 2",
+        "container apps[^;\\n]{0,100}?serverless container"
+      ],
+      [
+        "fact 3",
+        "virtual machines[^;\\n]{0,100}?(linux|windows)"
+      ],
+      [
+        "fact 4",
+        "(aks|kubernetes service)[^;\\n]{0,100}?managed kubernetes"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "product_slug": "kubernetes-service",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--1": {
+    "task": "Help Carol choose an Azure database for an application that needs a NoSQL vector database rather than a SQL database. Compare Azure Cosmos DB and Azure SQL using their product descriptions, check the Cosmos DB pricing page for its provisioned-throughput billing model, and save the matching product to Carol's favorites (carol.ito@test.com, password TestPass123!). Explain the choice and the billing unit you found.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/products/azure-sql/",
+      "/products/cosmos-db/",
+      "/pricing/details/cosmos-db/",
+      "/products/cosmos-db/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "cosmos db[^;\\n]{0,100}?nosql vector database"
+      ],
+      [
+        "fact 2",
+        "azure sql[^;\\n]{0,100}?(sql|secure.*intelligent)"
+      ],
+      [
+        "fact 3",
+        "100\\s*ru/s\\s*(?:per )?hour|100\\s*ru/s\\s*/\\s*h"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "product_slug": "cosmos-db",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--2": {
+    "task": "Prepare a monthly budget for three always-on Linux D4s v5 virtual machines in West US 2. Use Alice's Azure account (alice.chen@test.com, password TestPass123!) to save the USD estimate as Production web tier, and tell me the monthly amount shown in her saved estimates.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "production web tier[^;\\n]{0,100}?[\\s\\S]{0,130}\\$\\s*420\\.48(?!\\d)"
+      ]
+    ],
+    "state": {
+      "estimates": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "name": "Production web tier",
+            "service": "virtual-machines",
+            "config": {
+              "json_value": {
+                "hours": "730",
+                "quantity": "3",
+                "region": "us-west-2",
+                "size": "linux-d4sv5-standard",
+                "name": "Production web tier"
+              }
+            },
+            "monthly_usd": 420.48,
+            "currency": "usd",
+            "monthly_display": "$420.48",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--3": {
+    "task": "I need to budget for an always-on AKS cluster in East US with an SLA control plane and three Linux D4s v5 nodes. Compare its monthly cost with running those nodes as plain virtual machines, explaining the control-plane and node costs and the difference. Save the AKS estimate in USD as AKS baseline in Alice's account (alice.chen@test.com, password TestPass123!).",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "control plane[^;\\n]{0,100}?\\$\\s*73\\.00(?!\\d)"
+      ],
+      [
+        "fact 2",
+        "node pool[^;\\n]{0,100}?\\$\\s*420\\.48(?!\\d)"
+      ],
+      [
+        "fact 3",
+        "aks total[^;\\n]{0,100}?\\$\\s*493\\.48(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "(plain )?vms[^;\\n]{0,100}?\\$\\s*420\\.48(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "difference.{0,50}(sla|control.plane)"
+      ]
+    ],
+    "state": {
+      "estimates": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "name": "AKS baseline",
+            "service": "kubernetes-service",
+            "config": {
+              "json_value": {
+                "hours": "730",
+                "nodes": "3",
+                "region": "us-east",
+                "size": "linux-d4sv5-standard",
+                "tier": "SLA",
+                "name": "AKS baseline"
+              }
+            },
+            "monthly_usd": 493.48,
+            "currency": "usd",
+            "monthly_display": "$493.48",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--4": {
+    "task": "Choose the cheaper region, East US or West Europe, for 60,000 GB of hot LRS block blob storage with 100 write batches and 1,000 read batches per month. Show the capacity and total monthly costs, including the East US total in EUR. For our growth budget, also estimate 120,000 GB in East US with the same operations and explain how the graduated capacity tiers apply.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "east us capacity[^;\\n]{0,100}?\\$\\s*1251\\.20(?!\\d)"
+      ],
+      [
+        "fact 2",
+        "east us total[^;\\n]{0,100}?\\$\\s*1262\\.70(?!\\d)"
+      ],
+      [
+        "fact 3",
+        "€\\s*1094\\.09(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "west europe capacity[^;\\n]{0,100}?\\$\\s*1189\\.44(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "west europe total[^;\\n]{0,100}?\\$\\s*1202\\.44(?!\\d)"
+      ],
+      [
+        "fact 6",
+        "west europe.{0,30}cheaper"
+      ],
+      [
+        "fact 7",
+        "120000 gb[^;\\n]{0,100}?.{0,100}\\$\\s*2462\\.70(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "51200 gb.{0,30}tier 1"
+      ],
+      [
+        "fact 9",
+        "68800 gb.{0,30}tier 2"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--5": {
+    "task": "Price an always-on Cosmos DB deployment with 700 RU/s of provisioned writes and 250 GB of storage. Compare single-region costs in Sweden Central and Japan East, separating throughput and storage and identifying the cheaper region and saving. For Sweden Central, show the additional cost of multi-region writes and then a D4s dedicated gateway, with the fully upgraded total in USD and EUR.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "sweden central single.region throughput[^;\\n]{0,100}?\\$\\s*40\\.88(?!\\d)"
+      ],
+      [
+        "fact 2",
+        "storage[^;\\n]{0,100}?\\$\\s*62\\.50(?!\\d)"
+      ],
+      [
+        "fact 3",
+        "sweden central single.region total[^;\\n]{0,100}?\\$\\s*103\\.38(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "japan east throughput[^;\\n]{0,100}?\\$\\s*45\\.99(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "japan east throughput[^;\\n]{0,100}?.{0,40}storage.{0,20}\\$\\s*70\\.62(?!\\d)"
+      ],
+      [
+        "fact 6",
+        "japan east total[^;\\n]{0,100}?\\$\\s*116\\.62(?!\\d)"
+      ],
+      [
+        "fact 7",
+        "sweden central is cheaper[^;\\n]{0,100}?\\$\\s*13\\.24(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "multi.region writes[^;\\n]{0,100}?\\$\\s*144\\.26(?!\\d)"
+      ],
+      [
+        "fact 9",
+        "increase[^;\\n]{0,100}?\\$\\s*40\\.88(?!\\d)"
+      ],
+      [
+        "fact 10",
+        "gateway[^;\\n]{0,100}?\\$\\s*312\\.44(?!\\d)"
+      ],
+      [
+        "fact 11",
+        "fully upgraded total[^;\\n]{0,100}?\\$\\s*456\\.70(?!\\d)"
+      ],
+      [
+        "fact 12",
+        "€\\s*395\\.72(?!\\d)"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--6": {
+    "task": "Choose the cheapest Azure region among East US, West Europe, Brazil South and East Asia for two always-on Linux D4s v5 virtual machines. Compare the regional hourly rates, report the gap between the cheapest and most expensive, and calculate the chosen deployment's monthly cost in USD and EUR.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "products-by-region"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "east us[^;\\n]{0,100}?\\$\\s*0\\.1920?(?!\\d)"
+      ],
+      [
+        "fact 2",
+        "west europe[^;\\n]{0,100}?\\$\\s*0\\.2300?(?!\\d)"
+      ],
+      [
+        "fact 3",
+        "brazil south[^;\\n]{0,100}?\\$\\s*0\\.3060?(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "east asia[^;\\n]{0,100}?\\$\\s*0\\.2640?(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "east us.{0,20}cheapest"
+      ],
+      [
+        "fact 6",
+        "brazil south.{0,20}most expensive"
+      ],
+      [
+        "fact 7",
+        "\\$\\s*0\\.114(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "\\$\\s*280\\.32(?!\\d)"
+      ],
+      [
+        "fact 9",
+        "€\\s*242\\.89(?!\\d)"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--7": {
+    "task": "We're assessing Sweden Central for a small application that may later move to AKS. Check Sweden's regions and whether Cosmos DB is available in Sweden Central; compare its priced AKS node-size choice with East US and West Europe. For the initial single always-on Linux B2s VM, compare Sweden Central's monthly cost in USD and EUR with West Europe's USD cost, and summarize the cost versus node-choice tradeoff.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "products-by-region",
+      "/geographies/sweden/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "sweden.{0,20}2 regions"
+      ],
+      [
+        "fact 2",
+        "cosmos db[^;\\n]{0,100}?available in sweden central"
+      ],
+      [
+        "fact 3",
+        "sweden central\\s*18"
+      ],
+      [
+        "fact 4",
+        "east us\\s*22"
+      ],
+      [
+        "fact 5",
+        "west europe\\s*22"
+      ],
+      [
+        "fact 6",
+        "\\$\\s*31\\.54(?!\\d)"
+      ],
+      [
+        "fact 7",
+        "€\\s*27\\.32(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "west europe at[^;\\n]{0,100}?\\$\\s*35\\.04(?!\\d)"
+      ],
+      [
+        "fact 9",
+        "fewer.{0,20}(sizes|choices)"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--8": {
+    "task": "We want to understand the paid cost of the scale offered by Azure Cosmos DB's 12-month free allowance. Check that allowance, then price 400 RU/s of always-on single-region writes with 25 GB in East US, separating throughput and storage. Show how multi-region writes and then a D4s dedicated gateway change the monthly cost, including the final USD and EUR totals.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/pricing/free-services/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "allowance.{0,30}400 ru/s.{0,20}25 gb"
+      ],
+      [
+        "fact 2",
+        "single.region throughput[^;\\n]{0,100}?\\$\\s*23\\.36(?!\\d)"
+      ],
+      [
+        "fact 3",
+        "storage[^;\\n]{0,100}?\\$\\s*6\\.25(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "single.region total[^;\\n]{0,100}?\\$\\s*29\\.61(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "multi.region[^;\\n]{0,100}?\\$\\s*52\\.97(?!\\d)"
+      ],
+      [
+        "fact 6",
+        "increase[^;\\n]{0,100}?\\$\\s*23\\.36(?!\\d)"
+      ],
+      [
+        "fact 7",
+        "gateway[^;\\n]{0,100}?\\$\\s*277\\.40(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "final total[^;\\n]{0,100}?\\$\\s*330\\.37(?!\\d)"
+      ],
+      [
+        "fact 9",
+        "€\\s*286\\.26(?!\\d)"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--9": {
+    "task": "Dana needs evidence for considering AKS in healthcare. Find the Healthcare customer stories using Azure Kubernetes Service, identify both customers, and report the first story's quoted person and role. Check the AKS pricing page's cluster node limit to put its scale in context, then save AKS to Dana's favorites (dana.osei@test.com, password TestPass123!) for the proposal.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/customer-stories/",
+      "/pricing/details/kubernetes-service/",
+      "/products/kubernetes-service/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "wellstar"
+      ],
+      [
+        "fact 2",
+        "beekeeperai"
+      ],
+      [
+        "fact 3",
+        "susan thurman"
+      ],
+      [
+        "fact 4",
+        "vp nursing practice.{0,30}clinical integration"
+      ],
+      [
+        "fact 5",
+        "node limit[^;\\n]{0,100}?5000"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "product_slug": "kubernetes-service",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--10": {
+    "task": "I'm new to Azure's database options. Use the SQL database dictionary article and the Azure SQL and Cosmos DB product pages to explain the difference between the SQL offering and the NoSQL vector database offering. Include the SQL article's first section heading so I can find the explanation again. Save Azure SQL to Alice's favorites (alice.chen@test.com, password TestPass123!) for further evaluation.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "what-is-sql-database",
+      "/products/azure-sql/",
+      "/products/cosmos-db/",
+      "/products/azure-sql/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "sql databases make data reliable.{0,20}secure.{0,25}easy to access"
+      ],
+      [
+        "fact 2",
+        "azure sql[^;\\n]{0,100}?(sql database|sql workloads)"
+      ],
+      [
+        "fact 3",
+        "cosmos db[^;\\n]{0,100}?nosql vector database"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_slug": "azure-sql",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--11": {
+    "task": "Prepare a deployment budget for a business-critical workload using four always-on Linux E8s v5 VMs. Identify the Azure support plan intended for business-critical functions and describe its response commitment. Compare VM costs in West US 2 and East US, give the West US 2 total in USD and EUR, and recommend based on price, noting any tie; keep the VM estimate separate from support charges.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/support/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "professional direct"
+      ],
+      [
+        "fact 2",
+        "advisory services"
+      ],
+      [
+        "fact 3",
+        "escalation management"
+      ],
+      [
+        "fact 4",
+        "\\$\\s*1471\\.68(?!\\d).{0,25}west us 2"
+      ],
+      [
+        "fact 5",
+        "€\\s*1275\\.17(?!\\d)"
+      ],
+      [
+        "fact 6",
+        "east us[^;\\n]{0,100}?\\$\\s*1471\\.68(?!\\d)"
+      ],
+      [
+        "fact 7",
+        "(tie|equal|same)"
+      ],
+      [
+        "fact 8",
+        "exclude support|support.{0,20}(separate|excluded)"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--12": {
+    "task": "Set up Kai Rivera's Azure account (kai.rivera@test.com, choose a password of at least 8 characters) for an edge-cache deployment. Save a USD estimate named Edge cache pair for two always-on Linux B2s VMs in East US. Tell me the configuration and monthly amount shown in the saved estimate.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/account/$",
+      "/account/signup"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "edge cache pair"
+      ],
+      [
+        "fact 2",
+        "2 linux b2s"
+      ],
+      [
+        "fact 3",
+        "east us"
+      ],
+      [
+        "fact 4",
+        "\\$\\s*60\\.74(?!\\d)"
+      ]
+    ],
+    "state": {
+      "estimates": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "name": "Edge cache pair",
+            "service": "virtual-machines",
+            "config": {
+              "json_value": {
+                "hours": "730",
+                "quantity": "2",
+                "region": "us-east",
+                "size": "linux-b2s-standard",
+                "name": "Edge cache pair"
+              }
+            },
+            "monthly_usd": 60.74,
+            "currency": "usd",
+            "monthly_display": "$60.74",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "name": "Kai Rivera",
+            "email": "kai.rivera@test.com",
+            "pw_hash": {
+              "regex": "\\$2[aby]\\$\\d{2}\\$[./A-Za-z0-9]{53}"
+            },
+            "role": "Member"
+          }
+        ]
+      }
+    },
+    "signup_password_column": "pw_hash"
+  },
+  "Microsoft Azure--13": {
+    "task": "I'm budgeting a three-node Linux D4s v5 compute pilot in East US. Check the AKS pricing page's node limit and the tiers it compares, and the Linux VM pricing page's rule about deallocated VMs. Save an always-on plain-VM estimate in USD as Compute pilot in Bob's account (bob.alvarez@test.com, password TestPass123!), and report its monthly cost alongside those operational constraints.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/details/kubernetes-service/",
+      "/pricing/details/virtual-machines-linux/",
+      "/pricing/calculator/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "automatic and standard"
+      ],
+      [
+        "fact 2",
+        "node limit[^;\\n]{0,100}?5000"
+      ],
+      [
+        "fact 3",
+        "deallocated vms.{0,10}(are )?not billed"
+      ],
+      [
+        "fact 4",
+        "compute pilot[^;\\n]{0,100}?.{0,100}\\$\\s*420\\.48(?!\\d)"
+      ]
+    ],
+    "state": {
+      "estimates": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "name": "Compute pilot",
+            "service": "virtual-machines",
+            "config": {
+              "json_value": {
+                "hours": "730",
+                "quantity": "3",
+                "region": "us-east",
+                "size": "linux-d4sv5-standard",
+                "name": "Compute pilot"
+              }
+            },
+            "monthly_usd": 420.48,
+            "currency": "usd",
+            "monthly_display": "$420.48",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--14": {
+    "task": "Help Carol evaluate managed Kubernetes using Azure's explanation and a customer example. Find the Kubernetes dictionary article and report its first section heading, then find the customer stories using AKS and identify the first customer's quoted person and company. Save the AKS product to Carol's favorites (carol.ito@test.com, password TestPass123!) and summarize how the product is described.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "what-is-kubernetes",
+      "/customer-stories/",
+      "/products/kubernetes-service/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "kubernetes definition"
+      ],
+      [
+        "fact 2",
+        "microsoft 365"
+      ],
+      [
+        "fact 3",
+        "suma saganegowda"
+      ],
+      [
+        "fact 4",
+        "managed kubernetes"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 3,
+            "product_slug": "kubernetes-service",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--15": {
+    "task": "Is AKS's free allowance enough to make our cluster free? Check the free-services listing, then price an always-on East US cluster with the SLA control plane and three Linux D4s v5 nodes. Compare its control-plane, node and total costs with the same three plain VMs, in USD and EUR, and explain what the extra cluster cost covers.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/pricing/calculator/",
+      "/pricing/free-services/"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "cluster management"
+      ],
+      [
+        "fact 2",
+        "node resources.{0,30}chargeable"
+      ],
+      [
+        "fact 3",
+        "control plane[^;\\n]{0,100}?\\$\\s*73\\.00(?!\\d)"
+      ],
+      [
+        "fact 4",
+        "nodes[^;\\n]{0,100}?\\$\\s*420\\.48(?!\\d)"
+      ],
+      [
+        "fact 5",
+        "aks total[^;\\n]{0,100}?\\$\\s*493\\.48(?!\\d)"
+      ],
+      [
+        "fact 6",
+        "€\\s*427\\.59(?!\\d)"
+      ],
+      [
+        "fact 7",
+        "plain vms[^;\\n]{0,100}?\\$\\s*420\\.48(?!\\d)"
+      ],
+      [
+        "fact 8",
+        "€\\s*364\\.33(?!\\d)"
+      ],
+      [
+        "fact 9",
+        "extra.{0,35}sla.{0,20}control plane"
+      ]
+    ],
+    "state": {}
+  },
+  "Microsoft Azure--16": {
+    "task": "I'm evaluating the Azure announcement about GPT-6 Astra, Sol and Luna. Find the announcement and report its title, publication date and read time, then check how Microsoft Foundry is described and which support plan Azure recommends for trial and testing, including its response commitment. Save Foundry to Dana's favorites (dana.osei@test.com, password TestPass123!) as the product to investigate for this evaluation.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "gpt-6-astra",
+      "/support/",
+      "/products/ai-foundry/",
+      "/products/ai-foundry/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "gpt-6 astra.{0,15}sol.{0,15}luna.{0,10}for production agents in microsoft foundry"
+      ],
+      [
+        "fact 2",
+        "september 22.{0,3}2026|2026-09-22"
+      ],
+      [
+        "fact 3",
+        "5.minute read|5 min read"
+      ],
+      [
+        "fact 4",
+        "(microsoft )?foundry[^;\\n]{0,100}?ai app and agent factory"
+      ],
+      [
+        "fact 5",
+        "developer.{0,70}1 business day"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 4,
+            "product_slug": "ai-foundry",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--17": {
+    "task": "Bob is preparing an AKS proposal for a financial-services team. Find the Financial Services customer story using AKS and identify the customer, quoted person and role. Compare that context with the AKS product description and its pricing page's cluster node limit, then save AKS to Bob's favorites (bob.alvarez@test.com, password TestPass123!) for the proposal.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/customer-stories/",
+      "/pricing/details/kubernetes-service/",
+      "/products/kubernetes-service/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "zurich north america"
+      ],
+      [
+        "fact 2",
+        "paul ruskusky"
+      ],
+      [
+        "fact 3",
+        "head of infrastructure and operations"
+      ],
+      [
+        "fact 4",
+        "managed kubernetes"
+      ],
+      [
+        "fact 5",
+        "node limit[^;\\n]{0,100}?5000"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 2,
+            "product_slug": "kubernetes-service",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--18": {
+    "task": "I'm exploring a retrieval-augmented generation application. Find Azure's RAG dictionary article and report its title and first section heading, then use the Microsoft Foundry product page to explain what Foundry offers for AI apps and agents. Save Foundry to Alice's favorites (alice.chen@test.com, password TestPass123!) so she can continue evaluating the platform.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "what-is-retrieval",
+      "/products/ai-foundry/",
+      "/products/ai-foundry/",
+      "/account/$"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "what is retrieval.augmented generation"
+      ],
+      [
+        "fact 2",
+        "retrieval.augmented generation meaning"
+      ],
+      [
+        "fact 3",
+        "(microsoft )?foundry[^;\\n]{0,100}?ai app and agent factory"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 1,
+            "product_slug": "ai-foundry",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Microsoft Azure--19": {
+    "task": "Create an Azure account for Mira Patel (mira.patel@test.com, choose a password of at least 8 characters) to evaluate serverless containers. Find Azure Container Apps in the Containers catalog and save it to her favorites. Sign back in to confirm it is retained, and report the saved product and its description.",
+    "initial_digest": "36a0e2eb45cef8b358fb5d5c1e3e3f9e1220e678b9a481ed731aed57160d0338",
+    "paths": [
+      "/products/container-apps/",
+      "/products/container-apps/",
+      "/account/$",
+      "/account/signup"
+    ],
+    "claims": [
+      [
+        "fact 1",
+        "azure container apps"
+      ],
+      [
+        "fact 2",
+        "fully managed serverless container"
+      ]
+    ],
+    "state": {
+      "favorites": {
+        "added": [
+          {
+            "id": {
+              "regex": "[1-9][0-9]*"
+            },
+            "user_id": 5,
+            "product_slug": "container-apps",
+            "created_ts": {
+              "regex": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"
+            }
+          }
+        ]
+      },
+      "users": {
+        "added": [
+          {
+            "id": 5,
+            "name": "Mira Patel",
+            "email": "mira.patel@test.com",
+            "pw_hash": {
+              "regex": "\\$2[aby]\\$\\d{2}\\$[./A-Za-z0-9]{53}"
+            },
+            "role": "Member"
+          }
+        ]
+      }
+    },
+    "signup_password_column": "pw_hash"
+  }
+}

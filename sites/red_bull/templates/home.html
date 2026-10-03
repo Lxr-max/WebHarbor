@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ hero_story.hero_image }}" alt="{{ hero_story.title }}">
+  <div class="overlay">
+    <span class="kicker">{{ hero_story.discipline or 'Story' }}</span>
+    <h1>{{ hero_story.title }}</h1>
+    <p>{{ hero_story.standfirst }}</p>
+    <a class="btn btn-red" href="{{ url_for('story_detail', slug=hero_story.slug) }}">Read Story</a>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Energy Drinks</h2>
+  <div class="grid cols-4">
+    {% for p in products[:4] %}
+    <a class="card" href="{{ url_for('product_detail', slug=p.slug) }}">
+      <div class="thumb"><img src="{{ p.can_image }}" alt="{{ p.name }}"></div>
+      <div class="body">
+        <span class="tag">{{ p.line }}</span>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.flavor or p.meta_description }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-outline" href="{{ url_for('energydrink') }}">All Red Bull Energy Drinks</a></p>
+</section>
+
+<section>
+  <h2 class="section-title">Events</h2>
+  <div class="grid cols-3">
+    {% for e in upcoming %}
+    <a class="card" href="{{ url_for('event_detail', slug=e.slug) }}">
+      <div class="thumb"><img src="{{ e.hero_image or e.image }}" alt="{{ e.title }}"></div>
+      <div class="body">
+        <span class="tag">{{ e.discipline }}</span>
+        <h3>{{ e.title }}</h3>
+        <p class="meta">{{ e.date_range_text() }}</p>
+        <p class="meta">{{ e.location_text() }}</p>
+        {% if e.reg_price or e.reg_title %}<span class="badge reg">Registrations open</span>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-outline" href="{{ url_for('events') }}">View all</a></p>
+</section>
+
+<section>
+  <h2 class="section-title">Stories</h2>
+  <div class="grid cols-3">
+    {% for s in stories %}
+    <a class="card" href="{{ url_for('story_detail', slug=s.slug) }}">
+      <div class="thumb"><img src="{{ s.hero_image }}" alt="{{ s.title }}"></div>
+      <div class="body">
+        <span class="tag">{{ s.discipline or 'Story' }}</span>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.standfirst[:110] }}…</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-outline" href="{{ url_for('stories') }}">More stories</a></p>
+</section>
+
+<section>
+  <h2 class="section-title">Films on Red Bull TV</h2>
+  <div class="grid cols-4">
+    {% for f in films[:4] %}
+    <a class="card" href="{{ url_for('film_detail', slug=f.slug) }}">
+      <div class="thumb"><img src="{{ f.image }}" alt="{{ f.title }}"></div>
+      <div class="body">
+        <span class="tag">{{ f.discipline }}</span>
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.subheading }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a class="btn btn-outline" href="{{ url_for('films') }}">All films</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Tumblr{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+  <link rel="icon" href="{{ url_for('static', filename='icons/favicon.png') }}">
+</head>
+<body class="{% if user %}logged-in{% else %}logged-out{% endif %}">
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="{{ url_for('index') if not user else url_for('dashboard') }}">
+      <span class="logo-t">t</span>
+    </a>
+    <nav class="nav-links">
+      {% if user %}
+        <a href="{{ url_for('dashboard') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('explore') }}" class="nav-link">Explore</a>
+        <a href="{{ url_for('activity') }}" class="nav-link">Activity{% if notif_count %} <span class="badge" aria-hidden="true">{{ notif_count }}</span>{% endif %}</a>
+        <a href="{{ url_for('inbox') }}" class="nav-link">Inbox{% if unread_count %} <span class="badge" aria-hidden="true">{{ unread_count }}</span>{% endif %}</a>
+      {% else %}
+        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('explore') }}" class="nav-link">Explore</a>
+      {% endif %}
+    </nav>
+    <form class="searchbar" action="{{ url_for('search_redirect') }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Search Tumblr" autocomplete="off"
+             value="{{ request.args.get('q','') }}">
+      <button type="submit" aria-label="Search" class="search-btn">
+        <svg viewBox="0 0 20 20" width="16" height="16"><path fill="currentColor" d="M12.9 11.5a6 6 0 1 0-1.4 1.4l4.3 4.3 1.4-1.4-4.3-4.3zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>
+      </button>
+    </form>
+    <div class="topbar-right">
+      {% if user %}
+        <a href="{{ url_for('new_post') }}" class="btn btn-primary">New post</a>
+        <a href="{{ url_for('settings') }}" class="avatar-chip" title="{{ user.display_name }}">
+          {% if user_blog and user_blog.avatar %}<img class="avatar a32" src="{{ user_blog.avatar }}" alt="">{% else %}<span class="avatar a32 avatar-fallback">{{ user.display_name[:1] }}</span>{% endif %}
+        </a>
+        <a href="{{ url_for('logout') }}" class="nav-link subtle">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-ghost">Log in</a>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for cat, msg in messages %}<div class="flash flash-{{ cat }}">{{ msg }}</div>{% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main class="page">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>Tumblr is a microblogging mirror for the WebHarbor benchmark. Content captured from tumblr.com on 2026-09-28.</span>
+    <nav>
+      <a href="{{ url_for('explore') }}">Explore</a>
+      <a href="{{ url_for('search_redirect', q='pixel art') }}">Search</a>
+      <a href="{{ url_for('login') }}">Log in</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

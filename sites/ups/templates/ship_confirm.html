@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Shipment Confirmed | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Create a Shipment</div>
+  <div class="ups-card ups-confirm">
+    <h1>Your shipment is ready</h1>
+    <p class="ups-h2">We&rsquo;ve created your label and reserved a tracking number.</p>
+    <div class="ups-confirm-num">
+      <p class="ups-factlabel">UPS Tracking Number</p>
+      <p class="ups-tracknum-big">{{ s.tracking_number }}</p>
+    </div>
+    <div class="ups-review-grid">
+      <div>
+        <p class="ups-factlabel">Ship From</p>
+        <p>{{ s.shipper_name }}<br>{{ s.from_city }}, {{ s.from_state }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Ship To</p>
+        <p>{{ s.to_name }}<br>{{ s.to_city }}, {{ s.to_state }} {{ s.to_zip }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Service</p>
+        <p>{{ svc.name if svc }}<br>Scheduled Delivery: {{ s.scheduled_delivery }}</p>
+      </div>
+      <div>
+        <p class="ups-factlabel">Charges</p>
+        <p>
+          {% if s.signature == 'Signature Required' %}Signature Required: $7.70<br>{% endif %}
+          {% if s.signature == 'Adult Signature Required' %}Adult Signature Required: $9.35<br>{% endif %}
+          {% if dv_charge %}Declared Value Charge: ${{ '%.2f'|format(dv_charge) }}{% endif %}
+        </p>
+      </div>
+    </div>
+    <div class="ups-form-actions">
+      <a class="ups-btn ups-btn-primary" href="{{ url_for('track_detail', tracking_number=s.tracking_number) }}">Track Your Shipment</a>
+      <a class="ups-btn ups-btn-secondary" href="{{ url_for('pickup') }}">Schedule a Pickup</a>
+      <a class="ups-btn ups-btn-tertiary" href="{{ url_for('locations') }}">Find a Drop-off Location</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %}{{ pro.name }} | {{ pro.city }}, {{ pro.state }} | Thumbtack{% endblock %}
+{% block description %}{{ pro.name }} provides {{ pro.category.name }} services. See their reviews & get quotes today.{% endblock %}
+{% block content %}
+<div class="profile-wrap">
+  <div>
+    <div class="profile-head">
+      <img class="av" src="{{ url_for('static', filename='images/avatars/' + pro.avatar) }}" alt="{{ pro.name }}">
+      <div>
+        <h1>{{ pro.name }}</h1>
+        <div class="rating-line">
+          <b>{{ pro.rating_word }} {{ '%.1f'|format(pro.rating) }}</b>
+          <span class="muted">({{ pro.review_count }})</span>
+          {% if pro.top_pro %}<span class="badge badge-toppro">Top Pro</span>{% endif %}
+        </div>
+        <p class="muted" style="margin:6px 0 0;">{{ pro.category.name }} · {{ pro.city }}, {{ pro.state }}</p>
+      </div>
+    </div>
+
+    <div class="profile-tabs">
+      <a class="active" href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#photos">Photos</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#credentials">Credentials</a>
+    </div>
+
+    <section id="about">
+      <h3>About</h3>
+      <p>{{ pro.bio }}</p>
+      <h4>Overview</h4>
+      <div class="overview-grid">
+        {% if pro.top_pro %}<div class="overview-item"><b>Current Top Pro</b>2026</div>{% endif %}
+        <div class="overview-item"><b>Hired {{ pro.hires }} times</b>on Thumbtack</div>
+        <div class="overview-item"><b>Serves {{ pro.city }}, {{ pro.state }}</b>and nearby areas</div>
+        {% if pro.background_checked %}<div class="overview-item"><b>Background checked</b>{% if pro.background_check_name %}{{ pro.background_check_name }}{% endif %}</div>{% endif %}
+        <div class="overview-item"><b>{{ pro.employees }} employee{{ 's' if pro.employees != 1 }}</b>on the team</div>
+        <div class="overview-item"><b>{{ pro.years_in_business }} year{{ 's' if pro.years_in_business != 1 }} in business</b>professionally</div>
+      </div>
+      <h4>Business hours</h4>
+      <table class="hours-table">
+        {% for day, hours in pro.business_hours_list %}
+        <tr><td>{{ day }}</td><td>{{ hours }}</td></tr>
+        {% endfor %}
+      </table>
+      <h4>Payment methods</h4>
+      <p class="muted" style="margin-top:4px;">This pro accepts payments via {{ pro.payment_methods }}.</p>
+      {% if pro.social_media_list %}
+      <p class="muted"><b>Social media</b> — {{ pro.social_media_list|join(', ') }}</p>
+      {% endif %}
+      {% if pro.top_pro %}
+      <h4>Top Pro status</h4>
+      <p class="muted">Top Pros are among the highest-rated, most popular professionals on Thumbtack.</p>
+      <p>{% for y in pro.top_pro_years_list %}<span class="badge badge-toppro">{{ y }}</span>{% endfor %}</p>
+      {% endif %}
+    </section>
+
+    <section id="services">
+      <h3>Services offered</h3>
+      {% for group, opts in pro.services_offered_list %}
+      <h4 style="font-size:16px; margin-bottom:4px;">{{ group }}</h4>
+      <p class="muted" style="margin-bottom:10px;">{{ opts|join(' · ') }}</p>
+      {% endfor %}
+    </section>
+
+    <section id="photos">
+      <h3>Projects and media</h3>
+      <p class="muted">See all ({{ pro.gallery_list|length }})</p>
+      <div class="photo-grid">
+        {% for img in pro.gallery_list %}
+        <img src="{{ url_for('static', filename='images/photos/' + img) }}" alt="{{ pro.name }} project photo {{ loop.index }}">
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="reviews">
+      <h3>Reviews</h3>
+      <p class="muted">Customers rated this pro highly for work quality, professionalism, and responsiveness.</p>
+      <div class="rating-line"><b>{{ pro.rating_word }} {{ '%.1f'|format(pro.rating) }}</b> <span class="muted">{{ pro.review_count }} reviews</span></div>
+      {% for star in ['5', '4', '3', '2', '1'] %}
+      <div class="dist-row">
+        <span style="width:14px;">{{ star }}</span>
+        <div class="dist-bar"><i style="width: {{ dist.get(star, 0) }}%"></i></div>
+        <span style="width:40px; text-align:right;">{{ dist.get(star, 0) }}%</span>
+      </div>
+      {% endfor %}
+      <p class="muted" style="font-size:13px;">Your trust means everything to us. Learn about our review guidelines.</p>
+
+      {% if pro.review_tags_list %}
+      <p style="margin-top:16px;"><b>Read reviews that mention:</b></p>
+      <div class="tag-row">
+        {% for tag, count in pro.review_tags_list %}
+        <span class="tag">{{ tag }}・{{ count }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% for r in reviews %}
+      <div class="review">
+        <div class="review-head">
+          <span><b>{{ r.author }}</b> · {{ r.date_str }} {% if r.hired %}· <span class="badge badge-toppro">Hired on Thumbtack</span>{% endif %}</span>
+          <span class="stars">{% for i in range(r.rating) %}★{% endfor %}</span>
+        </div>
+        <div class="review-body">{{ r.body }}</div>
+        {% if r.details and not r.details.startswith('project:') %}
+        <div class="review-details">Details: {{ r.details }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </section>
+
+    <section id="credentials">
+      <h3>Credentials</h3>
+      {% if pro.background_checked %}
+      <p><b>Background Check</b></p>
+      <p class="muted">{% if pro.background_check_name %}{{ pro.background_check_name }} · {% endif %}View credential details</p>
+      {% endif %}
+      {% if pro.credentials_zip %}
+      <p><b>Zip code</b></p>
+      <p class="muted">{{ pro.credentials_zip }}</p>
+      {% endif %}
+    </section>
+
+    {% if similar %}
+    <section id="similar">
+      <h3>You might also like</h3>
+      {% for s in similar %}
+      <div class="pro-card" style="grid-template-columns:64px 1fr;">
+        <a href="{{ s.url() }}"><img class="av" style="width:64px;height:64px;" src="{{ url_for('static', filename='images/avatars/' + s.avatar) }}" alt="{{ s.name }}"></a>
+        <div>
+          <a class="pro-name" href="{{ s.url() }}">{{ s.name }}</a>
+          <div class="rating-line"><b>{{ s.rating_word }} {{ '%.1f'|format(s.rating) }}</b> <span class="muted">({{ s.review_count }})</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+
+  <aside>
+    <div class="rail-card">
+      <h3>Request estimate</h3>
+      <p class="muted">Responds {{ pro.responds_label }}</p>
+      <form method="get" action="/projects/new">
+        <input type="hidden" name="category" value="{{ pro.category.slug }}">
+        <input type="hidden" name="pro" value="{{ pro.service_pk }}">
+        <div class="form-row">
+          <label>Zip code</label>
+          <input type="text" name="zip" value="98052" required>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Request estimate</button>
+      </form>
+      <p class="muted" style="font-size:13px; margin-top:12px;">Thumbtack Guarantee — If you hire this pro, you're covered by a money-back guarantee. <a href="/guarantee">Learn more</a></p>
+    </div>
+    <div class="rail-card">
+      <h3>Message {{ pro.name }}</h3>
+      <a class="btn btn-outline btn-block" href="/message/{{ pro.service_pk }}">Message this pro</a>
+    </div>
+    <div class="rail-card">
+      <h3>Save this pro</h3>
+      <form method="post" action="/account/saved/toggle/{{ pro.id }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button class="btn btn-outline btn-block" type="submit">{% if saved %}Remove from saved{% else %}Save pro{% endif %}</button>
+      </form>
+    </div>
+    {% if guide %}
+    <div class="rail-card">
+      <h3>Related cost information</h3>
+      <p class="muted"><a href="{{ guide.url() }}">{{ guide.title }}</a> — national average ${{ '{:,}'.format(guide.range_low) }}-${{ '{:,}'.format(guide.range_high) }}</p>
+    </div>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}My USCIS Account{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Welcome, {{ current_user.display_name }}</h1>
+  <p class="account-sub">USCIS online account {{ current_user.account_number }} &middot; {{ current_user.email }}</p>
+
+  <div class="section section--split">
+    <section class="account-panel">
+      <h2 class="section__title">My Progress</h2>
+      {% for case in cases %}
+      <article class="case-card">
+        <h3>{{ case.form_number }} &mdash; {{ case.form_title }}</h3>
+        <p>Receipt Number: <strong>{{ case.receipt }}</strong> {% if case.office_name %}&middot; {{ case.office_name }}{% endif %}</p>
+        {% if case.case_type %}<p>{{ case.case_type }}</p>{% endif %}
+        <div class="alert-box alert-box--info">
+          <p><strong>Current status:</strong> {{ case.current_status }} (as of {{ case.status_date }})</p>
+        </div>
+        <ol class="timeline timeline--compact">
+          {% for step in case.history() %}
+          <li class="timeline__item{% if loop.last %} timeline__item--current{% endif %}">
+            <span class="timeline__date">{{ step.date }}</span>
+            <span class="timeline__status">{{ step.status }}</span>
+          </li>
+          {% endfor %}
+        </ol>
+        <p><a href="{{ url_for('casestatus') }}">Check this case on Case Status Online</a></p>
+      </article>
+      {% else %}
+      <p>You have no cases in your account yet.</p>
+      {% endfor %}
+    </section>
+
+    <section class="account-panel">
+      <h2 class="section__title">My Appointments</h2>
+      {% for appt in appts %}
+      <article class="case-card">
+        <h3>{{ appt.reason }}</h3>
+        <p>Confirmation: <strong>{{ appt.confirmation }}</strong> &middot; Status: {{ appt.status }}</p>
+        <p>{{ appt.office_name }} ({{ appt.office_designation }})</p>
+        <p>{{ appt.appt_date }} at {{ appt.appt_time }}</p>
+        {% if appt.status == 'Scheduled' %}
+        <form method="post" action="{{ url_for('appointment_cancel') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="confirmation" value="{{ appt.confirmation }}">
+          <button class="btn btn--danger" type="submit">Cancel this appointment</button>
+        </form>
+        {% endif %}
+      </article>
+      {% else %}
+      <p>You have no appointments. <a href="{{ url_for('appointment_new') }}">Request an appointment</a>.</p>
+      {% endfor %}
+
+      <h2 class="section__title">My Profile</h2>
+      <dl class="office-meta">
+        <dt>Name:</dt><dd>{{ current_user.display_name }}</dd>
+        <dt>Account number:</dt><dd>{{ current_user.account_number }}</dd>
+        <dt>Mailing address:</dt><dd>{{ current_user.street }}, {{ current_user.city }}, {{ current_user.state }} {{ current_user.zip }}</dd>
+      </dl>
+      <p><a class="btn btn--secondary" href="{{ url_for('account_address') }}">Update your address (Form AR-11)</a></p>
+    </section>
+  </div>
+</div>
+{% endblock %}

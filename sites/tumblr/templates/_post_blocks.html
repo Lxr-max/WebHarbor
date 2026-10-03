@@ -1,0 +1,83 @@
+{# One content block inside a post. Expects `block` in context. #}
+{% if block.type == 'text' %}
+  {% if block.subtype == 'heading1' or block.subtype == 'heading2' or block.subtype == 'heading' %}
+    <h2 class="post-text post-heading">{{ render_inline(block.text) }}</h2>
+  {% elif block.subtype == 'quote' %}
+    <blockquote class="post-text post-quote">{{ render_inline(block.text) }}</blockquote>
+  {% elif block.subtype == 'chat' %}
+    <div class="chat-block">{{ render_inline(block.text) }}</div>
+  {% else %}
+    <p class="post-text">{{ render_inline(block.text) }}</p>
+  {% endif %}
+
+{% elif block.type == 'image' %}
+  {% if block.media %}
+    <figure class="post-figure">
+      <a href="{{ url_for('permalink', name=post.blog.name, post_id=post.id) }}">
+        <img class="post-image" src="{{ block.media.url }}" alt="{{ block.alt_text or post.summary or '' }}" loading="lazy">
+      </a>
+      {% if block.caption %}<figcaption>{{ render_inline(block.caption) }}</figcaption>{% endif %}
+    </figure>
+  {% endif %}
+
+{% elif block.type == 'quote' %}
+  <blockquote class="post-quote-big">
+    <p>{{ block.text }}</p>
+    {% if block.source %}<cite>— {{ block.source }}</cite>{% endif %}
+  </blockquote>
+
+{% elif block.type == 'link' %}
+  <a class="link-card" href="{{ block.url }}" rel="noopener nofollow">
+    {% if block.poster %}<img class="link-poster" src="{{ block.poster }}" alt="">{% endif %}
+    <span class="link-body">
+      <span class="link-title">{{ block.title or block.url }}</span>
+      {% if block.site_name %}<span class="link-site">{{ block.site_name }}</span>{% endif %}
+      {% if block.description %}<span class="link-desc">{{ block.description }}</span>{% endif %}
+    </span>
+  </a>
+
+{% elif block.type == 'video' %}
+  <div class="video-block">
+    {% if block.media and block.media.url and block.media.url.endswith('.mp4') %}
+      <video class="post-video" controls preload="metadata"
+             width="{{ block.media.width or 640 }}" height="{{ block.media.height or 360 }}">
+        <source src="{{ block.media.url }}" type="video/mp4">
+      </video>
+      <span class="video-provider">Video · tumblr</span>
+    {% else %}
+      {% if block.poster %}
+        <div class="video-poster">
+          <img src="{{ block.poster.url }}" alt="{{ block.title or 'video' }}">
+          <span class="play-overlay">▶</span>
+        </div>
+      {% endif %}
+      <span class="video-provider">Video · {{ block.provider or 'external' }}</span>
+    {% endif %}
+  </div>
+
+{% elif block.type == 'audio' %}
+  <div class="audio-block">
+    {% if block.poster %}<img class="audio-poster" src="{{ block.poster.url }}" alt="">{% endif %}
+    <div class="audio-meta">
+      <span class="audio-title">{{ block.title or 'Audio post' }}</span>
+      {% if block.artist %}<span class="audio-artist">{{ block.artist }}</span>{% endif %}
+      {% if block.album %}<span class="audio-album">from “{{ block.album }}”</span>{% endif %}
+      <span class="audio-provider">Audio · {{ block.provider or 'tumblr' }}</span>
+    </div>
+    <div class="audio-bar"><span class="audio-play">▶</span>
+      <span class="audio-track"><span class="audio-progress"></span></span>
+      {% if block.duration %}<span class="audio-duration">{{ block.duration }}</span>{% endif %}
+    </div>
+  </div>
+
+{% elif block.type == 'poll' %}
+  <div class="poll-block">
+    <p class="poll-question">{{ block.question }}</p>
+    <ul class="poll-answers">
+      {% for answer in block.answers %}
+        <li class="poll-answer">{{ answer.answer_text }}</li>
+      {% endfor %}
+    </ul>
+    <span class="poll-note">Poll · results hidden until you vote</span>
+  </div>
+{% endif %}

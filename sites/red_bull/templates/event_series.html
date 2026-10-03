@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ series.title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <img class="hero-bg" src="{{ series.image }}" alt="{{ series.title }}">
+  <div class="overlay">
+    <span class="kicker">Event series</span>
+    <h1>{{ series.title }}</h1>
+    <p>{{ series.standfirst }}</p>
+  </div>
+</section>
+
+<div class="detail-layout">
+  <div class="detail-main">
+    <div class="prose">
+      {% for para in series.description_list() %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+    <h2 class="section-title">Tour stops</h2>
+    <div class="grid cols-3">
+      {% for e in stops %}
+      <a class="card" href="{{ url_for('event_detail', slug=e.slug) }}">
+        <div class="thumb"><img src="{{ e.hero_image or e.image }}" alt="{{ e.title }}"></div>
+        <div class="body">
+          <span class="tag">{{ e.discipline }}</span>
+          <h3>{{ e.title }}</h3>
+          <p class="meta">{{ e.date_range_text() }}</p>
+          <p class="meta">{{ e.location_text() }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <aside class="side-panel">
+    <h3>Series facts</h3>
+    <div class="fact-row"><span class="k">Stops</span><span class="v">{{ stops | length }}</span></div>
+    <div class="fact-row"><span class="k">Discipline</span><span class="v">{{ stops[0].discipline if stops else '—' }}</span></div>
+  </aside>
+</div>
+{% endblock %}

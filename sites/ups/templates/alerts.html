@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Service Alerts | UPS - United States{% endblock %}
+{% block content %}
+<section class="ups-wrap ups-page">
+  <div class="ups-breadcrumb"><a href="{{ url_for('index') }}">Home</a> &rsaquo; Service Alerts</div>
+  <h1>Service Alerts</h1>
+  {% for a in alerts %}
+  <div class="ups-card ups-alertcard">
+    <div class="ups-red-dot"></div>
+    <div>
+      <h2>{{ a.title }}</h2>
+      <p>{{ a.body }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Cancellation Policy - TourRadar{% endblock %}
+{% block content %}
+<div class="container" style="padding: 22px 16px 60px; max-width:860px;">
+  <div class="crumbs"><a href="/">Home</a> &nbsp;&#8805;&nbsp; Cancellation Policy</div>
+  <h1>Cancellation Policy</h1>
+  {% for h, b in [["Deposits and refunds", "Cancellation terms are set by each tour operator and shown at checkout. Most operators allow free date changes up to 60 days before departure."], ["Deposit bookings", "If you booked with a 10% deposit, the deposit is refundable per the operator's policy for your departure date."], ["How to cancel", "Open your booking in Tour Management and choose Request cancellation, or contact support any time."], ["Travel insurance", "Cancellation protection can be added at checkout to reimburse prepaid costs if you can't travel due to illness or injury."]] %}
+  <div class="panel">
+    <h2>{{ h }}</h2>
+    <p style="color:var(--text-2);">{{ b }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
